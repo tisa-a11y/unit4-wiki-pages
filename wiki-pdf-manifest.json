@@ -1,28 +1,13 @@
 {
-  "1-9lH7ac0fH1pcCDp3FmsK0JMdwT4yV-t": {
-    "original_asset": "/_blob/6e6b1a8969e46f37f9326b2cba685fc0",
-    "pages_path": "wiki-pdfs/1-9lH7ac0fH1pcCDp3FmsK0JMdwT4yV-t.pdf",
-    "sha256": "491a65ea4492730e589bce4d647f3f644d303c12d2fddf23d2c880f43c342e57"
-  },
   "10D_YpGKMtzfC6yF6HBBVdLVfKFKu6JTG": {
     "original_asset": "/_blob/59366f8324f645233f22ad329fcc43e8",
     "pages_path": "wiki-pdfs/10D_YpGKMtzfC6yF6HBBVdLVfKFKu6JTG.pdf",
     "sha256": "4735474570abacd2ddcb4f73840e3ca9bb81b90d010fcf7c91f826568409ba9e"
   },
-  "11EDY-QeQkMCi6WbSYF8K9Y9crNQDNXFN": {
-    "original_asset": "/_blob/6ef8fe0270b8ff952e5b360143dfdf72",
-    "pages_path": "wiki-pdfs/11EDY-QeQkMCi6WbSYF8K9Y9crNQDNXFN.pdf",
-    "sha256": "9c82f6626148021d82ff25fe4b889c761fd92b09b584fcb5a17ef1de85135c14"
-  },
   "12XSYgY_X6jGvicZYA0M4NQU_Re8z9N9M": {
     "original_asset": "/_blob/5064110bcf08aad8b963030e9997d330",
     "pages_path": "wiki-pdfs/12XSYgY_X6jGvicZYA0M4NQU_Re8z9N9M.pdf",
     "sha256": "7f6debdb7014138a3b7cc77a1b918b1aaafc5781713ea840e1a9af414a57a29f"
-  },
-  "12aDzLscN-PoFRooBSyLxAd613834V4a7": {
-    "original_asset": "/_blob/a9f3306575c18e741f18f97b94c91f74",
-    "pages_path": "wiki-pdfs/12aDzLscN-PoFRooBSyLxAd613834V4a7.pdf",
-    "sha256": "ba53e9d29d7c8fb800a1bf84f152699c3a83d4a8a59c9ab5d0a7c8655006f9b6"
   },
   "14ZUQJ15FtxfGFFbJjISJE9gJdgabj2hP": {
     "original_asset": "/_blob/e0839757dc5987a882ea315ad874ab8c",
@@ -59,16 +44,6 @@
     "pages_path": "wiki-pdfs/19oGYJpwnGf1IE0FS-9TdgWT14NbBHYrt.pdf",
     "sha256": "ecf67f393573a9fc8925cc8a4f3aa5bea7dc96953009b7e2040f4da8e39a06c9"
   },
-  "1EpfwQfHg7nf5zdWoSWm-nBS3Rce24AsO": {
-    "original_asset": "/_blob/4bf425ba1c46571522f3d62fc0e8a5b4",
-    "pages_path": "wiki-pdfs/1EpfwQfHg7nf5zdWoSWm-nBS3Rce24AsO.pdf",
-    "sha256": "cd622fd329d7e79e28e285cda1adc421d935f3d30fcca884b62c5346247b9bb9"
-  },
-  "1GCya4GyNxZTqUHnTkDo00oHgtSTZGBMx": {
-    "original_asset": "/_blob/271e3c31811fd7f234529cf9df09b027",
-    "pages_path": "wiki-pdfs/1GCya4GyNxZTqUHnTkDo00oHgtSTZGBMx.pdf",
-    "sha256": "f20ae5a5d49753705be87ecf9cd827d6c05fdf67812ca4dfcc3a31ebc066b962"
-  },
   "1GsVm7VrFU897ax3yAxypfW5lowapbZKB": {
     "original_asset": "/_blob/bf1c1acbf2d35fbce7c9c164c5905eb1",
     "pages_path": "wiki-pdfs/1GsVm7VrFU897ax3yAxypfW5lowapbZKB.pdf",
@@ -84,21 +59,11 @@
     "pages_path": "wiki-pdfs/1KPYZCWI4NZvByh9gB6yiUAOJB3dziUrL.pdf",
     "sha256": "b282cf94d7313702f3461464e7fbd5fe2bc0a10d6e2890e48933d85346d7ccff"
   },
-  "1LjcBLx4db-k13OC1zK6hfKkmz-TIVzYQ": {
-    "original_asset": "/_blob/6477f225e44913304c10975e561566fa",
-    "pages_path": "wiki-pdfs/1LjcBLx4db-k13OC1zK6hfKkmz-TIVzYQ.pdf",
-    "sha256": "55af20e64a1384327ce9944f489725b6783eadbc053aa5edc1a66fb7bfe778d9"
-  },
   "1NY9eaXvYK_oICJBK8FrMnkw5iCx5lVuQ": {
     "original_asset": "/_blob/2c687a32a4372f2c4adb83cc6fd1083f",
     "pages_path": "wiki-pdfs/1NY9eaXvYK_oICJBK8FrMnkw5iCx5lVuQ.pdf",
     "sha256": "416ff0da21679afefeedfb5983b29ed074fad6617f679e5f1bacda82ce033e15",
     "source_filename": "Bano Unidad 4 - Plan para John - Espanol.pdf"
-  },
-  "1NhUaUQAxadf26s2AlpVJQOKZfhaUpDDc": {
-    "original_asset": "/_blob/14657a433cc1268124c3123df9084d38",
-    "pages_path": "wiki-pdfs/1NhUaUQAxadf26s2AlpVJQOKZfhaUpDDc.pdf",
-    "sha256": "a82016e6898f62674f312483aef31b6a9ee532333e85c25575287780cf25247b"
   },
   "1Tgb82HNVsMrTEe-W3OXmvuVHm4EL1JpO": {
     "original_asset": "/_blob/1cb99516302d746a757db26f45ffb5bb",
@@ -115,20 +80,15 @@
     "pages_path": "wiki-pdfs/1VazWlSTKbc76vCkSMUp4s69SOoEctq95.pdf",
     "sha256": "70757b9476a07f8afb5505412114f34f32c789602612bc097c1bcf2dc93939eb"
   },
+  "1WTPBOcSCPfVmSmrbXUWiCw29XUT49XYU": {
+    "pages_path": "wiki-pdfs/1WTPBOcSCPfVmSmrbXUWiCw29XUT49XYU.pdf",
+    "sha256": "73baae167291b9a4d0dbd66cc52f38c381b8336f50070a3e03fd416b5e396fd8",
+    "source_filename": "2026-11-08_U4_bedroom_trim-installation-packet_R2_ES.pdf"
+  },
   "1XAsVFF6ZAzrno31-btbaPStZukkNHiqQ": {
     "original_asset": "/_blob/9024704e5dda441b150633748fff203a",
     "pages_path": "wiki-pdfs/1XAsVFF6ZAzrno31-btbaPStZukkNHiqQ.pdf",
     "sha256": "28a154a93c29cea368fdf5e076ff211c6bfb4694c38fb726c48b640be24428be"
-  },
-  "1XBBpFk1hXG27vZUg2t2I9oHxdE4wUBXD": {
-    "original_asset": "/_blob/36e456423fa21a2790d9769dd9a8801a",
-    "pages_path": "wiki-pdfs/1XBBpFk1hXG27vZUg2t2I9oHxdE4wUBXD.pdf",
-    "sha256": "59cfac4fd5eedc6ed3cbfda0bdd1122cb204ce4eb987b1732c0786e69dbb9970"
-  },
-  "1XvO2EN5c_damYLu53MESVmgntFVrMzIo": {
-    "original_asset": "/_blob/93435666f887d973f8b516eb42f6e9ef",
-    "pages_path": "wiki-pdfs/1XvO2EN5c_damYLu53MESVmgntFVrMzIo.pdf",
-    "sha256": "fe96d8623aca6d87dd1ff961829550fcc402cd37f7cdbd9fd7746f311062b56e"
   },
   "1ZtY0-QONVmxSIYP_1LPAGeKht6SPiW7w": {
     "original_asset": "/_blob/6963ef8bd36f4f61913cf33f737d1254",
@@ -145,25 +105,10 @@
     "pages_path": "wiki-pdfs/1aYu9yWuRRFk8T5E3nQ6NDTHWpeRcrXgW.pdf",
     "sha256": "31dcd10b627c4d6b3fddc61728d3c10f07f4e0c62a139217aa4352b1323ed2f2"
   },
-  "1acRJwUWJj6NiVDN--S757o3mTnPMMIV4": {
-    "original_asset": "/_blob/971354b44bef7baac4da59ac6c2c2b77",
-    "pages_path": "wiki-pdfs/1acRJwUWJj6NiVDN--S757o3mTnPMMIV4.pdf",
-    "sha256": "849e73d03fd372f27a69b55d74ecade34c0511984751a154125426a4019340f1"
-  },
   "1dB6h6MFYhcv15b2-xqiIwf6sqkjDzuj1": {
     "original_asset": "/_blob/de243f18f5b454f5a9cafeaa1304ac44",
     "pages_path": "wiki-pdfs/1dB6h6MFYhcv15b2-xqiIwf6sqkjDzuj1.pdf",
     "sha256": "f8b28ab6f97398085787bc55549b3483541e89d4b98c3cb26f65cf021f0d1be4"
-  },
-  "1g7JI9VALqEA_s8cnzzgIS_95yMlIqO_8": {
-    "original_asset": "/_blob/b7d772cc8d48cb901e844aae976471ae",
-    "pages_path": "wiki-pdfs/1g7JI9VALqEA_s8cnzzgIS_95yMlIqO_8.pdf",
-    "sha256": "b1b766fe7acff82233869252882951ede2f15ea35ac9aa5f5bb7de7eaeebc232"
-  },
-  "1gxbo7N7IMqkGconlg27hq4H0LHi1iqFg": {
-    "original_asset": "/_blob/8303485fa05a9061d1088cbf7d921d4e",
-    "pages_path": "wiki-pdfs/1gxbo7N7IMqkGconlg27hq4H0LHi1iqFg.pdf",
-    "sha256": "44ea195327331575d853b63265a23dc03297a65b1b69d9b18cc223eed18cd104"
   },
   "1j3RtlylFUgKKUACB2EGpEEPVaMTEwMtz": {
     "original_asset": "/_blob/2353c34dc04a75bd4b944b3f4920fbe6",
@@ -175,6 +120,11 @@
     "pages_path": "wiki-pdfs/1j_ol20Uk3Tbp_gCbxcynK-AVLZ2dEMoO.pdf",
     "sha256": "3b822eeca45933784e960aff2c6b477063fbb45e9ba3f715aaabfe6acee3baad"
   },
+  "1jiGfPGxC122ZaippBSkCe4UBWUnMgJmQ": {
+    "pages_path": "wiki-pdfs/1jiGfPGxC122ZaippBSkCe4UBWUnMgJmQ.pdf",
+    "sha256": "cdac65b758d87a33afc8bc3b5c9fac14c3f46cf40d3db03c63078932cd821cde",
+    "source_filename": "2026-11-08_U4_bedroom_trim-installation-packet_R2_EN.pdf"
+  },
   "1jtmamYcL-alhUNlUZPkIZn9nlCp0mYDY": {
     "original_asset": "/_blob/4a6f1fa286d6d9b806869a51934b05d0",
     "pages_path": "wiki-pdfs/1jtmamYcL-alhUNlUZPkIZn9nlCp0mYDY.pdf",
@@ -185,20 +135,10 @@
     "pages_path": "wiki-pdfs/1mAC3K0dQZUO9heLN9ac8YYR0Yl-2bE22.pdf",
     "sha256": "691390f4fddcbd1701d6c56f9e3a0cb2649cc18ac3a8e5721ee94d9e9b589461"
   },
-  "1pXzh-gR7-5XIa-jfm0DIrE4oz9kJK9J_": {
-    "original_asset": "/_blob/33aae57530b1988b6e51781670ed4c06",
-    "pages_path": "wiki-pdfs/1pXzh-gR7-5XIa-jfm0DIrE4oz9kJK9J_.pdf",
-    "sha256": "43b11516f579c6dc385748db8af42647b0d0fe726933e8974483a5f7700a80cf"
-  },
   "1rcyuJfMmYOjxPCrX8WR16cZXOkT2ah0K": {
     "original_asset": "/_blob/6566060e2f447bb5746e009b7205a78c",
     "pages_path": "wiki-pdfs/1rcyuJfMmYOjxPCrX8WR16cZXOkT2ah0K.pdf",
     "sha256": "62b517615af27f89f7d4ed22b584069eed165fd57e52f4786b41767efd71c15e"
-  },
-  "1si0hranSi5r1bPbZ1KI6bd1n0fZop6vh": {
-    "original_asset": "/_blob/9cdca29501cf0af7c1d232809386cf6c",
-    "pages_path": "wiki-pdfs/1si0hranSi5r1bPbZ1KI6bd1n0fZop6vh.pdf",
-    "sha256": "ef844a122a625ec2e9838bb5e63bf7122f9e284a3d81d9e492181829eced25be"
   },
   "1taIg19r1lPEztEDybHcrDh_H702WusVy": {
     "original_asset": "/_blob/e84cc7f25abec665481e2eaba25c50db",
@@ -206,29 +146,9 @@
     "sha256": "e6302a8f702edbc65d44834c225f6d4f0245b650e0dd443416060098ac02a47b",
     "source_filename": "Unit 4 Bathroom - Plan for John - English.pdf"
   },
-  "1uWIWOtwRBL7ICIN2wnXJzzIuX0DDevt7": {
-    "original_asset": "/_blob/b0db9ff303a88f4e4d8970d87fb244bd",
-    "pages_path": "wiki-pdfs/1uWIWOtwRBL7ICIN2wnXJzzIuX0DDevt7.pdf",
-    "sha256": "2cdbc5ae0c972122ba5ff67ced2c3906312bb557112d50925d12d049319df31b"
-  },
-  "1vGukYxu6ZHOYImdGlqHB30a8A2SkSdy8": {
-    "original_asset": "/_blob/1b151092cf1a870d7684f56c3aa17733",
-    "pages_path": "wiki-pdfs/1vGukYxu6ZHOYImdGlqHB30a8A2SkSdy8.pdf",
-    "sha256": "2732f7d9d02885e1b611f2840d767bbfdc30be8951fc77676fb86d83d9c4cea4"
-  },
-  "1vt17VpbH0T9UvHck0pRxL7Jhjy6PswpB": {
-    "original_asset": "/_blob/f99cc56b66f9ce5fd0bda7d957ca9d3c",
-    "pages_path": "wiki-pdfs/1vt17VpbH0T9UvHck0pRxL7Jhjy6PswpB.pdf",
-    "sha256": "b207a84a6a8349b3f03d26d047c4869906df946ee61b7004e6033757000d34db"
-  },
   "1zmfZZ_oTx2etOEbVycFGW18r1zcrUSWK": {
     "original_asset": "/_blob/f1cea9f1b1180895d0b2f8e3649c6567",
     "pages_path": "wiki-pdfs/1zmfZZ_oTx2etOEbVycFGW18r1zcrUSWK.pdf",
     "sha256": "47c9808622a09fab326c3c9ccf8feeeb22f03f952b04f4cb94cda8bbac660e02"
-  },
-  "1zxGX4CZ_-cfEqDLOHpUxQ07vwHD6e9Ai": {
-    "original_asset": "/_blob/b0ebe845c1962bbc991abff4a7578c70",
-    "pages_path": "wiki-pdfs/1zxGX4CZ_-cfEqDLOHpUxQ07vwHD6e9Ai.pdf",
-    "sha256": "e828c27d6f3516815ae45e40f2fe997f0a7f7e316abaefc9319444e5b735f399"
   }
 }
