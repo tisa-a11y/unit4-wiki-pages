@@ -977,7 +977,8 @@ function docsBlock(key){
   const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const rows=ds=>ds.map(d=>{const L=docLabel(d);return '<li'+(hideInEs(d,ds)?' data-hide-es':'')+'><a href="'+docHref(d)+'"'+(isPdf(d)?'':' target="_blank" rel="noopener"')+'>'+esc(L.t)+'</a> <span class="k">'+docKind(d)+(L.date?' · '+niceDate(L.date):'')+'</span>'+(d.pin?' <span class="pin-tag">Original</span>':'')+(d.review?' <span class="k">'+(LANG==="es"?"En revisión":"Awaiting review")+'</span>':'')+'</li>';}).join("");
   const history=archived.length?'<details><summary>'+(LANG==="es"?"Historial":"History")+'</summary><ul>'+rows(archived)+'</ul></details>':"";
-  return '<section class="docs"><h2>Documents ('+active.length+')</h2><ul>'+rows(active)+'</ul>'+history+'</section>';
+  const method = key==="bedroom" ? '<p class="hint" translate="no">'+(LANG==="es"?'Use los planos R2 con esta enmienda al método.':'Use the R2 plans with this installation-method amendment.')+' <a href="./wiki-pdfs/2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_EN.pdf">English PDF</a> · <a href="./wiki-pdfs/2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_ES.pdf">PDF en español</a></p>' : "";
+  return '<section class="docs"><h2>Documents ('+active.length+')</h2>'+method+'<ul>'+rows(active)+'</ul>'+history+'</section>';
 }
 jump.addEventListener("change", ()=>{ location.hash = jump.value; });
 const menuBtn=document.getElementById("menuBtn"), shade=document.getElementById("railShade");
