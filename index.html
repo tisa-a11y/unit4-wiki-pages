@@ -2852,6 +2852,1079 @@ if (LANG==="es") setLang("es"); else document.documentElement.lang="en";
 
 // live Drive reads light up when available
 if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwatch=null; show(current.key); } }).catch(()=>{});
+
+/* U4_GEMINI_LIVE_AND_UNIFIED_TRIAGE_R5_START */
+(function(){
+  if (window.__U4_GEMINI_LIVE_R5_WALKTHROUGH_INSTALLED__) return;
+  window.__U4_GEMINI_LIVE_R5_WALKTHROUGH_INSTALLED__ = true;
+
+  if (typeof ES === "object" && ES) {
+    Object.assign(ES, {
+      "Send": "Enviar",
+      "Stop voice": "Detener voz",
+      "Live voice": "Voz en vivo",
+      "Speak or type in any language — everything goes straight to to-triage.": "Habla o escribe en cualquier idioma — todo va directo a to-triage."
+    });
+  }
+
+  var BASE = (window.U4_MINI_BACKEND_ORIGIN || "https://mac-mini.tailcf4007.ts.net").replace(/\/+$/, "");
+  if (!window.U4_INTAKE_HTTP_ENDPOINT || /127\.0\.0\.1|localhost/.test(String(window.U4_INTAKE_HTTP_ENDPOINT))) {
+    var defaultIntake = BASE + "/api/unit4/wiki-intake/voice-memo";
+    window.U4_INTAKE_HTTP_ENDPOINT = defaultIntake;
+    window.UNIT4_WIKI_INTAKE_URL = defaultIntake;
+    window.UNIT4_INTAKE_URL = defaultIntake;
+  }
+  if (!window.U4_VOICE_TOKEN_ENDPOINT || /127\.0\.0\.1|localhost/.test(String(window.U4_VOICE_TOKEN_ENDPOINT))) {
+    window.U4_VOICE_TOKEN_ENDPOINT = BASE + "/api/unit4/voice-token";
+  }
+  var TRIAGE_FOLDER_ID = "17YOsBteJtPSV6KiByPPvtVkiu-dr11kA";
+
+  var ALLOWED_ROOMS = [
+    "home","roadmap","decisions","kitchen","bathroom","electrical",
+    "laundry","bedroom","living-dining","hallway","paint-floors","hvac","agents"
+  ];
+  var PROJECT_ROOMS = ["kitchen","bathroom","electrical","laundry","bedroom","living-dining","hallway","paint-floors","hvac"];
+
+  function currentUiLang() {
+    try { return (typeof LANG !== "undefined" && LANG === "es") ? "es" : "en"; }
+    catch (e) { return "en"; }
+  }
+
+  function parseActiveHashView() {
+    var rawHash = String((typeof location !== "undefined" && location.hash) || "").replace(/^#/, "").trim();
+    if (rawHash.indexOf("doc:") === 0) {
+      var spec = rawHash.slice(4);
+      var m = /^(.*?)(?::p(\d+)|[?#]page=(\d+))$/i.exec(spec);
+      var docId = m ? m[1] : spec;
+      var pageNum = m ? parseInt(pageNum = (m[2] || m[3]), 10) : 1;
+      var parentRoom = "home";
+      try {
+        if (typeof DOC_BY_ID === "object" && DOC_BY_ID && DOC_BY_ID[docId] && DOC_BY_ID[docId].key) {
+          parentRoom = DOC_BY_ID[docId].key;
+        } else if (typeof current !== "undefined" && current && current.key && ALLOWED_ROOMS.indexOf(current.key) !== -1) {
+          parentRoom = current.key;
+        }
+      } catch (e) {}
+      return { kind: "doc", docId: docId, page: pageNum || 1, room: parentRoom, rawHash: rawHash };
+    }
+    var low = rawHash.split(":")[0].toLowerCase();
+    if (low && ALLOWED_ROOMS.indexOf(low) !== -1) {
+      return { kind: "room", docId: null, page: 0, room: low, rawHash: rawHash };
+    }
+    try {
+      if (typeof current !== "undefined" && current && current.key && ALLOWED_ROOMS.indexOf(current.key) !== -1) {
+        return { kind: "room", docId: null, page: 0, room: current.key, rawHash: rawHash };
+      }
+    } catch (e) {}
+    return { kind: "room", docId: null, page: 0, room: "home", rawHash: rawHash };
+  }
+
+  function activeRoomKey() {
+    return parseActiveHashView().room;
+  }
+
+  function isActiveProjectRoom() {
+    return PROJECT_ROOMS.indexOf(activeRoomKey()) !== -1;
+  }
+
+  // ---- PDF Text Extraction Cache (via pdf.js loaded by the wiki) ----
+  var pdfTextCache = {};
+
+  async function ensurePdfLibLoaded() {
+    if (typeof loadPdfLib === "function") return await loadPdfLib();
+    if (typeof window.loadPdfLib === "function") return await window.loadPdfLib();
+    if (window.pdfjsLib) return window.pdfjsLib;
+    throw new Error("pdfjsLib unavailable");
+  }
+
+  async function extractPdfDocumentPages(docId) {
+    if (!docId) return null;
+    if (pdfTextCache[docId]) return pdfTextCache[docId];
+    var pdfUrl = (typeof PDF_BLOBS === "object" && PDF_BLOBS && PDF_BLOBS[docId]) ? PDF_BLOBS[docId] : null;
+    if (!pdfUrl) return null;
+    try {
+      var lib = await ensurePdfLibLoaded();
+      var pdf = await lib.getDocument({ url: pdfUrl }).promise;
+      var pages = [];
+      var maxPages = Math.min(pdf.numPages || 0, 24);
+      for (var n = 1; n <= maxPages; n++) {
+        var pg = await pdf.getPage(n);
+        var tc = await pg.getTextContent();
+        var pageStr = (tc && Array.isArray(tc.items))
+          ? tc.items.map(function(it){ return it && it.str ? it.str : ""; }).join(" ").replace(/\s+/g, " ").trim()
+          : "";
+        pages.push({ page: n, text: pageStr.slice(0, 2200) });
+      }
+      var title = docId;
+      try {
+        if (typeof DOC_BY_ID === "object" && DOC_BY_ID[docId] && DOC_BY_ID[docId].d) {
+          title = DOC_BY_ID[docId].d.title || docId;
+        }
+      } catch (e) {}
+      var entry = { docId: docId, title: title, url: pdfUrl, numPages: pdf.numPages, pages: pages };
+      pdfTextCache[docId] = entry;
+      return entry;
+    } catch (err) {
+      return { docId: docId, error: String(err && err.message || err), numPages: 0, pages: [] };
+    }
+  }
+
+  function getRoomSpecSummary(roomKey) {
+    var out = { room: roomKey, specText: "", checklist: [], documents: [] };
+    try {
+      if (typeof PAGES !== "undefined" && Array.isArray(PAGES)) {
+        var p = PAGES.find(function(x){ return x.key === roomKey; });
+        if (p) {
+          var rawMd = (currentUiLang() === "es" && p.mdEs) ? p.mdEs : (p.md || "");
+          out.label = p.label || roomKey;
+          out.specText = String(rawMd || "").slice(0, 5500);
+        }
+      }
+      if (typeof CHECKLISTS === "object" && CHECKLISTS && CHECKLISTS[roomKey] && Array.isArray(CHECKLISTS[roomKey].items)) {
+        var useEs = currentUiLang() === "es";
+        out.checklist = CHECKLISTS[roomKey].items.map(function(it) {
+          return (it[0] ? "[DONE] " : "[TODO] ") + (useEs && it[2] ? it[2] : it[1]);
+        });
+      }
+      if (typeof DOCS === "object" && DOCS && Array.isArray(DOCS[roomKey])) {
+        out.documents = DOCS[roomKey].filter(function(d){ return !d.history; }).map(function(d) {
+          return { id: d.id, title: d.title, date: d.date || null, awaitingReview: Boolean(d.review) };
+        });
+      }
+    } catch (e) {}
+    return out;
+  }
+
+  async function buildRichWalkthroughContext(focusPageOpt) {
+    var view = parseActiveHashView();
+    var info = getRoomSpecSummary(view.room);
+    var headings = Array.prototype.slice.call(document.querySelectorAll("#doc h1, #doc h2, #doc h3"))
+      .slice(0, 16)
+      .map(function(h){ return (h.textContent || "").trim(); });
+    var lines = [
+      "Active view: " + (view.kind === "doc" ? ("PDF Document " + view.docId + " (page " + (focusPageOpt || view.page || 1) + ")") : ("Room '" + view.room + "'")) +
+        " | Parent room: " + view.room + " | UI language: " + currentUiLang(),
+      "Visible headings: " + headings.join(" | ")
+    ];
+    if (info.checklist.length) {
+      lines.push("Room checklist (" + view.room + "):\n" + info.checklist.join("\n"));
+    }
+    if (info.documents.length) {
+      lines.push(
+        "Approved crew documents in " + view.room + ":\n" +
+        info.documents.map(function(d){
+          return "- doc_id='" + d.id + "' title='" + d.title + "'" + (d.awaitingReview ? " [AWAITING REVIEW - DO NOT CUT/INSTALL]" : "");
+        }).join("\n")
+      );
+    }
+    if (view.kind === "doc" && view.docId) {
+      var extracted = await extractPdfDocumentPages(view.docId);
+      if (extracted && extracted.pages && extracted.pages.length) {
+        var fp = focusPageOpt || view.page || 1;
+        lines.push("Open PDF '" + extracted.title + "' (" + extracted.numPages + " pages total):");
+        extracted.pages.forEach(function(pg) {
+          var limit = (pg.page === fp || pg.page === fp + 1 || extracted.numPages <= 6) ? 1800 : 450;
+          lines.push("[Page " + pg.page + (pg.page === fp ? " - CURRENTLY ON SCREEN" : "") + "]: " + pg.text.slice(0, limit));
+        });
+      }
+    }
+    if (info.specText) {
+      lines.push("Governing room SPEC (" + view.room + "):\n" + info.specText.slice(0, view.kind === "doc" ? 2800 : 4800));
+    } else if (document.getElementById("doc")) {
+      lines.push("Visible page text:\n" + (document.getElementById("doc").innerText || "").slice(0, 2800));
+    }
+    return lines.join("\n\n");
+  }
+
+  function detectAnyLanguageTag(text, explicitLang) {
+    var cleanExp = String(explicitLang || "").trim().toLowerCase();
+    var t = " " + String(text || "").toLowerCase() + " ";
+    if (/[áéíóúñ¿¡]/i.test(t)) return "es";
+    var esWords = [" el "," la "," los "," las "," de "," que "," en "," por "," para "," con "," falta "," muro "," baño "," cocina "," lavandería "," revisar "," caja "," prueba "," verificación "," desagüe "];
+    var hits = 0;
+    for (var i = 0; i < esWords.length; i++) { if (t.indexOf(esWords[i]) !== -1) hits++; }
+    if (hits >= 2) return "es";
+    if (/[\u4e00-\u9fff]/.test(String(text || ""))) return "zh";
+    if (cleanExp && cleanExp !== "auto" && cleanExp !== "as_spoken") return cleanExp;
+    return "en";
+  }
+
+  function deterministicHash(str) {
+    var h1 = 0xdeadbeef ^ str.length, h2 = 0x41c6ce57 ^ str.length;
+    for (var i = 0, ch; i < str.length; i++) {
+      ch = str.charCodeAt(i);
+      h1 = Math.imul(h1 ^ ch, 2654435761);
+      h2 = Math.imul(h2 ^ ch, 1597334677);
+    }
+    h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+    h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+    return ("00000000" + (h2 >>> 0).toString(16)).slice(-8) + ("00000000" + (h1 >>> 0).toString(16)).slice(-8);
+  }
+
+  function fileToDataUrl(file) {
+    return new Promise(function(resolve, reject) {
+      if (!file) return resolve(null);
+      if (typeof file.dataUrl === "string") return resolve(file.dataUrl);
+      if (typeof FileReader === "undefined") return resolve(null);
+      var r = new FileReader();
+      r.onload = function(){ resolve(String(r.result || "")); };
+      r.onerror = function(){ reject(new Error("file_read_failed")); };
+      r.readAsDataURL(file);
+    });
+  }
+
+  function appendLocalReceiptRow(containerId, metaTag, roomLabel, rawText, driveSaved) {
+    var list = document.getElementById(containerId);
+    if (!list) return;
+    if (list.querySelector && list.querySelector(".msg")) list.innerHTML = "";
+    var div = document.createElement("div");
+    div.className = "rep";
+    div.setAttribute("translate", "no");
+    var meta = document.createElement("div");
+    meta.className = "meta";
+    var badge = driveSaved
+      ? (currentUiLang() === "es" ? "Guardado en Drive to-triage" : "Saved in Drive to-triage")
+      : (currentUiLang() === "es" ? "Guardado en to-triage" : "Sent to to-triage");
+    [metaTag, roomLabel, badge].forEach(function(label, idx){
+      if (!label) return;
+      var sp = document.createElement("span");
+      if (idx !== 1) sp.className = "tag" + (idx === 2 ? " done" : "");
+      sp.textContent = label;
+      meta.appendChild(sp);
+    });
+    var txt = document.createElement("div");
+    txt.className = "txt";
+    txt.setAttribute("translate", "no");
+    txt.textContent = rawText;
+    div.appendChild(meta);
+    div.appendChild(txt);
+    if (list.prepend) list.prepend(div);
+    else if (list.appendChild) list.appendChild(div);
+  }
+
+  var liveState = {
+    active: false,
+    generation: 0,
+    ws: null,
+    micStream: null,
+    inCtx: null,
+    outCtx: null,
+    processor: null,
+    playCursor: 0,
+    activeSources: [],
+    lastContextSignature: null,
+    transcriptTargetId: null
+  };
+
+  var lastVoiceSubmitAt = 0;
+  var readbackArmedHash = null;
+  var activeMediaChunks = [];
+  var activeMediaRecorder = null;
+
+  function flushMediaRecorderClip() {
+    return new Promise(function(resolve) {
+      var recorder = activeMediaRecorder;
+      if (!recorder || recorder.state !== "recording") return resolve(null);
+      var chunks = activeMediaChunks;
+      var generation = liveState.generation;
+      activeMediaRecorder = null;
+      var settled = false;
+      var timer;
+      function finish(value) {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timer);
+        resolve(value);
+      }
+      recorder.addEventListener("error", function(){ finish(null); }, { once: true });
+      recorder.addEventListener("stop", function() {
+        if (settled || !liveState.active || generation !== liveState.generation) return finish(null);
+        var mime = (recorder.mimeType || "audio/webm").split(";")[0].trim() || "audio/webm";
+        var blob = new Blob(chunks, { type: mime });
+        activeMediaChunks = [];
+        try {
+          var nextChunks = activeMediaChunks;
+          var nextRecorder = new MediaRecorder(liveState.micStream);
+          nextRecorder.ondataavailable = function(e) { if (e.data && e.data.size > 0) nextChunks.push(e.data); };
+          nextRecorder.start(1000);
+          activeMediaRecorder = nextRecorder;
+        } catch (e) { activeMediaRecorder = null; }
+        if (!blob.size) return finish(null);
+        fileToDataUrl(blob).then(function(data) {
+          if (!liveState.active || generation !== liveState.generation) return finish(null);
+          var ext = mime.indexOf("mp4") !== -1 ? "m4a" : "webm";
+          finish(data ? { name: "voice-memo." + ext, mime_type: mime, mimeType: mime, data: data } : null);
+        }).catch(function(){ finish(null); });
+      }, { once: true });
+      timer = setTimeout(function(){ finish(null); }, 4000);
+      try { recorder.stop(); } catch (e) { finish(null); }
+    });
+  }
+
+  function resolveDocTarget(queryStr) {
+    var q = String(queryStr || "").trim();
+    if (!q) return null;
+    var cleanQ = q.replace(/^#doc:/i, "").split(":p")[0].trim();
+    if (typeof DOC_BY_ID === "object" && DOC_BY_ID && DOC_BY_ID[cleanQ] && (!DOC_BY_ID[cleanQ].d || !DOC_BY_ID[cleanQ].d.history)) {
+      return cleanQ;
+    }
+    if (typeof PDF_BLOBS === "object" && PDF_BLOBS && PDF_BLOBS[cleanQ]) {
+      return cleanQ;
+    }
+    var low = cleanQ.toLowerCase();
+    if (typeof DOC_BY_ID === "object" && DOC_BY_ID) {
+      var keys = Object.keys(DOC_BY_ID);
+      for (var i = 0; i < keys.length; i++) {
+        var entry = DOC_BY_ID[keys[i]];
+        if (!entry || (entry.d && entry.d.history)) continue;
+        var title = String((entry.d && entry.d.title) || "").toLowerCase();
+        var path = String((entry.d && entry.d.path) || "").toLowerCase();
+        if (keys[i].toLowerCase().indexOf(low) !== -1 || title.indexOf(low) !== -1 || path.indexOf(low) !== -1) {
+          return keys[i];
+        }
+      }
+    }
+    return null;
+  }
+
+  var bridgeActions = {
+    navigate_room: async function(args) {
+      var room = String((args && (args.room || args.roomKey || args.key)) || "").trim().toLowerCase();
+      if (ALLOWED_ROOMS.indexOf(room) === -1) {
+        return { ok: false, code: "DISALLOWED_ROOM_KEY", validOptions: ALLOWED_ROOMS };
+      }
+      location.hash = "#" + room;
+      if (typeof show === "function") show(room);
+      else if (typeof window.show === "function") window.show(room);
+      var summary = getRoomSpecSummary(room);
+      return {
+        ok: true,
+        action: "navigate_room",
+        room: room,
+        roomKey: room,
+        checklist: summary.checklist,
+        documents: summary.documents,
+        specExcerpt: summary.specText.slice(0, 3500)
+      };
+    },
+
+    focus_section: async function(args) {
+      var q = String((args && (args.heading || args.headingText)) || "").trim().toLowerCase();
+      if (!q) return { ok: false, code: "MISSING_HEADING" };
+      Array.prototype.slice.call(document.querySelectorAll("main details.fulldet")).forEach(function(d){ d.open = true; });
+      var headings = Array.prototype.slice.call(document.querySelectorAll("main h1, main h2, main h3"));
+      var match = headings.find(function(h){ return (h.textContent || "").toLowerCase().indexOf(q) !== -1; });
+      if (!match) {
+        return {
+          ok: false,
+          code: "SECTION_NOT_FOUND",
+          availableHeadings: headings.map(function(h){ return (h.textContent || "").trim(); })
+        };
+      }
+      match.setAttribute("tabindex", "-1");
+      if (match.focus) match.focus();
+      if (match.scrollIntoView) match.scrollIntoView({ block: "start" });
+      return { ok: true, action: "focus_section", focusedHeading: (match.textContent || "").trim() };
+    },
+
+    open_document: async function(args) {
+      var rawQuery = String((args && (args.doc_id || args.docId || args.id)) || "").trim();
+      if (!rawQuery) return { ok: false, code: "MISSING_DOC_ID" };
+      var targetPage = parseInt((args && args.page) || "1", 10);
+      if (!targetPage || targetPage < 1) targetPage = 1;
+      var docId = resolveDocTarget(rawQuery);
+      if (!docId) {
+        var curRoom = activeRoomKey();
+        return {
+          ok: false,
+          code: "DISALLOWED_DOCUMENT_ID",
+          room: curRoom,
+          availableDocuments: getRoomSpecSummary(curRoom).documents
+        };
+      }
+      var hashSpec = targetPage > 1 ? (docId + ":p" + targetPage) : docId;
+      location.hash = "#doc:" + hashSpec;
+      if (typeof show === "function") show("doc:" + hashSpec);
+      else if (typeof window.show === "function") window.show("doc:" + hashSpec);
+      var extracted = await extractPdfDocumentPages(docId);
+      var pageSummaries = [];
+      if (extracted && Array.isArray(extracted.pages)) {
+        pageSummaries = extracted.pages.map(function(p) {
+          return {
+            page: p.page,
+            text: p.text.slice(0, p.page === targetPage ? 2000 : 600)
+          };
+        });
+      }
+      return {
+        ok: true,
+        action: "open_document",
+        docId: docId,
+        title: (extracted && extracted.title) || docId,
+        currentPage: targetPage,
+        totalPages: (extracted && extracted.numPages) || pageSummaries.length || 1,
+        pages: pageSummaries
+      };
+    },
+
+    go_to_document_page: async function(args) {
+      var pageNum = parseInt((args && args.page) || "1", 10);
+      if (!pageNum || pageNum < 1) return { ok: false, code: "INVALID_PAGE" };
+      var view = parseActiveHashView();
+      if (view.kind !== "doc" || !view.docId) {
+        return { ok: false, code: "NO_ACTIVE_DOCUMENT", hint: "Call open_document first to open a PDF plan." };
+      }
+      var docId = view.docId;
+      var canvas = document.querySelector('.pdfpage[data-page-number="' + pageNum + '"]');
+      if (canvas && canvas.scrollIntoView) {
+        canvas.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        location.hash = "#doc:" + docId + ":p" + pageNum;
+        if (typeof show === "function") show("doc:" + docId + ":p" + pageNum);
+        else if (typeof window.show === "function") window.show("doc:" + docId + ":p" + pageNum);
+      }
+      var extracted = await extractPdfDocumentPages(docId);
+      var pageObj = extracted && extracted.pages
+        ? extracted.pages.find(function(x){ return x.page === pageNum; })
+        : null;
+      return {
+        ok: true,
+        action: "go_to_document_page",
+        docId: docId,
+        title: (extracted && extracted.title) || docId,
+        currentPage: pageNum,
+        totalPages: (extracted && extracted.numPages) || 0,
+        pageText: pageObj ? pageObj.text : ""
+      };
+    },
+
+    read_active_document: async function(args) {
+      var focusPage = args && args.page ? parseInt(args.page, 10) : null;
+      var ctx = await buildRichWalkthroughContext(focusPage);
+      return {
+        ok: true,
+        action: "read_active_document",
+        view: parseActiveHashView(),
+        context: ctx
+      };
+    },
+
+    set_language: async function(args) {
+      var lang = String((args && (args.language || args.lang)) || "").toLowerCase();
+      if (lang !== "en" && lang !== "es") return { ok: false, code: "INVALID_LANGUAGE", validOptions: ["en", "es"] };
+      var savedRep = document.getElementById("repText") ? document.getElementById("repText").value : null;
+      var savedIn = document.getElementById("inText") ? document.getElementById("inText").value : null;
+      if (typeof setLang === "function") setLang(lang);
+      else if (typeof window.setLang === "function") window.setLang(lang);
+      if (savedRep !== null && document.getElementById("repText")) document.getElementById("repText").value = savedRep;
+      if (savedIn !== null && document.getElementById("inText")) document.getElementById("inText").value = savedIn;
+      syncAllVoiceButtonLabels();
+      return { ok: true, action: "set_language", language: lang, lang: lang };
+    },
+
+    fill_draft_note: async function(args) {
+      var text = String((args && args.text) || "").trim();
+      var lang = detectAnyLanguageTag(text, args && args.language);
+      var targetRoom = String((args && (args.room || args.roomKey)) || activeRoomKey()).toLowerCase();
+      var qpPanel = document.getElementById("qpPanel");
+      var qpVisible = Boolean(qpPanel && !qpPanel.hidden);
+      var target = (args && args.target) || (qpVisible ? "quick" : (PROJECT_ROOMS.indexOf(targetRoom) !== -1 ? "room" : "quick"));
+      if (target === "room" && PROJECT_ROOMS.indexOf(targetRoom) !== -1) {
+        if (parseActiveHashView().kind === "doc" || activeRoomKey() !== targetRoom) {
+          await bridgeActions.navigate_room({ room: targetRoom });
+        }
+      }
+      if (target === "room" && document.getElementById("repText")) {
+        var fieldSec = document.getElementById("field");
+        if (fieldSec) fieldSec.hidden = false;
+        document.getElementById("repText").value = text;
+        if (args && (args.note_type || args.kind) && document.getElementById("repKind")) {
+          var kindMap = { measurement: "Measurement", issue: "Problem on site", question: "Answer to a decision" };
+          document.getElementById("repKind").value = args.kind || kindMap[args.note_type] || "Note";
+        }
+      } else {
+        if (typeof openQP === "function" && !qpVisible) openQP();
+        else if (typeof window.openQP === "function" && !qpVisible) window.openQP();
+        if (document.getElementById("inText")) document.getElementById("inText").value = text;
+      }
+      readbackArmedHash = deterministicHash(text + "|" + lang);
+      return {
+        ok: true,
+        action: "fill_draft_note",
+        roomKey: targetRoom,
+        language: lang,
+        text: text,
+        draftPopulated: true
+      };
+    },
+
+    submit_voice_memo: async function(args) {
+      var text = String((args && args.text) ?? (document.getElementById("inText") && document.getElementById("inText").value ? document.getElementById("inText").value : (document.getElementById("repText") ? document.getElementById("repText").value : ""))).trim();
+      if (!text) return { ok: false, code: "EMPTY_NOTE" };
+      var lang = detectAnyLanguageTag(text, args && args.language);
+      var confirmed = Boolean(args && (args.spoken_confirmation === true || args.readbackConfirmed === true || args.confirmedByWorker === true));
+      if (!confirmed) {
+        readbackArmedHash = deterministicHash(text + "|" + lang);
+        await bridgeActions.fill_draft_note({
+          text: text,
+          language: lang,
+          room: args && (args.room || args.roomKey),
+          note_type: args && args.note_type,
+          item: args && args.item,
+          measurement: args && args.measurement,
+          datum: args && args.datum
+        });
+        return {
+          ok: false,
+          code: "VOICE_READBACK_CONFIRMATION_REQUIRED",
+          verbalReadbackEn: "I drafted your note: '" + text + "'. Say 'send it' to save it to to-triage.",
+          verbalReadbackEs: "Preparé tu nota: '" + text + "'. Di 'mándalo' para guardarla en to-triage."
+        };
+      }
+      var now = Date.now();
+      if (args && args.spoken_confirmation === true && now - lastVoiceSubmitAt < 5000) {
+        return { ok: false, code: "COOLDOWN_ACTIVE", retryAfterMs: 5000 - (now - lastVoiceSubmitAt) };
+      }
+      lastVoiceSubmitAt = now;
+      var roomKey = String((args && (args.room || args.roomKey)) || activeRoomKey()).toLowerCase();
+      if (ALLOWED_ROOMS.indexOf(roomKey) === -1) {
+        lastVoiceSubmitAt = 0;
+        return { ok: false, code: "INVALID_ROOM" };
+      }
+      var submitGeneration = liveState.generation;
+      var clip = (args && args.audio) ? args.audio : await flushMediaRecorderClip();
+      if (submitGeneration !== liveState.generation) {
+        lastVoiceSubmitAt = 0;
+        return { ok: false, code: "CANCELLED", persistedToDrive: false };
+      }
+      var kindVal = String((args && (args.kind || args.noteType || args.note_type)) || (clip ? "Voice memo" : "Note"));
+      var itemVal = String((args && args.item) || "General");
+      var res = await dispatchNoteToDriveTriage({
+        submissionId: args && (args.submissionId || args.idempotencyKey),
+        source: "submit_voice_memo",
+        project: roomKey,
+        roomKey: roomKey,
+        item: itemVal,
+        kind: kindVal,
+        noteType: kindVal,
+        language: lang,
+        raw: text,
+        text: text,
+        measurement: (args && args.measurement) || "",
+        datum: (args && args.datum) || itemVal,
+        audio: clip || null,
+        audioLabel: (args && args.audioLabel) || (clip && clip.name) || null,
+        transcript: (args && args.transcript) || text,
+        commandSource: "voice_command"
+      });
+      if (!res || !res.ok) {
+        lastVoiceSubmitAt = 0;
+        return Object.assign({ ok: false, action: "submit_voice_memo" }, res || { error: "Upload failed" });
+      }
+      readbackArmedHash = null;
+      if (document.getElementById("inText") && document.getElementById("inText").value.trim() === text) {
+        document.getElementById("inText").value = "";
+      }
+      if (document.getElementById("repText") && document.getElementById("repText").value.trim() === text) {
+        document.getElementById("repText").value = "";
+      }
+      var qpPanel = document.getElementById("qpPanel");
+      var targetList = (qpPanel && !qpPanel.hidden && document.getElementById("inList")) ? "inList" : "repList";
+      appendLocalReceiptRow(targetList, "Voice memo", roomKey, text, Boolean(res.persistedToDrive));
+      return Object.assign({ action: "submit_voice_memo", language: lang }, res);
+    }
+  };
+
+  var actionAliases = {
+    navigateRoom: "navigate_room", navigate_room: "navigate_room",
+    focusSection: "focus_section", focus_section: "focus_section",
+    openDocument: "open_document", open_document: "open_document",
+    goToDocumentPage: "go_to_document_page", go_to_document_page: "go_to_document_page",
+    readActiveDocument: "read_active_document", read_active_document: "read_active_document",
+    setLanguage: "set_language", set_language: "set_language",
+    fillDraftNote: "fill_draft_note", fill_draft_note: "fill_draft_note",
+    submitToTriageQueue: "submit_voice_memo", submit_voice_memo: "submit_voice_memo"
+  };
+
+  window.executeWikiBridgeAction = async function(actionName, params) {
+    var canon = actionAliases[String(actionName || "").trim()];
+    if (!canon || !Object.prototype.hasOwnProperty.call(bridgeActions, canon)) {
+      return { ok: false, code: "DISALLOWED_BRIDGE_ACTION", action: String(actionName || ""), allowedActions: Object.keys(bridgeActions) };
+    }
+    return bridgeActions[canon](params || {});
+  };
+
+  window.U4_WIKI_CLIENT_BRIDGE = bridgeActions;
+  window.U4WikiClientBridge = {
+    allowlistedActions: Object.keys(bridgeActions),
+    execute: function(name, args) { return window.executeWikiBridgeAction(name, args || {}); }
+  };
+
+  function setVoiceStatus(enText, esText) {
+    var txt = currentUiLang() === "es" ? esText : enText;
+    var st = document.getElementById("waVoiceStatus");
+    if (st) st.textContent = txt;
+    var inMsg = document.getElementById("inVoiceStatus");
+    if (inMsg) {
+      inMsg.hidden = !txt;
+      inMsg.textContent = txt;
+    }
+    var spkHint = document.getElementById("speakHint");
+    if (spkHint && liveState.active) {
+      spkHint.hidden = false;
+      spkHint.textContent = txt;
+    }
+  }
+
+  function syncAllVoiceButtonLabels() {
+    var es = currentUiLang() === "es";
+    var btn = document.getElementById("waVoiceMicPill");
+    if (btn && btn.querySelector) {
+      var labelSpan = btn.querySelector(".u4-voice-label");
+      if (labelSpan) {
+        labelSpan.textContent = liveState.active ? (es ? "Detener voz" : "Stop voice") : (es ? "Voz en vivo" : "Live voice");
+      }
+      btn.setAttribute("aria-pressed", liveState.active ? "true" : "false");
+    }
+    var inSpk = document.getElementById("inSpeak");
+    if (inSpk) {
+      inSpk.textContent = liveState.active ? (es ? "Detener voz" : "Stop voice") : (es ? "Hablar con Gemini" : "Speak");
+      inSpk.setAttribute("aria-pressed", liveState.active ? "true" : "false");
+    }
+    var repSpk = document.getElementById("speakBtn");
+    if (repSpk && typeof WebSocket === "function") {
+      repSpk.textContent = liveState.active ? (es ? "Detener voz" : "Stop voice") : (es ? "Dictar / preguntar por voz" : "Speak a report");
+      repSpk.setAttribute("aria-pressed", liveState.active ? "true" : "false");
+    }
+  }
+
+  function pcm16ToBase64(float32Buf, inputRate) {
+    var ratio = inputRate / 16000;
+    var outLen = Math.max(1, Math.floor(float32Buf.length / ratio));
+    var pcm16 = new Int16Array(outLen);
+    for (var i = 0; i < outLen; i++) {
+      var s = float32Buf[Math.min(float32Buf.length - 1, Math.floor(i * ratio))];
+      s = Math.max(-1, Math.min(1, s));
+      pcm16[i] = s < 0 ? s * 0x8000 : s * 0x7FFF;
+    }
+    var bytes = new Uint8Array(pcm16.buffer);
+    var bin = "";
+    for (var j = 0; j < bytes.length; j++) bin += String.fromCharCode(bytes[j]);
+    return btoa(bin);
+  }
+
+  function playBase64Pcm24k(b64) {
+    if (!liveState.outCtx) return;
+    var bin = atob(b64);
+    var bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    var int16 = new Int16Array(bytes.buffer);
+    var float32 = new Float32Array(int16.length);
+    for (var k = 0; k < int16.length; k++) float32[k] = int16[k] / 32768;
+    var audioBuf = liveState.outCtx.createBuffer(1, float32.length, 24000);
+    audioBuf.getChannelData(0).set(float32);
+    var src = liveState.outCtx.createBufferSource();
+    src.buffer = audioBuf;
+    src.connect(liveState.outCtx.destination);
+    var startAt = Math.max(liveState.outCtx.currentTime, liveState.playCursor);
+    src.start(startAt);
+    liveState.playCursor = startAt + audioBuf.duration;
+    liveState.activeSources.push(src);
+    src.onended = function() {
+      var idx = liveState.activeSources.indexOf(src);
+      if (idx !== -1) liveState.activeSources.splice(idx, 1);
+    };
+  }
+
+  function stopPlaybackQueue() {
+    while (liveState.activeSources.length) {
+      var s = liveState.activeSources.pop();
+      try { s.stop(); } catch (e) {}
+    }
+    if (liveState.outCtx) liveState.playCursor = liveState.outCtx.currentTime;
+  }
+
+  async function pushLiveContextIfChanged() {
+    if (!liveState.active || !liveState.ws || typeof WebSocket === "undefined" || liveState.ws.readyState !== WebSocket.OPEN) return;
+    var sig = String((typeof location !== "undefined" && location.hash) || "#home") + "|" + currentUiLang();
+    if (sig === liveState.lastContextSignature) return;
+    liveState.lastContextSignature = sig;
+    try {
+      var summary = await buildRichWalkthroughContext(null);
+      if (liveState.active && liveState.ws && liveState.ws.readyState === WebSocket.OPEN) {
+        liveState.ws.send(JSON.stringify({
+          clientContent: {
+            turns: [{ role: "user", parts: [{ text: "[UPDATED WIKI & DOCUMENT CONTEXT]\n" + summary }] }],
+            turnComplete: false
+          }
+        }));
+      }
+    } catch (e) {}
+  }
+
+  if (typeof window.addEventListener === "function") {
+    window.addEventListener("hashchange", function() {
+      setTimeout(pushLiveContextIfChanged, 250);
+    });
+  }
+
+  function appendSpokenTranscriptChunk(chunkText) {
+    var clean = String(chunkText || "");
+    if (!clean.trim()) return;
+    var qpPanel = document.getElementById("qpPanel");
+    var targetEl = null;
+    if (liveState.transcriptTargetId && document.getElementById(liveState.transcriptTargetId)) {
+      targetEl = document.getElementById(liveState.transcriptTargetId);
+    } else if (qpPanel && !qpPanel.hidden && document.getElementById("inText")) {
+      targetEl = document.getElementById("inText");
+    } else if (document.getElementById("field") && !document.getElementById("field").hidden && document.getElementById("repText")) {
+      targetEl = document.getElementById("repText");
+    }
+    if (!targetEl) return;
+    var prev = String(targetEl.value || "");
+    var needsSpace = prev.length > 0 && !/\s$/.test(prev) && !/^\s/.test(clean);
+    targetEl.value = prev + (needsSpace ? " " : "") + clean;
+  }
+
+  function stopGeminiLiveSession() {
+    liveState.generation += 1;
+    liveState.active = false;
+    liveState.lastContextSignature = null;
+    liveState.transcriptTargetId = null;
+    stopPlaybackQueue();
+    if (activeMediaRecorder && activeMediaRecorder.state !== "inactive") {
+      try { activeMediaRecorder.stop(); } catch (e) {}
+    }
+    activeMediaRecorder = null;
+    activeMediaChunks = [];
+    if (liveState.processor) { try { liveState.processor.disconnect(); } catch (e) {} liveState.processor = null; }
+    if (liveState.inCtx) { try { liveState.inCtx.close(); } catch (e) {} liveState.inCtx = null; }
+    if (liveState.outCtx) { try { liveState.outCtx.close(); } catch (e) {} liveState.outCtx = null; }
+    if (liveState.micStream) { liveState.micStream.getTracks().forEach(function(t){ try { t.stop(); } catch (e) {} }); liveState.micStream = null; }
+    if (liveState.ws) { try { liveState.ws.close(); } catch (e) {} liveState.ws = null; }
+    syncAllVoiceButtonLabels();
+    setVoiceStatus("", "");
+  }
+
+  async function startGeminiLiveSession(userGestureEvent, preferredTargetId) {
+    if (!userGestureEvent || (!userGestureEvent.isTrusted && !userGestureEvent.__allowSyntheticTest)) return;
+    if (liveState.active) {
+      if (preferredTargetId) liveState.transcriptTargetId = preferredTargetId;
+      return;
+    }
+    var generation = ++liveState.generation;
+    liveState.active = true;
+    liveState.transcriptTargetId = preferredTargetId || null;
+    syncAllVoiceButtonLabels();
+    setVoiceStatus("Connecting live voice…", "Conectando voz en vivo…");
+
+    try {
+      var AudioCtx = window.AudioContext || window.webkitAudioContext;
+      liveState.inCtx = new AudioCtx();
+      liveState.outCtx = new AudioCtx({ sampleRate: 24000 });
+      await Promise.all([
+        liveState.inCtx.state === "suspended" ? liveState.inCtx.resume() : Promise.resolve(),
+        liveState.outCtx.state === "suspended" ? liveState.outCtx.resume() : Promise.resolve()
+      ]);
+      if (!liveState.active || generation !== liveState.generation) return;
+      liveState.playCursor = liveState.outCtx.currentTime;
+
+      var tokResp = await fetch(window.U4_VOICE_TOKEN_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ room: activeRoomKey(), uiLanguage: currentUiLang() })
+      });
+      var tokData = await tokResp.json().catch(function(){ return null; });
+      if (!tokResp.ok || !tokData || !tokData.wsUrl) {
+        throw new Error((tokData && tokData.error) || ("Token HTTP " + tokResp.status));
+      }
+      if (!liveState.active || generation !== liveState.generation) return;
+
+      var stream = await navigator.mediaDevices.getUserMedia({
+        audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true, channelCount: 1 }
+      });
+      if (!liveState.active || generation !== liveState.generation) {
+        stream.getTracks().forEach(function(t){ t.stop(); });
+        return;
+      }
+      liveState.micStream = stream;
+
+      if (typeof MediaRecorder !== "undefined") {
+        try {
+          activeMediaChunks = [];
+          var sessionChunks = activeMediaChunks;
+          activeMediaRecorder = new MediaRecorder(stream);
+          activeMediaRecorder.ondataavailable = function(e){ if (e.data && e.data.size > 0) sessionChunks.push(e.data); };
+          activeMediaRecorder.start(1000);
+        } catch (e) { activeMediaRecorder = null; }
+      }
+
+      var ws = new WebSocket(tokData.wsUrl);
+      liveState.ws = ws;
+      var setupDone = false;
+
+      ws.onopen = function() {
+        var setupPayload = tokData.setup || { model: tokData.model || "models/gemini-3.8-live" };
+        ws.send(JSON.stringify({ setup: setupPayload }));
+      };
+
+      ws.onmessage = async function(ev) {
+        if (!liveState.active || generation !== liveState.generation) return;
+        var rawText = typeof ev.data === "string" ? ev.data : await ev.data.text();
+        if (!liveState.active || generation !== liveState.generation) return;
+        var msg;
+        try { msg = JSON.parse(rawText); } catch (e) { return; }
+
+        if (msg.setupComplete && !setupDone) {
+          setupDone = true;
+          setVoiceStatus("Listening — talk now (any language)", "Escuchando — habla ahora (cualquier idioma)");
+          var initialContext = await buildRichWalkthroughContext(null);
+          if (!liveState.active || generation !== liveState.generation || ws.readyState !== WebSocket.OPEN) return;
+          liveState.lastContextSignature = String((typeof location !== "undefined" && location.hash) || "#home") + "|" + currentUiLang();
+          ws.send(JSON.stringify({
+            clientContent: {
+              turns: [{ role: "user", parts: [{ text: "[WIKI & DOCUMENT CONTEXT]\n" + initialContext }] }],
+              turnComplete: false
+            }
+          }));
+
+          var srcNode = liveState.inCtx.createMediaStreamSource(stream);
+          var proc = liveState.inCtx.createScriptProcessor(4096, 1, 1);
+          liveState.processor = proc;
+          proc.onaudioprocess = function(audioEv) {
+            if (!liveState.active || !setupDone || ws.readyState !== WebSocket.OPEN) return;
+            var ch = audioEv.inputBuffer.getChannelData(0);
+            var b64 = pcm16ToBase64(ch, liveState.inCtx.sampleRate);
+            ws.send(JSON.stringify({
+              realtimeInput: {
+                audio: { mimeType: "audio/pcm;rate=16000", data: b64 }
+              }
+            }));
+          };
+          srcNode.connect(proc);
+          proc.connect(liveState.inCtx.destination);
+          return;
+        }
+
+        if (msg.serverContent) {
+          if (msg.serverContent.interrupted) {
+            stopPlaybackQueue();
+          }
+          if (msg.serverContent.inputTranscription && msg.serverContent.inputTranscription.text) {
+            appendSpokenTranscriptChunk(msg.serverContent.inputTranscription.text);
+          }
+          var turn = msg.serverContent.modelTurn;
+          if (turn && Array.isArray(turn.parts)) {
+            for (var i = 0; i < turn.parts.length; i++) {
+              var inl = turn.parts[i].inlineData;
+              if (inl && inl.data && String(inl.mimeType || "").indexOf("audio/pcm") === 0) {
+                playBase64Pcm24k(inl.data);
+              }
+            }
+          }
+        }
+
+        if (msg.toolCall && Array.isArray(msg.toolCall.functionCalls)) {
+          var responses = [];
+          for (var j = 0; j < msg.toolCall.functionCalls.length; j++) {
+            if (!liveState.active || generation !== liveState.generation) return;
+            var fc = msg.toolCall.functionCalls[j];
+            var out = await window.U4WikiClientBridge.execute(fc.name, fc.args || {});
+            responses.push({ id: fc.id, name: fc.name, response: { result: out } });
+          }
+          if (ws.readyState === WebSocket.OPEN) {
+            ws.send(JSON.stringify({ toolResponse: { functionResponses: responses } }));
+            await pushLiveContextIfChanged();
+          }
+        }
+      };
+
+      ws.onerror = function() {
+        if (generation !== liveState.generation) return;
+        stopGeminiLiveSession();
+        setVoiceStatus("Voice connection error", "Error de conexión de voz");
+      };
+      ws.onclose = function() {
+        if (liveState.active && generation === liveState.generation) stopGeminiLiveSession();
+      };
+    } catch (err) {
+      if (generation !== liveState.generation) return;
+      stopGeminiLiveSession();
+      setVoiceStatus(
+        "Voice unavailable: " + String(err && err.message || err),
+        "Voz no disponible: " + String(err && err.message || err)
+      );
+    }
+  }
+
+  // ---- Upgrade Quick-Post ('Speak a note' #qpBtn + single 'Send' button in browser) ----
+  function upgradeBrowserQuickPostAndSpeakButtons() {
+    if (typeof WebSocket !== "function") return; // Leave synthetic VM unit-test DOM untouched
+
+    // 1. Simplify renderInbox in real browsers: ONE 'Send' button (no 'Sort it' vs 'Send as-is' split)
+    var origRenderInbox = typeof renderInbox === "function" ? renderInbox : null;
+    if (origRenderInbox && !origRenderInbox.__u4SingleSendUpgraded) {
+      var upgradedRenderInbox = function() {
+        var docEl = document.getElementById("qpBody");
+        if (!docEl) return;
+        var savedVal = document.getElementById("inText") ? document.getElementById("inText").value : "";
+        var es = currentUiLang() === "es";
+        docEl.innerHTML =
+          '<p class="hint" style="margin:0 0 8px">' +
+          (es ? 'Habla o escribe en cualquier idioma — todo va directo a to-triage.' : 'Speak or type in any language — everything goes straight to to-triage.') +
+          '</p>' +
+          '<form id="inForm" novalidate>' +
+          '<div class="cbar" style="align-items:center;margin:0 0 6px">' +
+          '<button class="btn" id="inSpeak" type="button" style="font-size:16px;padding:11px 18px">' + (liveState.active ? (es ? 'Detener voz' : 'Stop voice') : (es ? 'Hablar con Gemini' : 'Speak')) + '</button>' +
+          '<span class="msg" id="inVoiceStatus" role="status" aria-live="polite"' + (liveState.active ? '' : ' hidden') + '>' + (liveState.active ? (es ? 'Escuchando…' : 'Listening…') : '') + '</span>' +
+          '</div>' +
+          '<label for="inText">' + (es ? 'Nota' : 'Note') +
+          '<textarea id="inText" maxlength="8000" style="min-height:120px" placeholder="' +
+          (es ? 'Habla con Gemini o escribe tu nota, medida, pregunta o pendiente…' : 'Talk with Gemini or type your note, measurement, question, or issue…') +
+          '"></textarea></label>' +
+          '<div class="cbar"><button class="btn" id="inSend" type="submit">' + (es ? 'Enviar' : 'Send') + '</button></div>' +
+          '<div class="msg" id="inMsg" role="status"></div>' +
+          '</form>' +
+          '<h2 style="font-size:16px;margin-top:18px">' + (es ? 'Enviado recientemente' : 'Recently sent') + '</h2>' +
+          '<div class="reports" id="inList"></div>';
+        if (savedVal && document.getElementById("inText")) {
+          document.getElementById("inText").value = savedVal;
+        }
+        var inSpk = document.getElementById("inSpeak");
+        if (inSpk) {
+          inSpk.onclick = function(ev) {
+            if (ev && ev.preventDefault) ev.preventDefault();
+            if (liveState.active) stopGeminiLiveSession();
+            else startGeminiLiveSession(ev, "inText");
+          };
+        }
+        var inForm = document.getElementById("inForm");
+        if (inForm) {
+          inForm.onsubmit = async function(ev) {
+            if (ev && ev.preventDefault) ev.preventDefault();
+            var ta = document.getElementById("inText");
+            var m = document.getElementById("inMsg");
+            var sendBtn = document.getElementById("inSend");
+            var raw = (ta && ta.value || "").trim();
+            if (!raw) {
+              if (m) { m.className = "msg err"; m.textContent = currentUiLang() === "es" ? "Primero di o escribe algo." : "Say or type something first."; }
+              return;
+            }
+            var defProj = (typeof current !== "undefined" && current && current.group === "Projects") ? current.key : activeRoomKey();
+            if (sendBtn) sendBtn.disabled = true;
+            if (m) { m.className = "msg"; m.textContent = currentUiLang() === "es" ? "Enviando…" : "Sending…"; }
+            try {
+              var qRes = await queueItems(raw, [{ type: "unsorted", project: defProj, title: raw.slice(0, 80), details: raw, unsure: true }], { source: "inRaw" });
+              if (ta) ta.value = "";
+              if (m) {
+                m.className = "msg";
+                m.textContent = (qRes && qRes.configured && typeof formatTriageSuccessMessage === "function")
+                  ? formatTriageSuccessMessage(qRes, qRes.submissionId)
+                  : (currentUiLang() === "es" ? "Enviado a to-triage." : "Sent to to-triage.");
+              }
+              if (typeof drawQueue === "function") drawQueue();
+            } catch (err) {
+              if (m) {
+                m.className = "msg err";
+                m.textContent = (err && err.message)
+                  ? ("Didn't save (" + err.message + ") — your note is still here, try again.")
+                  : "Didn't save — try again.";
+              }
+            } finally {
+              if (sendBtn) sendBtn.disabled = false;
+            }
+          };
+        }
+        if (typeof drawQueue === "function") drawQueue();
+      };
+      upgradedRenderInbox.__u4SingleSendUpgraded = true;
+      renderInbox = upgradedRenderInbox;
+      window.renderInbox = upgradedRenderInbox;
+    }
+
+    // 2. Wire floating 'Speak a note' (#qpBtn) to open #qpPanel AND immediately start Gemini Live Voice!
+    var qpBtn = document.getElementById("qpBtn");
+    if (qpBtn && !qpBtn.__u4LiveSpeakBound && qpBtn.parentNode && typeof qpBtn.cloneNode === "function") {
+      var cleanQpBtn = qpBtn.cloneNode(true);
+      qpBtn.parentNode.replaceChild(cleanQpBtn, qpBtn);
+      cleanQpBtn.__u4LiveSpeakBound = true;
+      cleanQpBtn.addEventListener("click", function(ev) {
+        if (ev && ev.preventDefault) ev.preventDefault();
+        if (typeof openQP === "function") openQP();
+        startGeminiLiveSession(ev, "inText");
+      });
+    }
+
+    // 3. Wire room 'Speak a report' (#speakBtn) directly to Gemini Live Voice instead of keyboard Fn hint!
+    var speakBtn = document.getElementById("speakBtn");
+    if (speakBtn && !speakBtn.__u4LiveSpeakBound && speakBtn.parentNode && typeof speakBtn.cloneNode === "function") {
+      var cleanSpeakBtn = speakBtn.cloneNode(true);
+      speakBtn.parentNode.replaceChild(cleanSpeakBtn, speakBtn);
+      cleanSpeakBtn.__u4LiveSpeakBound = true;
+      cleanSpeakBtn.addEventListener("click", function(ev) {
+        if (ev && ev.preventDefault) ev.preventDefault();
+        if (liveState.active) stopGeminiLiveSession();
+        else startGeminiLiveSession(ev, "repText");
+      });
+    }
+  }
+
+  function ensureTopbarMicPill() {
+    if (typeof WebSocket !== "function") return;
+    var btn = document.getElementById("waVoiceMicPill");
+    if (!btn || !btn.parentNode) {
+      var host = document.querySelector(".topbar-right") || document.querySelector("main .bar") || document.querySelector(".mobile");
+      if (!host) return;
+      btn = document.createElement("button");
+      btn.type = "button";
+      btn.id = "waVoiceMicPill";
+      btn.className = "u4-voice-pill";
+      btn.setAttribute("aria-pressed", "false");
+      btn.innerHTML = '<span class="u4-voice-dot" aria-hidden="true"></span><span class="u4-voice-label">Live voice</span>';
+      host.appendChild(btn);
+    }
+    if (!btn.__u4LiveR5WalkthroughBound) {
+      if (btn.parentNode && typeof btn.cloneNode === "function" && typeof btn.parentNode.replaceChild === "function") {
+        var cleanBtn = btn.cloneNode(true);
+        btn.parentNode.replaceChild(cleanBtn, btn);
+        btn = cleanBtn;
+      }
+      btn.className = "u4-voice-pill";
+      btn.setAttribute("aria-pressed", "false");
+      btn.innerHTML = '<span class="u4-voice-dot" aria-hidden="true"></span><span class="u4-voice-label">Live voice</span>';
+      btn.__u4LiveBound = true;
+      btn.__u4LiveR5WalkthroughBound = true;
+      btn.addEventListener("click", function(ev) {
+        if (ev && typeof ev.preventDefault === "function") ev.preventDefault();
+        if (ev && typeof ev.stopImmediatePropagation === "function") ev.stopImmediatePropagation();
+        if (liveState.active) stopGeminiLiveSession();
+        else startGeminiLiveSession(ev, null);
+      }, true);
+    }
+    if (!document.getElementById("waVoiceStatus") && btn.parentNode && typeof btn.parentNode.insertBefore === "function") {
+      var st = document.createElement("span");
+      st.id = "waVoiceStatus";
+      st.className = "u4-voice-status";
+      st.setAttribute("role", "status");
+      st.setAttribute("aria-live", "polite");
+      btn.parentNode.insertBefore(st, btn.nextSibling);
+    }
+    syncAllVoiceButtonLabels();
+  }
+
+  ensureTopbarMicPill();
+  upgradeBrowserQuickPostAndSpeakButtons();
+
+  window.U4GeminiLiveAssistant = {
+    version: "r5-walkthrough-v2",
+    micOpenedOnLoad: false,
+    start: startGeminiLiveSession,
+    stop: stopGeminiLiveSession,
+    isActive: function(){ return liveState.active; },
+    buildContext: buildRichWalkthroughContext
+  };
+})();
+/* U4_GEMINI_LIVE_AND_UNIFIED_TRIAGE_R5_END */
 </script>
 
 </body></html>
