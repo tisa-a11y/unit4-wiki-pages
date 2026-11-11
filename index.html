@@ -916,6 +916,11 @@ function crewRoom(p, srcMd){
       : "The chair rail decision is open. The earlier chair-rail layout is a comparison baseline. Upper and lower frame rows without a rail are another option under review.";
     const scope = p.key==="kitchen" ? (es?" Solo aplica a la moldura decorativa de D04.":" This applies to D04 decorative trim only.") : "";
     h += '<section class="concept" translate="no"><h2>'+(es?"Guardasilla: decisión pendiente":"Chair rail decision open")+'</h2><p>'+text+scope+'</p></section>';
+    const reviewPage = {"bedroom":3,"living-dining":5,"hallway":12}[p.key];
+    if (reviewPage) {
+      const packet = "./wiki-pdfs/2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB";
+      h += '<section class="concept" translate="no"><h2>'+(es?"Opción A: marcos sin guardasilla":"Option A: frames without a chair rail")+'</h2><p>'+(es?"Solo para comparación. La opción B con guardasilla sigue disponible. No cortar ni instalar.":"For comparison only. Option B with a chair rail remains available. Do not cut or install.")+'</p><p><a href="'+packet+'_EN.pdf#page='+reviewPage+'">English PDF</a> · <a href="'+packet+'_ES.pdf#page='+reviewPage+'">PDF en español</a></p></section>';
+    }
   }
   if (concept){ h += '<section class="concept" translate="no"><div class="mdbody">'+render((crewClean(concept.body.join("\n")).trim().split(/\n\s*\n/)[0]||""))+'</div>'+conceptFigure(p.key)+'</section>'; }
   else if (p.key==="kitchen") h += '<section class="concept" translate="no">'+conceptFigure(p.key)+'</section>';
