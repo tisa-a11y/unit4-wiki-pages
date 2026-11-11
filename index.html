@@ -884,6 +884,13 @@ function crewSplit(md){
 function crewClean(t){ return t.split("\n").filter(l=>!CREW_LINE.test(l.trim()) && l.trim()!=="---").join("\n").replace(/✅\s*/g,"").replace(/❓\s*/g,"").replace(/\n{3,}/g,"\n\n"); }
 // Plan mockups per room (Tisa, 2026-11-07: kitchen plan mockups from Magicplan MASTER). Images are artifact assets.
 const ROOM_GALLERY = {
+  bedroom: {en:"Bedroom R2 design mockups", es:"Maquetas del diseño R2 del dormitorio",
+    note:{en:"For design review. Use the R2 plans for dimensions. Paint colors and sheens are still open.", es:"Para revisión del diseño. Consulte los planos R2 para las medidas. Los colores y acabados de pintura siguen pendientes."},
+    items:[
+      {img:"./wiki-images/bedroom-r2-room-views.png", en:"Two furnished room views", es:"Dos vistas del dormitorio amueblado"},
+      {img:"./wiki-images/bedroom-r2-wall-a.jpg", en:"Wall A · North headboard wall", es:"Muro A · Norte, cabecera"},
+      {img:"./wiki-images/bedroom-r2-wall-c.jpg", en:"Wall C · South wall (labeled B in earlier drawings)", es:"Muro C · Sur (llamado B en planos anteriores)"}
+    ]},
   kitchen: {en:"Plan mockups (Magicplan, Nov 7)", es:"Maquetas del plano (Magicplan, 7 nov)",
     note:{en:"Cabinets and appliances in the 3D views are stand-ins. Upper cabinets aren't decided.", es:"Los gabinetes y electrodomésticos de las vistas 3D son de muestra. Los gabinetes altos no están decididos."},
     items:[
@@ -904,9 +911,20 @@ function crewRoom(p, srcMd){
   const label = (es && typeof ES==="object" && ES[p.label]) ? ES[p.label] : p.label;
   let h = '<h1 translate="no">'+label+'</h1>';
   if (concept){ h += '<section class="concept" translate="no"><div class="mdbody">'+render((crewClean(concept.body.join("\n")).trim().split(/\n\s*\n/)[0]||""))+'</div>'+conceptFigure(p.key)+'</section>'; }
+  else if (p.key==="kitchen") h += '<section class="concept" translate="no">'+conceptFigure(p.key)+'</section>';
+  if (p.key==="bedroom"){
+    h += '<section class="concept" translate="no"><p>'+(es
+      ? 'Muro A: norte, cabecera. Muro B: este, ventana saliente, sin marcos. Muro C: sur, compartido con la sala (antes llamado B). Muro D: oeste, entrada y nicho.'
+      : 'Wall A: north, headboard. Wall B: east, bay window, no frames. Wall C: south, shared with the living room (formerly Wall B). Wall D: west, entry and closet niche.')
+      +'</p><p>'+(es
+      ? 'Conservar las molduras existentes. El nicho queda liso, con barra, y se mantiene el acceso temporal al ático durante el trabajo. Colores y acabados de pintura por definir.'
+      : 'Keep the existing trim. The niche stays plain with a rod, and the temporary attic opening stays available during the work. Paint colors and sheens are still open.')
+      +'</p></section>';
+    h += ckBlock(p.key);
+  }
   const pb = pinnedBlock(p.key); if (pb) h += pb;
   h += galleryBlock(p.key);
-  h += ckBlock(p.key);
+  if (p.key!=="bedroom") h += ckBlock(p.key);
   h += '<p class="jumpwrap"><button type="button" class="jumpfield">'+(es?"Mandar una nota de obra ↓":"Send a field note ↓")+'</button></p>';
   h += docsBlock(p.key);
   const detail = rest.map(s=>"## "+s.h+"\n"+s.body.join("\n")).join("\n\n");
