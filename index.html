@@ -234,7 +234,7 @@ main{padding-bottom:96px}
 .goals h2{margin:2px 0 6px;font-size:19px}.goals ol{margin:0;padding-left:22px}.goals li{margin:5px 0;line-height:1.45}
 .about{max-width:74ch;margin:0 0 22px;padding-bottom:6px;border-bottom:1px solid var(--line, rgba(127,127,127,.25))}
 .about h2{font-size:17px;margin:14px 0 6px}.about p{margin:0 0 8px}.about ul{margin:0;padding-left:20px}.about li{margin:5px 0;line-height:1.45}
-#field .reports{display:grid}#field .reports:empty{display:none}.rep .tag.warn{background:var(--open-soft);color:var(--open)}.pp-link{font-size:14px;margin:6px 0 0}.legend a{font-weight:600}
+#field .reports{display:grid}#field .reports:empty{display:none}.rep .tag.warn{background:var(--open-soft);color:var(--open)}.u4-voice-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;border:1px solid var(--line,#cfd5d2);background:#fff;color:var(--fg,#1d2326);font:600 13px/1.2 -apple-system,BlinkMacSystemFont,'IBM Plex Sans',sans-serif;cursor:pointer;margin-left:auto}.u4-voice-pill[aria-pressed='true']{background:var(--accent,#1f5f7a);border-color:var(--accent,#1f5f7a);color:#fff}.u4-voice-dot{width:8px;height:8px;border-radius:50%;background:#7b878c;display:inline-block}.u4-voice-pill[aria-pressed='true'] .u4-voice-dot{background:#7ef29d}.u4-voice-status{font-size:12px;color:#4b555a;margin-left:6px}.pp-link{font-size:14px;margin:6px 0 0}.legend a{font-weight:600}
 .is-home .bar .status,.is-home #status{display:none}
 .done-list{max-width:74ch;margin:0 0 18px}.done-list ul{list-style:none;padding-left:4px;margin:0}.done-list li{margin:8px 0;padding-left:32px;text-indent:-32px}.done-list .chk{display:inline-block;width:22px;height:22px;border-radius:6px;background:var(--accent);color:#fff;text-align:center;line-height:22px;font-size:14px;font-weight:700;margin-right:10px;text-indent:0;vertical-align:-3px}
 .goals.week h2{border-top:none;padding-top:0;margin-top:0}main{padding-bottom:96px}
@@ -580,9 +580,9 @@ function loadPdfLib(){
   pdfLibP=new Promise((res,rej)=>{ const s=document.createElement("script"); s.src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"; s.onload=()=>{ try{ window.pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"; res(window.pdfjsLib);}catch(e){rej(e);} }; s.onerror=rej; document.head.appendChild(s); });
   return pdfLibP;
 }
-async function renderPdf(url, id){
+async function renderPdf(url, id, targetPage){
   const tok=++pdfTok; const box=document.getElementById("pdfpages"); if(!box) return;
-  const fallback=()=>{ if(tok!==pdfTok) return; box.innerHTML='<div class="vframe"><iframe src="'+url+'" title="PDF"></iframe></div>'; };
+  const fallback=()=>{ if(tok!==pdfTok) return; box.innerHTML='<div class="vframe"><iframe src="'+url+(targetPage?("#page="+targetPage):"")+'" title="PDF"></iframe></div>'; };
   try{
     const lib=await loadPdfLib();
     const pdf=await lib.getDocument({url:url}).promise;
@@ -592,8 +592,9 @@ async function renderPdf(url, id){
     for (let n=1;n<=pdf.numPages;n++){
       if (tok!==pdfTok) return;
       const page=await pdf.getPage(n); const v1=page.getViewport({scale:1}); const scale=W/v1.width; const vp=page.getViewport({scale:scale*dpr});
-      const c=document.createElement("canvas"); c.width=Math.floor(vp.width); c.height=Math.floor(vp.height); c.style.width=Math.floor(vp.width/dpr)+"px"; c.className="pdfpage";
+      const c=document.createElement("canvas"); c.width=Math.floor(vp.width); c.height=Math.floor(vp.height); c.style.width=Math.floor(vp.width/dpr)+"px"; c.className="pdfpage"; c.dataset.pageNumber=String(n);
       box.appendChild(c); await page.render({canvasContext:c.getContext("2d"), viewport:vp}).promise;
+      if (targetPage && n===targetPage && c.scrollIntoView) c.scrollIntoView({behavior:"smooth", block:"start"});
     }
   }catch(e){ fallback(); }
 }
@@ -605,17 +606,23 @@ function show(key){
   else window.__backTo="home";
   if (bbtn) bbtn.hidden = !key || key==="home";
   if (key && key.startsWith("doc:")){
-    const id=key.slice(4), hit=DOC_BY_ID[id]; const d=hit?hit.d:{title:"Document",id:id,path:""}; const L=docLabel(d);
-    const parent=hit?PAGES.find(x=>x.key===hit.key):null;
+    const rawDocSpec=key.slice(4);
+    const pageMatch=/^(.*?)(?::p(\d+)|[?#]page=(\d+))$/.exec(rawDocSpec);
+    const id=pageMatch?pageMatch[1]:rawDocSpec;
+    const targetPage=pageMatch?parseInt(pageMatch[2]||pageMatch[3],10):0;
+    const hit=DOC_BY_ID[id]; const d=hit?hit.d:{title:"Document",id:id,path:""}; const L=docLabel(d);
+    const fromRoom=(current && current.group==="Projects" && current.key && !String(current.key).startsWith("doc:")) ? PAGES.find(x=>x.key===current.key) : null;
+    const parent=fromRoom || (hit?PAGES.find(x=>x.key===hit.key):null);
     document.querySelectorAll("nav.rail a").forEach(a=>a.setAttribute("aria-current", (a.dataset.doc===id || (parent && a.dataset.key===parent.key)) ? "page" : "false"));
     syncSubs(parent ? parent.key : null);
     document.getElementById("field").hidden=true;
     const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-    document.getElementById("doc").innerHTML='<div class="viewer"><div class="vbar"><a class="btn ghost" href="#'+(parent?parent.key:"home")+'">← '+esc(parent?parent.label:"Back")+'</a><a class="btn ghost" href="'+docUrl(d)+'" target="_blank" rel="noopener">Open in Google Drive</a></div><h1>'+esc(L.t)+'</h1><p class="hint" style="color:var(--muted);margin:0 0 10px">'+esc(d.path||"")+(L.date?' · '+niceDate(L.date):'')+'</p>'+(PDF_BLOBS[id]?'<div class="pdfpages" id="pdfpages"><p class="msg">Loading document…</p></div>':'<div class="vframe"><iframe src="https://drive.google.com/file/d/'+encodeURIComponent(id)+'/preview" title="'+esc(L.t)+'" loading="lazy"></iframe></div><p class="hint" style="color:var(--muted);font-size:13px;margin-top:8px">Preview comes from Google Drive. If it stays blank, use “Open in Google Drive”.</p>')+'</div>';
-    if (PDF_BLOBS[id]) renderPdf(PDF_BLOBS[id], id);
+    const driveBtn=/^2026-/.test(id)?'':'<a class="btn ghost" href="'+docUrl(d)+'" target="_blank" rel="noopener">Open in Google Drive</a>';
+    document.getElementById("doc").innerHTML='<div class="viewer"><div class="vbar"><a class="btn ghost" href="#'+(parent?parent.key:"home")+'">← '+esc(parent?parent.label:"Back")+'</a>'+driveBtn+'</div><h1>'+esc(L.t)+'</h1><p class="hint" style="color:var(--muted);margin:0 0 10px">'+esc(d.path||"")+(L.date?' · '+niceDate(L.date):'')+'</p>'+(PDF_BLOBS[id]?'<div class="pdfpages" id="pdfpages"><p class="msg">Loading document…</p></div>':'<div class="vframe"><iframe src="https://drive.google.com/file/d/'+encodeURIComponent(id)+'/preview" title="'+esc(L.t)+'" loading="lazy"></iframe></div><p class="hint" style="color:var(--muted);font-size:13px;margin-top:8px">Preview comes from Google Drive. If it stays blank, use “Open in Google Drive”.</p>')+'</div>';
+    if (PDF_BLOBS[id]) renderPdf(PDF_BLOBS[id], id, targetPage);
     setStatus("", "Document preview", false);
     window.__backTo = parent?parent.key:"home"; var bb=document.getElementById("backBtn"); if(bb) bb.hidden=false;
-    window.scrollTo(0,0);
+    if (!targetPage) window.scrollTo(0,0);
     return;
   }
   if (key==="agent-brief"){
@@ -703,17 +710,15 @@ function docLabel(d){
   s=s.replace(/^\d{4}-\d{2}-\d{2}_?/,"").replace(/^U4_/,"").replace(/_/g," ").replace(/-/g," ").replace(/\s+/g," ").trim();
   return {t:s, date:date};
 }
-function docKind(d){ if (d.title.indexOf(".")<0) return "doc"; const e=(d.title.split(".").pop()||"").toLowerCase(); return e==="jpeg"?"jpg":e; }
+function docKind(d){ if (isPdf(d)) return "pdf"; if (d.title.indexOf(".")<0) return "doc"; const e=(d.title.split(".").pop()||"").toLowerCase(); return e==="jpeg"?"jpg":e; }
 function docUrl(d){ return "https://drive.google.com/file/d/"+d.id+"/view"; }
-function isPdf(d){ return /\.pdf$/i.test(d.title); }
+function isPdf(d){ return Boolean(d && (/\.pdf$/i.test(d.title||"") || (typeof PDF_BLOBS==="object" && PDF_BLOBS && PDF_BLOBS[d.id]))); }
 const KITCHEN_HOSTED_LINKS = {
   "1MtSmNvzrQnAP5mfQuA3w_1wGYD2sUMAJ": "./wiki-docs/2026-11-02_U4_Kitchen_Master-Plan_R2_EN.html",
-  "1hHeDrjPwn0b_64Hda78LFk6hP-t8RplK": "./wiki-pdfs/1zmfZZ_oTx2etOEbVycFGW18r1zcrUSWK.pdf",
-  "17quaLGnDuRcQyO1bmY8wzYKcyIleNA-L": "./wiki-docs/2026-11-02_U4_Kitchen_Master-Plan_R2_ES.html",
-  "1_0EK9jHb95d6-mLOAJX9unUm7d9eoUSQ": "./wiki-pdfs/18qyXoGk8oypKXmWD-SYG-EPIFgWN5VJD.pdf"
+  "17quaLGnDuRcQyO1bmY8wzYKcyIleNA-L": "./wiki-docs/2026-11-02_U4_Kitchen_Master-Plan_R2_ES.html"
 };
 function docHref(d){ return KITCHEN_HOSTED_LINKS[d.id] || (isPdf(d) ? "#doc:"+d.id : docUrl(d)); }
-const PDF_BLOBS = {"10D_YpGKMtzfC6yF6HBBVdLVfKFKu6JTG": "./wiki-pdfs/10D_YpGKMtzfC6yF6HBBVdLVfKFKu6JTG.pdf", "12XSYgY_X6jGvicZYA0M4NQU_Re8z9N9M": "./wiki-pdfs/12XSYgY_X6jGvicZYA0M4NQU_Re8z9N9M.pdf", "14ZUQJ15FtxfGFFbJjISJE9gJdgabj2hP": "./wiki-pdfs/14ZUQJ15FtxfGFFbJjISJE9gJdgabj2hP.pdf", "14hgR2av9lmM05C1ZWrNz_8Ne3g9IP-kt": "./wiki-pdfs/14hgR2av9lmM05C1ZWrNz_8Ne3g9IP-kt.pdf", "15EVx1nRChryy8X7YkaiCf_2fiN8sRTP2": "./wiki-pdfs/15EVx1nRChryy8X7YkaiCf_2fiN8sRTP2.pdf", "17_Qe5LTY6OOIiv4-KeQnA79FIm_M2yjO": "./wiki-pdfs/17_Qe5LTY6OOIiv4-KeQnA79FIm_M2yjO.pdf", "18qyXoGk8oypKXmWD-SYG-EPIFgWN5VJD": "./wiki-pdfs/18qyXoGk8oypKXmWD-SYG-EPIFgWN5VJD.pdf", "19BYgPOC5-RoRmaj-qidSJBTcEZoXR6tR": "./wiki-pdfs/19BYgPOC5-RoRmaj-qidSJBTcEZoXR6tR.pdf", "19oGYJpwnGf1IE0FS-9TdgWT14NbBHYrt": "./wiki-pdfs/19oGYJpwnGf1IE0FS-9TdgWT14NbBHYrt.pdf", "1GsVm7VrFU897ax3yAxypfW5lowapbZKB": "./wiki-pdfs/1GsVm7VrFU897ax3yAxypfW5lowapbZKB.pdf", "1INgn3iZDKq0ArTGZqH1zv0Qj0sST0bAl": "./wiki-pdfs/1INgn3iZDKq0ArTGZqH1zv0Qj0sST0bAl.pdf", "1KPYZCWI4NZvByh9gB6yiUAOJB3dziUrL": "./wiki-pdfs/1KPYZCWI4NZvByh9gB6yiUAOJB3dziUrL.pdf", "1Tgb82HNVsMrTEe-W3OXmvuVHm4EL1JpO": "./wiki-pdfs/1Tgb82HNVsMrTEe-W3OXmvuVHm4EL1JpO.pdf", "1VRVlrLHoqBleu4D6brZCzeB57skxrYOJ": "./wiki-pdfs/1VRVlrLHoqBleu4D6brZCzeB57skxrYOJ.pdf", "1VazWlSTKbc76vCkSMUp4s69SOoEctq95": "./wiki-pdfs/1VazWlSTKbc76vCkSMUp4s69SOoEctq95.pdf", "1XAsVFF6ZAzrno31-btbaPStZukkNHiqQ": "./wiki-pdfs/1XAsVFF6ZAzrno31-btbaPStZukkNHiqQ.pdf", "1ZtY0-QONVmxSIYP_1LPAGeKht6SPiW7w": "./wiki-pdfs/1ZtY0-QONVmxSIYP_1LPAGeKht6SPiW7w.pdf", "1_fBtZtmTohFwIO4CdC7HeKvZGp8OnUOL": "./wiki-pdfs/1_fBtZtmTohFwIO4CdC7HeKvZGp8OnUOL.pdf", "1aYu9yWuRRFk8T5E3nQ6NDTHWpeRcrXgW": "./wiki-pdfs/1aYu9yWuRRFk8T5E3nQ6NDTHWpeRcrXgW.pdf", "1dB6h6MFYhcv15b2-xqiIwf6sqkjDzuj1": "./wiki-pdfs/1dB6h6MFYhcv15b2-xqiIwf6sqkjDzuj1.pdf", "1j3RtlylFUgKKUACB2EGpEEPVaMTEwMtz": "./wiki-pdfs/1j3RtlylFUgKKUACB2EGpEEPVaMTEwMtz.pdf", "1j_ol20Uk3Tbp_gCbxcynK-AVLZ2dEMoO": "./wiki-pdfs/1j_ol20Uk3Tbp_gCbxcynK-AVLZ2dEMoO.pdf", "1jtmamYcL-alhUNlUZPkIZn9nlCp0mYDY": "./wiki-pdfs/1jtmamYcL-alhUNlUZPkIZn9nlCp0mYDY.pdf", "1mAC3K0dQZUO9heLN9ac8YYR0Yl-2bE22": "./wiki-pdfs/1mAC3K0dQZUO9heLN9ac8YYR0Yl-2bE22.pdf", "1rcyuJfMmYOjxPCrX8WR16cZXOkT2ah0K": "./wiki-pdfs/1rcyuJfMmYOjxPCrX8WR16cZXOkT2ah0K.pdf", "1zmfZZ_oTx2etOEbVycFGW18r1zcrUSWK": "./wiki-pdfs/1zmfZZ_oTx2etOEbVycFGW18r1zcrUSWK.pdf", "1jiGfPGxC122ZaippBSkCe4UBWUnMgJmQ": "./wiki-pdfs/1jiGfPGxC122ZaippBSkCe4UBWUnMgJmQ.pdf", "1WTPBOcSCPfVmSmrbXUWiCw29XUT49XYU": "./wiki-pdfs/1WTPBOcSCPfVmSmrbXUWiCw29XUT49XYU.pdf"};
+const PDF_BLOBS = {"10D_YpGKMtzfC6yF6HBBVdLVfKFKu6JTG": "./wiki-pdfs/10D_YpGKMtzfC6yF6HBBVdLVfKFKu6JTG.pdf", "12XSYgY_X6jGvicZYA0M4NQU_Re8z9N9M": "./wiki-pdfs/12XSYgY_X6jGvicZYA0M4NQU_Re8z9N9M.pdf", "14ZUQJ15FtxfGFFbJjISJE9gJdgabj2hP": "./wiki-pdfs/14ZUQJ15FtxfGFFbJjISJE9gJdgabj2hP.pdf", "14hgR2av9lmM05C1ZWrNz_8Ne3g9IP-kt": "./wiki-pdfs/14hgR2av9lmM05C1ZWrNz_8Ne3g9IP-kt.pdf", "15EVx1nRChryy8X7YkaiCf_2fiN8sRTP2": "./wiki-pdfs/15EVx1nRChryy8X7YkaiCf_2fiN8sRTP2.pdf", "17_Qe5LTY6OOIiv4-KeQnA79FIm_M2yjO": "./wiki-pdfs/17_Qe5LTY6OOIiv4-KeQnA79FIm_M2yjO.pdf", "18qyXoGk8oypKXmWD-SYG-EPIFgWN5VJD": "./wiki-pdfs/18qyXoGk8oypKXmWD-SYG-EPIFgWN5VJD.pdf", "19BYgPOC5-RoRmaj-qidSJBTcEZoXR6tR": "./wiki-pdfs/19BYgPOC5-RoRmaj-qidSJBTcEZoXR6tR.pdf", "19oGYJpwnGf1IE0FS-9TdgWT14NbBHYrt": "./wiki-pdfs/19oGYJpwnGf1IE0FS-9TdgWT14NbBHYrt.pdf", "1GsVm7VrFU897ax3yAxypfW5lowapbZKB": "./wiki-pdfs/1GsVm7VrFU897ax3yAxypfW5lowapbZKB.pdf", "1INgn3iZDKq0ArTGZqH1zv0Qj0sST0bAl": "./wiki-pdfs/1INgn3iZDKq0ArTGZqH1zv0Qj0sST0bAl.pdf", "1KPYZCWI4NZvByh9gB6yiUAOJB3dziUrL": "./wiki-pdfs/1KPYZCWI4NZvByh9gB6yiUAOJB3dziUrL.pdf", "1Tgb82HNVsMrTEe-W3OXmvuVHm4EL1JpO": "./wiki-pdfs/1Tgb82HNVsMrTEe-W3OXmvuVHm4EL1JpO.pdf", "1VRVlrLHoqBleu4D6brZCzeB57skxrYOJ": "./wiki-pdfs/1VRVlrLHoqBleu4D6brZCzeB57skxrYOJ.pdf", "1VazWlSTKbc76vCkSMUp4s69SOoEctq95": "./wiki-pdfs/1VazWlSTKbc76vCkSMUp4s69SOoEctq95.pdf", "1XAsVFF6ZAzrno31-btbaPStZukkNHiqQ": "./wiki-pdfs/1XAsVFF6ZAzrno31-btbaPStZukkNHiqQ.pdf", "1ZtY0-QONVmxSIYP_1LPAGeKht6SPiW7w": "./wiki-pdfs/1ZtY0-QONVmxSIYP_1LPAGeKht6SPiW7w.pdf", "1_fBtZtmTohFwIO4CdC7HeKvZGp8OnUOL": "./wiki-pdfs/1_fBtZtmTohFwIO4CdC7HeKvZGp8OnUOL.pdf", "1aYu9yWuRRFk8T5E3nQ6NDTHWpeRcrXgW": "./wiki-pdfs/1aYu9yWuRRFk8T5E3nQ6NDTHWpeRcrXgW.pdf", "1dB6h6MFYhcv15b2-xqiIwf6sqkjDzuj1": "./wiki-pdfs/1dB6h6MFYhcv15b2-xqiIwf6sqkjDzuj1.pdf", "1j3RtlylFUgKKUACB2EGpEEPVaMTEwMtz": "./wiki-pdfs/1j3RtlylFUgKKUACB2EGpEEPVaMTEwMtz.pdf", "1j_ol20Uk3Tbp_gCbxcynK-AVLZ2dEMoO": "./wiki-pdfs/1j_ol20Uk3Tbp_gCbxcynK-AVLZ2dEMoO.pdf", "1jtmamYcL-alhUNlUZPkIZn9nlCp0mYDY": "./wiki-pdfs/1jtmamYcL-alhUNlUZPkIZn9nlCp0mYDY.pdf", "1mAC3K0dQZUO9heLN9ac8YYR0Yl-2bE22": "./wiki-pdfs/1mAC3K0dQZUO9heLN9ac8YYR0Yl-2bE22.pdf", "1rcyuJfMmYOjxPCrX8WR16cZXOkT2ah0K": "./wiki-pdfs/1rcyuJfMmYOjxPCrX8WR16cZXOkT2ah0K.pdf", "1zmfZZ_oTx2etOEbVycFGW18r1zcrUSWK": "./wiki-pdfs/1zmfZZ_oTx2etOEbVycFGW18r1zcrUSWK.pdf", "1jiGfPGxC122ZaippBSkCe4UBWUnMgJmQ": "./wiki-pdfs/1jiGfPGxC122ZaippBSkCe4UBWUnMgJmQ.pdf", "1WTPBOcSCPfVmSmrbXUWiCw29XUT49XYU": "./wiki-pdfs/1WTPBOcSCPfVmSmrbXUWiCw29XUT49XYU.pdf", "1hHeDrjPwn0b_64Hda78LFk6hP-t8RplK": "./wiki-pdfs/1zmfZZ_oTx2etOEbVycFGW18r1zcrUSWK.pdf", "1_0EK9jHb95d6-mLOAJX9unUm7d9eoUSQ": "./wiki-pdfs/18qyXoGk8oypKXmWD-SYG-EPIFgWN5VJD.pdf", "1fMS5FN0zmR0LcoTj8x7GJf7B335iJXcn": "./wiki-pdfs/1fMS5FN0zmR0LcoTj8x7GJf7B335iJXcn.pdf", "1RyQo3l4hc0yTdMbgdO01IdbA7e3JJ8J7": "./wiki-pdfs/1RyQo3l4hc0yTdMbgdO01IdbA7e3JJ8J7.pdf", "1JucaH0UXB1mko6Qnl4dDa0vzex_WSKh3": "./wiki-pdfs/1JucaH0UXB1mko6Qnl4dDa0vzex_WSKh3.pdf", "2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_EN": "./wiki-pdfs/2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_EN.pdf", "2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_ES": "./wiki-pdfs/2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_ES.pdf", "2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_EN": "./wiki-pdfs/2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_EN.pdf", "2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_ES": "./wiki-pdfs/2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_ES.pdf"};
 
 // ---- document dates + pinned originals (2026-11-06) ----
 const DOC_DATES = {"18qyXoGk8oypKXmWD-SYG-EPIFgWN5VJD": "2026-11-02", "1zmfZZ_oTx2etOEbVycFGW18r1zcrUSWK": "2026-11-02", "1_0EK9jHb95d6-mLOAJX9unUm7d9eoUSQ": "2026-11-02", "1hHeDrjPwn0b_64Hda78LFk6hP-t8RplK": "2026-11-02", "19BYgPOC5-RoRmaj-qidSJBTcEZoXR6tR": "2026-10-29", "1aYu9yWuRRFk8T5E3nQ6NDTHWpeRcrXgW": "2026-10-29", "1mAC3K0dQZUO9heLN9ac8YYR0Yl-2bE22": "2026-10-30", "1Tgb82HNVsMrTEe-W3OXmvuVHm4EL1JpO": "2026-10-30", "1INgn3iZDKq0ArTGZqH1zv0Qj0sST0bAl": "2026-11-01", "1rcyuJfMmYOjxPCrX8WR16cZXOkT2ah0K": "2026-11-01", "1j3RtlylFUgKKUACB2EGpEEPVaMTEwMtz": "2026-11-01", "19oGYJpwnGf1IE0FS-9TdgWT14NbBHYrt": "2026-11-01", "14hgR2av9lmM05C1ZWrNz_8Ne3g9IP-kt": "2026-11-01", "1KPYZCWI4NZvByh9gB6yiUAOJB3dziUrL": "2026-11-01"};
@@ -918,8 +923,8 @@ function crewRoom(p, srcMd){
     h += '<section class="concept" translate="no"><h2>'+(es?"Guardasilla: decisión pendiente":"Chair rail decision open")+'</h2><p>'+text+scope+'</p></section>';
     const reviewPage = {"bedroom":3,"living-dining":5,"hallway":12}[p.key];
     if (reviewPage) {
-      const packet = "./wiki-pdfs/2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB";
-      h += '<section class="concept" translate="no"><h2>'+(es?"Opción A: marcos sin guardasilla":"Option A: frames without a chair rail")+'</h2><p>'+(es?"Solo para comparación. La opción B con guardasilla sigue disponible. No cortar ni instalar.":"For comparison only. Option B with a chair rail remains available. Do not cut or install.")+'</p><p><a href="'+packet+'_EN.pdf#page='+reviewPage+'">English PDF</a> · <a href="'+packet+'_ES.pdf#page='+reviewPage+'">PDF en español</a></p></section>';
+      const packetDoc = "2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB";
+      h += '<section class="concept" translate="no"><h2>'+(es?"Opción A: marcos sin guardasilla":"Option A: frames without a chair rail")+'</h2><p>'+(es?"Solo para comparación. La opción B con guardasilla sigue disponible. No cortar ni instalar.":"For comparison only. Option B with a chair rail remains available. Do not cut or install.")+'</p><p><a href="#doc:'+packetDoc+'_EN:p'+reviewPage+'">English PDF</a> · <a href="#doc:'+packetDoc+'_ES:p'+reviewPage+'">PDF en español</a></p></section>';
     }
   }
   if (concept){ h += '<section class="concept" translate="no"><div class="mdbody">'+render((crewClean(concept.body.join("\n")).trim().split(/\n\s*\n/)[0]||""))+'</div>'+conceptFigure(p.key)+'</section>'; }
@@ -959,7 +964,12 @@ DOCS.laundry = (DOCS.laundry||[]).concat([
   {title:"Murphy Bookshelf Door Build Plan — Oct 10.pdf", id:"1JucaH0UXB1mko6Qnl4dDa0vzex_WSKh3", path:"laundry/from-remodel-hub/Unit 4 - Murphy Bookshelf Door Build Plan - October 10 2026.pdf", date:"2026-10-10"}
 ].filter(d=>!(DOCS.laundry||[]).some(x=>x.id===d.id)));
 // ---- end crew room pages ----
-const DOC_BY_ID = {}; Object.keys(DOCS).forEach(k=>(DOCS[k]||[]).forEach(d=>{ if(!DOC_BY_ID[d.id]) DOC_BY_ID[d.id]={d:d,key:k}; }));
+const DOC_BY_ID = {
+  "2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_EN": {d:{title:"2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_EN.pdf",id:"2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_EN",path:"Option A: frames without a chair rail · English",date:"2026-11-10"},key:"bedroom"},
+  "2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_ES": {d:{title:"2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_ES.pdf",id:"2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_ES",path:"Opción A: marcos sin guardasilla · Español",date:"2026-11-10"},key:"bedroom"},
+  "2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_EN": {d:{title:"2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_EN.pdf",id:"2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_EN",path:"Bedroom R2 installation-method amendment · English",date:"2026-11-10"},key:"bedroom"},
+  "2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_ES": {d:{title:"2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_ES.pdf",id:"2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_ES",path:"Enmienda al método de instalación R2 · Español",date:"2026-11-10"},key:"bedroom"}
+}; Object.keys(DOCS).forEach(k=>(DOCS[k]||[]).forEach(d=>{ if(!DOC_BY_ID[d.id]) DOC_BY_ID[d.id]={d:d,key:k}; }));
 PAGES.forEach(p=>{
   if (p.group!==lastGrp){ const g=document.createElement("div"); g.className="grp"; g.textContent=p.group; rail.appendChild(g); lastGrp=p.group; }
   const a=document.createElement("a"); a.href="#"+p.key; a.dataset.key=p.key; a.textContent=p.label; rail.appendChild(a);
@@ -989,7 +999,7 @@ function docsBlock(key){
   const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const rows=ds=>ds.map(d=>{const L=docLabel(d);return '<li'+(hideInEs(d,ds)?' data-hide-es':'')+'><a href="'+docHref(d)+'"'+(isPdf(d)?'':' target="_blank" rel="noopener"')+'>'+esc(L.t)+'</a> <span class="k">'+docKind(d)+(L.date?' · '+niceDate(L.date):'')+'</span>'+(d.pin?' <span class="pin-tag">Original</span>':'')+(d.review?' <span class="k">'+(LANG==="es"?"En revisión":"Awaiting review")+'</span>':'')+'</li>';}).join("");
   const history=archived.length?'<details><summary>'+(LANG==="es"?"Historial":"History")+'</summary><ul>'+rows(archived)+'</ul></details>':"";
-  const method = key==="bedroom" ? '<p class="hint" translate="no">'+(LANG==="es"?'Use los planos R2 con esta enmienda al método.':'Use the R2 plans with this installation-method amendment.')+' <a href="./wiki-pdfs/2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_EN.pdf">English PDF</a> · <a href="./wiki-pdfs/2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_ES.pdf">PDF en español</a></p>' : "";
+  const method = key==="bedroom" ? '<p class="hint" translate="no">'+(LANG==="es"?'Use los planos R2 con esta enmienda al método.':'Use the R2 plans with this installation-method amendment.')+' <a href="#doc:2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_EN">English PDF</a> · <a href="#doc:2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_ES">PDF en español</a></p>' : "";
   return '<section class="docs"><h2>Documents ('+active.length+')</h2>'+method+'<ul>'+rows(active)+'</ul>'+history+'</section>';
 }
 jump.addEventListener("change", ()=>{ location.hash = jump.value; });
@@ -1031,6 +1041,70 @@ var U4_TRIAGE_FOLDER_ID = "17YOsBteJtPSV6KiByPPvtVkiu-dr11kA";
 var U4_PUBLISHED_ORIGIN = "https://tisa-a11y.github.io";
 var U4_PUBLISHED_PAGE_PATH = "/unit4-wiki-pages/";
 var U4_SESSION_ID = "u4-wiki-sess-" + Math.random().toString(36).slice(2, 10);
+var U4_DEFAULT_MINI_ORIGIN = "https://mac-mini.tailcf4007.ts.net";
+var U4_DEFAULT_INTAKE_ENDPOINT = U4_DEFAULT_MINI_ORIGIN + "/api/unit4/wiki-intake/voice-memo";
+var U4_DEFAULT_VOICE_TOKEN_ENDPOINT = U4_DEFAULT_MINI_ORIGIN + "/api/unit4/voice-token";
+if (typeof window !== "undefined") {
+  const existingEp = window.UNIT4_WIKI_INTAKE_URL || window.UNIT4_INTAKE_URL || window.U4_INTAKE_HTTP_ENDPOINT;
+  if (typeof existingEp === "string" && existingEp.trim()) {
+    window.U4_INTAKE_HTTP_ENDPOINT = existingEp.trim();
+  } else if (window.U4_INTAKE_HTTP_ENDPOINT === undefined) {
+    window.U4_INTAKE_HTTP_ENDPOINT = U4_DEFAULT_INTAKE_ENDPOINT;
+    window.UNIT4_WIKI_INTAKE_URL = U4_DEFAULT_INTAKE_ENDPOINT;
+    window.UNIT4_INTAKE_URL = U4_DEFAULT_INTAKE_ENDPOINT;
+  }
+  if (!window.U4_VOICE_TOKEN_ENDPOINT) {
+    window.U4_VOICE_TOKEN_ENDPOINT = U4_DEFAULT_VOICE_TOKEN_ENDPOINT;
+  }
+}
+function getIntakeEndpoint() {
+  if (typeof window === "undefined") return U4_DEFAULT_INTAKE_ENDPOINT;
+  const explicit = window.UNIT4_WIKI_INTAKE_URL || window.UNIT4_INTAKE_URL || window.U4_INTAKE_HTTP_ENDPOINT;
+  if (typeof explicit === "string") return explicit.trim();
+  return U4_DEFAULT_INTAKE_ENDPOINT;
+}
+window.getIntakeEndpoint = getIntakeEndpoint;
+
+function resolvePdfHrefToDocKey(rawHref) {
+  const href = String(rawHref || "").trim();
+  if (!href) return null;
+  if (href.startsWith("#doc:")) return href.slice(5);
+  const m = /^(?:\.?\/?wiki-pdfs\/)?([^/?#]+)\.pdf(?:[?#]page=(\d+))?$/i.exec(href);
+  if (!m) return null;
+  const stem = m[1];
+  const pageNum = m[2] ? parseInt(m[2], 10) : 0;
+  let docId = null;
+  if (typeof PDF_BLOBS === "object" && PDF_BLOBS) {
+    if (PDF_BLOBS[stem]) {
+      docId = stem;
+    } else {
+      const targetPath = "./wiki-pdfs/" + stem + ".pdf";
+      docId = Object.keys(PDF_BLOBS).find(k => PDF_BLOBS[k] === targetPath) || stem;
+      if (!PDF_BLOBS[docId]) PDF_BLOBS[docId] = targetPath;
+    }
+  } else {
+    docId = stem;
+  }
+  if (typeof DOC_BY_ID === "object" && DOC_BY_ID && !DOC_BY_ID[docId]) {
+    DOC_BY_ID[docId] = { d: { title: stem + ".pdf", id: docId, path: "wiki-pdfs/" + stem + ".pdf" }, key: (current && current.group === "Projects" && current.key) ? current.key : "home" };
+  }
+  return pageNum ? (docId + ":p" + pageNum) : docId;
+}
+window.resolvePdfHrefToDocKey = resolvePdfHrefToDocKey;
+
+document.addEventListener("click", function(ev) {
+  if (!ev || !ev.target || typeof ev.target.closest !== "function") return;
+  const a = ev.target.closest("a");
+  if (!a || typeof a.getAttribute !== "function") return;
+  const href = a.getAttribute("href") || "";
+  if (!/\.pdf(?:$|[?#])/i.test(href)) return;
+  const docKey = resolvePdfHrefToDocKey(href);
+  if (!docKey) return;
+  if (typeof ev.preventDefault === "function") ev.preventDefault();
+  a.removeAttribute("target");
+  location.hash = "#doc:" + docKey;
+  if (typeof show === "function") show("doc:" + docKey);
+});
 
 var DEFAULT_OPEN_DECISIONS = [
   {
@@ -1120,9 +1194,7 @@ function mapPageIdForBackend(projectOrRoom) {
 }
 
 function isDriveTriageConfigured() {
-  const ep = (typeof window !== "undefined" && typeof window.U4_INTAKE_HTTP_ENDPOINT === "string")
-    ? window.U4_INTAKE_HTTP_ENDPOINT.trim()
-    : "";
+  const ep = getIntakeEndpoint();
   const ad = (typeof window !== "undefined") ? window.U4_DRIVE_TO_TRIAGE_ADAPTER : null;
   return Boolean(ep || typeof ad === "function" || (ad && (typeof ad.submitNote === "function" || typeof ad.submit === "function")));
 }
@@ -1480,9 +1552,7 @@ async function dispatchNoteToDriveTriage(opts) {
     deliveryAttempts: attempts
   }));
 
-  const ep = (typeof window !== "undefined" && typeof window.U4_INTAKE_HTTP_ENDPOINT === "string")
-    ? window.U4_INTAKE_HTTP_ENDPOINT.trim()
-    : "";
+  const ep = getIntakeEndpoint();
   const adapter = (typeof window !== "undefined") ? window.U4_DRIVE_TO_TRIAGE_ADAPTER : null;
 
   if (!ep && !adapter) {
@@ -2587,10 +2657,15 @@ async function executeWikiBridgeAction(actionName, params) {
     return { ok: true, action: canon, viewKey: vk, headingText: String(p.headingText || "") };
   }
   if (canon === "open_document") {
-    const docId = String(p.docId || p.id || "").trim();
-    if (!DOC_BY_ID[docId]) return { ok: false, code: "DISALLOWED_DOCUMENT_ID", action: canon, docId };
-    show("doc:" + docId);
-    return { ok: true, action: canon, docId };
+    const rawId = String(p.docId || p.doc_id || p.id || "").trim();
+    const resolvedKey = resolvePdfHrefToDocKey(rawId) || rawId;
+    const baseId = resolvedKey.split(":p")[0];
+    if (!DOC_BY_ID[baseId] && !(typeof PDF_BLOBS === "object" && PDF_BLOBS && PDF_BLOBS[baseId])) {
+      return { ok: false, code: "DISALLOWED_DOCUMENT_ID", action: canon, docId: rawId };
+    }
+    location.hash = "#doc:" + resolvedKey;
+    show("doc:" + resolvedKey);
+    return { ok: true, action: canon, docId: baseId };
   }
   if (canon === "set_language") {
     const lang = String(p.lang || p.language || "").trim().toLowerCase();
@@ -2644,8 +2719,131 @@ window.U4_WIKI_CLIENT_BRIDGE = {
   fill_draft_note: (p) => executeWikiBridgeAction("fill_draft_note", p),
   submit_voice_memo: (p) => executeWikiBridgeAction("submit_voice_memo", p)
 };
+window.U4WikiClientBridge = {
+  allowlistedActions: CANONICAL_BRIDGE_FUNCTIONS.slice(),
+  execute: (name, args) => executeWikiBridgeAction(name, args || {})
+};
 window.executeWikiBridgeAction = executeWikiBridgeAction;
 window.toggleVoiceCompanionSession = toggleVoiceCompanionSession;
+
+(function initGeminiLiveVoiceAssistant() {
+  const liveState = { active: false, ws: null, micStream: null, inCtx: null, outCtx: null, processor: null, playCursor: 0, activeSources: [], lastContextRoom: null };
+  function setVoiceStatus(enText, esText) {
+    const st = document.getElementById("waVoiceStatus");
+    if (st) st.textContent = (LANG === "es") ? esText : enText;
+  }
+  function syncMicPillLabel() {
+    const btn = document.getElementById("waVoiceMicPill");
+    if (!btn) return;
+    const labelSpan = btn.querySelector ? btn.querySelector(".u4-voice-label") : null;
+    if (!labelSpan) return;
+    labelSpan.textContent = liveState.active
+      ? (LANG === "es" ? "Detener voz" : "Stop voice")
+      : (LANG === "es" ? "Voz en vivo" : "Live voice");
+  }
+  function stopPlaybackQueue() {
+    while (liveState.activeSources.length) {
+      const s = liveState.activeSources.pop();
+      try { s.stop(); } catch (e) {}
+    }
+    if (liveState.outCtx) liveState.playCursor = liveState.outCtx.currentTime;
+  }
+  function stopGeminiLiveSession() {
+    liveState.active = false;
+    stopPlaybackQueue();
+    if (liveState.processor) { try { liveState.processor.disconnect(); } catch (e) {} liveState.processor = null; }
+    if (liveState.inCtx) { try { liveState.inCtx.close(); } catch (e) {} liveState.inCtx = null; }
+    if (liveState.outCtx) { try { liveState.outCtx.close(); } catch (e) {} liveState.outCtx = null; }
+    if (liveState.micStream) { liveState.micStream.getTracks().forEach(t => { try { t.stop(); } catch (e) {} }); liveState.micStream = null; }
+    if (liveState.ws) { try { liveState.ws.close(); } catch (e) {} liveState.ws = null; }
+    const btn = document.getElementById("waVoiceMicPill");
+    if (btn) btn.setAttribute("aria-pressed", "false");
+    syncMicPillLabel();
+    setVoiceStatus("", "");
+  }
+  async function startGeminiLiveSession(userGestureEvent) {
+    if (!userGestureEvent || (!userGestureEvent.isTrusted && !userGestureEvent.__allowSyntheticTest)) return;
+    const btn = document.getElementById("waVoiceMicPill");
+    if (btn) btn.setAttribute("aria-pressed", "true");
+    liveState.active = true;
+    syncMicPillLabel();
+    setVoiceStatus("Connecting…", "Conectando…");
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      liveState.inCtx = new AudioCtx();
+      liveState.outCtx = new AudioCtx({ sampleRate: 24000 });
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true, channelCount: 1 } });
+      liveState.micStream = stream;
+      const tokResp = await fetch(window.U4_VOICE_TOKEN_ENDPOINT || U4_DEFAULT_VOICE_TOKEN_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ room: (current && current.key) || "home", uiLanguage: LANG === "es" ? "es" : "en" })
+      });
+      const tokData = await tokResp.json().catch(() => null);
+      if (!tokResp.ok || !tokData || !tokData.wsUrl) throw new Error((tokData && tokData.error) || ("Token HTTP " + tokResp.status));
+      const ws = new WebSocket(tokData.wsUrl);
+      liveState.ws = ws;
+      ws.onopen = () => {
+        ws.send(JSON.stringify({ setup: tokData.setup || { model: tokData.model || "models/gemini-3.8-live" } }));
+      };
+      ws.onmessage = async (ev) => {
+        const rawText = typeof ev.data === "string" ? ev.data : await ev.data.text();
+        const msg = JSON.parse(rawText);
+        if (msg.setupComplete) {
+          setVoiceStatus("Listening (EN / ES)", "Escuchando (ES / EN)");
+        }
+        if (msg.toolCall && Array.isArray(msg.toolCall.functionCalls)) {
+          const responses = [];
+          for (const fc of msg.toolCall.functionCalls) {
+            const out = await executeWikiBridgeAction(fc.name, fc.args || {});
+            responses.push({ id: fc.id, name: fc.name, response: { result: out } });
+          }
+          if (ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({ toolResponse: { functionResponses: responses } }));
+        }
+      };
+      ws.onerror = () => { stopGeminiLiveSession(); setVoiceStatus("Voice connection error", "Error de conexión de voz"); };
+      ws.onclose = () => { if (liveState.active) stopGeminiLiveSession(); };
+    } catch (err) {
+      stopGeminiLiveSession();
+      setVoiceStatus("Voice unavailable: " + String((err && err.message) || err), "Voz no disponible: " + String((err && err.message) || err));
+    }
+  }
+  function ensureTopbarMicPill() {
+    if (typeof WebSocket !== "function") return;
+    let btn = document.getElementById("waVoiceMicPill");
+    if (!btn || !btn.parentNode) {
+      const host = document.querySelector(".topbar-right") || document.querySelector("main .bar") || document.querySelector(".mobile");
+      if (!host) return;
+      btn = document.createElement("button");
+      btn.type = "button";
+      btn.id = "waVoiceMicPill";
+      btn.className = "u4-voice-pill";
+      btn.setAttribute("aria-pressed", "false");
+      btn.innerHTML = '<span class="u4-voice-dot" aria-hidden="true"></span><span class="u4-voice-label">Live voice</span>';
+      host.appendChild(btn);
+    }
+    if (!btn.__u4LiveBound) {
+      btn.__u4LiveBound = true;
+      btn.addEventListener("click", (ev) => {
+        if (ev && typeof ev.preventDefault === "function") ev.preventDefault();
+        if (ev && typeof ev.stopImmediatePropagation === "function") ev.stopImmediatePropagation();
+        if (liveState.active) stopGeminiLiveSession();
+        else startGeminiLiveSession(ev);
+      }, true);
+    }
+    if (!document.getElementById("waVoiceStatus") && btn.parentNode && typeof btn.parentNode.insertBefore === "function") {
+      const st = document.createElement("span");
+      st.id = "waVoiceStatus";
+      st.className = "u4-voice-status";
+      st.setAttribute("role", "status");
+      st.setAttribute("aria-live", "polite");
+      btn.parentNode.insertBefore(st, btn.nextSibling);
+    }
+    syncMicPillLabel();
+  }
+  ensureTopbarMicPill();
+  window.U4GeminiLiveAssistant = { version: "r5", micOpenedOnLoad: false, start: startGeminiLiveSession, stop: stopGeminiLiveSession, isActive: () => liveState.active };
+})();
 
 show(location.hash.slice(1) || "home");
 i18nObs.observe(document.body, {subtree:true, childList:true, characterData:true});
@@ -2656,1095 +2854,4 @@ if (LANG==="es") setLang("es"); else document.documentElement.lang="en";
 if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwatch=null; show(current.key); } }).catch(()=>{});
 </script>
 
-<!-- U4_GEMINI_LIVE_AND_UNIFIED_TRIAGE_R3_START -->
-<style id="u4-gemini-live-style">
-  .u4-voice-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 5px 11px;
-    border-radius: 999px;
-    border: 1px solid var(--line, #cfd5d2);
-    background: #fff;
-    color: var(--fg, #1d2326);
-    font: 600 13px/1.2 -apple-system, BlinkMacSystemFont, "IBM Plex Sans", sans-serif;
-    cursor: pointer;
-    margin-left: auto;
-  }
-  .u4-voice-pill[aria-pressed="true"] {
-    background: var(--accent, #1f5f7a);
-    border-color: var(--accent, #1f5f7a);
-    color: #fff;
-  }
-  .u4-voice-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #7b878c;
-    display: inline-block;
-  }
-  .u4-voice-pill[aria-pressed="true"] .u4-voice-dot {
-    background: #7ef29d;
-  }
-  .u4-voice-status {
-    font-size: 12px;
-    color: #4b555a;
-    margin-left: 6px;
-  }
-</style>
-<script id="u4-gemini-live-bridge">
-(function(){
-  if (window.__U4_GEMINI_LIVE_R3_INSTALLED__) return;
-  window.__U4_GEMINI_LIVE_R3_INSTALLED__ = true;
-
-  var BASE = (window.U4_MINI_BACKEND_ORIGIN || "https://mac-mini.tailcf4007.ts.net").replace(/\/+$/, "");
-  if (!window.U4_INTAKE_HTTP_ENDPOINT || /127\.0\.0\.1|localhost/.test(String(window.U4_INTAKE_HTTP_ENDPOINT))) {
-    window.U4_INTAKE_HTTP_ENDPOINT = BASE + "/api/unit4/wiki-intake";
-  }
-  if (!window.U4_VOICE_TOKEN_ENDPOINT || /127\.0\.0\.1|localhost/.test(String(window.U4_VOICE_TOKEN_ENDPOINT))) {
-    window.U4_VOICE_TOKEN_ENDPOINT = BASE + "/api/unit4/voice-token";
-  }
-  var TRIAGE_FOLDER_ID = "17YOsBteJtPSV6KiByPPvtVkiu-dr11kA";
-
-  var ALLOWED_ROOMS = [
-    "home","roadmap","decisions","kitchen","bathroom","electrical",
-    "laundry","bedroom","living-dining","hallway","paint-floors","hvac","agents"
-  ];
-
-  function currentUiLang() {
-    try { return (typeof LANG !== "undefined" && LANG === "es") ? "es" : "en"; }
-    catch (e) { return "en"; }
-  }
-
-  var PROJECT_ROOMS = ["kitchen","bathroom","electrical","laundry","bedroom","living-dining","hallway","paint-floors","hvac"];
-  function activeRoomKey() {
-    try { if (typeof current !== "undefined" && current && current.key) return current.key; } catch (e) {}
-    var h = String((typeof location !== "undefined" && location.hash) || "").replace(/^#/, "").trim().toLowerCase();
-    if (h && ALLOWED_ROOMS.indexOf(h) !== -1) return h;
-    return "home";
-  }
-  function isActiveProjectRoom() {
-    var rk = activeRoomKey();
-    return PROJECT_ROOMS.indexOf(rk) !== -1;
-  }
-
-  function detectNoteLanguage(text, explicitLang) {
-    if (explicitLang === "es" || explicitLang === "en") return explicitLang;
-    var t = " " + String(text || "").toLowerCase() + " ";
-    if (/[áéíóúñ¿¡]/i.test(t)) return "es";
-    var esWords = [" el "," la "," los "," las "," de "," que "," en "," por "," para "," con "," falta "," muro "," baño "," cocina "," lavandería "," revisar "," caja "];
-    var hits = 0;
-    for (var i = 0; i < esWords.length; i++) { if (t.indexOf(esWords[i]) !== -1) hits++; }
-    return hits >= 2 ? "es" : "en";
-  }
-
-  function deterministicHash(str) {
-    var h1 = 0xdeadbeef ^ str.length, h2 = 0x41c6ce57 ^ str.length;
-    for (var i = 0, ch; i < str.length; i++) {
-      ch = str.charCodeAt(i);
-      h1 = Math.imul(h1 ^ ch, 2654435761);
-      h2 = Math.imul(h2 ^ ch, 1597334677);
-    }
-    h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
-    h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
-    return ("00000000" + (h2 >>> 0).toString(16)).slice(-8) + ("00000000" + (h1 >>> 0).toString(16)).slice(-8);
-  }
-
-  var pendingSubmissions = window.pendingDriveSubmissions || (window.pendingDriveSubmissions = {});
-
-  function fileToDataUrl(file) {
-    return new Promise(function(resolve, reject) {
-      if (!file) return resolve(null);
-      if (typeof file.dataUrl === "string") return resolve(file.dataUrl);
-      if (typeof FileReader === "undefined") return resolve(null);
-      var r = new FileReader();
-      r.onload = function(){ resolve(String(r.result || "")); };
-      r.onerror = function(){ reject(new Error("file_read_failed")); };
-      r.readAsDataURL(file);
-    });
-  }
-
-  function normalizeTriageReceipt(body) {
-    if (!body || typeof body !== "object") return { ok: false, saved: false };
-    var vdr = body.verifiedDriveReceipt || body.provider_receipt || null;
-    var ltr = body.localTriageReceipt || body.local_triage_receipt || null;
-    var driveSaved = Boolean(
-      body.external_state === "saved_in_drive_to_triage" ||
-      body.persistedToDrive === true ||
-      (vdr && (vdr.fileId || vdr.record_id) && (vdr.readbackVerified || vdr.readback_verified))
-    );
-    var localSynced = Boolean(
-      body.local_triage_saved === true ||
-      body.localTriageSaved === true ||
-      body.receipt_stage === "local_triage_staged" ||
-      (ltr && (ltr.markdownFile || ltr.markdown_file))
-    );
-    return {
-      ok: Boolean(body.ok !== false && (driveSaved || localSynced)),
-      driveSaved: driveSaved,
-      localSynced: localSynced,
-      submissionId: body.submissionId || body.idempotencyKey || null,
-      targetFolderId: body.targetFolderId || TRIAGE_FOLDER_ID,
-      fileId: vdr ? (vdr.fileId || vdr.record_id || null) : null,
-      markdownFile: ltr ? (ltr.markdownFile || ltr.markdown_file || null) : null,
-      language: body.language || null,
-      rawReceipt: body
-    };
-  }
-
-  var existingDispatch = typeof window.dispatchNoteToDriveTriage === "function" ? window.dispatchNoteToDriveTriage : null;
-
-  window.dispatchNoteToDriveTriage = async function(noteSpec) {
-    if (existingDispatch && !noteSpec.__useR3Direct) {
-      return existingDispatch(noteSpec);
-    }
-    var rawText = String(noteSpec.raw != null ? noteSpec.raw : (noteSpec.text || "")).trim();
-    var roomKey = String(noteSpec.page_id || noteSpec.room || activeRoomKey());
-    var noteLang = detectNoteLanguage(rawText, noteSpec.language);
-    var draftKey = noteSpec.draftKey || (roomKey + ":" + (noteSpec.sourcePath || "ui") + ":" + deterministicHash(rawText + "|" + (noteSpec.item || "") + "|" + (noteSpec.measurement || "")));
-    var existingPending = pendingSubmissions[draftKey];
-    var submissionId = (existingPending && existingPending.submissionId) || noteSpec.submissionId || ("u4-" + roomKey + "-" + deterministicHash(draftKey + "|" + rawText));
-    var observedAt = (existingPending && existingPending.observedAt) || noteSpec.observedAt || new Date().toISOString();
-
-    var payload = {
-      id: submissionId,
-      submissionId: submissionId,
-      idempotencyKey: submissionId,
-      targetFolderId: TRIAGE_FOLDER_ID,
-      audience: "crew",
-      page_id: roomKey,
-      roomContext: roomKey,
-      note_type: noteSpec.note_type || "general",
-      noteType: noteSpec.noteType || noteSpec.kind || "Note",
-      kind: noteSpec.kind || "Note",
-      item: noteSpec.item || "",
-      language: noteLang,
-      uiLanguage: currentUiLang(),
-      observed_at: observedAt,
-      observedAt: observedAt,
-      raw: rawText,
-      text: rawText,
-      originalText: rawText,
-      measurement: noteSpec.measurement || null,
-      datum: noteSpec.datum || null,
-      topic: noteSpec.topic || null,
-      agreed: noteSpec.agreed || null,
-      open: noteSpec.open || null,
-      next: noteSpec.next || null,
-      decision: noteSpec.decision || null,
-      photo: noteSpec.photoDataUrl || null,
-      photoLabel: noteSpec.photoLabel || null,
-      audio: noteSpec.audioObj || null,
-      sourcePath: noteSpec.sourcePath || "wiki_send"
-    };
-
-    var headers = { "Content-Type": "application/json" };
-    if (window.U4_INTAKE_BEARER_TOKEN) {
-      headers["Authorization"] = "Bearer " + String(window.U4_INTAKE_BEARER_TOKEN);
-    }
-
-    try {
-      var resp = await fetch(window.U4_INTAKE_HTTP_ENDPOINT, {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(payload)
-      });
-      var data = await resp.json().catch(function(){ return null; });
-      var norm = normalizeTriageReceipt(data);
-      if (!resp.ok || !norm.ok) {
-        var errMsg = (data && data.error) ? data.error : ("HTTP " + resp.status);
-        pendingSubmissions[draftKey] = {
-          submissionId: submissionId,
-          observedAt: observedAt,
-          lifecycleState: "pending",
-          statusKey: "upload_interrupted",
-          lastError: errMsg,
-          payload: payload
-        };
-        throw new Error(errMsg);
-      }
-      delete pendingSubmissions[draftKey];
-      return norm;
-    } catch (err) {
-      if (!pendingSubmissions[draftKey]) {
-        pendingSubmissions[draftKey] = {
-          submissionId: submissionId,
-          observedAt: observedAt,
-          lifecycleState: "pending",
-          statusKey: "upload_interrupted",
-          lastError: String(err && err.message || err),
-          payload: payload
-        };
-      }
-      throw err;
-    }
-  };
-
-  function appendLocalReceiptRow(containerId, metaTag, roomLabel, rawText, receipt) {
-    var list = document.getElementById(containerId);
-    if (!list) return;
-    if (list.querySelector(".msg")) list.innerHTML = "";
-    var div = document.createElement("div");
-    div.className = "rep";
-    div.setAttribute("translate", "no");
-    var meta = document.createElement("div");
-    meta.className = "meta";
-    var badge = receipt.driveSaved
-      ? (currentUiLang() === "es" ? "Guardado en Drive to-triage" : "Saved in Drive to-triage")
-      : (currentUiLang() === "es" ? "Guardado en carpeta sincronizada to-triage" : "Saved in synced to-triage");
-    [metaTag, roomLabel, badge].forEach(function(label, idx){
-      if (!label) return;
-      var sp = document.createElement("span");
-      if (idx !== 1) sp.className = "tag" + (idx === 2 ? " done" : "");
-      sp.textContent = label;
-      meta.appendChild(sp);
-    });
-    var txt = document.createElement("div");
-    txt.className = "txt";
-    txt.setAttribute("translate", "no");
-    txt.textContent = rawText;
-    div.appendChild(meta);
-    div.appendChild(txt);
-    list.prepend(div);
-  }
-
-  function installPagesDbAndAssetsShim() {
-    if (existingDispatch || (typeof window.db !== "undefined" && window.db)) return;
-    var uploadedBlobs = {};
-    var collections = { reports: [], inbox: [], decisionNotes: [], sessionNotes: [], decisions: [] };
-    var listeners = { reports: [], inbox: [], decisionNotes: [], sessionNotes: [], decisions: [] };
-
-    function notify(col) {
-      var list = collections[col] || [];
-      (listeners[col] || []).forEach(function(sub) {
-        var filtered = sub.filterFn ? list.filter(sub.filterFn) : list.slice();
-        if (sub.desc) filtered.sort(function(a, b){ return (b.data.createdAt || 0) - (a.data.createdAt || 0); });
-        else filtered.sort(function(a, b){ return (a.data.createdAt || 0) - (b.data.createdAt || 0); });
-        var docs = filtered.map(function(entry){ return { id: entry.id, data: function(){ return entry.data; } }; });
-        try { sub.cb({ metadata: { fromCache: false }, docs: docs }); } catch (e) {}
-      });
-      // Mark rendered note text translate="no" so Spanish stays Spanish and English stays English
-      if (typeof document !== "undefined" && document.querySelectorAll) {
-        Array.prototype.slice.call(document.querySelectorAll(".rep .txt, .note")).forEach(function(n){
-          if (n && n.setAttribute) n.setAttribute("translate", "no");
-        });
-      }
-    }
-
-    window.assets = {
-      upload: async function(file, opts) {
-        if (!file) throw new Error("missing_file");
-        if (file.size && file.size > 20 * 1024 * 1024) { var err = new Error("too_large"); err.code = "too_large"; throw err; }
-        var durl = await fileToDataUrl(file);
-        var id = deterministicHash((file.name || "blob") + ":" + (file.size || 0) + ":" + Date.now()) + "0000000000000000";
-        id = id.slice(0, 32);
-        uploadedBlobs[id] = { id: id, name: file.name || "attachment", mimeType: (opts && opts.type) || file.type || "application/octet-stream", dataUrl: durl };
-        return { id: id };
-      }
-    };
-
-    function makeQuery(col, filterFn, desc) {
-      return {
-        where: function(field, op, val) {
-          return makeQuery(col, function(entry){ return op === "==" ? entry.data[field] === val : true; }, desc);
-        },
-        orderBy: function(field, dir) {
-          return makeQuery(col, filterFn, dir === "desc");
-        },
-        limit: function() {
-          return makeQuery(col, filterFn, desc);
-        },
-        onSnapshot: function(cb) {
-          var sub = { cb: cb, filterFn: filterFn, desc: Boolean(desc) };
-          (listeners[col] = listeners[col] || []).push(sub);
-          notify(col);
-          return function() {
-            var idx = listeners[col].indexOf(sub);
-            if (idx !== -1) listeners[col].splice(idx, 1);
-          };
-        },
-        add: async function(docObj) {
-          var pBlob = docObj.photo && uploadedBlobs[docObj.photo] ? uploadedBlobs[docObj.photo] : null;
-          var aBlob = docObj.audio && uploadedBlobs[docObj.audio] ? uploadedBlobs[docObj.audio] : null;
-          var rawText = "";
-          var pageId = "general";
-          var noteType = "general";
-          if (col === "reports") {
-            rawText = docObj.text || "";
-            pageId = docObj.project || activeRoomKey();
-            var k = String(docObj.kind || "Note").toLowerCase();
-            noteType = k.indexOf("meas") !== -1 ? "measurement" : (k.indexOf("prob") !== -1 ? "issue" : "general");
-          } else if (col === "inbox") {
-            rawText = docObj.raw || [docObj.title || "", docObj.details || ""].filter(Boolean).join(" — ");
-            pageId = docObj.project || "general";
-            noteType = docObj.type === "fact" ? "measurement" : "general";
-          } else if (col === "decisionNotes") {
-            rawText = docObj.text || "";
-            pageId = docObj.decision ? ("decision-" + docObj.decision) : "decisions";
-            noteType = "general";
-          } else if (col === "sessionNotes") {
-            rawText = [docObj.topic || "", docObj.summary || "", docObj.agreed || "", docObj.open || "", docObj.next || ""].filter(Boolean).join("\n");
-            pageId = "sessions";
-            noteType = "general";
-          }
-          var rec = await window.dispatchNoteToDriveTriage({
-            __useR3Direct: true,
-            page_id: pageId,
-            note_type: noteType,
-            kind: docObj.kind || docObj.type || col,
-            item: docObj.item || "",
-            raw: rawText,
-            topic: docObj.topic || null,
-            agreed: docObj.agreed || null,
-            open: docObj.open || null,
-            next: docObj.next || null,
-            decision: docObj.decision || null,
-            photoDataUrl: pBlob ? pBlob.dataUrl : null,
-            photoLabel: pBlob ? pBlob.name : null,
-            audioObj: aBlob ? { name: aBlob.name, mimeType: aBlob.mimeType, data: aBlob.dataUrl } : null,
-            sourcePath: "db." + col
-          });
-          var savedDoc = Object.assign({}, docObj, {
-            persistedToDrive: rec.driveSaved,
-            localTriageSaved: rec.localSynced,
-            verifiedDriveReceipt: rec.rawReceipt
-          });
-          (collections[col] = collections[col] || []).push({ id: rec.submissionId || ("id-" + Date.now()), data: savedDoc });
-          notify(col);
-          return { id: rec.submissionId };
-        }
-      };
-    }
-
-    window.db = {
-      collection: function(col) { return makeQuery(col, null, true); },
-      doc: function() { return { update: async function(){ throw new Error("owner_only"); } }; }
-    };
-    if (typeof window.show === "function") window.show(activeRoomKey());
-  }
-
-  function wireStandaloneFormsIfNeeded() {
-    installPagesDbAndAssetsShim();
-    if (typeof window.db !== "undefined" && window.db) return;
-    if (existingDispatch) return; // Already wired by R2 948c353 patch
-
-    // 1. Unlock Room #field and wire #repForm on GitHub Pages even when Claude `db` is null
-    var repForm = document.getElementById("repForm");
-    if (repForm && !repForm.__u4R3Wired) {
-      repForm.__u4R3Wired = true;
-      var origShow = typeof window.show === "function" ? window.show : null;
-      if (origShow && !window.show.__u4Wrapped) {
-        var wrappedShow = function(key) {
-          var r = origShow(key);
-          try {
-            var fieldSec = document.getElementById("field");
-            if (fieldSec && isActiveProjectRoom()) {
-              fieldSec.hidden = false;
-              var pw = document.getElementById("photoWrap"); if (pw) pw.hidden = false;
-              var aw = document.getElementById("audioWrap"); if (aw) aw.hidden = false;
-              var sel = document.getElementById("repItem");
-              if (sel && !sel.options.length) {
-                var o = document.createElement("option");
-                o.value = current.label || current.key;
-                o.textContent = current.label || current.key;
-                sel.appendChild(o);
-              }
-            }
-          } catch (e) {}
-          return r;
-        };
-        wrappedShow.__u4Wrapped = true;
-        window.show = wrappedShow;
-        if (typeof current !== "undefined" && current) window.show(current.key);
-      }
-
-      repForm.addEventListener("submit", async function(ev) {
-        if (typeof db !== "undefined" && db) return; // handled below if db absent; also mirror when !db
-        ev.preventDefault();
-        ev.stopImmediatePropagation();
-        var msg = document.getElementById("repMsg");
-        var send = document.getElementById("repSend");
-        var textEl = document.getElementById("repText");
-        var photoEl = document.getElementById("repPhoto");
-        var audioEl = document.getElementById("repAudio");
-        var kindVal = (document.getElementById("repKind") && document.getElementById("repKind").value) || "Note";
-        var itemVal = (document.getElementById("repItem") && document.getElementById("repItem").value) || "";
-        var text = (textEl && textEl.value || "").trim();
-        var pFile = photoEl && photoEl.files && photoEl.files[0];
-        var aFile = audioEl && audioEl.files && audioEl.files[0];
-        if (!text && !pFile && !aFile) {
-          if (msg) { msg.className = "msg err"; msg.textContent = currentUiLang() === "es" ? "Escribe unas palabras o adjunta una foto/audio primero." : "Add a few words, a photo or a voice memo first."; }
-          return;
-        }
-        if (send) send.disabled = true;
-        if (msg) { msg.className = "msg"; msg.textContent = currentUiLang() === "es" ? "Enviando a to-triage…" : "Sending to to-triage…"; }
-        try {
-          var pData = await fileToDataUrl(pFile);
-          var aData = await fileToDataUrl(aFile);
-          var roomKey = activeRoomKey();
-          var roomLabel = (typeof current !== "undefined" && current && current.label) || roomKey;
-          var rec = await window.dispatchNoteToDriveTriage({
-            __useR3Direct: true,
-            page_id: roomKey,
-            kind: kindVal,
-            note_type: kindVal.toLowerCase().indexOf("meas") !== -1 ? "measurement" : (kindVal.toLowerCase().indexOf("prob") !== -1 ? "issue" : "general"),
-            item: itemVal,
-            raw: text,
-            photoDataUrl: pData,
-            photoLabel: pFile ? pFile.name : null,
-            audioObj: aFile ? { name: aFile.name, mimeType: aFile.type || "audio/mp4", data: aData } : null,
-            sourcePath: "repForm"
-          });
-          if (textEl) textEl.value = "";
-          if (photoEl) photoEl.value = "";
-          if (audioEl) audioEl.value = "";
-          appendLocalReceiptRow("repList", kindVal, roomLabel, text || (pFile && pFile.name) || "[attachment]", rec);
-          if (msg) {
-            msg.className = "msg";
-            msg.textContent = currentUiLang() === "es"
-              ? "Enviado a to-triage (" + (rec.fileId || rec.markdownFile || TRIAGE_FOLDER_ID) + ")."
-              : "Sent to to-triage (" + (rec.fileId || rec.markdownFile || TRIAGE_FOLDER_ID) + ").";
-          }
-        } catch (err) {
-          if (msg) {
-            msg.className = "msg err";
-            msg.textContent = currentUiLang() === "es"
-              ? "No se pudo guardar en to-triage; tu nota sigue aquí para reintentar."
-              : "Couldn't reach to-triage; your text is preserved here to retry.";
-          }
-        } finally {
-          if (send) send.disabled = false;
-        }
-      }, true);
-    }
-
-    // 2. Unlock #qpPanel / renderInbox when `db` is null on GitHub Pages
-    if (typeof window.openQP === "function" && !window.openQP.__u4Wrapped) {
-      var origOpenQP = window.openQP;
-      var wrappedOpenQP = function() {
-        origOpenQP();
-        var body = document.getElementById("qpBody");
-        if (body && !document.getElementById("inForm")) {
-          body.innerHTML =
-            '<form id="inForm" novalidate>' +
-            '<button class="btn" id="inSpeak" type="button" style="font-size:17px;padding:14px 20px">' + (currentUiLang() === "es" ? "Dictar" : "Speak") + '</button>' +
-            '<p class="hint" id="inHint" hidden style="margin:6px 0">Tap your keyboard mic or use Live Voice in the top bar, then press Send.</p>' +
-            '<label for="inText">' + (currentUiLang() === "es" ? "Nota" : "Note") + '<textarea id="inText" maxlength="8000" style="min-height:120px"></textarea></label>' +
-            '<div class="cbar"><button class="btn" id="inSend" type="submit">' + (currentUiLang() === "es" ? "Enviar nota" : "Send note") + '</button>' +
-            '<button class="btn ghost" id="inRaw" type="button">' + (currentUiLang() === "es" ? "Enviar tal cual" : "Send as-is") + '</button></div>' +
-            '<div class="msg" id="inMsg" role="status"></div></form>' +
-            '<h2 style="font-size:16px;margin-top:18px">' + (currentUiLang() === "es" ? "Enviados recientemente" : "Recently sent") + '</h2><div class="reports" id="inList"></div>';
-          var spk = document.getElementById("inSpeak");
-          if (spk) spk.onclick = function(){ document.getElementById("inHint").hidden = false; document.getElementById("inText").focus(); };
-          var submitQuick = async function(ev) {
-            if (ev) ev.preventDefault();
-            var ta = document.getElementById("inText");
-            var m = document.getElementById("inMsg");
-            var raw = (ta && ta.value || "").trim();
-            if (!raw) {
-              if (m) { m.className = "msg err"; m.textContent = currentUiLang() === "es" ? "Escribe o dicta algo primero." : "Say or type something first."; }
-              return;
-            }
-            if (m) { m.className = "msg"; m.textContent = currentUiLang() === "es" ? "Enviando a to-triage…" : "Sending to to-triage…"; }
-            try {
-              var rk = (isActiveProjectRoom() && current.key) || "general";
-              var rec = await window.dispatchNoteToDriveTriage({
-                __useR3Direct: true,
-                page_id: rk,
-                note_type: "general",
-                kind: "Quick note",
-                raw: raw,
-                sourcePath: "inForm"
-              });
-              ta.value = "";
-              appendLocalReceiptRow("inList", "Note", rk, raw, rec);
-              if (m) {
-                m.className = "msg";
-                m.textContent = currentUiLang() === "es"
-                  ? "Enviado a to-triage (" + (rec.fileId || rec.markdownFile || TRIAGE_FOLDER_ID) + ")."
-                  : "Sent to to-triage (" + (rec.fileId || rec.markdownFile || TRIAGE_FOLDER_ID) + ").";
-              }
-            } catch (err) {
-              if (m) {
-                m.className = "msg err";
-                m.textContent = currentUiLang() === "es"
-                  ? "No se pudo enviar; tu nota sigue aquí para reintentar."
-                  : "Didn't save — your note is still here to retry.";
-              }
-            }
-          };
-          document.getElementById("inForm").onsubmit = submitQuick;
-          document.getElementById("inRaw").onclick = submitQuick;
-        }
-      };
-      wrappedOpenQP.__u4Wrapped = true;
-      window.openQP = wrappedOpenQP;
-      var qpBtn = document.getElementById("qpBtn");
-      if (qpBtn) {
-        qpBtn.onclick = function(ev){ ev.preventDefault(); ev.stopImmediatePropagation(); window.openQP(); };
-      }
-    }
-
-    // 3. Wrap queueItems so #inSort -> queueItems also routes to to-triage
-    if (typeof window.queueItems === "function" && !window.queueItems.__u4Wrapped) {
-      var origQueueItems = window.queueItems;
-      var wrappedQueue = async function(raw, items) {
-        var list = Array.isArray(items) && items.length ? items : [{ type: "unsorted", project: "general", details: raw }];
-        for (var i = 0; i < list.length; i++) {
-          var it = list[i];
-          var bodyText = [it.title || "", it.details || raw || ""].filter(Boolean).join(" — ");
-          await window.dispatchNoteToDriveTriage({
-            __useR3Direct: true,
-            page_id: it.project || "general",
-            note_type: it.type === "fact" ? "measurement" : "general",
-            kind: it.type || "Note",
-            raw: bodyText || raw,
-            sourcePath: "queueItems"
-          });
-        }
-        if (typeof db !== "undefined" && db) return origQueueItems(raw, items);
-      };
-      wrappedQueue.__u4Wrapped = true;
-      window.queueItems = wrappedQueue;
-    }
-  }
-
-  // ---- 6-Action Allowlisted Client Bridge (U4WikiClientBridge) ----
-  var lastVoiceSubmitAt = 0;
-  var readbackArmedHash = null;
-  var activeMediaChunks = [];
-  var activeMediaRecorder = null;
-
-  function flushMediaRecorderClip() {
-    return new Promise(function(resolve) {
-      if (!activeMediaRecorder || activeMediaRecorder.state !== "recording") {
-        return resolve(null);
-      }
-      var onData = function(ev) {
-        if (ev.data && ev.data.size > 0) activeMediaChunks.push(ev.data);
-      };
-      activeMediaRecorder.addEventListener("dataavailable", onData, { once: true });
-      try { activeMediaRecorder.requestData(); } catch (e) {}
-      setTimeout(function() {
-        if (!activeMediaChunks.length) return resolve(null);
-        var mime = activeMediaRecorder.mimeType || "audio/webm";
-        var blob = new Blob(activeMediaChunks.slice(-25), { type: mime });
-        fileToDataUrl(blob).then(function(durl) {
-          resolve(durl ? { name: "voice-memo.webm", mimeType: mime, data: durl } : null);
-        }).catch(function(){ resolve(null); });
-      }, 300);
-    });
-  }
-
-  var existingBridge = window.U4WikiClientBridge || null;
-
-  var bridgeActions = {
-    navigate_room: async function(args) {
-      var room = String((args && args.room) || "").trim().toLowerCase();
-      if (ALLOWED_ROOMS.indexOf(room) === -1) {
-        return { ok: false, code: "INVALID_ROOM", validOptions: ALLOWED_ROOMS };
-      }
-      location.hash = "#" + room;
-      if (typeof window.show === "function") window.show(room);
-      return { ok: true, action: "navigate_room", room: room };
-    },
-
-    focus_section: async function(args) {
-      var q = String((args && args.heading) || "").trim().toLowerCase();
-      if (!q) return { ok: false, code: "MISSING_HEADING" };
-      var headings = Array.prototype.slice.call(document.querySelectorAll("main h1, main h2, main h3"));
-      var match = headings.find(function(h){ return (h.textContent || "").toLowerCase().indexOf(q) !== -1; });
-      if (!match) {
-        return {
-          ok: false,
-          code: "SECTION_NOT_FOUND",
-          availableHeadings: headings.map(function(h){ return (h.textContent || "").trim(); })
-        };
-      }
-      match.setAttribute("tabindex", "-1");
-      match.focus();
-      if (match.scrollIntoView) match.scrollIntoView({ block: "start" });
-      return { ok: true, action: "focus_section", focusedHeading: (match.textContent || "").trim() };
-    },
-
-    open_document: async function(args) {
-      var q = String((args && args.doc_id) || "").trim();
-      if (!q) return { ok: false, code: "MISSING_DOC_ID" };
-      var docLinks = Array.prototype.slice.call(document.querySelectorAll('a[href^="#doc:"], .docs a[href]'));
-      var found = docLinks.find(function(a) {
-        var href = a.getAttribute("href") || "";
-        var txt = (a.textContent || "").toLowerCase();
-        return href === "#doc:" + q || href.indexOf(q) !== -1 || txt.indexOf(q.toLowerCase()) !== -1;
-      });
-      if (!found && typeof DOC_BY_ID !== "undefined" && DOC_BY_ID[q] && !DOC_BY_ID[q].history) {
-        location.hash = "#doc:" + q;
-        if (typeof window.show === "function") window.show("doc:" + q);
-        return { ok: true, action: "open_document", docId: q };
-      }
-      if (!found) {
-        return {
-          ok: false,
-          code: "DOC_NOT_APPROVED_OR_NOT_FOUND",
-          validOptions: docLinks.map(function(a){ return { label: (a.textContent || "").trim(), href: a.getAttribute("href") }; })
-        };
-      }
-      var targetHref = found.getAttribute("href") || "";
-      if (targetHref.indexOf("#") === 0) {
-        location.hash = targetHref;
-        if (typeof window.show === "function") window.show(targetHref.slice(1));
-      } else {
-        window.open(targetHref, "_blank", "noopener");
-      }
-      return { ok: true, action: "open_document", opened: (found.textContent || "").trim() };
-    },
-
-    set_language: async function(args) {
-      var lang = String((args && args.language) || "").toLowerCase();
-      if (lang !== "en" && lang !== "es") return { ok: false, code: "INVALID_LANGUAGE", validOptions: ["en", "es"] };
-      // Preserve active drafts across language toggle
-      var savedRep = document.getElementById("repText") ? document.getElementById("repText").value : null;
-      var savedIn = document.getElementById("inText") ? document.getElementById("inText").value : null;
-      if (typeof window.setLang === "function") {
-        window.setLang(lang);
-      } else {
-        window.LANG = lang;
-        try { localStorage.setItem("u4lang", lang); } catch (e) {}
-      }
-      if (savedRep !== null && document.getElementById("repText")) document.getElementById("repText").value = savedRep;
-      if (savedIn !== null && document.getElementById("inText")) document.getElementById("inText").value = savedIn;
-      syncMicPillLabel();
-      return { ok: true, action: "set_language", language: lang };
-    },
-
-    fill_draft_note: async function(args) {
-      var text = String((args && args.text) || "").trim();
-      var lang = detectNoteLanguage(text, args && args.language);
-      var target = (args && args.target) || ((isActiveProjectRoom()) ? "room" : "quick");
-      if (args && args.room && ALLOWED_ROOMS.indexOf(args.room) !== -1 && target === "room") {
-        if (typeof current === "undefined" || !current || current.key !== args.room) {
-          await bridgeActions.navigate_room({ room: args.room });
-        }
-      }
-      if (target === "room" && document.getElementById("repText")) {
-        var fieldSec = document.getElementById("field");
-        if (fieldSec) fieldSec.hidden = false;
-        document.getElementById("repText").value = text;
-        if (args && args.measurement && document.getElementById("repMeas")) document.getElementById("repMeas").value = args.measurement;
-        if (args && args.datum && document.getElementById("repDatum")) document.getElementById("repDatum").value = args.datum;
-      } else {
-        if (typeof window.openQP === "function") window.openQP();
-        if (document.getElementById("inText")) document.getElementById("inText").value = text;
-      }
-      readbackArmedHash = deterministicHash(text + "|" + lang);
-      return {
-        ok: true,
-        action: "fill_draft_note",
-        language: lang,
-        draftPopulated: true,
-        nextStep: lang === "es"
-          ? "Lee la nota en voz alta y espera a que la persona diga 'mándalo' antes de llamar a submit_voice_memo."
-          : "Read the note back aloud and wait for the user to say 'send it' before calling submit_voice_memo."
-      };
-    },
-
-    submit_voice_memo: async function(args) {
-      var text = String((args && args.text) || "").trim();
-      if (!text) return { ok: false, code: "EMPTY_NOTE" };
-      var lang = detectNoteLanguage(text, args && args.language);
-      var noteHash = deterministicHash(text + "|" + lang);
-      var confirmed = Boolean(args && args.spoken_confirmation === true);
-      if (!confirmed || readbackArmedHash !== noteHash) {
-        readbackArmedHash = noteHash;
-        await bridgeActions.fill_draft_note({ text: text, language: lang, room: args && args.room, measurement: args && args.measurement, datum: args && args.datum });
-        return {
-          ok: false,
-          code: "NEEDS_READBACK_CONFIRMATION",
-          verbalReadbackEn: "I drafted your note: '" + text + "'. Say 'send it' to save it to to-triage.",
-          verbalReadbackEs: "Preparé tu nota: '" + text + "'. Di 'mándalo' para guardarla en to-triage."
-        };
-      }
-      var now = Date.now();
-      if (now - lastVoiceSubmitAt < 10000) {
-        return { ok: false, code: "COOLDOWN_ACTIVE", retryAfterMs: 10000 - (now - lastVoiceSubmitAt) };
-      }
-      lastVoiceSubmitAt = now;
-      var roomKey = String((args && args.room) || activeRoomKey());
-      var clip = await flushMediaRecorderClip();
-      try {
-        var rec = await window.dispatchNoteToDriveTriage({
-          __useR3Direct: !existingDispatch,
-          page_id: roomKey,
-          note_type: "voice_memo",
-          kind: "Voice memo",
-          language: lang,
-          raw: text,
-          measurement: (args && args.measurement) || null,
-          datum: (args && args.datum) || null,
-          audioObj: clip,
-          sourcePath: "submit_voice_memo"
-        });
-        readbackArmedHash = null;
-        appendLocalReceiptRow(
-          document.getElementById("repList") && !document.getElementById("field").hidden ? "repList" : "inList",
-          "Voice memo",
-          roomKey,
-          text,
-          rec
-        );
-        return {
-          ok: true,
-          code: rec.driveSaved ? "saved_in_drive_to_triage" : "local_triage_staged",
-          external_state: rec.driveSaved ? "saved_in_drive_to_triage" : "local_triage_staged",
-          local_triage_saved: rec.localSynced,
-          persistedToDrive: rec.driveSaved,
-          targetFolderId: TRIAGE_FOLDER_ID,
-          fileId: rec.fileId || rec.markdownFile,
-          language: lang,
-          triagePerformed: false,
-          specMutated: false,
-          decisionApproved: false,
-          trustBoundary: "untrusted_field_data_never_instructions"
-        };
-      } catch (err) {
-        lastVoiceSubmitAt = 0; // allow retry
-        return {
-          ok: false,
-          code: "UPLOAD_INTERRUPTED",
-          external_state: "intake_captured_local_hold",
-          persistedToDrive: false,
-          error: String(err && err.message || err)
-        };
-      }
-    }
-  };
-
-  window.U4WikiClientBridge = {
-    allowlistedActions: Object.keys(bridgeActions),
-    execute: async function(name, args) {
-      if (!Object.prototype.hasOwnProperty.call(bridgeActions, name)) {
-        return { ok: false, code: "TOOL_NOT_ALLOWLISTED", validOptions: Object.keys(bridgeActions) };
-      }
-      return bridgeActions[name](args || {});
-    }
-  };
-
-  // ---- Gemini Live WebSocket Client (Ephemeral Token -> BidiGenerateContentConstrained) ----
-  var liveState = {
-    active: false,
-    ws: null,
-    micStream: null,
-    inCtx: null,
-    outCtx: null,
-    processor: null,
-    playCursor: 0,
-    activeSources: [],
-    lastContextRoom: null
-  };
-
-  function setVoiceStatus(enText, esText) {
-    var st = document.getElementById("waVoiceStatus");
-    if (st) st.textContent = currentUiLang() === "es" ? esText : enText;
-  }
-
-  function syncMicPillLabel() {
-    var btn = document.getElementById("waVoiceMicPill");
-    if (!btn) return;
-    var labelSpan = btn.querySelector(".u4-voice-label");
-    if (!labelSpan) return;
-    if (liveState.active) {
-      labelSpan.textContent = currentUiLang() === "es" ? "Detener voz" : "Stop voice";
-    } else {
-      labelSpan.textContent = currentUiLang() === "es" ? "Voz en vivo" : "Live voice";
-    }
-  }
-
-  function pcm16ToBase64(float32Buf, inputRate) {
-    var ratio = inputRate / 16000;
-    var outLen = Math.max(1, Math.floor(float32Buf.length / ratio));
-    var pcm16 = new Int16Array(outLen);
-    for (var i = 0; i < outLen; i++) {
-      var s = float32Buf[Math.min(float32Buf.length - 1, Math.floor(i * ratio))];
-      s = Math.max(-1, Math.min(1, s));
-      pcm16[i] = s < 0 ? s * 0x8000 : s * 0x7FFF;
-    }
-    var bytes = new Uint8Array(pcm16.buffer);
-    var bin = "";
-    for (var j = 0; j < bytes.length; j++) bin += String.fromCharCode(bytes[j]);
-    return btoa(bin);
-  }
-
-  function playBase64Pcm24k(b64) {
-    if (!liveState.outCtx) return;
-    var bin = atob(b64);
-    var bytes = new Uint8Array(bin.length);
-    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
-    var int16 = new Int16Array(bytes.buffer);
-    var float32 = new Float32Array(int16.length);
-    for (var k = 0; k < int16.length; k++) float32[k] = int16[k] / 32768;
-    var audioBuf = liveState.outCtx.createBuffer(1, float32.length, 24000);
-    audioBuf.getChannelData(0).set(float32);
-    var src = liveState.outCtx.createBufferSource();
-    src.buffer = audioBuf;
-    src.connect(liveState.outCtx.destination);
-    var startAt = Math.max(liveState.outCtx.currentTime, liveState.playCursor);
-    src.start(startAt);
-    liveState.playCursor = startAt + audioBuf.duration;
-    liveState.activeSources.push(src);
-    src.onended = function() {
-      var idx = liveState.activeSources.indexOf(src);
-      if (idx !== -1) liveState.activeSources.splice(idx, 1);
-    };
-  }
-
-  function stopPlaybackQueue() {
-    while (liveState.activeSources.length) {
-      var s = liveState.activeSources.pop();
-      try { s.stop(); } catch (e) {}
-    }
-    if (liveState.outCtx) liveState.playCursor = liveState.outCtx.currentTime;
-  }
-
-  function buildPageContextSummary() {
-    var roomKey = activeRoomKey();
-    var headings = Array.prototype.slice.call(document.querySelectorAll("#doc h1, #doc h2, #doc h3"))
-      .slice(0, 12)
-      .map(function(h){ return (h.textContent || "").trim(); });
-    var docs = Array.prototype.slice.call(document.querySelectorAll('a[href^="#doc:"], .docs a[href]'))
-      .slice(0, 15)
-      .map(function(a){ return (a.textContent || "").trim() + " (" + (a.getAttribute("href") || "") + ")"; });
-    var snippet = (document.getElementById("doc") ? document.getElementById("doc").innerText : "").slice(0, 1800);
-    return "Active wiki room: " + roomKey + " | UI language: " + currentUiLang() +
-      "\nHeadings: " + headings.join("; ") +
-      "\nCrew documents on page: " + docs.join("; ") +
-      "\nVisible room summary:\n" + snippet;
-  }
-
-  function stopGeminiLiveSession() {
-    liveState.active = false;
-    stopPlaybackQueue();
-    if (activeMediaRecorder && activeMediaRecorder.state !== "inactive") {
-      try { activeMediaRecorder.stop(); } catch (e) {}
-    }
-    activeMediaRecorder = null;
-    activeMediaChunks = [];
-    if (liveState.processor) {
-      try { liveState.processor.disconnect(); } catch (e) {}
-      liveState.processor = null;
-    }
-    if (liveState.inCtx) {
-      try { liveState.inCtx.close(); } catch (e) {}
-      liveState.inCtx = null;
-    }
-    if (liveState.outCtx) {
-      try { liveState.outCtx.close(); } catch (e) {}
-      liveState.outCtx = null;
-    }
-    if (liveState.micStream) {
-      liveState.micStream.getTracks().forEach(function(t){ try { t.stop(); } catch (e) {} });
-      liveState.micStream = null;
-    }
-    if (liveState.ws) {
-      try { liveState.ws.close(); } catch (e) {}
-      liveState.ws = null;
-    }
-    var btn = document.getElementById("waVoiceMicPill");
-    if (btn) btn.setAttribute("aria-pressed", "false");
-    syncMicPillLabel();
-    setVoiceStatus("", "");
-  }
-
-  async function startGeminiLiveSession(userGestureEvent) {
-    if (!userGestureEvent || !userGestureEvent.isTrusted) {
-      // Allow synthetic test invocation only when explicitly flagged
-      if (!(userGestureEvent && userGestureEvent.__allowSyntheticTest)) return;
-    }
-    var btn = document.getElementById("waVoiceMicPill");
-    if (btn) btn.setAttribute("aria-pressed", "true");
-    liveState.active = true;
-    syncMicPillLabel();
-    setVoiceStatus("Connecting…", "Conectando…");
-
-    try {
-      var tokResp = await fetch(window.U4_VOICE_TOKEN_ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ room: activeRoomKey(), uiLanguage: currentUiLang() })
-      });
-      var tokData = await tokResp.json().catch(function(){ return null; });
-      if (!tokResp.ok || !tokData || !tokData.wsUrl) {
-        throw new Error((tokData && tokData.error) || ("Token HTTP " + tokResp.status));
-      }
-
-      var stream = await navigator.mediaDevices.getUserMedia({
-        audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true, channelCount: 1 }
-      });
-      liveState.micStream = stream;
-
-      if (typeof MediaRecorder !== "undefined") {
-        try {
-          activeMediaChunks = [];
-          activeMediaRecorder = new MediaRecorder(stream);
-          activeMediaRecorder.ondataavailable = function(e){ if (e.data && e.data.size > 0) activeMediaChunks.push(e.data); };
-          activeMediaRecorder.start(1000);
-        } catch (e) { activeMediaRecorder = null; }
-      }
-
-      var AudioCtx = window.AudioContext || window.webkitAudioContext;
-      liveState.inCtx = new AudioCtx();
-      liveState.outCtx = new AudioCtx({ sampleRate: 24000 });
-      liveState.playCursor = liveState.outCtx.currentTime;
-
-      var ws = new WebSocket(tokData.wsUrl);
-      liveState.ws = ws;
-      var setupDone = false;
-
-      ws.onopen = function() {
-        ws.send(JSON.stringify({
-          setup: {
-            model: tokData.model || "models/gemini-3.8-live"
-          }
-        }));
-      };
-
-      ws.onmessage = async function(ev) {
-        var rawText = typeof ev.data === "string" ? ev.data : await ev.data.text();
-        var msg = JSON.parse(rawText);
-
-        if (msg.setupComplete && !setupDone) {
-          setupDone = true;
-          setVoiceStatus("Listening (EN / ES)", "Escuchando (ES / EN)");
-          // Send current room context silently without triggering an unprompted monologue
-          ws.send(JSON.stringify({
-            clientContent: {
-              turns: [{ role: "user", parts: [{ text: "[WIKI CONTEXT]\n" + buildPageContextSummary() }] }],
-              turnComplete: false
-            }
-          }));
-          liveState.lastContextRoom = activeRoomKey();
-
-          var srcNode = liveState.inCtx.createMediaStreamSource(stream);
-          var proc = liveState.inCtx.createScriptProcessor(4096, 1, 1);
-          liveState.processor = proc;
-          proc.onaudioprocess = function(audioEv) {
-            if (!liveState.active || !setupDone || ws.readyState !== WebSocket.OPEN) return;
-            var ch = audioEv.inputBuffer.getChannelData(0);
-            var b64 = pcm16ToBase64(ch, liveState.inCtx.sampleRate);
-            ws.send(JSON.stringify({
-              realtimeInput: {
-                audio: { mimeType: "audio/pcm;rate=16000", data: b64 }
-              }
-            }));
-          };
-          srcNode.connect(proc);
-          proc.connect(liveState.inCtx.destination);
-          return;
-        }
-
-        if (msg.serverContent) {
-          if (msg.serverContent.interrupted) {
-            stopPlaybackQueue();
-          }
-          var turn = msg.serverContent.modelTurn;
-          if (turn && Array.isArray(turn.parts)) {
-            for (var i = 0; i < turn.parts.length; i++) {
-              var inl = turn.parts[i].inlineData;
-              if (inl && inl.data && String(inl.mimeType || "").indexOf("audio/pcm") === 0) {
-                playBase64Pcm24k(inl.data);
-              }
-            }
-          }
-        }
-
-        if (msg.toolCall && Array.isArray(msg.toolCall.functionCalls)) {
-          var responses = [];
-          for (var j = 0; j < msg.toolCall.functionCalls.length; j++) {
-            var fc = msg.toolCall.functionCalls[j];
-            var out = await window.U4WikiClientBridge.execute(fc.name, fc.args || {});
-            responses.push({ id: fc.id, name: fc.name, response: { result: out } });
-          }
-          if (ws.readyState === WebSocket.OPEN) {
-            ws.send(JSON.stringify({ toolResponse: { functionResponses: responses } }));
-            // Refresh room context if navigation occurred
-            var curKey = activeRoomKey();
-            if (curKey !== liveState.lastContextRoom) {
-              liveState.lastContextRoom = curKey;
-              ws.send(JSON.stringify({
-                clientContent: {
-                  turns: [{ role: "user", parts: [{ text: "[UPDATED WIKI CONTEXT]\n" + buildPageContextSummary() }] }],
-                  turnComplete: false
-                }
-              }));
-            }
-          }
-        }
-      };
-
-      ws.onerror = function() {
-        stopGeminiLiveSession();
-        setVoiceStatus("Voice connection error", "Error de conexión de voz");
-      };
-      ws.onclose = function() {
-        if (liveState.active) stopGeminiLiveSession();
-      };
-    } catch (err) {
-      stopGeminiLiveSession();
-      setVoiceStatus(
-        "Voice unavailable: " + String(err && err.message || err),
-        "Voz no disponible: " + String(err && err.message || err)
-      );
-    }
-  }
-
-  function ensureTopbarMicPill() {
-    var btn = document.getElementById("waVoiceMicPill");
-    if (!btn) {
-      var host = document.querySelector(".topbar-right") || document.querySelector("main .bar") || document.querySelector(".mobile");
-      if (!host) return;
-      btn = document.createElement("button");
-      btn.type = "button";
-      btn.id = "waVoiceMicPill";
-      btn.className = "u4-voice-pill";
-      btn.setAttribute("aria-pressed", "false");
-      btn.innerHTML = '<span class="u4-voice-dot" aria-hidden="true"></span><span class="u4-voice-label">Live voice</span>';
-      host.appendChild(btn);
-    }
-    if (!document.getElementById("waVoiceStatus") && btn.parentNode) {
-      var st = document.createElement("span");
-      st.id = "waVoiceStatus";
-      st.className = "u4-voice-status";
-      st.setAttribute("role", "status");
-      st.setAttribute("aria-live", "polite");
-      btn.parentNode.insertBefore(st, btn.nextSibling);
-    }
-    if (!btn.__u4LiveBound) {
-      btn.__u4LiveBound = true;
-      btn.addEventListener("click", function(ev) {
-        ev.preventDefault();
-        if (liveState.active) stopGeminiLiveSession();
-        else startGeminiLiveSession(ev);
-      });
-    }
-    syncMicPillLabel();
-  }
-
-  window.U4GeminiLiveAssistant = {
-    micOpenedOnLoad: false,
-    start: startGeminiLiveSession,
-    stop: stopGeminiLiveSession,
-    isActive: function(){ return liveState.active; }
-  };
-
-  function boot() {
-    ensureTopbarMicPill();
-    wireStandaloneFormsIfNeeded();
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", boot);
-  } else {
-    boot();
-  }
-})();
-</script>
-<!-- U4_GEMINI_LIVE_AND_UNIFIED_TRIAGE_R3_END -->
 </body></html>

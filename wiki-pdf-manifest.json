@@ -54,6 +54,11 @@
     "pages_path": "wiki-pdfs/1INgn3iZDKq0ArTGZqH1zv0Qj0sST0bAl.pdf",
     "sha256": "9799fa2aefb4ba393251cd3c34cbc5becd6a6eae8c6dafb223774de195e4c4a0"
   },
+  "1JucaH0UXB1mko6Qnl4dDa0vzex_WSKh3": {
+    "pages_path": "wiki-pdfs/1JucaH0UXB1mko6Qnl4dDa0vzex_WSKh3.pdf",
+    "sha256": "c69095dda4626a15bc731e009c2d82cae51d095f8a115c02dbe0bdf964e3137e",
+    "source_filename": "2026-11-01_U4_laundry-closet_trim-detail_A-301_EN.pdf"
+  },
   "1KPYZCWI4NZvByh9gB6yiUAOJB3dziUrL": {
     "original_asset": "/_blob/132361e9f146d5722a1ac811f3d0cc3b",
     "pages_path": "wiki-pdfs/1KPYZCWI4NZvByh9gB6yiUAOJB3dziUrL.pdf",
@@ -64,6 +69,11 @@
     "pages_path": "wiki-pdfs/1NY9eaXvYK_oICJBK8FrMnkw5iCx5lVuQ.pdf",
     "sha256": "416ff0da21679afefeedfb5983b29ed074fad6617f679e5f1bacda82ce033e15",
     "source_filename": "Bano Unidad 4 - Plan para John - Espanol.pdf"
+  },
+  "1RyQo3l4hc0yTdMbgdO01IdbA7e3JJ8J7": {
+    "pages_path": "wiki-pdfs/1RyQo3l4hc0yTdMbgdO01IdbA7e3JJ8J7.pdf",
+    "sha256": "d96feeda497560885eb6493df6e2268eb50291133690b53d2541f3bf0ca262b1",
+    "source_filename": "2026-11-01_U4_laundry-closet_section_A-103_EN.pdf"
   },
   "1Tgb82HNVsMrTEe-W3OXmvuVHm4EL1JpO": {
     "original_asset": "/_blob/1cb99516302d746a757db26f45ffb5bb",
@@ -110,6 +120,11 @@
     "pages_path": "wiki-pdfs/1dB6h6MFYhcv15b2-xqiIwf6sqkjDzuj1.pdf",
     "sha256": "f8b28ab6f97398085787bc55549b3483541e89d4b98c3cb26f65cf021f0d1be4"
   },
+  "1fMS5FN0zmR0LcoTj8x7GJf7B335iJXcn": {
+    "pages_path": "wiki-pdfs/1fMS5FN0zmR0LcoTj8x7GJf7B335iJXcn.pdf",
+    "sha256": "5706408a830faee11cde65cbf58a6f9d43431a20f958e86e730e5984d58ca2fb",
+    "source_filename": "2026-11-01_U4_laundry-closet_elevations_A-102_EN.pdf"
+  },
   "1j3RtlylFUgKKUACB2EGpEEPVaMTEwMtz": {
     "original_asset": "/_blob/2353c34dc04a75bd4b944b3f4920fbe6",
     "pages_path": "wiki-pdfs/1j3RtlylFUgKKUACB2EGpEEPVaMTEwMtz.pdf",
@@ -150,5 +165,25 @@
     "original_asset": "/_blob/f1cea9f1b1180895d0b2f8e3649c6567",
     "pages_path": "wiki-pdfs/1zmfZZ_oTx2etOEbVycFGW18r1zcrUSWK.pdf",
     "sha256": "47c9808622a09fab326c3c9ccf8feeeb22f03f952b04f4cb94cda8bbac660e02"
+  },
+  "2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_EN": {
+    "pages_path": "wiki-pdfs/2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_EN.pdf",
+    "sha256": "d88f3aa7f27cadac2999524261568b72646600193347cdccd46b026562705a67",
+    "source_filename": "2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_EN.pdf"
+  },
+  "2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_ES": {
+    "pages_path": "wiki-pdfs/2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_ES.pdf",
+    "sha256": "2fba00c53690211b42073faf525565c2afc590de087160f055963643a8d7ba87",
+    "source_filename": "2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_ES.pdf"
+  },
+  "2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_EN": {
+    "pages_path": "wiki-pdfs/2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_EN.pdf",
+    "sha256": "79b50a4ab11bbb0179764d86d27e96c7fe5ef55aea9831bb60aa3f836646395b",
+    "source_filename": "2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_EN.pdf"
+  },
+  "2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_ES": {
+    "pages_path": "wiki-pdfs/2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_ES.pdf",
+    "sha256": "541cfc401ea624d11a4f9642e51c702a3e9858790e4e3bd9b19cc51eea92b4c5",
+    "source_filename": "2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_ES.pdf"
   }
 }
