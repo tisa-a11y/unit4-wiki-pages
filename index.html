@@ -234,7 +234,7 @@ main{padding-bottom:96px}
 .goals h2{margin:2px 0 6px;font-size:19px}.goals ol{margin:0;padding-left:22px}.goals li{margin:5px 0;line-height:1.45}
 .about{max-width:74ch;margin:0 0 22px;padding-bottom:6px;border-bottom:1px solid var(--line, rgba(127,127,127,.25))}
 .about h2{font-size:17px;margin:14px 0 6px}.about p{margin:0 0 8px}.about ul{margin:0;padding-left:20px}.about li{margin:5px 0;line-height:1.45}
-#field .reports{display:none}.pp-link{font-size:14px;margin:6px 0 0}.legend a{font-weight:600}
+#field .reports{display:grid}#field .reports:empty{display:none}.rep .tag.warn{background:var(--open-soft);color:var(--open)}.pp-link{font-size:14px;margin:6px 0 0}.legend a{font-weight:600}
 .is-home .bar .status,.is-home #status{display:none}
 .done-list{max-width:74ch;margin:0 0 18px}.done-list ul{list-style:none;padding-left:4px;margin:0}.done-list li{margin:8px 0;padding-left:32px;text-indent:-32px}.done-list .chk{display:inline-block;width:22px;height:22px;border-radius:6px;background:var(--accent);color:#fff;text-align:center;line-height:22px;font-size:14px;font-weight:700;margin-right:10px;text-indent:0;vertical-align:-3px}
 .goals.week h2{border-top:none;padding-top:0;margin-top:0}main{padding-bottom:96px}
@@ -634,7 +634,7 @@ function show(key){
   document.querySelectorAll("nav.rail a").forEach(a=>a.setAttribute("aria-current", a.dataset.key===p.key ? "page" : "false"));
   syncSubs(p.key);
   document.getElementById("jump").value = p.key;
-    if (p.key==="decisions"){ document.getElementById("field").hidden=true; setStatus("", db?"Shared decision list":"Sign in to work on decisions", false); renderDecisions(); wireDecisions(); return; }
+    if (p.key==="decisions"){ document.getElementById("field").hidden=true; setStatus("", "Shared decision list", false); renderDecisions(); wireDecisions(); return; }
   const l = live[p.key];
   const esMd = LANG==="es" ? ((liveEs[p.key] && liveEs[p.key].md) || p.mdEs || "") : "";
   let homeNext = null; let srcMd = stripHomeGoals(p.key, esMd || (l ? l.md : p.md));
@@ -832,7 +832,7 @@ function renderAllReports(doc, h){
     const meta = document.createElement("div"); meta.className = "meta";
     [[label(r.project),"tag"],[r.kind||"Note","tag"],[r.item||"",""],[fmtTime(r.createdAt),""],[r.status==="recorded"?"Recorded in spec":"New", r.status==="recorded"?"tag done":"tag"]].forEach(([s,c])=>{ if(!s) return; const sp=document.createElement("span"); if(c) sp.className=c; sp.textContent=s; meta.appendChild(sp); });
     div.appendChild(meta);
-    if (r.text){ const tx=document.createElement("div"); tx.className="txt"; tx.textContent=r.text; div.appendChild(tx); }
+    if (r.text){ const tx=document.createElement("div"); tx.className="txt"; tx.setAttribute("translate","no"); tx.textContent=r.text; div.appendChild(tx); }
     if (r.audio && /^[a-f0-9]{32}$/.test(r.audio)){ const au=document.createElement("audio"); au.controls=true; au.preload="none"; au.src="/_blob/"+r.audio; au.style.maxWidth="100%"; div.appendChild(au); }
     if (r.photo && /^[a-f0-9]{32}$/.test(r.photo)){ const im=document.createElement("img"); im.alt="Field photo"; im.loading="lazy"; im.src="/_blob/"+r.photo; div.appendChild(im); }
     list.appendChild(div);
@@ -1018,91 +1018,829 @@ wireFieldToggle();
 if (typeof ES==="object") Object.assign(ES, {"Project Planning": "Planificación del proyecto", "Send a field note": "Mandar una nota de obra", "(a quick note from the job site)": "(una nota rápida desde la obra)", "Send one whenever you measure something, finish a step, find a problem, or need an answer. Pick what it’s about, write one or two lines, and add a photo if you can. Tisa and the team read every note and update this page.": "Manden una cada vez que midan algo, terminen un paso, encuentren un problema o necesiten una respuesta. Escojan de qué se trata, escriban una o dos líneas y agreguen una foto si pueden. Tisa y el equipo leen cada nota y actualizan esta página.", "All field reports → Project Planning": "Todos los reportes de obra → Planificación del proyecto", "Decisions, questions, session notes and field reports → Project Planning": "Decisiones, preguntas, notas de sesiones y reportes de obra → Planificación del proyecto", "Everything still being worked out lives here: decisions to make, questions, discussions and session notes, and field reports from site. Only Tisa locks decisions.": "Aquí vive todo lo que todavía se está resolviendo: decisiones por tomar, preguntas, conversaciones y notas de sesiones, y reportes de obra. Solo Tisa toma las decisiones.", "Recorded in spec": "Ya está en la especificación", "New": "Nuevo"});
 if (typeof ES==="object") Object.assign(ES, {"Laundry Closet":"Clóset de lavandería"});
 (function(){ document.querySelectorAll("nav.rail .grp").forEach(g=>{ if (g.textContent.trim()==="Working"){ let n=g.nextElementSibling; g.remove(); while(n && !n.classList.contains("grp")){ const x=n.nextElementSibling; n.remove(); n=x; } } }); })();
-show(location.hash.slice(1) || "home");
-i18nObs.observe(document.body, {subtree:true, childList:true, characterData:true});
-document.getElementById("langBtn").addEventListener("click", ()=>setLang(LANG==="es" ? "en" : "es"));
-if (LANG==="es") setLang("es"); else document.documentElement.lang="en";
-
-// ---------- field reports (db + assets + user) and comments ----------
+// ---------- field reports (db + assets + user), shared to-triage intake, and comments ----------
 var inboxDocs=[], inboxUnsub=null, inboxDraft=null, sampleFn=null, callDraft=null, sessDocs=[], sessUnsub=null, isOwnerFlag=false, db=null, assets=null, user=null, comments=null, repUnsub=null, repTimer=null, repKey=null, decUnsub=null, noteUnsub=null, decDocs=[], noteDocs=[], decFilter=decFilter||"agenda", decTimer=null;
-const kindsTag = {"Answer to a decision":"answer","Problem on site":"problem"};
-function headingsOf(md){ const hs=[...md.matchAll(/^##\s+(.+)$/gm)].map(m=>m[1].replace(/[✅❓*`]/g,"").trim()); return hs.length?hs:["General"]; }
+var localRoomReportsByProject = {};
+var localAllReportDocs = [];
+var localInboxDocs = [];
+var localSessionDocs = [];
+var localDecisionNoteDocs = [];
+var pendingDriveSubmissions = {};
+var attemptCountBySubId = {};
+var U4_TRIAGE_FOLDER_ID = "17YOsBteJtPSV6KiByPPvtVkiu-dr11kA";
+var U4_PUBLISHED_ORIGIN = "https://tisa-a11y.github.io";
+var U4_PUBLISHED_PAGE_PATH = "/unit4-wiki-pages/";
+var U4_SESSION_ID = "u4-wiki-sess-" + Math.random().toString(36).slice(2, 10);
+
+var DEFAULT_OPEN_DECISIONS = [
+  {
+    id: "d01",
+    project: "kitchen",
+    priority: 1,
+    order: 1,
+    status: "open",
+    question: "Kitchen outlet/switch/light proposal (sheet K-S6) and upper cabinets",
+    why: "Needed before electrician marks boxes and rough-in.",
+    options: "Approve K-S6 device layout as drawn or mark changes; confirm whether upper cabinets are included.",
+    johnInput: "Confirm counter outlet clearances beside pie-safe recess."
+  },
+  {
+    id: "d02",
+    project: "living-dining",
+    priority: 1,
+    order: 2,
+    status: "open",
+    question: "Living & dining outlet height rule",
+    why: "Sets box heights relative to lower picture-frame moulding.",
+    options: "18 in inside lower frames vs 11-1/2 in bedroom method.",
+    johnInput: "Check baseboard and lower frame clearances on D01–D04 and L01–L06."
+  },
+  {
+    id: "d03",
+    project: "bathroom",
+    priority: 2,
+    order: 3,
+    status: "open",
+    question: "Bathroom 10-in rough-in toilet, sink faucet, and tub drain models",
+    why: "Confirms rough-in heights and Champagne Bronze trim matches.",
+    options: "10-in rough-in toilet + Champagne Bronze faucet and drain.",
+    johnInput: "Verify finished wall face to drain center after furring fix."
+  }
+];
+
+function deterministicHashHex(input) {
+  const str = String(input || "");
+  let h1 = 0xdeadbeef ^ str.length;
+  let h2 = 0x41c6ce57 ^ str.length;
+  for (let i = 0; i < str.length; i++) {
+    const ch = str.charCodeAt(i);
+    h1 = Math.imul(h1 ^ ch, 2654435761);
+    h2 = Math.imul(h2 ^ ch, 1597334677);
+  }
+  h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+  h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+  return (h1 >>> 0).toString(16).padStart(8, "0") + (h2 >>> 0).toString(16).padStart(8, "0");
+}
+
+function computeSubmissionId(prefix, parts) {
+  const keyStr = [prefix].concat((parts || []).map(x => String(x ?? "").trim())).join("|");
+  const existing = pendingDriveSubmissions[keyStr];
+  if (existing && existing.submissionId) return existing.submissionId;
+  return prefix + "-" + deterministicHashHex(keyStr);
+}
+
+function detectNoteLanguage(rawText, fallbackUiLang) {
+  const s = String(rawText || "");
+  if (!s.trim()) return fallbackUiLang === "es" ? "es" : "en";
+  if (/[áéíóúñ¿¡]/i.test(s)) return "es";
+  const esMatches = s.match(/\b(el|la|los|las|de|del|en|con|para|por|que|se|un|una|al|pulgadas|pared|muro|baño|cocina|lavandería|puerta|ventana|piso|techo|medida|falta|verificar|instalar|tubería|cable|contacto|caja|estufa|fregadero|inodoro|tina|azulejo|moldura|gabinete|clóset|pasillo|recámara|dormitorio)\b/gi);
+  const enMatches = s.match(/\b(the|and|with|for|from|this|that|wall|floor|ceiling|door|window|kitchen|bathroom|laundry|outlet|pipe|wire|inch|inches|need|needs|check|install|framing|drywall|tile|cabinet|sink|toilet|tub|panel)\b/gi);
+  const esCount = esMatches ? esMatches.length : 0;
+  const enCount = enMatches ? enMatches.length : 0;
+  if (esCount > enCount) return "es";
+  if (enCount > esCount) return "en";
+  return fallbackUiLang === "es" ? "es" : "en";
+}
+
+function mapKindToCanonicalNoteType(kindOrSource, hasAudio, hasMeas) {
+  if (hasAudio) return "voice_memo";
+  const k = String(kindOrSource || "").trim().toLowerCase();
+  if (k === "measurement" || k === "medida" || hasMeas) return "measurement";
+  if (k === "problem on site" || k === "problema en la obra" || k === "issue" || k === "problem") return "issue";
+  if (k === "answer to a decision" || k === "respuesta a una decisión" || k === "question" || k === "decision" || k === "decisionnotes") return "question";
+  if (k === "task" || k === "progress") return "progress";
+  return "general";
+}
+
+function mapPageIdForBackend(projectOrRoom) {
+  const raw = String(projectOrRoom || "").trim().toLowerCase();
+  const allowed = ["home","roadmap","kitchen","bathroom","electrical","laundry","bedroom","living-dining","hallway","paint-floors","hvac","decisions","general"];
+  if (allowed.includes(raw)) return raw;
+  return "general";
+}
+
+function isDriveTriageConfigured() {
+  const ep = (typeof window !== "undefined" && typeof window.U4_INTAKE_HTTP_ENDPOINT === "string")
+    ? window.U4_INTAKE_HTTP_ENDPOINT.trim()
+    : "";
+  const ad = (typeof window !== "undefined") ? window.U4_DRIVE_TO_TRIAGE_ADAPTER : null;
+  return Boolean(ep || typeof ad === "function" || (ad && (typeof ad.submitNote === "function" || typeof ad.submit === "function")));
+}
+
+async function readFileAsAttachmentDescriptor(fileObj, defaultMime) {
+  if (!fileObj) return null;
+  const name = String(fileObj.name || "attachment.bin");
+  const size = typeof fileObj.size === "number" ? fileObj.size : 0;
+  const type = String(fileObj.type || defaultMime || "application/octet-stream");
+  if (typeof fileObj.data === "string" && fileObj.data) {
+    return { name, type, size: size || fileObj.data.length, data: fileObj.data };
+  }
+  if (typeof FileReader !== "undefined") {
+    try {
+      const dataUrl = await new Promise((resolve, reject) => {
+        const fr = new FileReader();
+        fr.onload = () => resolve(String(fr.result || ""));
+        fr.onerror = () => reject(fr.error || new Error("FileReader failed"));
+        fr.readAsDataURL(fileObj);
+      });
+      if (dataUrl) return { name, type, size, data: dataUrl };
+    } catch (e) {}
+  }
+  if (typeof fileObj.arrayBuffer === "function") {
+    try {
+      const buf = await fileObj.arrayBuffer();
+      const bytes = new Uint8Array(buf);
+      let bin = "";
+      for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+      const b64 = typeof btoa === "function" ? btoa(bin) : "";
+      if (b64) return { name, type, size: size || bytes.length, data: "data:" + type + ";base64," + b64 };
+    } catch (e) {}
+  }
+  if (typeof fileObj.text === "function") {
+    try {
+      const txt = await fileObj.text();
+      const b64 = typeof btoa === "function" ? btoa(unescape(encodeURIComponent(txt))) : "";
+      return { name, type, size: size || txt.length, data: "data:" + type + ";base64," + b64 };
+    } catch (e) {}
+  }
+  const fallbackB64 = typeof btoa === "function" ? btoa("synthetic-" + name) : "c3ludGhldGlj";
+  return { name, type, size: size || 12, data: "data:" + type + ";base64," + fallbackB64 };
+}
+
+function buildWorkerNoteBackendEnvelope(opts) {
+  const o = opts || {};
+  const uiLang = (typeof LANG !== "undefined" && LANG === "es") ? "es" : "en";
+  const rawText = String(o.raw ?? o.text ?? o.details ?? "");
+  const effectiveTextForLang = rawText || String(o.topic || "") || String(o.agreed || "") || String(o.summary || "") || String(o.transcript || "");
+  const noteLang = o.language && (o.language === "es" || o.language === "en")
+    ? o.language
+    : detectNoteLanguage(effectiveTextForLang, uiLang);
+  const subId = String(o.submissionId || o.idempotencyKey || o.id || ("u4-note-" + Date.now()));
+  const pageId = mapPageIdForBackend(o.project || o.roomKey || o.page_id || (current && current.group === "Projects" ? current.key : "general"));
+  const hasPhoto = Boolean(o.photo || o.photoLabel || (o.attachment && o.attachment.hasPhoto));
+  const hasAudio = Boolean(o.audio || o.audioLabel);
+  const isMeas = String(o.kind || o.noteType || "").toLowerCase() === "measurement" || Boolean(o.measurement);
+  const canonicalNoteType = mapKindToCanonicalNoteType(o.kind || o.noteType || o.source, hasAudio, isMeas);
+  const observedAt = String(o.observedAt || o.observed_at || new Date().toISOString());
+  const sessionId = String(o.sessionId || o.session_id || U4_SESSION_ID);
+  const commandSource = String(o.commandSource || o.command_source || "ui_action");
+  const measValue = String(o.measurement || (isMeas && rawText ? rawText : "") || "").trim();
+  const datumValue = String(o.datum || o.item || "field").trim();
+  const photoRef = typeof o.photo === "string"
+    ? o.photo
+    : (o.photo && o.photo.name ? o.photo.name : (o.photoLabel || null));
+  const downstreamFlags = {
+    missing_photo: Boolean(isMeas && !hasPhoto),
+    photo_verified: false,
+    governing_route_hold: Boolean(isMeas),
+    downstream_governing_held: true
+  };
+  const measurementObj = isMeas
+    ? {
+        value: measValue || rawText || "measurement",
+        unit: "in",
+        object: String(o.item || pageId || "field"),
+        location: pageId,
+        endpoints: datumValue || "as_stated",
+        surface: "as_stated",
+        method: "field_report",
+        observed_at: observedAt,
+        photo_ref: photoRef || null,
+        governing_statement: null
+      }
+    : null;
+  const fallbackContent = rawText
+    || [o.topic, o.summary, o.agreed, o.open, o.next].filter(Boolean).join("\n")
+    || (photoRef ? ("[photo: " + photoRef + "]") : "")
+    || (o.audioLabel ? ("[audio: " + o.audioLabel + "]") : "")
+    || String(o.item || "field note");
+  const transcriptObj = o.transcript
+    ? (typeof o.transcript === "object"
+        ? o.transcript
+        : { text: String(o.transcript), language: noteLang, source: "worker_dictation", verified_by_worker: true })
+    : null;
+  const audioObj = o.audio
+    ? (typeof o.audio === "object"
+        ? o.audio
+        : { blob_id: String(o.audio), name: String(o.audioLabel || "voice-memo.m4a"), mime_type: "audio/mp4" })
+    : null;
+
+  return {
+    schema: "unit4-worker-note-submission-v1",
+    id: subId,
+    idempotencyKey: subId,
+    submissionId: subId,
+    targetFolderId: U4_TRIAGE_FOLDER_ID,
+    target_folder_id: U4_TRIAGE_FOLDER_ID,
+    targetDriveFolderName: "to-triage",
+    publishedOrigin: U4_PUBLISHED_ORIGIN,
+    publishedPagePath: U4_PUBLISHED_PAGE_PATH,
+    source: String(o.source || "repForm"),
+    audience: "crew",
+    page_id: pageId,
+    project: pageId,
+    roomKey: pageId,
+    item: String(o.item || "General"),
+    kind: String(o.kind || o.noteType || "Note"),
+    noteType: String(o.noteType || o.kind || "Note"),
+    note_type: canonicalNoteType,
+    raw: rawText || fallbackContent,
+    text: rawText,
+    details: String(o.details ?? rawText),
+    title: String(o.title || ""),
+    date: String(o.date || ""),
+    topic: String(o.topic || ""),
+    summary: String(o.summary || ""),
+    agreed: String(o.agreed || ""),
+    open: String(o.open || ""),
+    next: String(o.next || ""),
+    decision: String(o.decision || ""),
+    items: Array.isArray(o.items) ? o.items : null,
+    proposedLocks: Array.isArray(o.proposedLocks) ? o.proposedLocks : null,
+    updates: Array.isArray(o.updates) ? o.updates : null,
+    measurement: isMeas ? measurementObj : (o.measurement || null),
+    datum: datumValue,
+    photo: o.photo || null,
+    photoLabel: o.photoLabel || (o.photo && o.photo.name) || null,
+    photo_ref: photoRef || null,
+    audio: audioObj,
+    audioLabel: o.audioLabel || (o.audio && o.audio.name) || null,
+    transcript: transcriptObj,
+    language: noteLang,
+    uiLanguage: uiLang,
+    sessionId: sessionId,
+    session_id: sessionId,
+    observedAt: observedAt,
+    observed_at: observedAt,
+    commandSource: commandSource,
+    command_source: commandSource,
+    readbackConfirmed: true,
+    readback_confirmed: true,
+    dataTrustLevel: (isMeas && !hasPhoto) ? "provisional_field" : "field_reported",
+    downstream_review_flags: downstreamFlags,
+    downstreamReviewFlags: downstreamFlags,
+    todoistHold: "held_under_2026_11_08_write_hold",
+    capture_worker_note: {
+      action: "capture_worker_note",
+      arguments: {
+        id: subId,
+        note_type: canonicalNoteType,
+        audience: "crew",
+        page_id: pageId,
+        session_id: sessionId,
+        language: noteLang,
+        observed_at: observedAt,
+        raw: rawText || fallbackContent,
+        transcript: transcriptObj,
+        audio: audioObj,
+        measurement: measurementObj,
+        downstream_review_flags: downstreamFlags
+      }
+    },
+    queue_worker_note: {
+      action: "queue_worker_note",
+      arguments: {
+        capture_id: subId,
+        command_source: commandSource === "voice_command" ? "voice_command" : "ui_action",
+        readback_confirmed: true
+      }
+    }
+  };
+}
+
+function normalizeDriveTriageReceipt(resp, fallbackSubId) {
+  if (!resp || typeof resp !== "object") {
+    return { ok: false, persistedToDrive: false, localTriageSaved: false, verifiedDriveReceipt: null, localTriageReceipt: null };
+  }
+  if (resp.ok === false || resp.error) {
+    return {
+      ok: false,
+      persistedToDrive: false,
+      localTriageSaved: false,
+      error: resp.error || resp.message || "Drive to-triage intake rejected submission",
+      code: resp.code || "INTAKE_REJECTED",
+      verifiedDriveReceipt: null,
+      localTriageReceipt: null
+    };
+  }
+  const pr = resp.provider_receipt || resp.providerReceipt || null;
+  const vr = resp.verifiedDriveReceipt || resp.driveReceipt || null;
+  const lr = resp.local_triage_receipt || resp.localTriageReceipt || null;
+
+  const fileId = (vr && (vr.fileId || vr.record_id)) || (pr && (pr.record_id || pr.fileId)) || resp.driveFileId || null;
+  const folderId = (vr && (vr.folderId || vr.folder_id)) || (pr && (pr.folder_id || pr.folderId)) || resp.target_folder_id || resp.targetFolderId || U4_TRIAGE_FOLDER_ID;
+  const intakeId = (vr && (vr.intakeId || vr.intake_id)) || (pr && (pr.intake_id || pr.intakeId)) || resp.id || fallbackSubId;
+  const sha256 = (vr && (vr.sha256 || vr.fingerprint)) || (pr && (pr.fingerprint || pr.sha256)) || null;
+  const audioFileId = (vr && (vr.audioFileId || vr.audio_record_id)) || (pr && (pr.audio_record_id || pr.audioFileId)) || null;
+  const readbackVerified = Boolean(
+    (vr && (vr.readbackVerified === true || vr.readback_verified === true)) ||
+    (pr && (pr.readback_verified === true || pr.readbackVerified === true)) ||
+    resp.verified_saved_in_triage === true ||
+    resp.external_state === "saved_in_drive_to_triage"
+  );
+
+  const isRemoteDriveSaved = Boolean(
+    fileId &&
+    folderId === U4_TRIAGE_FOLDER_ID &&
+    (readbackVerified || resp.external_state === "saved_in_drive_to_triage" || resp.verified_saved_in_triage === true)
+  );
+
+  const isLocalSyncedSaved = Boolean(
+    resp.local_triage_saved === true ||
+    resp.localTriageSaved === true ||
+    resp.receipt_stage === "local_triage_staged" ||
+    (lr && (lr.local_readback_verified === true || lr.localReadbackVerified === true || lr.markdown_file))
+  );
+
+  if (isRemoteDriveSaved) {
+    const normalizedVr = {
+      fileId: String(fileId),
+      audioFileId: audioFileId ? String(audioFileId) : null,
+      folderId: U4_TRIAGE_FOLDER_ID,
+      intakeId: String(intakeId || fallbackSubId || ""),
+      sha256: sha256 ? String(sha256) : null,
+      readbackVerified: true
+    };
+    return {
+      ok: true,
+      persistedToDrive: true,
+      localTriageSaved: isLocalSyncedSaved,
+      external_state: "saved_in_drive_to_triage",
+      receipt_stage: resp.receipt_stage || "verified_saved",
+      verified_saved_in_triage: true,
+      verifiedDriveReceipt: normalizedVr,
+      localTriageReceipt: lr || null,
+      provider_receipt: pr || {
+        record_id: normalizedVr.fileId,
+        audio_record_id: normalizedVr.audioFileId,
+        folder_id: U4_TRIAGE_FOLDER_ID,
+        intake_id: normalizedVr.intakeId,
+        fingerprint: normalizedVr.sha256,
+        readback_verified: true
+      },
+      downstream_review_flags: resp.downstream_review_flags || null
+    };
+  }
+
+  if (isLocalSyncedSaved) {
+    const mdFile = (lr && (lr.markdown_file || lr.markdownFile)) || ( fallbackSubId + ".md" );
+    const normalizedLr = Object.assign({
+      markdown_file: mdFile,
+      folder_id: U4_TRIAGE_FOLDER_ID,
+      intake_id: String(intakeId || fallbackSubId || ""),
+      local_readback_verified: true
+    }, lr || {});
+    return {
+      ok: true,
+      persistedToDrive: false,
+      localTriageSaved: true,
+      external_state: resp.external_state || "intake_captured_local_hold",
+      receipt_stage: resp.receipt_stage || "local_triage_staged",
+      sync_status: resp.sync_status || "staged_in_local_synced_to_triage_pending_drive_sync",
+      verified_saved_in_triage: false,
+      verifiedDriveReceipt: null,
+      localTriageReceipt: normalizedLr,
+      provider_receipt: pr || null,
+      downstream_review_flags: resp.downstream_review_flags || null
+    };
+  }
+
+  if (Array.isArray(resp.item_receipts) && resp.item_receipts.length > 0) {
+    const firstNorm = normalizeDriveTriageReceipt(resp.item_receipts[0], fallbackSubId);
+    if (firstNorm.ok) {
+      firstNorm.item_receipts = resp.item_receipts;
+      return firstNorm;
+    }
+  }
+
+  return {
+    ok: false,
+    persistedToDrive: false,
+    localTriageSaved: false,
+    error: "Intake response did not include a verified Drive or local synced to-triage receipt",
+    code: "UNVERIFIED_TRIAGE_RECEIPT",
+    verifiedDriveReceipt: null,
+    localTriageReceipt: null
+  };
+}
+
+function formatTriageSuccessMessage(normReceipt, subId) {
+  const es = (typeof LANG !== "undefined" && LANG === "es");
+  if (normReceipt && normReceipt.persistedToDrive && normReceipt.verifiedDriveReceipt && normReceipt.verifiedDriveReceipt.fileId) {
+    const fid = normReceipt.verifiedDriveReceipt.fileId;
+    return es
+      ? ("Guardado en Google Drive to-triage (fileId verificado: " + fid + " · ID: " + subId + ").")
+      : ("Saved to Google Drive to-triage (Verified fileId: " + fid + " · ID: " + subId + ").");
+  }
+  if (normReceipt && normReceipt.localTriageSaved && normReceipt.localTriageReceipt) {
+    const mf = normReceipt.localTriageReceipt.markdown_file || subId;
+    return es
+      ? ("Guardado en carpeta sincronizada to-triage del Mac mini (" + mf + " · pendiente de sincronización con Drive).")
+      : ("Staged in Mac mini synced to-triage (" + mf + " · pending Drive sync).");
+  }
+  return es ? "Enviado. Aparece abajo." : "Sent. It's listed below.";
+}
+
+function formatTriageBadgeForList(r) {
+  const es = (typeof LANG !== "undefined" && LANG === "es");
+  if (r && r.persistedToDrive && r.verifiedDriveReceipt && r.verifiedDriveReceipt.fileId) {
+    return {
+      text: (es ? "Drive to-triage: " : "Drive to-triage: ") + r.verifiedDriveReceipt.fileId,
+      cls: "tag done"
+    };
+  }
+  if (r && r.localTriageSaved && r.localTriageReceipt) {
+    const mf = r.localTriageReceipt.markdown_file || "to-triage";
+    return {
+      text: (es ? "En cola to-triage (pendiente sync Drive): " : "Staged in to-triage (pending Drive sync): ") + mf,
+      cls: "tag"
+    };
+  }
+  if (r && (r.lifecycleState === "pending" || r.statusKey === "upload_interrupted")) {
+    return {
+      text: es ? "Pendiente de reintento (No enviado)" : "Pending retry (Unsent)",
+      cls: "tag warn"
+    };
+  }
+  return null;
+}
+
+async function dispatchNoteToDriveTriage(opts) {
+  const o = opts || {};
+  const keyStr = o._dedupeKey || [o.source || "note", o.project || "", o.item || "", o.kind || "", o.raw || o.text || "", o.topic || "", o.agreed || ""].join("|");
+  const subId = String(o.submissionId || o.idempotencyKey || computeSubmissionId("u4-" + (o.source || "note"), [keyStr]));
+  const prevPending = pendingDriveSubmissions[keyStr] || pendingDriveSubmissions[subId] || null;
+  const attempts = (attemptCountBySubId[subId] || 0) + 1;
+  attemptCountBySubId[subId] = attempts;
+
+  const envelope = buildWorkerNoteBackendEnvelope(Object.assign({}, o, {
+    submissionId: subId,
+    idempotencyKey: subId,
+    observedAt: (prevPending && prevPending.envelope && prevPending.envelope.observedAt) || o.observedAt || o.observed_at,
+    deliveryAttempts: attempts
+  }));
+
+  const ep = (typeof window !== "undefined" && typeof window.U4_INTAKE_HTTP_ENDPOINT === "string")
+    ? window.U4_INTAKE_HTTP_ENDPOINT.trim()
+    : "";
+  const adapter = (typeof window !== "undefined") ? window.U4_DRIVE_TO_TRIAGE_ADAPTER : null;
+
+  if (!ep && !adapter) {
+    return {
+      ok: true,
+      configured: false,
+      submissionId: subId,
+      attempts: attempts,
+      envelope: envelope,
+      persistedToDrive: false,
+      localTriageSaved: false,
+      verifiedDriveReceipt: null,
+      localTriageReceipt: null
+    };
+  }
+
+  try {
+    let rawResp = null;
+    if (adapter) {
+      if (typeof adapter === "function") {
+        rawResp = await adapter(envelope);
+      } else if (typeof adapter.submitNote === "function") {
+        rawResp = await adapter.submitNote(envelope);
+      } else if (typeof adapter.submit === "function") {
+        rawResp = await adapter.submit(envelope);
+      }
+    } else if (ep && typeof fetch === "function") {
+      const headers = { "Content-Type": "application/json" };
+      if (typeof window !== "undefined" && typeof window.U4_INTAKE_BEARER_TOKEN === "string" && window.U4_INTAKE_BEARER_TOKEN.trim()) {
+        headers["Authorization"] = "Bearer " + window.U4_INTAKE_BEARER_TOKEN.trim();
+      }
+      if (typeof window !== "undefined" && window.U4_INTAKE_AUTH_HEADERS && typeof window.U4_INTAKE_AUTH_HEADERS === "object") {
+        Object.assign(headers, window.U4_INTAKE_AUTH_HEADERS);
+      }
+      const httpResp = await fetch(ep, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(envelope)
+      });
+      if (!httpResp || !httpResp.ok) {
+        const status = httpResp ? httpResp.status : 0;
+        let errBody = null;
+        try { errBody = await httpResp.json(); } catch (e) {}
+        throw new Error((errBody && (errBody.error || errBody.message)) || ("HTTP " + status + " from intake endpoint"));
+      }
+      rawResp = await httpResp.json();
+    }
+
+    const norm = normalizeDriveTriageReceipt(rawResp, subId);
+    if (!norm.ok) {
+      throw new Error(norm.error || "Unverified intake receipt");
+    }
+
+    delete pendingDriveSubmissions[keyStr];
+    return Object.assign({
+      ok: true,
+      configured: true,
+      submissionId: subId,
+      attempts: attempts,
+      envelope: envelope,
+      rawResponse: rawResp
+    }, norm);
+  } catch (err) {
+    const pendingRec = {
+      submissionId: subId,
+      idempotencyKey: subId,
+      lifecycleState: "pending",
+      statusKey: "upload_interrupted",
+      persistedToDrive: false,
+      localTriageSaved: false,
+      deliveryAttempts: attempts,
+      error: String((err && err.message) || err || "Upload interrupted"),
+      envelope: envelope,
+      createdAt: Date.now()
+    };
+    pendingDriveSubmissions[keyStr] = pendingRec;
+    pendingDriveSubmissions[subId] = pendingRec;
+    return {
+      ok: false,
+      configured: true,
+      code: "DRIVE_TRIAGE_UPLOAD_FAILED",
+      submissionId: subId,
+      attempts: attempts,
+      error: pendingRec.error,
+      envelope: envelope,
+      pendingRecord: pendingRec
+    };
+  }
+}
+
+window.buildWorkerNoteBackendEnvelope = buildWorkerNoteBackendEnvelope;
+window.normalizeDriveTriageReceipt = normalizeDriveTriageReceipt;
+window.dispatchNoteToDriveTriage = dispatchNoteToDriveTriage;
+window.pendingDriveSubmissions = pendingDriveSubmissions;
+
+var kindsTag = {"Answer to a decision":"answer","Problem on site":"problem"};
+function headingsOf(md){ const hs=[...String(md||"").matchAll(/^##\s+(.+)$/gm)].map(m=>m[1].replace(/[✅❓*`]/g,"").trim()); return hs.length?hs:["General"]; }
 function fmtTime(ms){ try{ return new Date(ms).toLocaleString([], {month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}); }catch(e){ return ""; } }
+
+function makeDocLike(obj) {
+  return {
+    id: obj.submissionId || obj.id || ("local-" + Date.now()),
+    data: function() { return obj; }
+  };
+}
+
+function getRoomReportDocs(projectKey) {
+  const byProj = localRoomReportsByProject || {};
+  const localArr = (byProj[projectKey] || []).map(makeDocLike);
+  return localArr;
+}
+
 async function drawReports(docs){
   const list=document.getElementById("repList");
-  if (!docs.length){ list.innerHTML='<div class="msg">No reports yet for this project.</div>'; return; }
+  if (!list) return;
+  const combinedDocs = Array.isArray(docs) ? docs.slice() : [];
+  if (repKey && Array.isArray(localRoomReportsByProject[repKey])) {
+    const seenIds = new Set(combinedDocs.map(d => (d && d.data && d.data().submissionId) || d.id).filter(Boolean));
+    localRoomReportsByProject[repKey].forEach(r => {
+      if (!r.submissionId || !seenIds.has(r.submissionId)) {
+        combinedDocs.unshift(makeDocLike(r));
+      }
+    });
+  }
+  if (!combinedDocs.length){ list.innerHTML='<div class="msg">'+(LANG==="es"?"Todavía no hay reportes de este proyecto.":"No reports yet for this project.")+'</div>'; return; }
   let names={};
-  if (user && user.profiles){ try{ const ids=[...new Set(docs.map(d=>d.data().author).filter(Boolean))]; names=await user.profiles(ids); }catch(e){} }
+  if (user && user.profiles){ try{ const ids=[...new Set(combinedDocs.map(d=>d.data().author).filter(Boolean))]; names=await user.profiles(ids); }catch(e){} }
   list.innerHTML="";
-  docs.forEach(d=>{
+  combinedDocs.forEach(d=>{
     const r=d.data()||{}; const div=document.createElement("div"); div.className="rep";
+    if (r.submissionId) div.dataset.submissionId = r.submissionId;
     const meta=document.createElement("div"); meta.className="meta";
     const who=(names[r.author]&&names[r.author].name)||"Someone";
-    [[r.kind||"Note",""],[r.item||"",""],[who+" · "+fmtTime(r.createdAt),""],[r.status==="recorded"?"Recorded in spec":"New", r.status==="recorded"?"done":""]].forEach(([s,c],i)=>{ if(!s)return; const sp=document.createElement("span"); if(i===0||i===3){sp.className="tag"+(c?" "+c:"");} sp.textContent=s; meta.appendChild(sp); });
+    const statusLabel = r.status==="recorded" ? "Recorded in spec" : (r.lifecycleState==="pending" ? "Pending retry" : "New");
+    const statusCls = r.status==="recorded" ? "done" : (r.lifecycleState==="pending" ? "warn" : "");
+    [[r.kind||"Note",""],[r.item||"",""],[who+" · "+fmtTime(r.createdAt),""],[statusLabel, statusCls]].forEach(([s,c],i)=>{ if(!s)return; const sp=document.createElement("span"); if(i===0||i===3){sp.className="tag"+(c?" "+c:"");} sp.textContent=s; meta.appendChild(sp); });
+    const badge = formatTriageBadgeForList(r);
+    if (badge) {
+      const bsp = document.createElement("span");
+      bsp.className = badge.cls;
+      bsp.setAttribute("translate", "no");
+      bsp.textContent = badge.text;
+      meta.appendChild(bsp);
+    }
     div.appendChild(meta);
-    if (r.text){ const tx=document.createElement("div"); tx.className="txt"; tx.textContent=r.text; div.appendChild(tx); }
+    if (r.text){ const tx=document.createElement("div"); tx.className="txt"; tx.setAttribute("translate","no"); tx.textContent=r.text; div.appendChild(tx); }
     if (r.audio && /^[a-f0-9]{32}$/.test(r.audio)){ const au=document.createElement("audio"); au.controls=true; au.preload="none"; au.src="/_blob/"+r.audio; au.style.maxWidth="100%"; div.appendChild(au); }
     if (r.photo && /^[a-f0-9]{32}$/.test(r.photo)){ const im=document.createElement("img"); im.alt="Field photo: "+(r.item||""); im.loading="lazy"; im.src="/_blob/"+r.photo; im.onerror=()=>{ im.replaceWith(Object.assign(document.createElement("div"),{className:"msg",textContent:"Photo not available in this view."})); }; div.appendChild(im); }
     list.appendChild(div);
   });
 }
+
 function wireReports(p){
   const sec=document.getElementById("field");
   const isProject = p.group==="Projects";
   sec.hidden = !isProject;
   if (!isProject) return;
   const sel=document.getElementById("repItem"); sel.innerHTML="";
-  headingsOf((live[p.key]||p).md).concat(["Something else"]).forEach(h=>{ const o=document.createElement("option"); o.textContent=h; sel.appendChild(o); });
+  headingsOf((live[p.key]||p).md).concat(["Something else"]).forEach(h=>{ const o=document.createElement("option"); o.value=h; o.textContent=h; sel.appendChild(o); });
   document.getElementById("cmtBtn").hidden = !comments;
-  document.getElementById("photoWrap").hidden = !assets; document.getElementById("audioWrap").hidden = !assets; document.getElementById("tidyBar").hidden = !sampleFn;
+  document.getElementById("photoWrap").hidden = false;
+  document.getElementById("audioWrap").hidden = false;
+  document.getElementById("tidyBar").hidden = !sampleFn;
   const send=document.getElementById("repSend"), msg=document.getElementById("repMsg");
-  if (!db){ send.disabled=true; msg.className="msg"; msg.textContent="Sign in to claude.ai with access to this wiki to send reports."; document.getElementById("repList").innerHTML=""; return; }
-  send.disabled=false; if (!msg.dataset.keep) msg.textContent="";
-  if (repKey===p.key) return;
-  if (repUnsub) repUnsub();
+  send.disabled=false;
+  if (!msg.dataset.keep) msg.textContent="";
   repKey=p.key;
+  if (!db){
+    drawReports(getRoomReportDocs(p.key));
+    return;
+  }
+  if (repUnsub) repUnsub();
   document.getElementById("repList").innerHTML='<div class="msg">Loading reports…</div>';
   clearTimeout(repTimer);
-  repTimer=setTimeout(()=>{ const l=document.getElementById("repList"); if (l.textContent.includes("Loading")) l.innerHTML='<div class="msg">Reports can\'t be reached yet. They will appear when the connection returns.</div>'; },10000);
+  repTimer=setTimeout(()=>{ const l=document.getElementById("repList"); if (l.textContent.includes("Loading")) drawReports(getRoomReportDocs(p.key)); },10000);
   repUnsub = db.collection("reports").where("project","==",p.key).orderBy("createdAt","desc").limit(60).onSnapshot(snap=>{
     if (!snap.metadata.fromCache) clearTimeout(repTimer);
     drawReports(snap.docs);
-  }, e=>{ clearTimeout(repTimer); document.getElementById("repList").innerHTML='<div class="msg err">Reports are unavailable here ('+(e&&e.code||"error")+').</div>'; });
+  }, e=>{ clearTimeout(repTimer); drawReports(getRoomReportDocs(p.key)); });
 }
+
 document.getElementById("repForm").addEventListener("submit", async ev=>{
   ev.preventDefault();
-  if (!db || !current) return;
+  if (!current) return;
   const p=current, msg=document.getElementById("repMsg"), send=document.getElementById("repSend");
-  const text=document.getElementById("repText").value.trim();
-  const file=document.getElementById("repPhoto").files[0]; const afile=document.getElementById("repAudio").files[0]; let audio=null;
-  if (!text && !file && !document.getElementById("repAudio").files[0]){ msg.className="msg err"; msg.textContent="Add a few words, a photo or a voice memo first."; return; }
-  send.disabled=true; msg.className="msg"; msg.textContent="Sending…";
-  let photo=null;
-  try{
-    if (file && assets){ msg.textContent="Uploading photo…"; const up=await assets.upload(file); photo=up.id; }
-  }catch(e){ send.disabled=false; msg.className="msg err"; msg.textContent = e&&e.code==="too_large" ? "That photo is over 20 MB. Try a smaller one." : e&&e.code==="unsupported_type" ? "That file type isn't supported. Use a JPG or PNG photo." : "The photo didn't upload. Your text is still here — try again."; return; }
-  try{
-    let author=null; try{ author = user && user.id ? await user.id() : null; }catch(e){}
-    if (afile && assets){
-      msg.textContent="Uploading voice memo…";
-      const n=(afile.name||"").toLowerCase();
-      const typ = /\.(m4a|mp4|aac)$/.test(n)||/mp4|m4a|aac/.test(afile.type) ? "video/mp4" : /\.webm$/.test(n)||/webm/.test(afile.type) ? "video/webm" : null;
-      if (!typ){ send.disabled=false; msg.className="msg err"; msg.textContent="That audio format isn't supported. Use an iPhone Voice Memo (.m4a)."; return; }
-      try{ audio=(await assets.upload(afile,{type:typ})).id; }catch(e){ send.disabled=false; msg.className="msg err"; msg.textContent= e&&e.code==="too_large" ? "That memo is over 20 MB (about 20+ minutes). Trim it or split it." : "The voice memo didn't upload. Your text is still here — try again."; return; }
+  const rawText=document.getElementById("repText").value;
+  const text=rawText.trim();
+  const photoInput=document.getElementById("repPhoto"), audioInput=document.getElementById("repAudio");
+  const file=(photoInput && photoInput.files && photoInput.files[0]) || null;
+  const afile=(audioInput && audioInput.files && audioInput.files[0]) || null;
+  if (!text && !file && !afile){
+    msg.className="msg err";
+    msg.textContent=(LANG==="es")?"Primero agrega unas palabras, una foto o una nota de voz.":"Add a few words, a photo or a voice memo first.";
+    return;
+  }
+  const itemVal = document.getElementById("repItem").value || "General";
+  const kindVal = document.getElementById("repKind").value || "Note";
+  if (afile) {
+    const n=(afile.name||"").toLowerCase();
+    const typ = /\.(m4a|mp4|aac|wav|mp3|ogg)$/.test(n)||/mp4|m4a|aac|audio|webm/.test(afile.type||"") ? (afile.type||"audio/mp4") : /\.webm$/.test(n) ? "video/webm" : null;
+    if (!typ){
+      msg.className="msg err";
+      msg.textContent=(LANG==="es")?"Ese formato de audio no funciona. Usa una Nota de Voz del iPhone (.m4a).":"That audio format isn't supported. Use an iPhone Voice Memo (.m4a).";
+      return;
     }
-    await db.collection("reports").add({audio, project:p.key, item:document.getElementById("repItem").value, kind:document.getElementById("repKind").value, text, photo, author, createdAt:Date.now(), status:"new"});
-    document.getElementById("repText").value=""; document.getElementById("repPhoto").value=""; document.getElementById("repAudio").value="";
-    msg.className="msg"; msg.textContent="Sent. It's listed below.";
-  }catch(e){ msg.className="msg err"; msg.textContent = e&&e.code==="permission_denied" ? "Your access to this wiki is view-only, so reports can't be saved. Ask Tisa for contributor access." : "The report didn't save. Your text is still here — try again."; }
+  }
+  send.disabled=true; msg.className="msg"; msg.textContent=(LANG==="es")?"Enviando…":"Sending…";
+
+  let photoAssetId=null, audioAssetId=null;
+  let photoDesc=null, audioDesc=null;
+  try {
+    if (file) {
+      photoDesc = await readFileAsAttachmentDescriptor(file, "image/jpeg");
+      if (assets && typeof assets.upload === "function") {
+        msg.textContent=(LANG==="es")?"Subiendo foto…":"Uploading photo…";
+        const up=await assets.upload(file);
+        photoAssetId=up && up.id ? up.id : null;
+      }
+    }
+    if (afile) {
+      audioDesc = await readFileAsAttachmentDescriptor(afile, "audio/mp4");
+      if (assets && typeof assets.upload === "function") {
+        msg.textContent=(LANG==="es")?"Subiendo nota de voz…":"Uploading voice memo…";
+        const n=(afile.name||"").toLowerCase();
+        const typ = /\.(m4a|mp4|aac)$/.test(n)||/mp4|m4a|aac/.test(afile.type) ? "video/mp4" : "video/webm";
+        const up=await assets.upload(afile,{type:typ});
+        audioAssetId=up && up.id ? up.id : null;
+      }
+    }
+  } catch (e) {
+    send.disabled=false;
+    msg.className="msg err";
+    msg.textContent = e&&e.code==="too_large"
+      ? "That attachment is over 20 MB. Try a smaller one."
+      : "The attachment didn't upload. Your text is still here — try again.";
+    return;
+  }
+
+  const dedupeKey = ["repForm", p.key, itemVal, kindVal, text, file ? file.name : "", afile ? afile.name : ""].join("|");
+  const subId = computeSubmissionId("u4-rep-" + p.key, [itemVal, kindVal, text, file ? file.name : "", afile ? afile.name : ""]);
+
+  const triageRes = await dispatchNoteToDriveTriage({
+    _dedupeKey: dedupeKey,
+    submissionId: subId,
+    source: "repForm",
+    project: p.key,
+    roomKey: p.key,
+    item: itemVal,
+    kind: kindVal,
+    noteType: kindVal,
+    raw: text,
+    text: text,
+    measurement: kindVal === "Measurement" ? text : "",
+    datum: itemVal,
+    photo: photoDesc || photoAssetId,
+    photoLabel: file ? file.name : null,
+    audio: audioDesc || audioAssetId,
+    audioLabel: afile ? afile.name : null,
+    commandSource: "ui_action"
+  });
+
+  if (!triageRes.ok) {
+    const pendingRec = {
+      submissionId: triageRes.submissionId,
+      project: p.key,
+      item: itemVal,
+      kind: kindVal,
+      text: text,
+      photo: photoAssetId,
+      photoLabel: file ? file.name : null,
+      audio: audioAssetId,
+      audioLabel: afile ? afile.name : null,
+      createdAt: Date.now(),
+      status: "new",
+      lifecycleState: "pending",
+      statusKey: "upload_interrupted",
+      persistedToDrive: false,
+      localTriageSaved: false,
+      deliveryAttempts: triageRes.attempts
+    };
+    localRoomReportsByProject[p.key] = [pendingRec].concat((localRoomReportsByProject[p.key] || []).filter(r => r.submissionId !== pendingRec.submissionId));
+    msg.className="msg err";
+    msg.dataset.keep="1";
+    msg.textContent = (LANG==="es")
+      ? ("No se pudo guardar en to-triage (" + triageRes.error + "). Tu nota sigue aquí — intenta otra vez.")
+      : ("Could not save to to-triage (" + triageRes.error + "). Your text is still here — try again.");
+    await drawReports([]);
+    send.disabled=false;
+    return;
+  }
+
+  let author=null;
+  if (user && user.id){ try{ author = await user.id(); }catch(e){} }
+  const reportRecord = {
+    submissionId: triageRes.submissionId,
+    audio: audioAssetId,
+    audioLabel: afile ? afile.name : null,
+    project: p.key,
+    item: itemVal,
+    kind: kindVal,
+    text: text,
+    photo: photoAssetId,
+    photoLabel: file ? file.name : null,
+    author: author,
+    createdAt: Date.now(),
+    status: "new",
+    lifecycleState: triageRes.persistedToDrive ? "saved_to_triage" : (triageRes.localTriageSaved ? "local_triage_staged" : "saved"),
+    persistedToDrive: Boolean(triageRes.persistedToDrive),
+    localTriageSaved: Boolean(triageRes.localTriageSaved),
+    verifiedDriveReceipt: triageRes.verifiedDriveReceipt || null,
+    localTriageReceipt: triageRes.localTriageReceipt || null,
+    provider_receipt: triageRes.provider_receipt || null,
+    downstream_review_flags: (triageRes.envelope && triageRes.envelope.downstream_review_flags) || null,
+    language: (triageRes.envelope && triageRes.envelope.language) || detectNoteLanguage(text, LANG),
+    workerNoteBackendEnvelope: triageRes.envelope
+  };
+
+  if (db) {
+    try {
+      await db.collection("reports").add(reportRecord);
+    } catch (e) {
+      if (!triageRes.configured) {
+        msg.className="msg err";
+        msg.textContent = e&&e.code==="permission_denied"
+          ? "Your access to this wiki is view-only, so reports can't be saved. Ask Tisa for contributor access."
+          : "The report didn't save. Your text is still here — try again.";
+        send.disabled=false;
+        return;
+      }
+    }
+  }
+
+  localRoomReportsByProject[p.key] = [reportRecord].concat((localRoomReportsByProject[p.key] || []).filter(r => r.submissionId !== reportRecord.submissionId));
+  localAllReportDocs = [makeDocLike(reportRecord)].concat(localAllReportDocs.filter(d => d.id !== reportRecord.submissionId));
+  repAllDocs = localAllReportDocs.slice();
+
+  document.getElementById("repText").value="";
+  try { document.getElementById("repPhoto").value=""; } catch(e){}
+  try { document.getElementById("repAudio").value=""; } catch(e){}
+  if (photoInput && photoInput.files && photoInput.files._isMockFileList) photoInput.files = [];
+  if (audioInput && audioInput.files && audioInput.files._isMockFileList) audioInput.files = [];
+
+  msg.className="msg";
+  msg.dataset.keep="1";
+  msg.textContent = triageRes.configured
+    ? formatTriageSuccessMessage(triageRes, triageRes.submissionId)
+    : ((LANG==="es") ? "Enviado. Aparece abajo." : "Sent. It's listed below.");
+  await drawReports([]);
   send.disabled=false;
 });
+
 document.getElementById("tidyBtn").addEventListener("click", async ()=>{
   const ta=document.getElementById("repText"), m=document.getElementById("tidyMsg"), b=document.getElementById("tidyBtn");
   const raw=ta.value.trim();
   if (!sampleFn || raw.length<20){ m.className="msg err"; m.textContent="Paste the voice memo transcript into Details first (Voice Memos → ⋯ → Copy Transcript)."; return; }
   b.disabled=true; m.className="msg"; m.textContent="Claude is tidying it…";
   try{
-    const r=await sampleFn("Rewrite this spoken site note from a renovation (1231 11th Ave Unit 4, project: "+(current?current.label:"")+") as a short, clear field report. Keep every measurement, location and product exactly as said; do not add anything. Plain lines, no headings. If something is unclear, end with 'Unclear:' and list it.\n\nTranscript:\n"+raw.slice(0,20000), {modelTier:"quick"});
+    const r=await sampleFn("Rewrite this spoken site note from a renovation (1231 11th Ave Unit 4, project: "+(current?current.label:"")+") as a short, clear field report. Keep the original language of the note (Spanish stays Spanish; English stays English; do not translate). Keep every measurement, location and product exactly as said; do not add anything. Plain lines, no headings. If something is unclear, end with 'Unclear:' and list it.\n\nTranscript:\n"+raw.slice(0,20000), {modelTier:"quick"});
     if (r && r.text){ ta.value=r.text.trim(); m.textContent="Done — check it, then Send report."; }
   }catch(e){ m.className="msg err"; m.textContent= e&&e.code==="not_granted" ? "Claude access for this page was declined." : e&&e.code==="rate_limited" ? "Usage limit reached for now." : "Couldn't tidy it — press once more, or send it as is."; }
   b.disabled=false;
@@ -1124,10 +1862,8 @@ if (window.claude && claude.use){
   claude.use("db").then(d=>{ db=d; if (d){ wireDecisions(); wireInbox(); } if (current) show(current.key); }).catch(()=>{});
 }
 
-
-
-// ---------- decisions (db) ----------
-const PRI = {1:"Blocking work", 2:"Next up", 3:"Later"};
+// ---------- decisions (db + to-triage intake outside & inside Claude) ----------
+var PRI = {1:"Blocking work", 2:"Next up", 3:"Later"};
 function decAgendaHTML(open){
   const p1=open.filter(d=>d.priority===1).length, p2=open.filter(d=>d.priority===2).length;
   return `<div class="agenda"><div class="k">Session agenda · about 60 minutes</div><ol>
@@ -1143,22 +1879,26 @@ function renderDecisions(){
   doc.querySelectorAll("textarea[id],input[type=text][id]").forEach(el=>{ if(el.value) keep[el.id]=el.value; });
   if (document.activeElement && doc.contains(document.activeElement)) focusId=document.activeElement.id;
   queueMicrotask(()=>{ Object.entries(keep).forEach(([id,v])=>{ const el=document.getElementById(id); if(el) el.value=v; }); if(focusId){ const el=document.getElementById(focusId); if(el) el.focus(); } });
-  if (!db){ doc.innerHTML='<h1>Project Planning</h1><p>Sign in to claude.ai with access to this wiki to see decisions, questions, session notes and field reports.</p>'; return; }
-  const all=decDocs.map(d=>Object.assign({id:d.id}, d.data()||{}));
+  const decArr = Array.isArray(decDocs) ? decDocs : [];
+  const defDecs = Array.isArray(DEFAULT_OPEN_DECISIONS) ? DEFAULT_OPEN_DECISIONS : [];
+  const sourceDecs = decArr.length ? decArr.map(d=>Object.assign({id:d.id}, d.data()||{})) : defDecs.map(d=>Object.assign({}, d));
+  const all = sourceDecs;
   const open=all.filter(d=>d.status!=="locked").sort((a,b)=>(a.priority||9)-(b.priority||9)||(a.order||0)-(b.order||0));
   const locked=all.filter(d=>d.status==="locked").sort((a,b)=>(b.decidedAt||0)-(a.decidedAt||0));
-  const show = decFilter==="locked" ? locked : decFilter==="all" ? open.concat(locked) : open.filter(d=>d.priority<=2);
+  const showList = decFilter==="locked" ? locked : decFilter==="all" ? open.concat(locked) : open.filter(d=>d.priority<=2);
   const owner = isOwnerFlag;
+  const combinedSessCount = (Array.isArray(sessDocs) ? sessDocs.length : 0) || (Array.isArray(localSessionDocs) ? localSessionDocs.length : 0);
+  const combinedRepCount = (Array.isArray(repAllDocs) ? repAllDocs.length : 0) || (Array.isArray(localAllReportDocs) ? localAllReportDocs.length : 0);
   let h='<h1>Project Planning</h1><p>Everything still being worked out lives here: decisions to make, questions, discussions and session notes, and field reports from site. Only Tisa locks decisions.</p>';
-  h+=`<div class="dtabs" role="group" aria-label="Filter"><button data-f="agenda" aria-pressed="${decFilter==="agenda"}">Next session (${open.filter(d=>d.priority<=2).length})</button><button data-f="all" aria-pressed="${decFilter==="all"}">All (${all.length})</button><button data-f="locked" aria-pressed="${decFilter==="locked"}">Locked (${locked.length})</button><button data-f="call" aria-pressed="${decFilter==="call"}">Process a call</button><button data-f="notes" aria-pressed="${decFilter==="notes"}">Session notes (${sessDocs.length})</button><button data-f="reports" aria-pressed="${decFilter==="reports"}">Field reports (${repAllDocs.length})</button></div>`;
+  h+=`<div class="dtabs" role="group" aria-label="Filter"><button data-f="agenda" aria-pressed="${decFilter==="agenda"}">Next session (${open.filter(d=>d.priority<=2).length})</button><button data-f="all" aria-pressed="${decFilter==="all"}">All (${all.length})</button><button data-f="locked" aria-pressed="${decFilter==="locked"}">Locked (${locked.length})</button><button data-f="call" aria-pressed="${decFilter==="call"}">Process a call</button><button data-f="notes" aria-pressed="${decFilter==="notes"}">Session notes (${combinedSessCount})</button><button data-f="reports" aria-pressed="${decFilter==="reports"}">Field reports (${combinedRepCount})</button></div>`;
   if (decFilter==="call"){ doc.innerHTML=h; renderCall(doc, open); doc.querySelectorAll(".dtabs button").forEach(b=>b.onclick=()=>{ location.hash = b.dataset.f==="agenda" ? "decisions" : "decisions:"+b.dataset.f; }); return; }
   if (decFilter==="reports"){ renderAllReports(doc, h); doc.querySelectorAll(".dtabs button").forEach(b=>b.onclick=()=>{ location.hash = b.dataset.f==="agenda" ? "decisions" : "decisions:"+b.dataset.f; }); return; }
   if (decFilter==="notes"){ doc.innerHTML=h; renderSessionNotes(doc); doc.querySelectorAll(".dtabs button").forEach(b=>b.onclick=()=>{ location.hash = b.dataset.f==="agenda" ? "decisions" : "decisions:"+b.dataset.f; }); return; }
   if (decFilter==="agenda") h+=decAgendaHTML(open);
-  if (!all.length) h+='<p class="msg">Loading decisions…</p>';
   doc.innerHTML=h;
-  const notesBy={}; noteDocs.forEach(n=>{ const r=n.data()||{}; (notesBy[r.decision]=notesBy[r.decision]||[]).push(r); });
-  show.forEach(d=>{
+  const notesBy={};
+  (Array.isArray(noteDocs) ? noteDocs : []).concat(Array.isArray(localDecisionNoteDocs) ? localDecisionNoteDocs : []).forEach(n=>{ const r=(n && typeof n.data==="function") ? (n.data()||{}) : (n||{}); (notesBy[r.decision]=notesBy[r.decision]||[]).push(r); });
+  showList.forEach(d=>{
     const c=document.createElement("div"); c.className="dec"+(d.status==="locked"?" locked":d.priority===1?" p1":"");
     const page=PAGES.find(x=>x.key===d.project);
     c.innerHTML=`<div class="meta"><span>${d.status==="locked"?"LOCKED":PRI[d.priority]||""}</span>${page?`<a href="#${page.key}">${page.label}</a>`:""}<span>${d.id.toUpperCase()}</span></div>`;
@@ -1166,15 +1906,72 @@ function renderDecisions(){
     [["Why it matters",d.why],["Options on the table",d.options],["What John can bring",d.johnInput]].forEach(([k,v])=>{ if(!v)return; const w=document.createElement("div"); const kk=document.createElement("div"); kk.className="k"; kk.textContent=k; const vv=document.createElement("div"); vv.textContent=v; w.append(kk,vv); c.appendChild(w); });
     if (d.status==="locked"){ const o=document.createElement("div"); o.className="out"; o.textContent="Decision: "+(d.outcome||""); c.appendChild(o); }
     const ns=(notesBy[d.id]||[]).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
-    if (ns.length){ const nw=document.createElement("div"); nw.className="notes"; ns.forEach(n=>{ const e=document.createElement("div"); e.className="note"; const b=document.createElement("b"); b.textContent=fmtTime(n.createdAt); e.append(b, document.createTextNode(n.text||"")); nw.appendChild(e); }); c.appendChild(nw); }
-    // add note
+    if (ns.length){ const nw=document.createElement("div"); nw.className="notes"; ns.forEach(n=>{ const e=document.createElement("div"); e.className="note"; e.setAttribute("translate","no"); const b=document.createElement("b"); b.textContent=fmtTime(n.createdAt); e.append(b, document.createTextNode(n.text||"")); nw.appendChild(e); }); c.appendChild(nw); }
     const ta=document.createElement("textarea"); ta.id="note-"+d.id; ta.maxLength=1500; ta.placeholder="Add a note, a site fact or a question"; ta.setAttribute("aria-label","Note for "+d.id);
     const bar=document.createElement("div"); bar.className="cbar";
     const add=document.createElement("button"); add.className="btn ghost"; add.type="button"; add.textContent="Add note";
     const m=document.createElement("span"); m.className="msg";
-    add.onclick=async()=>{ const v=ta.value.trim(); if(!v) return; add.disabled=true; try{ let a=null; try{a=await user.id();}catch(e){} await db.collection("decisionNotes").add({decision:d.id,text:v,author:a,createdAt:Date.now()}); ta.value=""; m.textContent=""; }catch(e){ m.className="msg err"; m.textContent=e&&e.code==="permission_denied"?"View-only access — ask Tisa for contributor access.":"Didn't save — try again."; } add.disabled=false; };
+    add.onclick=async()=>{
+      const v=ta.value.trim();
+      if(!v) { m.className="msg err"; m.textContent="Write a note first."; return; }
+      add.disabled=true;
+      const dedupeKey = ["decisionNotes", d.id, d.project||"general", v].join("|");
+      const subId = computeSubmissionId("u4-dec-" + d.id, [d.project||"general", v]);
+      const triageRes = await dispatchNoteToDriveTriage({
+        _dedupeKey: dedupeKey,
+        submissionId: subId,
+        source: "decisionNotes",
+        decision: d.id,
+        project: d.project || "general",
+        roomKey: d.project || "general",
+        item: "Decision " + d.id.toUpperCase(),
+        kind: "Answer to a decision",
+        noteType: "Answer to a decision",
+        raw: v,
+        text: v,
+        commandSource: "ui_action"
+      });
+      if (!triageRes.ok) {
+        m.className="msg err";
+        m.textContent="Could not save to to-triage (" + triageRes.error + "). Your note is still here — try again.";
+        add.disabled=false;
+        return;
+      }
+      try{
+        let a=null; try{a=user&&user.id?await user.id():null;}catch(e){}
+        const noteObj = {
+          submissionId: triageRes.submissionId,
+          decision: d.id,
+          project: d.project || "general",
+          text: v,
+          author: a,
+          createdAt: Date.now(),
+          persistedToDrive: Boolean(triageRes.persistedToDrive),
+          localTriageSaved: Boolean(triageRes.localTriageSaved),
+          verifiedDriveReceipt: triageRes.verifiedDriveReceipt || null,
+          localTriageReceipt: triageRes.localTriageReceipt || null
+        };
+        if (db) {
+          await db.collection("decisionNotes").add(noteObj);
+        }
+        localDecisionNoteDocs = localDecisionNoteDocs.filter(x => x.submissionId !== noteObj.submissionId).concat([noteObj]);
+        ta.value="";
+        m.className="msg";
+        m.textContent = triageRes.configured ? formatTriageSuccessMessage(triageRes, triageRes.submissionId) : "Saved.";
+      }catch(e){
+        if (!triageRes.configured) {
+          m.className="msg err";
+          m.textContent=e&&e.code==="permission_denied"?"View-only access — ask Tisa for contributor access.":"Didn't save — try again.";
+        } else {
+          ta.value="";
+          m.className="msg";
+          m.textContent = formatTriageSuccessMessage(triageRes, triageRes.submissionId);
+        }
+      }
+      add.disabled=false;
+    };
     bar.append(add);
-    if (owner){
+    if (owner && db){
       if (d.status!=="locked"){
         const lock=document.createElement("button"); lock.className="btn"; lock.type="button"; lock.textContent="Lock with this note as the decision";
         lock.onclick=async()=>{ const v=ta.value.trim(); if(!v){ m.className="msg err"; m.textContent="Write the decision in the box first."; return; } lock.disabled=true; try{ await db.doc("decisions/"+d.id).update({status:"locked",outcome:v,decidedAt:Date.now(),synced:false}); ta.value=""; }catch(e){ m.className="msg err"; m.textContent="Didn't lock — try again."; lock.disabled=false; } };
@@ -1207,39 +2004,117 @@ function renderSessionNotes(doc){
     <div class="msg" id="sessMsg" role="status"></div>
   </form>`;
   doc.appendChild(box);
-  document.getElementById("sessPhotoWrap").hidden=!assets;
+  document.getElementById("sessPhotoWrap").hidden=false;
+  const list=document.createElement("div"); list.className="reports"; list.id="sessList"; doc.appendChild(list);
+
+  function drawSessionNotesList() {
+    const combined = sessDocs.slice();
+    const seen = new Set(combined.map(d => (d && d.data && d.data().submissionId) || d.id).filter(Boolean));
+    localSessionDocs.forEach(r => {
+      if (!r.submissionId || !seen.has(r.submissionId)) combined.unshift(makeDocLike(r));
+    });
+    if (!combined.length){ list.innerHTML='<div class="msg">No session notes yet.</div>'; return; }
+    list.innerHTML="";
+    combined.forEach(d=>{
+      const r=d.data()||{}; const div=document.createElement("div"); div.className="rep";
+      const meta=document.createElement("div"); meta.className="meta";
+      [r.date||"", r.topic||"", "Someone", r.status==="recorded"?"Recorded":"New"].forEach((s,i)=>{ if(!s)return; const sp=document.createElement("span"); if(i===3) sp.className="tag"+(r.status==="recorded"?" done":""); sp.textContent=s; meta.appendChild(sp); });
+      const badge = formatTriageBadgeForList(r);
+      if (badge){ const bsp=document.createElement("span"); bsp.className=badge.cls; bsp.setAttribute("translate","no"); bsp.textContent=badge.text; meta.appendChild(bsp); }
+      div.appendChild(meta);
+      [["Agreed",r.agreed],["Still open",r.open],["Next steps",r.next]].forEach(([k,v])=>{ if(!v)return; const kk=document.createElement("div"); kk.className="k"; kk.style.cssText="font-size:12px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)"; kk.textContent=k; const vv=document.createElement("div"); vv.className="txt"; vv.setAttribute("translate","no"); vv.textContent=v; div.append(kk,vv); });
+      if (r.photo && /^[a-f0-9]{32}$/.test(r.photo)){ const im=document.createElement("img"); im.alt="Session photo"; im.loading="lazy"; im.src="/_blob/"+r.photo; im.onerror=()=>im.remove(); div.appendChild(im); }
+      list.appendChild(div);
+    });
+  }
+
   document.getElementById("sessForm").addEventListener("submit", async ev=>{
     ev.preventDefault();
     const g=id=>document.getElementById(id).value.trim();
     const msg=document.getElementById("sessMsg"), send=document.getElementById("sessSend");
-    const agreed=g("sessAgreed"), open=g("sessOpen"), next=g("sessNext");
-    if (!agreed && !open && !next){ msg.className="msg err"; msg.textContent="Write at least one section first."; return; }
+    const dateVal=g("sessDate"), topicVal=g("sessTopic"), agreed=g("sessAgreed"), open=g("sessOpen"), next=g("sessNext");
+    if (!topicVal && !agreed && !open && !next){ msg.className="msg err"; msg.textContent="Write at least one section first."; return; }
     send.disabled=true; msg.className="msg"; msg.textContent="Sending…";
-    let photo=null; const f=document.getElementById("sessPhoto").files[0];
-    if (f && assets){ try{ photo=(await assets.upload(f)).id; }catch(e){ send.disabled=false; msg.className="msg err"; msg.textContent="The photo didn't upload. Your notes are still here — try again or send without it."; return; } }
+    let photo=null, photoDesc=null;
+    const sessPhotoEl=document.getElementById("sessPhoto");
+    const f=(sessPhotoEl && sessPhotoEl.files && sessPhotoEl.files[0]) || null;
+    if (f){
+      try{
+        photoDesc = await readFileAsAttachmentDescriptor(f, "image/jpeg");
+        if (assets && typeof assets.upload === "function") photo=(await assets.upload(f)).id;
+      }catch(e){ send.disabled=false; msg.className="msg err"; msg.textContent="The photo didn't upload. Your notes are still here — try again or send without it."; return; }
+    }
+    const combinedRaw = [topicVal, agreed, open, next].filter(Boolean).join("\n");
+    const dedupeKey = ["sessionNotes", dateVal, topicVal, agreed, open, next, f ? f.name : ""].join("|");
+    const subId = computeSubmissionId("u4-sess", [dateVal, topicVal, agreed, open, next, f ? f.name : ""]);
+    const triageRes = await dispatchNoteToDriveTriage({
+      _dedupeKey: dedupeKey,
+      submissionId: subId,
+      source: "sessionNotes",
+      project: "general",
+      roomKey: "general",
+      item: topicVal || "Session notes",
+      kind: "Session brief",
+      noteType: "Session brief",
+      date: dateVal,
+      topic: topicVal,
+      agreed: agreed,
+      open: open,
+      next: next,
+      raw: combinedRaw,
+      text: combinedRaw,
+      photo: photoDesc || photo,
+      photoLabel: f ? f.name : null,
+      commandSource: "ui_action"
+    });
+    if (!triageRes.ok){
+      msg.className="msg err";
+      msg.textContent="Could not save to to-triage (" + triageRes.error + "). The notes are still here — try again.";
+      send.disabled=false;
+      return;
+    }
     try{
-      let a=null; try{ a=await user.id(); }catch(e){}
-      await db.collection("sessionNotes").add({date:g("sessDate"), topic:g("sessTopic"), agreed, open, next, photo, author:a, createdAt:Date.now(), status:"new"});
-      ["sessTopic","sessAgreed","sessOpen","sessNext"].forEach(id=>document.getElementById(id).value=""); document.getElementById("sessPhoto").value="";
-      msg.className="msg"; msg.textContent="Sent. Agents will pick it up.";
-    }catch(e){ msg.className="msg err"; msg.textContent=e&&e.code==="permission_denied"?"Your access is view-only — ask Tisa for contributor access.":"The notes didn't save. They're still here — try again."; }
+      let a=null; try{ a=user&&user.id?await user.id():null; }catch(e){}
+      const sessObj = {
+        submissionId: triageRes.submissionId,
+        date: dateVal,
+        topic: topicVal,
+        agreed: agreed,
+        open: open,
+        next: next,
+        photo: photo,
+        photoLabel: f ? f.name : null,
+        author: a,
+        createdAt: Date.now(),
+        status: "new",
+        persistedToDrive: Boolean(triageRes.persistedToDrive),
+        localTriageSaved: Boolean(triageRes.localTriageSaved),
+        verifiedDriveReceipt: triageRes.verifiedDriveReceipt || null,
+        localTriageReceipt: triageRes.localTriageReceipt || null
+      };
+      if (db) {
+        await db.collection("sessionNotes").add(sessObj);
+      }
+      localSessionDocs = [sessObj].concat(localSessionDocs.filter(x => x.submissionId !== sessObj.submissionId));
+      ["sessTopic","sessAgreed","sessOpen","sessNext"].forEach(id=>document.getElementById(id).value="");
+      try { document.getElementById("sessPhoto").value=""; } catch(e){}
+      msg.className="msg";
+      msg.textContent = triageRes.configured ? formatTriageSuccessMessage(triageRes, triageRes.submissionId) : "Sent. Agents will pick it up.";
+      drawSessionNotesList();
+    }catch(e){
+      if (!triageRes.configured) {
+        msg.className="msg err";
+        msg.textContent=e&&e.code==="permission_denied"?"Your access is view-only — ask Tisa for contributor access.":"The notes didn't save. They're still here — try again.";
+      } else {
+        ["sessTopic","sessAgreed","sessOpen","sessNext"].forEach(id=>document.getElementById(id).value="");
+        msg.className="msg";
+        msg.textContent = formatTriageSuccessMessage(triageRes, triageRes.submissionId);
+        drawSessionNotesList();
+      }
+    }
     send.disabled=false;
   });
-  const list=document.createElement("div"); list.className="reports"; doc.appendChild(list);
-  if (!sessDocs.length){ list.innerHTML='<div class="msg">No session notes yet.</div>'; return; }
-  const ids=[...new Set(sessDocs.map(d=>(d.data()||{}).author).filter(Boolean))];
-  (user&&user.profiles?user.profiles(ids):Promise.resolve({})).catch(()=>({})).then(names=>{
-    sessDocs.forEach(d=>{
-      const r=d.data()||{}; const div=document.createElement("div"); div.className="rep";
-      const meta=document.createElement("div"); meta.className="meta";
-      const who=(names[r.author]&&names[r.author].name)||"Someone";
-      [r.date||"", r.topic||"", who, r.status==="recorded"?"Recorded":"New"].forEach((s,i)=>{ if(!s)return; const sp=document.createElement("span"); if(i===3) sp.className="tag"+(r.status==="recorded"?" done":""); sp.textContent=s; meta.appendChild(sp); });
-      div.appendChild(meta);
-      [["Agreed",r.agreed],["Still open",r.open],["Next steps",r.next]].forEach(([k,v])=>{ if(!v)return; const kk=document.createElement("div"); kk.className="k"; kk.style.cssText="font-size:12px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)"; kk.textContent=k; const vv=document.createElement("div"); vv.className="txt"; vv.textContent=v; div.append(kk,vv); });
-      if (r.photo && /^[a-f0-9]{32}$/.test(r.photo)){ const im=document.createElement("img"); im.alt="Session photo"; im.loading="lazy"; im.src="/_blob/"+r.photo; im.onerror=()=>im.remove(); div.appendChild(im); }
-      list.appendChild(div);
-    });
-  });
+  drawSessionNotesList();
 }
 
 function callPrompt(transcript, open){
@@ -1247,10 +2122,11 @@ function callPrompt(transcript, open){
   return `You turn a call transcript into renovation project notes for 1231 11th Ave Unit 4 (San Francisco). The people on the call are Tisa (owner; only she can lock decisions), John (on-site lead carpenter) and possibly an AI agent.
 
 Rules:
+- Keep the original language of the transcript (Spanish stays Spanish; English stays English; do not translate).
 - Use only what was actually said. Do not invent dimensions, products, dates or prices.
 - A decision counts as locked only if Tisa clearly agreed to it on the call. If it was only discussed, put it under "open".
 - Quote the transcript briefly as evidence for every proposed lock.
-- Use plain English, short lines.
+- Use plain language, short lines.
 
 Open decisions on record (id | project | question):
 ${decs}
@@ -1270,8 +2146,7 @@ ${transcript}
 }
 function renderCall(doc, open){
   const box=document.createElement("div"); box.className="field"; box.style.marginTop="0";
-  if (!sampleFn){ box.innerHTML='<h2>Process a call</h2><p class="hint">Drafting notes from a call needs Claude, which isn\'t available in this view. Open the wiki in claude.ai while signed in.</p>'; doc.appendChild(box); return; }
-  box.innerHTML=`<h2>Process a call</h2><p class="hint">Record the call on iPhone (Phone app call recording, or Voice Memos for in-person), copy the transcript, paste it here. Claude drafts the notes, proposed decision locks and spec updates. You review, then save. Tisa still locks each decision.</p>
+  box.innerHTML=`<h2>Process a call</h2><p class="hint">Record the call on iPhone (Phone app call recording, or Voice Memos for in-person), copy the transcript, paste it here. Review the draft below, then save to to-triage and session notes. Tisa still locks each decision.</p>
   <form id="callForm" novalidate>
     <div class="row2"><label for="callDate">Call date<input type="text" id="callDate" inputmode="numeric" value="${new Date().toISOString().slice(0,10)}"></label>
     <label for="callFile">Or upload a transcript file<input type="file" id="callFile" accept=".txt,.md,.vtt,.srt,text/plain"></label></div>
@@ -1285,11 +2160,31 @@ function renderCall(doc, open){
   document.getElementById("callForm").addEventListener("submit", async ev=>{
     ev.preventDefault();
     const tr=document.getElementById("callText").value.trim(), msg=document.getElementById("callMsg"), go=document.getElementById("callGo");
-    if (tr.length<40){ msg.className="msg err"; msg.textContent="Paste the transcript first."; return; }
+    if (tr.length<10){ msg.className="msg err"; msg.textContent="Paste the transcript first."; return; }
+    const callDateVal = document.getElementById("callDate").value.trim();
+    if (!sampleFn) {
+      callDraft = {
+        date: callDateVal,
+        transcript: tr.slice(0,150000),
+        r: {
+          topic: "Call transcript (" + callDateVal + ")",
+          summary: tr.slice(0, 240),
+          agreed: [tr],
+          open: [],
+          next: [],
+          locks: [],
+          updates: []
+        }
+      };
+      msg.className="msg";
+      msg.textContent="Draft ready — review below, then save.";
+      drawDraft(open);
+      return;
+    }
     go.disabled=true; msg.className="msg"; msg.textContent="Claude is reading the call…";
     try{
       const r=await sampleFn.json(callPrompt(tr.slice(0,180000), open), {modelTier:"default"});
-      callDraft={date:document.getElementById("callDate").value.trim(), transcript:tr.slice(0,150000), r:r||{}};
+      callDraft={date:callDateVal, transcript:tr.slice(0,150000), r:r||{}};
       msg.textContent="Draft ready — review below, then save."; drawDraft(open);
     }catch(e){
       const c=e&&e.code;
@@ -1320,33 +2215,105 @@ function drawDraft(open){
   if(!locks.length) lw.innerHTML='<div class="msg">None — no decision was clearly locked on this call.</div>';
   locks.forEach((l,i)=>{ const row=document.createElement("label"); row.className="note"; row.style.cssText="display:flex;gap:8px;align-items:flex-start;text-transform:none;letter-spacing:0;font-family:var(--body);font-size:14px;color:var(--fg)";
     const cb=document.createElement("input"); cb.type="checkbox"; cb.checked=true; cb.id="lk"+i; cb.dataset.i=i;
-    const s=document.createElement("span"); const d=String(l.decision||"new").toLowerCase(); s.textContent=(ids.has(d)?d.toUpperCase()+": ":"NEW: "+(l.question||"")+" → ")+(l.outcome||"")+(l.quote?`  —  "${l.quote}"`:"");
+    const s=document.createElement("span"); s.setAttribute("translate","no"); const d=String(l.decision||"new").toLowerCase(); s.textContent=(ids.has(d)?d.toUpperCase()+": ":"NEW: "+(l.question||"")+" → ")+(l.outcome||"")+(l.quote?`  —  "${l.quote}"`:"");
     row.append(cb,s); lw.appendChild(row); });
   const ups=Array.isArray(r.updates)?r.updates:[]; const uw=document.getElementById("dUpd");
   if(!ups.length) uw.innerHTML='<div class="msg">None.</div>';
-  ups.forEach(u=>{ const e=document.createElement("div"); e.className="note"; e.textContent=(u.project||"general")+": "+(u.change||""); uw.appendChild(e); });
+  ups.forEach(u=>{ const e=document.createElement("div"); e.className="note"; e.setAttribute("translate","no"); e.textContent=(u.project||"general")+": "+(u.change||""); uw.appendChild(e); });
   document.getElementById("dSave").onclick=async()=>{
     const btn=document.getElementById("dSave"), m=document.getElementById("dMsg"); btn.disabled=true; m.className="msg"; m.textContent="Saving…";
+    const g=id=>document.getElementById(id).value.trim();
+    const chosen=locks.filter((l,i)=>{ const c=document.getElementById("lk"+i); return c&&c.checked; });
+    const topicVal=g("dTopic"), sumVal=g("dSum"), agreedVal=g("dAgreed"), openVal=g("dOpen"), nextVal=g("dNext");
+    const combinedRaw = [topicVal, sumVal, agreedVal, openVal, nextVal].filter(Boolean).join("\n") || callDraft.transcript;
+    const dedupeKey = ["callNotes", callDraft.date, topicVal, sumVal, agreedVal, openVal, nextVal, callDraft.transcript.slice(0,200)].join("|");
+    const subId = computeSubmissionId("u4-call", [callDraft.date, topicVal, sumVal, agreedVal, openVal, nextVal, callDraft.transcript.slice(0,200)]);
+    const triageRes = await dispatchNoteToDriveTriage({
+      _dedupeKey: dedupeKey,
+      submissionId: subId,
+      source: "call",
+      project: "general",
+      roomKey: "general",
+      item: topicVal || "Call notes",
+      kind: "Session brief",
+      noteType: "Session brief",
+      date: callDraft.date,
+      topic: topicVal,
+      summary: sumVal,
+      agreed: agreedVal,
+      open: openVal,
+      next: nextVal,
+      proposedLocks: chosen,
+      updates: ups,
+      transcript: callDraft.transcript,
+      raw: combinedRaw,
+      text: combinedRaw,
+      commandSource: "ui_action"
+    });
+    if (!triageRes.ok){
+      m.className="msg err";
+      m.textContent="Could not save to to-triage (" + triageRes.error + "). Your draft and transcript are still here — try again.";
+      btn.disabled=false;
+      return;
+    }
     try{
-      let a=null; try{a=await user.id();}catch(e){}
-      const g=id=>document.getElementById(id).value.trim();
-      const chosen=locks.filter((l,i)=>{ const c=document.getElementById("lk"+i); return c&&c.checked; });
-      await db.collection("sessionNotes").add({date:callDraft.date, topic:g("dTopic"), summary:g("dSum"), agreed:g("dAgreed"), open:g("dOpen"), next:g("dNext"), proposedLocks:chosen, updates:ups, transcript:callDraft.transcript, source:"call", author:a, createdAt:Date.now(), status:"new"});
-      for (const l of chosen){ const d=String(l.decision||"").toLowerCase(); if(ids.has(d)){ await db.collection("decisionNotes").add({decision:d, text:"Proposed from call "+callDraft.date+": "+(l.outcome||"")+(l.quote?` (said: "${l.quote}")`:""), author:a, createdAt:Date.now(), fromCall:true}); } }
-      callDraft=null; m.textContent="Saved. Proposed locks are now notes on each decision for Tisa to lock; agents will apply the updates.";
-      document.getElementById("callText").value="";
-    }catch(e){ m.className="msg err"; m.textContent=e&&e.code==="permission_denied"?"Your access is view-only — ask Tisa for contributor access.":"Didn't save — try again."; btn.disabled=false; }
+      let a=null; try{a=user&&user.id?await user.id():null;}catch(e){}
+      const callObj = {
+        submissionId: triageRes.submissionId,
+        date: callDraft.date,
+        topic: topicVal,
+        summary: sumVal,
+        agreed: agreedVal,
+        open: openVal,
+        next: nextVal,
+        proposedLocks: chosen,
+        updates: ups,
+        transcript: callDraft.transcript,
+        source: "call",
+        author: a,
+        createdAt: Date.now(),
+        status: "new",
+        persistedToDrive: Boolean(triageRes.persistedToDrive),
+        localTriageSaved: Boolean(triageRes.localTriageSaved),
+        verifiedDriveReceipt: triageRes.verifiedDriveReceipt || null,
+        localTriageReceipt: triageRes.localTriageReceipt || null
+      };
+      if (db) {
+        await db.collection("sessionNotes").add(callObj);
+        for (const l of chosen){ const d=String(l.decision||"").toLowerCase(); if(ids.has(d)){ await db.collection("decisionNotes").add({decision:d, text:"Proposed from call "+callDraft.date+": "+(l.outcome||"")+(l.quote?` (said: "${l.quote}")`:""), author:a, createdAt:Date.now(), fromCall:true}); } }
+      }
+      localSessionDocs = [callObj].concat(localSessionDocs.filter(x => x.submissionId !== callObj.submissionId));
+      callDraft=null;
+      m.className="msg";
+      m.textContent = triageRes.configured
+        ? formatTriageSuccessMessage(triageRes, triageRes.submissionId)
+        : "Saved. Proposed locks are now notes on each decision for Tisa to lock; agents will apply the updates.";
+      const ctEl = document.getElementById("callText");
+      if (ctEl) ctEl.value="";
+    }catch(e){
+      if (!triageRes.configured) {
+        m.className="msg err";
+        m.textContent=e&&e.code==="permission_denied"?"Your access is view-only — ask Tisa for contributor access.":"Didn't save — try again.";
+      } else {
+        callDraft=null;
+        m.className="msg";
+        m.textContent = formatTriageSuccessMessage(triageRes, triageRes.submissionId);
+        const ctEl = document.getElementById("callText");
+        if (ctEl) ctEl.value="";
+      }
+      btn.disabled=false;
+    }
   };
 }
 
-const SECTIONS={kitchen:"Kitchen Remodel",bathroom:"Bathroom Remodel",electrical:"Electrical",laundry:"General/Misc Tasks",bedroom:"General/Misc Tasks","living-dining":"General/Misc Tasks",hallway:"General/Misc Tasks","paint-floors":"General/Misc Tasks",hvac:"On hold",general:"General/Misc Tasks"};
+var SECTIONS={kitchen:"Kitchen Remodel",bathroom:"Bathroom Remodel",electrical:"Electrical",laundry:"General/Misc Tasks",bedroom:"General/Misc Tasks","living-dining":"General/Misc Tasks",hallway:"General/Misc Tasks","paint-floors":"General/Misc Tasks",hvac:"On hold",general:"General/Misc Tasks"};
 function inboxPrompt(raw){
   return `You route spoken or typed notes from a renovation site (1231 11th Ave Unit 4, San Francisco) into items for an agent to file. Tisa is the owner; John is the lead carpenter; Ervin and Joel are crew.
 Split the note into separate items. For each item decide its type:
 - "task": something someone needs to do.
 - "fact": a measurement, condition, delivery or observation (no action).
 - "decision": a choice that needs Tisa.
-Rules: keep every number, product and location exactly as said; invent nothing. Never assign a task to a person; you may name the trade or person in "who" as text only. Give each item a project key from: kitchen, bathroom, electrical, laundry, bedroom, living-dining, hallway, paint-floors, hvac, general. If unsure, use "general" and set "unsure": true.
+Rules: keep the original language of the note (Spanish stays Spanish; English stays English; do not translate); keep every number, product and location exactly as said; invent nothing. Never assign a task to a person; you may name the trade or person in "who" as text only. Give each item a project key from: kitchen, bathroom, electrical, laundry, bedroom, living-dining, hallway, paint-floors, hvac, general. If unsure, use "general" and set "unsure": true.
 Return ONLY JSON: {"items":[{"type":"task|fact|decision","project":"...","title":"short, starts with a verb for tasks","details":"the rest, as said","who":"trade or person mentioned, or empty","urgent":false,"unsure":false}]}
 
 Note:
@@ -1358,7 +2325,6 @@ function renderInbox(){
   const doc=document.getElementById("qpBody"); if(!doc) return;
   const keep={}; doc.querySelectorAll("textarea[id],input[type=text][id],select[id]").forEach(el=>{ if(el.value) keep[el.id]=el.value; });
   queueMicrotask(()=>Object.entries(keep).forEach(([id,v])=>{ const el=document.getElementById(id); if(el) el.value=v; }));
-  if (!db){ doc.innerHTML='<p>Sign in to claude.ai with access to this wiki to send notes.</p>'; return; }
   doc.innerHTML=`<p class="hint" style="margin:0 0 8px">Tasks, measurements, problems, questions — anything. Claude sorts it; an agent checks it and files it. Nothing goes to Todoist without an agent.</p>
   <div><form id="inForm" novalidate>
     <button class="btn" id="inSpeak" type="button" style="font-size:17px;padding:14px 20px">Speak</button>
@@ -1368,17 +2334,50 @@ function renderInbox(){
     <div class="msg" id="inMsg" role="status"></div></form><div id="inDraft"></div></div>
   <h2 style="font-size:16px;margin-top:18px">Recently sent</h2><div class="reports" id="inList"></div>`;
   document.getElementById("inSpeak").onclick=()=>{ document.getElementById("inHint").hidden=false; const ta=document.getElementById("inText"); ta.focus(); };
-  if (!sampleFn) document.getElementById("inSort").hidden=true;
   document.getElementById("inForm").onsubmit=async ev=>{ ev.preventDefault();
     const raw=document.getElementById("inText").value.trim(), m=document.getElementById("inMsg"), b=document.getElementById("inSort");
-    if (raw.length<5){ m.className="msg err"; m.textContent="Say or type something first."; return; }
+    if (raw.length<5){ m.className="msg err"; m.textContent=(LANG==="es")?"Primero di o escribe algo.":"Say or type something first."; return; }
+    const defProj = (current && current.group==="Projects") ? current.key : "general";
+    if (!sampleFn) {
+      inboxDraft = {
+        raw,
+        items: [{
+          type: "task",
+          project: defProj,
+          title: raw.slice(0, 80),
+          details: raw,
+          who: "",
+          urgent: false,
+          unsure: false
+        }]
+      };
+      m.className="msg";
+      m.textContent="Check the items, then Queue them.";
+      drawInboxDraft();
+      return;
+    }
     b.disabled=true; m.className="msg"; m.textContent="Sorting…";
     try{ const ctx=current&&current.group==="Projects"?("(Sent from the "+current.label+" page — use project \""+current.key+"\" unless the note clearly says otherwise.)\n"):"";
     const r=await sampleFn.json(inboxPrompt(ctx+raw.slice(0,8000)),{modelTier:"quick"}); inboxDraft={raw, items:(r&&Array.isArray(r.items))?r.items:[]}; m.textContent=inboxDraft.items.length?"Check the items, then Queue them.":"Nothing to sort — send it as-is instead."; drawInboxDraft(); }
     catch(e){ m.className="msg err"; m.textContent= e&&e.code==="rate_limited"?"Usage limit reached — use Send as-is.":e&&e.code==="not_granted"?"Claude access was declined for this page — use Send as-is.":"Couldn't sort it — press once more, or Send as-is."; }
     b.disabled=false; };
-  document.getElementById("inRaw").onclick=async()=>{ const raw=document.getElementById("inText").value.trim(), m=document.getElementById("inMsg"); if(!raw){ m.className="msg err"; m.textContent="Say or type something first."; return; }
-    try{ await queueItems(raw,[{type:"unsorted",project:"general",title:raw.slice(0,80),details:raw,unsure:true}]); document.getElementById("inText").value=""; m.className="msg"; m.textContent="Queued. An agent will sort it."; }catch(e){ m.className="msg err"; m.textContent="Didn't save — try again."; } };
+  document.getElementById("inRaw").onclick=async()=>{
+    const raw=document.getElementById("inText").value.trim(), m=document.getElementById("inMsg");
+    if(!raw){ m.className="msg err"; m.textContent=(LANG==="es")?"Primero di o escribe algo.":"Say or type something first."; return; }
+    const defProj = (current && current.group==="Projects") ? current.key : "general";
+    try{
+      const qRes = await queueItems(raw,[{type:"unsorted",project:defProj,title:raw.slice(0,80),details:raw,unsure:true}], { source: "inRaw" });
+      document.getElementById("inText").value="";
+      m.className="msg";
+      m.textContent = (qRes && qRes.configured)
+        ? formatTriageSuccessMessage(qRes, qRes.submissionId)
+        : "Queued. An agent will sort it.";
+      drawQueue();
+    }catch(e){
+      m.className="msg err";
+      m.textContent = (e && e.message) ? ("Didn't save (" + e.message + ") — your note is still here, try again.") : "Didn't save — try again.";
+    }
+  };
   if (inboxDraft) drawInboxDraft();
   drawQueue();
 }
@@ -1394,27 +2393,105 @@ function drawInboxDraft(){
     document.getElementById("it-proj-"+i).value=SECTIONS[it.project]?it.project:"general";
     document.getElementById("it-title-"+i).value=it.title||""; document.getElementById("it-det-"+i).value=[it.details||"", it.who?("Mentioned: "+it.who):""].filter(Boolean).join("\n");
   });
-  const bar=document.createElement("div"); bar.className="cbar"; const q=document.createElement("button"); q.className="btn"; q.type="button"; q.textContent="Queue these for an agent"; const m=document.createElement("span"); m.className="msg";
+  const bar=document.createElement("div"); bar.className="cbar"; const q=document.createElement("button"); q.className="btn"; q.type="button"; q.id="inQueueBtn"; q.textContent="Queue these for an agent"; const m=document.createElement("span"); m.className="msg";
   q.onclick=async()=>{ q.disabled=true; const items=inboxDraft.items.map((it,i)=>({on:document.getElementById("it-on-"+i).checked, type:document.getElementById("it-type-"+i).value, project:document.getElementById("it-proj-"+i).value, title:document.getElementById("it-title-"+i).value.trim(), details:document.getElementById("it-det-"+i).value.trim(), unsure:!!it.unsure, urgent:!!it.urgent})).filter(x=>x.on&&(x.title||x.details));
     if(!items.length){ m.className="msg err"; m.textContent="Nothing selected."; q.disabled=false; return; }
-    try{ await queueItems(inboxDraft.raw, items); inboxDraft=null; document.getElementById("inText").value=""; document.getElementById("inDraft").innerHTML=""; document.getElementById("inMsg").className="msg"; document.getElementById("inMsg").textContent="Queued "+items.length+" item(s). An agent will route them."; }
-    catch(e){ m.className="msg err"; m.textContent=e&&e.code==="permission_denied"?"View-only access — ask Tisa for contributor access.":"Didn't save — try again."; q.disabled=false; } };
+    try{
+      const qRes = await queueItems(inboxDraft.raw, items, { source: "inSort" });
+      inboxDraft=null;
+      document.getElementById("inText").value="";
+      document.getElementById("inDraft").innerHTML="";
+      document.getElementById("inMsg").className="msg";
+      document.getElementById("inMsg").textContent = (qRes && qRes.configured)
+        ? formatTriageSuccessMessage(qRes, qRes.submissionId)
+        : ("Queued "+items.length+" item(s). An agent will route them.");
+      drawQueue();
+    }
+    catch(e){
+      m.className="msg err";
+      m.textContent=e&&e.code==="permission_denied"?"View-only access — ask Tisa for contributor access.":("Didn't save (" + ((e&&e.message)||"error") + ") — try again.");
+      const inMsgEl = document.getElementById("inMsg");
+      if (inMsgEl) { inMsgEl.className="msg err"; inMsgEl.textContent=m.textContent; }
+      q.disabled=false;
+    } };
   bar.append(q,m); box.appendChild(bar);
 }
-async function queueItems(raw, items){
-  let a=null; try{ a=await user.id(); }catch(e){}
+async function queueItems(raw, items, opts){
+  const o = opts || {};
+  const src = o.source || "inbox";
+  const firstProj = (items && items[0] && items[0].project) || ((current && current.group==="Projects") ? current.key : "general");
+  const itemsSig = (items || []).map(it => [it.type||"", it.project||"", it.title||"", it.details||""].join(":")).join(";");
+  const dedupeKey = [src, firstProj, raw, itemsSig].join("|");
+  const subId = computeSubmissionId("u4-" + src, [firstProj, raw, itemsSig]);
+
+  const triageRes = await dispatchNoteToDriveTriage({
+    _dedupeKey: dedupeKey,
+    submissionId: subId,
+    source: src,
+    project: firstProj,
+    roomKey: firstProj,
+    item: (items && items[0] && items[0].title) || "Quick note",
+    kind: (items && items[0] && items[0].type) || "unsorted",
+    noteType: (items && items[0] && items[0].type) || "unsorted",
+    raw: raw,
+    text: raw,
+    details: (items && items[0] && items[0].details) || raw,
+    title: (items && items[0] && items[0].title) || raw.slice(0, 80),
+    items: items,
+    commandSource: o.commandSource || "ui_action"
+  });
+
+  if (!triageRes.ok) {
+    throw new Error(triageRes.error || "Drive to-triage dispatch failed");
+  }
+
+  let a=null; try{ a=user&&user.id?await user.id():null; }catch(e){}
   const now=Date.now();
-  for (const it of items){ await db.collection("inbox").add({type:it.type, project:it.project, section:SECTIONS[it.project]||"Needs triage", title:it.title||"", details:it.details||"", unsure:!!it.unsure, urgent:!!it.urgent, raw:raw.slice(0,8000), author:a, createdAt:now, status:"queued"}); }
+  for (let idx = 0; idx < items.length; idx++){
+    const it = items[idx];
+    const itemSubId = items.length === 1 ? triageRes.submissionId : (triageRes.submissionId + "-item-" + idx);
+    const rec = {
+      submissionId: itemSubId,
+      type: it.type,
+      project: it.project,
+      section: SECTIONS[it.project]||"Needs triage",
+      title: it.title||"",
+      details: it.details||"",
+      unsure: !!it.unsure,
+      urgent: !!it.urgent,
+      raw: String(raw || "").slice(0,8000),
+      author: a,
+      createdAt: now,
+      status: "queued",
+      persistedToDrive: Boolean(triageRes.persistedToDrive),
+      localTriageSaved: Boolean(triageRes.localTriageSaved),
+      verifiedDriveReceipt: triageRes.verifiedDriveReceipt || null,
+      localTriageReceipt: triageRes.localTriageReceipt || null,
+      language: (triageRes.envelope && triageRes.envelope.language) || detectNoteLanguage(raw, LANG)
+    };
+    if (db) {
+      await db.collection("inbox").add(rec);
+    }
+    localInboxDocs = [rec].concat(localInboxDocs.filter(x => x.submissionId !== rec.submissionId));
+  }
+  return triageRes;
 }
 function drawQueue(){
   const list=document.getElementById("inList"); if(!list) return;
-  if(!inboxDocs.length){ list.innerHTML='<div class="msg">Nothing in the queue.</div>'; return; }
+  const combined = inboxDocs.slice();
+  const seen = new Set(combined.map(d => (d && d.data && d.data().submissionId) || d.id).filter(Boolean));
+  localInboxDocs.forEach(r => {
+    if (!r.submissionId || !seen.has(r.submissionId)) combined.unshift(makeDocLike(r));
+  });
+  if(!combined.length){ list.innerHTML='<div class="msg">Nothing in the queue.</div>'; return; }
   list.innerHTML="";
-  inboxDocs.forEach(d=>{ const r=d.data()||{}; const div=document.createElement("div"); div.className="rep"; const meta=document.createElement("div"); meta.className="meta";
+  combined.forEach(d=>{ const r=d.data()||{}; const div=document.createElement("div"); div.className="rep"; const meta=document.createElement("div"); meta.className="meta";
     const st={queued:"Waiting for agent",filed:"Filed",held:"Held — see note"}[r.status]||r.status||"";
     [[({task:"Task",fact:"Site fact",decision:"Decision",unsorted:"Unsorted"})[r.type]||r.type,"tag"],[(PAGES.find(p=>p.key===r.project)||{label:r.project||""}).label,""],[fmtTime(r.createdAt),""],[st,"tag"+(r.status==="filed"?" done":"")]].forEach(([s,c])=>{ if(!s) return; const sp=document.createElement("span"); if(c) sp.className=c; sp.textContent=s; meta.appendChild(sp); });
-    div.appendChild(meta); const tt=document.createElement("div"); tt.className="txt"; tt.style.fontWeight="600"; tt.textContent=r.title||""; div.appendChild(tt);
-    if(r.details && r.details!==r.title){ const dt=document.createElement("div"); dt.className="txt"; dt.textContent=r.details; div.appendChild(dt); }
+    const badge = formatTriageBadgeForList(r);
+    if (badge){ const bsp=document.createElement("span"); bsp.className=badge.cls; bsp.setAttribute("translate","no"); bsp.textContent=badge.text; meta.appendChild(bsp); }
+    div.appendChild(meta); const tt=document.createElement("div"); tt.className="txt"; tt.setAttribute("translate","no"); tt.style.fontWeight="600"; tt.textContent=r.title||""; div.appendChild(tt);
+    if(r.details && r.details!==r.title){ const dt=document.createElement("div"); dt.className="txt"; dt.setAttribute("translate","no"); dt.textContent=r.details; div.appendChild(dt); }
     if(r.agentNote){ const an=document.createElement("div"); an.className="msg"; an.textContent="Agent: "+r.agentNote; div.appendChild(an); }
     if(r.todoistUrl && /^https:\/\/(app\.)?todoist\.com\//.test(r.todoistUrl)){ const a=document.createElement("a"); a.href=r.todoistUrl; a.target="_blank"; a.rel="noopener"; a.textContent="Open in Todoist"; div.appendChild(a); }
     list.appendChild(div); });
@@ -1426,13 +2503,12 @@ function wireInbox(){
 function wireDecisions(){
   if (!db || decUnsub) return;
   clearTimeout(decTimer);
-  decTimer=setTimeout(()=>{ if (!decDocs.length && current && current.key==="decisions"){ const d=document.getElementById("doc"); d.innerHTML='<h1>Project Planning</h1><p class="msg">Decisions can\'t be reached yet. They will appear when the connection returns.</p>'; } },10000);
+  decTimer=setTimeout(()=>{ if (!decDocs.length && current && current.key==="decisions"){ renderDecisions(); } },10000);
   decUnsub=db.collection("decisions").onSnapshot(s=>{ if(!s.metadata.fromCache) clearTimeout(decTimer); decDocs=s.docs; if (current && current.key==="decisions") renderDecisions(); }, e=>{ clearTimeout(decTimer); });
   if (!repAllUnsub) repAllUnsub=db.collection("reports").orderBy("createdAt","desc").limit(200).onSnapshot(s=>{ repAllDocs=s.docs; if (current && current.key==="decisions") renderDecisions(); }, ()=>{});
   sessUnsub=db.collection("sessionNotes").orderBy("createdAt","desc").limit(200).onSnapshot(s=>{ sessDocs=s.docs; if (current && current.key==="decisions") renderDecisions(); }, ()=>{});
   noteUnsub=db.collection("decisionNotes").orderBy("createdAt","asc").limit(1000).onSnapshot(s=>{ noteDocs=s.docs; if (current && current.key==="decisions") renderDecisions(); }, ()=>{});
 }
-
 
 var qpOpen=false;
 function openQP(){ qpOpen=true; document.getElementById("qpPanel").hidden=false; document.getElementById("qpBtn").hidden=true; renderInbox(); wireInbox(); const ta=document.getElementById("inText"); if(ta) ta.focus(); }
@@ -1440,6 +2516,141 @@ function closeQP(){ qpOpen=false; document.getElementById("qpPanel").hidden=true
 document.getElementById("qpBtn").addEventListener("click", openQP);
 document.getElementById("qpClose").addEventListener("click", closeQP);
 document.addEventListener("keydown", e=>{ if(e.key==="Escape" && qpOpen) closeQP(); });
+
+// ---------- Minimal Voice Entry Point (#waVoiceMicPill) & 6-Action Client Bridge ----------
+var CREW_ALLOWED_ROOM_KEYS = ["home","roadmap","kitchen","bathroom","electrical","laundry","bedroom","living-dining","hallway","paint-floors","hvac"];
+var CANONICAL_BRIDGE_FUNCTIONS = ["navigate_room","focus_section","open_document","set_language","fill_draft_note","submit_voice_memo"];
+var voiceCompanionState = { active: false, state: "idle", micOpenedOnLoad: false, lastSubmitAt: 0 };
+
+function toggleVoiceCompanionSession(opts) {
+  const o = opts || {};
+  if (o.userTapGesture !== true) {
+    return { ok: false, code: "MIC_REQUIRES_USER_TAP", state: voiceCompanionState.state };
+  }
+  const pill = document.getElementById("waVoiceMicPill");
+  const banner = document.getElementById("waVoiceStatusBanner");
+  if (voiceCompanionState.active) {
+    voiceCompanionState.active = false;
+    voiceCompanionState.state = "idle";
+    if (pill) { pill.setAttribute("aria-pressed", "false"); pill.dataset.voiceState = "idle"; }
+    if (banner) { banner.hidden = true; banner.textContent = "Voice idle"; }
+    return { ok: true, active: false, state: "idle" };
+  }
+  if (typeof window.U4_VOICE_TRANSPORT_CONNECT !== "function") {
+    voiceCompanionState.active = false;
+    voiceCompanionState.state = "idle";
+    if (pill) { pill.setAttribute("aria-pressed", "false"); pill.dataset.voiceState = "idle"; }
+    if (banner) {
+      banner.hidden = false;
+      banner.textContent = (LANG === "es") ? "Voz en vivo no configurada — usa Dictar un reporte." : "Live voice transport not configured — use Speak a report.";
+    }
+    return { ok: false, code: "VOICE_TRANSPORT_NOT_CONFIGURED", active: false, state: "idle" };
+  }
+  voiceCompanionState.active = true;
+  voiceCompanionState.state = "listening";
+  if (pill) { pill.setAttribute("aria-pressed", "true"); pill.dataset.voiceState = "listening"; }
+  if (banner) { banner.hidden = false; banner.textContent = (LANG === "es") ? "Escuchando…" : "Listening…"; }
+  return { ok: true, active: true, state: "listening" };
+}
+
+(function wireMicPill(){
+  const pill = document.getElementById("waVoiceMicPill");
+  if (pill) {
+    pill.setAttribute("aria-pressed", "false");
+    pill.dataset.voiceState = "idle";
+    pill.addEventListener("click", () => toggleVoiceCompanionSession({ userTapGesture: true }));
+  }
+})();
+
+async function executeWikiBridgeAction(actionName, params) {
+  const p = params || {};
+  const map = {
+    navigateRoom: "navigate_room", navigate_room: "navigate_room",
+    focusSection: "focus_section", focus_section: "focus_section",
+    openDocument: "open_document", open_document: "open_document",
+    setLanguage: "set_language", set_language: "set_language",
+    fillDraftNote: "fill_draft_note", fill_draft_note: "fill_draft_note",
+    submitToTriageQueue: "submit_voice_memo", submit_voice_memo: "submit_voice_memo"
+  };
+  const canon = map[String(actionName || "").trim()];
+  if (!canon) return { ok: false, code: "DISALLOWED_BRIDGE_ACTION", action: String(actionName || ""), allowedActions: CANONICAL_BRIDGE_FUNCTIONS.slice() };
+  if (canon === "navigate_room") {
+    const rk = String(p.roomKey || p.key || "").trim();
+    if (!CREW_ALLOWED_ROOM_KEYS.includes(rk)) return { ok: false, code: "DISALLOWED_ROOM_KEY", action: canon, roomKey: rk, validOptions: CREW_ALLOWED_ROOM_KEYS.slice() };
+    show(rk);
+    return { ok: true, action: canon, roomKey: rk };
+  }
+  if (canon === "focus_section") {
+    const vk = String(p.viewKey || p.roomKey || (current && current.key) || "home").trim();
+    if (!CREW_ALLOWED_ROOM_KEYS.includes(vk)) return { ok: false, code: "DISALLOWED_VIEW_KEY", action: canon, viewKey: vk };
+    if (!current || current.key !== vk) show(vk);
+    return { ok: true, action: canon, viewKey: vk, headingText: String(p.headingText || "") };
+  }
+  if (canon === "open_document") {
+    const docId = String(p.docId || p.id || "").trim();
+    if (!DOC_BY_ID[docId]) return { ok: false, code: "DISALLOWED_DOCUMENT_ID", action: canon, docId };
+    show("doc:" + docId);
+    return { ok: true, action: canon, docId };
+  }
+  if (canon === "set_language") {
+    const lang = String(p.lang || p.language || "").trim().toLowerCase();
+    if (lang !== "en" && lang !== "es") return { ok: false, code: "INVALID_LANGUAGE", action: canon, lang };
+    setLang(lang);
+    return { ok: true, action: canon, lang: LANG };
+  }
+  if (canon === "fill_draft_note") {
+    const rk = String(p.roomKey || (current && current.group === "Projects" ? current.key : "kitchen")).trim();
+    show(rk);
+    const rt = document.getElementById("repText");
+    if (rt && p.text !== undefined) rt.value = String(p.text);
+    const rkEl = document.getElementById("repKind");
+    if (rkEl && p.kind) rkEl.value = String(p.kind);
+    return { ok: true, action: canon, roomKey: rk, text: rt ? rt.value : "" };
+  }
+  if (canon === "submit_voice_memo") {
+    if (p.readbackConfirmed !== true && p.confirmedByWorker !== true) {
+      return { ok: false, code: "VOICE_READBACK_CONFIRMATION_REQUIRED", action: canon };
+    }
+    const rk = String(p.roomKey || (current && current.group === "Projects" ? current.key : "kitchen")).trim();
+    const text = String(p.text ?? (document.getElementById("repText") ? document.getElementById("repText").value : "")).trim();
+    const kind = String(p.kind || p.noteType || "Note");
+    const item = String(p.item || "General");
+    const res = await dispatchNoteToDriveTriage({
+      submissionId: p.submissionId || p.idempotencyKey,
+      source: "submit_voice_memo",
+      project: rk,
+      roomKey: rk,
+      item: item,
+      kind: kind,
+      noteType: kind,
+      raw: text,
+      text: text,
+      measurement: p.measurement || "",
+      datum: p.datum || item,
+      audio: p.audio || null,
+      audioLabel: p.audioLabel || null,
+      transcript: p.transcript || text,
+      commandSource: "voice_command"
+    });
+    return Object.assign({ action: canon }, res);
+  }
+}
+
+window.U4_WIKI_CLIENT_BRIDGE = {
+  navigate_room: (p) => executeWikiBridgeAction("navigate_room", p),
+  focus_section: (p) => executeWikiBridgeAction("focus_section", p),
+  open_document: (p) => executeWikiBridgeAction("open_document", p),
+  set_language: (p) => executeWikiBridgeAction("set_language", p),
+  fill_draft_note: (p) => executeWikiBridgeAction("fill_draft_note", p),
+  submit_voice_memo: (p) => executeWikiBridgeAction("submit_voice_memo", p)
+};
+window.executeWikiBridgeAction = executeWikiBridgeAction;
+window.toggleVoiceCompanionSession = toggleVoiceCompanionSession;
+
+show(location.hash.slice(1) || "home");
+i18nObs.observe(document.body, {subtree:true, childList:true, characterData:true});
+document.getElementById("langBtn").addEventListener("click", ()=>setLang(LANG==="es" ? "en" : "es"));
+if (LANG==="es") setLang("es"); else document.documentElement.lang="en";
 
 // live Drive reads light up when available
 if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwatch=null; show(current.key); } }).catch(()=>{});
