@@ -1,4 +1,24 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
+/* v10 Smart Dynamic Co-Pilot + Magicplan Viewer + Direct Tisa Notify + PM & Trade Consultant */
+.u4-mp-wrap{background:var(--paper,#fff);border:1px solid var(--line,#d8d2c7);border-radius:14px;padding:16px;margin:12px 0 20px}
+.u4-mp-canvas{overflow:auto;max-height:70vh;border:1px solid var(--line,#e2ddd3);border-radius:10px;background:#faf9f6;padding:10px;text-align:center}
+.u4-mp-canvas img{max-width:100%;height:auto;transition:transform .18s ease;transform-origin:top center}
+.u4-mp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-top:14px}
+.u4-mp-card{border:1px solid var(--line,#e2ddd3);border-radius:10px;padding:11px 13px;background:var(--bg,#fff)}
+.u4-mp-card h3{margin:0 0 4px;font-size:15px}
+.u4-mp-card .u4-mp-dim{font:700 13px/1.35 var(--mono,monospace);color:var(--accent,#0f5b4f);margin-bottom:4px}
+.u4-mp-card p{margin:4px 0 0;font-size:12.5px;color:var(--muted,#555);line-height:1.4}
+.u4-mp-warn{background:#fffbeb;border:1px solid #f59e0b;color:#78350f;padding:10px 13px;border-radius:10px;font-size:13px;margin:10px 0;line-height:1.45}
+.u4-vd-caps{font-size:12px;line-height:1.45;color:var(--muted,#4b5563);background:rgba(15,91,79,.06);border:1px solid rgba(15,91,79,.18);border-radius:10px;padding:8px 11px;margin:0 14px 8px}
+.u4-vd-caps b{color:var(--fg,#111827)}
+.u4-vd-tisa-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 8px;flex-wrap:wrap}
+.u4-vd-tisa-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;border:1.5px solid #0f5b4f;background:#ecfdf5;color:#065f46;font:600 12.5px/1.2 var(--body);cursor:pointer;transition:background .15s,transform .1s}
+.u4-vd-tisa-btn:hover{background:#d1fae5}
+.u4-vd-tisa-btn:active{transform:scale(.98)}
+.u4-vd-mp-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 11px;border-radius:999px;border:1px solid var(--line,#d1d5db);background:var(--bg,#fff);color:var(--fg,#1f2937);font:600 12px/1.2 var(--body);cursor:pointer}
+.u4-vd-mp-btn:hover{background:#f3f4f6}
+
+</style></head><body>
 <title>Unit 4 Wiki</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Agent brief: shared home of the 1231 11th Ave Unit 4 remodel so Tisa (owner, locks decisions) and John (lead carpenter) work from one current picture; the spine of the Todoist board — every card traces to a wiki spec or decision; agents file every note into specs, Todoist and decisions. Read #agent-brief (= unit-4-renovation/START-HERE.md).">
@@ -3639,6 +3659,8 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   }
 
   function rebuildOrderedProjectsNav() {
+    if (!PAGES.some(function(p){ return p && p.key === 'magicplan'; })) { PAGES.push({ key: 'magicplan', label: 'Magicplan Floor Plan', group: 'Reference', path: 'magicplan', md: '' }); }
+    ES['Magicplan Floor Plan'] = 'Plano Maestro Magicplan';
     if (typeof WebSocket !== "function" || typeof PAGES === "undefined" || !Array.isArray(PAGES)) return;
 
     if (typeof ES === "object" && ES) {
@@ -4124,6 +4146,443 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   }
 
   // =========================================================================
+  
+  // ---- v10 SMART DYNAMIC ENGINE: MAGICPLAN + CALCULATOR + PM/GC SEQUENCING + TRADES & SOURCING + DIRECT TISA NOTIFY ----
+  var U4_MAGICPLAN_MASTER = {
+    planId: "abb2d2c6-aa1c-4a88-a57e-1260847b6410",
+    projectId: "44f4fc6f-8e5f-49f6-bae6-2c3557fb3444",
+    name: "Unit 4 MASTER plan (Oct 2026)",
+    cloudUrl: (typeof LINKS !== "undefined" && LINKS[0] && LINKS[0][2]) || "",
+    svgPath: "./wiki-assets/unit4-magicplan-master-floorplan.svg",
+    ceilingHeightIn: 121.5,
+    ceilingHeightDisplay: '121-1/2" (10\'-1 1/2")',
+    governingNotes: [
+      "GOVERNING SPEC OVERRIDE (Kitchen South Wall): Locked kitchen/SPEC.md (Nov 5) sets South sink wall from SE corner as: Corner 0–36\", Trash 36–51\", Dishwasher 51–75\", 30\" Sink Base 75–105\" (centerline CL 90\"). Any older floor-plan callout showing sink at 51–81\" / CL 66\" is superseded.",
+      "GOVERNING SPEC OVERRIDE (Bathroom): Magicplan MASTER bathroom size is 72-1/8\" × 82-1/8\" (41.14 sq ft). Older 81\" × 74\" figures are wrong.",
+      "PRE-DRYWALL CLOSE-IN GATE (Tisa PM Rule): Photograph EVERY open wall with a tape measure in frame before covering — those photos are the as-builts. Nothing closes in until framing/blocking, rough MEP, nail plates, firestop, and hold items are done, deferred with a capped & labeled leg, or explicitly waived by Tisa.",
+      "OPEN DECISIONS NOT YET LOCKED IN WIKI: Chair-rail vs Option A (no-rail) molding layout across Bedroom / Living & Dining / Hallway / D04 is still OPEN (comparison only — do NOT cut or install). Paint colors/sheens, Floor Treatment selections, and several HVAC/crossover details are not finalized in the wiki yet — always offer: 'Want me to let Tisa know directly?'"
+    ],
+    rooms: {
+      "kitchen": {
+        title: "Kitchen",
+        esTitle: "Cocina",
+        dimensions: '147" × 126" (East wall 126-1/4", North 115-1/2", Range wall 66-1/4", Jog 31-1/2", West low 59-3/4")',
+        floorSqFt: 114.08,
+        ceilingIn: 121.5,
+        wallsSummary: 'South sink wall 147" (Corner 0–36", Trash 36–51", DW 51–75", Sink 75–105" CL 90" per locked SPEC.md); East wall 126-1/4" (Corner 0–36", Drawers 36–60", Fridge zone 60–88" w/ low recessed icemaker box); West range wall 66-1/4" (18" base, 30" range, 18" base); D04 former doorway infill shared with Dining.',
+        openingsAndFixtures: ['36" corner lazy Susan (C1)', '15" trash pullout (36–51")', '24" dishwasher (51–75")', '30" sink base Centered at CL 90" (75–105") in front of window', '4"x4" electrical boxes w/ 1" mud rings in full-height tile zones (1/2" rings untiled)', 'Pie safe recessed shelves']
+      },
+      "bathroom": {
+        title: "Bathroom",
+        esTitle: "Baño",
+        dimensions: '72-1/8" × 82-1/8" (supersedes wrong 81" × 74")',
+        floorSqFt: 41.14,
+        ceilingIn: 121.5,
+        wallsSummary: '72-1/8" × 82-1/8", ceiling 121-1/2". Viewing from door: pedestal sink on left, toilet on right, alcove tub across back wall. Shared wall with Laundry Closet requires gas-box clearance resolution before close-in.',
+        openingsAndFixtures: ['Alcove tub set & framed', 'Pedestal sink (left, solid blocking)', 'Toilet (right, flange ON TOP of finished tile)', 'Exhaust fan ducted outdoors', 'Schluter floor waterproofing (leak test alone is NOT close-in approval)']
+      },
+      "bedroom": {
+        title: "Bedroom",
+        esTitle: "Recámara",
+        dimensions: '155-3/4" × 142-3/16"',
+        floorSqFt: 140.15,
+        ceilingIn: 121.5,
+        grossWallSqFt: 471.80,
+        netPaintableWallSqFt: 321.52,
+        perimeterFt: 46.59,
+        groundPerimeterFt: 36.97,
+        wallsSummary: 'Wall A (north/headboard): 122-1/8" (122.125"); Wall B (east bay window): no frames; Wall C (south, shared with Living Room): 120-5/8" (120.625"); Wall D (west entry & closet niche): closet/niche room 22-5/8" × 82-5/16" with 82-1/8" × 120-3/4" opening.',
+        openingsAndFixtures: [
+          'Hinged entry door: 33-1/4" W × 86-5/16" H (0.844m × 2.193m)',
+          'Closet/niche opening: 82-1/8" W × 120-3/4" H (niche 22-5/8" × 82-5/16")',
+          'Bay Sliding Window: 48" W × 77-1/4" H',
+          'Bay French Window 1: 35-1/2" W × 75-3/16" H',
+          'Bay French Window 2: 34-3/8" W × 72-1/8" H'
+        ]
+      },
+      "living-dining": {
+        title: "Living & Dining",
+        esTitle: "Sala y Comedor",
+        dimensions: 'Living: 179-3/4" span (194.85 sq ft) | Dining: 146-11/16" span (158.65 sq ft) — Combined 353.50 sq ft',
+        floorSqFt: 353.50,
+        ceilingIn: 121.5,
+        wallsSummary: 'Living L01: 124", L02 (pocket-door face): 140", L03 (fireplace wall): 150". Dining D01: 120", D02 (movable buffet wall): 146", D03 (pocket-door face): 140", D04 (electrical subpanel & former kitchen doorway infill wall): 91-1/2" (field tape-verify before trim).',
+        openingsAndFixtures: ['Pocket doors between Living & Dining (verify frame/track stiffness before trim)', 'Fireplace mantel on L03', 'Eaton 125A >=40-space subpanel framed in D04 wall (accessed from Living/Dining side)']
+      },
+      "laundry": {
+        title: "Laundry Closet",
+        esTitle: "Clóset de lavandería",
+        dimensions: 'Murphy bookcase door envelope 36" × 8" × 80" (out-swing left pivot); stacked LG WashTower alcove',
+        floorSqFt: 16.5,
+        ceilingIn: 121.5,
+        wallsSummary: 'Houses stacked LG WashTower (delivery Dec 1), gas valve box on shared bathroom wall (assess blocking & reposition before closing wall), rigid metal dryer vent to lightwell, laundry outlet (check 240V->120V conductor/AFCI/GFCI), and custom Murphy bookcase door.',
+        openingsAndFixtures: ['LG WashTower stacked washer/dryer', 'Custom Murphy bookcase door 36" × 8" × 80" out-swing left pivot', 'Gas valve box & trim (hold before close-in; photograph w/ tape in frame)']
+      },
+      "hallway": {
+        title: "Hallway",
+        esTitle: "Pasillo",
+        dimensions: '81.79 sq ft · key wall runs 53-11/16", 45-9/16", 42-3/8", 39-7/16", 32-9/16"',
+        floorSqFt: 81.79,
+        ceilingIn: 121.5,
+        wallsSummary: 'Connects Entry, Bedroom, Bathroom, Laundry Murphy door, Living & Dining, and Kitchen. Chair-rail vs Option A no-rail molding review applies (page 12 of Option A RevB packet).',
+        openingsAndFixtures: ['Murphy door pivot clearance into Hallway', 'Entry & room doorways']
+      },
+      "electrical": {
+        title: "Electrical",
+        esTitle: "Electricidad",
+        dimensions: 'Whole-unit system · Subpanel in D04 wall (91-1/2" run)',
+        floorSqFt: 0,
+        ceilingIn: 121.5,
+        wallsSummary: 'Feeder: 100A Cu (#3 THWN-2 + #8 EGC in conduit). Subpanel: Eaton 125A bus >=40 spaces on D04 wall (Living/Dining side). Locked rule (Nov 5): own crew wires Unit 4, no permit requested. Route wires AFTER plumbing & ducts; 4"x4" boxes w/ 1" mud rings in full-height tile zones; Bathroom rough-in runs to attic junction box.',
+        openingsAndFixtures: ['Eaton 125A >=40-space subpanel (D04)', 'Kitchen KE01–KE05 working drawings', 'Attic junction box for Bathroom']
+      },
+      "paint-floors": {
+        title: "Wall Treatment (Paint)",
+        esTitle: "Tratamiento de muros (Pintura)",
+        dimensions: 'Whole-unit walls, ceilings (121-1/2" H), & molding datums from Magicplan MASTER',
+        floorSqFt: 745.0,
+        ceilingIn: 121.5,
+        wallsSummary: 'Reference molding datums (Option A comparison, NOT released for cut): existing baseboard top 9-1/2", picture rail underside 103", lower frames 13-1/2"–37", upper frames 41"–99" (4" clear vertical gap). Bedroom net paintable wall area = 321.52 sq ft (gross 471.80 sq ft). Palette direction in notes: Essex Green cabinets, Urbane Bronze, Pale Oak, Chantilly Lace — room sheens/colors still OPEN for Tisa lock.',
+        openingsAndFixtures: ['Retained original baseboard (9-1/2" top) & high picture rail (103" underside)', 'Chair rail vs No-rail Option A OPEN']
+      },
+      "floor-treatment": {
+        title: "Floor Treatment",
+        esTitle: "Tratamiento de pisos",
+        dimensions: 'Magicplan net floor areas: Living 194.85 + Dining 158.65 + Bedroom 140.15 + Kitchen 114.08 + Hall 81.79 + Bath 41.14 = 730.66 sq ft (+ closets ~15–28 sq ft)',
+        floorSqFt: 745.0,
+        ceilingIn: 121.5,
+        wallsSummary: 'Dry-area wood/finish flooring across Living (194.85), Dining (158.65), Bedroom (140.15), Kitchen (114.08), Hallway (81.79) = 689.52 sq ft net (+10% waste = 758.5 sq ft; +15% waste = 793.0 sq ft). Bathroom tile area = 41.14 sq ft net (+15% waste = 47.3 sq ft). Acclimate wood on site before install; selections pending Tisa lock.',
+        openingsAndFixtures: ['Transitions at Bathroom Schluter floor & Laundry threshold']
+      },
+      "hvac": {
+        title: "HVAC",
+        esTitle: "Climatización (HVAC)",
+        dimensions: 'Whole-unit registered Magicplan geometry proof (730.7+ sq ft conditioned)',
+        floorSqFt: 745.0,
+        ceilingIn: 121.5,
+        wallsSummary: 'Old electric wall heater removed in Bathroom; bathroom exhaust fan ducted; dryer rigid metal duct to lightwell; abandoned galvanized exhaust pipes in chases must be decided (remove/cap/reuse) while walls are open.',
+        openingsAndFixtures: ['Bathroom exhaust fan duct complete', 'HVAC routing & heat/smoke/CO compliance check']
+      }
+    }
+  };
+
+  function formatInchFraction(val) {
+    if (!isFinite(val)) return String(val);
+    var neg = val < 0 ? "-" : "";
+    var abs = Math.abs(val);
+    var whole = Math.floor(abs + 1e-9);
+    var sixteenths = Math.round((abs - whole) * 16);
+    if (sixteenths === 16) { whole += 1; sixteenths = 0; }
+    if (sixteenths === 0) return neg + whole + '"';
+    var num = sixteenths, den = 16;
+    while (num % 2 === 0 && den % 2 === 0) { num /= 2; den /= 2; }
+    return neg + (whole > 0 ? (whole + "-" + num + "/" + den) : (num + "/" + den)) + '"';
+  }
+
+  function formatFeetAndInches(totalInches) {
+    if (!isFinite(totalInches)) return String(totalInches);
+    var neg = totalInches < 0 ? "-" : "";
+    var abs = Math.abs(totalInches);
+    var ft = Math.floor((abs + 1e-9) / 12);
+    var remIn = abs - ft * 12;
+    if (Math.round(remIn * 16) >= 192) { ft += 1; remIn = 0; }
+    return neg + ft + "'-" + formatInchFraction(remIn);
+  }
+
+  function parseConstructionNumber(expr) {
+    if (typeof expr === "number") return expr;
+    var s = String(expr || "").trim();
+    if (!s) return NaN;
+    s = s.replace(/(\d+)\s*'\s*-?\s*(\d+\s+\d+\/\d+|\d+-\d+\/\d+|\d+\/\d+|\d+(?:\.\d+)?)\s*"?/g, function(_, ft, inchPart) {
+      return "(" + ft + "*12 + (" + inchPart.replace(/-/g, "+") + "))";
+    });
+    s = s.replace(/(\d+(?:\.\d+)?)\s*'/g, "($1*12)");
+    s = s.replace(/(\d+)\s*[\s-]\s*(\d+)\s*\/\s*(\d+)/g, "($1+$2/$3)");
+    s = s.replace(/"|in\b|inches\b|pulg\b/gi, "");
+    if (!/^[0-9+\-*/().\s]+$/.test(s)) return NaN;
+    try {
+      var fn = new Function("return (" + s + ");");
+      var v = Number(fn());
+      return isFinite(v) ? v : NaN;
+    } catch (e) {
+      return NaN;
+    }
+  }
+
+  function runConstructionCalcEngine(args) {
+    args = args || {};
+    var mode = String(args.mode || "auto").toLowerCase();
+    var expr = String(args.expression || args.expr || args.formula || "").trim();
+
+    if (mode === "spacing" || (args.total_span_in && (args.count || args.panel_count))) {
+      var span = parseConstructionNumber(args.total_span_in || args.span);
+      var cnt = parseInt(args.count || args.panel_count || "2", 10);
+      var itemW = parseConstructionNumber(args.item_width_in || args.panel_width_in || 0) || 0;
+      var margin = args.margin_in !== undefined ? parseConstructionNumber(args.margin_in) : null;
+      if (!isFinite(span) || cnt < 1) return { ok: false, error: "Provide valid total_span_in and count." };
+      var gap, positions = [];
+      if (margin !== null && isFinite(margin)) {
+        var inner = span - 2 * margin - cnt * itemW;
+        gap = cnt > 1 ? inner / (cnt - 1) : 0;
+        for (var i = 0; i < cnt; i++) {
+          var start = margin + i * (itemW + gap);
+          positions.push({ index: i + 1, start: formatInchFraction(start), centerCL: formatInchFraction(start + itemW / 2), end: formatInchFraction(start + itemW) });
+        }
+      } else {
+        gap = (span - cnt * itemW) / (cnt + 1);
+        for (var j = 0; j < cnt; j++) {
+          var st = gap + j * (itemW + gap);
+          positions.push({ index: j + 1, start: formatInchFraction(st), centerCL: formatInchFraction(st + itemW / 2), end: formatInchFraction(st + itemW) });
+        }
+      }
+      return {
+        ok: true,
+        mode: "spacing",
+        totalSpan: formatInchFraction(span) + " (" + formatFeetAndInches(span) + ")",
+        count: cnt,
+        itemWidth: formatInchFraction(itemW),
+        equalGap: formatInchFraction(gap) + " (" + gap.toFixed(3) + '")',
+        layoutPositions: positions,
+        summary: cnt + " items across " + formatInchFraction(span) + " -> equal gap " + formatInchFraction(gap) + (positions.length ? (", CLs: " + positions.map(function(p){ return p.centerCL; }).join(", ")) : "")
+      };
+    }
+
+    if (mode === "area" || (args.length_in && args.width_in) || args.sqft) {
+      var sqft = args.sqft ? Number(args.sqft) : ((parseConstructionNumber(args.length_in) * parseConstructionNumber(args.width_in)) / 144);
+      if (!isFinite(sqft) || sqft <= 0) return { ok: false, error: "Invalid area inputs." };
+      var wastePct = isFinite(Number(args.waste_pct)) ? Number(args.waste_pct) : 10;
+      var withWaste = sqft * (1 + wastePct / 100);
+      return {
+        ok: true,
+        mode: "area_takeoff",
+        netSqFt: Number(sqft.toFixed(2)),
+        with10PctWasteSqFt: Number((sqft * 1.10).toFixed(2)),
+        with15PctWasteSqFt: Number((sqft * 1.15).toFixed(2)),
+        requestedWastePct: wastePct,
+        withRequestedWasteSqFt: Number(withWaste.toFixed(2)),
+        paintGallons1CoatAt350: Number((sqft / 350).toFixed(2)),
+        paintGallons2CoatsAt350: Number(((sqft * 2) / 350).toFixed(2)),
+        summary: sqft.toFixed(2) + " sq ft net -> +" + wastePct + "% waste = " + withWaste.toFixed(2) + " sq ft (paint 2 coats ~ " + ((sqft * 2) / 350).toFixed(1) + " gal)"
+      };
+    }
+
+    if (mode === "electrical" || (args.watts && !expr)) {
+      var watts = Number(args.watts || 0);
+      var volts = Number(args.volts || 120);
+      var amps = watts / volts;
+      var minBreakerContinuous = Math.ceil((amps * 1.25) / 5) * 5;
+      return {
+        ok: true,
+        mode: "electrical_load",
+        watts: watts,
+        volts: volts,
+        amps: Number(amps.toFixed(2)),
+        maxContinuous80PctOn15A: "12.0 A (1,440 W @ 120V)",
+        maxContinuous80PctOn20A: "16.0 A (1,920 W @ 120V)",
+        suggestedMinBreakerContinuous: Math.max(15, minBreakerContinuous) + "A",
+        summary: watts + "W @ " + volts + "V = " + amps.toFixed(2) + " A (continuous 125% = " + (amps * 1.25).toFixed(2) + " A)"
+      };
+    }
+
+    if (mode === "slope" && args.run_ft) {
+      var runFt = Number(args.run_ft);
+      var slopePerFt = Number(args.slope_in_per_ft || 0.25);
+      var dropIn = runFt * slopePerFt;
+      return {
+        ok: true,
+        mode: "plumbing_slope",
+        runFt: runFt,
+        slopeInPerFt: slopePerFt,
+        totalDrop: formatInchFraction(dropIn) + " (" + dropIn.toFixed(3) + '")',
+        summary: runFt + " ft run @ " + formatInchFraction(slopePerFt) + "/ft = " + formatInchFraction(dropIn) + " total fall"
+      };
+    }
+
+    var val = parseConstructionNumber(expr);
+    if (!isFinite(val)) {
+      return { ok: false, error: "Could not parse expression: " + expr };
+    }
+    return {
+      ok: true,
+      mode: "dimension_math",
+      expression: expr,
+      decimalInches: Number(val.toFixed(4)),
+      nearestSixteenthInch: formatInchFraction(val),
+      feetAndInches: formatFeetAndInches(val),
+      millimeters: Number((val * 25.4).toFixed(1)),
+      sqFtIfSquareInches: Number((val / 144).toFixed(2)),
+      summary: expr + " = " + formatInchFraction(val) + " (" + formatFeetAndInches(val) + " · " + val.toFixed(3) + '")'
+    };
+  }
+
+  // Incorporating Tisa's Project Manager (general-contractor), Pre-Close-In, Appliance Crosscheck, Plumbing, Suppliers & Collected/Salvage Sourcing playbooks
+  var U4_TRADE_AND_SOURCING_GUIDE = [
+    {
+      keys: ["sequence", "close-in", "close in", "drywall", "hold", "gate", "schedule", "order of work", "blocking", "photo", "as-built", "project manager", "gc"],
+      trade: "Project Manager Sequence & Pre-Drywall Close-In Gate (Tisa GC Playbook)",
+      codeAndPractice: "Master Trade Order: (1) Framing & solid 2x blocking (specify height bands from subfloor, 1 stud bay past each footprint; cleats/rails carry cabinet loads; stone-sink ledgers get vertical legs to floor; Murphy door & grab-bar backing) -> (2) Plumbing DWV/supply & Gas rough (check appliance inlet/back clearance) -> (3) HVAC & exhaust ducts (rigid metal; bath fan outdoors, dryer to lightwell; decide abandoned galvanized pipes while open) -> (4) Electrical rough (route wires around pipes/ducts; 4\"x4\" boxes w/ 1\" mud rings in full-height tile zones, 1/2\" untiled) -> (5) Firestop & 1/16\" nail plates -> (6) MANDATORY PHOTO GATE: photograph EVERY open wall with a tape measure in frame before close-in! Nothing closes until every item is done, deferred with a capped & labeled leg, or waived by Tisa.",
+      localSourcing: "Long-lead drivers (order at design lock): custom millwork knives, plumbing rough+trim suites, specialty tile/slabs, panels/breakers, appliances, and salvage pieces needing restoration."
+    },
+    {
+      keys: ["plumb", "pipe", "drain", "slope", "vent", "trap", "valve", "rough", "pex", "copper", "cast iron", "no-hub", "toilet", "flange", "pedestal", "tub", "shower", "gas", "washtower", "icemaker", "ferguson", "pace", "dalziel"],
+      trade: "Plumbing & Gas Trade + Appliance Crosscheck + SF Supply Houses",
+      codeAndPractice: "Buy rough valve and trim from the SAME brand & series and verify valve body depth against exact wall stackup (HardieBacker + Kerdi + thinset + slab/tile). CPC 1/4\"/ft min drain slope (<=3\" pipe); atmospheric venting in SF; set toilet flange ON TOP of finished floor; low recessed icemaker box in fridge bay; dishwasher high-loop or air gap; lowering a high gas stub requires square rotary cut, deburr, rigid run, gas-rated sealant, two wrenches, and soapy-water leak test. Resolve Laundry gas box blocking BEFORE closing shared Bathroom wall.",
+      localSourcing: "SF / Bay Area Plumbing Houses: Dalziel Supply (SF Bayshore — fast will-call for rough brass, cast-iron no-hub couplings, ABS, copper, gas boxes), Pace Supply (SF / Oakland), Ferguson Plumbing Supply (SF / Oakland — matched rough+trim showroom lines; get submittal & rough-in sheets before ordering). Tisa approves all purchases."
+    },
+    {
+      keys: ["electr", "wire", "panel", "subpanel", "breaker", "eaton", "gfci", "afci", "conduit", "thwn", "dimmer", "lutron", "ja8", "outlet", "receptacle", "mud ring", "junction", "attic", "platt", "maltby", "city electric"],
+      trade: "Electrical & Lighting Trade + SF Supply Houses",
+      codeAndPractice: "Eaton 125A >=40-space subpanel on D04 wall (30\"W x 36\"D x 78\"H working space, floating neutral unbonded from ground). Full-height tile zones use 4\"x4\" boxes with 1\" mud rings (or adjustable-depth boxes); confirm appliance manual box zones; repurposing 240V->120V in Laundry requires conductor/breaker/AFCI/GFCI verification; resolve any legacy BX/knob-and-tube before cabinet install; check Lutron dimmer + Title 24 JA8 LED compatibility.",
+      localSourcing: "SF / Bay Area Electrical Houses: Platt Electric Supply (SF / South SF / Oakland — Eaton 125A 40-space panels, AFCI/GFCI breakers, #3 THWN-2 Cu, 4x4 boxes & 1\" mud rings), Independent Electric Supply (SF Cesar Chavez), Maltby / City Electric Supply (SF)."
+    },
+    {
+      keys: ["lumber", "molding", "trim", "millwork", "chair rail", "panel", "wainscot", "door", "pocket", "murphy", "pivot", "salvage", "antique", "edwardian", "victorian", "custom", "beronio", "truitt", "macbeath"],
+      trade: "Custom Millwork, Edwardian/Collected Sourcing & Lumber Yards",
+      codeAndPractice: "Tisa's Unit 4 Design Canon: Luxury tier — must feel CUSTOM and COLLECTED, never builder-grade (deep picture-frame molding, Edwardian character, custom 36\"x8\"x80\" Murphy bookcase door). Acclimate wood & flooring in conditioned unit before install; tape-fit molding layouts on Victorian walls first. On salvage/antique finds: measure, photograph, check for lead paint (presume yes on old paint), and design framing around actual piece dimensions. Reminder: Chair-rail vs Option A (no-rail) is OPEN — do NOT cut or install wall frames yet.",
+      localSourcing: "Millwork, Lumber & Salvage: Beronio Lumber (SF Marin St — Victorian mouldings, custom knife runs, framing), Truitt & White (Berkeley — architectural millwork & hardware), MacBeath Hardwood (SF/Berkeley — hardwoods for Murphy bookcase door), Discount Builders Supply (SF); Urban Ore (Berkeley) & Ohmega Salvage + Tisa's vintage/estate channels for collected Edwardian hardware/fixtures."
+    },
+    {
+      keys: ["tile", "slab", "schluter", "kerdi", "ditra", "waterproof", "hardie", "thinset", "mortar", "grout", "floor", "paint", "primer", "sheen", "essex", "chantilly", "benjamin", "sherwin"],
+      trade: "Tile, Waterproofing, Flooring & Paint + SF Supply Houses",
+      codeAndPractice: "Schluter Kerdi requires 2\" min seam overlap in unmodified thinset or Schluter All-Set; shim/plane studs before HardieBacker so large-format tile/slab walls are flat within 1/8\" in 10 ft; stone countertops template ONLY off installed base cabinets. Palette candidates in project notes: Essex Green (cabinets), Urbane Bronze, Pale Oak, Chantilly Lace — final room colors/sheens & flooring await Tisa lock.",
+      localSourcing: "Tile, Stone & Paint: Floor & Decor (Colma / San Leandro — Schluter Kerdi, Ditra, All-Set, HardieBacker), Ceramic Tile West / Best Tile (SF), Da Vinci Marble / Pietra Fina / IRG (slab yards); Lasting Paint / SF Paint Source (Benjamin Moore) & Sherwin-Williams (SF Geary / SoMa / Oakland)."
+    }
+  ];
+
+  function lookupTradeOrCodeEngine(args) {
+    var q = String((args && (args.topic || args.query || args.trade || args.item)) || "").toLowerCase();
+    var matches = U4_TRADE_AND_SOURCING_GUIDE.filter(function(item) {
+      return item.keys.some(function(k){ return q.indexOf(k) !== -1 || k.indexOf(q) !== -1; });
+    });
+    if (!matches.length) matches = U4_TRADE_AND_SOURCING_GUIDE.slice(0, 3);
+    return {
+      ok: true,
+      jurisdiction: "San Francisco / California Codes + Tisa's Unit 4 Project Manager, Trade & Sourcing Playbooks",
+      purchasingRule: "Crew & AI can check submittals, rough-in manuals, and local SF supply houses anytime; Tisa approves all orders/purchases.",
+      matches: matches
+    };
+  }
+
+  function renderMagicplanPageHtml() {
+    var es = currentUiLang() === "es";
+    var mp = U4_MAGICPLAN_MASTER;
+    var cloudHref = mp.cloudUrl || ((typeof LINKS !== "undefined" && LINKS[0] && LINKS[0][2]) || "#magicplan");
+    var order = ["kitchen", "bathroom", "bedroom", "living-dining", "laundry", "hallway", "electrical", "paint-floors", "floor-treatment", "hvac"];
+    var cards = order.map(function(k) {
+      var r = mp.rooms[k];
+      if (!r) return "";
+      return (
+        '<div class="u4-mp-card">' +
+          '<h3><a href="#' + k + '">' + (es ? r.esTitle : r.title) + ' →</a></h3>' +
+          '<div class="u4-mp-dim">' + r.dimensions + (r.floorSqFt ? (' · ' + r.floorSqFt + ' sq ft') : '') + '</div>' +
+          '<p>' + r.wallsSummary + '</p>' +
+        '</div>'
+      );
+    }).join("");
+
+    return (
+      '<div class="viewer" translate="no">' +
+        '<div class="vbar">' +
+          '<a class="btn ghost" href="#home">← ' + (es ? "Inicio" : "Home") + '</a>' +
+          '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
+            '<button type="button" class="btn ghost" onclick="var im=document.getElementById(\'u4MpImg\');if(im){var z=Number(im.dataset.z||1);z=z>=2?1:z+0.5;im.dataset.z=z;im.style.transform=\'scale(\'+z+\')\';}">🔍 ' + (es ? "Zoom plano" : "Zoom plan") + '</button>' +
+            '<a class="btn ghost" href="' + cloudHref + '" target="_blank" rel="noopener">' + (es ? "Abrir en Magicplan Cloud ↗" : "Open Magicplan Cloud ↗") + '</a>' +
+          '</div>' +
+        '</div>' +
+        '<h1>' + (es ? "Plano Maestro Magicplan — Unidad 4" : "Unit 4 Magicplan — Master Floor Plan & Geometry") + '</h1>' +
+        '<div class="u4-mp-warn"><b>' + (es ? "Importante — Reglas vigentes sobre este plano:" : "Important — Governing Spec Notes Over Floor Plan:") + '</b><br>• <b>Kitchen South Wall:</b> ' +
+          (es ? 'Según kitchen/SPEC.md aprobado (5 nov): Esquina 0–36", Basura 36–51", Lavavajillas 51–75", Fregadero 75–105" (centro CL 90"). Ignorar etiqueta antigua 51–81".' : 'Per locked kitchen/SPEC.md (Nov 5): Corner 0–36", Trash 36–51", Dishwasher 51–75", 30" Sink Base 75–105" (CL 90"). Supersedes older 51–81" diagram label.') +
+          '<br>• <b>Bathroom:</b> 72-1/8" × 82-1/8" (41.14 sq ft) · <b>Ceiling height:</b> 121-1/2" (10\'-1 1/2").' +
+        '</div>' +
+        '<div class="u4-mp-wrap">' +
+          '<div class="u4-mp-canvas"><img id="u4MpImg" src="' + mp.svgPath + '" alt="Unit 4 Magicplan Master Floor Plan" data-z="1"></div>' +
+          '<div class="u4-mp-grid">' + cards + '</div>' +
+        '</div>' +
+      '</div>'
+    );
+  }
+
+  function buildAllPlansCatalogForPrompt() {
+    var out = ["COMPLETE UNIT 4 PLAN, PDF & MAGICPLAN DIRECTORY (you can open ANY of these immediately from ANY screen via open_document({doc_id, page}) or examine_magicplan({open_on_screen:true})):"];
+    out.push("- MAGICPLAN WHOLE-UNIT FLOOR PLAN & ROOM GEOMETRY: call examine_magicplan({room: 'all' | '<room>', open_on_screen: true}) -> opens #magicplan SVG floor plan + exact wall/door/window/sq-ft dimensions.");
+    if (typeof DOC_BY_ID === "object" && DOC_BY_ID) {
+      Object.keys(DOC_BY_ID).forEach(function(id) {
+        var entry = DOC_BY_ID[id];
+        if (!entry || !entry.d || entry.d.history) return;
+        var hasPdf = typeof PDF_BLOBS === "object" && PDF_BLOBS && Boolean(PDF_BLOBS[id]);
+        if (hasPdf || /^2026-/.test(id)) {
+          out.push("- [" + (entry.key || "general") + "] doc_id='" + id + "' | title='" + (entry.d.title || id) + "'");
+        }
+      });
+    }
+    return out.join("\n");
+  }
+
+  function searchWikiAndPlansEngine(queryStr) {
+    var raw = String(queryStr || "").trim().toLowerCase();
+    if (!raw) return { ok: false, error: "Empty search query" };
+    var tokens = raw.split(/[^a-z0-9áéíóúñ]+/).filter(function(t){ return t.length >= 2; });
+    var hits = [];
+
+    Object.keys(U4_MAGICPLAN_MASTER.rooms).forEach(function(rk) {
+      var r = U4_MAGICPLAN_MASTER.rooms[rk];
+      var blob = (rk + " " + r.title + " " + r.esTitle + " " + r.dimensions + " " + r.wallsSummary + " " + (r.openingsAndFixtures || []).join(" ")).toLowerCase();
+      var score = tokens.reduce(function(acc, t){ return acc + (blob.indexOf(t) !== -1 ? 2 : 0); }, 0);
+      if (score > 0) hits.push({ type: "magicplan_room", room: rk, score: score, summary: r.title + ": " + r.dimensions + " — " + r.wallsSummary });
+    });
+
+    if (typeof PAGES !== "undefined" && Array.isArray(PAGES)) {
+      PAGES.forEach(function(p) {
+        var md = String(p.md || "");
+        var low = (p.key + " " + p.label + " " + md).toLowerCase();
+        var score = tokens.reduce(function(acc, t){ return acc + (low.indexOf(t) !== -1 ? 2 : 0); }, 0);
+        if (score > 0) {
+          var idx = tokens.length ? low.indexOf(tokens[0]) : 0;
+          var snippet = md.slice(Math.max(0, idx - 120), Math.min(md.length, idx + 380)).replace(/\s+/g, " ");
+          hits.push({ type: "wiki_spec", room: p.key, label: p.label, score: score, excerpt: snippet });
+        }
+      });
+    }
+
+    if (typeof DOC_BY_ID === "object" && DOC_BY_ID) {
+      Object.keys(DOC_BY_ID).forEach(function(id) {
+        var entry = DOC_BY_ID[id];
+        if (!entry || !entry.d || entry.d.history) return;
+        var hay = (id + " " + (entry.d.title || "") + " " + (entry.d.path || "") + " " + (entry.key || "")).toLowerCase();
+        var score = tokens.reduce(function(acc, t){ return acc + (hay.indexOf(t) !== -1 ? 3 : 0); }, 0);
+        if (score > 0) {
+          hits.push({ type: "pdf_plan", docId: id, room: entry.key, title: entry.d.title, score: score });
+        }
+      });
+    }
+
+    hits.sort(function(a, b){ return b.score - a.score; });
+    return {
+      ok: true,
+      query: queryStr,
+      totalMatches: hits.length,
+      topMatches: hits.slice(0, 10),
+      governingNotes: U4_MAGICPLAN_MASTER.governingNotes
+    };
+  }
+
+  function extractAutomaticNuancesFromTurns(turns) {
+    var autoNotes = [];
+    if (!Array.isArray(turns)) return autoNotes;
+    var dimRe = /\b(\d+\s*'\s*-?\s*\d+(?:[\s-]\d+\/\d+)?\s*"?|\d+(?:[\s-]\d+\/\d+|\.\d+)\s*(?:"|in\b|inches|pulg|ft\b|pies|sq\s*ft|mm|cm)|CL\s*\d+)\b/gi;
+    var gapRe = /\b(not in the wiki|isn't in the wiki|not decided|undecided|tisa said|ask tisa|let tisa know|tell tisa|check with tisa|what if|instead of|fur out|out of level|out of plumb|conflict|crossover|plumb|pipe|valve|source|supply|order|salvage|no está en el wiki|falta definir|avisar a tisa|preguntar a tisa|desnivel)\b/i;
+    turns.forEach(function(t) {
+      if (!t || t.role !== "user" || !t.text) return;
+      var dims = t.text.match(dimRe);
+      if (dims && dims.length) {
+        autoNotes.push("Spoken dimension/figure by speaker: " + dims.join(", ") + ' — "' + t.text.slice(0, 180) + '"');
+      } else if (gapRe.test(t.text)) {
+        autoNotes.push("Nuance / trade / open item mentioned: \"" + t.text.slice(0, 200) + "\"");
+      }
+    });
+    return autoNotes.slice(0, 15);
+  }
+
   // PART 2: INLINE AI HELPER NEXT TO HOME + SPEAKER IDENTITY + ABRUPT-END LOGGING + TISA FLAGS
   // =========================================================================
   var liveState = {
@@ -4176,7 +4635,10 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   // Format Voice Session Notes markdown from any live or recovered session snapshot
   function buildVoiceSessionNotesMarkdown(snap, endReason) {
     var flags = Array.isArray(snap.flags) ? snap.flags : [];
+    var insights = Array.isArray(snap.insights) ? snap.insights : [];
+    var calcs = Array.isArray(snap.calculations) ? snap.calculations : [];
     var turns = Array.isArray(snap.turns) ? snap.turns : [];
+    var autoNuances = extractAutomaticNuancesFromTurns(turns);
     var rooms = Array.isArray(snap.roomsVisited) ? snap.roomsVisited : [];
     var docs = Array.isArray(snap.docsOpened) ? snap.docsOpened : [];
     var speaker = String(snap.speakerName || getSavedSenderName() || "Unidentified speaker").trim();
@@ -4203,6 +4665,23 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     if (rooms.length) lines.push("- **Rooms visited:** " + rooms.join(", "));
     if (docs.length) lines.push("- **Documents opened:** " + docs.join(", "));
     lines.push("");
+    if (insights.length > 0 || autoNuances.length > 0) {
+      lines.push("### Captured Field Nuances, Measurements, Trade Notes & Unwritten Wiki Context");
+      insights.forEach(function(ins) {
+        lines.push("- **[" + String(ins.category || "nuance").toUpperCase() + (ins.room ? (" · " + ins.room) : "") + "]** " + ins.summary +
+          (ins.speakerNuance ? (" _(Nuance: " + ins.speakerNuance + ")_") : "") +
+          (ins.unwrittenWikiGap ? (" — **Wiki gap / needs Tisa:** " + ins.unwrittenWikiGap) : ""));
+      });
+      autoNuances.forEach(function(an) {
+        lines.push("- " + an);
+      });
+      lines.push("");
+    }
+    if (calcs.length > 0) {
+      lines.push("### Calculations Performed On the Fly");
+      calcs.forEach(function(c) { lines.push("- `📐` " + c); });
+      lines.push("");
+    }
     lines.push("### Line-by-Line Voice Chat Transcript");
     if (turns.length === 0) {
       lines.push("- _(Session ended before transcript turns completed)_");
@@ -4638,19 +5117,35 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       return cleanQ;
     }
     var low = cleanQ.toLowerCase();
+    var tokens = low.split(/[^a-z0-9]+/).filter(function(t){ return t.length >= 2 && ["pdf", "plan", "the", "show", "open", "drawing"].indexOf(t) === -1; });
+    var wantEs = currentUiLang() === "es" || /es|español|espanol/.test(low);
+    var bestId = null, bestScore = 0;
     if (typeof DOC_BY_ID === "object" && DOC_BY_ID) {
       var keys = Object.keys(DOC_BY_ID);
       for (var i = 0; i < keys.length; i++) {
-        var entry = DOC_BY_ID[keys[i]];
+        var id = keys[i];
+        var entry = DOC_BY_ID[id];
         if (!entry || (entry.d && entry.d.history)) continue;
         var title = String((entry.d && entry.d.title) || "").toLowerCase();
         var path = String((entry.d && entry.d.path) || "").toLowerCase();
-        if (keys[i].toLowerCase().indexOf(low) !== -1 || title.indexOf(low) !== -1 || path.indexOf(low) !== -1) {
-          return keys[i];
+        var room = String(entry.key || "").toLowerCase();
+        var hay = (id + " " + title + " " + path + " " + room).toLowerCase().replace(/[-_./]/g, " ");
+        if (id.toLowerCase().indexOf(low) !== -1 || title.indexOf(low) !== -1) {
+          return id;
+        }
+        var score = 0;
+        for (var t = 0; t < tokens.length; t++) {
+          if (hay.indexOf(tokens[t]) !== -1) score += 3;
+        }
+        if (score > 0) {
+          if (typeof PDF_BLOBS === "object" && PDF_BLOBS && PDF_BLOBS[id]) score += 2;
+          if (wantEs && (/es|_es|-es/i.test(id + " " + title))) score += 2;
+          if (!wantEs && (/en|_en|-en/i.test(id + " " + title))) score += 2;
+          if (score > bestScore) { bestScore = score; bestId = id; }
         }
       }
     }
-    return null;
+    return bestScore >= 3 ? bestId : null;
   }
 
   function autoMinimizeDialogueForNavigation(summaryText) {
@@ -4663,6 +5158,155 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   }
 
   var bridgeActions = {
+    examine_magicplan: async function(args) {
+      var rk = String((args && (args.room || args.roomKey)) || "all").trim().toLowerCase();
+      if (rk === "wall-treatment" || rk === "paint") rk = "paint-floors";
+      if (rk === "floors" || rk === "floor") rk = "floor-treatment";
+      if (rk === "living" || rk === "dining") rk = "living-dining";
+      var openScreen = Boolean(args && (args.open_on_screen || args.show_floorplan || args.open));
+      if (openScreen) {
+        location.hash = "#magicplan";
+        if (typeof window.show === "function") window.show("magicplan");
+        if (liveState.sessionDocsOpened.indexOf("Magicplan Master Floor Plan") === -1) {
+          liveState.sessionDocsOpened.push("Magicplan Master Floor Plan");
+        }
+        persistActiveSessionCheckpoint();
+        var mpMsg = currentUiLang() === "es" ? "🗺️ Abrió Plano Maestro Magicplan" : "🗺️ Opened Magicplan Master Floor Plan";
+        appendNavEventChip(mpMsg, false);
+        autoMinimizeDialogueForNavigation(mpMsg);
+      }
+      var roomData = (rk && rk !== "all" && U4_MAGICPLAN_MASTER.rooms[rk]) ? U4_MAGICPLAN_MASTER.rooms[rk] : U4_MAGICPLAN_MASTER.rooms;
+      return {
+        ok: true,
+        action: "examine_magicplan",
+        planId: U4_MAGICPLAN_MASTER.planId,
+        ceilingHeight: U4_MAGICPLAN_MASTER.ceilingHeightDisplay,
+        governingNotes: U4_MAGICPLAN_MASTER.governingNotes,
+        data: roomData
+      };
+    },
+
+    run_construction_calc: async function(args) {
+      var res = runConstructionCalcEngine(args || {});
+      if (res.ok && res.summary) {
+        liveState.sessionCalculations.push(res.summary);
+        persistActiveSessionCheckpoint();
+        appendNavEventChip("📐 " + res.summary, false);
+        liveState.latestMinSummary = "📐 " + res.summary;
+        syncFloatingAiUi();
+      }
+      return res;
+    },
+
+    consult_trade_and_sourcing: async function(args) {
+      var res = lookupTradeOrCodeEngine(args || {});
+      if (res.matches && res.matches[0]) {
+        appendNavEventChip("🔧 " + res.matches[0].trade, false);
+      }
+      return res;
+    },
+
+    lookup_code_or_best_practice: async function(args) {
+      var res = lookupTradeOrCodeEngine(args || {});
+      if (res.matches && res.matches[0]) {
+        appendNavEventChip("📘 " + res.matches[0].trade, false);
+      }
+      return res;
+    },
+
+    notify_tisa_directly: async function(args) {
+      args = args || {};
+      var who = String(args.speaker_name || liveState.speakerName || getSavedSenderName() || "Crew member").trim();
+      if (args.speaker_name) setSavedSenderName(args.speaker_name);
+      var rk = String(args.room || activeRoomKey() || "home").trim().toLowerCase();
+      if (rk === "wall-treatment") rk = "paint-floors";
+      var topic = String(args.topic || "Direct crew question / decision needed").trim();
+      var summary = String(args.full_nuance_summary || args.summary || args.message || "").trim();
+      var options = String(args.recommended_options || "").trim();
+      var actionNeeded = String(args.action_needed_from_tisa || "").trim();
+      var recentTurns = (liveState.sessionTurns || []).slice(-6).map(function(t) {
+        return (t.role === "user" ? who : "AI Helper") + ": " + t.text;
+      }).join("\n");
+      var bodyLines = [
+        "📬 [DIRECT MESSAGE FOR TISA · From: " + who + " · Room: " + rk + "]",
+        "Topic: " + topic,
+        summary ? ("Details & Nuance: " + summary) : "",
+        options ? ("Options / Trade Context: " + options) : "",
+        actionNeeded ? ("Decision / Input Needed from Tisa: " + actionNeeded) : "",
+        recentTurns ? ("\nRecent Conversation Context:\n" + recentTurns) : ""
+      ].filter(Boolean).join("\n");
+
+      var flagRes = await recordAndDispatchPlanIssueFlag({
+        flag_type: "direct_for_tisa",
+        room: rk,
+        summary: "[" + topic + "] " + (summary || "Crew asked to let Tisa know directly"),
+        user_quote: recentTurns.slice(0, 500)
+      });
+      try {
+        var endpoint = window.U4_VOICE_MEMO_ENDPOINT;
+        if (endpoint) {
+          var idem = "u4-direct-tisa-" + deterministicHash(who + "|" + rk + "|" + bodyLines + "|" + Date.now());
+          await fetch(endpoint, {
+            method: "POST",
+            keepalive: true,
+            headers: { "Content-Type": "application/json", "X-Idempotency-Key": idem },
+            body: JSON.stringify({
+              schema: "unit4-wiki-intake-v1",
+              submissionType: "direct_to_tisa",
+              idempotencyKey: idem,
+              room: rk,
+              roomLabel: (ROOM_LABELS[rk] && ROOM_LABELS[rk].en) || rk,
+              item: "Direct for Tisa — " + topic,
+              kind: "Direct for Tisa",
+              language: currentUiLang(),
+              rawText: bodyLines,
+              senderName: who,
+              sourceSurface: "unit4-ai-helper-direct-tisa",
+              pageUrl: String((typeof location !== "undefined" && location.href) || ""),
+              clientSubmittedAt: new Date().toISOString()
+            })
+          });
+        }
+      } catch (e) {}
+      appendNavEventChip(currentUiLang() === "es" ? ("📨 Enviado directamente a Tisa (de " + who + ")") : ("📨 Sent directly to Tisa (from " + who + ")"), true);
+      return {
+        ok: true,
+        sentDirectlyToTisa: true,
+        from: who,
+        room: rk,
+        topic: topic,
+        flagReceipt: flagRes
+      };
+    },
+
+    search_wiki_and_plans: async function(args) {
+      return searchWikiAndPlansEngine((args && (args.query || args.q)) || "");
+    },
+
+    capture_session_insight: async function(args) {
+      var item = {
+        at: new Date().toISOString(),
+        category: String((args && args.category) || "field_nuance"),
+        room: String((args && args.room) || activeRoomKey()),
+        summary: String((args && (args.summary || args.note || args.detail)) || "").trim(),
+        speakerNuance: String((args && (args.speaker_nuance || args.nuance || args.user_quote)) || "").trim(),
+        unwrittenWikiGap: String((args && (args.unwritten_wiki_gap || args.follow_up_for_tisa)) || "").trim()
+      };
+      if (!item.summary) return { ok: false, code: "EMPTY_INSIGHT" };
+      liveState.sessionInsights.push(item);
+      persistActiveSessionCheckpoint();
+      appendNavEventChip("📝 " + (currentUiLang() === "es" ? "Detalle registrado: " : "Recorded nuance: ") + item.summary.slice(0, 64), Boolean(item.unwrittenWikiGap));
+      if (item.unwrittenWikiGap) {
+        await recordAndDispatchPlanIssueFlag({
+          flag_type: "unwritten_wiki_gap",
+          room: item.room,
+          summary: item.summary + " — " + item.unwrittenWikiGap,
+          user_quote: item.speakerNuance
+        });
+      }
+      return { ok: true, recorded: item, totalInsights: liveState.sessionInsights.length };
+    },
+
     set_speaker_name: async function(args) {
       var nm = String((args && (args.speaker_name || args.name || args.speaker)) || "").trim();
       if (!nm) return { ok: false, code: "EMPTY_SPEAKER_NAME" };
@@ -4948,7 +5592,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   };
 
   var actionAliases = {
-    setSpeakerName: "set_speaker_name", set_speaker_name: "set_speaker_name",
+    examineMagicplan: "examine_magicplan", examine_magicplan: "examine_magicplan", runConstructionCalc: "run_construction_calc", run_construction_calc: "run_construction_calc", consultTradeAndSourcing: "consult_trade_and_sourcing", consult_trade_and_sourcing: "consult_trade_and_sourcing", lookupCodeOrBestPractice: "lookup_code_or_best_practice", lookup_code_or_best_practice: "lookup_code_or_best_practice", notifyTisaDirectly: "notify_tisa_directly", notify_tisa_directly: "notify_tisa_directly", searchWikiAndPlans: "search_wiki_and_plans", search_wiki_and_plans: "search_wiki_and_plans", captureSessionInsight: "capture_session_insight", capture_session_insight: "capture_session_insight", setSpeakerName: "set_speaker_name", set_speaker_name: "set_speaker_name",
     flagPlanIssueForTisa: "flag_plan_issue_for_tisa", flag_plan_issue_for_tisa: "flag_plan_issue_for_tisa",
     queryTodoistCards: "query_todoist_cards", query_todoist_cards: "query_todoist_cards",
     navigateRoom: "navigate_room", navigate_room: "navigate_room",
@@ -4981,40 +5625,46 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     if (view.kind === "doc") {
       return es
         ? [
-            { label: "Explica esta página", prompt: "Explica qué muestra esta página del plano PDF y qué medidas debo cuidar." },
-            { label: "Ir a página 2", prompt: "Llévame a la página 2 de este PDF y explícala." },
-            { label: "Volver al cuarto", prompt: "Llévame de regreso a la página del cuarto." }
+            { label: "📄 Explica esta página", prompt: "Explica qué muestra esta página del plano PDF y qué medidas o pendientes debo cuidar." },
+            { label: "📐 Calcular desde este plano", prompt: "Haz un cálculo rápido de medidas o espacios iguales basado en este plano." },
+            { label: "🔧 Consulta de oficio / materiales", prompt: "Consúltame sobre plomería, electricidad, códigos o materiales relacionados con este plano." },
+            { label: "Ir a página 2", prompt: "Llévame a la página 2 de este PDF y explícala." }
           ]
         : [
-            { label: "Explain this PDF page", prompt: "Walk me through what is on this PDF page and highlight key dimensions." },
-            { label: "Go to page 2", prompt: "Go to page 2 of this PDF and summarize it." },
-            { label: "Back to room spec", prompt: "Navigate back to the room page." }
+            { label: "📄 Walk through this PDF page", prompt: "Walk me through what is on this PDF page, key dimensions, and any close-in holds." },
+            { label: "📐 Run a calc off this plan", prompt: "Run a fractional-inch or equal-spacing calculation from this plan." },
+            { label: "🔧 Trade / code / sourcing check", prompt: "Check plumbing, electrical, framing, code, or SF sourcing considerations for this drawing." },
+            { label: "Go to page 2", prompt: "Go to page 2 of this PDF and summarize it." }
           ];
     }
-    if (PROJECT_ROOMS.indexOf(view.room) !== -1) {
-      var rl = ROOM_LABELS[view.room] ? (es ? ROOM_LABELS[view.room].es : ROOM_LABELS[view.room].en) : view.room;
+    var rl = ROOM_LABELS[view.room] ? (es ? ROOM_LABELS[view.room].es : ROOM_LABELS[view.room].en) : view.room;
+    if (view.room === "home" || view.room === "magicplan") {
       return es
         ? [
-            { label: "¿Qué falta en " + rl + "?", prompt: "¿Qué tareas siguen abiertas o pendientes en " + rl + "?" },
-            { label: "Abrir planos PDF", prompt: "Abre el plano PDF principal de " + rl + " y recórrelo conmigo." },
-            { label: "Llenar nota abajo", prompt: "Ayúdame a redactar una nota de obra en el formulario de abajo para " + rl + "." }
+            { label: "🗺️ Ver plano Magicplan", prompt: "Abre el plano maestro Magicplan en pantalla y muéstrame las medidas clave." },
+            { label: "📄 Abrir un plano PDF exacto", prompt: "Muéstrame el plano PDF de la cocina a escala (o dime qué planos puedes abrir) y recórrelo conmigo." },
+            { label: "📐 Hacer un cálculo de medidas", prompt: "Ayúdame a calcular espacios iguales, fracciones de pulgada o pies cuadrados con desperdicio." },
+            { label: "🔧 Plomería, oficios y compras SF", prompt: "Necesito consultar sobre plomería, secuencia de obra, códigos o dónde conseguir materiales aquí en SF." }
           ]
         : [
-            { label: "What's open in " + rl + "?", prompt: "What tasks and checklist items are still open in " + rl + "?" },
-            { label: "Open PDF plans", prompt: "Open the main PDF drawing for " + rl + " and walk me through it." },
-            { label: "Help fill field note", prompt: "Help me fill out a field note on the form at the bottom for " + rl + "." }
+            { label: "🗺️ Show Magicplan floor plan", prompt: "Pull up the Unit 4 Magicplan master floor plan on screen and walk me through the room dimensions." },
+            { label: "📄 Pull up an exact PDF plan", prompt: "Open the Kitchen to-scale PDF plan (or tell me which drawings you can pull up) and walk me through it." },
+            { label: "📐 Run a measurement / layout calc", prompt: "Help me calculate equal panel spacing, fractional inches, or square footage with waste." },
+            { label: "🔧 Plumbing, trades & SF sourcing", prompt: "Consult with me on plumbing, close-in sequence, codes, or local SF supply house & salvage sourcing." }
           ];
     }
     return es
       ? [
-          { label: "Ir a Cocina", prompt: "Llévame a la Cocina y resume el trabajo." },
-          { label: "Ir a Baño", prompt: "Llévame al Baño y dime qué falta por terminar." },
-          { label: "Llenar nota de obra", prompt: "Ayúdame a escribir una nota de obra en el formulario de abajo." }
+          { label: "📄 Abrir plano PDF de " + rl, prompt: "Abre el plano PDF principal de " + rl + " y explícame las medidas." },
+          { label: "🗺️ Medidas en Magicplan", prompt: "Revisa el Magicplan de " + rl + " (muros, vanos y área) y dime qué aún no está definido en el wiki." },
+          { label: "📐 Calcular medidas aquí", prompt: "Haz un cálculo rápido de medidas, centros (CL) o materiales para " + rl + "." },
+          { label: "🔧 Plomería / secuencia / compras", prompt: "Consúltame sobre plomería, requisitos antes de cerrar muros, códigos o proveedores para " + rl + "." }
         ]
       : [
-          { label: "Go to Kitchen", prompt: "Navigate to Kitchen and summarize what's next." },
-          { label: "Go to Bathroom", prompt: "Navigate to Bathroom and tell me what's left to finish." },
-          { label: "Fill out a field note", prompt: "Help me fill out a field note on the form at the bottom." }
+          { label: "📄 Pull up " + rl + " PDF plan", prompt: "Open the main PDF plan for " + rl + " and walk me through the key dimensions." },
+          { label: "🗺️ Check Magicplan geometry", prompt: "Examine the Magicplan dimensions and wall runs for " + rl + ", and flag anything not locked in the wiki yet." },
+          { label: "📐 Calculate layout / quantities", prompt: "Run a quick layout spacing, centerline (CL), or material calculation for " + rl + "." },
+          { label: "🔧 Trade, close-in & sourcing", prompt: "Help me check plumbing/electrical/blocking pre-close-in gates, code, or local SF sourcing for " + rl + "." }
         ];
   }
 
@@ -5174,6 +5824,14 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     }
     var dlgTitle = document.getElementById("u4VdTitle");
     if (dlgTitle) dlgTitle.textContent = es ? "Asistente IA" : "AI Helper";
+    var tisaDirectBtn = document.getElementById("u4LetTisaKnowBtn");
+    if (tisaDirectBtn) tisaDirectBtn.textContent = es ? "📨 ¿Le aviso a Tisa directamente?" : "📨 Want me to let Tisa know directly?";
+    var capsEl = document.getElementById("u4VdCaps");
+    if (capsEl) {
+      capsEl.innerHTML = es
+        ? "<b>Co-Piloto PM y Oficios:</b> Abre cualquier <b>plano PDF</b> o el <b>Magicplan</b> · Hace <b>cálculos y fracciones</b> · Consulta sobre <b>plomería, cierres de muro, códigos y proveedores en SF</b> · Registra cada matiz y <b>le avisa a Tisa directamente</b>."
+        : "<b>Proactive PM &amp; Trade Co-Pilot:</b> Pull up any exact <b>PDF plan</b> or <b>Magicplan</b> · Run <b>layout &amp; fraction calcs</b> · Consult on <b>plumbing, close-in gates, codes &amp; SF sourcing</b> · Capture nuances &amp; <b>let Tisa know directly</b>.";
+    }
     var minBtn = document.getElementById("u4VdMinBtn");
     if (minBtn) minBtn.textContent = es ? "Ocultar chat ▴" : "Hide chat ▴";
 
@@ -5371,10 +6029,50 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         };
       });
 
+      var EXTRA_TOOL_DECLS = [
+        { name: "set_speaker_name", description: "Record the name of the person speaking (e.g. John, Ervin, Joel, Wilma, Tisa).", parameters: { type: "OBJECT", properties: { speaker_name: { type: "STRING" } }, required: ["speaker_name"] } },
+        { name: "examine_magicplan", description: "Examine Unit 4 Magicplan MASTER floor plan geometry, wall runs, door/window dimensions, ceiling height, and floor/wall square footages, and optionally open the interactive Magicplan floor plan on screen.", parameters: { type: "OBJECT", properties: { room: { type: "STRING", description: "Room key (kitchen, bathroom, bedroom, living-dining, laundry, hallway, electrical, paint-floors, floor-treatment, hvac, or all)" }, open_on_screen: { type: "BOOLEAN", description: "Set true to display the zoomable Magicplan floor plan on the user's screen" } } } },
+        { name: "run_construction_calc", description: "Run exact on-the-fly construction math: fractional inches (1/16 in), feet-and-inches, equal panel/molding spacing & centerlines (CL), sq ft + waste %, paint gallons, electrical watts-to-amps, or drain slope.", parameters: { type: "OBJECT", properties: { mode: { type: "STRING", description: "dimension_math | spacing | area | electrical | slope" }, expression: { type: "STRING", description: "Math or fractional inch expression, e.g. '147 - 36 - 15 - 24' or '122 1/8 - 8'" }, total_span_in: { type: "STRING" }, count: { type: "INTEGER" }, item_width_in: { type: "STRING" }, margin_in: { type: "STRING" }, length_in: { type: "STRING" }, width_in: { type: "STRING" }, sqft: { type: "NUMBER" }, waste_pct: { type: "NUMBER" }, watts: { type: "NUMBER" }, volts: { type: "NUMBER" }, run_ft: { type: "NUMBER" } } } },
+        { name: "consult_trade_and_sourcing", description: "Consult using Tisa's Project Manager (GC), Pre-Close-In, Appliance Crosscheck, Plumbing/Gas, Electrical, Victorian Millwork, Waterproofing/Tile, and SF Bay Area Trade Supply & Salvage Sourcing playbooks.", parameters: { type: "OBJECT", properties: { topic: { type: "STRING" } }, required: ["topic"] } },
+        { name: "lookup_code_or_best_practice", description: "Look up California / San Francisco residential building codes (CEC/NEC, CPC, CRC) and trade best practices.", parameters: { type: "OBJECT", properties: { topic: { type: "STRING" } }, required: ["topic"] } },
+        { name: "notify_tisa_directly", description: "Send a direct, high-priority summary of a question, open decision, sourcing need, or field nuance straight to Tisa when the user says Yes to 'Want me to let Tisa know directly?' or asks to tell Tisa.", parameters: { type: "OBJECT", properties: { speaker_name: { type: "STRING" }, room: { type: "STRING" }, topic: { type: "STRING" }, full_nuance_summary: { type: "STRING" }, recommended_options: { type: "STRING" }, action_needed_from_tisa: { type: "STRING" } }, required: ["topic", "full_nuance_summary"] } },
+        { name: "search_wiki_and_plans", description: "Search across ALL 10 Unit 4 room specs, checklists, Magicplan measurements, and PDF plan titles from anywhere in the wiki.", parameters: { type: "OBJECT", properties: { query: { type: "STRING" } }, required: ["query"] } },
+        { name: "capture_session_insight", description: "Record nuanced field observations, spoken measurements, trade/sourcing notes, cross-room impacts, or details not yet written in the wiki so everything is saved.", parameters: { type: "OBJECT", properties: { category: { type: "STRING" }, room: { type: "STRING" }, summary: { type: "STRING" }, speaker_nuance: { type: "STRING" }, unwritten_wiki_gap: { type: "STRING" } }, required: ["summary"] } },
+        { name: "flag_plan_issue_for_tisa", description: "Flag an unknown measurement, unwritten decision not yet in the wiki, or contradictory plan for Tisa in to-triage.", parameters: { type: "OBJECT", properties: { flag_type: { type: "STRING" }, room: { type: "STRING" }, document: { type: "STRING" }, summary: { type: "STRING" }, user_quote: { type: "STRING" } }, required: ["summary"] } }
+      ];
+
+      function buildMergedSetupPayload(baseSetup, allowEnhanced) {
+        var sp = baseSetup ? JSON.parse(JSON.stringify(baseSetup)) : { model: tokData.model || "models/gemini-3.8-live" };
+        sp.inputAudioTranscription = sp.inputAudioTranscription || {};
+        sp.outputAudioTranscription = sp.outputAudioTranscription || {};
+        if (!allowEnhanced) return sp;
+        sp.tools = Array.isArray(sp.tools) ? sp.tools : [];
+        var fnTool = sp.tools.find(function(t){ return Array.isArray(t.functionDeclarations); });
+        if (!fnTool) { fnTool = { functionDeclarations: [] }; sp.tools.push(fnTool); }
+        EXTRA_TOOL_DECLS.forEach(function(decl) {
+          if (!fnTool.functionDeclarations.some(function(x){ return x.name === decl.name; })) {
+            fnTool.functionDeclarations.push(decl);
+          }
+        });
+        fnTool.functionDeclarations.forEach(function(fd) {
+          if (fd.name === "navigate_room" && fd.parameters && fd.parameters.properties) {
+            var rProp = fd.parameters.properties.room || fd.parameters.properties.key;
+            if (rProp && Array.isArray(rProp.enum)) {
+              ["floor-treatment", "wall-treatment", "magicplan"].forEach(function(rk){
+                if (rProp.enum.indexOf(rk) === -1) rProp.enum.push(rk);
+              });
+            }
+          }
+        });
+        if (!sp.tools.some(function(t){ return t.googleSearch !== undefined; })) {
+          sp.tools.push({ googleSearch: {} });
+        }
+        return sp;
+      }
+
+      var isConstrainedToken = String(tokData.wsUrl || "").indexOf("BidiGenerateContentConstrained") !== -1;
       ws.onopen = function() {
-        var setupPayload = tokData.setup ? Object.assign({}, tokData.setup) : { model: tokData.model || "models/gemini-3.8-live" };
-        setupPayload.inputAudioTranscription = setupPayload.inputAudioTranscription || {};
-        setupPayload.outputAudioTranscription = setupPayload.outputAudioTranscription || {};
+        var setupPayload = buildMergedSetupPayload(tokData.setup, !isConstrainedToken);
         ws.send(JSON.stringify({ setup: setupPayload }));
       };
 
@@ -5392,26 +6090,34 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
           syncFloatingAiUi();
 
           var initialContext = await buildRichWalkthroughContext(null, true);
+          var allPlansDirectory = buildAllPlansCatalogForPrompt();
           if (!liveState.active || generation !== liveState.generation || ws.readyState !== WebSocket.OPEN) return;
           var startedInSpanish = currentUiLang() === "es";
           liveState.lastContextSignature = String((typeof location !== "undefined" && location.hash) || "#home") + "|" + (startedInSpanish ? "es" : "en");
 
           var hasPendingQ = Boolean(liveState.pendingPrompt);
           var greetingInstruction = startedInSpanish
-            ? "\n\nINSTRUCCIÓN DE SALUDO INICIAL OBLIGATORIA (dilo en voz alta ahora mismo de forma breve y cálida):\nSaluda en español diciendo que eres el asistente de la Unidad 4 y PREGUNTA DE INMEDIATO con quién estás hablando hoy ('¿Con quién hablo hoy?')."
-            : "\n\nMANDATORY OPENING GREETING INSTRUCTION (speak this aloud right now, briefly and warmly):\nGreet the user in English saying you're the Unit 4 helper AND ask right away who you're talking to today ('Who am I speaking with today?'), AND immediately say IN SPANISH: 'También puedo ayudarte en español — ¿con quién hablo?' Keep the entire greeting concise and natural.";
+            ? "\n\nINSTRUCCIÓN DE SALUDO INICIAL OBLIGATORIA (dilo en voz alta ahora mismo con calidez y agilidad):\n1) Saluda brevemente y PREGUNTA DE INMEDIATO con quién hablas hoy ('¿Con quién hablo hoy?').\n2) En una frase natural y proactiva, ofrece lo que puedes hacer: abrir en pantalla el plano PDF exacto o el Magicplan que pidan, hacer cálculos de medidas al instante, consultar sobre plomería, secuencia de obra, códigos o proveedores en SF, o avisarle directamente a Tisa cualquier duda o detalle."
+            : "\n\nMANDATORY OPENING GREETING INSTRUCTION (speak this aloud right now — warm, sharp, concise, and proactive):\n1) Greet them warmly, ask right away who you're speaking with today ('Who am I speaking with today?'), and briefly add in Spanish: 'También puedo ayudarte en español — ¿con quién hablo?'\n2) Immediately VOLUNTEER what you can do in one natural, upbeat sentence: let them know you can pull up any exact PDF plan or the Magicplan floor plan right on screen, run layout or measurement calculations on the fly, consult on trades like plumbing, electrical, codes, or material sourcing, and let Tisa know directly whenever a question or field detail comes up.";
 
           var kickoffInstruction =
-            "System guide context for Unit 4 AI Helper:\n" +
-            "- ALWAYS ASK WHO YOU ARE TALKING TO AT THE START OF EVERY SESSION so we know who is sending notes or questions (e.g. John, Ervin, Joel, Wilma, Tisa). As soon as they tell you their name, remember it (and call set_speaker_name if available).\n" +
-            "- Reply concisely and naturally in whatever language the speaker uses (English, Español, etc.) automatically. If they speak Spanish, reply in Spanish and call set_language({language:'es'}).\n" +
-            "- Projects in this wiki are ordered: Kitchen, Bathroom, Bedroom, Living & Dining, Laundry Closet, Hallway, Electrical, Wall Treatment (Paint) [key: 'paint-floors'], Floor Treatment [key: 'floor-treatment'], HVAC. Note there can be plan crossover across areas.\n" +
-            "- Proactively help the user navigate: use navigate_room, open_document, go_to_document_page, and focus_section whenever they ask about a room, plan, or section. (The UI automatically minimizes your chat window when you navigate so they can clearly see the room or PDF on screen.)\n" +
-            "- FIELD NOTE FORM AT BOTTOM OF PAGE: Whenever the speaker wants to record a field note, site fact, or measurement (or asks you to help fill out the form), call fill_draft_note({text: ..., item: ...}) right away so their note shows up on the Field Note form at the bottom, and remind them to attach a photo if they have one before pressing Send.\n" +
-            "- CRITICAL RULE FOR PLAN INCONSISTENCIES, UNKNOWN MEASUREMENTS, OR CONTRADICTORY PLANS: Whenever you notice OR the user asks about an unknown/missing measurement, an inconsistency in the plans, or contradictory plans/specs, ALWAYS tell the user out loud that you will note it and send it to Tisa (in English: \"I'll note that and send it to Tisa\" / in Spanish: \"Lo voy a anotar y mandárselo a Tisa\"), AND call flag_plan_issue_for_tisa (if available) so it is flagged in the to-triage session notes for Tisa.\n" +
-            "- Keep Todoist IDs invisible unless specifically asked.\n\n" +
+            "=== UNIT 4 PROJECT MANAGER CO-PILOT, MULTI-TRADE & SOURCING CONSULTANT BRIEF ===\n" +
+            "You are the smart, dynamic, proactive Voice & Visual Co-Pilot for 1231 11th Ave Unit 4 (San Francisco), shaped by Tisa's Project Manager (GC), Pre-Close-In, Briefing Facilitation, Trade, and Custom/Collected Sourcing templates.\n" +
+            "1. KNOW WHO IS SPEAKING & FACILITATE CLEARLY: Always ask who you're talking to at session start (John, Ervin, Joel, Wilma, Tisa) and call set_speaker_name. Attribute remarks accurately; separate observed field facts/measurements, design preferences, and trade sequencing; preserve Tisa's owner decision authority and John's lead carpenter role.\n" +
+            "2. PROACTIVE 'WANT ME TO LET TISA KNOW DIRECTLY?' OPTION: Not everything Tisa has decided is written in this wiki yet, and plans cross over across rooms. NEVER guess or invent a locked decision when the wiki is open or silent! Distinguish locked vs open/deferred vs awaiting evidence vs unwritten. Capture every spoken nuance via capture_session_insight AND proactively ask out loud: \"Want me to let Tisa know directly?\" (Spanish: \"¿Quieres que le avise a Tisa directamente?\"). When they say yes (or ask to tell Tisa), call notify_tisa_directly with the full nuanced context, measurements, trade options, and speaker name!\n" +
+            "3. TISA'S PROJECT MANAGER & MULTI-TRADE / SOURCING PLAYBOOKS: Consult dynamically using consult_trade_and_sourcing and Google Search:\n" +
+            "   - Master Trade Sequence & Close-In Gate: Framing & solid 2x blocking (height bands from subfloor, 1 stud bay past footprint; cabinet cleats, stone-sink legs, grab bars, 36x8x80 Murphy door pivot header/floor bearing) -> Plumbing DWV/supply & Gas rough -> Rigid HVAC/exhaust ducts (bath fan outdoors, dryer to lightwell, resolve abandoned galvanized pipes while open) -> Electrical rough (route around pipes/ducts; 4x4 boxes w/ 1\" mud rings in full-height tile zones, 1/2\" untiled; Eaton 125A D04 subpanel w/ floating neutral) -> Firestop & 1/16\" nail plates -> MANDATORY AS-BUILT PHOTO GATE (photograph every open wall with a tape measure in frame before drywall!). Nothing closes until done, capped/labeled, or waived by Tisa.\n" +
+            "   - Plumbing & Appliance Crosscheck: Match rough valve & trim brand/series and check valve depth against full wall build-up; CPC 1/4\"/ft drain slope; toilet flange ON TOP of finished tile; low recessed icemaker box in fridge bay; resolve Laundry shared-wall gas box before close-in.\n" +
+            "   - Custom/Collected Aesthetic & SF Sourcing: Unit 4 is luxury tier — custom & collected Edwardian/Victorian character, never builder-grade. Local SF Bay Area trade sources: Dalziel Supply, Pace, Ferguson (plumbing), Platt, Independent Electric (electrical), Beronio Lumber, Truitt & White, MacBeath Hardwood (Victorian mouldings/hardwoods), Urban Ore / Ohmega Salvage / estate vintage (salvage — check lead paint & exact dimensions), Floor & Decor / CTW (Schluter/tile), Lasting Paint / Sherwin-Williams. Tisa approves all purchases.\n" +
+            "4. PROACTIVE ON-THE-FLY NAVIGATION, EXACT PDF PLANS & MAGICPLAN: Pull drawings right onto their screen via open_document({doc_id, page}), go_to_document_page({page}), navigate_room({room}), focus_section({heading}), search_wiki_and_plans({query}), and examine_magicplan({room, open_on_screen: true}). Check Magicplan MASTER first so you never ask John to re-measure what's already recorded!\n" +
+            "5. ON-THE-FLY CALCULATIONS: Compute exact fractional inches (to 1/16\"), feet-and-inches, centerlines (CL), equal panel spacing, sq ft + waste %, paint gallons, drain fall, or electrical amps via run_construction_calc.\n" +
+            "6. BOTTOM FIELD NOTE FORM: Call fill_draft_note({text, item, room}) whenever they want to draft a written/photo note below, reminding them to include a photo (with a tape measure in frame on open walls!).\n" +
+            "7. LANGUAGE: Reply naturally in whichever language the speaker uses (English or Español).\n\n" +
+            allPlansDirectory + "\n\n" +
+            "MAGICPLAN MASTER SUMMARY (plan_id " + U4_MAGICPLAN_MASTER.planId + ", ceiling " + U4_MAGICPLAN_MASTER.ceilingHeightDisplay + "):\n" +
+            JSON.stringify(U4_MAGICPLAN_MASTER.rooms) + "\n\n" +
             initialContext +
-            (hasPendingQ ? ("\n\n(First, briefly ask who you are talking to while answering their question; and note in Spanish 'También puedo ayudarte en español.')") : greetingInstruction);
+            (hasPendingQ ? ("\n\n(First, briefly ask who you are talking to while answering their question, proactively pulling up any helpful plan/Magicplan/calculation, and offering 'Want me to let Tisa know directly?' if any decision or sourcing item is involved; note in Spanish 'También puedo ayudarte en español.')") : greetingInstruction);
 
           ws.send(JSON.stringify({
             clientContent: {
@@ -5608,11 +6314,16 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
           '</div>' +
         '</div>' +
         '<p id="u4VdSub" class="u4-vd-sub" role="status" aria-live="polite"></p>' +
+        '<div id="u4VdCaps" class="u4-vd-caps"><b>Proactive PM &amp; Trade Co-Pilot:</b> Pull up any exact <b>PDF plan</b> or <b>Magicplan</b> · Run <b>layout &amp; fraction calcs</b> · Consult on <b>plumbing, close-in gates, codes &amp; SF sourcing</b> · Capture nuances &amp; <b>let Tisa know directly</b>.</div>' +
         '<div id="u4VoiceChatTranscript" class="u4-vd-log" role="log" aria-live="polite"></div>' +
         '<div class="u4-vd-foot">' +
+          '<div class="u4-vd-tisa-row">' +
+            '<button type="button" id="u4LetTisaKnowBtn" class="u4-vd-tisa-btn">📨 Want me to let Tisa know directly?</button>' +
+            '<button type="button" id="u4OpenMagicplanBtn" class="u4-vd-mp-btn">🗺️ Magicplan</button>' +
+          '</div>' +
           '<div id="u4AiNudges" class="u4-vd-chips"></div>' +
           '<form id="u4VdAskForm" class="u4-vd-ask-row" novalidate>' +
-            '<input id="u4VdAskInput" class="u4-vd-ask-inp" type="text" autocomplete="off" placeholder="Or type a question…">' +
+            '<input id="u4VdAskInput" class="u4-vd-ask-inp" type="text" autocomplete="off" placeholder="Ask a plan, calc, plumbing/sourcing, or code question…">' +
             '<button type="submit" class="u4-vd-ask-send" aria-label="Ask AI Helper">↑</button>' +
           '</form>' +
         '</div>';
@@ -5662,7 +6373,69 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         setDialogOpen(false);
       });
 
-      document.getElementById("u4VdAskForm").addEventListener("submit", function(ev) {
+      var letTisaBtn = document.getElementById("u4LetTisaKnowBtn");
+      if (letTisaBtn) {
+        letTisaBtn.addEventListener("click", async function(ev) {
+          if (ev && ev.preventDefault) ev.preventDefault();
+          var es = currentUiLang() === "es";
+          if (liveState.active) {
+            sendPromptToLiveAgent(es
+              ? "Sí, por favor avísale a Tisa directamente ahora mismo usando notify_tisa_directly con todos los detalles y matices de lo que acabamos de hablar."
+              : "Yes, please let Tisa know directly right now using notify_tisa_directly with all the nuances, measurements, and context from what we're discussing.");
+            return;
+          }
+          var turns = liveState.sessionTurns || [];
+          if (turns.length > 0) {
+            var lastSummary = turns.slice(-4).map(function(t){ return t.text; }).join(" | ");
+            await bridgeActions.notify_tisa_directly({
+              room: activeRoomKey(),
+              topic: "Crew follow-up from AI Helper",
+              full_nuance_summary: lastSummary
+            });
+            appendCompleteChatLine("ai", es ? "✓ Listo — le envié el resumen directo a Tisa." : "✓ Done — sent that directly to Tisa with full context.");
+          } else {
+            startGeminiLiveSession(ev, es ? "Quiero dejarle un mensaje directo a Tisa sobre este cuarto." : "I want to let Tisa know directly about a question or detail here.");
+          }
+        });
+      }
+
+      var openMpBtn = document.getElementById("u4OpenMagicplanBtn");
+      if (openMpBtn) {
+        openMpBtn.addEventListener("click", async function(ev) {
+          if (ev && ev.preventDefault) ev.preventDefault();
+          await bridgeActions.examine_magicplan({ room: activeRoomKey(), open_on_screen: true });
+        });
+      }
+
+      document.getElementById("u4VdAskForm").addEventListener("submit", async function(ev) {
+        ev.preventDefault();
+        var inp = document.getElementById("u4VdAskInput");
+        if (!inp) return;
+        var q = String(inp.value || "").trim();
+        if (!q) return;
+        inp.value = "";
+        if (liveState.active) {
+          sendPromptToLiveAgent(q);
+          return;
+        }
+        var low = q.toLowerCase();
+        if (/^(calc|calculate|calcula)\b|[0-9]+\s*[+\-*/]\s*[0-9]+/.test(low)) {
+          appendCompleteChatLine("user", q);
+          var expr = q.replace(/^(calc|calculate|calcula)[:\s]*/i, "").trim();
+          var cRes = await bridgeActions.run_construction_calc({ expression: expr });
+          if (cRes.ok) {
+            appendCompleteChatLine("ai", "📐 " + cRes.summary + " — Tap the waveform button above anytime to talk through layout or trade details live!");
+            return;
+          }
+        }
+        if (/^magicplan$|^show magicplan$|^open magicplan$/i.test(low)) {
+          appendCompleteChatLine("user", q);
+          await bridgeActions.examine_magicplan({ room: activeRoomKey(), open_on_screen: true });
+          return;
+        }
+        startGeminiLiveSession(ev, q);
+      });
+      if (false) document.getElementById("u4VdAskForm").addEventListener("submit", function(ev) {
         if (ev && ev.preventDefault) ev.preventDefault();
         dismissMovingPointerForever();
         var inp = document.getElementById("u4VdAskInput");
@@ -5934,6 +6707,19 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       var wrappedShow = function(target) {
         var normTarget = target === "wall-treatment" ? "paint-floors" : target;
         parkAiHelperNodes();
+        if (normTarget === "magicplan" || normTarget === "floorplan") {
+          current = { key: "magicplan", label: "Magicplan Floor Plan", group: "Reference", path: "magicplan", md: "" };
+          var docEl = document.getElementById("doc");
+          if (docEl) docEl.innerHTML = renderMagicplanPageHtml();
+          var fEl = document.getElementById("field");
+          if (fEl) fEl.hidden = false;
+          var bb = document.getElementById("backBtn");
+          if (bb) bb.hidden = false;
+          window.__backTo = "home";
+          placeAiHelperBesidePageHeading();
+          setTimeout(refreshDialogSuggestions, 25);
+          return;
+        }
         var r = origShow.call(this, normTarget);
         placeAiHelperBesidePageHeading();
         setTimeout(refreshDialogSuggestions, 25);
@@ -5968,7 +6754,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   }
 
   window.U4GeminiLiveAssistant = {
-    version: "r5-live-orb-v9",
+    version: "r5-live-orb-v10",
     micOpenedOnLoad: false,
     orderedProjects: ORDERED_PROJECTS,
     start: startGeminiLiveSession,
