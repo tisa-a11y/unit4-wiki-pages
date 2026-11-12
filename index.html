@@ -447,6 +447,90 @@ header.home-head.u4-has-ai .u4-home-head-copy{min-width:0;flex:1 1 200px}
 #field.u4-simple-field #repSend{border-radius:999px;padding:9px 22px;font-size:14.5px}
 .ck-note{font-size:13px;color:var(--muted);margin:0 0 8px;line-height:1.4}
 /* U4_R5_V9_COMPLETE_UI_CSS_END */
+
+/* U4_V15_USABILITY_AUDIT_OVERHAUL_START */
+/* 1. Prevent iOS Safari forced viewport zoom on tap (all inputs/selects/textareas >= 16px on touch viewports) */
+@media (max-width:820px){
+  .mobile select,.field select,.field textarea,.field input[type=text],.u4-vd-ask-inp,#u4RepSenderName,#repItem,#repText{font-size:16px!important}
+}
+
+/* 2. Clean top bar: comfortable 38px touch pills for Back & Español/English, hide raw repo file path noise */
+main > .bar{gap:8px 10px;margin-bottom:14px}
+main > .bar button.small{min-height:38px;padding:7px 14px;font-size:13.5px;font-weight:600;display:inline-flex;align-items:center;gap:5px}
+main > .bar #path{display:none!important}
+.mobile .menubtn{min-height:40px;padding:8px 14px;font-size:14.5px}
+.mobile select{min-height:40px}
+
+/* 3. Quick Room Section Jump Bar (Plans & PDFs · Checklist · Full Specs · Field Note ↓) */
+.u4-room-jumps{display:flex;flex-wrap:wrap;gap:7px;max-width:74ch;margin:4px 0 16px}
+.u4-rjump-pill{display:inline-flex;align-items:center;gap:5px;min-height:36px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--fg);font:600 13px/1.2 var(--body);cursor:pointer;text-decoration:none;transition:border-color .15s,background .15s,color .15s}
+.u4-rjump-pill:hover{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.jumpwrap{display:none!important}
+
+/* 4. Tappable Document Rows on Room Pages (replaces tiny cramped bullet links) */
+.docs ul{list-style:none!important;padding-left:0!important;display:grid;gap:8px!important;margin:10px 0 0}
+.docs li{margin:0!important}
+.docs li a{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 12px;min-height:44px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--fg);text-decoration:none;font-weight:600;font-size:14.5px;transition:border-color .15s,background .15s}
+.docs li a:hover{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.docs .k{margin-left:auto;padding:2px 8px;border-radius:999px;background:var(--bg);border:1px solid var(--line);font-size:11px}
+
+/* 5. PDF Viewer Page Number Labels */
+.u4-pdf-page-lbl{font:600 11.5px/1.2 var(--mono);color:var(--muted);margin:6px 0 2px}
+
+/* 6. AI Helper Drawer Ergonomics: 38px send button, End Call header button when live, roomier transcript, 34px chips */
+.u4-vd-log{max-height:min(300px,42vh)!important;min-height:72px}
+.u4-vd-chips{flex-wrap:wrap;gap:6px!important}
+@media (max-width:600px){.u4-vd-chips{flex-wrap:nowrap}}
+.u4-nudge-chip{min-height:34px;padding:6px 12px!important;font-size:12.5px!important;display:inline-flex;align-items:center}
+.u4-vd-ask-inp{min-height:38px;padding:7px 13px!important;font-size:14px}
+.u4-vd-ask-send{width:38px!important;height:38px!important;font-size:16px!important}
+.u4-vd-min-btn{min-height:34px;padding:6px 12px!important;font-size:12.5px!important}
+.u4-vd-end-btn{min-height:34px;padding:6px 12px;border-radius:999px;border:1px solid #dc2626;background:#fef2f2;color:#b91c1c;font:600 12.5px/1.2 var(--body);cursor:pointer;white-space:nowrap}
+.u4-vd-end-btn:hover{background:#fee2e2}
+.u4-vd-end-btn[hidden]{display:none!important}
+
+/* 7. Sleek Unified Bottom Field Note Composer (#field):
+      - Clean aligned From + About row (with 36px one-tap crew chips)
+      - Unified rounded Composer Box where textarea sits above/left and Photo + Right-Side [🎤 Mic] + [Send ↑] sit cleanly inside the box! */
+#field.u4-simple-field{margin-top:32px;padding:18px 20px;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.04)}
+#field.u4-simple-field h2{font-size:20px;margin:0 0 12px;display:flex;align-items:center;justify-content:space-between}
+#field.u4-simple-field .row2{display:grid;grid-template-columns:1.15fr 1fr;gap:12px;align-items:start;margin-bottom:4px}
+@media (max-width:680px){#field.u4-simple-field .row2{grid-template-columns:1fr;gap:10px}}
+.u4-who-wrap{display:grid;gap:6px}
+.u4-who-chips{display:flex;flex-wrap:wrap;gap:6px;margin:0}
+.u4-who-chip{min-height:34px;padding:5px 12px!important;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font:600 13px/1.2 var(--body)!important;cursor:pointer;display:inline-flex;align-items:center;gap:4px;transition:all .14s}
+.u4-who-chip.is-active{background:var(--accent)!important;border-color:var(--accent)!important;color:var(--panel)!important}
+#u4RepSenderName,#field.u4-simple-field #repItem{min-height:42px;border-radius:9px;padding:8px 11px;font-size:15px}
+
+/* Unified Composer Box */
+.u4-composer-box{border:1.5px solid var(--line);border-radius:14px;background:var(--bg);padding:10px 12px 10px 14px;display:grid;gap:8px;transition:border-color .18s,box-shadow .18s,background .18s}
+.u4-composer-box:focus-within{border-color:var(--accent);background:var(--panel);box-shadow:0 0 0 3px var(--accent-soft)}
+.u4-composer-box.is-dictating{border-color:#dc2626;box-shadow:0 0 0 3px rgba(220,38,38,.16)}
+#field.u4-simple-field label[for="repText"]{display:none!important}
+#field.u4-simple-field .u4-composer-box #repText{border:0!important;background:transparent!important;padding:2px 0!important;min-height:68px!important;max-height:260px;font-size:15.5px!important;line-height:1.5;resize:none;outline:none!important;box-shadow:none!important;width:100%}
+.u4-composer-bar{display:flex;align-items:center;justify-content:space-between;gap:8px 10px;flex-wrap:wrap;padding-top:6px;border-top:1px solid var(--line)}
+.u4-composer-left{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0}
+.u4-composer-right{display:inline-flex;align-items:center;gap:8px;margin-left:auto;flex:none}
+
+/* Clean compact Photo trigger inside left of composer bar */
+.u4-photo-bar{display:inline-flex!important;align-items:center;gap:8px;padding:0!important;border:0!important;background:transparent!important}
+.u4-photo-btn{min-height:38px;padding:6px 12px!important;border-radius:999px;border:1px solid var(--line)!important;background:var(--panel)!important;color:var(--fg)!important;font:600 13px/1.2 var(--body)!important;display:inline-flex;align-items:center;gap:6px;cursor:pointer;transition:border-color .15s,background .15s}
+.u4-photo-btn:hover{border-color:var(--accent)!important;color:var(--accent)!important;background:var(--accent-soft)!important}
+.u4-photo-note{font-size:12px!important;color:var(--muted)}
+@media (max-width:520px){.u4-photo-note{display:none}}
+
+/* Right-side Circular Mic Icon Button + Primary Send Pill */
+@keyframes u4MicPulse{0%{box-shadow:0 0 0 0 rgba(220,38,38,.45)}70%{box-shadow:0 0 0 9px rgba(220,38,38,0)}100%{box-shadow:0 0 0 0 rgba(220,38,38,0)}}
+.u4-dictate-btn{width:42px;height:42px;padding:0!important;border-radius:50%!important;border:1.5px solid var(--accent)!important;background:var(--panel)!important;color:var(--accent)!important;display:inline-flex!important;align-items:center;justify-content:center;cursor:pointer;flex:none;transition:transform .12s,background .15s,color .15s,border-color .15s}
+.u4-dictate-btn:hover{background:var(--accent-soft)!important;transform:scale(1.04)}
+.u4-dictate-btn:active{transform:scale(.96)}
+.u4-dictate-btn svg{width:19px!important;height:19px!important}
+.u4-dictate-btn.is-rec{width:auto!important;padding:0 13px!important;border-radius:999px!important;background:#dc2626!important;border-color:#dc2626!important;color:#fff!important;animation:u4MicPulse 1.6s infinite;gap:6px}
+.u4-dictate-live-lbl{font:600 12.5px/1 var(--body);white-space:nowrap}
+#field.u4-simple-field #repSend{min-height:42px;padding:0 18px!important;border-radius:999px!important;font:600 14.5px/1 var(--body)!important;display:inline-flex;align-items:center;gap:6px;box-shadow:0 2px 6px rgba(0,0,0,.10)}
+#field.u4-simple-field #repSend:hover{filter:brightness(1.06)}
+/* U4_V15_USABILITY_AUDIT_OVERHAUL_END */
+
 </style>
 
 <section id="agent-brief" class="sr-only" aria-label="Agent brief"># START HERE — Unit 4 remodel, 1231 11th Ave (San Francisco)<br><br>**This is the only start-here file.** Every person and agent opening this folder reads this first, fully, before acting.<br>Updated 2026-11-05 17:45 PT by Claude (Tisa&#x27;s account, cloud session). The same text is the wiki&#x27;s &quot;For AI agents: read first&quot; section.<br><br>## 0. Where to work — Google Drive is the single source of truth<br>- **Unit 4 folder (work here):** https://drive.google.com/drive/folders/1NnUfcuJfnzcjJz3XRvDQDhfvtMkrlSOr (`1231-11th-avenue/unit-4-renovation`)<br>- **Whole-building parent:** https://drive.google.com/drive/folders/1StmWHtnrDQlpd1CbUUfUEOI1vg-jHn29 (`1231-11th-avenue`)<br>- Everyone — Tisa&#x27;s Claude, John&#x27;s Claude, Dibble, any other agent — reads and writes through this Drive folder. (It is backed by Tisa&#x27;s Mini and syncs automatically; you never need the Mini path.)<br>- Every Unit 4 document now lives here, including copies of everything from the old locations (section 3). If you can&#x27;t find something, look in the room folder&#x27;s `from-remodel-hub/`, `from-unit4-bath-folder/` or `from-my-drive/` subfolder before assuming it&#x27;s missing.<br>- Older start-here, AGENTS and CLAUDE files were retired 2026-11-05 to `continuity/_superseded/start-here-history/` — don&#x27;t follow them.<br><br>---<br><br>## 1. Who and what<br>- **Tisa** owns the project and makes and locks every decision. **John** is lead carpenter on site. **Ervin, Joel, Alex** are crew (Spanish speakers).<br>- **Wiki** — https://claude.ai/artifact/3rweGyzGShQj4oUauUTRvU — the shared picture: roadmap, one spec per project, open decisions, documents (PDFs preview in the page). It reads the `.md` files in this folder.<br>- **Todoist** board `Full 1231 11th Avenue Remodel` (id `6hcMQpGhXWprg6m7`). The wiki is its spine: every card traces to a spec, a locked decision or captured input.<br>- **Magicplan** MASTER plan is the geometry source: https://cloud.magicplan.app/plan/abb2d2c6-aa1c-4a88-a57e-1260847b6410<br>- **Your job:** keep the project moving with as little effort from Tisa and John as possible. Answer from the specs, capture what they tell you, file it, keep wiki and Todoist in step.<br><br>## 2. Read in this order<br>1. `STATUS-NOW.md` — what&#x27;s locked, what&#x27;s blocking, what&#x27;s next on site. Answer &quot;what&#x27;s up?&quot; from here first.<br>2. `continuity/ROADMAP.md` — sequence and phases.<br>3. `&lt;room&gt;/SPEC.md` for the area you&#x27;re working on.<br>4. `continuity/CURRENT-DECISIONS.md` and `continuity/KNOWN-GAPS.md` only if you need the history.<br><br>## 3. Folder map<br>| Folder | Holds |<br>|---|---|<br>| `kitchen/` `bathroom/` `electrical/` `laundry/` `bedroom/` `living-dining/` `hallway/` `paint-floors/` `hvac/` | One per room or trade; each has `SPEC.md` (governs) plus dated drawings and packages. |<br>| `interior-design/` | Wall treatment, trim, outlet and finish plans (dated revision folders). |<br>| `general/` | Whole-unit items; `from-remodel-hub/` = imported old crew-hub files. |<br>| `sprint/` | Current sprint plan and session agendas. |<br>| `continuity/` | Roadmap, decisions log, known gaps, labor ballpark, history and source snapshots. |<br>| `work-control/` | Agent index, Todoist runbook (dated snapshot), `wiki-source/` (wiki build files). |<br>| `to-triage/` | Drop box for any input (notes, photos, voice memos, session minutes). Claude routes it and moves it to `to-triage/_done/`. |<br>| `sessions/` | One folder per working session: minutes (and transcript when available). |<br>| `_to_delete/` | Marked for removal; only Tisa empties it. |<br><br>Outside this folder: `../building/` (common areas, backyard, alley; `building/earlier-renovations-not-unit-4…/` holds older renovation docs that are **not** Unit 4 — don&#x27;t use them for Unit 4), `../GOOGLE-DOCS-INDEX.md`, and the separate private folder `1231-11th-avenue-private` (leases, costs, payroll, bids — **never share with crew**).<br><br>**Old locations — still readable for history, never the place to work:** Drive &quot;1231 11th Ave - Unit 4 Remodel&quot; (old crew hub, folders 01–12), Drive &quot;11th Ave Unit 4 Bath&quot;. Everything in them was copied here on 2026-11-04/05. If an old file and a file here disagree, the room&#x27;s `SPEC.md` governs.<br><br>## 4. Which version is the latest<br>1. Names carry date and revision: `YYYY-MM-DD_U4_&lt;room or trade&gt;_&lt;what&gt;_R#` (issued drawings may use `RevA`, `RevB`), then `_EN` or `_ES`. English and Spanish are always separate files.<br>2. The latest lives in the topic folder. A replaced file moves, name unchanged, to that folder&#x27;s `_superseded/` (or `history/`). Nothing is deleted.<br>3. If a folder still has more than one live iteration, its `CURRENT.md` names the one that governs.<br>4. `from-remodel-hub/`, `from-unit4-bath-folder/`, `from-my-drive/` are copies imported 2026-11-04 so no mockup or image is lost; they&#x27;re being reconciled. Until then the room&#x27;s `SPEC.md` and the dated files outside them govern.<br><br>## 5. Golden rule: John never has to enter anything himself<br>When John or Tisa tells you something — a task, a measurement, a problem, a question, a decision needed — capture it for them in their words and file it (section 7). Don&#x27;t send them to a form. Confirm back in one line what you filed and where.<br><br>## 6. What each kind of agent can do<br>| You are… | You can |<br>|---|---|<br>| **Claude on Tisa&#x27;s claude.ai account** (this Project, Cowork, Claude Code) | Everything: wiki data via the ArtifactData tool (URL above), republish the wiki via the Artifact tool, edit files here, Todoist via the connector (connected 2026-11-03). |<br>| **John&#x27;s Claude** (claude.ai cloud, often voice on John&#x27;s iPhone) | Read the wiki link, this Drive folder and the Todoist board. Its Drive connector can **create** files but can&#x27;t overwrite existing ones, so it writes session minutes and notes to `to-triage/` as `YYYY-MM-DD_HHMM_session_&lt;topic&gt;.md` with an author line (which Claude, which device, cloud or local). Tisa&#x27;s Claude routes them into the wiki, specs, STATUS-NOW and Todoist. |<br>| **Any other agent** (Dibble, Codex, Gemini, Antigravity) | Read and edit the files here (section 8 rules), update `STATUS-NOW.md`, drop input in `to-triage/`. Access comes from this Drive folder being shared with John&#x27;s Google account as Editor. |<br>| **Any agent with a browser** | Open the wiki and help John use it on his phone. |<br><br>**Dropping input (non-Claude agents):** `to-triage/YYYY-MM-DD_HHMM_&lt;who&gt;_&lt;short&gt;.md`<br>```<br>type: task | fact | decision | note<br>project: kitchen | bathroom | electrical | laundry | bedroom | living-dining | hallway | paint-floors | hvac | general<br>from: &lt;agent&gt; on behalf of &lt;John/Tisa&gt;<br>---<br>&lt;their words&gt;<br>```<br>**Claude capture:** write to the wiki&#x27;s `inbox` collection `{type, project, section, title, details, raw, source:&quot;agent&quot;, from, createdAt, status:&quot;queued&quot;}`, then route it in the same turn.<br><br>## 7. Routing — where each thing goes<br>| Came in | Do this |<br>|---|---|<br>| **Task** | Look for an existing card first (comment rather than duplicate). Create it in the project&#x27;s section — Kitchen / Cocina · Bathroom / Baño · Electrical / Electricidad · Laundry / Lavandería · Walls, Molding &amp; Paint · General &amp; HVAC (bedroom, living-dining, hallway, HVAC, building) · New Tasks (need triage) · Backlog · On Hold or Blocked. Re-check section names live before writing. Plain title; description = State / Trade / Next physical action / Governing source (link to SPEC.md). **Unassigned** unless Tisa names someone. |<br>| **Site fact** | Add to the project&#x27;s SPEC.md with date and &quot;(John, field)&quot;. Comment on the card if it changes one. |<br>| **Decision needed** | Add a wiki `decisions` doc (`status: open`, priority 1 blocking / 2 next / 3 later). Only Tisa locks. |<br>| **Locked decision** (`synced: false`) | Update SPEC.md (mark LOCKED), matching cards, the Spanish crew edition, `STATUS-NOW.md`; set `synced: true`. |<br>| **Field report / session notes** | File facts as above; next steps → unassigned cards; open items → decisions; mark `recorded`. |<br><br>Wiki and cards disagree → the wiki wins (never the reverse without Tisa). Any change you make → update `STATUS-NOW.md` in the same pass.<br><br>## 8. Rules that always hold<br>- Tisa&#x27;s direction is locked; anything an AI produces is a suggestion until she locks it.<br>- Nothing is sent, signed, ordered, paid or scheduled without Tisa&#x27;s approval.<br>- Magicplan and existing drawings first. Never ask John to re-measure what&#x27;s recorded; ask only for the specific missing number.<br>- Crew-facing documents: English first, then a **separate** Spanish edition. Never mix languages. Replies to Tisa in English.<br>- Edit an existing spec rather than making a new file beside it (new files break wiki links).<br>- Superseded files go to `_superseded`; never delete. No credentials in any file here.<br>- **Wiki and Drive mirror each other** (Tisa, 2026-11-06): every wiki page and document list matches a folder in `1231 11th Avenue Unit 4`, and each document sits under the same room in both. When you add or move a document or folder in Drive, update the wiki in the same pass, and the reverse. Example: the Laundry Closet is its own project, so its documents live in `laundry/`, not `electrical/`.<br>- **Spanish for the wiki lives only in the wiki's own text** (Tisa, 2026-11-06): the English/Español toggle. Never create Spanish copies of the .md files in Drive. Crew plans keep their existing English and Spanish PDFs.<br>- **Work record (Beads):** canonical ledger `/Users/tisavo/Work/Projects/1231-11th-avenue/unit-4-renovation` on the MacBook Pro (`.beads/embeddeddolt`, main issue `tisa-wi0.6`). Run `bd where` before writing; never initialize a duplicate ledger; keep existing issue IDs. Agents that can&#x27;t reach it (cloud sessions) record state in `STATUS-NOW.md` and say Beads is pending. Last check from a cloud session (2026-11-05): not reachable, status unverified.<br>- Every session&#x27;s minutes say the date, who attended and which Claude wrote them (account, device, cloud or local).<br>- Say plainly what you verified vs. only wrote. Trust the source file over another agent&#x27;s summary.<br><br>## 9. Maintaining the wiki (Claude only)<br>Source: `work-control/wiki-source/` (template updated 2026-11-05 to include the live Home page and collapsible document lists) — `wiki_template.html`, `build_wiki.py` (embeds the specs and document lists), `brief.py` (embeds this file as the agent brief), `drive_docs.json`, `pdf_blobs.json`. Rebuild, then publish to the same artifact URL. Collections: `decisions` (Tisa/admin write), `decisionNotes`, `reports`, `sessionNotes`, `inbox`.<br><br>## 10. More detail, if needed<br>- Routing detail and history: `work-control/2026-11-03_U4_AgentWork_Index_R2.md`<br>- Todoist runbook (11/2 snapshot, has known errors): `work-control/TODOIST-PROJECT-MANAGER-RUNBOOK.md`<br>- Kitchen governing revision: `kitchen/CURRENT.md`<br></section>
@@ -3891,18 +3975,23 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     if (typeof WebSocket !== "function") return;
     var es = currentUiLang() === "es";
     var repBtn = document.getElementById("speakBtn");
+    var compBox = document.getElementById("u4ComposerBox");
+    var rec = Boolean(noteVoiceState.active);
+    if (compBox) compBox.classList.toggle("is-dictating", rec);
     if (repBtn) {
-      var rec = Boolean(noteVoiceState.active);
       repBtn.classList.add("u4-dictate-btn");
       repBtn.classList.remove("btn");
       repBtn.classList.toggle("is-rec", rec);
       repBtn.setAttribute("aria-pressed", rec ? "true" : "false");
-      repBtn.innerHTML = (rec ? STOP_ICON_SVG : MIC_ICON_SVG) +
-        '<span>' + (rec ? (es ? "Detener" : "Stop") : (es ? "Dictar" : "Dictate")) + '</span>';
+      repBtn.setAttribute("title", rec ? (es ? "Detener dictado" : "Stop dictation") : (es ? "Dictar nota por voz" : "Dictate note by voice"));
+      repBtn.setAttribute("aria-label", rec ? (es ? "Detener dictado" : "Stop dictation") : (es ? "Dictar nota por voz" : "Dictate note by voice"));
+      repBtn.innerHTML = rec
+        ? (STOP_ICON_SVG + '<span class="u4-dictate-live-lbl">' + (es ? "Detener" : "Stop") + '</span>')
+        : MIC_ICON_SVG;
     }
     var sendBtn = document.getElementById("repSend");
     if (sendBtn) {
-      sendBtn.textContent = es ? "Enviar" : "Send";
+      sendBtn.innerHTML = '<span>' + (es ? "Enviar" : "Send") + '</span><span aria-hidden="true">↑</span>';
     }
     var fieldHeading = document.querySelector("#field > h2");
     if (fieldHeading) {
@@ -3914,27 +4003,23 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     }
     var whoInp = document.getElementById("u4RepSenderName");
     if (whoInp) {
-      whoInp.placeholder = es ? "Toca tu nombre abajo o escríbelo…" : "Tap your name below or type it…";
+      whoInp.placeholder = es ? "Toca tu nombre o escríbelo…" : "Tap your name below or type it…";
     }
     var photoBtnTxt = document.getElementById("u4PhotoBtnText");
     if (photoBtnTxt) {
-      photoBtnTxt.textContent = es ? "📷 Agregar foto" : "📷 Add photo";
+      photoBtnTxt.textContent = es ? "📷 Foto" : "📷 Add photo";
     }
     var photoHintTxt = document.getElementById("u4PhotoEncourageText");
     if (photoHintTxt) {
       photoHintTxt.textContent = es
-        ? "Incluye una foto siempre que puedas."
-        : "Include a photo whenever possible.";
+        ? "Incluye foto siempre que puedas"
+        : "Include a photo whenever possible";
     }
     var repTa = document.getElementById("repText");
     if (repTa) {
       repTa.placeholder = es
-        ? "Toca Dictar para hablar (tus palabras aparecen aquí en vivo) o escribe tu nota…"
-        : "Tap Dictate to speak (words appear here as you talk) or type your note…";
-    }
-    var jumpBtn = document.querySelector(".jumpfield");
-    if (jumpBtn) {
-      jumpBtn.textContent = es ? "Nota de obra ↓" : "Field note ↓";
+        ? "Escribe una nota o toca el micrófono a la derecha para dictar…"
+        : "Write a field note, or tap the mic on the right to dictate…";
     }
   }
 
@@ -5926,6 +6011,62 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     });
   }
 
+
+  function enhanceRoomQuickJumpsAndPdfPages() {
+    if (typeof WebSocket !== "function") return;
+    var docEl = document.getElementById("doc");
+    if (!docEl) return;
+    var es = currentUiLang() === "es";
+    var view = parseActiveHashView();
+
+    // Add quick jump pills right below title row on the 10 Project pages so crew never has to scroll blindly
+    if (view.kind === "room" && PROJECT_ROOMS.indexOf(view.room) !== -1 && !document.getElementById("u4RoomQuickJumps")) {
+      var anchorAfter = docEl.querySelector(".u4-title-row") || docEl.querySelector("h1");
+      if (anchorAfter && anchorAfter.parentNode) {
+        var jbar = document.createElement("div");
+        jbar.id = "u4RoomQuickJumps";
+        jbar.className = "u4-room-jumps";
+        jbar.setAttribute("translate", "no");
+        var hasDocs = Boolean(docEl.querySelector(".docs"));
+        var hasCk = Boolean(docEl.querySelector(".ck"));
+        var hasFull = Boolean(docEl.querySelector("details.fulldet"));
+        var pills = [];
+        if (hasDocs) pills.push('<button type="button" class="u4-rjump-pill" data-u4-jump=".docs">' + (es ? "📄 Planos y PDFs" : "📄 Plans & PDFs") + '</button>');
+        if (hasCk) pills.push('<button type="button" class="u4-rjump-pill" data-u4-jump=".ck">' + (es ? "☑️ Lista de pendientes" : "☑️ Checklist") + '</button>');
+        if (hasFull) pills.push('<button type="button" class="u4-rjump-pill" data-u4-jump="details.fulldet">' + (es ? "📋 Especificación completa" : "📋 Full Specs") + '</button>');
+        pills.push('<button type="button" class="u4-rjump-pill" data-u4-jump="#field">' + (es ? "📝 Nota de obra ↓" : "📝 Field Note ↓") + '</button>');
+        jbar.innerHTML = pills.join("");
+        if (anchorAfter.nextSibling) anchorAfter.parentNode.insertBefore(jbar, anchorAfter.nextSibling);
+        else anchorAfter.parentNode.appendChild(jbar);
+        jbar.addEventListener("click", function(ev) {
+          var b = ev.target && ev.target.closest ? ev.target.closest("[data-u4-jump]") : null;
+          if (!b) return;
+          ev.preventDefault();
+          var sel = b.getAttribute("data-u4-jump");
+          var target = sel === "#field" ? document.getElementById("field") : docEl.querySelector(sel);
+          if (!target) return;
+          if (target.tagName && target.tagName.toLowerCase() === "details") target.open = true;
+          if (target.scrollIntoView) target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
+    }
+
+    // Label rendered PDF pages with clear 'Page N' captions when canvases load
+    if (view.kind === "doc") {
+      setTimeout(function() {
+        Array.prototype.slice.call(document.querySelectorAll(".pdfpage[data-page-number]")).forEach(function(cv) {
+          if (cv.previousElementSibling && cv.previousElementSibling.classList && cv.previousElementSibling.classList.contains("u4-pdf-page-lbl")) return;
+          var pgNum = cv.getAttribute("data-page-number");
+          if (!pgNum || !cv.parentNode) return;
+          var lbl = document.createElement("div");
+          lbl.className = "u4-pdf-page-lbl";
+          lbl.textContent = (currentUiLang() === "es" ? "Página " : "Page ") + pgNum;
+          cv.parentNode.insertBefore(lbl, cv);
+        });
+      }, 650);
+    }
+  }
+
   function placeAiHelperBesidePageHeading() {
     if (typeof WebSocket !== "function") return;
     var dock = document.getElementById("u4AiFloatingDock");
@@ -6049,6 +6190,11 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     if (dlgTitle) dlgTitle.textContent = es ? "Asistente IA" : "AI Helper";
     var minBtn = document.getElementById("u4VdMinBtn");
     if (minBtn) minBtn.textContent = es ? "Ocultar chat ▴" : "Hide chat ▴";
+    var endCallBtn = document.getElementById("u4VdEndBtn");
+    if (endCallBtn) {
+      endCallBtn.hidden = !(liveState.active || liveState.connecting);
+      endCallBtn.textContent = es ? "Terminar llamada" : "End call";
+    }
 
     var subEl = document.getElementById("u4VdSub");
     if (subEl && !liveState.connecting) {
@@ -6532,6 +6678,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
             '<span id="u4VdSpeakerBadge" class="u4-vd-speaker-badge" hidden></span>' +
           '</div>' +
           '<div class="u4-vd-controls">' +
+            '<button type="button" id="u4VdEndBtn" class="u4-vd-end-btn" hidden>End call</button>' +
             '<button type="button" id="u4VdMinBtn" class="u4-vd-min-btn" aria-label="Hide voice chat">Hide chat ▴</button>' +
           '</div>' +
         '</div>' +
@@ -6585,6 +6732,13 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         }
       });
 
+      var endBtnEl = document.getElementById("u4VdEndBtn");
+      if (endBtnEl) {
+        endBtnEl.addEventListener("click", function(ev) {
+          if (ev && ev.preventDefault) ev.preventDefault();
+          stopGeminiLiveSession(true, "user_clicked_header_end", false);
+        });
+      }
       document.getElementById("u4VdMinBtn").addEventListener("click", function(ev) {
         if (ev && ev.preventDefault) ev.preventDefault();
         setDialogOpen(false);
@@ -6732,72 +6886,112 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       syncSenderChipsUi();
     }
 
-    // 2. Inject clean Photo bar (encouraging photos whenever possible) wired to #repPhoto
-    if (photoInput && !document.getElementById("u4PhotoBar")) {
-      var photoBar = document.createElement("div");
-      photoBar.id = "u4PhotoBar";
-      photoBar.className = "u4-photo-bar";
-      photoBar.setAttribute("translate", "no");
-      photoBar.innerHTML =
-        '<button type="button" id="u4PhotoTriggerBtn" class="u4-photo-btn"><span id="u4PhotoBtnText">📷 Add photo</span></button>' +
-        '<span id="u4PhotoEncourageText" class="u4-photo-note">Include a photo whenever possible.</span>' +
-        '<span id="u4PhotoPreviewBadge" class="u4-photo-preview" hidden>' +
-          '<img id="u4PhotoThumb" alt="Selected photo">' +
-          '<span id="u4PhotoName" class="u4-photo-preview-name"></span>' +
-          '<button type="button" id="u4PhotoClearBtn" class="u4-photo-clear" aria-label="Remove photo">✕</button>' +
-        '</span>';
+    // 2 & 3. Build Unified Composer Box: #repText on top/left, Photo pill on bottom-left, Circular Mic (#speakBtn) + Send ↑ (#repSend) docked cleanly on the right side of the box!
+    var repTaEl = document.getElementById("repText");
+    if (repTaEl && !document.getElementById("u4ComposerBox")) {
+      var compBox = document.createElement("div");
+      compBox.id = "u4ComposerBox";
+      compBox.className = "u4-composer-box";
+      compBox.setAttribute("translate", "no");
 
-      var cbar = repSend.parentNode;
-      if (cbar && cbar.parentNode) {
-        cbar.parentNode.insertBefore(photoBar, cbar);
+      var compBar = document.createElement("div");
+      compBar.className = "u4-composer-bar";
+
+      var leftCluster = document.createElement("div");
+      leftCluster.className = "u4-composer-left";
+
+      var rightCluster = document.createElement("div");
+      rightCluster.className = "u4-composer-right";
+
+      // Insert compBox right after .row2
+      if (row2 && row2.parentNode === repForm) {
+        if (row2.nextSibling) repForm.insertBefore(compBox, row2.nextSibling);
+        else repForm.appendChild(compBox);
       } else {
-        repForm.appendChild(photoBar);
+        repForm.appendChild(compBox);
       }
 
-      document.getElementById("u4PhotoTriggerBtn").addEventListener("click", function(ev) {
-        ev.preventDefault();
-        photoInput.click();
-      });
-
-      var syncPhotoBadge = function() {
-        var f = photoInput.files && photoInput.files[0];
-        var badge = document.getElementById("u4PhotoPreviewBadge");
-        var thumb = document.getElementById("u4PhotoThumb");
-        var nm = document.getElementById("u4PhotoName");
-        if (!f) {
-          if (badge) badge.hidden = true;
-          return;
-        }
-        if (nm) nm.textContent = f.name || "photo.jpg";
-        if (badge) badge.hidden = false;
-        if (thumb && typeof URL !== "undefined" && URL.createObjectURL) {
-          try { thumb.src = URL.createObjectURL(f); } catch (e) {}
-        }
+      // Move #repText inside compBox (auto-growing height + Cmd/Ctrl+Enter submit)
+      compBox.appendChild(repTaEl);
+      var autoGrowTa = function() {
+        repTaEl.style.height = "auto";
+        repTaEl.style.height = Math.min(260, Math.max(68, repTaEl.scrollHeight)) + "px";
       };
-
-      photoInput.addEventListener("change", syncPhotoBadge);
-      document.getElementById("u4PhotoClearBtn").addEventListener("click", function(ev) {
-        ev.preventDefault();
-        try { photoInput.value = ""; } catch (e) {}
-        syncPhotoBadge();
+      repTaEl.addEventListener("input", autoGrowTa);
+      repTaEl.addEventListener("keydown", function(ev) {
+        if ((ev.metaKey || ev.ctrlKey) && ev.key === "Enter") {
+          ev.preventDefault();
+          if (typeof repForm.requestSubmit === "function") repForm.requestSubmit(repSend);
+          else repSend.click();
+        }
       });
-    }
 
-    // 3. Move dictation mic button right next to Send inside .cbar
-    if (!speakBtn.__u4SimpleDictateBoundV9) {
+      // Photo button + live thumbnail badge on left of composer bar
+      if (photoInput) {
+        var photoBar = document.createElement("div");
+        photoBar.id = "u4PhotoBar";
+        photoBar.className = "u4-photo-bar";
+        photoBar.innerHTML =
+          '<button type="button" id="u4PhotoTriggerBtn" class="u4-photo-btn"><span id="u4PhotoBtnText">📷 Add photo</span></button>' +
+          '<span id="u4PhotoEncourageText" class="u4-photo-note">Include a photo whenever possible</span>' +
+          '<span id="u4PhotoPreviewBadge" class="u4-photo-preview" hidden>' +
+            '<img id="u4PhotoThumb" alt="Selected photo">' +
+            '<span id="u4PhotoName" class="u4-photo-preview-name"></span>' +
+            '<button type="button" id="u4PhotoClearBtn" class="u4-photo-clear" aria-label="Remove photo">✕</button>' +
+          '</span>';
+        leftCluster.appendChild(photoBar);
+
+        setTimeout(function() {
+          var trig = document.getElementById("u4PhotoTriggerBtn");
+          var clr = document.getElementById("u4PhotoClearBtn");
+          var syncPhotoBadge = function() {
+            var f = photoInput.files && photoInput.files[0];
+            var badge = document.getElementById("u4PhotoPreviewBadge");
+            var hintEl = document.getElementById("u4PhotoEncourageText");
+            var thumb = document.getElementById("u4PhotoThumb");
+            var nm = document.getElementById("u4PhotoName");
+            if (!f) {
+              if (badge) badge.hidden = true;
+              if (hintEl) hintEl.hidden = false;
+              return;
+            }
+            if (nm) nm.textContent = f.name || "photo.jpg";
+            if (badge) badge.hidden = false;
+            if (hintEl) hintEl.hidden = true;
+            if (thumb && typeof URL !== "undefined" && URL.createObjectURL) {
+              try { thumb.src = URL.createObjectURL(f); } catch (e) {}
+            }
+          };
+          if (trig) trig.addEventListener("click", function(ev){ ev.preventDefault(); photoInput.click(); });
+          photoInput.addEventListener("change", syncPhotoBadge);
+          if (clr) clr.addEventListener("click", function(ev){
+            ev.preventDefault();
+            try { photoInput.value = ""; } catch (e) {}
+            syncPhotoBadge();
+          });
+        }, 0);
+      }
+
+      // Circular Mic (#speakBtn) + Send ↑ (#repSend) on the RIGHT side of the box!
       var cleanSpeakBtn = speakBtn.cloneNode(false);
       cleanSpeakBtn.removeAttribute("style");
       cleanSpeakBtn.type = "button";
       cleanSpeakBtn.__u4SimpleDictateBoundV9 = true;
       if (speakBtn.parentNode) speakBtn.parentNode.removeChild(speakBtn);
-      if (repSend.parentNode) {
-        repSend.parentNode.insertBefore(cleanSpeakBtn, repSend);
-      } else {
-        repForm.appendChild(cleanSpeakBtn);
-      }
       cleanSpeakBtn.addEventListener("click", function(ev) {
         toggleFieldDictation(ev);
       });
+
+      var oldCbar = repSend.parentNode;
+      rightCluster.appendChild(cleanSpeakBtn);
+      rightCluster.appendChild(repSend);
+      if (oldCbar && oldCbar !== repForm && oldCbar.children && oldCbar.children.length <= 1) {
+        oldCbar.hidden = true;
+      }
+
+      compBar.appendChild(leftCluster);
+      compBar.appendChild(rightCluster);
+      compBox.appendChild(compBar);
     }
 
     // 4. Before #repForm submits: stop active dictation, require sender identity, and embed '[From: Name]' cleanly!
@@ -6913,6 +7107,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         }
         var r = origShow.call(this, normTarget);
         placeAiHelperBesidePageHeading();
+        enhanceRoomQuickJumpsAndPdfPages();
         setTimeout(refreshDialogSuggestions, 25);
         return r;
       };
@@ -6945,7 +7140,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   }
 
   window.U4GeminiLiveAssistant = {
-    version: "r5-live-orb-v14",
+    version: "r5-live-orb-v15",
     micOpenedOnLoad: false,
     orderedProjects: ORDERED_PROJECTS,
     start: startGeminiLiveSession,
