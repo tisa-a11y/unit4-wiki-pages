@@ -295,84 +295,138 @@ nav.rail a.sub .k,.docs .k{display:block;font-family:var(--mono);font-size:10.5p
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
-/* U4_R5_V7_LIVE_ORB_AND_CHAT_DIALOG_CSS_START */
-main .bar .u4-voice-pill,main .bar .u4-voice-status,.mobile .u4-voice-pill,.mobile .u4-voice-status,#waVoiceMicPill,#waVoiceStatus{display:none!important}
-main{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 168px)!important}
-.qp-panel{z-index:98!important}
-.u4-ai-dock{position:fixed;right:max(16px,calc(env(safe-area-inset-right,0px) + 16px));bottom:calc(env(safe-area-inset-bottom,0px) + 78px);z-index:95;display:flex;align-items:center;justify-content:flex-end;gap:10px;pointer-events:none;font-family:var(--body);max-width:calc(100vw - 24px)}
-@media (max-width:760px){.u4-ai-dock{right:max(14px,calc(env(safe-area-inset-right,0px) + 14px));bottom:calc(env(safe-area-inset-bottom,0px) + 76px);gap:8px}}
-@keyframes u4HelperPoint{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
-@keyframes u4LiveAura{0%{box-shadow:0 0 0 0 rgba(16,185,129,.48),0 6px 20px rgba(0,0,0,.3)}70%{box-shadow:0 0 0 13px rgba(16,185,129,0),0 6px 20px rgba(0,0,0,.3)}100%{box-shadow:0 0 0 0 rgba(16,185,129,0),0 6px 20px rgba(0,0,0,.3)}}
-@keyframes u4EqBar{0%,100%{transform:scaleY(.38)}50%{transform:scaleY(1.15)}}
-.u4-ai-pointer{pointer-events:auto;display:inline-flex;align-items:center;gap:7px;padding:9px 14px;border-radius:999px;border:1.5px solid var(--accent);background:var(--panel);color:var(--fg);font:600 13.5px/1.2 var(--body);box-shadow:0 6px 20px rgba(0,0,0,.26);cursor:pointer;animation:u4HelperPoint 1.55s ease-in-out infinite;white-space:nowrap}
-.u4-ai-pointer[hidden],.u4-ai-chat-pill[hidden]{display:none!important}
-.u4-ai-pointer:hover,.u4-ai-chat-pill:hover{background:var(--accent-soft)}
-.u4-ai-pointer-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
-.u4-ai-pointer-arrow{font-weight:800;color:var(--accent);font-size:14px;line-height:1}
-.u4-ai-chat-pill{pointer-events:auto;display:inline-flex;align-items:center;gap:6px;padding:8px 13px;border-radius:999px;border:1.5px solid #10b981;background:var(--panel);color:var(--fg);font:600 12.5px/1.2 var(--body);box-shadow:0 6px 18px rgba(0,0,0,.24);cursor:pointer;white-space:nowrap}
-.u4-ai-chat-pill-dot{width:7px;height:7px;border-radius:50%;background:#10b981;box-shadow:0 0 0 3px rgba(16,185,129,.22);flex:none}
-@media (max-width:520px){.u4-ai-pointer,.u4-ai-chat-pill{padding:8px 12px;font-size:12.5px}}
-.u4-ai-orb{pointer-events:auto;position:relative;width:58px;height:58px;border-radius:50%;border:2px solid rgba(255,255,255,.24);background:linear-gradient(145deg,#1e293b,#0f172a);color:#f8fafc;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.34),0 0 0 2px var(--accent);padding:0;flex:none;transition:transform .14s,background .2s,box-shadow .2s}
-.u4-ai-orb:hover{transform:scale(1.05)}
+/* U4_R5_V9_COMPLETE_UI_CSS_START */
+/* Hide redundant legacy voice pills and broken floating 'Send a note' pill/panel */
+main .bar .u4-voice-pill,main .bar .u4-voice-status,.mobile .u4-voice-pill,.mobile .u4-voice-status,#waVoiceMicPill,#waVoiceStatus,#qpBtn,.qp-fab,#qpPanel,.qp-panel{display:none!important;visibility:hidden!important;pointer-events:none!important}
+main{padding-bottom:64px!important}
+
+/* Inline title + AI Helper row right next to 'Unit 4 Wiki — Home' and room headings (never blocking screen) */
+.u4-title-row,header.home-head.u4-has-ai{display:flex;align-items:center;justify-content:space-between;gap:10px 14px;flex-wrap:wrap;max-width:74ch;margin:0 0 14px}
+header.home-head.u4-has-ai .u4-home-head-copy{min-width:0;flex:1 1 200px}
+.u4-title-row h1{margin:0!important;flex:1 1 180px;min-width:0}
+.u4-top-fallback-slot{display:flex;align-items:center;justify-content:flex-end;max-width:74ch;margin:0 0 10px}
+
+.u4-ai-dock{display:inline-flex;align-items:center;justify-content:flex-end;gap:8px;font-family:var(--body);flex:0 0 auto;margin-left:auto}
+@keyframes u4HelperPoint{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+@keyframes u4LiveAura{0%{box-shadow:0 0 0 0 rgba(5,150,105,.42)}70%{box-shadow:0 0 0 10px rgba(5,150,105,0)}100%{box-shadow:0 0 0 0 rgba(5,150,105,0)}}
+@keyframes u4EqBar{0%,100%{transform:scaleY(.4)}50%{transform:scaleY(1.15)}}
+
+.u4-ai-pointer{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;border:1.5px solid var(--accent);background:var(--accent-soft);color:var(--fg);font:600 13px/1.2 var(--body);cursor:pointer;animation:u4HelperPoint 1.6s ease-in-out infinite;white-space:nowrap}
+.u4-ai-pointer[hidden],.u4-ai-reopen-btn[hidden],.u4-voice-minbar[hidden],.u4-voice-dialog[hidden]{display:none!important}
+.u4-ai-pointer:hover,.u4-ai-reopen-btn:hover{filter:brightness(1.04)}
+.u4-ai-pointer-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none}
+.u4-ai-pointer-arrow{font-weight:700;color:var(--accent);font-size:13.5px;line-height:1}
+
+.u4-ai-reopen-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;border:1.5px solid #10b981;background:var(--panel);color:var(--fg);font:600 12.5px/1.2 var(--body);cursor:pointer;white-space:nowrap}
+.u4-ai-reopen-dot{width:7px;height:7px;border-radius:50%;background:#10b981;flex:none}
+
+/* Clean circular waveform icon button — NO tacky ON/OFF text sign */
+.u4-ai-orb{position:relative;width:44px;height:44px;border-radius:50%;border:1.5px solid var(--accent);background:var(--panel);color:var(--accent);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.10);padding:0;flex:none;transition:transform .14s,background .18s,color .18s,border-color .18s,box-shadow .18s}
+.u4-ai-orb:hover{transform:scale(1.05);background:var(--accent-soft)}
 .u4-ai-orb:active{transform:scale(.96)}
-.u4-ai-dock[data-live="connecting"] .u4-ai-orb{background:linear-gradient(145deg,#b45309,#78350f);box-shadow:0 8px 24px rgba(180,83,9,.38),0 0 0 3px #fbbf24}
-.u4-ai-dock[data-live="on"] .u4-ai-orb{background:linear-gradient(145deg,#059669,#0f766e);border-color:#a7f3d0;animation:u4LiveAura 1.9s infinite}
-@media (max-width:760px){.u4-ai-orb{width:54px;height:54px}}
-.u4-ai-orb svg{width:27px;height:27px;display:block}
-@media (max-width:760px){.u4-ai-orb svg{width:25px;height:25px}}
+.u4-ai-dock[data-live="connecting"] .u4-ai-orb{background:#fef3c7;color:#b45309;border-color:#f59e0b}
+.u4-ai-dock[data-live="on"] .u4-ai-orb{background:#059669;color:#ffffff;border-color:#059669;animation:u4LiveAura 1.9s infinite}
+.u4-ai-orb svg{width:22px;height:22px;display:block}
 .u4-eq-b{transform-origin:center;transition:transform .15s}
 .u4-ai-dock[data-live="on"] .u4-eq-1{animation:u4EqBar .78s ease-in-out infinite}
 .u4-ai-dock[data-live="on"] .u4-eq-2{animation:u4EqBar .56s ease-in-out .12s infinite}
 .u4-ai-dock[data-live="on"] .u4-eq-3{animation:u4EqBar .68s ease-in-out .24s infinite}
 .u4-ai-dock[data-live="on"] .u4-eq-4{animation:u4EqBar .60s ease-in-out .08s infinite}
 .u4-ai-dock[data-live="on"] .u4-eq-5{animation:u4EqBar .84s ease-in-out .18s infinite}
-.u4-ai-orb-pill{position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);padding:1px 6px;border-radius:999px;font:700 9.5px/1.3 var(--mono);letter-spacing:.05em;text-transform:uppercase;background:#334155;color:#e2e8f0;border:1px solid rgba(255,255,255,.2);white-space:nowrap}
-.u4-ai-dock[data-live="on"] .u4-ai-orb-pill{background:#ecfdf5;color:#065f46;border-color:#34d399}
-.u4-ai-dock[data-live="connecting"] .u4-ai-orb-pill{background:#fef3c7;color:#92400e;border-color:#fbbf24}
-.u4-voice-dialog{position:fixed;right:max(16px,calc(env(safe-area-inset-right,0px) + 16px));bottom:calc(env(safe-area-inset-bottom,0px) + 148px);z-index:94;width:min(395px,calc(100vw - 24px));height:min(480px,calc(100vh - 210px));display:flex;flex-direction:column;border-radius:16px;border:1.5px solid var(--line);background:var(--panel);color:var(--fg);box-shadow:0 16px 42px rgba(0,0,0,.36);overflow:hidden;font-family:var(--body)}
-.u4-voice-dialog[hidden]{display:none!important}
-@media (max-width:760px){.u4-voice-dialog{left:max(10px,env(safe-area-inset-left,0px));right:max(10px,env(safe-area-inset-right,0px));width:auto;bottom:calc(env(safe-area-inset-bottom,0px) + 142px);height:min(420px,calc(100dvh - 210px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px)))}}
-.u4-vd-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 13px;border-bottom:1px solid var(--line);background:var(--bg)}
+
+@media (max-width:520px){
+  header.home-head.u4-has-ai .home-title{font-size:26px}
+  .u4-ai-pointer{padding:6px 10px;font-size:12px}
+  .u4-ai-orb{width:42px;height:42px}
+}
+
+/* Obvious 1-line minimized live strip when dialogue auto-minimizes on navigation so user sees the page clearly */
+.u4-voice-minbar{max-width:74ch;width:100%;margin:0 0 14px;padding:8px 12px;border-radius:10px;border:1.5px solid #10b981;background:var(--panel);color:var(--fg);display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;font-family:var(--body);box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.u4-voice-minbar:hover{background:var(--accent-soft)}
+.u4-vmin-left{display:flex;align-items:center;gap:8px;min-width:0;font-size:13px;font-weight:500}
+.u4-vmin-dot{width:8px;height:8px;border-radius:50%;background:#10b981;box-shadow:0 0 0 3px rgba(16,185,129,.20);flex:none}
+.u4-vmin-summary{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--fg)}
+.u4-vmin-open{flex:none;font:600 12px/1.2 var(--body);padding:4px 10px;border-radius:999px;background:var(--accent);color:var(--panel);white-space:nowrap}
+
+/* Compact inline voice chat drawer right below the title row (never covers or blocks the page!) */
+.u4-voice-dialog{max-width:74ch;width:100%;margin:0 0 16px;display:flex;flex-direction:column;border-radius:12px;border:1.5px solid var(--line);background:var(--panel);color:var(--fg);box-shadow:0 6px 20px rgba(0,0,0,.09);overflow:hidden;font-family:var(--body)}
+.u4-vd-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px;border-bottom:1px solid var(--line);background:var(--bg)}
 .u4-vd-title-wrap{display:flex;align-items:center;gap:8px;min-width:0}
-.u4-vd-dot{width:9px;height:9px;border-radius:50%;background:var(--muted);flex:none}
-.u4-voice-dialog[data-live="on"] .u4-vd-dot{background:#10b981;box-shadow:0 0 0 3px rgba(16,185,129,.24)}
+.u4-vd-dot{width:8px;height:8px;border-radius:50%;background:var(--muted);flex:none}
+.u4-voice-dialog[data-live="on"] .u4-vd-dot{background:#10b981;box-shadow:0 0 0 3px rgba(16,185,129,.22)}
 .u4-voice-dialog[data-live="connecting"] .u4-vd-dot{background:#f59e0b}
-.u4-vd-title{font-weight:700;font-size:14px;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.u4-vd-state{font:700 10px/1.2 var(--mono);padding:2px 6px;border-radius:999px;border:1px solid var(--line);color:var(--muted);text-transform:uppercase}
-.u4-voice-dialog[data-live="on"] .u4-vd-state{background:#d1fae5;color:#065f46;border-color:#6ee7b7}
+.u4-vd-title{font-weight:700;font-size:13.5px;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.u4-vd-speaker-badge{font:600 11px/1.2 var(--mono);padding:2px 7px;border-radius:999px;background:var(--accent-soft);color:var(--accent);white-space:nowrap}
+.u4-vd-speaker-badge[hidden]{display:none!important}
 .u4-vd-controls{display:flex;align-items:center;gap:6px;flex:none}
-.u4-vd-icon-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--fg);font:700 14px/1 var(--body);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
-.u4-vd-icon-btn:hover{border-color:var(--accent);color:var(--accent)}
-.u4-vd-lang-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;padding:8px 13px;border:0;border-bottom:1px solid var(--line);background:var(--accent-soft);color:var(--fg);font:600 12.5px/1.3 var(--body);text-align:left;cursor:pointer;transition:background .15s}
-.u4-vd-lang-bar:hover{filter:brightness(1.04)}
-.u4-vd-lang-cta{font:700 11.5px/1.2 var(--body);padding:3px 9px;border-radius:999px;background:var(--accent);color:var(--panel);white-space:nowrap;flex:none}
-.u4-vd-sub{margin:0;padding:5px 13px;font-size:11.5px;color:var(--muted);border-bottom:1px solid var(--line);background:var(--panel);line-height:1.35}
-.u4-vd-log{flex:1 1 auto;overflow-y:auto;padding:11px 13px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
-.u4-chat-turn{display:flex;flex-direction:column;gap:3px;max-width:88%}
+.u4-vd-min-btn{font:600 12px/1.2 var(--body);padding:4px 10px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--fg);cursor:pointer;white-space:nowrap}
+.u4-vd-min-btn:hover{border-color:var(--accent);color:var(--accent)}
+.u4-vd-sub{margin:0;padding:5px 12px;font-size:11.5px;color:var(--muted);border-bottom:1px solid var(--line);background:var(--panel);line-height:1.35}
+.u4-vd-log{max-height:185px;min-height:64px;overflow-y:auto;padding:10px 12px;display:flex;flex-direction:column;gap:8px;scroll-behavior:smooth}
+.u4-chat-turn{display:flex;flex-direction:column;gap:2px;max-width:88%}
 .u4-chat-turn.is-user{align-self:flex-end;align-items:flex-end}
 .u4-chat-turn.is-ai{align-self:flex-start;align-items:flex-start}
 .u4-chat-turn.is-nav{align-self:center;max-width:96%}
-.u4-chat-role{font:600 10.5px/1.2 var(--mono);color:var(--muted);padding:0 4px}
-.u4-chat-bubble{padding:8px 12px;border-radius:14px;font-size:13.5px;line-height:1.42;overflow-wrap:anywhere;white-space:pre-wrap}
+.u4-chat-role{font:600 10px/1.2 var(--mono);color:var(--muted);padding:0 4px}
+.u4-chat-bubble{padding:7px 11px;border-radius:12px;font-size:13.5px;line-height:1.4;overflow-wrap:anywhere;white-space:pre-wrap}
 .u4-chat-turn.is-user .u4-chat-bubble{background:var(--accent);color:var(--panel);border-bottom-right-radius:4px}
 .u4-chat-turn.is-ai .u4-chat-bubble{background:var(--bg);color:var(--fg);border:1px solid var(--line);border-bottom-left-radius:4px}
-.u4-chat-nav-pill{font:600 11.5px/1.3 var(--body);padding:4px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);border:1px solid var(--line)}
+.u4-chat-nav-pill{font:600 11.5px/1.3 var(--body);padding:3px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent);border:1px solid var(--line)}
 .u4-chat-nav-pill.is-flag{background:var(--open-soft);color:var(--open);border-color:var(--open)}
-.u4-vd-foot{border-top:1px solid var(--line);padding:8px 11px;background:var(--bg);display:grid;gap:7px}
-.u4-vd-chips{display:flex;gap:5px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.u4-vd-foot{border-top:1px solid var(--line);padding:7px 10px;background:var(--bg);display:grid;gap:6px}
+.u4-vd-chips{display:flex;gap:5px;overflow-x:auto;padding-bottom:1px;scrollbar-width:none}
 .u4-vd-chips::-webkit-scrollbar{display:none}
 .u4-nudge-chip{flex:none;font:500 11.5px/1.2 var(--body);padding:4px 9px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--fg);cursor:pointer;white-space:nowrap}
 .u4-nudge-chip:hover{border-color:var(--accent);color:var(--accent)}
 .u4-vd-ask-row{display:flex;gap:6px;align-items:center}
-.u4-vd-ask-inp{flex:1 1 auto;min-width:0;font:inherit;font-size:13px;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--fg)}
-.u4-vd-ask-send{width:30px;height:30px;border-radius:50%;border:1px solid var(--accent);background:var(--accent);color:var(--panel);font:700 13px/1 var(--body);cursor:pointer;flex:none;display:inline-flex;align-items:center;justify-content:center;padding:0}
-.u4-note-mic-box{display:grid;gap:8px;margin:0 0 10px;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg)}
-.u4-note-mic-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
-.u4-note-mic-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;border:1.5px solid var(--accent);background:var(--accent);color:var(--panel);font:600 14.5px/1.2 var(--body);cursor:pointer}
-.u4-note-mic-btn.is-rec{background:#b42318;border-color:#b42318;color:#fff}
-.u4-note-mic-sub{font-size:12.5px;color:var(--muted);margin:0;line-height:1.35}
+.u4-vd-ask-inp{flex:1 1 auto;min-width:0;font:inherit;font-size:13px;padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--fg)}
+.u4-vd-ask-send{width:28px;height:28px;border-radius:50%;border:1px solid var(--accent);background:var(--accent);color:var(--panel);font:700 13px/1 var(--body);cursor:pointer;flex:none;display:inline-flex;align-items:center;justify-content:center;padding:0}
+
+/* Clean, organized bottom Field Note form (#field):
+   - Identity input + quick crew chips
+   - Organized About dropdown (NO Type/What-kind dropdown!)
+   - NO Voice Memo choose-file (#audioWrap hidden!)
+   - Live streaming dictation mic + encouraged Photo capture + Send */
+#field.u4-simple-field > p.hint,
+#field.u4-simple-field label[for="repKind"],
+#field.u4-simple-field #repKind,
+#field.u4-simple-field #audioWrap,
+#field.u4-simple-field #repAudio,
+#field.u4-simple-field #tidyBar,
+#field.u4-simple-field #speakHint,
+#field.u4-simple-field #cmtBtn,
+#field.u4-simple-field .pp-link{display:none!important}
+#field.u4-simple-field{margin-top:32px;padding:16px 18px}
+#field.u4-simple-field h2{font-size:19px;margin:0 0 10px}
+#field.u4-simple-field .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:680px){#field.u4-simple-field .row2{grid-template-columns:1fr}}
+.u4-who-wrap{display:grid;gap:5px}
+.u4-who-chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:2px}
+.u4-who-chip{font:500 12px/1.2 var(--body);padding:3px 9px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--fg);cursor:pointer}
+.u4-who-chip:hover{border-color:var(--accent);color:var(--accent)}
+.u4-who-chip.is-active{background:var(--accent);border-color:var(--accent);color:var(--panel);font-weight:600}
+#field.u4-simple-field label[for="repText"]{font-size:12px}
+#field.u4-simple-field #repText{font-size:15px;min-height:90px;line-height:1.45;transition:box-shadow .22s,border-color .22s}
+#field.u4-simple-field #repText.u4-field-updated{border-color:#10b981;box-shadow:0 0 0 3px rgba(16,185,129,.22)}
+/* Styled Photo bar (encouraging photos whenever possible, hiding ugly raw file input) */
+#field.u4-simple-field #photoWrap{display:none!important}
+.u4-photo-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding:8px 11px;border-radius:8px;border:1px dashed var(--line);background:var(--bg)}
+.u4-photo-btn{display:inline-flex;align-items:center;gap:6px;font:600 13.5px/1.2 var(--body);padding:7px 13px;border-radius:999px;border:1px solid var(--accent);background:var(--panel);color:var(--accent);cursor:pointer}
+.u4-photo-btn:hover{background:var(--accent-soft)}
+.u4-photo-note{font-size:12.5px;color:var(--muted);line-height:1.35}
+.u4-photo-preview{display:inline-flex;align-items:center;gap:7px;padding:4px 9px 4px 5px;border-radius:999px;background:var(--accent-soft);color:var(--fg);font:500 12px/1.2 var(--body);max-width:100%}
+.u4-photo-preview[hidden]{display:none!important}
+.u4-photo-preview img{width:24px;height:24px;object-fit:cover;border-radius:50%;border:1px solid var(--line);flex:none}
+.u4-photo-preview-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:180px}
+.u4-photo-clear{border:0;background:transparent;color:var(--muted);font:700 13px/1 var(--body);cursor:pointer;padding:2px 4px}
+#field.u4-simple-field .cbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:2px}
+.u4-dictate-btn{display:inline-flex;align-items:center;gap:7px;font:600 14.5px/1.2 var(--body);padding:9px 15px;border-radius:999px;border:1.5px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+.u4-dictate-btn:hover{background:var(--accent-soft)}
+.u4-dictate-btn.is-rec{background:#b42318!important;border-color:#b42318!important;color:#ffffff!important}
+.u4-dictate-btn svg{width:16px;height:16px;flex:none;display:block}
+#field.u4-simple-field #repSend{border-radius:999px;padding:9px 22px;font-size:14.5px}
 .ck-note{font-size:13px;color:var(--muted);margin:0 0 8px;line-height:1.4}
-/* U4_R5_V7_LIVE_ORB_AND_CHAT_DIALOG_CSS_END */
+/* U4_R5_V9_COMPLETE_UI_CSS_END */
 </style>
 
 <section id="agent-brief" class="sr-only" aria-label="Agent brief"># START HERE — Unit 4 remodel, 1231 11th Ave (San Francisco)<br><br>**This is the only start-here file.** Every person and agent opening this folder reads this first, fully, before acting.<br>Updated 2026-11-05 17:45 PT by Claude (Tisa&#x27;s account, cloud session). The same text is the wiki&#x27;s &quot;For AI agents: read first&quot; section.<br><br>## 0. Where to work — Google Drive is the single source of truth<br>- **Unit 4 folder (work here):** https://drive.google.com/drive/folders/1NnUfcuJfnzcjJz3XRvDQDhfvtMkrlSOr (`1231-11th-avenue/unit-4-renovation`)<br>- **Whole-building parent:** https://drive.google.com/drive/folders/1StmWHtnrDQlpd1CbUUfUEOI1vg-jHn29 (`1231-11th-avenue`)<br>- Everyone — Tisa&#x27;s Claude, John&#x27;s Claude, Dibble, any other agent — reads and writes through this Drive folder. (It is backed by Tisa&#x27;s Mini and syncs automatically; you never need the Mini path.)<br>- Every Unit 4 document now lives here, including copies of everything from the old locations (section 3). If you can&#x27;t find something, look in the room folder&#x27;s `from-remodel-hub/`, `from-unit4-bath-folder/` or `from-my-drive/` subfolder before assuming it&#x27;s missing.<br>- Older start-here, AGENTS and CLAUDE files were retired 2026-11-05 to `continuity/_superseded/start-here-history/` — don&#x27;t follow them.<br><br>---<br><br>## 1. Who and what<br>- **Tisa** owns the project and makes and locks every decision. **John** is lead carpenter on site. **Ervin, Joel, Wilma** are crew (Spanish speakers).<br>- **Wiki** — https://claude.ai/artifact/3rweGyzGShQj4oUauUTRvU — the shared picture: roadmap, one spec per project, open decisions, documents (PDFs preview in the page). It reads the `.md` files in this folder.<br>- **Todoist** board `Full 1231 11th Avenue Remodel` (id `6hcMQpGhXWprg6m7`). The wiki is its spine: every card traces to a spec, a locked decision or captured input.<br>- **Magicplan** MASTER plan is the geometry source: https://cloud.magicplan.app/plan/abb2d2c6-aa1c-4a88-a57e-1260847b6410<br>- **Your job:** keep the project moving with as little effort from Tisa and John as possible. Answer from the specs, capture what they tell you, file it, keep wiki and Todoist in step.<br><br>## 2. Read in this order<br>1. `STATUS-NOW.md` — what&#x27;s locked, what&#x27;s blocking, what&#x27;s next on site. Answer &quot;what&#x27;s up?&quot; from here first.<br>2. `continuity/ROADMAP.md` — sequence and phases.<br>3. `&lt;room&gt;/SPEC.md` for the area you&#x27;re working on.<br>4. `continuity/CURRENT-DECISIONS.md` and `continuity/KNOWN-GAPS.md` only if you need the history.<br><br>## 3. Folder map<br>| Folder | Holds |<br>|---|---|<br>| `kitchen/` `bathroom/` `electrical/` `laundry/` `bedroom/` `living-dining/` `hallway/` `paint-floors/` `hvac/` | One per room or trade; each has `SPEC.md` (governs) plus dated drawings and packages. |<br>| `interior-design/` | Wall treatment, trim, outlet and finish plans (dated revision folders). |<br>| `general/` | Whole-unit items; `from-remodel-hub/` = imported old crew-hub files. |<br>| `sprint/` | Current sprint plan and session agendas. |<br>| `continuity/` | Roadmap, decisions log, known gaps, labor ballpark, history and source snapshots. |<br>| `work-control/` | Agent index, Todoist runbook (dated snapshot), `wiki-source/` (wiki build files). |<br>| `to-triage/` | Drop box for any input (notes, photos, voice memos, session minutes). Claude routes it and moves it to `to-triage/_done/`. |<br>| `sessions/` | One folder per working session: minutes (and transcript when available). |<br>| `_to_delete/` | Marked for removal; only Tisa empties it. |<br><br>Outside this folder: `../building/` (common areas, backyard, alley; `building/earlier-renovations-not-unit-4…/` holds older renovation docs that are **not** Unit 4 — don&#x27;t use them for Unit 4), `../GOOGLE-DOCS-INDEX.md`, and the separate private folder `1231-11th-avenue-private` (leases, costs, payroll, bids — **never share with crew**).<br><br>**Old locations — still readable for history, never the place to work:** Drive &quot;1231 11th Ave - Unit 4 Remodel&quot; (old crew hub, folders 01–12), Drive &quot;11th Ave Unit 4 Bath&quot;. Everything in them was copied here on 2026-11-04/05. If an old file and a file here disagree, the room&#x27;s `SPEC.md` governs.<br><br>## 4. Which version is the latest<br>1. Names carry date and revision: `YYYY-MM-DD_U4_&lt;room or trade&gt;_&lt;what&gt;_R#` (issued drawings may use `RevA`, `RevB`), then `_EN` or `_ES`. English and Spanish are always separate files.<br>2. The latest lives in the topic folder. A replaced file moves, name unchanged, to that folder&#x27;s `_superseded/` (or `history/`). Nothing is deleted.<br>3. If a folder still has more than one live iteration, its `CURRENT.md` names the one that governs.<br>4. `from-remodel-hub/`, `from-unit4-bath-folder/`, `from-my-drive/` are copies imported 2026-11-04 so no mockup or image is lost; they&#x27;re being reconciled. Until then the room&#x27;s `SPEC.md` and the dated files outside them govern.<br><br>## 5. Golden rule: John never has to enter anything himself<br>When John or Tisa tells you something — a task, a measurement, a problem, a question, a decision needed — capture it for them in their words and file it (section 7). Don&#x27;t send them to a form. Confirm back in one line what you filed and where.<br><br>## 6. What each kind of agent can do<br>| You are… | You can |<br>|---|---|<br>| **Claude on Tisa&#x27;s claude.ai account** (this Project, Cowork, Claude Code) | Everything: wiki data via the ArtifactData tool (URL above), republish the wiki via the Artifact tool, edit files here, Todoist via the connector (connected 2026-11-03). |<br>| **John&#x27;s Claude** (claude.ai cloud, often voice on John&#x27;s iPhone) | Read the wiki link, this Drive folder and the Todoist board. Its Drive connector can **create** files but can&#x27;t overwrite existing ones, so it writes session minutes and notes to `to-triage/` as `YYYY-MM-DD_HHMM_session_&lt;topic&gt;.md` with an author line (which Claude, which device, cloud or local). Tisa&#x27;s Claude routes them into the wiki, specs, STATUS-NOW and Todoist. |<br>| **Any other agent** (Dibble, Codex, Gemini, Antigravity) | Read and edit the files here (section 8 rules), update `STATUS-NOW.md`, drop input in `to-triage/`. Access comes from this Drive folder being shared with John&#x27;s Google account as Editor. |<br>| **Any agent with a browser** | Open the wiki and help John use it on his phone. |<br><br>**Dropping input (non-Claude agents):** `to-triage/YYYY-MM-DD_HHMM_&lt;who&gt;_&lt;short&gt;.md`<br>```<br>type: task | fact | decision | note<br>project: kitchen | bathroom | electrical | laundry | bedroom | living-dining | hallway | paint-floors | hvac | general<br>from: &lt;agent&gt; on behalf of &lt;John/Tisa&gt;<br>---<br>&lt;their words&gt;<br>```<br>**Claude capture:** write to the wiki&#x27;s `inbox` collection `{type, project, section, title, details, raw, source:&quot;agent&quot;, from, createdAt, status:&quot;queued&quot;}`, then route it in the same turn.<br><br>## 7. Routing — where each thing goes<br>| Came in | Do this |<br>|---|---|<br>| **Task** | Look for an existing card first (comment rather than duplicate). Create it in the project&#x27;s section — Kitchen / Cocina · Bathroom / Baño · Electrical / Electricidad · Laundry / Lavandería · Walls, Molding &amp; Paint · General &amp; HVAC (bedroom, living-dining, hallway, HVAC, building) · New Tasks (need triage) · Backlog · On Hold or Blocked. Re-check section names live before writing. Plain title; description = State / Trade / Next physical action / Governing source (link to SPEC.md). **Unassigned** unless Tisa names someone. |<br>| **Site fact** | Add to the project&#x27;s SPEC.md with date and &quot;(John, field)&quot;. Comment on the card if it changes one. |<br>| **Decision needed** | Add a wiki `decisions` doc (`status: open`, priority 1 blocking / 2 next / 3 later). Only Tisa locks. |<br>| **Locked decision** (`synced: false`) | Update SPEC.md (mark LOCKED), matching cards, the Spanish crew edition, `STATUS-NOW.md`; set `synced: true`. |<br>| **Field report / session notes** | File facts as above; next steps → unassigned cards; open items → decisions; mark `recorded`. |<br><br>Wiki and cards disagree → the wiki wins (never the reverse without Tisa). Any change you make → update `STATUS-NOW.md` in the same pass.<br><br>## 8. Rules that always hold<br>- Tisa&#x27;s direction is locked; anything an AI produces is a suggestion until she locks it.<br>- Nothing is sent, signed, ordered, paid or scheduled without Tisa&#x27;s approval.<br>- Magicplan and existing drawings first. Never ask John to re-measure what&#x27;s recorded; ask only for the specific missing number.<br>- Crew-facing documents: English first, then a **separate** Spanish edition. Never mix languages. Replies to Tisa in English.<br>- Edit an existing spec rather than making a new file beside it (new files break wiki links).<br>- Superseded files go to `_superseded`; never delete. No credentials in any file here.<br>- **Wiki and Drive mirror each other** (Tisa, 2026-11-06): every wiki page and document list matches a folder in `1231 11th Avenue Unit 4`, and each document sits under the same room in both. When you add or move a document or folder in Drive, update the wiki in the same pass, and the reverse. Example: the Laundry Closet is its own project, so its documents live in `laundry/`, not `electrical/`.<br>- **Spanish for the wiki lives only in the wiki's own text** (Tisa, 2026-11-06): the English/Español toggle. Never create Spanish copies of the .md files in Drive. Crew plans keep their existing English and Spanish PDFs.<br>- **Work record (Beads):** canonical ledger `/Users/tisavo/Work/Projects/1231-11th-avenue/unit-4-renovation` on the MacBook Pro (`.beads/embeddeddolt`, main issue `tisa-wi0.6`). Run `bd where` before writing; never initialize a duplicate ledger; keep existing issue IDs. Agents that can&#x27;t reach it (cloud sessions) record state in `STATUS-NOW.md` and say Beads is pending. Last check from a cloud session (2026-11-05): not reachable, status unverified.<br>- Every session&#x27;s minutes say the date, who attended and which Claude wrote them (account, device, cloud or local).<br>- Say plainly what you verified vs. only wrote. Trust the source file over another agent&#x27;s summary.<br><br>## 9. Maintaining the wiki (Claude only)<br>Source: `work-control/wiki-source/` (template updated 2026-11-05 to include the live Home page and collapsible document lists) — `wiki_template.html`, `build_wiki.py` (embeds the specs and document lists), `brief.py` (embeds this file as the agent brief), `drive_docs.json`, `pdf_blobs.json`. Rebuild, then publish to the same artifact URL. Collections: `decisions` (Tisa/admin write), `decisionNotes`, `reports`, `sessionNotes`, `inbox`.<br><br>## 10. More detail, if needed<br>- Routing detail and history: `work-control/2026-11-03_U4_AgentWork_Index_R2.md`<br>- Todoist runbook (11/2 snapshot, has known errors): `work-control/TODOIST-PROJECT-MANAGER-RUNBOOK.md`<br>- Kitchen governing revision: `kitchen/CURRENT.md`<br></section>
@@ -2967,21 +3021,26 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   }
 
   var ALLOWED_ROOMS = [
-    "home","roadmap","decisions","kitchen","bathroom","electrical",
-    "laundry","bedroom","living-dining","hallway","paint-floors","hvac","agents"
+    "home","roadmap","decisions","kitchen","bathroom","bedroom","living-dining",
+    "laundry","hallway","electrical","paint-floors","wall-treatment","floor-treatment","hvac","agents"
   ];
-  var PROJECT_ROOMS = ["kitchen","bathroom","electrical","laundry","bedroom","living-dining","hallway","paint-floors","hvac"];
+  var PROJECT_ROOMS = [
+    "kitchen","bathroom","bedroom","living-dining","laundry",
+    "hallway","electrical","paint-floors","floor-treatment","hvac"
+  ];
 
   var ROOM_LABELS = {
     kitchen: { en: "Kitchen", es: "Cocina" },
     bathroom: { en: "Bathroom", es: "Baño" },
-    electrical: { en: "Electrical & Lighting", es: "Eléctrico e iluminación" },
-    laundry: { en: "Laundry Closet", es: "Lavandería" },
     bedroom: { en: "Bedroom", es: "Recámara" },
     "living-dining": { en: "Living & Dining", es: "Sala y comedor" },
+    laundry: { en: "Laundry Closet", es: "Clóset de lavandería" },
     hallway: { en: "Hallway", es: "Pasillo" },
-    "paint-floors": { en: "Paint, Trim & Floors", es: "Pintura, molduras y pisos" },
-    hvac: { en: "Heating / Cooling", es: "Clima / calefacción" }
+    electrical: { en: "Electrical", es: "Electricidad" },
+    "paint-floors": { en: "Wall Treatment (Paint)", es: "Acabado de muros (Pintura)" },
+    "wall-treatment": { en: "Wall Treatment (Paint)", es: "Acabado de muros (Pintura)" },
+    "floor-treatment": { en: "Floor Treatment", es: "Acabado de pisos" },
+    hvac: { en: "HVAC", es: "Calefacción (HVAC)" }
   };
 
   function currentUiLang() {
@@ -3107,21 +3166,21 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       window.ckBlock = cleanCkBlock;
     }
 
-    // Clean Home aboutBlock (no inline dashed banner clutter)
-    if (typeof WebSocket === "function" && typeof aboutBlock === "function" && !aboutBlock.__u4CleanV4) {
+    // Clean Home aboutBlock (no inline dashed banner clutter, no redundant Send a note)
+    if (typeof WebSocket === "function" && typeof aboutBlock === "function" && !aboutBlock.__u4CleanV9) {
       var cleanAboutBlock = function() {
         if (currentUiLang() === "es") {
           return '<section class="about" translate="no"><h2>Cómo usar esta wiki</h2><ul>' +
-            '<li><b>Asistente IA (botón redondo flotante abajo a la derecha):</b> tócalo una vez para iniciar el chat de voz en vivo (en español o inglés) y navegar cuartos o planos PDF; tócalo de nuevo para terminar. Si detecta alguna inconsistencia o medida faltante, la anota automáticamente para Tisa.</li>' +
-            '<li><b>Enviar una nota (botón abajo a la derecha):</b> habla o escribe una nota de obra en español o inglés — el idioma se detecta automáticamente.</li>' +
+            '<li><b>Asistente IA (botón junto al título arriba):</b> tócalo una vez para hablar en vivo (en español o inglés), abrir cuartos o planos PDF, o pedirle que llene una nota de obra abajo; al navegar se minimiza solo para que veas la página y puedes reabrirlo con <b>Ver chat</b>. Tócalo otra vez para terminar.</li>' +
+            '<li><b>Nota de obra (abajo en cada página):</b> indica tu nombre y el área, toca <b>Dictar</b> para que tus palabras aparezcan en vivo mientras hablas, agrega una <b>foto</b> siempre que puedas y presiona <b>Enviar</b>.</li>' +
           '</ul></section>';
         }
         return '<section class="about" translate="no"><h2>How to use this wiki</h2><ul>' +
-          '<li><b>AI Helper (floating round voice button at bottom right):</b> tap once to start a live voice conversation (in English or Español) to jump to rooms, walk through PDF plans, or check open items — and tap the round button again to end. Any plan inconsistencies or missing measurements are automatically flagged for Tisa in session notes.</li>' +
-          '<li><b>Send a note (bottom-right button):</b> speak or type a quick site note in English or Español — language is detected automatically.</li>' +
+          '<li><b>AI Helper (button next to Home at top):</b> tap once to start live voice (in English or Español) to jump to rooms, walk through PDF plans, or help fill out a field note below — the chat auto-minimizes when navigating so you can see the page clearly, and <b>Show chat</b> reopens it anytime. Tap the button again to end.</li>' +
+          '<li><b>Field note (bottom of each page):</b> enter your name, pick what it’s about, tap <b>Dictate</b> so your words appear live on the form as you speak, add a <b>photo</b> whenever possible, and press <b>Send</b>.</li>' +
         '</ul></section>';
       };
-      cleanAboutBlock.__u4CleanV4 = true;
+      cleanAboutBlock.__u4CleanV9 = true;
       aboutBlock = cleanAboutBlock;
       window.aboutBlock = cleanAboutBlock;
     }
@@ -3417,243 +3476,602 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   }
 
   // =========================================================================
-  // PART 1: CLEAN 'LEAVE A NOTE' VOICE CAPTURE (AUTOMATIC LANGUAGE + PAUSE AUTO-SEND)
+  // PART 1: CANONICAL PROJECTS ORDER + ORGANIZED 'ABOUT' MENU + SENDER IDENTITY + PHOTO + LIVE STREAMING DICTATION
   // =========================================================================
-  var noteVoiceState = {
-    active: false,
-    mode: null, // "qp" | "room"
-    mediaRecorder: null,
-    mediaStream: null,
-    audioCtx: null,
-    rafId: null,
-    maxTimer: null,
-    chunks: [],
-    cancelled: false,
-    submitting: false
+  var ORDERED_PROJECTS = [
+    { key: "kitchen", en: "Kitchen", es: "Cocina" },
+    { key: "bathroom", en: "Bathroom", es: "Baño" },
+    { key: "bedroom", en: "Bedroom", es: "Recámara" },
+    { key: "living-dining", en: "Living & Dining", es: "Sala y comedor" },
+    { key: "laundry", en: "Laundry Closet", es: "Clóset de lavandería" },
+    { key: "hallway", en: "Hallway", es: "Pasillo" },
+    { key: "electrical", en: "Electrical", es: "Electricidad" },
+    { key: "paint-floors", en: "Wall Treatment (Paint)", es: "Acabado de muros (Pintura)" },
+    { key: "floor-treatment", en: "Floor Treatment", es: "Acabado de pisos" },
+    { key: "hvac", en: "HVAC", es: "Calefacción (HVAC)" }
+  ];
+
+  // Clean, practical topic organization per project (plus crossover support across plans)
+  var ORGANIZED_ABOUT_TOPICS = {
+    kitchen: [
+      { v: "Kitchen — General", en: "Kitchen — General", es: "Cocina — General" },
+      { v: "Kitchen — Cabinets & Pie-Safe Shelves", en: "Cabinets & Pie-Safe Shelves", es: "Gabinetes y repisas empotradas" },
+      { v: "Kitchen — Appliances (Range, Hood, Fridge, DW)", en: "Appliances (Range, Hood, Fridge, DW)", es: "Electrodomésticos (estufa, campana, refri, lavavajillas)" },
+      { v: "Kitchen — Sink, Faucet & Plumbing", en: "Sink, Faucet & Plumbing", es: "Fregadero, llave y plomería" },
+      { v: "Kitchen — Countertops & Range-Wall Tile", en: "Countertops & Range-Wall Tile", es: "Cubiertas y azulejo del muro de la estufa" },
+      { v: "Kitchen — Panel Wall (D04) & Kitchen Wiring", en: "Panel Wall (D04) & Kitchen Wiring", es: "Muro del panel (D04) y cableado de cocina" },
+      { v: "Kitchen — Framing & Measurements", en: "Framing & Measurements", es: "Enmarcado y medidas" }
+    ],
+    bathroom: [
+      { v: "Bathroom — General", en: "Bathroom — General", es: "Baño — General" },
+      { v: "Bathroom — Floor & Wall Tile / Niches", en: "Floor & Wall Tile / Niches", es: "Azulejo de piso y muros / nichos" },
+      { v: "Bathroom — Tub, Valve & Waterproofing", en: "Tub, Valve & Waterproofing", es: "Tina, válvula e impermeabilizante" },
+      { v: "Bathroom — Toilet & Wall Furring", en: "Toilet & Wall Furring", es: "Inodoro y enrasado del muro" },
+      { v: "Bathroom — Pedestal Sink & Plumbing", en: "Pedestal Sink & Plumbing", es: "Lavabo de pedestal y plomería" },
+      { v: "Bathroom — Ceiling Wiring, Fan & Lights", en: "Ceiling Wiring, Fan & Lights", es: "Cableado de techo, extractor y luces" },
+      { v: "Bathroom — Pocket Door", en: "Pocket Door", es: "Puerta corrediza" },
+      { v: "Bathroom — Mirror, Glass & Accessories", en: "Mirror, Glass & Accessories", es: "Botiquín/espejo, vidrio y accesorios" }
+    ],
+    bedroom: [
+      { v: "Bedroom — General", en: "Bedroom — General", es: "Recámara — General" },
+      { v: "Bedroom — Wall Moulding & Frames (R2)", en: "Wall Moulding & Frames (R2)", es: "Molduras y marcos de pared (R2)" },
+      { v: "Bedroom — Closet Niche & Low-Voltage Switch", en: "Closet Niche & Low-Voltage Switch", es: "Nicho del clóset y cable de bajo voltaje" },
+      { v: "Bedroom — Outlets & Smurf Tube", en: "Outlets & Smurf Tube", es: "Cajas de contactos y tubo smurf" },
+      { v: "Bedroom — Trim & Paint", en: "Trim & Paint", es: "Molduras existentes y pintura" }
+    ],
+    "living-dining": [
+      { v: "Living & Dining — General", en: "Living & Dining — General", es: "Sala y comedor — General" },
+      { v: "Living & Dining — Wall Frames & Chair Rail", en: "Wall Frames & Chair Rail", es: "Marcos de pared y guardasilla" },
+      { v: "Living & Dining — Outlet Heights & Boxes", en: "Outlet Heights & Boxes", es: "Altura de contactos y cajas" },
+      { v: "Living & Dining — Subpanel Wall (D04)", en: "Subpanel Wall (D04)", es: "Muro del subpanel (D04)" },
+      { v: "Living & Dining — Trim & Paint", en: "Trim & Paint", es: "Molduras y pintura" }
+    ],
+    laundry: [
+      { v: "Laundry Closet — General", en: "Laundry Closet — General", es: "Clóset de lavandería — General" },
+      { v: "Laundry Closet — WashTower Delivery & Hookup", en: "WashTower Delivery & Hookup", es: "Entrega y conexión de WashTower" },
+      { v: "Laundry Closet — Murphy Bookcase Door", en: "Murphy Bookcase Door", es: "Puerta librero Murphy" },
+      { v: "Laundry Closet — Gas, Vent, Drain & Power", en: "Gas, Vent, Drain & Power", es: "Gas, ventilación, desagüe y corriente" }
+    ],
+    hallway: [
+      { v: "Hallway — General", en: "Hallway — General", es: "Pasillo — General" },
+      { v: "Hallway — Murphy Door Opening", en: "Murphy Door Opening", es: "Abertura de puerta Murphy" },
+      { v: "Hallway — Hall Trim & Lighting", en: "Hall Trim & Lighting", es: "Molduras e iluminación del pasillo" }
+    ],
+    electrical: [
+      { v: "Electrical — General", en: "Electrical — General", es: "Electricidad — General" },
+      { v: "Electrical — Subpanel (Eaton 20-Space at D04) & Feeder", en: "Subpanel (Eaton 20-Space at D04) & Feeder", es: "Subpanel (Eaton 20 espacios en D04) y alimentador" },
+      { v: "Electrical — Kitchen Circuits (Romex)", en: "Kitchen Circuits (Romex)", es: "Circuitos de cocina (Romex)" },
+      { v: "Electrical — Bathroom Ceiling & Circuits", en: "Bathroom Ceiling & Circuits", es: "Techo y circuitos del baño" },
+      { v: "Electrical — Room Boxes & Smurf Tube", en: "Room Boxes & Smurf Tube", es: "Cajas en cuartos y tubo smurf" }
+    ],
+    "paint-floors": [
+      { v: "Wall Treatment (Paint) — General", en: "Wall Treatment (Paint) — General", es: "Acabado de muros (Pintura) — General" },
+      { v: "Wall Treatment (Paint) — Moulding & Picture Frames", en: "Moulding & Picture Frames", es: "Molduras y marcos de pared" },
+      { v: "Wall Treatment (Paint) — Chair Rail vs No-Rail Option", en: "Chair Rail vs No-Rail Option", es: "Guardasilla vs Opción sin guardasilla" },
+      { v: "Wall Treatment (Paint) — Paint Colors, Primer & Sheen", en: "Paint Colors, Primer & Sheen", es: "Colores de pintura, primer y brillo" }
+    ],
+    "floor-treatment": [
+      { v: "Floor Treatment — General", en: "Floor Treatment — General", es: "Acabado de pisos — General" },
+      { v: "Floor Treatment — Unit Hardwood / Flooring Selection", en: "Unit Hardwood / Flooring Selection", es: "Selección de madera / piso de la unidad" },
+      { v: "Floor Treatment — Bathroom Tile Floor", en: "Bathroom Tile Floor", es: "Piso de azulejo del baño" },
+      { v: "Floor Treatment — Subfloor, Leveling & Thresholds", en: "Subfloor, Leveling & Thresholds", es: "Contrapiso, nivelación y umbrales" }
+    ],
+    hvac: [
+      { v: "HVAC — General", en: "HVAC — General", es: "Calefacción (HVAC) — General" },
+      { v: "HVAC — Furnace & Attic Equipment", en: "Furnace & Attic Equipment", es: "Calentador y equipo en el ático" },
+      { v: "HVAC — Attic Hatch Location (NEXT)", en: "Attic Hatch Location (NEXT)", es: "Ubicación de escotilla del ático (NEXT)" },
+      { v: "HVAC — Ducts & Registers", en: "Ducts & Registers", es: "Ductos y rejillas" }
+    ]
   };
 
-  function updateNoteVoiceButtons() {
+  var KNOWN_TEAM_NAMES = ["John", "Ervin", "Joel", "Wilma", "Tisa"];
+  var SENDER_STORAGE_KEY = "u4_sender_name_v1";
+  var SESSION_CHECKPOINT_KEY = "u4_pending_voice_session_v1";
+
+  function getSavedSenderName() {
+    try { return String(localStorage.getItem(SENDER_STORAGE_KEY) || "").trim(); }
+    catch (e) { return ""; }
+  }
+
+  function setSavedSenderName(nameStr) {
+    var clean = String(nameStr || "").replace(/\s+/g, " ").trim().slice(0, 60);
+    try {
+      if (clean) localStorage.setItem(SENDER_STORAGE_KEY, clean);
+    } catch (e) {}
+    var inp = document.getElementById("u4RepSenderName");
+    if (inp && clean && inp.value !== clean) inp.value = clean;
+    syncSenderChipsUi();
+    if (clean && liveState) {
+      liveState.speakerName = clean;
+      persistActiveSessionCheckpoint();
+      syncFloatingAiUi();
+    }
+    return clean;
+  }
+
+  function syncSenderChipsUi() {
+    var inp = document.getElementById("u4RepSenderName");
+    var cur = inp ? String(inp.value || "").trim().toLowerCase() : "";
+    Array.prototype.slice.call(document.querySelectorAll(".u4-who-chip")).forEach(function(btn) {
+      var n = String(btn.getAttribute("data-u4-who") || "").toLowerCase();
+      btn.classList.toggle("is-active", Boolean(cur && cur === n));
+    });
+  }
+
+  function populateOrganizedAboutSelect(roomKey) {
+    var sel = document.getElementById("repItem");
+    if (!sel) return;
     var es = currentUiLang() === "es";
-    var inBtn = document.getElementById("inVoiceBtn");
-    var inCancel = document.getElementById("inVoiceCancel");
+    var prev = sel.value;
+    var rk = String(roomKey || "home").toLowerCase();
+    if (rk === "wall-treatment") rk = "paint-floors";
+    var html = "";
+
+    if (ORGANIZED_ABOUT_TOPICS[rk]) {
+      var projInfo = ORDERED_PROJECTS.find(function(x){ return x.key === rk; });
+      var grpTitle = projInfo ? (es ? projInfo.es : projInfo.en) : rk;
+      html += '<optgroup label="' + escHtml(grpTitle) + '">';
+      ORGANIZED_ABOUT_TOPICS[rk].forEach(function(t) {
+        html += '<option value="' + escHtml(t.v) + '">' + escHtml(es ? t.es : t.en) + '</option>';
+      });
+      html += '</optgroup>';
+      html += '<optgroup label="' + escHtml(es ? "Cruce de planos / Otras áreas" : "Plan crossover / Other areas") + '">';
+      html += '<option value="Multiple areas / Plan crossover">' + escHtml(es ? "Varios cuartos / Cruce entre planos" : "Multiple areas / Plan crossover") + '</option>';
+      html += '<option value="Whole Unit / General">' + escHtml(es ? "Toda la unidad / General" : "Whole Unit / General") + '</option>';
+      ORDERED_PROJECTS.forEach(function(p) {
+        if (p.key === rk) return;
+        html += '<option value="' + escHtml(p.en + " (Crossover)") + '">' + escHtml((es ? p.es : p.en) + (es ? " (otro cuarto)" : " (other area)")) + '</option>';
+      });
+      html += '</optgroup>';
+    } else {
+      html += '<option value="Whole Unit / General">' + escHtml(es ? "Toda la unidad / General" : "Whole Unit / General") + '</option>';
+      html += '<option value="Multiple areas / Plan crossover">' + escHtml(es ? "Varios cuartos / Cruce entre planos" : "Multiple areas / Plan crossover") + '</option>';
+      html += '<optgroup label="' + escHtml(es ? "Proyectos" : "Projects") + '">';
+      ORDERED_PROJECTS.forEach(function(p) {
+        html += '<option value="' + escHtml(p.en) + '" data-room-key="' + escHtml(p.key) + '">' + escHtml(es ? p.es : p.en) + '</option>';
+      });
+      html += '</optgroup>';
+    }
+    sel.innerHTML = html;
+    if (prev && Array.prototype.some.call(sel.options, function(o){ return o.value === prev; })) {
+      sel.value = prev;
+    }
+  }
+
+  function rebuildOrderedProjectsNav() {
+    if (typeof WebSocket !== "function" || typeof PAGES === "undefined" || !Array.isArray(PAGES)) return;
+
+    if (typeof ES === "object" && ES) {
+      ES["Wall Treatment (Paint)"] = "Acabado de muros (Pintura)";
+      ES["Floor Treatment"] = "Acabado de pisos";
+      ES["Laundry Closet"] = "Clóset de lavandería";
+    }
+
+    // 1. Update paint-floors -> Wall Treatment (Paint)
+    var pf = PAGES.find(function(x){ return x.key === "paint-floors"; });
+    if (pf) {
+      pf.label = "Wall Treatment (Paint)";
+      pf.md =
+        "# Wall Treatment (Paint) — Project Spec (living page)\n\n" +
+        "## Concept\n" +
+        "Custom Edwardian-inspired wall mouldings, picture frames, trim alignment, and high-end paint finishes across the unit (with crossover to Bedroom R2, Living & Dining, Hallway, and Kitchen D04 trim).\n\n" +
+        "## Wall moulding & paint scope\n" +
+        "- Existing historic trim is preserved; new picture-frame moulding aligns cleanly with retained casings and baseboards.\n" +
+        "- Chair-rail baseline vs Option A (upper and lower frame rows without a chair rail) is under Tisa's review — do not cut or install review-only sheets yet.\n" +
+        "- Paint quantities come from Magicplan wall and ceiling areas (no re-measuring). Tisa approves all paint samples, colors, lines, and sheens.\n";
+      pf.mdEs =
+        "# Acabado de muros (Pintura) — Especificación del proyecto (página viva)\n\n" +
+        "## Concepto\n" +
+        "Molduras de pared a la medida, marcos decorativos, alineación con molduras existentes y acabados de pintura de alta gama en toda la unidad (con cruce hacia Recámara R2, Sala y comedor, Pasillo y moldura D04 de Cocina).\n\n" +
+        "## Alcance de muros y pintura\n" +
+        "- Se conservan las molduras existentes; los marcos nuevos se alinean con los marcos y zoclos actuales.\n" +
+        "- El diseño con guardasilla vs la Opción A (filas de marcos sin guardasilla) sigue en revisión de Tisa — no cortar ni instalar planos de revisión.\n" +
+        "- Las cantidades de pintura salen de las áreas de muros y techos en Magicplan. Tisa aprueba muestras, colores, líneas y brillos.\n";
+    }
+    if (typeof CHECKLISTS === "object" && CHECKLISTS) {
+      CHECKLISTS["paint-floors"] = {
+        fileId: (CHECKLISTS["paint-floors"] && CHECKLISTS["paint-floors"].fileId) || "1X6tuZMgvcY1y7RmhbDvScSAab77CGNFQ",
+        items: [
+          [0, "Chair rail vs Option A no-rail layout decided", "Decisión tomada: guardasilla vs Opción A sin guardasilla"],
+          [0, "Paint colors and sheens chosen", "Colores y acabados de pintura elegidos"],
+          [0, "Wall moulding and picture frames installed", "Molduras y marcos de pared instalados"],
+          [0, "Primed and painted after rough-ins and trim", "Primer y pintura aplicados después de instalaciones en bruto y molduras"]
+        ]
+      };
+    }
+
+    // 2. Ensure Laundry label is 'Laundry Closet'
+    var laun = PAGES.find(function(x){ return x.key === "laundry"; });
+    if (laun) laun.label = "Laundry Closet";
+
+    // 3. Add 'Floor Treatment' project right after 'Wall Treatment (Paint)'
+    if (!PAGES.some(function(x){ return x.key === "floor-treatment"; })) {
+      PAGES.push({
+        key: "floor-treatment",
+        label: "Floor Treatment",
+        group: "Projects",
+        path: "paint-floors/SPEC.md",
+        fileId: null,
+        md:
+          "# Floor Treatment — Project Spec (living page)\n\n" +
+          "## Concept\n" +
+          "Cohesive flooring across the unit — porcelain tile in the Bathroom and wood/unit flooring across Kitchen, Living & Dining, Bedroom, and Hallway (with thresholds and finished-floor height transitions coordinated across rooms).\n\n" +
+          "## Current floor scope\n" +
+          "- **Bathroom floor:** STAINMASTER Calacatta Gem 12×24 matte porcelain (`SM421224XTMTLW`, Lowe's 918690) with matching 3×12 bullnose base — John dry-lays and approves layout/vein direction before setting (see Bathroom page).\n" +
+          "- **Kitchen, Living & Dining, Bedroom, Hallway:** Floor material awaiting Tisa's confirmation (inventory lists white oak 116 sq ft for kitchen vs undecided in log; historical Marazzi gray study is not a selection).\n" +
+          "- Mark finished floor heights before cabinet markout and door/casing undercuts.\n",
+        mdEs:
+          "# Acabado de pisos — Especificación del proyecto (página viva)\n\n" +
+          "## Concepto\n" +
+          "Pisos coordinados en toda la unidad — porcelanato en el Baño y piso continuo/madera en Cocina, Sala y comedor, Recámara y Pasillo (coordinando niveles de piso terminado y umbrales entre cuartos).\n\n" +
+          "## Alcance actual de pisos\n" +
+          "- **Piso del baño:** Porcelanato STAINMASTER Calacatta Gem 12×24 mate (`SM421224XTMTLW`) con zoclo boleado 3×12 — John acomoda en seco y aprueba dirección de vetas antes de pegar (ver página de Baño).\n" +
+          "- **Cocina, Sala y comedor, Recámara y Pasillo:** Material de piso pendiente de confirmación de Tisa (el estudio viejo gris Marazzi no es selección).\n" +
+          "- Marcar nivel de piso terminado antes del trazo de gabinetes y cortes de marcos.\n"
+      });
+    }
+    if (typeof DOCS === "object" && DOCS && !DOCS["floor-treatment"]) {
+      DOCS["floor-treatment"] = [];
+    }
+    if (typeof CHECKLISTS === "object" && CHECKLISTS && !CHECKLISTS["floor-treatment"]) {
+      CHECKLISTS["floor-treatment"] = {
+        fileId: null,
+        items: [
+          [1, "Bathroom floor tile chosen (Calacatta Gem 12×24 matte)", "Azulejo del piso del baño elegido (Calacatta Gem 12×24 mate)"],
+          [0, "Floor material confirmed for Kitchen, Living & Dining, Bedroom and Hallway", "Material de piso confirmado para Cocina, Sala y comedor, Recámara y Pasillo"],
+          [0, "Flooring ordered and delivered", "Piso comprado y entregado"],
+          [0, "Installed after rough-ins and trim", "Instalado después de instalaciones en bruto y molduras"]
+        ]
+      };
+    }
+
+    // 4. Reorder PAGES in place to match exact requested Projects sequence:
+    // Kitchen, Bathroom, Bedroom, Living & Dining, Laundry Closet, Hallway, Electrical, Wall Treatment (Paint), Floor Treatment, HVAC
+    var desiredProjectKeys = ORDERED_PROJECTS.map(function(p){ return p.key; });
+    var overviewPages = PAGES.filter(function(p){ return p.group === "Overview"; });
+    var projectPages = [];
+    desiredProjectKeys.forEach(function(k) {
+      var found = PAGES.find(function(p){ return p.key === k; });
+      if (found) projectPages.push(found);
+    });
+    PAGES.filter(function(p){ return p.group === "Projects" && desiredProjectKeys.indexOf(p.key) === -1; }).forEach(function(p) {
+      projectPages.push(p);
+    });
+    var otherPages = PAGES.filter(function(p){ return p.group !== "Overview" && p.group !== "Projects"; });
+
+    PAGES.length = 0;
+    overviewPages.concat(projectPages, otherPages).forEach(function(p){ PAGES.push(p); });
+
+    // 5. Rebuild #rail and #jump in the exact new order
+    var railEl = document.getElementById("rail");
+    var jumpEl = document.getElementById("jump");
+    if (railEl) {
+      var brandEl = railEl.querySelector(".brand");
+      while (railEl.firstChild) railEl.removeChild(railEl.firstChild);
+      if (brandEl) railEl.appendChild(brandEl);
+      if (jumpEl) jumpEl.innerHTML = "";
+
+      var lastGrpName = null;
+      PAGES.forEach(function(p) {
+        if (p.group !== lastGrpName) {
+          var g = document.createElement("div");
+          g.className = "grp";
+          g.textContent = p.group;
+          railEl.appendChild(g);
+          lastGrpName = p.group;
+        }
+        var a = document.createElement("a");
+        a.href = "#" + p.key;
+        a.dataset.key = p.key;
+        a.textContent = p.label;
+        railEl.appendChild(a);
+
+        var ds = ((typeof DOCS === "object" && DOCS && DOCS[p.key]) || []).filter(function(d){ return !d.history; });
+        if (ds.length) {
+          var box = document.createElement("div");
+          box.className = "subdocs";
+          box.dataset.for = p.key;
+          box.hidden = true;
+          ds.forEach(function(d) {
+            var L = docLabel(d);
+            var s = document.createElement("a");
+            s.className = "sub";
+            s.href = docHref(d);
+            if (!isPdf(d)) { s.target = "_blank"; s.rel = "noopener"; }
+            s.dataset.doc = d.id;
+            if (typeof hideInEs === "function" && hideInEs(d, ds)) s.setAttribute("data-hide-es", "");
+            s.title = d.path;
+            s.textContent = L.t;
+            var k = document.createElement("span");
+            k.className = "k";
+            k.textContent = docKind(d) + (L.date ? " · " + niceDate(L.date) : "");
+            if (d.pin) s.classList.add("pin");
+            s.appendChild(k);
+            box.appendChild(s);
+          });
+          railEl.appendChild(box);
+          a.classList.add("has-subs");
+          a.setAttribute("aria-expanded", "false");
+          a.setAttribute("aria-controls", "subs-" + p.key);
+          box.id = "subs-" + p.key;
+          a.addEventListener("click", function(ev) {
+            if (typeof subActive !== "undefined" && subActive === p.key) {
+              ev.preventDefault();
+              if (subCollapsed.has(p.key)) subCollapsed.delete(p.key);
+              else subCollapsed.add(p.key);
+              syncSubs();
+            } else if (typeof subCollapsed !== "undefined") {
+              subCollapsed.delete(p.key);
+            }
+          });
+        }
+        if (jumpEl) {
+          var opt = document.createElement("option");
+          opt.value = p.key;
+          opt.textContent = p.label;
+          jumpEl.appendChild(opt);
+        }
+      });
+      if (currentUiLang() === "es" && typeof translateTree === "function") {
+        translateTree(railEl);
+      }
+    }
+  }
+
+  // Live streaming dictation state for the bottom Field Note form
+  var noteVoiceState = {
+    active: false,
+    engine: null,
+    recognition: null,
+    baseText: "",
+    committedText: "",
+    mediaRecorder: null,
+    mediaStream: null,
+    maxTimer: null,
+    chunks: [],
+    cancelled: false
+  };
+
+  var MIC_ICON_SVG =
+    '<svg viewBox="0 0 20 20" fill="none" aria-hidden="true">' +
+      '<rect x="7" y="2.5" width="6" height="9.5" rx="3" stroke="currentColor" stroke-width="1.7"/>' +
+      '<path d="M4.5 9.5a5.5 5.5 0 0 0 11 0M10 15v2.5M7.5 17.5h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>' +
+    '</svg>';
+
+  var STOP_ICON_SVG =
+    '<svg viewBox="0 0 20 20" fill="none" aria-hidden="true">' +
+      '<rect x="5.5" y="5.5" width="9" height="9" rx="2" fill="currentColor"/>' +
+    '</svg>';
+
+  function flashFieldNoteTextarea() {
+    var ta = document.getElementById("repText");
+    if (!ta || !ta.classList) return;
+    ta.classList.add("u4-field-updated");
+    setTimeout(function() {
+      if (ta && ta.classList) ta.classList.remove("u4-field-updated");
+    }, 1100);
+  }
+
+  function setFieldNoteHint(msg, isErr) {
+    var msgEl = document.getElementById("repMsg");
+    if (!msgEl) return;
+    msgEl.className = isErr ? "msg err" : "msg";
+    msgEl.textContent = msg || "";
+  }
+
+  function updateNoteVoiceButtons() {
+    if (typeof WebSocket !== "function") return;
+    var es = currentUiLang() === "es";
     var repBtn = document.getElementById("speakBtn");
-
-    var qpRec = noteVoiceState.active && noteVoiceState.mode === "qp";
-    if (inBtn) {
-      inBtn.classList.toggle("is-rec", qpRec);
-      inBtn.setAttribute("aria-pressed", qpRec ? "true" : "false");
-      inBtn.textContent = qpRec
-        ? (es ? "✓ Enviar ahora" : "✓ Send now")
-        : (es ? "🎤 Toca para hablar" : "🎤 Tap to speak");
+    if (repBtn) {
+      var rec = Boolean(noteVoiceState.active);
+      repBtn.classList.add("u4-dictate-btn");
+      repBtn.classList.remove("btn");
+      repBtn.classList.toggle("is-rec", rec);
+      repBtn.setAttribute("aria-pressed", rec ? "true" : "false");
+      repBtn.innerHTML = (rec ? STOP_ICON_SVG : MIC_ICON_SVG) +
+        '<span>' + (rec ? (es ? "Detener" : "Stop") : (es ? "Dictar" : "Dictate")) + '</span>';
     }
-    if (inCancel) inCancel.hidden = !qpRec;
-
-    if (repBtn && typeof WebSocket === "function") {
-      var rmRec = noteVoiceState.active && noteVoiceState.mode === "room";
-      repBtn.classList.toggle("is-rec", rmRec);
-      repBtn.setAttribute("aria-pressed", rmRec ? "true" : "false");
-      repBtn.textContent = rmRec
-        ? (es ? "✓ Enviar ahora" : "✓ Send now")
-        : (es ? "🎤 Hablar una nota" : "🎤 Tap to speak");
+    var sendBtn = document.getElementById("repSend");
+    if (sendBtn) {
+      sendBtn.textContent = es ? "Enviar" : "Send";
+    }
+    var fieldHeading = document.querySelector("#field > h2");
+    if (fieldHeading) {
+      fieldHeading.textContent = es ? "Nota de obra" : "Field note";
+    }
+    var whoLbl = document.getElementById("u4WhoLabelText");
+    if (whoLbl) {
+      whoLbl.textContent = es ? "De (tu nombre)" : "From (your name)";
+    }
+    var whoInp = document.getElementById("u4RepSenderName");
+    if (whoInp) {
+      whoInp.placeholder = es ? "Toca tu nombre abajo o escríbelo…" : "Tap your name below or type it…";
+    }
+    var photoBtnTxt = document.getElementById("u4PhotoBtnText");
+    if (photoBtnTxt) {
+      photoBtnTxt.textContent = es ? "📷 Agregar foto" : "📷 Add photo";
+    }
+    var photoHintTxt = document.getElementById("u4PhotoEncourageText");
+    if (photoHintTxt) {
+      photoHintTxt.textContent = es
+        ? "Incluye una foto siempre que puedas."
+        : "Include a photo whenever possible.";
+    }
+    var repTa = document.getElementById("repText");
+    if (repTa) {
+      repTa.placeholder = es
+        ? "Toca Dictar para hablar (tus palabras aparecen aquí en vivo) o escribe tu nota…"
+        : "Tap Dictate to speak (words appear here as you talk) or type your note…";
+    }
+    var jumpBtn = document.querySelector(".jumpfield");
+    if (jumpBtn) {
+      jumpBtn.textContent = es ? "Nota de obra ↓" : "Field note ↓";
     }
   }
 
-  function setNoteVoiceFeedback(mode, msg, isErr) {
-    var id = mode === "room" ? "speakHint" : "inVoiceStatus";
-    var el = document.getElementById(id);
-    if (!el) return;
-    el.hidden = !msg;
-    el.className = isErr ? "msg err" : "msg";
-    el.textContent = msg || "";
-  }
-
-  function stopNoteVoiceHardware() {
-    if (noteVoiceState.rafId && typeof cancelAnimationFrame === "function") {
-      cancelAnimationFrame(noteVoiceState.rafId);
-    }
-    noteVoiceState.rafId = null;
+  function stopFieldDictation(clearStatus) {
     clearTimeout(noteVoiceState.maxTimer);
     noteVoiceState.maxTimer = null;
-    if (noteVoiceState.audioCtx) {
-      try { noteVoiceState.audioCtx.close(); } catch (e) {}
-      noteVoiceState.audioCtx = null;
+    var rec = noteVoiceState.recognition;
+    noteVoiceState.recognition = null;
+    if (rec) {
+      try { rec.onend = null; rec.stop(); } catch (e) {}
     }
+    if (noteVoiceState.mediaRecorder && noteVoiceState.mediaRecorder.state === "recording") {
+      try { noteVoiceState.mediaRecorder.stop(); } catch (e) {}
+    }
+    noteVoiceState.mediaRecorder = null;
     if (noteVoiceState.mediaStream) {
       noteVoiceState.mediaStream.getTracks().forEach(function(t){ try { t.stop(); } catch (e) {} });
       noteVoiceState.mediaStream = null;
     }
-    noteVoiceState.mediaRecorder = null;
     noteVoiceState.active = false;
+    noteVoiceState.engine = null;
     updateNoteVoiceButtons();
+    if (clearStatus) setFieldNoteHint("", false);
   }
 
   function cancelNoteVoiceRecording(msg) {
-    var m = noteVoiceState.mode || "qp";
     noteVoiceState.cancelled = true;
-    if (noteVoiceState.mediaRecorder && noteVoiceState.mediaRecorder.state !== "inactive") {
-      try { noteVoiceState.mediaRecorder.stop(); } catch (e) {}
-    }
-    stopNoteVoiceHardware();
-    setNoteVoiceFeedback(m, msg || "", false);
+    stopFieldDictation(false);
+    if (msg) setFieldNoteHint(msg, false);
   }
 
-  async function sendLeaveANotePayload(rawText, detectedLang, audioObj, autoClosePanel) {
-    if (noteVoiceState.submitting) return;
-    var es = currentUiLang() === "es";
-    var ta = document.getElementById("inText");
-    var msgEl = document.getElementById("inMsg");
-    var sendBtn = document.getElementById("inSend");
-    var cleanText = String(rawText || (ta && ta.value) || "").trim();
-    if (!cleanText && !audioObj) {
-      if (msgEl) {
-        msgEl.className = "msg err";
-        msgEl.textContent = es ? "Habla o escribe una nota primero." : "Speak or write a note first.";
-      }
-      return;
+  // Live streaming dictation onto #repText as the speaker speaks
+  async function toggleFieldDictation(ev) {
+    if (ev && ev.preventDefault) ev.preventDefault();
+    if (liveState.active || liveState.connecting) {
+      stopGeminiLiveSession(false, "switched_to_field_dictation");
     }
-    noteVoiceState.submitting = true;
-    if (sendBtn) sendBtn.disabled = true;
-    var langTag = detectSpokenOrWrittenLanguage(cleanText, detectedLang);
-    var roomKey = (typeof current !== "undefined" && current && current.group === "Projects") ? current.key : activeRoomKey();
-    if (msgEl) {
-      msgEl.className = "msg";
-      msgEl.textContent = es ? "Enviando nota…" : "Sending note…";
-    }
-    try {
-      var res = await dispatchNoteToDriveTriage({
-        source: "inRaw",
-        project: roomKey,
-        roomKey: roomKey,
-        item: "General",
-        kind: audioObj ? "Voice note" : "Note",
-        noteType: audioObj ? "voice_memo" : "Note",
-        language: langTag,
-        raw: cleanText || "(Audio note)",
-        text: cleanText || "(Audio note)",
-        transcript: cleanText || "",
-        audio: audioObj || null,
-        audioLabel: audioObj ? audioObj.name : null,
-        commandSource: audioObj ? "voice_note" : "web_form"
-      });
-      if (!res || !res.ok) {
-        throw new Error((res && res.error) || "send_failed");
-      }
-      if (ta) ta.value = "";
-      setNoteVoiceFeedback("qp", "", false);
-      appendLocalReceiptRow("inList", audioObj ? "Voice" : "Note", roomKey, cleanText || "(Audio note)", Boolean(res.persistedToDrive));
-      if (msgEl) {
-        msgEl.className = "msg";
-        msgEl.textContent = es ? "✓ Nota enviada." : "✓ Note sent.";
-      }
-      if (autoClosePanel) {
-        setTimeout(function() {
-          var panel = document.getElementById("qpPanel");
-          var stillTyping = ta && document.activeElement === ta && ta.value.trim().length > 0;
-          if (panel && !panel.hidden && !stillTyping && !noteVoiceState.active && typeof closeQP === "function") {
-            closeQP();
-          }
-        }, 1250);
-      }
-    } catch (err) {
-      if (ta && cleanText && !ta.value.trim()) ta.value = cleanText;
-      if (msgEl) {
-        msgEl.className = "msg err";
-        msgEl.textContent = es
-          ? "No se pudo enviar — tu nota sigue aquí para reintentar."
-          : "Couldn't send right now — your note is still here so you can retry.";
-      }
-    } finally {
-      noteVoiceState.submitting = false;
-      if (sendBtn) sendBtn.disabled = false;
-    }
-  }
-
-  async function toggleSpeakANote(ev, mode) {
-    if (liveState.active) stopGeminiLiveSession();
 
     if (noteVoiceState.active) {
-      if (noteVoiceState.mode === mode && noteVoiceState.mediaRecorder && noteVoiceState.mediaRecorder.state === "recording") {
-        try { noteVoiceState.mediaRecorder.stop(); } catch (e) {}
-        return;
-      }
-      cancelNoteVoiceRecording("");
-    }
-
-    var es = currentUiLang() === "es";
-    if (!navigator.mediaDevices || typeof navigator.mediaDevices.getUserMedia !== "function" || typeof MediaRecorder === "undefined") {
-      setNoteVoiceFeedback(mode, es ? "Micrófono no disponible aquí — escribe tu nota abajo." : "Microphone unavailable in this browser — write your note below.", true);
+      stopFieldDictation(false);
+      var esDone = currentUiLang() === "es";
+      var curVal = document.getElementById("repText") ? document.getElementById("repText").value.trim() : "";
+      setFieldNoteHint(
+        curVal
+          ? (esDone ? "Dictado listo — agrega foto si puedes y presiona Enviar." : "Dictation ready — add a photo if possible and press Send.")
+          : "",
+        false
+      );
       return;
     }
 
+    var es = currentUiLang() === "es";
+    var repTa = document.getElementById("repText");
+    if (!repTa) return;
+
+    var SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (typeof SpeechRec === "function") {
+      try {
+        var recognition = new SpeechRec();
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.lang = es ? "es-US" : "en-US";
+
+        noteVoiceState.active = true;
+        noteVoiceState.engine = "speech";
+        noteVoiceState.recognition = recognition;
+        noteVoiceState.cancelled = false;
+        noteVoiceState.baseText = String(repTa.value || "").trim();
+        noteVoiceState.committedText = "";
+        updateNoteVoiceButtons();
+        setFieldNoteHint(
+          es ? "Escuchando… tus palabras aparecen arriba mientras hablas." : "Listening… your words appear above as you speak.",
+          false
+        );
+
+        recognition.onresult = function(resEv) {
+          var finalChunk = "";
+          var interimChunk = "";
+          for (var i = 0; i < resEv.results.length; i++) {
+            var r = resEv.results[i];
+            var t = (r && r[0] && r[0].transcript) ? String(r[0].transcript) : "";
+            if (r.isFinal) finalChunk += t + " ";
+            else interimChunk += t;
+          }
+          noteVoiceState.committedText = finalChunk.trim();
+          var combined = [noteVoiceState.baseText, noteVoiceState.committedText, interimChunk.trim()]
+            .filter(Boolean)
+            .join(" ")
+            .replace(/\s+/g, " ")
+            .trim();
+          repTa.value = combined;
+          repTa.scrollTop = repTa.scrollHeight;
+        };
+
+        recognition.onerror = function(errEv) {
+          var code = String((errEv && errEv.error) || "");
+          if (code === "aborted" || code === "no-speech") return;
+          stopFieldDictation(false);
+          if (code === "not-allowed" || code === "audio-capture") {
+            setFieldNoteHint(
+              es ? "Permite el acceso al micrófono para dictar." : "Please allow microphone access to dictate.",
+              true
+            );
+          } else {
+            startFallbackRecorderDictation(repTa);
+          }
+        };
+
+        recognition.onend = function() {
+          if (noteVoiceState.recognition === recognition) {
+            noteVoiceState.recognition = null;
+            noteVoiceState.active = false;
+            noteVoiceState.engine = null;
+            updateNoteVoiceButtons();
+            var hasWords = String(repTa.value || "").trim().length > 0;
+            setFieldNoteHint(
+              hasWords
+                ? (currentUiLang() === "es" ? "Dictado listo — agrega foto si puedes y presiona Enviar." : "Dictation ready — add a photo if possible and press Send.")
+                : "",
+              false
+            );
+          }
+        };
+
+        noteVoiceState.maxTimer = setTimeout(function() {
+          if (noteVoiceState.active && noteVoiceState.recognition === recognition) {
+            stopFieldDictation(false);
+          }
+        }, 90000);
+
+        recognition.start();
+        return;
+      } catch (e) {}
+    }
+
+    await startFallbackRecorderDictation(repTa);
+  }
+
+  async function startFallbackRecorderDictation(repTa) {
+    var es = currentUiLang() === "es";
+    if (!navigator.mediaDevices || typeof navigator.mediaDevices.getUserMedia !== "function" || typeof MediaRecorder === "undefined") {
+      setFieldNoteHint(
+        es ? "Dictado no disponible en este navegador — escribe tu nota arriba." : "Dictation unavailable in this browser — type your note above.",
+        true
+      );
+      return;
+    }
     try {
       var stream = await navigator.mediaDevices.getUserMedia({
         audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }
       });
       noteVoiceState.active = true;
-      noteVoiceState.mode = mode;
+      noteVoiceState.engine = "recorder";
       noteVoiceState.mediaStream = stream;
       noteVoiceState.chunks = [];
       noteVoiceState.cancelled = false;
+      noteVoiceState.baseText = String(repTa.value || "").trim();
 
       var mr = new MediaRecorder(stream);
       noteVoiceState.mediaRecorder = mr;
       updateNoteVoiceButtons();
-
-      var msgEl = document.getElementById("inMsg");
-      if (mode === "qp" && msgEl) msgEl.textContent = "";
-
-      setNoteVoiceFeedback(
-        mode,
-        es
-          ? "🔴 Escuchando (español o inglés)… haz una pausa al terminar y se envía sola."
-          : "🔴 Listening (English or Español)… pause when finished and it sends automatically.",
+      setFieldNoteHint(
+        es ? "Grabando… toca Detener al terminar para poner tus palabras en el cuadro." : "Recording… tap Stop when finished to place your words in the box.",
         false
       );
-
-      // Language-independent Web Audio RMS silence detector (~2.05s pause after speech)
-      var AudioCtx = window.AudioContext || window.webkitAudioContext;
-      if (typeof AudioCtx === "function" && typeof requestAnimationFrame === "function") {
-        var actx = new AudioCtx();
-        noteVoiceState.audioCtx = actx;
-        if (actx.state === "suspended") { try { await actx.resume(); } catch (e) {} }
-        var src = actx.createMediaStreamSource(stream);
-        var analyser = actx.createAnalyser();
-        analyser.fftSize = 1024;
-        src.connect(analyser);
-        var buf = new Float32Array(analyser.fftSize);
-        var heardSpeech = false;
-        var speechFrames = 0;
-        var lastVoiceTs = Date.now();
-        var startedTs = Date.now();
-
-        var tick = function() {
-          if (!noteVoiceState.active || noteVoiceState.mediaRecorder !== mr) return;
-          analyser.getFloatTimeDomainData(buf);
-          var sumSq = 0;
-          for (var i = 0; i < buf.length; i++) sumSq += buf[i] * buf[i];
-          var rms = Math.sqrt(sumSq / buf.length);
-          var now = Date.now();
-          if (rms > 0.022) {
-            speechFrames += 1;
-            if (speechFrames >= 4) heardSpeech = true;
-            lastVoiceTs = now;
-          } else if (heardSpeech && (now - lastVoiceTs) > 2050) {
-            try { if (mr.state === "recording") mr.stop(); } catch (e) {}
-            return;
-          } else if (!heardSpeech && (now - startedTs) > 14000) {
-            cancelNoteVoiceRecording(es ? "No se escuchó voz — toca el botón para hablar." : "No speech heard — tap the button when ready to speak.");
-            return;
-          }
-          noteVoiceState.rafId = requestAnimationFrame(tick);
-        };
-        noteVoiceState.rafId = requestAnimationFrame(tick);
-      }
-
-      noteVoiceState.maxTimer = setTimeout(function() {
-        if (noteVoiceState.active && noteVoiceState.mediaRecorder === mr && mr.state === "recording") {
-          try { mr.stop(); } catch (e) {}
-        }
-      }, 90000);
 
       mr.ondataavailable = function(e) {
         if (e.data && e.data.size > 0) noteVoiceState.chunks.push(e.data);
@@ -3662,91 +4080,43 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       mr.onstop = async function() {
         var chunks = noteVoiceState.chunks.slice();
         var wasCancelled = noteVoiceState.cancelled;
-        stopNoteVoiceHardware();
+        var base = noteVoiceState.baseText;
+        stopFieldDictation(false);
         if (wasCancelled || !chunks.length) return;
-
-        setNoteVoiceFeedback(
-          mode,
-          es ? "Procesando y enviando nota…" : "Processing & sending note…",
-          false
-        );
-
-        var mime = (mr.mimeType || "audio/webm").split(";")[0];
-        var ext = mime.indexOf("mp4") !== -1 ? "m4a" : (mime.indexOf("ogg") !== -1 ? "ogg" : "webm");
-        var blob = new Blob(chunks, { type: mime });
-        var durl = await fileToDataUrl(blob);
-        var audioAttachment = durl ? { name: "spoken-note." + ext, type: mime, size: blob.size, data: durl } : null;
-
-        var transcript = "";
-        var modelLang = "";
+        setFieldNoteHint(es ? "Transcribiendo…" : "Transcribing…", false);
         try {
+          var mime = (mr.mimeType || "audio/webm").split(";")[0];
+          var blob = new Blob(chunks, { type: mime });
+          var durl = await fileToDataUrl(blob);
           var r = await fetch(window.U4_DICTATE_HTTP_ENDPOINT, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ audio: durl, language: "auto" })
           });
           var j = r && r.ok ? await r.json() : null;
-          if (j && j.ok && j.transcript) {
-            transcript = String(j.transcript || "").trim();
-            modelLang = String(j.language || "").trim();
-          }
-        } catch (e) {}
-
-        var detectedLang = detectSpokenOrWrittenLanguage(transcript, modelLang);
-
-        if (mode === "room") {
-          var repTa = document.getElementById("repText");
-          if (repTa && transcript) {
-            repTa.value = [repTa.value.trim(), transcript].filter(Boolean).join(" ").trim();
-          }
-          var roomKey = activeRoomKey();
-          var finalRoomText = (repTa && repTa.value.trim()) || transcript;
-          if (!finalRoomText && !audioAttachment) {
-            setNoteVoiceFeedback("room", es ? "No se detectaron palabras — intenta de nuevo." : "No words detected — try speaking again.", true);
-            return;
-          }
-          var repRes = await dispatchNoteToDriveTriage({
-            source: "reports",
-            project: roomKey,
-            roomKey: roomKey,
-            item: (document.getElementById("repItem") && document.getElementById("repItem").value) || "General",
-            kind: (document.getElementById("repKind") && document.getElementById("repKind").value) || "Note",
-            noteType: "voice_memo",
-            language: detectedLang,
-            raw: finalRoomText || "(Audio note)",
-            text: finalRoomText || "(Audio note)",
-            transcript: transcript || finalRoomText || "",
-            audio: audioAttachment,
-            audioLabel: audioAttachment ? audioAttachment.name : null,
-            commandSource: "voice_note"
-          });
-          if (repRes && repRes.ok) {
-            if (repTa) repTa.value = "";
-            setNoteVoiceFeedback("room", es ? "✓ Nota enviada." : "✓ Note sent.", false);
-            appendLocalReceiptRow("repList", "Voice", roomKey, finalRoomText || "(Audio note)", Boolean(repRes.persistedToDrive));
-            setTimeout(function(){ setNoteVoiceFeedback("room", "", false); }, 2000);
+          var transcript = (j && j.ok && j.transcript) ? String(j.transcript).trim() : "";
+          if (transcript) {
+            repTa.value = [base, transcript].filter(Boolean).join(" ").trim();
+            flashFieldNoteTextarea();
+            setFieldNoteHint(es ? "Dictado listo — agrega foto si puedes y presiona Enviar." : "Dictation ready — add a photo if possible and press Send.", false);
           } else {
-            setNoteVoiceFeedback("room", es ? "No se pudo enviar — revisa el cuadro abajo y presiona Enviar." : "Couldn't auto-send — check the box below and tap Send.", true);
+            setFieldNoteHint(es ? "No se detectaron palabras — intenta de nuevo." : "No words detected — try again.", true);
           }
-          return;
+        } catch (err) {
+          setFieldNoteHint(es ? "No se pudo transcribir ahorita." : "Could not transcribe right now.", true);
         }
-
-        // Quick 'Send a note' panel
-        var inTa = document.getElementById("inText");
-        var combinedQp = [inTa ? inTa.value.trim() : "", transcript].filter(Boolean).join(" ").trim();
-        if (!combinedQp && !audioAttachment) {
-          setNoteVoiceFeedback("qp", es ? "No se detectaron palabras — toca el botón para intentar de nuevo." : "No words detected — tap the mic button to try again.", true);
-          return;
-        }
-        if (inTa && combinedQp) inTa.value = combinedQp;
-        await sendLeaveANotePayload(combinedQp, detectedLang, audioAttachment, true);
       };
+
+      noteVoiceState.maxTimer = setTimeout(function() {
+        if (noteVoiceState.active && noteVoiceState.mediaRecorder === mr && mr.state === "recording") {
+          try { mr.stop(); } catch (e) {}
+        }
+      }, 90000);
 
       mr.start(400);
     } catch (err) {
-      stopNoteVoiceHardware();
-      setNoteVoiceFeedback(
-        mode,
+      stopFieldDictation(false);
+      setFieldNoteHint(
         (es ? "Permiso de micrófono necesario: " : "Microphone permission needed: ") + String(err && err.message || err),
         true
       );
@@ -3754,13 +4124,15 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   }
 
   // =========================================================================
-  // PART 2: FLOATING BOTTOM-RIGHT ROUND LIVE BUTTON + ONE-TAP SPANISH + TO-TRIAGE SESSION LOGGING & PLAN FLAGS
+  // PART 2: INLINE AI HELPER NEXT TO HOME + SPEAKER IDENTITY + ABRUPT-END LOGGING + TISA FLAGS
   // =========================================================================
   var liveState = {
     active: false,
     connecting: false,
     dialogOpen: false,
     pointerDismissed: false,
+    speakerName: "",
+    latestMinSummary: "",
     micGateTimer: null,
     generation: 0,
     sessionId: "",
@@ -3801,21 +4173,218 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     if (log) log.scrollTop = log.scrollHeight;
   }
 
-  function appendNavEventChip(text, isFlag) {
-    var log = document.getElementById("u4VoiceChatTranscript");
-    if (!log || !text) return;
-    sealActiveChatTurn();
-    var row = document.createElement("div");
-    row.className = "u4-chat-turn is-nav";
-    var pill = document.createElement("span");
-    pill.className = "u4-chat-nav-pill" + (isFlag ? " is-flag" : "");
-    pill.textContent = (isFlag ? "🚩 " : "↳ ") + text;
-    row.appendChild(pill);
-    log.appendChild(row);
-    scrollChatToBottom();
+  // Format Voice Session Notes markdown from any live or recovered session snapshot
+  function buildVoiceSessionNotesMarkdown(snap, endReason) {
+    var flags = Array.isArray(snap.flags) ? snap.flags : [];
+    var turns = Array.isArray(snap.turns) ? snap.turns : [];
+    var rooms = Array.isArray(snap.roomsVisited) ? snap.roomsVisited : [];
+    var docs = Array.isArray(snap.docsOpened) ? snap.docsOpened : [];
+    var speaker = String(snap.speakerName || getSavedSenderName() || "Unidentified speaker").trim();
+    var endedAt = new Date().toISOString();
+    var lines = [];
+
+    if (flags.length > 0) {
+      lines.push("⚠️ FLAGGED FOR TISA (" + flags.length + " item" + (flags.length > 1 ? "s" : "") + ": plan inconsistency / unknown measurement / contradictory plans)");
+      lines.push("");
+      lines.push("### Flagged Items for Tisa");
+      flags.forEach(function(f, idx) {
+        lines.push(
+          (idx + 1) + ". **[" + String(f.flagType || "inconsistency").toUpperCase() + "]** (Room: `" + (f.room || "home") + "`" +
+          (f.document ? (", Doc: `" + f.document + "`") : "") + "): " + f.summary +
+          (f.userQuote ? (" — _Asked/noted:_ \"" + f.userQuote + "\"") : "")
+        );
+      });
+      lines.push("");
+    }
+    lines.push("### Voice Session Summary");
+    lines.push("- **Speaker / Who:** " + speaker);
+    lines.push("- **Session ID:** `" + snap.sessionId + "`");
+    lines.push("- **Started:** " + (snap.startedAt || endedAt) + " | **Ended:** " + endedAt + " (`" + (endReason || "user_ended") + "`)");
+    if (rooms.length) lines.push("- **Rooms visited:** " + rooms.join(", "));
+    if (docs.length) lines.push("- **Documents opened:** " + docs.join(", "));
+    lines.push("");
+    lines.push("### Line-by-Line Voice Chat Transcript");
+    if (turns.length === 0) {
+      lines.push("- _(Session ended before transcript turns completed)_");
+    } else {
+      turns.forEach(function(t) {
+        var whoLbl = t.role === "user" ? (speaker !== "Unidentified speaker" ? speaker : "User") : "AI Helper";
+        lines.push("- **" + whoLbl + "** (`" + (t.room || "home") + "`): " + t.text);
+      });
+    }
+    return lines.join("\n");
   }
 
-  // Detect if the AI promised to note/send a plan inconsistency, missing measurement, or conflict to Tisa without calling the tool yet
+  // Persist rolling checkpoint to localStorage after EVERY turn/flag/nav so abrupt tab kill, crash, or battery loss never loses a session!
+  function persistActiveSessionCheckpoint() {
+    if (!liveState.sessionId || liveState.sessionFlushed) return;
+    if (liveState.sessionTurns.length === 0 && liveState.sessionFlags.length === 0 && !liveState.speakerName) return;
+    try {
+      var snap = {
+        sessionId: liveState.sessionId,
+        speakerName: liveState.speakerName || getSavedSenderName() || "",
+        startedAt: liveState.sessionStartedAt,
+        roomsVisited: liveState.sessionRoomsVisited.slice(),
+        docsOpened: liveState.sessionDocsOpened.slice(),
+        turns: liveState.sessionTurns.slice(),
+        flags: liveState.sessionFlags.slice(),
+        uiLang: currentUiLang(),
+        updatedAt: new Date().toISOString()
+      };
+      localStorage.setItem(SESSION_CHECKPOINT_KEY, JSON.stringify(snap));
+    } catch (e) {}
+  }
+
+  function clearSessionCheckpointIfMatches(sessionId) {
+    try {
+      var raw = localStorage.getItem(SESSION_CHECKPOINT_KEY);
+      if (!raw) return;
+      var parsed = JSON.parse(raw);
+      if (!sessionId || (parsed && parsed.sessionId === sessionId)) {
+        localStorage.removeItem(SESSION_CHECKPOINT_KEY);
+      }
+    } catch (e) {}
+  }
+
+  // Send keepalive POST on abrupt unload/close so mobile Safari / Chrome completes delivery even as tab closes
+  function dispatchSessionSnapshotToTriage(snap, reason, useKeepalive) {
+    if (!snap || !snap.sessionId) return Promise.resolve({ ok: false });
+    var turns = Array.isArray(snap.turns) ? snap.turns : [];
+    var flags = Array.isArray(snap.flags) ? snap.flags : [];
+    if (turns.length === 0 && flags.length === 0 && !snap.speakerName) {
+      clearSessionCheckpointIfMatches(snap.sessionId);
+      return Promise.resolve({ ok: false, skipped: true });
+    }
+
+    var hasFlags = flags.length > 0;
+    var primaryRoom = flags[0]
+      ? flags[0].room
+      : ((snap.roomsVisited && snap.roomsVisited[snap.roomsVisited.length - 1]) || activeRoomKey() || "home");
+    if (primaryRoom === "wall-treatment") primaryRoom = "paint-floors";
+    var speaker = String(snap.speakerName || getSavedSenderName() || "Unidentified speaker").trim();
+    var fullNoteText = buildVoiceSessionNotesMarkdown(snap, reason);
+    var subId = "u4-vsession-" + snap.sessionId + "-" + deterministicHash(fullNoteText).slice(0, 8);
+    var combinedUserText = turns.filter(function(t){ return t.role === "user"; }).map(function(t){ return t.text; }).join(" ");
+    var sessionLang = detectSpokenOrWrittenLanguage(combinedUserText || fullNoteText, snap.uiLang || currentUiLang());
+
+    var payloadObj = {
+      submissionId: subId,
+      idempotencyKey: subId,
+      targetFolderId: "17YOsBteJtPSV6KiByPPvtVkiu-dr11kA",
+      target_folder_id: "17YOsBteJtPSV6KiByPPvtVkiu-dr11kA",
+      source: "voice_session_notes",
+      page_id: primaryRoom,
+      project: primaryRoom,
+      roomKey: primaryRoom,
+      author: speaker,
+      senderName: speaker,
+      item: (hasFlags ? "FLAGGED FOR TISA · " : "") + "Voice Session (" + speaker + ")",
+      kind: hasFlags ? "Flagged Voice Session" : "Voice Session Notes",
+      noteType: "voice_session_notes",
+      note_type: "voice_session_notes",
+      language: sessionLang,
+      flagged_for_tisa: hasFlags,
+      triage_flags: flags,
+      raw: fullNoteText,
+      text: fullNoteText,
+      transcript: fullNoteText,
+      observed_at: new Date().toISOString(),
+      commandSource: "voice_session_log"
+    };
+
+    if (useKeepalive && typeof fetch === "function") {
+      try {
+        var ep = typeof getIntakeEndpoint === "function" ? getIntakeEndpoint() : "https://mac-mini.tailcf4007.ts.net/api/unit4/wiki-intake/voice-memo";
+        var hdrs = { "Content-Type": "application/json" };
+        if (window.U4_INTAKE_BEARER_TOKEN) hdrs["Authorization"] = "Bearer " + window.U4_INTAKE_BEARER_TOKEN;
+        return fetch(ep, {
+          method: "POST",
+          headers: hdrs,
+          body: JSON.stringify(payloadObj),
+          keepalive: true
+        }).then(function(r) {
+          if (r && r.ok) clearSessionCheckpointIfMatches(snap.sessionId);
+          return { ok: Boolean(r && r.ok) };
+        }).catch(function() {
+          // Leave checkpoint in localStorage so next page load recovers & sends it!
+          return { ok: false };
+        });
+      } catch (e) {
+        return Promise.resolve({ ok: false });
+      }
+    }
+
+    return dispatchNoteToDriveTriage(payloadObj).then(function(res) {
+      if (res && res.ok) clearSessionCheckpointIfMatches(snap.sessionId);
+      return res;
+    }).catch(function() {
+      return { ok: false };
+    });
+  }
+
+  // Recover and flush any session that ended abruptly (crash, force-quit, dead battery, lost signal) on next load!
+  function recoverAbruptlyEndedSessionOnLoad() {
+    if (typeof WebSocket !== "function") return;
+    try {
+      var raw = localStorage.getItem(SESSION_CHECKPOINT_KEY);
+      if (!raw) return;
+      var snap = JSON.parse(raw);
+      if (!snap || !snap.sessionId) {
+        localStorage.removeItem(SESSION_CHECKPOINT_KEY);
+        return;
+      }
+      if (liveState.active && liveState.sessionId === snap.sessionId) return;
+      dispatchSessionSnapshotToTriage(snap, "abrupt_session_end_recovered", false);
+    } catch (e) {}
+  }
+
+  // Automatically extract speaker's name when they answer "Who am I talking to?" at session start
+  function maybeExtractSpeakerNameFromUserTurn(userText) {
+    var clean = String(userText || "").trim();
+    if (!clean) return;
+    // 1. Check explicit introduction phrases in EN or ES
+    var introMatch = /(?:^(?:hi|hey|hello|hola|buenos?\s+d[ií]as|buenas?\s+tardes)[,.\s!]*)?(?:this\s+is|it'?s|i\s+am|i'?m|my\s+name\s+is|soy|habla|mi\s+nombre\s+es|aqu[ií]\s+habla)\s+([A-Za-zÁÉÍÓÚÑáéíóúñ]{2,22})(?:\b|$)/i.exec(clean);
+    if (introMatch && introMatch[1]) {
+      var candidate = introMatch[1];
+      if (!/^(here|looking|checking|in|at|on|ready|good|bien|aqu[ií]|viendo|revisando)$/i.test(candidate)) {
+        var formatted = candidate.charAt(0).toUpperCase() + candidate.slice(1);
+        setSavedSenderName(formatted);
+        return;
+      }
+    }
+    // 2. Check if one of the known Unit 4 team names was spoken in the first 2 user turns (e.g. just answering "John" or "Ervin")
+    var userTurnCount = liveState.sessionTurns.filter(function(t){ return t.role === "user"; }).length;
+    if (!liveState.speakerName && userTurnCount <= 2 && clean.split(/\s+/).length <= 5) {
+      for (var i = 0; i < KNOWN_TEAM_NAMES.length; i++) {
+        var kn = KNOWN_TEAM_NAMES[i];
+        if (new RegExp("\\b" + kn + "\\b", "i").test(clean)) {
+          setSavedSenderName(kn);
+          return;
+        }
+      }
+    }
+  }
+
+  function appendNavEventChip(text, isFlag) {
+    var clean = String(text || "").trim();
+    if (!clean) return;
+    liveState.latestMinSummary = clean;
+    var log = document.getElementById("u4VoiceChatTranscript");
+    if (log) {
+      sealActiveChatTurn();
+      var row = document.createElement("div");
+      row.className = "u4-chat-turn is-nav";
+      var pill = document.createElement("span");
+      pill.className = "u4-chat-nav-pill" + (isFlag ? " is-flag" : "");
+      pill.textContent = (isFlag ? "🚩 " : "↳ ") + clean;
+      row.appendChild(pill);
+      log.appendChild(row);
+      scrollChatToBottom();
+    }
+    persistActiveSessionCheckpoint();
+    syncFloatingAiUi();
+  }
+
   function maybeAutoCaptureSpokenTisaFlag(aiTurnText) {
     var txt = String(aiTurnText || "").trim();
     if (!txt) return;
@@ -3856,14 +4425,18 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         });
         if (chatStream.activeRole === "user") {
           liveState.lastUserTurnText = cleanTurn;
+          maybeExtractSpeakerNameFromUserTurn(cleanTurn);
         } else if (chatStream.activeRole === "ai") {
+          liveState.latestMinSummary = cleanTurn;
           maybeAutoCaptureSpokenTisaFlag(cleanTurn);
         }
+        persistActiveSessionCheckpoint();
       }
     }
     chatStream.activeRole = null;
     chatStream.bubbleEl = null;
     chatStream.rawBuffer = "";
+    syncFloatingAiUi();
   }
 
   function createChatTurnElement(role) {
@@ -3874,7 +4447,8 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     row.className = "u4-chat-turn " + (role === "user" ? "is-user" : "is-ai");
     var roleLbl = document.createElement("span");
     roleLbl.className = "u4-chat-role";
-    roleLbl.textContent = role === "user" ? (es ? "Tú" : "You") : (es ? "Asistente IA" : "AI Helper");
+    var who = liveState.speakerName || (es ? "Tú" : "You");
+    roleLbl.textContent = role === "user" ? who : (es ? "Asistente IA" : "AI Helper");
     var bub = document.createElement("div");
     bub.className = "u4-chat-bubble";
     row.appendChild(roleLbl);
@@ -3899,6 +4473,11 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       chatStream.bubbleEl.textContent = display;
       scrollChatToBottom();
     }
+    if (role === "ai" && display) {
+      liveState.latestMinSummary = display;
+      var minTxt = document.getElementById("u4VoiceMinSummary");
+      if (minTxt && !liveState.dialogOpen) minTxt.textContent = display;
+    }
     if (role === "user") {
       clearTimeout(chatStream.userPauseTimer);
       chatStream.userPauseTimer = setTimeout(function() {
@@ -3922,7 +4501,11 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       room: activeRoomKey(),
       at: new Date().toISOString()
     });
-    if (role === "user") liveState.lastUserTurnText = clean;
+    if (role === "user") {
+      liveState.lastUserTurnText = clean;
+      maybeExtractSpeakerNameFromUserTurn(clean);
+    }
+    persistActiveSessionCheckpoint();
   }
 
   // Record a plan inconsistency / unknown measurement / contradictory plan flag & send immediately to to-triage for Tisa
@@ -3930,6 +4513,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     var a = args || {};
     var view = parseActiveHashView();
     var roomKey = String(a.room || a.roomKey || view.room || "home").trim().toLowerCase();
+    if (roomKey === "wall-treatment") roomKey = "paint-floors";
     if (ALLOWED_ROOMS.indexOf(roomKey) === -1) roomKey = activeRoomKey();
     var rawCat = String(a.flag_type || a.category || "inconsistency").trim().toLowerCase();
     var flagType = (rawCat === "unknown_measurement" || rawCat === "contradictory_plans" || rawCat === "inconsistency")
@@ -3939,18 +4523,21 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     var summary = String(a.summary || a.details || a.issue || "").trim();
     if (!summary) return { ok: false, code: "EMPTY_FLAG_SUMMARY" };
     var userQuote = String(a.user_quote || a.userQuote || liveState.lastUserTurnText || "").trim();
+    var speaker = String(liveState.speakerName || getSavedSenderName() || "Unidentified speaker").trim();
     var lang = detectSpokenOrWrittenLanguage(userQuote || summary, a.language);
 
     var flagEntry = {
       flagType: flagType,
       room: roomKey,
       document: docRef || null,
+      speaker: speaker,
       summary: summary,
       userQuote: userQuote || null,
       aiStatement: a.source_trigger === "spoken_promise_auto_capture" ? summary : null,
       flaggedAt: new Date().toISOString()
     };
     liveState.sessionFlags.push(flagEntry);
+    persistActiveSessionCheckpoint();
 
     var es = currentUiLang() === "es";
     var catLabelEn = {
@@ -3971,10 +4558,11 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
 
     var flagBodyLines = [
       "⚠️ FLAGGED FOR TISA — " + catLabelEn.toUpperCase(),
+      "From / Speaker: " + speaker,
       "Room / Page: " + roomKey + (docRef ? (" | Document: " + docRef) : ""),
       "Summary: " + summary
     ];
-    if (userQuote) flagBodyLines.push("Crew / User question or observation: " + userQuote);
+    if (userQuote) flagBodyLines.push("Speaker question or observation: " + userQuote);
     var flagRaw = flagBodyLines.join("\n");
     var flagSubId = "u4-vflag-" + (liveState.sessionId || deterministicHash(flagRaw)) + "-" + liveState.sessionFlags.length;
 
@@ -3985,7 +4573,9 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         source: "voice_session_flag",
         project: roomKey,
         roomKey: roomKey,
-        item: catLabelEn,
+        author: speaker,
+        senderName: speaker,
+        item: catLabelEn + " (" + speaker + ")",
         kind: "Flagged for Tisa",
         noteType: "voice_session_flag",
         note_type: "voice_session_flag",
@@ -4001,6 +4591,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         ok: Boolean(res && res.ok),
         flaggedForTisa: true,
         flagType: flagType,
+        speaker: speaker,
         room: roomKey,
         submissionId: flagSubId
       };
@@ -4009,75 +4600,28 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     }
   }
 
-  // Log complete Voice Session Notes to 'to-triage' when a voice session ends (prominently flagging any Tisa items!)
-  function flushVoiceSessionNotesToTriage(reason) {
+  // Flush current live session notes (supports both normal end and keepalive abrupt-unload end!)
+  function flushVoiceSessionNotesToTriage(reason, useKeepaliveOpt) {
     sealActiveChatTurn();
     if (liveState.sessionFlushed || !liveState.sessionId) return;
-    var userTurnCount = liveState.sessionTurns.filter(function(t){ return t.role === "user"; }).length;
-    if (userTurnCount === 0 && liveState.sessionFlags.length === 0) return;
+    var hasAnyActivity = liveState.sessionTurns.length > 0 || liveState.sessionFlags.length > 0 || Boolean(liveState.speakerName);
+    if (!hasAnyActivity) {
+      clearSessionCheckpointIfMatches(liveState.sessionId);
+      return;
+    }
     liveState.sessionFlushed = true;
 
-    var hasFlags = liveState.sessionFlags.length > 0;
-    var primaryRoom = liveState.sessionFlags[0]
-      ? liveState.sessionFlags[0].room
-      : (liveState.sessionRoomsVisited[liveState.sessionRoomsVisited.length - 1] || activeRoomKey() || "home");
-    var endedAt = new Date().toISOString();
-
-    var lines = [];
-    if (hasFlags) {
-      lines.push("⚠️ FLAGGED FOR TISA (" + liveState.sessionFlags.length + " item" + (liveState.sessionFlags.length > 1 ? "s" : "") + ": plan inconsistency / unknown measurement / contradictory plans)");
-      lines.push("");
-      lines.push("### Flagged Items for Tisa");
-      liveState.sessionFlags.forEach(function(f, idx) {
-        lines.push(
-          (idx + 1) + ". **[" + f.flagType.toUpperCase() + "]** (Room: `" + f.room + "`" +
-          (f.document ? (", Doc: `" + f.document + "`") : "") + "): " + f.summary +
-          (f.userQuote ? (" — _Asked/noted:_ \"" + f.userQuote + "\"") : "")
-        );
-      });
-      lines.push("");
-    }
-    lines.push("### Voice Session Summary");
-    lines.push("- Session ID: `" + liveState.sessionId + "`");
-    lines.push("- Started: " + (liveState.sessionStartedAt || endedAt) + " | Ended: " + endedAt + " (" + (reason || "user_ended") + ")");
-    if (liveState.sessionRoomsVisited.length) {
-      lines.push("- Rooms visited: " + liveState.sessionRoomsVisited.join(", "));
-    }
-    if (liveState.sessionDocsOpened.length) {
-      lines.push("- Documents opened: " + liveState.sessionDocsOpened.join(", "));
-    }
-    lines.push("");
-    lines.push("### Line-by-Line Voice Chat Transcript");
-    liveState.sessionTurns.forEach(function(t) {
-      lines.push("- **" + (t.role === "user" ? "User" : "AI Helper") + "** (`" + t.room + "`): " + t.text);
-    });
-
-    var fullNoteText = lines.join("\n");
-    var subId = "u4-vsession-" + liveState.sessionId;
-    var combinedUserText = liveState.sessionTurns
-      .filter(function(t){ return t.role === "user"; })
-      .map(function(t){ return t.text; })
-      .join(" ");
-    var sessionLang = detectSpokenOrWrittenLanguage(combinedUserText || fullNoteText, currentUiLang());
-
-    dispatchNoteToDriveTriage({
-      submissionId: subId,
-      idempotencyKey: subId,
-      source: "voice_session_notes",
-      project: primaryRoom,
-      roomKey: primaryRoom,
-      item: hasFlags ? "FLAGGED FOR TISA · Voice Session Notes" : "Voice Session Notes",
-      kind: hasFlags ? "Flagged Voice Session" : "Voice Session Notes",
-      noteType: "voice_session_notes",
-      note_type: "voice_session_notes",
-      language: sessionLang,
-      flagged_for_tisa: hasFlags,
-      triage_flags: liveState.sessionFlags.slice(),
-      raw: fullNoteText,
-      text: fullNoteText,
-      transcript: fullNoteText,
-      commandSource: "voice_session_log"
-    }).catch(function(){});
+    var snap = {
+      sessionId: liveState.sessionId,
+      speakerName: liveState.speakerName || getSavedSenderName() || "",
+      startedAt: liveState.sessionStartedAt,
+      roomsVisited: liveState.sessionRoomsVisited.slice(),
+      docsOpened: liveState.sessionDocsOpened.slice(),
+      turns: liveState.sessionTurns.slice(),
+      flags: liveState.sessionFlags.slice(),
+      uiLang: currentUiLang()
+    };
+    dispatchSessionSnapshotToTriage(snap, reason || "user_ended", Boolean(useKeepaliveOpt));
   }
 
   var lastVoiceSubmitAt = 0;
@@ -4109,7 +4653,24 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     return null;
   }
 
+  function autoMinimizeDialogueForNavigation(summaryText) {
+    if (summaryText) liveState.latestMinSummary = summaryText;
+    if (liveState.dialogOpen) {
+      setDialogOpen(false);
+    } else {
+      syncFloatingAiUi();
+    }
+  }
+
   var bridgeActions = {
+    set_speaker_name: async function(args) {
+      var nm = String((args && (args.speaker_name || args.name || args.speaker)) || "").trim();
+      if (!nm) return { ok: false, code: "EMPTY_SPEAKER_NAME" };
+      var saved = setSavedSenderName(nm);
+      appendNavEventChip((currentUiLang() === "es" ? "Hablando con: " : "Speaking with: ") + saved, false);
+      return { ok: true, speakerName: saved };
+    },
+
     flag_plan_issue_for_tisa: async function(args) {
       return await recordAndDispatchPlanIssueFlag(args || {});
     },
@@ -4124,6 +4685,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
 
     navigate_room: async function(args) {
       var room = String((args && (args.room || args.roomKey || args.key)) || "").trim().toLowerCase();
+      if (room === "wall-treatment") room = "paint-floors";
       if (ALLOWED_ROOMS.indexOf(room) === -1) {
         return { ok: false, code: "DISALLOWED_ROOM_KEY", validOptions: ALLOWED_ROOMS };
       }
@@ -4131,10 +4693,13 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       if (typeof show === "function") show(room);
       else if (typeof window.show === "function") window.show(room);
       if (liveState.sessionRoomsVisited.indexOf(room) === -1) liveState.sessionRoomsVisited.push(room);
+      persistActiveSessionCheckpoint();
       refreshDialogSuggestions();
       var es = currentUiLang() === "es";
       var rl = ROOM_LABELS[room] ? (es ? ROOM_LABELS[room].es : ROOM_LABELS[room].en) : room;
-      appendNavEventChip((es ? "Abrió " : "Opened ") + rl, false);
+      var navMsg = (es ? "Abrió " : "Opened ") + rl;
+      appendNavEventChip(navMsg, false);
+      autoMinimizeDialogueForNavigation(navMsg);
       var summary = getRoomSpecSummary(room);
       return {
         ok: true,
@@ -4160,11 +4725,13 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
           availableHeadings: headings.map(function(h){ return (h.textContent || "").trim(); })
         };
       }
+      var hText = (match.textContent || "").trim();
+      var navMsg = (currentUiLang() === "es" ? "Sección: " : "Section: ") + hText;
+      appendNavEventChip(navMsg, false);
+      autoMinimizeDialogueForNavigation(navMsg);
       match.setAttribute("tabindex", "-1");
       if (match.focus) match.focus();
-      if (match.scrollIntoView) match.scrollIntoView({ block: "start" });
-      var hText = (match.textContent || "").trim();
-      appendNavEventChip((currentUiLang() === "es" ? "Sección: " : "Jumped to: ") + hText, false);
+      if (match.scrollIntoView) match.scrollIntoView({ behavior: "smooth", block: "start" });
       return { ok: true, action: "focus_section", focusedHeading: hText };
     },
 
@@ -4191,7 +4758,10 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       var extracted = await extractPdfDocumentPages(docId);
       var docTitle = (extracted && extracted.title) || docId;
       if (liveState.sessionDocsOpened.indexOf(docTitle) === -1) liveState.sessionDocsOpened.push(docTitle);
-      appendNavEventChip((currentUiLang() === "es" ? "Abrió PDF: " : "Opened PDF: ") + docTitle + (targetPage > 1 ? (" · p." + targetPage) : ""), false);
+      persistActiveSessionCheckpoint();
+      var navMsg = (currentUiLang() === "es" ? "Plano PDF: " : "PDF Plan: ") + docTitle + (targetPage > 1 ? (" · p." + targetPage) : "");
+      appendNavEventChip(navMsg, false);
+      autoMinimizeDialogueForNavigation(navMsg);
       var pageSummaries = [];
       if (extracted && Array.isArray(extracted.pages)) {
         pageSummaries = extracted.pages.map(function(p) {
@@ -4220,6 +4790,9 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         return { ok: false, code: "NO_ACTIVE_DOCUMENT", hint: "Call open_document first to open a PDF plan." };
       }
       var docId = view.docId;
+      var navMsg = (currentUiLang() === "es" ? "Página PDF " : "PDF Page ") + pageNum;
+      appendNavEventChip(navMsg, false);
+      autoMinimizeDialogueForNavigation(navMsg);
       var canvas = document.querySelector('.pdfpage[data-page-number="' + pageNum + '"]');
       if (canvas && canvas.scrollIntoView) {
         canvas.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -4228,7 +4801,6 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         if (typeof show === "function") show("doc:" + docId + ":p" + pageNum);
         else if (typeof window.show === "function") window.show("doc:" + docId + ":p" + pageNum);
       }
-      appendNavEventChip((currentUiLang() === "es" ? "Página PDF " : "PDF Page ") + pageNum, false);
       var extracted = await extractPdfDocumentPages(docId);
       var pageObj = extracted && extracted.pages
         ? extracted.pages.find(function(x){ return x.page === pageNum; })
@@ -4259,11 +4831,9 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       var lang = String((args && (args.language || args.lang)) || "").toLowerCase();
       if (lang !== "en" && lang !== "es") return { ok: false, code: "INVALID_LANGUAGE", validOptions: ["en", "es"] };
       var savedRep = document.getElementById("repText") ? document.getElementById("repText").value : null;
-      var savedIn = document.getElementById("inText") ? document.getElementById("inText").value : null;
       if (typeof setLang === "function") setLang(lang);
       else if (typeof window.setLang === "function") window.setLang(lang);
       if (savedRep !== null && document.getElementById("repText")) document.getElementById("repText").value = savedRep;
-      if (savedIn !== null && document.getElementById("inText")) document.getElementById("inText").value = savedIn;
       syncFloatingAiUi();
       updateNoteVoiceButtons();
       refreshDialogSuggestions();
@@ -4274,33 +4844,44 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       var text = String((args && args.text) || "").trim();
       var lang = detectSpokenOrWrittenLanguage(text, args && args.language);
       var targetRoom = String((args && (args.room || args.roomKey)) || activeRoomKey()).toLowerCase();
-      var qpPanel = document.getElementById("qpPanel");
-      var qpVisible = Boolean(qpPanel && !qpPanel.hidden);
-      var target = (args && args.target) || (qpVisible ? "quick" : (PROJECT_ROOMS.indexOf(targetRoom) !== -1 ? "room" : "quick"));
-      if (target === "room" && PROJECT_ROOMS.indexOf(targetRoom) !== -1) {
-        if (parseActiveHashView().kind === "doc" || activeRoomKey() !== targetRoom) {
-          await bridgeActions.navigate_room({ room: targetRoom });
+      if (targetRoom === "wall-treatment") targetRoom = "paint-floors";
+      if (args && args.speaker_name) setSavedSenderName(args.speaker_name);
+      else if (liveState.speakerName) setSavedSenderName(liveState.speakerName);
+
+      if (targetRoom && PROJECT_ROOMS.indexOf(targetRoom) !== -1 && activeRoomKey() !== targetRoom && parseActiveHashView().kind !== "room") {
+        location.hash = "#" + targetRoom;
+        if (typeof show === "function") show(targetRoom);
+        else if (typeof window.show === "function") window.show(targetRoom);
+      }
+      var fieldSec = document.getElementById("field");
+      if (fieldSec) fieldSec.hidden = false;
+      if (args && args.item && document.getElementById("repItem")) {
+        var sel = document.getElementById("repItem");
+        var qItem = String(args.item).toLowerCase();
+        for (var i = 0; i < sel.options.length; i++) {
+          if (sel.options[i].value.toLowerCase().indexOf(qItem) !== -1 || sel.options[i].textContent.toLowerCase().indexOf(qItem) !== -1) {
+            sel.selectedIndex = i;
+            break;
+          }
         }
       }
-      if (target === "room" && document.getElementById("repText")) {
-        var fieldSec = document.getElementById("field");
-        if (fieldSec) fieldSec.hidden = false;
-        document.getElementById("repText").value = text;
-        if (args && (args.note_type || args.kind) && document.getElementById("repKind")) {
-          var kindMap = { measurement: "Measurement", issue: "Problem on site", question: "Answer to a decision" };
-          document.getElementById("repKind").value = args.kind || kindMap[args.note_type] || "Note";
-        }
-      } else {
-        if (typeof openQP === "function" && !qpVisible) openQP();
-        else if (typeof window.openQP === "function" && !qpVisible) window.openQP();
-        if (document.getElementById("inText")) document.getElementById("inText").value = text;
+      var repTa = document.getElementById("repText");
+      if (repTa) {
+        repTa.value = text;
+        flashFieldNoteTextarea();
+      }
+      var navMsg = currentUiLang() === "es" ? "Nota escrita en el formulario abajo" : "Filled out Field Note form below";
+      appendNavEventChip(navMsg, false);
+      autoMinimizeDialogueForNavigation(navMsg);
+      if (fieldSec && fieldSec.scrollIntoView) {
+        fieldSec.scrollIntoView({ behavior: "smooth", block: "center" });
       }
       readbackArmedHash = deterministicHash(text + "|" + lang);
-      return { ok: true, action: "fill_draft_note", roomKey: targetRoom, language: lang, text: text, draftPopulated: true };
+      return { ok: true, action: "fill_draft_note", roomKey: targetRoom || "home", language: lang, text: text, draftPopulated: true };
     },
 
     submit_voice_memo: async function(args) {
-      var text = String((args && args.text) ?? (document.getElementById("inText") && document.getElementById("inText").value ? document.getElementById("inText").value : (document.getElementById("repText") ? document.getElementById("repText").value : ""))).trim();
+      var text = String((args && args.text) ?? (document.getElementById("repText") ? document.getElementById("repText").value : "")).trim();
       if (!text) return { ok: false, code: "EMPTY_NOTE" };
       var lang = detectSpokenOrWrittenLanguage(text, args && args.language);
       var confirmed = Boolean(args && (args.spoken_confirmation === true || args.readbackConfirmed === true || args.confirmedByWorker === true));
@@ -4310,16 +4891,13 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
           text: text,
           language: lang,
           room: args && (args.room || args.roomKey),
-          note_type: args && args.note_type,
-          item: args && args.item,
-          measurement: args && args.measurement,
-          datum: args && args.datum
+          item: args && args.item
         });
         return {
           ok: false,
           code: "VOICE_READBACK_CONFIRMATION_REQUIRED",
-          verbalReadbackEn: "I drafted your note: '" + text + "'. Say 'send it' to save it.",
-          verbalReadbackEs: "Preparé tu nota: '" + text + "'. Di 'mándalo' para guardarla."
+          verbalReadbackEn: "I put that on the field note form below: '" + text + "'. Add a photo if you have one and press Send, or say 'send it' to submit now.",
+          verbalReadbackEs: "Ya puse tu nota en el formulario de abajo: '" + text + "'. Agrega una foto si puedes y presiona Enviar, o dime 'mándalo'."
         };
       }
       var now = Date.now();
@@ -4328,27 +4906,31 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       }
       lastVoiceSubmitAt = now;
       var roomKey = String((args && (args.room || args.roomKey)) || activeRoomKey()).toLowerCase();
+      if (roomKey === "wall-treatment") roomKey = "paint-floors";
       if (ALLOWED_ROOMS.indexOf(roomKey) === -1) {
         lastVoiceSubmitAt = 0;
         return { ok: false, code: "INVALID_ROOM" };
       }
-      var kindVal = String((args && (args.kind || args.noteType || args.note_type)) || "Note");
-      var itemVal = String((args && args.item) || "General");
+      var speaker = String((args && args.speaker_name) || liveState.speakerName || getSavedSenderName() || "").trim();
+      var itemVal = String((args && args.item) || (document.getElementById("repItem") && document.getElementById("repItem").value) || "General");
+      var rawWithWho = (typeof WebSocket === "function" && speaker && text.indexOf("[From:") !== 0)
+        ? ("[From: " + speaker + "]\n" + text)
+        : text;
       var res = await dispatchNoteToDriveTriage({
         submissionId: args && (args.submissionId || args.idempotencyKey),
         source: "submit_voice_memo",
         project: roomKey,
         roomKey: roomKey,
+        author: speaker || null,
+        senderName: speaker || null,
         item: itemVal,
-        kind: kindVal,
-        noteType: kindVal,
+        kind: String((args && (args.kind || args.noteType || args.note_type)) || "Note"),
+        noteType: String((args && (args.kind || args.noteType || args.note_type)) || "Note"),
         language: lang,
-        raw: text,
-        text: text,
+        raw: rawWithWho,
+        text: rawWithWho,
         measurement: (args && args.measurement) || "",
         datum: (args && args.datum) || itemVal,
-        audio: (args && args.audio) || null,
-        audioLabel: (args && args.audioLabel) || null,
         transcript: (args && args.transcript) || text,
         commandSource: "voice_command"
       });
@@ -4357,15 +4939,16 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         return Object.assign({ ok: false, action: "submit_voice_memo" }, res || { error: "Upload failed" });
       }
       readbackArmedHash = null;
-      var qpPanel = document.getElementById("qpPanel");
-      var targetList = (qpPanel && !qpPanel.hidden && document.getElementById("inList")) ? "inList" : "repList";
-      appendLocalReceiptRow(targetList, "Voice", roomKey, text, Boolean(res.persistedToDrive));
-      appendNavEventChip(currentUiLang() === "es" ? "Nota guardada en to-triage" : "Saved note to to-triage", false);
+      if (document.getElementById("repText")) document.getElementById("repText").value = "";
+      setFieldNoteHint(currentUiLang() === "es" ? "✓ Nota enviada a to-triage." : "✓ Field note sent to to-triage.", false);
+      appendLocalReceiptRow("repList", speaker || "Voice", roomKey, text, Boolean(res.persistedToDrive));
+      appendNavEventChip(currentUiLang() === "es" ? "Nota enviada a to-triage" : "Sent field note to to-triage", false);
       return Object.assign({ action: "submit_voice_memo", language: lang }, res);
     }
   };
 
   var actionAliases = {
+    setSpeakerName: "set_speaker_name", set_speaker_name: "set_speaker_name",
     flagPlanIssueForTisa: "flag_plan_issue_for_tisa", flag_plan_issue_for_tisa: "flag_plan_issue_for_tisa",
     queryTodoistCards: "query_todoist_cards", query_todoist_cards: "query_todoist_cards",
     navigateRoom: "navigate_room", navigate_room: "navigate_room",
@@ -4414,24 +4997,24 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         ? [
             { label: "¿Qué falta en " + rl + "?", prompt: "¿Qué tareas siguen abiertas o pendientes en " + rl + "?" },
             { label: "Abrir planos PDF", prompt: "Abre el plano PDF principal de " + rl + " y recórrelo conmigo." },
-            { label: "Ir a otro cuarto", prompt: "Muéstrame las metas de esta semana en Inicio." }
+            { label: "Llenar nota abajo", prompt: "Ayúdame a redactar una nota de obra en el formulario de abajo para " + rl + "." }
           ]
         : [
             { label: "What's open in " + rl + "?", prompt: "What tasks and checklist items are still open in " + rl + "?" },
             { label: "Open PDF plans", prompt: "Open the main PDF drawing for " + rl + " and walk me through it." },
-            { label: "Jump to Bathroom", prompt: "Navigate to Bathroom and summarize the spec." }
+            { label: "Help fill field note", prompt: "Help me fill out a field note on the form at the bottom for " + rl + "." }
           ];
     }
     return es
       ? [
+          { label: "Ir a Cocina", prompt: "Llévame a la Cocina y resume el trabajo." },
           { label: "Ir a Baño", prompt: "Llévame al Baño y dime qué falta por terminar." },
-          { label: "Ir a Lavandería", prompt: "Llévame al clóset de Lavandería y resume el trabajo." },
-          { label: "Ver PDF de molduras", prompt: "Abre el PDF de molduras y explícame las opciones." }
+          { label: "Llenar nota de obra", prompt: "Ayúdame a escribir una nota de obra en el formulario de abajo." }
         ]
       : [
+          { label: "Go to Kitchen", prompt: "Navigate to Kitchen and summarize what's next." },
           { label: "Go to Bathroom", prompt: "Navigate to Bathroom and tell me what's left to finish." },
-          { label: "Go to Laundry", prompt: "Navigate to Laundry Closet and summarize what needs to be done." },
-          { label: "Open molding PDF", prompt: "Open the molding review PDF and walk me through it." }
+          { label: "Fill out a field note", prompt: "Help me fill out a field note on the form at the bottom." }
         ];
   }
 
@@ -4449,36 +5032,78 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     var dlg = document.getElementById("u4VoiceChatDialog");
     if (dlg) {
       dlg.hidden = !liveState.dialogOpen;
-      if (liveState.dialogOpen) {
-        scrollChatToBottom();
-      }
+      if (liveState.dialogOpen) scrollChatToBottom();
     }
     syncFloatingAiUi();
   }
 
-  function switchLiveVoiceAndWikiLanguage(targetLang, userEvent) {
-    var nextLang = targetLang === "es" ? "es" : "en";
-    bridgeActions.set_language({ language: nextLang });
-    appendNavEventChip(nextLang === "es" ? "Modo cambiado a Español (voz y wiki)" : "Switched to English mode (voice & wiki)", false);
-    if (liveState.active && liveState.ws && typeof WebSocket !== "undefined" && liveState.ws.readyState === WebSocket.OPEN) {
-      stopPlaybackQueue();
-      sealActiveChatTurn();
-      liveState.ws.send(JSON.stringify({
-        clientContent: {
-          turns: [{
-            role: "user",
-            parts: [{
-              text: nextLang === "es"
-                ? "El usuario acaba de tocar el botón en el chat para cambiar a modo Español. A partir de este momento habla ÚNICAMENTE en español y confirma ahora mismo en una frase breve en español (por ejemplo: '¡Listo! Cambié a español. ¿Qué cuarto o plano revisamos?')."
-                : "The user just tapped to switch to English mode. From now on speak in English and confirm briefly in one short sentence."
-            }]
-          }],
-          turnComplete: true
-        }
-      }));
-    } else if (!liveState.active && !liveState.connecting && userEvent) {
-      startGeminiLiveSession(userEvent, "");
+  function parkAiHelperNodes() {
+    var mainEl = document.querySelector("main") || document.body;
+    if (!mainEl) return;
+    var park = document.getElementById("u4AiSafePark");
+    if (!park) {
+      park = document.createElement("div");
+      park.id = "u4AiSafePark";
+      park.hidden = true;
+      mainEl.appendChild(park);
     }
+    ["u4AiFloatingDock", "u4VoiceMinBar", "u4VoiceChatDialog"].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) park.appendChild(el);
+    });
+  }
+
+  function placeAiHelperBesidePageHeading() {
+    if (typeof WebSocket !== "function") return;
+    var dock = document.getElementById("u4AiFloatingDock");
+    var minBar = document.getElementById("u4VoiceMinBar");
+    var dlg = document.getElementById("u4VoiceChatDialog");
+    var docEl = document.getElementById("doc");
+    if (!dock || !minBar || !dlg || !docEl) return;
+
+    var insertAfterNode = null;
+    var homeHead = docEl.querySelector("header.home-head");
+    if (homeHead) {
+      if (!homeHead.classList.contains("u4-has-ai")) {
+        var copyWrap = document.createElement("div");
+        copyWrap.className = "u4-home-head-copy";
+        while (homeHead.firstChild) copyWrap.appendChild(homeHead.firstChild);
+        homeHead.appendChild(copyWrap);
+        homeHead.classList.add("u4-has-ai");
+      }
+      homeHead.appendChild(dock);
+      insertAfterNode = homeHead;
+    } else {
+      var h1 = docEl.querySelector("h1");
+      if (h1 && h1.parentNode) {
+        var row = h1.parentNode;
+        if (!row.classList || !row.classList.contains("u4-title-row")) {
+          row = document.createElement("div");
+          row.className = "u4-title-row";
+          h1.parentNode.insertBefore(row, h1);
+          row.appendChild(h1);
+        }
+        row.appendChild(dock);
+        insertAfterNode = row;
+      }
+    }
+
+    if (insertAfterNode && insertAfterNode.parentNode) {
+      var parent = insertAfterNode.parentNode;
+      parent.insertBefore(dlg, insertAfterNode.nextSibling);
+      parent.insertBefore(minBar, dlg);
+    } else {
+      var fallback = docEl.querySelector(".u4-top-fallback-slot");
+      if (!fallback) {
+        fallback = document.createElement("div");
+        fallback.className = "u4-top-fallback-slot";
+        docEl.insertBefore(fallback, docEl.firstChild);
+      }
+      fallback.appendChild(dock);
+      docEl.insertBefore(dlg, fallback.nextSibling);
+      docEl.insertBefore(minBar, dlg);
+    }
+    syncFloatingAiUi();
   }
 
   function syncFloatingAiUi() {
@@ -4501,70 +5126,69 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       }
     }
 
-    var chatPill = document.getElementById("u4AiChatTogglePill");
-    if (chatPill) {
-      chatPill.hidden = !(isRunning && !liveState.dialogOpen);
-      var chatPillLbl = document.getElementById("u4AiChatToggleText");
-      if (chatPillLbl) {
-        chatPillLbl.textContent = es ? "Abrir chat" : "Open chat";
-      }
-    }
-
-    var orbPill = document.getElementById("u4AiStateBadge");
-    if (orbPill) {
-      orbPill.textContent = liveState.active ? "LIVE" : (liveState.connecting ? "…" : "OFF");
+    var reopenBtn = document.getElementById("u4AiShowChatBtn");
+    if (reopenBtn) {
+      reopenBtn.hidden = !(isRunning && !liveState.dialogOpen);
+      var reopenLbl = document.getElementById("u4AiShowChatText");
+      if (reopenLbl) reopenLbl.textContent = es ? "Ver chat ▾" : "Show chat ▾";
     }
 
     var orb = document.getElementById("u4AiBubbleOrb");
     if (orb) {
       orb.setAttribute("aria-pressed", isRunning ? "true" : "false");
       orb.setAttribute("aria-expanded", liveState.dialogOpen ? "true" : "false");
+      orb.setAttribute(
+        "aria-label",
+        isRunning
+          ? (es ? "Terminar sesión de voz del Asistente IA" : "End AI Helper voice session")
+          : (es ? "Iniciar sesión de voz del Asistente IA" : "Start AI Helper voice session")
+      );
       orb.title = isRunning
         ? (es ? "Toca para terminar la sesión de voz" : "Tap to end live voice session")
-        : (es ? "Toca para hablar con el asistente IA" : "Tap to start live voice session");
+        : (es ? "Toca para iniciar voz en vivo" : "Tap to start live voice");
+    }
+
+    var spkBadge = document.getElementById("u4VdSpeakerBadge");
+    if (spkBadge) {
+      var who = liveState.speakerName || "";
+      spkBadge.hidden = !who;
+      if (who) spkBadge.textContent = who;
+    }
+
+    var minBar = document.getElementById("u4VoiceMinBar");
+    if (minBar) {
+      minBar.hidden = !(isRunning && !liveState.dialogOpen);
+      var minSum = document.getElementById("u4VoiceMinSummary");
+      if (minSum) {
+        var defaultMin = es ? "Asistente IA activo — sigue hablando mientras ves la página" : "AI Helper live — keep talking while viewing this page";
+        minSum.textContent = liveState.latestMinSummary || defaultMin;
+      }
+      var minOpen = document.getElementById("u4VoiceMinOpenLbl");
+      if (minOpen) minOpen.textContent = es ? "Ver chat ▾" : "Show chat ▾";
     }
 
     var dlg = document.getElementById("u4VoiceChatDialog");
     if (dlg) {
       dlg.setAttribute("data-live", stateMode);
+      dlg.hidden = !liveState.dialogOpen;
     }
     var dlgTitle = document.getElementById("u4VdTitle");
-    if (dlgTitle) {
-      dlgTitle.textContent = es ? "Asistente IA" : "AI Helper";
-    }
-    var dlgState = document.getElementById("u4VdState");
-    if (dlgState) {
-      dlgState.textContent = liveState.active
-        ? (es ? "● EN VIVO" : "● LIVE")
-        : (liveState.connecting ? (es ? "CONECTANDO" : "CONNECTING") : (es ? "APAGADO" : "OFF"));
-    }
-
-    var langSwitchText = document.getElementById("u4VdLangSwitchText");
-    var langSwitchCta = document.getElementById("u4VdLangSwitchCta");
-    if (langSwitchText && langSwitchCta) {
-      if (es) {
-        langSwitchText.textContent = "Modo Español activo · Voz y wiki en español";
-        langSwitchCta.textContent = "Switch to English";
-      } else {
-        langSwitchText.textContent = "¿Prefieres español? Cambia voz y chat a Español";
-        langSwitchCta.textContent = "Cambiar a Español";
-      }
-    }
+    if (dlgTitle) dlgTitle.textContent = es ? "Asistente IA" : "AI Helper";
+    var minBtn = document.getElementById("u4VdMinBtn");
+    if (minBtn) minBtn.textContent = es ? "Ocultar chat ▴" : "Hide chat ▴";
 
     var subEl = document.getElementById("u4VdSub");
     if (subEl && !liveState.connecting) {
       subEl.textContent = liveState.active
         ? (es
-            ? "Habla con naturalidad — toca el botón redondo abajo para terminar, o '—' para minimizar."
-            : "Speak naturally — tap the round button below to end, or '—' to minimize while browsing.")
+            ? "Habla en español o inglés — se minimiza solo al navegar para que veas la página, o toca el botón redondo arriba para terminar."
+            : "Speak naturally — auto-minimizes when opening pages so you can see, or tap the round button to end.")
         : (es
-            ? "Sesión terminada — toca el botón redondo abajo para volver a empezar."
-            : "Session ended — tap the round button below anytime to start again.");
+            ? "Sesión terminada — toca el botón redondo arriba para volver a hablar."
+            : "Session ended — tap the round button anytime to start again.");
     }
     var askInp = document.getElementById("u4VdAskInput");
-    if (askInp) {
-      askInp.placeholder = es ? "O escribe una pregunta para navegar…" : "Or type a question to navigate…";
-    }
+    if (askInp) askInp.placeholder = es ? "O escribe una pregunta…" : "Or type a question…";
   }
 
   function pcm16ToBase64(float32Buf, inputRate) {
@@ -4644,7 +5268,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     }));
   }
 
-  function stopGeminiLiveSession(closeDialogOpt, endReasonOpt) {
+  function stopGeminiLiveSession(closeDialogOpt, endReasonOpt, useKeepaliveOpt) {
     var wasActiveOrConnecting = liveState.active || liveState.connecting;
     liveState.generation += 1;
     clearTimeout(liveState.micGateTimer);
@@ -4658,10 +5282,10 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     if (liveState.processor) { try { liveState.processor.disconnect(); } catch (e) {} liveState.processor = null; }
     if (liveState.inCtx) { try { liveState.inCtx.close(); } catch (e) {} liveState.inCtx = null; }
     if (liveState.outCtx) { try { liveState.outCtx.close(); } catch (e) {} liveState.outCtx = null; }
-    if (liveState.micStream) { liveState.micStream.getTracks().forEach(function(t){ try { t.stop(); } catch (e) {} }); liveState.micStream = null; }
-    if (liveState.ws) { try { liveState.ws.close(); } catch (e) {} liveState.ws = null; }
+    if (liveState.micStream) { liveState.micStream.getTracks().forEach(function(t){ try { t.onended = null; t.stop(); } catch (e) {} }); liveState.micStream = null; }
+    if (liveState.ws) { try { liveState.ws.onclose = null; liveState.ws.close(); } catch (e) {} liveState.ws = null; }
     if (wasActiveOrConnecting) {
-      flushVoiceSessionNotesToTriage(endReasonOpt || "user_ended");
+      flushVoiceSessionNotesToTriage(endReasonOpt || "user_ended", Boolean(useKeepaliveOpt));
     }
     if (closeDialogOpt) {
       liveState.dialogOpen = false;
@@ -4673,9 +5297,10 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
 
   async function startGeminiLiveSession(userGestureEvent, initialPromptOpt) {
     if (!userGestureEvent || (!userGestureEvent.isTrusted && !userGestureEvent.__allowSyntheticTest)) return;
-    if (noteVoiceState.active) cancelNoteVoiceRecording("");
+    if (noteVoiceState.active) stopFieldDictation(true);
 
     dismissMovingPointerForever();
+    liveState.latestMinSummary = "";
     setDialogOpen(true);
 
     if (liveState.active) {
@@ -4688,6 +5313,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     liveState.connecting = true;
     liveState.sessionId = Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 7);
     liveState.sessionStartedAt = new Date().toISOString();
+    liveState.speakerName = "";
     liveState.sessionRoomsVisited = [activeRoomKey()];
     liveState.sessionDocsOpened = [];
     liveState.sessionTurns = [];
@@ -4736,6 +5362,15 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       liveState.ws = ws;
       var setupDone = false;
 
+      // Ensure abrupt microphone cutoff (e.g. incoming phone call on iPhone) still logs the session!
+      stream.getTracks().forEach(function(trk) {
+        trk.onended = function() {
+          if ((liveState.active || liveState.connecting) && generation === liveState.generation) {
+            stopGeminiLiveSession(false, "mic_track_ended_abruptly", true);
+          }
+        };
+      });
+
       ws.onopen = function() {
         var setupPayload = tokData.setup ? Object.assign({}, tokData.setup) : { model: tokData.model || "models/gemini-3.8-live" };
         setupPayload.inputAudioTranscription = setupPayload.inputAudioTranscription || {};
@@ -4763,17 +5398,20 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
 
           var hasPendingQ = Boolean(liveState.pendingPrompt);
           var greetingInstruction = startedInSpanish
-            ? "\n\nINSTRUCCIÓN DE SALUDO INICIAL (dilo en voz alta ahora mismo de forma breve y cálida):\nSaluda en español en una frase corta diciendo que eres el asistente de la Unidad 4 y puedes abrir cualquier cuarto o plano PDF."
-            : "\n\nOPENING GREETING INSTRUCTION (speak this aloud right now, briefly and warmly):\nGreet the user in one short sentence in English saying you're the Unit 4 AI helper and can open any room plan or answer questions, AND immediately say IN SPANISH: 'También puedo ayudarte en español.' Keep the entire greeting to those two short sentences.";
+            ? "\n\nINSTRUCCIÓN DE SALUDO INICIAL OBLIGATORIA (dilo en voz alta ahora mismo de forma breve y cálida):\nSaluda en español diciendo que eres el asistente de la Unidad 4 y PREGUNTA DE INMEDIATO con quién estás hablando hoy ('¿Con quién hablo hoy?')."
+            : "\n\nMANDATORY OPENING GREETING INSTRUCTION (speak this aloud right now, briefly and warmly):\nGreet the user in English saying you're the Unit 4 helper AND ask right away who you're talking to today ('Who am I speaking with today?'), AND immediately say IN SPANISH: 'También puedo ayudarte en español — ¿con quién hablo?' Keep the entire greeting concise and natural.";
 
           var kickoffInstruction =
             "System guide context for Unit 4 AI Helper:\n" +
-            "- Reply concisely and naturally in whatever language the speaker uses (English, Español, etc.) automatically. If they speak Spanish or request Spanish, call set_language({language:'es'}) so the wiki switches to Spanish mode too.\n" +
-            "- Proactively help the user navigate: use navigate_room, open_document, go_to_document_page, and focus_section whenever they ask about a room, plan, or section.\n" +
-            "- CRITICAL RULE FOR PLAN INCONSISTENCIES, UNKNOWN MEASUREMENTS, OR CONTRADICTORY PLANS: Whenever you notice OR the user asks about an unknown/missing measurement, an inconsistency in the plans, or contradictory plans/specs (e.g. a drawing disagreeing with SPEC.md or conflicting numbers), ALWAYS tell the user out loud that you will note it and send it to Tisa (in English: \"I'll note that and send it to Tisa\" / in Spanish: \"Lo voy a anotar y mandárselo a Tisa\"), AND call flag_plan_issue_for_tisa (if available) so it is flagged in the to-triage session notes for Tisa.\n" +
-            "- Keep Todoist IDs invisible unless specifically asked; speak about tasks in plain human room/checklist terms.\n\n" +
+            "- ALWAYS ASK WHO YOU ARE TALKING TO AT THE START OF EVERY SESSION so we know who is sending notes or questions (e.g. John, Ervin, Joel, Wilma, Tisa). As soon as they tell you their name, remember it (and call set_speaker_name if available).\n" +
+            "- Reply concisely and naturally in whatever language the speaker uses (English, Español, etc.) automatically. If they speak Spanish, reply in Spanish and call set_language({language:'es'}).\n" +
+            "- Projects in this wiki are ordered: Kitchen, Bathroom, Bedroom, Living & Dining, Laundry Closet, Hallway, Electrical, Wall Treatment (Paint) [key: 'paint-floors'], Floor Treatment [key: 'floor-treatment'], HVAC. Note there can be plan crossover across areas.\n" +
+            "- Proactively help the user navigate: use navigate_room, open_document, go_to_document_page, and focus_section whenever they ask about a room, plan, or section. (The UI automatically minimizes your chat window when you navigate so they can clearly see the room or PDF on screen.)\n" +
+            "- FIELD NOTE FORM AT BOTTOM OF PAGE: Whenever the speaker wants to record a field note, site fact, or measurement (or asks you to help fill out the form), call fill_draft_note({text: ..., item: ...}) right away so their note shows up on the Field Note form at the bottom, and remind them to attach a photo if they have one before pressing Send.\n" +
+            "- CRITICAL RULE FOR PLAN INCONSISTENCIES, UNKNOWN MEASUREMENTS, OR CONTRADICTORY PLANS: Whenever you notice OR the user asks about an unknown/missing measurement, an inconsistency in the plans, or contradictory plans/specs, ALWAYS tell the user out loud that you will note it and send it to Tisa (in English: \"I'll note that and send it to Tisa\" / in Spanish: \"Lo voy a anotar y mandárselo a Tisa\"), AND call flag_plan_issue_for_tisa (if available) so it is flagged in the to-triage session notes for Tisa.\n" +
+            "- Keep Todoist IDs invisible unless specifically asked.\n\n" +
             initialContext +
-            (hasPendingQ ? "" : greetingInstruction);
+            (hasPendingQ ? ("\n\n(First, briefly ask who you are talking to while answering their question; and note in Spanish 'También puedo ayudarte en español.')") : greetingInstruction);
 
           ws.send(JSON.stringify({
             clientContent: {
@@ -4861,22 +5499,22 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
 
       ws.onerror = function() {
         if (generation !== liveState.generation) return;
-        stopGeminiLiveSession(false, "ws_error");
+        stopGeminiLiveSession(false, "ws_error_abrupt", true);
         var sEl = document.getElementById("u4VdSub");
         if (sEl) {
           sEl.textContent = currentUiLang() === "es"
-            ? "Conexión interrumpida — toca el botón redondo abajo para reconectar."
-            : "Connection interrupted — tap the round button below to reconnect.";
+            ? "Conexión interrumpida (sesión guardada) — toca el botón redondo arriba para reconectar."
+            : "Connection interrupted (session logged) — tap the round button above to reconnect.";
         }
       };
       ws.onclose = function() {
         if ((liveState.active || liveState.connecting) && generation === liveState.generation) {
-          stopGeminiLiveSession(false, "ws_closed");
+          stopGeminiLiveSession(false, "ws_closed_abruptly", true);
         }
       };
     } catch (err) {
       if (generation !== liveState.generation) return;
-      stopGeminiLiveSession(false, "connect_error");
+      stopGeminiLiveSession(false, "connect_error", true);
       var errSub = document.getElementById("u4VdSub");
       if (errSub) {
         errSub.textContent = (currentUiLang() === "es" ? "Voz no disponible: " : "Voice unavailable: ") + String(err && err.message || err);
@@ -4884,16 +5522,26 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     }
   }
 
-  function mountFloatingRoundAiHelper() {
+  function mountInlineTopAiHelper() {
     if (typeof WebSocket !== "function") return;
     if (!document.body) return;
 
-    // Remove any legacy R2 Start voice / status elements from main .bar so nothing redundant appears!
     var oldTop = document.getElementById("u4TopAssistant");
     if (oldTop && oldTop.parentNode) oldTop.parentNode.removeChild(oldTop);
     Array.prototype.slice.call(document.querySelectorAll("#waVoiceMicPill, #waVoiceStatus, .u4-voice-pill, .u4-voice-status")).forEach(function(el) {
       if (el && el.parentNode) el.parentNode.removeChild(el);
     });
+    var qpBtn = document.getElementById("qpBtn");
+    if (qpBtn) {
+      qpBtn.hidden = true;
+      qpBtn.setAttribute("aria-hidden", "true");
+      qpBtn.tabIndex = -1;
+    }
+    var qpPanel = document.getElementById("qpPanel");
+    if (qpPanel) {
+      qpPanel.hidden = true;
+      qpPanel.setAttribute("aria-hidden", "true");
+    }
 
     if (!document.getElementById("u4AiFloatingDock")) {
       var dock = document.createElement("div");
@@ -4904,13 +5552,12 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       dock.setAttribute("translate", "no");
 
       var liveOrbSvg =
-        '<svg viewBox="0 0 28 28" fill="none" aria-hidden="true">' +
-          '<rect class="u4-eq-b u4-eq-1" x="5.2" y="10.5" width="2.5" height="7" rx="1.25" fill="currentColor"/>' +
-          '<rect class="u4-eq-b u4-eq-2" x="9.3" y="7.2" width="2.5" height="13.6" rx="1.25" fill="currentColor"/>' +
-          '<rect class="u4-eq-b u4-eq-3" x="13.4" y="5" width="2.6" height="18" rx="1.3" fill="currentColor"/>' +
-          '<rect class="u4-eq-b u4-eq-4" x="17.6" y="8.2" width="2.5" height="11.6" rx="1.25" fill="currentColor"/>' +
-          '<rect class="u4-eq-b u4-eq-5" x="21.7" y="11" width="2.4" height="6" rx="1.2" fill="currentColor"/>' +
-          '<path d="M23.3 3.1l.55 1.35 1.35.55-1.35.55-.55 1.35-.55-1.35-1.35-.55 1.35-.55z" fill="#34d399"/>' +
+        '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">' +
+          '<rect class="u4-eq-b u4-eq-1" x="4.2" y="9.2" width="2.2" height="5.6" rx="1.1" fill="currentColor"/>' +
+          '<rect class="u4-eq-b u4-eq-2" x="8.0" y="6.2" width="2.2" height="11.6" rx="1.1" fill="currentColor"/>' +
+          '<rect class="u4-eq-b u4-eq-3" x="11.8" y="4.2" width="2.3" height="15.6" rx="1.15" fill="currentColor"/>' +
+          '<rect class="u4-eq-b u4-eq-4" x="15.7" y="7.2" width="2.2" height="9.6" rx="1.1" fill="currentColor"/>' +
+          '<rect class="u4-eq-b u4-eq-5" x="19.5" y="9.6" width="2.1" height="4.8" rx="1.05" fill="currentColor"/>' +
         '</svg>';
 
       dock.innerHTML =
@@ -4919,21 +5566,32 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
           '<span id="u4AiPointerText">Use the AI helper</span>' +
           '<span class="u4-ai-pointer-arrow" aria-hidden="true">→</span>' +
         '</button>' +
-        '<button type="button" id="u4AiChatTogglePill" class="u4-ai-chat-pill" hidden>' +
-          '<span class="u4-ai-chat-pill-dot" aria-hidden="true"></span>' +
-          '<span id="u4AiChatToggleText">Open chat</span>' +
+        '<button type="button" id="u4AiShowChatBtn" class="u4-ai-reopen-btn" hidden>' +
+          '<span class="u4-ai-reopen-dot" aria-hidden="true"></span>' +
+          '<span id="u4AiShowChatText">Show chat ▾</span>' +
         '</button>' +
         '<button type="button" id="u4AiBubbleOrb" class="u4-ai-orb" aria-pressed="false" aria-expanded="false" aria-controls="u4VoiceChatDialog">' +
           liveOrbSvg +
-          '<span id="u4AiStateBadge" class="u4-ai-orb-pill">OFF</span>' +
         '</button>';
 
-      document.body.appendChild(dock);
+      var minBar = document.createElement("div");
+      minBar.id = "u4VoiceMinBar";
+      minBar.className = "u4-voice-minbar";
+      minBar.setAttribute("role", "button");
+      minBar.setAttribute("tabindex", "0");
+      minBar.setAttribute("translate", "no");
+      minBar.hidden = true;
+      minBar.innerHTML =
+        '<div class="u4-vmin-left">' +
+          '<span class="u4-vmin-dot" aria-hidden="true"></span>' +
+          '<span id="u4VoiceMinSummary" class="u4-vmin-summary">AI Helper live — keep talking while viewing this page</span>' +
+        '</div>' +
+        '<span id="u4VoiceMinOpenLbl" class="u4-vmin-open">Show chat ▾</span>';
 
       var dialog = document.createElement("aside");
       dialog.id = "u4VoiceChatDialog";
       dialog.className = "u4-voice-dialog";
-      dialog.setAttribute("role", "dialog");
+      dialog.setAttribute("role", "region");
       dialog.setAttribute("aria-label", "Unit 4 AI Helper Voice Chat");
       dialog.setAttribute("translate", "no");
       dialog.hidden = true;
@@ -4943,40 +5601,37 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
           '<div class="u4-vd-title-wrap">' +
             '<span class="u4-vd-dot" aria-hidden="true"></span>' +
             '<span id="u4VdTitle" class="u4-vd-title">AI Helper</span>' +
-            '<span id="u4VdState" class="u4-vd-state">OFF</span>' +
+            '<span id="u4VdSpeakerBadge" class="u4-vd-speaker-badge" hidden></span>' +
           '</div>' +
           '<div class="u4-vd-controls">' +
-            '<button type="button" id="u4VdMinBtn" class="u4-vd-icon-btn" title="Minimize window (keep voice live)" aria-label="Minimize voice chat">—</button>' +
+            '<button type="button" id="u4VdMinBtn" class="u4-vd-min-btn" aria-label="Hide voice chat">Hide chat ▴</button>' +
           '</div>' +
         '</div>' +
-        '<button type="button" id="u4VdLangSwitchBtn" class="u4-vd-lang-bar">' +
-          '<span id="u4VdLangSwitchText">¿Prefieres español? Cambia voz y chat a Español</span>' +
-          '<span id="u4VdLangSwitchCta" class="u4-vd-lang-cta">Cambiar a Español</span>' +
-        '</button>' +
         '<p id="u4VdSub" class="u4-vd-sub" role="status" aria-live="polite"></p>' +
         '<div id="u4VoiceChatTranscript" class="u4-vd-log" role="log" aria-live="polite"></div>' +
         '<div class="u4-vd-foot">' +
           '<div id="u4AiNudges" class="u4-vd-chips"></div>' +
           '<form id="u4VdAskForm" class="u4-vd-ask-row" novalidate>' +
-            '<input id="u4VdAskInput" class="u4-vd-ask-inp" type="text" autocomplete="off" placeholder="Or type a question to navigate…">' +
+            '<input id="u4VdAskInput" class="u4-vd-ask-inp" type="text" autocomplete="off" placeholder="Or type a question…">' +
             '<button type="submit" class="u4-vd-ask-send" aria-label="Ask AI Helper">↑</button>' +
           '</form>' +
         '</div>';
 
+      document.body.appendChild(dock);
+      document.body.appendChild(minBar);
       document.body.appendChild(dialog);
+      parkAiHelperNodes();
 
-      // Simple click to start, click again to end!
       document.getElementById("u4AiBubbleOrb").addEventListener("click", function(ev) {
         if (ev && ev.preventDefault) ev.preventDefault();
         dismissMovingPointerForever();
         if (liveState.active || liveState.connecting) {
-          stopGeminiLiveSession(true, "user_clicked_orb_to_end");
+          stopGeminiLiveSession(true, "user_clicked_orb_to_end", false);
         } else {
           startGeminiLiveSession(ev, "");
         }
       });
 
-      // Clicking 'Use the AI helper ->' dismisses the pointer permanently and starts the session
       document.getElementById("u4AiMovingPointer").addEventListener("click", function(ev) {
         if (ev && ev.preventDefault) ev.preventDefault();
         dismissMovingPointerForever();
@@ -4987,20 +5642,21 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         }
       });
 
-      // Clicking the Spanish banner inside the live chat switches both UI mode & live voice automatically!
-      document.getElementById("u4VdLangSwitchBtn").addEventListener("click", function(ev) {
-        if (ev && ev.preventDefault) ev.preventDefault();
-        var nextLang = currentUiLang() === "es" ? "en" : "es";
-        switchLiveVoiceAndWikiLanguage(nextLang, ev);
-      });
-
-      // Reopen chat window when minimized during an ongoing live voice call
-      document.getElementById("u4AiChatTogglePill").addEventListener("click", function(ev) {
+      document.getElementById("u4AiShowChatBtn").addEventListener("click", function(ev) {
         if (ev && ev.preventDefault) ev.preventDefault();
         setDialogOpen(true);
       });
+      minBar.addEventListener("click", function(ev) {
+        if (ev && ev.preventDefault) ev.preventDefault();
+        setDialogOpen(true);
+      });
+      minBar.addEventListener("keydown", function(ev) {
+        if (ev && (ev.key === "Enter" || ev.key === " ")) {
+          ev.preventDefault();
+          setDialogOpen(true);
+        }
+      });
 
-      // Minimize popup dialog without ending the ongoing live voice session
       document.getElementById("u4VdMinBtn").addEventListener("click", function(ev) {
         if (ev && ev.preventDefault) ev.preventDefault();
         setDialogOpen(false);
@@ -5039,173 +5695,289 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       });
     }
 
-    if (typeof window.addEventListener === "function" && !window.__u4SessionUnloadBound) {
-      window.__u4SessionUnloadBound = true;
-      window.addEventListener("pagehide", function() {
-        if (liveState.active || liveState.connecting || liveState.sessionFlags.length > 0) {
-          flushVoiceSessionNotesToTriage("pagehide");
+    // Bulletproof abrupt-session-end handlers (tab close, swipe-away, navigation away, network restore)
+    if (typeof window.addEventListener === "function" && !window.__u4SessionUnloadBoundV9) {
+      window.__u4SessionUnloadBoundV9 = true;
+      var flushOnAbruptUnload = function(evName) {
+        if (liveState.active || liveState.connecting || liveState.sessionFlags.length > 0 || liveState.sessionTurns.length > 0) {
+          flushVoiceSessionNotesToTriage(evName, true);
         }
+      };
+      window.addEventListener("pagehide", function() { flushOnAbruptUnload("pagehide_abrupt"); });
+      window.addEventListener("beforeunload", function() { flushOnAbruptUnload("beforeunload_abrupt"); });
+      document.addEventListener("visibilitychange", function() {
+        if (document.visibilityState === "hidden") {
+          sealActiveChatTurn();
+          persistActiveSessionCheckpoint();
+        }
+      });
+      window.addEventListener("online", function() {
+        recoverAbruptlyEndedSessionOnLoad();
       });
     }
 
-    syncFloatingAiUi();
+    placeAiHelperBesidePageHeading();
     refreshDialogSuggestions();
+    recoverAbruptlyEndedSessionOnLoad();
   }
 
-  function mountCleanLeaveANoteSchema() {
+  function mountSimpleBottomFieldNoteForm() {
     if (typeof WebSocket !== "function") return;
+    var fieldSec = document.getElementById("field");
+    var repForm = document.getElementById("repForm");
+    var speakBtn = document.getElementById("speakBtn");
+    var repSend = document.getElementById("repSend");
+    var row2 = fieldSec ? fieldSec.querySelector(".row2") : null;
+    var photoInput = document.getElementById("repPhoto");
+    var audioInput = document.getElementById("repAudio");
+    if (!fieldSec || !repForm || !speakBtn || !repSend) return;
 
-    var syncQpChromeLabels = function() {
-      var es = currentUiLang() === "es";
-      var qpBtn = document.getElementById("qpBtn");
-      if (qpBtn) qpBtn.textContent = es ? "Enviar una nota" : "Send a note";
-      var qpTitle = document.querySelector("#qpPanel .qp-head h2, #qpPanel h2");
-      if (qpTitle) qpTitle.textContent = es ? "Enviar una nota" : "Send a note";
-    };
+    fieldSec.classList.add("u4-simple-field");
+    if (audioInput) {
+      try { audioInput.value = ""; } catch (e) {}
+    }
 
-    var origRenderInbox = typeof renderInbox === "function" ? renderInbox : null;
-    if (origRenderInbox && !origRenderInbox.__u4LeaveANoteCleanV4) {
-      var cleanRenderInbox = function() {
-        var docEl = document.getElementById("qpBody");
-        if (!docEl) return;
-        syncQpChromeLabels();
-        var savedVal = document.getElementById("inText") ? document.getElementById("inText").value : "";
-        var es = currentUiLang() === "es";
-        docEl.innerHTML =
-          '<div class="u4-note-mic-box" translate="no">' +
-            '<div class="u4-note-mic-row">' +
-              '<button class="u4-note-mic-btn" id="inVoiceBtn" type="button" aria-pressed="false">' +
-                (es ? '🎤 Toca para hablar' : '🎤 Tap to speak') +
-              '</button>' +
-              '<button class="btn ghost" id="inVoiceCancel" type="button" hidden style="padding:7px 12px;font-size:13px">' +
-                (es ? 'Cancelar' : 'Cancel') +
-              '</button>' +
-            '</div>' +
-            '<p class="u4-note-mic-sub">' +
-              (es
-                ? 'Habla en español o inglés — el idioma se detecta solo y tu nota se envía al hacer una pausa.'
-                : 'Speak in English or Español — language is detected automatically and pauses send your note.') +
-            '</p>' +
-            '<div class="msg" id="inVoiceStatus" role="status" aria-live="polite" hidden></div>' +
-          '</div>' +
-          '<form id="inForm" novalidate>' +
-            '<label for="inText">' + (es ? 'O escribe tu nota' : 'Or write a note') +
-              '<textarea id="inText" maxlength="8000" style="min-height:96px" placeholder="' +
-                (es ? 'Escribe en español o inglés…' : 'Write in English or Español…') +
-              '"></textarea>' +
-            '</label>' +
-            '<div class="cbar"><button class="btn" id="inSend" type="submit">' + (es ? 'Enviar' : 'Send') + '</button></div>' +
-            '<div class="msg" id="inMsg" role="status"></div>' +
-          '</form>' +
-          '<h2 style="font-size:15px;margin-top:16px">' + (es ? 'Enviadas recientemente' : 'Recently sent') + '</h2>' +
-          '<div class="reports" id="inList"></div>';
+    // 1. Inject user Identity input + quick-tap crew chips inside .row2 (right beside organized 'About' menu; Type is hidden!)
+    if (row2 && !document.getElementById("u4RepSenderName")) {
+      var whoWrap = document.createElement("div");
+      whoWrap.className = "u4-who-wrap";
+      whoWrap.setAttribute("translate", "no");
+      var savedWho = getSavedSenderName();
+      whoWrap.innerHTML =
+        '<label for="u4RepSenderName"><span id="u4WhoLabelText">From (your name)</span>' +
+          '<input type="text" id="u4RepSenderName" maxlength="60" autocomplete="name" value="' + escHtml(savedWho) + '" placeholder="Tap your name below or type it…">' +
+        '</label>' +
+        '<div class="u4-who-chips">' +
+          KNOWN_TEAM_NAMES.map(function(n) {
+            return '<button type="button" class="u4-who-chip" data-u4-who="' + escHtml(n) + '">' + escHtml(n) + '</button>';
+          }).join("") +
+        '</div>';
+      row2.insertBefore(whoWrap, row2.firstChild);
 
-        if (savedVal && document.getElementById("inText")) {
-          document.getElementById("inText").value = savedVal;
+      var whoInp = document.getElementById("u4RepSenderName");
+      whoInp.addEventListener("input", function() {
+        try { localStorage.setItem(SENDER_STORAGE_KEY, String(whoInp.value || "").trim()); } catch (e) {}
+        syncSenderChipsUi();
+      });
+      whoWrap.addEventListener("click", function(ev) {
+        var chip = ev.target && ev.target.closest ? ev.target.closest("[data-u4-who]") : null;
+        if (!chip) return;
+        ev.preventDefault();
+        setSavedSenderName(chip.getAttribute("data-u4-who") || "");
+      });
+      syncSenderChipsUi();
+    }
+
+    // 2. Inject clean Photo bar (encouraging photos whenever possible) wired to #repPhoto
+    if (photoInput && !document.getElementById("u4PhotoBar")) {
+      var photoBar = document.createElement("div");
+      photoBar.id = "u4PhotoBar";
+      photoBar.className = "u4-photo-bar";
+      photoBar.setAttribute("translate", "no");
+      photoBar.innerHTML =
+        '<button type="button" id="u4PhotoTriggerBtn" class="u4-photo-btn"><span id="u4PhotoBtnText">📷 Add photo</span></button>' +
+        '<span id="u4PhotoEncourageText" class="u4-photo-note">Include a photo whenever possible.</span>' +
+        '<span id="u4PhotoPreviewBadge" class="u4-photo-preview" hidden>' +
+          '<img id="u4PhotoThumb" alt="Selected photo">' +
+          '<span id="u4PhotoName" class="u4-photo-preview-name"></span>' +
+          '<button type="button" id="u4PhotoClearBtn" class="u4-photo-clear" aria-label="Remove photo">✕</button>' +
+        '</span>';
+
+      var cbar = repSend.parentNode;
+      if (cbar && cbar.parentNode) {
+        cbar.parentNode.insertBefore(photoBar, cbar);
+      } else {
+        repForm.appendChild(photoBar);
+      }
+
+      document.getElementById("u4PhotoTriggerBtn").addEventListener("click", function(ev) {
+        ev.preventDefault();
+        photoInput.click();
+      });
+
+      var syncPhotoBadge = function() {
+        var f = photoInput.files && photoInput.files[0];
+        var badge = document.getElementById("u4PhotoPreviewBadge");
+        var thumb = document.getElementById("u4PhotoThumb");
+        var nm = document.getElementById("u4PhotoName");
+        if (!f) {
+          if (badge) badge.hidden = true;
+          return;
         }
+        if (nm) nm.textContent = f.name || "photo.jpg";
+        if (badge) badge.hidden = false;
+        if (thumb && typeof URL !== "undefined" && URL.createObjectURL) {
+          try { thumb.src = URL.createObjectURL(f); } catch (e) {}
+        }
+      };
 
-        var vBtn = document.getElementById("inVoiceBtn");
-        if (vBtn) {
-          vBtn.onclick = function(ev) {
-            if (ev && ev.preventDefault) ev.preventDefault();
-            toggleSpeakANote(ev, "qp");
-          };
+      photoInput.addEventListener("change", syncPhotoBadge);
+      document.getElementById("u4PhotoClearBtn").addEventListener("click", function(ev) {
+        ev.preventDefault();
+        try { photoInput.value = ""; } catch (e) {}
+        syncPhotoBadge();
+      });
+    }
+
+    // 3. Move dictation mic button right next to Send inside .cbar
+    if (!speakBtn.__u4SimpleDictateBoundV9) {
+      var cleanSpeakBtn = speakBtn.cloneNode(false);
+      cleanSpeakBtn.removeAttribute("style");
+      cleanSpeakBtn.type = "button";
+      cleanSpeakBtn.__u4SimpleDictateBoundV9 = true;
+      if (speakBtn.parentNode) speakBtn.parentNode.removeChild(speakBtn);
+      if (repSend.parentNode) {
+        repSend.parentNode.insertBefore(cleanSpeakBtn, repSend);
+      } else {
+        repForm.appendChild(cleanSpeakBtn);
+      }
+      cleanSpeakBtn.addEventListener("click", function(ev) {
+        toggleFieldDictation(ev);
+      });
+    }
+
+    // 4. Before #repForm submits: stop active dictation, require sender identity, and embed '[From: Name]' cleanly!
+    if (!repForm.__u4SubmitIdentityBoundV9) {
+      repForm.__u4SubmitIdentityBoundV9 = true;
+      var lastPrependedPrefix = "";
+      repForm.addEventListener("submit", function(ev) {
+        if (noteVoiceState.active) stopFieldDictation(false);
+        var whoInp = document.getElementById("u4RepSenderName");
+        var whoVal = whoInp ? String(whoInp.value || "").trim() : "";
+        if (!whoVal) {
+          ev.preventDefault();
+          ev.stopImmediatePropagation();
+          if (whoInp && whoInp.focus) whoInp.focus();
+          setFieldNoteHint(
+            currentUiLang() === "es"
+              ? "Toca o escribe tu nombre arriba para saber quién envía esta nota."
+              : "Please tap or enter your name above so we know who is sending this.",
+            true
+          );
+          return;
         }
-        var cBtn = document.getElementById("inVoiceCancel");
-        if (cBtn) {
-          cBtn.onclick = function(ev) {
-            if (ev && ev.preventDefault) ev.preventDefault();
-            cancelNoteVoiceRecording(currentUiLang() === "es" ? "Cancelado." : "Cancelled.");
-          };
+        setSavedSenderName(whoVal);
+        // Ensure #repKind defaults cleanly so user never selects a Type
+        var kindSel = document.getElementById("repKind");
+        if (kindSel) kindSel.value = "Note";
+        // Prepend [From: Name] if text is present and doesn't already include it
+        var repTa = document.getElementById("repText");
+        if (repTa && repTa.value.trim() && repTa.value.indexOf("[From:") !== 0) {
+          lastPrependedPrefix = "[From: " + whoVal + "]\n";
+          repTa.value = lastPrependedPrefix + repTa.value.trim();
+        } else {
+          lastPrependedPrefix = "";
         }
-        var inForm = document.getElementById("inForm");
-        if (inForm) {
-          inForm.onsubmit = function(ev) {
-            if (ev && ev.preventDefault) ev.preventDefault();
-            if (noteVoiceState.active && noteVoiceState.mode === "qp") cancelNoteVoiceRecording("");
-            var val = document.getElementById("inText") ? document.getElementById("inText").value : "";
-            sendLeaveANotePayload(val, "", null, false);
-          };
+        // Clear photo preview badge once form clears after successful submit
+        setTimeout(function() {
+          var badge = document.getElementById("u4PhotoPreviewBadge");
+          if (badge && (!photoInput || !photoInput.files || !photoInput.files.length)) {
+            badge.hidden = true;
+          }
+          // If network errored and repText wasn't cleared, strip the temporary prefix so user sees their clean text
+          if (repTa && lastPrependedPrefix && repTa.value.indexOf(lastPrependedPrefix) === 0) {
+            repTa.value = repTa.value.slice(lastPrependedPrefix.length);
+          }
+        }, 600);
+      }, true);
+    }
+
+    // 5. Override wireReports so #field is shown on Home AND all 10 Project pages with the organized 'About' menu!
+    if (typeof wireReports === "function" && !wireReports.__u4OrganizedAboutV9) {
+      var origWireReports = wireReports;
+      var wrappedWireReports = function(p) {
+        if (p && p.key === "home") {
+          fieldSec.hidden = false;
+          populateOrganizedAboutSelect("home");
+          repSend.disabled = false;
+          var msg = document.getElementById("repMsg");
+          if (msg && (!msg.dataset || !msg.dataset.keep)) msg.textContent = "";
+          if (typeof drawReports === "function" && typeof getRoomReportDocs === "function") {
+            drawReports(getRoomReportDocs("home"));
+          }
+          updateNoteVoiceButtons();
+          return;
+        }
+        origWireReports.apply(this, arguments);
+        if (p && p.group === "Projects") {
+          populateOrganizedAboutSelect(p.key);
         }
         updateNoteVoiceButtons();
-        if (typeof drawQueue === "function") drawQueue();
       };
-      cleanRenderInbox.__u4LeaveANoteCleanV4 = true;
-      renderInbox = cleanRenderInbox;
-      window.renderInbox = cleanRenderInbox;
-    }
-
-    var qpClose = document.getElementById("qpClose");
-    if (qpClose && !qpClose.__u4CleanCloseBound) {
-      qpClose.__u4CleanCloseBound = true;
-      qpClose.addEventListener("click", function() {
-        if (noteVoiceState.active && noteVoiceState.mode === "qp") cancelNoteVoiceRecording("");
-      });
-    }
-
-    var speakBtn = document.getElementById("speakBtn");
-    if (speakBtn && !speakBtn.__u4CleanRoomVoiceBound && speakBtn.parentNode && typeof speakBtn.cloneNode === "function") {
-      var cleanSpeakBtn = speakBtn.cloneNode(true);
-      speakBtn.parentNode.replaceChild(cleanSpeakBtn, speakBtn);
-      cleanSpeakBtn.__u4CleanRoomVoiceBound = true;
-      cleanSpeakBtn.addEventListener("click", function(ev) {
-        if (ev && ev.preventDefault) ev.preventDefault();
-        toggleSpeakANote(ev, "room");
-      });
+      wrappedWireReports.__u4OrganizedAboutV9 = true;
+      wireReports = wrappedWireReports;
+      window.wireReports = wrappedWireReports;
     }
 
     var langBtn = document.getElementById("langBtn");
-    if (langBtn && !langBtn.__u4CleanLangBound) {
-      langBtn.__u4CleanLangBound = true;
+    if (langBtn && !langBtn.__u4CleanLangBoundV9) {
+      langBtn.__u4CleanLangBoundV9 = true;
       langBtn.addEventListener("click", function() {
         setTimeout(function() {
-          syncQpChromeLabels();
+          rebuildOrderedProjectsNav();
+          populateOrganizedAboutSelect(activeRoomKey());
+          placeAiHelperBesidePageHeading();
           syncFloatingAiUi();
           updateNoteVoiceButtons();
           refreshDialogSuggestions();
-        }, 50);
+        }, 40);
       });
     }
 
-    syncQpChromeLabels();
     updateNoteVoiceButtons();
   }
 
   if (typeof WebSocket === "function") {
-    if (typeof show === "function" && !show.__u4NudgeWrapped) {
+    rebuildOrderedProjectsNav();
+    if (typeof show === "function" && !show.__u4InlineTopWrappedV9) {
       var origShow = show;
       var wrappedShow = function(target) {
-        var r = origShow.apply(this, arguments);
-        setTimeout(refreshDialogSuggestions, 30);
+        var normTarget = target === "wall-treatment" ? "paint-floors" : target;
+        parkAiHelperNodes();
+        var r = origShow.call(this, normTarget);
+        placeAiHelperBesidePageHeading();
+        setTimeout(refreshDialogSuggestions, 25);
         return r;
       };
-      wrappedShow.__u4NudgeWrapped = true;
+      wrappedShow.__u4InlineTopWrappedV9 = true;
       show = wrappedShow;
       window.show = wrappedShow;
     }
-    mountFloatingRoundAiHelper();
-    mountCleanLeaveANoteSchema();
+    mountSimpleBottomFieldNoteForm();
+    mountInlineTopAiHelper();
     if (typeof show === "function" && document.getElementById("doc")) {
-      try { show((location.hash || "#home").slice(1) || "home"); } catch (e) {}
+      try {
+        var initKey = (location.hash || "#home").slice(1) || "home";
+        if (initKey === "wall-treatment") initKey = "paint-floors";
+        show(initKey);
+      } catch (e) {}
     }
     if (typeof window.addEventListener === "function") {
       window.addEventListener("hashchange", function() {
+        if (location.hash === "#wall-treatment") {
+          location.hash = "#paint-floors";
+          return;
+        }
         setTimeout(function() {
+          placeAiHelperBesidePageHeading();
           refreshDialogSuggestions();
           pushLiveContextIfChanged();
-        }, 120);
+        }, 100);
       });
     }
   }
 
   window.U4GeminiLiveAssistant = {
-    version: "r5-live-orb-v7",
+    version: "r5-live-orb-v9",
     micOpenedOnLoad: false,
+    orderedProjects: ORDERED_PROJECTS,
     start: startGeminiLiveSession,
     stop: stopGeminiLiveSession,
-    switchLanguage: switchLiveVoiceAndWikiLanguage,
+    setSpeakerName: setSavedSenderName,
+    toggleFieldDictation: toggleFieldDictation,
     flagPlanIssueForTisa: recordAndDispatchPlanIssueFlag,
     flushSessionNotes: flushVoiceSessionNotesToTriage,
+    recoverAbruptSession: recoverAbruptlyEndedSessionOnLoad,
     toggleDialog: function(){ setDialogOpen(!liveState.dialogOpen); },
     isDialogOpen: function(){ return liveState.dialogOpen; },
     isActive: function(){ return liveState.active; },
