@@ -295,47 +295,78 @@ nav.rail a.sub .k,.docs .k{display:block;font-family:var(--mono);font-size:10.5p
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
-/* U4_R5_V4_CLEAN_AI_AND_NOTE_CSS_START */
-.u4-top-ai{position:sticky;top:0;z-index:25;max-width:74ch;margin:0 0 16px;border:1.5px solid var(--line);border-radius:12px;background:var(--panel);box-shadow:0 4px 14px rgba(0,0,0,.07);transition:border-color .18s,box-shadow .18s}
-.u4-top-ai[data-live="on"]{border-color:#0f766e;box-shadow:0 6px 20px rgba(15,118,110,.18)}
-.u4-top-ai[data-live="connecting"]{border-color:#b45309}
-@media (max-width:760px){.u4-top-ai{top:calc(env(safe-area-inset-top,0px) + 50px);margin-top:2px}}
-.u4-top-ai-main{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 14px;padding:10px 13px}
-.u4-top-ai-id{display:flex;align-items:center;gap:10px;min-width:0;flex:1 1 240px}
-.u4-ai-orb{position:relative;width:38px;height:38px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:var(--bg);border:1.5px solid var(--line);color:var(--muted);flex:none;cursor:pointer;padding:0;transition:all .18s}
-.u4-top-ai[data-live="on"] .u4-ai-orb{background:#0f766e;border-color:#0f766e;color:#fff;box-shadow:0 0 0 4px rgba(15,118,110,.2)}
-.u4-top-ai[data-live="connecting"] .u4-ai-orb{background:#fef3c7;border-color:#d97706;color:#b45309}
-.u4-ai-orb svg{width:21px;height:21px;display:block}
-@keyframes u4WavePulse{0%,100%{transform:scaleY(.55)}50%{transform:scaleY(1.18)}}
-.u4-top-ai[data-live="on"] .u4-wave-b1{animation:u4WavePulse .85s ease-in-out infinite;transform-origin:center}
-.u4-top-ai[data-live="on"] .u4-wave-b2{animation:u4WavePulse .65s ease-in-out .15s infinite;transform-origin:center}
-.u4-top-ai[data-live="on"] .u4-wave-b3{animation:u4WavePulse .95s ease-in-out .3s infinite;transform-origin:center}
-.u4-ai-copy{min-width:0;display:grid;gap:2px}
-.u4-ai-title-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
-.u4-ai-title{font-weight:700;font-size:14px;color:var(--fg);letter-spacing:-.01em}
-.u4-ai-state{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:999px;background:var(--bg);color:var(--muted);border:1px solid var(--line)}
-.u4-top-ai[data-live="on"] .u4-ai-state{background:#d1fae5;color:#065f46;border-color:#6ee7b7}
-.u4-top-ai[data-live="connecting"] .u4-ai-state{background:#fef3c7;color:#92400e;border-color:#fcd34d}
-.u4-voice-status{font-size:12.5px;color:var(--muted);margin:0;line-height:1.35;overflow-wrap:anywhere}
-.u4-top-ai-cta{display:flex;align-items:center;gap:8px;flex:none}
-.u4-voice-pill{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border-radius:999px;border:1.5px solid var(--accent);background:var(--accent);color:var(--panel);font:600 13.5px/1.2 var(--body);cursor:pointer;transition:transform .1s,background .15s}
-.u4-voice-pill:active{transform:scale(.98)}
-.u4-voice-pill[aria-pressed="true"]{background:#b42318;border-color:#b42318;color:#fff}
-.u4-ai-heard{margin:0 13px 8px;padding:5px 9px;border-radius:7px;background:var(--accent-soft);color:var(--accent);font:500 12px/1.35 var(--mono)}
-.u4-ai-nudges{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:7px 13px 9px;border-top:1px solid var(--line);background:var(--bg);border-radius:0 0 11px 11px}
-.u4-nudge-lbl{font-size:11.5px;font-weight:600;color:var(--muted);margin-right:2px}
-.u4-nudge-chip{font:500 12px/1.25 var(--body);padding:4px 10px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--fg);cursor:pointer;transition:border-color .15s,background .15s}
+/* U4_R5_V5_LIVE_ORB_AND_CHAT_DIALOG_CSS_START */
+.u4-ai-dock{position:fixed;top:16px;right:20px;z-index:95;display:flex;align-items:center;gap:10px;pointer-events:none;font-family:var(--body)}
+@media (max-width:760px){.u4-ai-dock{top:calc(env(safe-area-inset-top,0px) + 6px);right:10px;gap:7px}}
+@keyframes u4HelperPoint{0%,100%{transform:translateX(0)}50%{transform:translateX(7px)}}
+@keyframes u4LiveAura{0%{box-shadow:0 0 0 0 rgba(16,185,129,.48),0 6px 20px rgba(0,0,0,.28)}70%{box-shadow:0 0 0 13px rgba(16,185,129,0),0 6px 20px rgba(0,0,0,.28)}100%{box-shadow:0 0 0 0 rgba(16,185,129,0),0 6px 20px rgba(0,0,0,.28)}}
+@keyframes u4EqBar{0%,100%{transform:scaleY(.38)}50%{transform:scaleY(1.15)}}
+.u4-ai-pointer{pointer-events:auto;display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border-radius:999px;border:1.5px solid var(--accent);background:var(--panel);color:var(--fg);font:600 13px/1.2 var(--body);box-shadow:0 6px 18px rgba(0,0,0,.22);cursor:pointer;animation:u4HelperPoint 1.55s ease-in-out infinite;white-space:nowrap}
+.u4-ai-pointer:hover{background:var(--accent-soft)}
+.u4-ai-pointer-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
+.u4-ai-dock[data-live="on"] .u4-ai-pointer-dot{background:#10b981;box-shadow:0 0 0 3px rgba(16,185,129,.25)}
+.u4-ai-dock[data-live="on"][data-open="true"] .u4-ai-pointer{animation:none;opacity:.92}
+.u4-ai-pointer-arrow{font-weight:800;color:var(--accent);font-size:14px;line-height:1}
+@media (max-width:520px){.u4-ai-pointer{padding:6px 10px;font-size:12px}}
+.u4-ai-orb{pointer-events:auto;position:relative;width:60px;height:60px;border-radius:50%;border:2px solid rgba(255,255,255,.22);background:linear-gradient(145deg,#1e293b,#0f172a);color:#f8fafc;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.32),0 0 0 2px var(--accent);padding:0;transition:transform .14s,background .2s,box-shadow .2s}
+.u4-ai-orb:hover{transform:scale(1.05)}
+.u4-ai-orb:active{transform:scale(.96)}
+.u4-ai-dock[data-live="connecting"] .u4-ai-orb{background:linear-gradient(145deg,#b45309,#78350f);box-shadow:0 8px 24px rgba(180,83,9,.38),0 0 0 3px #fbbf24}
+.u4-ai-dock[data-live="on"] .u4-ai-orb{background:linear-gradient(145deg,#059669,#0f766e);border-color:#a7f3d0;animation:u4LiveAura 1.9s infinite}
+@media (max-width:760px){.u4-ai-orb{width:50px;height:50px}}
+.u4-ai-orb svg{width:28px;height:28px;display:block}
+@media (max-width:760px){.u4-ai-orb svg{width:24px;height:24px}}
+.u4-eq-b{transform-origin:center;transition:transform .15s}
+.u4-ai-dock[data-live="on"] .u4-eq-1{animation:u4EqBar .78s ease-in-out infinite}
+.u4-ai-dock[data-live="on"] .u4-eq-2{animation:u4EqBar .56s ease-in-out .12s infinite}
+.u4-ai-dock[data-live="on"] .u4-eq-3{animation:u4EqBar .68s ease-in-out .24s infinite}
+.u4-ai-dock[data-live="on"] .u4-eq-4{animation:u4EqBar .60s ease-in-out .08s infinite}
+.u4-ai-dock[data-live="on"] .u4-eq-5{animation:u4EqBar .84s ease-in-out .18s infinite}
+.u4-ai-orb-pill{position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);padding:1px 6px;border-radius:999px;font:700 9.5px/1.3 var(--mono);letter-spacing:.05em;text-transform:uppercase;background:#334155;color:#e2e8f0;border:1px solid rgba(255,255,255,.2);white-space:nowrap}
+.u4-ai-dock[data-live="on"] .u4-ai-orb-pill{background:#ecfdf5;color:#065f46;border-color:#34d399}
+.u4-ai-dock[data-live="connecting"] .u4-ai-orb-pill{background:#fef3c7;color:#92400e;border-color:#fbbf24}
+.u4-voice-dialog{position:fixed;top:86px;right:20px;z-index:94;width:min(395px,calc(100vw - 24px));height:min(520px,calc(100vh - 155px));display:flex;flex-direction:column;border-radius:16px;border:1.5px solid var(--line);background:var(--panel);color:var(--fg);box-shadow:0 16px 42px rgba(0,0,0,.34);overflow:hidden;font-family:var(--body)}
+.u4-voice-dialog[hidden]{display:none!important}
+@media (max-width:760px){.u4-voice-dialog{top:calc(env(safe-area-inset-top,0px) + 64px);right:10px;width:calc(100vw - 20px);height:min(460px,calc(100vh - 140px))}}
+.u4-vd-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 13px;border-bottom:1px solid var(--line);background:var(--bg)}
+.u4-vd-title-wrap{display:flex;align-items:center;gap:8px;min-width:0}
+.u4-vd-dot{width:9px;height:9px;border-radius:50%;background:var(--muted);flex:none}
+.u4-voice-dialog[data-live="on"] .u4-vd-dot{background:#10b981;box-shadow:0 0 0 3px rgba(16,185,129,.24)}
+.u4-voice-dialog[data-live="connecting"] .u4-vd-dot{background:#f59e0b}
+.u4-vd-title{font-weight:700;font-size:14px;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.u4-vd-state{font:700 10px/1.2 var(--mono);padding:2px 6px;border-radius:999px;border:1px solid var(--line);color:var(--muted);text-transform:uppercase}
+.u4-voice-dialog[data-live="on"] .u4-vd-state{background:#d1fae5;color:#065f46;border-color:#6ee7b7}
+.u4-vd-controls{display:flex;align-items:center;gap:6px;flex:none}
+.u4-vd-btn{font:600 12px/1.2 var(--body);padding:5px 10px;border-radius:999px;border:1px solid var(--accent);background:var(--accent);color:var(--panel);cursor:pointer}
+.u4-vd-btn.is-end{background:#b42318;border-color:#b42318;color:#fff}
+.u4-vd-icon-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--fg);font:700 14px/1 var(--body);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+.u4-vd-icon-btn:hover{border-color:var(--accent);color:var(--accent)}
+.u4-vd-sub{margin:0;padding:6px 13px;font-size:12px;color:var(--muted);border-bottom:1px solid var(--line);background:var(--panel);line-height:1.35}
+.u4-vd-log{flex:1 1 auto;overflow-y:auto;padding:12px 13px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
+.u4-chat-turn{display:flex;flex-direction:column;gap:3px;max-width:88%}
+.u4-chat-turn.is-user{align-self:flex-end;align-items:flex-end}
+.u4-chat-turn.is-ai{align-self:flex-start;align-items:flex-start}
+.u4-chat-turn.is-nav{align-self:center;max-width:96%}
+.u4-chat-role{font:600 10.5px/1.2 var(--mono);color:var(--muted);padding:0 4px}
+.u4-chat-bubble{padding:8px 12px;border-radius:14px;font-size:13.5px;line-height:1.42;overflow-wrap:anywhere;white-space:pre-wrap}
+.u4-chat-turn.is-user .u4-chat-bubble{background:var(--accent);color:var(--panel);border-bottom-right-radius:4px}
+.u4-chat-turn.is-ai .u4-chat-bubble{background:var(--bg);color:var(--fg);border:1px solid var(--line);border-bottom-left-radius:4px}
+.u4-chat-nav-pill{font:600 11.5px/1.3 var(--body);padding:4px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);border:1px solid var(--line)}
+.u4-vd-foot{border-top:1px solid var(--line);padding:8px 11px;background:var(--bg);display:grid;gap:7px}
+.u4-vd-chips{display:flex;gap:5px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.u4-vd-chips::-webkit-scrollbar{display:none}
+.u4-nudge-chip{flex:none;font:500 11.5px/1.2 var(--body);padding:4px 9px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--fg);cursor:pointer;white-space:nowrap}
 .u4-nudge-chip:hover{border-color:var(--accent);color:var(--accent)}
-.u4-wiki-nudge{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 12px;margin:0 0 14px;padding:9px 12px;border-radius:9px;border:1px dashed var(--accent);background:var(--accent-soft);color:var(--fg);font-size:13px;line-height:1.4}
-.u4-wiki-nudge b{color:var(--accent)}
-.u4-wiki-nudge-chips{display:flex;flex-wrap:wrap;gap:6px}
+.u4-vd-ask-row{display:flex;gap:6px;align-items:center}
+.u4-vd-ask-inp{flex:1 1 auto;min-width:0;font:inherit;font-size:13px;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--fg)}
+.u4-vd-ask-send{width:30px;height:30px;border-radius:50%;border:1px solid var(--accent);background:var(--accent);color:var(--panel);font:700 13px/1 var(--body);cursor:pointer;flex:none;display:inline-flex;align-items:center;justify-content:center;padding:0}
 .u4-note-mic-box{display:grid;gap:8px;margin:0 0 10px;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg)}
 .u4-note-mic-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
 .u4-note-mic-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;border:1.5px solid var(--accent);background:var(--accent);color:var(--panel);font:600 14.5px/1.2 var(--body);cursor:pointer}
 .u4-note-mic-btn.is-rec{background:#b42318;border-color:#b42318;color:#fff}
 .u4-note-mic-sub{font-size:12.5px;color:var(--muted);margin:0;line-height:1.35}
 .ck-note{font-size:13px;color:var(--muted);margin:0 0 8px;line-height:1.4}
-/* U4_R5_V4_CLEAN_AI_AND_NOTE_CSS_END */
+/* U4_R5_V5_LIVE_ORB_AND_CHAT_DIALOG_CSS_END */
 </style>
 
 <section id="agent-brief" class="sr-only" aria-label="Agent brief"># START HERE — Unit 4 remodel, 1231 11th Ave (San Francisco)<br><br>**This is the only start-here file.** Every person and agent opening this folder reads this first, fully, before acting.<br>Updated 2026-11-05 17:45 PT by Claude (Tisa&#x27;s account, cloud session). The same text is the wiki&#x27;s &quot;For AI agents: read first&quot; section.<br><br>## 0. Where to work — Google Drive is the single source of truth<br>- **Unit 4 folder (work here):** https://drive.google.com/drive/folders/1NnUfcuJfnzcjJz3XRvDQDhfvtMkrlSOr (`1231-11th-avenue/unit-4-renovation`)<br>- **Whole-building parent:** https://drive.google.com/drive/folders/1StmWHtnrDQlpd1CbUUfUEOI1vg-jHn29 (`1231-11th-avenue`)<br>- Everyone — Tisa&#x27;s Claude, John&#x27;s Claude, Dibble, any other agent — reads and writes through this Drive folder. (It is backed by Tisa&#x27;s Mini and syncs automatically; you never need the Mini path.)<br>- Every Unit 4 document now lives here, including copies of everything from the old locations (section 3). If you can&#x27;t find something, look in the room folder&#x27;s `from-remodel-hub/`, `from-unit4-bath-folder/` or `from-my-drive/` subfolder before assuming it&#x27;s missing.<br>- Older start-here, AGENTS and CLAUDE files were retired 2026-11-05 to `continuity/_superseded/start-here-history/` — don&#x27;t follow them.<br><br>---<br><br>## 1. Who and what<br>- **Tisa** owns the project and makes and locks every decision. **John** is lead carpenter on site. **Ervin, Joel, Wilma** are crew (Spanish speakers).<br>- **Wiki** — https://claude.ai/artifact/3rweGyzGShQj4oUauUTRvU — the shared picture: roadmap, one spec per project, open decisions, documents (PDFs preview in the page). It reads the `.md` files in this folder.<br>- **Todoist** board `Full 1231 11th Avenue Remodel` (id `6hcMQpGhXWprg6m7`). The wiki is its spine: every card traces to a spec, a locked decision or captured input.<br>- **Magicplan** MASTER plan is the geometry source: https://cloud.magicplan.app/plan/abb2d2c6-aa1c-4a88-a57e-1260847b6410<br>- **Your job:** keep the project moving with as little effort from Tisa and John as possible. Answer from the specs, capture what they tell you, file it, keep wiki and Todoist in step.<br><br>## 2. Read in this order<br>1. `STATUS-NOW.md` — what&#x27;s locked, what&#x27;s blocking, what&#x27;s next on site. Answer &quot;what&#x27;s up?&quot; from here first.<br>2. `continuity/ROADMAP.md` — sequence and phases.<br>3. `&lt;room&gt;/SPEC.md` for the area you&#x27;re working on.<br>4. `continuity/CURRENT-DECISIONS.md` and `continuity/KNOWN-GAPS.md` only if you need the history.<br><br>## 3. Folder map<br>| Folder | Holds |<br>|---|---|<br>| `kitchen/` `bathroom/` `electrical/` `laundry/` `bedroom/` `living-dining/` `hallway/` `paint-floors/` `hvac/` | One per room or trade; each has `SPEC.md` (governs) plus dated drawings and packages. |<br>| `interior-design/` | Wall treatment, trim, outlet and finish plans (dated revision folders). |<br>| `general/` | Whole-unit items; `from-remodel-hub/` = imported old crew-hub files. |<br>| `sprint/` | Current sprint plan and session agendas. |<br>| `continuity/` | Roadmap, decisions log, known gaps, labor ballpark, history and source snapshots. |<br>| `work-control/` | Agent index, Todoist runbook (dated snapshot), `wiki-source/` (wiki build files). |<br>| `to-triage/` | Drop box for any input (notes, photos, voice memos, session minutes). Claude routes it and moves it to `to-triage/_done/`. |<br>| `sessions/` | One folder per working session: minutes (and transcript when available). |<br>| `_to_delete/` | Marked for removal; only Tisa empties it. |<br><br>Outside this folder: `../building/` (common areas, backyard, alley; `building/earlier-renovations-not-unit-4…/` holds older renovation docs that are **not** Unit 4 — don&#x27;t use them for Unit 4), `../GOOGLE-DOCS-INDEX.md`, and the separate private folder `1231-11th-avenue-private` (leases, costs, payroll, bids — **never share with crew**).<br><br>**Old locations — still readable for history, never the place to work:** Drive &quot;1231 11th Ave - Unit 4 Remodel&quot; (old crew hub, folders 01–12), Drive &quot;11th Ave Unit 4 Bath&quot;. Everything in them was copied here on 2026-11-04/05. If an old file and a file here disagree, the room&#x27;s `SPEC.md` governs.<br><br>## 4. Which version is the latest<br>1. Names carry date and revision: `YYYY-MM-DD_U4_&lt;room or trade&gt;_&lt;what&gt;_R#` (issued drawings may use `RevA`, `RevB`), then `_EN` or `_ES`. English and Spanish are always separate files.<br>2. The latest lives in the topic folder. A replaced file moves, name unchanged, to that folder&#x27;s `_superseded/` (or `history/`). Nothing is deleted.<br>3. If a folder still has more than one live iteration, its `CURRENT.md` names the one that governs.<br>4. `from-remodel-hub/`, `from-unit4-bath-folder/`, `from-my-drive/` are copies imported 2026-11-04 so no mockup or image is lost; they&#x27;re being reconciled. Until then the room&#x27;s `SPEC.md` and the dated files outside them govern.<br><br>## 5. Golden rule: John never has to enter anything himself<br>When John or Tisa tells you something — a task, a measurement, a problem, a question, a decision needed — capture it for them in their words and file it (section 7). Don&#x27;t send them to a form. Confirm back in one line what you filed and where.<br><br>## 6. What each kind of agent can do<br>| You are… | You can |<br>|---|---|<br>| **Claude on Tisa&#x27;s claude.ai account** (this Project, Cowork, Claude Code) | Everything: wiki data via the ArtifactData tool (URL above), republish the wiki via the Artifact tool, edit files here, Todoist via the connector (connected 2026-11-03). |<br>| **John&#x27;s Claude** (claude.ai cloud, often voice on John&#x27;s iPhone) | Read the wiki link, this Drive folder and the Todoist board. Its Drive connector can **create** files but can&#x27;t overwrite existing ones, so it writes session minutes and notes to `to-triage/` as `YYYY-MM-DD_HHMM_session_&lt;topic&gt;.md` with an author line (which Claude, which device, cloud or local). Tisa&#x27;s Claude routes them into the wiki, specs, STATUS-NOW and Todoist. |<br>| **Any other agent** (Dibble, Codex, Gemini, Antigravity) | Read and edit the files here (section 8 rules), update `STATUS-NOW.md`, drop input in `to-triage/`. Access comes from this Drive folder being shared with John&#x27;s Google account as Editor. |<br>| **Any agent with a browser** | Open the wiki and help John use it on his phone. |<br><br>**Dropping input (non-Claude agents):** `to-triage/YYYY-MM-DD_HHMM_&lt;who&gt;_&lt;short&gt;.md`<br>```<br>type: task | fact | decision | note<br>project: kitchen | bathroom | electrical | laundry | bedroom | living-dining | hallway | paint-floors | hvac | general<br>from: &lt;agent&gt; on behalf of &lt;John/Tisa&gt;<br>---<br>&lt;their words&gt;<br>```<br>**Claude capture:** write to the wiki&#x27;s `inbox` collection `{type, project, section, title, details, raw, source:&quot;agent&quot;, from, createdAt, status:&quot;queued&quot;}`, then route it in the same turn.<br><br>## 7. Routing — where each thing goes<br>| Came in | Do this |<br>|---|---|<br>| **Task** | Look for an existing card first (comment rather than duplicate). Create it in the project&#x27;s section — Kitchen / Cocina · Bathroom / Baño · Electrical / Electricidad · Laundry / Lavandería · Walls, Molding &amp; Paint · General &amp; HVAC (bedroom, living-dining, hallway, HVAC, building) · New Tasks (need triage) · Backlog · On Hold or Blocked. Re-check section names live before writing. Plain title; description = State / Trade / Next physical action / Governing source (link to SPEC.md). **Unassigned** unless Tisa names someone. |<br>| **Site fact** | Add to the project&#x27;s SPEC.md with date and &quot;(John, field)&quot;. Comment on the card if it changes one. |<br>| **Decision needed** | Add a wiki `decisions` doc (`status: open`, priority 1 blocking / 2 next / 3 later). Only Tisa locks. |<br>| **Locked decision** (`synced: false`) | Update SPEC.md (mark LOCKED), matching cards, the Spanish crew edition, `STATUS-NOW.md`; set `synced: true`. |<br>| **Field report / session notes** | File facts as above; next steps → unassigned cards; open items → decisions; mark `recorded`. |<br><br>Wiki and cards disagree → the wiki wins (never the reverse without Tisa). Any change you make → update `STATUS-NOW.md` in the same pass.<br><br>## 8. Rules that always hold<br>- Tisa&#x27;s direction is locked; anything an AI produces is a suggestion until she locks it.<br>- Nothing is sent, signed, ordered, paid or scheduled without Tisa&#x27;s approval.<br>- Magicplan and existing drawings first. Never ask John to re-measure what&#x27;s recorded; ask only for the specific missing number.<br>- Crew-facing documents: English first, then a **separate** Spanish edition. Never mix languages. Replies to Tisa in English.<br>- Edit an existing spec rather than making a new file beside it (new files break wiki links).<br>- Superseded files go to `_superseded`; never delete. No credentials in any file here.<br>- **Wiki and Drive mirror each other** (Tisa, 2026-11-06): every wiki page and document list matches a folder in `1231 11th Avenue Unit 4`, and each document sits under the same room in both. When you add or move a document or folder in Drive, update the wiki in the same pass, and the reverse. Example: the Laundry Closet is its own project, so its documents live in `laundry/`, not `electrical/`.<br>- **Spanish for the wiki lives only in the wiki's own text** (Tisa, 2026-11-06): the English/Español toggle. Never create Spanish copies of the .md files in Drive. Crew plans keep their existing English and Spanish PDFs.<br>- **Work record (Beads):** canonical ledger `/Users/tisavo/Work/Projects/1231-11th-avenue/unit-4-renovation` on the MacBook Pro (`.beads/embeddeddolt`, main issue `tisa-wi0.6`). Run `bd where` before writing; never initialize a duplicate ledger; keep existing issue IDs. Agents that can&#x27;t reach it (cloud sessions) record state in `STATUS-NOW.md` and say Beads is pending. Last check from a cloud session (2026-11-05): not reachable, status unverified.<br>- Every session&#x27;s minutes say the date, who attended and which Claude wrote them (account, device, cloud or local).<br>- Say plainly what you verified vs. only wrote. Trust the source file over another agent&#x27;s summary.<br><br>## 9. Maintaining the wiki (Claude only)<br>Source: `work-control/wiki-source/` (template updated 2026-11-05 to include the live Home page and collapsible document lists) — `wiki_template.html`, `build_wiki.py` (embeds the specs and document lists), `brief.py` (embeds this file as the agent brief), `drive_docs.json`, `pdf_blobs.json`. Rebuild, then publish to the same artifact URL. Collections: `decisions` (Tisa/admin write), `decisionNotes`, `reports`, `sessionNotes`, `inbox`.<br><br>## 10. More detail, if needed<br>- Routing detail and history: `work-control/2026-11-03_U4_AgentWork_Index_R2.md`<br>- Todoist runbook (11/2 snapshot, has known errors): `work-control/TODOIST-PROJECT-MANAGER-RUNBOOK.md`<br>- Kitchen governing revision: `kitchen/CURRENT.md`<br></section>
@@ -2992,28 +3023,29 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
 
   // ---- Silent Todoist Memory + Clean Wiki Checklists & Inline Wiki Nudges ----
   function syncSilentTodoistMemoryAndCleanWiki(syncData) {
-    if (!syncData || !Array.isArray(syncData.rooms)) return;
-    U4_TODOIST_MEMORY = syncData;
-    window.U4_TODOIST_MEMORY = syncData;
+    if (syncData && Array.isArray(syncData.rooms)) {
+      U4_TODOIST_MEMORY = syncData;
+      window.U4_TODOIST_MEMORY = syncData;
+    }
 
     try {
-      if (typeof WEEK_GOALS === "object" && WEEK_GOALS && syncData.thisWeekNov9To13) {
+      if (typeof WEEK_GOALS === "object" && WEEK_GOALS) {
         WEEK_GOALS.en = {
-          h: "This week · Nov 9–13",
+          h: "This week — Nov 9 to 13",
           k: "",
           items: [
-            "<b>Finish bathroom:</b> all drywall and Hardie board up, wall tiling, bath tub installation complete, sink installation.",
-            "<b>Frame the electrical panel wall</b> — dining-side wall (D04).",
-            "<b>Finish the laundry closet</b> — complete the rough-in, finish the walls, and paint."
+            '<b>Finish bathroom:</b> all drywall and Hardie board up, wall tiling, bath tub installation complete, sink installation.<br>Steps: put in blocking and complete the bathroom electrical rough-in, with the wires ending in a junction box in the attic → close the ceiling → drywall and Hardie board → wall tile → set the tub and sink. <a href="#bathroom">Bathroom plans →</a>',
+            '<b>Frame the electrical panel wall</b> — the wall on the dining side where the new panel goes. <a href="#kitchen">Kitchen plans →</a>',
+            '<b>Finish the laundry closet</b> — complete the rough-in, finish the walls, and paint. <a href="#laundry">Laundry plans →</a>'
           ]
         };
         WEEK_GOALS.es = {
-          h: "Esta semana · 9 al 13 de nov",
+          h: "Esta semana — 9 al 13 de nov",
           k: "",
           items: [
-            "<b>Terminar el baño:</b> toda la tablaroca y el Hardie board puestos, azulejo de los muros, instalación de la tina terminada, instalación del lavabo.",
-            "<b>Enmarcar el muro del panel eléctrico</b> — muro D04 del lado del comedor.",
-            "<b>Terminar el clóset de lavandería</b> — completar instalaciones pendientes, terminar muros y pintar."
+            '<b>Terminar el baño:</b> toda la tablaroca y el Hardie board puestos, azulejo de los muros, instalación de la tina terminada, instalación del lavabo. <a href="#bathroom">Planos del baño →</a>',
+            '<b>Enmarcar el muro del panel eléctrico</b> — el muro del lado del comedor donde va el nuevo panel. <a href="#kitchen">Planos de cocina →</a>',
+            '<b>Terminar el clóset de lavandería</b> — completar las instalaciones pendientes, terminar los muros y pintar. <a href="#laundry">Planos de lavandería →</a>'
           ]
         };
       }
@@ -3021,8 +3053,8 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
 
     // Update CHECKLISTS completion states silently without adding Todoist badges to the page
     try {
-      if (typeof CHECKLISTS === "object" && CHECKLISTS) {
-        syncData.rooms.forEach(function(rm) {
+      if (typeof CHECKLISTS === "object" && CHECKLISTS && U4_TODOIST_MEMORY && Array.isArray(U4_TODOIST_MEMORY.rooms)) {
+        U4_TODOIST_MEMORY.rooms.forEach(function(rm) {
           if (!rm || !rm.key || !Array.isArray(rm.items)) return;
           var target = CHECKLISTS[rm.key] || { fileId: rm.driveChecklistId || null, items: [] };
           target.noteEn = rm.note || "";
@@ -3069,34 +3101,18 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       window.ckBlock = cleanCkBlock;
     }
 
-    // Upgrade Home aboutBlock with clear AI Guide capability overview & navigation nudges
+    // Clean Home aboutBlock (no inline dashed banner clutter)
     if (typeof WebSocket === "function" && typeof aboutBlock === "function" && !aboutBlock.__u4CleanV4) {
       var cleanAboutBlock = function() {
         if (currentUiLang() === "es") {
-          return '<div class="u4-wiki-nudge" translate="no">' +
-            '<div><b>💬 ¿No sabes dónde buscar? Usa la Guía de Voz IA arriba.</b> Puedes hablarle en español o inglés para abrir cualquier cuarto, recorrer un plano PDF página por página, o preguntar medidas y pendientes.</div>' +
-            '<div class="u4-wiki-nudge-chips">' +
-              '<button type="button" class="u4-nudge-chip" data-u4-ask="¿Cuáles son las metas de esta semana?">¿Metas de esta semana?</button>' +
-              '<button type="button" class="u4-nudge-chip" data-u4-ask="Llévame al baño y dime qué falta">Abrir Baño</button>' +
-              '<button type="button" class="u4-nudge-chip" data-u4-ask="¿Qué está pendiente en eléctrico?">Pendientes Eléctrico</button>' +
-            '</div>' +
-          '</div>' +
-          '<section class="about" translate="no"><h2>Cómo funciona esta wiki</h2><ul>' +
-            '<li><b>Guía de Voz IA (barra fija arriba):</b> toca el ícono de burbuja de voz para conversar con el asistente. Cuando está <b>APAGADA</b> no escucha nada; cuando está <b>EN VIVO</b> te guía por cuartos, planos PDF y tareas.</li>' +
-            '<li><b>Enviar una nota (botón abajo a la derecha):</b> toca para hablar o escribir una nota de obra. Detecta automáticamente si hablas en español o inglés y la envía directo al buzón del proyecto.</li>' +
+          return '<section class="about" translate="no"><h2>Cómo usar esta wiki</h2><ul>' +
+            '<li><b>Asistente IA (botón redondo arriba a la derecha):</b> tócalo para abrir el chat de voz en vivo. Te ayuda a navegar a cualquier cuarto, abrir y explicar planos PDF, y revisar medidas o pendientes. Puedes minimizar o reabrir la ventana mientras sigues hablando.</li>' +
+            '<li><b>Enviar una nota (botón abajo a la derecha):</b> habla o escribe una nota de obra en español o inglés — el idioma se detecta automáticamente.</li>' +
           '</ul></section>';
         }
-        return '<div class="u4-wiki-nudge" translate="no">' +
-          '<div><b>💬 Need help finding a spec or drawing? Ask the AI Voice Guide above.</b> Speak in English or Español to jump to any room, walk through PDF plans page by page, or check open items.</div>' +
-          '<div class="u4-wiki-nudge-chips">' +
-            '<button type="button" class="u4-nudge-chip" data-u4-ask="What are this week\'s goals?">This week\'s goals</button>' +
-            '<button type="button" class="u4-nudge-chip" data-u4-ask="Take me to Bathroom and summarize what\'s left">Go to Bathroom</button>' +
-            '<button type="button" class="u4-nudge-chip" data-u4-ask="What is still open in Electrical?">Open in Electrical</button>' +
-          '</div>' +
-        '</div>' +
-        '<section class="about" translate="no"><h2>How to use this wiki</h2><ul>' +
-          '<li><b>AI Voice Guide (pinned at the top):</b> tap the speech-bubble button to talk with the assistant. It clearly shows <b>OFF</b> vs. <b>LIVE</b>, and can navigate rooms, open PDF drawings, and answer spec or task questions.</li>' +
-          '<li><b>Send a note (bottom-right button):</b> speak or type a quick site note. Whether you speak English or Español is detected automatically from what you say.</li>' +
+        return '<section class="about" translate="no"><h2>How to use this wiki</h2><ul>' +
+          '<li><b>AI Helper (round live-voice button at top right):</b> tap to open the voice chat popup. Ask it to jump to any room, walk through PDF drawings, or check specs and open tasks — and tap the round button anytime to minimize or reopen the chat while your conversation stays live.</li>' +
+          '<li><b>Send a note (bottom-right button):</b> speak or type a quick site note in English or Español — language is detected automatically.</li>' +
         '</ul></section>';
       };
       cleanAboutBlock.__u4CleanV4 = true;
@@ -3732,11 +3748,12 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   }
 
   // =========================================================================
-  // PART 2: PERSISTENT TOP AI VOICE GUIDE (LIVE SPEECH BUBBLE + NUDGES + MEMORY)
+  // PART 2: FLOATING ROUND LIVE CONVERSATION BUTTON + LINE-BY-LINE VOICE CHAT POPUP
   // =========================================================================
   var liveState = {
     active: false,
     connecting: false,
+    dialogOpen: false,
     generation: 0,
     ws: null,
     micStream: null,
@@ -3746,9 +3763,107 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     playCursor: 0,
     activeSources: [],
     lastContextSignature: null,
-    heardBuffer: "",
     pendingPrompt: ""
   };
+
+  var chatStream = {
+    activeRole: null,
+    bubbleEl: null,
+    rawBuffer: "",
+    userPauseTimer: null,
+    sawOutputTranscriptInTurn: false
+  };
+
+  function ensureChatDialogHasWelcome() {
+    var log = document.getElementById("u4VoiceChatTranscript");
+    if (!log || log.children.length > 0) return;
+    var es = currentUiLang() === "es";
+    appendCompleteChatLine(
+      "ai",
+      es
+        ? "¡Hola! Soy el asistente de voz de Unidad 4. Dime a qué cuarto o plano PDF quieres ir, o pregúntame cualquier medida o pendiente."
+        : "Hi! I'm the Unit 4 AI Helper. Tell me what room or PDF plan to open, or ask about any spec, measurement, or open task."
+    );
+  }
+
+  function scrollChatToBottom() {
+    var log = document.getElementById("u4VoiceChatTranscript");
+    if (log) log.scrollTop = log.scrollHeight;
+  }
+
+  function sealActiveChatTurn() {
+    clearTimeout(chatStream.userPauseTimer);
+    chatStream.userPauseTimer = null;
+    chatStream.activeRole = null;
+    chatStream.bubbleEl = null;
+    chatStream.rawBuffer = "";
+  }
+
+  function createChatTurnElement(role) {
+    var log = document.getElementById("u4VoiceChatTranscript");
+    if (!log) return null;
+    var es = currentUiLang() === "es";
+    var row = document.createElement("div");
+    row.className = "u4-chat-turn " + (role === "user" ? "is-user" : "is-ai");
+    var roleLbl = document.createElement("span");
+    roleLbl.className = "u4-chat-role";
+    roleLbl.textContent = role === "user" ? (es ? "Tú" : "You") : (es ? "Asistente IA" : "AI Helper");
+    var bub = document.createElement("div");
+    bub.className = "u4-chat-bubble";
+    row.appendChild(roleLbl);
+    row.appendChild(bub);
+    log.appendChild(row);
+    scrollChatToBottom();
+    return bub;
+  }
+
+  function appendStreamingChatChunk(role, rawChunk) {
+    var piece = String(rawChunk == null ? "" : rawChunk);
+    if (!piece) return;
+    if (chatStream.activeRole !== role || !chatStream.bubbleEl) {
+      sealActiveChatTurn();
+      chatStream.activeRole = role;
+      chatStream.rawBuffer = "";
+      chatStream.bubbleEl = createChatTurnElement(role);
+    }
+    chatStream.rawBuffer += piece;
+    var display = chatStream.rawBuffer.replace(/\s+/g, " ").trim();
+    if (chatStream.bubbleEl && display) {
+      chatStream.bubbleEl.textContent = display;
+      scrollChatToBottom();
+    }
+    if (role === "user") {
+      clearTimeout(chatStream.userPauseTimer);
+      chatStream.userPauseTimer = setTimeout(function() {
+        if (chatStream.activeRole === "user") sealActiveChatTurn();
+      }, 1800);
+    }
+  }
+
+  function appendCompleteChatLine(role, fullText) {
+    var clean = String(fullText || "").trim();
+    if (!clean) return;
+    sealActiveChatTurn();
+    var bub = createChatTurnElement(role);
+    if (bub) {
+      bub.textContent = clean;
+      scrollChatToBottom();
+    }
+  }
+
+  function appendNavEventChip(text) {
+    var log = document.getElementById("u4VoiceChatTranscript");
+    if (!log || !text) return;
+    sealActiveChatTurn();
+    var row = document.createElement("div");
+    row.className = "u4-chat-turn is-nav";
+    var pill = document.createElement("span");
+    pill.className = "u4-chat-nav-pill";
+    pill.textContent = "↳ " + text;
+    row.appendChild(pill);
+    log.appendChild(row);
+    scrollChatToBottom();
+  }
 
   var lastVoiceSubmitAt = 0;
   var readbackArmedHash = null;
@@ -3796,7 +3911,10 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       location.hash = "#" + room;
       if (typeof show === "function") show(room);
       else if (typeof window.show === "function") window.show(room);
-      refreshContextualNudges();
+      refreshDialogSuggestions();
+      var es = currentUiLang() === "es";
+      var rl = ROOM_LABELS[room] ? (es ? ROOM_LABELS[room].es : ROOM_LABELS[room].en) : room;
+      appendNavEventChip((es ? "Abrió " : "Opened ") + rl);
       var summary = getRoomSpecSummary(room);
       return {
         ok: true,
@@ -3825,7 +3943,9 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       match.setAttribute("tabindex", "-1");
       if (match.focus) match.focus();
       if (match.scrollIntoView) match.scrollIntoView({ block: "start" });
-      return { ok: true, action: "focus_section", focusedHeading: (match.textContent || "").trim() };
+      var hText = (match.textContent || "").trim();
+      appendNavEventChip((currentUiLang() === "es" ? "Sección: " : "Jumped to: ") + hText);
+      return { ok: true, action: "focus_section", focusedHeading: hText };
     },
 
     open_document: async function(args) {
@@ -3847,8 +3967,10 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       location.hash = "#doc:" + hashSpec;
       if (typeof show === "function") show("doc:" + hashSpec);
       else if (typeof window.show === "function") window.show("doc:" + hashSpec);
-      refreshContextualNudges();
+      refreshDialogSuggestions();
       var extracted = await extractPdfDocumentPages(docId);
+      var docTitle = (extracted && extracted.title) || docId;
+      appendNavEventChip((currentUiLang() === "es" ? "Abrió PDF: " : "Opened PDF: ") + docTitle + (targetPage > 1 ? (" · p." + targetPage) : ""));
       var pageSummaries = [];
       if (extracted && Array.isArray(extracted.pages)) {
         pageSummaries = extracted.pages.map(function(p) {
@@ -3862,7 +3984,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         ok: true,
         action: "open_document",
         docId: docId,
-        title: (extracted && extracted.title) || docId,
+        title: docTitle,
         currentPage: targetPage,
         totalPages: (extracted && extracted.numPages) || pageSummaries.length || 1,
         pages: pageSummaries
@@ -3885,6 +4007,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         if (typeof show === "function") show("doc:" + docId + ":p" + pageNum);
         else if (typeof window.show === "function") window.show("doc:" + docId + ":p" + pageNum);
       }
+      appendNavEventChip((currentUiLang() === "es" ? "Página PDF " : "PDF Page ") + pageNum);
       var extracted = await extractPdfDocumentPages(docId);
       var pageObj = extracted && extracted.pages
         ? extracted.pages.find(function(x){ return x.page === pageNum; })
@@ -3920,9 +4043,9 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       else if (typeof window.setLang === "function") window.setLang(lang);
       if (savedRep !== null && document.getElementById("repText")) document.getElementById("repText").value = savedRep;
       if (savedIn !== null && document.getElementById("inText")) document.getElementById("inText").value = savedIn;
-      syncTopAssistantUi();
+      syncFloatingAiUi();
       updateNoteVoiceButtons();
-      refreshContextualNudges();
+      refreshDialogSuggestions();
       return { ok: true, action: "set_language", language: lang, lang: lang };
     },
 
@@ -4016,6 +4139,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       var qpPanel = document.getElementById("qpPanel");
       var targetList = (qpPanel && !qpPanel.hidden && document.getElementById("inList")) ? "inList" : "repList";
       appendLocalReceiptRow(targetList, "Voice", roomKey, text, Boolean(res.persistedToDrive));
+      appendNavEventChip(currentUiLang() === "es" ? "Nota guardada en to-triage" : "Saved note to to-triage");
       return Object.assign({ action: "submit_voice_memo", language: lang }, res);
     }
   };
@@ -4046,159 +4170,146 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     execute: function(name, args) { return window.executeWikiBridgeAction(name, args || {}); }
   };
 
-  // ---- Contextual Prompt Chips & Inline Wiki Navigation Nudges ----
   function getSuggestionsForCurrentView() {
     var view = parseActiveHashView();
     var es = currentUiLang() === "es";
     if (view.kind === "doc") {
       return es
         ? [
-            { label: "Explica esta página", prompt: "Explica qué muestra esta página del plano PDF y qué medidas o notas debo cuidar." },
-            { label: "¿Hay alguna pausa aquí?", prompt: "¿Este documento está aprobado para construir o tiene alguna nota de revisión?" },
-            { label: "Ir a la página 2", prompt: "Llévame a la página 2 de este PDF y explícala." }
+            { label: "Explica esta página", prompt: "Explica qué muestra esta página del plano PDF y qué medidas debo cuidar." },
+            { label: "Ir a página 2", prompt: "Llévame a la página 2 de este PDF y explícala." },
+            { label: "Volver al cuarto", prompt: "Llévame de regreso a la página del cuarto." }
           ]
         : [
-            { label: "Explain this PDF page", prompt: "Walk me through what is on this PDF page and highlight key dimensions or callouts." },
-            { label: "Any holds on this drawing?", prompt: "Is this drawing approved for build, or is anything awaiting review?" },
-            { label: "Go to page 2", prompt: "Go to page 2 of this PDF and summarize it." }
+            { label: "Explain this PDF page", prompt: "Walk me through what is on this PDF page and highlight key dimensions." },
+            { label: "Go to page 2", prompt: "Go to page 2 of this PDF and summarize it." },
+            { label: "Back to room spec", prompt: "Navigate back to the room page." }
           ];
     }
     if (PROJECT_ROOMS.indexOf(view.room) !== -1) {
       var rl = ROOM_LABELS[view.room] ? (es ? ROOM_LABELS[view.room].es : ROOM_LABELS[view.room].en) : view.room;
       return es
         ? [
-            { label: "Resumen de " + rl, prompt: "Dame un recorrido rápido por las especificaciones principales de " + rl + "." },
-            { label: "¿Qué falta terminar aquí?", prompt: "¿Qué tareas siguen abiertas o pendientes en " + rl + "?" },
-            { label: "Abrir planos PDF", prompt: "Abre el plano PDF principal de " + rl + " y explícame qué muestra." }
+            { label: "¿Qué falta en " + rl + "?", prompt: "¿Qué tareas siguen abiertas o pendientes en " + rl + "?" },
+            { label: "Abrir planos PDF", prompt: "Abre el plano PDF principal de " + rl + " y recórrelo conmigo." },
+            { label: "Ir a otro cuarto", prompt: "Muéstrame las metas de esta semana en Inicio." }
           ]
         : [
-            { label: "Walk through " + rl, prompt: "Give me a quick walkthrough of the governing spec for " + rl + "." },
-            { label: "What's still open here?", prompt: "What tasks and checklist items are still open in " + rl + "?" },
-            { label: "Open room PDF plans", prompt: "Open the main PDF drawing for " + rl + " and walk me through it." }
+            { label: "What's open in " + rl + "?", prompt: "What tasks and checklist items are still open in " + rl + "?" },
+            { label: "Open PDF plans", prompt: "Open the main PDF drawing for " + rl + " and walk me through it." },
+            { label: "Jump to Bathroom", prompt: "Navigate to Bathroom and summarize the spec." }
           ];
     }
     return es
       ? [
-          { label: "¿Metas de esta semana?", prompt: "¿Cuáles son las metas principales de esta semana en la obra?" },
-          { label: "Ir a Baño", prompt: "Llévame a la página del Baño y dime qué falta por hacer." },
-          { label: "Ver planos de molduras", prompt: "Abre el PDF de molduras y explícame las opciones." }
+          { label: "Ir a Baño", prompt: "Llévame al Baño y dime qué falta por terminar." },
+          { label: "Ir a Lavandería", prompt: "Llévame al clóset de Lavandería y resume el trabajo." },
+          { label: "Ver PDF de molduras", prompt: "Abre el PDF de molduras y explícame las opciones." }
         ]
       : [
-          { label: "This week's goals?", prompt: "What are this week's top priorities on site?" },
           { label: "Go to Bathroom", prompt: "Navigate to Bathroom and tell me what's left to finish." },
-          { label: "Open molding drawings", prompt: "Open the molding review PDF and walk me through it." }
+          { label: "Go to Laundry", prompt: "Navigate to Laundry Closet and summarize what needs to be done." },
+          { label: "Open molding PDF", prompt: "Open the molding review PDF and walk me through it." }
         ];
   }
 
-  function injectInlinePageNudge() {
-    if (typeof WebSocket !== "function") return;
-    var docEl = document.getElementById("doc");
-    if (!docEl) return;
-    var view = parseActiveHashView();
-    if (view.room === "home" && view.kind === "room") return; // Home already has cleanAboutBlock nudge
-    var existing = docEl.querySelector(".u4-wiki-nudge");
-    if (existing && existing.getAttribute("data-u4-view") === view.rawHash + "|" + currentUiLang()) return;
-    if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
-
-    var es = currentUiLang() === "es";
-    var chips = getSuggestionsForCurrentView().slice(0, 2);
-    var banner = document.createElement("div");
-    banner.className = "u4-wiki-nudge";
-    banner.setAttribute("translate", "no");
-    banner.setAttribute("data-u4-view", view.rawHash + "|" + currentUiLang());
-
-    var leadHtml = view.kind === "doc"
-      ? (es
-          ? "<b>💬 Guía IA para planos:</b> toca una pregunta o habla arriba para recorrer este PDF sin usar las manos."
-          : "<b>💬 AI Drawing Guide:</b> tap a prompt or use the AI speech bubble above to walk through this PDF hands-free.")
-      : (es
-          ? "<b>💬 Guía IA:</b> pídele al asistente arriba que abra planos PDF, busque medidas o revise pendientes."
-          : "<b>💬 AI Guide:</b> ask the voice assistant above to open PDF plans, check dimensions, or list open tasks.");
-
-    banner.innerHTML =
-      '<div>' + leadHtml + '</div>' +
-      '<div class="u4-wiki-nudge-chips">' +
-        chips.map(function(c) {
-          return '<button type="button" class="u4-nudge-chip" data-u4-ask="' + escHtml(c.prompt) + '">' + escHtml(c.label) + '</button>';
-        }).join("") +
-      '</div>';
-
-    if (docEl.firstChild) docEl.insertBefore(banner, docEl.firstChild);
-    else docEl.appendChild(banner);
+  function refreshDialogSuggestions() {
+    var box = document.getElementById("u4AiNudges");
+    if (!box) return;
+    var items = getSuggestionsForCurrentView();
+    box.innerHTML = items.map(function(it) {
+      return '<button type="button" class="u4-nudge-chip" data-u4-ask="' + escHtml(it.prompt) + '">' + escHtml(it.label) + '</button>';
+    }).join("");
   }
 
-  function refreshContextualNudges() {
-    if (typeof WebSocket !== "function") return;
-    var nudgeBox = document.getElementById("u4AiNudges");
-    if (nudgeBox) {
-      var es = currentUiLang() === "es";
-      var items = getSuggestionsForCurrentView();
-      nudgeBox.innerHTML =
-        '<span class="u4-nudge-lbl">' + (es ? "Prueba preguntar:" : "Try asking:") + '</span>' +
-        items.map(function(it) {
-          return '<button type="button" class="u4-nudge-chip" data-u4-ask="' + escHtml(it.prompt) + '">“' + escHtml(it.label) + '”</button>';
-        }).join("");
-    }
-    injectInlinePageNudge();
-  }
-
-  function defaultGuideSubtitle() {
-    var es = currentUiLang() === "es";
-    if (liveState.active) {
-      return es
-        ? "Estás hablando con la IA — pide abrir cuartos, explicar planos PDF o revisar pendientes."
-        : "You're talking live with the AI agent — ask to open rooms, explain PDF plans, or check open items.";
-    }
-    if (liveState.connecting) {
-      return es ? "Conectando audio en vivo con la Guía IA…" : "Connecting live voice to the Unit 4 AI Guide…";
-    }
-    return es
-      ? "Micrófono apagado · Toca para hablar en español o inglés y navegar cuartos, planos PDF y especificaciones."
-      : "Mic is off · Tap to talk in English or Español to navigate rooms, walk through PDFs, or check specs.";
-  }
-
-  function setTopVoiceStatus(enText, esText) {
-    var st = document.getElementById("waVoiceStatus");
-    if (!st) return;
-    var chosen = currentUiLang() === "es" ? esText : enText;
-    st.textContent = chosen || defaultGuideSubtitle();
-  }
-
-  function syncTopAssistantUi() {
-    var es = currentUiLang() === "es";
-    var wrap = document.getElementById("u4TopAssistant");
-    if (wrap) {
-      wrap.setAttribute("data-live", liveState.active ? "on" : (liveState.connecting ? "connecting" : "off"));
-    }
-    var titleEl = document.getElementById("u4AiTitle");
-    if (titleEl) {
-      titleEl.textContent = es ? "Guía de Voz IA · Unidad 4" : "Unit 4 AI Voice Guide";
-    }
-    var badgeEl = document.getElementById("u4AiStateBadge");
-    if (badgeEl) {
-      if (liveState.active) badgeEl.textContent = es ? "● EN VIVO · ESCUCHANDO" : "● LIVE · LISTENING";
-      else if (liveState.connecting) badgeEl.textContent = es ? "CONECTANDO…" : "CONNECTING…";
-      else badgeEl.textContent = es ? "VOZ IA · APAGADA" : "AI VOICE · OFF";
-    }
-    var btn = document.getElementById("waVoiceMicPill");
-    if (btn) {
-      btn.setAttribute("aria-pressed", liveState.active ? "true" : "false");
-      var lbl = btn.querySelector ? btn.querySelector(".u4-voice-label") : null;
-      if (lbl) {
-        lbl.textContent = liveState.active
-          ? (es ? "Terminar voz" : "End voice")
-          : (es ? "Hablar con IA" : "Talk to AI");
+  function setDialogOpen(openFlag) {
+    liveState.dialogOpen = Boolean(openFlag);
+    var dlg = document.getElementById("u4VoiceChatDialog");
+    if (dlg) {
+      dlg.hidden = !liveState.dialogOpen;
+      if (liveState.dialogOpen) {
+        ensureChatDialogHasWelcome();
+        scrollChatToBottom();
       }
     }
+    syncFloatingAiUi();
+  }
+
+  function syncFloatingAiUi() {
+    var es = currentUiLang() === "es";
+    var stateMode = liveState.active ? "on" : (liveState.connecting ? "connecting" : "off");
+
+    var dock = document.getElementById("u4AiFloatingDock");
+    if (dock) {
+      dock.setAttribute("data-live", stateMode);
+      dock.setAttribute("data-open", liveState.dialogOpen ? "true" : "false");
+    }
+
+    var ptrText = document.getElementById("u4AiPointerText");
+    if (ptrText) {
+      if (liveState.active && !liveState.dialogOpen) {
+        ptrText.textContent = es ? "En vivo · abrir chat" : "Live · open chat";
+      } else if (liveState.active && liveState.dialogOpen) {
+        ptrText.textContent = es ? "Voz IA activa" : "Live voice active";
+      } else if (liveState.connecting) {
+        ptrText.textContent = es ? "Conectando IA…" : "Connecting AI…";
+      } else {
+        ptrText.textContent = es ? "Usa el asistente IA" : "Use the AI helper";
+      }
+    }
+
+    var orbPill = document.getElementById("u4AiStateBadge");
+    if (orbPill) {
+      orbPill.textContent = liveState.active ? "LIVE" : (liveState.connecting ? "…" : "OFF");
+    }
+
     var orb = document.getElementById("u4AiBubbleOrb");
     if (orb) {
       orb.setAttribute("aria-pressed", liveState.active ? "true" : "false");
+      orb.setAttribute("aria-expanded", liveState.dialogOpen ? "true" : "false");
       orb.title = liveState.active
-        ? (es ? "IA en vivo — toca para apagar" : "AI Live ON — tap to turn off")
-        : (es ? "IA apagada — toca para hablar con el agente" : "AI Voice OFF — tap to talk to the AI Guide");
+        ? (liveState.dialogOpen
+            ? (es ? "Minimizar chat (la voz sigue activa)" : "Minimize chat (voice stays live)")
+            : (es ? "Reabrir chat de voz en vivo" : "Reopen live voice chat"))
+        : (es ? "Hablar con el asistente IA" : "Start live conversation with AI Helper");
     }
-    if (!liveState.active && !liveState.connecting) {
-      setTopVoiceStatus("", "");
+
+    var dlg = document.getElementById("u4VoiceChatDialog");
+    if (dlg) {
+      dlg.setAttribute("data-live", stateMode);
+    }
+    var dlgTitle = document.getElementById("u4VdTitle");
+    if (dlgTitle) {
+      dlgTitle.textContent = es ? "Asistente IA" : "AI Helper";
+    }
+    var dlgState = document.getElementById("u4VdState");
+    if (dlgState) {
+      dlgState.textContent = liveState.active
+        ? (es ? "● EN VIVO" : "● LIVE")
+        : (liveState.connecting ? (es ? "CONECTANDO" : "CONNECTING") : (es ? "APAGADO" : "OFF"));
+    }
+    var sessionBtn = document.getElementById("waVoiceMicPill");
+    if (sessionBtn) {
+      var isRunning = liveState.active || liveState.connecting;
+      sessionBtn.classList.toggle("is-end", isRunning);
+      sessionBtn.setAttribute("aria-pressed", isRunning ? "true" : "false");
+      sessionBtn.textContent = isRunning
+        ? (es ? "Terminar voz" : "End voice")
+        : (es ? "Iniciar voz" : "Start voice");
+    }
+    var subEl = document.getElementById("waVoiceStatus");
+    if (subEl && !liveState.connecting) {
+      subEl.textContent = liveState.active
+        ? (es
+            ? "Habla con naturalidad — puedes minimizar esta ventana con el botón redondo mientras navegas."
+            : "Speak naturally — tap the round button anytime to minimize or reopen while navigating.")
+        : (es
+            ? "Micrófono apagado — toca Iniciar voz o haz una pregunta abajo para navegar."
+            : "Mic is off — tap Start voice or pick a prompt below to navigate.");
+    }
+    var askInp = document.getElementById("u4VdAskInput");
+    if (askInp) {
+      askInp.placeholder = es ? "O escribe una pregunta para navegar…" : "Or type a question to navigate…";
     }
   }
 
@@ -4258,7 +4369,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       if (liveState.active && liveState.ws && liveState.ws.readyState === WebSocket.OPEN) {
         liveState.ws.send(JSON.stringify({
           clientContent: {
-            turns: [{ role: "user", parts: [{ text: "Updated screen context:\n" + summary }] }],
+            turns: [{ role: "user", parts: [{ text: "Screen navigation update:\n" + summary }] }],
             turnComplete: false
           }
         }));
@@ -4270,11 +4381,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     var clean = String(promptText || "").trim();
     if (!clean || !liveState.active || !liveState.ws || liveState.ws.readyState !== WebSocket.OPEN) return;
     stopPlaybackQueue();
-    var heardEl = document.getElementById("u4AiLiveHeard");
-    if (heardEl) {
-      heardEl.hidden = false;
-      heardEl.textContent = (currentUiLang() === "es" ? "Preguntaste: " : "Asked: ") + clean;
-    }
+    appendCompleteChatLine("user", clean);
     liveState.ws.send(JSON.stringify({
       clientContent: {
         turns: [{ role: "user", parts: [{ text: clean }] }],
@@ -4288,22 +4395,23 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     liveState.active = false;
     liveState.connecting = false;
     liveState.lastContextSignature = null;
-    liveState.heardBuffer = "";
     liveState.pendingPrompt = "";
+    sealActiveChatTurn();
     stopPlaybackQueue();
     if (liveState.processor) { try { liveState.processor.disconnect(); } catch (e) {} liveState.processor = null; }
     if (liveState.inCtx) { try { liveState.inCtx.close(); } catch (e) {} liveState.inCtx = null; }
     if (liveState.outCtx) { try { liveState.outCtx.close(); } catch (e) {} liveState.outCtx = null; }
     if (liveState.micStream) { liveState.micStream.getTracks().forEach(function(t){ try { t.stop(); } catch (e) {} }); liveState.micStream = null; }
     if (liveState.ws) { try { liveState.ws.close(); } catch (e) {} liveState.ws = null; }
-    var heardEl = document.getElementById("u4AiLiveHeard");
-    if (heardEl) heardEl.hidden = true;
-    syncTopAssistantUi();
+    syncFloatingAiUi();
   }
 
   async function startGeminiLiveSession(userGestureEvent, initialPromptOpt) {
     if (!userGestureEvent || (!userGestureEvent.isTrusted && !userGestureEvent.__allowSyntheticTest)) return;
     if (noteVoiceState.active) cancelNoteVoiceRecording("");
+
+    setDialogOpen(true);
+
     if (liveState.active) {
       if (initialPromptOpt) sendPromptToLiveAgent(initialPromptOpt);
       return;
@@ -4312,10 +4420,12 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
 
     var generation = ++liveState.generation;
     liveState.connecting = true;
-    liveState.heardBuffer = "";
     liveState.pendingPrompt = String(initialPromptOpt || "").trim();
-    syncTopAssistantUi();
-    setTopVoiceStatus("Connecting live AI voice…", "Conectando voz en vivo con IA…");
+    syncFloatingAiUi();
+    var subEl = document.getElementById("waVoiceStatus");
+    if (subEl) {
+      subEl.textContent = currentUiLang() === "es" ? "Conectando voz en vivo…" : "Connecting live voice…";
+    }
 
     try {
       var AudioCtx = window.AudioContext || window.webkitAudioContext;
@@ -4353,7 +4463,9 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       var setupDone = false;
 
       ws.onopen = function() {
-        var setupPayload = tokData.setup || { model: tokData.model || "models/gemini-3.8-live" };
+        var setupPayload = tokData.setup ? Object.assign({}, tokData.setup) : { model: tokData.model || "models/gemini-3.8-live" };
+        setupPayload.inputAudioTranscription = setupPayload.inputAudioTranscription || {};
+        setupPayload.outputAudioTranscription = setupPayload.outputAudioTranscription || {};
         ws.send(JSON.stringify({ setup: setupPayload }));
       };
 
@@ -4368,8 +4480,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
           setupDone = true;
           liveState.connecting = false;
           liveState.active = true;
-          syncTopAssistantUi();
-          setTopVoiceStatus("", "");
+          syncFloatingAiUi();
 
           var initialContext = await buildRichWalkthroughContext(null, true);
           if (!liveState.active || generation !== liveState.generation || ws.readyState !== WebSocket.OPEN) return;
@@ -4380,9 +4491,9 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
               turns: [{
                 role: "user",
                 parts: [{
-                  text: "System guide context for Unit 4 AI Voice Guide:\n" +
-                    "- Reply naturally in whatever language the speaker uses (English, Español, etc.) automatically.\n" +
-                    "- Help users navigate rooms (navigate_room), open and walk through PDF drawings (open_document, go_to_document_page), check governing specs, and answer questions about open/completed project tasks from your memory.\n" +
+                  text: "System guide context for Unit 4 AI Helper:\n" +
+                    "- Reply concisely and naturally in whatever language the speaker uses (English, Español, etc.) automatically.\n" +
+                    "- Proactively help the user navigate: use navigate_room, open_document, go_to_document_page, and focus_section whenever they ask about a room, plan, or section.\n" +
                     "- Keep Todoist IDs invisible unless specifically asked; speak about tasks in plain human room/checklist terms.\n\n" +
                     initialContext
                 }]
@@ -4416,32 +4527,39 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         }
 
         if (msg.serverContent) {
-          if (msg.serverContent.interrupted) {
+          var sc = msg.serverContent;
+          if (sc.interrupted) {
             stopPlaybackQueue();
+            sealActiveChatTurn();
+            chatStream.sawOutputTranscriptInTurn = false;
           }
-          if (msg.serverContent.inputTranscription && msg.serverContent.inputTranscription.text) {
-            var chunk = String(msg.serverContent.inputTranscription.text || "").trim();
-            if (chunk) {
-              liveState.heardBuffer = (liveState.heardBuffer + " " + chunk).replace(/\s+/g, " ").trim().slice(-160);
-              var heardEl = document.getElementById("u4AiLiveHeard");
-              if (heardEl) {
-                heardEl.hidden = false;
-                heardEl.textContent = (currentUiLang() === "es" ? "Escuchando: " : "Heard: ") + liveState.heardBuffer;
-              }
-            }
+          if (sc.inputTranscription && typeof sc.inputTranscription.text === "string" && sc.inputTranscription.text) {
+            appendStreamingChatChunk("user", sc.inputTranscription.text);
           }
-          var turn = msg.serverContent.modelTurn;
+          if (sc.outputTranscription && typeof sc.outputTranscription.text === "string" && sc.outputTranscription.text) {
+            chatStream.sawOutputTranscriptInTurn = true;
+            appendStreamingChatChunk("ai", sc.outputTranscription.text);
+          }
+          var turn = sc.modelTurn;
           if (turn && Array.isArray(turn.parts)) {
             for (var i = 0; i < turn.parts.length; i++) {
-              var inl = turn.parts[i].inlineData;
+              var pt = turn.parts[i];
+              var inl = pt && pt.inlineData;
               if (inl && inl.data && String(inl.mimeType || "").indexOf("audio/pcm") === 0) {
                 playBase64Pcm24k(inl.data);
+              } else if (pt && typeof pt.text === "string" && pt.text && !pt.thought && !chatStream.sawOutputTranscriptInTurn) {
+                appendStreamingChatChunk("ai", pt.text);
               }
             }
+          }
+          if (sc.turnComplete) {
+            sealActiveChatTurn();
+            chatStream.sawOutputTranscriptInTurn = false;
           }
         }
 
         if (msg.toolCall && Array.isArray(msg.toolCall.functionCalls)) {
+          sealActiveChatTurn();
           var responses = [];
           for (var j = 0; j < msg.toolCall.functionCalls.length; j++) {
             if (!liveState.active || generation !== liveState.generation) return;
@@ -4459,7 +4577,12 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       ws.onerror = function() {
         if (generation !== liveState.generation) return;
         stopGeminiLiveSession();
-        setTopVoiceStatus("Connection interrupted — tap Talk to AI to reconnect.", "Conexión interrumpida — toca Hablar con IA para reconectar.");
+        var sEl = document.getElementById("waVoiceStatus");
+        if (sEl) {
+          sEl.textContent = currentUiLang() === "es"
+            ? "Conexión interrumpida — toca Iniciar voz para reconectar."
+            : "Connection interrupted — tap Start voice to reconnect.";
+        }
       };
       ws.onclose = function() {
         if ((liveState.active || liveState.connecting) && generation === liveState.generation) {
@@ -4469,82 +4592,124 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     } catch (err) {
       if (generation !== liveState.generation) return;
       stopGeminiLiveSession();
-      setTopVoiceStatus(
-        "Voice unavailable: " + String(err && err.message || err),
-        "Voz no disponible: " + String(err && err.message || err)
-      );
+      var errSub = document.getElementById("waVoiceStatus");
+      if (errSub) {
+        errSub.textContent = (currentUiLang() === "es" ? "Voz no disponible: " : "Voice unavailable: ") + String(err && err.message || err);
+      }
     }
   }
 
-  // ---- Mount Persistent Top AI Speech-Bubble Bar + Clean 'Send a note' UI ----
-  function mountPersistentTopAiGuide() {
+  function mountFloatingRoundAiHelper() {
     if (typeof WebSocket !== "function") return;
-    var mainEl = document.querySelector("main");
-    if (!mainEl) return;
+    if (!document.body) return;
 
-    var oldPill = document.getElementById("waVoiceMicPill");
-    if (oldPill && !oldPill.closest("#u4TopAssistant") && oldPill.parentNode) {
-      oldPill.parentNode.removeChild(oldPill);
-    }
-    var oldSt = document.getElementById("waVoiceStatus");
-    if (oldSt && !oldSt.closest("#u4TopAssistant") && oldSt.parentNode) {
-      oldSt.parentNode.removeChild(oldSt);
-    }
+    var oldTop = document.getElementById("u4TopAssistant");
+    if (oldTop && oldTop.parentNode) oldTop.parentNode.removeChild(oldTop);
 
-    var wrap = document.getElementById("u4TopAssistant");
-    if (!wrap) {
-      wrap = document.createElement("section");
-      wrap.id = "u4TopAssistant";
-      wrap.className = "u4-top-ai";
-      wrap.setAttribute("data-live", "off");
-      wrap.setAttribute("aria-label", "Unit 4 AI Voice Guide");
-      wrap.setAttribute("translate", "no");
+    if (!document.getElementById("u4AiFloatingDock")) {
+      var dock = document.createElement("div");
+      dock.id = "u4AiFloatingDock";
+      dock.className = "u4-ai-dock";
+      dock.setAttribute("data-live", "off");
+      dock.setAttribute("data-open", "false");
+      dock.setAttribute("translate", "no");
 
-      // Speech-bubble + live audio waveform + AI sparkle SVG icon
-      var speechBubbleSvg =
-        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-          '<path d="M4 12a8 8 0 0 1 13.8-5.5A7.8 7.8 0 0 1 20 12c0 4.4-3.6 8-8 8-1.4 0-2.8-.35-4-.98L4 20l1.1-3.7A7.9 7.9 0 0 1 4 12z"/>' +
-          '<line class="u4-wave-b1" x1="9" y1="10.2" x2="9" y2="13.8"/>' +
-          '<line class="u4-wave-b2" x1="12" y1="8.5" x2="12" y2="15.5"/>' +
-          '<line class="u4-wave-b3" x1="15" y1="10.2" x2="15" y2="13.8"/>' +
-          '<path d="M19.2 3.2l.45 1.15 1.15.45-1.15.45-.45 1.15-.45-1.15-1.15-.45 1.15-.45z" fill="currentColor" stroke="none"/>' +
+      var liveOrbSvg =
+        '<svg viewBox="0 0 28 28" fill="none" aria-hidden="true">' +
+          '<rect class="u4-eq-b u4-eq-1" x="5.2" y="10.5" width="2.5" height="7" rx="1.25" fill="currentColor"/>' +
+          '<rect class="u4-eq-b u4-eq-2" x="9.3" y="7.2" width="2.5" height="13.6" rx="1.25" fill="currentColor"/>' +
+          '<rect class="u4-eq-b u4-eq-3" x="13.4" y="5" width="2.6" height="18" rx="1.3" fill="currentColor"/>' +
+          '<rect class="u4-eq-b u4-eq-4" x="17.6" y="8.2" width="2.5" height="11.6" rx="1.25" fill="currentColor"/>' +
+          '<rect class="u4-eq-b u4-eq-5" x="21.7" y="11" width="2.4" height="6" rx="1.2" fill="currentColor"/>' +
+          '<path d="M23.3 3.1l.55 1.35 1.35.55-1.35.55-.55 1.35-.55-1.35-1.35-.55 1.35-.55z" fill="#34d399"/>' +
         '</svg>';
 
-      wrap.innerHTML =
-        '<div class="u4-top-ai-main">' +
-          '<div class="u4-top-ai-id">' +
-            '<button type="button" id="u4AiBubbleOrb" class="u4-ai-orb" aria-pressed="false">' +
-              speechBubbleSvg +
-            '</button>' +
-            '<div class="u4-ai-copy">' +
-              '<div class="u4-ai-title-row">' +
-                '<span id="u4AiTitle" class="u4-ai-title">Unit 4 AI Voice Guide</span>' +
-                '<span id="u4AiStateBadge" class="u4-ai-state">AI VOICE · OFF</span>' +
-              '</div>' +
-              '<p id="waVoiceStatus" class="u4-voice-status" role="status" aria-live="polite"></p>' +
-            '</div>' +
+      dock.innerHTML =
+        '<button type="button" id="u4AiMovingPointer" class="u4-ai-pointer">' +
+          '<span class="u4-ai-pointer-dot" aria-hidden="true"></span>' +
+          '<span id="u4AiPointerText">Use the AI helper</span>' +
+          '<span class="u4-ai-pointer-arrow" aria-hidden="true">→</span>' +
+        '</button>' +
+        '<button type="button" id="u4AiBubbleOrb" class="u4-ai-orb" aria-pressed="false" aria-expanded="false" aria-controls="u4VoiceChatDialog">' +
+          liveOrbSvg +
+          '<span id="u4AiStateBadge" class="u4-ai-orb-pill">OFF</span>' +
+        '</button>';
+
+      document.body.appendChild(dock);
+
+      var dialog = document.createElement("aside");
+      dialog.id = "u4VoiceChatDialog";
+      dialog.className = "u4-voice-dialog";
+      dialog.setAttribute("role", "dialog");
+      dialog.setAttribute("aria-label", "Unit 4 AI Helper Voice Chat");
+      dialog.setAttribute("translate", "no");
+      dialog.hidden = true;
+
+      dialog.innerHTML =
+        '<div class="u4-vd-head">' +
+          '<div class="u4-vd-title-wrap">' +
+            '<span class="u4-vd-dot" aria-hidden="true"></span>' +
+            '<span id="u4VdTitle" class="u4-vd-title">AI Helper</span>' +
+            '<span id="u4VdState" class="u4-vd-state">OFF</span>' +
           '</div>' +
-          '<div class="u4-top-ai-cta">' +
-            '<button type="button" id="waVoiceMicPill" class="u4-voice-pill" aria-pressed="false">' +
-              '<span class="u4-voice-label">Talk to AI</span>' +
-            '</button>' +
+          '<div class="u4-vd-controls">' +
+            '<button type="button" id="waVoiceMicPill" class="u4-vd-btn" aria-pressed="false">Start voice</button>' +
+            '<button type="button" id="u4VdMinBtn" class="u4-vd-icon-btn" title="Minimize (keep voice running)" aria-label="Minimize voice chat">—</button>' +
           '</div>' +
         '</div>' +
-        '<div id="u4AiLiveHeard" class="u4-ai-heard" hidden></div>' +
-        '<div id="u4AiNudges" class="u4-ai-nudges"></div>';
+        '<p id="waVoiceStatus" class="u4-vd-sub" role="status" aria-live="polite"></p>' +
+        '<div id="u4VoiceChatTranscript" class="u4-vd-log" role="log" aria-live="polite"></div>' +
+        '<div class="u4-vd-foot">' +
+          '<div id="u4AiNudges" class="u4-vd-chips"></div>' +
+          '<form id="u4VdAskForm" class="u4-vd-ask-row" novalidate>' +
+            '<input id="u4VdAskInput" class="u4-vd-ask-inp" type="text" autocomplete="off" placeholder="Or type a question to navigate…">' +
+            '<button type="submit" class="u4-vd-ask-send" aria-label="Ask AI Helper">↑</button>' +
+          '</form>' +
+        '</div>';
 
-      mainEl.insertBefore(wrap, mainEl.firstChild);
+      document.body.appendChild(dialog);
 
-      var toggleHandler = function(ev) {
+      var handleOrbOrPointerClick = function(ev) {
         if (ev && ev.preventDefault) ev.preventDefault();
-        if (liveState.active || liveState.connecting) stopGeminiLiveSession();
-        else startGeminiLiveSession(ev, "");
+        if (liveState.active || liveState.connecting) {
+          setDialogOpen(!liveState.dialogOpen);
+        } else {
+          setDialogOpen(true);
+          startGeminiLiveSession(ev, "");
+        }
       };
-      document.getElementById("waVoiceMicPill").addEventListener("click", toggleHandler);
-      document.getElementById("u4AiBubbleOrb").addEventListener("click", toggleHandler);
+
+      document.getElementById("u4AiBubbleOrb").addEventListener("click", handleOrbOrPointerClick);
+      document.getElementById("u4AiMovingPointer").addEventListener("click", handleOrbOrPointerClick);
+
+      document.getElementById("u4VdMinBtn").addEventListener("click", function(ev) {
+        if (ev && ev.preventDefault) ev.preventDefault();
+        setDialogOpen(false);
+      });
+
+      document.getElementById("waVoiceMicPill").addEventListener("click", function(ev) {
+        if (ev && ev.preventDefault) ev.preventDefault();
+        if (liveState.active || liveState.connecting) {
+          stopGeminiLiveSession();
+        } else {
+          startGeminiLiveSession(ev, "");
+        }
+      });
+
+      document.getElementById("u4VdAskForm").addEventListener("submit", function(ev) {
+        if (ev && ev.preventDefault) ev.preventDefault();
+        var inp = document.getElementById("u4VdAskInput");
+        var q = inp ? String(inp.value || "").trim() : "";
+        if (!q) return;
+        inp.value = "";
+        if (liveState.active) {
+          sendPromptToLiveAgent(q);
+        } else {
+          startGeminiLiveSession(ev, q);
+        }
+      });
     }
 
-    // Delegated click handler for any [data-u4-ask] nudge chip in the top bar or inline on wiki pages
     if (!document.__u4NudgeDelegationBound) {
       document.__u4NudgeDelegationBound = true;
       document.addEventListener("click", function(ev) {
@@ -4553,6 +4718,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         var prompt = t.getAttribute("data-u4-ask");
         if (!prompt) return;
         if (ev.preventDefault) ev.preventDefault();
+        setDialogOpen(true);
         if (liveState.active) {
           sendPromptToLiveAgent(prompt);
         } else {
@@ -4561,14 +4727,13 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       });
     }
 
-    syncTopAssistantUi();
-    refreshContextualNudges();
+    syncFloatingAiUi();
+    refreshDialogSuggestions();
   }
 
   function mountCleanLeaveANoteSchema() {
     if (typeof WebSocket !== "function") return;
 
-    // Update #qpPanel heading to 'Send a note' / 'Enviar una nota'
     var syncQpChromeLabels = function() {
       var es = currentUiLang() === "es";
       var qpBtn = document.getElementById("qpBtn");
@@ -4657,7 +4822,6 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       });
     }
 
-    // Room-level '#speakBtn' uses the exact same auto-language 'Tap to speak' flow (no Fn-twice hint)
     var speakBtn = document.getElementById("speakBtn");
     if (speakBtn && !speakBtn.__u4CleanRoomVoiceBound && speakBtn.parentNode && typeof speakBtn.cloneNode === "function") {
       var cleanSpeakBtn = speakBtn.cloneNode(true);
@@ -4675,9 +4839,9 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       langBtn.addEventListener("click", function() {
         setTimeout(function() {
           syncQpChromeLabels();
-          syncTopAssistantUi();
+          syncFloatingAiUi();
           updateNoteVoiceButtons();
-          refreshContextualNudges();
+          refreshDialogSuggestions();
         }, 50);
       });
     }
@@ -4686,20 +4850,19 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     updateNoteVoiceButtons();
   }
 
-  // Re-render current page once in real browsers so clean checklists & inline wiki nudges appear immediately
   if (typeof WebSocket === "function") {
     if (typeof show === "function" && !show.__u4NudgeWrapped) {
       var origShow = show;
       var wrappedShow = function(target) {
         var r = origShow.apply(this, arguments);
-        setTimeout(refreshContextualNudges, 30);
+        setTimeout(refreshDialogSuggestions, 30);
         return r;
       };
       wrappedShow.__u4NudgeWrapped = true;
       show = wrappedShow;
       window.show = wrappedShow;
     }
-    mountPersistentTopAiGuide();
+    mountFloatingRoundAiHelper();
     mountCleanLeaveANoteSchema();
     if (typeof show === "function" && document.getElementById("doc")) {
       try { show((location.hash || "#home").slice(1) || "home"); } catch (e) {}
@@ -4707,7 +4870,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     if (typeof window.addEventListener === "function") {
       window.addEventListener("hashchange", function() {
         setTimeout(function() {
-          refreshContextualNudges();
+          refreshDialogSuggestions();
           pushLiveContextIfChanged();
         }, 120);
       });
@@ -4715,10 +4878,12 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   }
 
   window.U4GeminiLiveAssistant = {
-    version: "r5-clean-v4",
+    version: "r5-live-orb-v5",
     micOpenedOnLoad: false,
     start: startGeminiLiveSession,
     stop: stopGeminiLiveSession,
+    toggleDialog: function(){ setDialogOpen(!liveState.dialogOpen); },
+    isDialogOpen: function(){ return liveState.dialogOpen; },
     isActive: function(){ return liveState.active; },
     buildContext: buildRichWalkthroughContext,
     queryMemory: queryTodoistMemory
