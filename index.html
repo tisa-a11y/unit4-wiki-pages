@@ -530,809 +530,992 @@ main > .bar #path{display:none!important}
 
 /* U4_V16_ARCHITECTURAL_DESIGN_SYSTEM_START */
 :root{
-  --bg:#f5f1e8;
-  --panel:#fcfbf7;
-  --surface-subtle:#efeae0;
-  --fg:#19211e;
-  --muted:#5c655f;
-  --line:#ded8ca;
-  --line-strong:#cbc3b1;
-  --accent:#1b4338;
-  --accent-hover:#14332a;
-  --accent-soft:#e5ede9;
-  --brass:#b58338;
-  --brass-soft:#f6eedf;
-  --lock:#235c3a;
-  --lock-soft:#e3f0e7;
-  --open:#96530e;
-  --open-soft:#faeedb;
-  --rail-bg:#162420;
-  --rail-panel:#1f322c;
-  --rail-fg:#ede9df;
-  --rail-muted:#97a69f;
-  --rail-line:rgba(237,233,223,.11);
-  --shadow-sm:0 1px 3px rgba(22,36,32,.05),0 1px 2px rgba(22,36,32,.03);
-  --shadow-md:0 8px 24px rgba(22,36,32,.07),0 2px 6px rgba(22,36,32,.04);
-  --display:"Iowan Old Style","Charter","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
-  --body:-apple-system,BlinkMacSystemFont,"SF Pro Text","Avenir Next","Segoe UI",system-ui,sans-serif;
-  --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
+  --bg:#f8fafc;
+  --panel:#ffffff;
+  --rail-bg:#fbfcfe;
+  --surface-subtle:#f1f5f9;
+  --fg:#0f172a;
+  --muted:#475569;
+  --muted-light:#64748b;
+  --line:#e2e8f0;
+  --line-strong:#cbd5e1;
+  --accent:#2563eb;
+  --accent-hover:#1d4ed8;
+  --accent-soft:#eff6ff;
+  --ink-btn:#0f172a;
+  --ink-btn-hover:#1e293b;
+  --lock:#15803d;
+  --lock-soft:#dcfce7;
+  --open:#b45309;
+  --open-soft:#fef3c7;
+  --shadow-xs:0 1px 2px rgba(15,23,42,.04);
+  --shadow-sm:0 1px 3px rgba(15,23,42,.06),0 1px 2px rgba(15,23,42,.04);
+  --shadow-md:0 8px 22px rgba(15,23,42,.06),0 2px 5px rgba(15,23,42,.04);
+  --display:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter","Segoe UI",system-ui,sans-serif;
+  --body:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter","Segoe UI",system-ui,sans-serif;
+  --mono:"SF Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#121715;
-    --panel:#19201d;
-    --surface-subtle:#212926;
-    --fg:#ece9e0;
-    --muted:#9ba6a0;
-    --line:#2b3531;
-    --line-strong:#3a4742;
-    --accent:#72b69c;
-    --accent-hover:#88c5ae;
-    --accent-soft:#1d312a;
-    --brass:#deb068;
-    --brass-soft:#312819;
-    --lock:#84ce9c;
-    --lock-soft:#1b3123;
-    --open:#f2b56b;
-    --open-soft:#362816;
-    --rail-bg:#0e1412;
-    --rail-panel:#18221f;
-    --rail-fg:#ece9e0;
-    --rail-muted:#8b9992;
-    --rail-line:rgba(236,233,224,.09);
-    --shadow-sm:0 1px 3px rgba(0,0,0,.28);
-    --shadow-md:0 10px 28px rgba(0,0,0,.38);
+    --bg:#0b0f17;
+    --panel:#111827;
+    --rail-bg:#0f1623;
+    --surface-subtle:#1e293b;
+    --fg:#f8fafc;
+    --muted:#94a3b8;
+    --muted-light:#64748b;
+    --line:#1f2937;
+    --line-strong:#334155;
+    --accent:#3b82f6;
+    --accent-hover:#60a5fa;
+    --accent-soft:rgba(59,130,246,.15);
+    --ink-btn:#f8fafc;
+    --ink-btn-hover:#e2e8f0;
+    --lock:#4ade80;
+    --lock-soft:rgba(34,197,94,.16);
+    --open:#fbbf24;
+    --open-soft:rgba(245,158,11,.16);
+    --shadow-xs:0 1px 2px rgba(0,0,0,.3);
+    --shadow-sm:0 2px 6px rgba(0,0,0,.35);
+    --shadow-md:0 10px 26px rgba(0,0,0,.45);
   }
 }
 :root[data-theme="dark"]{
-  --bg:#121715;
-  --panel:#19201d;
-  --surface-subtle:#212926;
-  --fg:#ece9e0;
-  --muted:#9ba6a0;
-  --line:#2b3531;
-  --line-strong:#3a4742;
-  --accent:#72b69c;
-  --accent-hover:#88c5ae;
-  --accent-soft:#1d312a;
-  --brass:#deb068;
-  --brass-soft:#312819;
-  --lock:#84ce9c;
-  --lock-soft:#1b3123;
-  --open:#f2b56b;
-  --open-soft:#362816;
-  --rail-bg:#0e1412;
-  --rail-panel:#18221f;
-  --rail-fg:#ece9e0;
-  --rail-muted:#8b9992;
-  --rail-line:rgba(236,233,224,.09);
+  --bg:#0b0f17;
+  --panel:#111827;
+  --rail-bg:#0f1623;
+  --surface-subtle:#1e293b;
+  --fg:#f8fafc;
+  --muted:#94a3b8;
+  --muted-light:#64748b;
+  --line:#1f2937;
+  --line-strong:#334155;
+  --accent:#3b82f6;
+  --accent-hover:#60a5fa;
+  --accent-soft:rgba(59,130,246,.15);
+  --ink-btn:#f8fafc;
+  --ink-btn-hover:#e2e8f0;
+  --lock:#4ade80;
+  --lock-soft:rgba(34,197,94,.16);
+  --open:#fbbf24;
+  --open-soft:rgba(245,158,11,.16);
 }
 
 body{
   background:var(--bg);
   color:var(--fg);
   font-family:var(--body);
-  font-size:15.5px;
-  line-height:1.62;
+  font-size:15px;
+  line-height:1.58;
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
 }
 
+/* App Shell Grid: Clean Light Left Side Navigation Bar + Wide Multi-Column Workspace */
 .wrap{
-  grid-template-columns:268px minmax(0,1fr);
+  grid-template-columns:264px minmax(0,1fr);
 }
 @media (max-width:760px){
   .wrap{grid-template-columns:1fr}
 }
 
+/* Upgraded Modern Light Side Navigation Bar (Linear / Notion / Stripe Docs feel) */
 nav.rail{
   background:var(--rail-bg);
-  color:var(--rail-fg);
-  border-right:1px solid var(--rail-line);
-  padding-block:24px 32px;
-  padding-left:max(18px,env(safe-area-inset-left,0px));
-  padding-right:18px;
-  box-shadow:inset -1px 0 0 rgba(0,0,0,.15);
+  border-right:1px solid var(--line);
+  padding-block:18px 28px;
+  padding-left:max(14px,env(safe-area-inset-left,0px));
+  padding-right:14px;
 }
 nav.rail .brand{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  padding:6px 10px 14px;
+  margin-bottom:4px;
+  border-bottom:1px solid var(--line);
   font-family:var(--display);
   font-weight:700;
-  font-size:22px;
-  letter-spacing:-.01em;
-  color:var(--rail-fg);
-  padding:4px 8px 16px;
-  border-bottom:1px solid var(--rail-line);
-  margin-bottom:6px;
+  font-size:17px;
+  letter-spacing:-.02em;
+  color:var(--fg);
 }
 nav.rail .brand a.homelink{
-  color:var(--rail-fg);
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  color:var(--fg);
   text-decoration:none;
+}
+nav.rail .brand a.homelink::before{
+  content:"U4";
+  width:26px;
+  height:26px;
+  border-radius:7px;
+  background:var(--ink-btn);
+  color:var(--panel);
+  font:700 11.5px/26px var(--mono);
+  text-align:center;
+  letter-spacing:-.03em;
+  flex:none;
 }
 nav.rail .brand small{
   font-family:var(--body);
-  font-weight:600;
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:.11em;
-  color:#d4ad6a;
-  margin-top:5px;
+  font-weight:500;
+  font-size:12px;
+  letter-spacing:0;
+  color:var(--muted);
+  margin:2px 0 0 35px;
 }
 nav.rail .grp{
   font-family:var(--body);
   font-weight:700;
-  font-size:10.5px;
+  font-size:11px;
   text-transform:uppercase;
-  letter-spacing:.14em;
-  color:var(--rail-muted);
-  margin:22px 8px 7px;
+  letter-spacing:.06em;
+  color:var(--muted-light);
+  margin:18px 10px 6px;
 }
 nav.rail a{
-  color:rgba(237,233,223,.88);
-  font-weight:500;
-  font-size:14.5px;
-  padding:8px 11px;
-  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  padding:7px 10px;
   margin-bottom:2px;
-  border-left:3px solid transparent;
-  transition:background .15s ease,color .15s ease,border-color .15s ease;
+  border-radius:8px;
+  color:var(--muted);
+  font-weight:500;
+  font-size:13.5px;
+  text-decoration:none;
+  transition:background .13s ease,color .13s ease;
 }
 nav.rail a:hover{
-  background:rgba(237,233,223,.08);
-  color:#ffffff;
+  background:var(--surface-subtle);
+  color:var(--fg);
 }
 nav.rail a[aria-current="page"]{
-  background:var(--rail-panel);
-  color:#ffffff;
+  background:var(--accent-soft);
+  color:var(--accent);
   font-weight:600;
-  border-left-color:#d4ad6a;
-  box-shadow:0 1px 3px rgba(0,0,0,.22);
+}
+.u4-rail-item-left{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.u4-rail-ico{
+  width:16px;
+  text-align:center;
+  font-size:13px;
+  opacity:.82;
+  flex:none;
+}
+.u4-rail-cnt{
+  margin-left:auto;
+  font:600 10.5px/1 var(--mono);
+  padding:3px 6px;
+  border-radius:6px;
+  background:var(--surface-subtle);
+  color:var(--muted-light);
+  flex:none;
+}
+nav.rail a[aria-current="page"] .u4-rail-cnt{
+  background:rgba(37,99,235,.14);
+  color:var(--accent);
 }
 nav.rail .subdocs{
-  margin:3px 0 10px 14px;
-  border-left:1px solid rgba(212,173,106,.35);
+  margin:2px 0 8px 20px;
+  border-left:1.5px solid var(--line);
   padding-left:8px;
+  gap:2px;
 }
 nav.rail a.sub{
-  color:rgba(237,233,223,.76);
+  display:block;
   font-size:12.5px;
-  padding:5px 9px;
-  border-left:0;
+  padding:5px 8px;
+  color:var(--muted);
+  border-radius:6px;
 }
 nav.rail a.sub:hover{
-  background:rgba(237,233,223,.07);
-  color:#ffffff;
+  background:var(--surface-subtle);
+  color:var(--fg);
 }
 nav.rail a.sub[aria-current="page"]{
-  background:rgba(212,173,106,.16);
-  color:#fff6e5;
+  background:var(--accent-soft);
+  color:var(--accent);
+  font-weight:600;
 }
 nav.rail a.sub .k{
   font-family:var(--body);
   font-size:10.5px;
-  letter-spacing:.02em;
-  color:var(--rail-muted);
+  color:var(--muted-light);
 }
 
+/* Mobile Sticky Header Bar */
 @media (max-width:760px){
   .mobile{
-    background:var(--rail-bg);
-    color:var(--rail-fg);
-    border-bottom:1px solid var(--rail-line);
-    padding-block:11px;
-    box-shadow:0 2px 10px rgba(0,0,0,.14);
+    background:rgba(255,255,255,.94);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+    padding-block:10px;
   }
-  body::before{
-    background:var(--rail-bg);
-  }
+  body::before{background:var(--panel)}
   .mobile .brand{
     font-family:var(--display);
-    font-size:19px;
-    letter-spacing:-.01em;
-    color:var(--rail-fg);
+    font-weight:700;
+    font-size:17px;
+    letter-spacing:-.02em;
   }
   .mobile .menubtn{
-    background:var(--rail-panel);
-    color:var(--rail-fg);
-    border:1px solid rgba(237,233,223,.22);
     border-radius:8px;
-    font-family:var(--body);
+    border:1px solid var(--line-strong);
+    background:var(--panel);
+    color:var(--fg);
     font-weight:600;
+    box-shadow:var(--shadow-xs);
   }
 }
 
-main{
+/* Main Workspace Area: Multi-Column Split Layout on Desktop (Content Left + Sticky Field Note Right) */
+body.u4-modern-app .u4-room-jumps{display:none!important}
+body.u4-modern-app main{
   width:100%;
-  max-width:960px;
-  margin-inline:auto;
-  padding-top:28px;
-  padding-bottom:84px!important;
-  padding-left:max(32px,env(safe-area-inset-left,0px));
-  padding-right:max(32px,env(safe-area-inset-right,0px));
+  max-width:1280px;
+  margin:0 auto;
+  padding:20px max(28px,env(safe-area-inset-left,0px)) 80px max(28px,env(safe-area-inset-right,0px))!important;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 365px;
+  gap:26px;
+  align-items:start;
+}
+body.u4-modern-app.u4-single-col main{
+  max-width:1040px;
+  grid-template-columns:minmax(0,1fr);
+}
+@media (max-width:1160px){
+  body.u4-modern-app main{
+    grid-template-columns:minmax(0,1fr);
+    max-width:900px;
+  }
 }
 @media (max-width:760px){
-  main{
-    padding-top:18px;
-    padding-left:max(16px,env(safe-area-inset-left,0px));
-    padding-right:max(16px,env(safe-area-inset-right,0px));
+  body.u4-modern-app main{
+    padding:14px max(16px,env(safe-area-inset-left,0px)) 72px max(16px,env(safe-area-inset-right,0px))!important;
+    gap:20px;
   }
 }
 
-article,
-.u4-title-row,
-header.home-head.u4-has-ai,
-.u4-top-fallback-slot,
-.u4-voice-minbar,
-.u4-voice-dialog,
-.u4-room-jumps,
-.goals,
-.done-list,
-.about,
-.unit-concept,
-.concept-fig,
-.pinned,
-.ck,
-.fulldet,
-.concept,
-.gallery,
-.docs,
-.field,
-#field.u4-simple-field{
-  max-width:860px;
-}
-
-article p,article li{
-  max-width:76ch;
-}
-
-main > .bar{
-  font-family:var(--body);
-  font-size:13px;
+/* Top Utility Bar spans full width across both columns of <main> */
+body.u4-modern-app main > .bar{
+  grid-column:1 / -1;
+  display:flex;
+  align-items:center;
+  gap:8px 10px;
   padding-bottom:14px;
-  margin-bottom:20px;
+  margin-bottom:0!important;
   border-bottom:1px solid var(--line);
+  font-family:var(--body);
 }
-main > .bar button.small{
+body.u4-modern-app main > .bar button.small{
+  min-height:36px;
+  padding:0 13px;
   border-radius:8px;
   border:1px solid var(--line-strong);
   background:var(--panel);
   color:var(--fg);
-  font-family:var(--body);
-  font-weight:600;
-  font-size:13px;
-  padding:7px 13px;
-  box-shadow:var(--shadow-sm);
-  transition:border-color .15s,background .15s,transform .1s;
+  font:600 13px/1 var(--body);
+  box-shadow:var(--shadow-xs);
+  transition:background .14s,border-color .14s;
 }
-main > .bar button.small:hover{
-  border-color:var(--accent);
-  background:var(--accent-soft);
-  color:var(--accent);
+body.u4-modern-app main > .bar button.small:hover{
+  background:var(--surface-subtle);
+  border-color:var(--muted-light);
 }
-main > .bar .chip{
+body.u4-modern-app main > .bar .chip{
   border-radius:8px;
-  padding:5px 11px;
-  font-family:var(--body);
-  font-weight:500;
-  font-size:12.5px;
+  padding:5px 10px;
   background:var(--surface-subtle);
   border:1px solid var(--line);
+  font:500 12px/1.2 var(--body);
   color:var(--muted);
 }
 
-.home-title,
-article h1{
-  font-family:var(--display);
-  font-weight:700;
-  font-size:clamp(28px,3.3vw,36px);
-  letter-spacing:-.015em;
-  line-height:1.15;
-  color:var(--fg);
-}
-.home-sub{
-  font-family:var(--body);
-  font-weight:700;
-  font-size:12px;
-  text-transform:uppercase;
-  letter-spacing:.12em;
-  color:var(--brass);
-  margin-top:6px;
-}
-article h2{
-  font-family:var(--display);
-  font-weight:700;
-  font-size:22.5px;
-  letter-spacing:-.01em;
-  margin:32px 0 10px;
-  padding-top:16px;
-  border-top:1px solid var(--line);
-  color:var(--fg);
-}
-article h3{
-  font-family:var(--body);
-  font-weight:700;
-  font-size:16.5px;
-  letter-spacing:-.005em;
-  margin:22px 0 6px;
-  color:var(--fg);
-}
-article code{
-  font-family:var(--mono);
-  font-size:.84em;
-  background:var(--surface-subtle);
-  border:1px solid var(--line);
-  padding:1px 6px;
-  border-radius:5px;
-  color:var(--fg);
-}
-
-.goals{
-  border:1px solid var(--line-strong);
-  border-left:4px solid var(--accent);
-  background:var(--panel);
-  border-radius:12px;
-  padding:18px 22px 16px;
-  margin:0 0 24px;
-  box-shadow:var(--shadow-md);
-  position:relative;
-}
-.goals::before{
-  content:"SITE BULLETIN";
-  display:block;
-  font-family:var(--body);
-  font-weight:700;
-  font-size:10.5px;
-  letter-spacing:.14em;
-  color:var(--brass);
-  margin-bottom:4px;
-}
-body.lang-es .goals::before{
-  content:"BOLETÍN DE OBRA";
-}
-.goals h2{
-  font-family:var(--display);
-  font-size:22px;
-  margin:0 0 12px!important;
-  padding:0!important;
-  border:0!important;
-}
-.goals ol{
-  list-style:none;
-  counter-reset:u4goal;
-  padding-left:0;
-  margin:0;
+/* Top AI Helper Dock & Live Voice Drawer Slot */
+.u4-top-ai-host{
+  grid-column:1 / -1;
   display:grid;
   gap:10px;
 }
-.goals li{
-  counter-increment:u4goal;
-  position:relative;
-  padding:10px 14px 10px 44px;
-  margin:0;
-  background:var(--bg);
-  border:1px solid var(--line);
-  border-radius:9px;
-  line-height:1.5;
+.u4-top-ai-host:empty{display:none}
+.u4-ai-dock{
+  margin-left:auto!important;
+  gap:6px!important;
 }
-.goals li::before{
-  content:counter(u4goal);
-  position:absolute;
-  left:12px;
-  top:11px;
-  width:22px;
-  height:22px;
-  border-radius:6px;
-  background:var(--accent);
-  color:var(--panel);
-  font:700 12px/22px var(--body);
-  text-align:center;
-}
-.goals li a{
-  font-weight:600;
-  color:var(--accent);
-  text-decoration:none;
-  border-bottom:1px solid currentColor;
-}
-
-.about{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:15px 20px;
-  margin:0 0 24px;
-  box-shadow:var(--shadow-sm);
-}
-.about h2{
-  font-family:var(--body);
-  font-size:12.5px;
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:.10em;
-  color:var(--muted);
-  margin:0 0 8px!important;
-  padding:0!important;
-  border:0!important;
-}
-.about li{
-  margin:6px 0;
-}
-
-.links{
-  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
-  gap:12px;
-  margin:14px 0 24px;
-}
-.links a{
-  position:relative;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  gap:6px;
-  padding:15px 18px;
-  border:1px solid var(--line);
-  border-radius:11px;
-  background:var(--panel);
-  box-shadow:var(--shadow-sm);
-  transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease;
-}
-.links a:hover{
-  transform:translateY(-2px);
-  border-color:var(--accent);
-  box-shadow:var(--shadow-md);
-}
-.links a b{
-  font-family:var(--display);
-  font-weight:700;
-  font-size:18px;
-  letter-spacing:-.01em;
-  color:var(--fg);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-.links a b::after{
-  content:"→";
-  font-family:var(--body);
-  font-size:15px;
-  font-weight:600;
-  color:var(--brass);
-  transition:transform .15s ease;
-}
-.links a:hover b::after{
-  transform:translateX(3px);
-  color:var(--accent);
-}
-.links a span{
-  font-family:var(--body);
-  font-size:12.5px;
-  font-weight:500;
-  color:var(--muted);
-}
-
-.u4-room-jumps{
-  gap:8px;
-  margin:6px 0 20px;
-}
-.u4-rjump-pill{
+.u4-ai-pointer{
+  animation:none!important;
+  height:36px;
+  padding:0 13px!important;
   border-radius:8px!important;
   border:1px solid var(--line-strong)!important;
   background:var(--panel)!important;
-  padding:7px 13px!important;
-  font-weight:600!important;
-  font-size:13px!important;
-  box-shadow:var(--shadow-sm);
+  color:var(--fg)!important;
+  font:600 13px/1 var(--body)!important;
+  box-shadow:var(--shadow-xs);
 }
-.u4-rjump-pill:hover{
+.u4-ai-pointer:hover{
   border-color:var(--accent)!important;
   background:var(--accent-soft)!important;
   color:var(--accent)!important;
 }
-
-.ck{
-  background:var(--panel);
-  border:1px solid var(--line-strong);
-  border-radius:12px;
-  padding:16px 20px;
-  margin:10px 0 22px;
-  box-shadow:var(--shadow-sm);
-}
-.ck h2{
-  font-family:var(--display);
-  font-size:20.5px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding-bottom:10px!important;
-  margin:0 0 10px!important;
-  border-bottom:1px solid var(--line)!important;
-}
-.ck-n{
-  font-family:var(--mono);
-  font-size:12px;
-  font-weight:600;
-  padding:3px 9px;
-  border-radius:6px;
-  background:var(--accent-soft);
-  color:var(--accent);
-}
-.ck li{
-  padding:7px 0;
-  margin:0!important;
-  border-bottom:1px solid var(--surface-subtle);
-  align-items:center;
-}
-.ck li:last-child{
-  border-bottom:0;
-  padding-bottom:2px;
-}
-.ck li.is-done{
-  color:var(--muted);
-  text-decoration:line-through;
-  text-decoration-color:rgba(92,101,95,.45);
-}
-.chk{
-  width:21px;
-  height:21px;
-  border-radius:5px;
-  line-height:21px;
-  font-size:13px;
-  background:var(--lock);
-}
-.chk.todo{
-  border:1.75px solid var(--line-strong);
-  background:var(--bg);
-}
-
-.concept-fig img,.gal img{
-  border-radius:12px;
-  border:1px solid var(--line-strong);
-  box-shadow:var(--shadow-md);
-}
-.concept-fig figcaption,.gal figcaption{
-  font-size:13px;
-  color:var(--muted);
-  margin-top:7px;
-}
-.pinned{
-  border:1px solid var(--brass);
-  border-left:4px solid var(--brass);
-  background:var(--brass-soft);
-  border-radius:11px;
-  padding:14px 18px;
-}
-.pinned .pin-k{
-  font-family:var(--body);
-  font-weight:700;
-  letter-spacing:.12em;
-  color:var(--open);
-}
-.pinned .btn{
-  border-radius:8px;
-  background:var(--accent);
-}
-
-.tbl{
-  border:1px solid var(--line-strong);
-  border-radius:10px;
-  background:var(--panel);
-  box-shadow:var(--shadow-sm);
-  margin:14px 0 20px;
-}
-.tbl th{
-  font-family:var(--body);
-  font-weight:700;
-  font-size:11.5px;
-  letter-spacing:.07em;
-  background:var(--surface-subtle);
-  color:var(--fg);
-  padding:10px 12px;
-}
-.tbl td{
-  padding:10px 12px;
-}
-.lock,.open{
-  font-family:var(--body);
-  font-weight:700;
-  font-size:11px;
-  letter-spacing:.05em;
-  padding:2px 7px;
-  border-radius:5px;
-  vertical-align:1px;
-}
-.lock{
-  background:var(--lock-soft);
-  color:var(--lock);
-  border:1px solid rgba(35,92,58,.2);
-}
-.open{
-  background:var(--open-soft);
-  color:var(--open);
-  border:1px solid rgba(150,83,14,.22);
-}
-
-.docs h2{
-  font-family:var(--display);
-}
-.docs li a{
-  border-radius:10px!important;
-  border:1px solid var(--line-strong)!important;
-  background:var(--panel)!important;
-  padding:11px 15px!important;
-  box-shadow:var(--shadow-sm);
-}
-.docs li a:hover{
-  border-color:var(--accent)!important;
-  background:var(--accent-soft)!important;
-}
-.docs .k{
-  font-family:var(--mono)!important;
-  text-transform:uppercase;
-  font-weight:600;
-  border-radius:6px!important;
-  background:var(--surface-subtle)!important;
-  color:var(--muted)!important;
-}
-
-.fulldet{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:11px;
-  padding:6px 18px!important;
-  margin:20px 0!important;
-  box-shadow:var(--shadow-sm);
-}
-.fulldet summary{
-  font-family:var(--display);
-  font-size:18.5px;
-  font-weight:700;
-  color:var(--fg);
-}
-.fulldet[open]{
-  padding-bottom:16px!important;
-}
-
-.u4-mp-wrap{
-  background:var(--panel)!important;
-  border:1px solid var(--line-strong)!important;
-  border-radius:14px!important;
-  box-shadow:var(--shadow-md);
-}
-.u4-mp-card{
-  background:var(--bg)!important;
-  border:1px solid var(--line)!important;
-  border-radius:10px!important;
-}
-.u4-mp-card h3{
-  font-family:var(--display);
-}
-.u4-mp-warn{
-  background:var(--brass-soft)!important;
-  border:1px solid var(--brass)!important;
-  border-left:4px solid var(--brass)!important;
-  color:var(--fg)!important;
-}
-
-.u4-ai-pointer{
-  border-radius:9px!important;
-  border:1.5px solid var(--accent)!important;
-  background:var(--panel)!important;
-  color:var(--fg)!important;
-  box-shadow:var(--shadow-sm);
-  padding:8px 13px!important;
-  font-weight:600!important;
-}
-.u4-ai-pointer-dot{
-  background:var(--brass)!important;
-}
+.u4-ai-pointer-dot{background:var(--accent)!important}
+.u4-ai-pointer-arrow{display:none!important}
 .u4-ai-orb{
-  background:var(--accent)!important;
+  width:36px!important;
+  height:36px!important;
+  border-radius:9px!important;
+  background:var(--ink-btn)!important;
   color:var(--panel)!important;
-  border-color:var(--accent)!important;
-  box-shadow:0 3px 10px rgba(27,67,56,.22)!important;
+  border:1px solid var(--ink-btn)!important;
+  box-shadow:var(--shadow-xs)!important;
 }
-.u4-ai-orb:hover{
-  background:var(--accent-hover)!important;
-}
+.u4-ai-orb svg{width:18px!important;height:18px!important}
 .u4-ai-dock[data-live="on"] .u4-ai-orb{
-  background:#1f7a53!important;
-  border-color:#1f7a53!important;
+  background:#16a34a!important;
+  border-color:#16a34a!important;
+  color:#ffffff!important;
 }
-.u4-voice-dialog{
+.u4-voice-minbar,.u4-voice-dialog{
+  max-width:none!important;
+  margin:0!important;
   border-radius:14px!important;
   border:1px solid var(--line-strong)!important;
-  background:var(--panel)!important;
   box-shadow:var(--shadow-md)!important;
 }
-.u4-vd-head{
-  background:var(--surface-subtle)!important;
-  padding:10px 14px!important;
-}
-.u4-vd-title{
-  font-family:var(--display);
-  font-size:16px!important;
-}
-.u4-vd-min-btn,.u4-nudge-chip{
-  border-radius:8px!important;
-}
-.u4-vd-ask-inp{
-  border-radius:10px!important;
-}
-.u4-vd-ask-send{
-  border-radius:10px!important;
+.u4-vd-head{background:var(--surface-subtle)!important}
+.u4-vd-min-btn,.u4-nudge-chip{border-radius:8px!important}
+.u4-vd-ask-inp,.u4-vd-ask-send{border-radius:9px!important}
+
+body.u4-modern-app article{
+  max-width:none!important;
+  min-width:0;
 }
 
-#field.u4-simple-field{
+/* Sticky Right-Side Field Note Composer + Master Floor Plan Card */
+body.u4-modern-app #field.u4-simple-field{
+  max-width:none!important;
+  margin-top:0!important;
+  position:sticky;
+  top:20px;
   background:var(--panel);
-  border:1px solid var(--line-strong);
-  border-top:3px solid var(--accent);
-  border-radius:14px;
-  padding:20px 22px;
-  box-shadow:var(--shadow-md);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:18px;
+  box-shadow:var(--shadow-sm);
+}
+@media (max-width:1160px){
+  body.u4-modern-app #field.u4-simple-field{
+    position:static;
+  }
 }
 #field.u4-simple-field h2{
-  font-family:var(--display);
-  font-size:22px;
-  letter-spacing:-.01em;
+  font:700 16.5px/1.2 var(--display);
+  letter-spacing:-.015em;
+  margin:0 0 12px;
+}
+#field.u4-simple-field .row2{
+  grid-template-columns:1fr!important;
+  gap:10px!important;
+  margin-bottom:8px;
 }
 .field label{
-  font-family:var(--body);
-  font-weight:700;
-  font-size:11.5px;
-  letter-spacing:.07em;
+  font:600 11.5px/1.2 var(--body);
+  letter-spacing:.03em;
+  text-transform:uppercase;
   color:var(--muted);
 }
 .u4-who-chip{
-  border-radius:8px!important;
-  border:1px solid var(--line-strong)!important;
-  background:var(--bg)!important;
+  min-height:30px!important;
+  padding:4px 10px!important;
+  border-radius:7px!important;
+  border:1px solid var(--line)!important;
+  background:var(--surface-subtle)!important;
+  font-size:12.5px!important;
 }
-.u4-who-chip:hover{
-  border-color:var(--accent)!important;
+.u4-who-chip.is-active{
+  background:var(--ink-btn)!important;
+  border-color:var(--ink-btn)!important;
+  color:var(--panel)!important;
 }
 .u4-composer-box{
-  border:1.5px solid var(--line-strong)!important;
+  border:1px solid var(--line-strong)!important;
   border-radius:12px!important;
   background:var(--bg)!important;
-  padding:12px 14px!important;
+  padding:10px 12px!important;
 }
 .u4-composer-box:focus-within{
-  background:#ffffff!important;
+  background:var(--panel)!important;
   border-color:var(--accent)!important;
   box-shadow:0 0 0 3px var(--accent-soft)!important;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]) .u4-composer-box:focus-within{
-    background:var(--panel)!important;
-  }
 }
 .u4-photo-btn{
   border-radius:8px!important;
   border:1px solid var(--line-strong)!important;
 }
+.u4-dictate-btn{
+  width:38px!important;
+  height:38px!important;
+  border:1px solid var(--line-strong)!important;
+  background:var(--panel)!important;
+  color:var(--fg)!important;
+}
+.u4-dictate-btn:hover{
+  border-color:var(--accent)!important;
+  color:var(--accent)!important;
+}
 #field.u4-simple-field #repSend{
-  border-radius:10px!important;
-  background:var(--accent)!important;
+  min-height:38px!important;
+  padding:0 16px!important;
+  border-radius:9px!important;
+  background:var(--ink-btn)!important;
   color:var(--panel)!important;
-  padding:0 20px!important;
-  font-weight:600!important;
+  box-shadow:none!important;
 }
 #field.u4-simple-field #repSend:hover{
-  background:var(--accent-hover)!important;
+  background:var(--ink-btn-hover)!important;
   filter:none!important;
 }
 
-.dtabs button{
-  border-radius:8px;
-  font-weight:600;
-  padding:7px 13px;
+/* Mini Floor Plan Quick-Preview Card inside Sticky Right Rail */
+.u4-side-mp{
+  margin-top:16px;
+  padding-top:14px;
+  border-top:1px solid var(--line);
 }
-.dec{
+.u4-side-mp-link{
+  display:block;
+  text-decoration:none;
+  color:var(--fg);
+  border:1px solid var(--line);
   border-radius:11px;
+  padding:10px;
+  background:var(--bg);
+  transition:border-color .14s,box-shadow .14s;
+}
+.u4-side-mp-link:hover{
+  border-color:var(--accent);
+  box-shadow:var(--shadow-xs);
+}
+.u4-side-mp-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  font:600 12.5px/1.2 var(--body);
+  margin-bottom:7px;
+}
+.u4-side-mp-head span:last-child{
+  color:var(--accent);
+  font-size:12px;
+}
+.u4-side-mp-link img{
+  width:100%;
+  max-height:132px;
+  object-fit:contain;
+  border-radius:7px;
+  background:#ffffff;
+  border:1px solid var(--line);
+  display:block;
+}
+
+/* Modern Bento Dashboard (#home) */
+.u4-dash-wrap{display:grid;gap:22px}
+.u4-dash-hero{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:14px;
+  flex-wrap:wrap;
+}
+.u4-dash-kicker{
+  font:600 11.5px/1.2 var(--body);
+  text-transform:uppercase;
+  letter-spacing:.07em;
+  color:var(--accent);
+  margin-bottom:4px;
+}
+.u4-dash-title{
+  font:700 clamp(24px,2.5vw,30px)/1.15 var(--display);
+  letter-spacing:-.025em;
+  margin:0;
+  color:var(--fg);
+}
+.u4-dash-sub{
+  margin:4px 0 0;
+  font-size:14px;
+  color:var(--muted);
+}
+.u4-mobile-note-jump{display:none}
+@media (max-width:1160px){
+  .u4-mobile-note-jump{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    height:36px;
+    padding:0 13px;
+    border-radius:8px;
+    border:1px solid var(--line-strong);
+    background:var(--panel);
+    color:var(--fg);
+    font:600 13px/1 var(--body);
+    cursor:pointer;
+    box-shadow:var(--shadow-xs);
+  }
+}
+
+.u4-kpi-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+}
+@media (max-width:680px){
+  .u4-kpi-grid{grid-template-columns:1fr}
+}
+.u4-kpi-card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:15px 16px;
+  box-shadow:var(--shadow-xs);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:8px;
+}
+.u4-kpi-lbl{font:600 12px/1.2 var(--body);color:var(--muted)}
+.u4-kpi-val{
+  font:700 22px/1.15 var(--display);
+  letter-spacing:-.02em;
+  color:var(--fg);
+  font-variant-numeric:tabular-nums;
+}
+.u4-kpi-foot{
+  font-size:12px;
+  color:var(--muted-light);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+.u4-kpi-link{font-weight:600;color:var(--accent);text-decoration:none}
+.u4-kpi-link:hover{text-decoration:underline}
+
+.u4-prog-track{
+  width:100%;
+  height:6px;
+  border-radius:999px;
+  background:var(--surface-subtle);
+  overflow:hidden;
+}
+.u4-prog-fill{
+  height:100%;
+  border-radius:999px;
+  background:var(--accent);
+  transition:width .25s ease;
+}
+.u4-prog-fill.is-complete{background:var(--lock)}
+
+.u4-sec-head{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:12px;
+  margin:0 0 10px;
+}
+.u4-sec-title{
+  font:700 16.5px/1.25 var(--display);
+  letter-spacing:-.015em;
+  margin:0;
+  color:var(--fg);
+}
+.u4-sec-meta{font-size:12.5px;color:var(--muted-light)}
+
+.u4-prio-list{display:grid;gap:10px}
+.u4-prio-card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px 16px;
+  box-shadow:var(--shadow-xs);
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  gap:14px;
+  align-items:center;
+  transition:border-color .15s,box-shadow .15s;
+}
+.u4-prio-card:hover{
   border-color:var(--line-strong);
   box-shadow:var(--shadow-sm);
 }
-.dec h3{
-  font-family:var(--display);
+.u4-prio-num{
+  width:28px;
+  height:28px;
+  border-radius:7px;
+  background:var(--accent-soft);
+  color:var(--accent);
+  font:700 12px/28px var(--mono);
+  text-align:center;
 }
+.u4-prio-body{min-width:0}
+.u4-prio-tag{
+  display:inline-block;
+  font:600 11px/1.2 var(--body);
+  padding:2px 8px;
+  border-radius:6px;
+  background:var(--surface-subtle);
+  color:var(--muted);
+  margin-bottom:4px;
+}
+.u4-prio-title{font:600 14.5px/1.35 var(--body);color:var(--fg);margin:0}
+.u4-prio-desc{font-size:13px;color:var(--muted);margin:3px 0 0;line-height:1.45}
+.u4-prio-cta{
+  display:inline-flex;
+  align-items:center;
+  height:32px;
+  padding:0 11px;
+  border-radius:8px;
+  border:1px solid var(--line);
+  background:var(--bg);
+  color:var(--fg);
+  font:600 12.5px/1 var(--body);
+  text-decoration:none;
+  white-space:nowrap;
+}
+.u4-prio-cta:hover{
+  border-color:var(--accent);
+  color:var(--accent);
+  background:var(--accent-soft);
+}
+@media (max-width:600px){
+  .u4-prio-card{grid-template-columns:auto minmax(0,1fr)}
+  .u4-prio-cta{grid-column:2;justify-self:start;margin-top:4px}
+}
+
+.u4-bento-rooms{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+@media (max-width:640px){
+  .u4-bento-rooms{grid-template-columns:1fr}
+}
+.u4-room-card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:15px 16px;
+  text-decoration:none;
+  color:var(--fg);
+  box-shadow:var(--shadow-xs);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  transition:transform .14s ease,border-color .14s ease,box-shadow .14s ease;
+}
+.u4-room-card:hover{
+  transform:translateY(-2px);
+  border-color:var(--accent);
+  box-shadow:var(--shadow-md);
+}
+.u4-rc-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:8px;
+}
+.u4-rc-name{
+  font:700 15.5px/1.25 var(--display);
+  letter-spacing:-.015em;
+  color:var(--fg);
+}
+.u4-rc-badges{display:inline-flex;align-items:center;gap:5px;flex:none}
+.u4-rc-pill{
+  font:600 11px/1.2 var(--mono);
+  padding:3px 7px;
+  border-radius:6px;
+  background:var(--surface-subtle);
+  color:var(--muted);
+}
+.u4-rc-next{
+  font-size:12.5px;
+  color:var(--muted);
+  line-height:1.4;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+  min-height:34px;
+}
+.u4-rc-next b{color:var(--fg);font-weight:600}
+
+/* Modern Tabbed Room Workspace (#kitchen, #bathroom, etc.) */
+.u4-room-ws{display:grid;gap:18px}
+.u4-rws-header{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:18px 20px 0;
+  box-shadow:var(--shadow-xs);
+}
+.u4-rws-crumb{
+  font:500 12px/1.2 var(--body);
+  color:var(--muted-light);
+  margin-bottom:6px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.u4-rws-crumb a{color:var(--muted);text-decoration:none}
+.u4-rws-crumb a:hover{color:var(--accent)}
+.u4-rws-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-bottom:14px;
+}
+.u4-rws-title{
+  font:700 clamp(23px,2.5vw,29px)/1.15 var(--display);
+  letter-spacing:-.025em;
+  margin:0!important;
+  color:var(--fg);
+}
+.u4-rws-dim{
+  font:500 12px/1.35 var(--mono);
+  color:var(--muted);
+  margin-top:5px;
+}
+.u4-rws-stat{
+  min-width:165px;
+  background:var(--bg);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:8px 12px;
+  display:grid;
+  gap:6px;
+}
+.u4-rws-stat-lbl{
+  display:flex;
+  justify-content:space-between;
+  font:600 11.5px/1 var(--body);
+  color:var(--fg);
+}
+.u4-rws-tabs{
+  display:flex;
+  gap:4px;
+  overflow-x:auto;
+  scrollbar-width:none;
+  border-top:1px solid var(--line);
+  padding-top:2px;
+}
+.u4-rws-tabs::-webkit-scrollbar{display:none}
+.u4-rws-tab{
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  font:600 13px/1 var(--body);
+  padding:11px 12px 10px;
+  border-bottom:2px solid transparent;
+  cursor:pointer;
+  white-space:nowrap;
+  transition:color .14s,border-color .14s;
+}
+.u4-rws-tab:hover{color:var(--fg)}
+.u4-rws-tab.is-active{
+  color:var(--accent);
+  border-bottom-color:var(--accent);
+}
+.u4-rws-sec[hidden]{display:none!important}
+
+.u4-doc-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+@media (max-width:640px){
+  .u4-doc-grid{grid-template-columns:1fr}
+}
+.u4-doc-card{
+  display:flex;
+  align-items:flex-start;
+  gap:11px;
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:var(--panel);
+  color:var(--fg);
+  text-decoration:none;
+  box-shadow:var(--shadow-xs);
+  transition:border-color .14s,box-shadow .14s,transform .14s;
+}
+.u4-doc-card:hover{
+  border-color:var(--accent);
+  box-shadow:var(--shadow-sm);
+  transform:translateY(-1px);
+}
+.u4-doc-badge{
+  flex:none;
+  width:36px;
+  height:36px;
+  border-radius:8px;
+  background:var(--accent-soft);
+  color:var(--accent);
+  font:700 10px/1 var(--mono);
+  text-transform:uppercase;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+.u4-doc-badge.is-html{
+  background:var(--surface-subtle);
+  color:var(--fg);
+}
+.u4-doc-info{min-width:0;flex:1}
+.u4-doc-title{font:600 13.5px/1.35 var(--body);color:var(--fg);overflow-wrap:anywhere}
+.u4-doc-sub{
+  margin-top:4px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  align-items:center;
+  font-size:11.5px;
+  color:var(--muted-light);
+}
+.u4-doc-flag{
+  font:600 10.5px/1.2 var(--body);
+  padding:2px 6px;
+  border-radius:5px;
+  background:var(--open-soft);
+  color:var(--open);
+}
+.u4-doc-flag.is-pin{
+  background:var(--accent-soft);
+  color:var(--accent);
+}
+
+.u4-card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:18px 20px;
+  box-shadow:var(--shadow-xs);
+}
+.u4-card h2{
+  font:700 16.5px/1.25 var(--display)!important;
+  letter-spacing:-.015em;
+  margin:0 0 10px!important;
+  padding:0!important;
+  border:0!important;
+}
+.u4-notice-banner{
+  background:var(--open-soft);
+  border:1px solid rgba(180,83,9,.2);
+  border-radius:11px;
+  padding:11px 14px;
+  font-size:13.5px;
+  color:var(--fg);
+  display:grid;
+  gap:4px;
+}
+.u4-notice-banner b{color:var(--open)}
+.u4-notice-banner a{color:var(--accent);font-weight:600}
+
+.ck{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:18px 20px;
+  margin:0!important;
+  box-shadow:var(--shadow-xs);
+  max-width:none!important;
+}
+.ck h2{
+  font:700 16.5px/1.25 var(--display);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin:0 0 12px!important;
+  padding:0 0 10px!important;
+  border-bottom:1px solid var(--line)!important;
+}
+.ck-n{
+  font:600 11.5px/1 var(--mono);
+  padding:4px 8px;
+  border-radius:6px;
+  background:var(--surface-subtle);
+  color:var(--fg);
+}
+.ck li{
+  padding:8px 0;
+  margin:0!important;
+  border-bottom:1px solid var(--surface-subtle);
+  align-items:center;
+  font-size:14px;
+}
+.ck li:last-child{border-bottom:0;padding-bottom:0}
+.ck li.is-done{
+  color:var(--muted-light);
+  text-decoration:line-through;
+}
+.chk{
+  width:20px;
+  height:20px;
+  border-radius:6px;
+  line-height:20px;
+  font-size:12px;
+  background:var(--lock);
+}
+.chk.todo{
+  border:1.5px solid var(--line-strong);
+  background:var(--bg);
+}
+
+.u4-spec-card .mdbody h2{
+  font:700 16px/1.3 var(--display);
+  margin:22px 0 8px;
+  padding-top:14px;
+  border-top:1px solid var(--line);
+}
+.u4-spec-card .mdbody h2:first-child{
+  margin-top:0;
+  padding-top:0;
+  border-top:0;
+}
+.tbl{
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--panel);
+  box-shadow:none;
+}
+.tbl th{
+  font:600 11.5px/1.3 var(--body);
+  letter-spacing:.03em;
+  text-transform:uppercase;
+  background:var(--surface-subtle);
+  color:var(--muted);
+}
+.lock,.open{
+  font:700 10.5px/1.2 var(--body);
+  padding:2px 6px;
+  border-radius:5px;
+}
+.dtabs button{border-radius:8px;font-weight:600}
+.dec{border-radius:12px;box-shadow:var(--shadow-xs)}
 /* U4_V16_ARCHITECTURAL_DESIGN_SYSTEM_END */
 
 
@@ -6872,8 +7055,505 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     }
   }
 
+
+  // =========================================================================
+  // PART 3 (v17): MODERN SIDEBAR BADGES, MULTI-COLUMN WORKSPACE, BENTO DASHBOARD & TABBED ROOMS
+  // =========================================================================
+  var SIDEBAR_ICONS = {
+    home: "⌂",
+    decisions: "📋",
+    roadmap: "🗺️",
+    kitchen: "🍳",
+    bathroom: "🚿",
+    bedroom: "🛏️",
+    "living-dining": "🛋️",
+    laundry: "🧺",
+    hallway: "🚪",
+    electrical: "⚡",
+    "paint-floors": "🎨",
+    "floor-treatment": "🪵",
+    hvac: "🌡️",
+    magicplan: "📐",
+    agents: "⚙️"
+  };
+
+  function computeChecklistStats(roomKey) {
+    var c = (typeof CHECKLISTS === "object" && CHECKLISTS && CHECKLISTS[roomKey]) || null;
+    if (!c || !Array.isArray(c.items) || !c.items.length) return { done: 0, total: 0, pct: 0, nextEn: "", nextEs: "" };
+    var liveArr = (typeof ckLive === "object" && ckLive && ckLive[roomKey]) || null;
+    var rows = liveArr || c.items;
+    var done = 0;
+    var nextEn = "", nextEs = "";
+    for (var i = 0; i < rows.length; i++) {
+      var isDone = Boolean(rows[i][0]);
+      if (isDone) done++;
+      else if (!nextEn) {
+        var baseHit = c.items[i] || rows[i];
+        nextEn = baseHit[1] || rows[i][1] || "";
+        nextEs = baseHit[2] || baseHit[1] || nextEn;
+      }
+    }
+    var total = rows.length;
+    var pct = total ? Math.round((done / total) * 100) : 0;
+    return { done: done, total: total, pct: pct, nextEn: nextEn, nextEs: nextEs };
+  }
+
+  function decorateLeftSidebarRail() {
+    if (typeof WebSocket !== "function") return;
+    var railEl = document.getElementById("rail");
+    if (!railEl) return;
+    Array.prototype.slice.call(railEl.querySelectorAll("a[data-key]")).forEach(function(a) {
+      var k = a.getAttribute("data-key") || "";
+      if (a.querySelector(".u4-rail-item-left")) {
+        var existingCnt = a.querySelector(".u4-rail-cnt");
+        if (existingCnt) {
+          var stUpd = computeChecklistStats(k);
+          if (stUpd.total) existingCnt.textContent = stUpd.done + "/" + stUpd.total;
+        }
+        return;
+      }
+      var rawLbl = a.textContent || "";
+      a.textContent = "";
+      var leftSpan = document.createElement("span");
+      leftSpan.className = "u4-rail-item-left";
+      var ico = document.createElement("span");
+      ico.className = "u4-rail-ico";
+      ico.setAttribute("aria-hidden", "true");
+      ico.setAttribute("translate", "no");
+      ico.textContent = SIDEBAR_ICONS[k] || "•";
+      var txt = document.createElement("span");
+      txt.textContent = rawLbl;
+      leftSpan.appendChild(ico);
+      leftSpan.appendChild(txt);
+      a.appendChild(leftSpan);
+
+      var st = computeChecklistStats(k);
+      if (st.total > 0) {
+        var badge = document.createElement("span");
+        badge.className = "u4-rail-cnt";
+        badge.setAttribute("translate", "no");
+        badge.textContent = st.done + "/" + st.total;
+        a.appendChild(badge);
+      }
+    });
+  }
+
+  function renderModernDocCards(roomKey) {
+    var es = currentUiLang() === "es";
+    var all = (typeof DOCS === "object" && DOCS && DOCS[roomKey]) || [];
+    var active = all.filter(function(d){ return !d.history; });
+    var archived = all.filter(function(d){ return d.history; });
+    if (!active.length && !archived.length) return "";
+
+    var buildCard = function(d, list) {
+      if (es && typeof hideInEs === "function" && hideInEs(d, list)) return "";
+      var L = docLabel(d);
+      var kind = docKind(d);
+      var pdf = isPdf(d);
+      var href = docHref(d);
+      return (
+        '<a class="u4-doc-card" href="' + escHtml(href) + '"' + (pdf ? '' : ' target="_blank" rel="noopener"') + '>' +
+          '<span class="u4-doc-badge' + (pdf ? '' : ' is-html') + '">' + escHtml(kind) + '</span>' +
+          '<span class="u4-doc-info">' +
+            '<div class="u4-doc-title">' + escHtml(L.t) + '</div>' +
+            '<div class="u4-doc-sub">' +
+              (L.date ? ('<span>' + escHtml(niceDate(L.date)) + '</span>') : '') +
+              (d.pin ? ('<span class="u4-doc-flag is-pin">' + (es ? "Plan original" : "Original") + '</span>') : '') +
+              (d.review ? ('<span class="u4-doc-flag">' + (es ? "En revisión" : "Awaiting review") + '</span>') : '') +
+            '</div>' +
+          '</span>' +
+        '</a>'
+      );
+    };
+
+    var cardsHtml = active.map(function(d){ return buildCard(d, active); }).filter(Boolean).join("");
+    var methodNote = "";
+    if (roomKey === "bedroom") {
+      methodNote =
+        '<div class="u4-notice-banner" style="margin-bottom:12px">' +
+          '<span><b>' + (es ? "Enmienda de método:" : "Method amendment:") + '</b> ' +
+          (es ? "Use los planos R2 junto con esta enmienda de instalación con cinta en el muro." : "Use the R2 plans together with this wall tape-fit installation amendment.") +
+          ' <a href="#doc:2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_EN">English PDF</a> · ' +
+          '<a href="#doc:2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_ES">PDF en español</a></span>' +
+        '</div>';
+    }
+    var histHtml = "";
+    if (archived.length) {
+      histHtml =
+        '<details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600;font-size:13px;color:var(--muted)">' +
+        (es ? "Planos anteriores / historial" : "Earlier revisions / history") + ' (' + archived.length + ')</summary>' +
+        '<div class="u4-doc-grid" style="margin-top:10px">' +
+          archived.map(function(d){ return buildCard(d, archived); }).filter(Boolean).join("") +
+        '</div></details>';
+    }
+    return (
+      '<section class="u4-card u4-rws-sec" data-u4-rsec="plans" translate="no">' +
+        '<div class="u4-sec-head">' +
+          '<h2 class="u4-sec-title">' + (es ? "Planos y documentos" : "Drawings & Plans") + '</h2>' +
+          '<span class="u4-sec-meta">' + active.length + ' ' + (es ? (active.length === 1 ? "archivo activo" : "archivos activos") : (active.length === 1 ? "active sheet" : "active sheets")) + '</span>' +
+        '</div>' +
+        methodNote +
+        '<div class="u4-doc-grid">' + cardsHtml + '</div>' +
+        histHtml +
+      '</section>'
+    );
+  }
+
+  function renderModernDashboardHome() {
+    var es = currentUiLang() === "es";
+    var totDone = 0, totItems = 0, totDocs = 0;
+    ORDERED_PROJECTS.forEach(function(p) {
+      var st = computeChecklistStats(p.key);
+      totDone += st.done;
+      totItems += st.total;
+      var ds = (typeof DOCS === "object" && DOCS && DOCS[p.key]) ? DOCS[p.key].filter(function(d){ return !d.history; }) : [];
+      totDocs += ds.length;
+    });
+    var totPct = totItems ? Math.round((totDone / totItems) * 100) : 0;
+
+    var priorities = es
+      ? [
+          { num: "01", tag: "Baño", title: "Terminar cierre, azulejo y muebles del baño", desc: "Refuerzos + cableado en bruto a caja en el ático → cerrar techo → tablaroca y Hardie → azulejo de muros → tina y lavabo.", href: "#bathroom", cta: "Abrir Baño →" },
+          { num: "02", tag: "Cocina · Muro D04", title: "Enmarcar el muro del subpanel eléctrico (D04)", desc: "Cerrar abertura hacia comedor y dejar listo el hueco para el subpanel Eaton de 125 A.", href: "#kitchen", cta: "Abrir Cocina →" },
+          { num: "03", tag: "Cocina · Eléctrico", title: "Iniciar cableado e instalación en bruto de cocina", desc: "Arrancar circuitos Romex de cocina una vez enmarcado el muro del panel D04.", href: "#electrical", cta: "Ver Eléctrico →" }
+        ]
+      : [
+          { num: "01", tag: "Bathroom", title: "Finish bathroom close-in, wall tile, tub & sink", desc: "Install blocking + complete electrical rough-in to attic junction box → close ceiling → drywall & Hardie → wall tile → set tub & sink.", href: "#bathroom", cta: "Open Bathroom →" },
+          { num: "02", tag: "Kitchen · D04 Wall", title: "Frame the electrical subpanel wall (D04)", desc: "Frame the dining-side doorway infill bay where the new Eaton 125A subpanel mounts.", href: "#kitchen", cta: "Open Kitchen →" },
+          { num: "03", tag: "Kitchen · Electrical", title: "Start kitchen electrical rough-in & branch wiring", desc: "Begin rough-in and Romex kitchen circuits immediately after the D04 panel wall is framed.", href: "#electrical", cta: "Open Electrical →" }
+        ];
+
+    var roomCards = ORDERED_PROJECTS.map(function(p) {
+      var st = computeChecklistStats(p.key);
+      var ds = (typeof DOCS === "object" && DOCS && DOCS[p.key]) ? DOCS[p.key].filter(function(d){ return !d.history; }) : [];
+      var docLbl = ds.length ? (ds.length + (es ? (ds.length === 1 ? " plano" : " planos") : (ds.length === 1 ? " plan" : " plans"))) : (es ? "Espec." : "Spec");
+      var nextTxt = es ? st.nextEs : st.nextEn;
+      var nextLine = nextTxt
+        ? ('<b>' + (es ? "Sigue: " : "Next: ") + '</b>' + escHtml(nextTxt))
+        : ('<b>' + (es ? "Al día" : "Up to date") + '</b>');
+      var ico = SIDEBAR_ICONS[p.key] || "•";
+      return (
+        '<a class="u4-room-card" href="#' + escHtml(p.key) + '">' +
+          '<div class="u4-rc-top">' +
+            '<span class="u4-rc-name"><span style="margin-right:6px" aria-hidden="true">' + ico + '</span>' + escHtml(es ? p.es : p.en) + '</span>' +
+            '<span class="u4-rc-badges">' +
+              '<span class="u4-rc-pill">' + escHtml(docLbl) + '</span>' +
+              (st.total ? ('<span class="u4-rc-pill">' + st.done + '/' + st.total + '</span>') : '') +
+            '</span>' +
+          '</div>' +
+          (st.total
+            ? ('<div class="u4-prog-track"><div class="u4-prog-fill' + (st.pct === 100 ? ' is-complete' : '') + '" style="width:' + st.pct + '%"></div></div>')
+            : '') +
+          '<div class="u4-rc-next">' + nextLine + '</div>' +
+        '</a>'
+      );
+    }).join("");
+
+    return (
+      '<div class="u4-dash-wrap" translate="no">' +
+        '<div class="u4-dash-hero">' +
+          '<div>' +
+            '<div class="u4-dash-kicker">1231 11th Avenue · San Francisco</div>' +
+            '<h1 class="u4-dash-title">' + (es ? "Panel de Obra — Unidad 4" : "Unit 4 Remodel Workspace") + '</h1>' +
+            '<p class="u4-dash-sub">' + (es ? "Planos vigentes, avances por cuarto y notas directas de obra." : "Live room specs, issued drawings, checklists, and site field notes.") + '</p>' +
+          '</div>' +
+          '<button type="button" class="u4-mobile-note-jump" onclick="var f=document.getElementById(\'field\');if(f&&f.scrollIntoView)f.scrollIntoView({behavior:\'smooth\'});">' +
+            (es ? "📝 Nota de obra ↓" : "📝 Field Note ↓") +
+          '</button>' +
+        '</div>' +
+
+        '<div class="u4-kpi-grid">' +
+          '<div class="u4-kpi-card">' +
+            '<span class="u4-kpi-lbl">' + (es ? "Semana activa" : "Current Sprint") + '</span>' +
+            '<span class="u4-kpi-val">' + (es ? "9–13 Nov" : "Nov 9–13") + '</span>' +
+            '<span class="u4-kpi-foot"><span>' + (es ? "3 metas prioritarias" : "3 active site priorities") + '</span><a class="u4-kpi-link" href="#roadmap">' + (es ? "Hoja de ruta →" : "Roadmap →") + '</a></span>' +
+          '</div>' +
+          '<div class="u4-kpi-card">' +
+            '<span class="u4-kpi-lbl">' + (es ? "Avance de listas" : "Checklist Progress") + '</span>' +
+            '<span class="u4-kpi-val">' + totDone + ' / ' + totItems + ' <span style="font-size:14px;font-weight:600;color:var(--muted)">(' + totPct + '%)</span></span>' +
+            '<div class="u4-prog-track"><div class="u4-prog-fill" style="width:' + totPct + '%"></div></div>' +
+          '</div>' +
+          '<div class="u4-kpi-card">' +
+            '<span class="u4-kpi-lbl">' + (es ? "Geometría y planos" : "Master Floor Plan") + '</span>' +
+            '<span class="u4-kpi-val">731 sq ft</span>' +
+            '<span class="u4-kpi-foot"><span>' + totDocs + '+ ' + (es ? "planos · techo 10\'-1½\"" : "sheets · 10\'-1½\" ceiling") + '</span><a class="u4-kpi-link" href="#magicplan">' + (es ? "Ver plano →" : "Open plan →") + '</a></span>' +
+          '</div>' +
+        '</div>' +
+
+        '<section>' +
+          '<div class="u4-sec-head">' +
+            '<h2 class="u4-sec-title">' + (es ? "Prioridades de esta semana" : "This Week on Site") + '</h2>' +
+            '<span class="u4-sec-meta">' + (es ? "9 al 13 de noviembre" : "Nov 9 – 13") + '</span>' +
+          '</div>' +
+          '<div class="u4-prio-list">' +
+            priorities.map(function(pr) {
+              return (
+                '<div class="u4-prio-card">' +
+                  '<span class="u4-prio-num">' + pr.num + '</span>' +
+                  '<div class="u4-prio-body">' +
+                    '<span class="u4-prio-tag">' + escHtml(pr.tag) + '</span>' +
+                    '<p class="u4-prio-title">' + escHtml(pr.title) + '</p>' +
+                    '<p class="u4-prio-desc">' + escHtml(pr.desc) + '</p>' +
+                  '</div>' +
+                  '<a class="u4-prio-cta" href="' + pr.href + '">' + escHtml(pr.cta) + '</a>' +
+                '</div>'
+              );
+            }).join("") +
+          '</div>' +
+        '</section>' +
+
+        '<section>' +
+          '<div class="u4-sec-head">' +
+            '<h2 class="u4-sec-title">' + (es ? "Cuartos y oficios" : "Rooms & Trades") + '</h2>' +
+            '<span class="u4-sec-meta">' + (es ? "10 áreas del proyecto" : "10 project workspaces") + '</span>' +
+          '</div>' +
+          '<div class="u4-bento-rooms">' + roomCards + '</div>' +
+        '</section>' +
+      '</div>'
+    );
+  }
+
+  function renderModernCrewRoomWorkspace(p, srcMd) {
+    var es = currentUiLang() === "es";
+    var split = crewSplit(srcMd);
+    var secs = split.secs || [];
+    var concept = secs.find(function(s){ return /^(Concept|Concepto)\b/i.test(s.h); });
+    var rest = secs.filter(function(s){ return s !== concept && s.h && !CREW_DROP.test(s.h); });
+    var projEntry = ORDERED_PROJECTS.find(function(x){ return x.key === p.key; });
+    var label = projEntry ? (es ? projEntry.es : projEntry.en) : ((es && ES && ES[p.label]) ? ES[p.label] : p.label);
+
+    var st = computeChecklistStats(p.key);
+    var mpRoom = (U4_MAGICPLAN_MASTER && U4_MAGICPLAN_MASTER.rooms && U4_MAGICPLAN_MASTER.rooms[p.key]) || null;
+    var dimLine = mpRoom ? mpRoom.dimensions : "";
+
+    var allDocs = (typeof DOCS === "object" && DOCS && DOCS[p.key]) || [];
+    var activeDocsCount = allDocs.filter(function(d){ return !d.history; }).length;
+    var hasPlans = activeDocsCount > 0 || allDocs.length > 0;
+    var hasCk = st.total > 0;
+    var detailMd = rest.map(function(s){ return "## " + s.h + "\n" + s.body.join("\n"); }).join("\n\n");
+    var hasSpecs = Boolean(detailMd.trim());
+    var figHtml = conceptFigure(p.key);
+    var galHtml = galleryBlock(p.key);
+    var hasVisuals = Boolean(figHtml || galHtml);
+
+    var noticesHtml = "";
+    if (["bedroom","living-dining","hallway","paint-floors","kitchen"].indexOf(p.key) !== -1) {
+      var crText = es
+        ? "La decisión sobre la guardasilla sigue abierta: se compara el diseño con guardasilla frente a la Opción A sin guardasilla. No cortar ni instalar todavía."
+        : "Chair-rail layout vs Option A (upper & lower frames without a chair rail) is still open for comparison — do not cut or install review sheets yet.";
+      var scope = p.key === "kitchen" ? (es ? " (Solo aplica a la moldura decorativa en D04.)" : " (Applies to D04 decorative trim only.)") : "";
+      var reviewPage = { "bedroom": 3, "living-dining": 5, "hallway": 12 }[p.key];
+      var revLinks = "";
+      if (reviewPage) {
+        var packetDoc = "2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB";
+        revLinks = ' · <a href="#doc:' + packetDoc + '_EN:p' + reviewPage + '">Option A PDF (EN)</a> · <a href="#doc:' + packetDoc + '_ES:p' + reviewPage + '">Opción A PDF (ES)</a>';
+      }
+      noticesHtml += '<div class="u4-notice-banner"><span><b>' + (es ? "Revisión abierta:" : "Open design review:") + '</b> ' + crText + scope + revLinks + '</span></div>';
+    }
+    var pb = pinnedBlock(p.key);
+    if (pb) noticesHtml += pb;
+
+    var conceptTextHtml = "";
+    if (concept) {
+      var firstPara = (crewClean(concept.body.join("\n")).trim().split(/\n\s*\n/)[0] || "");
+      if (firstPara) conceptTextHtml = '<div class="mdbody">' + render(firstPara) + '</div>';
+    }
+    if (p.key === "bedroom") {
+      conceptTextHtml += '<p style="margin:8px 0 0;color:var(--muted)">' + (es
+        ? "Muro A: norte (cabecera) · Muro B: este (ventana saliente, sin marcos) · Muro C: sur (compartido con sala, antes llamado B) · Muro D: oeste (entrada y nicho)."
+        : "Wall A: north (headboard) · Wall B: east (bay window, no frames) · Wall C: south (shared with living room, formerly Wall B) · Wall D: west (entry & closet niche).") + '</p>';
+    }
+
+    var tabs = [
+      { id: "all", lbl: es ? "Resumen completo" : "Overview" }
+    ];
+    if (hasPlans) tabs.push({ id: "plans", lbl: (es ? "Planos" : "Plans & PDFs") + " (" + activeDocsCount + ")" });
+    if (hasCk) tabs.push({ id: "checklist", lbl: (es ? "Lista" : "Checklist") + " (" + st.done + "/" + st.total + ")" });
+    if (hasSpecs) tabs.push({ id: "specs", lbl: es ? "Especificaciones" : "Full Specs" });
+    if (hasVisuals) tabs.push({ id: "visuals", lbl: es ? "Maquetas" : "Mockups" });
+
+    var out = '<div class="u4-room-ws" translate="no">';
+    out +=
+      '<header class="u4-rws-header">' +
+        '<div class="u4-rws-crumb"><a href="#home">' + (es ? "Inicio" : "Home") + '</a><span>/</span><span>' + (es ? "Proyectos" : "Projects") + '</span></div>' +
+        '<div class="u4-rws-top">' +
+          '<div style="min-width:0;flex:1">' +
+            '<h1 class="u4-rws-title">' + escHtml(label) + '</h1>' +
+            (dimLine ? ('<div class="u4-rws-dim">' + escHtml(dimLine) + '</div>') : '') +
+          '</div>' +
+          (hasCk
+            ? ('<div class="u4-rws-stat">' +
+                 '<div class="u4-rws-stat-lbl"><span>' + (es ? "Avance" : "Progress") + '</span><span>' + st.done + ' / ' + st.total + ' (' + st.pct + '%)</span></div>' +
+                 '<div class="u4-prog-track"><div class="u4-prog-fill' + (st.pct === 100 ? ' is-complete' : '') + '" style="width:' + st.pct + '%"></div></div>' +
+               '</div>')
+            : '') +
+        '</div>' +
+        '<div class="u4-rws-tabs" role="tablist">' +
+          tabs.map(function(t, idx) {
+            return '<button type="button" class="u4-rws-tab' + (idx === 0 ? ' is-active' : '') + '" data-u4-rtab="' + t.id + '">' + escHtml(t.lbl) + '</button>';
+          }).join("") +
+        '</div>' +
+      '</header>';
+
+    if (noticesHtml || conceptTextHtml) {
+      out +=
+        '<section class="u4-card u4-rws-sec" data-u4-rsec="overview" style="display:grid;gap:12px">' +
+          (conceptTextHtml || '') +
+          noticesHtml +
+        '</section>';
+    }
+
+    if (hasPlans) {
+      out += renderModernDocCards(p.key);
+    }
+
+    if (hasCk) {
+      out += '<div class="u4-rws-sec" data-u4-rsec="checklist">' + ckBlock(p.key) + '</div>';
+    }
+
+    if (hasVisuals) {
+      out +=
+        '<section class="u4-card u4-rws-sec" data-u4-rsec="visuals">' +
+          (figHtml ? ('<div style="margin-bottom:' + (galHtml ? '16px' : '0') + '">' + figHtml + '</div>') : '') +
+          (galHtml || '') +
+        '</section>';
+    }
+
+    if (hasSpecs) {
+      out +=
+        '<section class="u4-card u4-spec-card u4-rws-sec" data-u4-rsec="specs">' +
+          '<h2>' + (es ? "Especificaciones detalladas" : "Detailed Room Specifications") + '</h2>' +
+          '<div class="mdbody" translate="no">' + render(crewClean(detailMd)) + '</div>' +
+        '</section>';
+    }
+
+    out += '</div>';
+    return out;
+  }
+
+  function mountModernSidebarWorkspace() {
+    if (typeof WebSocket !== "function" || !document.body) return;
+    document.body.classList.add("u4-modern-app");
+
+    // 1. Insert dedicated full-span Voice Drawer host right under main > .bar so AI Helper docks in .bar and opens cleanly across the top!
+    var mainEl = document.querySelector("main");
+    var barEl = mainEl ? mainEl.querySelector(":scope > .bar") : null;
+    if (mainEl && barEl && !document.getElementById("u4TopAiHost")) {
+      var aiHost = document.createElement("div");
+      aiHost.id = "u4TopAiHost";
+      aiHost.className = "u4-top-ai-host";
+      if (barEl.nextSibling) mainEl.insertBefore(aiHost, barEl.nextSibling);
+      else mainEl.appendChild(aiHost);
+    }
+
+    // 2. Delegate Segmented Room Tab Filtering inside #doc
+    if (!document.__u4RoomTabsBoundV17) {
+      document.__u4RoomTabsBoundV17 = true;
+      document.addEventListener("click", function(ev) {
+        var tabBtn = ev.target && ev.target.closest ? ev.target.closest("[data-u4-rtab]") : null;
+        if (!tabBtn) return;
+        ev.preventDefault();
+        var mode = tabBtn.getAttribute("data-u4-rtab") || "all";
+        var ws = tabBtn.closest(".u4-room-ws");
+        if (!ws) return;
+        Array.prototype.slice.call(ws.querySelectorAll("[data-u4-rtab]")).forEach(function(b) {
+          b.classList.toggle("is-active", b === tabBtn);
+        });
+        Array.prototype.slice.call(ws.querySelectorAll(".u4-rws-sec")).forEach(function(sec) {
+          var kind = sec.getAttribute("data-u4-rsec");
+          sec.hidden = (mode !== "all" && kind !== mode);
+        });
+      });
+    }
+
+    // 3. Inject Magicplan Floor Plan Quick-Preview Card at bottom of sticky right #field rail
+    var fieldEl = document.getElementById("field");
+    if (fieldEl && !document.getElementById("u4SideMpCard") && U4_MAGICPLAN_MASTER && U4_MAGICPLAN_MASTER.svgPath) {
+      var mpSide = document.createElement("div");
+      mpSide.id = "u4SideMpCard";
+      mpSide.className = "u4-side-mp";
+      mpSide.setAttribute("translate", "no");
+      mpSide.innerHTML =
+        '<a href="#magicplan" class="u4-side-mp-link">' +
+          '<div class="u4-side-mp-head"><span id="u4SideMpTitle">Master Floor Plan</span><span id="u4SideMpCta">Interactive view →</span></div>' +
+          '<img src="' + escHtml(U4_MAGICPLAN_MASTER.svgPath) + '" alt="Unit 4 Master Floor Plan" loading="lazy">' +
+        '</a>';
+      fieldEl.appendChild(mpSide);
+    }
+
+    // 4. Override crewRoom in browser mode so all 10 Project pages render the Tabbed Workspace
+    if (typeof crewRoom === "function" && !crewRoom.__u4ModernV17) {
+      var modernCrewRoomFn = function(p, srcMd) {
+        return renderModernCrewRoomWorkspace(p, srcMd);
+      };
+      modernCrewRoomFn.__u4ModernV17 = true;
+      crewRoom = modernCrewRoomFn;
+      window.crewRoom = modernCrewRoomFn;
+    }
+
+    decorateLeftSidebarRail();
+  }
+
+  function syncModernSidebarWorkspaceUi() {
+    if (typeof WebSocket !== "function") return;
+    var es = currentUiLang() === "es";
+    var rawHash = String((typeof location !== "undefined" && location.hash) || "#home").slice(1) || "home";
+    var activeKey = rawHash.indexOf("decisions") === 0 ? "decisions" : (rawHash.indexOf("doc:") === 0 ? "doc" : rawHash);
+    if (activeKey === "wall-treatment") activeKey = "paint-floors";
+
+    decorateLeftSidebarRail();
+
+    // Ensure Magicplan route highlights properly in the left sidebar too
+    if (activeKey === "magicplan") {
+      Array.prototype.slice.call(document.querySelectorAll("nav.rail a")).forEach(function(a) {
+        a.setAttribute("aria-current", a.getAttribute("data-key") === "magicplan" ? "page" : "false");
+      });
+    }
+
+    // Dock AI Helper cleanly on the right end of main > .bar & keep live voice drawer in #u4TopAiHost
+    var barEl = document.querySelector("main > .bar");
+    var dock = document.getElementById("u4AiFloatingDock");
+    if (barEl && dock && dock.parentNode !== barEl) {
+      barEl.appendChild(dock);
+    }
+    var aiHost = document.getElementById("u4TopAiHost");
+    var minBar = document.getElementById("u4VoiceMinBar");
+    var dlg = document.getElementById("u4VoiceChatDialog");
+    if (aiHost) {
+      if (minBar && minBar.parentNode !== aiHost) aiHost.appendChild(minBar);
+      if (dlg && dlg.parentNode !== aiHost) aiHost.appendChild(dlg);
+    }
+
+    // Toggle 2-column (Content + Sticky Right #field) vs 1-column (PDF viewer / Planning)
+    var fieldEl = document.getElementById("field");
+    var isSingleCol = Boolean(!fieldEl || fieldEl.hidden || activeKey === "doc" || activeKey === "decisions");
+    document.body.classList.toggle("u4-single-col", isSingleCol);
+
+    var sideMp = document.getElementById("u4SideMpCard");
+    if (sideMp) {
+      sideMp.hidden = (activeKey === "magicplan");
+      var mpT = document.getElementById("u4SideMpTitle");
+      var mpC = document.getElementById("u4SideMpCta");
+      if (mpT) mpT.textContent = es ? "Plano Maestro (Magicplan)" : "Master Floor Plan";
+      if (mpC) mpC.textContent = es ? "Abrir plano →" : "Interactive view →";
+    }
+
+    // Render Modern Bento Dashboard on #home
+    if (activeKey === "home") {
+      var docEl = document.getElementById("doc");
+      if (docEl && !docEl.querySelector(".u4-dash-wrap")) {
+        docEl.innerHTML = renderModernDashboardHome();
+      }
+    }
+  }
+
   function placeAiHelperBesidePageHeading() {
     if (typeof WebSocket !== "function") return;
+    if (document.body && document.body.classList.contains("u4-modern-app")) {
+      syncModernSidebarWorkspaceUi();
+      syncFloatingAiUi();
+      return;
+    }
     var dock = document.getElementById("u4AiFloatingDock");
     var minBar = document.getElementById("u4VoiceMinBar");
     var dlg = document.getElementById("u4VoiceChatDialog");
@@ -7911,6 +8591,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
           return;
         }
         var r = origShow.call(this, normTarget);
+        syncModernSidebarWorkspaceUi();
         placeAiHelperBesidePageHeading();
         enhanceRoomQuickJumpsAndPdfPages();
         setTimeout(refreshDialogSuggestions, 25);
@@ -7920,8 +8601,10 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       show = wrappedShow;
       window.show = wrappedShow;
     }
+    mountModernSidebarWorkspace();
     mountSimpleBottomFieldNoteForm();
     mountInlineTopAiHelper();
+    syncModernSidebarWorkspaceUi();
     if (typeof show === "function" && document.getElementById("doc")) {
       try {
         var initKey = (location.hash || "#home").slice(1) || "home";
@@ -7945,7 +8628,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   }
 
   window.U4GeminiLiveAssistant = {
-    version: "r5-live-orb-v16",
+    version: "r5-live-orb-v17",
     micOpenedOnLoad: false,
     orderedProjects: ORDERED_PROJECTS,
     start: startGeminiLiveSession,
