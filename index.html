@@ -5122,7 +5122,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       ptr.hidden = Boolean(liveState.pointerDismissed);
       var ptrText = document.getElementById("u4AiPointerText");
       if (ptrText && !liveState.pointerDismissed) {
-        ptrText.textContent = es ? "Usa el asistente IA" : "Use the AI helper";
+        ptrText.textContent = es ? "Asistente IA" : "AI Helper";
       }
     }
 
@@ -5563,7 +5563,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       dock.innerHTML =
         '<button type="button" id="u4AiMovingPointer" class="u4-ai-pointer">' +
           '<span class="u4-ai-pointer-dot" aria-hidden="true"></span>' +
-          '<span id="u4AiPointerText">Use the AI helper</span>' +
+          '<span id="u4AiPointerText">AI Helper</span>' +
           '<span class="u4-ai-pointer-arrow" aria-hidden="true">→</span>' +
         '</button>' +
         '<button type="button" id="u4AiShowChatBtn" class="u4-ai-reopen-btn" hidden>' +
