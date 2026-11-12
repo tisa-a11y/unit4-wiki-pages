@@ -1,6 +1,6 @@
 {
   "schema": "unit4-todoist-wiki-sync-index-v1",
-  "updatedAt": "2026-11-11T15:24:00-08:00",
+  "updatedAt": "2026-11-11T23:18:00-08:00",
   "todoistBoard": {
     "name": "Full 1231 11th Avenue Remodel",
     "projectId": "6hcMQpGhXWprg6m7",
@@ -338,7 +338,7 @@
         },
         {
           "id": "bathroom-todoist-reconcile-08",
-          "done": false,
+          "done": true,
           "en": "Finish the bathroom window sill and casing framing before adjacent board",
           "es": "Terminar la estructura de repisa y contramarco de ventana antes del panel adyacente",
           "todoistTaskIds": [
