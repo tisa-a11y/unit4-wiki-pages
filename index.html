@@ -5824,14 +5824,6 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     }
     var dlgTitle = document.getElementById("u4VdTitle");
     if (dlgTitle) dlgTitle.textContent = es ? "Asistente IA" : "AI Helper";
-    var tisaDirectBtn = document.getElementById("u4LetTisaKnowBtn");
-    if (tisaDirectBtn) tisaDirectBtn.textContent = es ? "📨 ¿Le aviso a Tisa directamente?" : "📨 Want me to let Tisa know directly?";
-    var capsEl = document.getElementById("u4VdCaps");
-    if (capsEl) {
-      capsEl.innerHTML = es
-        ? "<b>Co-Piloto PM y Oficios:</b> Abre cualquier <b>plano PDF</b> o el <b>Magicplan</b> · Hace <b>cálculos y fracciones</b> · Consulta sobre <b>plomería, cierres de muro, códigos y proveedores en SF</b> · Registra cada matiz y <b>le avisa a Tisa directamente</b>."
-        : "<b>Proactive PM &amp; Trade Co-Pilot:</b> Pull up any exact <b>PDF plan</b> or <b>Magicplan</b> · Run <b>layout &amp; fraction calcs</b> · Consult on <b>plumbing, close-in gates, codes &amp; SF sourcing</b> · Capture nuances &amp; <b>let Tisa know directly</b>.";
-    }
     var minBtn = document.getElementById("u4VdMinBtn");
     if (minBtn) minBtn.textContent = es ? "Ocultar chat ▴" : "Hide chat ▴";
 
@@ -6104,7 +6096,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
             "=== UNIT 4 PROJECT MANAGER CO-PILOT, MULTI-TRADE & SOURCING CONSULTANT BRIEF ===\n" +
             "You are the smart, dynamic, proactive Voice & Visual Co-Pilot for 1231 11th Ave Unit 4 (San Francisco), shaped by Tisa's Project Manager (GC), Pre-Close-In, Briefing Facilitation, Trade, and Custom/Collected Sourcing templates.\n" +
             "1. TWO-STEP IDENTITY FIRST, THEN CAPABILITIES SPIEL (STRICT RULE): At the start of every session, ONLY ask who you're speaking with and WAIT for them to answer before giving any spiel about what you can do! Once they identify themselves (e.g. John, Ervin, Joel, Wilma, Tisa), call set_speaker_name, greet them by name, and THEN briefly volunteer what you can help with (showing exact PDF plans or Magicplan on screen, running calculations, consulting on plumbing/trades/codes/sourcing, or letting Tisa know directly). Attribute remarks accurately; separate observed field facts/measurements, design preferences, and trade sequencing; preserve Tisa's owner decision authority and John's lead carpenter role.\n" +
-            "2. PROACTIVE 'WANT ME TO LET TISA KNOW DIRECTLY?' OPTION: Not everything Tisa has decided is written in this wiki yet, and plans cross over across rooms. NEVER guess or invent a locked decision when the wiki is open or silent! Distinguish locked vs open/deferred vs awaiting evidence vs unwritten. Capture every spoken nuance via capture_session_insight AND proactively ask out loud: \"Want me to let Tisa know directly?\" (Spanish: \"¿Quieres que le avise a Tisa directamente?\"). When they say yes (or ask to tell Tisa), call notify_tisa_directly with the full nuanced context, measurements, trade options, and speaker name!\n" +
+            "2. CONVERSATIONAL PROACTIVITY & NUANCE CAPTURE: Not everything Tisa has decided is written in this wiki yet, and plans cross over across rooms. NEVER guess or invent a locked decision when the wiki is open or silent! Distinguish locked vs open/deferred vs awaiting evidence vs unwritten, and capture spoken nuances via capture_session_insight. Be naturally proactive in offering helpful next steps in the flow of conversation — for example, offering to pull up the relevant PDF or Magicplan on screen, offering to run a quick calculation, or asking things like \"Want me to let Tisa know directly?\" (or \"¿Quieres que le avise a Tisa directamente?\") when an open decision, missing spec, or sourcing question comes up (and calling notify_tisa_directly if they say yes).\n" +
             "3. TISA'S PROJECT MANAGER & MULTI-TRADE / SOURCING PLAYBOOKS: Consult dynamically using consult_trade_and_sourcing and Google Search:\n" +
             "   - Master Trade Sequence & Close-In Gate: Framing & solid 2x blocking (height bands from subfloor, 1 stud bay past footprint; cabinet cleats, stone-sink legs, grab bars, 36x8x80 Murphy door pivot header/floor bearing) -> Plumbing DWV/supply & Gas rough -> Rigid HVAC/exhaust ducts (bath fan outdoors, dryer to lightwell, resolve abandoned galvanized pipes while open) -> Electrical rough (route around pipes/ducts; 4x4 boxes w/ 1\" mud rings in full-height tile zones, 1/2\" untiled; Eaton 125A D04 subpanel w/ floating neutral) -> Firestop & 1/16\" nail plates -> MANDATORY AS-BUILT PHOTO GATE (photograph every open wall with a tape measure in frame before drywall!). Nothing closes until done, capped/labeled, or waived by Tisa.\n" +
             "   - Plumbing & Appliance Crosscheck: Match rough valve & trim brand/series and check valve depth against full wall build-up; CPC 1/4\"/ft drain slope; toilet flange ON TOP of finished tile; low recessed icemaker box in fridge bay; resolve Laundry shared-wall gas box before close-in.\n" +
@@ -6314,16 +6306,11 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
           '</div>' +
         '</div>' +
         '<p id="u4VdSub" class="u4-vd-sub" role="status" aria-live="polite"></p>' +
-        '<div id="u4VdCaps" class="u4-vd-caps"><b>Proactive PM &amp; Trade Co-Pilot:</b> Pull up any exact <b>PDF plan</b> or <b>Magicplan</b> · Run <b>layout &amp; fraction calcs</b> · Consult on <b>plumbing, close-in gates, codes &amp; SF sourcing</b> · Capture nuances &amp; <b>let Tisa know directly</b>.</div>' +
         '<div id="u4VoiceChatTranscript" class="u4-vd-log" role="log" aria-live="polite"></div>' +
         '<div class="u4-vd-foot">' +
-          '<div class="u4-vd-tisa-row">' +
-            '<button type="button" id="u4LetTisaKnowBtn" class="u4-vd-tisa-btn">📨 Want me to let Tisa know directly?</button>' +
-            '<button type="button" id="u4OpenMagicplanBtn" class="u4-vd-mp-btn">🗺️ Magicplan</button>' +
-          '</div>' +
           '<div id="u4AiNudges" class="u4-vd-chips"></div>' +
           '<form id="u4VdAskForm" class="u4-vd-ask-row" novalidate>' +
-            '<input id="u4VdAskInput" class="u4-vd-ask-inp" type="text" autocomplete="off" placeholder="Ask a plan, calc, plumbing/sourcing, or code question…">' +
+            '<input id="u4VdAskInput" class="u4-vd-ask-inp" type="text" autocomplete="off" placeholder="Or type a question…">' +
             '<button type="submit" class="u4-vd-ask-send" aria-label="Ask AI Helper">↑</button>' +
           '</form>' +
         '</div>';
@@ -6373,39 +6360,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         setDialogOpen(false);
       });
 
-      var letTisaBtn = document.getElementById("u4LetTisaKnowBtn");
-      if (letTisaBtn) {
-        letTisaBtn.addEventListener("click", async function(ev) {
-          if (ev && ev.preventDefault) ev.preventDefault();
-          var es = currentUiLang() === "es";
-          if (liveState.active) {
-            sendPromptToLiveAgent(es
-              ? "Sí, por favor avísale a Tisa directamente ahora mismo usando notify_tisa_directly con todos los detalles y matices de lo que acabamos de hablar."
-              : "Yes, please let Tisa know directly right now using notify_tisa_directly with all the nuances, measurements, and context from what we're discussing.");
-            return;
-          }
-          var turns = liveState.sessionTurns || [];
-          if (turns.length > 0) {
-            var lastSummary = turns.slice(-4).map(function(t){ return t.text; }).join(" | ");
-            await bridgeActions.notify_tisa_directly({
-              room: activeRoomKey(),
-              topic: "Crew follow-up from AI Helper",
-              full_nuance_summary: lastSummary
-            });
-            appendCompleteChatLine("ai", es ? "✓ Listo — le envié el resumen directo a Tisa." : "✓ Done — sent that directly to Tisa with full context.");
-          } else {
-            startGeminiLiveSession(ev, es ? "Quiero dejarle un mensaje directo a Tisa sobre este cuarto." : "I want to let Tisa know directly about a question or detail here.");
-          }
-        });
-      }
 
-      var openMpBtn = document.getElementById("u4OpenMagicplanBtn");
-      if (openMpBtn) {
-        openMpBtn.addEventListener("click", async function(ev) {
-          if (ev && ev.preventDefault) ev.preventDefault();
-          await bridgeActions.examine_magicplan({ room: activeRoomKey(), open_on_screen: true });
-        });
-      }
 
       document.getElementById("u4VdAskForm").addEventListener("submit", async function(ev) {
         ev.preventDefault();
@@ -6754,7 +6709,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   }
 
   window.U4GeminiLiveAssistant = {
-    version: "r5-live-orb-v11",
+    version: "r5-live-orb-v12",
     micOpenedOnLoad: false,
     orderedProjects: ORDERED_PROJECTS,
     start: startGeminiLiveSession,
