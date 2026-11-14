@@ -5,8 +5,8 @@
     "name": "Full 1231 11th Avenue Remodel",
     "projectId": "6hcMQpGhXWprg6m7",
     "url": "https://app.todoist.com/app/project/6hcMQpGhXWprg6m7",
-    "writeHoldActive": true,
-    "writeHoldNote": "Todoist write hold in force (Tisa, 2026-11-08) until new specs & planning merges are locked; reading cards is active.",
+    "writeHoldActive": false,
+    "writeHoldNote": "2026-11-08 blanket write hold lifted 2026-11-12; scoped writes active with @verification-photo onsite subtasks and 1:1 Wiki synchronicity.",
     "synchronicityRule": "Any Todoist record change must have corresponding synchronicity in its governing wiki doc (<room>/CHECKLIST.md, <room>/SPEC.md, STATUS-NOW.md, or decisions) in the same pass (Tisa, 2026-11-11).",
     "knownStaleCardNotes": [
       "Bathroom toilet-wall furring card 6hvhMvhmWqgR52v7 is marked complete in Todoist while checklist requires reconciliation before repeating work.",
