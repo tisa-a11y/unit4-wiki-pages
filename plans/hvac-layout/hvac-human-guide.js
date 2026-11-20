@@ -237,6 +237,7 @@
       window.removeEventListener("mouseup", onUp);
       window.removeEventListener("touchmove", onMove);
       window.removeEventListener("touchend", onUp);
+      window.removeEventListener("touchcancel", onUp);
     }
 
     handle.addEventListener("mousedown", function (ev) {
@@ -250,6 +251,7 @@
       state.dragActive = true;
       window.addEventListener("touchmove", onMove, { passive: false });
       window.addEventListener("touchend", onUp);
+      window.addEventListener("touchcancel", onUp);
     }, { passive: false });
   }
 

@@ -162,7 +162,7 @@ body.mode-5step {
   width: 100%;
   max-width: 780px;
   margin: 0 auto;
-  padding: 14px 12px 44px;
+  padding: 14px 12px 92px;
   flex: 1;
 }
 
@@ -467,6 +467,7 @@ body.mode-5step {
     color: var(--ink-3);
   }
   .ks4-svg-wrap.drop-target { outline: 2px dashed var(--cobalt); background: #F2F7FC; }
+  .ks4-svg-wrap.drop-target .pin-steer { pointer-events: none; opacity: 0.22; transition: opacity 120ms ease; }
   .ks4-svg { width: 100%; height: auto; display: block; }
   .mark-group { cursor: grab; }
   .mark-group:active { cursor: grabbing; }
@@ -481,6 +482,7 @@ body.mode-5step {
     border: 1.5px dashed var(--crimson);
     background: var(--crimson-soft);
     color: var(--crimson);
+    font-family: inherit;
     font-size: 12px;
     font-weight: 700;
     cursor: grab;
@@ -488,10 +490,15 @@ body.mode-5step {
     touch-action: none;
   }
   .drag-pill:active { cursor: grabbing; }
+  .drag-pill.is-armed {
+    background: var(--crimson);
+    color: #fff;
+    border-style: solid;
+  }
   .drag-ghost {
     position: fixed;
     pointer-events: none;
-    z-index: 120;
+    z-index: 9999;
     width: 34px; height: 34px;
     border-radius: 50%;
     border: 2px dashed var(--crimson);
@@ -970,7 +977,7 @@ body.mode-5step {
 }
 
 .u4g-main {
-    padding: 10px 8px 36px;
+    padding: 10px 8px 92px;
   }
   .sheet-card {
     padding: 11px 10px;

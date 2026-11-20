@@ -1087,7 +1087,16 @@ const HOURS = [["Kitchen", 116, 180, 275], ["Bathroom", 91.5, 140, 205], ["Paint
 const SNAP = "Nov 19, 2026";
 const live = {};
 let mcp = null, current = null, unwatch = null;
-var LANG = (function(){ try{ return localStorage.getItem("u4lang")==="es" ? "es" : "en"; }catch(e){ return "en"; } })();
+var LANG = (function(){
+  try {
+    var qp = (new URLSearchParams(location.search || "").get("lang") || "").toLowerCase();
+    if (qp === "es" || qp === "en") {
+      try { localStorage.setItem("u4lang", qp); } catch(e){}
+      return qp;
+    }
+    return localStorage.getItem("u4lang")==="es" ? "es" : "en";
+  } catch(e){ return "en"; }
+})();
 const UI = {
   en: {
     unitTitle: "Unit 4 Wiki", unitMobileTitle: "Unit 4", unitSub: "1231 11th Ave · Remodel",
@@ -1344,7 +1353,7 @@ function homeMenuBlock(){
   const es = LANG==="es";
   const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const prog = k => { const it=(CHECKLISTS[k]&&CHECKLISTS[k].items)||[]; return it.length ? '<span class="u4-hm-prog">'+it.filter(x=>x[0]).length+'/'+it.length+'</span>' : ''; };
-  const packets = (k, deep) => packetsFor(k).map(pk=>'<a class="u4-hm-packet'+(deep?' is-deep':'')+'" href="#'+pk.key+'">'+esc(packetTitle(pk))+'</a>').join("");
+  const packets = (k, deep) => packetsFor(k).map(pk=>'<a class="u4-hm-packet'+(deep?' is-deep':'')+'" href="'+esc(packetHref(pk))+'">'+esc(packetTitle(pk))+'</a>').join("");
   const room = (p, child) => '<a class="u4-hm-room'+(child?' is-child':'')+'" href="#'+p.key+'"><span>'+esc(pageLabel(p))+'</span>'+prog(p.key)+'</a>'+(child?packets(p.key, true):"");
   const tops = PAGES.filter(x=>x.group==="Projects" && !x.parent);
   const groups = tops.map(p=>'<div class="u4-hm-group">'+room(p,false)+PAGES.filter(c=>c.parent===p.key).map(c=>room(c,true)).join("")+packets(p.key,false)+'</div>').join("");
@@ -1360,7 +1369,7 @@ function roomAreasBlock(p){
   const es = LANG==="es";
   const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const prog = k => { const it=(CHECKLISTS[k]&&CHECKLISTS[k].items)||[]; return it.length ? '<span class="u4-hm-prog">'+it.filter(x=>x[0]).length+'/'+it.length+'</span>' : ''; };
-  const pkt = (pk, deep) => '<a class="u4-hm-packet'+(deep?' is-deep':'')+'" href="#'+pk.key+'">'+esc(packetTitle(pk))+(packetNote(pk)?'<span class="u4-hm-note">'+esc(packetNote(pk))+'</span>':'')+'</a>';
+  const pkt = (pk, deep) => '<a class="u4-hm-packet'+(deep?' is-deep':'')+'" href="'+esc(packetHref(pk))+'">'+esc(packetTitle(pk))+(packetNote(pk)?'<span class="u4-hm-note">'+esc(packetNote(pk))+'</span>':'')+'</a>';
   let rows = "";
   kids.forEach(c=>{ rows += '<a class="u4-hm-room is-area" href="#'+c.key+'"><span>'+esc(pageLabel(c))+'</span>'+prog(c.key)+'</a>' + packetsFor(c.key).map(pk=>pkt(pk,true)).join(""); });
   rows += own.map(pk=>pkt(pk,false)).join("");
@@ -1546,6 +1555,13 @@ window.packetByKey = packetByKey;
 function packetTitle(pk){ return LANG==="es" ? pk.titleEs : pk.titleEn; }
 function packetNote(pk){ return LANG==="es" ? (pk.noteEs||"") : (pk.noteEn||""); }
 function packetDocId(pk){ return LANG==="es" ? (pk.docEs||pk.docEn) : (pk.docEn||pk.docEs); }
+function packetHostedPlanUrl(pk){
+  if (!pk) return null;
+  const id = packetDocId(pk);
+  const hosted = id ? KITCHEN_HOSTED_LINKS[id] : null;
+  return (hosted && hosted.indexOf("./plans/") === 0) ? withPlanParams(hosted) : null;
+}
+function packetHref(pk){ return packetHostedPlanUrl(pk) || ("#" + pk.key); }
 function packetsFor(roomKey){ return PACKETS.filter(x=>x.room===roomKey && x.inMenu!==false); }
 function packetCardsBlock(list, showRoom){
   if (!list.length) return "";
@@ -1553,7 +1569,7 @@ function packetCardsBlock(list, showRoom){
   const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   return '<section class="u4-packets" id="sec-packets"><h2>'+(es?"Guías":"Guides")+'</h2><div class="u4-packet-list">'
     + list.map(pk=>{ const room = showRoom ? PAGES.find(x=>x.key===pk.room) : null;
-        return '<a class="u4-packet" href="#'+pk.key+'">'
+        return '<a class="u4-packet" href="'+esc(packetHref(pk))+'">'
           + (room?'<span class="u4-packet-room">'+esc(pageLabel(room))+'</span>':'')
           + '<span class="u4-packet-t">'+esc(packetTitle(pk))+'</span>'
           + (packetNote(pk)?'<span class="u4-packet-n">'+esc(packetNote(pk))+'</span>':'')+'</a>'; }).join("")
@@ -2034,6 +2050,8 @@ function scrollToTargetSection(targetSectionId){
 function show(key){
   const __pk = packetByKey(key);
   if (__pk){
+    const __planUrl = packetHostedPlanUrl(__pk);
+    if (__planUrl) { window.location.replace(__planUrl); return; }
     const r = show("doc:"+packetDocId(__pk));
     try {
       const v = document.querySelector("#doc .viewer");
@@ -2065,6 +2083,10 @@ function show(key){
       const targetKey=hosted.slice(1)||"home";
       try{ if(typeof history!=="undefined" && history.replaceState) history.replaceState(null,"",hosted); else location.hash=hosted; }catch(e){ location.hash=hosted; }
       return show(targetKey);
+    }
+    if (hosted && hosted.indexOf("./plans/") === 0){
+      window.location.replace(withPlanParams(hosted));
+      return;
     }
     const hit=DOC_BY_ID[id]; const d=hit?hit.d:{title:"Document",id:id,path:""}; const L=docLabel(d);
     const fromRoom=(current && current.group==="Projects" && current.key && !String(current.key).startsWith("doc:")) ? PAGES.find(x=>x.key===current.key) : null;
@@ -3933,7 +3955,19 @@ async function executeWikiBridgeAction(actionName, params) {
   if (!canon) return { ok: false, code: "DISALLOWED_BRIDGE_ACTION", action: String(actionName || ""), allowedActions: CANONICAL_BRIDGE_FUNCTIONS.slice() };
   if (canon === "navigate_room") {
     let rk = String(p.roomKey || p.key || "").trim();
-    { const pk = packetByKey(rk); if (pk) { location.hash = "#" + pk.key; show(pk.key); return { ok: true, action: canon, roomKey: pk.key, packet: true, title: packetTitle(pk) }; } }
+    {
+      const pk = packetByKey(rk);
+      if (pk) {
+        const planUrl = packetHostedPlanUrl(pk);
+        if (planUrl) {
+          setTimeout(() => { window.location.assign(planUrl); }, 60);
+          return { ok: true, action: canon, roomKey: pk.key, packet: true, url: planUrl, title: packetTitle(pk) };
+        }
+        location.hash = "#" + pk.key;
+        show(pk.key);
+        return { ok: true, action: canon, roomKey: pk.key, packet: true, title: packetTitle(pk) };
+      }
+    }
     if (!CREW_ALLOWED_ROOM_KEYS.includes(rk)) return { ok: false, code: "DISALLOWED_ROOM_KEY", action: canon, roomKey: rk, validOptions: CREW_ALLOWED_ROOM_KEYS.slice() };
     show(rk);
     return { ok: true, action: canon, roomKey: rk };
@@ -3950,6 +3984,12 @@ async function executeWikiBridgeAction(actionName, params) {
     const baseId = resolvedKey.split(":p")[0];
     if (!DOC_BY_ID[baseId] && !(typeof PDF_BLOBS === "object" && PDF_BLOBS && PDF_BLOBS[baseId])) {
       return { ok: false, code: "DISALLOWED_DOCUMENT_ID", action: canon, docId: rawId };
+    }
+    const hostedPlan = KITCHEN_HOSTED_LINKS[baseId];
+    if (hostedPlan && hostedPlan.indexOf("./plans/") === 0) {
+      const targetPlanUrl = withPlanParams(hostedPlan);
+      setTimeout(() => { window.location.assign(targetPlanUrl); }, 60);
+      return { ok: true, action: canon, docId: baseId, url: targetPlanUrl };
     }
     location.hash = "#doc:" + resolvedKey;
     show("doc:" + resolvedKey);
@@ -6308,13 +6348,9 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       if (planMod) {
         var esPlan = currentUiLang() === "es";
         var planDocId = esPlan ? planMod.docIdEs : planMod.docIdEn;
-        var planUrl = planMod.url + "?lang=" + (esPlan ? "es" : "en");
-        if (KITCHEN_HOSTED_LINKS[planDocId]) {
-          location.hash = "#doc:" + planDocId;
-          if (typeof show === "function") show("doc:" + planDocId);
-          else if (typeof window.show === "function") window.show("doc:" + planDocId);
-        }
+        var planUrl = withPlanParams(planMod.url + "?lang=" + (esPlan ? "es" : "en"));
         appendNavEventChip((esPlan ? "Abri\u00f3 plano interactivo: " : "Opened interactive plan: ") + (esPlan ? planMod.titleEs : planMod.titleEn));
+        setTimeout(function () { window.location.assign(planUrl); }, 80);
         return {
           ok: true,
           action: "navigate_room",
@@ -6328,6 +6364,12 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       }
       var pkHit = (typeof packetByKey === "function") ? packetByKey(rawRoom) : null;
       if (pkHit) {
+        var pkPlanUrl = packetHostedPlanUrl(pkHit);
+        if (pkPlanUrl) {
+          appendNavEventChip((currentUiLang() === "es" ? "Abri\u00f3 " : "Opened ") + packetTitle(pkHit));
+          setTimeout(function () { window.location.assign(pkPlanUrl); }, 80);
+          return { ok: true, action: "navigate_room", room: pkHit.key, packet: true, title: packetTitle(pkHit), url: pkPlanUrl, documentId: packetDocId(pkHit) };
+        }
         location.hash = "#" + pkHit.key;
         if (typeof show === "function") show(pkHit.key);
         appendNavEventChip((currentUiLang() === "es" ? "Abri\u00f3 " : "Opened ") + packetTitle(pkHit));
@@ -6397,6 +6439,19 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       var hostedTarget = (typeof KITCHEN_HOSTED_LINKS === "object" && KITCHEN_HOSTED_LINKS) ? KITCHEN_HOSTED_LINKS[docId] : null;
       if (hostedTarget && hostedTarget.indexOf("#") === 0) {
         return bridgeActions.navigate_room({ room: hostedTarget.slice(1) });
+      }
+      if (hostedTarget && hostedTarget.indexOf("./plans/") === 0) {
+        var hostedUrl = withPlanParams(hostedTarget);
+        var hostedPlanTitle = (typeof DOC_BY_ID === "object" && DOC_BY_ID[docId] && DOC_BY_ID[docId].d && DOC_BY_ID[docId].d.title) || docId;
+        appendNavEventChip((currentUiLang() === "es" ? "Abri\u00f3 plano interactivo: " : "Opened interactive plan: ") + hostedPlanTitle);
+        setTimeout(function () { window.location.assign(hostedUrl); }, 80);
+        return {
+          ok: true,
+          action: "open_document",
+          docId: docId,
+          title: hostedPlanTitle,
+          hostedUrl: hostedUrl
+        };
       }
       var hashSpec = (!hostedTarget && targetPage > 1) ? (docId + ":p" + targetPage) : docId;
       location.hash = "#doc:" + hashSpec;

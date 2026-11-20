@@ -451,6 +451,10 @@
 
   const MIC_SVG = `<svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2.5" width="6" height="9.5" rx="3"/><path d="M4.5 9.5a5.5 5.5 0 0 0 11 0"/><line x1="10" y1="15" x2="10" y2="18"/><line x1="7" y1="18" x2="13" y2="18"/></svg>`;
 
+  function sheetViewBoxHeight(sheetKey) {
+    return sheetKey === "tile-plan" ? 292 : (sheetKey === "range-gas" ? 288 : 310);
+  }
+
   function activePinSteerHtml(sheetKey) {
     const es = state.lang === "es";
     const marks = state.marksBySheet[sheetKey] || [];
@@ -458,8 +462,9 @@
     if (idx < 0) return "";
     const m = marks[idx];
     const isListening = dictatingMarkId === m.id;
+    const vbH = sheetViewBoxHeight(sheetKey);
     const pctX = (m.x / 380) * 100;
-    const pctY = (m.y / 310) * 100;
+    const pctY = (m.y / vbH) * 100;
     const placeBelow = pctY < 62;
     const topStyle = placeBelow
       ? `top:calc(${pctY.toFixed(1)}% + ${m.r + 8}px);`
@@ -493,6 +498,7 @@
 
   function svgMarksHtml(sheetKey) {
     const marks = state.marksBySheet[sheetKey] || [];
+    const maxTagY = sheetViewBoxHeight(sheetKey) - 22;
     return marks.map((m, idx) => {
       const sel = m.id === state.selectedMarkId;
       const stroke = m.status === "applied" ? "#1B6B46" : (sel ? "#184E77" : "#B42318");
@@ -501,7 +507,7 @@
       const goRight = m.x >= 190;
       const edgeX = m.x + (goRight ? m.r : -m.r);
       const tagX = goRight ? Math.min(342, m.x + m.r + 24) : Math.max(38, m.x - m.r - 24);
-      const tagY = Math.max(22, Math.min(288, m.y - 6));
+      const tagY = Math.max(22, Math.min(maxTagY, m.y - 6));
       const handleX = m.x + Math.round(m.r * 0.72);
       const handleY = m.y + Math.round(m.r * 0.72);
       return `
@@ -648,14 +654,46 @@
     const svg = document.getElementById(svgId);
     const wrap = document.getElementById(wrapId);
     if (!svg || !wrap) return;
+    const es = state.lang === "es";
     const marks = state.marksBySheet[sheetKey] || (state.marksBySheet[sheetKey] = []);
-    const vbW = 380, vbH = 310;
+    const vb = svg.viewBox && svg.viewBox.baseVal;
+    const vbW = (vb && vb.width) ? vb.width : 380;
+    const vbH = (vb && vb.height) ? vb.height : sheetViewBoxHeight(sheetKey);
+
+    function ensureDragGhost() {
+      let el = document.getElementById("dragGhost");
+      if (!el) {
+        el = document.createElement("div");
+        el.id = "dragGhost";
+        el.className = "drag-ghost no-print";
+        el.setAttribute("aria-hidden", "true");
+        el.textContent = "⊕";
+        document.body.appendChild(el);
+      }
+      return el;
+    }
+
+    let tapPlaceMode = false;
+    const dragPill = document.getElementById("dragMarkPill");
+    function setTapPlace(on) {
+      tapPlaceMode = !!on;
+      wrap.classList.toggle("drop-target", tapPlaceMode);
+      if (dragPill) {
+        dragPill.classList.toggle("is-armed", tapPlaceMode);
+        dragPill.setAttribute("aria-pressed", tapPlaceMode ? "true" : "false");
+        dragPill.textContent = tapPlaceMode
+          ? (es ? "Toca el plano ✕" : "Tap plan ✕")
+          : (es ? "⊕ Arrastrar / Tocar" : "⊕ Drag / Tap");
+      }
+    }
 
     function clientToSvg(cx, cy) {
       const rect = svg.getBoundingClientRect();
+      const w = rect.width || 1;
+      const h = rect.height || 1;
       return {
-        x: Math.max(20, Math.min(vbW - 20, Math.round(((cx - rect.left) / rect.width) * vbW))),
-        y: Math.max(20, Math.min(vbH - 20, Math.round(((cy - rect.top) / rect.height) * vbH)))
+        x: Math.max(20, Math.min(vbW - 20, Math.round(((cx - rect.left) / w) * vbW))),
+        y: Math.max(20, Math.min(vbH - 20, Math.round(((cy - rect.top) / h) * vbH)))
       };
     }
 
@@ -664,11 +702,16 @@
       marks.push({ id, x: pt.x, y: pt.y, r: 16, comment: "", reply: "", status: "" });
       state.selectedMarkId = id;
       renderDrawer();
-      const inp = document.querySelector(`[data-input-mark="${id}"]`);
-      if (inp) inp.focus();
+      const inp = document.getElementById("steerInput") || document.querySelector(`[data-input-mark="${id}"]`);
+      if (inp) {
+        try { inp.focus({ preventScroll: true }); } catch (_) { inp.focus(); }
+      }
     }
 
-    svg.ondblclick = (e) => addMarkAt(clientToSvg(e.clientX, e.clientY));
+    svg.ondblclick = (e) => {
+      setTapPlace(false);
+      addMarkAt(clientToSvg(e.clientX, e.clientY));
+    };
 
     let activeDrag = null;
     svg.onpointerdown = (e) => {
@@ -679,7 +722,7 @@
         if (!m) return;
         e.preventDefault();
         activeDrag = { mode: "resize", mark: m };
-        svg.setPointerCapture(e.pointerId);
+        try { svg.setPointerCapture(e.pointerId); } catch (_) {}
         return;
       }
       if (markEl) {
@@ -689,7 +732,13 @@
         state.selectedMarkId = m.id;
         const pt = clientToSvg(e.clientX, e.clientY);
         activeDrag = { mode: "move", mark: m, dx: m.x - pt.x, dy: m.y - pt.y, moved: false };
-        svg.setPointerCapture(e.pointerId);
+        try { svg.setPointerCapture(e.pointerId); } catch (_) {}
+        return;
+      }
+      if (tapPlaceMode) {
+        e.preventDefault();
+        setTapPlace(false);
+        addMarkAt(clientToSvg(e.clientX, e.clientY));
       }
     };
     svg.onpointermove = (e) => {
@@ -708,7 +757,7 @@
         const goRight = m.x >= 190;
         const edgeX = m.x + (goRight ? m.r : -m.r);
         const tagX = goRight ? Math.min(342, m.x + m.r + 24) : Math.max(38, m.x - m.r - 24);
-        const tagY = Math.max(22, Math.min(288, m.y - 6));
+        const tagY = Math.max(22, Math.min(vbH - 22, m.y - 6));
         const hx = m.x + Math.round(m.r * 0.72), hy = m.y + Math.round(m.r * 0.72);
         const line = g.querySelector("line");
         const circles = g.querySelectorAll("circle");
@@ -726,30 +775,74 @@
       const moved = activeDrag.moved || activeDrag.mode === "resize";
       activeDrag = null;
       renderDrawer();
-      if (moved) showToast(state.lang === "es" ? "Comentario reposicionado" : "Comment moved — target updated");
+      if (moved) showToast(es ? "Comentario reposicionado" : "Comment moved — target updated");
+    };
+    svg.onpointercancel = () => {
+      activeDrag = null;
     };
 
-    const dragPill = document.getElementById("dragMarkPill");
-    const ghost = document.getElementById("dragGhost");
+    const ghost = ensureDragGhost();
     if (dragPill && ghost) {
       dragPill.onpointerdown = (e) => {
+        if (e.button !== undefined && e.button !== 0 && e.pointerType === "mouse") return;
         e.preventDefault();
-        ghost.classList.add("active");
-        ghost.style.left = e.clientX + "px";
-        ghost.style.top = e.clientY + "px";
-        wrap.classList.add("drop-target");
-        function onMove(ev) { ghost.style.left = ev.clientX + "px"; ghost.style.top = ev.clientY + "px"; }
-        function onUp(ev) {
+        const pointerId = e.pointerId;
+        const startX = e.clientX;
+        const startY = e.clientY;
+        let moved = false;
+        try { dragPill.setPointerCapture(pointerId); } catch (_) {}
+        const blockScroll = (tev) => { if (tev.cancelable) tev.preventDefault(); };
+        window.addEventListener("touchmove", blockScroll, { passive: false });
+
+        function cleanup() {
           document.removeEventListener("pointermove", onMove);
           document.removeEventListener("pointerup", onUp);
+          document.removeEventListener("pointercancel", onCancel);
+          window.removeEventListener("touchmove", blockScroll);
+          try { if (dragPill.hasPointerCapture && dragPill.hasPointerCapture(pointerId)) dragPill.releasePointerCapture(pointerId); } catch (_) {}
           ghost.classList.remove("active");
-          wrap.classList.remove("drop-target");
-          const rect = svg.getBoundingClientRect();
-          const inside = ev.clientX >= rect.left && ev.clientX <= rect.right && ev.clientY >= rect.top && ev.clientY <= rect.bottom;
-          addMarkAt(inside ? clientToSvg(ev.clientX, ev.clientY) : { x: 190, y: 155 });
+        }
+        function onMove(ev) {
+          if (ev.pointerId !== pointerId) return;
+          if (!moved && Math.hypot(ev.clientX - startX, ev.clientY - startY) >= 6) {
+            moved = true;
+            ghost.classList.add("active");
+            wrap.classList.add("drop-target");
+          }
+          if (moved) {
+            ghost.style.left = ev.clientX + "px";
+            ghost.style.top = ev.clientY + "px";
+          }
+        }
+        function onCancel(ev) {
+          if (ev.pointerId !== pointerId) return;
+          cleanup();
+          wrap.classList.toggle("drop-target", tapPlaceMode);
+        }
+        function onUp(ev) {
+          if (ev.pointerId !== pointerId) return;
+          cleanup();
+          if (moved) {
+            setTapPlace(false);
+            const rect = svg.getBoundingClientRect();
+            const margin = 16;
+            const inside = ev.clientX >= rect.left - margin && ev.clientX <= rect.right + margin && ev.clientY >= rect.top - margin && ev.clientY <= rect.bottom + margin;
+            if (inside) {
+              addMarkAt(clientToSvg(ev.clientX, ev.clientY));
+            } else {
+              showToast(es ? "Suelta ⊕ sobre el dibujo, o toca ⊕ y luego toca el dibujo" : "Drop ⊕ onto the drawing, or tap ⊕ then tap any spot");
+            }
+          } else {
+            const next = !tapPlaceMode;
+            setTapPlace(next);
+            if (next) {
+              showToast(es ? "Ahora toca cualquier punto del plano para poner una nota" : "Now tap any spot on the drawing to place a note");
+            }
+          }
         }
         document.addEventListener("pointermove", onMove);
         document.addEventListener("pointerup", onUp);
+        document.addEventListener("pointercancel", onCancel);
       };
     }
 
@@ -932,8 +1025,8 @@
     const es = state.lang === "es";
     return `
       <div class="top-drag-bar" style="justify-content:space-between">
-        <span style="flex:1;min-width:170px">${es ? "Arrastra <b>⊕</b> a cualquier punto del plano (o haz doble clic) para editar o preguntar sobre esa zona." : "Drag <b>⊕</b> to any spot on the plan (or double-click) for edits or questions about that area."}</span>
-        <span class="drag-pill" id="dragMarkPill" title="Drag onto any spot on the plan" style="flex-shrink:0">⊕ ${es ? "Arrastrar" : "Drag"}</span>
+        <span style="flex:1;min-width:170px">${es ? "Arrastra <b>⊕</b> a cualquier punto (o toca <b>⊕</b> y luego el plano) para editar o preguntar sobre esa zona." : "Drag <b>⊕</b> onto any spot (or tap <b>⊕</b>, then tap the plan) to ask or edit that area."}</span>
+        <button type="button" class="drag-pill" id="dragMarkPill" aria-pressed="false" title="${es ? "Arrastra al plano o toca para marcar" : "Drag onto the plan or tap to place a note"}" style="flex-shrink:0">⊕ ${es ? "Arrastrar / Tocar" : "Drag / Tap"}</button>
       </div>
     `;
   }

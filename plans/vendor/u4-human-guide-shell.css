@@ -380,7 +380,7 @@ html[data-theme="dark"] .u4h-mini-btn.primary {
   width: 100%;
   max-width: 780px;
   margin: 0 auto;
-  padding: 14px 12px 24px;
+  padding: 14px 12px 92px;
   box-sizing: border-box;
 }
 
@@ -1034,7 +1034,7 @@ html[data-theme="dark"] .u4h-pager-btn.is-next {
     padding: 5px 9px;
   }
   .u4h-main {
-    padding: 10px 8px 24px;
+    padding: 10px 8px 92px;
   }
   .u4h-card {
     padding: 11px 10px;
