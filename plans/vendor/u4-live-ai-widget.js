@@ -645,7 +645,10 @@
         Object.assign(cfg, options);
       }
       var params = new URLSearchParams(window.location.search || "");
-      var qLang = params.get("lang") || document.documentElement.lang || "en";
+      var storedLang = "";
+      try { storedLang = window.localStorage.getItem("u4_lang") || ""; } catch (_) {}
+      var navLang = (window.U4PlanNav && typeof window.U4PlanNav.getLang === "function") ? window.U4PlanNav.getLang() : "";
+      var qLang = params.get("lang") || navLang || storedLang || document.documentElement.lang || "en";
       state.lang = qLang.toLowerCase().indexOf("es") === 0 ? "es" : "en";
       if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", mount, { once: true });

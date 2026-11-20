@@ -1,10 +1,11 @@
 # Unit 4 Frontend Style Guide & UI Contract (Canonical)
 
 - **Style & Frontend Owner:** `@ag-unit-4-wiki-frontend` (`antigravity:conv:0ed9bd5d`)
-- **Authority:** Tisa Vo (`2026-11-20 05:18–05:19 PT`):
-  - *"specialist is building out good stuff and a lot can and should be incorporated into the backend, and the technical work done so far shouldn't be thrown away, but it's not what should be live in the wiki"*
-  - *"you're in charge of style choices and front end stuff, so you should be sharing style rules with anyone who's building for the front end"*
-- **Scope:** Mandatory for ALL agents building, integrating, or reviewing human-facing UI on `tisa-a11y/unit4-wiki-pages` (`index.html`, `src/template.html`, `plans/*/index.html`, and all future interactive modules including Wave D `kitchen-electrical`).
+- **Owner Directives (Tisa Vo, 2026-11-20):**
+  - *05:18–05:19 PT:* *"you're in charge of style choices and front end stuff, so you should be sharing style rules with anyone who's building for the front end"*
+  - *13:46 PT (Visual Reversal):* *"i don't like the new style on the wiki. i'd prefer the new elements corresponded with the old style."* -> **Classic Old Wiki Style Wins Everywhere!**
+  - *14:02 PT (Universal Pin Dragger):* *"I want the dragger available on every page even the regular pdf ones so that the user can ask questions about specific aspects or correct static documents."*
+- **Scope:** Mandatory for ALL agents building, integrating, or reviewing human-facing UI on `tisa-a11y/unit4-wiki-pages` (`index.html`, `src/template.html`, `plans/*/index.html`, `.viewer` PDF pages, and all future interactive modules).
 - **Privacy:** Strictly zero currency symbols / prices, zero private owner data, zero secrets.
 
 ---
@@ -14,139 +15,103 @@
 | Layer | Owner | What Lives Here | Visibility |
 |---|---|---|---|
 | **Technical Engine, Data & Print Layer** | `@ag-unit-4-specialists` + `@ag-unit-4-backend` | True-scale (`scaleX === scaleY`) geometry, code/trade calculations, `*-plan-data.json`, backend `:8444` / `:8791` endpoints, `window.U4PLAN` contract, exact 2-page EN/ES Letter print sheets (`?print=1` / `@media print`) | **Backend / Print / Hidden `#blueprint-sheet-shell` ONLY** — NEVER default human screen |
-| **Human-First Live Wiki UI Layer** | `@ag-unit-4-wiki-frontend` (mandatory design & merge gate) | Calm step-by-step interactive visual guides, plain-language crew copy, smooth room/step/manual navigation, Light/Dark styling, prominent `EN` / `Español (MX)` toggle | **Default live screen** on `tisa-a11y.github.io/unit4-wiki-pages` |
+| **Human-First Live Wiki UI Layer** | `@ag-unit-4-wiki-frontend` (mandatory design & merge gate) | Classic Old Wiki flat aesthetic, calm step-by-step interactive visual guides, plain-language crew copy, global `EN/ES` + `Dark/Light` sync, universal pin dragger & Live AI widget | **Default live screen** on `tisa-a11y.github.io/unit4-wiki-pages` |
 
 **Hard Rule:** NEVER throw away Specialist technical work, AND NEVER ship a raw Specialist CAD/engineering workbench as the default screen of a live wiki page. Every interactive module MUST follow this style guide and clear `@ag-unit-4-wiki-frontend` + `@ag-unit-4-qa` Human-UI Gate before merging to `main`.
 
 ---
 
-## 2. Canonical Visual Design Tokens (Zero External CDNs)
+## 2. Canonical Classic Old Wiki Design Tokens (Master Visual Language — Zero CDNs)
 
-Use these exact CSS custom properties (copied from the Tisa-approved `ks4-5step-guide.css` reference implementation):
+All main wiki components AND all 6 interactive plans MUST use the **Classic Old Wiki** palette, typography, and flat `1px solid var(--line)` `8px` cards (`src/template.html:175–230`, `plans/vendor/u4-human-guide-shell.css`, `plans/kitchen-west-ks4/ks4-5step-guide.css`, `plans/vendor/u4-live-ai-widget.css`, `plans/vendor/u4-pin-dragger.css`):
 
 ```css
 :root {
-  --paper: #F6F8FA;
-  --surface: #FFFFFF;
-  --rail: #EEF1F5;
-  --sheet-bg: #E6ECF2;
-  --ink: #131A22;
-  --ink-2: #485563;
-  --ink-3: #6E7D8C;
-  --rule: #DCE2E9;
-  --rule-strong: #C2CCD6;
-  --cobalt: #184E77;
-  --cobalt-hover: #123D5E;
-  --cobalt-soft: #E6F0F8;
-  --pine: #1B6B46;
-  --pine-soft: #E5F4EC;
-  --amber: #A15206;
-  --amber-soft: #FDF2E4;
-  --crimson: #B42318;
-  --crimson-soft: #FEECEB;
-  --shadow-sm: 0 1px 3px rgba(19, 26, 34, 0.06);
-  --shadow-md: 0 10px 28px rgba(19, 26, 34, 0.14);
-  --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
-  --display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif;
-  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  --r-sm: 6px;
-  --r-md: 10px;
-  --r-lg: 14px;
+  --bg: #f4f5f3;
+  --panel: #ffffff;
+  --fg: #1d2326;
+  --muted: #5d686d;
+  --line: #d9dedc;
+  --accent: #1f5f7a;
+  --accent-soft: #e3eef2;
+  --lock: #2f6b3f;
+  --lock-soft: #e4f0e6;
+  --open: #9a5b06;
+  --open-soft: #f7ecd9;
+  --crimson: #a8281c;
+  --crimson-soft: #f9e6e4;
+  --display: "Archivo Narrow", "Arial Narrow", Arial, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
 }
 
-html[data-theme="dark"] {
-  --paper: #12171D;
-  --surface: #1A2129;
-  --rail: #161C23;
-  --sheet-bg: #0D1116;
-  --ink: #ECF1F6;
-  --ink-2: #A7B4C2;
-  --ink-3: #7A8999;
-  --rule: #28323D;
-  --rule-strong: #3A4756;
-  --cobalt: #6FB3E6;
-  --cobalt-hover: #8DC6F0;
-  --cobalt-soft: #1B2E3E;
-  --pine: #6CD4A0;
-  --pine-soft: #173025;
-  --amber: #F5B461;
-  --amber-soft: #352715;
-  --crimson: #F97066;
-  --crimson-soft: #3A1B1A;
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121618; --panel: #1a2023; --fg: #e4e9ea; --muted: #98a4a8; --line: #2c3539;
+    --accent: #7cc0dc; --accent-soft: #1d3440; --lock: #8fd19e; --lock-soft: #1e3324;
+    --open: #f0b75a; --open-soft: #3a2d17; --crimson: #f28479; --crimson-soft: #3a1f1d;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"], html[data-theme="dark"] {
+  --bg: #121618; --panel: #1a2023; --fg: #e4e9ea; --muted: #98a4a8; --line: #2c3539;
+  --accent: #7cc0dc; --accent-soft: #1d3440; --lock: #8fd19e; --lock-soft: #1e3324;
+  --open: #f0b75a; --open-soft: #3a2d17; --crimson: #f28479; --crimson-soft: #3a1f1d;
+  color-scheme: dark;
 }
 ```
 
-- **Canvas & Card Width:** Center human interactive guides in a calm single-column reading/action stage (`max-width: 780px`, subtle rounded `.sheet-card` on `--sheet-bg` with `padding: 14px` desktop / `10px` phone).
-- **Typography:** `15px` base body, `line-height: 1.5`, crisp monospace (`--mono`) ONLY for dimensions/SVG callouts, bold display titles (`14.5px–18px`). Zero dense 7pt multi-column CAD wall-of-text layouts on screen.
-- **No Horizontal Overflow:** Must fit cleanly at `390px` iPhone width (`document.documentElement.scrollWidth <= window.innerWidth + 2`) with zero sideways scroll.
+- **Surface & Chrome Rules:**
+  - Crisp flat `1px solid var(--line)` `8px` cards (`box-shadow: none`), matching old-wiki `button.small` / `.chip` pill top-bar controls (`font-family: var(--mono); font-size: 12px; border-radius: 999px;`).
+  - **Dark-Mode Drafting Paper SVG Framing (`[P1-U6]`):** Inside `html[data-theme="dark"]`, frame `.u4h-svg-wrap` and `.ks4-svg-wrap` in warm soft drafting paper (`background: #ecefed; border: 1.5px solid #39444a; box-shadow: inset 0 0 0 1px rgba(18, 22, 24, 0.12);`) rather than a stark pure-white `#FFFFFF` cutout, keeping dark SVG ink lines razor-sharp.
+  - **Zero Opacity-0 Washout & Reduced Motion (`[P2-U7]`):** Start step-switch `@keyframes u4FadeSlideIn` at `opacity: 0.94; transform: translateY(2px);` and enforce `@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }`.
+  - **Mobile `390px` Zero-Overflow + `>=36px` Touch Targets (`[P2-U11]`):** All top-bar controls (`.u4h-nav-link`, `.u4h-seg-item`, `.u4h-plans-btn`, `.u4h-lang-btn`, `.u4h-mini-btn`) enforce `min-height: 36px` at `@media (max-width: 640px)` with `scrollWidth <= innerWidth + 2`.
 
 ---
 
-## 3. Mandatory Human-First Layout, Flow & Copy Rules
+## 3. Global App-Wide `EN/ES` & `Dark/Light` Sync Contract (`[P1-U1]` + `[P2-U8]`)
 
-1. **One Clean Sticky Top Bar (Zero Duplicate Bars):**
-   - Left: `← Back to <Room>` + sibling interactive plan pill (preserving `?lang=en|es`).
-   - Right: Prominent **`Español (MX)` / `English (EN)`** pill button, **`☀ Light / ☾ Dark`** toggle, and **`Print / PDF`** button.
-   - Hide any secondary toolbar unless showing an inline manual summary (where it shows `← Back to plan`).
-2. **Focused Step-by-Step Flow (Never Dump Everything on One Screen):**
-   - Split multi-trade room plans into clear horizontal step pills (`1. ...`, `2. ...`, ...) with a bottom **`← Prev` / `Step X of N` / `Next →`** pager that resets scroll to top (`window.scrollTo(0, 0)`).
-   - Support direct URL hash step deep-links (`#step=<stepId>`) so room wiki pages can jump straight to a specific step.
-3. **Zero Backend Plumbing Visible to Humans (Blocking QA Gate):**
-   - Default visible screen text MUST NEVER expose internal engineering jargon or backend controls:
-     - **BANNED on default human screen:** `Tailnet Live`, `Checking Tailnet`, `Off-tailnet`, `EOD Review`, `measure_boundary`, `wall_to_wall` / `clear_between_casings` raw snake_case tags, `K_S4_BASELINE`, `rev-2026...` stamp badges, `Immutable Flagged Clashes`, `Download JSON`, or 12-field engineering override forms.
-   - Translate every technical check into plain, warm, direct human language (e.g., `"Bare subfloor (not installed yet)"`, `"MAX HEIGHT: 4-15/16\" off floor"`, `"Measure on site"`).
-4. **No Sticky/Floating Diagrams & No Collapsible Prose Blocks:**
-   - Keep interactive SVGs normal in-flow (`position: relative`, full crisp width) — NEVER `position: sticky` floating diagrams.
-   - Keep green status summaries, floor condition toggles, and important bulleted facts openly visible — NEVER fold prose text behind disclosure triangles.
-   - **ONLY** collapse **`+ Add custom`** (manual numeric overrides) and **`🔧 Equipment & Supplies`** (per-step visual tool icons + calculated supplies) by default until tapped.
-5. **Control Priority & Ordering:**
-   - Put high-impact structural toggles that reshape the drawing (e.g., `Where the wall studs fall`) **ABOVE** secondary allowances (e.g., floor thickness).
-   - For Tile Plans: Top KPI strip (`Total wall area` | `Selected tile: —` | `Est. qty / boxes: —`, blank at startup with zero hardcoded brand defaults) → Main Wall SVG → **Tile Selection** (`Select Tile Size` neutral pills → `Orientation` → `Pattern & waste` → `Product lookup` name/URL/camera → collapsed `+ Add custom`) → **Zero-Metal Edge Finishes bubble** (with live Close-Up Top-Down flat-wall SVG, strictly zero metal/Schluter & zero 45° miter on flat returns) **DIRECTLY BENEATH Tile Selection** → collapsed **`🔧 Equipment & Supplies`** button.
-6. **Mandatory Bilingual (`EN` ↔ Mexican `ES`) Parity:**
-   - Every single heading, SVG label, button, step pill, status banner, manual summary, close-up diagram, and toast MUST translate immediately when toggling English ↔ Mexican Spanish (`Español (MX)`), and preserve `?lang=es` / `?lang=en` on cross-plan links.
-7. **Live Wiki Shell & Old PDFs Protection:**
-   - Never reorganize the main wiki layout, sidebar `nav#rail`, `genieIn`/`genieOut` animation, room hierarchy (`Kitchen` as one parent room with sub-areas nested underneath), or existing room PDFs (`wiki-pdfs/*`, including the 17-page Bedroom Trim Installation Packet).
-8. **Zero Prices & Zero Web Storage on Public Crew Pages:**
-   - Strictly zero currency symbols / prices on all public GitHub Pages crew modules (`plans/*/`), never pass `include_retail_estimate: true` from crew pages, and zero `localStorage`/`sessionStorage` inside standalone interactive plan modules.
+Both the main wiki (`src/template.html`) AND all 6 interactive plans (`plans/vendor/u4-plan-nav.js` + `ks4-5step-guide.js`) share ONE identical preference sync contract:
+1. **Shared `localStorage` Keys (wrapped in safe `try/catch`):** `u4_lang` (`"en" | "es"`) and `u4_theme` (`"light" | "dark"`). *(Only UI language & theme preference keys belong in `localStorage` — NEVER store plan data, offline edit queues, credentials, or prices in web storage.)*
+2. **Load Precedence:** URL `?lang=` / `?theme=` (if valid, persist to `localStorage`) → `localStorage` (`u4_lang` / `u4_theme`) → fallback (`"en"`, and `prefers-color-scheme: dark` for theme).
+3. **Immediate DOM Application:** Set `document.documentElement.lang` AND explicit `document.documentElement.setAttribute("data-theme", theme)` (`"light"` or `"dark"`) immediately on load before paint.
+4. **Seamless Propagation:** Toggling language or theme persists to `localStorage`, updates URL search params via `window.history.replaceState(...)`, forwards BOTH `?lang=` & `&theme=` on every cross-link (`withPlanParams()`, `wikiBackUrl()`, `planUrl()`), and listens to `window.addEventListener("storage", ...)` for instant cross-tab sync.
+5. **Accessible Popover & Favicon (`[P2-U8]`, `[P2-U10]`):** Pressing `Escape` closes `#u4hAllPlansPop` and returns focus to `#u4hAllPlansBtn`; every `plans/*/index.html` includes `<link rel="icon" type="image/png" href="../../wiki-images/favicon-32.png">`.
 
 ---
 
-## 4. Reference Implementation & Pre-Merge Checklist
+## 4. Mandatory Human-First Layout, Flow & Copy Rules
 
-- **Gold Standard Reference:** `plans/kitchen-west-ks4/index.html` + `ks4-5step-guide.css` + `ks4-5step-guide.js` (with hidden `#blueprint-sheet-shell` preserving `window.U4PLAN` `scaleX === scaleY` + exact 2-page EN/ES print PDFs on `?print=1` / `@media print`).
-- **Before Any Future Module (Including Wave D `kitchen-electrical`) Can Merge to `main`:**
-  1. `@ag-unit-4-specialists` completes technical geometry, `*-plan-data.json`, `window.U4PLAN` engine, and 2-page EN/ES print sheet.
-  2. `@ag-unit-4-wiki-frontend` reviews/authors the clean human-first default screen layer adhering to Sections 1–3 above.
-  3. `@ag-unit-4-qa` verifies BOTH clean human screen (automated zero-backend-clutter regex + `0` `USD-currency` + `390px` mobile EN/ES + visual `read_file` screenshot check) AND `window.U4PLAN` / 2-page print PDF parity.
+1. **One Clean Sticky Top Bar:** Left `← Back to <Room>` + segmented sibling switcher + `All Plans ▾`; Right `Español (MX)` / `English (EN)`, `☾ Dark / ☀ Light`, `Print / PDF`.
+2. **Focused Step-by-Step Flow:** Horizontal step pills + bottom `← Prev / Step X of N / Next →` pager (`window.scrollTo(0, 0)`), supporting `#step=<stepId>`.
+3. **Zero Backend Plumbing Visible to Humans (Blocking QA Gate):** Never show `Tailnet Live`, `Off-tailnet`, `EOD Review`, `measure_boundary`, raw snake_case tags, `rev-2026...` stamps, `Download JSON`, or engineering override forms on default human screens.
+4. **Equipment & Supplies Naming (Tisa, 2026-11-20 05:31 PT):** Always label the collapsed per-step tool/supply drawer **`🔧 Equipment & Supplies ▾`** (EN) / **`🔧 Equipo y suministros ▾`** (ES).
+5. **Strict Input Bounds Validation (`[P1-U5]`):** Calculators (such as Murphy Door 9-point `b7`–`b15`) MUST validate plausible architectural bounds (e.g., `18"–48"` W, `60"–96"` H, `60"–110"` Diag, `2"–12"` Jamb) and hold cut size at `— × —` with a clear EN/ES warning rather than ever displaying negative cut dimensions.
+6. **Live AI Chat & Voice Widget on Every Page (`plans/vendor/u4-live-ai-widget.{css,js}`):** Mounted on main wiki and all 6 interactive plans (hidden on print), wired to Mac mini `:8791` (`/api/unit4/voice-token`, `/knowledge`, `/wiki-intake`) with 1-tap Mute/Unmute and graceful Chrome 142+ Local Network Access (`LNA`) fallback.
 
 ---
 
-## 5. Main Wiki (`src/template.html`), Transitions, Live AI Widget & Chrome LNA Rules
+## 5. Direct 2-Way Synced SVG Element Dragging (Native Pointer Events — Wave E)
 
-### 5.1 Main Wiki Shell & Global Chrome (`src/template.html`)
-- **Preserved Navigation & Layout:** Keep sidebar `nav#rail`, sticky room top bar, room hierarchy (`Kitchen` as one parent room with sub-areas nested underneath), `genieIn` / `genieOut` animation, and all existing room PDFs (`wiki-pdfs/*`, including the 17-page Bedroom Trim Installation Packet) untouched.
-- **Visual-First Rule:** Every room wiki page and PDF sheet leads with labeled real site photos, renderings, or crisp diagrams at the top before checklists or dense text.
-- **Seamless Theme & Language Handoff:** Any link from the main wiki (`src/template.html`) into `./plans/*/index.html` or between sibling interactive plans MUST preserve both `?lang=en|es` and `?theme=light|dark` via query parameters (never via `localStorage` inside `plans/*/`).
-- **Unified Top Bar & Sibling Switchers across All Interactive Plans:**
-  - Every interactive module (`plans/kitchen-west-ks4/`, `plans/kitchen-floor-plan/`, `plans/attic-hatch/`, `plans/hvac-layout/`, `plans/murphy-door/`, and future `plans/kitchen-electrical/`) uses the shared calm shell (`plans/vendor/u4-human-guide-shell.css`):
-    - Left: `← Back to <Room>` + segmented sibling switcher pill (e.g., `Range & Hood Wall | Floor Plan & Cabinets` or `Attic Hatch | Furnace & Ducts`) + compact `All Plans ▾` quick-switcher dropdown.
-    - Right: `Español (MX)` / `English (EN)` pill, `☀ Light / ☾ Dark` toggle, `Print / PDF` button.
-    - Smooth 180ms step & view transitions (`prefers-reduced-motion` safe) and scroll-to-top on step changes so moving across rooms and plans feels like one calm app.
-- **Equipment & Supplies Button Naming (Tisa, 2026-11-20 05:31 PT):**
-  - Always label the collapsed per-step tool/supply drawer **`🔧 Equipment & Supplies ▾`** (EN) / **`🔧 Equipo y suministros ▾`** (ES). Never use `🧰` (reads like a red flag on dark cobalt) and say **Supplies** rather than Materials.
+Whenever an interactive plan allows adjusting physical positions (KS4 Zephyr hood/blocking, Attic staggered L-path platform, Kitchen Electrical South wall pie-safe/sink, HVAC `F1`/`R1`/`S1`/`S2`/`S3`/`JD-1` reactive Manual D ducts), users MUST be able to drag elements directly via native Pointer Events:
+- Bind `pointerdown` with `setPointerCapture(e.pointerId)` + non-passive `touchmove` scroll lock + `pointermove`/`pointerup`/`pointercancel` cleanup.
+- Mutate SVG transforms/paths, reactive ductwork, numeric KPIs, PASS/FAIL banners, and paired sliders **in place** during `pointermove` (NEVER wipe parent `innerHTML` mid-drag!).
+- Keep 2-way sync with hidden `#blueprint-sheet-shell` controls (`#rng-walkway-l`, `#rng-piesafe`, `#rng-sink`) so Print/PDF always reflects the user's state.
+- Include keyboard `tabindex="0"`, ARIA attributes, and Arrow-key nudges.
 
-### 5.2 Live AI Chat & Voice Guidance on EVERY Page (`#u4VoiceChatDialog` & `plans/vendor/u4-live-ai-widget.{css,js}`)
-- **Never Drop Live Guidance on Interactive Pages (Tisa, 2026-11-20 05:32 PT):** Both the main wiki (`src/template.html`) and ALL standalone interactive plan pages (`plans/*/index.html`) MUST mount the floating **AI Helper** orb + docked **Live Voice & Chat Guidance** drawer (`plans/vendor/u4-live-ai-widget.{css,js}`), hidden cleanly on `@media print` / `?print=1` (`no-print`).
-- **Required Interactive Controls & Endpoints (`https://mac-mini.tailcf4007.ts.net`, Mac mini `:8791`):**
-  1. **Live Voice Guidance:** `POST /api/unit4/voice-token` → Gemini Live WebSocket PCM16/PCM24k audio, seeded with the active room, interactive plan, and active step context, with a visible **1-tap Mute / Unmute** control directly beside Start/Stop Voice (and quick-mute pill on the floating dock when live).
-  2. **Live Text Chat Guidance:** Queries `GET /api/unit4/knowledge?q=...&room=...` with quick step-aware prompt chips + automatic offline/LNA fallback explaining local answers when `:8791` is unreachable.
-  3. **Field Note & Site Photo Intake:** `POST /api/unit4/wiki-intake` supporting both gallery attach (`#u4PhotoTriggerBtn` / `#u4VdPhotoBtn`) and mobile camera capture (`#u4CameraTriggerBtn` / `#u4VdCameraBtn`).
-  4. **Pin-to-AI Wiring:** Clicking/dragging a zone pin's "Ask AI" action on an interactive plan opens `window.U4LiveAi.open(promptText, zoneLabel)` pre-populated with that exact zone.
-  5. **Strict Privacy & Hygiene:** Zero external CDNs, zero currency symbols / prices, zero `localStorage`/`sessionStorage` inside `plans/*/`, full EN ↔ Mexican ES parity synced live with the page toggle.
+---
 
-### 5.3 Chrome 142+ Local Network Access (`LNA`) & Private Network Access (`PNA`) Guidance
-- Mac mini `:8791` (`com.tisa.unit4-wiki-intake`) and `:8444` (`com.tisa.unit4-plan-edits`, tailnet-only) emit `Access-Control-Allow-Private-Network: true` for allowlisted origins (`https://tisa-a11y.github.io`, `http://localhost`, `null`).
-- **Off-Tailnet Devices:** `mac-mini.tailcf4007.ts.net` resolves to public Tailscale Funnel IPs, so `:8791` works directly without LNA prompts.
-- **On-Tailnet Laptops / Phones (Chrome 142+):** Tailscale MagicDNS resolves `mac-mini.tailcf4007.ts.net` to CGNAT `100.114.3.50`. Chrome 142+ enforces **Local Network Access (`LNA`)** from public HTTPS origins (`https://tisa-a11y.github.io`) to private/CGNAT IPs.
-  - **User Setup (1-time per browser):** Click the site-settings icon left of the address bar on `https://tisa-a11y.github.io` → **Local network access → Allow**.
-  - **UI Requirement:** Whenever a live `:8791` fetch fails with a network/TypeError in the Live AI widget or main wiki, NEVER show raw `TypeError: Failed to fetch` or expose internal Tailnet/host status badges on screen; instead fall back seamlessly to built-in local answers and show a calm 1-line helper tip: *"Live AI helper blocked by browser? Tap Site Settings → Local network access → Allow."*
+## 6. Universal Pin/Circle Dragger on EVERY Page Including Static PDFs (Tisa, 2026-11-20 14:02 PT)
+
+Users MUST have a consistent drag-or-tap spot marker tool on **every interactive plan AND every static wiki / PDF viewer page** so they can point at any specific detail on a drawing, photo, or PDF page to ask AI a question or flag a correction:
+- **Interactive Plans (`plans/vendor/u4-pin-dragger.{css,js}` + KS4 `#dragMarkPill`):**
+  - Renders classic old-wiki **`⊕ Drag / Tap to Pin Spot`** (`⊕ Arrastrar / Tocar punto`) pill above drawings & site photos.
+  - Supports **BOTH drag-and-drop** (floating dashed ghost circle) **AND 1-tap arm mode** (solid crimson pill with dark high-contrast text `#0D1116` in dark mode `[P2-U9]`).
+  - Zero interference with element dragging while disarmed (`pointer-events: none` on overlay layer).
+  - Dropping a pin disarms immediately, dismisses the helper toast (`bottom: 76px`, clear of `.u4-lai-dock`), and opens a viewport-clamped inline callout card (`left: 8px; right: 8px; width: auto` on `<= 560px` mobile `[P1-U4]`) with:
+    - Intent switch: **`Ask AI`** (opens `U4LiveAi.open(text, locationTag)`) vs **`Correct / Flag`** (posts to `:8791/api/unit4/wiki-intake` with normalized `(xPct, yPct)`, active step/page, and fallback to local note drawer),
+    - Optional voice dictation mic (`SpeechRecognition`),
+    - Draggable repositioning & delete/clear controls, completely hidden on print (`no-print`).
+- **Main Wiki & Static PDF Viewer (`.viewer` in `src/template.html` — owned by `@ag-unit4-pm-macbook`):**
+  - Mirror the exact same classic old-wiki `⊕ Drag / Tap to Pin Spot` pill, ghost ring, numbered pin markers, and viewport-clamped callout popup over `.viewer` PDF pages and static room photos/cards, capturing `{ docId, pdfPage, xPct, yPct }` when routing to `#u4VoiceChatDialog` or `:8791/api/unit4/wiki-intake`.

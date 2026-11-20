@@ -1,11 +1,10 @@
 /* ============================================================================
    Unit 4 Interactive Plans — Live AI Chat & Voice Guidance Widget
-   Matches Main Wiki #u4AiBubbleOrb + #u4VoiceChatDialog seamlessly
-   Zero External CDNs · Zero Prices · Zero Storage · Hidden on Print
+   Classic Old Wiki Tokens & Flat 8px Chrome · Zero External CDNs · Zero Prices
    ============================================================================ */
 
 .u4-live-ai-root {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+  font-family: var(--body, "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif);
 }
 
 @media print {
@@ -29,85 +28,93 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 9px 14px;
+  padding: 8px 14px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  background: linear-gradient(135deg, #184E77 0%, #123D5E 100%);
-  color: #FFFFFF;
+  border: 1px solid var(--accent, #1f5f7a);
+  background: var(--accent, #1f5f7a);
+  color: var(--panel, #ffffff);
+  font-family: var(--body, "IBM Plex Sans", system-ui, -apple-system, sans-serif);
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 8px 24px rgba(19, 26, 34, 0.26);
-  transition: transform 140ms ease, box-shadow 140ms ease;
+  box-shadow: 0 3px 12px rgba(18, 22, 24, 0.18);
+  transition: background 120ms ease, transform 120ms ease;
 }
 
 .u4-lai-pill:hover {
+  background: var(--cobalt-hover, #17495e);
   transform: translateY(-1px);
-  box-shadow: 0 10px 28px rgba(19, 26, 34, 0.34);
 }
 
 .u4-lai-dock[data-live="on"] .u4-lai-pill {
-  background: linear-gradient(135deg, #1B6B46 0%, #145235 100%);
+  background: var(--lock, #2f6b3f);
+  border-color: var(--lock, #2f6b3f);
 }
 
 .u4-lai-orb-icon {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
 .u4-lai-badge {
+  font-family: var(--mono, "IBM Plex Mono", ui-monospace, monospace);
   font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.04em;
+  font-weight: 600;
+  letter-spacing: 0.05em;
   padding: 2px 6px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.18);
-  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.2);
+  color: inherit;
+}
+
+html[data-theme="dark"] .u4-lai-badge {
+  background: rgba(18, 22, 24, 0.22);
 }
 
 .u4-lai-dock[data-live="on"] .u4-lai-badge {
-  background: #34D399;
-  color: #0B2518;
+  background: var(--lock-soft, #e4f0e6);
+  color: var(--lock, #2f6b3f);
 }
 
 .u4-lai-qmute {
-  padding: 8px 12px;
+  padding: 7px 12px;
   border-radius: 999px;
-  border: 1px solid #C2CCD6;
-  background: #FFFFFF;
-  color: #131A22;
-  font-size: 12.5px;
-  font-weight: 800;
+  border: 1px solid var(--line, #d9dedc);
+  background: var(--panel, #ffffff);
+  color: var(--fg, #1d2326);
+  font-family: var(--mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 12px;
+  font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 6px 18px rgba(19, 26, 34, 0.18);
+  box-shadow: 0 2px 8px rgba(18, 22, 24, 0.12);
 }
 
 .u4-lai-qmute[aria-pressed="true"] {
-  background: #FEECEB;
-  color: #B42318;
-  border-color: #B42318;
+  background: var(--crimson-soft, #f9e6e4);
+  color: var(--crimson, #a8281c);
+  border-color: var(--crimson, #a8281c);
 }
 
 .u4-lai-qmute[hidden] {
   display: none !important;
 }
 
-/* Docked Live Guidance Drawer */
+/* Docked Live Guidance Drawer (Flat Classic Old Wiki Card) */
 .u4-lai-dialog {
   position: fixed;
   right: 16px;
-  bottom: 68px;
+  bottom: 66px;
   width: min(390px, calc(100vw - 24px));
   max-height: min(620px, calc(100vh - 96px));
   z-index: 95;
-  background: var(--surface, #FFFFFF);
-  color: var(--ink, #131A22);
-  border: 1px solid var(--rule-strong, #C2CCD6);
-  border-radius: 14px;
-  box-shadow: 0 18px 44px rgba(19, 26, 34, 0.28);
+  background: var(--panel, #ffffff);
+  color: var(--fg, #1d2326);
+  border: 1px solid var(--line, #d9dedc);
+  border-radius: 8px;
+  box-shadow: 0 8px 26px rgba(18, 22, 24, 0.18);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -119,8 +126,8 @@
 
 .u4-lai-head {
   padding: 10px 12px;
-  background: var(--paper, #F6F8FA);
-  border-bottom: 1px solid var(--rule, #DCE2E9);
+  background: var(--bg, #f4f5f3);
+  border-bottom: 1px solid var(--line, #d9dedc);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -135,22 +142,23 @@
 }
 
 .u4-lai-dot {
-  width: 9px;
-  height: 9px;
+  width: 8px;
+  height: 8px;
   border-radius: 999px;
-  background: #94A3B8;
+  background: var(--muted, #5d686d);
   flex-shrink: 0;
 }
 
 .u4-lai-dialog[data-live="on"] .u4-lai-dot {
-  background: #10B981;
-  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+  background: var(--lock, #2f6b3f);
+  box-shadow: 0 0 0 3px rgba(47, 107, 63, 0.22);
 }
 
 .u4-lai-title {
-  font-size: 13.5px;
-  font-weight: 800;
-  color: var(--ink, #131A22);
+  font-family: var(--display, "Archivo Narrow", "Arial Narrow", Arial, sans-serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--fg, #1d2326);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -164,36 +172,33 @@
 }
 
 .u4-lai-btn {
-  padding: 5px 10px;
+  padding: 4px 10px;
   border-radius: 999px;
-  border: 1px solid var(--rule-strong, #C2CCD6);
-  background: var(--surface, #FFFFFF);
-  color: var(--ink, #131A22);
+  border: 1px solid var(--line, #d9dedc);
+  background: var(--panel, #ffffff);
+  color: var(--fg, #1d2326);
+  font-family: var(--mono, "IBM Plex Mono", ui-monospace, monospace);
   font-size: 11.5px;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
 }
 
 .u4-lai-btn.is-voice {
-  background: var(--cobalt, #184E77);
-  border-color: var(--cobalt, #184E77);
-  color: #FFFFFF;
-}
-
-html[data-theme="dark"] .u4-lai-btn.is-voice {
-  color: #0D1116;
+  background: var(--accent, #1f5f7a);
+  border-color: var(--accent, #1f5f7a);
+  color: var(--panel, #ffffff);
 }
 
 .u4-lai-btn.is-voice[aria-pressed="true"] {
-  background: #B42318;
-  border-color: #B42318;
-  color: #FFFFFF;
+  background: var(--crimson, #a8281c);
+  border-color: var(--crimson, #a8281c);
+  color: #ffffff;
 }
 
 .u4-lai-btn.is-mute[aria-pressed="true"] {
-  background: #FEECEB;
-  border-color: #B42318;
-  color: #B42318;
+  background: var(--crimson-soft, #f9e6e4);
+  border-color: var(--crimson, #a8281c);
+  color: var(--crimson, #a8281c);
 }
 
 .u4-lai-btn[hidden] {
@@ -204,11 +209,11 @@ html[data-theme="dark"] .u4-lai-btn.is-voice {
   width: 26px;
   height: 26px;
   border-radius: 999px;
-  border: 1px solid var(--rule, #DCE2E9);
+  border: 1px solid var(--line, #d9dedc);
   background: transparent;
-  color: var(--ink-2, #485563);
+  color: var(--muted, #5d686d);
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -218,10 +223,11 @@ html[data-theme="dark"] .u4-lai-btn.is-voice {
 .u4-lai-status {
   margin: 0;
   padding: 6px 12px;
-  font-size: 11.5px;
-  color: var(--ink-2, #485563);
-  background: var(--surface, #FFFFFF);
-  border-bottom: 1px solid var(--rule, #DCE2E9);
+  font-family: var(--mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 11px;
+  color: var(--muted, #5d686d);
+  background: var(--panel, #ffffff);
+  border-bottom: 1px solid var(--line, #d9dedc);
 }
 
 .u4-lai-log {
@@ -233,50 +239,46 @@ html[data-theme="dark"] .u4-lai-btn.is-voice {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  background: var(--paper, #F6F8FA);
+  background: var(--bg, #f4f5f3);
 }
 
 .u4-lai-msg {
   max-width: 90%;
   padding: 8px 11px;
-  border-radius: 11px;
-  font-size: 12.8px;
-  line-height: 1.42;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.45;
   white-space: pre-wrap;
   word-break: break-word;
 }
 
 .u4-lai-msg.is-ai {
   align-self: flex-start;
-  background: var(--surface, #FFFFFF);
-  color: var(--ink, #131A22);
-  border: 1px solid var(--rule, #DCE2E9);
+  background: var(--panel, #ffffff);
+  color: var(--fg, #1d2326);
+  border: 1px solid var(--line, #d9dedc);
 }
 
 .u4-lai-msg.is-user {
   align-self: flex-end;
-  background: var(--cobalt, #184E77);
-  color: #FFFFFF;
-}
-
-html[data-theme="dark"] .u4-lai-msg.is-user {
-  color: #0D1116;
+  background: var(--accent, #1f5f7a);
+  color: var(--panel, #ffffff);
 }
 
 .u4-lai-msg.is-sys {
   align-self: center;
   max-width: 100%;
   font-size: 11.5px;
-  color: var(--amber, #A15206);
-  background: var(--amber-soft, #FDF2E4);
-  border: 1px solid rgba(161, 82, 6, 0.25);
+  color: var(--open, #9a5b06);
+  background: var(--open-soft, #f7ecd9);
+  border: 1px solid var(--line, #d9dedc);
   text-align: center;
 }
 
 .u4-lai-foot {
   padding: 9px 11px 11px;
-  background: var(--surface, #FFFFFF);
-  border-top: 1px solid var(--rule, #DCE2E9);
+  background: var(--panel, #ffffff);
+  border-top: 1px solid var(--line, #d9dedc);
   display: flex;
   flex-direction: column;
   gap: 7px;
@@ -291,17 +293,17 @@ html[data-theme="dark"] .u4-lai-msg.is-user {
 .u4-lai-chip {
   padding: 4px 9px;
   border-radius: 999px;
-  border: 1px solid var(--rule-strong, #C2CCD6);
-  background: var(--paper, #F6F8FA);
-  color: var(--cobalt, #184E77);
+  border: 1px solid var(--line, #d9dedc);
+  background: var(--bg, #f4f5f3);
+  color: var(--accent, #1f5f7a);
   font-size: 11.5px;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
 }
 
 .u4-lai-chip:hover {
-  background: var(--cobalt-soft, #E6F0F8);
-  border-color: var(--cobalt, #184E77);
+  background: var(--accent-soft, #e3eef2);
+  border-color: var(--accent, #1f5f7a);
 }
 
 .u4-lai-tools-row {
@@ -313,18 +315,20 @@ html[data-theme="dark"] .u4-lai-msg.is-user {
 
 .u4-lai-tool-btn {
   padding: 4px 9px;
-  border-radius: 7px;
-  border: 1px solid var(--rule, #DCE2E9);
-  background: var(--paper, #F6F8FA);
-  color: var(--ink-2, #485563);
-  font-size: 11.5px;
-  font-weight: 700;
+  border-radius: 6px;
+  border: 1px solid var(--line, #d9dedc);
+  background: var(--bg, #f4f5f3);
+  color: var(--fg, #1d2326);
+  font-family: var(--mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 11px;
+  font-weight: 600;
   cursor: pointer;
 }
 
 .u4-lai-tool-btn:hover {
-  border-color: var(--cobalt, #184E77);
-  color: var(--cobalt, #184E77);
+  border-color: var(--accent, #1f5f7a);
+  color: var(--accent, #1f5f7a);
+  background: var(--accent-soft, #e3eef2);
 }
 
 .u4-lai-photo-bar {
@@ -332,8 +336,8 @@ html[data-theme="dark"] .u4-lai-msg.is-user {
   align-items: center;
   gap: 7px;
   padding: 5px 8px;
-  border-radius: 8px;
-  background: var(--cobalt-soft, #E6F0F8);
+  border-radius: 6px;
+  background: var(--accent-soft, #e3eef2);
   font-size: 11.5px;
 }
 
@@ -345,7 +349,7 @@ html[data-theme="dark"] .u4-lai-msg.is-user {
   width: 34px;
   height: 34px;
   object-fit: cover;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 .u4-lai-form {
@@ -357,16 +361,17 @@ html[data-theme="dark"] .u4-lai-msg.is-user {
 .u4-lai-input {
   flex: 1;
   min-width: 0;
-  padding: 8px 11px;
-  border-radius: 999px;
-  border: 1px solid var(--rule-strong, #C2CCD6);
-  background: var(--paper, #F6F8FA);
-  color: var(--ink, #131A22);
-  font-size: 13px;
+  padding: 7px 11px;
+  border-radius: 6px;
+  border: 1px solid var(--line, #d9dedc);
+  background: var(--bg, #f4f5f3);
+  color: var(--fg, #1d2326);
+  font-family: inherit;
+  font-size: 13.5px;
 }
 
 .u4-lai-input:focus {
-  outline: 2px solid var(--cobalt, #184E77);
+  outline: 2px solid var(--accent, #1f5f7a);
   outline-offset: 1px;
 }
 
@@ -374,17 +379,13 @@ html[data-theme="dark"] .u4-lai-msg.is-user {
   width: 34px;
   height: 34px;
   border-radius: 999px;
-  border: none;
-  background: var(--cobalt, #184E77);
-  color: #FFFFFF;
+  border: 1px solid var(--accent, #1f5f7a);
+  background: var(--accent, #1f5f7a);
+  color: var(--panel, #ffffff);
   font-size: 15px;
-  font-weight: 800;
+  font-weight: 700;
   cursor: pointer;
   flex-shrink: 0;
-}
-
-html[data-theme="dark"] .u4-lai-send {
-  color: #0D1116;
 }
 
 @media (max-width: 480px) {

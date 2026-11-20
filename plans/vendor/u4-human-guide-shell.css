@@ -1,70 +1,136 @@
 /* ============================================================================
-   Unit 4 Interactive Plans — Unified Human-First UI Shell (v1)
-   Canonical Design Tokens & Shared Chrome across ALL Interactive Plans
+   Unit 4 Interactive Plans — Unified Human-First UI Shell (Classic Old Wiki)
+   Owner-Locked Visual Direction: Classic Old Wiki Design Tokens & Flat 8px Chrome
    Zero External CDNs · Zero Prices · Zero Backend Clutter · Light/Dark + EN/ES
    ============================================================================ */
 
 :root {
-  --paper: #F6F8FA;
-  --surface: #FFFFFF;
-  --rail: #EEF1F5;
-  --sheet-bg: #E6ECF2;
-  --ink: #131A22;
-  --ink-2: #485563;
-  --ink-3: #6E7D8C;
-  --rule: #DCE2E9;
-  --rule-strong: #C2CCD6;
-  --cobalt: #184E77;
-  --cobalt-hover: #123D5E;
-  --cobalt-soft: #E6F0F8;
-  --pine: #1B6B46;
-  --pine-soft: #E5F4EC;
-  --amber: #A15206;
-  --amber-soft: #FDF2E4;
-  --crimson: #B42318;
-  --crimson-soft: #FEECEB;
-  --shadow-sm: 0 1px 3px rgba(19, 26, 34, 0.06);
-  --shadow-md: 0 10px 28px rgba(19, 26, 34, 0.14);
-  --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
-  --display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif;
-  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  /* Classic Old Wiki Canonical Tokens (src/template.html:175-188) */
+  --bg: #f4f5f3;
+  --panel: #ffffff;
+  --fg: #1d2326;
+  --muted: #5d686d;
+  --line: #d9dedc;
+  --accent: #1f5f7a;
+  --accent-soft: #e3eef2;
+  --lock: #2f6b3f;
+  --lock-soft: #e4f0e6;
+  --open: #9a5b06;
+  --open-soft: #f7ecd9;
+
+  /* Compatibility Aliases for Existing Plan Rules */
+  --paper: #f4f5f3;
+  --surface: #ffffff;
+  --rail: #ecedea;
+  --sheet-bg: #f4f5f3;
+  --ink: #1d2326;
+  --ink-2: #5d686d;
+  --ink-3: #6c777c;
+  --rule: #d9dedc;
+  --rule-strong: #c5ccc9;
+  --cobalt: #1f5f7a;
+  --cobalt-hover: #17495e;
+  --cobalt-soft: #e3eef2;
+  --pine: #2f6b3f;
+  --pine-soft: #e4f0e6;
+  --amber: #9a5b06;
+  --amber-soft: #f7ecd9;
+  --crimson: #a8281c;
+  --crimson-soft: #f9e6e4;
+  --shadow-sm: none;
+  --shadow-md: 0 4px 16px rgba(18, 22, 24, 0.14);
+  --display: "Archivo Narrow", "Arial Narrow", Arial, sans-serif;
+  --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
   --r-sm: 6px;
-  --r-md: 10px;
-  --r-lg: 14px;
+  --r-md: 8px;
+  --r-lg: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121618;
+    --panel: #1a2023;
+    --fg: #e4e9ea;
+    --muted: #98a4a8;
+    --line: #2c3539;
+    --accent: #7cc0dc;
+    --accent-soft: #1d3440;
+    --lock: #8fd19e;
+    --lock-soft: #1e3324;
+    --open: #f0b75a;
+    --open-soft: #3a2d17;
+
+    --paper: #121618;
+    --surface: #1a2023;
+    --rail: #161b1e;
+    --sheet-bg: #121618;
+    --ink: #e4e9ea;
+    --ink-2: #98a4a8;
+    --ink-3: #7f8c90;
+    --rule: #2c3539;
+    --rule-strong: #39444a;
+    --cobalt: #7cc0dc;
+    --cobalt-hover: #97cde4;
+    --cobalt-soft: #1d3440;
+    --pine: #8fd19e;
+    --pine-soft: #1e3324;
+    --amber: #f0b75a;
+    --amber-soft: #3a2d17;
+    --crimson: #f28479;
+    --crimson-soft: #3a1f1d;
+    --shadow-sm: none;
+    --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.42);
+    color-scheme: dark;
+  }
 }
 
 html[data-theme="dark"] {
-  --paper: #12171D;
-  --surface: #1A2129;
-  --rail: #161C23;
-  --sheet-bg: #0D1116;
-  --ink: #ECF1F6;
-  --ink-2: #A7B4C2;
-  --ink-3: #7A8999;
-  --rule: #28323D;
-  --rule-strong: #3A4756;
-  --cobalt: #6FB3E6;
-  --cobalt-hover: #8DC6F0;
-  --cobalt-soft: #1B2E3E;
-  --pine: #6CD4A0;
-  --pine-soft: #173025;
-  --amber: #F5B461;
-  --amber-soft: #352715;
-  --crimson: #F97066;
-  --crimson-soft: #3A1B1A;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.48);
+  --bg: #121618;
+  --panel: #1a2023;
+  --fg: #e4e9ea;
+  --muted: #98a4a8;
+  --line: #2c3539;
+  --accent: #7cc0dc;
+  --accent-soft: #1d3440;
+  --lock: #8fd19e;
+  --lock-soft: #1e3324;
+  --open: #f0b75a;
+  --open-soft: #3a2d17;
+
+  --paper: #121618;
+  --surface: #1a2023;
+  --rail: #161b1e;
+  --sheet-bg: #121618;
+  --ink: #e4e9ea;
+  --ink-2: #98a4a8;
+  --ink-3: #7f8c90;
+  --rule: #2c3539;
+  --rule-strong: #39444a;
+  --cobalt: #7cc0dc;
+  --cobalt-hover: #97cde4;
+  --cobalt-soft: #1d3440;
+  --pine: #8fd19e;
+  --pine-soft: #1e3324;
+  --amber: #f0b75a;
+  --amber-soft: #3a2d17;
+  --crimson: #f28479;
+  --crimson-soft: #3a1f1d;
+  --shadow-sm: none;
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.42);
+  color-scheme: dark;
 }
 
 /* Mode Switching: Human Guide (Default) vs Hidden Print/Blueprint Engine */
 body.u4-mode-human {
   margin: 0;
   padding: 0;
-  background: var(--sheet-bg);
-  color: var(--ink);
-  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body);
   font-size: 15px;
-  line-height: 1.5;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
@@ -99,37 +165,38 @@ body.u4-mode-blueprint #blueprint-sheet-shell {
   position: sticky;
   top: 0;
   z-index: 60;
-  background: #184E77;
-  color: #FFFFFF;
+  background: #1f5f7a;
+  color: #ffffff;
   padding: 9px 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  font-family: var(--sans);
+  font-family: var(--body);
   font-size: 13px;
 }
 
 .u4g-bp-return-btn {
-  border: 1px solid rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   background: rgba(255, 255, 255, 0.14);
-  color: #FFFFFF;
+  color: #ffffff;
   border-radius: 999px;
-  padding: 5px 12px;
-  font-size: 12.5px;
-  font-weight: 700;
+  padding: 4px 12px;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
   cursor: pointer;
 }
 
 .u4g-bp-return-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.24);
 }
 
-/* Smooth Step & Page Entrance */
+/* Smooth Step & Page Entrance (No Opacity-0 Washout) */
 @keyframes u4FadeSlideIn {
   from {
-    opacity: 0;
-    transform: translateY(6px);
+    opacity: 0.94;
+    transform: translateY(2px);
   }
   to {
     opacity: 1;
@@ -138,36 +205,36 @@ body.u4-mode-blueprint #blueprint-sheet-shell {
 }
 
 .u4h-animate-in {
-  animation: u4FadeSlideIn 180ms ease-out;
+  animation: u4FadeSlideIn 140ms ease-out;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .u4h-animate-in {
-    animation: none;
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
   }
 }
 
-/* Unified Single-Bar Sticky Header */
+/* Unified Single-Bar Sticky Header (Classic Old Wiki Chrome) */
 .u4h-app {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding-bottom: 84px; /* space for floating AI Helper orb on mobile */
+  padding-bottom: 84px;
 }
 
 .u4h-topbar {
   position: sticky;
   top: 0;
   z-index: 40;
-  background: var(--surface);
-  border-bottom: 1px solid var(--rule);
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
   padding: 8px 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
   flex-wrap: wrap;
-  box-shadow: var(--shadow-sm);
 }
 
 .u4h-nav-left,
@@ -178,34 +245,34 @@ body.u4-mode-blueprint #blueprint-sheet-shell {
   flex-wrap: wrap;
 }
 
+/* Old-Wiki .chip / button.small Top-Bar Chrome */
 .u4h-nav-link {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 6px 11px;
-  border-radius: var(--r-sm);
-  border: 1px solid var(--rule-strong);
-  background: var(--surface);
-  color: var(--cobalt);
-  font-family: var(--sans);
-  font-size: 12.5px;
-  font-weight: 700;
+  padding: 4px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
-  transition: background 140ms ease, border-color 140ms ease;
+  transition: background 120ms ease, color 120ms ease;
 }
 
 .u4h-nav-link:hover {
-  background: var(--cobalt-soft);
-  border-color: var(--cobalt);
+  background: var(--accent-soft);
 }
 
-/* Seamless Segmented Sibling Switcher (e.g., Range Wall | Floor Plan) */
+/* Seamless Segmented Sibling Switcher */
 .u4h-seg-switch {
   display: inline-flex;
   align-items: center;
-  background: var(--rail);
-  border: 1px solid var(--rule-strong);
+  background: var(--bg);
+  border: 1px solid var(--line);
   border-radius: 999px;
   padding: 2px;
   gap: 2px;
@@ -215,29 +282,25 @@ body.u4-mode-blueprint #blueprint-sheet-shell {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 4px 11px;
+  padding: 3px 10px;
   border-radius: 999px;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--ink-2);
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--muted);
   text-decoration: none;
   white-space: nowrap;
-  transition: background 150ms ease, color 150ms ease;
+  transition: background 120ms ease, color 120ms ease;
 }
 
 .u4h-seg-item:hover {
-  color: var(--cobalt);
-  background: var(--surface);
+  color: var(--accent);
+  background: var(--panel);
 }
 
 .u4h-seg-item.is-active {
-  background: var(--cobalt);
-  color: #FFFFFF;
-  box-shadow: var(--shadow-sm);
-}
-
-html[data-theme="dark"] .u4h-seg-item.is-active {
-  color: #0D1116;
+  background: var(--accent);
+  color: var(--panel);
 }
 
 /* Quick "All Plans ▾" Menu inside Top Bar */
@@ -249,31 +312,32 @@ html[data-theme="dark"] .u4h-seg-item.is-active {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 6px 10px;
-  border-radius: var(--r-sm);
-  border: 1px solid var(--rule-strong);
-  background: var(--rail);
-  color: var(--ink);
-  font-family: var(--sans);
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--fg);
+  font-family: var(--mono);
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
 }
 
 .u4h-plans-btn:hover {
-  border-color: var(--cobalt);
-  color: var(--cobalt);
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
 }
 
 .u4h-plans-pop {
   position: absolute;
   top: calc(100% + 6px);
   left: 0;
-  min-width: 248px;
-  background: var(--surface);
-  border: 1px solid var(--rule-strong);
-  border-radius: var(--r-md);
+  min-width: 262px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
   box-shadow: var(--shadow-md);
   padding: 6px;
   z-index: 60;
@@ -291,47 +355,43 @@ html[data-theme="dark"] .u4h-seg-item.is-active {
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  padding: 8px 10px;
-  border-radius: 7px;
-  color: var(--ink);
-  font-size: 12.5px;
-  font-weight: 600;
+  padding: 7px 10px;
+  border-radius: 6px;
+  color: var(--fg);
+  font-size: 13px;
+  font-weight: 500;
   text-decoration: none;
 }
 
 .u4h-plans-pop a:hover {
-  background: var(--cobalt-soft);
-  color: var(--cobalt);
+  background: var(--accent-soft);
+  color: var(--accent);
 }
 
 .u4h-plans-pop a.is-current {
-  background: var(--cobalt-soft);
-  color: var(--cobalt);
-  font-weight: 800;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 700;
 }
 
 .u4h-plans-pop .u4h-pop-room {
+  font-family: var(--mono);
   font-size: 10.5px;
-  color: var(--ink-3);
-  font-weight: 600;
+  color: var(--muted);
 }
 
-/* Standard Top Bar Buttons */
+/* Standard Top Bar Buttons (Matching Classic Old Wiki button.small) */
 .u4h-lang-btn {
-  padding: 6px 12px;
+  padding: 4px 11px;
   border-radius: 999px;
-  border: 1.5px solid var(--cobalt);
-  background: var(--cobalt);
-  color: #FFFFFF;
-  font-family: var(--sans);
-  font-size: 12.5px;
-  font-weight: 700;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--panel);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
-}
-
-html[data-theme="dark"] .u4h-lang-btn {
-  color: #0D1116;
 }
 
 .u4h-lang-btn:hover {
@@ -340,13 +400,13 @@ html[data-theme="dark"] .u4h-lang-btn {
 }
 
 .u4h-mini-btn {
-  padding: 6px 10px;
-  border-radius: var(--r-sm);
-  border: 1px solid var(--rule-strong);
-  background: var(--surface);
-  color: var(--ink);
-  font-family: var(--sans);
-  font-size: 12.5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--fg);
+  font-family: var(--mono);
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
@@ -356,23 +416,29 @@ html[data-theme="dark"] .u4h-lang-btn {
 }
 
 .u4h-mini-btn:hover {
-  background: var(--rail);
-  border-color: var(--cobalt);
-  color: var(--cobalt);
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .u4h-mini-btn.primary {
-  background: var(--cobalt);
-  border-color: var(--cobalt);
-  color: #FFFFFF;
-}
-
-html[data-theme="dark"] .u4h-mini-btn.primary {
-  color: #0D1116;
+  background: transparent;
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .u4h-mini-btn.primary:hover {
-  background: var(--cobalt-hover);
+  background: var(--accent);
+  color: var(--panel);
+}
+
+.u4h-topbar a:focus-visible,
+.u4h-topbar button:focus-visible,
+.u4h-card button:focus-visible,
+.u4h-card input:focus-visible,
+.u4h-card select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 /* Main Single-Column Calm Reading/Action Stage */
@@ -380,37 +446,44 @@ html[data-theme="dark"] .u4h-mini-btn.primary {
   width: 100%;
   max-width: 780px;
   margin: 0 auto;
-  padding: 14px 12px 92px;
+  padding: 16px 14px 92px;
   box-sizing: border-box;
 }
 
 .u4h-hold-strip {
-  background: var(--amber-soft);
-  border: 1px solid rgba(161, 82, 6, 0.32);
-  color: var(--amber);
-  border-radius: var(--r-md);
-  padding: 9px 13px;
-  font-size: 12.5px;
-  line-height: 1.45;
+  background: var(--open-soft);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--open);
+  color: var(--fg);
+  border-radius: 8px;
+  padding: 10px 13px;
+  font-size: 13px;
+  line-height: 1.48;
   margin-bottom: 12px;
 }
 
 .u4h-hold-strip.is-danger {
   background: var(--crimson-soft);
-  border-color: rgba(180, 35, 24, 0.35);
-  color: var(--crimson);
+  border-color: var(--line);
+  border-left: 4px solid var(--crimson);
+  color: var(--fg);
 }
 
 .u4h-hold-strip strong {
-  font-weight: 800;
+  color: var(--open);
+  font-weight: 700;
 }
 
+.u4h-hold-strip.is-danger strong {
+  color: var(--crimson);
+}
+
+/* Crisp Flat 1px Classic Old Wiki Card */
 .u4h-card {
-  background: var(--surface);
-  border: 1px solid var(--rule);
-  border-radius: var(--r-lg);
-  padding: 14px;
-  box-shadow: var(--shadow-sm);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
 }
 
 .u4h-card-head {
@@ -419,38 +492,39 @@ html[data-theme="dark"] .u4h-mini-btn.primary {
   justify-content: space-between;
   gap: 10px;
   padding-bottom: 10px;
-  border-bottom: 1px solid var(--rule);
-  margin-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 12px;
 }
 
 .u4h-title {
   font-family: var(--display);
-  font-size: 17px;
-  font-weight: 800;
-  color: var(--ink);
-  line-height: 1.25;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--fg);
+  line-height: 1.18;
+  letter-spacing: 0.01em;
 }
 
 .u4h-sub {
-  font-size: 12.5px;
-  color: var(--ink-2);
-  margin-top: 2px;
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 3px;
 }
 
 .u4h-compass {
   flex-shrink: 0;
   font-family: var(--mono);
   font-size: 11px;
-  font-weight: 700;
-  color: var(--cobalt);
-  background: var(--cobalt-soft);
-  border: 1px solid rgba(24, 78, 119, 0.25);
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--line);
   border-radius: 999px;
   padding: 3px 9px;
   white-space: nowrap;
 }
 
-/* Horizontal Step Pills */
+/* Horizontal Step Pills (Old Wiki .dtabs Aesthetic) */
 .u4h-steps {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
@@ -459,86 +533,99 @@ html[data-theme="dark"] .u4h-mini-btn.primary {
 }
 
 .u4h-step-btn {
-  padding: 8px 8px;
-  border-radius: 8px;
-  border: 1px solid var(--rule-strong);
-  background: var(--paper);
-  color: var(--ink-2);
-  font-family: var(--sans);
-  font-size: 12px;
-  font-weight: 700;
+  padding: 7px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body);
+  font-size: 12.5px;
+  font-weight: 600;
   cursor: pointer;
   text-align: center;
   line-height: 1.25;
-  transition: background 140ms ease, color 140ms ease, border-color 140ms ease;
+  transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
 }
 
 .u4h-step-btn:hover {
-  border-color: var(--cobalt);
-  color: var(--cobalt);
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
 }
 
 .u4h-step-btn.is-active {
-  background: var(--cobalt);
-  border-color: var(--cobalt);
-  color: #FFFFFF;
-}
-
-html[data-theme="dark"] .u4h-step-btn.is-active {
-  color: #0D1116;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--panel);
 }
 
 /* KPI Strip (3-Column Plain-Language Summary) */
 .u4h-kpi-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 7px;
-  margin-bottom: 11px;
+  gap: 8px;
+  margin-bottom: 12px;
 }
 
 .u4h-kpi {
-  background: var(--paper);
-  border: 1px solid var(--rule);
-  border-radius: 9px;
-  padding: 8px 10px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 9px 11px;
 }
 
 .u4h-kpi-lbl {
+  font-family: var(--mono);
   font-size: 10.5px;
-  font-weight: 700;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
-  color: var(--ink-3);
+  letter-spacing: 0.06em;
+  color: var(--muted);
 }
 
 .u4h-kpi-val {
-  font-size: 15px;
-  font-weight: 800;
-  color: var(--ink);
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--fg);
   margin-top: 2px;
   line-height: 1.2;
 }
 
-.u4h-kpi-val.is-ok { color: var(--pine); }
-.u4h-kpi-val.is-warn { color: var(--amber); }
+.u4h-kpi-val.is-ok { color: var(--lock); }
+.u4h-kpi-val.is-warn { color: var(--open); }
 .u4h-kpi-val.is-fail { color: var(--crimson); }
-.u4h-kpi-val.is-info { color: var(--cobalt); }
+.u4h-kpi-val.is-info { color: var(--accent); }
 
 .u4h-kpi-sub {
-  font-size: 11px;
-  color: var(--ink-2);
+  font-size: 11.5px;
+  color: var(--muted);
   margin-top: 2px;
 }
 
-/* Crisp SVG Drawing Frame (Always Clean White Paper Background for Legibility) */
+/* Crisp SVG Drawing Frame (Deliberate Drafting Paper Framing in Light & Dark) */
 .u4h-svg-wrap {
-  background: #FFFFFF;
-  border: 1px solid var(--rule-strong);
-  border-radius: var(--r-md);
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
   padding: 8px;
-  margin-bottom: 11px;
+  margin-bottom: 12px;
   overflow: hidden;
   position: relative;
+}
+
+html[data-theme="dark"] .u4h-svg-wrap {
+  background: #ecefed;
+  border: 1.5px solid #39444a;
+  box-shadow: inset 0 0 0 1px rgba(18, 22, 24, 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .u4h-svg-wrap {
+    background: #ecefed;
+    border: 1.5px solid #39444a;
+    box-shadow: inset 0 0 0 1px rgba(18, 22, 24, 0.12);
+  }
 }
 
 .u4h-svg-wrap svg {
@@ -548,12 +635,53 @@ html[data-theme="dark"] .u4h-step-btn.is-active {
   max-width: 100%;
 }
 
+/* Direct 2-Way Synced SVG Dragging Affordances (Native Pointer Events) */
+.u4-drag-ns {
+  cursor: ns-resize;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.u4-drag-ew {
+  cursor: ew-resize;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.u4-drag-move {
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.u4-drag-move.is-dragging {
+  cursor: grabbing;
+}
+
+.u4-drag-ns:hover .u4-drag-grip,
+.u4-drag-ew:hover .u4-drag-grip,
+.u4-drag-move:hover .u4-drag-grip,
+.is-dragging .u4-drag-grip {
+  filter: brightness(0.95);
+  stroke-width: 2.2;
+}
+
+.u4-drag-ns:focus-visible,
+.u4-drag-ew:focus-visible,
+.u4-drag-move:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 .u4h-svg-hint {
-  font-size: 11.5px;
-  color: var(--ink-2);
-  background: var(--paper);
-  border: 1px solid var(--rule);
-  border-radius: 8px;
+  font-size: 12px;
+  color: var(--muted);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
   padding: 7px 10px;
   margin-bottom: 9px;
   display: flex;
@@ -568,15 +696,15 @@ html[data-theme="dark"] .u4h-step-btn.is-active {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 10px;
-  margin-bottom: 11px;
+  margin-bottom: 12px;
 }
 
 .u4h-photo-card {
   position: relative;
-  border-radius: var(--r-md);
+  border-radius: 8px;
   overflow: hidden;
-  border: 1px solid var(--rule-strong);
-  background: var(--paper);
+  border: 1px solid var(--line);
+  background: var(--bg);
   display: flex;
   flex-direction: column;
 }
@@ -590,25 +718,25 @@ html[data-theme="dark"] .u4h-step-btn.is-active {
 
 .u4h-photo-cap {
   flex: 1;
-  padding: 7px 10px;
-  background: var(--paper);
-  color: var(--ink);
-  font-size: 12px;
-  line-height: 1.38;
-  border-top: 1px solid var(--rule);
+  padding: 8px 10px;
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 12.5px;
+  line-height: 1.42;
+  border-top: 1px solid var(--line);
 }
 
 .u4h-photo-cap strong {
-  color: var(--cobalt);
+  color: var(--accent);
 }
 
 /* Control Rows & Toggle Pills */
 .u4h-controls {
-  background: var(--paper);
-  border: 1px solid var(--rule);
-  border-radius: var(--r-md);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
   padding: 11px 12px;
-  margin-bottom: 11px;
+  margin-bottom: 12px;
   display: flex;
   flex-direction: column;
   gap: 9px;
@@ -624,8 +752,8 @@ html[data-theme="dark"] .u4h-step-btn.is-active {
 
 .u4h-ctrl-lbl {
   font-size: 13px;
-  font-weight: 700;
-  color: var(--ink);
+  font-weight: 600;
+  color: var(--fg);
 }
 
 .u4h-pill-group {
@@ -636,83 +764,82 @@ html[data-theme="dark"] .u4h-step-btn.is-active {
 }
 
 .u4h-pill {
-  padding: 6px 11px;
+  padding: 5px 11px;
   border-radius: 999px;
-  border: 1px solid var(--rule-strong);
-  background: var(--surface);
-  color: var(--ink-2);
-  font-family: var(--sans);
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--fg);
+  font-family: var(--body);
   font-size: 12.5px;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 140ms ease;
+  transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
 }
 
 .u4h-pill:hover {
-  border-color: var(--cobalt);
-  color: var(--cobalt);
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
 }
 
 .u4h-pill.is-active {
-  background: var(--cobalt);
-  border-color: var(--cobalt);
-  color: #FFFFFF;
-}
-
-html[data-theme="dark"] .u4h-pill.is-active {
-  color: #0D1116;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--panel);
 }
 
 .u4h-pill.is-warn.is-active {
-  background: var(--amber);
-  border-color: var(--amber);
-  color: #FFFFFF;
+  background: var(--open);
+  border-color: var(--open);
+  color: var(--panel);
 }
 
 /* Live Status Banner */
 .u4h-status {
-  border-radius: 9px;
+  border-radius: 8px;
   padding: 9px 12px;
   font-size: 13px;
-  font-weight: 700;
-  line-height: 1.4;
-  margin-bottom: 11px;
+  font-weight: 600;
+  line-height: 1.45;
+  margin-bottom: 12px;
+  border: 1px solid var(--line);
 }
 
 .u4h-status.is-pass {
-  background: var(--pine-soft);
-  color: var(--pine);
-  border: 1px solid rgba(27, 107, 70, 0.28);
+  background: var(--lock-soft);
+  color: var(--lock);
+  border-left: 4px solid var(--lock);
 }
 
 .u4h-status.is-warn {
-  background: var(--amber-soft);
-  color: var(--amber);
-  border: 1px solid rgba(161, 82, 6, 0.3);
+  background: var(--open-soft);
+  color: var(--open);
+  border-left: 4px solid var(--open);
 }
 
 .u4h-status.is-fail {
   background: var(--crimson-soft);
   color: var(--crimson);
-  border: 1px solid rgba(180, 35, 24, 0.32);
+  border-left: 4px solid var(--crimson);
 }
 
 /* Plain-Language Callout / Important Things to Know Box */
 .u4h-info-box {
-  background: var(--paper);
-  border: 1px solid var(--rule);
-  border-left: 4px solid var(--cobalt);
-  border-radius: 9px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
   padding: 11px 13px;
-  margin-bottom: 11px;
+  margin-bottom: 12px;
 }
 
 .u4h-info-title {
-  font-size: 12px;
-  font-weight: 800;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--cobalt);
+  letter-spacing: 0.06em;
+  color: var(--accent);
   margin-bottom: 6px;
 }
 
@@ -720,7 +847,7 @@ html[data-theme="dark"] .u4h-pill.is-active {
   margin: 0;
   padding-left: 18px;
   font-size: 13.5px;
-  color: var(--ink);
+  color: var(--fg);
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -737,12 +864,35 @@ html[data-theme="dark"] .u4h-pill.is-active {
   display: flex;
   flex-direction: column;
   gap: 3px;
+  padding: 6px 7px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  transition: background 120ms ease, border-color 120ms ease;
+}
+
+.u4h-field.is-active {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.u4h-field.is-invalid {
+  background: var(--crimson-soft);
+  border-color: var(--crimson);
 }
 
 .u4h-field label {
-  font-size: 11.5px;
-  font-weight: 700;
-  color: var(--ink-2);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.u4h-field.is-active label {
+  color: var(--accent);
+}
+
+.u4h-field.is-invalid label {
+  color: var(--crimson);
 }
 
 .u4h-field input[type="number"],
@@ -751,19 +901,24 @@ html[data-theme="dark"] .u4h-pill.is-active {
   width: 100%;
   box-sizing: border-box;
   padding: 7px 9px;
-  border-radius: 7px;
-  border: 1px solid var(--rule-strong);
-  background: var(--surface);
-  color: var(--ink);
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--fg);
   font-family: var(--mono);
   font-size: 13.5px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
-.u4h-field input:focus,
-.u4h-field select:focus {
-  outline: 2px solid var(--cobalt);
-  outline-offset: 1px;
+.u4h-field.is-invalid input[type="text"] {
+  border-color: var(--crimson);
+}
+
+.u4h-field-err {
+  font-size: 11px;
+  color: var(--crimson);
+  font-weight: 600;
+  line-height: 1.25;
 }
 
 .u4h-slider-row {
@@ -775,14 +930,14 @@ html[data-theme="dark"] .u4h-pill.is-active {
 
 .u4h-slider-row input[type="range"] {
   flex: 1;
-  accent-color: var(--cobalt);
+  accent-color: var(--accent);
 }
 
 .u4h-slider-val {
   font-family: var(--mono);
-  font-size: 14px;
-  font-weight: 800;
-  color: var(--cobalt);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--accent);
   min-width: 58px;
   text-align: right;
 }
@@ -792,13 +947,13 @@ html[data-theme="dark"] .u4h-pill.is-active {
   display: flex;
   flex-direction: column;
   gap: 7px;
-  margin-bottom: 11px;
+  margin-bottom: 12px;
 }
 
 .u4h-item-card {
-  background: var(--paper);
-  border: 1px solid var(--rule);
-  border-radius: 9px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
   padding: 10px 12px;
   display: flex;
   align-items: flex-start;
@@ -808,8 +963,8 @@ html[data-theme="dark"] .u4h-pill.is-active {
 }
 
 .u4h-item-card.is-selected {
-  border-color: var(--cobalt);
-  background: var(--cobalt-soft);
+  border-color: var(--accent);
+  background: var(--accent-soft);
 }
 
 .u4h-item-main {
@@ -819,39 +974,40 @@ html[data-theme="dark"] .u4h-pill.is-active {
 
 .u4h-item-name {
   font-size: 14px;
-  font-weight: 800;
-  color: var(--ink);
+  font-weight: 700;
+  color: var(--fg);
 }
 
 .u4h-item-meta {
   font-family: var(--mono);
   font-size: 12px;
-  color: var(--cobalt);
+  color: var(--accent);
   margin-top: 2px;
 }
 
 .u4h-item-note {
   font-size: 12.5px;
-  color: var(--ink-2);
+  color: var(--muted);
   margin-top: 4px;
-  line-height: 1.4;
+  line-height: 1.42;
 }
 
 .u4h-badge {
   display: inline-block;
+  font-family: var(--mono);
   font-size: 11px;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 999px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 4px;
   background: var(--rail);
-  color: var(--ink-2);
-  border: 1px solid var(--rule-strong);
+  color: var(--muted);
+  border: 1px solid var(--line);
   white-space: nowrap;
 }
 
-.u4h-badge.is-locked { background: var(--pine-soft); color: var(--pine); border-color: rgba(27,107,70,0.3); }
-.u4h-badge.is-verify { background: var(--amber-soft); color: var(--amber); border-color: rgba(161,82,6,0.3); }
-.u4h-badge.is-hold { background: var(--crimson-soft); color: var(--crimson); border-color: rgba(180,35,24,0.3); }
+.u4h-badge.is-locked { background: var(--lock-soft); color: var(--lock); border-color: transparent; }
+.u4h-badge.is-verify { background: var(--open-soft); color: var(--open); border-color: transparent; }
+.u4h-badge.is-hold { background: var(--crimson-soft); color: var(--crimson); border-color: transparent; }
 
 /* Action CTA Row */
 .u4h-cta-row {
@@ -865,25 +1021,21 @@ html[data-theme="dark"] .u4h-pill.is-active {
 .u4h-action-btn {
   padding: 7px 12px;
   border-radius: 8px;
-  border: 1px solid var(--cobalt);
-  background: var(--cobalt-soft);
-  color: var(--cobalt);
-  font-family: var(--sans);
-  font-size: 12.5px;
-  font-weight: 700;
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  font-family: var(--body);
+  font-size: 13px;
+  font-weight: 600;
   cursor: pointer;
 }
 
 .u4h-action-btn:hover {
-  background: var(--cobalt);
-  color: #FFFFFF;
+  background: var(--accent);
+  color: var(--panel);
 }
 
-html[data-theme="dark"] .u4h-action-btn:hover {
-  color: #0D1116;
-}
-
-/* Collapsed "🔧 Equipment & Supplies ▾" Drawer (Matches KS4 Gold Standard) */
+/* Collapsed "🔧 Equipment & Supplies ▾" Drawer */
 .u4h-equip-wrap {
   margin-top: 12px;
 }
@@ -891,22 +1043,18 @@ html[data-theme="dark"] .u4h-action-btn:hover {
 .u4h-equip-toggle {
   width: 100%;
   padding: 10px 14px;
-  border-radius: var(--r-md);
-  border: 1px solid var(--cobalt);
-  background: var(--cobalt);
-  color: #FFFFFF;
-  font-family: var(--sans);
+  border-radius: 8px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--panel);
+  font-family: var(--body);
   font-size: 13.5px;
-  font-weight: 800;
+  font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 7px;
-}
-
-html[data-theme="dark"] .u4h-equip-toggle {
-  color: #0D1116;
 }
 
 .u4h-equip-toggle:hover {
@@ -915,9 +1063,9 @@ html[data-theme="dark"] .u4h-equip-toggle {
 
 .u4h-equip-body {
   margin-top: 8px;
-  background: var(--paper);
-  border: 1px solid var(--rule-strong);
-  border-radius: var(--r-md);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
   padding: 12px;
 }
 
@@ -933,17 +1081,18 @@ html[data-theme="dark"] .u4h-equip-toggle {
 
 .u4h-equip-col h4 {
   margin: 0 0 6px;
-  font-size: 12px;
+  font-family: var(--mono);
+  font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--cobalt);
+  letter-spacing: 0.06em;
+  color: var(--accent);
 }
 
 .u4h-equip-col ul {
   margin: 0;
   padding-left: 17px;
   font-size: 13px;
-  color: var(--ink);
+  color: var(--fg);
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -957,34 +1106,31 @@ html[data-theme="dark"] .u4h-equip-toggle {
   gap: 8px;
   margin-top: 14px;
   padding-top: 12px;
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--line);
 }
 
 .u4h-pager-btn {
-  padding: 8px 14px;
+  padding: 7px 14px;
   border-radius: 8px;
-  border: 1px solid var(--rule-strong);
-  background: var(--surface);
-  color: var(--ink);
-  font-family: var(--sans);
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--fg);
+  font-family: var(--body);
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
 }
 
 .u4h-pager-btn:hover:not(:disabled) {
-  border-color: var(--cobalt);
-  color: var(--cobalt);
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
 }
 
 .u4h-pager-btn.is-next {
-  background: var(--cobalt);
-  border-color: var(--cobalt);
-  color: #FFFFFF;
-}
-
-html[data-theme="dark"] .u4h-pager-btn.is-next {
-  color: #0D1116;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--panel);
 }
 
 .u4h-pager-btn:disabled {
@@ -993,12 +1139,12 @@ html[data-theme="dark"] .u4h-pager-btn.is-next {
 }
 
 .u4h-pager-count {
+  font-family: var(--mono);
   font-size: 12px;
-  font-weight: 700;
-  color: var(--ink-3);
+  color: var(--muted);
 }
 
-/* Mobile Responsive (390px iPhone Zero-Overflow Contract) */
+/* Mobile Responsive (390px iPhone Zero-Overflow Contract + >=36px Tap Targets) */
 @media (max-width: 640px) {
   .u4h-topbar {
     padding: 8px 10px;
@@ -1020,24 +1166,34 @@ html[data-theme="dark"] .u4h-pager-btn.is-next {
     max-width: 100%;
     flex-wrap: wrap;
     justify-content: center;
-    border-radius: 10px;
+    border-radius: 8px;
     box-sizing: border-box;
   }
   .u4h-seg-item {
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-size: 11px;
-    padding: 4px 7px;
+    padding: 4px 8px;
     white-space: normal;
     text-align: center;
+    box-sizing: border-box;
   }
   .u4h-nav-link, .u4h-plans-btn, .u4h-lang-btn, .u4h-mini-btn {
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-size: 11.5px;
-    padding: 5px 9px;
+    padding: 4px 9px;
+    box-sizing: border-box;
   }
   .u4h-main {
     padding: 10px 8px 92px;
   }
   .u4h-card {
-    padding: 11px 10px;
+    padding: 12px 10px;
   }
   .u4h-kpi-grid {
     grid-template-columns: 1fr;

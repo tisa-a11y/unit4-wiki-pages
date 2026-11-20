@@ -1,6 +1,7 @@
 /* ============================================================================
    Unit 4 Interactive Plans — Unified Top Bar, Sibling Switcher & Print Bridge
-   Seamless ?lang= & ?theme= Handoff · Zero Storage · Zero External CDNs
+   Global App-Wide EN/ES & Dark/Light Sync (u4_lang / u4_theme + ?lang=/?theme=)
+   Classic Old Wiki Chrome · Zero External CDNs · Escape-Safe Popover
    ============================================================================ */
 (function () {
   "use strict";
@@ -80,17 +81,57 @@
     }
   ];
 
+  function readPref(key) {
+    try { return window.localStorage.getItem(key); } catch (_) { return null; }
+  }
+
+  function writePref(key, val) {
+    try { window.localStorage.setItem(key, val); } catch (_) {}
+  }
+
+  function resolveInitialLang(urlParams) {
+    var q = (urlParams.get("lang") || "").toLowerCase();
+    if (q === "es" || q.indexOf("es-") === 0 || q === "en" || q.indexOf("en-") === 0) {
+      var norm = q.indexOf("es") === 0 ? "es" : "en";
+      writePref("u4_lang", norm);
+      return norm;
+    }
+    var stored = (readPref("u4_lang") || "").toLowerCase();
+    if (stored === "es" || stored === "en") return stored;
+    return "en";
+  }
+
+  function resolveInitialTheme(urlParams) {
+    var q = (urlParams.get("theme") || "").toLowerCase();
+    if (q === "dark" || q === "light") {
+      writePref("u4_theme", q);
+      return q;
+    }
+    var stored = (readPref("u4_theme") || "").toLowerCase();
+    if (stored === "dark" || stored === "light") return stored;
+    try {
+      if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        return "dark";
+      }
+    } catch (_) {}
+    return "light";
+  }
+
   var params = new URLSearchParams(window.location.search || "");
   var state = {
     planId: "kitchen-floor-plan",
-    lang: (params.get("lang") || "").toLowerCase().indexOf("es") === 0 ? "es" : "en",
-    theme: (params.get("theme") || "").toLowerCase() === "dark" ? "dark" : "light",
+    lang: resolveInitialLang(params),
+    theme: resolveInitialTheme(params),
     mode: params.get("print") === "1" ? "blueprint" : "human",
     menuOpen: false,
     onLangChange: null,
     onThemeChange: null,
     headerEl: null
   };
+
+  /* Apply immediately on script execution to prevent light/dark flash */
+  document.documentElement.lang = state.lang;
+  document.documentElement.setAttribute("data-theme", state.theme);
 
   function getPlanMeta(id) {
     for (var i = 0; i < ALL_PLANS.length; i++) {
@@ -114,16 +155,22 @@
 
   function wikiBackUrl() {
     var m = getPlanMeta(state.planId);
-    return "../../index.html?lang=" + state.lang + "#" + m.roomHash;
+    return "../../index.html?lang=" + state.lang + "&theme=" + state.theme + "#" + m.roomHash;
+  }
+
+  function syncUrlSearchParams() {
+    try {
+      var next = new URLSearchParams(window.location.search || "");
+      next.set("lang", state.lang);
+      next.set("theme", state.theme);
+      var nextUrl = "?" + next.toString() + (window.location.hash || "");
+      window.history.replaceState(null, "", nextUrl);
+    } catch (_) {}
   }
 
   function applyThemeAndLang() {
     document.documentElement.lang = state.lang;
-    if (state.theme === "dark") {
-      document.documentElement.setAttribute("data-theme", "dark");
-    } else {
-      document.documentElement.removeAttribute("data-theme");
-    }
+    document.documentElement.setAttribute("data-theme", state.theme);
     if (window.U4LiveAi && typeof window.U4LiveAi.setLang === "function") {
       window.U4LiveAi.setLang(state.lang);
     }
@@ -173,6 +220,18 @@
     }, 120);
   }
 
+  function closeAllPlansMenu(returnFocus) {
+    if (!state.menuOpen) return;
+    state.menuOpen = false;
+    var pop = document.getElementById("u4hAllPlansPop");
+    var btn = document.getElementById("u4hAllPlansBtn");
+    if (pop) pop.hidden = true;
+    if (btn) {
+      btn.setAttribute("aria-expanded", "false");
+      if (returnFocus) btn.focus();
+    }
+  }
+
   function renderHeader() {
     var host = state.headerEl;
     if (!host) return;
@@ -192,7 +251,7 @@
     }
 
     var menuHtml = '<div class="u4h-plans-menu">' +
-      '<button type="button" id="u4hAllPlansBtn" class="u4h-plans-btn" aria-expanded="' + (state.menuOpen ? "true" : "false") + '">' +
+      '<button type="button" id="u4hAllPlansBtn" class="u4h-plans-btn" aria-expanded="' + (state.menuOpen ? "true" : "false") + '" aria-controls="u4hAllPlansPop">' +
         (es ? "Todos los planos ▾" : "All Plans ▾") +
       "</button>" +
       '<div id="u4hAllPlansPop" class="u4h-plans-pop"' + (state.menuOpen ? "" : " hidden") + ">" +
@@ -231,6 +290,8 @@
 
     document.getElementById("u4hLangBtn").addEventListener("click", function () {
       state.lang = state.lang === "en" ? "es" : "en";
+      writePref("u4_lang", state.lang);
+      syncUrlSearchParams();
       applyThemeAndLang();
       renderHeader();
       if (typeof state.onLangChange === "function") state.onLangChange(state.lang);
@@ -238,6 +299,8 @@
 
     document.getElementById("u4hThemeBtn").addEventListener("click", function () {
       state.theme = state.theme === "dark" ? "light" : "dark";
+      writePref("u4_theme", state.theme);
+      syncUrlSearchParams();
       applyThemeAndLang();
       renderHeader();
       if (typeof state.onThemeChange === "function") state.onThemeChange(state.theme);
@@ -251,9 +314,31 @@
     var pop = document.getElementById("u4hAllPlansPop");
     var btn = document.getElementById("u4hAllPlansBtn");
     if (pop && !pop.contains(ev.target) && btn && !btn.contains(ev.target)) {
-      state.menuOpen = false;
-      pop.hidden = true;
-      btn.setAttribute("aria-expanded", "false");
+      closeAllPlansMenu(false);
+    }
+  });
+
+  document.addEventListener("keydown", function (ev) {
+    if (ev.key === "Escape" && state.menuOpen) {
+      ev.preventDefault();
+      closeAllPlansMenu(true);
+    }
+  });
+
+  window.addEventListener("storage", function (ev) {
+    if (!ev || !ev.key) return;
+    if (ev.key === "u4_lang" && (ev.newValue === "en" || ev.newValue === "es") && ev.newValue !== state.lang) {
+      state.lang = ev.newValue;
+      syncUrlSearchParams();
+      applyThemeAndLang();
+      renderHeader();
+      if (typeof state.onLangChange === "function") state.onLangChange(state.lang);
+    } else if (ev.key === "u4_theme" && (ev.newValue === "light" || ev.newValue === "dark") && ev.newValue !== state.theme) {
+      state.theme = ev.newValue;
+      syncUrlSearchParams();
+      applyThemeAndLang();
+      renderHeader();
+      if (typeof state.onThemeChange === "function") state.onThemeChange(state.theme);
     }
   });
 
@@ -285,6 +370,7 @@
     getLang: function () { return state.lang; },
     getTheme: function () { return state.theme; },
     planUrl: planUrl,
+    wikiBackUrl: wikiBackUrl,
     renderHeader: renderHeader,
     setMode: setMode,
     triggerPrintPdf: triggerPrintPdf

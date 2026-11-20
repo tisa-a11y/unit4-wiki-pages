@@ -469,9 +469,9 @@
     const topStyle = placeBelow
       ? `top:calc(${pctY.toFixed(1)}% + ${m.r + 8}px);`
       : `bottom:calc(${(100 - pctY).toFixed(1)}% + ${m.r + 8}px);`;
-    const leftPct = Math.max(2, Math.min(24, pctX - 36));
+    const leftPct = Math.max(2, Math.min(50, pctX - 34));
     return `
-      <div class="pin-steer" id="activePinSteer" style="left:${leftPct.toFixed(1)}%;${topStyle}">
+      <div class="pin-steer" id="activePinSteer" style="left:clamp(8px, ${leftPct.toFixed(1)}%, calc(100% - 304px));${topStyle}">
         <div class="pin-steer-head">
           <div style="display:flex;align-items:center;gap:5px;min-width:0">
             <span class="mark-num" style="width:18px;height:18px;font-size:10px;background:var(--cobalt)">${idx + 1}</span>
@@ -698,6 +698,7 @@
     }
 
     function addMarkAt(pt) {
+      document.getElementById("u4gToast")?.classList.remove("show");
       const id = sheetKey + "-" + Date.now();
       marks.push({ id, x: pt.x, y: pt.y, r: 16, comment: "", reply: "", status: "" });
       state.selectedMarkId = id;
@@ -1318,8 +1319,10 @@
       // 1 stud bay centered on C/L = 14.5" wide = 31.2px (174.4..205.6) — FAR narrower than 64.5px hood!
       const blkW = +(14.5 * S).toFixed(1);               // 31.2px (1 stud bay!)
       const blkX = +(190 - blkW / 2).toFixed(1);         // 174.4
-      const lowTopY = +(floorY - 82.25 * S).toFixed(1);  // 2x10 top (82-1/4" AFF)
-      const lowBotY = +(floorY - 73.0 * S).toFixed(1);   // 2x10 bottom (73" AFF) -> 19.9px tall!
+      const lowBlkBotS1 = Math.max(70, Math.round((lineBAffNum - 4.5) * 4) / 4);
+      const lowBlkTopS1 = lowBlkBotS1 + 9.25;
+      const lowTopY = +(floorY - lowBlkTopS1 * S).toFixed(1);
+      const lowBotY = +(floorY - lowBlkBotS1 * S).toFixed(1);
       const upBotY = +(floorY - 116.0 * S).toFixed(1);   // 2x6 bottom (116" AFF) -> 11.8px tall!
       const lineBY = +(floorY - lineBAffNum * S).toFixed(1);
       const screwDx = +(4.922 * S).toFixed(1);           // half of 9-27/32" = 10.6px
@@ -1373,42 +1376,49 @@
               <text x="110" y="${(ceilY + 12).toFixed(1)}" text-anchor="end" font-size="7.2" font-weight="700" fill="#A15206">${es ? "BLOQUE 2×6 SUP." : "2×6 UPPER BLOCK"}</text>
               <text x="110" y="${(ceilY + 21).toFixed(1)}" text-anchor="end" font-size="6.7" font-family="monospace" fill="#78350F">${es ? '116"–121.5" · 1 claro' : '116"–121.5" · 1 bay'}</text>
 
-              <!-- COMPACT Lower 2x10 Wood Blocking (73"–82-1/4" AFF, 1 stud bay 14-1/2" W ONLY!) -->
-              <rect x="${blkX}" y="${lowTopY}" width="${blkW}" height="${(lowBotY - lowTopY).toFixed(1)}" fill="url(#woodHatch)" stroke="#A15206" stroke-width="1.2"/>
-              <line x1="114" y1="${((lowTopY + lowBotY) / 2).toFixed(1)}" x2="${blkX}" y2="${((lowTopY + lowBotY) / 2).toFixed(1)}" stroke="#A15206" stroke-width="0.9"/>
-              <text x="110" y="${((lowTopY + lowBotY) / 2 - 1).toFixed(1)}" text-anchor="end" font-size="7.2" font-weight="700" fill="#A15206">${es ? "BLOQUE 2×10 INF." : "2×10 LOWER BLOCK"}</text>
-              <text x="110" y="${((lowTopY + lowBotY) / 2 + 8).toFixed(1)}" text-anchor="end" font-size="6.7" font-family="monospace" fill="#78350F">${es ? '73"–82-1/4" · 1 claro' : '73"–82-1/4" · 1 bay'}</text>
+              <!-- COMPACT Lower 2x10 Wood Blocking (tracks hood height live!) -->
+              <rect id="ks4LowerBlkRect" x="${blkX}" y="${lowTopY}" width="${blkW}" height="${(lowBotY - lowTopY).toFixed(1)}" fill="url(#woodHatch)" stroke="#A15206" stroke-width="1.2"/>
+              <line id="ks4LowerBlkLine" x1="114" y1="${((lowTopY + lowBotY) / 2).toFixed(1)}" x2="${blkX}" y2="${((lowTopY + lowBotY) / 2).toFixed(1)}" stroke="#A15206" stroke-width="0.9"/>
+              <text id="ks4LowerBlkTxt1" x="110" y="${((lowTopY + lowBotY) / 2 - 1).toFixed(1)}" text-anchor="end" font-size="7.2" font-weight="700" fill="#A15206">${es ? "BLOQUE 2×10 INF." : "2×10 LOWER BLOCK"}</text>
+              <text id="ks4LowerBlkTxt2" x="110" y="${((lowTopY + lowBotY) / 2 + 8).toFixed(1)}" text-anchor="end" font-size="6.7" font-family="monospace" fill="#78350F">${fmtFrac(lowBlkBotS1)}"–${fmtFrac(lowBlkTopS1)}" · ${es ? "1 claro" : "1 bay"}</text>
 
               <!-- 8-5/8" Stainless Chimney Casing + 6" Centered Vertical Vent -->
-              <rect x="${(190 - shroudW / 2).toFixed(1)}" y="${ceilY}" width="${shroudW}" height="${Math.max(20, hoodTopY - ceilY).toFixed(1)}" fill="rgba(220,226,233,0.45)" stroke="#6E7D8C" stroke-dasharray="3 2"/>
-              <rect x="${(190 - ductW / 2).toFixed(1)}" y="${ceilY}" width="${ductW}" height="${Math.max(20, hoodTopY - ceilY).toFixed(1)}" fill="#E6F0F8" stroke="#184E77" stroke-width="1.2"/>
+              <rect id="ks4ShroudRect" x="${(190 - shroudW / 2).toFixed(1)}" y="${ceilY}" width="${shroudW}" height="${Math.max(20, hoodTopY - ceilY).toFixed(1)}" fill="rgba(220,226,233,0.45)" stroke="#6E7D8C" stroke-dasharray="3 2"/>
+              <rect id="ks4DuctRect" x="${(190 - ductW / 2).toFixed(1)}" y="${ceilY}" width="${ductW}" height="${Math.max(20, hoodTopY - ceilY).toFixed(1)}" fill="#E6F0F8" stroke="#184E77" stroke-width="1.2"/>
               <!-- Upper 8-5/8" Duct Cover Bracket -->
               <rect x="${(190 - shroudW / 2 + 1).toFixed(1)}" y="${(ceilY + 2).toFixed(1)}" width="${(shroudW - 2).toFixed(1)}" height="3" fill="#184E77"/>
 
-              <!-- 1-Gang 15A Hardwire Box (Right above canopy, 83"–86" off floor, hidden inside 8-5/8" casing!) -->
-              <rect x="${jboxX}" y="${jboxY}" width="${jboxW}" height="${jboxH}" fill="#1B6B46" stroke="#FFFFFF" stroke-width="0.7"/>
-              <line x1="${(Number(jboxX) + Number(jboxW)).toFixed(1)}" y1="${(Number(jboxY) + Number(jboxH) / 2).toFixed(1)}" x2="268" y2="96" stroke="#1B6B46" stroke-width="0.9"/>
+              <!-- 1-Gang 15A Hardwire Box (Right above canopy, hidden inside 8-5/8" casing!) -->
+              <rect id="ks4JboxRect" x="${jboxX}" y="${jboxY}" width="${jboxW}" height="${jboxH}" fill="#1B6B46" stroke="#FFFFFF" stroke-width="0.7"/>
+              <line id="ks4JboxLine" x1="${(Number(jboxX) + Number(jboxW)).toFixed(1)}" y1="${(Number(jboxY) + Number(jboxH) / 2).toFixed(1)}" x2="268" y2="96" stroke="#1B6B46" stroke-width="0.9"/>
               <text x="272" y="94" font-size="7.2" font-weight="700" fill="#1B6B46">${es ? "CAJA 1-GANG 15A" : "1-GANG 15A BOX"}</text>
-              <text x="272" y="103" font-size="6.7" font-family="monospace" fill="#1B6B46">${boxLowAff}"–${boxHighAff}" ${es ? "piso · oculta" : "floor · hidden"}</text>
+              <text id="ks4JboxSub" x="272" y="103" font-size="6.7" font-family="monospace" fill="#1B6B46">${boxLowAff}"–${boxHighAff}" ${es ? "piso · oculta" : "floor · hidden"}</text>
 
               <line x1="${(190 + shroudW / 2).toFixed(1)}" y1="62" x2="268" y2="62" stroke="#184E77" stroke-width="0.9"/>
               <text x="272" y="60" font-size="7.2" font-weight="700" fill="#184E77">${es ? 'CUBIERTA 8-5/8"' : '8-5/8" CASING'}</text>
               <text x="272" y="69" font-size="6.7" font-family="monospace" fill="#485563">${es ? 'Ducto 6" al centro' : '6" rigid vent centered'}</text>
 
               <!-- Exact 2 Zephyr Hanging Screws (9-27/32" spread) -->
-              <circle cx="${(190 - screwDx).toFixed(1)}" cy="${lineBY}" r="2.4" fill="#B42318" stroke="#FFFFFF" stroke-width="0.8"/>
-              <circle cx="${(190 + screwDx).toFixed(1)}" cy="${lineBY}" r="2.4" fill="#B42318" stroke="#FFFFFF" stroke-width="0.8"/>
+              <circle id="ks4ScrewL" cx="${(190 - screwDx).toFixed(1)}" cy="${lineBY}" r="2.4" fill="#B42318" stroke="#FFFFFF" stroke-width="0.8"/>
+              <circle id="ks4ScrewR" cx="${(190 + screwDx).toFixed(1)}" cy="${lineBY}" r="2.4" fill="#B42318" stroke="#FFFFFF" stroke-width="0.8"/>
 
-              <!-- Zephyr 30" Chimney Hood (exact 30" W x 10-3/4" H) -->
-              <polygon points="${(190 - shroudW / 2).toFixed(1)},${hoodTopY} ${(190 + shroudW / 2).toFixed(1)},${hoodTopY} ${(rangeX + rangeW).toFixed(1)},${hoodBottomY} ${rangeX},${hoodBottomY}" fill="rgba(220,226,233,0.78)" stroke="#131A22" stroke-width="1.3"/>
-              <text x="190" y="${(hoodBottomY - 4).toFixed(1)}" text-anchor="middle" font-size="6.8" font-weight="700" fill="#131A22">ZEPHYR 30"</text>
+              <!-- DIRECTLY DRAGGABLE Zephyr 30" Chimney Hood (2-way synced with #hoodRange 64"–74" AFF!) -->
+              <g id="ks4HoodDragHandle" class="u4-drag-ns" data-drag-hood="step1" tabindex="0" role="slider" aria-label="${es ? 'Arrastrar altura de campana Zephyr' : 'Drag Zephyr hood height'}" aria-valuemin="64" aria-valuemax="74" aria-valuenow="${state.hoodAff}">
+                <rect id="ks4HoodHit" x="${(rangeX - 8).toFixed(1)}" y="${(hoodTopY - 8).toFixed(1)}" width="${(rangeW + 16).toFixed(1)}" height="${(hoodBottomY - hoodTopY + 24).toFixed(1)}" fill="transparent"/>
+                <polygon id="ks4HoodPoly" class="u4-drag-grip" points="${(190 - shroudW / 2).toFixed(1)},${hoodTopY} ${(190 + shroudW / 2).toFixed(1)},${hoodTopY} ${(rangeX + rangeW).toFixed(1)},${hoodBottomY} ${rangeX},${hoodBottomY}" fill="rgba(220,226,233,0.86)" stroke="#184E77" stroke-width="1.6"/>
+                <text id="ks4HoodText" x="190" y="${(hoodBottomY - 4).toFixed(1)}" text-anchor="middle" font-size="6.8" font-weight="700" fill="#131A22" pointer-events="none">ZEPHYR 30"</text>
+                <g id="ks4HoodGrip" pointer-events="none">
+                  <rect x="167" y="${(hoodBottomY + 2.5).toFixed(1)}" width="46" height="11" rx="5.5" fill="#184E77"/>
+                  <text x="190" y="${(hoodBottomY + 10.3).toFixed(1)}" text-anchor="middle" font-size="6.0" font-weight="800" fill="#FFFFFF">${es ? "↕ MOVER" : "↕ DRAG"}</text>
+                </g>
+              </g>
 
               <!-- Live Clearance Dimension Arrow -->
-              <line x1="${(wallX0 + wallW + 14).toFixed(1)}" y1="${hoodBottomY}" x2="${(wallX0 + wallW + 14).toFixed(1)}" y2="${counterY}" stroke="${isPass ? '#184E77' : '#B42318'}" stroke-width="1.5"/>
-              <line x1="${(wallX0 + wallW + 9).toFixed(1)}" y1="${hoodBottomY}" x2="${(wallX0 + wallW + 19).toFixed(1)}" y2="${hoodBottomY}" stroke="${isPass ? '#184E77' : '#B42318'}" stroke-width="1.5"/>
-              <line x1="${(wallX0 + wallW + 9).toFixed(1)}" y1="${counterY}" x2="${(wallX0 + wallW + 19).toFixed(1)}" y2="${counterY}" stroke="${isPass ? '#184E77' : '#B42318'}" stroke-width="1.5"/>
-              <text x="${(wallX0 + wallW + 23).toFixed(1)}" y="${((hoodBottomY + counterY) / 2 - 1).toFixed(1)}" font-size="9.5" font-weight="700" font-family="monospace" fill="${isPass ? '#184E77' : '#B42318'}">${clearance}" ${es ? "libre" : "clear"}</text>
-              <text x="${(wallX0 + wallW + 23).toFixed(1)}" y="${((hoodBottomY + counterY) / 2 + 10).toFixed(1)}" font-size="7.8" fill="#485563">${state.hoodAff}" ${es ? "piso" : "floor"}</text>
+              <line id="ks4ClearLine" x1="${(wallX0 + wallW + 14).toFixed(1)}" y1="${hoodBottomY}" x2="${(wallX0 + wallW + 14).toFixed(1)}" y2="${counterY}" stroke="${isPass ? '#184E77' : '#B42318'}" stroke-width="1.5"/>
+              <line id="ks4ClearTopTick" x1="${(wallX0 + wallW + 9).toFixed(1)}" y1="${hoodBottomY}" x2="${(wallX0 + wallW + 19).toFixed(1)}" y2="${hoodBottomY}" stroke="${isPass ? '#184E77' : '#B42318'}" stroke-width="1.5"/>
+              <line id="ks4ClearBotTick" x1="${(wallX0 + wallW + 9).toFixed(1)}" y1="${counterY}" x2="${(wallX0 + wallW + 19).toFixed(1)}" y2="${counterY}" stroke="${isPass ? '#184E77' : '#B42318'}" stroke-width="1.5"/>
+              <text id="ks4ClearText" x="${(wallX0 + wallW + 23).toFixed(1)}" y="${((hoodBottomY + counterY) / 2 - 1).toFixed(1)}" font-size="9.5" font-weight="700" font-family="monospace" fill="${isPass ? '#184E77' : '#B42318'}">${clearance}" ${es ? "libre" : "clear"}</text>
+              <text id="ks4ClearFloorText" x="${(wallX0 + wallW + 23).toFixed(1)}" y="${((hoodBottomY + counterY) / 2 + 10).toFixed(1)}" font-size="7.8" fill="#485563">${state.hoodAff}" ${es ? "piso" : "floor"}</text>
 
               <!-- STRICTLY PROPORTIONAL BASE CABINETS (18" W x 36" H) & VIKING RANGE (30" W x 36" H) -->
               <rect x="${wallX0}" y="${counterY}" width="${cabW}" height="${cabH}" fill="#E6EEE8" stroke="#2D4A3E" stroke-width="1.3"/>
@@ -1435,13 +1445,13 @@
             <div class="slider-row">
               <label for="hoodRange">${t("hoodSlider")}</label>
               <input id="hoodRange" type="range" min="64" max="74" step="1" value="${state.hoodAff}">
-              <span class="slider-readout">${state.hoodAff}"</span>
+              <span id="ks4HoodReadout" class="slider-readout">${state.hoodAff}"</span>
             </div>
-            <div style="font-size:12px;color:var(--ink-2);font-family:var(--mono)">
+            <div id="ks4SubfloorSummary" style="font-size:12px;color:var(--ink-2);font-family:var(--mono)">
               ${es ? `Desde subpiso: ${subfloorAff}" · 2 tornillos de carga: ${lineBAff}" piso (${lineBSub}" subpiso)` : `Off bare subfloor: ${subfloorAff}" · 2 hanging screws: ${lineBAff}" off floor (${lineBSub}" off subfloor)`}
             </div>
             ${floorStatusControlHtml(es)}
-            <div class="status-strip ${statusCls}"><span>${statusTxt}</span></div>
+            <div id="ks4StatusStrip" class="status-strip ${statusCls}"><span>${statusTxt}</span></div>
           </div>
 
           ${markEditorAndListHtml("ks4-live")}
@@ -1462,11 +1472,138 @@
         </div>
       `;
 
-      document.getElementById("hoodRange").oninput = (e) => {
-        state.hoodAff = Number(e.target.value);
-        renderDrawer();
-        if (state.route === "kitchen-oven-range") renderPage();
+      function updateKs4Step1Live(newAff) {
+        const aff = Math.max(64, Math.min(74, Math.round(newAff)));
+        state.hoodAff = aff;
+        const hBotY = +(floorY - aff * S).toFixed(1);
+        const hTopY = +(hBotY - 10.75 * S).toFixed(1);
+        const lbAffNum = aff + 9.5625;
+        const lbY = +(floorY - lbAffNum * S).toFixed(1);
+        const lbBot = Math.max(70, Math.round((lbAffNum - 4.5) * 4) / 4);
+        const lbTop = lbBot + 9.25;
+        const lTopY = +(floorY - lbTop * S).toFixed(1);
+        const lBotY = +(floorY - lbBot * S).toFixed(1);
+        const bLow = Math.max(82, Math.round(aff + 15));
+        const bHigh = bLow + 3;
+        const jbY = +(floorY - bHigh * S).toFixed(1);
+        const clr = aff - 36;
+        const ok = clr >= 30 && clr <= 36;
+        const col = ok ? "#184E77" : "#B42318";
+
+        const poly = document.getElementById("ks4HoodPoly");
+        if (poly) poly.setAttribute("points", `${(190 - shroudW / 2).toFixed(1)},${hTopY} ${(190 + shroudW / 2).toFixed(1)},${hTopY} ${(rangeX + rangeW).toFixed(1)},${hBotY} ${rangeX},${hBotY}`);
+        const hTxt = document.getElementById("ks4HoodText");
+        if (hTxt) hTxt.setAttribute("y", (hBotY - 4).toFixed(1));
+        const hHit = document.getElementById("ks4HoodHit");
+        if (hHit) { hHit.setAttribute("y", (hTopY - 8).toFixed(1)); hHit.setAttribute("height", (hBotY - hTopY + 24).toFixed(1)); }
+        const hGrip = document.getElementById("ks4HoodGrip");
+        if (hGrip) {
+          const r = hGrip.querySelector("rect"), tx = hGrip.querySelector("text");
+          if (r) r.setAttribute("y", (hBotY + 2.5).toFixed(1));
+          if (tx) tx.setAttribute("y", (hBotY + 10.3).toFixed(1));
+        }
+        const sh = document.getElementById("ks4ShroudRect");
+        if (sh) sh.setAttribute("height", Math.max(20, hTopY - ceilY).toFixed(1));
+        const dt = document.getElementById("ks4DuctRect");
+        if (dt) dt.setAttribute("height", Math.max(20, hTopY - ceilY).toFixed(1));
+        const scL = document.getElementById("ks4ScrewL"), scR = document.getElementById("ks4ScrewR");
+        if (scL) scL.setAttribute("cy", lbY);
+        if (scR) scR.setAttribute("cy", lbY);
+        const jb = document.getElementById("ks4JboxRect"), jbl = document.getElementById("ks4JboxLine"), jbs = document.getElementById("ks4JboxSub");
+        if (jb) jb.setAttribute("y", jbY);
+        if (jbl) jbl.setAttribute("y1", (jbY + Number(jboxH) / 2).toFixed(1));
+        if (jbs) jbs.textContent = `${bLow}"–${bHigh}" ${es ? "piso · oculta" : "floor · hidden"}`;
+        const lbR = document.getElementById("ks4LowerBlkRect"), lbLn = document.getElementById("ks4LowerBlkLine");
+        const lbT1 = document.getElementById("ks4LowerBlkTxt1"), lbT2 = document.getElementById("ks4LowerBlkTxt2");
+        const lbMid = ((lTopY + lBotY) / 2).toFixed(1);
+        if (lbR) { lbR.setAttribute("y", lTopY); lbR.setAttribute("height", (lBotY - lTopY).toFixed(1)); }
+        if (lbLn) { lbLn.setAttribute("y1", lbMid); lbLn.setAttribute("y2", lbMid); }
+        if (lbT1) lbT1.setAttribute("y", (Number(lbMid) - 1).toFixed(1));
+        if (lbT2) { lbT2.setAttribute("y", (Number(lbMid) + 8).toFixed(1)); lbT2.textContent = `${fmtFrac(lbBot)}"–${fmtFrac(lbTop)}" · ${es ? "1 claro" : "1 bay"}`; }
+
+        const clL = document.getElementById("ks4ClearLine"), clT = document.getElementById("ks4ClearTopTick"), clB = document.getElementById("ks4ClearBotTick");
+        const clTx = document.getElementById("ks4ClearText"), clFl = document.getElementById("ks4ClearFloorText");
+        if (clL) { clL.setAttribute("y1", hBotY); clL.setAttribute("stroke", col); }
+        if (clT) { clT.setAttribute("y1", hBotY); clT.setAttribute("y2", hBotY); clT.setAttribute("stroke", col); }
+        if (clB) clB.setAttribute("stroke", col);
+        if (clTx) { clTx.setAttribute("y", ((hBotY + counterY) / 2 - 1).toFixed(1)); clTx.setAttribute("fill", col); clTx.textContent = `${clr}" ${es ? "libre" : "clear"}`; }
+        if (clFl) { clFl.setAttribute("y", ((hBotY + counterY) / 2 + 10).toFixed(1)); clFl.textContent = `${aff}" ${es ? "piso" : "floor"}`; }
+
+        const rng = document.getElementById("hoodRange");
+        if (rng) rng.value = String(aff);
+        const ro = document.getElementById("ks4HoodReadout");
+        if (ro) ro.textContent = `${aff}"`;
+        const subEl = document.getElementById("ks4SubfloorSummary");
+        if (subEl) {
+          const sf = fmtFrac(aff + effT);
+          const lbA = fmtFrac(lbAffNum);
+          const lbS = fmtFrac(lbAffNum + effT);
+          subEl.textContent = es
+            ? `Desde subpiso: ${sf}" · 2 tornillos de carga: ${lbA}" piso (${lbS}" subpiso)`
+            : `Off bare subfloor: ${sf}" · 2 hanging screws: ${lbA}" off floor (${lbS}" off subfloor)`;
+        }
+        const stEl = document.getElementById("ks4StatusStrip");
+        if (stEl) {
+          stEl.className = "status-strip " + (ok ? "pass" : "fail");
+          stEl.innerHTML = `<span>${clr < 30 ? t("failLow", clr) : (ok ? t("passViking", clr) : t("failHigh", clr))}</span>`;
+        }
+        const dh = document.getElementById("ks4HoodDragHandle");
+        if (dh) dh.setAttribute("aria-valuenow", String(aff));
+      }
+
+      const hoodRangeEl = document.getElementById("hoodRange");
+      hoodRangeEl.oninput = (e) => {
+        updateKs4Step1Live(Number(e.target.value));
       };
+      hoodRangeEl.onchange = () => {
+        renderDrawer();
+      };
+
+      const hoodDragEl = document.getElementById("ks4HoodDragHandle");
+      const ks4SvgEl = document.getElementById("ks4Svg");
+      const ks4WrapEl = document.getElementById("ks4SvgWrap");
+      if (hoodDragEl && ks4SvgEl) {
+        hoodDragEl.addEventListener("pointerdown", (e) => {
+          if (ks4WrapEl && ks4WrapEl.classList.contains("drop-target")) return;
+          if (e.button !== undefined && e.button !== 0 && e.pointerType === "mouse") return;
+          e.preventDefault();
+          e.stopPropagation();
+          const pointerId = e.pointerId;
+          const startAff = state.hoodAff;
+          const rect = ks4SvgEl.getBoundingClientRect();
+          const pxPerSvgY = (rect.height || 310) / 310;
+          const startClientY = e.clientY;
+          hoodDragEl.classList.add("is-dragging");
+          try { hoodDragEl.setPointerCapture(pointerId); } catch (_) {}
+          const blockScroll = (tev) => { if (tev.cancelable) tev.preventDefault(); };
+          window.addEventListener("touchmove", blockScroll, { passive: false });
+
+          function onMove(ev) {
+            if (ev.pointerId !== pointerId) return;
+            const deltaSvgY = (ev.clientY - startClientY) / (pxPerSvgY || 1);
+            const deltaIn = -deltaSvgY / S;
+            updateKs4Step1Live(startAff + deltaIn);
+          }
+          function finish(ev) {
+            if (ev && ev.pointerId !== pointerId) return;
+            hoodDragEl.classList.remove("is-dragging");
+            document.removeEventListener("pointermove", onMove);
+            document.removeEventListener("pointerup", finish);
+            document.removeEventListener("pointercancel", finish);
+            window.removeEventListener("touchmove", blockScroll);
+            try { if (hoodDragEl.hasPointerCapture && hoodDragEl.hasPointerCapture(pointerId)) hoodDragEl.releasePointerCapture(pointerId); } catch (_) {}
+            renderDrawer();
+          }
+          document.addEventListener("pointermove", onMove);
+          document.addEventListener("pointerup", finish);
+          document.addEventListener("pointercancel", finish);
+        });
+        hoodDragEl.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowUp" || e.key === "ArrowRight") { e.preventDefault(); updateKs4Step1Live(state.hoodAff + 1); }
+          if (e.key === "ArrowDown" || e.key === "ArrowLeft") { e.preventDefault(); updateKs4Step1Live(state.hoodAff - 1); }
+        });
+      }
+
       wireFloorStatusControls();
       wireCalcMaterials();
       wireInteractiveSvgMarks("ks4-live", "ks4Svg", "ks4SvgWrap");
@@ -1553,31 +1690,34 @@
               <rect x="${blkX0}" y="140" width="${blkW}" height="68" fill="url(#woodHatchS1)" stroke="#A15206" stroke-width="1.8"/>
               ${is2Bay ? `<rect x="186" y="140" width="8" height="68" fill="#EFE6D8" stroke="#BEA98D" stroke-width="1"/>` : ""}
               <rect x="74" y="121" width="232" height="15" rx="3" fill="#FFFFFF" fill-opacity="0.96"/>
-              <text x="190" y="131.5" text-anchor="middle" font-size="6.9" font-weight="700" fill="#78350F">${es ? `BLOQUE 2×10 INF.: ${fmtFrac(lowBlkBotAff)}"–${fmtFrac(lowBlkTopAff)}" piso (Sub: ${lowSub})` : `2×10 LOWER BLOCK: ${fmtFrac(lowBlkBotAff)}"–${fmtFrac(lowBlkTopAff)}" floor (Sub: ${lowSub})`}</text>
+              <text id="s1LowBlockText" x="190" y="131.5" text-anchor="middle" font-size="6.9" font-weight="700" fill="#78350F">${es ? `BLOQUE 2×10 INF.: ${fmtFrac(lowBlkBotAff)}"–${fmtFrac(lowBlkTopAff)}" piso (Sub: ${lowSub})` : `2×10 LOWER BLOCK: ${fmtFrac(lowBlkBotAff)}"–${fmtFrac(lowBlkTopAff)}" floor (Sub: ${lowSub})`}</text>
 
-              <!-- EXACT 2 ZEPHYR HANGING SCREWS -->
-              <line x1="112" y1="${lineBY}" x2="268" y2="${lineBY}" stroke="#B42318" stroke-width="1" stroke-dasharray="3 2"/>
-              <circle cx="163.4" cy="${lineBY}" r="5.5" fill="rgba(180,35,24,0.16)" stroke="#B42318" stroke-width="1.8"/>
-              <circle cx="163.4" cy="${lineBY}" r="2" fill="#B42318"/>
-              <circle cx="216.6" cy="${lineBY}" r="5.5" fill="rgba(180,35,24,0.16)" stroke="#B42318" stroke-width="1.8"/>
-              <circle cx="216.6" cy="${lineBY}" r="2" fill="#B42318"/>
+              <!-- DIRECTLY DRAGGABLE ZEPHYR HANGING SCREW BAR (2-way synced with #s1HoodRange 66"–72" AFF!) -->
+              <g id="s1ScrewDragHandle" class="u4-drag-ns" data-drag-hood="step2" tabindex="0" role="slider" aria-label="${es ? 'Arrastrar altura de tornillos de carga' : 'Drag hood hanging screw height'}" aria-valuemin="66" aria-valuemax="72" aria-valuenow="${Math.max(66, Math.min(72, state.hoodAff))}" transform="translate(0, 0)">
+                <rect x="108" y="${lineBY - 16}" width="164" height="54" fill="transparent"/>
+                <line x1="112" y1="${lineBY}" x2="268" y2="${lineBY}" stroke="#B42318" stroke-width="1.4" stroke-dasharray="3 2"/>
+                <circle class="u4-drag-grip" cx="163.4" cy="${lineBY}" r="5.5" fill="rgba(180,35,24,0.18)" stroke="#B42318" stroke-width="1.8"/>
+                <circle cx="163.4" cy="${lineBY}" r="2" fill="#B42318"/>
+                <circle class="u4-drag-grip" cx="216.6" cy="${lineBY}" r="5.5" fill="rgba(180,35,24,0.18)" stroke="#B42318" stroke-width="1.8"/>
+                <circle cx="216.6" cy="${lineBY}" r="2" fill="#B42318"/>
 
-              <line x1="163.4" y1="${lineBY + 17}" x2="216.6" y2="${lineBY + 17}" stroke="#B42318" stroke-width="1.4"/>
-              <line x1="163.4" y1="${lineBY + 12}" x2="163.4" y2="${lineBY + 22}" stroke="#B42318" stroke-width="1.4"/>
-              <line x1="216.6" y1="${lineBY + 12}" x2="216.6" y2="${lineBY + 22}" stroke="#B42318" stroke-width="1.4"/>
-              <rect x="145" y="${lineBY + 21}" width="90" height="14" rx="3" fill="#FEECEB" stroke="#B42318" stroke-width="0.9"/>
-              <text x="190" y="${lineBY + 31}" text-anchor="middle" font-size="7.6" font-weight="700" font-family="monospace" fill="#B42318">${es ? '9-27/32" SEPARAC.' : '9-27/32" SPREAD'}</text>
+                <line x1="163.4" y1="${lineBY + 17}" x2="216.6" y2="${lineBY + 17}" stroke="#B42318" stroke-width="1.4"/>
+                <line x1="163.4" y1="${lineBY + 12}" x2="163.4" y2="${lineBY + 22}" stroke="#B42318" stroke-width="1.4"/>
+                <line x1="216.6" y1="${lineBY + 12}" x2="216.6" y2="${lineBY + 22}" stroke="#B42318" stroke-width="1.4"/>
+                <rect x="139" y="${lineBY + 21}" width="102" height="15" rx="4" fill="#FEECEB" stroke="#B42318" stroke-width="1.1"/>
+                <text x="190" y="${lineBY + 31.2}" text-anchor="middle" font-size="7.2" font-weight="800" font-family="monospace" fill="#B42318">↕ ${es ? '9-27/32" · MOVER' : '9-27/32" · DRAG'}</text>
 
-              <text x="104" y="${lineBY - 3}" text-anchor="end" font-size="7.2" font-weight="700" fill="#B42318">${es ? "TORNILLO IZQ." : "LEFT SCREW"}</text>
-              <text x="104" y="${lineBY + 7}" text-anchor="end" font-size="7" font-family="monospace" fill="#131A22">${es ? '28-1/16" del Sur' : '28-1/16" from S'}</text>
-              <text x="104" y="${lineBY + 16}" text-anchor="end" font-size="6.7" fill="#485563">${es ? '(Centro − 4-15/16")' : '(Center − 4-15/16")'}</text>
+                <text x="104" y="${lineBY - 3}" text-anchor="end" font-size="7.2" font-weight="700" fill="#B42318">${es ? "TORNILLO IZQ." : "LEFT SCREW"}</text>
+                <text x="104" y="${lineBY + 7}" text-anchor="end" font-size="7" font-family="monospace" fill="#131A22">${es ? '28-1/16" del Sur' : '28-1/16" from S'}</text>
+                <text x="104" y="${lineBY + 16}" text-anchor="end" font-size="6.7" fill="#485563">${es ? '(Centro − 4-15/16")' : '(Center − 4-15/16")'}</text>
 
-              <text x="276" y="${lineBY - 3}" font-size="7.2" font-weight="700" fill="#B42318">${es ? "TORNILLO DER." : "RIGHT SCREW"}</text>
-              <text x="276" y="${lineBY + 7}" font-size="7" font-family="monospace" fill="#131A22">${es ? '37-15/16" del Sur' : '37-15/16" from S'}</text>
-              <text x="276" y="${lineBY + 16}" font-size="6.7" fill="#485563">${es ? '(Centro + 4-15/16")' : '(Center + 4-15/16")'}</text>
+                <text x="276" y="${lineBY - 3}" font-size="7.2" font-weight="700" fill="#B42318">${es ? "TORNILLO DER." : "RIGHT SCREW"}</text>
+                <text x="276" y="${lineBY + 7}" font-size="7" font-family="monospace" fill="#131A22">${es ? '37-15/16" del Sur' : '37-15/16" from S'}</text>
+                <text x="276" y="${lineBY + 16}" font-size="6.7" fill="#485563">${es ? '(Centro + 4-15/16")' : '(Center + 4-15/16")'}</text>
+              </g>
 
               <line x1="109" y1="254" x2="271" y2="254" stroke="#184E77" stroke-width="1.6"/>
-              <text x="190" y="267" text-anchor="middle" font-size="7.4" font-weight="700" font-family="monospace" fill="#184E77">${es ? `BASE CAMPANA: ${state.hoodAff}" piso · 2 TORNILLOS: ${lineBAff}" (${lineBSub}" subpiso)` : `HOOD BOTTOM: ${state.hoodAff}" off floor · 2 SCREWS: ${lineBAff}" (${lineBSub}" subfloor)`}</text>
+              <text id="s1FooterReadout" x="190" y="267" text-anchor="middle" font-size="7.4" font-weight="700" font-family="monospace" fill="#184E77">${es ? `BASE CAMPANA: ${state.hoodAff}" piso · 2 TORNILLOS: ${lineBAff}" (${lineBSub}" subpiso)` : `HOOD BOTTOM: ${state.hoodAff}" off floor · 2 SCREWS: ${lineBAff}" (${lineBSub}" subfloor)`}</text>
               <text x="190" y="280" text-anchor="middle" font-size="7.1" fill="#485563">${es ? 'Al ras de postes para HardieBacker 1/2" + azulejo (~1") · tornillos 2-1/2"–3"' : 'Flush w/ studs for 1/2" HardieBacker + tile (~1" buildup) · use 2-1/2"–3" screws'}</text>
 
               ${svgMarksHtml("hood-s1")}
@@ -1589,7 +1729,7 @@
             <div class="slider-row">
               <label for="s1HoodRange">${es ? "Altura elegida (borde inferior):" : "Chosen hood bottom height:"}</label>
               <input id="s1HoodRange" type="range" min="66" max="72" step="1" value="${Math.max(66, Math.min(72, state.hoodAff))}">
-              <span class="slider-readout">${state.hoodAff}" ${es ? "piso" : "off floor"}</span>
+              <span id="s1HoodReadout" class="slider-readout">${state.hoodAff}" ${es ? "piso" : "off floor"}</span>
             </div>
             <div class="slider-row">
               <span>${es ? "Cómo caen los postes:" : "Where the wall studs fall:"}</span>
@@ -1643,11 +1783,82 @@
         </div>
       `;
 
-      document.getElementById("s1HoodRange").oninput = (e) => {
-        state.hoodAff = Number(e.target.value);
-        renderDrawer();
-        if (state.route === "kitchen-oven-range") renderPage();
-      };
+      const s1InitLineBY = lineBY;
+      function updateKs4Step2Live(newAff) {
+        const aff = Math.max(66, Math.min(72, Math.round(newAff)));
+        state.hoodAff = aff;
+        const targetY = Math.max(150, Math.min(204, Math.round(176 - (aff - 68) * 3.5)));
+        const dy = targetY - s1InitLineBY;
+        const gEl = document.getElementById("s1ScrewDragHandle");
+        if (gEl) {
+          gEl.setAttribute("transform", `translate(0, ${dy})`);
+          gEl.setAttribute("aria-valuenow", String(aff));
+        }
+        const lbNum = aff + 9.5625;
+        const lbA = fmtFrac(lbNum);
+        const lbS = fmtFrac(lbNum + effT);
+        const lbBot = Math.max(70, Math.round((lbNum - 4.5) * 4) / 4);
+        const lbTop = lbBot + 9.25;
+        const lSub = `${fmtFrac(lbBot + effT)}"–${fmtFrac(lbTop + effT)}"`;
+        const rng = document.getElementById("s1HoodRange");
+        if (rng) rng.value = String(aff);
+        const ro = document.getElementById("s1HoodReadout");
+        if (ro) ro.textContent = `${aff}" ${es ? "piso" : "off floor"}`;
+        const lbl = document.getElementById("s1LowBlockText");
+        if (lbl) lbl.textContent = es ? `BLOQUE 2×10 INF.: ${fmtFrac(lbBot)}"–${fmtFrac(lbTop)}" piso (Sub: ${lSub})` : `2×10 LOWER BLOCK: ${fmtFrac(lbBot)}"–${fmtFrac(lbTop)}" floor (Sub: ${lSub})`;
+        const ft = document.getElementById("s1FooterReadout");
+        if (ft) ft.textContent = es ? `BASE CAMPANA: ${aff}" piso · 2 TORNILLOS: ${lbA}" (${lbS}" subpiso)` : `HOOD BOTTOM: ${aff}" off floor · 2 SCREWS: ${lbA}" (${lbS}" subfloor)`;
+      }
+
+      const s1RangeEl = document.getElementById("s1HoodRange");
+      s1RangeEl.oninput = (e) => updateKs4Step2Live(Number(e.target.value));
+      s1RangeEl.onchange = () => renderDrawer();
+
+      const s1DragEl = document.getElementById("s1ScrewDragHandle");
+      const s1SvgEl = document.getElementById("s1Svg");
+      const s1WrapEl = document.getElementById("s1SvgWrap");
+      if (s1DragEl && s1SvgEl) {
+        s1DragEl.addEventListener("pointerdown", (e) => {
+          if (s1WrapEl && s1WrapEl.classList.contains("drop-target")) return;
+          if (e.button !== undefined && e.button !== 0 && e.pointerType === "mouse") return;
+          e.preventDefault();
+          e.stopPropagation();
+          const pointerId = e.pointerId;
+          const startAff = Math.max(66, Math.min(72, state.hoodAff));
+          const rect = s1SvgEl.getBoundingClientRect();
+          const pxPerSvgY = (rect.height || 310) / 310;
+          const startClientY = e.clientY;
+          s1DragEl.classList.add("is-dragging");
+          try { s1DragEl.setPointerCapture(pointerId); } catch (_) {}
+          const blockScroll = (tev) => { if (tev.cancelable) tev.preventDefault(); };
+          window.addEventListener("touchmove", blockScroll, { passive: false });
+
+          function onMove(ev) {
+            if (ev.pointerId !== pointerId) return;
+            const deltaSvgY = (ev.clientY - startClientY) / (pxPerSvgY || 1);
+            const deltaIn = -deltaSvgY / 3.5;
+            updateKs4Step2Live(startAff + deltaIn);
+          }
+          function finish(ev) {
+            if (ev && ev.pointerId !== pointerId) return;
+            s1DragEl.classList.remove("is-dragging");
+            document.removeEventListener("pointermove", onMove);
+            document.removeEventListener("pointerup", finish);
+            document.removeEventListener("pointercancel", finish);
+            window.removeEventListener("touchmove", blockScroll);
+            try { if (s1DragEl.hasPointerCapture && s1DragEl.hasPointerCapture(pointerId)) s1DragEl.releasePointerCapture(pointerId); } catch (_) {}
+            renderDrawer();
+          }
+          document.addEventListener("pointermove", onMove);
+          document.addEventListener("pointerup", finish);
+          document.addEventListener("pointercancel", finish);
+        });
+        s1DragEl.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowUp" || e.key === "ArrowRight") { e.preventDefault(); updateKs4Step2Live(state.hoodAff + 1); }
+          if (e.key === "ArrowDown" || e.key === "ArrowLeft") { e.preventDefault(); updateKs4Step2Live(state.hoodAff - 1); }
+        });
+      }
+
       wireFloorStatusControls();
       wireCalcMaterials();
       document.querySelectorAll("[data-studs]").forEach(b => b.onclick = () => { state.studLayout = b.dataset.studs; renderDrawer(); });
@@ -2825,6 +3036,11 @@
           renderTopChrome();
         }
       });
+      state.lang = window.U4PlanNav.getLang() === "es" ? "es" : "en";
+      state.theme = window.U4PlanNav.getTheme() === "dark" ? "dark" : "light";
+      if (window.U4PLAN && typeof window.U4PLAN.setLang === "function") {
+        try { window.U4PLAN.setLang(state.lang); } catch (_) {}
+      }
     }
     if (window.U4LiveAi) {
       window.U4LiveAi.init({

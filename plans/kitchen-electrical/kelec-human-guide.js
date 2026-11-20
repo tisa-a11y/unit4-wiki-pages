@@ -82,7 +82,9 @@
     floorDown: false,       // false = bare subfloor (+3/4"), true = finished floor
     sinkCtrl: "optA",       // "optA" (air button + wireless) | "optB" (wired 2-gang @ 70")
     taskLights: "3task",    // "3task" | "2pendant"
-    wallTab: "east",        // "east" | "south" | "west" | "north"
+    wallTab: "south",       // "east" | "south" | "west" | "north"
+    pieStart: 26.0,         // 18..40 in from SE (width 33")
+    sinkStart: 75.0,        // 70..80 in from SE (width 30")
     selectedCircuit: "SA-A",
     showUnitSlots: false,
     equipOpen: false,
@@ -113,6 +115,15 @@
     return state.floorDown ? 0 : 0.75;
   }
 
+  function syncHiddenSouthRanges() {
+    try {
+      var rp = document.getElementById("rng-piesafe");
+      if (rp) { rp.value = String(state.pieStart); rp.dispatchEvent(new Event("input", { bubbles: true })); }
+      var rs = document.getElementById("rng-sink");
+      if (rs) { rs.value = String(state.sinkStart); rs.dispatchEvent(new Event("input", { bubbles: true })); }
+    } catch (_) {}
+  }
+
   function syncUnderlyingPrint() {
     try {
       if (window.U4PLAN && typeof window.U4PLAN.setFloorCondition === "function") {
@@ -121,6 +132,7 @@
       if (window.U4PLAN && typeof window.U4PLAN.selectCircuit === "function") {
         window.U4PLAN.selectCircuit(state.selectedCircuit);
       }
+      syncHiddenSouthRanges();
     } catch (_) {}
   }
 
@@ -227,8 +239,8 @@
         '<text x="' + (xEast - 65 * S).toFixed(1) + '" y="' + (ySouth - 7.5).toFixed(1) + '" text-anchor="middle" font-size="6.4" font-weight="800" fill="#184E77">S2</text>' +
       "</g>" +
       '<g data-cir="DW" style="cursor:pointer">' +
-        '<rect x="' + (xEast - 98 * S).toFixed(1) + '" y="' + (ySouth - 40).toFixed(1) + '" width="54" height="20" rx="4" fill="#FDF2E4" stroke="#A15206" stroke-width="1.6"/>' +
-        '<text x="' + (xEast - 98 * S + 27).toFixed(1) + '" y="' + (ySouth - 27).toFixed(1) + '" text-anchor="middle" font-size="7" font-weight="800" fill="#A15206">DW-GD 79"</text>' +
+        '<rect x="' + (xEast - (state.sinkStart + 23) * S).toFixed(1) + '" y="' + (ySouth - 40).toFixed(1) + '" width="56" height="20" rx="4" fill="#FDF2E4" stroke="#A15206" stroke-width="1.6"/>' +
+        '<text x="' + (xEast - (state.sinkStart + 23) * S + 28).toFixed(1) + '" y="' + (ySouth - 27).toFixed(1) + '" text-anchor="middle" font-size="7" font-weight="800" fill="#A15206">DW-GD ' + fmtIn(state.sinkStart + 4) + '</text>' +
       "</g>" +
 
       // Ceiling Main Light + Task/Pendants + North SW-ENTRY
@@ -269,7 +281,76 @@
       "</div>";
     }
     if (state.wallTab === "south") {
-      return '<div class="u4h-photo-grid">' +
+      var Sx = 3.2; // 115" -> 368px starting at x0=44
+      var x0 = 44;
+      var pieX = x0 + state.pieStart * Sx;
+      var pieW = 33 * Sx;
+      var sinkX = x0 + state.sinkStart * Sx;
+      var sinkW = 30 * Sx;
+      var dwgdX = x0 + (state.sinkStart + 4) * Sx;
+      var pieClashS1 = state.pieStart < 25;
+      var pieClashS2 = (state.pieStart + 33) > 64;
+      var sinkClash = (state.sinkStart + 30) > 108;
+      var southSvg =
+        '<div class="u4h-svg-hint"><span>' + (es ? '✋ Arrastra la Alacena o el Gabinete de Tarja directo sobre el muro Sur (o usa las barras abajo) para probar contactos:' : '✋ Drag the Pie-Safe or 30" Sink Base directly along the South wall (or slide below) to check outlet clearances:') + "</span></div>" +
+        '<div class="u4h-svg-wrap">' +
+          '<svg id="kelecSouthSvg" viewBox="0 0 460 245" xmlns="http://www.w3.org/2000/svg">' +
+            '<text x="230" y="18" text-anchor="middle" font-size="9.6" font-weight="800" fill="#184E77">' + (es ? 'MURO SUR ELÉCTRICO · SE 0" → OESTE (CHAMBRANA 114")' : 'SOUTH WALL ELECTRICAL · SE 0" → WEST (REAR DOOR 114")') + "</text>" +
+            '<line x1="34" y1="32" x2="432" y2="32" stroke="#131A22" stroke-width="1.6"/>' +
+            '<line x1="34" y1="210" x2="432" y2="210" stroke="#131A22" stroke-width="2.2"/>' +
+            // Countertop 36" line
+            '<line x1="34" y1="154" x2="426" y2="154" stroke="#6E7D8C" stroke-width="1.2" stroke-dasharray="4 3"/>' +
+            // South Window reference (72.87" - 106.68")
+            '<rect x="' + (x0 + 72.87 * Sx).toFixed(1) + '" y="48" width="' + (33.81 * Sx).toFixed(1) + '" height="88" fill="#E6F0F8" stroke="#184E77" stroke-width="1.4"/>' +
+            '<text x="' + (x0 + 89.78 * Sx).toFixed(1) + '" y="96" text-anchor="middle" font-size="8" font-weight="800" fill="#184E77">' + (es ? "VENTANA" : "WINDOW") + "</text>" +
+            // Fixed counter outlets S1 @ 24" & S2 @ 65"
+            '<rect x="' + (x0 + 24 * Sx - 7).toFixed(1) + '" y="136" width="14" height="12" rx="2" fill="#184E77"/>' +
+            '<text x="' + (x0 + 24 * Sx).toFixed(1) + '" y="144.5" text-anchor="middle" font-size="6.4" font-weight="800" fill="#FFFFFF">S1</text>' +
+            '<rect x="' + (x0 + 65 * Sx - 7).toFixed(1) + '" y="136" width="14" height="12" rx="2" fill="#184E77"/>' +
+            '<text x="' + (x0 + 65 * Sx).toFixed(1) + '" y="144.5" text-anchor="middle" font-size="6.4" font-weight="800" fill="#FFFFFF">S2</text>' +
+            // DRAGGABLE Pie-Safe (33" W)
+            '<g id="kelecPieDrag" class="u4-drag-ew" tabindex="0" role="slider" aria-label="' + esc(es ? "Arrastrar alacena existente" : "Drag recessed pie-safe") + '" aria-valuemin="18" aria-valuemax="40" aria-valuenow="' + state.pieStart + '" transform="translate(' + pieX.toFixed(1) + ', 0)">' +
+              '<rect class="u4-drag-grip" x="0" y="76" width="' + pieW.toFixed(1) + '" height="68" rx="4" fill="' + (pieClashS1 || pieClashS2 ? "#FEECEB" : "#FDF2E4") + '" stroke="' + (pieClashS1 || pieClashS2 ? "#B42318" : "#A15206") + '" stroke-width="1.8" stroke-dasharray="5 3"/>' +
+              '<text x="' + (pieW / 2).toFixed(1) + '" y="98" text-anchor="middle" font-size="8" font-weight="800" fill="' + (pieClashS1 || pieClashS2 ? "#B42318" : "#A15206") + '" pointer-events="none">' + (es ? 'ALACENA 33"' : 'PIE-SAFE 33"') + "</text>" +
+              '<text id="kelecPieSvgLbl" x="' + (pieW / 2).toFixed(1) + '" y="111" text-anchor="middle" font-size="7.2" font-weight="700" fill="#485563" pointer-events="none">' + fmtIn(state.pieStart) + "–" + fmtIn(state.pieStart + 33) + "</text>" +
+              '<rect x="' + (pieW / 2 - 26).toFixed(1) + '" y="120" width="52" height="13" rx="6" fill="#A15206" pointer-events="none"/>' +
+              '<text x="' + (pieW / 2).toFixed(1) + '" y="129" text-anchor="middle" font-size="6.3" font-weight="800" fill="#FFFFFF" pointer-events="none">' + (es ? "↔ MOVER" : "↔ DRAG") + "</text>" +
+            "</g>" +
+            // DRAGGABLE 30" Sink Base + DW-GD Box inside
+            '<g id="kelecSinkDrag" class="u4-drag-ew" tabindex="0" role="slider" aria-label="' + esc(es ? "Arrastrar gabinete de tarja 30 pulgadas" : "Drag 30 inch sink base") + '" aria-valuemin="70" aria-valuemax="80" aria-valuenow="' + state.sinkStart + '" transform="translate(' + sinkX.toFixed(1) + ', 0)">' +
+              '<rect class="u4-drag-grip" x="0" y="154" width="' + sinkW.toFixed(1) + '" height="56" rx="3" fill="' + (sinkClash ? "#FEECEB" : "#E5F4EC") + '" stroke="' + (sinkClash ? "#B42318" : "#1B6B46") + '" stroke-width="2"/>' +
+              '<text x="' + (sinkW / 2).toFixed(1) + '" y="170" text-anchor="middle" font-size="7.8" font-weight="800" fill="#1B6B46" pointer-events="none">' + (es ? 'TARJA 30"' : 'SINK 30"') + "</text>" +
+              '<rect x="6" y="175" width="46" height="14" rx="3" fill="#184E77" pointer-events="none"/>' +
+              '<text id="kelecDwgdSvgLbl" x="29" y="184.5" text-anchor="middle" font-size="6.4" font-weight="800" fill="#FFFFFF" pointer-events="none">DW-GD ' + fmtIn(state.sinkStart + 4) + "</text>" +
+              '<rect x="' + (sinkW / 2 - 24).toFixed(1) + '" y="193" width="48" height="12" rx="6" fill="#1B6B46" pointer-events="none"/>' +
+              '<text x="' + (sinkW / 2).toFixed(1) + '" y="201.5" text-anchor="middle" font-size="6.1" font-weight="800" fill="#FFFFFF" pointer-events="none">' + (es ? "↔ MOVER" : "↔ DRAG") + "</text>" +
+            "</g>" +
+            // Rear Door Limit 114"
+            '<line x1="' + (x0 + 114 * Sx).toFixed(1) + '" y1="42" x2="' + (x0 + 114 * Sx).toFixed(1) + '" y2="220" stroke="#B42318" stroke-width="1.6" stroke-dasharray="4 2"/>' +
+            '<text x="' + (x0 + 114 * Sx + 4).toFixed(1) + '" y="56" font-size="7.4" font-weight="800" fill="#B42318">114"</text>' +
+            '<text x="44" y="229" font-size="7.8" font-weight="800" fill="#184E77">SE 0"</text>' +
+            '<text x="' + (x0 + 24 * Sx).toFixed(1) + '" y="229" text-anchor="middle" font-size="7.2" fill="#184E77">S1: 24"</text>' +
+            '<text x="' + (x0 + 65 * Sx).toFixed(1) + '" y="229" text-anchor="middle" font-size="7.2" fill="#184E77">S2: 65"</text>' +
+            '<text id="kelecSinkFoot" x="' + (x0 + (state.sinkStart + 15) * Sx).toFixed(1) + '" y="229" text-anchor="middle" font-size="7.2" font-weight="800" fill="#1B6B46">' + fmtIn(state.sinkStart) + "–" + fmtIn(state.sinkStart + 30) + "</text>" +
+          "</svg>" +
+        "</div>" +
+        '<div class="u4h-controls">' +
+          '<div class="u4h-ctrl-row">' +
+            '<span class="u4h-ctrl-lbl">' + (es ? "Alacena existente (desde SE):" : "Pie-Safe start (from SE):") + "</span>" +
+            '<div class="u4h-slider-row" style="max-width:340px">' +
+              '<input id="kelecPieSlider" type="range" min="18" max="40" step="0.5" value="' + state.pieStart + '">' +
+              '<span id="kelecPieReadout" class="u4h-slider-val">' + fmtIn(state.pieStart) + "–" + fmtIn(state.pieStart + 33) + "</span>" +
+            "</div>" +
+          "</div>" +
+          '<div class="u4h-ctrl-row">' +
+            '<span class="u4h-ctrl-lbl">' + (es ? 'Gabinete tarja 30" (desde SE):' : '30" Sink Base start (from SE):') + "</span>" +
+            '<div class="u4h-slider-row" style="max-width:340px">' +
+              '<input id="kelecSinkSlider" type="range" min="70" max="80" step="0.5" value="' + state.sinkStart + '">' +
+              '<span id="kelecSinkReadout" class="u4h-slider-val">' + fmtIn(state.sinkStart) + "–" + fmtIn(state.sinkStart + 30) + "</span>" +
+            "</div>" +
+          "</div>" +
+        "</div>";
+      return southSvg + '<div class="u4h-photo-grid">' +
         '<div class="u4h-photo-card">' +
           '<img src="./assets/south-sink-wall.jpg" alt="' + esc(es ? "Foto real del muro Sur abierto" : "Real open-stud photo of South sink wall") + '">' +
           '<div class="u4h-photo-cap"><strong>' + (es ? "Foto real — Muro Sur:" : "Real photo — South Sink Wall:") + "</strong> " +
@@ -579,6 +660,78 @@
     var nBtn = document.getElementById("kelecNextBtn");
     if (pBtn) pBtn.addEventListener("click", function () { if (idx > 0) { state.step = STEPS[idx - 1].id; render(); window.scrollTo(0, 0); } });
     if (nBtn) nBtn.addEventListener("click", function () { if (idx < STEPS.length - 1) { state.step = STEPS[idx + 1].id; render(); window.scrollTo(0, 0); } });
+
+    if (state.step === "walls" && state.wallTab === "south") {
+      var Sx = 3.2, x0 = 44;
+      function updatePieLive(val) {
+        var v = Math.max(18, Math.min(40, Math.round(val * 2) / 2));
+        state.pieStart = v;
+        var g = document.getElementById("kelecPieDrag");
+        if (g) { g.setAttribute("transform", "translate(" + (x0 + v * Sx).toFixed(1) + ", 0)"); g.setAttribute("aria-valuenow", String(v)); }
+        var sl = document.getElementById("kelecPieSlider"); if (sl) sl.value = String(v);
+        var ro = document.getElementById("kelecPieReadout"); if (ro) ro.textContent = fmtIn(v) + "–" + fmtIn(v + 33);
+        var svgL = document.getElementById("kelecPieSvgLbl"); if (svgL) svgL.textContent = fmtIn(v) + "–" + fmtIn(v + 33);
+        syncHiddenSouthRanges();
+      }
+      function updateSinkLive(val) {
+        var v = Math.max(70, Math.min(80, Math.round(val * 2) / 2));
+        state.sinkStart = v;
+        var g = document.getElementById("kelecSinkDrag");
+        if (g) { g.setAttribute("transform", "translate(" + (x0 + v * Sx).toFixed(1) + ", 0)"); g.setAttribute("aria-valuenow", String(v)); }
+        var sl = document.getElementById("kelecSinkSlider"); if (sl) sl.value = String(v);
+        var ro = document.getElementById("kelecSinkReadout"); if (ro) ro.textContent = fmtIn(v) + "–" + fmtIn(v + 30);
+        var dwL = document.getElementById("kelecDwgdSvgLbl"); if (dwL) dwL.textContent = "DW-GD " + fmtIn(v + 4);
+        var ftL = document.getElementById("kelecSinkFoot"); if (ftL) { ftL.setAttribute("x", (x0 + (v + 15) * Sx).toFixed(1)); ftL.textContent = fmtIn(v) + "–" + fmtIn(v + 30); }
+        syncHiddenSouthRanges();
+      }
+      var pieSl = document.getElementById("kelecPieSlider");
+      if (pieSl) { pieSl.addEventListener("input", function () { updatePieLive(parseFloat(pieSl.value)); }); pieSl.addEventListener("change", render); }
+      var sinkSl = document.getElementById("kelecSinkSlider");
+      if (sinkSl) { sinkSl.addEventListener("input", function () { updateSinkLive(parseFloat(sinkSl.value)); }); sinkSl.addEventListener("change", render); }
+
+      var sSvg = document.getElementById("kelecSouthSvg");
+      function bindHDrag(elId, getStart, applyFn) {
+        var el = document.getElementById(elId);
+        if (!el || !sSvg) return;
+        el.addEventListener("pointerdown", function (e) {
+          if (e.button !== undefined && e.button !== 0 && e.pointerType === "mouse") return;
+          e.preventDefault();
+          var pid = e.pointerId;
+          var startVal = getStart();
+          var startX = e.clientX;
+          var rect = sSvg.getBoundingClientRect();
+          var pxPerSvgX = (rect.width || 460) / 460;
+          el.classList.add("is-dragging");
+          try { el.setPointerCapture(pid); } catch (_) {}
+          var blockScroll = function (tev) { if (tev.cancelable) tev.preventDefault(); };
+          window.addEventListener("touchmove", blockScroll, { passive: false });
+          function onMove(ev) {
+            if (ev.pointerId !== pid) return;
+            var dxSvg = (ev.clientX - startX) / (pxPerSvgX || 1);
+            applyFn(startVal + dxSvg / Sx);
+          }
+          function finish(ev) {
+            if (ev && ev.pointerId !== pid) return;
+            el.classList.remove("is-dragging");
+            document.removeEventListener("pointermove", onMove);
+            document.removeEventListener("pointerup", finish);
+            document.removeEventListener("pointercancel", finish);
+            window.removeEventListener("touchmove", blockScroll);
+            try { if (el.hasPointerCapture && el.hasPointerCapture(pid)) el.releasePointerCapture(pid); } catch (_) {}
+            render();
+          }
+          document.addEventListener("pointermove", onMove);
+          document.addEventListener("pointerup", finish);
+          document.addEventListener("pointercancel", finish);
+        });
+        el.addEventListener("keydown", function (e) {
+          if (e.key === "ArrowRight" || e.key === "ArrowUp") { e.preventDefault(); applyFn(getStart() + 0.5); }
+          if (e.key === "ArrowLeft" || e.key === "ArrowDown") { e.preventDefault(); applyFn(getStart() - 0.5); }
+        });
+      }
+      bindHDrag("kelecPieDrag", function () { return state.pieStart; }, updatePieLive);
+      bindHDrag("kelecSinkDrag", function () { return state.sinkStart; }, updateSinkLive);
+    }
   }
 
   function boot() {
