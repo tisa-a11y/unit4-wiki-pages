@@ -224,8 +224,9 @@
     doc.setTextColor(71, 85, 105);
     doc.text(subtitle, margin + 10, margin + 31);
 
-    // Revision & Status Stamp Pill inside Header
-    var stampLine = stamp.revId + "  ·  " + stamp.badge + (stamp.author ? ("  ·  " + stamp.author) : "");
+    // Revision & Status Stamp Pill inside Header (avoid duplicating revId if badge already starts with it)
+    var hasRevPrefix = stamp.badge && stamp.revId && stamp.badge.indexOf(stamp.revId) === 0;
+    var stampLine = (hasRevPrefix ? stamp.badge : (stamp.revId + "  ·  " + stamp.badge)) + (stamp.author ? ("  ·  " + stamp.author) : "");
     var pillBg = stamp.mode === "local" ? [254, 243, 199] : (stamp.mode === "pending" ? [219, 234, 254] : [241, 245, 249]);
     var pillFg = stamp.mode === "local" ? [146, 64, 14] : (stamp.mode === "pending" ? [30, 64, 175] : [51, 65, 85]);
     var pillBorder = stamp.mode === "local" ? [245, 158, 11] : (stamp.mode === "pending" ? [59, 130, 246] : [148, 163, 184]);

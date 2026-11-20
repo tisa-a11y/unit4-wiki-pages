@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit 4 Kitchen — West Vent Hood Wall (K-S4) Interactive Plan Pilot</title>
+  <link rel="stylesheet" href="./ks4-styles.css">
+</head>
+<body>
+  <header class="app-header no-print">
+    <div class="header-inner">
+      <div class="brand-block">
+        <h1 id="hdr-title">Unit 4 Kitchen — West Vent Hood Wall (K-S4)</h1>
+        <div class="brand-meta">
+          <span id="hdr-sub">Interactive Parametric Sheet · Viking VGCC5304BSS + Zephyr ZSA-E30AS · Zero Prices</span>
+          <span id="tailnet-badge" class="pill pill-neutral">Checking Tailnet…</span>
+          <span id="rev-badge" class="pill pill-info">rev-20261120-001</span>
+        </div>
+      </div>
+
+      <div class="toolbar-actions">
+        <button type="button" id="btn-lang" class="btn" aria-label="Switch language">Español (MX)</button>
+        <button type="button" id="btn-datum" class="btn">Datum: AFF + Subfloor (+t)</button>
+        <button type="button" id="btn-circle-toggle" class="btn">Circle-to-Correct</button>
+        <button type="button" id="btn-export-svg" class="btn">Export SVG</button>
+        <button type="button" id="btn-download-pdf" class="btn btn-primary">Download / Print PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <div id="hold-banner" class="hold-banner" role="status">
+      <strong>HARD HOLD &amp; MOCKUP ONLY:</strong> Planning and Friday Nov 20 pre-drywall mockup reference only.
+      <strong>NOT</strong> final gas/electrical tie-in and <strong>NOT</strong> drywall close-in permission.
+      Nov 23 drywall delivery is not a close-in release.
+    </div>
+
+    <div id="conflict-banner" class="conflict-banner no-print" hidden role="alert">
+      <div id="conflict-text">A newer revision was saved by another editor. Reload the latest plan before saving again.</div>
+      <button type="button" id="btn-reload-latest" class="btn btn-sm btn-primary">Reload Latest Plan</button>
+    </div>
+
+    <!-- VISUAL-FIRST HERO: Parametric SVG + Actual Open-Stud Site Photo FIRST above text -->
+    <section class="visual-hero" aria-label="Visual plan and open-stud site photo">
+      <div class="panel svg-panel">
+        <div class="panel-head">
+          <h2 id="svg-panel-title">Parametric Architectural Sheet — West Wall (K-S4)</h2>
+          <div class="layer-toggles no-print" aria-label="Drawing layer visibility">
+            <label class="layer-chip"><input type="checkbox" id="lyr-framing" checked> <span data-i18n="lyr_framing">Framing &amp; Backing</span></label>
+            <label class="layer-chip"><input type="checkbox" id="lyr-appliances" checked> <span data-i18n="lyr_appliances">Viking + Zephyr</span></label>
+            <label class="layer-chip"><input type="checkbox" id="lyr-mep" checked> <span data-i18n="lyr_mep">6&quot; Duct, Gas &amp; Elec</span></label>
+            <label class="layer-chip"><input type="checkbox" id="lyr-clashes" checked> <span data-i18n="lyr_clashes">Clashes &amp; Measure Flags</span></label>
+          </div>
+        </div>
+
+        <div class="status-bar-strip no-print">
+          <span id="viking-pill" class="pill pill-pass">Viking 30&quot;–36&quot;: PASS</span>
+          <span id="gap-pill" class="pill pill-warn">Ceiling Gap: 9-9/16&quot;–10-9/16&quot; (OPEN)</span>
+          <span id="scribe-pill" class="pill pill-info">Run: 66&quot; / 66-1/4&quot; (+1/4&quot; scribe)</span>
+          <span id="sync-stamp-pill" class="pill pill-neutral">Baseline Loaded</span>
+        </div>
+
+        <div class="svg-stage-wrap">
+          <div class="svg-stage" id="svg-stage">
+            <svg id="ks4-svg" viewBox="0 0 920 1120" width="920" height="1120"
+                 xmlns="http://www.w3.org/2000/svg" role="img"
+                 aria-label="Unit 4 Kitchen West Range Wall K-S4 Interactive Elevation and Blocking Plan"></svg>
+            <canvas id="ks4-sketch-canvas" aria-label="Circle-to-Correct drawing overlay"></canvas>
+          </div>
+        </div>
+
+        <div id="circle-bar" class="circle-bar no-print" hidden>
+          <span id="circle-bar-hint">Draw a circle around any spot on the elevation (touch or mouse), then add your note below.</span>
+          <div>
+            <button type="button" id="btn-clear-sketch" class="btn btn-sm">Clear Sketch</button>
+            <button type="button" id="btn-circle-done" class="btn btn-sm btn-danger">Exit Circle Mode</button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="panel photo-panel" aria-label="Actual open-stud site photo">
+        <div class="panel-head print-keep-head">
+          <h2 id="photo-panel-title">Actual Open-Stud West Wall (Site Photo)</h2>
+          <span class="pill pill-warn" id="photo-badge">VERIFY FRIDAY</span>
+        </div>
+        <div class="photo-body">
+          <div class="photo-frame">
+            <img src="./assets/P03-IMG_5152.jpeg" alt="Actual Unit 4 open-stud West range wall showing South step corner, framed left pipe chase, redwood studs, and gas tee" loading="eager">
+            <div class="photo-compass-overlay">
+              <span id="photo-left-lbl">&larr; SOUTH (0&quot; ref)</span>
+              <span id="photo-mid-lbl">WEST WALL (K-S4)</span>
+              <span id="photo-right-lbl">NORTH (Hallway) &rarr;</span>
+            </div>
+          </div>
+
+          <ul class="photo-callouts" id="photo-callouts">
+            <li class="callout-alert"><strong>Left Framed Pipe/Flue Chase:</strong> Width is <strong>MEASURE ON SITE</strong> — confirm Friday if chase stays, shifts, or opens.</li>
+            <li><strong>South Step Corner (Left = 0&quot;):</strong> All horizontal marks measure right (North) from this fixed corner.</li>
+            <li><strong>Gas Tee &amp; Lower Framing:</strong> Relocate into rear 18&quot;–48&quot; bay at 0-9/16&quot;–4-15/16&quot; AFF (+t) under C-36 permit.</li>
+            <li><strong>Upper Ceiling Bay:</strong> Confirm 8&quot;–10&quot; clear joist bay at C/L 33&quot; for 6&quot; rigid smooth metal duct (no flex).</li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+
+    <!-- IMMUTABLE FLAGGED CLASHES (Never Auto-Resolved) -->
+    <section class="panel" aria-label="Flagged clashes and field checks">
+      <div class="panel-head print-keep-head">
+        <h2 id="clashes-title">Flagged Clashes &amp; Field Checks (Never Auto-Resolved)</h2>
+        <span class="pill pill-fail" id="clashes-lock-pill">Immutable · Verify in Field</span>
+      </div>
+      <div class="clashes-grid" id="clashes-grid"></div>
+    </section>
+
+    <!-- LIVE DUAL-DATUM MARK SHEET (Crew Never Subtracts) -->
+    <section class="panel" aria-label="Live dual-datum mark table">
+      <div class="panel-head print-keep-head">
+        <h2 id="marks-title">Live Dual-Datum Mark Sheet (Crew Marks Directly From Subfloor +t)</h2>
+        <span class="pill pill-info" id="marks-t-pill">Floor buildup t = 3/4&quot; (MEASURE ON SITE)</span>
+      </div>
+      <div class="table-scroll">
+        <table class="mark-table">
+          <thead>
+            <tr>
+              <th id="th-feature">Feature / Reference</th>
+              <th id="th-aff">Height AFF</th>
+              <th id="th-subfloor">Above Subfloor (+t)</th>
+              <th id="th-horiz">Horizontal From South (0&quot;)</th>
+              <th id="th-boundary">Boundary &amp; Provenance</th>
+            </tr>
+          </thead>
+          <tbody id="marks-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE FIELD CONTROLS, CIRCLE/VOICE & EOD REVIEW (Hidden on Print) -->
+    <section class="workspace-grid no-print" aria-label="Interactive field editors and EOD review">
+      <!-- Left: Live Field Dimensions & Options -->
+      <div class="panel">
+        <div class="panel-head">
+          <h2 id="editor-title">Live Field Dimensions &amp; Options</h2>
+          <span class="pill pill-neutral" id="editor-mode-pill">Local Preview + Export</span>
+        </div>
+
+        <form id="ks4-form" class="form-body" novalidate>
+          <div class="preset-row">
+            <span class="preset-label" id="preset-lbl">Quick Check:</span>
+            <button type="button" class="btn btn-sm" id="preset-baseline">K-S4 Baseline (66-15/16&quot;)</button>
+            <button type="button" class="btn btn-sm" id="preset-fail64">Test 64&quot; AFF (FAIL)</button>
+            <button type="button" class="btn btn-sm" id="preset-mid70">Test 70&quot; AFF (PASS)</button>
+            <button type="button" class="btn btn-sm" id="btn-reset-baseline">Reset Baseline</button>
+          </div>
+
+          <div class="dim-grid">
+            <div class="field-group">
+              <label class="field-label-row" for="inp-author">
+                <span data-i18n="lbl_author">Editor Name</span>
+                <span class="boundary-tag">author</span>
+              </label>
+              <select id="inp-author">
+                <option value="Tisa">Tisa</option>
+                <option value="John">John</option>
+                <option value="Ervin">Ervin</option>
+                <option value="Alex">Alex</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-floor-t">
+                <span data-i18n="lbl_floor_t">Floor Build-Up (t) (in)</span>
+                <span class="pill pill-warn" id="prov-floor-t">MEASURE ON SITE</span>
+              </label>
+              <div class="field-input-row">
+                <input type="number" id="inp-floor-t" step="0.0625" min="0" max="4">
+                <select id="bnd-floor-t" class="boundary-select" aria-label="Floor buildup measure boundary"></select>
+              </div>
+              <div class="field-help" data-i18n="help_floor_t">Provisional 3/4&quot; — updates every Subfloor (+t) mark live.</div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-wall-w">
+                <span data-i18n="lbl_wall_w">West Wall Width (in)</span>
+                <span class="pill pill-warn" id="prov-wall-w">VERIFY ON SITE</span>
+              </label>
+              <div class="field-input-row">
+                <input type="number" id="inp-wall-w" step="0.0625" min="48" max="96">
+                <select id="bnd-wall-w" class="boundary-select" aria-label="Wall width measure boundary"></select>
+              </div>
+              <div class="field-help" data-i18n="help_wall_w">Magicplan 66-1/4&quot; (South step corner to North corner).</div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-ceil-h">
+                <span data-i18n="lbl_ceil_h">Ceiling Height AFF (in)</span>
+                <span class="pill pill-warn" id="prov-ceil-h">VERIFY ON SITE</span>
+              </label>
+              <div class="field-input-row">
+                <input type="number" id="inp-ceil-h" step="0.0625" min="84" max="156">
+                <select id="bnd-ceil-h" class="boundary-select" aria-label="Ceiling height measure boundary"></select>
+              </div>
+              <div class="field-help" data-i18n="help_ceil_h">Magicplan 121-1/2&quot; AFF (10&apos;-1-1/2&quot;).</div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-hood-aff">
+                <span data-i18n="lbl_hood_aff">Hood Bottom Line A AFF (in)</span>
+                <span class="pill pill-info" id="prov-hood-aff">K-S4 BASELINE</span>
+              </label>
+              <div class="field-input-row">
+                <input type="number" id="inp-hood-aff" step="0.0625" min="58" max="80">
+                <select id="bnd-hood-aff" class="boundary-select" aria-label="Hood bottom measure boundary"></select>
+              </div>
+              <div class="field-help" id="help-hood-aff">Viking S10 p.11 governs: 66&quot;–72&quot; AFF (30&quot;–36&quot; above 36&quot; cooktop). 64&quot; FAILS.</div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-left-chase">
+                <span data-i18n="lbl_left_chase">Left Pipe/Flue Chase Width (in)</span>
+                <span class="pill pill-fail" id="prov-left-chase">MEASURE ON SITE</span>
+              </label>
+              <div class="field-input-row">
+                <input type="number" id="inp-left-chase" step="0.0625" min="0" max="24" placeholder="MEASURE ON SITE">
+                <select id="bnd-left-chase" class="boundary-select" aria-label="Left chase measure boundary"></select>
+              </div>
+              <div class="field-help" data-i18n="help_left_chase">Leave blank until measured Friday (never fabricated).</div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-left-cab">
+                <span data-i18n="lbl_left_cab">Left Base Cabinet (in)</span>
+                <span class="boundary-tag">wall_to_wall</span>
+              </label>
+              <div class="field-input-row">
+                <input type="number" id="inp-left-cab" step="0.0625" min="9" max="36">
+                <select id="bnd-left-cab" class="boundary-select" aria-label="Left base cabinet boundary"></select>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-right-cab">
+                <span data-i18n="lbl_right_cab">Right Base Cabinet (in)</span>
+                <span class="boundary-tag">wall_to_wall</span>
+              </label>
+              <div class="field-input-row">
+                <input type="number" id="inp-right-cab" step="0.0625" min="9" max="36">
+                <select id="bnd-right-cab" class="boundary-select" aria-label="Right base cabinet boundary"></select>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-counter-h">
+                <span data-i18n="lbl_counter_h">Countertop Height AFF (in)</span>
+                <span class="boundary-tag">aff</span>
+              </label>
+              <div class="field-input-row">
+                <input type="number" id="inp-counter-h" step="0.0625" min="34" max="39">
+                <select id="bnd-counter-h" class="boundary-select" aria-label="Countertop boundary"></select>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-range-w">
+                <span data-i18n="lbl_range_w">Range Opening Width (in)</span>
+                <span class="boundary-tag">clear_between_casings</span>
+              </label>
+              <div class="field-input-row">
+                <input type="number" id="inp-range-w" step="0.0625" min="29.875" max="36">
+                <select id="bnd-range-w" class="boundary-select" aria-label="Range opening boundary"></select>
+              </div>
+            </div>
+
+            <div class="field-group full-span">
+              <label class="field-label-row" for="sel-rear-trim">
+                <span data-i18n="lbl_rear_trim">Viking Rear Trim (Inspect Downstairs Friday)</span>
+              </label>
+              <select id="sel-rear-trim">
+                <option value="island_trim_1in">1&quot; Island Trim — REQUIRES 6&quot; rear clearance (or DBI AHJ non-combustible wall approval)</option>
+                <option value="backguard_8in">8&quot; High Backguard + 3/4&quot; standoffs — 0&quot; rear clearance OK</option>
+              </select>
+            </div>
+
+            <div class="field-group full-span">
+              <label class="field-label-row" for="sel-ceil-gap">
+                <span data-i18n="lbl_ceil_gap">Ceiling Gap Solution (4-1/2&quot;–11-1/2&quot; gap above stock cover)</span>
+              </label>
+              <select id="sel-ceil-gap">
+                <option value="open_tbd">OPEN CHOICE — Decide after Friday mockup photos</option>
+                <option value="option_a_soffit">Option A — Framed &amp; Tiled Soffit Chase at Ceiling (Unapproved)</option>
+                <option value="option_b_ext_z1c00sa">Option B — Zephyr Z1C-00SA Stainless Extension Kit (Verify SKU)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="action-bar">
+            <button type="button" id="btn-apply-local" class="btn btn-essex">Apply Live Preview</button>
+            <button type="button" id="btn-save-tailnet" class="btn btn-primary" disabled>Save Live to Tailnet</button>
+            <button type="button" id="btn-export-json" class="btn">Download JSON</button>
+          </div>
+          <div id="save-hint" class="field-help">Off-tailnet devices preview and export locally only. Connect to Tisa&apos;s Tailscale network to save live overrides.</div>
+        </form>
+      </div>
+
+      <!-- Right Stack: Circle-to-Correct + Voice + EOD Review Drawer -->
+      <div class="right-stack">
+        <div class="panel">
+          <div class="panel-head">
+            <h2 id="voice-title">Circle-to-Correct &amp; Voice Field Note</h2>
+            <span class="pill pill-info" id="voice-lang-pill">en-US</span>
+          </div>
+          <div class="form-body">
+            <div class="field-group">
+              <label class="field-label-row" for="sel-pin-intent">
+                <span data-i18n="lbl_intent">Note Type</span>
+                <span id="sketch-status-pill" class="pill pill-neutral">No Circle Drawn</span>
+              </label>
+              <select id="sel-pin-intent">
+                <option value="propose_edit">Propose Edit / Field Measurement</option>
+                <option value="flag_problem">Flag Problem / Clash</option>
+                <option value="ask_question">Ask Question (&quot;What is this right here?&quot;)</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-voice-note">
+                <span data-i18n="lbl_note">Field Note or Spoken Command</span>
+              </label>
+              <textarea id="inp-voice-note" rows="3" placeholder="Example: &quot;Set hood to 70 inches&quot;, &quot;Floor buildup is 0.875&quot;, or &quot;Left chase is 5.5 inches&quot; (Zero prices/bids)"></textarea>
+            </div>
+
+            <div class="voice-row">
+              <button type="button" id="btn-dictate" class="btn">Dictate Voice Note</button>
+              <button type="button" id="btn-apply-note" class="btn btn-primary">Pin / Apply Note</button>
+            </div>
+            <div id="voice-status" class="field-help">Tap Circle-to-Correct above to circle a spot on the drawing, then dictate or type your note.</div>
+
+            <div id="pin-list" class="pin-list"></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2 id="eod-title">End-of-Day Review &amp; Revert (Tisa)</h2>
+            <span class="pill pill-warn" id="eod-count-pill">0 pending</span>
+          </div>
+          <div class="form-body">
+            <p class="empty-note" id="eod-desc">
+              Workers never wait: saved tailnet edits stamp the live plan immediately with a revision ID.
+              At end-of-day, Tisa taps <strong>Accept</strong> (promotes to <code>kitchen/SPEC.md</code>) or <strong>Reject</strong> (reverts atomically).
+            </p>
+            <div id="eod-list" class="eod-list"></div>
+            <div class="action-bar">
+              <button type="button" id="btn-refresh-eod" class="btn btn-sm">Refresh From Tailnet</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="status-toast" class="status-toast" hidden role="status" aria-live="polite"></div>
+
+  <script src="../vendor/jspdf.umd.min.js"></script>
+  <script src="../vendor/svg2pdf.umd.min.js"></script>
+  <script src="../vendor/ks4-pdf-export.js"></script>
+  <script src="./ks4-renderer.js"></script>
+</body>
+</html>
