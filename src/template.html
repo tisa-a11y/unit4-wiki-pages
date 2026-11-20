@@ -20,6 +20,18 @@
 
 .viewer.is-packet .u4-preview-tabs,.viewer.is-packet > p.hint{display:none}
 .viewer.is-packet h1{font-size:24px;margin:10px 0 12px}
+.u4-home-menu{margin:26px 0 8px}
+.u4-hm-group{border:1px solid var(--line);border-radius:12px;background:var(--panel);margin:0 0 10px;overflow:hidden}
+.u4-hm-room{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:52px;padding:10px 16px;font-size:17px;font-weight:700;color:var(--fg);text-decoration:none}
+.u4-hm-room.is-child{font-size:15.5px;font-weight:600;padding-left:30px;border-top:1px solid var(--line)}
+.u4-hm-prog{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--muted)}
+.u4-hm-packet{display:block;min-height:44px;padding:11px 16px 11px 30px;font-size:15px;color:var(--accent);text-decoration:none;border-top:1px solid var(--line)}
+.u4-hm-packet::before{content:"\25A4\00a0\00a0";opacity:.75}
+.u4-hm-room.is-child + .u4-hm-packet,.u4-hm-room.is-child ~ .u4-hm-packet{padding-left:44px}
+.u4-hm-plan{font-size:13.5px;color:var(--muted);margin:14px 2px}
+.u4-hm-plan a{color:var(--muted)}
+@media (min-width:761px){.u4-home-menu{display:none}}
+@media (max-width:760px){html body .mobile #menuBtn,html body .mobile select#jump{display:none!important}.mobile .homelink{font-size:17px;font-weight:700;padding:8px 2px}}
 .u4-packets{margin:22px 0}
 .u4-packet-list{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
 .u4-packet{display:flex;flex-direction:column;gap:3px;padding:14px 16px;min-height:60px;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;background:var(--panel);text-decoration:none;color:var(--fg)}
@@ -1017,7 +1029,7 @@ let mcp = null, current = null, unwatch = null;
 var LANG = (function(){ try{ return localStorage.getItem("u4lang")==="es" ? "es" : "en"; }catch(e){ return "en"; } })();
 const UI = {
   en: {
-    unitTitle: "Unit 4 Wiki", unitMobileTitle: "Unit 4", unitSub: "1231 11th Ave · Remodel",
+    unitTitle: "Unit 4 Wiki", unitMobileTitle: "\u2302 Home", unitSub: "1231 11th Ave · Remodel",
     menuBtn: "☰ Menu", backBtn: "← Back", backShort: "Back", closeBtn: "Close",
     langToggleLabel: "Español", langToggleAria: "Switch to Spanish",
     grpOverview: "Overview", grpPreviews: "Previews", grpProjects: "Projects",
@@ -1042,7 +1054,7 @@ const UI = {
     noFieldReportsYet: "No field reports yet."
   },
   es: {
-    unitTitle: "Wiki Unidad 4", unitMobileTitle: "Unidad 4", unitSub: "1231 11th Ave · Remodelación",
+    unitTitle: "Wiki Unidad 4", unitMobileTitle: "\u2302 Inicio", unitSub: "1231 11th Ave · Remodelación",
     menuBtn: "☰ Menú", backBtn: "← Atrás", backShort: "Atrás", closeBtn: "Cerrar",
     langToggleLabel: "English", langToggleAria: "Cambiar a inglés",
     grpOverview: "Resumen", grpPreviews: "Vistas previas", grpProjects: "Proyectos",
@@ -1233,6 +1245,19 @@ function hoursBlock(){
     return `<div class="hrow"><span>${lbl}</span><div class="track" aria-label="${lbl}: ${lo} - ${hi} h"><div class="range" style="left:${lo/max*100}%;width:${(hi-lo)/max*100}%"></div><div class="likely" style="left:calc(${li/max*100}% - 1px)"></div></div><span class="num">${li} h</span></div>`;
   }).join("");
   return `<h2>${t("scaleRemainingWork")}</h2><p>${t("scaleRemainingDesc")}<b>${Math.round(tot[1])} h</b> (${Math.round(tot[0])}–${Math.round(tot[2])} h).</p><div class="hours">${rows}</div>`;
+}
+// Home is the menu on phones: one list of rooms, their subrooms and their instruction packets.
+function homeMenuBlock(){
+  const es = LANG==="es";
+  const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const prog = k => { const it=(CHECKLISTS[k]&&CHECKLISTS[k].items)||[]; return it.length ? '<span class="u4-hm-prog">'+it.filter(x=>x[0]).length+'/'+it.length+'</span>' : ''; };
+  const packets = k => packetsFor(k).map(pk=>'<a class="u4-hm-packet" href="#'+pk.key+'">'+esc(packetTitle(pk))+'</a>').join("");
+  const room = (p, child) => '<a class="u4-hm-room'+(child?' is-child':'')+'" href="#'+p.key+'"><span>'+esc(pageLabel(p))+'</span>'+prog(p.key)+'</a>'+packets(p.key);
+  const tops = PAGES.filter(x=>x.group==="Projects" && !x.parent);
+  const groups = tops.map(p=>'<div class="u4-hm-group">'+room(p,false)+PAGES.filter(c=>c.parent===p.key).map(c=>room(c,true)).join("")+'</div>').join("");
+  const plan = PAGES.filter(x=>x.key==="roadmap"||x.key==="decisions").map(p=>'<a href="#'+p.key+'">'+esc(pageLabel(p))+'</a>').join(" · ");
+  return '<nav class="u4-home-menu" aria-label="'+(es?"Cuartos y guías":"Rooms and guides")+'"><h2>'+(es?"Cuartos y guías":"Rooms and guides")+'</h2>'+groups
+    + (plan?'<p class="u4-hm-plan">'+(es?"Planeación: ":"Planning: ")+plan+'</p>':'')+'</nav>';
 }
 function roomsBlock(){
   const es = LANG==="es";
@@ -1964,7 +1989,7 @@ function show(key){
   let body = '<div class="mdbody">' + render(srcMd) + '</div>';
   if (p.key==="roadmap") body += hoursBlock() + linksBlock();
   if (p.key==="home") {
-    body = homeHeader() + goalsBlock() + packetCardsBlock(PACKETS.filter(x=>x.inMenu!==false), true) + roomsBlock() + aboutBlock()
+    body = homeHeader() + goalsBlock() + homeMenuBlock() + aboutBlock()
       + '<p class="foot"><a href="#decisions">' + t("openDecisionsLink") + '</a> · <span class="u4-build-stamp">Build 2026-11-19 · r3f-usability</span></p>';
   }
   const isCrew = p.group==="Projects";

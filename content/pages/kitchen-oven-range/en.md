@@ -12,5 +12,5 @@ The West wall: a 30" Viking gas range with a 30" Zephyr Savona hood above it, an
 - **Hood power:** the hood gets its own 15-amp circuit, with a breaker that can be locked off. Never share it with the lights. The junction box goes at about 100" from the floor, inside the 8-5/8" chimney cover and clear of the duct.
 - **Range hookups:** a 1/2" gas shutoff and a 120V outlet.
 - **Duct:** 6" round rigid metal, straight up (685 CFM). No flex duct.
-- **Gap at the ceiling:** the hood's cover stops short of the 121-1/2" ceiling. Measure the gap during the test-hang.
+- **Gap at the ceiling:** the hood's cover stops 4-1/2" to 11-1/2" short of the 121-1/2" ceiling. Measure the actual gap during the test-hang.
 - **Models:** Viking VGCC5304BSS range · Zephyr Savona ZSA-E30AS hood.
