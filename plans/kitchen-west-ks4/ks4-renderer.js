@@ -31,6 +31,7 @@
 
   const DEFAULT_API_ORIGIN = 'https://mac-mini.tailcf4007.ts.net:8444';
   const DEFAULT_VOICE_ORIGIN = 'https://mac-mini.tailcf4007.ts.net:8791';
+  const DEFAULT_LOOKUP_ORIGIN = 'https://mac-mini.tailcf4007.ts.net';
   const PLAN_ENDPOINT_BASE = '/api/unit4/plans/kitchen-west-ks4';
   const SVG_NS = 'http://www.w3.org/2000/svg';
 
@@ -206,7 +207,14 @@
     takeoff_settings: {
       waste_pct: 15,
       tile_box_sqft: null,
-      deduct_chimney: false
+      deduct_chimney: false,
+      south_edge_trim: 'ceramic_bullnose',
+      north_corner_treatment: 'silicone_only_inside_90',
+      selected_tile_product: null,
+      tile_size_key: null,
+      tile_orientation: 'horizontal',
+      tile_pattern: 'brick50',
+      cap_ceiling: false
     },
     flagged_clashes: [
       {
@@ -399,7 +407,7 @@
         line_b_lbl: 'Line B Keyholes (+9-9/16" · 9-27/32" spread)',
         gas_zone: 'REAR GAS + 120V UTILITY BAY: 0-9/16"–4-15/16" Fin. Floor (+t) · Clear of Anti-Tip',
         antitip: 'ANTI-TIP (25-3/4" from S)',
-        seam_lbl: '36" Backer Seam (Shim 3/16" for 0.42" Hardie)',
+        seam_lbl: '36" Seam: 1/2" Drywall (0.50") to 0.42" Hardie (~1/16" skim, NO shims)',
         clash_ks7: 'NO 4×4 BOX AT 100"!',
         clash_ks7_sub: 'Use 1-gang 2"×3" @ 83"–86"',
         canopy_box: '1-Gang 2"×3" (~83"–86", ±2-1/4", ~1" proud)',
@@ -592,7 +600,7 @@
         line_b_lbl: 'Ojales Línea B (+9-9/16" · sep. 9-27/32")',
         gas_zone: 'FRANJA GAS + 120V TRASERA: 0-9/16"–4-15/16" Piso Term. (+t) · Libre Antivuelco',
         antitip: 'ANTIVUELCO (25-3/4" de Sur)',
-        seam_lbl: 'Junta Respaldo 36" (Calza 3/16" p/ Hardie 0.42")',
+        seam_lbl: 'Junta 36": Tablaroca 1/2" (0.50") a Hardie 0.42" (~1/16" pasta, SIN calzas)',
         clash_ks7: '¡NO CAJA 4×4 A 100"!',
         clash_ks7_sub: 'Usar caja 2"×3" @ 83"–86"',
         canopy_box: 'Caja 2"×3" (~83"–86", ±2-1/4", ~1" salida)',
@@ -685,8 +693,22 @@
         }
       });
     }
+    if (!target.options) target.options = {};
+    if (!target.options.floor_condition) target.options.floor_condition = 'bare_subfloor';
+    if (target.options.stud_layout !== 'one_bay' && target.options.stud_layout !== 'center_stud') {
+      target.options.stud_layout = 'one_bay';
+    }
+    target.options.rear_trim = 'island_trim_1in';
     if (!target.takeoff_settings) {
       target.takeoff_settings = deepClone(BASELINE_KS4_DATA.takeoff_settings);
+    } else {
+      if (!target.takeoff_settings.south_edge_trim) target.takeoff_settings.south_edge_trim = 'ceramic_bullnose';
+      if (!target.takeoff_settings.north_corner_treatment) target.takeoff_settings.north_corner_treatment = 'silicone_only_inside_90';
+      if (target.takeoff_settings.selected_tile_product === undefined) target.takeoff_settings.selected_tile_product = null;
+      if (target.takeoff_settings.tile_size_key === undefined) target.takeoff_settings.tile_size_key = null;
+      if (!target.takeoff_settings.tile_orientation) target.takeoff_settings.tile_orientation = 'horizontal';
+      if (!target.takeoff_settings.tile_pattern) target.takeoff_settings.tile_pattern = 'brick50';
+      if (target.takeoff_settings.cap_ceiling === undefined) target.takeoff_settings.cap_ceiling = false;
     }
     target.flagged_clashes = deepClone(BASELINE_KS4_DATA.flagged_clashes);
     if (!Array.isArray(target.pins)) target.pins = [];
@@ -785,10 +807,14 @@
   }
 
   function computeDerived() {
+    ensureStateDefaults(state);
     const d = state.dimensions;
     const wallW = Number(d.wall_width_in.value) || 66.25;
     const ceilH = Number(d.ceiling_height_in.value) || 121.5;
-    const floorT = d.floor_buildup_t_in.value === null ? 0 : Number(d.floor_buildup_t_in.value);
+    const floorCondition = state.options.floor_condition === 'finished_installed' ? 'finished_installed' : 'bare_subfloor';
+    const floorInstalled = floorCondition === 'finished_installed';
+    const rawFloorT = d.floor_buildup_t_in.value === null ? 0 : Number(d.floor_buildup_t_in.value);
+    const floorT = floorInstalled ? 0 : rawFloorT;
     const counterH = Number(d.counter_height_in.value) || 36.0;
     const hoodA = Number(d.hood_bottom_aff_in.value) || 66.9375;
     const leftCab = Number(d.left_base_cab_in.value) || 18.0;
@@ -823,7 +849,7 @@
     const w2X = leftCab + rangeW + rightCab / 2.0; // 57"
 
     return {
-      wallW, ceilH, floorT, counterH, hoodA, leftCab, rangeW, rightCab,
+      wallW, ceilH, floorCondition, floorInstalled, rawFloorT, floorT, counterH, hoodA, leftCab, rangeW, rightCab,
       lowBlkMin, lowBlkMax, upBlkMin, leftChase,
       clearance, minClear, maxClear, vikingPass, vikingDelta,
       lineB, clX, runSum, scribe,
@@ -858,14 +884,10 @@
     const grossTileSqFt = netTileSqFt * (1 + wastePct / 100.0);
     const proposedBoxes = boxSqFt ? Math.ceil(grossTileSqFt / boxSqFt) : null;
 
-    /* 0.42" HardieBacker 500 sheets (3' x 5' = 15 sq ft) + 10% cut allowance */
+    /* 1/2" drywall (0.50") meets 1/2" HardieBacker 500 (0.42") with NO stud shims (~1/16" feather/skim at transition only) */
     const backerNetSqFt = grossWallSqFt;
     const backerGrossSqFt = backerNetSqFt * 1.10;
     const backerSheets = Math.max(1, Math.ceil(backerGrossSqFt / 15.0));
-
-    /* 3/16" furring / shim strips across 16" OC studs above 36" backer seam */
-    const studCount = Math.floor((m.wallW - 3) / 16) + 2;
-    const shimLF = Math.ceil((studCount * tileHeightIn) / 12.0);
 
     /* Solid wood blocking (2x10 / 2x8 lumber courses or 3/4" structural ply) */
     const lowerBandW = Math.min(m.wallW, 46.0);
@@ -884,10 +906,49 @@
     const lowerDrywallSqFt = (m.wallW * m.counterH) / 144.0;
     const paintGallonsMin = Math.max(1, Math.ceil((lowerDrywallSqFt * 2) / 350.0));
 
+    /* Zero-Metal South Edge Trim Calculation (North 90° inside corner = silicone only; ZERO metal / NO Schluter / NO 45° miter) */
+    const allowedEdgeKeys = ['ceramic_bullnose', 'ceramic_pencil', 'painted_wood_trim', 'glazed_edge_tile'];
+    const southEdgeKey = allowedEdgeKeys.includes(cfg.south_edge_trim) ? cfg.south_edge_trim : 'ceramic_bullnose';
+    const capCeiling = !!cfg.cap_ceiling;
+    const edgeHeightIn = tileHeightIn + (capCeiling ? m.wallW : 0);
+    const edgeNetLF = Number((edgeHeightIn / 12.0).toFixed(2));
+    const edgeGrossLF = Math.ceil(edgeNetLF * (1 + wastePct / 100.0));
+    const prod = cfg.selected_tile_product || null;
+    const matchTrimArr = prod && Array.isArray(prod.matching_trim_parts) ? prod.matching_trim_parts : [];
+    const bullMatch = matchTrimArr.find((p) => /bullnose/i.test(String(p.type || p.name || '')) && Number(p.length_in) > 0);
+    const bullLenIn = (bullMatch && Number(bullMatch.length_in)) || (prod && Number(prod.bullnose_length_in) > 0 ? Number(prod.bullnose_length_in) : 8.0);
+    const bullNetPcs = Math.max(1, Math.ceil(edgeHeightIn / bullLenIn));
+    const bullGrossPcs = Math.ceil(bullNetPcs * (1 + wastePct / 100.0));
+    const pencilSticks12 = Math.max(1, Math.ceil(edgeGrossLF));
+    const capSuffixEn = capCeiling ? ' (incl. ceiling cap)' : '';
+    const capSuffixEs = capCeiling ? ' (incl. remate techo)' : '';
+    let southEdgeLabelEn = 'Ceramic Bullnose';
+    let southEdgeLabelEs = 'Bullnose Cerámico';
+    let southEdgeQtyEn = `${bullGrossPcs} pcs (${bullLenIn}" ea · ${edgeNetLF} LF net${capSuffixEn})`;
+    let southEdgeQtyEs = `${bullGrossPcs} pzas (${bullLenIn}" c/u · ${edgeNetLF} LF neto${capSuffixEs})`;
+    if (southEdgeKey === 'ceramic_pencil') {
+      southEdgeLabelEn = 'Ceramic Pencil / Quarter-Round';
+      southEdgeLabelEs = 'Lápiz / Cuarto de Redondo Cerámico';
+      southEdgeQtyEn = `${edgeGrossLF} LF (${pencilSticks12} × 12" sticks${capSuffixEn})`;
+      southEdgeQtyEs = `${edgeGrossLF} LF (${pencilSticks12} piezas 12"${capSuffixEs})`;
+    } else if (southEdgeKey === 'painted_wood_trim') {
+      southEdgeLabelEn = 'Painted Edwardian Wood Trim';
+      southEdgeLabelEs = 'Moldura de Madera Pintada Edwardian';
+      southEdgeQtyEn = `${edgeGrossLF} LF painted wood casing/stop${capSuffixEn} (separate from original trim)`;
+      southEdgeQtyEs = `${edgeGrossLF} LF moldura madera pintada${capSuffixEs} (aparte de moldura original)`;
+    } else if (southEdgeKey === 'glazed_edge_tile') {
+      southEdgeLabelEn = 'Factory Glazed-Edge Tile';
+      southEdgeLabelEs = 'Azulejo con Borde Esmaltado de Fábrica';
+      southEdgeQtyEn = `0 trim sticks — verify glazed-edge end tiles (${edgeNetLF} LF edge${capSuffixEn})`;
+      southEdgeQtyEs = `0 molduras extra — confirmar azulejos borde esmaltado (${edgeNetLF} LF${capSuffixEs})`;
+    }
+
     return {
       waste_pct: wastePct,
       tile_box_sqft: boxSqFt,
       deduct_chimney: deductChimney,
+      floor_condition: m.floorCondition,
+      effective_floor_t_in: m.floorT,
       tile_net_sqft: Number(netTileSqFt.toFixed(2)),
       tile_gross_sqft: Number(grossTileSqFt.toFixed(2)),
       tile_soffit_extra_sqft: Number(soffitSideSqFt.toFixed(2)),
@@ -896,12 +957,36 @@
       backer_net_sqft: Number(backerNetSqFt.toFixed(2)),
       backer_gross_sqft: Number(backerGrossSqFt.toFixed(2)),
       backer_sheets_3x5: backerSheets,
-      shim_strips_count: studCount,
-      shim_total_lf: shimLF,
+      drywall_thickness_in: 0.5,
+      seam_transition_note: '1/2" drywall (0.50") meets 1/2" HardieBacker 500 (0.42") — NO stud shims (~1/16" feather/skim at seam only)',
       blocking_total_lf: blockingTotalLF,
       blocking_8ft_sticks: blocking8ftSticks,
       lower_drywall_sqft: Number(lowerDrywallSqFt.toFixed(2)),
-      primer_paint_gallons_min: paintGallonsMin
+      primer_paint_gallons_min: paintGallonsMin,
+      zero_metal_enforced: true,
+      north_corner_treatment: 'silicone_only_inside_90',
+      north_corner_silicone_tubes: 1,
+      south_edge_trim: southEdgeKey,
+      south_edge_label_en: southEdgeLabelEn,
+      south_edge_label_es: southEdgeLabelEs,
+      south_edge_lf_net: edgeNetLF,
+      south_edge_lf_gross: edgeGrossLF,
+      south_edge_bullnose_pcs: bullGrossPcs,
+      south_edge_qty_en: southEdgeQtyEn,
+      south_edge_qty_es: southEdgeQtyEs,
+      selected_tile_product: prod ? {
+        name: prod.name || '',
+        brand: prod.brand || '',
+        sku: prod.sku || '',
+        width_in: prod.width_in != null ? Number(prod.width_in) : null,
+        height_in: prod.height_in != null ? Number(prod.height_in) : null,
+        thickness_in: prod.thickness_in != null ? Number(prod.thickness_in) : null,
+        sqft_per_box: prod.sqft_per_box != null ? Number(prod.sqft_per_box) : null,
+        bullnose_available: !!prod.bullnose_available,
+        bullnose_length_in: prod.bullnose_length_in != null ? Number(prod.bullnose_length_in) : null,
+        glazed_edge_available: !!prod.glazed_edge_available,
+        recommended_pattern: prod.recommended_pattern || null
+      } : null
     };
   }
 
@@ -1122,7 +1207,7 @@
       <rect x="514" y="268" width="382" height="22" rx="4" fill="#e8f1fb"/>
       <text x="526" y="283" font-size="8.8" font-weight="700" fill="#15539e">${esc(S.callouts_title)} (${isEs ? 'SIN PRECIOS' : 'ZERO PRICES'})</text>
       <text x="526" y="308" font-size="8.2" font-weight="700" fill="#10202b">${isEs ? 'Azulejo Muro Estufa' : 'Statement Wall Tile'}: ${tk.tile_net_sqft} net → ${tk.tile_gross_sqft} sq ft (+${tk.waste_pct}%)</text>
-      <text x="526" y="326" font-size="8.0" fill="#334155">HardieBacker 0.42" (3'×5'): ${tk.backer_sheets_3x5} ${isEs ? 'hojas' : 'sheets'} · ${tk.shim_strips_count} ${isEs ? 'calzas' : 'shims'} (${tk.shim_total_lf} LF)</text>
+      <text x="526" y="326" font-size="7.8" fill="#334155">HardieBacker 0.42" (3'×5'): ${tk.backer_sheets_3x5} ${isEs ? 'hojas' : 'sheets'} · ${isEs ? 'Tablaroca 1/2" (~1/16" pasta, sin calzas)' : '1/2" drywall (~1/16" skim, NO shims)'}</text>
       <text x="526" y="344" font-size="8.0" fill="#334155">${isEs ? 'Refuerzo Madera' : 'Solid Wood Blocking'}: ${tk.blocking_total_lf} LF (${tk.blocking_8ft_sticks} × 8' ${isEs ? 'piezas' : 'pcs'})</text>
       <text x="526" y="362" font-size="8.0" fill="#334155">${isEs ? 'Moldura Original' : 'Existing Original Trim'}: ${isEs ? 'Zoclo' : 'Base'} ${esc(toFrac16(state.existing_original_trim.baseboard_height_in.value))} · ${isEs ? 'Riel' : 'Rail'} ${esc(toFrac16(state.existing_original_trim.high_picture_rail_height_in.value))}</text>
       <text x="526" y="388" font-size="7.5" font-weight="700" fill="#92400e">${esc(tr.takeoff_notice)}</text>
@@ -1228,10 +1313,15 @@
     const ductX = xCl - ductW / 2;
     const soffitX = xCl - soffitW / 2;
 
-    /* Studs at 16" OC across actual wall width */
+    /* Studs at 16" OC driven live by Where the Wall Studs Fall (1 bay ~14-1/2" vs Stud on center 2 bays) */
+    const studLayout = state.options.stud_layout === 'center_stud' ? 'center_stud' : 'one_bay';
     const studs = [];
-    for (let pos = 0; pos < m.wallW - 3; pos += 16) {
-      studs.push(pos);
+    const anchorStud = studLayout === 'center_stud' ? (m.clX - 0.75) : (m.clX - 8.75);
+    let firstStud = anchorStud;
+    while (firstStud - 16 >= 0) firstStud -= 16;
+    if (firstStud > 1.5) studs.push(0);
+    for (let pos = firstStud; pos < m.wallW - 1.5; pos += 16) {
+      if (pos >= 0) studs.push(pos);
     }
     studs.push(Math.max(0, m.wallW - 1.5));
 
@@ -1239,11 +1329,80 @@
       `<rect x="${sx(sp).toFixed(2)}" y="${yCeil.toFixed(2)}" width="${(1.5 * pxPerIn).toFixed(2)}" height="${(fy - yCeil).toFixed(2)}" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="0.8"/>`
     )).join('');
 
-    /* Lower & Upper Backing bands */
-    const blkLowX1 = sx(Math.max(0, m.clX - 23));
-    const blkLowX2 = sx(Math.min(m.wallW, m.clX + 23));
-    const blkUpX1 = sx(Math.max(0, m.clX - 15));
-    const blkUpX2 = sx(Math.min(m.wallW, m.clX + 15));
+    /* Lower & Upper Backing bands (compact 1-bay inside 30" hood vs 2-bay when stud lands on center) */
+    const blkHalfLow = studLayout === 'center_stud' ? 16.0 : 8.75;
+    const blkHalfUp = studLayout === 'center_stud' ? 16.0 : 8.75;
+    const blkLowX1 = sx(Math.max(0, m.clX - blkHalfLow));
+    const blkLowX2 = sx(Math.min(m.wallW, m.clX + blkHalfLow));
+    const blkUpX1 = sx(Math.max(0, m.clX - blkHalfUp));
+    const blkUpX2 = sx(Math.min(m.wallW, m.clX + blkHalfUp));
+
+    /* Live Tile Layout Preview (ONLY drawn when user selects a neutral tile size or looks up a product — blank on startup!) */
+    let tilePreviewMarkup = '';
+    const tileDims = (() => {
+      const tk = state.takeoff_settings || {};
+      if (tk.selected_tile_product && Number(tk.selected_tile_product.width_in) > 0 && Number(tk.selected_tile_product.height_in) > 0) {
+        return [Number(tk.selected_tile_product.width_in), Number(tk.selected_tile_product.height_in)];
+      }
+      if (tk.tile_size_key && /^\d+(?:\.\d+)?x\d+(?:\.\d+)?$/.test(tk.tile_size_key)) {
+        const parts = tk.tile_size_key.split('x').map(Number);
+        return [parts[0], parts[1]];
+      }
+      return null;
+    })();
+    if (tileDims) {
+      const shortIn = Math.min(tileDims[0], tileDims[1]);
+      const longIn = Math.max(tileDims[0], tileDims[1]);
+      const orient = (state.takeoff_settings && state.takeoff_settings.tile_orientation) || 'horizontal';
+      const pat = (state.takeoff_settings && state.takeoff_settings.tile_pattern) || 'brick50';
+      const clipId = 'ks4-tile-wall-clip';
+      const segs = [];
+      const wallHIn = Math.max(1, m.ceilH - m.counterH);
+      if (orient === 'herringbone') {
+        const tw = longIn * pxPerIn;
+        const th = shortIn * pxPerIn;
+        const step = th;
+        const cols = Math.ceil((wTot + (yCtr - yCeil)) / Math.max(6, step)) + 4;
+        const rows = Math.ceil(((yCtr - yCeil) + wTot) / Math.max(6, step)) + 4;
+        const ox = x0 - (yCtr - yCeil) * 0.55;
+        const oy = yCeil - wTot * 0.35;
+        for (let r = 0; r < rows && segs.length < 720; r++) {
+          for (let c = 0; c < cols && segs.length < 720; c++) {
+            const gx = ox + c * step;
+            const gy = oy + r * step;
+            const isHoriz = ((r + c) % 2) === 0;
+            if (isHoriz) {
+              segs.push(`<rect x="${gx.toFixed(1)}" y="${gy.toFixed(1)}" width="${tw.toFixed(1)}" height="${th.toFixed(1)}" fill="none" stroke="#64748b" stroke-opacity="0.46" stroke-width="0.65"/>`);
+            } else {
+              segs.push(`<rect x="${gx.toFixed(1)}" y="${gy.toFixed(1)}" width="${th.toFixed(1)}" height="${tw.toFixed(1)}" fill="none" stroke="#64748b" stroke-opacity="0.46" stroke-width="0.65"/>`);
+            }
+          }
+        }
+        tilePreviewMarkup = `<defs><clipPath id="${clipId}"><rect x="${x0.toFixed(2)}" y="${yCeil.toFixed(2)}" width="${wTot.toFixed(2)}" height="${(yCtr - yCeil).toFixed(2)}"/></clipPath></defs><g clip-path="url(#${clipId})" opacity="0.92"><g transform="rotate(-45 ${(x0 + wTot / 2).toFixed(1)} ${(yCeil + (yCtr - yCeil) / 2).toFixed(1)})">${segs.join('')}</g></g>`;
+      } else {
+        const tileW = (orient === 'vertical' ? shortIn : longIn) * pxPerIn;
+        const tileH = (orient === 'vertical' ? longIn : shortIn) * pxPerIn;
+        const diag = orient === 'diagonal';
+        const pad = diag ? Math.max(wTot, yCtr - yCeil) * 0.55 : 0;
+        const startX = x0 - pad;
+        const endX = xEnd + pad;
+        const startY = yCeil - pad;
+        const endY = yCtr + pad;
+        let rowIdx = 0;
+        for (let yy = endY - tileH; yy >= startY - tileH && segs.length < 720; yy -= tileH, rowIdx++) {
+          const offsetFrac = pat === 'stacked' ? 0 : pat === 'third' ? ((rowIdx % 3) / 3) : ((rowIdx % 2) * 0.5);
+          const xOff = -offsetFrac * tileW;
+          for (let xx = startX + xOff; xx < endX && segs.length < 720; xx += tileW) {
+            segs.push(`<rect x="${xx.toFixed(1)}" y="${yy.toFixed(1)}" width="${tileW.toFixed(1)}" height="${tileH.toFixed(1)}" fill="none" stroke="#64748b" stroke-opacity="0.46" stroke-width="0.65"/>`);
+          }
+        }
+        const inner = diag
+          ? `<g transform="rotate(-45 ${(x0 + wTot / 2).toFixed(1)} ${(yCeil + (yCtr - yCeil) / 2).toFixed(1)})">${segs.join('')}</g>`
+          : segs.join('');
+        tilePreviewMarkup = `<defs><clipPath id="${clipId}"><rect x="${x0.toFixed(2)}" y="${yCeil.toFixed(2)}" width="${wTot.toFixed(2)}" height="${(yCtr - yCeil).toFixed(2)}"/></clipPath></defs><g clip-path="url(#${clipId})" data-tile-preview="${esc(orient)}">${inner}</g>`;
+      }
+      void wallHIn;
+    }
 
     /* Left Chase indicator (dashed provisional outline when null, snaps to solid true scale when measured) */
     let chaseMarkup = '';
@@ -1323,15 +1482,11 @@
       }
     }
 
-    /* Rear trim visual (1" island trim vs 8" high backguard) */
-    const is8inBackguard = state.options.rear_trim === 'backguard_8in';
-    const yBackguardTop = sy(m.counterH + (is8inBackguard ? 8.0 : 1.0));
-    const backguardSvg = is8inBackguard
-      ? `<rect x="${x1.toFixed(2)}" y="${yBackguardTop.toFixed(2)}" width="${(m.rangeW * pxPerIn).toFixed(2)}" height="${(yTrim - yBackguardTop).toFixed(2)}" fill="#e2e8f0" stroke="#2f4f42" stroke-width="1.5"/>
-         <text x="${xCl.toFixed(2)}" y="${((yBackguardTop + yTrim) / 2 + 3).toFixed(2)}" font-size="7.1" text-anchor="middle" font-weight="700" fill="#2f4f42">${isEs ? 'COPETE 8" + 3/4" = 0" ATRÁS OK' : '8" BACKGUARD + 3/4" = 0" REAR OK'}</text>`
-      : `<rect x="${x1.toFixed(2)}" y="${yBackguardTop.toFixed(2)}" width="${(m.rangeW * pxPerIn).toFixed(2)}" height="${(yTrim - yBackguardTop).toFixed(2)}" fill="#fecaca" stroke="#b91c1c" stroke-width="1.3"/>
-         <rect x="${(xCl - 78).toFixed(2)}" y="${(yBackguardTop - 16).toFixed(2)}" width="156" height="13" rx="2" fill="#fef2f2" stroke="#b91c1c" stroke-width="0.9"/>
-         <text x="${xCl.toFixed(2)}" y="${(yBackguardTop - 7).toFixed(2)}" font-size="6.7" text-anchor="middle" font-weight="700" fill="#b91c1c">${isEs ? 'REMATE 1" = 6" MÍN. ATRÁS' : '1" TRIM = 6" REAR MIN'}</text>`;
+    /* Rear trim visual (Locked: Owned Viking VGCC5304BSS has low 1" island trim ONLY — NO 8" high backguard) */
+    const yBackguardTop = sy(m.counterH + 1.0);
+    const backguardSvg = `<rect x="${x1.toFixed(2)}" y="${yBackguardTop.toFixed(2)}" width="${(m.rangeW * pxPerIn).toFixed(2)}" height="${(yTrim - yBackguardTop).toFixed(2)}" fill="#fef3c7" stroke="#b45309" stroke-width="1.2"/>
+         <rect x="${(xCl - 84).toFixed(2)}" y="${(yBackguardTop - 14.5).toFixed(2)}" width="168" height="12" rx="2" fill="#fffbeb" stroke="#d97706" stroke-width="0.85"/>
+         <text x="${xCl.toFixed(2)}" y="${(yBackguardTop - 6.5).toFixed(2)}" font-size="5.5" text-anchor="middle" font-weight="700" fill="#92400e">${isEs ? 'REMATE 1" (SIN COPETE 8") · HARDIE 1/2" + AZULEJO' : 'LOW 1" TRIM (NO 8" BACKGUARD) · HARDIE 1/2" + TILE'}</text>`;
 
     /* Appliances & Cabinetry layer (strict scaleX === scaleY: 18" base : 30" range = 3:5, 36" H : 18" W = 2:1) */
     const hoodStroke = m.vikingPass ? '#10202b' : '#b91c1c';
@@ -1421,8 +1576,14 @@
         <rect x="${(sx(m.antitipX) - 9).toFixed(2)}" y="${sy(11.5).toFixed(2)}" width="18" height="11" fill="#fef3c7" fill-opacity="0.88" stroke="#8f4a16" stroke-width="1.1" stroke-dasharray="2,2"/>
         <text x="${sx(m.antitipX).toFixed(2)}" y="${(sy(11.5) - 3).toFixed(2)}" font-size="6.4" text-anchor="middle" font-weight="700" fill="#78350f">${esc(S.antitip)}</text>
 
-        <rect x="${(x1 + 10).toFixed(2)}" y="${yUtilTop.toFixed(2)}" width="${Math.max(20, (x2 - x1) - 20).toFixed(2)}" height="${Math.max(12, yUtilBot - yUtilTop).toFixed(2)}"
-              fill="#fee2e2" fill-opacity="0.78" stroke="#b91c1c" stroke-width="1.4"/>
+        <rect x="${(x1 + 10).toFixed(2)}" y="${yUtilTop.toFixed(2)}" width="${Math.max(20, (x2 - x1) - 20).toFixed(2)}" height="${Math.max(14, yUtilBot - yUtilTop).toFixed(2)}"
+              fill="#fee2e2" fill-opacity="0.84" stroke="#b91c1c" stroke-width="1.5"/>
+        <line x1="${(x1 + 2).toFixed(2)}" y1="${yUtilTop.toFixed(2)}" x2="${(x2 - 2).toFixed(2)}" y2="${yUtilTop.toFixed(2)}" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="5,2.5"/>
+        <rect x="${(xCl - 84).toFixed(2)}" y="${(yUtilTop - 13.5).toFixed(2)}" width="168" height="12" rx="2" fill="#dc2626"/>
+        <text x="${xCl.toFixed(2)}" y="${(yUtilTop - 5.5).toFixed(2)}" font-size="5.3" text-anchor="middle" font-weight="800" fill="#ffffff">${isEs
+          ? `▲ MÁX. GAS Y CONTACTO: 4-15/16" PT${m.floorT > 0 ? ` (${toFrac16(4.9375 + m.floorT)} SP)` : ''} ▲`
+          : `▲ MAX GAS &amp; OUTLET: 4-15/16" FF${m.floorT > 0 ? ` (${toFrac16(4.9375 + m.floorT)} SF)` : ''} ▲`}</text>
+        <text x="${xCl.toFixed(2)}" y="${(yUtilTop + 9.2).toFixed(2)}" font-size="5.2" text-anchor="middle" font-weight="700" fill="#7f1d1d">${isEs ? '120V/15A (14/2 Cu · NO 240V) · Gas ≤2"' : '120V/15A (14/2 Cu · NO 240V) · Gas ≤2" proud'}</text>
       </g>` : '';
 
     /* Left Dual-Height Axis with automatic vertical anti-overlap */
@@ -1477,9 +1638,7 @@
         ? (isEs ? 'Opc. B Z1C-00SA' : 'Opt B Z1C-00SA')
         : (isEs ? 'ABIERTO' : 'OPEN CHOICE');
 
-    const rearTrimShort = is8inBackguard
-      ? (isEs ? 'Copete 8" + 3/4" = 0" atrás OK' : '8" Backguard + 3/4" = 0" rear OK')
-      : (isEs ? 'Remate 1" = 6" atrás mín.' : '1" Trim = 6" rear min');
+    const rearTrimShort = isEs ? 'Remate bajo 1" (sin copete 8")' : 'Low 1" trim (no 8" backguard)';
 
     const scribeStatus = m.scribe < 0
       ? (isEs ? `EXCEDE ${toFrac16(Math.abs(m.scribe))}!` : `OVERFLOW ${toFrac16(Math.abs(m.scribe))}!`)
@@ -1521,7 +1680,8 @@
 
       <!-- Wall Envelope + Tile Backdrop -->
       <rect data-elem="wall-outline" x="${x0.toFixed(2)}" y="${yCeil.toFixed(2)}" width="${wTot.toFixed(2)}" height="${(fy - yCeil).toFixed(2)}" fill="none" stroke="none"/>
-      <rect x="${x0.toFixed(2)}" y="${yCeil.toFixed(2)}" width="${wTot.toFixed(2)}" height="${(yCtr - yCeil).toFixed(2)}" fill="url(#tileGrid)" stroke="#475569" stroke-width="0.9"/>
+      <rect x="${x0.toFixed(2)}" y="${yCeil.toFixed(2)}" width="${wTot.toFixed(2)}" height="${(yCtr - yCeil).toFixed(2)}" fill="${tilePreviewMarkup ? '#f8fafc' : 'url(#tileGrid)'}" stroke="#475569" stroke-width="0.9"/>
+      ${tilePreviewMarkup}
       <rect x="${x0.toFixed(2)}" y="${yCtr.toFixed(2)}" width="${wTot.toFixed(2)}" height="${(fy - yCtr).toFixed(2)}" fill="#ffffff" stroke="#475569" stroke-width="0.9"/>
 
       ${framingMarkup}
@@ -1611,7 +1771,9 @@
         <text x="-48" y="3" font-size="8.5" text-anchor="middle" font-weight="700" fill="#ffffff">W</text>
       </g>
       <text x="526" y="232" font-size="7.5" font-weight="700" fill="#10202b">${esc(S.kp_origin)}</text>
-      <text x="526" y="245" font-size="7.4" fill="#b91c1c" font-weight="700">${isEs ? 'Espesor piso t' : 'Floor t'} = ${esc(toFrac16(m.floorT))} [${esc(d.floor_buildup_t_in.verified)}]</text>
+      <text x="526" y="245" font-size="7.2" fill="${m.floorInstalled ? '#2f4f42' : '#b91c1c'}" font-weight="700">${m.floorInstalled
+        ? (isEs ? 'Piso terminado instalado · 0" ajuste' : 'Finished floor installed · 0" offset')
+        : `${isEs ? 'Subpiso desnudo (+t)' : 'Bare subfloor (+t)'} = ${esc(toFrac16(m.floorT))} [${esc(d.floor_buildup_t_in.verified)}]`}</text>
 
       <!-- Panel B: Live Recalculated Measurements & Takeoff Summary -->
       <rect x="514" y="266" width="382" height="248" rx="4" fill="#ffffff" stroke="#94a3b8" stroke-width="1.1"/>
@@ -1631,11 +1793,11 @@
       <text x="526" y="412" font-size="7.2" fill="#4b5c69">${isEs ? 'Remate Viking' : 'Rear Trim'}: ${esc(rearTrimShort)} · ${isEs ? 'Cajón Izq.' : 'Left Chase'}: ${esc(m.leftChase === null ? tr.measure_on_site : toFrac16(m.leftChase))}</text>
 
       <line x1="526" y1="423" x2="884" y2="423" stroke="#cbd5e1" stroke-width="0.8"/>
-      <text x="526" y="438" font-size="8.0" font-weight="700" fill="#2f4f42">5. ${isEs ? 'Azulejo Propuesto (Sin Precios)' : 'Proposed Wall Tile (Zero Prices)'}: ${tk.tile_net_sqft} → ${tk.tile_gross_sqft} sq ft (+${tk.waste_pct}%)</text>
-      <text x="526" y="450" font-size="7.2" fill="#4b5c69">0.42" HardieBacker: ${tk.backer_sheets_3x5} ${isEs ? 'hojas 3×5' : 'sheets (3×5)'} · ${isEs ? 'Refuerzo' : 'Blocking'}: ${tk.blocking_total_lf} LF (${tk.blocking_8ft_sticks} × 8')</text>
+      <text x="526" y="438" font-size="8.0" font-weight="700" fill="#2f4f42">5. ${isEs ? 'Azulejo (0 Metal / 0 Precios)' : 'Wall Tile (Zero Metal / Zero Prices)'}: ${tk.tile_net_sqft} → ${tk.tile_gross_sqft} sq ft (+${tk.waste_pct}%)</text>
+      <text x="526" y="450" font-size="7.0" fill="#4b5c69">${isEs ? 'Borde Sur' : 'South Edge'}: ${esc(isEs ? tk.south_edge_label_es : tk.south_edge_label_en)} · ${isEs ? 'Norte 90°: Silicón' : 'North 90°: Silicone only'}</text>
 
       <text x="526" y="472" font-size="7.8" font-weight="700" fill="#475569">6. ${isEs ? 'Molduras Originales (Separadas)' : 'Existing Original Trim (Separate)'}: ${isEs ? 'Zoclo' : 'Base'} ${esc(toFrac16(baseH))} · ${isEs ? 'Riel' : 'Rail'} ${esc(toFrac16(railH))}</text>
-      <text x="526" y="484" font-size="7.2" fill="#4b5c69">${isEs ? 'Chambrana puerta/ventana: MEDIR EN OBRA (nunca inventado)' : 'Door/window casing widths: MEASURE ON SITE (never fabricated)'}</text>
+      <text x="526" y="484" font-size="7.1" fill="#4b5c69">Hardie 0.42": ${tk.backer_sheets_3x5} ${isEs ? 'hojas' : 'sheets'} · ${isEs ? 'Refuerzo' : 'Blocking'}: ${tk.blocking_total_lf} LF · ${isEs ? 'Chambranas: MEDIR' : 'Casings: MEASURE'}</text>
 
       <text x="526" y="504" font-size="7.3" font-weight="700" fill="#334155">${isEs ? 'Cubierta' : 'Counter'} ${esc(toFrac16(m.counterH))} ${ffTag} (${esc(toFrac16(m.counterH + m.floorT))} ${sfTag}) · W1=${esc(toFrac16(m.w1X))}, W2=${esc(toFrac16(m.w2X))}</text>
 
@@ -1818,8 +1980,10 @@
     const es = currentLang === 'es';
 
     if (tPill) {
-      tPill.className = `pill ${d.floor_buildup_t_in.verified === 'MEASURE_ON_SITE' ? 'pill-warn' : 'pill-pass'}`;
-      tPill.textContent = `${es ? 'Espesor piso t' : 'Floor buildup t'} = ${toFrac16(m.floorT)} (${d.floor_buildup_t_in.verified})`;
+      tPill.className = `pill ${m.floorInstalled ? 'pill-pass' : (d.floor_buildup_t_in.verified === 'MEASURE_ON_SITE' ? 'pill-warn' : 'pill-pass')}`;
+      tPill.textContent = m.floorInstalled
+        ? (es ? 'Piso terminado instalado · 0" ajuste' : 'Finished floor already down · 0" offset')
+        : `${es ? 'Subpiso desnudo (+t)' : 'Bare subfloor (+t)'} = ${toFrac16(m.floorT)} (${d.floor_buildup_t_in.verified})`;
     }
 
     const rows = [
@@ -1943,33 +2107,40 @@
       ? (es ? ` · −${tk.tile_chimney_deduct_sqft} pies² tiro` : ` · −${tk.tile_chimney_deduct_sqft} sq ft chimney`)
       : '';
 
+    const prodLine = tk.selected_tile_product && tk.selected_tile_product.name
+      ? `<div class="takeoff-card-sub"><strong>${esc(tk.selected_tile_product.name)}</strong>${tk.selected_tile_product.width_in && tk.selected_tile_product.height_in ? ` (${tk.selected_tile_product.width_in}"×${tk.selected_tile_product.height_in}"${tk.selected_tile_product.thickness_in ? ` · ${tk.selected_tile_product.thickness_in}"` : ''})` : ''}</div>`
+      : (state.takeoff_settings.tile_size_key
+        ? `<div class="takeoff-card-sub"><strong>${esc(state.takeoff_settings.tile_size_key.replace('x', '"×') + '"')}</strong> · ${esc(state.takeoff_settings.tile_orientation || 'horizontal')}</div>`
+        : `<div class="takeoff-card-sub">${es ? 'Azulejo seleccionado: — (elige medida o busca producto)' : 'Selected tile: — (pick size or look up product)'}</div>`);
+
     grid.innerHTML = `
-      <article class="takeoff-card card-primary">
+      <article class="takeoff-card card-primary" data-takeoff-card="tile">
         <div class="takeoff-card-title">${es ? 'Azulejo Muro de Estufa' : 'Statement Wall Tile'}</div>
         <div class="takeoff-card-big">${tk.tile_gross_sqft} sq ft</div>
+        ${prodLine}
         <div class="takeoff-card-sub">${es ? 'Neto' : 'Net'}: ${tk.tile_net_sqft} sq ft (+${tk.waste_pct}%)${extraNote}${dedNote}</div>
         <div class="takeoff-card-sub">${boxLine}</div>
       </article>
 
-      <article class="takeoff-card">
-        <div class="takeoff-card-title">${es ? 'Panel Cemento 0.42" + Calzas' : '0.42" HardieBacker + Shims'}</div>
+      <article class="takeoff-card" data-takeoff-card="backer">
+        <div class="takeoff-card-title">${es ? 'Panel Cemento 0.42" + Tablaroca 1/2"' : '0.42" HardieBacker + 1/2" Drywall'}</div>
         <div class="takeoff-card-big">${tk.backer_sheets_3x5} ${es ? 'hojas (3\'×5\')' : 'sheets (3\'×5\')'}</div>
         <div class="takeoff-card-sub">${es ? 'Neto' : 'Net'}: ${tk.backer_net_sqft} sq ft · ${es ? 'Bruto +10%' : 'Gross +10%'}: ${tk.backer_gross_sqft} sq ft</div>
-        <div class="takeoff-card-sub">${es ? 'Calzas 3/16"' : '3/16" shims'}: ${tk.shim_strips_count} ${es ? 'tiras' : 'strips'} (${tk.shim_total_lf} LF)</div>
+        <div class="takeoff-card-sub">${es ? 'Tablaroca 1/2" (0.50") a Hardie 0.42" — SIN calzas (~1/16" pasta en junta)' : '1/2" drywall (0.50") to 0.42" Hardie — NO stud shims (~1/16" skim at seam)'}</div>
       </article>
 
-      <article class="takeoff-card">
-        <div class="takeoff-card-title">${es ? 'Refuerzo de Madera Sólida' : 'Solid Wood Blocking'}</div>
+      <article class="takeoff-card" data-takeoff-card="blocking">
+        <div class="takeoff-card-title">${es ? 'Refuerzo Madera y Muro Bajo' : 'Solid Blocking & Lower Paint'}</div>
         <div class="takeoff-card-big">${tk.blocking_total_lf} LF (${tk.blocking_8ft_sticks} × 8')</div>
         <div class="takeoff-card-sub">${es ? 'Franjas 68"–86" y 104"–Techo (claro ducto 8"–10" libre)' : 'Bands 68"–86" & 104"–Ceil (8"–10" duct bay clear)'}</div>
-        <div class="takeoff-card-sub">${es ? 'Alternativa: 1 hoja triplay 3/4" (4×8)' : 'Or 1 sheet 3/4" structural plywood (4×8)'}</div>
+        <div class="takeoff-card-sub">${es ? 'Sellador/pintura bajo cubierta' : 'Lower wall primer/paint'}: ${tk.primer_paint_gallons_min} gal (${tk.lower_drywall_sqft} sq ft)</div>
       </article>
 
-      <article class="takeoff-card">
-        <div class="takeoff-card-title">${es ? 'Sellador y Pintura Muro Bajo' : 'Primer & Lower Wall Paint'}</div>
-        <div class="takeoff-card-big">${tk.primer_paint_gallons_min} gal ${es ? 'mín.' : 'min'}</div>
-        <div class="takeoff-card-sub">${es ? 'Tablaroca bajo cubierta' : 'Lower drywall below 36"'}: ${tk.lower_drywall_sqft} sq ft</div>
-        <div class="takeoff-card-sub">${es ? 'Sin precios · Verificar inventario antes de pedir' : 'Zero prices · Verify on-hand stock first'}</div>
+      <article class="takeoff-card" data-takeoff-card="edge">
+        <div class="takeoff-card-title">${es ? 'Remate Sin Metal (Cero Schluter)' : 'Zero-Metal Edge & Silicone'}</div>
+        <div class="takeoff-card-big">${esc(es ? tk.south_edge_label_es : tk.south_edge_label_en)}</div>
+        <div class="takeoff-card-sub">${es ? 'Sur (muro pintado):' : 'South (painted return):'} ${esc(es ? tk.south_edge_qty_es : tk.south_edge_qty_en)}</div>
+        <div class="takeoff-card-sub">${es ? 'Norte 90° interior: 1 tubo silicón (0 moldura · 0 metal · 0 inglete 45°)' : 'North 90° inside: 1 tube silicone (zero trim · zero metal · no 45° miter)'}</div>
       </article>
     `;
   }
@@ -2269,10 +2440,14 @@
     setVal('inp-box-sqft', tk.tile_box_sqft);
     const chkChim = document.getElementById('chk-deduct-chimney');
     if (chkChim) chkChim.checked = !!tk.deduct_chimney;
+    const chkCap = document.getElementById('chk-cap-ceiling');
+    if (chkCap) chkCap.checked = !!tk.cap_ceiling;
     const b10 = document.getElementById('btn-waste-10');
     const b15 = document.getElementById('btn-waste-15');
+    const b20 = document.getElementById('btn-waste-20');
     if (b10) b10.classList.toggle('btn-primary', Number(tk.waste_pct) === 10);
     if (b15) b15.classList.toggle('btn-primary', Number(tk.waste_pct) === 15);
+    if (b20) b20.classList.toggle('btn-primary', Number(tk.waste_pct) === 20);
   }
 
   function applyUiLanguage() {
@@ -2387,9 +2562,8 @@
     if (noteInput) noteInput.placeholder = tr.note_placeholder;
 
     const selRear = document.getElementById('sel-rear-trim');
-    if (selRear && selRear.options.length >= 2) {
+    if (selRear && selRear.options.length >= 1) {
       selRear.options[0].textContent = tr.opt_trim_1;
-      selRear.options[1].textContent = tr.opt_trim_8;
     }
 
     const selGap = document.getElementById('sel-ceil-gap');
@@ -2409,10 +2583,17 @@
 
   function renderAll() {
     applyUiLanguage();
+    resolveCrossLinks();
     renderSvg();
     renderStatusPills();
     renderClashes();
     renderMarkTable();
+    renderStudBayBar();
+    renderSubfloorBar();
+    renderVisualSteps();
+    renderTileSelectionControls();
+    renderZeroMetalControls();
+    renderProductLookupPanel();
     renderTakeoff();
     renderPinsList();
     renderEodDrawer();
@@ -2488,6 +2669,9 @@
     if (patch.options) {
       if (patch.options.rear_trim) state.options.rear_trim = patch.options.rear_trim;
       if (patch.options.ceiling_gap_solution) state.options.ceiling_gap_solution = patch.options.ceiling_gap_solution;
+      if (patch.options.floor_condition === 'bare_subfloor' || patch.options.floor_condition === 'finished_installed') {
+        state.options.floor_condition = patch.options.floor_condition;
+      }
     }
     ensureStateDefaults(state);
     if (patch.existing_original_trim) {
@@ -2504,6 +2688,12 @@
       if ('waste_pct' in patch.takeoff_settings) state.takeoff_settings.waste_pct = patch.takeoff_settings.waste_pct;
       if ('tile_box_sqft' in patch.takeoff_settings) state.takeoff_settings.tile_box_sqft = patch.takeoff_settings.tile_box_sqft;
       if ('deduct_chimney' in patch.takeoff_settings) state.takeoff_settings.deduct_chimney = !!patch.takeoff_settings.deduct_chimney;
+      if (['ceramic_bullnose', 'ceramic_pencil', 'painted_wood_trim', 'glazed_edge_tile'].includes(patch.takeoff_settings.south_edge_trim)) {
+        state.takeoff_settings.south_edge_trim = patch.takeoff_settings.south_edge_trim;
+      }
+      if ('selected_tile_product' in patch.takeoff_settings) {
+        state.takeoff_settings.selected_tile_product = sanitizeTileProduct(patch.takeoff_settings.selected_tile_product);
+      }
     }
     if (patch.pin) {
       state.pins = state.pins || [];
@@ -3157,6 +3347,1005 @@
     });
   }
 
+  /* ── Wave C: Zero-Metal Trim, Bare Subfloor, Visual Steps & Product Lookup ── */
+  const lookupOrigin = resolveApiOrigin(params.get('lookup_api') || params.get('voice_api'), DEFAULT_LOOKUP_ORIGIN);
+  const ZERO_METAL_ALLOWED = ['ceramic_bullnose', 'ceramic_pencil', 'painted_wood_trim', 'glazed_edge_tile'];
+  const METAL_BAN_RE = /schluter|metal|aluminum|aluminium|steel|brass|chrome|j-?trim|l-?trim|miter|45\s*°|45\s*deg/i;
+  const METAL_TEXT_STRIP_RE = /(?<!zero[\s-])(?<!no\s)\b(schluter(?:\s+[a-z0-9-]+)?|metal\s+edge(?:\s+trim)?|metal\s+trim|j-?trim|l-?trim)\b/gi;
+  let activeLookupMode = 'query';
+  let activeLookupMeta = { source: null, isFallback: false, candidates: [], error: null };
+  let activeCamStream = null;
+  let activeCamFacing = 'environment';
+  let capturedCamDataUrl = null;
+
+  const LOCAL_TILE_CATALOG = [
+    {
+      name: 'Bedrosians Cloe White 2.5" × 8" Ceramic',
+      brand: 'Bedrosians',
+      sku: 'DECCLOWHI28G',
+      width_in: 2.5,
+      height_in: 8.0,
+      thickness_in: 0.375,
+      sqft_per_box: 10.83,
+      bullnose_available: true,
+      bullnose_length_in: 8.0,
+      glazed_edge_available: false,
+      matching_trim_parts: [{ type: 'ceramic_bullnose', name: 'Cloe 2.5"×8" Ceramic Bullnose', length_in: 8.0, sku: 'DECCLOWHI28BN' }],
+      zero_metal_trim_guidance: 'Zero metal trim: finish South flat painted return with matching Ceramic Bullnose, Ceramic Pencil/Quarter-Round, Painted Edwardian Wood Trim, or Factory Glazed-Edge Tile (silicone-only inside North 90° corner; no 45° miter).',
+      recommended_trim_options: ['ceramic_bullnose', 'ceramic_pencil', 'painted_wood_trim'],
+      recommended_pattern: 'brick',
+      notes: 'Glossy ceramic wall tile. Zero metal trim — use matching ceramic bullnose or painted wood stop on South flat painted return; silicone-only inside North 90° corner.'
+    },
+    {
+      name: 'Clé Zellige 4" × 4" Glazed Terracotta',
+      brand: 'Clé',
+      sku: 'ZELLIGE-4X4',
+      width_in: 4.0,
+      height_in: 4.0,
+      thickness_in: 0.5,
+      sqft_per_box: 5.5,
+      bullnose_available: false,
+      bullnose_length_in: null,
+      glazed_edge_available: true,
+      recommended_trim_options: ['glazed_edge_tile', 'painted_wood_trim', 'ceramic_pencil'],
+      recommended_pattern: 'straight',
+      notes: 'Thick handmade tile (~1/2"). Confirm 1-gang box projection for HardieBacker + tile thickness; finish South edge with factory glazed-edge end tiles or painted wood trim.'
+    },
+    {
+      name: 'Classic 3" × 6" Glazed Ceramic Subway',
+      brand: 'Ceramic Subway Reference',
+      sku: 'SUBWAY-3X6',
+      width_in: 3.0,
+      height_in: 6.0,
+      thickness_in: 0.3125,
+      sqft_per_box: 12.5,
+      bullnose_available: true,
+      bullnose_length_in: 6.0,
+      glazed_edge_available: false,
+      recommended_trim_options: ['ceramic_bullnose', 'ceramic_pencil', 'painted_wood_trim'],
+      recommended_pattern: 'brick',
+      notes: 'Standard ceramic wall tile with matching 2×6 or 3×6 ceramic bullnose; zero metal trim anywhere.'
+    },
+    {
+      name: '2" × 8" Handmade Glazed Ceramic Tile',
+      brand: 'Ceramic Reference',
+      sku: 'HANDMADE-2X8',
+      width_in: 2.0,
+      height_in: 8.0,
+      thickness_in: 0.375,
+      sqft_per_box: 9.6,
+      bullnose_available: true,
+      bullnose_length_in: 8.0,
+      glazed_edge_available: true,
+      recommended_trim_options: ['ceramic_bullnose', 'glazed_edge_tile', 'ceramic_pencil', 'painted_wood_trim'],
+      recommended_pattern: 'brick',
+      notes: 'Verify exact carton coverage on tile box before ordering; finish South edge zero-metal only.'
+    }
+  ];
+
+  function sanitizeZeroMetalOptions(list) {
+    const out = [];
+    if (Array.isArray(list)) {
+      list.forEach((item) => {
+        const s = String(item || '').trim().toLowerCase();
+        if (!s || METAL_BAN_RE.test(s)) return;
+        if (ZERO_METAL_ALLOWED.includes(s) && !out.includes(s)) out.push(s);
+      });
+    }
+    return out.length ? out : ZERO_METAL_ALLOWED.slice();
+  }
+
+  /* Strict zero-price & zero-metal product sanitizer (strips any price_* or metal trim fields defensively) */
+  function sanitizeTileProduct(raw) {
+    if (!raw || typeof raw !== 'object') return null;
+    const cleanText = (v) => String(v == null ? '' : v).replace(/[$€£¥]\s*[\d,]+(?:\.\d{1,2})?/g, '').trim();
+    const numOrNull = (v) => {
+      const n = Number(v);
+      return Number.isFinite(n) && n > 0 ? Number(n.toFixed(4)) : null;
+    };
+    const notesClean = cleanText(raw.notes || '').replace(METAL_TEXT_STRIP_RE, 'zero-metal trim');
+    const trimParts = Array.isArray(raw.matching_trim_parts)
+      ? raw.matching_trim_parts
+        .filter((p) => p && typeof p === 'object' && !METAL_BAN_RE.test(`${p.type || ''} ${p.name || ''}`))
+        .map((p) => ({
+          type: cleanText(p.type || 'trim'),
+          name: cleanText(p.name || 'Zero-metal trim part'),
+          length_in: numOrNull(p.length_in),
+          sku: cleanText(p.sku || '')
+        }))
+      : [];
+    const guidanceClean = cleanText(raw.zero_metal_trim_guidance || '').replace(METAL_TEXT_STRIP_RE, 'zero-metal trim');
+    return {
+      name: cleanText(raw.name || raw.title || 'Selected Tile'),
+      brand: cleanText(raw.brand || ''),
+      sku: cleanText(raw.sku || ''),
+      width_in: numOrNull(raw.width_in),
+      height_in: numOrNull(raw.height_in),
+      thickness_in: numOrNull(raw.thickness_in),
+      sqft_per_box: numOrNull(raw.sqft_per_box),
+      bullnose_available: !!raw.bullnose_available,
+      bullnose_length_in: numOrNull(raw.bullnose_length_in),
+      glazed_edge_available: !!raw.glazed_edge_available,
+      matching_trim_parts: trimParts,
+      zero_metal_trim_guidance: guidanceClean || null,
+      recommended_trim_options: sanitizeZeroMetalOptions(raw.recommended_trim_options),
+      recommended_pattern: cleanText(raw.recommended_pattern || '').toLowerCase() || null,
+      source_url: raw.source_url && /^https?:\/\//i.test(String(raw.source_url)) ? String(raw.source_url) : null,
+      notes: notesClean
+    };
+  }
+
+  function matchLocalTileFallback(queryText, urlText) {
+    const hay = `${queryText || ''} ${urlText || ''}`.toLowerCase();
+    const scored = LOCAL_TILE_CATALOG.map((item) => {
+      let score = 0;
+      if (hay.includes('cloe') || hay.includes('bedrosian') || hay.includes('2.5')) {
+        if (item.sku === 'DECCLOWHI28G') score += 10;
+      }
+      if (hay.includes('zellige') || hay.includes('cle') || hay.includes('clé') || hay.includes('4x4')) {
+        if (item.sku === 'ZELLIGE-4X4') score += 10;
+      }
+      if (hay.includes('subway') || hay.includes('3x6')) {
+        if (item.sku === 'SUBWAY-3X6') score += 10;
+      }
+      if (hay.includes('2x8') || hay.includes('handmade')) {
+        if (item.sku === 'HANDMADE-2X8') score += 8;
+      }
+      return { item, score };
+    }).sort((a, b) => b.score - a.score);
+    return {
+      product: deepClone(scored[0].item),
+      candidates: scored.slice(1).map((x) => deepClone(x.item))
+    };
+  }
+
+  function renderSubfloorBar() {
+    ensureStateDefaults(state);
+    const m = computeDerived();
+    const es = currentLang === 'es';
+    const bareBtn = document.getElementById('btn-floor-bare');
+    const finBtn = document.getElementById('btn-floor-finished');
+    const allowInp = document.getElementById('inp-subfloor-allow');
+    const allowLbl = document.getElementById('lbl-subfloor-allow');
+    const condLbl = document.getElementById('lbl-floor-cond');
+    const noteEl = document.getElementById('subfloor-status-note');
+
+    if (condLbl) condLbl.textContent = es ? 'Estado del Piso Hoy:' : 'Floor Condition Today:';
+    if (bareBtn) {
+      bareBtn.textContent = es ? 'Subpiso desnudo (piso sin instalar)' : 'Bare subfloor (not installed yet)';
+      bareBtn.classList.toggle('btn-primary', !m.floorInstalled);
+      bareBtn.setAttribute('aria-pressed', String(!m.floorInstalled));
+    }
+    if (finBtn) {
+      finBtn.textContent = es ? 'Piso terminado ya instalado' : 'Finished floor already down';
+      finBtn.classList.toggle('btn-primary', m.floorInstalled);
+      finBtn.setAttribute('aria-pressed', String(m.floorInstalled));
+    }
+    if (allowLbl) {
+      allowLbl.textContent = es ? 'Espesor piso futuro (+t):' : 'Finished-floor allowance (+t):';
+    }
+    if (allowInp) {
+      allowInp.disabled = m.floorInstalled;
+      if (document.activeElement !== allowInp) {
+        allowInp.value = m.rawFloorT;
+      }
+    }
+    if (noteEl) {
+      noteEl.textContent = m.floorInstalled
+        ? (es ? '0" de ajuste — midiendo directo sobre piso terminado' : '0" offset — measuring directly off finished floor')
+        : (es
+          ? `pulg (${toFrac16(m.floorT)} sumadas al marcar desde subpiso desnudo)`
+          : `in (${toFrac16(m.floorT)} added to every mark pulled from bare subfloor)`);
+    }
+  }
+
+  function renderStudBayBar() {
+    ensureStateDefaults(state);
+    const es = currentLang === 'es';
+    const isCenter = state.options.stud_layout === 'center_stud';
+    const lbl = document.getElementById('lbl-stud-layout');
+    const btn1 = document.getElementById('btn-stud-one-bay');
+    const btn2 = document.getElementById('btn-stud-center');
+    const note = document.getElementById('stud-layout-note');
+    if (lbl) lbl.textContent = es ? 'Dónde caen los barrotes del muro:' : 'Where the wall studs fall:';
+    if (btn1) {
+      btn1.textContent = es ? '1 vano (~14-1/2" entre barrotes)' : '1 bay (~14-1/2" between studs)';
+      btn1.classList.toggle('btn-primary', !isCenter);
+      btn1.setAttribute('aria-pressed', String(!isCenter));
+    }
+    if (btn2) {
+      btn2.textContent = es ? 'Barrote al centro (2 vanos)' : 'Stud on center (2 bays)';
+      btn2.classList.toggle('btn-primary', isCenter);
+      btn2.setAttribute('aria-pressed', String(isCenter));
+    }
+    if (note) {
+      note.textContent = isCenter
+        ? (es ? 'Barrote en eje 33" → refuerzos en 2 vanos (izq. y der.)' : 'Stud lands on 33" center → wood blocking spans 2 bays (left & right)')
+        : (es ? 'Cabe dentro de campana 30" — actualiza barrotes y refuerzos en vivo' : 'Fits inside 30" hood width — updates studs & wood blocking live');
+    }
+  }
+
+  function renderTileSelectionControls() {
+    ensureStateDefaults(state);
+    const es = currentLang === 'es';
+    const cfg = state.takeoff_settings;
+    const setText = (id, t) => { const el = document.getElementById(id); if (el) el.textContent = t; };
+    setText('lbl-tile-size', es ? 'Medida del Azulejo:' : 'Select Tile Size:');
+    setText('lbl-tile-orient', es ? 'Orientación:' : 'Orientation:');
+    setText('lbl-tile-pattern', es ? 'Patrón y margen:' : 'Pattern & waste:');
+    setText('lbl-add-custom', es ? '+ Personalizar (pies²/caja, margen % y descuento tiro)' : '+ Add custom (box sq ft, custom waste % & chimney deduction)');
+    setText('btn-waste-10', '+10%');
+    setText('btn-waste-15', '+15%');
+    setText('btn-waste-20', '+20%');
+
+    const sizeKey = cfg.tile_size_key || null;
+    document.querySelectorAll('#tile-size-pills [data-tile-size]').forEach((btn) => {
+      const k = btn.getAttribute('data-tile-size');
+      const on = k === sizeKey;
+      btn.classList.toggle('active', on);
+      btn.setAttribute('aria-checked', String(on));
+    });
+    const clearBtn = document.getElementById('btn-tile-size-clear');
+    if (clearBtn) {
+      clearBtn.hidden = !sizeKey && !cfg.selected_tile_product;
+      clearBtn.textContent = es ? '× Limpiar' : '× Clear';
+    }
+
+    const orientLabels = {
+      horizontal: es ? 'Horizontal' : 'Horizontal',
+      vertical: es ? 'Vertical' : 'Vertical',
+      diagonal: es ? 'Diagonal 45°' : 'Diagonal 45°',
+      herringbone: es ? 'Espiga (Herringbone)' : 'Herringbone'
+    };
+    const curOrient = cfg.tile_orientation || 'horizontal';
+    document.querySelectorAll('#tile-orient-pills [data-tile-orient]').forEach((btn) => {
+      const k = btn.getAttribute('data-tile-orient');
+      if (orientLabels[k]) btn.textContent = orientLabels[k];
+      const on = k === curOrient;
+      btn.classList.toggle('active', on);
+      btn.setAttribute('aria-checked', String(on));
+    });
+
+    const patLabels = {
+      stacked: es ? 'Alineado' : 'Stacked',
+      brick50: es ? 'Ladrillo 50%' : '50% Brick',
+      third: es ? 'Desfase 1/3' : '1/3 Offset'
+    };
+    const curPat = cfg.tile_pattern || 'brick50';
+    const hidePat = curOrient === 'herringbone';
+    document.querySelectorAll('#tile-pattern-pills [data-tile-pattern]').forEach((btn) => {
+      const k = btn.getAttribute('data-tile-pattern');
+      if (patLabels[k]) btn.textContent = patLabels[k];
+      const on = k === curPat;
+      btn.classList.toggle('active', on);
+      btn.setAttribute('aria-pressed', String(on));
+      btn.disabled = hidePat;
+      btn.style.opacity = hidePat ? '0.45' : '1';
+    });
+
+    const b10 = document.getElementById('btn-waste-10');
+    const b15 = document.getElementById('btn-waste-15');
+    const b20 = document.getElementById('btn-waste-20');
+    if (b10) b10.classList.toggle('btn-primary', Number(cfg.waste_pct) === 10);
+    if (b15) b15.classList.toggle('btn-primary', Number(cfg.waste_pct) === 15);
+    if (b20) b20.classList.toggle('btn-primary', Number(cfg.waste_pct) === 20);
+  }
+
+  function renderZeroMetalControls() {
+    ensureStateDefaults(state);
+    const es = currentLang === 'es';
+    const cur = state.takeoff_settings.south_edge_trim || 'ceramic_bullnose';
+    const capCeil = !!state.takeoff_settings.cap_ceiling;
+    const tk = computeTakeoff();
+    const titleEl = document.getElementById('zm-title');
+    const northEl = document.getElementById('zm-north-pill');
+    const descEl = document.getElementById('zm-south-desc');
+    const capLbl = document.getElementById('lbl-cap-ceiling');
+    if (titleEl) {
+      titleEl.textContent = es
+        ? 'Remates sin metal (Solo borde Izq. = 7.1 pies · Lado Norte topa muro)'
+        : 'Zero-metal edge finishes (Left edge only = 7.1 ft · North side meets wall)';
+    }
+    if (northEl) {
+      northEl.textContent = es
+        ? 'Esquina Interior Norte 90°: Solo Silicón (Cero Moldura)'
+        : 'North 90° Inside Corner: Silicone Only (Zero Trim)';
+    }
+    if (descEl) {
+      descEl.innerHTML = es
+        ? 'El borde Sur (Izq.) termina contra el muro pintado largo <strong>SIN vuelta azulejada</strong> (cero metal · sin Schluter · sin inglete 45°):'
+        : 'South (Left) edge terminates against the long painted flat wall with <strong>NO tiled return</strong> (zero metal · no Schluter · no 45° miter):';
+    }
+    if (capLbl) {
+      capLbl.textContent = es ? '+ Remate techo (5.5 pies)' : '+ Cap ceiling (5.5 ft)';
+    }
+    const labels = {
+      ceramic_bullnose: es ? 'Bullnose Cerámico' : 'Ceramic Bullnose',
+      ceramic_pencil: es ? 'Lápiz / 1/4-Redondo' : 'Pencil / 1/4-Round',
+      painted_wood_trim: es ? 'Moldura Madera Pintada' : 'Painted Wood Trim',
+      glazed_edge_tile: es ? 'Azulejo Borde Esmaltado' : 'Glazed-Edge Tile'
+    };
+    document.querySelectorAll('#zero-metal-options [data-edge-opt]').forEach((btn) => {
+      const k = btn.getAttribute('data-edge-opt');
+      if (labels[k]) btn.textContent = labels[k];
+      const active = k === cur;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-checked', String(active));
+    });
+    const chkCap = document.getElementById('chk-cap-ceiling');
+    if (chkCap) chkCap.checked = capCeil;
+
+    /* Live Close-Up Top-Down Mockup SVG against the Long Painted Flat Wall (ZERO metal / NO tiled return) */
+    const closeupWrap = document.getElementById('zm-closeup-wrap');
+    if (closeupWrap) {
+      const edgeMeta = {
+        ceramic_bullnose: {
+          badge: es ? `BULLNOSE CERÁMICO (${tk.south_edge_bullnose_pcs} PZAS)` : `CERAMIC BULLNOSE (${tk.south_edge_bullnose_pcs} PCS)`,
+          sub1: es ? 'Borde cerámico redondeado · cero metal' : 'Rounded factory glazed edge · zero metal',
+          sub2: es ? 'Se integra limpio al muro pintado liso' : 'Softly curves down to the painted drywall',
+          note: es
+            ? 'Acabado clásico Edwardian en San Francisco: pieza bullnose cerámica del mismo tono redondea el borde izquierdo sin una sola tira metálica.'
+            : 'Classic San Francisco Edwardian finish: matching rounded ceramic bullnose caps the Left edge cleanly against the painted wall — zero metal strips.',
+          profileSvg: '<path d="M 192 92 L 222 92 L 222 66 L 204 66 Q 192 66 192 78 Z" fill="#dbeafe" stroke="#15539e" stroke-width="2"/><text x="207" y="83" font-size="7.5" text-anchor="middle" font-weight="800" fill="#15539e">BN</text>'
+        },
+        ceramic_pencil: {
+          badge: es ? `LÁPIZ / 1/4-REDONDO CERÁMICO (${tk.south_edge_lf_gross} PIES)` : `CERAMIC PENCIL / 1/4-ROUND (${tk.south_edge_lf_gross} LF)`,
+          sub1: es ? 'Enmarca el borde limpio · cero metal' : 'Frames raw edge cleanly · zero metal',
+          sub2: es ? 'Funciona aunque el azulejo no tenga bullnose' : 'Works even if tile has no matching bullnose',
+          note: es
+            ? 'Acabado atemporal Edwardian en San Francisco: un lápiz o cuarto de redondo cerámico esmaltado enmarca el borde izquierdo limpio contra el muro pintado largo — funciona incluso si tu azulejo principal no tiene bullnose.'
+            : 'Timeless San Francisco Edwardian finish: a slim glazed ceramic pencil liner or quarter-round frames the Left edge cleanly against the long painted wall — works even when your main tile has no matching bullnose.',
+          profileSvg: '<path d="M 194 92 L 218 92 L 218 68 Q 194 68 194 92 Z" fill="#dbeafe" stroke="#15539e" stroke-width="2"/><circle cx="209" cy="83" r="3" fill="#15539e"/>'
+        },
+        painted_wood_trim: {
+          badge: es ? `MOLDURA MADERA PINTADA (${tk.south_edge_lf_gross} PIES)` : `PAINTED WOOD TRIM (${tk.south_edge_lf_gross} LF)`,
+          sub1: es ? 'Tope de madera pintada · cero metal' : 'Painted Edwardian casing/stop · zero metal',
+          sub2: es ? 'Cubre transición HardieBacker 0.42" a tablaroca 0.50"' : 'Bridges 0.42" HardieBacker to 0.50" drywall',
+          note: es
+            ? 'Detalle tradicional de carpintería Edwardian: moldura fina de madera pintada al tono del muro/carpintería remata el borde del azulejo sin metal (aparte de la moldura original).'
+            : 'Traditional San Francisco Edwardian millwork detail: painted wood casing/stop trim finishes the tile edge cleanly against the painted flat wall — zero metal (tracked separately from existing original trim).',
+          profileSvg: '<rect x="190" y="62" width="28" height="30" rx="2" fill="#e6efe9" stroke="#2f4f42" stroke-width="2"/><line x1="196" y1="62" x2="196" y2="92" stroke="#2f4f42" stroke-width="1"/><text x="206" y="81" font-size="7.2" text-anchor="middle" font-weight="800" fill="#2f4f42">WD</text>'
+        },
+        glazed_edge_tile: {
+          badge: es ? 'AZULEJO BORDE ESMALTADO (0 MOLDURAS)' : 'GLAZED-EDGE TILE (0 TRIM STICKS)',
+          sub1: es ? 'Canto de fábrica esmaltado · cero metal' : 'Factory-glazed tile side · zero metal',
+          sub2: es ? 'Confirmar cajas con borde esmaltado al pedir' : 'Confirm glazed-edge finish before ordering',
+          note: es
+            ? 'Solución minimalista sin metal: usa azulejos con canto esmaltado de fábrica en la columna izquierda + cordón fino de silicón/sellador pintable contra el muro.'
+            : 'Minimal zero-metal finish: place factory glazed-edge tiles along the Left column with a clean bead of paintable caulk/silicone where tile meets the long painted wall.',
+          profileSvg: '<rect x="194" y="68" width="28" height="24" rx="2" fill="#dbeafe" stroke="#15539e" stroke-width="2"/><line x1="194" y1="68" x2="194" y2="92" stroke="#0f766e" stroke-width="4"/>'
+        }
+      };
+      const meta = edgeMeta[cur] || edgeMeta.ceramic_bullnose;
+      const headLbl = es
+        ? 'Vista cercana superior contra el muro pintado largo (plano, sin vuelta azulejada):'
+        : 'Close-up top-down mockup against the long painted flat wall:';
+      closeupWrap.innerHTML = `
+        <div class="zm-closeup-head">${esc(headLbl)}</div>
+        <svg class="zm-closeup-svg" viewBox="0 0 460 134" role="img" aria-label="${esc(meta.badge)}">
+          <rect x="0" y="0" width="460" height="134" fill="#f8fafc"/>
+          <!-- Long Painted Flat Wall (1/2" drywall 0.50") -->
+          <rect x="16" y="92" width="178" height="28" fill="#e2e8f0" stroke="#64748b" stroke-width="1.4"/>
+          <text x="105" y="110" font-size="8.5" text-anchor="middle" font-weight="800" fill="#334155">${es ? 'MURO PINTADO LARGO (1/2")' : 'LONG PAINTED WALL (1/2")'}</text>
+          <!-- Range Wall Backing (1/2" HardieBacker 0.42", NO 3/16" shims) -->
+          <rect x="194" y="92" width="250" height="28" fill="#cbd5e1" stroke="#475569" stroke-width="1.4"/>
+          <text x="319" y="110" font-size="8.5" text-anchor="middle" font-weight="800" fill="#1e293b">${es ? 'MURO ESTUFA (HARDIE 0.42" · SIN CALZAS)' : 'RANGE WALL (0.42" HARDIE · NO SHIMS)'}</text>
+          <!-- Main Field Tile -->
+          <rect x="222" y="68" width="222" height="24" fill="#ffffff" stroke="#1e293b" stroke-width="1.5"/>
+          <line x1="296" y1="68" x2="296" y2="92" stroke="#cbd5e1" stroke-width="1"/>
+          <line x1="370" y1="68" x2="370" y2="92" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="333" y="83" font-size="8.2" text-anchor="middle" font-weight="700" fill="#334155">${es ? 'AZULEJO MURO DE ESTUFA' : 'RANGE WALL FIELD TILE'}</text>
+          <!-- Active Zero-Metal Edge Profile -->
+          ${meta.profileSvg}
+          <!-- Callout Pill -->
+          <line x1="206" y1="62" x2="206" y2="44" stroke="#15539e" stroke-width="1.3" stroke-dasharray="3,2"/>
+          <rect x="18" y="10" width="424" height="34" rx="5" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.1"/>
+          <text x="28" y="24" font-size="8.6" font-weight="800" fill="#15539e">${esc(meta.badge)}</text>
+          <text x="28" y="37" font-size="7.8" fill="#334155">${esc(meta.sub1)} · ${esc(meta.sub2)}</text>
+        </svg>
+        <div class="zm-closeup-note">${esc(meta.note)}</div>
+      `;
+    }
+  }
+
+  const TOOL_ICONS = {
+    tape: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="14" height="10" rx="2"/><path d="M17 14h4v3h-4"/><path d="M7 7v3m3-3v2m3-2v3"/></svg>',
+    level: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="9" width="20" height="6" rx="1.5"/><rect x="9" y="10.5" width="6" height="3" rx="1"/><circle cx="12" cy="12" r="0.8" fill="currentColor"/></svg>',
+    laser: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="8" height="8" rx="1.5"/><path d="M11 12h10M16 9l2 3-2 3"/></svg>',
+    pencil: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20l4-1 11-11-3-3L5 16l-1 4z"/><path d="M14 6l3 3"/></svg>',
+    stud: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="4" width="10" height="16" rx="2"/><circle cx="12" cy="9" r="1.5"/><path d="M10 15h4"/></svg>',
+    saw: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 3v2m0 14v2M3 12h2m14 0h2"/></svg>',
+    driver: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10l2 2v3l-2 2H8l-2 5H4l1-5H3z"/><path d="M15 11.5h6"/></svg>',
+    duct: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="6" rx="6" ry="2.5"/><path d="M6 6v12c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5V6"/></svg>',
+    box: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="12" height="16" rx="1.5"/><circle cx="12" cy="9" r="1.5"/><circle cx="12" cy="15" r="1.5"/></svg>',
+    tester: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>',
+    wrench: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 0 0 5 5l-9 9a2 2 0 1 1-2.8-2.8l9-9a4 4 0 0 0-2.2-2.2z"/></svg>',
+    trowel: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 17l7-9 7 4-7 9z"/><path d="M14 10l4-5"/></svg>',
+    silicone: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 14h12l4-3v5l-4-2"/><path d="M7 14v5m4-5v3"/></svg>',
+    spacer: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v16M4 12h16"/></svg>'
+  };
+
+  function renderVisualSteps() {
+    const grid = document.getElementById('steps-grid');
+    if (!grid) return;
+    const es = currentLang === 'es';
+    const m = computeDerived();
+    const titleEl = document.getElementById('steps-title');
+    const badgeEl = document.getElementById('steps-badge');
+    if (titleEl) titleEl.textContent = es ? 'Pasos de Obra — Equipo Visual Necesario y Cálculo de Materiales' : 'Field Steps — Visual Equipment Needed & Material Calculator';
+    if (badgeEl) badgeEl.textContent = es ? '4 Pasos Visuales · Cero Moldura Metálica' : '4 Visual Steps · Zero Metal Trim';
+
+    const steps = [
+      {
+        num: 1,
+        title: es ? 'Medir Muro y Subpiso Desnudo' : 'Measure Wall & Bare Subfloor',
+        note: m.floorInstalled
+          ? (es ? 'Piso terminado listo (0"). Confirma ancho 66-1/4" y cajón izquierdo desde esquina Sur 0".' : 'Finished floor down (0" offset). Confirm 66-1/4" width and left chase from South corner 0".')
+          : (es ? `Subpiso desnudo: suma +${toFrac16(m.floorT)} al marcar alturas desde subpiso. Confirma cajón izquierdo.` : `Bare subfloor today: add +${toFrac16(m.floorT)} to finished heights when pulling from subfloor. Measure left chase.`),
+        equip: [
+          ['tape', es ? 'Cinta 25 pies' : '25\' Tape Measure'],
+          ['laser', es ? 'Nivel Láser' : 'Cross Laser'],
+          ['level', es ? 'Nivel 4 pies' : '4\' Box Level'],
+          ['pencil', es ? 'Lápiz Obra' : 'Site Pencil']
+        ]
+      },
+      {
+        num: 2,
+        title: es ? 'Refuerzos Madera y Ducto 6" Campana' : 'Wood Blocking & Dedicated 6" Duct',
+        note: es
+          ? 'Refuerzos 2× en 68"–86" y 104"–Techo (eje 33"). Ducto izq. es SOLO campana (≥6"); NEXT HVAC es solo calefacción.'
+          : 'Solid 2× blocking at 68"–86" & 104"–Ceil (C/L 33"). Left-chase duct is hood ONLY (≥6"); NEXT HVAC is heating only.',
+        equip: [
+          ['stud', es ? 'Detector Vigas' : 'Stud Finder'],
+          ['saw', es ? 'Sierra Circular' : 'Circular Saw'],
+          ['driver', es ? 'Taladro Impacto' : 'Impact Driver'],
+          ['duct', es ? 'Medidor Ducto 6"' : '6" Duct Check']
+        ]
+      },
+      {
+        num: 3,
+        title: es ? 'Caja 1-Gang 2"×3", Gas y Contacto 120V' : '1-Gang 2"×3" Hood Box, Gas & 120V',
+        note: es
+          ? 'Cableado directo Zephyr caja 2"×3" (~83"–86", ~1" salida). Gas/120V atrás en 0-9/16"–4-15/16" con técnicos con licencia.'
+          : 'Zephyr direct hardwire 1-gang 2"×3" box (~83"–86", ~1" proud). Rear gas/120V in 0-9/16"–4-15/16" bay (licensed trades).',
+        equip: [
+          ['box', es ? 'Caja 1-Gang 2"×3"' : '1-Gang 2"×3" Box'],
+          ['tester', es ? 'Probador Voltaje' : 'Voltage Tester'],
+          ['wrench', es ? 'Llave Gas' : 'Pipe Wrench'],
+          ['level', es ? 'Nivel Corto' : 'Torpedo Level']
+        ]
+      },
+      {
+        num: 4,
+        title: es ? 'HardieBacker 0.42" y Azulejo Sin Metal' : '0.42" HardieBacker & Zero-Metal Tile',
+        note: es
+          ? 'Tablaroca 1/2" (0.50") a HardieBacker 0.42" (~1/16" pasta, sin calzas). Norte 90° solo silicón; Sur pintado = bullnose, lápiz, madera o borde esmaltado (0 metal).'
+          : '1/2" drywall (0.50") meets 0.42" HardieBacker (~1/16" skim, NO stud shims). North 90° = silicone only; South painted return = bullnose, pencil, wood, or glazed edge (zero metal).',
+        equip: [
+          ['trowel', es ? 'Llana Dentada' : 'Notched Trowel'],
+          ['saw', es ? 'Cortadora Agua' : 'Wet Tile Saw'],
+          ['spacer', es ? 'Separadores' : 'Tile Spacers'],
+          ['silicone', es ? 'Pistola Silicón' : 'Silicone Gun']
+        ]
+      }
+    ];
+
+    grid.innerHTML = steps.map((st) => `
+      <article class="step-card" data-step-card="${st.num}">
+        <div>
+          <div class="step-card-head">
+            <span class="step-num">${st.num}</span>
+            <h3 class="step-card-title">${esc(st.title)}</h3>
+          </div>
+          <p class="step-card-note" style="margin-top:6px;">${esc(st.note)}</p>
+        </div>
+        <details class="step-equip-details">
+          <summary class="step-equip-summary">${es ? 'Equipo Necesario y Calcular Materiales' : 'Equipment Needed &amp; Calculate Materials'}</summary>
+          <div class="step-equip-body">
+            <div class="equip-strip">
+              ${st.equip.map(([iconKey, lbl]) => `
+                <div class="equip-chip">${TOOL_ICONS[iconKey] || ''}<span>${esc(lbl)}</span></div>
+              `).join('')}
+            </div>
+            <div class="step-card-foot">
+              <button type="button" class="btn btn-sm btn-essex step-calc-btn" data-calc-step="${st.num}">
+                ${es ? 'Calcular Materiales' : 'Calculate Materials'} &darr;
+              </button>
+            </div>
+          </div>
+        </details>
+      </article>
+    `).join('');
+
+    grid.querySelectorAll('[data-calc-step]').forEach((btn) => {
+      btn.addEventListener('click', () => focusStepMaterials(Number(btn.getAttribute('data-calc-step'))));
+    });
+  }
+
+  function focusStepMaterials(stepNum) {
+    const tk = computeTakeoff();
+    const m = computeDerived();
+    const es = currentLang === 'es';
+    const banner = document.getElementById('step-calc-banner');
+    const panel = document.getElementById('takeoff-panel');
+    const mapCards = { 1: ['tile', 'backer'], 2: ['blocking', 'backer'], 3: ['blocking'], 4: ['tile', 'backer', 'edge'] };
+    const focusKeys = mapCards[stepNum] || ['tile'];
+
+    const summaries = {
+      1: es
+        ? `<strong>Paso 1 (Medición y Subpiso):</strong> Muro ${toFrac16(m.wallW)} × ${toFrac16(m.ceilH)} · ${m.floorInstalled ? 'Piso terminado (0")' : `Subpiso desnudo (+${toFrac16(m.floorT)})`} → Área azulejo neta ${tk.tile_net_sqft} sq ft.`
+        : `<strong>Step 1 (Wall & Floor Datum):</strong> Wall ${toFrac16(m.wallW)} × ${toFrac16(m.ceilH)} · ${m.floorInstalled ? 'Finished floor (0" offset)' : `Bare subfloor (+${toFrac16(m.floorT)})`} → Net tile area ${tk.tile_net_sqft} sq ft.`,
+      2: es
+        ? `<strong>Paso 2 (Refuerzos y Ducto):</strong> ${tk.blocking_total_lf} LF madera sólida (${tk.blocking_8ft_sticks} × 8') · Tablaroca 1/2" + HardieBacker 0.42" sin calzas · Ducto rígido liso ≥6" (campana únicamente).`
+        : `<strong>Step 2 (Blocking & Duct):</strong> ${tk.blocking_total_lf} LF solid wood blocking (${tk.blocking_8ft_sticks} × 8' pcs) · 1/2" drywall to 0.42" HardieBacker (NO stud shims) · Dedicated ≥6" smooth rigid hood duct.`,
+      3: es
+        ? `<strong>Paso 3 (Eléctrico y Gas):</strong> 1 caja sencilla 2"×3" (~83"–86", ~1" salida) para cableado directo Zephyr 14/2 + 2 contactos 20A (W1/W2) + llave/tee gas en franja trasera (técnicos con licencia).`
+        : `<strong>Step 3 (Rough-In MEP):</strong> 1× 1-gang 2"×3" box (~83"–86", ~1" proud) for Zephyr 14/2 direct hardwire + 2× 20A counter outlets (W1/W2) + rear gas stub/valve (licensed trades).`,
+      4: es
+        ? `<strong>Paso 4 (Respaldo y Azulejo Sin Metal):</strong> ${tk.tile_gross_sqft} sq ft azulejo (+${tk.waste_pct}%)${tk.tile_boxes_proposed ? ` · <strong>${tk.tile_boxes_proposed} cajas</strong>` : ''} + ${tk.backer_sheets_3x5} hojas HardieBacker 0.42" (junta ~1/16" pasta a tablaroca 1/2", sin calzas) + Sur: ${tk.south_edge_label_es} (${tk.south_edge_qty_es}) + 1 tubo silicón Norte 90°.`
+        : `<strong>Step 4 (Backer & Zero-Metal Tile):</strong> ${tk.tile_gross_sqft} sq ft tile (+${tk.waste_pct}%)${tk.tile_boxes_proposed ? ` · <strong>${tk.tile_boxes_proposed} boxes</strong>` : ''} + ${tk.backer_sheets_3x5} sheets 0.42" HardieBacker (~1/16" skim to 1/2" drywall, NO stud shims) + South: ${tk.south_edge_label_en} (${tk.south_edge_qty_en}) + 1 tube silicone North 90°.`
+    };
+
+    if (banner) {
+      banner.hidden = false;
+      banner.innerHTML = `<span>${summaries[stepNum] || summaries[4]}</span><button type="button" class="btn btn-sm" id="btn-dismiss-step-calc">${es ? 'Cerrar' : 'Dismiss'}</button>`;
+      const dis = document.getElementById('btn-dismiss-step-calc');
+      if (dis) dis.addEventListener('click', () => {
+        banner.hidden = true;
+        document.querySelectorAll('#takeoff-grid .takeoff-card').forEach((c) => c.classList.remove('card-focus'));
+      });
+    }
+    document.querySelectorAll('#takeoff-grid .takeoff-card').forEach((c) => {
+      c.classList.toggle('card-focus', focusKeys.includes(c.getAttribute('data-takeoff-card')));
+    });
+    if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function renderProductLookupPanel() {
+    ensureStateDefaults(state);
+    const es = currentLang === 'es';
+    const setText = (id, t) => { const el = document.getElementById(id); if (el) el.textContent = t; };
+    setText('pl-title', es
+      ? 'Buscador de Azulejo — Auto-Llena Medida, Rendimiento por Caja y Remate Sin Metal (0 Precios)'
+      : 'Tile Product Lookup — Auto-Fill Size, Box Coverage & Zero-Metal Trim (Zero Prices)');
+    setText('pl-tab-query', es ? 'Buscar Nombre / SKU' : 'Search Name / SKU');
+    setText('pl-tab-url', es ? 'URL del Producto' : 'Product URL');
+    setText('pl-tab-camera', es ? 'Cámara / Foto de Caja' : 'Camera / Box Photo');
+    setText('btn-pl-search', es ? 'Buscar Azulejo' : 'Look Up Tile');
+    setText('btn-pl-url', es ? 'Leer URL' : 'Fetch URL Specs');
+    setText('btn-pl-camera', es ? 'Escanear Etiqueta con Cámara' : 'Scan Label w/ Camera');
+    setText('btn-pl-upload', es ? 'Subir Foto de Caja/Etiqueta' : 'Upload Box / Tag Photo');
+    setText('pl-camera-hint', es
+      ? 'Toma o sube foto de la etiqueta de la caja para llenar medidas, pies²/caja y bullnose.'
+      : 'Snap or upload the tile carton label to auto-fill dimensions, sq ft/box, and bullnose availability.');
+
+    ['query', 'url', 'camera'].forEach((mode) => {
+      const tab = document.getElementById(`pl-tab-${mode}`);
+      const pane = document.getElementById(`pl-pane-${mode}`);
+      const on = activeLookupMode === mode;
+      if (tab) { tab.classList.toggle('active', on); tab.setAttribute('aria-selected', String(on)); }
+      if (pane) pane.hidden = !on;
+    });
+
+    const prod = state.takeoff_settings.selected_tile_product;
+    const resBox = document.getElementById('pl-result-box');
+    const candRow = document.getElementById('pl-candidates-row');
+    const srcPill = document.getElementById('pl-source-pill');
+    if (srcPill) {
+      if (activeLookupMeta.source) {
+        srcPill.className = `pill ${activeLookupMeta.isFallback ? 'pill-warn' : 'pill-pass'}`;
+        srcPill.textContent = activeLookupMeta.isFallback
+          ? (es ? 'Referencia Local (Verificar en Caja)' : 'Local Fallback (Verify on Box)')
+          : (es ? `Cargado · ${activeLookupMeta.source}` : `Loaded · ${activeLookupMeta.source}`);
+      } else {
+        srcPill.className = 'pill pill-info';
+        srcPill.textContent = es ? 'Listo · Nombre, URL o Foto' : 'Ready · Name, URL, or Box Photo';
+      }
+    }
+    if (resBox) {
+      const tk = computeTakeoff();
+      if (prod) {
+        resBox.hidden = false;
+        resBox.className = `pl-result-box${activeLookupMeta.isFallback ? ' pl-fallback' : ''}`;
+        const dims = prod.width_in && prod.height_in
+          ? `${prod.width_in}" × ${prod.height_in}"${prod.thickness_in ? ` · ${prod.thickness_in}" ${es ? 'espesor' : 'thick'}` : ''}`
+          : (es ? 'Medida por confirmar en caja' : 'Confirm tile size on box');
+        const boxTxt = prod.sqft_per_box
+          ? `${prod.sqft_per_box} sq ft/${es ? 'caja' : 'box'}${tk.tile_boxes_proposed ? ` → <strong>${tk.tile_boxes_proposed} ${es ? 'cajas' : 'boxes'}</strong>` : ''}`
+          : (es ? 'Verificar pies²/caja' : 'Verify sq ft/box');
+        const trimBadges = [
+          prod.bullnose_available ? (es ? `Bullnose disponible (${prod.bullnose_length_in || 8}")` : `Ceramic bullnose available (${prod.bullnose_length_in || 8}")`) : null,
+          prod.glazed_edge_available ? (es ? 'Borde esmaltado de fábrica disponible' : 'Factory glazed-edge available') : null,
+          es ? 'Cero metal / Sin Schluter' : 'Zero metal trim / No Schluter'
+        ].filter(Boolean).join(' · ');
+        const partsHtml = Array.isArray(prod.matching_trim_parts) && prod.matching_trim_parts.length
+          ? `<div style="margin-top:4px;"><strong>${es ? 'Piezas de remate sin metal de fábrica:' : 'Matching zero-metal factory trim parts:'}</strong> ${prod.matching_trim_parts.map((pt) => `${esc(pt.name)}${pt.length_in ? ` (${pt.length_in}")` : ''}${pt.sku ? ` <span class="boundary-tag">${esc(pt.sku)}</span>` : ''}`).join(' · ')}</div>`
+          : '';
+        const guidanceHtml = prod.zero_metal_trim_guidance
+          ? `<div style="color:#2f4f42;margin-top:3px;">${esc(prod.zero_metal_trim_guidance)}</div>`
+          : '';
+        resBox.innerHTML = `
+          <div><strong>${esc(prod.name)}</strong>${prod.brand ? ` · ${esc(prod.brand)}` : ''}${prod.sku ? ` <span class="boundary-tag">${esc(prod.sku)}</span>` : ''}</div>
+          <div>${esc(dims)} · ${boxTxt}</div>
+          <div style="color:#2f4f42;font-weight:600;">${esc(trimBadges)}</div>
+          ${partsHtml}
+          ${guidanceHtml}
+          ${prod.notes ? `<div style="color:#4b5c69;margin-top:2px;">${esc(prod.notes)}</div>` : ''}
+        `;
+      } else if (activeLookupMeta.error) {
+        resBox.hidden = false;
+        resBox.className = 'pl-result-box pl-fallback';
+        resBox.textContent = activeLookupMeta.error;
+      } else {
+        /* Zero hardcoded tile brand default on load — show wall area & unselected prompt */
+        resBox.hidden = false;
+        resBox.className = 'pl-result-box';
+        resBox.innerHTML = es
+          ? `<strong>Área del muro: ${tk.tile_net_sqft} pies² netos</strong> (${tk.tile_gross_sqft} pies² con +${tk.waste_pct}% margen) · Ningún azulejo seleccionado aún — busca por nombre, pega un enlace o escanea la etiqueta de la caja.`
+          : `<strong>Wall area: ${tk.tile_net_sqft} sq ft net</strong> (${tk.tile_gross_sqft} sq ft w/ +${tk.waste_pct}% waste) · No tile selected yet — search by name, paste a URL, or scan a tile label.`;
+      }
+    }
+    if (candRow) {
+      const cands = activeLookupMeta.candidates || [];
+      if (cands.length) {
+        candRow.hidden = false;
+        candRow.innerHTML = `<span>${es ? 'Otras opciones:' : 'Other matches:'}</span>` + cands.slice(0, 4).map((c, idx) =>
+          `<button type="button" class="pl-cand-btn" data-pl-cand="${idx}">${esc(c.name || c.sku || `Option ${idx + 1}`)}</button>`
+        ).join('');
+        candRow.querySelectorAll('[data-pl-cand]').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const picked = cands[Number(btn.getAttribute('data-pl-cand'))];
+            if (picked) applyProductLookupResult(picked, activeLookupMeta.source || 'candidate', activeLookupMeta.isFallback, cands);
+          });
+        });
+      } else {
+        candRow.hidden = true;
+      }
+    }
+  }
+
+  function applyProductLookupResult(rawProd, source, isFallback, candidates) {
+    const clean = sanitizeTileProduct(rawProd);
+    if (!clean) return;
+    ensureStateDefaults(state);
+    state.takeoff_settings.selected_tile_product = clean;
+    if (clean.sqft_per_box) {
+      state.takeoff_settings.tile_box_sqft = clean.sqft_per_box;
+    }
+    if (clean.recommended_pattern) {
+      state.takeoff_settings.waste_pct = /straight|grid|stack/i.test(clean.recommended_pattern) ? 10 : 15;
+    }
+    if (clean.bullnose_available) {
+      state.takeoff_settings.south_edge_trim = 'ceramic_bullnose';
+    } else if (clean.glazed_edge_available) {
+      state.takeoff_settings.south_edge_trim = 'glazed_edge_tile';
+    } else if (clean.recommended_trim_options && clean.recommended_trim_options.length) {
+      state.takeoff_settings.south_edge_trim = clean.recommended_trim_options[0];
+    }
+    activeLookupMeta = {
+      source: source || 'product_lookup',
+      isFallback: !!isFallback,
+      candidates: Array.isArray(candidates) ? candidates.map(sanitizeTileProduct).filter(Boolean) : [],
+      error: null
+    };
+    hasUnsyncedLocalEdits = true;
+    syncFormFromState();
+    renderAll();
+    const es = currentLang === 'es';
+    showToast(es ? `Azulejo cargado: ${clean.name}` : `Tile loaded: ${clean.name}`, 'ok');
+  }
+
+  /* Calls POST https://mac-mini.tailcf4007.ts.net/api/unit4/product-lookup (check_matching_trim_parts: true, WITHOUT include_retail_estimate; strict 0 $) */
+  async function runProductLookup(payload) {
+    const es = currentLang === 'es';
+    const body = { category: 'tile', check_matching_trim_parts: true };
+    if (payload.query) body.query = String(payload.query).trim();
+    if (payload.url) body.url = String(payload.url).trim();
+    if (payload.image_base64) {
+      body.image_base64 = String(payload.image_base64);
+      body.image_mime = payload.image_mime || 'image/jpeg';
+    }
+    const pill = document.getElementById('pl-source-pill');
+    if (pill) {
+      pill.className = 'pill pill-warn';
+      pill.textContent = es ? 'Buscando especificaciones…' : 'Looking up tile specs…';
+    }
+    try {
+      const res = await fetchJsonWithTimeout(`${lookupOrigin}/api/unit4/product-lookup`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      }, 8000);
+      if (res.ok && res.data && res.data.ok && res.data.product) {
+        applyProductLookupResult(res.data.product, res.data.source || 'backend', false, res.data.candidates || []);
+        return { ok: true, fallback: false, product: state.takeoff_settings.selected_tile_product };
+      }
+    } catch (_) {
+      /* Graceful local zero-metal fallback below */
+    }
+    const fb = matchLocalTileFallback(body.query, body.url);
+    applyProductLookupResult(fb.product, body.image_base64 ? 'local_camera_fallback' : 'local_fallback', true, fb.candidates);
+    return { ok: true, fallback: true, product: state.takeoff_settings.selected_tile_product };
+  }
+
+  function compressImageFileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = () => reject(new Error('Could not read photo'));
+      reader.onload = () => {
+        const img = new Image();
+        img.onerror = () => resolve({ dataUrl: String(reader.result || ''), mime: file.type || 'image/jpeg' });
+        img.onload = () => {
+          const maxDim = 1280;
+          const scale = Math.min(1, maxDim / Math.max(img.width || 1, img.height || 1));
+          const c = document.createElement('canvas');
+          c.width = Math.max(1, Math.round(img.width * scale));
+          c.height = Math.max(1, Math.round(img.height * scale));
+          c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+          resolve({ dataUrl: c.toDataURL('image/jpeg', 0.82), mime: 'image/jpeg' });
+        };
+        img.src = String(reader.result || '');
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function stopTileCameraStream() {
+    if (activeCamStream) {
+      activeCamStream.getTracks().forEach((t) => { try { t.stop(); } catch (_) {} });
+      activeCamStream = null;
+    }
+    const vid = document.getElementById('u4-cam-video');
+    if (vid) vid.srcObject = null;
+  }
+
+  function closeTileCameraModal() {
+    stopTileCameraStream();
+    capturedCamDataUrl = null;
+    const modal = document.getElementById('u4-tile-camera-modal');
+    if (modal) modal.hidden = true;
+  }
+
+  async function openTileCameraModal() {
+    const isTouch = 'ontouchstart' in window && navigator.maxTouchPoints > 0;
+    if (isTouch || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      const camInp = document.getElementById('inp-pl-file-camera') || document.getElementById('inp-pl-file');
+      if (camInp) camInp.click();
+      return;
+    }
+    const modal = document.getElementById('u4-tile-camera-modal');
+    const vid = document.getElementById('u4-cam-video');
+    const prev = document.getElementById('u4-cam-preview');
+    const btnCap = document.getElementById('btn-cam-capture');
+    const btnRet = document.getElementById('btn-cam-retake');
+    const btnUse = document.getElementById('btn-cam-use');
+    const btnSw = document.getElementById('btn-cam-switch');
+    const st = document.getElementById('cam-modal-status');
+    if (!modal || !vid) return;
+
+    capturedCamDataUrl = null;
+    vid.hidden = false;
+    if (prev) prev.hidden = true;
+    if (btnCap) btnCap.hidden = false;
+    if (btnRet) btnRet.hidden = true;
+    if (btnUse) btnUse.hidden = true;
+    modal.hidden = false;
+
+    try {
+      stopTileCameraStream();
+      try {
+        activeCamStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: activeCamFacing } }, audio: false });
+      } catch (_) {
+        activeCamStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+      }
+      vid.srcObject = activeCamStream;
+      if (btnSw && navigator.mediaDevices.enumerateDevices) {
+        const devs = await navigator.mediaDevices.enumerateDevices();
+        btnSw.hidden = devs.filter((d) => d.kind === 'videoinput').length < 2;
+      }
+      if (st) st.textContent = currentLang === 'es' ? 'Apunta a la etiqueta de la caja de azulejo y toca Capturar.' : 'Point camera at the tile carton label and tap Capture Label.';
+    } catch (_) {
+      closeTileCameraModal();
+      const fileInp = document.getElementById('inp-pl-file');
+      if (fileInp) fileInp.click();
+    }
+  }
+
+  function wireWaveCControls() {
+    document.getElementById('btn-stud-one-bay')?.addEventListener('click', () => {
+      ensureStateDefaults(state);
+      state.options.stud_layout = 'one_bay';
+      hasUnsyncedLocalEdits = true;
+      renderAll();
+    });
+    document.getElementById('btn-stud-center')?.addEventListener('click', () => {
+      ensureStateDefaults(state);
+      state.options.stud_layout = 'center_stud';
+      hasUnsyncedLocalEdits = true;
+      renderAll();
+    });
+
+    document.querySelectorAll('#tile-size-pills [data-tile-size]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const k = btn.getAttribute('data-tile-size');
+        ensureStateDefaults(state);
+        state.takeoff_settings.tile_size_key = state.takeoff_settings.tile_size_key === k ? null : k;
+        hasUnsyncedLocalEdits = true;
+        renderAll();
+      });
+    });
+    document.getElementById('btn-tile-size-clear')?.addEventListener('click', () => {
+      ensureStateDefaults(state);
+      state.takeoff_settings.tile_size_key = null;
+      state.takeoff_settings.selected_tile_product = null;
+      state.takeoff_settings.tile_box_sqft = null;
+      activeLookupMeta = { source: null, isFallback: false, candidates: [], error: null };
+      hasUnsyncedLocalEdits = true;
+      syncFormFromState();
+      renderAll();
+    });
+
+    document.querySelectorAll('#tile-orient-pills [data-tile-orient]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const o = btn.getAttribute('data-tile-orient');
+        if (!['horizontal', 'vertical', 'diagonal', 'herringbone'].includes(o)) return;
+        ensureStateDefaults(state);
+        state.takeoff_settings.tile_orientation = o;
+        if (o === 'diagonal' || o === 'herringbone') {
+          state.takeoff_settings.waste_pct = 20;
+        } else if (state.takeoff_settings.tile_pattern === 'stacked') {
+          state.takeoff_settings.waste_pct = 10;
+        } else {
+          state.takeoff_settings.waste_pct = 15;
+        }
+        hasUnsyncedLocalEdits = true;
+        syncFormFromState();
+        renderAll();
+      });
+    });
+
+    document.querySelectorAll('#tile-pattern-pills [data-tile-pattern]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const p = btn.getAttribute('data-tile-pattern');
+        if (!['stacked', 'brick50', 'third'].includes(p)) return;
+        ensureStateDefaults(state);
+        state.takeoff_settings.tile_pattern = p;
+        if (state.takeoff_settings.tile_orientation !== 'diagonal' && state.takeoff_settings.tile_orientation !== 'herringbone') {
+          state.takeoff_settings.waste_pct = p === 'stacked' ? 10 : 15;
+        }
+        hasUnsyncedLocalEdits = true;
+        syncFormFromState();
+        renderAll();
+      });
+    });
+
+    document.getElementById('btn-waste-20')?.addEventListener('click', () => {
+      applyPatchToLocalState({ takeoff_settings: { waste_pct: 20 } });
+    });
+
+    document.getElementById('chk-cap-ceiling')?.addEventListener('change', (e) => {
+      ensureStateDefaults(state);
+      state.takeoff_settings.cap_ceiling = !!e.target.checked;
+      hasUnsyncedLocalEdits = true;
+      renderAll();
+    });
+
+    document.getElementById('btn-floor-bare')?.addEventListener('click', () => {
+      ensureStateDefaults(state);
+      state.options.floor_condition = 'bare_subfloor';
+      hasUnsyncedLocalEdits = true;
+      renderAll();
+    });
+    document.getElementById('btn-floor-finished')?.addEventListener('click', () => {
+      ensureStateDefaults(state);
+      state.options.floor_condition = 'finished_installed';
+      hasUnsyncedLocalEdits = true;
+      renderAll();
+    });
+    document.getElementById('inp-subfloor-allow')?.addEventListener('change', (e) => {
+      const v = Number(e.target.value);
+      if (Number.isFinite(v) && v >= 0 && v <= 4) {
+        state.dimensions.floor_buildup_t_in.value = v;
+        state.options.floor_condition = 'bare_subfloor';
+        hasUnsyncedLocalEdits = true;
+        syncFormFromState();
+        renderAll();
+      }
+    });
+
+    document.querySelectorAll('#zero-metal-options [data-edge-opt]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const opt = btn.getAttribute('data-edge-opt');
+        if (ZERO_METAL_ALLOWED.includes(opt)) {
+          ensureStateDefaults(state);
+          state.takeoff_settings.south_edge_trim = opt;
+          hasUnsyncedLocalEdits = true;
+          renderAll();
+        }
+      });
+    });
+
+    document.querySelectorAll('[data-pl-mode]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        activeLookupMode = btn.getAttribute('data-pl-mode') || 'query';
+        renderProductLookupPanel();
+      });
+    });
+
+    const triggerQuery = () => {
+      const q = document.getElementById('inp-pl-query')?.value?.trim() || '';
+      if (!q) {
+        showToast(currentLang === 'es' ? 'Escribe un nombre o SKU de azulejo.' : 'Enter a tile name or SKU to look up.', 'error');
+        return;
+      }
+      if (violatesPrivateFirewall(q)) { showToast(I18N[currentLang].firewall_err, 'error'); return; }
+      runProductLookup({ query: q });
+    };
+    document.getElementById('btn-pl-search')?.addEventListener('click', triggerQuery);
+    document.getElementById('inp-pl-query')?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); triggerQuery(); }
+    });
+
+    const triggerUrl = () => {
+      const u = document.getElementById('inp-pl-url')?.value?.trim() || '';
+      if (!/^https?:\/\//i.test(u)) {
+        showToast(currentLang === 'es' ? 'Ingresa un enlace http(s) público del producto.' : 'Enter a public http(s) product URL.', 'error');
+        return;
+      }
+      runProductLookup({ url: u });
+    };
+    document.getElementById('btn-pl-url')?.addEventListener('click', triggerUrl);
+    document.getElementById('inp-pl-url')?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); triggerUrl(); }
+    });
+
+    document.getElementById('btn-pl-camera')?.addEventListener('click', openTileCameraModal);
+    document.getElementById('btn-pl-upload')?.addEventListener('click', () => document.getElementById('inp-pl-file')?.click());
+
+    const handlePhotoFile = async (e) => {
+      const file = e.target.files && e.target.files[0];
+      e.target.value = '';
+      if (!file) return;
+      try {
+        const { dataUrl, mime } = await compressImageFileToBase64(file);
+        await runProductLookup({ image_base64: dataUrl, image_mime: mime });
+      } catch (err) {
+        showToast(`Photo error: ${err.message}`, 'error');
+      }
+    };
+    document.getElementById('inp-pl-file')?.addEventListener('change', handlePhotoFile);
+    document.getElementById('inp-pl-file-camera')?.addEventListener('change', handlePhotoFile);
+
+    document.getElementById('btn-cam-close')?.addEventListener('click', closeTileCameraModal);
+    document.getElementById('btn-cam-switch')?.addEventListener('click', () => {
+      activeCamFacing = activeCamFacing === 'environment' ? 'user' : 'environment';
+      openTileCameraModal();
+    });
+    document.getElementById('btn-cam-capture')?.addEventListener('click', () => {
+      const vid = document.getElementById('u4-cam-video');
+      const prev = document.getElementById('u4-cam-preview');
+      if (!vid || !prev || !vid.videoWidth) return;
+      const maxDim = 1280;
+      const scale = Math.min(1, maxDim / Math.max(vid.videoWidth, vid.videoHeight));
+      prev.width = Math.max(1, Math.round(vid.videoWidth * scale));
+      prev.height = Math.max(1, Math.round(vid.videoHeight * scale));
+      prev.getContext('2d').drawImage(vid, 0, 0, prev.width, prev.height);
+      capturedCamDataUrl = prev.toDataURL('image/jpeg', 0.82);
+      stopTileCameraStream();
+      vid.hidden = true;
+      prev.hidden = false;
+      document.getElementById('btn-cam-capture').hidden = true;
+      document.getElementById('btn-cam-retake').hidden = false;
+      document.getElementById('btn-cam-use').hidden = false;
+    });
+    document.getElementById('btn-cam-retake')?.addEventListener('click', openTileCameraModal);
+    document.getElementById('btn-cam-use')?.addEventListener('click', async () => {
+      const dataUrl = capturedCamDataUrl;
+      closeTileCameraModal();
+      if (dataUrl) await runProductLookup({ image_base64: dataUrl, image_mime: 'image/jpeg' });
+    });
+  }
+
   /* ── Unified Public Integration Contract (window.U4PLAN + window.U4KS4 alias) ── */
   const U4PLAN_API = {
     planId: 'kitchen-west-ks4',
@@ -3180,6 +4369,30 @@
         activeView = v;
         renderAll();
       }
+    },
+    setStudLayout(layout) {
+      if (layout === 'one_bay' || layout === 'center_stud') {
+        ensureStateDefaults(state);
+        state.options.stud_layout = layout;
+        renderAll();
+      }
+    },
+    setFloorCondition(cond) {
+      if (cond === 'bare_subfloor' || cond === 'finished_installed') {
+        ensureStateDefaults(state);
+        state.options.floor_condition = cond;
+        renderAll();
+      }
+    },
+    setZeroMetalEdge(opt) {
+      if (ZERO_METAL_ALLOWED.includes(opt)) {
+        ensureStateDefaults(state);
+        state.takeoff_settings.south_edge_trim = opt;
+        renderAll();
+      }
+    },
+    runProductLookup(payload) {
+      return runProductLookup(payload || {});
     },
     getLang() {
       return currentLang;
@@ -3218,8 +4431,9 @@
     const backEl = document.getElementById('link-back-room');
     const fpTop = document.getElementById('link-full-floorplan-top');
     const fpMid = document.getElementById('link-full-floorplan');
+    const langQ = `?lang=${currentLang === 'es' ? 'es' : 'en'}`;
     const backHref = isWikiPlans ? '../../#kitchen-oven-range' : '../../index.html#kitchen-oven-range';
-    const fpHref = isWikiPlans ? '../kitchen-floor-plan/index.html' : '../floor-plan-pilot/index.html';
+    const fpHref = (isWikiPlans ? '../kitchen-floor-plan/index.html' : '../floor-plan-pilot/index.html') + langQ;
     if (backEl) backEl.href = backHref;
     if (fpTop) fpTop.href = fpHref;
     if (fpMid) fpMid.href = fpHref;
@@ -3233,6 +4447,7 @@
     resolveCrossLinks();
     initCircleCanvas();
     wireControls();
+    wireWaveCControls();
     await hydrateFromLocalJson();
     syncFormFromState();
     renderAll();

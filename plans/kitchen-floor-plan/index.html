@@ -10,7 +10,7 @@
   <header class="app-header no-print">
     <nav class="top-jump-bar" aria-label="Cross-plan navigation">
       <a id="link-back-room" class="jump-link" href="../../#kitchen">&larr; Back to Kitchen Page</a>
-      <a id="link-west-hood-top" class="jump-link jump-link-sibling" href="../interactive-pilot/index.html">West Range &amp; Hood Wall &rarr;</a>
+      <a id="link-west-hood-top" class="jump-link jump-link-sibling" href="../kitchen-west-ks4/index.html">West Range &amp; Hood Wall &rarr;</a>
     </nav>
     <div class="header-inner">
       <div class="brand-block">
@@ -46,7 +46,7 @@
       <div class="panel svg-panel">
         <div class="panel-head">
           <h2 id="svg-panel-title">True-to-Scale Kitchen Floor Plan (147&quot; × 126-1/4&quot;)</h2>
-          <a id="link-west-hood" class="cross-link-btn no-print" href="../interactive-pilot/index.html">Detailed West Range &amp; Hood Wall &rarr;</a>
+          <a id="link-west-hood" class="cross-link-btn no-print" href="../kitchen-west-ks4/index.html">Detailed West Range &amp; Hood Wall &rarr;</a>
         </div>
 
         <!-- Coupled Room View Tabs (Floor Plan + All 4 Connected Walls from ONE JSON) -->
@@ -80,6 +80,20 @@
           <button type="button" class="btn btn-sm btn-essex" id="btn-sink-75">75&quot;–105&quot; (CL 90&quot; Window)</button>
           <button type="button" class="btn btn-sm" id="btn-sink-72">72&quot;–102&quot; (Site Tape CL 87&quot;)</button>
           <button type="button" class="btn btn-sm" id="btn-reset-baseline">Reset Baseline</button>
+        </div>
+
+        <!-- Wave C: Live Bare Subfloor vs. Finished Floor Datum Toggle -->
+        <div class="subfloor-bar no-print" id="subfloor-bar" aria-label="Current site floor condition">
+          <div class="subfloor-toggle-group" role="group" aria-label="Floor installation state">
+            <strong id="lbl-floor-cond">Floor Condition Today:</strong>
+            <button type="button" class="btn btn-sm btn-primary" id="btn-floor-bare" aria-pressed="true">Bare subfloor (not installed yet)</button>
+            <button type="button" class="btn btn-sm" id="btn-floor-finished" aria-pressed="false">Finished floor already down</button>
+          </div>
+          <div class="subfloor-allow-group" id="subfloor-allow-wrap">
+            <label for="inp-subfloor-allow" id="lbl-subfloor-allow">Finished-floor allowance (+t):</label>
+            <input type="number" id="inp-subfloor-allow" step="0.0625" min="0" max="4" value="0.75" aria-label="Finished floor thickness allowance in inches">
+            <span class="subfloor-unit" id="subfloor-status-note">in (added to vertical marks pulled from bare subfloor)</span>
+          </div>
         </div>
 
         <div class="status-bar-strip no-print">
@@ -196,15 +210,83 @@
       <div class="clashes-grid" id="clashes-grid"></div>
     </section>
 
-    <!-- LIVE CROSS-WALL WRAP-AROUND TILE, BACKER & COUNTERTOP TAKEOFF (ZERO PRICES) -->
+    <!-- WAVE C: AIRY VISUAL STEP WORKFLOW (Equipment Needed + Calculate Materials at Bottom of EVERY Step) -->
+    <section class="panel steps-panel no-print" id="steps-workflow-panel" aria-label="Kitchen installation steps with equipment and material calculator">
+      <div class="panel-head">
+        <h2 id="steps-title">Kitchen Field Steps — Visual Equipment Needed &amp; Material Calculator</h2>
+        <span class="pill pill-pass" id="steps-badge">4 Visual Steps · Zero Metal Trim</span>
+      </div>
+      <div class="steps-grid" id="steps-grid"></div>
+    </section>
+
+    <!-- LIVE CROSS-WALL WRAP-AROUND TILE, BACKER, ZERO-METAL EDGE & COUNTERTOP TAKEOFF (ZERO PRICES) -->
     <section class="panel print-panel takeoff-panel" id="takeoff-panel" aria-label="Live cross-wall kitchen materials takeoff">
       <div class="panel-head print-keep-head">
         <h2 id="takeoff-title">Live Cross-Wall Tile, Backer &amp; Countertop Takeoff (Quantities Only · Zero Prices)</h2>
         <span class="pill pill-warn" id="takeoff-waste-pill">Waste Factor: +15%</span>
       </div>
       <div class="takeoff-notice" id="takeoff-notice">
-        Gross Proposed Quantities Only (Zero Prices · Zero Order Numbers) — Verify On-Hand Stock Before Ordering.
+        Gross Proposed Quantities Only (Zero Prices · Zero Order Numbers) — Verify On-Hand Stock Before Ordering. Zero Metal Trim / No Schluter.
       </div>
+      <div id="step-calc-banner" class="step-calc-banner no-print" hidden role="status"></div>
+
+      <!-- Wave C: Live Tile Product Lookup FIRST (Name/SKU Search, Product URL, Camera/Photo Label Scan -> POST /api/unit4/product-lookup, Strict 0 $) -->
+      <div class="product-lookup-box no-print" id="product-lookup-box" aria-label="Tile product lookup">
+        <div class="pl-header">
+          <strong id="pl-title">Tile Product Lookup — Auto-Fill Size, Box Coverage &amp; Zero-Metal Trim (Zero Prices)</strong>
+          <span class="pill pill-info" id="pl-source-pill">Ready · Name, URL, or Box Photo</span>
+        </div>
+        <div class="pl-mode-tabs" role="tablist" aria-label="Product lookup input mode">
+          <button type="button" class="pl-tab-btn active" data-pl-mode="query" id="pl-tab-query" role="tab" aria-selected="true">Search Name / SKU</button>
+          <button type="button" class="pl-tab-btn" data-pl-mode="url" id="pl-tab-url" role="tab" aria-selected="false">Product URL</button>
+          <button type="button" class="pl-tab-btn" data-pl-mode="camera" id="pl-tab-camera" role="tab" aria-selected="false">Camera / Box Photo</button>
+        </div>
+
+        <div class="pl-pane" id="pl-pane-query">
+          <div class="pl-input-row">
+            <input type="text" id="inp-pl-query" placeholder="Search tile name or SKU (e.g. 2.5x8 glossy ceramic)" aria-label="Tile name or SKU search">
+            <button type="button" class="btn btn-sm btn-primary" id="btn-pl-search">Look Up Tile</button>
+          </div>
+        </div>
+
+        <div class="pl-pane" id="pl-pane-url" hidden>
+          <div class="pl-input-row">
+            <input type="url" id="inp-pl-url" placeholder="Paste tile product page URL (manufacturer or supplier)" aria-label="Tile product URL">
+            <button type="button" class="btn btn-sm btn-primary" id="btn-pl-url">Fetch URL Specs</button>
+          </div>
+        </div>
+
+        <div class="pl-pane" id="pl-pane-camera" hidden>
+          <div class="pl-camera-row">
+            <button type="button" class="btn btn-sm btn-primary" id="btn-pl-camera">Scan Label w/ Camera</button>
+            <button type="button" class="btn btn-sm" id="btn-pl-upload">Upload Box / Tag Photo</button>
+            <input type="file" id="inp-pl-file" accept="image/*" hidden>
+            <input type="file" id="inp-pl-file-camera" accept="image/*" capture="environment" hidden>
+            <span class="field-help" id="pl-camera-hint">Snap or upload the tile carton label to auto-fill dimensions, sq ft/box, and zero-metal bullnose availability.</span>
+          </div>
+        </div>
+
+        <div id="pl-result-box" class="pl-result-box" hidden></div>
+        <div id="pl-candidates-row" class="pl-candidates-row" hidden></div>
+      </div>
+
+      <!-- Wave C: Zero-Metal Tile Edge Control DIRECTLY BENEATH Tile Selection (Strictly Zero Schluter / Zero Metal / Zero 45-Deg Miter) -->
+      <div class="zero-metal-box no-print" id="zero-metal-box" aria-label="Zero-metal tile edge selection">
+        <div class="zero-metal-head">
+          <strong id="zm-title">Zero-metal edge finishes (Left edge only = 7.1 ft &middot; North side meets wall)</strong>
+          <span class="pill pill-pass" id="zm-north-pill">North 90&deg; Inside Corner: Silicone Only (Zero Trim)</span>
+        </div>
+        <div class="zero-metal-sub" id="zm-south-desc">
+          West-South edge &amp; exposed painted returns have <strong>NO tiled return</strong> (zero metal / no Schluter / no 45&deg; miter). Choose a zero-metal edge finish:
+        </div>
+        <div class="zero-metal-options" id="zero-metal-options" role="radiogroup" aria-label="Zero-metal tile edge options">
+          <button type="button" class="zm-opt-btn active" data-edge-opt="ceramic_bullnose" aria-checked="true">Ceramic Bullnose</button>
+          <button type="button" class="zm-opt-btn" data-edge-opt="ceramic_pencil" aria-checked="false">Pencil / 1/4-Round</button>
+          <button type="button" class="zm-opt-btn" data-edge-opt="painted_wood_trim" aria-checked="false">Painted Wood Trim</button>
+          <button type="button" class="zm-opt-btn" data-edge-opt="glazed_edge_tile" aria-checked="false">Glazed-Edge Tile</button>
+        </div>
+      </div>
+
       <div class="takeoff-controls no-print">
         <div class="takeoff-control-group">
           <span id="lbl-waste-pct">Waste / Overage (%):</span>
@@ -360,9 +442,30 @@
     </section>
   </main>
 
+  <!-- Wave C: Lightweight Camera Modal for Tile Label Scan (Always stops MediaStream tracks on close) -->
+  <div id="u4-tile-camera-modal" class="camera-modal no-print" hidden role="dialog" aria-modal="true" aria-labelledby="cam-modal-title">
+    <div class="camera-modal-card">
+      <div class="camera-modal-head">
+        <strong id="cam-modal-title">Scan Tile Box / Label Photo</strong>
+        <button type="button" class="btn btn-sm" id="btn-cam-close" aria-label="Close camera">Close</button>
+      </div>
+      <div class="camera-stage">
+        <video id="u4-cam-video" playsinline muted autoplay></video>
+        <canvas id="u4-cam-preview" hidden></canvas>
+      </div>
+      <div class="camera-modal-actions">
+        <button type="button" class="btn btn-sm" id="btn-cam-switch" hidden>Switch Camera</button>
+        <button type="button" class="btn btn-sm btn-primary" id="btn-cam-capture">Capture Label</button>
+        <button type="button" class="btn btn-sm" id="btn-cam-retake" hidden>Retake</button>
+        <button type="button" class="btn btn-sm btn-essex" id="btn-cam-use" hidden>Use Photo &amp; Look Up</button>
+      </div>
+      <div id="cam-modal-status" class="field-help">Point camera at the tile carton label showing dimensions and sq ft/box.</div>
+    </div>
+  </div>
+
   <div id="status-toast" class="status-toast" hidden role="status" aria-live="polite"></div>
 
-    <script src="../vendor/jspdf.umd.min.js"></script>
+  <script src="../vendor/jspdf.umd.min.js"></script>
   <script src="../vendor/svg2pdf.umd.min.js"></script>
   <script src="../vendor/ks4-pdf-export.js"></script>
   <script src="./kitchen-floorplan-renderer.js"></script>
