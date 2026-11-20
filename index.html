@@ -1028,7 +1028,7 @@ a.u4-inline-interactive:hover{text-decoration:underline}
 .u4-lb-close{min-width:34px;min-height:34px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--fg);font:700 15px/1 var(--body);cursor:pointer}
 .u4-lb-stage{position:relative;display:flex;align-items:center;justify-content:center;background:#121618;min-height:240px;max-height:66vh;overflow:hidden}
 .u4-lb-stage img{max-width:100%;max-height:66vh;object-fit:contain;display:block}
-.u4-lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(18,22,24,.75);color:#fff;font:700 20px/1 var(--body);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.u4-lb-nav{position:absolute;z-index:25;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(18,22,24,.75);color:#fff;font:700 20px/1 var(--body);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
 .u4-lb-nav:hover{background:var(--accent)}
 .u4-lb-nav.prev{left:10px}
 .u4-lb-nav.next{right:10px}
@@ -1039,6 +1039,84 @@ a.u4-inline-interactive:hover{text-decoration:underline}
 .u4-lb-sub{font:500 12px/1.35 var(--mono);color:var(--muted)}
 .u4-lb-ext{display:inline-flex;align-items:center;gap:5px;min-height:34px;padding:5px 12px;border-radius:999px;border:1px solid var(--accent);background:transparent;color:var(--accent);font:600 12px/1.2 var(--mono);text-decoration:none;white-space:nowrap}
 .u4-lb-ext[hidden]{display:none!important}
+
+/* Wave F (2026-11-20): Classic Old-Wiki Zoom Controls + Universal Pin/Circle Dragger across Room Pages, Lightbox, Inline SVGs & PDF .viewer */
+.u4-zoom-bar{display:inline-flex;align-items:center;gap:3px;padding:2px;border:1px solid var(--line);border-radius:999px;background:var(--panel);flex:none}
+.u4-zoom-btn,.u4-zoom-pct{min-height:28px;min-width:28px;padding:3px 9px;border-radius:999px;border:0;background:transparent;color:var(--fg);font:600 12px/1.1 var(--mono);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.u4-zoom-btn:hover,.u4-zoom-pct:hover{background:var(--accent-soft);color:var(--accent)}
+.u4-zoom-btn[disabled]{opacity:.4;cursor:default}
+.u4-zoom-pct{min-width:48px;color:var(--muted)}
+.u4-lb-head-actions{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}
+.u4-lb-zoom-stage{position:relative;display:inline-flex;align-items:center;justify-content:center;max-width:100%;max-height:66vh;transform-origin:center center;touch-action:pan-y;user-select:none}
+.u4-lb-stage.is-zoomed{cursor:grab;touch-action:none}
+.u4-lb-stage.is-zoomed.is-panning{cursor:grabbing}
+.u4-zoom-inline{position:relative;margin:10px 0;border:1px solid var(--line);border-radius:8px;background:var(--panel);overflow:hidden}
+.u4-zoom-inline-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 10px;border-bottom:1px solid var(--line);background:var(--bg);font:600 11.5px/1.2 var(--mono);color:var(--muted)}
+.u4-zoom-inline-view{position:relative;overflow:hidden;min-height:140px;max-height:72vh;display:flex;align-items:center;justify-content:center;background:var(--panel);touch-action:pan-y}
+.u4-zoom-inline-view.is-zoomed{cursor:grab;touch-action:none}
+.u4-zoom-inline-view.is-panning{cursor:grabbing}
+.u4-zoom-inline-stage{position:relative;display:inline-block;max-width:100%;transform-origin:center center}
+.u4-zoom-inline-stage svg{display:block;max-width:100%;height:auto}
+.u4-pdf-toolbar{display:flex;align-items:center;flex-wrap:wrap;gap:8px 10px;margin:8px 0 10px;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
+.u4-pdf-page-hint{font:500 12px/1.2 var(--mono);color:var(--muted);margin-left:auto}
+.u4-pdf-zoom-viewport{position:relative;overflow:auto;max-height:76vh;padding:12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);touch-action:pan-x pan-y}
+.u4-pdf-zoom-viewport.is-zoomed{cursor:grab}
+.u4-pdf-zoom-viewport.is-zoomed.is-panning{cursor:grabbing}
+.u4-pdf-zoom-sizer{position:relative;min-width:100%}
+.u4-pdf-zoom-stage{position:relative;transform-origin:0 0;display:inline-block;min-width:100%}
+.u4-pdf-page-card{display:grid;gap:4px;margin-bottom:14px;justify-items:start}
+.u4-pdf-page-box{position:relative;display:inline-block;max-width:100%}
+.u4-pdf-page-box .pdfpage{display:block;max-width:100%;height:auto}
+.u4-pin-layer{position:absolute;inset:0;pointer-events:none;z-index:12;overflow:visible}
+.u4-pin-host{position:relative!important}
+
+.u4-pin-pill{display:inline-flex;align-items:center;gap:5px;min-height:34px;padding:5px 12px;border-radius:999px;border:1.5px dashed var(--accent);background:var(--panel);color:var(--accent);font:600 12px/1.2 var(--mono);cursor:grab;white-space:nowrap;touch-action:none;user-select:none}
+.u4-pin-pill:hover{background:var(--accent-soft)}
+.u4-pin-pill:active{cursor:grabbing}
+.u4-pin-pill.is-armed{border-style:solid;border-color:var(--crimson,#b42318);background:var(--crimson,#b42318);color:#ffffff;cursor:pointer}
+:root[data-theme="dark"] .u4-pin-pill.is-armed{color:#121618;font-weight:700}
+.u4-pin-fab{position:fixed;left:max(12px,env(safe-area-inset-left,0px));bottom:calc(env(safe-area-inset-bottom,0px) + 14px);z-index:91;max-width:calc(100vw - 92px)}
+body.u4-lb-open .u4-pin-fab{display:none!important}
+.u4-pin-ghost{position:fixed;z-index:350;pointer-events:none;width:32px;height:32px;border-radius:50%;border:2px solid var(--crimson,#b42318);background:rgba(180,35,24,.16);transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center}
+.u4-pin-ghost::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--crimson,#b42318)}
+.u4-pin-arm-banner{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 60px);transform:translateX(-50%);z-index:265;padding:6px 12px;border-radius:8px;border:1px solid var(--crimson,#b42318);background:var(--panel);color:var(--fg);font:600 12px/1.3 var(--mono);white-space:nowrap;max-width:calc(100vw - 24px);overflow:hidden;text-overflow:ellipsis}
+.u4-pin-arm-banner[hidden]{display:none!important}
+body.u4-pin-armed #doc,body.u4-pin-armed .u4-lb-stage,body.u4-pin-armed .u4-pdf-page-box{cursor:crosshair}
+
+.u4-pin-marker{position:absolute;transform:translate(-50%,-50%);pointer-events:auto;cursor:grab;width:28px;height:28px;border-radius:50%;border:2px dashed var(--crimson,#b42318);background:rgba(180,35,24,.14);display:inline-flex;align-items:center;justify-content:center;padding:0;touch-action:none;z-index:18}
+.u4-pin-marker.is-selected{border-style:solid;border-color:var(--accent);background:rgba(31,95,122,.16)}
+.u4-pin-marker.is-sent{border-style:solid;border-color:var(--lock);background:rgba(47,107,63,.16)}
+.u4-pin-marker::after{content:"";width:5px;height:5px;border-radius:50%;background:var(--crimson,#b42318)}
+.u4-pin-marker.is-selected::after{background:var(--accent)}
+.u4-pin-marker.is-sent::after{background:var(--lock)}
+.u4-pin-tag{position:absolute;top:-10px;right:-14px;min-width:22px;height:18px;padding:0 5px;border-radius:999px;background:var(--crimson,#b42318);color:#fff;border:1.5px solid var(--panel);font:700 10px/15px var(--mono);text-align:center;pointer-events:none}
+.u4-pin-marker.is-selected .u4-pin-tag{background:var(--accent);color:var(--panel)}
+.u4-pin-marker.is-sent .u4-pin-tag{background:var(--lock);color:var(--panel)}
+
+.u4-pin-steer{position:fixed;z-index:275;width:min(330px,calc(100vw - 16px));background:var(--panel);color:var(--fg);border:1px solid var(--accent);border-radius:8px;padding:10px 11px;display:grid;gap:7px;font-family:var(--body);box-shadow:0 4px 14px rgba(0,0,0,.16)}
+.u4-pin-steer[hidden]{display:none!important}
+@media (max-width:640px){
+  .u4-pin-steer{left:8px!important;right:8px!important;top:auto!important;bottom:calc(env(safe-area-inset-bottom,0px) + 70px)!important;width:auto!important;max-width:calc(100vw - 16px)}
+}
+.u4-pin-steer-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.u4-pin-steer-title{display:flex;align-items:center;gap:6px;min-width:0;font:600 11.5px/1.3 var(--mono);color:var(--accent)}
+.u4-pin-steer-zone{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:225px}
+.u4-pin-steer-hbtns{display:inline-flex;align-items:center;gap:4px;flex:none}
+.u4-pin-steer-ibtn{min-width:26px;height:26px;padding:0 7px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font:700 13px/1 var(--mono);cursor:pointer}
+.u4-pin-steer-ibtn.is-del{color:var(--crimson,#b42318)}
+.u4-pin-steer-row{display:flex;align-items:center;gap:5px}
+.u4-pin-steer-inp{flex:1 1 auto;min-width:0;min-height:36px;padding:6px 9px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font:inherit;font-size:14px}
+@media (max-width:820px){.u4-pin-steer-inp{font-size:16px!important}}
+.u4-pin-steer-mic{min-width:34px;height:36px;padding:0 8px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--fg);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.u4-pin-steer-mic.is-rec{border-color:var(--crimson,#b42318);background:var(--crimson-soft,#fef1f0);color:var(--crimson,#b42318)}
+.u4-pin-steer-actions{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap}
+.u4-pin-steer-btn{min-height:32px;padding:5px 10px;border-radius:6px;border:1px solid var(--accent);background:transparent;color:var(--accent);font:600 12px/1.2 var(--mono);cursor:pointer}
+.u4-pin-steer-btn:hover{background:var(--accent-soft)}
+.u4-pin-steer-btn.is-primary{background:var(--accent);color:var(--panel)}
+.u4-pin-steer-btn[disabled]{opacity:.55;cursor:default}
+.u4-pin-steer-status{font:500 11.5px/1.35 var(--mono);color:var(--muted)}
+.u4-pin-steer-status.is-ok{color:var(--lock)}
+.u4-pin-steer-status.is-err{color:var(--crimson,#b42318)}
 </style>
 
 <section id="agent-brief" class="sr-only" aria-label="Agent brief"># START HERE — Unit 4 remodel, 1231 11th Ave (San Francisco)<br><br>**This is the only start-here file.** Every person and agent opening this folder reads this first, fully, before acting.<br>Updated 2026-11-05 17:45 PT by Claude (Tisa&#x27;s account, cloud session). The same text is the wiki&#x27;s &quot;For AI agents: read first&quot; section.<br><br>## 0. Where to work — Google Drive is the single source of truth<br>- **Unit 4 folder (work here):** https://drive.google.com/drive/folders/1NnUfcuJfnzcjJz3XRvDQDhfvtMkrlSOr (`1231-11th-avenue/unit-4-renovation`)<br>- **Whole-building parent:** https://drive.google.com/drive/folders/1StmWHtnrDQlpd1CbUUfUEOI1vg-jHn29 (`1231-11th-avenue`)<br>- Everyone — Tisa&#x27;s Claude, John&#x27;s Claude, Dibble, any other agent — reads and writes through this Drive folder. (It is backed by Tisa&#x27;s Mini and syncs automatically; you never need the Mini path.)<br>- Every Unit 4 document now lives here, including copies of everything from the old locations (section 3). If you can&#x27;t find something, look in the room folder&#x27;s `from-remodel-hub/`, `from-unit4-bath-folder/` or `from-my-drive/` subfolder before assuming it&#x27;s missing.<br>- Older start-here, AGENTS and CLAUDE files were retired 2026-11-05 to `continuity/_superseded/start-here-history/` — don&#x27;t follow them.<br><br>---<br><br>## 1. Who and what<br>- **Tisa** owns the project and makes and locks every decision. **John** is lead carpenter on site. **Ervin, Joel, Alex** are crew (Spanish speakers).<br>- **Wiki** — https://tisa-a11y.github.io/unit4-wiki-pages/ — the shared picture: roadmap, one spec per project, open decisions, documents (PDFs preview in the page). It reads the `.md` files in this folder.<br>- **Todoist** board `Full 1231 11th Avenue Remodel` (id ). The wiki is its spine: every card traces to a spec, a locked decision or captured input.<br>- **Magicplan** MASTER plan is the geometry source: https://cloud.magicplan.app/plan/abb2d2c6-aa1c-4a88-a57e-1260847b6410<br>- **Your job:** keep the project moving with as little effort from Tisa and John as possible. Answer from the specs, capture what they tell you, file it, keep wiki and Todoist in step.<br><br>## 2. Read in this order<br>1. `STATUS-NOW.md` — what&#x27;s locked, what&#x27;s blocking, what&#x27;s next on site. Answer &quot;what&#x27;s up?&quot; from here first.<br>2. `continuity/ROADMAP.md` — sequence and phases.<br>3. `&lt;room&gt;/SPEC.md` for the area you&#x27;re working on.<br>4. `continuity/CURRENT-DECISIONS.md` and `continuity/KNOWN-GAPS.md` only if you need the history.<br><br>## 3. Folder map<br>| Folder | Holds |<br>|---|---|<br>| `kitchen/` `bathroom/` `electrical/` `laundry/` `bedroom/` `living-dining/` `hallway/` `paint-floors/` `hvac/` | One per room or trade; each has `SPEC.md` (governs) plus dated drawings and packages. |<br>| `interior-design/` | Wall treatment, trim, outlet and finish plans (dated revision folders). |<br>| `general/` | Whole-unit items; `from-remodel-hub/` = imported old crew-hub files. |<br>| `sprint/` | Current sprint plan and session agendas. |<br>| `continuity/` | Roadmap, decisions log, known gaps, labor ballpark, history and source snapshots. |<br>| `work-control/` | Agent index, Todoist runbook (dated snapshot), `wiki-source/` (wiki build files). |<br>| `to-triage/` | Drop box for any input (notes, photos, voice memos, session minutes). Claude routes it and moves it to `to-triage/_done/`. |<br>| `sessions/` | One folder per working session: minutes (and transcript when available). |<br>| `_to_delete/` | Marked for removal; only Tisa empties it. |<br><br>Outside this folder: `../building/` (common areas, backyard, alley; `building/earlier-renovations-not-unit-4…/` holds older renovation docs that are **not** Unit 4 — don&#x27;t use them for Unit 4), `../GOOGLE-DOCS-INDEX.md`, and the separate private folder `1231-11th-avenue-private` (leases, costs, payroll, bids — **never share with crew**).<br><br>**Old locations — still readable for history, never the place to work:** Drive &quot;1231 11th Ave - Unit 4 Remodel&quot; (old crew hub, folders 01–12), Drive &quot;11th Ave Unit 4 Bath&quot;. Everything in them was copied here on 2026-11-04/05. If an old file and a file here disagree, the room&#x27;s `SPEC.md` governs.<br><br>## 4. Which version is the latest<br>1. Names carry date and revision: `YYYY-MM-DD_U4_&lt;room or trade&gt;_&lt;what&gt;_R#` (issued drawings may use `RevA`, `RevB`), then `_EN` or `_ES`. English and Spanish are always separate files.<br>2. The latest lives in the topic folder. A replaced file moves, name unchanged, to that folder&#x27;s `_superseded/` (or `history/`). Nothing is deleted.<br>3. If a folder still has more than one live iteration, its `CURRENT.md` names the one that governs.<br>4. `from-remodel-hub/`, `from-unit4-bath-folder/`, `from-my-drive/` are copies imported 2026-11-04 so no mockup or image is lost; they&#x27;re being reconciled. Until then the room&#x27;s `SPEC.md` and the dated files outside them govern.<br><br>## 5. Golden rule: John never has to enter anything himself<br>When John or Tisa tells you something — a task, a measurement, a problem, a question, a decision needed — capture it for them in their words and file it (section 7). Don&#x27;t send them to a form. Confirm back in one line what you filed and where.<br><br>## 6. What each kind of agent can do<br>| You are… | You can |<br>|---|---|<br>| **Claude on Tisa&#x27;s claude.ai account** (this Project, Cowork, Claude Code) | Everything: wiki data via the ArtifactData tool (URL above), republish the wiki via the Artifact tool, edit files here, Todoist via the connector (connected 2026-11-03). |<br>| **John&#x27;s Claude** (claude.ai cloud, often voice on John&#x27;s iPhone) | Read the wiki link, this Drive folder and the Todoist board. Its Drive connector can **create** files but can&#x27;t overwrite existing ones, so it writes session minutes and notes to `to-triage/` as `YYYY-MM-DD_HHMM_session_&lt;topic&gt;.md` with an author line (which Claude, which device, cloud or local). Tisa&#x27;s Claude routes them into the wiki, specs, STATUS-NOW and Todoist. |<br>| **Any other agent** (Dibble, Codex, Gemini, Antigravity) | Read and edit the files here (section 8 rules), update `STATUS-NOW.md`, drop input in `to-triage/`. Access comes from this Drive folder being shared with John&#x27;s Google account as Editor. |<br>| **Any agent with a browser** | Open the wiki and help John use it on his phone. |<br><br>**Dropping input (non-Claude agents):** `to-triage/YYYY-MM-DD_HHMM_&lt;who&gt;_&lt;short&gt;.md`<br>```<br>type: task | fact | decision | note<br>project: kitchen | bathroom | electrical | laundry | bedroom | living-dining | hallway | paint-floors | hvac | general<br>from: &lt;agent&gt; on behalf of &lt;John/Tisa&gt;<br>---<br>&lt;their words&gt;<br>```<br>**Claude capture:** write to the wiki&#x27;s `inbox` collection `{type, project, section, title, details, raw, source:&quot;agent&quot;, from, createdAt, status:&quot;queued&quot;}`, then route it in the same turn.<br><br>## 7. Routing — where each thing goes<br>| Came in | Do this |<br>|---|---|<br>| **Task** | Look for an existing card first (comment rather than duplicate). Create it in the project&#x27;s section — Kitchen / Cocina · Bathroom / Baño · Electrical / Electricidad · Laundry / Lavandería · Walls, Molding &amp; Paint · General &amp; HVAC (bedroom, living-dining, hallway, HVAC, building) · New Tasks (need triage) · Backlog · On Hold or Blocked. Re-check section names live before writing. Plain title; description = State / Trade / Next physical action / Governing source (link to SPEC.md). **Unassigned** unless Tisa names someone. |<br>| **Site fact** | Add to the project&#x27;s SPEC.md with date and &quot;(John, field)&quot;. Comment on the card if it changes one. |<br>| **Decision needed** | Add a wiki `decisions` doc (`status: open`, priority 1 blocking / 2 next / 3 later). Only Tisa locks. |<br>| **Locked decision** (`synced: false`) | Update SPEC.md (mark LOCKED), matching cards, the Spanish crew edition, `STATUS-NOW.md`; set `synced: true`. |<br>| **Field report / session notes** | File facts as above; next steps → unassigned cards; open items → decisions; mark `recorded`. |<br><br>Wiki and cards disagree → the wiki wins (never the reverse without Tisa). Any change you make → update `STATUS-NOW.md` in the same pass.<br><br>## 8. Rules that always hold<br>- Tisa&#x27;s direction is locked; anything an AI produces is a suggestion until she locks it.<br>- Nothing is sent, signed, ordered, paid or scheduled without Tisa&#x27;s approval.<br>- Magicplan and existing drawings first. Never ask John to re-measure what&#x27;s recorded; ask only for the specific missing number.<br>- Crew-facing documents: English first, then a **separate** Spanish edition. Never mix languages. Replies to Tisa in English.<br>- Edit an existing spec rather than making a new file beside it (new files break wiki links).<br>- Superseded files go to `_superseded`; never delete. No credentials in any file here.<br>- **Wiki and Drive mirror each other** (Tisa, 2026-11-06): every wiki page and document list matches a folder in `1231 11th Avenue Unit 4`, and each document sits under the same room in both. When you add or move a document or folder in Drive, update the wiki in the same pass, and the reverse. Example: the Laundry Closet is its own project, so its documents live in `laundry/`, not `electrical/`.<br>- **Spanish for the wiki lives only in the wiki's own text** (Tisa, 2026-11-06): the English/Español toggle. Never create Spanish copies of the .md files in Drive. Crew plans keep their existing English and Spanish PDFs.<br>- **Work record (Beads):** canonical ledger `/Users/tisavo/Work/Projects/1231-11th-avenue/unit-4-renovation` on the MacBook Pro (`.beads/embeddeddolt`, main issue `tisa-wi0.6`). Run `bd where` before writing; never initialize a duplicate ledger; keep existing issue IDs. Agents that can&#x27;t reach it (cloud sessions) record state in `STATUS-NOW.md` and say Beads is pending. Last check from a cloud session (2026-11-05): not reachable, status unverified.<br>- Every session&#x27;s minutes say the date, who attended and which Claude wrote them (account, device, cloud or local).<br>- Say plainly what you verified vs. only wrote. Trust the source file over another agent&#x27;s summary.<br><br>## 9. Maintaining the wiki (Claude only)<br>Source: `work-control/wiki-source/` (template updated 2026-11-05 to include the live Home page and collapsible document lists) — `wiki_template.html`, `build_wiki.py` (embeds the specs and document lists), `brief.py` (embeds this file as the agent brief), `drive_docs.json`, `pdf_blobs.json`. Rebuild, then publish to the same artifact URL. Collections: `decisions` (Tisa/admin write), `decisionNotes`, `reports`, `sessionNotes`, `inbox`.<br><br>## 10. More detail, if needed<br>- Routing detail and history: `work-control/2026-11-03_U4_AgentWork_Index_R2.md`<br>- Todoist runbook (11/2 snapshot, has known errors): `work-control/TODOIST-PROJECT-MANAGER-RUNBOOK.md`<br>- Kitchen governing revision: `kitchen/CURRENT.md`<br></section>
@@ -1165,6 +1243,23 @@ const UI = {
     lbOpenDoc: "Open Document / Original ↗",
     lbPrevAria: "Previous photo",
     lbNextAria: "Next photo",
+    pinPillIdle: "⊕ Drag / Tap",
+    pinPillArmed: "✕ Tap spot",
+    pinArmBanner: "Tap any spot on the page, photo or PDF to pin · Esc cancels",
+    pinPlaceholder: "Ask about or flag a correction on this spot…",
+    pinAskAiBtn: "Ask AI",
+    pinSendCorrBtn: "Send Correction",
+    pinSending: "Sending…",
+    pinSentOk: "Correction sent to to-triage.",
+    pinSentErr: "Couldn't reach Mac mini now — check Local network access.",
+    pinNeedNote: "Write or dictate a note for this spot first.",
+    pinPromptDefault: "Check this spot and explain what applies here.",
+    pinMoved: "Pin moved.",
+    pinMicAria: "Dictate note by voice",
+    zoomOutAria: "Zoom out",
+    zoomInAria: "Zoom in",
+    zoomResetAria: "Reset zoom to 100%",
+    zoomDiagramLbl: "Diagram zoom",
     grpOverview: "Overview", grpPreviews: "Previews", grpProjects: "Projects",
     previewsEmpty: "Click any PDF to add here", clearAll: "Clear", inPreviews: "In Previews",
     openPreviewsLbl: "Open Previews:", previewTabsLbl: "Previews:",
@@ -1217,6 +1312,23 @@ const UI = {
     lbOpenDoc: "Abrir documento / original ↗",
     lbPrevAria: "Foto anterior",
     lbNextAria: "Siguiente foto",
+    pinPillIdle: "⊕ Arrastrar / Tocar",
+    pinPillArmed: "✕ Toca un punto",
+    pinArmBanner: "Toca cualquier punto de la página, foto o PDF para marcar · Esc cancela",
+    pinPlaceholder: "Pregunta o corrige este punto…",
+    pinAskAiBtn: "Preguntar a IA",
+    pinSendCorrBtn: "Enviar corrección",
+    pinSending: "Enviando…",
+    pinSentOk: "Corrección enviada a to-triage.",
+    pinSentErr: "No se pudo conectar con Mac mini — revisa Red local.",
+    pinNeedNote: "Escribe o dicta una nota primero para este punto.",
+    pinPromptDefault: "Revisa este punto y explica qué aplica aquí.",
+    pinMoved: "Marca movida.",
+    pinMicAria: "Dictar nota por voz",
+    zoomOutAria: "Alejar",
+    zoomInAria: "Acercar",
+    zoomResetAria: "Restablecer zoom a 100%",
+    zoomDiagramLbl: "Zoom de diagrama",
     grpOverview: "Resumen", grpPreviews: "Vistas previas", grpProjects: "Proyectos",
     previewsEmpty: "Toca un PDF para agregarlo aquí", clearAll: "Limpiar", inPreviews: "En vistas previas",
     openPreviewsLbl: "Vistas previas abiertas:", previewTabsLbl: "Vistas previas:",
@@ -1248,7 +1360,7 @@ const DOCS = {"home": [], "roadmap": [], "decisions": [], "kitchen": [{"title": 
 const PDF_BLOBS = {"10D_YpGKMtzfC6yF6HBBVdLVfKFKu6JTG": "./wiki-pdfs/10D_YpGKMtzfC6yF6HBBVdLVfKFKu6JTG.pdf", "12XSYgY_X6jGvicZYA0M4NQU_Re8z9N9M": "./wiki-pdfs/12XSYgY_X6jGvicZYA0M4NQU_Re8z9N9M.pdf", "14ZUQJ15FtxfGFFbJjISJE9gJdgabj2hP": "./wiki-pdfs/14ZUQJ15FtxfGFFbJjISJE9gJdgabj2hP.pdf", "14hgR2av9lmM05C1ZWrNz_8Ne3g9IP-kt": "./wiki-pdfs/14hgR2av9lmM05C1ZWrNz_8Ne3g9IP-kt.pdf", "15EVx1nRChryy8X7YkaiCf_2fiN8sRTP2": "./wiki-pdfs/15EVx1nRChryy8X7YkaiCf_2fiN8sRTP2.pdf", "17_Qe5LTY6OOIiv4-KeQnA79FIm_M2yjO": "./wiki-pdfs/17_Qe5LTY6OOIiv4-KeQnA79FIm_M2yjO.pdf", "18qyXoGk8oypKXmWD-SYG-EPIFgWN5VJD": "./wiki-pdfs/18qyXoGk8oypKXmWD-SYG-EPIFgWN5VJD.pdf", "19BYgPOC5-RoRmaj-qidSJBTcEZoXR6tR": "./wiki-pdfs/19BYgPOC5-RoRmaj-qidSJBTcEZoXR6tR.pdf", "19oGYJpwnGf1IE0FS-9TdgWT14NbBHYrt": "./wiki-pdfs/19oGYJpwnGf1IE0FS-9TdgWT14NbBHYrt.pdf", "1GsVm7VrFU897ax3yAxypfW5lowapbZKB": "./wiki-pdfs/1GsVm7VrFU897ax3yAxypfW5lowapbZKB.pdf", "1INgn3iZDKq0ArTGZqH1zv0Qj0sST0bAl": "./wiki-pdfs/1INgn3iZDKq0ArTGZqH1zv0Qj0sST0bAl.pdf", "1KPYZCWI4NZvByh9gB6yiUAOJB3dziUrL": "./wiki-pdfs/1KPYZCWI4NZvByh9gB6yiUAOJB3dziUrL.pdf", "1Tgb82HNVsMrTEe-W3OXmvuVHm4EL1JpO": "./wiki-pdfs/1Tgb82HNVsMrTEe-W3OXmvuVHm4EL1JpO.pdf", "1VRVlrLHoqBleu4D6brZCzeB57skxrYOJ": "./wiki-pdfs/1VRVlrLHoqBleu4D6brZCzeB57skxrYOJ.pdf", "1VazWlSTKbc76vCkSMUp4s69SOoEctq95": "./wiki-pdfs/1VazWlSTKbc76vCkSMUp4s69SOoEctq95.pdf", "1XAsVFF6ZAzrno31-btbaPStZukkNHiqQ": "./wiki-pdfs/1XAsVFF6ZAzrno31-btbaPStZukkNHiqQ.pdf", "1ZtY0-QONVmxSIYP_1LPAGeKht6SPiW7w": "./wiki-pdfs/1ZtY0-QONVmxSIYP_1LPAGeKht6SPiW7w.pdf", "1_fBtZtmTohFwIO4CdC7HeKvZGp8OnUOL": "./wiki-pdfs/1_fBtZtmTohFwIO4CdC7HeKvZGp8OnUOL.pdf", "1aYu9yWuRRFk8T5E3nQ6NDTHWpeRcrXgW": "./wiki-pdfs/1aYu9yWuRRFk8T5E3nQ6NDTHWpeRcrXgW.pdf", "1dB6h6MFYhcv15b2-xqiIwf6sqkjDzuj1": "./wiki-pdfs/1dB6h6MFYhcv15b2-xqiIwf6sqkjDzuj1.pdf", "1j3RtlylFUgKKUACB2EGpEEPVaMTEwMtz": "./wiki-pdfs/1j3RtlylFUgKKUACB2EGpEEPVaMTEwMtz.pdf", "1j_ol20Uk3Tbp_gCbxcynK-AVLZ2dEMoO": "./wiki-pdfs/1j_ol20Uk3Tbp_gCbxcynK-AVLZ2dEMoO.pdf", "2026-11-02_U4_Unidad_Muros-Molduras-Contactos_R1_ES": "./wiki-pdfs/2026-11-02_U4_Unidad_Muros-Molduras-Contactos_R1_ES.pdf", "1r2onyKr2kbBqI7LxJM8TV0mEj7FebEa5": "./wiki-pdfs/1r2onyKr2kbBqI7LxJM8TV0mEj7FebEa5.pdf", "1jtmamYcL-alhUNlUZPkIZn9nlCp0mYDY": "./wiki-pdfs/1jtmamYcL-alhUNlUZPkIZn9nlCp0mYDY.pdf", "1mAC3K0dQZUO9heLN9ac8YYR0Yl-2bE22": "./wiki-pdfs/1mAC3K0dQZUO9heLN9ac8YYR0Yl-2bE22.pdf", "1rcyuJfMmYOjxPCrX8WR16cZXOkT2ah0K": "./wiki-pdfs/1rcyuJfMmYOjxPCrX8WR16cZXOkT2ah0K.pdf", "1zmfZZ_oTx2etOEbVycFGW18r1zcrUSWK": "./wiki-pdfs/1zmfZZ_oTx2etOEbVycFGW18r1zcrUSWK.pdf", "1jiGfPGxC122ZaippBSkCe4UBWUnMgJmQ": "./wiki-pdfs/1jiGfPGxC122ZaippBSkCe4UBWUnMgJmQ.pdf", "1WTPBOcSCPfVmSmrbXUWiCw29XUT49XYU": "./wiki-pdfs/1WTPBOcSCPfVmSmrbXUWiCw29XUT49XYU.pdf", "1hHeDrjPwn0b_64Hda78LFk6hP-t8RplK": "./wiki-pdfs/1zmfZZ_oTx2etOEbVycFGW18r1zcrUSWK.pdf", "1_0EK9jHb95d6-mLOAJX9unUm7d9eoUSQ": "./wiki-pdfs/18qyXoGk8oypKXmWD-SYG-EPIFgWN5VJD.pdf", "1fMS5FN0zmR0LcoTj8x7GJf7B335iJXcn": "./wiki-pdfs/1fMS5FN0zmR0LcoTj8x7GJf7B335iJXcn.pdf", "1RyQo3l4hc0yTdMbgdO01IdbA7e3JJ8J7": "./wiki-pdfs/1RyQo3l4hc0yTdMbgdO01IdbA7e3JJ8J7.pdf", "1JucaH0UXB1mko6Qnl4dDa0vzex_WSKh3": "./wiki-pdfs/1JucaH0UXB1mko6Qnl4dDa0vzex_WSKh3.pdf", "1taIg19r1lPEztEDybHcrDh_H702WusVy": "./wiki-pdfs/1taIg19r1lPEztEDybHcrDh_H702WusVy.pdf", "1NY9eaXvYK_oICJBK8FrMnkw5iCx5lVuQ": "./wiki-pdfs/1NY9eaXvYK_oICJBK8FrMnkw5iCx5lVuQ.pdf", "2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_EN": "./wiki-pdfs/2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_EN.pdf", "2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_ES": "./wiki-pdfs/2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_ES.pdf", "1b_0NkZsh-hivHUv8zBH3zFsLOW8npFD5": "./wiki-pdfs/2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_EN.pdf", "1mubZOiGtwlI7ctMlmEAbLrCfhK_oCRp8": "./wiki-pdfs/2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_ES.pdf", "2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_EN": "./wiki-pdfs/2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_EN.pdf", "2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_ES": "./wiki-pdfs/2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_ES.pdf", "2026-11-19_U4_HVAC_Attic-Hatch-Visual-Field-Guide_R3_EN": "./wiki-docs/attic-hatch-r3/Attic-hatch-visual-field-guide_R3_EN.pdf", "2026-11-19_U4_HVAC_Attic-Hatch-Visual-Field-Guide_R3_ES": "./wiki-docs/attic-hatch-r3/Attic-hatch-visual-field-guide_R3_ES.pdf", "2026-11-19_Attic-hatch-practical-guide_R5_EN": "./wiki-docs/attic-hatch-r5/Attic-hatch-practical-guide_R5_EN.pdf", "2026-11-19_Attic-hatch-practical-guide_R5_ES": "./wiki-docs/attic-hatch-r5/Attic-hatch-practical-guide_R5_ES.pdf", "1QH6N_nnFVBHvfaEZiU0ZP1pyJDXAeNz3": "./wiki-pdfs/1QH6N_nnFVBHvfaEZiU0ZP1pyJDXAeNz3.pdf", "1D2YflscPC7hJGxr-AptP887Gci1LZLKO": "./wiki-pdfs/1D2YflscPC7hJGxr-AptP887Gci1LZLKO.pdf", "2026-11-19_U4_kitchen_range-wall-full-plan_R1_EN": "./wiki-pdfs/2026-11-19_U4_kitchen_range-wall-full-plan_R1_EN.pdf", "2026-11-19_U4_kitchen_range-wall-full-plan_R1_ES": "./wiki-pdfs/2026-11-19_U4_kitchen_range-wall-full-plan_R1_ES.pdf", "1-aotDnDzAM9u5-qnHP4gSOi2UmVQJmaS": "./wiki-pdfs/2026-11-19_U4_kitchen_range-wall-full-plan_R1_EN.pdf", "1ANxZ-9tJpXd0s_3Zz1PJ0jQgpOAKXvHS": "./wiki-pdfs/2026-11-19_U4_kitchen_range-wall-full-plan_R1_ES.pdf", "1GX4JjvGexhCi6ILkCzGva9Y0qDrWQfMc": "./wiki-pdfs/1GX4JjvGexhCi6ILkCzGva9Y0qDrWQfMc.pdf", "181C6zPqPPVPTYFKljPXibbjZ0q_UKiRS": "./wiki-pdfs/181C6zPqPPVPTYFKljPXibbjZ0q_UKiRS.pdf", "176xbLAm3cIv9tTgyc3rgV5OvIoBHNptH": "./wiki-pdfs/176xbLAm3cIv9tTgyc3rgV5OvIoBHNptH.pdf", "10fBNXdW8v-4muqaQbOsJnDdd-cRGje2s": "./wiki-pdfs/10fBNXdW8v-4muqaQbOsJnDdd-cRGje2s.pdf", "1vdNvEEgbYIcpW1sSR9RFnN14a6qPr0pt": "./wiki-pdfs/1vdNvEEgbYIcpW1sSR9RFnN14a6qPr0pt.pdf", "1spkThejSoSOimEmja3awwpx2rFHX-E2c": "./wiki-pdfs/1spkThejSoSOimEmja3awwpx2rFHX-E2c.pdf", "1_qHAwalUzUoMT8XYsI4G1rhGS8GgwCPT": "./wiki-pdfs/1_qHAwalUzUoMT8XYsI4G1rhGS8GgwCPT.pdf", "1vLIzKTSKNEAV507kTZjNaqAe2sz-pW2O": "./wiki-pdfs/1vLIzKTSKNEAV507kTZjNaqAe2sz-pW2O.pdf", "1PNIj1k70IHGafUm0jBRe0xZ2kHXmSqn8": "./wiki-pdfs/1PNIj1k70IHGafUm0jBRe0xZ2kHXmSqn8.pdf", "1oyzjDbzuRZiIITWSGF1UR05drrvrL0XB": "./wiki-pdfs/1oyzjDbzuRZiIITWSGF1UR05drrvrL0XB.pdf", "2026-11-20_U4_kitchen_ks4-interactive_R1_EN": "./wiki-pdfs/2026-11-20_U4_kitchen_ks4-interactive_R1_EN.pdf", "2026-11-20_U4_kitchen_ks4-interactive_R1_ES": "./wiki-pdfs/2026-11-20_U4_kitchen_ks4-interactive_R1_ES.pdf", "2026-11-20_U4_kitchen_floor-plan-interactive_R1_EN": "./wiki-pdfs/2026-11-20_U4_kitchen_floor-plan-interactive_R1_EN.pdf", "2026-11-20_U4_kitchen_floor-plan-interactive_R1_ES": "./wiki-pdfs/2026-11-20_U4_kitchen_floor-plan-interactive_R1_ES.pdf", "2026-11-20_U4_attic_hatch-interactive_R1_EN": "./wiki-pdfs/2026-11-20_U4_attic_hatch-interactive_R1_EN.pdf", "2026-11-20_U4_attic_hatch-interactive_R1_ES": "./wiki-pdfs/2026-11-20_U4_attic_hatch-interactive_R1_ES.pdf", "2026-11-20_U4_hvac_layout-interactive_R1_EN": "./wiki-pdfs/2026-11-20_U4_hvac_layout-interactive_R1_EN.pdf", "2026-11-20_U4_hvac_layout-interactive_R1_ES": "./wiki-pdfs/2026-11-20_U4_hvac_layout-interactive_R1_ES.pdf", "2026-11-20_U4_laundry_murphy-door-interactive_R1_EN": "./wiki-pdfs/2026-11-20_U4_laundry_murphy-door-interactive_R1_EN.pdf", "2026-11-20_U4_laundry_murphy-door-interactive_R1_ES": "./wiki-pdfs/2026-11-20_U4_laundry_murphy-door-interactive_R1_ES.pdf", "2026-11-20_U4_kitchen_electrical-d04-interactive_R1_EN": "./wiki-pdfs/2026-11-20_U4_kitchen_electrical-d04-interactive_R1_EN.pdf", "2026-11-20_U4_kitchen_electrical-d04-interactive_R1_ES": "./wiki-pdfs/2026-11-20_U4_kitchen_electrical-d04-interactive_R1_ES.pdf", "2026-11-20_U4_kitchen_zephyr-savona-mock-hookup_04-hood-electrical_R2_EN": "./wiki-pdfs/2026-11-20_U4_kitchen_zephyr-savona-mock-hookup_04-hood-electrical_R2_EN.pdf", "2026-11-20_U4_kitchen_zephyr-savona-mock-hookup_04-hood-electrical_R2_ES": "./wiki-pdfs/2026-11-20_U4_kitchen_zephyr-savona-mock-hookup_04-hood-electrical_R2_ES.pdf"};
 const DOC_DATES = {"18qyXoGk8oypKXmWD-SYG-EPIFgWN5VJD": "2026-11-02", "1zmfZZ_oTx2etOEbVycFGW18r1zcrUSWK": "2026-11-02", "1_0EK9jHb95d6-mLOAJX9unUm7d9eoUSQ": "2026-11-02", "1hHeDrjPwn0b_64Hda78LFk6hP-t8RplK": "2026-11-02", "19BYgPOC5-RoRmaj-qidSJBTcEZoXR6tR": "2026-10-29", "1aYu9yWuRRFk8T5E3nQ6NDTHWpeRcrXgW": "2026-10-29", "1mAC3K0dQZUO9heLN9ac8YYR0Yl-2bE22": "2026-10-30", "1Tgb82HNVsMrTEe-W3OXmvuVHm4EL1JpO": "2026-10-30", "1r2onyKr2kbBqI7LxJM8TV0mEj7FebEa5": "2026-11-10", "2026-11-02_U4_Unidad_Muros-Molduras-Contactos_R1_ES": "2026-11-02", "1j_ol20Uk3Tbp_gCbxcynK-AVLZ2dEMoO": "2026-11-02", "2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_EN": "2026-11-10", "2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_ES": "2026-11-10", "2026-11-19_U4_HVAC_Attic-Opening-Plan_EN-ES": "2026-11-19", "2026-11-19_U4_HVAC_Attic-Hatch-Visual-Field-Guide_R3_EN": "2026-11-19", "2026-11-19_U4_HVAC_Attic-Hatch-Visual-Field-Guide_R3_ES": "2026-11-19", "2026-11-19_Attic-hatch-practical-guide_R5_EN": "2026-11-19", "2026-11-19_Attic-hatch-practical-guide_R5_ES": "2026-11-19", "2026-11-19_Attic-Opening-Plan-Interactive": "2026-11-19", "1QH6N_nnFVBHvfaEZiU0ZP1pyJDXAeNz3": "2026-11-19", "1D2YflscPC7hJGxr-AptP887Gci1LZLKO": "2026-11-19", "1GX4JjvGexhCi6ILkCzGva9Y0qDrWQfMc": "2026-11-19", "181C6zPqPPVPTYFKljPXibbjZ0q_UKiRS": "2026-11-19", "2026-11-19_U4_kitchen_range-wall-full-plan_R1_EN": "2026-11-19", "2026-11-19_U4_kitchen_range-wall-full-plan_R1_ES": "2026-11-19", "1-aotDnDzAM9u5-qnHP4gSOi2UmVQJmaS": "2026-11-19", "1ANxZ-9tJpXd0s_3Zz1PJ0jQgpOAKXvHS": "2026-11-19", "176xbLAm3cIv9tTgyc3rgV5OvIoBHNptH": "2026-11-19", "10fBNXdW8v-4muqaQbOsJnDdd-cRGje2s": "2026-11-19", "1vdNvEEgbYIcpW1sSR9RFnN14a6qPr0pt": "2026-11-19", "1spkThejSoSOimEmja3awwpx2rFHX-E2c": "2026-11-19", "1_qHAwalUzUoMT8XYsI4G1rhGS8GgwCPT": "2026-11-19", "1vLIzKTSKNEAV507kTZjNaqAe2sz-pW2O": "2026-11-19", "1PNIj1k70IHGafUm0jBRe0xZ2kHXmSqn8": "2026-11-19", "1oyzjDbzuRZiIITWSGF1UR05drrvrL0XB": "2026-11-19", "2026-11-20_Kitchen-Vent-Hood-Wall-Interactive_EN": "2026-11-20", "2026-11-20_Kitchen-Vent-Hood-Wall-Interactive_ES": "2026-11-20", "2026-11-20_U4_kitchen_ks4-interactive_R1_EN": "2026-11-20", "2026-11-20_U4_kitchen_ks4-interactive_R1_ES": "2026-11-20", "2026-11-20_Kitchen-Floor-Plan-Interactive_EN": "2026-11-20", "2026-11-20_Kitchen-Floor-Plan-Interactive_ES": "2026-11-20", "2026-11-20_U4_kitchen_floor-plan-interactive_R1_EN": "2026-11-20", "2026-11-20_U4_kitchen_floor-plan-interactive_R1_ES": "2026-11-20", "2026-11-20_Attic-Hatch-Interactive_EN": "2026-11-20", "2026-11-20_Attic-Hatch-Interactive_ES": "2026-11-20", "2026-11-20_U4_attic_hatch-interactive_R1_EN": "2026-11-20", "2026-11-20_U4_attic_hatch-interactive_R1_ES": "2026-11-20", "2026-11-20_HVAC-Layout-Interactive_EN": "2026-11-20", "2026-11-20_HVAC-Layout-Interactive_ES": "2026-11-20", "2026-11-20_U4_hvac_layout-interactive_R1_EN": "2026-11-20", "2026-11-20_U4_hvac_layout-interactive_R1_ES": "2026-11-20", "2026-11-20_Murphy-Door-Interactive_EN": "2026-11-20", "2026-11-20_Murphy-Door-Interactive_ES": "2026-11-20", "2026-11-20_U4_laundry_murphy-door-interactive_R1_EN": "2026-11-20", "2026-11-20_U4_laundry_murphy-door-interactive_R1_ES": "2026-11-20", "2026-11-20_Kitchen-Electrical-Interactive_EN": "2026-11-20", "2026-11-20_Kitchen-Electrical-Interactive_ES": "2026-11-20", "2026-11-20_U4_kitchen_electrical-d04-interactive_R1_EN": "2026-11-20", "2026-11-20_U4_kitchen_electrical-d04-interactive_R1_ES": "2026-11-20", "2026-11-20_U4_kitchen_zephyr-savona-mock-hookup_04-hood-electrical_R2_EN": "2026-11-20", "2026-11-20_U4_kitchen_zephyr-savona-mock-hookup_04-hood-electrical_R2_ES": "2026-11-20"};
 const ROOM_KEY_FACTS = {"kitchen": [{"kEn": "Room", "kEs": "Cuarto", "vEn": "147\" × 126\" · ceiling 121-1/2\"", "vEs": "147\" × 126\" · techo 121-1/2\""}, {"kEn": "Cabinets", "kEs": "Gabinetes", "vEn": "Green lower cabinets · none beside the hood", "vEs": "Bajos verdes · ninguno junto a la campana"}, {"kEn": "Electrical", "kEs": "Electricidad", "vEn": "9 circuits from the new panel", "vEs": "9 circuitos desde el tablero nuevo"}, {"kEn": "Wait", "kEs": "Esperar", "vEn": "Sink cabinet · closing the panel wall", "vEs": "Gabinete de la tarja · cerrar el muro del tablero"}], "kitchen-oven-range": [{"kEn": "Hood height", "kEs": "Altura de la campana", "vEn": "Bottom 66\"–72\" from finished floor (bare subfloor now: add ~3/4\"; dry-hang 67\"–68\")", "vEs": "Base a 66\"–72\" del piso terminado (hoy subpiso: sumar ~3/4\"; prueba 67\"–68\")"}, {"kEn": "Backing & wall", "kEs": "Refuerzos y muro", "vEn": "Within 30\" hood width · 68\"–86\" & 104\"–121-1/2\" (+ ~3/4\" subfloor) · 1/2\" drywall + 1/2\" HardieBacker (NO 3/16\" shims)", "vEs": "Dentro de 30\" de campana · 68\"–86\" y 104\"–121-1/2\" (+ ~3/4\" subpiso) · tablaroca 1/2\" + HardieBacker 1/2\" (SIN calzas 3/16\")"}, {"kEn": "Power & duct", "kEs": "Corriente y ducto", "vEn": "Direct hardwire ~83\"–86\" (1-gang 2\"×3\", +1\" proud, C/L ±2-1/4\") · Dedicated left chase ≥ 6\" (John/crew, not NEXT HVAC)", "vEs": "Conexión directa ~83\"–86\" (caja 2\"×3\", +1\" al frente) · Ducto exclusivo cubo izq. ≥ 6\" (cuadrilla, no NEXT HVAC)"}, {"kEn": "Tile & edges (TBD, zero metal)", "kEs": "Azulejo y orillas (por definir, cero metal)", "vEn": "Tile brand TBD · NO metal/Schluter · North: silicone 90° corner · South: bullnose, pencil, painted wood trim, or glazed edge (no 45° miter)", "vEs": "Marca de azulejo por definir · CERO metal/Schluter · Norte: esquina 90° solo silicón · Sur: bullnose, lápiz, madera pintada o canto vidriado (sin 45°)"}], "kitchen-sink-north": [{"kEn": "South wall", "kEs": "Muro Sur", "vEn": "Corner 0\"–36\" · Trash 36\"–51\" · Dishwasher 51\"–75\"", "vEs": "Esquina 0\"–36\" · Basura 36\"–51\" · Lavavajillas 51\"–75\""}, {"kEn": "Sink", "kEs": "Tarja", "vEn": "30\" cabinet under the window · do not set yet", "vEs": "Gabinete de 30\" bajo la ventana · no fijar todavía"}, {"kEn": "Refrigerator", "kEs": "Refrigerador", "vEn": "Haier · 28\" space · 2\" behind", "vEs": "Haier · espacio de 28\" · 2\" atrás"}, {"kEn": "Pie-safe", "kEs": "Pie-safe", "vEn": "Open shelves · outlets beside, never under", "vEs": "Repisas abiertas · contactos a un lado, nunca debajo"}], "bathroom": [{"kEn": "Room size", "kEs": "Medidas", "vEn": "72-1/8\" × 82-1/8\"", "vEs": "72-1/8\" × 82-1/8\""}, {"kEn": "Do first", "kEs": "Primero", "vEn": "Window trim before any wall tile", "vEs": "Moldura de ventana antes del azulejo"}, {"kEn": "Floor", "kEs": "Piso", "vEn": "Tile laid · Warm Gray grout next", "vEs": "Azulejo colocado · sigue boquilla Warm Gray"}, {"kEn": "Fixtures", "kEs": "Accesorios", "vEn": "Bronze · 10\" toilet · medicine cabinet on the wall", "vEs": "Bronce · inodoro de 10\" · botiquín sobre el muro"}], "attic-access": [{"kEn": "Hatch", "kEs": "Escotilla", "vEn": "24\" × 36\" clear when finished", "vEs": "24\" × 36\" libres ya terminada"}, {"kEn": "Walkway", "kEs": "Pasarela", "vEn": "24\" wide · 20 ft max · 23/32\" OSB or 3/4\" plywood", "vEs": "24\" de ancho · máx. 20 pies · OSB 23/32\" o triplay 3/4\""}, {"kEn": "Platform", "kEs": "Plataforma", "vEn": "30\" × 30\", level", "vEs": "30\" × 30\", nivelada"}, {"kEn": "Light and power", "kEs": "Luz y corriente", "vEn": "LED light + switch · live outlet within 25 ft", "vEs": "Luz LED + apagador · contacto con corriente a 25 pies"}], "electrical": [{"kEn": "Panel location", "kEs": "Lugar del tablero", "vEn": "Dining-room wall (D04)", "vEs": "Muro del comedor (D04)"}, {"kEn": "Panel", "kEs": "Tablero", "vEn": "Eaton, on site", "vEs": "Eaton, en obra"}, {"kEn": "Panel wall", "kEs": "Muro del tablero", "vEn": "Do not close it yet", "vEs": "No cerrarlo todavía"}, {"kEn": "Closed walls", "kEs": "Muros cerrados", "vEn": "Boxes + empty conduit · no wire yet", "vEs": "Cajas + tubo vacío · sin cable todavía"}], "laundry": [{"kEn": "Washer/dryer", "kEs": "Lavadora/secadora", "vEn": "LG WashTower · arrives Dec 1", "vEs": "LG WashTower · llega el 1 dic"}, {"kEn": "Door", "kEs": "Puerta", "vEn": "Five-panel bookcase door", "vEs": "Puerta librero de cinco paneles"}, {"kEn": "Gas box", "kEs": "Caja de gas", "vEn": "Moved by Ervin, Nov 11", "vEs": "Movida por Ervin, 11 nov"}, {"kEn": "Next", "kEs": "Sigue", "vEn": "Outlet check + open-wall photos", "vEs": "Revisar contacto + fotos del muro abierto"}], "bedroom": [{"kEn": "Walls", "kEs": "Muros", "vEn": "A North · B East (no frames) · C South · D West", "vEs": "A Norte · B Este (sin marcos) · C Sur · D Oeste"}, {"kEn": "Trim lines", "kEs": "Líneas de moldura", "vEn": "9-1/2\" baseboard · 99\" high trim", "vEs": "Zoclo de 9-1/2\" · moldura alta a 99\""}, {"kEn": "Closet ceiling", "kEs": "Techo del clóset", "vEn": "Keep open until the cable and hatch are in", "vEs": "Dejar abierto hasta tener cable y escotilla"}, {"kEn": "Floor", "kEs": "Piso", "vEn": "Patch the missing hardwood", "vEs": "Reparar la duela que falta"}], "living-dining": [{"kEn": "Panel wall", "kEs": "Muro del tablero", "vEn": "D04, dining side · no outlet by the door swing", "vEs": "D04, lado del comedor · sin contacto junto a la puerta"}, {"kEn": "Wall labels", "kEs": "Nombres de muros", "vEn": "Dining D01–D04 · Living L01–L06", "vEs": "Comedor D01–D04 · Sala L01–L06"}, {"kEn": "Outlets", "kEs": "Contactos", "vEn": "Empty conduit · clear of pocket doors", "vEs": "Tubo vacío · lejos de puertas corredizas"}, {"kEn": "Wait", "kEs": "Esperar", "vEn": "No wire · no moulding cuts", "vEs": "Sin cable · sin cortar molduras"}], "hallway": [{"kEn": "Attic hatch", "kEs": "Escotilla del ático", "vEn": "24\" × 36\" clear", "vEs": "24\" × 36\" libres"}, {"kEn": "Laundry door", "kEs": "Puerta de lavandería", "vEn": "Trim only · door details on Laundry", "vEs": "Solo moldura · detalles en Lavandería"}, {"kEn": "Mouldings", "kEs": "Molduras", "vEn": "On every hallway wall", "vEs": "En todos los muros del pasillo"}, {"kEn": "Next", "kEs": "Sigue", "vEn": "4 daylight photos + fire-rating check", "vEs": "4 fotos de día + revisión contra fuego"}], "paint-floors": [{"kEn": "Bathroom floor", "kEs": "Piso del baño", "vEn": "Calacatta Gem 12×24 · Warm Gray grout", "vEs": "Calacatta Gem 12×24 · boquilla Warm Gray"}, {"kEn": "Kitchen floor", "kEs": "Piso de la cocina", "vEn": "Matte tile · confirm about 3/4\" thickness", "vEs": "Azulejo mate · confirmar aprox. 3/4\" de espesor"}, {"kEn": "Bedroom floor", "kEs": "Piso de la recámara", "vEn": "Patch the missing hardwood", "vEs": "Reparar la duela que falta"}, {"kEn": "Paint", "kEs": "Pintura", "vEn": "After drywall", "vEs": "Después de la tablaroca"}]};
-const UNIFIED_VISUALS = {"kitchen": {"en": "Pictures", "es": "Imágenes", "noteEn": "For reference only. Use the measurements in the drawings under Documents.", "noteEs": "Solo de referencia. Usar las medidas de los planos en Documentos.", "items": [{"img": "./wiki-images/2026-11-18_U4_kitchen_overhead-concept_R2.jpg", "href": "./wiki-images/2026-11-18_U4_kitchen_overhead-concept_R2.jpg", "en": "Kitchen from above", "es": "Cocina desde arriba"}, {"img": "https://drive.google.com/thumbnail?id=1iqFU246kyPgvR05zKM9gIsX8BTG8rwpT&sz=w1200", "imgEs": "https://drive.google.com/thumbnail?id=1Kk2cEiqrQ5ikAyIqXUTMQdmNASxv6H21&sz=w1200", "href": "https://drive.google.com/file/d/1iqFU246kyPgvR05zKM9gIsX8BTG8rwpT/view", "hrefEs": "https://drive.google.com/file/d/1Kk2cEiqrQ5ikAyIqXUTMQdmNASxv6H21/view", "en": "Floor plan", "es": "Plano de planta"}, {"img": "https://drive.google.com/thumbnail?id=1w9awRXL9sBPAxwZrjaIBKKY39nmloIOF&sz=w1200", "href": "https://drive.google.com/file/d/1w9awRXL9sBPAxwZrjaIBKKY39nmloIOF/view", "en": "Range wall", "es": "Muro de la estufa"}, {"img": "./wiki-images/kitchen-magicplan-7bb82437fa09d031aa98d36ccdf6860e.jpg", "href": "./wiki-images/kitchen-magicplan-7bb82437fa09d031aa98d36ccdf6860e.jpg", "en": "Measured floor plan", "es": "Plano con medidas"}]}, "kitchen-oven-range": {"en": "Pictures", "es": "Imágenes", "noteEn": "For reference only. Measurements are in the guide.", "noteEs": "Solo de referencia. Las medidas están en la guía.", "items": [{"img": "https://drive.google.com/thumbnail?id=1w9awRXL9sBPAxwZrjaIBKKY39nmloIOF&sz=w1200", "href": "https://drive.google.com/file/d/1w9awRXL9sBPAxwZrjaIBKKY39nmloIOF/view", "en": "Range wall and hood", "es": "Muro de la estufa y campana"}, {"img": "./wiki-images/kitchen-magicplan-9ed1811d0317467ea1ef90f03911772c.jpg", "href": "./wiki-images/kitchen-magicplan-9ed1811d0317467ea1ef90f03911772c.jpg", "en": "Range wall in 3D", "es": "Muro de la estufa en 3D"}]}, "kitchen-sink-north": {"en": "Pictures", "es": "Imágenes", "noteEn": "For reference only. Do not cut from these.", "noteEs": "Solo de referencia. No cortar con base en estas imágenes.", "items": [{"img": "./wiki-images/kitchen-magicplan-dedb66d9b37f5023a2b650b6ebff20dc.jpg", "href": "./wiki-images/kitchen-magicplan-dedb66d9b37f5023a2b650b6ebff20dc.jpg", "en": "Refrigerator wall and sink under the window", "es": "Muro del refrigerador y tarja bajo la ventana"}, {"img": "./wiki-images/2026-11-18_U4_kitchen_overhead-concept_R2.jpg", "href": "./wiki-images/2026-11-18_U4_kitchen_overhead-concept_R2.jpg", "en": "Full L from above", "es": "La L completa desde arriba"}]}, "bedroom": {"en": "Pictures", "es": "Imágenes", "noteEn": "Do not cut moulding yet. When released, lay out frames with tape from the center of each wall.", "noteEs": "No cortar molduras todavía. Cuando se libere, trazar los marcos con cinta desde el centro de cada muro.", "items": [{"img": "https://drive.google.com/thumbnail?id=1PhZG1Wkmwd3-WOtiA7fad6touqtj0lkK&sz=w1200", "href": "https://drive.google.com/file/d/1PhZG1Wkmwd3-WOtiA7fad6touqtj0lkK/view", "en": "Wall panels without chair rail", "es": "Paneles de muro sin guardasilla"}, {"img": "https://drive.google.com/thumbnail?id=1H7H2uz34PsgH1uF0km3ozPWihYL54UTq&sz=w1200", "href": "https://drive.google.com/file/d/1H7H2uz34PsgH1uF0km3ozPWihYL54UTq/view", "en": "Room with furniture", "es": "Cuarto con muebles"}, {"img": "./wiki-images/bedroom-r2-wall-a.jpg", "href": "./wiki-images/bedroom-r2-wall-a.jpg", "en": "Wall A, North (headboard)", "es": "Muro A, Norte (cabecera)"}, {"img": "./wiki-images/bedroom-r2-wall-c.jpg", "href": "./wiki-images/bedroom-r2-wall-c.jpg", "en": "Wall C, South", "es": "Muro C, Sur"}]}, "bathroom": {"en": "Pictures", "es": "Imágenes", "noteEn": "Bronze fixtures, medicine cabinet on the wall surface, toilet with a 10\" rough-in.", "noteEs": "Accesorios de bronce, botiquín sobre el muro, inodoro de 10\" al eje.", "items": [{"img": "https://drive.google.com/thumbnail?id=13tH-plEJj-eopLt3stePuWSzJQLrJMja&sz=w1200", "href": "https://drive.google.com/file/d/13tH-plEJj-eopLt3stePuWSzJQLrJMja/view", "en": "Bathroom look", "es": "Aspecto del baño"}, {"img": "https://drive.google.com/thumbnail?id=1S8GNQgWQXY7wp_TWWBoRVHuLqjd4GukG&sz=w1200", "href": "https://drive.google.com/file/d/1S8GNQgWQXY7wp_TWWBoRVHuLqjd4GukG/view", "en": "Pocket door idea (not being built)", "es": "Idea de puerta corrediza (no se construye)", "deferred": true}]}, "living-dining": {"en": "Pictures", "es": "Imágenes", "noteEn": "The panel sits in the upper-left moulding frame on the dining wall (D04).", "noteEs": "El tablero queda en el marco de moldura superior izquierdo del muro del comedor (D04).", "items": [{"img": "https://drive.google.com/thumbnail?id=14_p0IwMO_fdulKX2_SOUd4zRZ2jcSE61&sz=w1200", "imgEs": "https://drive.google.com/thumbnail?id=1YzpsF3QPmC-RIEwZbNoIq6K4sjB6zRgX&sz=w1200", "href": "https://drive.google.com/file/d/14_p0IwMO_fdulKX2_SOUd4zRZ2jcSE61/view", "hrefEs": "https://drive.google.com/file/d/1YzpsF3QPmC-RIEwZbNoIq6K4sjB6zRgX/view", "en": "Panel wall with mouldings", "es": "Muro del tablero con molduras"}]}, "attic-access": {"en": "Attic hatch guide", "es": "Guía de la escotilla del ático", "noteEn": "Tap a page to open the guide.", "noteEs": "Toca una página para abrir la guía.", "items": [{"img": "./wiki-docs/attic-hatch-r5/assets/EN-page-1.png", "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-1.png", "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p1", "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p1", "en": "1. Clear opening, 24\" × 36\"", "es": "1. Paso libre de 24\" × 36\""}, {"img": "./wiki-docs/attic-hatch-r5/assets/EN-page-2.png", "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-2.png", "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p2", "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p2", "en": "2. Location and 4 photos", "es": "2. Ubicación y 4 fotos"}, {"img": "./wiki-docs/attic-hatch-r5/assets/EN-page-3.png", "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-3.png", "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p3", "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p3", "en": "3. Materials", "es": "3. Materiales"}, {"img": "./wiki-docs/attic-hatch-r5/assets/EN-page-4.png", "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-4.png", "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p4", "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p4", "en": "4. Cut list", "es": "4. Lista de cortes"}, {"img": "./wiki-docs/attic-hatch-r5/assets/EN-page-5.png", "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-5.png", "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p5", "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p5", "en": "5. Check between the joists", "es": "5. Revisar entre las vigas"}, {"img": "./wiki-docs/attic-hatch-r5/assets/EN-page-6.png", "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-6.png", "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p6", "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p6", "en": "6. Seal and insulate", "es": "6. Sellar y aislar"}, {"img": "./wiki-docs/attic-hatch-r5/assets/EN-page-7.png", "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-7.png", "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p7", "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p7", "en": "7. Walkway and outlet", "es": "7. Pasarela y contacto"}, {"img": "./wiki-docs/attic-hatch-r5/assets/EN-page-8.png", "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-8.png", "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p8", "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p8", "en": "8. Final checks", "es": "8. Revisión final"}, {"img": "./wiki-docs/attic-hatch-r5/assets/John-original-landing-photo.jpg", "href": "./wiki-docs/attic-hatch-r5/assets/John-original-landing-photo.jpg", "en": "John's photo of the hatch spot", "es": "Foto de John del lugar de la escotilla"}], "lead": 8}, "hallway": {"en": "Pictures", "es": "Imágenes", "noteEn": "", "noteEs": "", "lead": 0, "items": [{"img": "./wiki-docs/attic-hatch-r5/assets/John-original-landing-photo.jpg", "href": "./wiki-docs/attic-hatch-r5/assets/John-original-landing-photo.jpg", "en": "John's photo of the hatch spot", "es": "Foto de John del lugar de la escotilla"}]}};
+const UNIFIED_VISUALS = {"kitchen": {"en": "Pictures", "es": "Imágenes", "noteEn": "For reference only. Use the measurements in the drawings under Documents.", "noteEs": "Solo de referencia. Usar las medidas de los planos en Documentos.", "items": [{"img": "./wiki-images/2026-11-18_U4_kitchen_overhead-concept_R2.jpg", "href": "./wiki-images/2026-11-18_U4_kitchen_overhead-concept_R2.jpg", "en": "Kitchen from above", "es": "Cocina desde arriba"}, {"img": "https://drive.google.com/thumbnail?id=1iqFU246kyPgvR05zKM9gIsX8BTG8rwpT&sz=w1200", "imgEs": "https://drive.google.com/thumbnail?id=1Kk2cEiqrQ5ikAyIqXUTMQdmNASxv6H21&sz=w1200", "href": "https://drive.google.com/file/d/1iqFU246kyPgvR05zKM9gIsX8BTG8rwpT/view", "hrefEs": "https://drive.google.com/file/d/1Kk2cEiqrQ5ikAyIqXUTMQdmNASxv6H21/view", "en": "Floor plan (Nov 19 — ignore hatch #5; hatch is outside Front Door 4)", "es": "Plano de planta (19 nov — ignorar escotilla #5; va fuera de Puerta 4)", "deferred": true}, {"img": "https://drive.google.com/thumbnail?id=1w9awRXL9sBPAxwZrjaIBKKY39nmloIOF&sz=w1200", "href": "https://drive.google.com/file/d/1w9awRXL9sBPAxwZrjaIBKKY39nmloIOF/view", "en": "Range wall", "es": "Muro de la estufa"}, {"img": "./wiki-images/kitchen-magicplan-7bb82437fa09d031aa98d36ccdf6860e.jpg", "href": "./wiki-images/kitchen-magicplan-7bb82437fa09d031aa98d36ccdf6860e.jpg", "en": "Measured floor plan", "es": "Plano con medidas"}]}, "kitchen-oven-range": {"en": "Pictures", "es": "Imágenes", "noteEn": "For reference only. Measurements are in the guide.", "noteEs": "Solo de referencia. Las medidas están en la guía.", "items": [{"img": "https://drive.google.com/thumbnail?id=1w9awRXL9sBPAxwZrjaIBKKY39nmloIOF&sz=w1200", "href": "https://drive.google.com/file/d/1w9awRXL9sBPAxwZrjaIBKKY39nmloIOF/view", "en": "Range wall and hood", "es": "Muro de la estufa y campana"}, {"img": "./wiki-images/kitchen-magicplan-9ed1811d0317467ea1ef90f03911772c.jpg", "href": "./wiki-images/kitchen-magicplan-9ed1811d0317467ea1ef90f03911772c.jpg", "en": "Range wall in 3D", "es": "Muro de la estufa en 3D"}]}, "kitchen-sink-north": {"en": "Pictures", "es": "Imágenes", "noteEn": "For reference only. Do not cut from these.", "noteEs": "Solo de referencia. No cortar con base en estas imágenes.", "items": [{"img": "./wiki-images/kitchen-magicplan-dedb66d9b37f5023a2b650b6ebff20dc.jpg", "href": "./wiki-images/kitchen-magicplan-dedb66d9b37f5023a2b650b6ebff20dc.jpg", "en": "Refrigerator wall and sink under the window", "es": "Muro del refrigerador y tarja bajo la ventana"}, {"img": "./wiki-images/2026-11-18_U4_kitchen_overhead-concept_R2.jpg", "href": "./wiki-images/2026-11-18_U4_kitchen_overhead-concept_R2.jpg", "en": "Full L from above", "es": "La L completa desde arriba"}]}, "bedroom": {"en": "Pictures", "es": "Imágenes", "noteEn": "Do not cut moulding yet. When released, lay out frames with tape from the center of each wall.", "noteEs": "No cortar molduras todavía. Cuando se libere, trazar los marcos con cinta desde el centro de cada muro.", "items": [{"img": "https://drive.google.com/thumbnail?id=1PhZG1Wkmwd3-WOtiA7fad6touqtj0lkK&sz=w1200", "href": "https://drive.google.com/file/d/1PhZG1Wkmwd3-WOtiA7fad6touqtj0lkK/view", "en": "Wall panels without chair rail", "es": "Paneles de muro sin guardasilla"}, {"img": "https://drive.google.com/thumbnail?id=1H7H2uz34PsgH1uF0km3ozPWihYL54UTq&sz=w1200", "href": "https://drive.google.com/file/d/1H7H2uz34PsgH1uF0km3ozPWihYL54UTq/view", "en": "Room with furniture", "es": "Cuarto con muebles"}, {"img": "./wiki-images/bedroom-r2-wall-a.jpg", "href": "./wiki-images/bedroom-r2-wall-a.jpg", "en": "Wall A, North (headboard)", "es": "Muro A, Norte (cabecera)"}, {"img": "./wiki-images/bedroom-r2-wall-c.jpg", "href": "./wiki-images/bedroom-r2-wall-c.jpg", "en": "Wall C, South", "es": "Muro C, Sur"}]}, "bathroom": {"en": "Pictures", "es": "Imágenes", "noteEn": "Bronze fixtures, medicine cabinet on the wall surface, toilet with a 10\" rough-in.", "noteEs": "Accesorios de bronce, botiquín sobre el muro, inodoro de 10\" al eje.", "items": [{"img": "https://drive.google.com/thumbnail?id=13tH-plEJj-eopLt3stePuWSzJQLrJMja&sz=w1200", "href": "https://drive.google.com/file/d/13tH-plEJj-eopLt3stePuWSzJQLrJMja/view", "en": "Bathroom look", "es": "Aspecto del baño"}, {"img": "https://drive.google.com/thumbnail?id=1S8GNQgWQXY7wp_TWWBoRVHuLqjd4GukG&sz=w1200", "href": "https://drive.google.com/file/d/1S8GNQgWQXY7wp_TWWBoRVHuLqjd4GukG/view", "en": "Pocket door idea (not being built)", "es": "Idea de puerta corrediza (no se construye)", "deferred": true}]}, "living-dining": {"en": "Pictures", "es": "Imágenes", "noteEn": "The panel sits in the upper-left moulding frame on the dining wall (D04).", "noteEs": "El tablero queda en el marco de moldura superior izquierdo del muro del comedor (D04).", "items": [{"img": "https://drive.google.com/thumbnail?id=14_p0IwMO_fdulKX2_SOUd4zRZ2jcSE61&sz=w1200", "imgEs": "https://drive.google.com/thumbnail?id=1YzpsF3QPmC-RIEwZbNoIq6K4sjB6zRgX&sz=w1200", "href": "https://drive.google.com/file/d/14_p0IwMO_fdulKX2_SOUd4zRZ2jcSE61/view", "hrefEs": "https://drive.google.com/file/d/1YzpsF3QPmC-RIEwZbNoIq6K4sjB6zRgX/view", "en": "Panel wall with mouldings", "es": "Muro del tablero con molduras"}]}, "attic-access": {"en": "Attic hatch guide", "es": "Guía de la escotilla del ático", "noteEn": "Tap a page to open the guide.", "noteEs": "Toca una página para abrir la guía.", "items": [{"img": "./wiki-docs/attic-hatch-r5/assets/EN-page-1.png", "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-1.png", "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p1", "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p1", "en": "1. Clear opening, 24\" × 36\"", "es": "1. Paso libre de 24\" × 36\""}, {"img": "./wiki-docs/attic-hatch-r5/assets/EN-page-2.png", "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-2.png", "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p2", "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p2", "en": "2. Location and 4 photos", "es": "2. Ubicación y 4 fotos"}, {"img": "./wiki-docs/attic-hatch-r5/assets/EN-page-3.png", "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-3.png", "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p3", "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p3", "en": "3. Materials", "es": "3. Materiales"}, {"img": "./wiki-docs/attic-hatch-r5/assets/EN-page-4.png", "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-4.png", "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p4", "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p4", "en": "4. Cut list", "es": "4. Lista de cortes"}, {"img": "./wiki-docs/attic-hatch-r5/assets/EN-page-5.png", "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-5.png", "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p5", "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p5", "en": "5. Check between the joists", "es": "5. Revisar entre las vigas"}, {"img": "./wiki-docs/attic-hatch-r5/assets/EN-page-6.png", "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-6.png", "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p6", "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p6", "en": "6. Seal and insulate", "es": "6. Sellar y aislar"}, {"img": "./wiki-docs/attic-hatch-r5/assets/EN-page-7.png", "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-7.png", "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p7", "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p7", "en": "7. Walkway and outlet", "es": "7. Pasarela y contacto"}, {"img": "./wiki-docs/attic-hatch-r5/assets/EN-page-8.png", "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-8.png", "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p8", "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p8", "en": "8. Final checks", "es": "8. Revisión final"}, {"img": "./wiki-docs/attic-hatch-r5/assets/John-original-landing-photo.jpg", "href": "./wiki-docs/attic-hatch-r5/assets/John-original-landing-photo.jpg", "en": "John's photo of the hatch spot", "es": "Foto de John del lugar de la escotilla"}], "lead": 8}, "hallway": {"en": "Pictures", "es": "Imágenes", "noteEn": "", "noteEs": "", "lead": 0, "items": [{"img": "./wiki-docs/attic-hatch-r5/assets/John-original-landing-photo.jpg", "href": "./wiki-docs/attic-hatch-r5/assets/John-original-landing-photo.jpg", "en": "John's photo of the hatch spot", "es": "Foto de John del lugar de la escotilla"}]}};
 const CHECKLISTS = {"kitchen": {"fileId": "1Ol2N6vIUfYA6FTONZlumowSwQogpAulN", "items": [[1, "Appliances and 30\" sink are on site; pie-safe recess cleared", "Equipos y tarja de 30\" en obra; hueco del pie-safe despejado"], [0, "Clear the room, finish the window framing, photograph the full L layout", "Despejar el cuarto, terminar el marco de la ventana y fotografiar el trazo completo en L"], [0, "Wood blocking on the range wall and test-hang the hood", "Refuerzos de madera en el muro de la estufa y colgar la campana de prueba"], [0, "Electrical, plumbing and gas rough-in; frame the panel wall", "Instalaciones eléctricas, de plomería y de gas; enmarcar el muro del tablero"], [0, "Drywall, cabinets, countertops, range-wall tile and floor", "Tablaroca, gabinetes, cubiertas, azulejo del muro de la estufa y piso"], [0, "Connect appliances, trim, paint and test the outlets", "Conectar equipos, molduras, pintura y probar contactos"]]}, "kitchen-oven-range": {"fileId": null, "items": [[1, "Range and hood are on site; crew guide and wall plan posted", "Estufa y campana en obra; guía y plan del muro publicados"], [0, "Install wood backing in both bands (68\"–86\" and 104\"–121-1/2\")", "Colocar refuerzos de madera en las dos franjas (68\"–86\" y 104\"–121-1/2\")"], [0, "Test-hang the hood at 66\"–72\" and measure the ceiling gap and the duct", "Colgar la campana de prueba a 66\"–72\" y medir el hueco al techo y el ducto"], [0, "Rough-in the hood's own circuit and the range gas shutoff", "Instalar en bruto el circuito propio de la campana y la llave de gas de la estufa"], [0, "Tile to the ceiling, Viking backguard, final hood and range connection", "Azulejo hasta el techo, respaldo Viking y conexión final de campana y estufa"]]}, "kitchen-sink-north": {"fileId": null, "items": [[1, "Sink and refrigerator are on site; pie-safe recess cleared", "Tarja y refrigerador en obra; hueco del pie-safe despejado"], [0, "Finish the window sill and framing; settle the sink position", "Terminar repisa y marco de la ventana; definir la posición de la tarja"], [0, "Frame the pie-safe shelves, the light-switch box and the panel wall", "Enmarcar las repisas pie-safe, la caja de apagadores y el muro del tablero"], [0, "Sink and dishwasher plumbing; counter circuits on the South and East walls", "Plomería de tarja y lavavajillas; circuitos de cubierta en muros Sur y Este"], [0, "Install cabinets, pie-safe shelves, sink, dishwasher and refrigerator", "Instalar gabinetes, repisas pie-safe, tarja, lavavajillas y refrigerador"]]}, "bathroom": {"fileId": "1Ip5esr8DOQSh55f0qFoDeWVhoDWOPpQz", "items": [[1, "Plumbing rough-in, fan duct, tub leak test and floor membrane done", "Plomería en bruto, ducto del extractor, prueba de la tina y membrana de piso listos"], [1, "Floor tile laid (not grouted); HardieBoard and niches up", "Azulejo de piso colocado (sin boquilla); HardieBoard y nichos puestos"], [0, "Install the original window trim before wall tile; set the two GFCI boxes", "Colocar la moldura original de la ventana antes del azulejo; fijar las dos cajas GFCI"], [0, "Check the toilet flange, grout the floor, tile the walls", "Revisar la brida del inodoro, emboquillar el piso y poner azulejo en los muros"], [0, "Attic junction box, close the ceiling, prime, paint and hang the door", "Caja de conexiones en el ático, cerrar el techo, sellar, pintar y colgar la puerta"], [0, "Install sink, toilet, bronze trim, glass and lights", "Instalar lavabo, inodoro, accesorios de bronce, vidrio y luces"]]}, "hvac": {"fileId": "1dYEurki2VQ8Zd5yxkRA4UzVL2uGJwMdG", "items": [[1, "NEXT HVAC's work is defined; hatch size settled at 24\" × 36\"", "Trabajo de NEXT HVAC definido; escotilla definida en 24\" × 36\""], [0, "Before NEXT: keep the bedroom closet ceiling open, frame the panel wall, fix roof leaks", "Antes de NEXT: dejar abierto el techo del clóset, enmarcar el muro del tablero y reparar goteras"], [0, "Mon Nov 23, 2–4 p.m. walkthrough: confirm furnace spot, vent, hatch and panel feeder", "Visita lun 23 nov, 2–4 p.m.: confirmar lugar del calefactor, tiro, escotilla y alimentador"], [0, "With NEXT: build the hatch, walkway, platform, light and outlet", "Con NEXT: construir escotilla, pasarela, plataforma, luz y contacto"], [0, "After NEXT: inspections, close the closet ceiling, paint", "Después de NEXT: inspecciones, cerrar el techo del clóset y pintar"]]}, "attic-access": {"fileId": null, "items": [[1, "Hatch size (24\" × 36\" clear) and furnace size are settled", "Tamaño de la escotilla (24\" × 36\" libres) y del calefactor definidos"], [0, "Measure the open bedroom closet; daylight photos of the hatch spot; fire-rating and joist check", "Medir el clóset abierto; fotos de día del lugar de la escotilla; revisar fuego y vigas"], [0, "Build the hatch with its dam, seal and insulation", "Construir la escotilla con barrera, sello y aislamiento"], [0, "Build the 24\" walkway (20 ft max)", "Construir la pasarela de 24\" (máx. 20 pies)"], [0, "Build the 30\" × 30\" platform; wire the light, switch and outlet", "Construir la plataforma de 30\" × 30\"; cablear luz, apagador y contacto"], [0, "Close the bedroom closet ceiling only after the cable and the hatch are in", "Cerrar el techo del clóset solo cuando estén el cable y la escotilla"]]}, "electrical": {"fileId": "1cShX-tf8guhceW3uOwCQCy2B4PfWZzxj", "items": [[1, "Panel location settled: dining-room wall (D04)", "Lugar del tablero definido: muro del comedor (D04)"], [0, "Frame the panel wall with side cable entry; confirm the feeder with NEXT and Alex", "Enmarcar el muro del tablero con entrada lateral; confirmar el alimentador con NEXT y Alex"], [0, "Bathroom GFCI circuits, attic junction box, attic light and outlet", "Circuitos GFCI del baño, caja de conexiones, luz y contacto del ático"], [0, "Kitchen rough-in: nine circuits, including the hood's own", "Instalación en bruto de la cocina: nueve circuitos, incluido el de la campana"], [0, "Outlet boxes and empty conduit in the closed-wall rooms; closet switch cable", "Cajas y tubo vacío en cuartos con muros cerrados; cable del apagador en el clóset"], [0, "Install feeder and panel, pull wire, install devices and test", "Instalar alimentador y tablero, jalar cable, colocar accesorios y probar"]]}, "laundry": {"fileId": "1kKY92-MUELZmCo1VDwMI_Dffnrc-Frdi", "items": [[1, "Rough-in done, gas box moved, WashTower ordered (Dec 1)", "Instalaciones listas, caja de gas movida, WashTower pedida (1 dic)"], [0, "Check the outlet opening and photograph the open wall before closing it", "Revisar la abertura del contacto y fotografiar el muro abierto antes de cerrarlo"], [0, "Drywall, primer, baseboard and paint", "Tablaroca, sellador, zoclo y pintura"], [0, "Measure the opening; build and hang the bookcase door", "Medir el vano; fabricar y colgar la puerta librero"], [0, "Receive the WashTower Dec 1, connect and test", "Recibir la WashTower el 1 dic, conectar y probar"]]}, "bedroom": {"fileId": "1X2EqyKgqqZQCieUrfEE44Zp1XecrJ3ae", "items": [[1, "Wall names set; moulding packet drafted", "Nombres de muros definidos; paquete de molduras en borrador"], [0, "Check the closet opening for the furnace; run the switch cable to the attic", "Revisar el paso del calefactor por el clóset; subir el cable del apagador al ático"], [0, "Outlet boxes and empty conduit; patch the hardwood floor", "Cajas de contacto y tubo vacío; reparar la duela"], [0, "Lay out the moulding frames with tape and install", "Trazar los marcos de moldura con cinta e instalar"], [0, "Close the closet ceiling after the hatch exists; rod, primer and paint", "Cerrar el techo del clóset cuando exista la escotilla; tubo, sellador y pintura"]]}, "living-dining": {"fileId": "10wWsl89_qWvDuqkOr2BThS75gJBsuP1r", "items": [[1, "Panel location chosen: dining wall, upper-left frame", "Lugar del tablero elegido: muro del comedor, marco superior izquierdo"], [0, "Frame the old doorway and the panel space with side cable entry", "Enmarcar la puerta antigua y el espacio del tablero con entrada lateral"], [0, "Outlet boxes and empty conduit, clear of the pocket doors", "Cajas de contacto y tubo vacío, lejos de las puertas corredizas"], [0, "Lay out the moulding frames with tape and install", "Trazar los marcos de moldura con cinta e instalar"], [0, "Finish hutch and fireplace trim, primer and paint", "Terminar molduras del trinchador y la chimenea, sellador y pintura"]]}, "hallway": {"fileId": "1Y9H-bCmZF_Q0xBIwMSoWCmcilmL6Dwv2", "items": [[1, "Hatch size settled; laundry door handled on the Laundry page", "Tamaño de la escotilla definido; la puerta de lavandería se ve en Lavandería"], [0, "Daylight photos, fire-rating check and joist measurement", "Fotos de día, revisión contra fuego y medida entre vigas"], [0, "Build the hatch and its light switch", "Construir la escotilla y su apagador de luz"], [0, "Outlets, lights, moulding layout and trim around the laundry door", "Contactos, luces, trazo de molduras y moldura de la puerta de lavandería"], [0, "Install trim, patch, primer and paint", "Instalar molduras, resanar, sellador y pintura"]]}, "paint-floors": {"fileId": "1X6tuZMgvcY1y7RmhbDvScSAab77CGNFQ", "items": [[1, "Bathroom floor tile laid; Warm Gray grout chosen", "Azulejo del piso del baño colocado; boquilla Warm Gray elegida"], [0, "Confirm kitchen floor thickness; patch the bedroom hardwood", "Confirmar espesor del piso de la cocina; reparar la duela de la recámara"], [0, "Place the moulding order; lay out frames with tape", "Hacer el pedido de molduras; trazar marcos con cinta"], [0, "Kitchen floor tile, door transitions and floor protection", "Azulejo del piso de la cocina, transiciones en puertas y protección de pisos"], [0, "Prime and paint rooms, trim and kitchen cabinets", "Sellar y pintar cuartos, molduras y gabinetes de cocina"]]}};
   var U4_CONCEPT_RENDERS = {
     kitchen: [
@@ -1277,13 +1389,13 @@ const CHECKLISTS = {"kitchen": {"fileId": "1Ol2N6vIUfYA6FTONZlumowSwQogpAulN", "
       {
         id: "1iqFU246kyPgvR05zKM9gIsX8BTG8rwpT",
         room: "kitchen",
-        titleEn: "Kitchen Measured Elevation & Cabinet Layout Preview",
-        titleEs: "Vista previa de elevaci\u00f3n y distribuci\u00f3n de gabinetes de cocina",
-        statusEn: "Verify pie-safe framed opening dimensions & finished-floor datum during full-L staging",
-        statusEs: "Verificar medidas del nicho pie-safe y referencia de piso terminado durante el trazado en L",
+        titleEn: "Kitchen Measured Elevation & Cabinet Layout Preview (Nov 19 — Note: Attic Hatch #5 Superseded)",
+        titleEs: "Vista previa de distribución de gabinetes de cocina (19 nov — Nota: Escotilla #5 reemplazada)",
+        statusEn: "Note on callout #5: Ignore the Nov 19 hallway hatch marker — attic hatch is OUTSIDE Front Door 4 on the common stair landing. Use Interactive Kitchen Floor Plan & Attic Hatch Plan.",
+        statusEs: "Nota sobre globo #5: Ignora la marca de escotilla dentro del pasillo (19 nov) — la escotilla va FUERA de la Puerta 4 en el descanso de escaleras. Usa el Plano Interactivo.",
         driveUrl: "https://drive.google.com/file/d/1iqFU246kyPgvR05zKM9gIsX8BTG8rwpT/view",
         thumbUrl: "https://drive.google.com/thumbnail?id=1iqFU246kyPgvR05zKM9gIsX8BTG8rwpT&sz=w1200",
-        deferred: false
+        deferred: true
       }
     ],
     bedroom: [
@@ -1941,6 +2053,7 @@ function rerenderRoomGalleryDom(roomKey){
     const next = tmp.firstElementChild;
     if (next) cur.parentNode.replaceChild(next, cur);
   });
+  if (typeof renderPinsOnSurface === "function") renderPinsOnSurface();
 }
 async function fetchRoomGallery(roomKey, force){
   if (!roomKey) return;
@@ -2082,6 +2195,265 @@ async function uploadGalleryDraft(roomKey, kind){
     rerenderRoomGalleryDom(roomKey);
   }
 }
+function u4ZoomBarHtml(role){
+  return '<div class="u4-zoom-bar" data-u4-zoom-bar="'+u4GalEsc(role||"zoom")+'">'
+    + '<button type="button" class="u4-zoom-btn" data-u4-zoom-out="1" aria-label="'+u4GalEsc(t("zoomOutAria"))+'">−</button>'
+    + '<button type="button" class="u4-zoom-pct" data-u4-zoom-reset="1" aria-label="'+u4GalEsc(t("zoomResetAria"))+'">100%</button>'
+    + '<button type="button" class="u4-zoom-btn" data-u4-zoom-in="1" aria-label="'+u4GalEsc(t("zoomInAria"))+'">+</button>'
+    + '</div>';
+}
+function u4ClampZoom(v){
+  const n = Number(v);
+  if (!isFinite(n) || n <= 1) return 1;
+  return Math.min(3, Math.round(n * 100) / 100);
+}
+function u4SetupTransformZoom(viewportEl, stageEl, barEl, opts){
+  if (!viewportEl || !stageEl || viewportEl.__u4ZoomCtrl) return viewportEl && viewportEl.__u4ZoomCtrl;
+  const st = { scale: 1, tx: 0, ty: 0 };
+  const clampPan = () => {
+    if (st.scale <= 1.001) { st.tx = 0; st.ty = 0; return; }
+    const vr = viewportEl.getBoundingClientRect();
+    const maxX = Math.max(40, ((vr.width || 400) * (st.scale - 1)) / 2 + 40);
+    const maxY = Math.max(40, ((vr.height || 300) * (st.scale - 1)) / 2 + 40);
+    st.tx = Math.max(-maxX, Math.min(maxX, st.tx));
+    st.ty = Math.max(-maxY, Math.min(maxY, st.ty));
+  };
+  const apply = () => {
+    st.scale = u4ClampZoom(st.scale);
+    clampPan();
+    stageEl.style.transform = st.scale > 1.001 ? ("translate(" + st.tx.toFixed(1) + "px," + st.ty.toFixed(1) + "px) scale(" + st.scale + ")") : "";
+    viewportEl.classList.toggle("is-zoomed", st.scale > 1.001);
+    if (barEl) {
+      const pct = barEl.querySelector("[data-u4-zoom-reset]");
+      const bOut = barEl.querySelector("[data-u4-zoom-out]");
+      const bIn = barEl.querySelector("[data-u4-zoom-in]");
+      if (pct) pct.textContent = Math.round(st.scale * 100) + "%";
+      if (bOut) bOut.disabled = st.scale <= 1.01;
+      if (bIn) bIn.disabled = st.scale >= 2.99;
+    }
+    if (typeof window.__u4PositionActivePinSteer === "function") window.__u4PositionActivePinSteer();
+  };
+  if (barEl) {
+    barEl.addEventListener("click", ev => {
+      if (ev.target.closest("[data-u4-zoom-out]")) { st.scale -= 0.25; apply(); }
+      else if (ev.target.closest("[data-u4-zoom-in]")) { st.scale += 0.25; apply(); }
+      else if (ev.target.closest("[data-u4-zoom-reset]")) { st.scale = 1; st.tx = 0; st.ty = 0; apply(); }
+    });
+  }
+  viewportEl.addEventListener("dblclick", ev => {
+    if (ev.target.closest("button, a, .u4-pin-marker")) return;
+    if (window.__u4PinArmed) return;
+    if (st.scale > 1.05) { st.scale = 1; st.tx = 0; st.ty = 0; }
+    else { st.scale = 2; }
+    apply();
+  });
+  viewportEl.addEventListener("wheel", ev => {
+    if (!ev.ctrlKey && !ev.metaKey) return;
+    ev.preventDefault();
+    const delta = ev.deltaY < 0 ? 0.2 : -0.2;
+    const prev = st.scale;
+    st.scale = u4ClampZoom(st.scale + delta);
+    if (st.scale !== prev) apply();
+  }, { passive: false });
+
+  let pan = null;
+  viewportEl.addEventListener("pointerdown", ev => {
+    if (st.scale <= 1.01 || window.__u4PinArmed || window.__u4PinDragging) return;
+    if (ev.pointerType === "mouse" && ev.button !== 0) return;
+    if (ev.target.closest("button, a, input, .u4-pin-marker, [data-u4-pin-trigger]")) return;
+    pan = { id: ev.pointerId, sx: ev.clientX, sy: ev.clientY, stx: st.tx, sty: st.ty };
+    viewportEl.classList.add("is-panning");
+    try { viewportEl.setPointerCapture(ev.pointerId); } catch(e){}
+  });
+  viewportEl.addEventListener("pointermove", ev => {
+    if (!pan || ev.pointerId !== pan.id) return;
+    st.tx = pan.stx + (ev.clientX - pan.sx);
+    st.ty = pan.sty + (ev.clientY - pan.sy);
+    apply();
+  });
+  const endPan = ev => {
+    if (!pan || (ev && ev.pointerId !== pan.id)) return;
+    pan = null;
+    viewportEl.classList.remove("is-panning");
+  };
+  viewportEl.addEventListener("pointerup", endPan);
+  viewportEl.addEventListener("pointercancel", endPan);
+
+  let pinch = null;
+  viewportEl.addEventListener("touchstart", ev => {
+    if (ev.touches && ev.touches.length === 2) {
+      const dx = ev.touches[0].clientX - ev.touches[1].clientX;
+      const dy = ev.touches[0].clientY - ev.touches[1].clientY;
+      pinch = { dist: Math.hypot(dx, dy) || 1, startScale: st.scale };
+    }
+  }, { passive: true });
+  viewportEl.addEventListener("touchmove", ev => {
+    if (!pinch || !ev.touches || ev.touches.length !== 2) return;
+    ev.preventDefault();
+    const dx = ev.touches[0].clientX - ev.touches[1].clientX;
+    const dy = ev.touches[0].clientY - ev.touches[1].clientY;
+    const d = Math.hypot(dx, dy) || 1;
+    st.scale = u4ClampZoom(pinch.startScale * (d / pinch.dist));
+    apply();
+  }, { passive: false });
+  viewportEl.addEventListener("touchend", ev => { if (!ev.touches || ev.touches.length < 2) pinch = null; }, { passive: true });
+
+  const ctrl = {
+    getScale: () => st.scale,
+    setScale: z => { st.scale = u4ClampZoom(z); apply(); },
+    reset: () => { st.scale = 1; st.tx = 0; st.ty = 0; apply(); }
+  };
+  viewportEl.__u4ZoomCtrl = ctrl;
+  apply();
+  return ctrl;
+}
+function u4SetupScrollZoom(viewportEl, stageEl, sizerEl, barEl){
+  if (!viewportEl || !stageEl || !sizerEl || viewportEl.__u4ZoomCtrl) return viewportEl && viewportEl.__u4ZoomCtrl;
+  const st = { scale: 1, baseW: 0, baseH: 0 };
+  const measureBase = () => {
+    const prevT = stageEl.style.transform;
+    stageEl.style.transform = "";
+    st.baseW = Math.max(stageEl.scrollWidth || stageEl.offsetWidth || viewportEl.clientWidth || 320, 200);
+    st.baseH = Math.max(stageEl.scrollHeight || stageEl.offsetHeight || 240, 120);
+    stageEl.style.transform = prevT;
+    if (st.scale > 1.001) {
+      sizerEl.style.width = Math.ceil(st.baseW * st.scale) + "px";
+      sizerEl.style.height = Math.ceil(st.baseH * st.scale) + "px";
+    } else {
+      sizerEl.style.width = "";
+      sizerEl.style.height = "";
+    }
+  };
+  const apply = (nextScale, focalX, focalY) => {
+    if (!st.baseW || !st.baseH) measureBase();
+    const oldScale = st.scale;
+    st.scale = u4ClampZoom(nextScale);
+    const vr = viewportEl.getBoundingClientRect();
+    const fx = typeof focalX === "number" ? (focalX - vr.left) : (vr.width / 2);
+    const fy = typeof focalY === "number" ? (focalY - vr.top) : (vr.height / 2);
+    const docX = (viewportEl.scrollLeft + fx) / (oldScale || 1);
+    const docY = (viewportEl.scrollTop + fy) / (oldScale || 1);
+
+    if (st.scale > 1.001) {
+      sizerEl.style.width = Math.ceil(st.baseW * st.scale) + "px";
+      sizerEl.style.height = Math.ceil(st.baseH * st.scale) + "px";
+      stageEl.style.transform = "scale(" + st.scale + ")";
+      viewportEl.scrollLeft = Math.max(0, docX * st.scale - fx);
+      viewportEl.scrollTop = Math.max(0, docY * st.scale - fy);
+    } else {
+      stageEl.style.transform = "";
+      sizerEl.style.width = "";
+      sizerEl.style.height = "";
+      if (oldScale > 1.001) { viewportEl.scrollLeft = 0; }
+    }
+    viewportEl.classList.toggle("is-zoomed", st.scale > 1.001);
+    if (barEl) {
+      const pct = barEl.querySelector("[data-u4-zoom-reset]");
+      const bOut = barEl.querySelector("[data-u4-zoom-out]");
+      const bIn = barEl.querySelector("[data-u4-zoom-in]");
+      if (pct) pct.textContent = Math.round(st.scale * 100) + "%";
+      if (bOut) bOut.disabled = st.scale <= 1.01;
+      if (bIn) bIn.disabled = st.scale >= 2.99;
+    }
+    if (typeof window.__u4PositionActivePinSteer === "function") window.__u4PositionActivePinSteer();
+  };
+  if (barEl) {
+    barEl.addEventListener("click", ev => {
+      if (ev.target.closest("[data-u4-zoom-out]")) apply(st.scale - 0.25);
+      else if (ev.target.closest("[data-u4-zoom-in]")) apply(st.scale + 0.25);
+      else if (ev.target.closest("[data-u4-zoom-reset]")) apply(1);
+    });
+  }
+  viewportEl.addEventListener("wheel", ev => {
+    if (!ev.ctrlKey && !ev.metaKey) return;
+    ev.preventDefault();
+    apply(st.scale + (ev.deltaY < 0 ? 0.2 : -0.2), ev.clientX, ev.clientY);
+  }, { passive: false });
+
+  let pan = null;
+  viewportEl.addEventListener("pointerdown", ev => {
+    if (st.scale <= 1.01 || window.__u4PinArmed || window.__u4PinDragging) return;
+    if (ev.pointerType === "mouse" && ev.button !== 0) return;
+    if (ev.target.closest("button, a, input, .u4-pin-marker, [data-u4-pin-trigger]")) return;
+    pan = { id: ev.pointerId, sx: ev.clientX, sy: ev.clientY, sl: viewportEl.scrollLeft, stp: viewportEl.scrollTop };
+    viewportEl.classList.add("is-panning");
+    try { viewportEl.setPointerCapture(ev.pointerId); } catch(e){}
+  });
+  viewportEl.addEventListener("pointermove", ev => {
+    if (!pan || ev.pointerId !== pan.id) return;
+    viewportEl.scrollLeft = pan.sl - (ev.clientX - pan.sx);
+    viewportEl.scrollTop = pan.stp - (ev.clientY - pan.sy);
+  });
+  const endPan = ev => {
+    if (!pan || (ev && ev.pointerId !== pan.id)) return;
+    pan = null;
+    viewportEl.classList.remove("is-panning");
+  };
+  viewportEl.addEventListener("pointerup", endPan);
+  viewportEl.addEventListener("pointercancel", endPan);
+
+  let pinch = null;
+  viewportEl.addEventListener("touchstart", ev => {
+    if (ev.touches && ev.touches.length === 2) {
+      const dx = ev.touches[0].clientX - ev.touches[1].clientX;
+      const dy = ev.touches[0].clientY - ev.touches[1].clientY;
+      pinch = { dist: Math.hypot(dx, dy) || 1, startScale: st.scale, mx: (ev.touches[0].clientX + ev.touches[1].clientX) / 2, my: (ev.touches[0].clientY + ev.touches[1].clientY) / 2 };
+    }
+  }, { passive: true });
+  viewportEl.addEventListener("touchmove", ev => {
+    if (!pinch || !ev.touches || ev.touches.length !== 2) return;
+    ev.preventDefault();
+    const dx = ev.touches[0].clientX - ev.touches[1].clientX;
+    const dy = ev.touches[0].clientY - ev.touches[1].clientY;
+    const d = Math.hypot(dx, dy) || 1;
+    apply(pinch.startScale * (d / pinch.dist), pinch.mx, pinch.my);
+  }, { passive: false });
+  viewportEl.addEventListener("touchend", ev => { if (!ev.touches || ev.touches.length < 2) pinch = null; }, { passive: true });
+
+  const ctrl = {
+    getScale: () => st.scale,
+    setScale: (z, fx, fy) => apply(z, fx, fy),
+    measureBase,
+    reset: () => apply(1)
+  };
+  viewportEl.__u4ZoomCtrl = ctrl;
+  apply(1);
+  return ctrl;
+}
+function enhanceZoomableInlineContent(docEl){
+  if (!docEl) return;
+  docEl.querySelectorAll(".mdbody svg").forEach((svg, idx) => {
+    if (svg.closest(".u4-zoom-inline, .u4-pin-marker, button, a")) return;
+    const wAttr = parseFloat(svg.getAttribute("width") || "0");
+    const vbAttr = String(svg.getAttribute("viewBox") || "");
+    const vbParts = vbAttr.trim().split(/[\s,]+/).map(Number);
+    const vbW = vbParts.length >= 4 ? vbParts[2] : 0;
+    const rectW = svg.getBoundingClientRect ? svg.getBoundingClientRect().width : 0;
+    if (Math.max(wAttr, vbW, rectW) < 100) return;
+    const wrap = document.createElement("div");
+    wrap.className = "u4-zoom-inline";
+    wrap.dataset.u4ZoomInline = String(idx + 1);
+    const head = document.createElement("div");
+    head.className = "u4-zoom-inline-head";
+    head.innerHTML = '<span>'+u4GalEsc(t("zoomDiagramLbl"))+'</span>' + u4ZoomBarHtml("inline-" + idx);
+    const view = document.createElement("div");
+    view.className = "u4-zoom-inline-view";
+    const stage = document.createElement("div");
+    stage.className = "u4-zoom-inline-stage";
+    stage.setAttribute("data-u4-pin-surface", "svg");
+    stage.setAttribute("data-u4-svg-idx", String(idx + 1));
+    svg.parentNode.insertBefore(wrap, svg);
+    stage.appendChild(svg);
+    const layer = document.createElement("div");
+    layer.className = "u4-pin-layer";
+    stage.appendChild(layer);
+    view.appendChild(stage);
+    wrap.appendChild(head);
+    wrap.appendChild(view);
+    u4SetupTransformZoom(view, stage, head.querySelector(".u4-zoom-bar"));
+  });
+}
+
 function ensureGalleryLightbox(){
   let lb = document.getElementById("u4GalLightbox");
   if (lb) return lb;
@@ -2096,11 +2468,18 @@ function ensureGalleryLightbox(){
     '<div class="u4-lb-box">' +
       '<div class="u4-lb-head">' +
         '<span class="u4-lb-kicker" id="u4LbKicker"></span>' +
-        '<button type="button" class="u4-lb-close" id="u4LbClose" aria-label="Close">✕</button>' +
+        '<div class="u4-lb-head-actions">' +
+          u4ZoomBarHtml("lightbox") +
+          '<button type="button" class="u4-pin-pill" id="u4LbPinBtn" data-u4-pin-trigger="1" aria-pressed="false">' + u4GalEsc(t("pinPillIdle")) + '</button>' +
+          '<button type="button" class="u4-lb-close" id="u4LbClose" aria-label="Close">✕</button>' +
+        '</div>' +
       '</div>' +
-      '<div class="u4-lb-stage">' +
+      '<div class="u4-lb-stage" id="u4LbStage">' +
         '<button type="button" class="u4-lb-nav prev" id="u4LbPrev">‹</button>' +
-        '<img id="u4LbImg" alt="">' +
+        '<div class="u4-lb-zoom-stage" id="u4LbZoomStage" data-u4-pin-surface="lightbox">' +
+          '<img id="u4LbImg" alt="">' +
+          '<div class="u4-pin-layer"></div>' +
+        '</div>' +
         '<button type="button" class="u4-lb-nav next" id="u4LbNext">›</button>' +
       '</div>' +
       '<div class="u4-lb-foot">' +
@@ -2117,6 +2496,11 @@ function ensureGalleryLightbox(){
     const href = document.getElementById("u4LbExt").getAttribute("href") || "";
     if (href.startsWith("#")) closeGalleryLightbox();
   });
+  u4SetupTransformZoom(
+    document.getElementById("u4LbStage"),
+    document.getElementById("u4LbZoomStage"),
+    lb.querySelector(".u4-zoom-bar")
+  );
   return lb;
 }
 function renderGalleryLightbox(){
@@ -2133,6 +2517,8 @@ function renderGalleryLightbox(){
   const prev = document.getElementById("u4LbPrev");
   const next = document.getElementById("u4LbNext");
   const cl = document.getElementById("u4LbClose");
+  const stage = document.getElementById("u4LbStage");
+  if (stage && stage.__u4ZoomCtrl) stage.__u4ZoomCtrl.reset();
   if (img) { img.src = it.fullUrl || it.thumbUrl || ""; img.alt = it.title || ""; }
   if (title) title.textContent = it.title || "";
   if (sub) sub.textContent = it.note || "";
@@ -2150,6 +2536,7 @@ function renderGalleryLightbox(){
       else { ext.target = "_blank"; ext.rel = "noopener noreferrer"; }
     }
   }
+  if (typeof renderPinsOnSurface === "function") renderPinsOnSurface();
 }
 function openGalleryLightbox(items, idx, title){
   if (!items || !items.length) return;
@@ -2157,6 +2544,8 @@ function openGalleryLightbox(items, idx, title){
   u4LightboxState = { items: items, idx: idx || 0, title: title || "" };
   renderGalleryLightbox();
   lb.hidden = false;
+  document.body.classList.add("u4-lb-open");
+  if (typeof renderPinsOnSurface === "function") renderPinsOnSurface();
 }
 function stepGalleryLightbox(delta){
   const lb = document.getElementById("u4GalLightbox");
@@ -2167,6 +2556,619 @@ function stepGalleryLightbox(delta){
 function closeGalleryLightbox(){
   const lb = document.getElementById("u4GalLightbox");
   if (lb) lb.hidden = true;
+  document.body.classList.remove("u4-lb-open");
+  if (u4PinState && u4PinState.selectedId) {
+    const sel = u4PinFindById(u4PinState.selectedId);
+    if (sel && sel.surfaceKind === "lightbox") {
+      u4PinState.selectedId = null;
+      renderActivePinSteer();
+    }
+  }
+}
+
+// ---- Wave F1: Universal Pin/Circle Dragger across Room Pages, Lightbox, SVGs & PDF .viewer ----
+var u4PinState = {
+  armed: false,
+  selectedId: null,
+  marksByContext: {},
+  statusMsg: "",
+  statusKind: "",
+  sending: false
+};
+function u4PinActiveContextKey(){
+  const lb = document.getElementById("u4GalLightbox");
+  if (lb && !lb.hidden) {
+    const cur = (u4LightboxState.items || [])[u4LightboxState.idx || 0];
+    return "lb:" + u4GalExtractKey((cur && (cur.fullUrl || cur.thumbUrl || cur.title)) || "lb");
+  }
+  const dc = window.__u4ActiveDocContext;
+  if (dc && dc.id) return "doc:" + dc.id;
+  return "page:" + ((current && current.key) || "home");
+}
+function u4PinMarksList(ctxKey){
+  const k = ctxKey || u4PinActiveContextKey();
+  if (!u4PinState.marksByContext[k]) u4PinState.marksByContext[k] = [];
+  return u4PinState.marksByContext[k];
+}
+function u4PinFindById(pinId){
+  const keys = Object.keys(u4PinState.marksByContext);
+  for (let i = 0; i < keys.length; i++) {
+    const list = u4PinState.marksByContext[keys[i]];
+    for (let j = 0; j < list.length; j++) {
+      if (list[j].id === pinId) return list[j];
+    }
+  }
+  return null;
+}
+function setUniversalPinArmed(on){
+  u4PinState.armed = Boolean(on);
+  window.__u4PinArmed = u4PinState.armed;
+  document.body.classList.toggle("u4-pin-armed", u4PinState.armed);
+  document.querySelectorAll("[data-u4-pin-trigger]").forEach(btn => {
+    btn.classList.toggle("is-armed", u4PinState.armed);
+    btn.setAttribute("aria-pressed", u4PinState.armed ? "true" : "false");
+    btn.textContent = u4PinState.armed ? t("pinPillArmed") : t("pinPillIdle");
+  });
+  const ban = document.getElementById("u4PinArmBanner");
+  if (ban) {
+    ban.textContent = t("pinArmBanner");
+    ban.hidden = !u4PinState.armed;
+  }
+}
+function syncUniversalPinChromeLabels(){
+  document.querySelectorAll("[data-u4-pin-trigger]").forEach(btn => {
+    btn.textContent = u4PinState.armed ? t("pinPillArmed") : t("pinPillIdle");
+  });
+  const ban = document.getElementById("u4PinArmBanner");
+  if (ban) ban.textContent = t("pinArmBanner");
+  document.querySelectorAll(".u4-zoom-inline-head > span").forEach(sp => { sp.textContent = t("zoomDiagramLbl"); });
+  document.querySelectorAll("[data-u4-zoom-out]").forEach(b => b.setAttribute("aria-label", t("zoomOutAria")));
+  document.querySelectorAll("[data-u4-zoom-in]").forEach(b => b.setAttribute("aria-label", t("zoomInAria")));
+  document.querySelectorAll("[data-u4-zoom-reset]").forEach(b => b.setAttribute("aria-label", t("zoomResetAria")));
+  renderActivePinSteer();
+}
+function u4Snippet(txt, maxLen){
+  const clean = String(txt || "").replace(/\s+/g, " ").trim();
+  if (!clean) return "";
+  return clean.length > (maxLen || 46) ? clean.slice(0, (maxLen || 46) - 1) + "…" : clean;
+}
+function stampDocPinAnchors(){
+  const docEl = document.getElementById("doc");
+  if (!docEl) return;
+  const sel = "figure.u4-lead-pic, section.u4-gal-sec, section.ck li, section.ck, section.docs li, section.docs, .u4-hvac-col, .u4-hvac-facts, .u4-qa-card, .u4-fact-card, details.fulldet, .u4-home-sec, .goals, .tbl";
+  let idx = 0;
+  docEl.querySelectorAll(sel).forEach(el => {
+    if (el.closest(".u4-zoom-inline, .viewer")) return;
+    idx++;
+    el.setAttribute("data-u4-pin-anchor", "anchor-" + idx);
+    el.classList.add("u4-pin-host");
+  });
+  docEl.setAttribute("data-u4-pin-anchor", "doc-root");
+  docEl.classList.add("u4-pin-host");
+}
+function resolvePinDropTarget(clientX, clientY){
+  const el = document.elementFromPoint(clientX, clientY);
+  if (!el) return null;
+  if (el.closest("[data-u4-pin-trigger], #u4ActivePinSteer, .u4-zoom-bar, #u4AiFloatingDock, #u4VoiceChatDialog, nav.rail, .bar, .mobile, #u4CameraModal")) return null;
+
+  const lb = document.getElementById("u4GalLightbox");
+  if (lb && !lb.hidden) {
+    const lbStage = el.closest("#u4LbStage");
+    const zoomStage = document.getElementById("u4LbZoomStage");
+    if (lbStage && zoomStage) {
+      const rect = zoomStage.getBoundingClientRect();
+      const xPct = Math.max(2, Math.min(98, ((clientX - rect.left) / (rect.width || 1)) * 100));
+      const yPct = Math.max(2, Math.min(98, ((clientY - rect.top) / (rect.height || 1)) * 100));
+      const curItem = (u4LightboxState.items || [])[u4LightboxState.idx || 0] || {};
+      const roomInfo = current ? pageLabel(current) : t("unitTitle");
+      return {
+        surfaceEl: zoomStage,
+        anchorId: "lightbox",
+        surfaceKind: "lightbox",
+        roomKey: (current && current.key) || "home",
+        roomLabel: roomInfo,
+        documentId: "",
+        documentTitle: curItem.title || u4LightboxState.title || "",
+        pageNumber: 0,
+        contextLabel: u4Snippet(curItem.title || roomInfo, 44),
+        xPct: Math.round(xPct * 10) / 10,
+        yPct: Math.round(yPct * 10) / 10
+      };
+    }
+    return null;
+  }
+
+  const pdfBox = el.closest(".u4-pdf-page-box");
+  if (pdfBox) {
+    const rect = pdfBox.getBoundingClientRect();
+    const xPct = Math.max(2, Math.min(98, ((clientX - rect.left) / (rect.width || 1)) * 100));
+    const yPct = Math.max(2, Math.min(98, ((clientY - rect.top) / (rect.height || 1)) * 100));
+    const dc = window.__u4ActiveDocContext || {};
+    const pageNum = parseInt(pdfBox.dataset.pageNumber || "1", 10) || 1;
+    const docTitle = dc.title || "PDF";
+    return {
+      surfaceEl: pdfBox,
+      anchorId: "pdf-p" + pageNum,
+      surfaceKind: "pdf",
+      roomKey: dc.roomKey || (current && current.key) || "home",
+      roomLabel: dc.roomLabel || docTitle,
+      documentId: pdfBox.dataset.docId || dc.id || "",
+      documentTitle: docTitle,
+      pageNumber: pageNum,
+      contextLabel: u4Snippet(docTitle, 32) + " · p. " + pageNum,
+      xPct: Math.round(xPct * 10) / 10,
+      yPct: Math.round(yPct * 10) / 10
+    };
+  }
+
+  const svgStage = el.closest(".u4-zoom-inline-stage");
+  if (svgStage) {
+    const rect = svgStage.getBoundingClientRect();
+    const xPct = Math.max(2, Math.min(98, ((clientX - rect.left) / (rect.width || 1)) * 100));
+    const yPct = Math.max(2, Math.min(98, ((clientY - rect.top) / (rect.height || 1)) * 100));
+    const roomInfo = current ? pageLabel(current) : t("unitTitle");
+    const svgIdx = svgStage.getAttribute("data-u4-svg-idx") || "1";
+    return {
+      surfaceEl: svgStage,
+      anchorId: "svg-" + svgIdx,
+      surfaceKind: "svg",
+      roomKey: (current && current.key) || "home",
+      roomLabel: roomInfo,
+      documentId: "",
+      documentTitle: "",
+      pageNumber: 0,
+      contextLabel: u4Snippet(roomInfo + " · " + t("zoomDiagramLbl"), 44),
+      xPct: Math.round(xPct * 10) / 10,
+      yPct: Math.round(yPct * 10) / 10
+    };
+  }
+
+  const docEl = el.closest("#doc");
+  if (docEl) {
+    stampDocPinAnchors();
+    const anchor = el.closest("[data-u4-pin-anchor]") || docEl;
+    const rect = anchor.getBoundingClientRect();
+    const xPct = Math.max(2, Math.min(98, ((clientX - rect.left) / (rect.width || 1)) * 100));
+    const yPct = Math.max(2, Math.min(98, ((clientY - rect.top) / (rect.height || 1)) * 100));
+    const roomKey = (current && current.key) || "home";
+    const roomLabel = current ? pageLabel(current) : t("unitTitle");
+    const hTxt = anchor.querySelector("h2, h3, figcaption, .u4-gal-cap, .u4-fact-k") ? anchor.querySelector("h2, h3, figcaption, .u4-gal-cap, .u4-fact-k").textContent : anchor.textContent;
+    const secName = u4Snippet(hTxt, 28);
+    return {
+      surfaceEl: anchor,
+      anchorId: anchor.getAttribute("data-u4-pin-anchor") || "doc-root",
+      surfaceKind: "room",
+      roomKey: roomKey,
+      roomLabel: roomLabel,
+      documentId: "",
+      documentTitle: "",
+      pageNumber: 0,
+      contextLabel: secName ? (u4Snippet(roomLabel, 18) + " › " + secName) : roomLabel,
+      xPct: Math.round(xPct * 10) / 10,
+      yPct: Math.round(yPct * 10) / 10
+    };
+  }
+  return null;
+}
+function ensurePinLayerOnSurface(surfaceEl){
+  if (!surfaceEl) return null;
+  if (!surfaceEl.classList.contains("u4-pin-host")) surfaceEl.classList.add("u4-pin-host");
+  let layer = null;
+  for (let i = 0; i < surfaceEl.children.length; i++) {
+    if (surfaceEl.children[i].classList && surfaceEl.children[i].classList.contains("u4-pin-layer")) { layer = surfaceEl.children[i]; break; }
+  }
+  if (!layer) {
+    layer = document.createElement("div");
+    layer.className = "u4-pin-layer";
+    surfaceEl.appendChild(layer);
+  }
+  return layer;
+}
+function findSurfaceForMark(mark){
+  if (!mark) return null;
+  if (mark.surfaceKind === "lightbox") {
+    const lb = document.getElementById("u4GalLightbox");
+    return (lb && !lb.hidden) ? document.getElementById("u4LbZoomStage") : null;
+  }
+  if (mark.surfaceKind === "pdf") {
+    return document.querySelector('.u4-pdf-page-box[data-page-number="'+mark.pageNumber+'"]');
+  }
+  if (mark.surfaceKind === "svg") {
+    return document.querySelector('.u4-zoom-inline-stage[data-u4-svg-idx="'+String(mark.anchorId||"").replace("svg-","")+'"]');
+  }
+  stampDocPinAnchors();
+  return document.querySelector('[data-u4-pin-anchor="'+mark.anchorId+'"]') || document.getElementById("doc");
+}
+function renderPinsOnSurface(){
+  document.querySelectorAll(".u4-pin-layer").forEach(l => { l.innerHTML = ""; });
+  const list = u4PinMarksList();
+  list.forEach((m, idx) => {
+    const surf = findSurfaceForMark(m);
+    const layer = ensurePinLayerOnSurface(surf);
+    if (!layer) return;
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "u4-pin-marker" + (m.id === u4PinState.selectedId ? " is-selected" : "") + (m.sent ? " is-sent" : "");
+    btn.dataset.u4PinId = m.id;
+    btn.style.left = m.xPct + "%";
+    btn.style.top = m.yPct + "%";
+    btn.setAttribute("aria-label", "#" + (idx + 1) + " " + (m.contextLabel || "") + " (" + m.xPct + "%, " + m.yPct + "%)");
+    btn.innerHTML = '<span class="u4-pin-tag">#' + (idx + 1) + '</span>';
+    layer.appendChild(btn);
+  });
+  renderActivePinSteer();
+}
+function positionActivePinSteer(){
+  const box = document.getElementById("u4ActivePinSteer");
+  if (!box || box.hidden || window.innerWidth <= 640) return;
+  const markEl = u4PinState.selectedId ? document.querySelector('.u4-pin-marker[data-u4-pin-id="'+u4PinState.selectedId+'"]') : null;
+  const br = box.getBoundingClientRect();
+  const bw = br.width || 330, bh = br.height || 156;
+  const vw = window.innerWidth || 1280, vh = window.innerHeight || 800;
+  let left = Math.round((vw - bw) / 2), top = 96;
+  if (markEl) {
+    const mr = markEl.getBoundingClientRect();
+    left = mr.left + (mr.width / 2) - (bw / 2);
+    top = (mr.bottom + bh + 18 <= vh) ? (mr.bottom + 12) : (mr.top - bh - 12);
+  }
+  left = Math.max(12, Math.min(vw - bw - 12, left));
+  top = Math.max(12, Math.min(vh - bh - 16, top));
+  box.style.left = Math.round(left) + "px";
+  box.style.top = Math.round(top) + "px";
+}
+window.__u4PositionActivePinSteer = positionActivePinSteer;
+function renderActivePinSteer(){
+  const box = document.getElementById("u4ActivePinSteer");
+  if (!box) return;
+  const m = u4PinState.selectedId ? u4PinFindById(u4PinState.selectedId) : null;
+  if (!m) { box.hidden = true; return; }
+  const ctxList = u4PinMarksList(m.contextKey);
+  const idx = ctxList.indexOf(m);
+  if (idx < 0 || !findSurfaceForMark(m)) { box.hidden = true; return; }
+  const wasHidden = box.hidden;
+  const numEl = box.querySelector("[data-u4-ps-num]");
+  const zoneEl = box.querySelector("[data-u4-ps-zone]");
+  const inpEl = document.getElementById("u4PinInput");
+  const askBtn = box.querySelector("[data-u4-ps-ask]");
+  const sendBtn = box.querySelector("[data-u4-ps-send]");
+  const stEl = box.querySelector("[data-u4-ps-status]");
+  const micBtn = box.querySelector("[data-u4-ps-mic]");
+  if (numEl) numEl.textContent = "#" + (idx + 1);
+  if (zoneEl) zoneEl.textContent = (m.contextLabel || "") + " (" + Math.round(m.xPct) + "%, " + Math.round(m.yPct) + "%)";
+  if (inpEl) {
+    inpEl.placeholder = t("pinPlaceholder");
+    if (document.activeElement !== inpEl || wasHidden) inpEl.value = m.note || "";
+  }
+  if (askBtn) { askBtn.textContent = t("pinAskAiBtn"); askBtn.disabled = u4PinState.sending; }
+  if (sendBtn) { sendBtn.textContent = u4PinState.sending ? t("pinSending") : t("pinSendCorrBtn"); sendBtn.disabled = u4PinState.sending; }
+  if (micBtn) micBtn.setAttribute("aria-label", t("pinMicAria"));
+  if (stEl) {
+    stEl.textContent = u4PinState.statusMsg || "";
+    stEl.className = "u4-pin-steer-status" + (u4PinState.statusKind ? (" is-" + u4PinState.statusKind) : "");
+  }
+  box.hidden = false;
+  requestAnimationFrame(positionActivePinSteer);
+}
+function addPinAtTarget(target){
+  if (!target || !target.surfaceEl) return null;
+  const ctxKey = u4PinActiveContextKey();
+  const list = u4PinMarksList(ctxKey);
+  const m = {
+    id: "pin-" + Date.now() + "-" + Math.random().toString(36).slice(2, 6),
+    contextKey: ctxKey,
+    surfaceKind: target.surfaceKind,
+    anchorId: target.anchorId,
+    roomKey: target.roomKey,
+    roomLabel: target.roomLabel,
+    documentId: target.documentId,
+    documentTitle: target.documentTitle,
+    pageNumber: target.pageNumber,
+    contextLabel: target.contextLabel,
+    xPct: target.xPct,
+    yPct: target.yPct,
+    note: "",
+    sent: false
+  };
+  list.push(m);
+  u4PinState.selectedId = m.id;
+  u4PinState.statusMsg = "";
+  u4PinState.statusKind = "";
+  renderPinsOnSurface();
+  setTimeout(() => {
+    const inp = document.getElementById("u4PinInput");
+    if (inp) { try { inp.focus({ preventScroll: true }); } catch(e) { inp.focus(); } }
+  }, 30);
+  return m;
+}
+function formatPinSpotPrompt(m, noteText){
+  const q = String(noteText || "").trim() || t("pinPromptDefault");
+  if (m.surfaceKind === "pdf") {
+    return LANG === "es"
+      ? ('Sobre el PDF "' + m.documentTitle + '" (documento ' + m.documentId + '), página ' + m.pageNumber + ' en el punto (' + Math.round(m.xPct) + '%, ' + Math.round(m.yPct) + '%): ' + q)
+      : ('On PDF "' + m.documentTitle + '" (doc ' + m.documentId + '), page ' + m.pageNumber + ' at (' + Math.round(m.xPct) + '%, ' + Math.round(m.yPct) + '%): ' + q);
+  }
+  return LANG === "es"
+    ? ('En "' + m.contextLabel + '" (' + m.roomKey + ', punto ' + Math.round(m.xPct) + '%, ' + Math.round(m.yPct) + '%): ' + q)
+    : ('On "' + m.contextLabel + '" (' + m.roomKey + ', spot ' + Math.round(m.xPct) + '%, ' + Math.round(m.yPct) + '%): ' + q);
+}
+async function submitPinCorrection(m){
+  if (!m || u4PinState.sending) return;
+  const note = String(m.note || "").trim();
+  if (!note) {
+    u4PinState.statusMsg = t("pinNeedNote");
+    u4PinState.statusKind = "err";
+    renderActivePinSteer();
+    return;
+  }
+  u4PinState.sending = true;
+  u4PinState.statusMsg = t("pinSending");
+  u4PinState.statusKind = "";
+  renderActivePinSteer();
+  const origin = u4GalOrigin();
+  const author = getActiveGalleryAuthor() || "Crew";
+  const spotLoc = m.surfaceKind === "pdf"
+    ? (m.documentTitle + " p." + m.pageNumber + " (" + Math.round(m.xPct) + "%, " + Math.round(m.yPct) + "%)")
+    : (m.contextLabel + " (" + Math.round(m.xPct) + "%, " + Math.round(m.yPct) + "%)");
+  const fullText = "[Pinned spot: " + spotLoc + "] " + note;
+  const subId = "u4-pin-" + Date.now() + "-" + Math.random().toString(36).slice(2, 6);
+  const payload = {
+    schema: "unit4-worker-note-submission-v1",
+    submissionId: subId,
+    idempotencyKey: subId,
+    source: "wiki-pin-dragger",
+    commandSource: "wiki_pin_correction",
+    project: m.roomKey || "home",
+    roomKey: m.roomKey || "home",
+    page_id: m.roomKey || "home",
+    document_id: m.documentId || "",
+    document_title: m.documentTitle || "",
+    pdf_page: m.pageNumber || 0,
+    x_pct: m.xPct,
+    y_pct: m.yPct,
+    kind: "Correction / Spot Pin",
+    noteType: "Correction / Spot Pin",
+    edit_kind: "spot_correction",
+    target_item: spotLoc,
+    item: spotLoc,
+    author: author,
+    verbatim_request: note,
+    text: fullText,
+    raw: fullText,
+    language: LANG
+  };
+  try {
+    const resp = await fetch(origin + "/api/unit4/wiki-intake", {
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    const data = await resp.json().catch(() => ({}));
+    if (!resp.ok || data.ok === false) throw new Error(data.error || ("HTTP " + resp.status));
+    m.sent = true;
+    u4PinState.sending = false;
+    u4PinState.statusMsg = t("pinSentOk");
+    u4PinState.statusKind = "ok";
+    renderPinsOnSurface();
+  } catch (err) {
+    u4PinState.sending = false;
+    u4PinState.statusMsg = t("pinSentErr") + (err && err.message ? (" (" + err.message + ")") : "");
+    u4PinState.statusKind = "err";
+    renderActivePinSteer();
+  }
+}
+function mountUniversalPinUi(){
+  if (typeof document === "undefined") return;
+  if (!document.getElementById("u4PinDragPill")) {
+    const pill = document.createElement("button");
+    pill.id = "u4PinDragPill";
+    pill.type = "button";
+    pill.className = "u4-pin-pill u4-pin-fab";
+    pill.setAttribute("data-u4-pin-trigger", "1");
+    pill.setAttribute("aria-pressed", "false");
+    pill.textContent = t("pinPillIdle");
+    document.body.appendChild(pill);
+  }
+  if (!document.getElementById("u4PinArmBanner")) {
+    const ban = document.createElement("div");
+    ban.id = "u4PinArmBanner";
+    ban.className = "u4-pin-arm-banner";
+    ban.hidden = true;
+    ban.textContent = t("pinArmBanner");
+    document.body.appendChild(ban);
+  }
+  if (!document.getElementById("u4ActivePinSteer")) {
+    const st = document.createElement("div");
+    st.id = "u4ActivePinSteer";
+    st.className = "u4-pin-steer";
+    st.setAttribute("role", "dialog");
+    st.setAttribute("aria-modal", "false");
+    st.hidden = true;
+    st.innerHTML =
+      '<div class="u4-pin-steer-head">' +
+        '<div class="u4-pin-steer-title"><span data-u4-ps-num>#1</span><span class="u4-pin-steer-zone" data-u4-ps-zone></span></div>' +
+        '<div class="u4-pin-steer-hbtns">' +
+          '<button type="button" class="u4-pin-steer-ibtn" data-u4-ps-min="1" aria-label="Minimize">−</button>' +
+          '<button type="button" class="u4-pin-steer-ibtn is-del" data-u4-ps-del="1" aria-label="Delete pin">×</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="u4-pin-steer-row">' +
+        '<input type="text" id="u4PinInput" class="u4-pin-steer-inp" maxlength="400">' +
+        '<button type="button" class="u4-pin-steer-mic" data-u4-ps-mic="1" aria-label="Dictate">' +
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><line x1="12" y1="17" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg>' +
+        '</button>' +
+      '</div>' +
+      '<div class="u4-pin-steer-actions">' +
+        '<button type="button" class="u4-pin-steer-btn" data-u4-ps-ask="1">' + u4GalEsc(t("pinAskAiBtn")) + '</button>' +
+        '<button type="button" class="u4-pin-steer-btn is-primary" data-u4-ps-send="1">' + u4GalEsc(t("pinSendCorrBtn")) + '</button>' +
+      '</div>' +
+      '<div class="u4-pin-steer-status" data-u4-ps-status aria-live="polite"></div>';
+    document.body.appendChild(st);
+  }
+  if (document.__u4PinUiBound) return;
+  document.__u4PinUiBound = true;
+
+  let ghostEl = null;
+  let pillDrag = null;
+  let markerDrag = null;
+  let pinRecog = null;
+
+  const removeGhost = () => {
+    if (ghostEl && ghostEl.parentNode) ghostEl.parentNode.removeChild(ghostEl);
+    ghostEl = null;
+    window.__u4PinDragging = false;
+  };
+  document.addEventListener("pointerdown", ev => {
+    const trig = ev.target && ev.target.closest ? ev.target.closest("[data-u4-pin-trigger]") : null;
+    if (trig) {
+      if (ev.pointerType === "mouse" && ev.button !== 0) return;
+      ev.preventDefault();
+      pillDrag = { btn: trig, id: ev.pointerId, sx: ev.clientX, sy: ev.clientY, dragged: false };
+      try { trig.setPointerCapture(ev.pointerId); } catch(e){}
+      return;
+    }
+    const mk = ev.target && ev.target.closest ? ev.target.closest(".u4-pin-marker") : null;
+    if (mk) {
+      if (ev.pointerType === "mouse" && ev.button !== 0) return;
+      const m = u4PinFindById(mk.dataset.u4PinId);
+      const surf = m ? findSurfaceForMark(m) : null;
+      if (!m || !surf) return;
+      ev.preventDefault();
+      ev.stopPropagation();
+      markerDrag = { id: ev.pointerId, el: mk, mark: m, surf: surf, sx: ev.clientX, sy: ev.clientY, moved: false };
+      window.__u4PinDragging = true;
+      try { mk.setPointerCapture(ev.pointerId); } catch(e){}
+    }
+  });
+  document.addEventListener("pointermove", ev => {
+    if (pillDrag && ev.pointerId === pillDrag.id) {
+      if (!pillDrag.dragged && Math.hypot(ev.clientX - pillDrag.sx, ev.clientY - pillDrag.sy) > 8) {
+        pillDrag.dragged = true;
+        window.__u4PinDragging = true;
+        setUniversalPinArmed(false);
+        ghostEl = document.createElement("div");
+        ghostEl.id = "u4PinGhost";
+        ghostEl.className = "u4-pin-ghost";
+        document.body.appendChild(ghostEl);
+      }
+      if (pillDrag.dragged && ghostEl) {
+        ghostEl.style.left = ev.clientX + "px";
+        ghostEl.style.top = ev.clientY + "px";
+      }
+      return;
+    }
+    if (markerDrag && ev.pointerId === markerDrag.id) {
+      if (Math.hypot(ev.clientX - markerDrag.sx, ev.clientY - markerDrag.sy) > 3) markerDrag.moved = true;
+      if (!markerDrag.moved) return;
+      const r = markerDrag.surf.getBoundingClientRect();
+      markerDrag.mark.xPct = Math.round(Math.max(2, Math.min(98, ((ev.clientX - r.left) / (r.width || 1)) * 100)) * 10) / 10;
+      markerDrag.mark.yPct = Math.round(Math.max(2, Math.min(98, ((ev.clientY - r.top) / (r.height || 1)) * 100)) * 10) / 10;
+      markerDrag.el.style.left = markerDrag.mark.xPct + "%";
+      markerDrag.el.style.top = markerDrag.mark.yPct + "%";
+      if (u4PinState.selectedId === markerDrag.mark.id) renderActivePinSteer();
+    }
+  });
+  const endPointer = (ev, cancelled) => {
+    if (pillDrag && (!ev || ev.pointerId === pillDrag.id)) {
+      const pd = pillDrag; pillDrag = null;
+      const wasDrag = pd.dragged;
+      removeGhost();
+      if (!cancelled) {
+        if (wasDrag) {
+          const tgt = resolvePinDropTarget(ev.clientX, ev.clientY);
+          if (tgt) addPinAtTarget(tgt);
+        } else {
+          setUniversalPinArmed(!u4PinState.armed);
+        }
+      }
+      return;
+    }
+    if (markerDrag && (!ev || ev.pointerId === markerDrag.id)) {
+      const md = markerDrag; markerDrag = null;
+      window.__u4PinDragging = false;
+      if (!cancelled) {
+        u4PinState.selectedId = md.mark.id;
+        u4PinState.statusMsg = md.moved ? t("pinMoved") : "";
+        u4PinState.statusKind = "";
+        renderPinsOnSurface();
+      }
+    }
+  };
+  document.addEventListener("pointerup", ev => endPointer(ev, false));
+  document.addEventListener("pointercancel", ev => endPointer(ev, true));
+
+  document.addEventListener("click", ev => {
+    const steer = document.getElementById("u4ActivePinSteer");
+    if (steer && steer.contains(ev.target)) {
+      const m = u4PinState.selectedId ? u4PinFindById(u4PinState.selectedId) : null;
+      if (ev.target.closest("[data-u4-ps-del]") && m) {
+        const list = u4PinMarksList(m.contextKey);
+        const ix = list.indexOf(m);
+        if (ix >= 0) list.splice(ix, 1);
+        u4PinState.selectedId = null;
+        renderPinsOnSurface();
+      } else if (ev.target.closest("[data-u4-ps-min]")) {
+        u4PinState.selectedId = null;
+        renderPinsOnSurface();
+      } else if (ev.target.closest("[data-u4-ps-ask]") && m) {
+        const promptTxt = formatPinSpotPrompt(m, m.note);
+        const lb = document.getElementById("u4GalLightbox");
+        if (lb && !lb.hidden) closeGalleryLightbox();
+        if (window.U4GeminiLiveAssistant && typeof window.U4GeminiLiveAssistant.askSpot === "function") {
+          window.U4GeminiLiveAssistant.askSpot(promptTxt, ev);
+        }
+        u4PinState.statusMsg = LANG === "es" ? "Abierto en Asistente de IA." : "Sent to AI Helper.";
+        u4PinState.statusKind = "ok";
+        renderActivePinSteer();
+      } else if (ev.target.closest("[data-u4-ps-send]") && m) {
+        submitPinCorrection(m);
+      } else if (ev.target.closest("[data-u4-ps-mic]")) {
+        const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const micBtn = steer.querySelector("[data-u4-ps-mic]");
+        if (!SR) {
+          u4PinState.statusMsg = LANG === "es" ? "Dictado no disponible en este navegador." : "Voice dictation unavailable in this browser.";
+          u4PinState.statusKind = "err";
+          renderActivePinSteer();
+          return;
+        }
+        if (pinRecog) { try { pinRecog.stop(); } catch(e){} pinRecog = null; if (micBtn) micBtn.classList.remove("is-rec"); return; }
+        pinRecog = new SR();
+        pinRecog.lang = LANG === "es" ? "es-MX" : "en-US";
+        pinRecog.interimResults = false;
+        if (micBtn) micBtn.classList.add("is-rec");
+        pinRecog.onresult = re => {
+          const sp = re.results && re.results[0] && re.results[0][0] ? re.results[0][0].transcript : "";
+          const inp = document.getElementById("u4PinInput");
+          if (sp && m && inp) {
+            m.note = (m.note ? (m.note + " ") : "") + sp.trim();
+            inp.value = m.note;
+          }
+        };
+        pinRecog.onend = () => { pinRecog = null; if (micBtn) micBtn.classList.remove("is-rec"); };
+        pinRecog.onerror = () => { pinRecog = null; if (micBtn) micBtn.classList.remove("is-rec"); };
+        try { pinRecog.start(); } catch(e) { pinRecog = null; if (micBtn) micBtn.classList.remove("is-rec"); }
+      }
+      return;
+    }
+    if (u4PinState.armed) {
+      if (ev.target.closest("[data-u4-pin-trigger]")) return;
+      const tgt = resolvePinDropTarget(ev.clientX, ev.clientY);
+      if (tgt) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        setUniversalPinArmed(false);
+        addPinAtTarget(tgt);
+      }
+    }
+  }, true);
+
+  document.addEventListener("input", ev => {
+    if (ev.target && ev.target.id === "u4PinInput") {
+      const m = u4PinState.selectedId ? u4PinFindById(u4PinState.selectedId) : null;
+      if (m) m.note = ev.target.value;
+    }
+  });
+  window.addEventListener("resize", positionActivePinSteer);
 }
 function ensureGalleryDelegation(){
   if (typeof document === "undefined" || document.__u4GalleryDelegated) return;
@@ -2177,6 +3179,13 @@ function ensureGalleryDelegation(){
       const fig = leadImg.closest(".u4-lead-pic");
       const cap = fig && fig.querySelector("figcaption") ? fig.querySelector("figcaption").textContent : "";
       openGalleryLightbox([{ fullUrl: leadImg.currentSrc || leadImg.src, thumbUrl: leadImg.src, title: cap, note: "" }], 0, current ? pageLabel(current) : "");
+      return;
+    }
+    const mdImg = ev.target && ev.target.closest ? ev.target.closest("#doc .mdbody img") : null;
+    if (mdImg && !mdImg.closest("a")) {
+      const fig = mdImg.closest("figure");
+      const cap = mdImg.alt || (fig && fig.querySelector("figcaption") && fig.querySelector("figcaption").textContent) || (current ? pageLabel(current) : "");
+      openGalleryLightbox([{ fullUrl: mdImg.currentSrc || mdImg.src, thumbUrl: mdImg.src, title: cap, note: "" }], 0, current ? pageLabel(current) : "");
       return;
     }
     const sec = ev.target && ev.target.closest ? ev.target.closest("section.u4-gal-sec") : null;
@@ -2740,6 +3749,7 @@ function syncChromeLabels(){
   const qc = document.getElementById("qpClose");
   if (qc) { qc.textContent = t("closeBtn"); qc.setAttribute("aria-label", t("closeBtn")); }
   wireFieldToggle();
+  if (typeof syncUniversalPinChromeLabels === "function") syncUniversalPinChromeLabels();
   if (typeof window.__u4SyncFloatingAiUi === "function") window.__u4SyncFloatingAiUi();
 }
 
@@ -2798,22 +3808,35 @@ function loadPdfLib(){
 }
 async function renderPdf(url, id, targetPage){
   const tok=++pdfTok; const box=document.getElementById("pdfpages"); if(!box) return;
-  const fallback=()=>{ if(tok!==pdfTok) return; box.innerHTML='<div class="vframe"><iframe src="'+url+(targetPage?("#page="+targetPage):"")+'" title="PDF"></iframe></div>'; };
+  const fallback=()=>{
+    if(tok!==pdfTok) return;
+    const vp=document.getElementById("u4PdfZoomViewport");
+    if (vp && vp.parentNode) vp.outerHTML='<div class="vframe"><iframe src="'+url+(targetPage?("#page="+targetPage):"")+'" title="PDF"></iframe></div>';
+    else box.innerHTML='<div class="vframe"><iframe src="'+url+(targetPage?("#page="+targetPage):"")+'" title="PDF"></iframe></div>';
+  };
   try{
     const lib=await loadPdfLib();
     const pdf=await lib.getDocument({url:url}).promise;
     if (tok!==pdfTok) return;
-    const pgMsg = LANG==="es"
-      ? (pdf.numPages+" "+(pdf.numPages===1?"página":"páginas")+" · usa el zoom del navegador para acercar")
-      : (pdf.numPages+" page"+(pdf.numPages>1?"s":"")+" · pinch or zoom to inspect closer");
-    box.innerHTML='<p class="msg">'+pgMsg+'</p>';
-    const W=Math.min(box.clientWidth||800, 1000), dpr=Math.min(window.devicePixelRatio||1, 2.5);
+    const hint = document.getElementById("u4PdfPageHint");
+    const pgLabel = pdf.numPages + " " + (LANG==="es" ? (pdf.numPages===1?"página":"páginas") : ("page"+(pdf.numPages>1?"s":"")));
+    if (hint) hint.textContent = pgLabel;
+    box.innerHTML="";
+    const vpEl = document.getElementById("u4PdfZoomViewport");
+    const W=Math.min((vpEl && vpEl.clientWidth ? (vpEl.clientWidth - 28) : box.clientWidth) || 800, 1000), dpr=Math.min(window.devicePixelRatio||1, 2.5);
     for (let n=1;n<=pdf.numPages;n++){
       if (tok!==pdfTok) return;
       const page=await pdf.getPage(n); const v1=page.getViewport({scale:1}); const scale=W/v1.width; const vp=page.getViewport({scale:scale*dpr});
+      const card=document.createElement("div"); card.className="u4-pdf-page-card";
+      const lbl=document.createElement("div"); lbl.className="u4-pdf-page-lbl"; lbl.textContent=(LANG==="es"?"Página ":"Page ")+n+" / "+pdf.numPages;
+      const pbox=document.createElement("div"); pbox.className="u4-pdf-page-box u4-pin-host"; pbox.dataset.pageNumber=String(n); pbox.dataset.docId=String(id||"");
       const c=document.createElement("canvas"); c.width=Math.floor(vp.width); c.height=Math.floor(vp.height); c.style.width=Math.floor(vp.width/dpr)+"px"; c.className="pdfpage"; c.dataset.pageNumber=String(n);
-      box.appendChild(c); await page.render({canvasContext:c.getContext("2d"), viewport:vp}).promise;
-      if (targetPage && n===targetPage && c.scrollIntoView) c.scrollIntoView({behavior:"smooth", block:"start"});
+      const layer=document.createElement("div"); layer.className="u4-pin-layer";
+      pbox.appendChild(c); pbox.appendChild(layer); card.appendChild(lbl); card.appendChild(pbox);
+      box.appendChild(card); await page.render({canvasContext:c.getContext("2d"), viewport:vp}).promise;
+      if (vpEl && vpEl.__u4ZoomCtrl && vpEl.__u4ZoomCtrl.measureBase) vpEl.__u4ZoomCtrl.measureBase();
+      renderPinsOnSurface();
+      if (targetPage && n===targetPage && card.scrollIntoView) card.scrollIntoView({behavior:"smooth", block:"start"});
     }
   }catch(e){ fallback(); }
 }
@@ -2883,19 +3906,49 @@ function show(key){
     const hostedBtn=hosted?'<a class="btn ghost" href="'+esc(hosted)+'" target="_blank" rel="noopener">'+esc(t("openFullPage"))+'</a>':'';
     const frameSrc=hosted?hosted:('https://drive.google.com/file/d/'+encodeURIComponent(id)+'/preview');
     const hintHtml=hosted?'':'<p class="hint" style="color:var(--muted);font-size:13px;margin-top:8px">'+esc(t("drivePreviewHint"))+'</p>';
+    window.__u4ActiveDocContext = {
+      id: id,
+      title: L.t,
+      roomKey: parent ? parent.key : "home",
+      roomLabel: parent ? pageLabel(parent) : t("unitTitle"),
+      targetPage: targetPage || 0
+    };
+    const pdfStageHtml = PDF_BLOBS[id]
+      ? '<div class="u4-pdf-toolbar" id="u4PdfToolbar">'
+        + u4ZoomBarHtml("pdf")
+        + '<button type="button" class="u4-pin-pill" id="u4PdfPinBtn" data-u4-pin-trigger="1" aria-pressed="false">'+esc(t("pinPillIdle"))+'</button>'
+        + '<span class="u4-pdf-page-hint" id="u4PdfPageHint"></span>'
+        + '</div>'
+        + '<div class="u4-pdf-zoom-viewport" id="u4PdfZoomViewport">'
+        + '<div class="u4-pdf-zoom-sizer" id="u4PdfZoomSizer">'
+        + '<div class="u4-pdf-zoom-stage" id="u4PdfZoomStage">'
+        + '<div class="pdfpages" id="pdfpages"><p class="msg">'+esc(t("loadingDoc"))+'</p></div>'
+        + '</div></div></div>'
+      : '<div class="vframe"><iframe src="'+esc(frameSrc)+'" title="'+esc(L.t)+'" loading="lazy"></iframe></div>'+hintHtml;
     document.getElementById("doc").innerHTML='<div class="viewer">'
       + previewTabsHtml(id)
       + '<div class="vbar"><a class="btn ghost" href="#'+(parent?parent.key:"home")+'">← '+esc(parent?pageLabel(parent):t("backShort"))+'</a>'+driveBtn+hostedBtn+'</div>'
       + '<h1>'+esc(L.t)+'</h1>'
       + '<p class="hint" style="color:var(--muted);margin:0 0 10px">'+esc(d.path||"")+(L.date?' · '+niceDate(L.date):'')+'</p>'
-      + (PDF_BLOBS[id]?'<div class="pdfpages" id="pdfpages"><p class="msg">'+esc(t("loadingDoc"))+'</p></div>':'<div class="vframe"><iframe src="'+esc(frameSrc)+'" title="'+esc(L.t)+'" loading="lazy"></iframe></div>'+hintHtml)
+      + pdfStageHtml
       + '</div>';
-    if (PDF_BLOBS[id]) renderPdf(PDF_BLOBS[id], id, targetPage);
+    if (PDF_BLOBS[id]) {
+      u4SetupScrollZoom(
+        document.getElementById("u4PdfZoomViewport"),
+        document.getElementById("u4PdfZoomStage"),
+        document.getElementById("u4PdfZoomSizer"),
+        document.querySelector("#u4PdfToolbar .u4-zoom-bar")
+      );
+      renderPdf(PDF_BLOBS[id], id, targetPage);
+    }
+    mountUniversalPinUi();
+    renderPinsOnSurface();
     setStatus("", t("docPreview"), false);
     window.__backTo = parent?parent.key:"home"; var bb=document.getElementById("backBtn"); if(bb) bb.hidden=false;
     if (!targetPage) window.scrollTo(0,0);
     return;
   }
+  window.__u4ActiveDocContext = null;
   if (key==="agent-brief"){
     const s=document.getElementById("agent-brief"), ta=document.createElement("textarea");
     ta.innerHTML=s.innerHTML.replace(/<br\s*\/?>/g,"\n");
@@ -2930,6 +3983,10 @@ function show(key){
   document.body.classList.toggle("is-crew", isCrew);
   document.getElementById("doc").innerHTML = body;
   enhanceInteractiveLinks(document.getElementById("doc"));
+  enhanceZoomableInlineContent(document.getElementById("doc"));
+  stampDocPinAnchors();
+  mountUniversalPinUi();
+  renderPinsOnSurface();
   if (isCrew) { ensureGalleryDelegation(); fetchRoomGallery(p.key, false); }
   document.getElementById("path").textContent = "";
   if (l) setStatus("live", t("latestFromDrive") + " · " + new Date(l.at).toLocaleString([], {month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}), false);
@@ -3007,7 +4064,7 @@ document.addEventListener("click", e=>{
     if (href.startsWith("#") && location.hash.slice(1) === href.slice(1)) { e.preventDefault(); show(href.slice(1)); }
   }
 });
-document.addEventListener("keydown",e=>{ if(e.key==="Escape") { setMenu(false); closeGalleryLightbox(); } });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") { setMenu(false); closeGalleryLightbox(); if (typeof setUniversalPinArmed === "function") setUniversalPinArmed(false); if (typeof u4PinState !== "undefined" && u4PinState.selectedId) { u4PinState.selectedId = null; renderPinsOnSurface(); } } });
 var navDepth=0;
 const backBtn=document.getElementById("backBtn");
 backBtn.addEventListener("click",()=>{ if(navDepth>0){ history.back(); return; } const h=location.hash.slice(1); location.hash = h.startsWith("decisions:") ? "decisions" : h.startsWith("doc:") ? (window.__backTo||"home") : "home"; });
@@ -8710,6 +9767,20 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     toggleDialog: function(){ setDialogOpen(!liveState.dialogOpen); },
     isDialogOpen: function(){ return liveState.dialogOpen; },
     isActive: function(){ return liveState.active; },
+    askSpot: function(prompt, ev){
+      var clean = String(prompt || "").trim();
+      if (!clean) return;
+      setDialogOpen(true);
+      var inp = document.getElementById("u4VdAskInput");
+      if (liveState.active && liveState.ws && liveState.ws.readyState === WebSocket.OPEN) {
+        if (inp) inp.value = "";
+        sendPromptToLiveAgent(clean);
+      } else {
+        if (inp) inp.value = clean;
+        appendNavEventChip(clean);
+        try { startGeminiLiveSession(ev || null, clean); } catch (e) {}
+      }
+    },
     buildContext: buildRichWalkthroughContext,
     queryMemory: queryTodoistMemory
   };

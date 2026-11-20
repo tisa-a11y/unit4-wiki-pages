@@ -15,8 +15,9 @@
       "imgEs": "https://drive.google.com/thumbnail?id=1Kk2cEiqrQ5ikAyIqXUTMQdmNASxv6H21&sz=w1200",
       "href": "https://drive.google.com/file/d/1iqFU246kyPgvR05zKM9gIsX8BTG8rwpT/view",
       "hrefEs": "https://drive.google.com/file/d/1Kk2cEiqrQ5ikAyIqXUTMQdmNASxv6H21/view",
-      "en": "Floor plan",
-      "es": "Plano de planta"
+      "en": "Floor plan (Nov 19 — ignore hatch #5; hatch is outside Front Door 4)",
+      "es": "Plano de planta (19 nov — ignorar escotilla #5; va fuera de Puerta 4)",
+      "deferred": true
     },
     {
       "img": "https://drive.google.com/thumbnail?id=1w9awRXL9sBPAxwZrjaIBKKY39nmloIOF&sz=w1200",
