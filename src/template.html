@@ -969,6 +969,8 @@ nav.rail a.sub.rail-doc-link:hover,nav.rail a.sub.rail-doc-link[aria-current="pa
 .u4-vis-cap{padding:7px 10px;font:600 12.5px/1.35 var(--body);color:var(--fg)}
 /* U4_R5_V7_LIVE_ORB_MUTE_RENDERS_CSS_END */
 
+html body main .bar .u4-build-stamp{display:none!important}
+html body .u4-subpage-dir,html body article .src{display:none!important}
 /* 2026-11-20 (Tisa): menu bar stays as built; no page drop-down beside it; Home sections tied by a side line */
 html body .mobile select#jump{display:none!important}
 html body .u4-home-menu{display:none!important}
@@ -1059,12 +1061,12 @@ const UI = {
     loadLatestDrive: "Load latest from Drive", docPreview: "Document preview", sharedDecList: "Shared decision list",
     agentBrief: "Agent brief", openInDrive: "Open in Google Drive", openFullPage: "Open full page",
     loadingDoc: "Loading document…", drivePreviewHint: "Preview comes from Google Drive. If blank, use Open in Google Drive.",
-    roomsAndProjects: "Rooms & subrooms", whereThingsLive: "Project links", scaleRemainingWork: "Remaining work (ballpark)",
-    scaleRemainingDesc: "Estimated person-hours for sprint planning. Total likely ",
+    roomsAndProjects: "Rooms", whereThingsLive: "Project links", scaleRemainingWork: "Remaining work (ballpark)",
+    scaleRemainingDesc: "Rough hours of work left. Total about ",
     checklistTitle: "Checklist", doneWord: "done", todoWord: "to do", stepsWord: "steps",
     docSingular: "doc", docPlural: "docs", documentsHeading: "Documents", historyHeading: "History",
-    awaitingReview: "Review", originalTag: "Pinned", englishOnlyTag: "EN only",
-    fullPlanDetails: "Full specs & dimensions", techSpecsDetails: "Technical specs & dimensions",
+    awaitingReview: "Review", originalTag: "Pinned", englishOnlyTag: "English only",
+    fullPlanDetails: "More detail", techSpecsDetails: "More detail",
     subnavOverviewTab: "Overview", fieldNoteHeading: "Field note", fromYourName: "From (your name)",
     fromPlaceholder: "Tap your name below or type it…", aboutTopic: "About",
     fieldPlaceholder: "Write a field note, or tap the mic to dictate…", addPhotoBtn: "📷 Add photo",
@@ -1084,12 +1086,12 @@ const UI = {
     loadLatestDrive: "Cargar lo más reciente", docPreview: "Vista previa del documento", sharedDecList: "Lista de decisiones",
     agentBrief: "Guía para agentes", openInDrive: "Abrir en Google Drive", openFullPage: "Abrir página completa",
     loadingDoc: "Cargando documento…", drivePreviewHint: "La vista previa viene de Google Drive. Si no carga, usa Abrir en Google Drive.",
-    roomsAndProjects: "Cuartos y subcuartos", whereThingsLive: "Enlaces del proyecto", scaleRemainingWork: "Trabajo restante (estimado)",
-    scaleRemainingDesc: "Horas-persona estimadas para planeación. Total probable ",
+    roomsAndProjects: "Cuartos", whereThingsLive: "Enlaces del proyecto", scaleRemainingWork: "Trabajo restante (estimado)",
+    scaleRemainingDesc: "Horas de trabajo que faltan, aproximadas. Total cerca de ",
     checklistTitle: "Lista de trabajo", doneWord: "hecho", todoWord: "por hacer", stepsWord: "pasos",
     docSingular: "doc", docPlural: "docs", documentsHeading: "Documentos", historyHeading: "Historial",
     awaitingReview: "Revisión", originalTag: "Fijado", englishOnlyTag: "Solo EN",
-    fullPlanDetails: "Especificaciones y medidas completas", techSpecsDetails: "Especificaciones técnicas y medidas",
+    fullPlanDetails: "Más detalle", techSpecsDetails: "Más detalle",
     subnavOverviewTab: "Resumen", fieldNoteHeading: "Nota de obra", fromYourName: "De (tu nombre)",
     fromPlaceholder: "Toca tu nombre abajo o escríbelo…", aboutTopic: "Tema",
     fieldPlaceholder: "Escribe una nota o toca el micrófono para dictar…", addPhotoBtn: "📷 Foto",
@@ -1291,7 +1293,7 @@ function roomAreasBlock(p){
   let rows = "";
   kids.forEach(c=>{ rows += '<a class="u4-hm-room is-area" href="#'+c.key+'"><span>'+esc(pageLabel(c))+'</span>'+prog(c.key)+'</a>' + packetsFor(c.key).map(pk=>pkt(pk,true)).join(""); });
   rows += own.map(pk=>pkt(pk,false)).join("");
-  return '<nav class="u4-room-areas" id="sec-packets" aria-label="'+(es?"En este cuarto":"In this room")+'"><h2>'+(kids.length?(es?"Áreas y guías":"Areas and guides"):(es?"Guías de trabajo":"Instruction packets"))+'</h2><div class="u4-hm-group">'+rows+'</div></nav>';
+  return '<nav class="u4-room-areas" id="sec-packets" aria-label="'+(es?"En este cuarto":"In this room")+'"><h2>'+(kids.length?(es?"Áreas y guías":"Areas and guides"):(es?"Guías":"Guides"))+'</h2><div class="u4-hm-group">'+rows+'</div></nav>';
 }
 function roomsBlock(){
   const es = LANG==="es";
@@ -1463,7 +1465,7 @@ function packetCardsBlock(list, showRoom){
   if (!list.length) return "";
   const es = LANG==="es";
   const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-  return '<section class="u4-packets" id="sec-packets"><h2>'+(es?"Guías de trabajo":"Instruction packets")+'</h2><div class="u4-packet-list">'
+  return '<section class="u4-packets" id="sec-packets"><h2>'+(es?"Guías":"Guides")+'</h2><div class="u4-packet-list">'
     + list.map(pk=>{ const room = showRoom ? PAGES.find(x=>x.key===pk.room) : null;
         return '<a class="u4-packet" href="#'+pk.key+'">'
           + (room?'<span class="u4-packet-room">'+esc(pageLabel(room))+'</span>':'')
@@ -4389,32 +4391,32 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   var ORGANIZED_ABOUT_TOPICS = {
     "kitchen-sink-north": [
       { v: "Sink & North Wall — General", en: "Sink & North Wall — General", es: "Fregadero y muro norte — General" },
-      { v: "Sink & North Wall — 30 in Sink Base & Window Centerline", en: "30 in Sink Base & Window Centerline", es: "Base de fregadero de 30 pulg y eje de ventana" },
-      { v: "Sink & North Wall — Pie-Safe Built-In Shelves", en: "Pie-Safe Built-In Shelves", es: "Repisas integradas pie-safe" },
-      { v: "Sink & North Wall — East Refrigerator Run (Haier)", en: "East Refrigerator Run (Haier)", es: "Tramo este del refrigerador (Haier)" },
-      { v: "Sink & North Wall — North Wall Switches & D04 Interface", en: "North Wall Switches & D04 Interface", es: "Apagadores en muro norte e interfaz D04" }
+      { v: "Sink & North Wall — 30 in Sink Base & Window Centerline", en: "Sink cabinet and window", es: "Gabinete de tarja y ventana" },
+      { v: "Sink & North Wall — Pie-Safe Built-In Shelves", en: "Pie-safe shelves", es: "Repisas pie-safe" },
+      { v: "Sink & North Wall — East Refrigerator Run (Haier)", en: "Refrigerator wall", es: "Muro del refrigerador" },
+      { v: "Sink & North Wall — North Wall Switches & D04 Interface", en: "North wall switches and panel wall", es: "Apagadores del muro norte y muro del tablero" }
     ],
     "kitchen-oven-range": [
       { v: "Range & Hood — General", en: "Range & Hood — General", es: "Estufa y campana — General" },
-      { v: "Range & Hood — Zephyr ZSA-E30AS Mounting & Blocking (30–36 in)", en: "Zephyr ZSA-E30AS Mounting & Blocking (30–36 in)", es: "Montaje y bloqueo Zephyr ZSA-E30AS (30–36 pulg)" },
-      { v: "Range & Hood — 121-1/2 in Ceiling Gap & Duct Cover", en: "121-1/2 in Ceiling Gap & Duct Cover", es: "Brecha al techo de 121-1/2 pulg y cubredacto" },
-      { v: "Range & Hood — 6 in Rigid Vertical Duct & Roof Vent", en: "6 in Rigid Vertical Duct & Roof Vent", es: "Ducto vertical rígido de 6 pulg y salida" },
-      { v: "Range & Hood — Viking 30 in Gas Range (VGCC5304BSS)", en: "Viking 30 in Gas Range (VGCC5304BSS)", es: "Estufa de gas Viking 30 pulg (VGCC5304BSS)" }
+      { v: "Range & Hood — Zephyr ZSA-E30AS Mounting & Blocking (30–36 in)", en: "Hood height and wood backing", es: "Altura de la campana y refuerzos de madera" },
+      { v: "Range & Hood — 121-1/2 in Ceiling Gap & Duct Cover", en: "Gap between hood and ceiling", es: "Hueco entre la campana y el techo" },
+      { v: "Range & Hood — 6 in Rigid Vertical Duct & Roof Vent", en: "Duct and roof vent", es: "Ducto y salida al techo" },
+      { v: "Range & Hood — Viking 30 in Gas Range (VGCC5304BSS)", en: "Range and gas", es: "Estufa y gas" }
     ],
     kitchen: [
       { v: "Kitchen — General", en: "Kitchen — General", es: "Cocina — General" },
-      { v: "Kitchen — Cabinets & Pie-Safe Shelves", en: "Cabinets & Pie-Safe Shelves", es: "Gabinetes y repisas empotradas" },
-      { v: "Kitchen — Appliances (Range, Hood, Fridge, DW)", en: "Appliances (Range, Hood, Fridge, DW)", es: "Electrodomésticos (estufa, campana, refri, lavavajillas)" },
+      { v: "Kitchen — Cabinets & Pie-Safe Shelves", en: "Cabinets and pie-safe shelves", es: "Gabinetes y repisas pie-safe" },
+      { v: "Kitchen — Appliances (Range, Hood, Fridge, DW)", en: "Appliances", es: "Equipos" },
       { v: "Kitchen — Sink, Faucet & Plumbing", en: "Sink, Faucet & Plumbing", es: "Fregadero, llave y plomería" },
       { v: "Kitchen — Countertops & Range-Wall Tile", en: "Countertops & Range-Wall Tile", es: "Cubiertas y azulejo del muro de la estufa" },
-      { v: "Kitchen — Panel Wall (D04) & Kitchen Wiring", en: "Panel Wall (D04) & Kitchen Wiring", es: "Muro del panel (D04) y cableado de cocina" },
+      { v: "Kitchen — Panel Wall (D04) & Kitchen Wiring", en: "Panel wall and kitchen wiring", es: "Muro del tablero y cableado de cocina" },
       { v: "Kitchen — Framing & Measurements", en: "Framing & Measurements", es: "Enmarcado y medidas" }
     ],
     bathroom: [
       { v: "Bathroom — General", en: "Bathroom — General", es: "Baño — General" },
       { v: "Bathroom — Floor & Wall Tile / Niches", en: "Floor & Wall Tile / Niches", es: "Azulejo de piso y muros / nichos" },
       { v: "Bathroom — Tub, Valve & Waterproofing", en: "Tub, Valve & Waterproofing", es: "Tina, válvula e impermeabilizante" },
-      { v: "Bathroom — Toilet & Wall Furring", en: "Toilet & Wall Furring", es: "Inodoro y enrasado del muro" },
+      { v: "Bathroom — Toilet & Wall Furring", en: "Toilet", es: "Inodoro" },
       { v: "Bathroom — Pedestal Sink & Plumbing", en: "Pedestal Sink & Plumbing", es: "Lavabo de pedestal y plomería" },
       { v: "Bathroom — Ceiling Wiring, Fan & Lights", en: "Ceiling Wiring, Fan & Lights", es: "Cableado de techo, extractor y luces" },
       { v: "Bathroom — Pocket Door", en: "Pocket Door", es: "Puerta corrediza" },
@@ -4422,38 +4424,38 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     ],
     bedroom: [
       { v: "Bedroom — General", en: "Bedroom — General", es: "Recámara — General" },
-      { v: "Bedroom — Wall Moulding & Frames (R2)", en: "Wall Moulding & Frames (R2)", es: "Molduras y marcos de pared (R2)" },
-      { v: "Bedroom — Closet Niche & Low-Voltage Switch", en: "Closet Niche & Low-Voltage Switch", es: "Nicho del clóset y cable de bajo voltaje" },
-      { v: "Bedroom — Outlets & Smurf Tube", en: "Outlets & Smurf Tube", es: "Cajas de contactos y tubo smurf" },
+      { v: "Bedroom — Wall Moulding & Frames (R2)", en: "Wall mouldings", es: "Molduras de muro" },
+      { v: "Bedroom — Closet Niche & Low-Voltage Switch", en: "Closet and switch cable", es: "Clóset y cable del apagador" },
+      { v: "Bedroom — Outlets & Smurf Tube", en: "Outlets and conduit", es: "Contactos y tubo" },
       { v: "Bedroom — Ceiling Light & Trim", en: "Ceiling Light & Trim", es: "Luz de techo y molduras" }
     ],
     "living-dining": [
       { v: "Living & Dining — General", en: "Living & Dining — General", es: "Sala y comedor — General" },
       { v: "Living & Dining — Wall Moulding & Picture Frames", en: "Wall Moulding & Picture Frames", es: "Molduras y marcos de pared" },
-      { v: "Living & Dining — Subpanel D04 (Dining Wall)", en: "Subpanel D04 (Dining Wall)", es: "Subpanel D04 (muro del comedor)" },
-      { v: "Living & Dining — Outlets & Smurf Tube", en: "Outlets & Smurf Tube", es: "Cajas de contactos y tubo smurf" },
+      { v: "Living & Dining — Subpanel D04 (Dining Wall)", en: "Electrical panel wall", es: "Muro del tablero eléctrico" },
+      { v: "Living & Dining — Outlets & Smurf Tube", en: "Outlets and conduit", es: "Contactos y tubo" },
       { v: "Living & Dining — Windows, Trim & Lighting", en: "Windows, Trim & Lighting", es: "Ventanas, molduras e iluminación" }
     ],
     laundry: [
       { v: "Laundry Closet — General", en: "Laundry Closet — General", es: "Clóset de lavandería — General" },
-      { v: "Laundry Closet — LG WashTower & Clearances", en: "LG WashTower & Clearances", es: "Torre LG WashTower y espacios libres" },
+      { v: "Laundry Closet — LG WashTower & Clearances", en: "WashTower and its space", es: "WashTower y su espacio" },
       { v: "Laundry Closet — Gas Box, Drain & Water Shutoffs", en: "Gas Box, Drain & Water Shutoffs", es: "Caja de gas, desagüe y llaves de agua" },
-      { v: "Laundry Closet — Exhaust Vent & Electrical", en: "Exhaust Vent & Electrical", es: "Ducto de ventilación y electricidad" },
-      { v: "Laundry Closet — Murphy Bookcase Door Interface", en: "Murphy Bookcase Door Interface", es: "Conexión con puerta librero Murphy" }
+      { v: "Laundry Closet — Exhaust Vent & Electrical", en: "Dryer vent and outlet", es: "Ducto de la secadora y contacto" },
+      { v: "Laundry Closet — Murphy Bookcase Door Interface", en: "Bookcase door", es: "Puerta librero" }
     ],
     hallway: [
       { v: "Hallway — General", en: "Hallway — General", es: "Pasillo — General" },
-      { v: "Hallway — Murphy Bookcase Door", en: "Murphy Bookcase Door", es: "Puerta librero oculta (Murphy)" },
-      { v: "Hallway — Attic Access Hatch (24 × 36)", en: "Attic Access Hatch (24 × 36)", es: "Escotilla de acceso al ático (24 × 36)" },
+      { v: "Hallway — Murphy Bookcase Door", en: "Trim around the laundry door", es: "Moldura de la puerta de lavandería" },
+      { v: "Hallway — Attic Access Hatch (24 × 36)", en: "Attic hatch", es: "Escotilla del ático" },
       { v: "Hallway — Moulding, Trim & Lighting", en: "Moulding, Trim & Lighting", es: "Molduras e iluminación" }
     ],
     electrical: [
       { v: "Electrical — General", en: "Electrical — General", es: "Electricidad — General" },
-      { v: "Electrical — Subpanel Eaton 125A at D04", en: "Subpanel Eaton 125A at D04", es: "Subpanel Eaton 125A en D04" },
-      { v: "Electrical — Kitchen 9 Circuits (Romex)", en: "Kitchen 9 Circuits (Romex)", es: "9 circuitos de cocina (Romex)" },
-      { v: "Electrical — Non-Kitchen Boxes & Smurf Tube (ENT)", en: "Non-Kitchen Boxes & Smurf Tube (ENT)", es: "Cajas fuera de cocina y tubo smurf (ENT)" },
-      { v: "Electrical — Bathroom Ceiling & Attic Junctions", en: "Bathroom Ceiling & Attic Junctions", es: "Techo del baño y cajas en el ático" },
-      { v: "Electrical — Low-Voltage Closet Switch & Attic Light", en: "Low-Voltage Closet Switch & Attic Light", es: "Interruptor de bajo voltaje en clóset y luz de ático" }
+      { v: "Electrical — Subpanel Eaton 125A at D04", en: "Electrical panel", es: "Tablero eléctrico" },
+      { v: "Electrical — Kitchen 9 Circuits (Romex)", en: "Kitchen circuits", es: "Circuitos de cocina" },
+      { v: "Electrical — Non-Kitchen Boxes & Smurf Tube (ENT)", en: "Outlet boxes and conduit in the rooms", es: "Cajas y tubo en los cuartos" },
+      { v: "Electrical — Bathroom Ceiling & Attic Junctions", en: "Bathroom ceiling wiring", es: "Cableado del techo del baño" },
+      { v: "Electrical — Low-Voltage Closet Switch & Attic Light", en: "Closet switch cable and attic light", es: "Cable del apagador del clóset y luz del ático" }
     ],
     "paint-floors": [
       { v: "Paint & Floors — General", en: "Paint & Floors — General", es: "Pintura y pisos — General" },
@@ -4463,16 +4465,16 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     ],
     hvac: [
       { v: "HVAC — General", en: "HVAC — General", es: "Calefacción (HVAC) — General" },
-      { v: "HVAC — Furnace & Attic Equipment", en: "Furnace & Attic Equipment", es: "Calentador y equipo en el ático" },
-      { v: "HVAC — Attic Hatch Location & NEXT Visit", en: "Attic Hatch Location & NEXT Visit", es: "Ubicación de escotilla y visita de NEXT" },
+      { v: "HVAC — Furnace & Attic Equipment", en: "Furnace", es: "Calentador y equipo en el ático" },
+      { v: "HVAC — Attic Hatch Location & NEXT Visit", en: "Hatch spot and NEXT visit", es: "Ubicación de escotilla y visita de NEXT" },
       { v: "HVAC — Ducts & Registers", en: "Ducts & Registers", es: "Ductos y rejillas" }
     ],
     "attic-access": [
       { v: "Attic Access — General", en: "Attic Access — General", es: "Acceso al ático — General" },
-      { v: "Attic Access — 24 × 36 Hatch Framing & Location", en: "24 × 36 Hatch Framing & Location", es: "Enmarcado y ubicación de escotilla 24 × 36" },
-      { v: "Attic Access — Attic Enclosure & R-38 / Weatherstripping", en: "Attic Enclosure & R-38 / Weatherstripping", es: "Envolvente del ático, R-38 y burlete" },
-      { v: "Attic Access — Catwalk / Walkway & Permanent Light", en: "Catwalk / Walkway & Permanent Light", es: "Pasarela de madera y luz permanente" },
-      { v: "Attic Access — Temporary Closet Access & Furnace Clearance", en: "Temporary Closet Access & Furnace Clearance", es: "Acceso temporal por clóset y paso de caldera" }
+      { v: "Attic Access — 24 × 36 Hatch Framing & Location", en: "Hatch framing and location", es: "Enmarcado y ubicación de escotilla 24 × 36" },
+      { v: "Attic Access — Attic Enclosure & R-38 / Weatherstripping", en: "Sealing and insulation", es: "Envolvente del ático, R-38 y burlete" },
+      { v: "Attic Access — Catwalk / Walkway & Permanent Light", en: "Walkway and light", es: "Pasarela de madera y luz permanente" },
+      { v: "Attic Access — Temporary Closet Access & Furnace Clearance", en: "Bedroom closet opening", es: "Acceso temporal por clóset y paso de caldera" }
     ]
   };
 
@@ -4527,10 +4529,10 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       ORGANIZED_ABOUT_TOPICS[rk].forEach(function(t) {
         html += '<option value="' + escHtml(t.v) + '">' + escHtml(es ? t.es : t.en) + '</option>';
       });
-      html += '<option value="General">' + escHtml(es ? "General / Otro tema" : "General / Something else") + '</option>';
+      html += '<option value="General">' + escHtml(es ? "Otro tema" : "Something else") + '</option>';
       html += '</optgroup>';
-      html += '<optgroup label="' + escHtml(es ? "Cruce de planos / Otras áreas" : "Plan crossover / Other areas") + '">';
-      html += '<option value="Multiple areas / Plan crossover">' + escHtml(es ? "Varios cuartos / Cruce entre planos" : "Multiple areas / Plan crossover") + '</option>';
+      html += '<optgroup label="' + escHtml(es ? "Otros cuartos" : "Other rooms") + '">';
+      html += '<option value="Multiple areas / Plan crossover">' + escHtml(es ? "Más de un cuarto" : "More than one room") + '</option>';
       ORDERED_PROJECTS.forEach(function(p) {
         if (p.key === rk) return;
         html += '<option value="' + escHtml(p.en + " (Crossover)") + '">' + escHtml((es ? p.es : p.en) + (es ? " (otro cuarto)" : " (other area)")) + '</option>';
@@ -4538,7 +4540,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       html += '</optgroup>';
     } else {
       html += '<option value="Whole Unit / General">' + escHtml(es ? "Toda la unidad / General" : "Whole Unit / General") + '</option>';
-      html += '<option value="Multiple areas / Plan crossover">' + escHtml(es ? "Varios cuartos / Cruce entre planos" : "Multiple areas / Plan crossover") + '</option>';
+      html += '<option value="Multiple areas / Plan crossover">' + escHtml(es ? "Más de un cuarto" : "More than one room") + '</option>';
       html += '<optgroup label="' + escHtml(es ? "Proyectos" : "Projects") + '">';
       ORDERED_PROJECTS.forEach(function(p) {
         html += '<option value="' + escHtml(p.en) + '" data-room-key="' + escHtml(p.key) + '">' + escHtml(es ? p.es : p.en) + '</option>';

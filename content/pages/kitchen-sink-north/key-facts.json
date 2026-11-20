@@ -2,8 +2,8 @@
   {
     "kEn": "South wall",
     "kEs": "Muro Sur",
-    "vEn": "Corner 0–36 · Trash 36–51 · Dishwasher 51–75",
-    "vEs": "Esquina 0–36 · Basura 36–51 · Lavavajillas 51–75"
+    "vEn": "Corner 0\"–36\" · Trash 36\"–51\" · Dishwasher 51\"–75\"",
+    "vEs": "Esquina 0\"–36\" · Basura 36\"–51\" · Lavavajillas 51\"–75\""
   },
   {
     "kEn": "Sink",
@@ -20,7 +20,7 @@
   {
     "kEn": "Pie-safe",
     "kEs": "Pie-safe",
-    "vEn": "Open shelves · outlets at 18\" and 66\"",
-    "vEs": "Repisas abiertas · contactos a 18\" y 66\""
+    "vEn": "Open shelves · outlets beside, never under",
+    "vEs": "Repisas abiertas · contactos a un lado, nunca debajo"
   }
 ]

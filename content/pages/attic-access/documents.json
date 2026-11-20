@@ -1,8 +1,8 @@
 [
   {
     "title": "2026-11-19_Attic-Hatch-Practical-Guide_R5_EN.pdf",
-    "titleEn": "Attic Hatch Practical Guide R5 (8-Page Visual Guide, English)",
-    "titleEs": "Guía Práctica R5 del Acceso al Ático (8 páginas, Inglés)",
+    "titleEn": "Attic hatch guide · English",
+    "titleEs": "Guía de la escotilla del ático · inglés",
     "id": "2026-11-19_Attic-hatch-practical-guide_R5_EN",
     "path": "attic/Attic-hatch-practical-guide_R5_EN.pdf · Practical guide R5 (English)",
     "date": "2026-11-19",
@@ -12,8 +12,8 @@
   },
   {
     "title": "2026-11-19_Attic-Hatch-Practical-Guide_R5_ES.pdf",
-    "titleEn": "Attic Hatch Practical Guide R5 (8-Page Visual Guide, Spanish)",
-    "titleEs": "Guía Práctica R5 del Acceso al Ático (8 páginas, Español)",
+    "titleEn": "Attic hatch guide · Spanish",
+    "titleEs": "Guía de la escotilla del ático · español",
     "id": "2026-11-19_Attic-hatch-practical-guide_R5_ES",
     "path": "attic/Attic-hatch-practical-guide_R5_ES.pdf · Guía práctica R5 (Español)",
     "date": "2026-11-19",
@@ -23,8 +23,8 @@
   },
   {
     "title": "Attic Opening Plan & Step Checklist.html",
-    "titleEn": "Interactive Attic Opening Plan & 7-Step Checklist (EN / ES)",
-    "titleEs": "Plan Interactivo de Apertura al Ático y Lista de 7 Pasos (EN / ES)",
+    "titleEn": "Attic opening plan and checklist",
+    "titleEs": "Plan y lista de pasos para abrir el ático",
     "id": "2026-11-19_Attic-Opening-Plan-Interactive",
     "path": "hvac/ATTIC-OPENING-PLAN.md · Interactive EN/ES Plan & Checklists",
     "date": "2026-11-19",
@@ -33,8 +33,8 @@
   },
   {
     "title": "2026-11-19_U4_HVAC_Attic-Hatch-Visual-Field-Guide_R3_EN.pdf",
-    "titleEn": "Superseded Attic Hatch Visual Field Guide R3 (English)",
-    "titleEs": "Guía Visual de Campo R3 reemplazada (Inglés)",
+    "titleEn": "Older attic hatch guide (do not use) · English",
+    "titleEs": "Guía anterior de la escotilla (no usar) · inglés",
     "id": "2026-11-19_U4_HVAC_Attic-Hatch-Visual-Field-Guide_R3_EN",
     "path": "hvac/_superseded/Attic-hatch-visual-field-guide_R3_EN.pdf",
     "date": "2026-11-19",
@@ -44,8 +44,8 @@
   },
   {
     "title": "2026-11-19_U4_HVAC_Attic-Hatch-Visual-Field-Guide_R3_ES.pdf",
-    "titleEn": "Superseded Attic Hatch Visual Field Guide R3 (Spanish)",
-    "titleEs": "Guía Visual de Campo R3 reemplazada (Español)",
+    "titleEn": "Older attic hatch guide (do not use) · Spanish",
+    "titleEs": "Guía anterior de la escotilla (no usar) · español",
     "id": "2026-11-19_U4_HVAC_Attic-Hatch-Visual-Field-Guide_R3_ES",
     "path": "hvac/_superseded/Attic-hatch-visual-field-guide_R3_ES.pdf",
     "date": "2026-11-19",

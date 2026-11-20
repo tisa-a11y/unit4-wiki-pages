@@ -1,20 +1,20 @@
 {
-  "en": "Sink & Fridge Wall Visuals",
-  "es": "Vistas de fregadero y refrigerador",
+  "en": "Pictures",
+  "es": "Imágenes",
   "noteEn": "For reference only. The sink position is not settled; do not cut from these.",
   "noteEs": "Solo de referencia. La posición de la tarja no está definida; no cortar con base en estas imágenes.",
   "items": [
     {
       "img": "./wiki-images/kitchen-magicplan-dedb66d9b37f5023a2b650b6ebff20dc.jpg",
       "href": "./wiki-images/kitchen-magicplan-dedb66d9b37f5023a2b650b6ebff20dc.jpg",
-      "en": "3D Fridge Return & Window Sink",
-      "es": "3D Retorno Refri y Tarja en Ventana"
+      "en": "Refrigerator wall and sink under the window",
+      "es": "Muro del refrigerador y tarja bajo la ventana"
     },
     {
       "img": "./wiki-images/2026-11-18_U4_kitchen_overhead-concept_R2.jpg",
       "href": "./wiki-images/2026-11-18_U4_kitchen_overhead-concept_R2.jpg",
-      "en": "Full-L Overhead Reference R2",
-      "es": "Referencia Elevada en L R2"
+      "en": "Full L from above",
+      "es": "La L completa desde arriba"
     }
   ]
 }

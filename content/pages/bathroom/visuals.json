@@ -1,20 +1,20 @@
 {
-  "en": "Concept Visuals",
-  "es": "Vistas conceptuales",
+  "en": "Pictures",
+  "es": "Imágenes",
   "noteEn": "Bronze fixtures, medicine cabinet on the wall surface, toilet with a 10\" rough-in.",
   "noteEs": "Accesorios de bronce, botiquín sobre el muro, inodoro de 10\" al eje.",
   "items": [
     {
       "img": "https://drive.google.com/thumbnail?id=13tH-plEJj-eopLt3stePuWSzJQLrJMja&sz=w1200",
       "href": "https://drive.google.com/file/d/13tH-plEJj-eopLt3stePuWSzJQLrJMja/view",
-      "en": "Warm Brass Bathroom Concept",
-      "es": "Concepto Baño Latón Cálido"
+      "en": "Bathroom look",
+      "es": "Aspecto del baño"
     },
     {
       "img": "https://drive.google.com/thumbnail?id=1S8GNQgWQXY7wp_TWWBoRVHuLqjd4GukG&sz=w1200",
       "href": "https://drive.google.com/file/d/1S8GNQgWQXY7wp_TWWBoRVHuLqjd4GukG/view",
-      "en": "Pocket Door Reference (Deferred)",
-      "es": "Referencia Puerta Corrediza (Pospuesta)",
+      "en": "Pocket door idea (on hold)",
+      "es": "Idea de puerta corrediza (en espera)",
       "deferred": true
     }
   ]

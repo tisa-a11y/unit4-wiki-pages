@@ -1,32 +1,32 @@
 {
-  "en": "Visuals & R2 Mockups",
-  "es": "Vistas y maquetas R2",
+  "en": "Pictures",
+  "es": "Imágenes",
   "noteEn": "Do not cut moulding yet. When released, lay out frames with tape from the center of each wall.",
   "noteEs": "No cortar molduras todavía. Cuando se libere, trazar los marcos con cinta desde el centro de cada muro.",
   "items": [
     {
       "img": "https://drive.google.com/thumbnail?id=1PhZG1Wkmwd3-WOtiA7fad6touqtj0lkK&sz=w1200",
       "href": "https://drive.google.com/file/d/1PhZG1Wkmwd3-WOtiA7fad6touqtj0lkK/view",
-      "en": "Chair-Rail-Free Wall Panel Concept",
-      "es": "Concepto Paneles Sin Riel"
+      "en": "Wall panels without chair rail",
+      "es": "Paneles de muro sin guardasilla"
     },
     {
       "img": "https://drive.google.com/thumbnail?id=1H7H2uz34PsgH1uF0km3ozPWihYL54UTq&sz=w1200",
       "href": "https://drive.google.com/file/d/1H7H2uz34PsgH1uF0km3ozPWihYL54UTq/view",
-      "en": "Furnished Room Views (Rev B)",
-      "es": "Vistas Amuebladas (Rev B)"
+      "en": "Room with furniture",
+      "es": "Cuarto con muebles"
     },
     {
       "img": "./wiki-images/bedroom-r2-wall-a.jpg",
       "href": "./wiki-images/bedroom-r2-wall-a.jpg",
-      "en": "Wall A · North Headboard",
-      "es": "Muro A · Norte Cabecera"
+      "en": "Wall A, North (headboard)",
+      "es": "Muro A, Norte (cabecera)"
     },
     {
       "img": "./wiki-images/bedroom-r2-wall-c.jpg",
       "href": "./wiki-images/bedroom-r2-wall-c.jpg",
-      "en": "Wall C · South Shared Wall",
-      "es": "Muro C · Sur Compartido"
+      "en": "Wall C, South",
+      "es": "Muro C, Sur"
     }
   ]
 }

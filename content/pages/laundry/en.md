@@ -1,10 +1,10 @@
 # Laundry Closet
 
 ## Concept
-A small closet for the stacked LG WashTower (arrives Dec 1), hidden from the hallway behind a bookcase door.
+Closet for the stacked LG WashTower, hidden behind a bookcase door. The WashTower arrives Dec 1.
 
 ## What to know
-- **Done:** plumbing, gas and dryer vent rough-in. Ervin moved the gas box on Nov 11.
-- **Before the walls close:** check the height and position of the 120V outlet opening, and photograph the open wall with a tape measure in the picture.
-- **Then:** drywall, primer, the remaining baseboard, and finish paint once the color is approved, all before the WashTower arrives Dec 1.
-- **Bookcase door (plan MD-02):** a five-panel hidden door. It belongs to this page; the hallway only handles the trim around it. Measure the opening and review the fit before the door is built and hung.
+- **Done:** plumbing, gas and dryer vent. Gas box moved Nov 11.
+- **Before closing the wall:** check the outlet opening. Photograph the open wall with a tape measure in the picture.
+- **Then:** drywall, primer, baseboard, paint.
+- **Bookcase door:** measure the opening before the door is built.

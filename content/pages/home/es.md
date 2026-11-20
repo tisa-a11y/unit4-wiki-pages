@@ -9,5 +9,5 @@
 
 ## Próxima semana (desde el lun 23 nov)
 - **Lunes:** Llega la tablaroca. Apilarla; no cerrar ningún muro hasta que se libere ese cuarto.
-- **Lun 2:00–4:00 p.m.:** Visita de NEXT HVAC con Serge Kalitov y Alex: lugar de la caldera, tiro en azotea, escotilla y alimentador del tablero.
+- **Lun 2:00–4:00 p.m.:** Visita de NEXT HVAC con Serge Kalitov y Alex: lugar del calefactor, tiro en azotea, escotilla y alimentador del tablero.
 - **Después:** Azulejo de muros del baño, preparación del ático e instalaciones en bruto cuarto por cuarto.

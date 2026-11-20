@@ -2,8 +2,8 @@
   {
     "kEn": "Hood height",
     "kEs": "Altura de la campana",
-    "vEn": "30\"–36\" above the cooktop (66\"–72\" from the floor)",
-    "vEs": "30\"–36\" sobre la parrilla (66\"–72\" del piso)"
+    "vEn": "Bottom 66\"–72\" from the floor",
+    "vEs": "Base a 66\"–72\" del piso"
   },
   {
     "kEn": "Hood power",
@@ -18,9 +18,9 @@
     "vEs": "Rígido de metal de 6\", vertical, sin flexible"
   },
   {
-    "kEn": "Behind the range",
-    "kEs": "Detrás de la estufa",
-    "vEn": "8\" backguard: 0\" · 1\" trim: 6\" clearance",
-    "vEs": "Respaldo de 8\": 0\" · moldura de 1\": 6\" libres"
+    "kEn": "Ceiling gap",
+    "kEs": "Hueco al techo",
+    "vEn": "4-1/2\" to 11-1/2\" · measure at the test-hang",
+    "vEs": "De 4-1/2\" a 11-1/2\" · medir en la prueba"
   }
 ]
