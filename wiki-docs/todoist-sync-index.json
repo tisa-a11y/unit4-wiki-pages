@@ -1,6 +1,6 @@
 {
   "schema": "unit4-todoist-wiki-sync-index-v1",
-  "updatedAt": "2026-11-20T02:00:40.040828+00:00",
+  "updatedAt": "2026-11-20T02:30:07.078551+00:00",
   "todoistBoard": {
     "name": "Full 1231 11th Avenue Remodel",
     "projectId": "6hcMQpGhXWprg6m7",
@@ -1653,8 +1653,8 @@
       "title": "HVAC",
       "esTitle": "Climatización",
       "driveChecklistId": "1dYEurki2VQ8Zd5yxkRA4UzVL2uGJwMdG",
-      "note": "Hatch planning accepted/in progress; John provides four bounded site checks. Retain closet access until low-voltage AND permanent hatch. Broader installation remains paused.",
-      "noteEs": "Plan del acceso aceptado/en curso; John confirma cuatro puntos en obra. Conservar clóset hasta bajo voltaje Y acceso permanente. Instalación general en pausa.",
+      "note": "Hatch planning accepted/in progress; John provides four bounded site checks. Retain closet access until low-voltage AND permanent hatch. Broader installation remains paused. Model and 24 × 36 finished-clear size already selected; recover the existing citation, do not reselect. R3 visual field guide is current; John’s four evidence groups pending, planned daylight check November 20.",
+      "noteEs": "Plan del acceso aceptado/en curso; John confirma cuatro puntos en obra. Conservar clóset hasta bajo voltaje Y acceso permanente. Instalación general en pausa. Modelo y paso libre de 24 × 36 ya elegidos; recuperar cita existente, sin volver a elegir. Guía visual R3 vigente; cuatro grupos de evidencia pendientes, revisión de John con luz de día el 20 de noviembre.",
       "items": [
         {
           "id": "hvac-nov19-3d2d8a04b9",
@@ -1729,8 +1729,8 @@
         {
           "id": "hvac-nov19-c0927dcc40",
           "done": true,
-          "en": "Historical Trane / American Standard selection record retained; current exact model remains unresolved",
-          "es": "Se conserva registro histórico de selección Trane / American Standard; el modelo exacto actual sigue sin resolver",
+          "en": "HVAC model and 24 × 36 finished-clear opening already selected — confirmed by Tisa; assistants recover the existing model citation without reopening either decision",
+          "es": "Modelo HVAC y paso libre terminado de 24 × 36 ya elegidos — Tisa lo confirma; los asistentes recuperan la cita existente sin reabrir ninguna decisión",
           "todoistTaskIds": [],
           "todoistUrls": [],
           "sourcePath": "hvac/SPEC.md",
@@ -3656,6 +3656,6 @@
       "laundry"
     ],
     "source": "Canonical SPEC and CHECKLIST snapshots, November 19; other room records retained without new verification.",
-    "latestScopedUpdate": "November 19: HVAC hatch planning ownership and four site checks; restored canonical eight-item HVAC checklist to current snapshot. Other rooms preserved."
+    "latestScopedUpdate": "November 19: publish reviewed R3 visual hatch guide and settled-model/24×36-clear correction; current site and construction-detail checks remain pending."
   }
 }
