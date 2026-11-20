@@ -32,6 +32,17 @@
 .u4-hm-plan a{color:var(--muted)}
 @media (min-width:761px){.u4-home-menu{display:none}}
 @media (max-width:760px){html body .mobile #menuBtn,html body .mobile select#jump{display:none!important}.mobile .homelink{font-size:17px;font-weight:700;padding:8px 2px}}
+.u4-subnav-bar{display:none!important}
+.u4-subpage-crumb{border:0!important;background:none!important;padding:0!important;margin:0 0 4px!important;box-shadow:none!important}
+.u4-subpage-crumb .u4-crumb-sep,.u4-subpage-crumb .u4-crumb-cur{display:none!important}
+.u4-subpage-crumb a{font-size:15px;font-weight:600;min-height:36px}
+.u4-room-areas{margin:22px 0}
+.u4-room-areas .u4-hm-group > :first-child{border-top:0}
+.u4-hm-room.is-area{border-top:1px solid var(--line);font-size:16.5px}
+.u4-hm-room.is-area::after{content:"\203A";font-size:22px;color:var(--muted);margin-left:6px}
+.u4-hm-room.is-area .u4-hm-prog{margin-left:auto}
+.u4-hm-packet.is-deep{padding-left:44px}
+.u4-hm-note{display:block;font-size:13.5px;color:var(--muted);margin-top:2px}
 .u4-packets{margin:22px 0}
 .u4-packet-list{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
 .u4-packet{display:flex;flex-direction:column;gap:3px;padding:14px 16px;min-height:60px;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;background:var(--panel);text-decoration:none;color:var(--fg)}
@@ -1259,6 +1270,19 @@ function homeMenuBlock(){
   return '<nav class="u4-home-menu" aria-label="'+(es?"Cuartos y guías":"Rooms and guides")+'"><h2>'+(es?"Cuartos y guías":"Rooms and guides")+'</h2>'+groups
     + (plan?'<p class="u4-hm-plan">'+(es?"Planeación: ":"Planning: ")+plan+'</p>':'')+'</nav>';
 }
+// A room's subrooms and guides, listed the same way Home lists rooms (one pattern everywhere).
+function roomAreasBlock(p){
+  const kids = PAGES.filter(c=>c.parent===p.key);
+  const own = packetsFor(p.key);
+  if (!kids.length && !own.length) return "";
+  const es = LANG==="es";
+  const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const prog = k => { const it=(CHECKLISTS[k]&&CHECKLISTS[k].items)||[]; return it.length ? '<span class="u4-hm-prog">'+it.filter(x=>x[0]).length+'/'+it.length+'</span>' : ''; };
+  const pkt = (pk, deep) => '<a class="u4-hm-packet'+(deep?' is-deep':'')+'" href="#'+pk.key+'">'+esc(packetTitle(pk))+(packetNote(pk)?'<span class="u4-hm-note">'+esc(packetNote(pk))+'</span>':'')+'</a>';
+  let rows = own.map(pk=>pkt(pk,false)).join("");
+  kids.forEach(c=>{ rows += '<a class="u4-hm-room is-area" href="#'+c.key+'"><span>'+esc(pageLabel(c))+'</span>'+prog(c.key)+'</a>' + packetsFor(c.key).map(pk=>pkt(pk,true)).join(""); });
+  return '<nav class="u4-room-areas" id="sec-packets" aria-label="'+(es?"En este cuarto":"In this room")+'"><h2>'+(kids.length?(es?"Áreas y guías":"Areas and guides"):(es?"Guías de trabajo":"Instruction packets"))+'</h2><div class="u4-hm-group">'+rows+'</div></nav>';
+}
 function roomsBlock(){
   const es = LANG==="es";
   const rooms = PAGES.filter(x=>x.group==="Projects");
@@ -1508,7 +1532,7 @@ function crewRoom(p, srcMd){
     h += keyFactsBlock(p.key);
   }
 
-  h += packetCardsBlock(packetsFor(p.key), false);
+  h += roomAreasBlock(p);
   h += ckBlock(p.key);
 
   if (p.key==="kitchen") {
