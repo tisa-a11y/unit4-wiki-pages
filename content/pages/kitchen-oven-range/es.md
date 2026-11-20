@@ -1,0 +1,11 @@
+# Cocina → Tramo de estufa y campana — Estufa Viking 30" y Campana Zephyr Savona ZSA-E30AS
+
+## Concepto
+Muro oeste con estufa de gas **Viking `VGCC5304BSS`** de 30 pulgadas y campana de chimenea en acero inoxidable **Zephyr Savona `ZSA-E30AS`** de 30 pulgadas con azulejo hasta el techo (**sin gabinetes altos junto a la campana**).
+
+## Especificaciones verificadas de ingeniería y montaje (OEM Viking + Zephyr)
+- **Altura de montaje gobernante (`30"–36"` sobre estufa = `66"–72"` NPT):** **El manual de la estufa Viking `VGCC5304BSS` (`30"–36"` sobre la superficie de cocción = `66"–72"` NPT con cubierta a `36"`)** manda sobre el mínimo de `28"` de Zephyr (`64"` NPT incumple Viking por `2"`). Tornillos del soporte (Línea B) a `9-9/16"` arriba de la base (Línea A), separación horizontal de `9-27/32"` con bloqueo sólido de madera (`≥ 1-1/2"` de empotramiento en zonas `68"–86"` NPT y `104"–121-1/2"` NPT + espesor de piso `t`).
+- **Espacio trasero de estufa Viking y respaldo:** Con la moldura **`1"` Island Trim**, Viking exige **`6"` de separación trasera a materiales combustibles** (azulejo sobre tablaroca/madera sigue siendo combustible); con el respaldo alto de **`8"` Backguard** se permite **`0"` de separación trasera** arriba de la cubierta (con separador integrado de `3/4"`). Moldura lateral `3/8"` sobre cubierta.
+- **Ancho del muro oeste (`K-S4` vs. nicho):** Conciliar el tramo plano `K-S4` de `66-1/4"` (`18"` + `30"` estufa + `18"` con ajuste de `1/8"` por lado) frente al nicho de `42"` con pilastras de `4"` (`50"` total).
+- **Circuito eléctrico dedicado (`15A` AFCI `Circuit HD`):** `120V / 60Hz`, máx. `415W / 3.4A` (`> 300 VA` — requiere **circuito dedicado `15A` AFCI `Circuit HD` con bloqueo de interruptor `CEC 422.31(B)`**; no comparte circuito de luces `LT`). Ubicar caja de conexión (`100"` NPT) dentro de la funda superior de `8-5/8"` sin estorbar el ducto de `6"`. Estufa con llave de gas de `1/2"` y contacto `120V`.
+- **Ducto vertical rígido de `6"` y brecha al techo de `121-1/2"`:** Escape vertical con **ducto metálico rígido redondo de `6"`** (cero ducto flexible), `685 CFM` (`> 400 CFM`). El cubredacto estándar alcanza techos de **máx. `116"–117"`**, dejando una **brecha de `4-1/2"` a `13-1/2"`** en el techo de `121-1/2"` (falso plafón/cajillo Opción A vs. extensión `Z1C-00SA` Opción B).

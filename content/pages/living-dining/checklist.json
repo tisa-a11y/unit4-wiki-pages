@@ -1,0 +1,34 @@
+{
+  "fileId": "10wWsl89_qWvDuqkOr2BThS75gJBsuP1r",
+  "note": {
+    "en": "Living & dining room sequence (5 milestones).",
+    "es": "Secuencia de sala y comedor (5 hitos)."
+  },
+  "steps": [
+    {
+      "done": true,
+      "en": "D04 dining-side wall selected for subpanel bay (centered inside upper-left moulding frame; no D5 outlet on door-swing wall)",
+      "es": "Muro D04 lado comedor elegido para subpanel (centrado en el marco superior izquierdo; sin contacto D5)"
+    },
+    {
+      "done": false,
+      "en": "Frame D04 doorway infill & subpanel bay with solid backing and side-entry routing",
+      "es": "Enmarcar relleno de puerta D04 y vano de subpanel con refuerzos y entradas laterales"
+    },
+    {
+      "done": false,
+      "en": "Install outlet boxes & empty ENT smurf tube across D01–D04 and L01–L06 walls (clear of pocket-door cavities)",
+      "es": "Instalar cajas de contactos y tubo smurf (ENT vacío) en muros D01–D04 y L01–L06 (fuera de puertas corredizas)"
+    },
+    {
+      "done": false,
+      "en": "Tape-fit picture-frame wall mouldings from wall centerlines (aligned to existing baseboard & high trim) and install",
+      "es": "Presentar con cinta desde ejes centrales e instalar marcos de molduras alineados al zoclo y moldura alta"
+    },
+    {
+      "done": false,
+      "en": "Complete dining hutch/fireplace trim details, wall/trim priming & finish paint",
+      "es": "Terminar detalles de vitrina y chimenea, fondeo y pintura final de muros y molduras"
+    }
+  ]
+}

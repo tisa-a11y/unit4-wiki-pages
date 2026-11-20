@@ -1,0 +1,39 @@
+{
+  "fileId": "1Ip5esr8DOQSh55f0qFoDeWVhoDWOPpQz",
+  "note": {
+    "en": "Phase sequence (6 milestones). Install original window trim over HardieBoard before wall tile; verify toilet flange before Warm Gray floor grouting.",
+    "es": "Secuencia por etapas (6 hitos). Instalar moldura original de ventana sobre HardieBoard antes del azulejo de muro; verificar brida antes de emboquillar piso."
+  },
+  "steps": [
+    {
+      "done": true,
+      "en": "Demolition, plumbing rough-in, exhaust fan duct, Kohler K-1821 tub set & leak-tested, and Schluter floor waterproofing complete",
+      "es": "Demolición, plomería en bruto, ducto de extractor, tina Kohler K-1821 instalada y probada e impermeabilizante Schluter listos"
+    },
+    {
+      "done": true,
+      "en": "Calacatta Gem 12×24 matte floor tile laid (ungrouted) and shower HardieBoard backer + soap niches installed",
+      "es": "Piso Calacatta Gem 12×24 mate colocado (sin boquilla) y HardieBoard de regadera con nichos instalado"
+    },
+    {
+      "done": false,
+      "en": "Install original window trim over HardieBoard (before wall tile) & set 20A GFCI rough-in boxes",
+      "es": "Instalar moldura original de ventana sobre HardieBoard (antes del azulejo de muro) y cajas GFCI de 20A"
+    },
+    {
+      "done": false,
+      "en": "Verify toilet flange, grout floor with Warm Gray grout, and complete white 3×6 wall tile, niches & tub surround",
+      "es": "Verificar brida de inodoro, emboquillar piso con Warm Gray y terminar azulejo blanco 3×6 en muros y nichos"
+    },
+    {
+      "done": false,
+      "en": "Complete attic ceiling electrical junction, close bathroom ceiling, prime/paint & hang outward-swing door",
+      "es": "Completar conexión eléctrica en ático, cerrar techo del baño, fondear/pintar y colocar puerta abatible"
+    },
+    {
+      "done": false,
+      "en": "Install pedestal sink, 10\" rough-in toilet, Champagne Bronze trim/faucets, glass screen, medicine cabinet & lights",
+      "es": "Instalar lavabo de pedestal, inodoro de 10\", llaves Champagne Bronze, cancel de vidrio, botiquín e iluminación"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "fileId": null,
+  "note": {
+    "en": "West range wall sequence (5 milestones). Governing height: Viking 30\"–36\" above range (66\"–72\" AFF at 36\" counter; no upper cabinets at hood).",
+    "es": "Secuencia del muro oeste de estufa y campana (5 hitos). Altura gobernante: Viking 30\"–36\" sobre estufa (66\"–72\" NPT; sin gabinetes altos)."
+  },
+  "steps": [
+    {
+      "done": true,
+      "en": "Viking 30\" gas range & Zephyr Savona 30\" hood on hand; Mock Hookup Plan R2 & Master Plan R1 published",
+      "es": "Estufa Viking 30\" y campana Zephyr Savona 30\" en obra; Plan de Presentación R2 y Plan Maestro R1 publicados"
+    },
+    {
+      "done": false,
+      "en": "Install solid wood backing across lower canopy (68\"–86\" AFF) & upper flue (104\"–121-1/2\" AFF) zones",
+      "es": "Instalar bloqueo sólido de madera en zona inferior de campana (68\"–86\" NPT) y superior de ducto (104\"–121-1/2\" NPT)"
+    },
+    {
+      "done": false,
+      "en": "Pre-drywall mock-hang at 30\"–36\" above range (66\"–72\" AFF) & 121-1/2\" ceiling-gap / 6\" rigid vertical duct check",
+      "es": "Presentación previa a tablaroca a 30\"–36\" sobre estufa (66\"–72\" NPT) y revisión de brecha al techo y ducto rígido de 6\""
+    },
+    {
+      "done": false,
+      "en": "Rough-in dedicated 15A AFCI hood Circuit HD (with 422.31(B) lock-off) & 1/2\" range gas shutoff + 120V outlet",
+      "es": "Instalar circuito dedicado 15A AFCI Circuit HD (con bloqueo 422.31(B)), llave de gas de 1/2\" y contacto 120V de estufa"
+    },
+    {
+      "done": false,
+      "en": "Install ceiling-height range-wall tile, Viking rear backguard/clearance assembly, final hood & range tie-in",
+      "es": "Instalar azulejo hasta el techo, respaldo/claros traseros de estufa Viking y conexión final de campana y estufa"
+    }
+  ]
+}

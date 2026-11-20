@@ -1,0 +1,39 @@
+{
+  "fileId": null,
+  "note": {
+    "en": "Attic hatch, enclosure & walkway sequence (6 milestones from Practical Guide R5). Confirm ceiling fire-rating and joist bay B before cutting.",
+    "es": "Secuencia de escotilla, envolvente y pasarela (6 hitos de la Guía Práctica R5). Confirmar resistencia al fuego y claro B antes de cortar."
+  },
+  "steps": [
+    {
+      "done": true,
+      "en": "Settled basis: 24\"×36\" FINISHED CLEAR hallway hatch, 33.25\"×14.19\"×29\" furnace envelope, and 66\" attic height (≤ 20 ft walkway)",
+      "es": "Base confirmada: escotilla de 24\"×36\" LIBRES TERMINADAS, caldera de 33.25\"×14.19\"×29\" y altura de 66\" (pasarela ≤ 20 pies)"
+    },
+    {
+      "done": false,
+      "en": "Verify temporary bedroom-closet opening & daylight check of hallway hatch site, ceiling fire-rating & joist bay B width",
+      "es": "Verificar abertura temporal del clóset y revisar con luz de día el sitio de escotilla, resistencia al fuego y ancho B de viguetas"
+    },
+    {
+      "done": false,
+      "en": "Build permanent 24\"×36\" finished-clear hatch, 4-sided 2\" plywood insulation dam, continuous air-seal & R-matched fiberglass batts",
+      "es": "Construir escotilla permanente 24\"×36\" libres terminadas, retén de triplay de 2\" en 4 lados, sello de aire y colchonetas de fibra"
+    },
+    {
+      "done": false,
+      "en": "Install continuous 24\" wood walkway (≤ 20 ft max, 30\" clear passage) using 23/32\" rated OSB or 3/4\" plywood",
+      "es": "Instalar pasarela continua de madera de 24\" (≤ 20 pies máx., paso libre 30\") con OSB clasificado de 23/32\" o triplay de 3/4\""
+    },
+    {
+      "done": false,
+      "en": "Build level 30\"×30\" service platform (≥ 1\" Type B vent clearance) & wire enclosed LED light, entry switch + line-side 120V GFCI ≤ 25 ft",
+      "es": "Construir plataforma nivelada de 30\"×30\" (≥ 1\" libre en tiro Tipo B) y conectar luz LED cerrada, apagador y GFCI 120V ≤ 25 pies"
+    },
+    {
+      "done": false,
+      "en": "Close temporary bedroom-closet ceiling only after low-voltage switch cable, furnace passage & permanent hallway hatch are complete",
+      "es": "Cerrar techo temporal del clóset solo tras completar cable de bajo voltaje, paso de caldera y escotilla permanente del pasillo"
+    }
+  ]
+}

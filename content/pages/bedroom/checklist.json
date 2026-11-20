@@ -1,0 +1,34 @@
+{
+  "fileId": "1X2EqyKgqqZQCieUrfEE44Zp1XecrJ3ae",
+  "note": {
+    "en": "Bedroom & closet niche sequence (5 milestones). Keep closet ceiling open as temporary attic access until LV cable and permanent 24\"×36\" hallway hatch exist.",
+    "es": "Secuencia de recámara y clóset (5 hitos). Mantener abierto el techo del clóset hasta instalar cable LV y escotilla permanente 24\"×36\"."
+  },
+  "steps": [
+    {
+      "done": true,
+      "en": "Canonical Wall A (North), Wall B (East bay window), Wall C (South) & Wall D (West entry/closet) orientation established",
+      "es": "Orientación oficial de Muros A (Norte), B (Este ventana), C (Sur) y D (Oeste entrada/clóset) establecida"
+    },
+    {
+      "done": false,
+      "en": "Verify temporary closet furnace passage & run coiled low-voltage switch cable up left closet wall to attic",
+      "es": "Verificar paso de caldera en clóset temporal y subir cable de bajo voltaje por el muro izquierdo al ático"
+    },
+    {
+      "done": false,
+      "en": "Install outlet boxes + empty ENT smurf tube and repair missing hardwood floor patch",
+      "es": "Instalar cajas de contactos + tubo smurf (ENT vacío) y reparar parche faltante de piso de madera"
+    },
+    {
+      "done": false,
+      "en": "Tape-fit wall moulding frames from wall centerlines (aligned to existing baseboard & high trim) and install trim",
+      "es": "Presentar marcos de molduras con cinta desde el eje central (alineados al zoclo y moldura alta) e instalar"
+    },
+    {
+      "done": false,
+      "en": "Close temporary closet ceiling (after permanent hallway hatch exists), install closet rod, prime & paint room",
+      "es": "Cerrar techo del clóset (tras escotilla permanente), colocar barra, fondear y pintar recámara"
+    }
+  ]
+}

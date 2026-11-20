@@ -1,0 +1,39 @@
+{
+  "fileId": "1Ol2N6vIUfYA6FTONZlumowSwQogpAulN",
+  "note": {
+    "en": "Phase sequence (6 milestones). Subpages: Kitchen › Oven / Range Run (#kitchen-oven-range) & Kitchen › Sink & North Wall Runs (#kitchen-sink-north).",
+    "es": "Secuencia por etapas (6 hitos). Subpáginas: Cocina › Tramo de estufa y campana (#kitchen-oven-range) y Cocina › Fregadero y muro norte (#kitchen-sink-north)."
+  },
+  "steps": [
+    {
+      "done": true,
+      "en": "Core appliances & 30\" sink on hand; old pie-safe cleared for built-in shelving",
+      "es": "Electrodomésticos principales y tarja de 30\" en obra; nicho pie-safe despejado"
+    },
+    {
+      "done": false,
+      "en": "Full-L floor/wall layout markout, window sill/framing & sink datum alignment (#kitchen-sink-north)",
+      "es": "Trazo completo en L, repisa/marco de ventana y alineación del fregadero (#kitchen-sink-north)"
+    },
+    {
+      "done": false,
+      "en": "West range-wall wood backing & Zephyr hood mock-hang at 30\"–36\" above range (66\"–72\" AFF — #kitchen-oven-range)",
+      "es": "Bloqueo en muro oeste y presentación de campana Zephyr a 30\"–36\" sobre estufa (66\"–72\" NPT — #kitchen-oven-range)"
+    },
+    {
+      "done": false,
+      "en": "Kitchen 9-circuit electrical, D04 subpanel bay, plumbing & gas rough-in",
+      "es": "Instalación en bruto de 9 circuitos eléctricos, vano D04, plomería y gas"
+    },
+    {
+      "done": false,
+      "en": "Drywall close-in, Essex Green base cabinets, pie-safe shelves, countertops, range-wall tile & matte floor",
+      "es": "Cierre con tablaroca, gabinetes bajos Essex Green, repisas pie-safe, cubiertas, azulejo y piso mate"
+    },
+    {
+      "done": false,
+      "en": "Final appliance hookup, trim & paint finish, AFCI/GFCI testing & punch list",
+      "es": "Conexión final de equipos, pintura de muros y molduras, pruebas AFCI/GFCI y detalles finales"
+    }
+  ]
+}

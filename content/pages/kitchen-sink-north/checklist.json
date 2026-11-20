@@ -1,0 +1,34 @@
+{
+  "fileId": null,
+  "note": {
+    "en": "South sink wall, East fridge return & North hall-opening sequence (5 milestones).",
+    "es": "Secuencia del tramo sur de fregadero, retorno este del refrigerador y muro norte (5 hitos)."
+  },
+  "steps": [
+    {
+      "done": true,
+      "en": "30\" sink & counter-depth Haier refrigerator on hand; pie-safe recess cleared for open shelves",
+      "es": "Fregadero de 30\" y refrigerador Haier en obra; nicho pie-safe despejado para repisas abiertas"
+    },
+    {
+      "done": false,
+      "en": "Window sill/framing & South-wall station alignment (SE zero, window centerline & 30\" sink base)",
+      "es": "Terminar repisa/marco de ventana y alinear estaciones del tramo sur (cero SE, eje de ventana y base de 30\")"
+    },
+    {
+      "done": false,
+      "en": "Pie-safe shelf framing & exterior weather-sealing, plus North-wall 3-gang switch & D04 subpanel bay framing",
+      "es": "Enmarcar repisas pie-safe y sellado exterior, más caja de 3 apagadores en muro norte y vano de subpanel D04"
+    },
+    {
+      "done": false,
+      "en": "Sink & dishwasher plumbing rough-in and South/East countertop & appliance circuits (outlets beside pie-safe)",
+      "es": "Plomería en bruto de fregadero/lavavajillas y circuitos de cubierta en muros sur y este (contactos fuera del pie-safe)"
+    },
+    {
+      "done": false,
+      "en": "Install South & East base cabinets, pie-safe shelves, countertops, sink/faucet/dishwasher & Haier refrigerator",
+      "es": "Instalar gabinetes bajos sur y este, repisas pie-safe, cubiertas, fregadero/llave/lavavajillas y refrigerador Haier"
+    }
+  ]
+}

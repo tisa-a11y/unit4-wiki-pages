@@ -1,0 +1,34 @@
+{
+  "fileId": "1kKY92-MUELZmCo1VDwMI_Dffnrc-Frdi",
+  "note": {
+    "en": "Laundry closet & Murphy bookcase door sequence (5 milestones).",
+    "es": "Secuencia del clóset de lavandería y puerta librero Murphy (5 hitos)."
+  },
+  "steps": [
+    {
+      "done": true,
+      "en": "Plumbing/gas/vent rough-in, gas-box repositioning, LG WashTower purchase (Dec 1 delivery) & Murphy door location complete",
+      "es": "Instalaciones en bruto, reubicación de caja de gas, compra de torre LG WashTower (entrega 1 dic) y ubicación Murphy listas"
+    },
+    {
+      "done": false,
+      "en": "Verify laundry outlet opening position & photograph open-wall rough-in before drywall close-in",
+      "es": "Verificar abertura de contacto eléctrico y fotografiar instalaciones abiertas antes de cerrar con tablaroca"
+    },
+    {
+      "done": false,
+      "en": "Drywall close-in, priming, baseboard installation & closet wall/ceiling finish paint",
+      "es": "Cierre con tablaroca, fondeo, colocación de zoclo y pintura final de muros y techo del clóset"
+    },
+    {
+      "done": false,
+      "en": "5-panel Murphy bookcase door opening measurements, shop fabrication, hanging & hardware fit",
+      "es": "Medidas del vano, fabricación, colgado y ajuste de herrajes de la puerta librero Murphy"
+    },
+    {
+      "done": false,
+      "en": "Receive LG WashTower (Dec 1), set in place, connect water/gas/vent/120V & test operation",
+      "es": "Recibir torre LG WashTower (1 dic), colocar, conectar agua/gas/ventilación/120V y probar funcionamiento"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "fileId": "1Y9H-bCmZF_Q0xBIwMSoWCmcilmL6Dwv2",
+  "note": {
+    "en": "Hallway sequence (5 milestones). Permanent 24\"×36\" attic hatch details live on HVAC › Attic Access (#attic-access); Murphy door lives on Laundry Closet (#laundry).",
+    "es": "Secuencia del pasillo (5 hitos). La escotilla permanente 24\"×36\" vive en HVAC › Acceso al ático (#attic-access); la puerta Murphy vive en Lavandería (#laundry)."
+  },
+  "steps": [
+    {
+      "done": true,
+      "en": "Permanent hallway attic hatch sized at 24\"×36\" FINISHED CLEAR opening (#attic-access); Murphy door assigned to Laundry (#laundry)",
+      "es": "Escotilla permanente del pasillo definida en 24\"×36\" LIBRES TERMINADAS (#attic-access); puerta Murphy en Lavandería (#laundry)"
+    },
+    {
+      "done": false,
+      "en": "Daylight site verification, ceiling fire-rating check & joist bay B confirmation for 24\"×36\" hallway hatch (#attic-access)",
+      "es": "Verificación con luz de día, revisión contra fuego del techo y confirmación del claro B para escotilla 24\"×36\" (#attic-access)"
+    },
+    {
+      "done": false,
+      "en": "Frame permanent 24\"×36\" finished-clear hallway hatch, air-sealed enclosure & entrance light switch",
+      "es": "Construir escotilla permanente 24\"×36\" libres terminadas, envolvente sellada y apagador de entrada"
+    },
+    {
+      "done": false,
+      "en": "Hallway outlet/lighting rough-in, wall moulding layout & 5-panel Murphy bookcase door trim interface",
+      "es": "Instalación eléctrica en pasillo, trazo de molduras e interfaz de marco con puerta librero Murphy"
+    },
+    {
+      "done": false,
+      "en": "Complete hallway trim installation, wall/ceiling patching, priming & finish paint",
+      "es": "Terminar instalación de molduras, resanes en muros y techo, fondeo y pintura final del pasillo"
+    }
+  ]
+}

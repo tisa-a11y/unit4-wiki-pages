@@ -1,0 +1,39 @@
+{
+  "fileId": "1cShX-tf8guhceW3uOwCQCy2B4PfWZzxj",
+  "note": {
+    "en": "Whole-unit electrical sequence (6 milestones).",
+    "es": "Secuencia eléctrica de toda la unidad (6 hitos)."
+  },
+  "steps": [
+    {
+      "done": true,
+      "en": "Subpanel location settled at D04 dining-side wall (centered in upper-left moulding frame; no D5 outlet on door-swing wall)",
+      "es": "Ubicación del subpanel definida en muro D04 lado comedor (centrado en el marco superior izquierdo; sin contacto D5)"
+    },
+    {
+      "done": false,
+      "en": "Frame D04 subpanel bay with side-entry routing & coordinate feeder/subpanel install with NEXT and Alex",
+      "es": "Enmarcar vano del subpanel D04 con entradas laterales y coordinar alimentador/subpanel con NEXT y Alex"
+    },
+    {
+      "done": false,
+      "en": "Bathroom & attic rough-in: 2× 20A bathroom GFCI circuits, attic junction box, enclosed attic LED + switch & line-side 120V GFCI ≤ 25 ft",
+      "es": "Instalación en bruto de baño y ático: 2 circuitos GFCI 20A en baño, caja en ático, luz LED + apagador y GFCI 120V ≤ 25 pies"
+    },
+    {
+      "done": false,
+      "en": "Kitchen 9-circuit Romex rough-in (3 countertop 20A, fridge, dishwasher, disposal, range, 15A AFCI hood Circuit HD & lighting)",
+      "es": "Instalación en bruto de 9 circuitos de cocina en Romex (3 cubierta 20A, refri, lavavajillas, triturador, estufa, campana 15A e iluminación)"
+    },
+    {
+      "done": false,
+      "en": "Non-kitchen rooms (Bedroom, Living & Dining, Hallway): set outlet boxes, empty ENT smurf tube & closet low-voltage switch cable",
+      "es": "Cuartos fuera de cocina (Recámara, Sala/Comedor, Pasillo): instalar cajas, tubo smurf ENT vacío y cable LV en clóset"
+    },
+    {
+      "done": false,
+      "en": "Install feeder & subpanel, pull branch circuits, trim out devices/fixtures & complete AFCI/GFCI testing",
+      "es": "Instalar alimentador y subpanel, jalar circuitos derivados, montar dispositivos/luminarias y completar pruebas AFCI/GFCI"
+    }
+  ]
+}

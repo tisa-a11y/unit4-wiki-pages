@@ -1,0 +1,34 @@
+{
+  "fileId": "1X6tuZMgvcY1y7RmhbDvScSAab77CGNFQ",
+  "note": {
+    "en": "Unit-wide paint, moulding & flooring sequence (5 milestones).",
+    "es": "Secuencia de pintura, molduras y pisos de toda la unidad (5 hitos)."
+  },
+  "steps": [
+    {
+      "done": true,
+      "en": "Bathroom Calacatta Gem 12×24 matte porcelain floor tile laid; Warm Gray grout selected",
+      "es": "Piso de baño Calacatta Gem 12×24 porcelanato mate colocado; boquilla Warm Gray seleccionada"
+    },
+    {
+      "done": false,
+      "en": "Verify finished floor buildup thickness (~3/4\" t) and repair missing bedroom hardwood patch",
+      "es": "Verificar espesor de piso terminado (~3/4\" t) y reparar parche faltante de madera en recámara"
+    },
+    {
+      "done": false,
+      "en": "Complete consolidated whole-unit moulding order and centerline tape-fit frame layout across rooms",
+      "es": "Completar pedido consolidado de molduras y presentación con cinta desde los ejes centrales"
+    },
+    {
+      "done": false,
+      "en": "Install kitchen matte floor tile & doorway transitions and protect finished floors",
+      "es": "Instalar piso mate de cocina y transiciones de puerta y proteger pisos terminados"
+    },
+    {
+      "done": false,
+      "en": "Prime and finish-paint rooms, trim & Essex Green kitchen cabinets after drywall close-in",
+      "es": "Fondear y pintar cuartos, molduras y gabinetes Essex Green de cocina tras cierre de tablaroca"
+    }
+  ]
+}

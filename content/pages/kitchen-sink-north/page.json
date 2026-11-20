@@ -1,0 +1,13 @@
+{
+  "key": "kitchen-sink-north",
+  "label": "Sink & North Wall Runs",
+  "group": "Projects",
+  "parent": "kitchen",
+  "aliases": [
+    "sink-north-wall",
+    "kitchen/sink-north",
+    "kitchen/sink"
+  ],
+  "path": "kitchen/SPEC.md",
+  "fileId": null
+}
