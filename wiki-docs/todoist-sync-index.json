@@ -1,6 +1,6 @@
 {
   "schema": "unit4-todoist-wiki-sync-index-v1",
-  "updatedAt": "2026-11-20T02:30:07.078551+00:00",
+  "updatedAt": "2026-11-20T03:09:53.703586+00:00",
   "todoistBoard": {
     "name": "Full 1231 11th Avenue Remodel",
     "projectId": "6hcMQpGhXWprg6m7",
@@ -1653,8 +1653,8 @@
       "title": "HVAC",
       "esTitle": "Climatización",
       "driveChecklistId": "1dYEurki2VQ8Zd5yxkRA4UzVL2uGJwMdG",
-      "note": "Hatch planning accepted/in progress; John provides four bounded site checks. Retain closet access until low-voltage AND permanent hatch. Broader installation remains paused. Model and 24 × 36 finished-clear size already selected; recover the existing citation, do not reselect. R3 visual field guide is current; John’s four evidence groups pending, planned daylight check November 20.",
-      "noteEs": "Plan del acceso aceptado/en curso; John confirma cuatro puntos en obra. Conservar clóset hasta bajo voltaje Y acceso permanente. Instalación general en pausa. Modelo y paso libre de 24 × 36 ya elegidos; recuperar cita existente, sin volver a elegir. Guía visual R3 vigente; cuatro grupos de evidencia pendientes, revisión de John con luz de día el 20 de noviembre.",
+      "note": "Hatch planning accepted/in progress; John provides four bounded site checks. Retain closet access until low-voltage AND permanent hatch. Broader installation remains paused. Model and 24 × 36 finished-clear size already selected; recover the existing citation, do not reselect. R4 proposed practical guide is current. Before full ceiling cut, confirm ceiling-compatible assembly AND site-specific supporting-opening/joist plan; wood cover and 27.5×39.5 cut are not approved site decisions.",
+      "noteEs": "Plan del acceso aceptado/en curso; John confirma cuatro puntos en obra. Conservar clóset hasta bajo voltaje Y acceso permanente. Instalación general en pausa. Modelo y paso libre de 24 × 36 ya elegidos; recuperar cita existente, sin volver a elegir. Guía práctica R4 propuesta vigente. Antes de cortar todo el techo, confirmar sistema compatible Y plan específico de abertura/apoyo/viguetas; tapa de madera y corte 27.5×39.5 no son decisiones de obra aprobadas.",
       "items": [
         {
           "id": "hvac-nov19-3d2d8a04b9",
@@ -3656,6 +3656,6 @@
       "laundry"
     ],
     "source": "Canonical SPEC and CHECKLIST snapshots, November 19; other room records retained without new verification.",
-    "latestScopedUpdate": "November 19: publish reviewed R3 visual hatch guide and settled-model/24×36-clear correction; current site and construction-detail checks remain pending."
+    "latestScopedUpdate": "November 19: publish corrected R4 as proposed practical guide; settled model/24×36 clear preserved, ceiling compatibility and site-specific support plan required before full ceiling cut."
   }
 }
