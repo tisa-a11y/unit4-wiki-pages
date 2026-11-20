@@ -1023,18 +1023,6 @@ html body .u4-room-areas .u4-hm-packet:not(.is-deep){padding-left:0!important}
 html body .u4-home-kicker,html body article .eyebrow,html body article .u4-eyebrow,html body article .wk-label{font-family:var(--body)!important;text-transform:none!important;letter-spacing:0!important;font-size:14px!important;font-weight:500!important;color:var(--muted)!important}
 html body .u4-hm-note{font-size:14px}
 html body .u4-hm-prog{font-size:14px!important;font-weight:400!important}
-/* a thin line down the left ties a room's areas and guides to the room */
-html body nav.rail .rail-kids{margin:2px 0 6px 16px;padding-left:4px;border-left:2px solid var(--line)}
-html body nav.rail .rail-kids a.rail-leaf{padding-left:10px!important}
-html body nav.rail .rail-kids a.rail-leaf2{padding-left:24px!important}
-html body .u4-hm-kids{margin:0 0 4px 6px;padding-left:10px;border-left:2px solid var(--line)}
-html body .u4-hm-kids > a{border-bottom:1px solid var(--line)}
-html body .u4-hm-kids > a:last-child{border-bottom:0}
-html body .u4-hm-kids .u4-hm-room.is-child{padding-left:4px!important}
-html body .u4-hm-kids .u4-hm-packet:not(.is-deep){padding-left:4px!important}
-html body .u4-hm-kids .u4-hm-packet.is-deep{padding-left:20px!important}
-html body .u4-hm-kids > a{display:flex;padding-right:0!important}
-html body .u4-hm-kids > a.u4-hm-packet{display:block;padding-right:28px!important}
 /* checklist: no box */
 html body .ck{border:0;border-radius:0;padding:0;margin:8px 0 20px}
 html body .ck h2{font-size:20px}
@@ -1339,7 +1327,7 @@ function homeMenuBlock(){
   const packets = (k, deep) => packetsFor(k).map(pk=>'<a class="u4-hm-packet'+(deep?' is-deep':'')+'" href="#'+pk.key+'">'+esc(packetTitle(pk))+'</a>').join("");
   const room = (p, child) => '<a class="u4-hm-room'+(child?' is-child':'')+'" href="#'+p.key+'"><span>'+esc(pageLabel(p))+'</span>'+prog(p.key)+'</a>'+(child?packets(p.key, true):"");
   const tops = PAGES.filter(x=>x.group==="Projects" && !x.parent);
-  const groups = tops.map(p=>'<div class="u4-hm-group">'+room(p,false)+(k=>k?'<div class="u4-hm-kids">'+k+'</div>':'')(PAGES.filter(c=>c.parent===p.key).map(c=>room(c,true)).join("")+packets(p.key,false))+'</div>').join("");
+  const groups = tops.map(p=>'<div class="u4-hm-group">'+room(p,false)+PAGES.filter(c=>c.parent===p.key).map(c=>room(c,true)).join("")+packets(p.key,false)+'</div>').join("");
   const plan = PAGES.filter(x=>x.key==="roadmap"||x.key==="decisions").map(p=>'<a href="#'+p.key+'">'+esc(pageLabel(p))+'</a>').join(" · ");
   return '<nav class="u4-home-menu" aria-label="'+(es?"Cuartos y guías":"Rooms and guides")+'"><h2>'+(es?"Cuartos y guías":"Rooms and guides")+'</h2>'+groups
     + (plan?'<p class="u4-hm-plan">'+(es?"Planeación: ":"Planning: ")+plan+'</p>':'')+'</nav>';
@@ -1675,7 +1663,6 @@ function resolvePageKey(rawKey){
 }
 window.resolvePageKey = resolvePageKey;
 
-let railTarget = null; // the lined group that holds a room's areas and guides
 function appendRailRoomNode(p, isChildSubpage){
   // One room = one group in the menu. Its areas and plans follow at one level, lighter than the room name.
   const isRoom = p.group==="Projects" && !isChildSubpage;
@@ -1683,12 +1670,12 @@ function appendRailRoomNode(p, isChildSubpage){
   a.href = "#" + p.key; a.dataset.key = p.key; if (p.parent) a.dataset.parentKey = p.parent;
   a.className = "rail-room-link " + (isRoom ? "rail-room" : (isChildSubpage ? "rail-leaf rail-area" : "rail-top"));
   a.textContent = pageLabel(p);
-  (railTarget||rail).appendChild(a);
+  rail.appendChild(a);
   if (isChildSubpage || !isRoom) appendRailPackets(p, isChildSubpage);
 }
 // Guides for a room or area. A room's own guides come after its areas (see renderNav).
 function appendRailPackets(p, deep){
-  packetsFor(p.key).forEach(pk=>{ const pa=document.createElement("a"); pa.className="rail-packet-link "+(deep?"rail-leaf2":"rail-leaf"); pa.href="#"+pk.key; pa.dataset.key=pk.key; pa.textContent=packetTitle(pk); (railTarget||rail).appendChild(pa); });
+  packetsFor(p.key).forEach(pk=>{ const pa=document.createElement("a"); pa.className="rail-packet-link "+(deep?"rail-leaf2":"rail-leaf"); pa.href="#"+pk.key; pa.dataset.key=pk.key; pa.textContent=packetTitle(pk); rail.appendChild(pa); });
 }
 function appendPlanningNav(){
   if (!rail) return;
@@ -1758,11 +1745,8 @@ function renderNav(){
   PAGES.filter(p=>p.group==="Projects" && !p.parent).forEach(p=>{
     appendRailRoomNode(p, false);
     const childPages = PAGES.filter(c=>c.parent===p.key);
-    railTarget = document.createElement("div"); railTarget.className = "rail-kids";
     childPages.forEach(cp=>appendRailRoomNode(cp, true));
     appendRailPackets(p, false);
-    if (railTarget.children.length) rail.appendChild(railTarget);
-    railTarget = null;
 
     const o=document.createElement("option"); o.value=p.key; o.textContent=pageLabel(p); jump.appendChild(o); packetsFor(p.key).forEach(pk=>{ const po2=document.createElement("option"); po2.value=pk.key; po2.textContent="\u00a0\u00a0\u25A4 "+packetTitle(pk); jump.appendChild(po2); });
     if (p.key === activeKey) {
