@@ -25,13 +25,13 @@
       {
         id: "1iqFU246kyPgvR05zKM9gIsX8BTG8rwpT",
         room: "kitchen",
-        titleEn: "Kitchen Measured Elevation & Cabinet Layout Preview",
-        titleEs: "Vista previa de elevaci\u00f3n y distribuci\u00f3n de gabinetes de cocina",
-        statusEn: "Verify pie-safe framed opening dimensions & finished-floor datum during full-L staging",
-        statusEs: "Verificar medidas del nicho pie-safe y referencia de piso terminado durante el trazado en L",
+        titleEn: "Kitchen Measured Elevation & Cabinet Layout Preview (Nov 19 — Note: Attic Hatch #5 Superseded)",
+        titleEs: "Vista previa de distribución de gabinetes de cocina (19 nov — Nota: Escotilla #5 reemplazada)",
+        statusEn: "Note on callout #5: Ignore the Nov 19 hallway hatch marker — attic hatch is OUTSIDE Front Door 4 on the common stair landing. Use Interactive Kitchen Floor Plan & Attic Hatch Plan.",
+        statusEs: "Nota sobre globo #5: Ignora la marca de escotilla dentro del pasillo (19 nov) — la escotilla va FUERA de la Puerta 4 en el descanso de escaleras. Usa el Plano Interactivo.",
         driveUrl: "https://drive.google.com/file/d/1iqFU246kyPgvR05zKM9gIsX8BTG8rwpT/view",
         thumbUrl: "https://drive.google.com/thumbnail?id=1iqFU246kyPgvR05zKM9gIsX8BTG8rwpT&sz=w1200",
-        deferred: false
+        deferred: true
       }
     ],
     bedroom: [
