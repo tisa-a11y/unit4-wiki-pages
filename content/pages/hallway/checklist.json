@@ -1,0 +1,30 @@
+{
+  "fileId": "1Y9H-bCmZF_Q0xBIwMSoWCmcilmL6Dwv2",
+  "steps": [
+    {
+      "done": true,
+      "en": "24\"×36\" clear hatch settled (#attic-access); Murphy door on #laundry",
+      "es": "Escotilla 24\"×36\" fija (#attic-access); puerta Murphy en #laundry"
+    },
+    {
+      "done": false,
+      "en": "Daylight hatch photos, fire-rating check & joist bay B (#attic-access)",
+      "es": "Fotos de día, revisión contra fuego y claro B (#attic-access)"
+    },
+    {
+      "done": false,
+      "en": "Build permanent 24\"×36\" clear hatch & entrance light switch",
+      "es": "Construir escotilla permanente 24\"×36\" y apagador de entrada"
+    },
+    {
+      "done": false,
+      "en": "Hallway outlets/lights, moulding layout & Murphy trim interface",
+      "es": "Contactos/luces, trazo de molduras e interfaz de marco Murphy"
+    },
+    {
+      "done": false,
+      "en": "Install trim, patch walls/ceiling, prime & paint",
+      "es": "Instalar molduras, resanar muros/techo, fondear y pintar"
+    }
+  ]
+}

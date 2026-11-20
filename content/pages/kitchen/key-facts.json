@@ -1,0 +1,26 @@
+[
+  {
+    "kEn": "Footprint",
+    "kEs": "Medidas",
+    "vEn": "147\" × 126\" · 121-1/2\" ceiling",
+    "vEs": "147\" × 126\" · techo 121-1/2\""
+  },
+  {
+    "kEn": "Cabinets",
+    "kEs": "Gabinetes",
+    "vEn": "Essex Green bases · No uppers at hood",
+    "vEs": "Bajos Essex Green · Sin altos en campana"
+  },
+  {
+    "kEn": "Electrical",
+    "kEs": "Electricidad",
+    "vEn": "9 circuits from D04 (AFCI/GFCI)",
+    "vEs": "9 circuitos desde D04 (AFCI/GFCI)"
+  },
+  {
+    "kEn": "Active Hold",
+    "kEs": "Pausa",
+    "vEn": "C3 sink base & D04 wall closure",
+    "vEs": "Base C3 y cierre muro D04"
+  }
+]

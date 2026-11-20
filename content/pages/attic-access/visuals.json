@@ -1,0 +1,78 @@
+{
+  "en": "Practical Guide R5 (8 Pages) & Site Photo",
+  "es": "Guía Práctica R5 (8 páginas) y foto del sitio",
+  "noteEn": "Tap any page to open R5 in Previews.",
+  "noteEs": "Toca cualquier página para abrir R5 en Vistas previas.",
+  "items": [
+    {
+      "img": "./wiki-docs/attic-hatch-r5/assets/EN-page-1.png",
+      "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-1.png",
+      "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p1",
+      "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p1",
+      "en": "R5 p. 1 · 24×36 Clear Opening",
+      "es": "R5 pág. 1 · Paso libre 24×36"
+    },
+    {
+      "img": "./wiki-docs/attic-hatch-r5/assets/EN-page-2.png",
+      "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-2.png",
+      "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p2",
+      "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p2",
+      "en": "R5 p. 2 · Location & 4 Photos",
+      "es": "R5 pág. 2 · Ubicación y 4 fotos"
+    },
+    {
+      "img": "./wiki-docs/attic-hatch-r5/assets/EN-page-3.png",
+      "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-3.png",
+      "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p3",
+      "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p3",
+      "en": "R5 p. 3 · Materials List",
+      "es": "R5 pág. 3 · Lista de materiales"
+    },
+    {
+      "img": "./wiki-docs/attic-hatch-r5/assets/EN-page-4.png",
+      "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-4.png",
+      "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p4",
+      "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p4",
+      "en": "R5 p. 4 · Cut List & Parts",
+      "es": "R5 pág. 4 · Lista de cortes"
+    },
+    {
+      "img": "./wiki-docs/attic-hatch-r5/assets/EN-page-5.png",
+      "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-5.png",
+      "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p5",
+      "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p5",
+      "en": "R5 p. 5 · Joist Bay B Check",
+      "es": "R5 pág. 5 · Revisión claro B"
+    },
+    {
+      "img": "./wiki-docs/attic-hatch-r5/assets/EN-page-6.png",
+      "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-6.png",
+      "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p6",
+      "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p6",
+      "en": "R5 p. 6 · Air-Seal & Batts",
+      "es": "R5 pág. 6 · Sellado y batts"
+    },
+    {
+      "img": "./wiki-docs/attic-hatch-r5/assets/EN-page-7.png",
+      "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-7.png",
+      "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p7",
+      "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p7",
+      "en": "R5 p. 7 · Walkway & GFCI",
+      "es": "R5 pág. 7 · Pasarela y GFCI"
+    },
+    {
+      "img": "./wiki-docs/attic-hatch-r5/assets/EN-page-8.png",
+      "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-8.png",
+      "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p8",
+      "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p8",
+      "en": "R5 p. 8 · Final Checks",
+      "es": "R5 pág. 8 · Revisión final"
+    },
+    {
+      "img": "./wiki-docs/attic-hatch-r5/assets/John-original-landing-photo.jpg",
+      "href": "./wiki-docs/attic-hatch-r5/assets/John-original-landing-photo.jpg",
+      "en": "John's Candidate Landing Photo",
+      "es": "Foto Candidata de John"
+    }
+  ]
+}

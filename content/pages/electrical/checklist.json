@@ -1,0 +1,35 @@
+{
+  "fileId": "1cShX-tf8guhceW3uOwCQCy2B4PfWZzxj",
+  "steps": [
+    {
+      "done": true,
+      "en": "D04 dining-side wall settled for Eaton 125A subpanel (no D5 outlet)",
+      "es": "Muro D04 lado comedor definido para subpanel Eaton 125A (sin D5)"
+    },
+    {
+      "done": false,
+      "en": "Frame D04 bay with side-entry routing & reconcile feeder with NEXT/Alex",
+      "es": "Enmarcar D04 con entradas laterales y conciliar alimentador con NEXT/Alex"
+    },
+    {
+      "done": false,
+      "en": "Bathroom 2× 20A GFCI, attic J-box, attic LED/switch & live 120V GFCI",
+      "es": "2× 20A GFCI baño, caja ático, luz LED/apagador y GFCI 120V vivo"
+    },
+    {
+      "done": false,
+      "en": "Kitchen 9-circuit Romex rough-in incl. 15A AFCI hood Circuit HD",
+      "es": "9 circuitos Romex en cocina incl. 15A AFCI campana Circuit HD"
+    },
+    {
+      "done": false,
+      "en": "Outlet boxes + empty ENT smurf tube in closed rooms & closet LV cable",
+      "es": "Cajas + tubo ENT vacío en cuartos cerrados y cable LV en clóset"
+    },
+    {
+      "done": false,
+      "en": "Install feeder/subpanel, pull circuits, trim out & test AFCI/GFCI",
+      "es": "Instalar alimentador/subpanel, cablear, montar dispositivos y probar"
+    }
+  ]
+}

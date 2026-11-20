@@ -1,0 +1,20 @@
+{
+  "en": "Sink & Fridge Wall Visuals",
+  "es": "Vistas de fregadero y refrigerador",
+  "noteEn": "Design reference — confirm common zero before cutting.",
+  "noteEs": "Referencia visual — confirmar cero común antes de cortar.",
+  "items": [
+    {
+      "img": "./wiki-images/kitchen-magicplan-dedb66d9b37f5023a2b650b6ebff20dc.jpg",
+      "href": "./wiki-images/kitchen-magicplan-dedb66d9b37f5023a2b650b6ebff20dc.jpg",
+      "en": "3D Fridge Return & Window Sink",
+      "es": "3D Retorno Refri y Tarja en Ventana"
+    },
+    {
+      "img": "./wiki-images/2026-11-18_U4_kitchen_overhead-concept_R2.jpg",
+      "href": "./wiki-images/2026-11-18_U4_kitchen_overhead-concept_R2.jpg",
+      "en": "Full-L Overhead Reference R2",
+      "es": "Referencia Elevada en L R2"
+    }
+  ]
+}

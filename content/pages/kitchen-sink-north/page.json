@@ -1,0 +1,15 @@
+{
+  "key": "kitchen-sink-north",
+  "label": "Sink & North Wall Runs",
+  "labelEn": "Sink & North Wall Runs",
+  "labelEs": "Fregadero y muro norte",
+  "group": "Projects",
+  "parent": "kitchen",
+  "aliases": [
+    "sink-north-wall",
+    "kitchen/sink-north",
+    "kitchen/sink"
+  ],
+  "path": "kitchen/SPEC.md",
+  "fileId": null
+}

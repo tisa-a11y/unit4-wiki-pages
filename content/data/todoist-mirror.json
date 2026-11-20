@@ -1,0 +1,2417 @@
+{
+  "schema": "unit4-todoist-wiki-sync-index-v1",
+  "updatedAt": "2026-11-20T06:36:00+00:00",
+  "todoistBoard": {
+    "name": "Full 1231 11th Avenue Remodel",
+    "projectId": "6hcMQpGhXWprg6m7",
+    "url": "https://app.todoist.com/app/project/6hcMQpGhXWprg6m7",
+    "writeHoldActive": false,
+    "writeHoldNote": "2026-11-08 blanket write hold lifted 2026-11-12; scoped writes active with @verification-photo onsite subtasks and 1:1 Wiki synchronicity.",
+    "synchronicityRule": "Any Todoist record change must have corresponding synchronicity in its governing wiki doc (<room>/CHECKLIST.md, <room>/SPEC.md, STATUS-NOW.md, or decisions) in the same pass (Tisa, 2026-11-11).",
+    "knownStaleCardNotes": [
+      "Bathroom toilet-wall furring card 6hvhMvhmWqgR52v7 is marked complete in Todoist while checklist requires reconciliation before repeating work.",
+      "Several electrical cards still describe an older C-10/permit path; locked rule (2026-11-05) is own crew wires Unit 4, no permit requested.",
+      "Some older kitchen sink-base subtasks show 51-81 / CL 66; governing kitchen/SPEC.md is 75-105 / CL 90 (card 6hvjQGPw7cf594p7 corrected)."
+    ]
+  },
+  "thisWeekNov9To13": {
+    "en": [
+      "Finish bathroom: blocking + full bathroom electrical rough-in (wires to attic junction box) -> close ceiling -> drywall & Hardie board -> wall tile -> set tub and sink.",
+      "Frame the electrical panel wall (D04 dining-side wall).",
+      "Finish the laundry closet: complete remaining rough-in, finish walls, and paint."
+    ],
+    "es": [
+      "Terminar el baño: refuerzos + instalación eléctrica en bruto del baño (cables a caja en el ático) -> cerrar techo -> tablaroca y Hardie board -> azulejo de muros -> tina y lavabo.",
+      "Enmarcar el muro del panel eléctrico (muro D04 hacia el comedor).",
+      "Terminar el clóset de lavandería: completar pendientes de instalaciones, muros y pintura."
+    ]
+  },
+  "summary": {
+    "roomCount": 9,
+    "checklistItemCount": 105,
+    "uniqueLinkedTodoistCards": 97
+  },
+  "rooms": [
+    {
+      "key": "kitchen",
+      "title": "Kitchen",
+      "esTitle": "Cocina",
+      "driveChecklistId": "1Ol2N6vIUfYA6FTONZlumowSwQogpAulN",
+      "note": "Phase sequence (6 milestones). Subpages: Kitchen › Oven / Range Run (#kitchen-oven-range) & Kitchen › Sink & North Wall Runs (#kitchen-sink-north).",
+      "noteEs": "Secuencia por etapas (6 hitos). Subpáginas: Cocina › Tramo de estufa y campana (#kitchen-oven-range) y Cocina › Fregadero y muro norte (#kitchen-sink-north).",
+      "items": [
+        {
+          "done": true,
+          "en": "Core appliances & 30\" sink on hand; old pie-safe cleared for built-in shelving",
+          "es": "Electrodomésticos principales y tarja de 30\" en obra; nicho pie-safe despejado",
+          "todoistTaskIds": [],
+          "checklistPath": "kitchen/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Full-L floor/wall layout markout, window sill/framing & sink datum alignment (#kitchen-sink-north)",
+          "es": "Trazo completo en L, repisa/marco de ventana y alineación del fregadero (#kitchen-sink-north)",
+          "todoistTaskIds": [],
+          "checklistPath": "kitchen/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "West range-wall wood backing & Zephyr hood mock-hang at 30\"–36\" above range (66\"–72\" AFF — #kitchen-oven-range)",
+          "es": "Bloqueo en muro oeste y presentación de campana Zephyr a 30\"–36\" sobre estufa (66\"–72\" NPT — #kitchen-oven-range)",
+          "todoistTaskIds": [],
+          "checklistPath": "kitchen/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Kitchen 9-circuit electrical, D04 subpanel bay, plumbing & gas rough-in",
+          "es": "Instalación en bruto de 9 circuitos eléctricos, vano D04, plomería y gas",
+          "todoistTaskIds": [],
+          "checklistPath": "kitchen/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Drywall close-in, Essex Green base cabinets, pie-safe shelves, countertops, range-wall tile & matte floor",
+          "es": "Cierre con tablaroca, gabinetes bajos Essex Green, repisas pie-safe, cubiertas, azulejo y piso mate",
+          "todoistTaskIds": [],
+          "checklistPath": "kitchen/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Final appliance hookup, trim & paint finish, AFCI/GFCI testing & punch list",
+          "es": "Conexión final de equipos, pintura de muros y molduras, pruebas AFCI/GFCI y detalles finales",
+          "todoistTaskIds": [],
+          "checklistPath": "kitchen/CHECKLIST.md"
+        }
+      ]
+    },
+    {
+      "key": "kitchen-oven-range",
+      "title": "Kitchen › Oven / Range Run",
+      "esTitle": "Cocina › Tramo de estufa y campana",
+      "driveChecklistId": null,
+      "note": "West range wall sequence (5 milestones). Governing height: Viking 30\"–36\" above range (66\"–72\" AFF at 36\" counter; no upper cabinets at hood).",
+      "noteEs": "Secuencia del muro oeste de estufa y campana (5 hitos). Altura gobernante: Viking 30\"–36\" sobre estufa (66\"–72\" NPT; sin gabinetes altos).",
+      "items": [
+        {
+          "done": true,
+          "en": "Viking 30\" gas range & Zephyr Savona 30\" hood on hand; Mock Hookup Plan R3 & Master Plan R1 published",
+          "es": "Estufa Viking 30\" y campana Zephyr Savona 30\" en obra; Plan de Presentación R3 y Plan Maestro R1 publicados",
+          "todoistTaskIds": [],
+          "checklistPath": "kitchen/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Install solid wood backing across lower canopy (68\"–86\" AFF) & upper flue (104\"–121-1/2\" AFF) zones",
+          "es": "Instalar bloqueo sólido de madera en zona inferior de campana (68\"–86\" NPT) y superior de ducto (104\"–121-1/2\" NPT)",
+          "todoistTaskIds": [],
+          "checklistPath": "kitchen/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Pre-drywall mock-hang at 30\"–36\" above range (66\"–72\" AFF) & 121-1/2\" ceiling-gap / 6\" rigid vertical duct check",
+          "es": "Presentación previa a tablaroca a 30\"–36\" sobre estufa (66\"–72\" NPT) y revisión de brecha al techo y ducto rígido de 6\"",
+          "todoistTaskIds": [],
+          "checklistPath": "kitchen/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Rough-in dedicated 15A AFCI hood Circuit HD (with 422.31(B) lock-off) & 1/2\" range gas shutoff + 120V outlet",
+          "es": "Instalar circuito dedicado 15A AFCI Circuit HD (con bloqueo 422.31(B)), llave de gas de 1/2\" y contacto 120V de estufa",
+          "todoistTaskIds": [],
+          "checklistPath": "kitchen/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Install ceiling-height range-wall tile, Viking rear backguard/clearance assembly, final hood & range tie-in",
+          "es": "Instalar azulejo hasta el techo, respaldo/claros traseros de estufa Viking y conexión final de campana y estufa",
+          "todoistTaskIds": [],
+          "checklistPath": "kitchen/CHECKLIST.md"
+        }
+      ]
+    },
+    {
+      "key": "kitchen-sink-north",
+      "title": "Kitchen › Sink & North Wall Runs",
+      "esTitle": "Cocina › Fregadero y muro norte",
+      "driveChecklistId": null,
+      "note": "South sink wall, East fridge return & North hall-opening sequence (5 milestones).",
+      "noteEs": "Secuencia del tramo sur de fregadero, retorno este del refrigerador y muro norte (5 hitos).",
+      "items": [
+        {
+          "done": true,
+          "en": "30\" sink & counter-depth Haier refrigerator on hand; pie-safe recess cleared for open shelves",
+          "es": "Fregadero de 30\" y refrigerador Haier en obra; nicho pie-safe despejado para repisas abiertas",
+          "todoistTaskIds": [],
+          "checklistPath": "kitchen/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Window sill/framing & South-wall station alignment (SE zero, window centerline & 30\" sink base)",
+          "es": "Terminar repisa/marco de ventana y alinear estaciones del tramo sur (cero SE, eje de ventana y base de 30\")",
+          "todoistTaskIds": [],
+          "checklistPath": "kitchen/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Pie-safe shelf framing & exterior weather-sealing, plus North-wall 3-gang switch & D04 subpanel bay framing",
+          "es": "Enmarcar repisas pie-safe y sellado exterior, más caja de 3 apagadores en muro norte y vano de subpanel D04",
+          "todoistTaskIds": [],
+          "checklistPath": "kitchen/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Sink & dishwasher plumbing rough-in and South/East countertop & appliance circuits (outlets beside pie-safe)",
+          "es": "Plomería en bruto de fregadero/lavavajillas y circuitos de cubierta en muros sur y este (contactos fuera del pie-safe)",
+          "todoistTaskIds": [],
+          "checklistPath": "kitchen/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Install South & East base cabinets, pie-safe shelves, countertops, sink/faucet/dishwasher & Haier refrigerator",
+          "es": "Instalar gabinetes bajos sur y este, repisas pie-safe, cubiertas, fregadero/llave/lavavajillas y refrigerador Haier",
+          "todoistTaskIds": [],
+          "checklistPath": "kitchen/CHECKLIST.md"
+        }
+      ]
+    },
+    {
+      "key": "bathroom",
+      "title": "Bathroom",
+      "esTitle": "Baño",
+      "driveChecklistId": "1Ip5esr8DOQSh55f0qFoDeWVhoDWOPpQz",
+      "note": "Phase sequence (6 milestones). Install original window trim over HardieBoard before wall tile; verify toilet flange before Warm Gray floor grouting.",
+      "noteEs": "Secuencia por etapas (6 hitos). Instalar moldura original de ventana sobre HardieBoard antes del azulejo de muro; verificar brida antes de emboquillar piso.",
+      "items": [
+        {
+          "done": true,
+          "en": "Demolition, plumbing rough-in, exhaust fan duct, Kohler K-1821 tub set & leak-tested, and Schluter floor waterproofing complete",
+          "es": "Demolición, plomería en bruto, ducto de extractor, tina Kohler K-1821 instalada y probada e impermeabilizante Schluter listos",
+          "todoistTaskIds": [],
+          "checklistPath": "bathroom/CHECKLIST.md"
+        },
+        {
+          "done": true,
+          "en": "Calacatta Gem 12×24 matte floor tile laid (ungrouted) and shower HardieBoard backer + soap niches installed",
+          "es": "Piso Calacatta Gem 12×24 mate colocado (sin boquilla) y HardieBoard de regadera con nichos instalado",
+          "todoistTaskIds": [],
+          "checklistPath": "bathroom/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Install original window trim over HardieBoard (before wall tile) & set 20A GFCI rough-in boxes",
+          "es": "Instalar moldura original de ventana sobre HardieBoard (antes del azulejo de muro) y cajas GFCI de 20A",
+          "todoistTaskIds": [],
+          "checklistPath": "bathroom/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Verify toilet flange, grout floor with Warm Gray grout, and complete white 3×6 wall tile, niches & tub surround",
+          "es": "Verificar brida de inodoro, emboquillar piso con Warm Gray y terminar azulejo blanco 3×6 en muros y nichos",
+          "todoistTaskIds": [],
+          "checklistPath": "bathroom/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Complete attic ceiling electrical junction, close bathroom ceiling, prime/paint & hang outward-swing door",
+          "es": "Completar conexión eléctrica en ático, cerrar techo del baño, fondear/pintar y colocar puerta abatible",
+          "todoistTaskIds": [],
+          "checklistPath": "bathroom/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Install pedestal sink, 10\" rough-in toilet, Champagne Bronze trim/faucets, glass screen, medicine cabinet & lights",
+          "es": "Instalar lavabo de pedestal, inodoro de 10\", llaves Champagne Bronze, cancel de vidrio, botiquín e iluminación",
+          "todoistTaskIds": [],
+          "checklistPath": "bathroom/CHECKLIST.md"
+        }
+      ]
+    },
+    {
+      "key": "hvac",
+      "title": "HVAC",
+      "esTitle": "Calefacción (HVAC)",
+      "driveChecklistId": "1dYEurki2VQ8Zd5yxkRA4UzVL2uGJwMdG",
+      "note": "NEXT HVAC & crew coordination sequence (5 milestones). Attic hatch & walkway specifics live on HVAC › Attic Access (#attic-access).",
+      "noteEs": "Secuencia de coordinación entre NEXT HVAC y nuestra cuadrilla (5 hitos). Los detalles del ático viven en HVAC › Acceso al ático (#attic-access).",
+      "items": [
+        {
+          "done": true,
+          "en": "Combined attic gas furnace, ductwork & electrical subpanel scope defined with NEXT HVAC; 24\"×36\" clear hatch settled",
+          "es": "Alcance de caldera de gas, ductos y subpanel definido con NEXT HVAC; escotilla libre de 24\"×36\" confirmada",
+          "todoistTaskIds": [],
+          "checklistPath": "hvac/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Phase 1 — Before NEXT (Our Crew): Keep bedroom-closet ceiling open, photograph hallway hatch site, frame D04 bay & fix roof leaks",
+          "es": "Fase 1 — Antes de NEXT (Cuadrilla): Mantener abierto techo de clóset, fotografiar sitio de escotilla, enmarcar D04 y reparar goteras",
+          "todoistTaskIds": [],
+          "checklistPath": "hvac/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Mon Nov 23 (2:00–4:00 p.m.) Walkthrough (Serge Kalitov & Alex): Confirm furnace spot, exhaust route, 24\"×36\" hatch & D04 feeder",
+          "es": "Visita Lun 23 nov (2:00–4:00 p.m.) (Serge Kalitov y Alex): Confirmar posición de caldera, escape, escotilla 24\"×36\" y alimentador D04",
+          "todoistTaskIds": [],
+          "checklistPath": "hvac/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Phase 2 — With NEXT: Build 24\"×36\" hatch, walkway, 30\"×30\" platform & attic light/GFCI (#attic-access); NEXT installs furnace, ducts & subpanel",
+          "es": "Fase 2 — Con NEXT: Construir escotilla 24\"×36\", pasarela, plataforma 30\"×30\" y luz/GFCI (#attic-access); NEXT instala caldera, ductos y subpanel",
+          "todoistTaskIds": [],
+          "checklistPath": "hvac/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Phase 3 — After NEXT: Pass HERS test & City HVAC/Electrical inspections, close bedroom-closet ceiling, and finish drywall & paint",
+          "es": "Fase 3 — Después de NEXT: Aprobar prueba HERS e inspecciones municipales, cerrar techo del clóset y terminar tablaroca y pintura",
+          "todoistTaskIds": [],
+          "checklistPath": "hvac/CHECKLIST.md"
+        }
+      ]
+    },
+    {
+      "key": "attic-access",
+      "title": "HVAC › Attic Access",
+      "esTitle": "HVAC › Acceso al ático",
+      "driveChecklistId": null,
+      "note": "Attic hatch, enclosure & walkway sequence (6 milestones from Practical Guide R5). Confirm ceiling fire-rating and joist bay B before cutting.",
+      "noteEs": "Secuencia de escotilla, envolvente y pasarela (6 hitos de la Guía Práctica R5). Confirmar resistencia al fuego y claro B antes de cortar.",
+      "items": [
+        {
+          "done": true,
+          "en": "Settled basis: 24\"×36\" FINISHED CLEAR hallway hatch, 33.25\"×14.19\"×29\" furnace envelope, and 66\" attic height (≤ 20 ft walkway)",
+          "es": "Base confirmada: escotilla de 24\"×36\" LIBRES TERMINADAS, caldera de 33.25\"×14.19\"×29\" y altura de 66\" (pasarela ≤ 20 pies)",
+          "todoistTaskIds": [],
+          "checklistPath": "attic/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Verify temporary bedroom-closet opening & daylight check of hallway hatch site, ceiling fire-rating & joist bay B width",
+          "es": "Verificar abertura temporal del clóset y revisar con luz de día el sitio de escotilla, resistencia al fuego y ancho B de viguetas",
+          "todoistTaskIds": [],
+          "checklistPath": "attic/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Build permanent 24\"×36\" finished-clear hatch, 4-sided 2\" plywood insulation dam, continuous air-seal & R-matched fiberglass batts",
+          "es": "Construir escotilla permanente 24\"×36\" libres terminadas, retén de triplay de 2\" en 4 lados, sello de aire y colchonetas de fibra",
+          "todoistTaskIds": [],
+          "checklistPath": "attic/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Install continuous 24\" wood walkway (≤ 20 ft max, 30\" clear passage) using 23/32\" rated OSB or 3/4\" plywood",
+          "es": "Instalar pasarela continua de madera de 24\" (≤ 20 pies máx., paso libre 30\") con OSB clasificado de 23/32\" o triplay de 3/4\"",
+          "todoistTaskIds": [],
+          "checklistPath": "attic/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Build level 30\"×30\" service platform (≥ 1\" Type B vent clearance) & wire enclosed LED light, entry switch + line-side 120V GFCI ≤ 25 ft",
+          "es": "Construir plataforma nivelada de 30\"×30\" (≥ 1\" libre en tiro Tipo B) y conectar luz LED cerrada, apagador y GFCI 120V ≤ 25 pies",
+          "todoistTaskIds": [],
+          "checklistPath": "attic/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Close temporary bedroom-closet ceiling only after low-voltage switch cable, furnace passage & permanent hallway hatch are complete",
+          "es": "Cerrar techo temporal del clóset solo tras completar cable de bajo voltaje, paso de caldera y escotilla permanente del pasillo",
+          "todoistTaskIds": [],
+          "checklistPath": "attic/CHECKLIST.md"
+        }
+      ]
+    },
+    {
+      "key": "electrical",
+      "title": "Electrical",
+      "esTitle": "Electricidad",
+      "driveChecklistId": "1cShX-tf8guhceW3uOwCQCy2B4PfWZzxj",
+      "note": "Whole-unit electrical sequence (6 milestones).",
+      "noteEs": "Secuencia eléctrica de toda la unidad (6 hitos).",
+      "items": [
+        {
+          "done": true,
+          "en": "Subpanel location settled at D04 dining-side wall (centered in upper-left moulding frame; no D5 outlet on door-swing wall)",
+          "es": "Ubicación del subpanel definida en muro D04 lado comedor (centrado en el marco superior izquierdo; sin contacto D5)",
+          "todoistTaskIds": [],
+          "checklistPath": "electrical/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Frame D04 subpanel bay with side-entry routing & coordinate feeder/subpanel install with NEXT and Alex",
+          "es": "Enmarcar vano del subpanel D04 con entradas laterales y coordinar alimentador/subpanel con NEXT y Alex",
+          "todoistTaskIds": [],
+          "checklistPath": "electrical/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Bathroom & attic rough-in: 2× 20A bathroom GFCI circuits, attic junction box, enclosed attic LED + switch & line-side 120V GFCI ≤ 25 ft",
+          "es": "Instalación en bruto de baño y ático: 2 circuitos GFCI 20A en baño, caja en ático, luz LED + apagador y GFCI 120V ≤ 25 pies",
+          "todoistTaskIds": [],
+          "checklistPath": "electrical/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Kitchen 9-circuit Romex rough-in (3 countertop 20A, fridge, dishwasher, disposal, range, 15A AFCI hood Circuit HD & lighting)",
+          "es": "Instalación en bruto de 9 circuitos de cocina en Romex (3 cubierta 20A, refri, lavavajillas, triturador, estufa, campana 15A e iluminación)",
+          "todoistTaskIds": [],
+          "checklistPath": "electrical/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Non-kitchen rooms (Bedroom, Living & Dining, Hallway): set outlet boxes, empty ENT smurf tube & closet low-voltage switch cable",
+          "es": "Cuartos fuera de cocina (Recámara, Sala/Comedor, Pasillo): instalar cajas, tubo smurf ENT vacío y cable LV en clóset",
+          "todoistTaskIds": [],
+          "checklistPath": "electrical/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Install feeder & subpanel, pull branch circuits, trim out devices/fixtures & complete AFCI/GFCI testing",
+          "es": "Instalar alimentador y subpanel, jalar circuitos derivados, montar dispositivos/luminarias y completar pruebas AFCI/GFCI",
+          "todoistTaskIds": [],
+          "checklistPath": "electrical/CHECKLIST.md"
+        }
+      ]
+    },
+    {
+      "key": "laundry",
+      "title": "Laundry Closet",
+      "esTitle": "Clóset de lavandería",
+      "driveChecklistId": "1kKY92-MUELZmCo1VDwMI_Dffnrc-Frdi",
+      "note": "Laundry closet & Murphy bookcase door sequence (5 milestones).",
+      "noteEs": "Secuencia del clóset de lavandería y puerta librero Murphy (5 hitos).",
+      "items": [
+        {
+          "done": true,
+          "en": "Plumbing/gas/vent rough-in, gas-box repositioning, LG WashTower purchase (Dec 1 delivery) & Murphy door location complete",
+          "es": "Instalaciones en bruto, reubicación de caja de gas, compra de torre LG WashTower (entrega 1 dic) y ubicación Murphy listas",
+          "todoistTaskIds": [],
+          "checklistPath": "laundry/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Verify laundry outlet opening position & photograph open-wall rough-in before drywall close-in",
+          "es": "Verificar abertura de contacto eléctrico y fotografiar instalaciones abiertas antes de cerrar con tablaroca",
+          "todoistTaskIds": [],
+          "checklistPath": "laundry/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Drywall close-in, priming, baseboard installation & closet wall/ceiling finish paint",
+          "es": "Cierre con tablaroca, fondeo, colocación de zoclo y pintura final de muros y techo del clóset",
+          "todoistTaskIds": [],
+          "checklistPath": "laundry/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "5-panel Murphy bookcase door opening measurements, shop fabrication, hanging & hardware fit",
+          "es": "Medidas del vano, fabricación, colgado y ajuste de herrajes de la puerta librero Murphy",
+          "todoistTaskIds": [],
+          "checklistPath": "laundry/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Receive LG WashTower (Dec 1), set in place, connect water/gas/vent/120V & test operation",
+          "es": "Recibir torre LG WashTower (1 dic), colocar, conectar agua/gas/ventilación/120V y probar funcionamiento",
+          "todoistTaskIds": [],
+          "checklistPath": "laundry/CHECKLIST.md"
+        }
+      ]
+    },
+    {
+      "key": "bedroom",
+      "title": "Bedroom",
+      "esTitle": "Recámara",
+      "driveChecklistId": "1X2EqyKgqqZQCieUrfEE44Zp1XecrJ3ae",
+      "note": "Bedroom & closet niche sequence (5 milestones). Keep closet ceiling open as temporary attic access until LV cable and permanent 24\"×36\" hallway hatch exist.",
+      "noteEs": "Secuencia de recámara y clóset (5 hitos). Mantener abierto el techo del clóset hasta instalar cable LV y escotilla permanente 24\"×36\".",
+      "items": [
+        {
+          "done": true,
+          "en": "Canonical Wall A (North), Wall B (East bay window), Wall C (South) & Wall D (West entry/closet) orientation established",
+          "es": "Orientación oficial de Muros A (Norte), B (Este ventana), C (Sur) y D (Oeste entrada/clóset) establecida",
+          "todoistTaskIds": [],
+          "checklistPath": "bedroom/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Verify temporary closet furnace passage & run coiled low-voltage switch cable up left closet wall to attic",
+          "es": "Verificar paso de caldera en clóset temporal y subir cable de bajo voltaje por el muro izquierdo al ático",
+          "todoistTaskIds": [],
+          "checklistPath": "bedroom/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Install outlet boxes + empty ENT smurf tube and repair missing hardwood floor patch",
+          "es": "Instalar cajas de contactos + tubo smurf (ENT vacío) y reparar parche faltante de piso de madera",
+          "todoistTaskIds": [],
+          "checklistPath": "bedroom/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Tape-fit wall moulding frames from wall centerlines (aligned to existing baseboard & high trim) and install trim",
+          "es": "Presentar marcos de molduras con cinta desde el eje central (alineados al zoclo y moldura alta) e instalar",
+          "todoistTaskIds": [],
+          "checklistPath": "bedroom/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Close temporary closet ceiling (after permanent hallway hatch exists), install closet rod, prime & paint room",
+          "es": "Cerrar techo del clóset (tras escotilla permanente), colocar barra, fondear y pintar recámara",
+          "todoistTaskIds": [],
+          "checklistPath": "bedroom/CHECKLIST.md"
+        }
+      ]
+    },
+    {
+      "key": "living-dining",
+      "title": "Living & Dining",
+      "esTitle": "Sala y comedor",
+      "driveChecklistId": "10wWsl89_qWvDuqkOr2BThS75gJBsuP1r",
+      "note": "Living & dining room sequence (5 milestones).",
+      "noteEs": "Secuencia de sala y comedor (5 hitos).",
+      "items": [
+        {
+          "done": true,
+          "en": "D04 dining-side wall selected for subpanel bay (centered inside upper-left moulding frame; no D5 outlet on door-swing wall)",
+          "es": "Muro D04 lado comedor elegido para subpanel (centrado en el marco superior izquierdo; sin contacto D5)",
+          "todoistTaskIds": [],
+          "checklistPath": "living/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Frame D04 doorway infill & subpanel bay with solid backing and side-entry routing",
+          "es": "Enmarcar relleno de puerta D04 y vano de subpanel con refuerzos y entradas laterales",
+          "todoistTaskIds": [],
+          "checklistPath": "living/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Install outlet boxes & empty ENT smurf tube across D01–D04 and L01–L06 walls (clear of pocket-door cavities)",
+          "es": "Instalar cajas de contactos y tubo smurf (ENT vacío) en muros D01–D04 y L01–L06 (fuera de puertas corredizas)",
+          "todoistTaskIds": [],
+          "checklistPath": "living/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Tape-fit picture-frame wall mouldings from wall centerlines (aligned to existing baseboard & high trim) and install",
+          "es": "Presentar con cinta desde ejes centrales e instalar marcos de molduras alineados al zoclo y moldura alta",
+          "todoistTaskIds": [],
+          "checklistPath": "living/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Complete dining hutch/fireplace trim details, wall/trim priming & finish paint",
+          "es": "Terminar detalles de vitrina y chimenea, fondeo y pintura final de muros y molduras",
+          "todoistTaskIds": [],
+          "checklistPath": "living/CHECKLIST.md"
+        }
+      ]
+    },
+    {
+      "key": "hallway",
+      "title": "Hallway",
+      "esTitle": "Pasillo",
+      "driveChecklistId": "1Y9H-bCmZF_Q0xBIwMSoWCmcilmL6Dwv2",
+      "note": "Hallway sequence (5 milestones). Permanent 24\"×36\" attic hatch details live on HVAC › Attic Access (#attic-access); Murphy door lives on Laundry Closet (#laundry).",
+      "noteEs": "Secuencia del pasillo (5 hitos). La escotilla permanente 24\"×36\" vive en HVAC › Acceso al ático (#attic-access); la puerta Murphy vive en Lavandería (#laundry).",
+      "items": [
+        {
+          "done": true,
+          "en": "Permanent hallway attic hatch sized at 24\"×36\" FINISHED CLEAR opening (#attic-access); Murphy door assigned to Laundry (#laundry)",
+          "es": "Escotilla permanente del pasillo definida en 24\"×36\" LIBRES TERMINADAS (#attic-access); puerta Murphy en Lavandería (#laundry)",
+          "todoistTaskIds": [],
+          "checklistPath": "hallway/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Daylight site verification, ceiling fire-rating check & joist bay B confirmation for 24\"×36\" hallway hatch (#attic-access)",
+          "es": "Verificación con luz de día, revisión contra fuego del techo y confirmación del claro B para escotilla 24\"×36\" (#attic-access)",
+          "todoistTaskIds": [],
+          "checklistPath": "hallway/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Frame permanent 24\"×36\" finished-clear hallway hatch, air-sealed enclosure & entrance light switch",
+          "es": "Construir escotilla permanente 24\"×36\" libres terminadas, envolvente sellada y apagador de entrada",
+          "todoistTaskIds": [],
+          "checklistPath": "hallway/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Hallway outlet/lighting rough-in, wall moulding layout & 5-panel Murphy bookcase door trim interface",
+          "es": "Instalación eléctrica en pasillo, trazo de molduras e interfaz de marco con puerta librero Murphy",
+          "todoistTaskIds": [],
+          "checklistPath": "hallway/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Complete hallway trim installation, wall/ceiling patching, priming & finish paint",
+          "es": "Terminar instalación de molduras, resanes en muros y techo, fondeo y pintura final del pasillo",
+          "todoistTaskIds": [],
+          "checklistPath": "hallway/CHECKLIST.md"
+        }
+      ]
+    },
+    {
+      "key": "paint-floors",
+      "title": "Paint & Floors",
+      "esTitle": "Pintura y pisos",
+      "driveChecklistId": "1X6tuZMgvcY1y7RmhbDvScSAab77CGNFQ",
+      "note": "Unit-wide paint, moulding & flooring sequence (5 milestones).",
+      "noteEs": "Secuencia de pintura, molduras y pisos de toda la unidad (5 hitos).",
+      "items": [
+        {
+          "done": true,
+          "en": "Bathroom Calacatta Gem 12×24 matte porcelain floor tile laid; Warm Gray grout selected",
+          "es": "Piso de baño Calacatta Gem 12×24 porcelanato mate colocado; boquilla Warm Gray seleccionada",
+          "todoistTaskIds": [],
+          "checklistPath": "paint/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Verify finished floor buildup thickness (~3/4\" t) and repair missing bedroom hardwood patch",
+          "es": "Verificar espesor de piso terminado (~3/4\" t) y reparar parche faltante de madera en recámara",
+          "todoistTaskIds": [],
+          "checklistPath": "paint/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Complete consolidated whole-unit moulding order and centerline tape-fit frame layout across rooms",
+          "es": "Completar pedido consolidado de molduras y presentación con cinta desde los ejes centrales",
+          "todoistTaskIds": [],
+          "checklistPath": "paint/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Install kitchen matte floor tile & doorway transitions and protect finished floors",
+          "es": "Instalar piso mate de cocina y transiciones de puerta y proteger pisos terminados",
+          "todoistTaskIds": [],
+          "checklistPath": "paint/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Prime and finish-paint rooms, trim & Essex Green kitchen cabinets after drywall close-in",
+          "es": "Fondear y pintar cuartos, molduras y gabinetes Essex Green de cocina tras cierre de tablaroca",
+          "todoistTaskIds": [],
+          "checklistPath": "paint/CHECKLIST.md"
+        }
+      ]
+    }
+  ],
+  "cardsById": {
+    "6hvRcQ4PhvRvWq7f": {
+      "taskId": "6hvRcQ4PhvRvWq7f",
+      "url": "https://app.todoist.com/app/task/6hvRcQ4PhvRvWq7f",
+      "rooms": [
+        "laundry"
+      ],
+      "doneInWiki": true,
+      "wikiItemsEn": [
+        "Rough-in reported done by Tisa on November 7; later gas-box and outlet follow-ups remain below"
+      ],
+      "wikiItemsEs": [
+        "Tisa informó terminadas las instalaciones el 7 de noviembre; los pendientes posteriores de caja de gas y contacto siguen abajo"
+      ],
+      "governingDocs": [
+        "laundry/CHECKLIST.md",
+        "laundry/SPEC.md"
+      ]
+    },
+    "6hxJ8Vqj7pMRGMgf": {
+      "taskId": "6hxJ8Vqj7pMRGMgf",
+      "url": "https://app.todoist.com/app/task/6hxJ8Vqj7pMRGMgf",
+      "rooms": [
+        "laundry"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Assess the blocking obstructing the gas box before any cutting"
+      ],
+      "wikiItemsEs": [
+        "Evaluar la madera que obstruye la caja de gas antes de cortar"
+      ],
+      "governingDocs": [
+        "laundry/CHECKLIST.md",
+        "laundry/SPEC.md"
+      ]
+    },
+    "6hxM2Xp8GWFw5Mr7": {
+      "taskId": "6hxM2Xp8GWFw5Mr7",
+      "url": "https://app.todoist.com/app/task/6hxM2Xp8GWFw5Mr7",
+      "rooms": [
+        "laundry"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Reposition the gas box and fit its trim"
+      ],
+      "wikiItemsEs": [
+        "Reubicar la caja de gas y colocar su marco"
+      ],
+      "governingDocs": [
+        "laundry/CHECKLIST.md",
+        "laundry/SPEC.md"
+      ]
+    },
+    "6hxM2c2rVW2pQxm7": {
+      "taskId": "6hxM2c2rVW2pQxm7",
+      "url": "https://app.todoist.com/app/task/6hxM2c2rVW2pQxm7",
+      "rooms": [
+        "laundry"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Resolve gas-valve access and appliance clearance before covering the wall"
+      ],
+      "wikiItemsEs": [
+        "Resolver el acceso a la válvula de gas y el espacio para el equipo antes de cubrir el muro"
+      ],
+      "governingDocs": [
+        "laundry/CHECKLIST.md",
+        "laundry/SPEC.md"
+      ]
+    },
+    "6hvjQJ9Q87P26vP7": {
+      "taskId": "6hvjQJ9Q87P26vP7",
+      "url": "https://app.todoist.com/app/task/6hvjQJ9Q87P26vP7",
+      "rooms": [
+        "laundry"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Prepare the laundry outlet opening after its position and height reference are confirmed"
+      ],
+      "wikiItemsEs": [
+        "Preparar la abertura del contacto después de confirmar su posición y referencia de altura"
+      ],
+      "governingDocs": [
+        "laundry/CHECKLIST.md",
+        "laundry/SPEC.md"
+      ]
+    },
+    "6hxM8VFQGvfVqpx7": {
+      "taskId": "6hxM8VFQGvfVqpx7",
+      "url": "https://app.todoist.com/app/task/6hxM8VFQGvfVqpx7",
+      "rooms": [
+        "laundry"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Photograph the laundry ceiling and open-wall work; resolve the existing close-in hold"
+      ],
+      "wikiItemsEs": [
+        "Fotografiar el techo y las instalaciones abiertas; resolver la pausa vigente antes del cierre"
+      ],
+      "governingDocs": [
+        "laundry/CHECKLIST.md",
+        "laundry/SPEC.md"
+      ]
+    },
+    "6hvjQJXcRvHFvPJf": {
+      "taskId": "6hvjQJXcRvHFvPJf",
+      "url": "https://app.todoist.com/app/task/6hvjQJXcRvHFvPJf",
+      "rooms": [
+        "laundry"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Photograph the laundry ceiling and open-wall work; resolve the existing close-in hold"
+      ],
+      "wikiItemsEs": [
+        "Fotografiar el techo y las instalaciones abiertas; resolver la pausa vigente antes del cierre"
+      ],
+      "governingDocs": [
+        "laundry/CHECKLIST.md",
+        "laundry/SPEC.md"
+      ]
+    },
+    "6hvjQJjG96fm9W7f": {
+      "taskId": "6hvjQJjG96fm9W7f",
+      "url": "https://app.todoist.com/app/task/6hvjQJjG96fm9W7f",
+      "rooms": [
+        "laundry"
+      ],
+      "doneInWiki": true,
+      "status": "closed_merged_into_6hvjQJf59MM924Cf",
+      "wikiItemsEn": [
+        "Merged Nov 19 into finish paint 6hvjQJf59MM924Cf and closed non-destructively (primer & close-in holds preserved on 6hvjQJf59MM924Cf)"
+      ],
+      "wikiItemsEs": [
+        "Fusionada el 19 nov en pintura final 6hvjQJf59MM924Cf y cerrada sin borrar (pendientes de fondeo y pausa conservados en 6hvjQJf59MM924Cf)"
+      ],
+      "governingDocs": [
+        "laundry/CHECKLIST.md",
+        "laundry/SPEC.md"
+      ]
+    },
+    "6hxM8VHG9vcHxWG7": {
+      "taskId": "6hxM8VHG9vcHxWG7",
+      "url": "https://app.todoist.com/app/task/6hxM8VHG9vcHxWG7",
+      "rooms": [
+        "laundry"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Install the remaining baseboard"
+      ],
+      "wikiItemsEs": [
+        "Colocar el zoclo pendiente"
+      ],
+      "governingDocs": [
+        "laundry/CHECKLIST.md",
+        "laundry/SPEC.md"
+      ]
+    },
+    "6hvjQJf59MM924Cf": {
+      "taskId": "6hvjQJf59MM924Cf",
+      "url": "https://app.todoist.com/app/task/6hvjQJf59MM924Cf",
+      "rooms": [
+        "laundry"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Finish, sand, trim valves/boxes, prime (merged from 6hvjQJjG96fm9W7f), and paint closet in approved color/sheen before Dec WashTower delivery"
+      ],
+      "wikiItemsEs": [
+        "Terminar, lijar, recortar válvulas/cajas, fondear (fusionado de 6hvjQJjG96fm9W7f) y pintar en color/brillo aprobados antes de entrega dic del WashTower"
+      ],
+      "governingDocs": [
+        "laundry/CHECKLIST.md",
+        "laundry/SPEC.md"
+      ]
+    },
+    "6hvjQJjXmF3fMjc7": {
+      "taskId": "6hvjQJjXmF3fMjc7",
+      "url": "https://app.todoist.com/app/task/6hvjQJjXmF3fMjc7",
+      "rooms": [
+        "laundry"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Set, connect and test the WashTower after delivery"
+      ],
+      "wikiItemsEs": [
+        "Colocar, conectar y probar la torre después de recibirla"
+      ],
+      "governingDocs": [
+        "laundry/CHECKLIST.md",
+        "laundry/SPEC.md"
+      ]
+    },
+    "6hvj3C7FHh9GVjV7": {
+      "taskId": "6hvj3C7FHh9GVjV7",
+      "url": "https://app.todoist.com/app/task/6hvj3C7FHh9GVjV7",
+      "rooms": [
+        "laundry"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Complete the Murphy-door opening measurements and fit review"
+      ],
+      "wikiItemsEs": [
+        "Completar las medidas del vano y la revisión de ajuste de la puerta librero"
+      ],
+      "governingDocs": [
+        "laundry/CHECKLIST.md",
+        "laundry/SPEC.md"
+      ]
+    },
+    "6hvj3CJrHRWm9CM7": {
+      "taskId": "6hvj3CJrHRWm9CM7",
+      "url": "https://app.todoist.com/app/task/6hvj3CJrHRWm9CM7",
+      "rooms": [
+        "laundry"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Build, hang and finish the Murphy bookcase door after the opening and hardware are ready"
+      ],
+      "wikiItemsEs": [
+        "Fabricar, colgar y terminar la puerta librero cuando estén listos el vano y los herrajes"
+      ],
+      "governingDocs": [
+        "laundry/CHECKLIST.md",
+        "laundry/SPEC.md"
+      ]
+    },
+    "6hhCMFcfFh5HC2r7": {
+      "taskId": "6hhCMFcfFh5HC2r7",
+      "url": "https://app.todoist.com/app/task/6hhCMFcfFh5HC2r7",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": true,
+      "wikiItemsEn": [
+        "Fan duct run recorded complete"
+      ],
+      "wikiItemsEs": [
+        "Ducto del extractor registrado como terminado"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hvmgQhGrH2f8mq7": {
+      "taskId": "6hvmgQhGrH2f8mq7",
+      "url": "https://app.todoist.com/app/task/6hvmgQhGrH2f8mq7",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": true,
+      "wikiItemsEn": [
+        "Tub set and framed"
+      ],
+      "wikiItemsEs": [
+        "Tina colocada y enmarcada"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hvWCWjWvX954M4f": {
+      "taskId": "6hvWCWjWvX954M4f",
+      "url": "https://app.todoist.com/app/task/6hvWCWjWvX954M4f",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": true,
+      "wikiItemsEn": [
+        "Schluter floor waterproofing recorded complete"
+      ],
+      "wikiItemsEs": [
+        "Impermeabilización Schluter del piso registrada como terminada"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hhCMFXjpHMwFmJf": {
+      "taskId": "6hhCMFXjpHMwFmJf",
+      "url": "https://app.todoist.com/app/task/6hhCMFXjpHMwFmJf",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": true,
+      "wikiItemsEn": [
+        "Tub and valve leak-tested with no leaks reported by Tisa and John on November 9"
+      ],
+      "wikiItemsEs": [
+        "Tisa y John reportaron el 9 de noviembre prueba de tina y válvula sin fugas"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hxM8VmGWpvHMCCf": {
+      "taskId": "6hxM8VmGWpvHMCCf",
+      "url": "https://app.todoist.com/app/task/6hxM8VmGWpvHMCCf",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Finish the bathroom window sill and casing framing before adjacent board"
+      ],
+      "wikiItemsEs": [
+        "Terminar la estructura de repisa y contramarco de ventana antes del panel adyacente"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hxM9CchgVpQrwqf": {
+      "taskId": "6hxM9CchgVpQrwqf",
+      "url": "https://app.todoist.com/app/task/6hxM9CchgVpQrwqf",
+      "rooms": [
+        "bathroom",
+        "electrical"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Install remaining blocking and bathroom electrical rough-in, including the box by the toilet and attic junction box",
+        "Finish bathroom blocking, direct ceiling wiring, attic junction box and toilet-side box"
+      ],
+      "wikiItemsEs": [
+        "Completar refuerzos e instalación eléctrica, incluida la caja junto al inodoro y la caja de conexiones en el ático",
+        "Terminar refuerzos de baño, cable directo de techo, caja en ático y caja junto al inodoro"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md",
+        "electrical/CHECKLIST.md",
+        "electrical/SPEC.md"
+      ]
+    },
+    "6hvvhhG3C57P4F4f": {
+      "taskId": "6hvvhhG3C57P4F4f",
+      "url": "https://app.todoist.com/app/task/6hvvhhG3C57P4F4f",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Install remaining blocking and bathroom electrical rough-in, including the box by the toilet and attic junction box"
+      ],
+      "wikiItemsEs": [
+        "Completar refuerzos e instalación eléctrica, incluida la caja junto al inodoro y la caja de conexiones en el ático"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hvmh6x72cMq8Vx7": {
+      "taskId": "6hvmh6x72cMq8Vx7",
+      "url": "https://app.todoist.com/app/task/6hvmh6x72cMq8Vx7",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Record remaining tub-support, drain/valve test details and photographs before concealing the work"
+      ],
+      "wikiItemsEs": [
+        "Registrar los detalles pendientes de soporte, pruebas y fotos antes de ocultar las instalaciones"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hvjQ9222wq4V7Pf": {
+      "taskId": "6hvjQ9222wq4V7Pf",
+      "url": "https://app.todoist.com/app/task/6hvjQ9222wq4V7Pf",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Record remaining tub-support, drain/valve test details and photographs before concealing the work"
+      ],
+      "wikiItemsEs": [
+        "Registrar los detalles pendientes de soporte, pruebas y fotos antes de ocultar las instalaciones"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hvmh6wmWGvgwjF7": {
+      "taskId": "6hvmh6wmWGvgwjF7",
+      "url": "https://app.todoist.com/app/task/6hvmh6wmWGvgwjF7",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Resolve the stone-to-waterproofing junction using the retained stone pieces"
+      ],
+      "wikiItemsEs": [
+        "Resolver la unión entre piedra e impermeabilización usando las piezas conservadas"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hxM8VpR9JmXWm9f": {
+      "taskId": "6hxM8VpR9JmXWm9f",
+      "url": "https://app.todoist.com/app/task/6hxM8VpR9JmXWm9f",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Trim the damaged tub-face slab edge and check its fit"
+      ],
+      "wikiItemsEs": [
+        "Recortar el borde dañado de la losa frontal y revisar su ajuste"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hvmh6vrFC5f4GJf": {
+      "taskId": "6hvmh6vrFC5f4GJf",
+      "url": "https://app.todoist.com/app/task/6hvmh6vrFC5f4GJf",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Install the tub-surround slabs only when the helper, tools, support and waterproofing details are ready"
+      ],
+      "wikiItemsEs": [
+        "Instalar las losas de la tina solo cuando estén listos ayudante, herramientas, soporte e impermeabilización"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hvhMvhmWqgR52v7": {
+      "taskId": "6hvhMvhmWqgR52v7",
+      "url": "https://app.todoist.com/app/task/6hvhMvhmWqgR52v7",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Reconcile toilet-wall furring status before doing any more work; its Todoist card is marked complete"
+      ],
+      "wikiItemsEs": [
+        "Conciliar el estado de las tiras detrás del inodoro antes de repetir trabajo; la tarjeta está marcada terminada"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hvRcQ4pXWvFq8r7": {
+      "taskId": "6hvRcQ4pXWvFq8r7",
+      "url": "https://app.todoist.com/app/task/6hvRcQ4pXWvFq8r7",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Fit the pocket-door kit to the retained door and opening; keep this lower priority"
+      ],
+      "wikiItemsEs": [
+        "Ajustar el kit de puerta corrediza a la hoja y vano conservados; mantenerlo como prioridad menor"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hvvhhRfPwrvVWm7": {
+      "taskId": "6hvvhhRfPwrvVWm7",
+      "url": "https://app.todoist.com/app/task/6hvvhhRfPwrvVWm7",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Close the ceiling and finish the dry-wall areas after the concealed work is ready"
+      ],
+      "wikiItemsEs": [
+        "Cerrar el techo y terminar las zonas secas cuando estén listas las instalaciones ocultas"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hvvhhP69VWHW967": {
+      "taskId": "6hvvhhP69VWHW967",
+      "url": "https://app.todoist.com/app/task/6hvvhhP69VWHW967",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Confirm and install the compatible wet-area board and waterproofing system"
+      ],
+      "wikiItemsEs": [
+        "Confirmar e instalar panel e impermeabilización compatibles en la zona húmeda"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hvWCWqqfRcJP3F7": {
+      "taskId": "6hvWCWqqfRcJP3F7",
+      "url": "https://app.todoist.com/app/task/6hvWCWqqfRcJP3F7",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Finish the floor tile and bullnose from the approved layout; reconcile remaining stock first"
+      ],
+      "wikiItemsEs": [
+        "Terminar piso y zoclo según el trazo aprobado; conciliar primero el material restante"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hvWCWrM9m2GPq97": {
+      "taskId": "6hvWCWrM9m2GPq97",
+      "url": "https://app.todoist.com/app/task/6hvWCWrM9m2GPq97",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Grout, seal and protect the bathroom floor"
+      ],
+      "wikiItemsEs": [
+        "Emboquillar, sellar y proteger el piso del baño"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hvWCWpRx2mGJwx7": {
+      "taskId": "6hvWCWpRx2mGJwx7",
+      "url": "https://app.todoist.com/app/task/6hvWCWpRx2mGJwx7",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Grout, seal and protect the bathroom floor"
+      ],
+      "wikiItemsEs": [
+        "Emboquillar, sellar y proteger el piso del baño"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hvWCWpfG9mH9337": {
+      "taskId": "6hvWCWpfG9mH9337",
+      "url": "https://app.todoist.com/app/task/6hvWCWpfG9mH9337",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Confirm wall-tile layout, stop lines, window ledge and niches before setting tile"
+      ],
+      "wikiItemsEs": [
+        "Confirmar trazo, límites, repisa de ventana y nichos antes de colocar azulejo"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hvWCWqCw84qWHjf": {
+      "taskId": "6hvWCWqCw84qWHjf",
+      "url": "https://app.todoist.com/app/task/6hvWCWqCw84qWHjf",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Set and grout the wall tile and niches; seal the joints"
+      ],
+      "wikiItemsEs": [
+        "Colocar y emboquillar azulejo y nichos; sellar las juntas"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hvWCWv2h2rHMx87": {
+      "taskId": "6hvWCWv2h2rHMx87",
+      "url": "https://app.todoist.com/app/task/6hvWCWv2h2rHMx87",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Set and grout the wall tile and niches; seal the joints"
+      ],
+      "wikiItemsEs": [
+        "Colocar y emboquillar azulejo y nichos; sellar las juntas"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hvmgmwXPqRGRfXf": {
+      "taskId": "6hvmgmwXPqRGRfXf",
+      "url": "https://app.todoist.com/app/task/6hvmgmwXPqRGRfXf",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Install the pedestal sink, faucet and drain; test for leaks"
+      ],
+      "wikiItemsEs": [
+        "Instalar lavabo de pedestal, mezcladora y desagüe; probar fugas"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hvvhq7mHF83Qwc7": {
+      "taskId": "6hvvhq7mHF83Qwc7",
+      "url": "https://app.todoist.com/app/task/6hvvhq7mHF83Qwc7",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Confirm the exact DeerValley toilet fit, then install and test it"
+      ],
+      "wikiItemsEs": [
+        "Confirmar el ajuste del modelo exacto de inodoro DeerValley; instalarlo y probarlo"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hvvm7RGJQ4gcjV7": {
+      "taskId": "6hvvm7RGJQ4gcjV7",
+      "url": "https://app.todoist.com/app/task/6hvvm7RGJQ4gcjV7",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Install and test the shower trim and tub drain/overflow trim"
+      ],
+      "wikiItemsEs": [
+        "Instalar y probar los acabados de regadera y desagüe/rebosadero de tina"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hvvm8JPQqjGpW57": {
+      "taskId": "6hvvm8JPQqjGpW57",
+      "url": "https://app.todoist.com/app/task/6hvvm8JPQqjGpW57",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Confirm the partial bath-screen product and fit; template and install it after finished surfaces are ready"
+      ],
+      "wikiItemsEs": [
+        "Confirmar producto y ajuste del cancel parcial; medirlo e instalarlo cuando estén listas las superficies terminadas"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hvvm9rx4RGHGrGf": {
+      "taskId": "6hvvm9rx4RGHGrGf",
+      "url": "https://app.todoist.com/app/task/6hvvm9rx4RGHGrGf",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "priority": 4,
+      "dueDate": "2026-11-20",
+      "responsibleUid": "56238243",
+      "wikiItemsEn": [
+        "Stage surface-mount medicine cabinet & bathroom fixtures with photos + verify toilet flange stock (Friday Nov 20 P1)"
+      ],
+      "wikiItemsEs": [
+        "Presentar con fotos botiquín sobrepuesto y accesorios + verificar brida de excusado"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hvvm95hc4c6Xq4f": {
+      "taskId": "6hvvm95hc4c6Xq4f",
+      "url": "https://app.todoist.com/app/task/6hvvm95hc4c6Xq4f",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Install lights, switches and receptacle; test their operation"
+      ],
+      "wikiItemsEs": [
+        "Instalar luces, apagadores y contacto; probar funcionamiento"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hvvmCmm5mWC9gm7": {
+      "taskId": "6hvvmCmm5mWC9gm7",
+      "url": "https://app.todoist.com/app/task/6hvvmCmm5mWC9gm7",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Finish window trim, crown, threshold, paint, caulk and punch list"
+      ],
+      "wikiItemsEs": [
+        "Terminar contramarcos, corona, umbral, pintura, sellos y pendientes finales"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hvjQJMqF46WRcPf": {
+      "taskId": "6hvjQJMqF46WRcPf",
+      "url": "https://app.todoist.com/app/task/6hvjQJMqF46WRcPf",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Finish window trim, crown, threshold, paint, caulk and punch list"
+      ],
+      "wikiItemsEs": [
+        "Terminar contramarcos, corona, umbral, pintura, sellos y pendientes finales"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hhCMFgP2GhJ6vpf": {
+      "taskId": "6hhCMFgP2GhJ6vpf",
+      "url": "https://app.todoist.com/app/task/6hhCMFgP2GhJ6vpf",
+      "rooms": [
+        "kitchen"
+      ],
+      "doneInWiki": true,
+      "wikiItemsEn": [
+        "Cabinet and appliance layout marked; Todoist records completion on November 5"
+      ],
+      "wikiItemsEs": [
+        "Trazo de gabinetes y equipos marcado; Todoist registra terminación el 5 de noviembre"
+      ],
+      "governingDocs": [
+        "kitchen/CHECKLIST.md",
+        "kitchen/SPEC.md"
+      ]
+    },
+    "6hvRcQ4XC9mr56g7": {
+      "taskId": "6hvRcQ4XC9mr56g7",
+      "url": "https://app.todoist.com/app/task/6hvRcQ4XC9mr56g7",
+      "rooms": [
+        "kitchen",
+        "electrical"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Frame the dining-side panel wall using the current D04 drawing and actual panel/cover",
+        "Match the actual panel and cover to the current D04 framing before final cuts"
+      ],
+      "wikiItemsEs": [
+        "Enmarcar el muro del tablero hacia el comedor con el plano D04 vigente y la caja/tapa reales",
+        "Cotejar caja y tapa reales con la estructura D04 vigente antes de cortes finales"
+      ],
+      "governingDocs": [
+        "kitchen/CHECKLIST.md",
+        "kitchen/SPEC.md",
+        "electrical/CHECKLIST.md",
+        "electrical/SPEC.md"
+      ]
+    },
+    "6hxQ5GjHm2QhrxVf": {
+      "taskId": "6hxQ5GjHm2QhrxVf",
+      "url": "https://app.todoist.com/app/task/6hxQ5GjHm2QhrxVf",
+      "rooms": [
+        "kitchen"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Resolve the unidentified kitchen ceiling vent separately from the range hood"
+      ],
+      "wikiItemsEs": [
+        "Resolver la ventilación de techo no identificada, por separado de la campana"
+      ],
+      "governingDocs": [
+        "kitchen/CHECKLIST.md",
+        "kitchen/SPEC.md"
+      ]
+    },
+    "6hrm36Xj3gXqr9Qf": {
+      "taskId": "6hrm36Xj3gXqr9Qf",
+      "url": "https://app.todoist.com/app/task/6hrm36Xj3gXqr9Qf",
+      "rooms": [
+        "kitchen"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Confirm the outlet, switch and lighting layout before kitchen wiring"
+      ],
+      "wikiItemsEs": [
+        "Confirmar posiciones de contactos, apagadores y luces antes del cableado"
+      ],
+      "governingDocs": [
+        "kitchen/CHECKLIST.md",
+        "kitchen/SPEC.md"
+      ]
+    },
+    "6hvjQ8qJXqR8Cfj7": {
+      "taskId": "6hvjQ8qJXqR8Cfj7",
+      "url": "https://app.todoist.com/app/task/6hvjQ8qJXqR8Cfj7",
+      "rooms": [
+        "kitchen",
+        "electrical"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Complete the planned kitchen wiring after panel-wall framing and layout readiness",
+        "Complete the kitchen wiring from its accepted layout"
+      ],
+      "wikiItemsEs": [
+        "Completar el cableado previsto después de la estructura del tablero y aprobación del trazo",
+        "Completar cableado de cocina según el trazo aceptado"
+      ],
+      "governingDocs": [
+        "kitchen/CHECKLIST.md",
+        "kitchen/SPEC.md",
+        "electrical/CHECKLIST.md",
+        "electrical/SPEC.md"
+      ]
+    },
+    "6hvjQ94Vmh5VJ2q7": {
+      "taskId": "6hvjQ94Vmh5VJ2q7",
+      "url": "https://app.todoist.com/app/task/6hvjQ94Vmh5VJ2q7",
+      "rooms": [
+        "kitchen"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Move sink plumbing to the current layout and prepare dishwasher connections"
+      ],
+      "wikiItemsEs": [
+        "Mover la plomería de tarja a la distribución vigente y preparar conexiones de lavavajillas"
+      ],
+      "governingDocs": [
+        "kitchen/CHECKLIST.md",
+        "kitchen/SPEC.md"
+      ]
+    },
+    "6hvjQ8vQjjXhxxM7": {
+      "taskId": "6hvjQ8vQjjXhxxM7",
+      "url": "https://app.todoist.com/app/task/6hvjQ8vQjjXhxxM7",
+      "rooms": [
+        "kitchen"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Complete the range gas connection preparation and separate hood duct route"
+      ],
+      "wikiItemsEs": [
+        "Completar la preparación de gas de estufa y el recorrido independiente del ducto de campana"
+      ],
+      "governingDocs": [
+        "kitchen/CHECKLIST.md",
+        "kitchen/SPEC.md"
+      ]
+    },
+    "6hvjQ93RxGW3gMgf": {
+      "taskId": "6hvjQ93RxGW3gMgf",
+      "url": "https://app.todoist.com/app/task/6hvjQ93RxGW3gMgf",
+      "rooms": [
+        "kitchen"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Complete the range gas connection preparation and separate hood duct route"
+      ],
+      "wikiItemsEs": [
+        "Completar la preparación de gas de estufa y el recorrido independiente del ducto de campana"
+      ],
+      "governingDocs": [
+        "kitchen/CHECKLIST.md",
+        "kitchen/SPEC.md"
+      ]
+    },
+    "6hrm36cfRhWcMGVf": {
+      "taskId": "6hrm36cfRhWcMGVf",
+      "url": "https://app.todoist.com/app/task/6hrm36cfRhWcMGVf",
+      "rooms": [
+        "kitchen"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Protect and photograph concealed work before closing and priming the walls"
+      ],
+      "wikiItemsEs": [
+        "Proteger y fotografiar instalaciones antes de cerrar y fondear muros"
+      ],
+      "governingDocs": [
+        "kitchen/CHECKLIST.md",
+        "kitchen/SPEC.md"
+      ]
+    },
+    "6hhCMFhxXcRFmw87": {
+      "taskId": "6hhCMFhxXcRFmw87",
+      "url": "https://app.todoist.com/app/task/6hhCMFhxXcRFmw87",
+      "rooms": [
+        "kitchen"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Select the exact dishwasher, faucet and disposal before final cabinet and hookup details",
+        "Build and install level base cabinets, the dishwasher bay and retained pie-safe shelves"
+      ],
+      "wikiItemsEs": [
+        "Elegir lavavajillas, mezcladora y triturador exactos antes de cerrar detalles de gabinetes y conexiones",
+        "Fabricar e instalar gabinetes nivelados, vano de lavavajillas y repisas del hueco conservado"
+      ],
+      "governingDocs": [
+        "kitchen/CHECKLIST.md",
+        "kitchen/SPEC.md"
+      ]
+    },
+    "6hrm36fXf28Wj9H7": {
+      "taskId": "6hrm36fXf28Wj9H7",
+      "url": "https://app.todoist.com/app/task/6hrm36fXf28Wj9H7",
+      "rooms": [
+        "kitchen"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Select the exact dishwasher, faucet and disposal before final cabinet and hookup details",
+        "Connect and test the selected appliances, plumbing, lights and electrical protection"
+      ],
+      "wikiItemsEs": [
+        "Elegir lavavajillas, mezcladora y triturador exactos antes de cerrar detalles de gabinetes y conexiones",
+        "Conectar y probar equipos elegidos, plomería, luces y protecciones eléctricas"
+      ],
+      "governingDocs": [
+        "kitchen/CHECKLIST.md",
+        "kitchen/SPEC.md"
+      ]
+    },
+    "6hvjQGvfvfM8ccx7": {
+      "taskId": "6hvjQGvfvfM8ccx7",
+      "url": "https://app.todoist.com/app/task/6hvjQGvfvfM8ccx7",
+      "rooms": [
+        "kitchen"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Confirm countertop material, edge and cutouts; template and install after cabinets and fixtures are fixed"
+      ],
+      "wikiItemsEs": [
+        "Confirmar material, canto y recortes de cubierta; medir e instalar cuando gabinetes y accesorios estén definidos"
+      ],
+      "governingDocs": [
+        "kitchen/CHECKLIST.md",
+        "kitchen/SPEC.md"
+      ]
+    },
+    "6hrm36WxpVfhqvQf": {
+      "taskId": "6hrm36WxpVfhqvQf",
+      "url": "https://app.todoist.com/app/task/6hrm36WxpVfhqvQf",
+      "rooms": [
+        "kitchen"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Choose range-wall tile and resolve optional upper-cabinet/alcove details, then install the approved tile"
+      ],
+      "wikiItemsEs": [
+        "Elegir azulejo del muro de estufa y resolver detalles opcionales de alacenas/nicho; después instalar el azulejo aprobado"
+      ],
+      "governingDocs": [
+        "kitchen/CHECKLIST.md",
+        "kitchen/SPEC.md"
+      ]
+    },
+    "6hvjQGRjh39J9w3f": {
+      "taskId": "6hvjQGRjh39J9w3f",
+      "url": "https://app.todoist.com/app/task/6hvjQGRjh39J9w3f",
+      "rooms": [
+        "kitchen",
+        "paint-floors"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Choose one matte kitchen floor tile and confirm finished-floor/appliance clearances",
+        "Choose the kitchen matte tile and verify the finished-floor build-up"
+      ],
+      "wikiItemsEs": [
+        "Elegir una loseta mate para cocina y confirmar niveles terminados y claros de equipos",
+        "Elegir loseta mate de cocina y verificar el espesor del piso terminado"
+      ],
+      "governingDocs": [
+        "kitchen/CHECKLIST.md",
+        "kitchen/SPEC.md",
+        "paint-floors/CHECKLIST.md",
+        "paint-floors/SPEC.md"
+      ]
+    },
+    "6hvjQGg44RC4FgQ7": {
+      "taskId": "6hvjQGg44RC4FgQ7",
+      "url": "https://app.todoist.com/app/task/6hvjQGg44RC4FgQ7",
+      "rooms": [
+        "kitchen"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Install the selected kitchen flooring and doorway transition; protect the finished floor"
+      ],
+      "wikiItemsEs": [
+        "Instalar piso elegido y transición de puerta; proteger el piso terminado"
+      ],
+      "governingDocs": [
+        "kitchen/CHECKLIST.md",
+        "kitchen/SPEC.md"
+      ]
+    },
+    "6hvjQGrQx3JH49rf": {
+      "taskId": "6hvjQGrQx3JH49rf",
+      "url": "https://app.todoist.com/app/task/6hvjQGrQx3JH49rf",
+      "rooms": [
+        "kitchen"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Install the selected kitchen flooring and doorway transition; protect the finished floor"
+      ],
+      "wikiItemsEs": [
+        "Instalar piso elegido y transición de puerta; proteger el piso terminado"
+      ],
+      "governingDocs": [
+        "kitchen/CHECKLIST.md",
+        "kitchen/SPEC.md"
+      ]
+    },
+    "6hvjQJCFHhV7Qp3f": {
+      "taskId": "6hvjQJCFHhV7Qp3f",
+      "url": "https://app.todoist.com/app/task/6hvjQJCFHhV7Qp3f",
+      "rooms": [
+        "kitchen"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Finish kitchen wall and trim paint in the approved colors and sheens"
+      ],
+      "wikiItemsEs": [
+        "Terminar pintura de muros y molduras con colores y brillos aprobados"
+      ],
+      "governingDocs": [
+        "kitchen/CHECKLIST.md",
+        "kitchen/SPEC.md"
+      ]
+    },
+    "6hvRcQ4JM7pXCXQf": {
+      "taskId": "6hvRcQ4JM7pXCXQf",
+      "url": "https://app.todoist.com/app/task/6hvRcQ4JM7pXCXQf",
+      "rooms": [
+        "electrical"
+      ],
+      "doneInWiki": true,
+      "wikiItemsEn": [
+        "Panel bought and reported on site by Tisa on November 7"
+      ],
+      "wikiItemsEs": [
+        "Tablero comprado y reportado en obra por Tisa el 7 de noviembre"
+      ],
+      "governingDocs": [
+        "electrical/CHECKLIST.md",
+        "electrical/SPEC.md"
+      ]
+    },
+    "6hvjQGgjhGrR649f": {
+      "taskId": "6hvjQGgjhGrR649f",
+      "url": "https://app.todoist.com/app/task/6hvjQGgjhGrR649f",
+      "rooms": [
+        "electrical"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Finish panel-wall framing and backing"
+      ],
+      "wikiItemsEs": [
+        "Terminar estructura y refuerzos del muro del tablero"
+      ],
+      "governingDocs": [
+        "electrical/CHECKLIST.md",
+        "electrical/SPEC.md"
+      ]
+    },
+    "6hvjQGhxRP9MR7j7": {
+      "taskId": "6hvjQGhxRP9MR7j7",
+      "url": "https://app.todoist.com/app/task/6hvjQGhxRP9MR7j7",
+      "rooms": [
+        "electrical"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Finish panel-wall framing and backing"
+      ],
+      "wikiItemsEs": [
+        "Terminar estructura y refuerzos del muro del tablero"
+      ],
+      "governingDocs": [
+        "electrical/CHECKLIST.md",
+        "electrical/SPEC.md"
+      ]
+    },
+    "6hhCMFXQ9g6G9HWf": {
+      "taskId": "6hhCMFXQ9g6G9HWf",
+      "url": "https://app.todoist.com/app/task/6hhCMFXQ9g6G9HWf",
+      "rooms": [
+        "electrical"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Reconcile the feeder and circuit schedule, including the laundry connections"
+      ],
+      "wikiItemsEs": [
+        "Conciliar alimentador y tabla de circuitos, incluidas las conexiones de lavandería"
+      ],
+      "governingDocs": [
+        "electrical/CHECKLIST.md",
+        "electrical/SPEC.md"
+      ]
+    },
+    "6hvjQHfx2Gjq9f5f": {
+      "taskId": "6hvjQHfx2Gjq9f5f",
+      "url": "https://app.todoist.com/app/task/6hvjQHfx2Gjq9f5f",
+      "rooms": [
+        "electrical"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Install the panel and feeder when the accepted design is ready"
+      ],
+      "wikiItemsEs": [
+        "Instalar tablero y alimentador cuando esté listo el diseño aceptado"
+      ],
+      "governingDocs": [
+        "electrical/CHECKLIST.md",
+        "electrical/SPEC.md"
+      ]
+    },
+    "6hvjQHhVWqfRG2R7": {
+      "taskId": "6hvjQHhVWqfRG2R7",
+      "url": "https://app.todoist.com/app/task/6hvjQHhVWqfRG2R7",
+      "rooms": [
+        "electrical"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Finish bathroom blocking, direct ceiling wiring, attic junction box and toilet-side box"
+      ],
+      "wikiItemsEs": [
+        "Terminar refuerzos de baño, cable directo de techo, caja en ático y caja junto al inodoro"
+      ],
+      "governingDocs": [
+        "electrical/CHECKLIST.md",
+        "electrical/SPEC.md"
+      ]
+    },
+    "6hvRcQ7Gmh3fG5m7": {
+      "taskId": "6hvRcQ7Gmh3fG5m7",
+      "url": "https://app.todoist.com/app/task/6hvRcQ7Gmh3fG5m7",
+      "rooms": [
+        "electrical"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Fit bedroom, living/dining and hallway boxes and empty ENT to the current wall layouts"
+      ],
+      "wikiItemsEs": [
+        "Instalar cajas y ENT vacía en recámara, sala/comedor y pasillo según trazos vigentes"
+      ],
+      "governingDocs": [
+        "electrical/CHECKLIST.md",
+        "electrical/SPEC.md"
+      ]
+    },
+    "6hvj36gH3V6PRmg7": {
+      "taskId": "6hvj36gH3V6PRmg7",
+      "url": "https://app.todoist.com/app/task/6hvj36gH3V6PRmg7",
+      "rooms": [
+        "bedroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Reconcile the current R2 layout and recorded wall geometry before cuts"
+      ],
+      "wikiItemsEs": [
+        "Conciliar distribución R2 y geometría registrada antes de cortar"
+      ],
+      "governingDocs": [
+        "bedroom/CHECKLIST.md",
+        "bedroom/SPEC.md"
+      ]
+    },
+    "6hvjQHFc2qqpFx67": {
+      "taskId": "6hvjQHFc2qqpFx67",
+      "url": "https://app.todoist.com/app/task/6hvjQHFc2qqpFx67",
+      "rooms": [
+        "bedroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Position bedroom electrical boxes and empty ENT against the current frame layout"
+      ],
+      "wikiItemsEs": [
+        "Ubicar cajas eléctricas y ENT vacía según el trazo vigente de marcos"
+      ],
+      "governingDocs": [
+        "bedroom/CHECKLIST.md",
+        "bedroom/SPEC.md"
+      ]
+    },
+    "6hvjQHxcv3rWWf4f": {
+      "taskId": "6hvjQHxcv3rWWf4f",
+      "url": "https://app.todoist.com/app/task/6hvjQHxcv3rWWf4f",
+      "rooms": [
+        "bedroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Lay out and install the approved Wall A and Wall C frames, aligned to the existing moldings"
+      ],
+      "wikiItemsEs": [
+        "Trazar e instalar marcos aprobados de muros A y C, alineados a molduras existentes"
+      ],
+      "governingDocs": [
+        "bedroom/CHECKLIST.md",
+        "bedroom/SPEC.md"
+      ]
+    },
+    "6hvjQJ9g36W3VRg7": {
+      "taskId": "6hvjQJ9g36W3VRg7",
+      "url": "https://app.todoist.com/app/task/6hvjQJ9g36W3VRg7",
+      "rooms": [
+        "bedroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Lay out and install the approved Wall A and Wall C frames, aligned to the existing moldings"
+      ],
+      "wikiItemsEs": [
+        "Trazar e instalar marcos aprobados de muros A y C, alineados a molduras existentes"
+      ],
+      "governingDocs": [
+        "bedroom/CHECKLIST.md",
+        "bedroom/SPEC.md"
+      ]
+    },
+    "6hvjQJQJ43cFJ9Qf": {
+      "taskId": "6hvjQJQJ43cFJ9Qf",
+      "url": "https://app.todoist.com/app/task/6hvjQJQJ43cFJ9Qf",
+      "rooms": [
+        "bedroom",
+        "paint-floors"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Choose the exact paint color and sheens, then prep and paint",
+        "Confirm remaining room paint colors and sheens"
+      ],
+      "wikiItemsEs": [
+        "Elegir color y brillos exactos; preparar y pintar",
+        "Confirmar colores y brillos pendientes de cada cuarto"
+      ],
+      "governingDocs": [
+        "bedroom/CHECKLIST.md",
+        "bedroom/SPEC.md",
+        "paint-floors/CHECKLIST.md",
+        "paint-floors/SPEC.md"
+      ]
+    },
+    "6hvjQHFpvRJFfHJf": {
+      "taskId": "6hvjQHFpvRJFfHJf",
+      "url": "https://app.todoist.com/app/task/6hvjQHFpvRJFfHJf",
+      "rooms": [
+        "living-dining"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Choose outlet height and any optional TV outlet before boxes are placed"
+      ],
+      "wikiItemsEs": [
+        "Elegir altura de contactos y contacto opcional de TV antes de colocar cajas"
+      ],
+      "governingDocs": [
+        "living-dining/CHECKLIST.md",
+        "living-dining/SPEC.md"
+      ]
+    },
+    "6hvjQHMV5j4W26Pf": {
+      "taskId": "6hvjQHMV5j4W26Pf",
+      "url": "https://app.todoist.com/app/task/6hvjQHMV5j4W26Pf",
+      "rooms": [
+        "living-dining"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Choose outlet height and any optional TV outlet before boxes are placed"
+      ],
+      "wikiItemsEs": [
+        "Elegir altura de contactos y contacto opcional de TV antes de colocar cajas"
+      ],
+      "governingDocs": [
+        "living-dining/CHECKLIST.md",
+        "living-dining/SPEC.md"
+      ]
+    },
+    "6hvj35CcVJrw5Fxf": {
+      "taskId": "6hvj35CcVJrw5Fxf",
+      "url": "https://app.todoist.com/app/task/6hvj35CcVJrw5Fxf",
+      "rooms": [
+        "living-dining"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Resolve only the missing wall/pier dimensions using the existing plan first"
+      ],
+      "wikiItemsEs": [
+        "Resolver solo medidas faltantes de muros y paños, usando primero el plano existente"
+      ],
+      "governingDocs": [
+        "living-dining/CHECKLIST.md",
+        "living-dining/SPEC.md"
+      ]
+    },
+    "6hvjQHMCxJxfJPG7": {
+      "taskId": "6hvjQHMCxJxfJPG7",
+      "url": "https://app.todoist.com/app/task/6hvjQHMCxJxfJPG7",
+      "rooms": [
+        "living-dining",
+        "hallway"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Install living/dining boxes and empty ENT, keeping clear of pocket-door cavities and omitting D5",
+        "Coordinate hallway outlet boxes with trim and door clearances"
+      ],
+      "wikiItemsEs": [
+        "Instalar cajas y ENT vacía, fuera de cavidades de puertas corredizas y sin D5",
+        "Coordinar cajas de contactos con molduras y claros de puertas"
+      ],
+      "governingDocs": [
+        "living-dining/CHECKLIST.md",
+        "living-dining/SPEC.md",
+        "hallway/CHECKLIST.md",
+        "hallway/SPEC.md"
+      ]
+    },
+    "6hvjQHRmpFHpwrV7": {
+      "taskId": "6hvjQHRmpFHpwrV7",
+      "url": "https://app.todoist.com/app/task/6hvjQHRmpFHpwrV7",
+      "rooms": [
+        "living-dining"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Install living/dining boxes and empty ENT, keeping clear of pocket-door cavities and omitting D5"
+      ],
+      "wikiItemsEs": [
+        "Instalar cajas y ENT vacía, fuera de cavidades de puertas corredizas y sin D5"
+      ],
+      "governingDocs": [
+        "living-dining/CHECKLIST.md",
+        "living-dining/SPEC.md"
+      ]
+    },
+    "6hvwQQF5cXPpG5gf": {
+      "taskId": "6hvwQQF5cXPpG5gf",
+      "url": "https://app.todoist.com/app/task/6hvwQQF5cXPpG5gf",
+      "rooms": [
+        "living-dining"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Confirm the dining cabinet's final position before adjacent paneling and repairs"
+      ],
+      "wikiItemsEs": [
+        "Confirmar posición final de vitrina antes de panelado y reparaciones adyacentes"
+      ],
+      "governingDocs": [
+        "living-dining/CHECKLIST.md",
+        "living-dining/SPEC.md"
+      ]
+    },
+    "6hvwcHjPrhqmw9Xf": {
+      "taskId": "6hvwcHjPrhqmw9Xf",
+      "url": "https://app.todoist.com/app/task/6hvwcHjPrhqmw9Xf",
+      "rooms": [
+        "living-dining"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Continue the remaining hutch repair without repeating the completed move"
+      ],
+      "wikiItemsEs": [
+        "Continuar reparación pendiente del mueble sin repetir el traslado terminado"
+      ],
+      "governingDocs": [
+        "living-dining/CHECKLIST.md",
+        "living-dining/SPEC.md"
+      ]
+    },
+    "6hvvjjX8r58CXRVf": {
+      "taskId": "6hvvjjX8r58CXRVf",
+      "url": "https://app.todoist.com/app/task/6hvvjjX8r58CXRVf",
+      "rooms": [
+        "living-dining"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Choose the fireplace tile design and reconcile the usable stored tile"
+      ],
+      "wikiItemsEs": [
+        "Elegir diseño de azulejo de chimenea y conciliar material guardado utilizable"
+      ],
+      "governingDocs": [
+        "living-dining/CHECKLIST.md",
+        "living-dining/SPEC.md"
+      ]
+    },
+    "6hvj379WJmmh5GW7": {
+      "taskId": "6hvj379WJmmh5GW7",
+      "url": "https://app.todoist.com/app/task/6hvj379WJmmh5GW7",
+      "rooms": [
+        "living-dining"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Install approved living-room frames and chair rail after layout release"
+      ],
+      "wikiItemsEs": [
+        "Instalar marcos y riel de sala aprobados después de liberar el trazo"
+      ],
+      "governingDocs": [
+        "living-dining/CHECKLIST.md",
+        "living-dining/SPEC.md"
+      ]
+    },
+    "6hhCMFjp8CqRRq5f": {
+      "taskId": "6hhCMFjp8CqRRq5f",
+      "url": "https://app.todoist.com/app/task/6hhCMFjp8CqRRq5f",
+      "rooms": [
+        "living-dining"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Install approved dining frames and coordinate the panel access frame"
+      ],
+      "wikiItemsEs": [
+        "Instalar marcos de comedor aprobados y coordinar marco de acceso al tablero"
+      ],
+      "governingDocs": [
+        "living-dining/CHECKLIST.md",
+        "living-dining/SPEC.md"
+      ]
+    },
+    "6hvjQJXJJGj4RM77": {
+      "taskId": "6hvjQJXJJGj4RM77",
+      "url": "https://app.todoist.com/app/task/6hvjQJXJJGj4RM77",
+      "rooms": [
+        "living-dining"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Choose paint colors and sheens, then prep and paint living and dining rooms"
+      ],
+      "wikiItemsEs": [
+        "Elegir colores y brillos; preparar y pintar sala y comedor"
+      ],
+      "governingDocs": [
+        "living-dining/CHECKLIST.md",
+        "living-dining/SPEC.md"
+      ]
+    },
+    "6hvjQJXCcVw39HQf": {
+      "taskId": "6hvjQJXCcVw39HQf",
+      "url": "https://app.todoist.com/app/task/6hvjQJXCcVw39HQf",
+      "rooms": [
+        "living-dining"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Choose paint colors and sheens, then prep and paint living and dining rooms"
+      ],
+      "wikiItemsEs": [
+        "Elegir colores y brillos; preparar y pintar sala y comedor"
+      ],
+      "governingDocs": [
+        "living-dining/CHECKLIST.md",
+        "living-dining/SPEC.md"
+      ]
+    },
+    "6hvjQHVFfvWxM59f": {
+      "taskId": "6hvjQHVFfvWxM59f",
+      "url": "https://app.todoist.com/app/task/6hvjQHVFfvWxM59f",
+      "rooms": [
+        "hallway"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Choose the hallway trim/chair-rail scope"
+      ],
+      "wikiItemsEs": [
+        "Elegir el alcance de molduras y riel del pasillo"
+      ],
+      "governingDocs": [
+        "hallway/CHECKLIST.md",
+        "hallway/SPEC.md"
+      ]
+    },
+    "6hvjQJ2mH79Xwqp7": {
+      "taskId": "6hvjQJ2mH79Xwqp7",
+      "url": "https://app.todoist.com/app/task/6hvjQJ2mH79Xwqp7",
+      "rooms": [
+        "hallway"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Confirm hallway paint color and sheen, then prep and paint"
+      ],
+      "wikiItemsEs": [
+        "Confirmar color y brillo; preparar y pintar pasillo"
+      ],
+      "governingDocs": [
+        "hallway/CHECKLIST.md",
+        "hallway/SPEC.md"
+      ]
+    },
+    "6hvj37ccC9q4mpPf": {
+      "taskId": "6hvj37ccC9q4mpPf",
+      "url": "https://app.todoist.com/app/task/6hvj37ccC9q4mpPf",
+      "rooms": [
+        "paint-floors"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Confirm remaining room paint colors and sheens",
+        "Install and protect finishes in the room sequence after the preceding work is ready"
+      ],
+      "wikiItemsEs": [
+        "Confirmar colores y brillos pendientes de cada cuarto",
+        "Instalar y proteger acabados según la secuencia de cada cuarto"
+      ],
+      "governingDocs": [
+        "paint-floors/CHECKLIST.md",
+        "paint-floors/SPEC.md"
+      ]
+    },
+    "6hxM9wVC7hX2jCq7": {
+      "taskId": "6hxM9wVC7hX2jCq7",
+      "url": "https://app.todoist.com/app/task/6hxM9wVC7hX2jCq7",
+      "rooms": [
+        "paint-floors"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Reconcile measured quantities, usable stock and incoming material before the consolidated order",
+        "Buy the approved paint/flooring quantities after Tisa authorizes the order"
+      ],
+      "wikiItemsEs": [
+        "Conciliar cantidades, existencias utilizables y material en camino antes del pedido consolidado",
+        "Comprar cantidades aprobadas de pintura y pisos después de autorización de Tisa"
+      ],
+      "governingDocs": [
+        "paint-floors/CHECKLIST.md",
+        "paint-floors/SPEC.md"
+      ]
+    },
+    "6hrm36cVp3XCFqC7": {
+      "taskId": "6hrm36cVp3XCFqC7",
+      "url": "https://app.todoist.com/app/task/6hrm36cVp3XCFqC7",
+      "rooms": [
+        "paint-floors"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Install and protect finishes in the room sequence after the preceding work is ready"
+      ],
+      "wikiItemsEs": [
+        "Instalar y proteger acabados según la secuencia de cada cuarto"
+      ],
+      "governingDocs": [
+        "paint-floors/CHECKLIST.md",
+        "paint-floors/SPEC.md"
+      ]
+    },
+    "6hvj3CgXpVqrJgvf": {
+      "taskId": "6hvj3CgXpVqrJgvf",
+      "url": "https://app.todoist.com/app/task/6hvj3CgXpVqrJgvf",
+      "rooms": [
+        "hvac"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "When Tisa restarts HVAC, reconcile equipment, routes, registers and electrical coordination before work"
+      ],
+      "wikiItemsEs": [
+        "Cuando Tisa reactive climatización, conciliar equipo, recorridos, rejillas y coordinación eléctrica"
+      ],
+      "governingDocs": [
+        "hvac/CHECKLIST.md",
+        "hvac/SPEC.md"
+      ]
+    },
+    "6j3RXQ6hVVH87CR7": {
+      "taskId": "6j3RXQ6hVVH87CR7",
+      "url": "https://app.todoist.com/app/task/6j3RXQ6hVVH87CR7",
+      "rooms": [
+        "kitchen"
+      ],
+      "doneInWiki": false,
+      "priority": 4,
+      "dueDate": "2026-11-20",
+      "responsibleUid": "56238243",
+      "wikiItemsEn": [
+        "Clear kitchen, finish window sill/framing & stage full-L floor/wall layout"
+      ],
+      "wikiItemsEs": [
+        "Despejar cocina, terminar marco/repisa de ventana y trazo completo en L"
+      ],
+      "governingDocs": [
+        "kitchen/CHECKLIST.md",
+        "kitchen/SPEC.md"
+      ]
+    },
+    "6j3hQfxHXHJhWgG7": {
+      "taskId": "6j3hQfxHXHJhWgG7",
+      "url": "https://app.todoist.com/app/task/6j3hQfxHXHJhWgG7",
+      "rooms": [
+        "kitchen"
+      ],
+      "doneInWiki": false,
+      "priority": 4,
+      "dueDate": "2026-11-20",
+      "responsibleUid": "56238243",
+      "wikiItemsEn": [
+        "Capture labeled full-L mockup verification photos (Friday Nov 20 P1)"
+      ],
+      "wikiItemsEs": [
+        "Tomar fotos rotuladas del trazo completo en L"
+      ],
+      "governingDocs": [
+        "kitchen/CHECKLIST.md",
+        "kitchen/SPEC.md"
+      ]
+    },
+    "6j3RXQ97qmMCGhQf": {
+      "taskId": "6j3RXQ97qmMCGhQf",
+      "url": "https://app.todoist.com/app/task/6j3RXQ97qmMCGhQf",
+      "rooms": [
+        "kitchen"
+      ],
+      "doneInWiki": false,
+      "priority": 4,
+      "dueDate": "2026-11-20",
+      "responsibleUid": "56238243",
+      "wikiItemsEn": [
+        "Pre-drywall Zephyr Savona ZSA-E30AS blocking & mock-hang without upper cabinets (Friday Nov 20 P1)"
+      ],
+      "wikiItemsEs": [
+        "Refuerzos y montaje provisional previo a tablaroca de campana Zephyr ZSA-E30AS sin gabinetes altos"
+      ],
+      "governingDocs": [
+        "kitchen/CHECKLIST.md",
+        "kitchen/SPEC.md"
+      ]
+    },
+    "6j3RvWmJ329qPCc7": {
+      "taskId": "6j3RvWmJ329qPCc7",
+      "url": "https://app.todoist.com/app/task/6j3RvWmJ329qPCc7",
+      "rooms": [
+        "attic-access",
+        "hvac"
+      ],
+      "doneInWiki": false,
+      "priority": 4,
+      "dueDate": "2026-11-20",
+      "responsibleUid": "56238243",
+      "wikiItemsEn": [
+        "Daylight 24x36 hallway hatch 4 labeled photos + safe interior roof leak check (Friday Nov 20 P1)"
+      ],
+      "wikiItemsEs": [
+        "Fotos de luz de día de escotilla 24x36 y revisión interior segura de goteras"
+      ],
+      "governingDocs": [
+        "attic/CHECKLIST.md",
+        "hvac/CHECKLIST.md"
+      ]
+    },
+    "6j3j3pXFrFWhH2w7": {
+      "taskId": "6j3j3pXFrFWhH2w7",
+      "url": "https://app.todoist.com/app/task/6j3j3pXFrFWhH2w7",
+      "rooms": [
+        "attic-access",
+        "bedroom"
+      ],
+      "doneInWiki": false,
+      "priority": 4,
+      "dueDate": "2026-11-20",
+      "responsibleUid": "56238243",
+      "wikiItemsEn": [
+        "Measure open temporary bedroom closet opening for furnace passage (Friday Nov 20 P1)"
+      ],
+      "wikiItemsEs": [
+        "Medir abertura temporal del clóset de recámara para paso de calefactor"
+      ],
+      "governingDocs": [
+        "attic/CHECKLIST.md",
+        "bedroom/CHECKLIST.md"
+      ]
+    },
+    "6j3j3pQ9cxVj3xP7": {
+      "taskId": "6j3j3pQ9cxVj3xP7",
+      "url": "https://app.todoist.com/app/task/6j3j3pQ9cxVj3xP7",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "priority": 4,
+      "dueDate": "2026-11-20",
+      "responsibleUid": "56238243",
+      "wikiItemsEn": [
+        "Install original window trim/casing over HardieBoard BEFORE bathroom wall tile (Friday Nov 20 P1 blocker)"
+      ],
+      "wikiItemsEs": [
+        "Instalar moldura original de ventana sobre HardieBoard ANTES del azulejo"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    },
+    "6hvvhhCfcC3hp7r7": {
+      "taskId": "6hvvhhCfcC3hp7r7",
+      "url": "https://app.todoist.com/app/task/6hvvhhCfcC3hp7r7",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "priority": 4,
+      "dueDate": "2026-11-20",
+      "responsibleUid": "56238243",
+      "wikiItemsEn": [
+        "Position & install bathroom rough-in electrical & GFCI boxes Friday (Friday Nov 20 P1)"
+      ],
+      "wikiItemsEs": [
+        "Colocar e instalar cajas eléctricas en bruto y GFCI del baño el viernes"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md",
+        "bathroom/SPEC.md"
+      ]
+    }
+  }
+}

@@ -1,0 +1,90 @@
+[
+  {
+    "title": "2026-11-08_U4_bedroom_trim-installation-packet_R2_EN.pdf",
+    "titleEn": "Bedroom Wall Moulding & Trim Installation Packet R2 (English)",
+    "titleEs": "Paquete de Instalación de Molduras de Recámara R2 (Inglés)",
+    "id": "1jiGfPGxC122ZaippBSkCe4UBWUnMgJmQ",
+    "path": "2026-11-08_U4_bedroom_trim-installation-packet_R2_EN.pdf",
+    "date": "2026-11-08",
+    "lang": "en",
+    "pairId": "bedroom-r2-packet",
+    "review": true
+  },
+  {
+    "title": "2026-11-08_U4_bedroom_trim-installation-packet_R2_ES.pdf",
+    "titleEn": "Bedroom Wall Moulding & Trim Installation Packet R2 (Spanish)",
+    "titleEs": "Paquete de Instalación de Molduras de Recámara R2 (Español)",
+    "id": "1WTPBOcSCPfVmSmrbXUWiCw29XUT49XYU",
+    "path": "2026-11-08_U4_bedroom_trim-installation-packet_R2_ES.pdf",
+    "date": "2026-11-08",
+    "lang": "es",
+    "pairId": "bedroom-r2-packet",
+    "review": true
+  },
+  {
+    "title": "2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_EN.pdf",
+    "titleEn": "Bedroom R2 Centerline Tape-Fit Installation Method Amendment (English)",
+    "titleEs": "Enmienda al Método de Instalación con Cinta desde Eje Central R2 (Inglés)",
+    "id": "2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_EN",
+    "path": "interior-design/2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_EN.pdf",
+    "date": "2026-11-10",
+    "lang": "en",
+    "pairId": "bedroom-r2-amend",
+    "review": true
+  },
+  {
+    "title": "2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_ES.pdf",
+    "titleEn": "Bedroom R2 Centerline Tape-Fit Installation Method Amendment (Spanish)",
+    "titleEs": "Enmienda al Método de Instalación con Cinta desde Eje Central R2 (Español)",
+    "id": "2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_ES",
+    "path": "interior-design/2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_ES.pdf",
+    "date": "2026-11-10",
+    "lang": "es",
+    "pairId": "bedroom-r2-amend",
+    "review": true
+  },
+  {
+    "title": "2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_EN.pdf",
+    "titleEn": "Whole-Unit Moulding Option A (No Chair Rail) Review Packet RevB (English)",
+    "titleEs": "Paquete de Revisión de Molduras Opción A (Sin Riel) RevB (Inglés)",
+    "id": "2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_EN",
+    "path": "interior-design/2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_EN.pdf",
+    "date": "2026-11-10",
+    "lang": "en",
+    "pairId": "molding-opt-a-revb",
+    "review": true
+  },
+  {
+    "title": "2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_ES.pdf",
+    "titleEn": "Whole-Unit Moulding Option A (No Chair Rail) Review Packet RevB (Spanish)",
+    "titleEs": "Paquete de Revisión de Molduras Opción A (Sin Riel) RevB (Español)",
+    "id": "2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_ES",
+    "path": "interior-design/2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_ES.pdf",
+    "date": "2026-11-10",
+    "lang": "es",
+    "pairId": "molding-opt-a-revb",
+    "review": true
+  },
+  {
+    "title": "2026-11-02_U4_Bedroom_Wall-B_RevB_EN.pdf",
+    "titleEn": "Superseded Bedroom South Shared Wall (formerly Wall B) RevB (English)",
+    "titleEs": "Plano anterior de Muro Sur compartido (antes Muro B) RevB (Inglés)",
+    "id": "1VRVlrLHoqBleu4D6brZCzeB57skxrYOJ",
+    "path": "2026-11-02-walls-trim-outlets-R1/2026-11-02_U4_Bedroom_Wall-B_RevB_EN.pdf",
+    "date": "2026-11-02",
+    "lang": "en",
+    "pairId": "bedroom-wall-b-revb",
+    "history": true
+  },
+  {
+    "title": "2026-11-02_U4_Recamara_Muro-B_RevB_ES.pdf",
+    "titleEn": "Superseded Bedroom South Shared Wall (formerly Wall B) RevB (Spanish)",
+    "titleEs": "Plano anterior de Muro Sur compartido (antes Muro B) RevB (Español)",
+    "id": "1ZtY0-QONVmxSIYP_1LPAGeKht6SPiW7w",
+    "path": "2026-11-02-walls-trim-outlets-R1/2026-11-02_U4_Recamara_Muro-B_RevB_ES.pdf",
+    "date": "2026-11-02",
+    "lang": "es",
+    "pairId": "bedroom-wall-b-revb",
+    "history": true
+  }
+]

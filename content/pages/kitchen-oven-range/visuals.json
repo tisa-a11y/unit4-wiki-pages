@@ -1,0 +1,20 @@
+{
+  "en": "Range Wall Visuals",
+  "es": "Vistas del muro de estufa",
+  "noteEn": "Tap any drawing in Documents below to add to Previews.",
+  "noteEs": "Toca cualquier plano en Documentos para agregarlo a Vistas previas.",
+  "items": [
+    {
+      "img": "https://drive.google.com/thumbnail?id=1w9awRXL9sBPAxwZrjaIBKKY39nmloIOF&sz=w1200",
+      "href": "https://drive.google.com/file/d/1w9awRXL9sBPAxwZrjaIBKKY39nmloIOF/view",
+      "en": "West Range Wall & Hood Concept",
+      "es": "Concepto Muro de Estufa y Campana"
+    },
+    {
+      "img": "./wiki-images/kitchen-magicplan-9ed1811d0317467ea1ef90f03911772c.jpg",
+      "href": "./wiki-images/kitchen-magicplan-9ed1811d0317467ea1ef90f03911772c.jpg",
+      "en": "3D Range Wall View",
+      "es": "Vista 3D Muro de Estufa"
+    }
+  ]
+}

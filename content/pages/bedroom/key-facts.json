@@ -1,0 +1,26 @@
+[
+  {
+    "kEn": "Walls A–D",
+    "kEs": "Muros A–D",
+    "vEn": "A North · B East (no trim) · C South · D West",
+    "vEs": "A Norte · B Este (liso) · C Sur · D Oeste"
+  },
+  {
+    "kEn": "Trim Align",
+    "kEs": "Molduras",
+    "vEn": "9-1/2\" base · 99\" high · Centerline tape-fit",
+    "vEs": "Zoclo 9-1/2\" · Alta 99\" · Eje central"
+  },
+  {
+    "kEn": "Closet Hold",
+    "kEs": "Pausa clóset",
+    "vEn": "Keep open for LV cable + 24\"×36\" hatch",
+    "vEs": "Abierto hasta cable LV + escotilla 24\"×36\""
+  },
+  {
+    "kEn": "Flooring",
+    "kEs": "Piso",
+    "vEn": "Repair missing hardwood patch",
+    "vEs": "Reparar parche faltante de madera"
+  }
+]

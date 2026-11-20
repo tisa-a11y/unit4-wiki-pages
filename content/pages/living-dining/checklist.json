@@ -1,0 +1,30 @@
+{
+  "fileId": "10wWsl89_qWvDuqkOr2BThS75gJBsuP1r",
+  "steps": [
+    {
+      "done": true,
+      "en": "D04 dining wall selected for subpanel (centered in upper-left frame)",
+      "es": "Muro D04 comedor elegido para subpanel (centrado en marco sup. izq.)"
+    },
+    {
+      "done": false,
+      "en": "Frame D04 doorway infill & subpanel bay with side-entry routing",
+      "es": "Enmarcar relleno D04 y vano de subpanel con entradas laterales"
+    },
+    {
+      "done": false,
+      "en": "Set outlet boxes + empty ENT smurf tube (clear of pocket doors)",
+      "es": "Instalar cajas + tubo ENT vacío (fuera de puertas corredizas)"
+    },
+    {
+      "done": false,
+      "en": "Tape-fit picture-frame mouldings from centerlines & install",
+      "es": "Presentar marcos con cinta desde ejes centrales e instalar"
+    },
+    {
+      "done": false,
+      "en": "Finish dining hutch/fireplace trim, prime & paint",
+      "es": "Terminar detalles de vitrina/chimenea, fondear y pintar"
+    }
+  ]
+}

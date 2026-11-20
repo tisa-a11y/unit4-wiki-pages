@@ -1,0 +1,35 @@
+{
+  "fileId": "1Ip5esr8DOQSh55f0qFoDeWVhoDWOPpQz",
+  "steps": [
+    {
+      "done": true,
+      "en": "Plumbing rough-in, fan duct, Kohler tub leak-test & Schluter done",
+      "es": "Plomería, ducto extractor, prueba tina Kohler y Schluter listos"
+    },
+    {
+      "done": true,
+      "en": "Calacatta Gem floor laid (ungrouted) & HardieBoard/niches up",
+      "es": "Piso Calacatta Gem colocado (sin boquilla) y HardieBoard/nichos listos"
+    },
+    {
+      "done": false,
+      "en": "Install original window trim over HardieBoard (before wall tile) & 2 GFCI boxes",
+      "es": "Instalar moldura original sobre HardieBoard (antes de azulejo) y 2 cajas GFCI"
+    },
+    {
+      "done": false,
+      "en": "Check toilet flange, Warm Gray floor grout & 3×6 white wall tile",
+      "es": "Revisar brida, boquilla Warm Gray en piso y azulejo blanco 3×6"
+    },
+    {
+      "done": false,
+      "en": "Attic ceiling J-box, close ceiling, prime/paint & hang door",
+      "es": "Caja en ático, cerrar techo, fondear/pintar y colgar puerta"
+    },
+    {
+      "done": false,
+      "en": "Install pedestal sink, 10\" toilet, Champagne Bronze trim, glass & lights",
+      "es": "Instalar lavabo, inodoro 10\", llaves Champagne Bronze, cancel y luces"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "key": "kitchen-oven-range",
+  "label": "Oven / Range Run",
+  "labelEn": "Oven / Range Run",
+  "labelEs": "Tramo de estufa y campana",
+  "group": "Projects",
+  "parent": "kitchen",
+  "aliases": [
+    "range-hood-run",
+    "range-hood",
+    "oven-range-run",
+    "kitchen/range-hood",
+    "kitchen/hood",
+    "kitchen/oven-range-run"
+  ],
+  "path": "kitchen/2026-11-19_U4_kitchen_range-wall-full-plan_R1_EN.md",
+  "fileId": null
+}

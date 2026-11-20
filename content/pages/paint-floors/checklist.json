@@ -1,0 +1,30 @@
+{
+  "fileId": "1X6tuZMgvcY1y7RmhbDvScSAab77CGNFQ",
+  "steps": [
+    {
+      "done": true,
+      "en": "Bathroom Calacatta Gem floor laid; Warm Gray grout selected",
+      "es": "Piso Calacatta Gem en baño colocado; boquilla Warm Gray lista"
+    },
+    {
+      "done": false,
+      "en": "Confirm kitchen floor thickness (~3/4\") & patch bedroom hardwood",
+      "es": "Confirmar espesor piso cocina (~3/4\") y parche madera recámara"
+    },
+    {
+      "done": false,
+      "en": "Complete consolidated moulding order & centerline tape-fit layout",
+      "es": "Pedido consolidado de molduras y presentación desde ejes centrales"
+    },
+    {
+      "done": false,
+      "en": "Install kitchen matte floor tile, transitions & floor protection",
+      "es": "Instalar piso mate de cocina, transiciones y protección"
+    },
+    {
+      "done": false,
+      "en": "Prime & finish-paint rooms, trim & Essex Green kitchen bases",
+      "es": "Fondear y pintar cuartos, molduras y gabinetes Essex Green"
+    }
+  ]
+}

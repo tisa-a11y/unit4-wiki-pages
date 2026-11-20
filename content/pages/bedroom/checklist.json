@@ -1,0 +1,30 @@
+{
+  "fileId": "1X2EqyKgqqZQCieUrfEE44Zp1XecrJ3ae",
+  "steps": [
+    {
+      "done": true,
+      "en": "Wall A–D orientation & R2 trim installation packet established",
+      "es": "Orientación Muros A–D y paquete de molduras R2 establecidos"
+    },
+    {
+      "done": false,
+      "en": "Check closet furnace passage & run coiled LV switch cable to attic",
+      "es": "Revisar paso de caldera en clóset y subir cable LV al ático"
+    },
+    {
+      "done": false,
+      "en": "Set outlet boxes + empty ENT smurf tube & patch hardwood floor",
+      "es": "Instalar cajas + tubo ENT vacío y reparar parche de madera"
+    },
+    {
+      "done": false,
+      "en": "Tape-fit wall moulding frames from centerlines & install trim",
+      "es": "Presentar marcos con cinta desde ejes centrales e instalar molduras"
+    },
+    {
+      "done": false,
+      "en": "Close closet ceiling (after permanent hatch), rod, prime & paint",
+      "es": "Cerrar techo clóset (tras escotilla permanente), barra, fondear y pintar"
+    }
+  ]
+}

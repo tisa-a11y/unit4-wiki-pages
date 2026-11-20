@@ -1,0 +1,26 @@
+[
+  {
+    "kEn": "Attic Hatch",
+    "kEs": "Escotilla",
+    "vEn": "24\"×36\" clear (#attic-access)",
+    "vEs": "24\"×36\" libre (#attic-access)"
+  },
+  {
+    "kEn": "Murphy Door",
+    "kEs": "Puerta Murphy",
+    "vEn": "Trim interface only (specs on #laundry)",
+    "vEs": "Solo marco (specs en #laundry)"
+  },
+  {
+    "kEn": "Moulding",
+    "kEs": "Molduras",
+    "vEn": "H01–H07 · NR-11 to NR-13 studies",
+    "vEs": "H01–H07 · Estudios NR-11 a NR-13"
+  },
+  {
+    "kEn": "Next Gate",
+    "kEs": "Siguiente",
+    "vEn": "4 daylight photos + fire-rating check",
+    "vEs": "4 fotos de día + revisión contra fuego"
+  }
+]

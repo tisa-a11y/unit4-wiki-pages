@@ -1,0 +1,35 @@
+{
+  "fileId": "1Ol2N6vIUfYA6FTONZlumowSwQogpAulN",
+  "steps": [
+    {
+      "done": true,
+      "en": "Core appliances & 30\" sink on hand; pie-safe cleared",
+      "es": "Equipos principales y tarja 30\" en obra; pie-safe despejado"
+    },
+    {
+      "done": false,
+      "en": "Clear room, finish window framing & full-L markout photos",
+      "es": "Despejar, marco de ventana y fotos del trazo en L"
+    },
+    {
+      "done": false,
+      "en": "West wall wood blocking & Zephyr hood mock-hang (30\"–36\" above range)",
+      "es": "Bloqueo muro oeste y presentación Zephyr (30\"–36\" sobre estufa)"
+    },
+    {
+      "done": false,
+      "en": "9-circuit electrical, D04 bay, plumbing & gas rough-in",
+      "es": "9 circuitos eléctricos, vano D04, plomería y gas en bruto"
+    },
+    {
+      "done": false,
+      "en": "Drywall close-in, Essex Green bases, counters, range tile & floor",
+      "es": "Tablaroca, gabinetes Essex Green, cubiertas, azulejo y piso"
+    },
+    {
+      "done": false,
+      "en": "Final appliance hookup, trim/paint & AFCI/GFCI test",
+      "es": "Conexión final de equipos, pintura y pruebas AFCI/GFCI"
+    }
+  ]
+}

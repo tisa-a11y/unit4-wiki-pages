@@ -1,0 +1,30 @@
+{
+  "fileId": "1dYEurki2VQ8Zd5yxkRA4UzVL2uGJwMdG",
+  "steps": [
+    {
+      "done": true,
+      "en": "NEXT HVAC furnace, ducts & subpanel scope defined; 24\"×36\" hatch settled",
+      "es": "Alcance NEXT de caldera, ductos y subpanel definido; escotilla 24\"×36\" fija"
+    },
+    {
+      "done": false,
+      "en": "Phase 1 (Before NEXT): Keep closet open, frame D04 & fix roof leaks",
+      "es": "Fase 1 (Antes): Dejar clóset abierto, enmarcar D04 y reparar goteras"
+    },
+    {
+      "done": false,
+      "en": "Mon Nov 23 (2–4 p.m.) Walkthrough: Confirm furnace, vent, hatch & D04",
+      "es": "Visita lun 23 nov (2–4 p.m.): Confirmar caldera, tiro, escotilla y D04"
+    },
+    {
+      "done": false,
+      "en": "Phase 2 (With NEXT): Build hatch, walkway, platform & light/GFCI (#attic-access)",
+      "es": "Fase 2 (Con NEXT): Escotilla, pasarela, plataforma y luz/GFCI (#attic-access)"
+    },
+    {
+      "done": false,
+      "en": "Phase 3 (After NEXT): HERS & City inspections, close closet & paint",
+      "es": "Fase 3 (Después): Prueba HERS e inspecciones, cerrar clóset y pintar"
+    }
+  ]
+}

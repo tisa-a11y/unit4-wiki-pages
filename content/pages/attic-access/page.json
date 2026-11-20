@@ -1,0 +1,14 @@
+{
+  "key": "attic-access",
+  "label": "Attic Access",
+  "labelEn": "Attic Access",
+  "labelEs": "Acceso al ático",
+  "group": "Projects",
+  "parent": "hvac",
+  "aliases": [
+    "attic",
+    "hvac/attic"
+  ],
+  "path": "attic/SPEC.md",
+  "fileId": null
+}

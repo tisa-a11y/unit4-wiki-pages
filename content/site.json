@@ -1,0 +1,87 @@
+{
+  "_readme": "Menu order and the order of per-page data. Add a page: create content/pages/<key>/ and add the key to \"pages\".",
+  "pages": [
+    "home",
+    "roadmap",
+    "decisions",
+    "kitchen",
+    "kitchen-oven-range",
+    "kitchen-sink-north",
+    "bathroom",
+    "hvac",
+    "attic-access",
+    "electrical",
+    "laundry",
+    "bedroom",
+    "living-dining",
+    "hallway",
+    "paint-floors"
+  ],
+  "perPage": {
+    "DOCS": {
+      "file": "documents.json",
+      "order": [
+        "home",
+        "roadmap",
+        "decisions",
+        "kitchen",
+        "kitchen-oven-range",
+        "kitchen-sink-north",
+        "bathroom",
+        "hvac",
+        "attic-access",
+        "electrical",
+        "laundry",
+        "bedroom",
+        "living-dining",
+        "hallway",
+        "paint-floors"
+      ]
+    },
+    "CHECKLISTS": {
+      "file": "checklist.json",
+      "order": [
+        "kitchen",
+        "kitchen-oven-range",
+        "kitchen-sink-north",
+        "bathroom",
+        "hvac",
+        "attic-access",
+        "electrical",
+        "laundry",
+        "bedroom",
+        "living-dining",
+        "hallway",
+        "paint-floors"
+      ]
+    },
+    "ROOM_KEY_FACTS": {
+      "file": "key-facts.json",
+      "order": [
+        "kitchen",
+        "kitchen-oven-range",
+        "kitchen-sink-north",
+        "bathroom",
+        "attic-access",
+        "electrical",
+        "laundry",
+        "bedroom",
+        "living-dining",
+        "hallway",
+        "paint-floors"
+      ]
+    },
+    "UNIFIED_VISUALS": {
+      "file": "visuals.json",
+      "order": [
+        "kitchen",
+        "kitchen-oven-range",
+        "kitchen-sink-north",
+        "bedroom",
+        "bathroom",
+        "living-dining",
+        "attic-access"
+      ]
+    }
+  }
+}

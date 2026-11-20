@@ -1,0 +1,31 @@
+[
+  {
+    "title": "2026-11-02_U4_Electrical_Whole-Unit-Wiring-Plan_R1.pdf",
+    "titleEn": "Whole-Unit Electrical Wiring Plan R1",
+    "titleEs": "Plan de Cableado Eléctrico de Toda la Unidad R1",
+    "id": "1VazWlSTKbc76vCkSMUp4s69SOoEctq95",
+    "path": "2026-11-02-whole-unit-wiring-R1/2026-11-02_U4_Electrical_Whole-Unit-Wiring-Plan_R1.pdf",
+    "date": "2026-11-02",
+    "lang": "en"
+  },
+  {
+    "title": "2026-11-02_U4_Kitchen-D04_Doorway-Infill-Framing_R1.pdf",
+    "titleEn": "D04 Doorway Infill & Subpanel Bay Framing Plan R1 (English)",
+    "titleEs": "Plan de Enmarcado de Vano D04 y Subpanel R1 (Inglés)",
+    "id": "17_Qe5LTY6OOIiv4-KeQnA79FIm_M2yjO",
+    "path": "doorway-infill-framing-2026-11-02-R1/2026-11-02_U4_Kitchen-D04_Doorway-Infill-Framing_R1.pdf",
+    "date": "2026-11-02",
+    "lang": "en",
+    "pairId": "kitchen-d04-infill-r1"
+  },
+  {
+    "title": "2026-11-02_U4_Kitchen-D04_Doorway-Infill-Framing_R1_ES.pdf",
+    "titleEn": "D04 Doorway Infill & Subpanel Bay Framing Plan R1 (Spanish)",
+    "titleEs": "Plan de Enmarcado de Vano D04 y Subpanel R1 (Español)",
+    "id": "1GsVm7VrFU897ax3yAxypfW5lowapbZKB",
+    "path": "doorway-infill-framing-2026-11-02-R1/2026-11-02_U4_Kitchen-D04_Doorway-Infill-Framing_R1_ES.pdf",
+    "date": "2026-11-02",
+    "lang": "es",
+    "pairId": "kitchen-d04-infill-r1"
+  }
+]

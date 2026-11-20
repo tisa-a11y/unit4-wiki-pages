@@ -1,0 +1,66 @@
+[
+  {
+    "title": "2026-11-19_U4_kitchen_zephyr-savona-mock-hookup-plan_R3_EN.pdf",
+    "titleEn": "Zephyr Savona Pre-Drywall Mock Hookup Plan R3 (Viking 30–36 in / 66–72 in AFF, English)",
+    "titleEs": "Plan de Presentación Pre-Tablaroca Zephyr Savona R3 (Viking 30–36 pulg / 66–72 pulg NPT, Inglés)",
+    "id": "1GX4JjvGexhCi6ILkCzGva9Y0qDrWQfMc",
+    "path": "kitchen/2026-11-19_U4_kitchen_zephyr-savona-mock-hookup-plan_R3_EN.pdf · Pre-Drywall Mock Hookup Plan R3 (EN)",
+    "date": "2026-11-19",
+    "lang": "en",
+    "pairId": "zephyr-mock-r3",
+    "pin": true
+  },
+  {
+    "title": "2026-11-19_U4_kitchen_zephyr-savona-mock-hookup-plan_R3_ES.pdf",
+    "titleEn": "Zephyr Savona Pre-Drywall Mock Hookup Plan R3 (Viking 30–36 in / 66–72 in AFF, Spanish)",
+    "titleEs": "Plan de Presentación Pre-Tablaroca Zephyr Savona R3 (Viking 30–36 pulg / 66–72 pulg NPT, Español)",
+    "id": "181C6zPqPPVPTYFKljPXibbjZ0q_UKiRS",
+    "path": "kitchen/2026-11-19_U4_kitchen_zephyr-savona-mock-hookup-plan_R3_ES.pdf · Plan de Presentación Pre-Tablaroca R3 (ES)",
+    "date": "2026-11-19",
+    "lang": "es",
+    "pairId": "zephyr-mock-r3",
+    "pin": true
+  },
+  {
+    "title": "2026-11-19_U4_kitchen_range-wall-full-plan_R1_EN.pdf",
+    "titleEn": "West Range Wall 8-Sheet Master Plan & Scaled Diagrams R1 (RW-0..RW-7, English)",
+    "titleEs": "Plan Maestro de 8 Láminas y Diagramas a Escala del Muro Oeste de Estufa R1 (Inglés)",
+    "id": "1-aotDnDzAM9u5-qnHP4gSOi2UmVQJmaS",
+    "path": "kitchen/2026-11-19_U4_kitchen_range-wall-full-plan_R1_EN.pdf · 8-Sheet Range Wall Master Plan R1 (EN)",
+    "date": "2026-11-19",
+    "lang": "en",
+    "pairId": "range-wall-master-r1",
+    "pin": true
+  },
+  {
+    "title": "2026-11-19_U4_kitchen_range-wall-full-plan_R1_ES.pdf",
+    "titleEn": "West Range Wall 8-Sheet Master Plan & Scaled Diagrams R1 (RW-0..RW-7, Spanish)",
+    "titleEs": "Plan Maestro de 8 Láminas y Diagramas a Escala del Muro Oeste de Estufa R1 (Español)",
+    "id": "1ANxZ-9tJpXd0s_3Zz1PJ0jQgpOAKXvHS",
+    "path": "kitchen/2026-11-19_U4_kitchen_range-wall-full-plan_R1_ES.pdf · Plan Maestro de 8 Láminas Muro de Estufa R1 (ES)",
+    "date": "2026-11-19",
+    "lang": "es",
+    "pairId": "range-wall-master-r1",
+    "pin": true
+  },
+  {
+    "title": "Zephyr-Savona-ZSA-E30AS-Installation-Manual.pdf",
+    "titleEn": "Zephyr Savona ZSA-E30AS OEM Installation Manual (6 in vertical duct, 120V 3.4A)",
+    "titleEs": "Manual de Instalación OEM Zephyr Savona ZSA-E30AS (ducto vertical 6 pulg, 120V 3.4A)",
+    "id": "1QH6N_nnFVBHvfaEZiU0ZP1pyJDXAeNz3",
+    "path": "kitchen/Zephyr-Savona-ZSA-E30AS-Installation-Manual.pdf · OEM Installation Manual",
+    "date": "2026-11-19",
+    "lang": "en",
+    "pin": true
+  },
+  {
+    "title": "Zephyr-Savona-ZSA-E30AS-Spec-Sheet.pdf",
+    "titleEn": "Zephyr Savona ZSA-E30AS OEM Spec Sheet (29-7/8 W × 19-7/16 D, 685 CFM)",
+    "titleEs": "Ficha Técnica OEM Zephyr Savona ZSA-E30AS (29-7/8 An × 19-7/16 F, 685 CFM)",
+    "id": "1D2YflscPC7hJGxr-AptP887Gci1LZLKO",
+    "path": "kitchen/Zephyr-Savona-ZSA-E30AS-Spec-Sheet.pdf · OEM Spec Sheet",
+    "date": "2026-11-19",
+    "lang": "en",
+    "pin": true
+  }
+]

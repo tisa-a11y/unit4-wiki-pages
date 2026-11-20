@@ -1,0 +1,30 @@
+{
+  "fileId": null,
+  "steps": [
+    {
+      "done": true,
+      "en": "Viking 30\" range & Zephyr 30\" hood on hand; R3 & R1 PDFs live",
+      "es": "Estufa Viking 30\" y campana Zephyr en obra; PDFs R3 y R1 listos"
+    },
+    {
+      "done": false,
+      "en": "Set solid wood backing (68\"–86\" & 104\"–121-1/2\" AFF)",
+      "es": "Instalar bloqueo sólido de madera (68\"–86\" y 104\"–121-1/2\" NPT)"
+    },
+    {
+      "done": false,
+      "en": "Pre-drywall mock-hang at 66\"–72\" AFF & measure ceiling gap/duct",
+      "es": "Presentar a 66\"–72\" NPT y medir brecha al techo y ducto"
+    },
+    {
+      "done": false,
+      "en": "Rough-in 15A AFCI Circuit HD (422.31(B)) & 1/2\" gas shutoff",
+      "es": "Instalar circuito 15A AFCI Circuit HD (422.31(B)) y llave gas 1/2\""
+    },
+    {
+      "done": false,
+      "en": "Full-height tile, Viking backguard & final hood/range tie-in",
+      "es": "Azulejo hasta techo, respaldo Viking y conexión final"
+    }
+  ]
+}

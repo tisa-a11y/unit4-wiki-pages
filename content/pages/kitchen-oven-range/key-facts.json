@@ -1,0 +1,26 @@
+[
+  {
+    "kEn": "Hood Height",
+    "kEs": "Altura campana",
+    "vEn": "30\"–36\" above range (66\"–72\" AFF)",
+    "vEs": "30\"–36\" sobre estufa (66\"–72\" NPT)"
+  },
+  {
+    "kEn": "Hood Circuit",
+    "kEs": "Circuito campana",
+    "vEn": "Dedicated 15A AFCI HD + 422.31(B)",
+    "vEs": "Dedicado 15A AFCI HD + 422.31(B)"
+  },
+  {
+    "kEn": "Exhaust Duct",
+    "kEs": "Ducto",
+    "vEn": "6\" rigid metal vertical (no flex)",
+    "vEs": "6\" metálico rígido vertical (sin flex)"
+  },
+  {
+    "kEn": "Rear Clearance",
+    "kEs": "Claros atrás",
+    "vEn": "8\" Backguard = 0\" · 1\" Trim = 6\"",
+    "vEs": "Respaldo 8\" = 0\" · Trim 1\" = 6\""
+  }
+]

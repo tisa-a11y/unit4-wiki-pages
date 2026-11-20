@@ -1,0 +1,26 @@
+[
+  {
+    "kEn": "Clear Hatch",
+    "kEs": "Paso libre",
+    "vEn": "24\" × 36\" FINISHED CLEAR (locked)",
+    "vEs": "24\" × 36\" LIBRES TERMINADAS (fijo)"
+  },
+  {
+    "kEn": "Walkway",
+    "kEs": "Pasarela",
+    "vEn": "24\" wide · ≤ 20 ft · 23/32\" OSB / 3/4\" ply",
+    "vEs": "24\" ancho · ≤ 20 pies · OSB 23/32\" / 3/4\""
+  },
+  {
+    "kEn": "Platform",
+    "kEs": "Plataforma",
+    "vEn": "30\" × 30\" level · No pads from John",
+    "vEs": "30\" × 30\" nivelada · Sin almohadillas"
+  },
+  {
+    "kEn": "Power & Light",
+    "kEs": "Luz y energía",
+    "vEn": "LED + switch · Live 120V GFCI ≤ 25 ft",
+    "vEs": "LED + apagador · GFCI 120V vivo ≤ 25 pies"
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "kEn": "Panel Spot",
+    "kEs": "Ubicación",
+    "vEn": "D04 dining wall · Upper-left frame",
+    "vEs": "Muro D04 comedor · Marco sup. izq."
+  },
+  {
+    "kEn": "Panel Box",
+    "kEs": "Tablero",
+    "vEn": "Eaton 125A / 20-space (BRP20L125G)",
+    "vEs": "Eaton 125A / 20 espacios (BRP20L125G)"
+  },
+  {
+    "kEn": "Feeder Check",
+    "kEs": "Alimentador",
+    "vEn": "Reconcile 80A vs 100A Mon Nov 23",
+    "vEs": "Conciliar 80A vs 100A lun 23 nov"
+  },
+  {
+    "kEn": "Closed Walls",
+    "kEs": "Muros cerrados",
+    "vEn": "Boxes + empty ENT smurf tube",
+    "vEs": "Cajas + tubo ENT (smurf) vacío"
+  }
+]

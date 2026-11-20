@@ -1,0 +1,35 @@
+{
+  "fileId": null,
+  "steps": [
+    {
+      "done": true,
+      "en": "24\"×36\" finished-clear hatch & 33.25\"×14.19\"×29\" furnace basis settled",
+      "es": "Escotilla 24\"×36\" libres terminadas y base de caldera confirmadas"
+    },
+    {
+      "done": false,
+      "en": "Measure open bedroom closet + daylight hatch photos, fire-rating & bay B",
+      "es": "Medir clóset abierto + fotos de día de escotilla, fuego y claro B"
+    },
+    {
+      "done": false,
+      "en": "Build 24\"×36\" clear hatch, 4-sided 2\" dam, air-seal & R-matched batts",
+      "es": "Construir escotilla 24\"×36\", retén 2\", sello de aire y batts"
+    },
+    {
+      "done": false,
+      "en": "Build 24\" wood walkway (≤ 20 ft, 23/32\" OSB or 3/4\" ply)",
+      "es": "Construir pasarela de madera 24\" (≤ 20 pies, OSB 23/32\" o triplay 3/4\")"
+    },
+    {
+      "done": false,
+      "en": "Build 30\"×30\" platform & wire LED light, switch + live 120V GFCI ≤ 25 ft",
+      "es": "Plataforma 30\"×30\" + luz LED, apagador y GFCI 120V vivo ≤ 25 pies"
+    },
+    {
+      "done": false,
+      "en": "Close bedroom closet only after LV cable & permanent hallway hatch exist",
+      "es": "Cerrar clóset solo tras cable LV y escotilla permanente del pasillo"
+    }
+  ]
+}
