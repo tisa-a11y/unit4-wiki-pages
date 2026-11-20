@@ -21,4 +21,4 @@ Updated 2026-11-07 by Claude (Tisa's account, cloud session, wiki editor): close
 **Next step:** delivery on Dec 1.
 
 ## Reference photos
-[Open this room’s reference-photo folder](https://drive.google.com/drive/folders/18fSFMNatWHapJMmWyeqs9ml_RMJDQeet). Every photo needs a direct link and a plain description of what it shows. Preserve the original caption; separate observations from interpretation.
+[Open this room’s reference-photo folder](https://drive.google.com/drive/folders/18fSFMNatWHapJMmWyeqs9ml_RMJDQeet).

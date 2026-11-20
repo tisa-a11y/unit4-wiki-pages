@@ -87,4 +87,4 @@ English edition. Spanish edition follows once Tisa approves this one.
 - Project Instructions (toilet 10-in, tile SKUs).
 
 ## Reference photos
-[Open this room’s reference-photo folder](https://drive.google.com/drive/folders/1-DPJl9arxalSxTaOSN-V4LglcsUESTIg). Every photo needs a direct link and a plain description of what it shows. Preserve the original caption; separate observations from interpretation.
+[Open this room’s reference-photo folder](https://drive.google.com/drive/folders/1-DPJl9arxalSxTaOSN-V4LglcsUESTIg).

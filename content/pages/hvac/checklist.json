@@ -1,8 +1,8 @@
 {
   "fileId": "1dYEurki2VQ8Zd5yxkRA4UzVL2uGJwMdG",
   "note": {
-    "en": "NEXT HVAC & crew coordination sequence (5 milestones). Attic hatch & walkway specifics live on HVAC › Attic Access (#attic-access).",
-    "es": "Secuencia de coordinación entre NEXT HVAC y nuestra cuadrilla (5 hitos). Los detalles del ático viven en HVAC › Acceso al ático (#attic-access)."
+    "en": "NEXT HVAC & crew coordination sequence (5 milestones). Attic hatch & walkway specifics live on HVAC › Attic Access.",
+    "es": "Secuencia de coordinación entre NEXT HVAC y nuestra cuadrilla (5 hitos). Los detalles del ático viven en HVAC › Acceso al ático."
   },
   "steps": [
     {
@@ -22,8 +22,8 @@
     },
     {
       "done": false,
-      "en": "Phase 2 — With NEXT: Build 24\"×36\" hatch, walkway, 30\"×30\" platform & attic light/GFCI (#attic-access); NEXT installs furnace, ducts & subpanel",
-      "es": "Fase 2 — Con NEXT: Construir escotilla 24\"×36\", pasarela, plataforma 30\"×30\" y luz/GFCI (#attic-access); NEXT instala caldera, ductos y subpanel"
+      "en": "Phase 2 — With NEXT: Build 24\"×36\" hatch, walkway, 30\"×30\" platform & attic light/GFCI; NEXT installs furnace, ducts & subpanel",
+      "es": "Fase 2 — Con NEXT: Construir escotilla 24\"×36\", pasarela, plataforma 30\"×30\" y luz/GFCI; NEXT instala caldera, ductos y subpanel"
     },
     {
       "done": false,

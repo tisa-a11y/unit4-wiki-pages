@@ -24,4 +24,4 @@ Etapa de concepto. No se encontraron planos propios.
 **Siguiente paso:** las medidas de Tisa de la abertura Murphy.
 
 ## Fotos de referencia
-[Abrir la carpeta de fotos de este cuarto](https://drive.google.com/drive/folders/1Zom6yb_qTqtUMs2b6l9jVYO9047oJLNZ). Cada foto necesita enlace directo y descripción clara de lo que muestra. Conservar el pie original; separar observaciones de interpretaciones.
+[Abrir la carpeta de fotos de este cuarto](https://drive.google.com/drive/folders/1Zom6yb_qTqtUMs2b6l9jVYO9047oJLNZ).

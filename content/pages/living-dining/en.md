@@ -17,4 +17,4 @@ Wall treatment and outlet planning in review.
 **Next step:** Tisa's outlet-height decision.
 
 ## Reference photos
-[Open this room’s reference-photo folder](https://drive.google.com/drive/folders/1ihu4iH4d4kpHaQutu56ngCB2zvJZ28wT). Every photo needs a direct link and a plain description of what it shows. Preserve the original caption; separate observations from interpretation.
+[Open this room’s reference-photo folder](https://drive.google.com/drive/folders/1ihu4iH4d4kpHaQutu56ngCB2zvJZ28wT).

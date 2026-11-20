@@ -17,4 +17,4 @@ Acabado de muros y planeación de contactos en revisión.
 **Siguiente paso:** decisión de Tisa sobre la altura de los contactos.
 
 ## Fotos de referencia
-[Abrir la carpeta de fotos de este cuarto](https://drive.google.com/drive/folders/1ihu4iH4d4kpHaQutu56ngCB2zvJZ28wT). Cada foto necesita enlace directo y descripción clara de lo que muestra. Conservar el pie original; separar observaciones de interpretaciones.
+[Abrir la carpeta de fotos de este cuarto](https://drive.google.com/drive/folders/1ihu4iH4d4kpHaQutu56ngCB2zvJZ28wT).

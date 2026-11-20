@@ -1,19 +1,19 @@
 {
   "fileId": "1Y9H-bCmZF_Q0xBIwMSoWCmcilmL6Dwv2",
   "note": {
-    "en": "Hallway sequence (5 milestones). Permanent 24\"×36\" attic hatch details live on HVAC › Attic Access (#attic-access); Murphy door lives on Laundry Closet (#laundry).",
-    "es": "Secuencia del pasillo (5 hitos). La escotilla permanente 24\"×36\" vive en HVAC › Acceso al ático (#attic-access); la puerta Murphy vive en Lavandería (#laundry)."
+    "en": "Hallway sequence (5 milestones). Permanent 24\"×36\" attic hatch details live on HVAC › Attic Access; Murphy door lives on Laundry Closet.",
+    "es": "Secuencia del pasillo (5 hitos). La escotilla permanente 24\"×36\" vive en HVAC › Acceso al ático; la puerta Murphy vive en Lavandería."
   },
   "steps": [
     {
       "done": true,
-      "en": "Permanent hallway attic hatch sized at 24\"×36\" FINISHED CLEAR opening (#attic-access); Murphy door assigned to Laundry (#laundry)",
-      "es": "Escotilla permanente del pasillo definida en 24\"×36\" LIBRES TERMINADAS (#attic-access); puerta Murphy en Lavandería (#laundry)"
+      "en": "Permanent hallway attic hatch sized at 24\"×36\" FINISHED CLEAR opening; Murphy door assigned to Laundry",
+      "es": "Escotilla permanente del pasillo definida en 24\"×36\" LIBRES TERMINADAS; puerta Murphy en Lavandería"
     },
     {
       "done": false,
-      "en": "Daylight site verification, ceiling fire-rating check & joist bay B confirmation for 24\"×36\" hallway hatch (#attic-access)",
-      "es": "Verificación con luz de día, revisión contra fuego del techo y confirmación del claro B para escotilla 24\"×36\" (#attic-access)"
+      "en": "Daylight site verification, ceiling fire-rating check & joist bay B confirmation for 24\"×36\" hallway hatch",
+      "es": "Verificación con luz de día, revisión contra fuego del techo y confirmación del claro B para escotilla 24\"×36\""
     },
     {
       "done": false,

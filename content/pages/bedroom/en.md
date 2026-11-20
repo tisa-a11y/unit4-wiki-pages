@@ -43,4 +43,4 @@ Source: https://drive.google.com/file/d/17f4I9foeTYdL9P8hgL7tN7H8KD2XKTZR/view �
 **Next step:** Compare Option A no-rail proportions with the retained chair-rail alternative against the retained trim, headboard, recorded outlets and exact wall endpoints. Carry the November 10 tape-fit method forward.
 
 ## Reference photos
-[Open this room’s reference-photo folder](https://drive.google.com/drive/folders/1cboLDq-siwJ6kEtHE8-dMAhV3YZKwLnc). Every photo needs a direct link and a plain description of what it shows. Preserve the original caption; separate observations from interpretation.
+[Open this room’s reference-photo folder](https://drive.google.com/drive/folders/1cboLDq-siwJ6kEtHE8-dMAhV3YZKwLnc).

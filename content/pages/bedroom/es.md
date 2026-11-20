@@ -10,4 +10,4 @@ Enmarcar de lado a lado la abertura del clóset; la cuadrilla decide cuándo hac
 Confirmar con Sergei si el equipo puede pasar temporalmente por la abertura existente. Si no puede, Tisa requiere una escotilla de ático suficientemente grande. No se conocen las medidas del equipo/escotilla ni la viabilidad del paso. No cerrar suponiendo que cabe.
 
 ## Fotos de referencia
-[Abrir la carpeta de fotos de este cuarto](https://drive.google.com/drive/folders/1cboLDq-siwJ6kEtHE8-dMAhV3YZKwLnc). Cada foto necesita enlace directo y descripción clara de lo que muestra. Conservar el pie original; separar observaciones de interpretaciones.
+[Abrir la carpeta de fotos de este cuarto](https://drive.google.com/drive/folders/1cboLDq-siwJ6kEtHE8-dMAhV3YZKwLnc).

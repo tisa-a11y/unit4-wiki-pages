@@ -5,8 +5,8 @@
         room: "kitchen",
         titleEn: "Kitchen Overhead Concept Render R2 (Nov 18 — Full-L Reference)",
         titleEs: "Render conceptual elevado de cocina R2 (18 nov — Referencia en L)",
-        statusEn: "Design reference for Friday Nov 20 P1 mockup photos (6j3hQfxHXHJhWgG7) — NO upper cabinets at Zephyr hood",
-        statusEs: "Referencia de diseño para fotos P1 del viernes 20 nov (6j3hQfxHXHJhWgG7) — SIN gabinetes altos en campana Zephyr",
+        statusEn: "Design reference for Friday Nov 20 P1 mockup photos — NO upper cabinets at Zephyr hood",
+        statusEs: "Referencia de diseño para fotos P1 del viernes 20 nov — SIN gabinetes altos en campana Zephyr",
         driveUrl: "https://drive.google.com/file/d/1k4XMSZnRjGXxcBrbtsVuZaOPMHGNCKBz/view",
         thumbUrl: "./wiki-images/2026-11-18_U4_kitchen_overhead-concept_R2.jpg",
         deferred: false

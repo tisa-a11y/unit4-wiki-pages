@@ -502,6 +502,15 @@ nav.rail a.sub.subpage-link{display:flex;align-items:center;justify-content:spac
 nav.rail a.sub.subpage-link:hover{background:var(--accent-soft);border-color:var(--accent)}
 nav.rail a.sub.subpage-link[aria-current="page"]{background:var(--accent);border-color:var(--accent);color:var(--panel)}
 nav.rail a.sub.subpage-link .k.subpage-badge{display:inline-block;padding:1px 6px;border-radius:999px;font-size:10px;text-transform:uppercase;letter-spacing:.06em;border:1px solid currentColor;color:inherit;opacity:.9}
+.u4-stop{border-left:4px solid var(--open);background:var(--open-soft);padding:12px 14px;border-radius:8px;max-width:74ch;margin:14px 0}
+.u4-guide h2{margin-top:26px}
+.u4-steps{max-width:74ch;padding-left:1.4em;margin:8px 0 0}
+.u4-steps li{margin:0 0 10px;line-height:1.5;padding-left:4px}
+@media (max-width:640px){.u4-tabs{flex-wrap:nowrap!important;overflow-x:auto;-webkit-overflow-scrolling:touch}.u4-tab{white-space:nowrap;flex:none}}
+.u4-tabs{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0 20px;border-bottom:1px solid var(--line)}
+.u4-tab{padding:10px 14px;font-size:15px;font-weight:600;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;margin-bottom:-1px;min-height:44px;display:inline-flex;align-items:center}
+.u4-tab:hover{color:var(--fg)}
+.u4-tab.is-current{color:var(--accent);border-bottom-color:var(--accent)}
 .u4-subpage-crumb{display:inline-flex;align-items:center;gap:8px;padding:5px 12px;margin:0 0 10px;border-radius:999px;border:1px solid var(--line);background:var(--panel);font-size:13px;font-weight:600;color:var(--muted)}
 .u4-subpage-crumb a{color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:4px}
 .u4-subpage-crumb a:hover{text-decoration:underline}
@@ -864,7 +873,7 @@ nav.rail a.sub.subpage-pinned{margin:2px 0 4px 10px}
     <div class="brand"><a class="homelink" href="#home">Unit 4 Wiki</a><small>1231 11th Ave · Remodel</small></div>
   </nav>
   <main>
-    <div class="bar"><button type="button" class="small" id="backBtn" hidden>← Back</button><button type="button" class="small langbtn" id="langBtn" translate="no" aria-label="Cambiar a español">Español</button><span class="chip" id="status"><span class="dot"></span><span id="statusText">Saved copy · Nov 19, 2026</span></span><button class="small" id="refresh" hidden>Load latest from Drive</button><span class="u4-build-stamp" id="u4BuildStamp" translate="no" title="Live build version">Build 2026-11-19 · r3d</span><span id="path"></span></div>
+    <div class="bar"><button type="button" class="small" id="backBtn" hidden>← Back</button><button type="button" class="small langbtn" id="langBtn" translate="no" aria-label="Cambiar a español">Español</button><span class="chip" id="status"><span class="dot"></span><span id="statusText">Saved copy · Nov 19, 2026</span></span><button class="small" id="refresh" hidden>Load latest from Drive</button><span class="u4-build-stamp" id="u4BuildStamp" translate="no" title="Live build version">@@U4:BUILD@@</span><span id="path"></span></div>
     <article id="doc"></article>
     <section class="field u4-simple-field" id="field" hidden>
       <h2 id="u4FieldHeading">Field note</h2>
@@ -1162,7 +1171,7 @@ function roomsBlock(){
     return (es && typeof ES==="object" && ES[r.label]) ? ES[r.label] : r.label;
   };
   return `<h2 translate="no">${es ? "Cuartos y proyectos" : "Rooms and projects"}</h2><div class="links" translate="no">${rooms.map(r=>{
-    const n=(DOCS[r.key]||[]).filter(d=>!d.history).length;
+    const act=(DOCS[r.key]||[]).filter(d=>!d.history); const n=act.filter(d=>es ? !hideInEs(d,act) : !hideInEn(d,act)).length;
     const ck=((CHECKLISTS[r.key]&&CHECKLISTS[r.key].items)||[]).length;
     const parts=[];
     if (ck) parts.push(ck + (es ? " pasos" : " steps"));
@@ -1338,7 +1347,7 @@ function show(key){
   else body = placeConcept(p.key, body);
   if (!isCrew) { const pb = pinnedBlock(p.key); if (pb && body.includes('class="concept-fig"')) body = body.replace(/(<figure class="concept-fig"[\s\S]*?<\/figure>)/, '$1' + pb); else body = pb + body; }
   if (!isCrew) body += docsBlock(p.key);
-  if (p.key==="home") body += '<p class="foot" translate="no"><a href="#decisions">' + (LANG==="es"?"Decisiones abiertas → Planificación del proyecto":"Open decisions → Project Planning") + '</a> · <span class="u4-build-stamp">Build 2026-11-19 · r3d</span></p>';
+  if (p.key==="home") body += '<p class="foot" translate="no"><a href="#decisions">' + (LANG==="es"?"Decisiones abiertas → Planificación del proyecto":"Open decisions → Project Planning") + '</a> · <span class="u4-build-stamp">@@U4:BUILD@@</span></p>';
   if (p.key!=="home" && !isCrew) body += `<div class="src">Source file: ${p.path}</div>`;
   document.body.classList.toggle("is-home", p.key==="home");
   document.body.classList.toggle("is-crew", isCrew);
@@ -1584,6 +1593,15 @@ function galleryBlock(key){
     + g.items.map(i=>{ const src=(es && i.imgEs)?i.imgEs:i.img; const href=(es && i.docHrefEs)?i.docHrefEs:(i.docHref||src); const isDoc=href.startsWith("#doc:"); return '<figure><a href="'+href+'"'+(isDoc?'':' target="_blank" rel="noopener"')+'><img src="'+src+'" alt="'+(es?i.es:i.en)+'" loading="lazy"></a><figcaption>'+(es?i.es:i.en)+'</figcaption></figure>'; }).join("")
     + '</div></section>';
 }
+// One-click switcher between a room and its subpages (shown on the room and on every subpage).
+function familyTabs(p, es){
+  const rootKey = p.parent || p.key;
+  const kids = PAGES.filter(x=>x.parent===rootKey);
+  if (!kids.length) return "";
+  const lab = x => (es && typeof ES==="object" && ES[x.label]) ? ES[x.label] : x.label;
+  const tab = (key, text) => '<a class="u4-tab'+(key===p.key?' is-current':'')+'" href="#'+key+'"'+(key===p.key?' aria-current="page"':'')+'>'+text+'</a>';
+  return '<nav class="u4-tabs" translate="no" aria-label="'+(es?"Secciones":"Sections")+'">'+tab(rootKey, es?"Resumen":"Overview")+kids.map(k=>tab(k.key, lab(k))).join("")+'</nav>';
+}
 function crewRoom(p, srcMd){
   const es = LANG==="es"; const {secs} = crewSplit(srcMd);
   const concept = secs.find(s=>/^(Concept|Concepto)\b/i.test(s.h));
@@ -1598,21 +1616,23 @@ function crewRoom(p, srcMd){
       + '<span class="u4-crumb-sep" aria-hidden="true">›</span>'
       + '<span class="u4-crumb-cur">'+label+'</span>'
       + '</nav>'
-      + '<h1 translate="no">'+parentLabel+' › '+label+'</h1>';
+      + '<h1 translate="no">'+label+'</h1>';
   } else {
     h += '<h1 translate="no">'+label+'</h1>';
   }
+  h += familyTabs(p, es);
 
   // Dedicated child subpage 1: Kitchen -> Oven / Range Run (#kitchen-oven-range)
   if (p.key==="kitchen-oven-range") {
     if (concept) {
       h += '<section class="concept" id="sec-concept" translate="no"><div class="mdbody">'+render(crewClean(concept.body.join("\n")).trim())+'</div></section>';
     }
+    h += U4_HTML[es ? "pages/kitchen-oven-range/instructions.es.html" : "pages/kitchen-oven-range/instructions.en.html"];
+    h += ckBlock("kitchen-oven-range");
     const pbHood = pinnedBlock("kitchen-oven-range");
     if (pbHood) h += pbHood;
-    h += ckBlock("kitchen-oven-range");
-    h += U4_HTML[es ? "pages/kitchen-oven-range/intro.es.html" : "pages/kitchen-oven-range/intro.en.html"];
     h += docsBlock("kitchen-oven-range");
+    h += '<details class="fulldet" id="sec-details"><summary>'+(es?"Detalle de ingeniería y medidas del fabricante":"Engineering detail and manufacturer specs")+'</summary>'+U4_HTML[es ? "pages/kitchen-oven-range/engineering-detail.es.html" : "pages/kitchen-oven-range/engineering-detail.en.html"]+'</details>';
     h += '<p class="u4-room-foot-plan" translate="no"><a href="#kitchen">← '+(es?"Volver a Cocina":"Back to Kitchen")+'</a> · <a href="#kitchen-sink-north">'+(es?"Cocina → Fregadero y muro norte →":"Kitchen → Sink & North Wall Runs →")+'</a> · <a href="#decisions">'+(es?"Decisiones abiertas y preguntas → Planificación del proyecto":"Open decisions & questions → Project Planning")+'</a></p>';
     return h;
   }
@@ -1661,7 +1681,6 @@ function crewRoom(p, srcMd){
 
   // (c) Standalone subpage link cards on Kitchen (#kitchen-oven-range and #kitchen-sink-north)
   if (p.key==="kitchen") {
-    h += U4_HTML[es ? "pages/kitchen/subpage-cards.es.html" : "pages/kitchen/subpage-cards.en.html"];
   }
 
   if (p.key==="attic-access") {

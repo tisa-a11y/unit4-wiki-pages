@@ -115,6 +115,7 @@ def sub(m):
     if kind == "CHECKLISTS": return js(CHECKLISTS)
     if kind == "JSON": return js(load(arg))
     if kind == "JSONFILE": return js(load(arg, ROOT))
+    if kind == "BUILD": return "@@BUILDSTAMP@@"
     if kind == "RAW":
         if not exists(arg): errors.append(f"missing file: {arg}"); return ""
         return read(arg).rstrip("\n")
@@ -137,10 +138,13 @@ if errors:
     print("BUILD STOPPED - index.html was NOT changed. Fix these and run again:")
     for x in errors: print("  -", x)
     sys.exit(1)
+import hashlib, datetime
+stamp = "Build " + hashlib.sha256(out.encode("utf-8")).hexdigest()[:7]
+out = out.replace("@@BUILDSTAMP@@", stamp)
 target = os.path.join(ROOT, "index.html")
 if "--check" in sys.argv:
     same = os.path.exists(target) and open(target, encoding="utf-8").read() == out
     print("index.html is up to date" if same else "index.html is OUT OF DATE: run python3 tools/build.py")
     sys.exit(0 if same else 1)
 open(target, "w", encoding="utf-8").write(out)
-print(f"built index.html ({len(out):,} bytes) from {len(page_keys)+1} pages, {len(HTML)} html blocks, {sum(len(v) for v in DOCS.values())} documents")
+print(f"built index.html, {stamp} ({len(out):,} bytes) from {len(page_keys)+1} pages, {len(HTML)} html blocks, {sum(len(v) for v in DOCS.values())} documents")

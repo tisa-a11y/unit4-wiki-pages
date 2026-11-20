@@ -23,4 +23,4 @@ Traducción de la versión en inglés del 2026-11-07 (vive solo en la wiki). Si 
 **Siguiente paso:** la entrega el 1 de diciembre.
 
 ## Fotos de referencia
-[Abrir la carpeta de fotos de este cuarto](https://drive.google.com/drive/folders/18fSFMNatWHapJMmWyeqs9ml_RMJDQeet). Cada foto necesita enlace directo y descripción clara de lo que muestra. Conservar el pie original; separar observaciones de interpretaciones.
+[Abrir la carpeta de fotos de este cuarto](https://drive.google.com/drive/folders/18fSFMNatWHapJMmWyeqs9ml_RMJDQeet).

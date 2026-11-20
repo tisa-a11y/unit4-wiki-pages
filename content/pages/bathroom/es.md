@@ -91,4 +91,4 @@ Traducción de la versión en inglés (vive solo en la wiki). Si algo no coincid
 - Instrucciones del proyecto (inodoro de 10 pulg, códigos de azulejo).
 
 ## Fotos de referencia
-[Abrir la carpeta de fotos de este cuarto](https://drive.google.com/drive/folders/1-DPJl9arxalSxTaOSN-V4LglcsUESTIg). Cada foto necesita enlace directo y descripción clara de lo que muestra. Conservar el pie original; separar observaciones de interpretaciones.
+[Abrir la carpeta de fotos de este cuarto](https://drive.google.com/drive/folders/1-DPJl9arxalSxTaOSN-V4LglcsUESTIg).

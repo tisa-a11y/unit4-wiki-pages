@@ -23,4 +23,4 @@ Option A Rev B sheets NR-11–13 carry the no-chair-rail hall/door comparison st
 **Next step:** Tisa's Murphy opening measurements.
 
 ## Reference photos
-[Open this room’s reference-photo folder](https://drive.google.com/drive/folders/1Zom6yb_qTqtUMs2b6l9jVYO9047oJLNZ). Every photo needs a direct link and a plain description of what it shows. Preserve the original caption; separate observations from interpretation.
+[Open this room’s reference-photo folder](https://drive.google.com/drive/folders/1Zom6yb_qTqtUMs2b6l9jVYO9047oJLNZ).
