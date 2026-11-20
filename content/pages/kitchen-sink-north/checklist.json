@@ -3,28 +3,28 @@
   "steps": [
     {
       "done": true,
-      "en": "30\" sink & Haier fridge on hand; pie-safe recess cleared",
-      "es": "Tarja 30\" y refri Haier en obra; nicho pie-safe despejado"
+      "en": "Sink and refrigerator are on site; pie-safe recess cleared",
+      "es": "Tarja y refrigerador en obra; hueco del pie-safe despejado"
     },
     {
       "done": false,
-      "en": "Finish window sill/framing & reconcile South-wall zero/centerline",
-      "es": "Terminar marco de ventana y conciliar cero/eje muro sur"
+      "en": "Finish the window sill and framing; settle the sink position",
+      "es": "Terminar repisa y marco de la ventana; definir la posición de la tarja"
     },
     {
       "done": false,
-      "en": "Frame pie-safe shelves, North 3-gang switches & D04 bay",
-      "es": "Enmarcar repisas pie-safe, 3 apagadores norte y vano D04"
+      "en": "Frame the pie-safe shelves, the light-switch box and the panel wall",
+      "es": "Enmarcar las repisas pie-safe, la caja de apagadores y el muro del tablero"
     },
     {
       "done": false,
-      "en": "Sink/dishwasher plumbing & South/East countertop circuits",
-      "es": "Plomería tarja/lavavajillas y circuitos de cubierta sur/este"
+      "en": "Sink and dishwasher plumbing; counter circuits on the South and East walls",
+      "es": "Plomería de tarja y lavavajillas; circuitos de cubierta en muros Sur y Este"
     },
     {
       "done": false,
-      "en": "Install base cabinets, pie-safe shelves, sink, DW & Haier fridge",
-      "es": "Instalar gabinetes bajos, repisas, tarja, lavavajillas y refri"
+      "en": "Install cabinets, pie-safe shelves, sink, dishwasher and refrigerator",
+      "es": "Instalar gabinetes, repisas pie-safe, tarja, lavavajillas y refrigerador"
     }
   ]
 }

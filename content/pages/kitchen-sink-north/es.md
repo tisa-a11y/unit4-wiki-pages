@@ -1,11 +1,14 @@
-# Cocina › Fregadero y muro norte
+# Fregadero y muro norte
 
 ## Concepto
-Muro sur con fregadero de 30" bajo ventana y repisas pie-safe, retorno este del refrigerador Haier, y muro norte con caja de 3 apagadores y vano de subpanel `D04`.
+El muro Sur con la tarja bajo la ventana y las repisas pie-safe, el muro Este con el refrigerador, y el muro Norte con el paso al pasillo, los apagadores y el bastidor del tablero eléctrico.
 
-## Estaciones e instalaciones en bruto
-- **Muro Sur (`0"–115"` desde esquina SE):** Esquina `0"–36"` · basura `36"–51"` · lavavajillas 24" `51"–75"` · base tarja 30" bajo ventana (conciliar `72"–102"` vs `75"–105"` / `eje 90"`) · ajuste a moldura (paso libre `6"` vs `12"` con voladizo).
-- **Repisas pie-safe:** Nicho conservado (`≈ 26"–59"` desde SE, altura `≈ 80"` NPT). Contactos a los lados (`18"` y `66"` desde SE a `41"` NPT), nunca debajo.
-- **Muro Este (Retorno `88"`):** Esquina `36"` + base `24"` + espacio `28"` para refrigerador Haier `QJS15HYRFS` (`27-9/16"` ancho, `2"` atrás, sin gabinete alto). Contactos a `12"` y `48"` desde SE (`41"` NPT).
-- **Muro Norte y `D04`:** Vano al pasillo `29-3/8" × 84"`, caja de 3 apagadores a `48"` NPT y bastidor `D04` (retener cierre hasta revisar entradas laterales).
-- **Plomería:** Alimentaciones/drenaje de tarja y lavavajillas en base de 30" (retener reubicación `C3` hasta confirmar cero común).
+## Muros y medidas
+- **Muro Sur, medido desde la esquina sureste:** gabinete de esquina 0"–36", bote de basura extraíble 36"–51", lavavajillas de 24" 51"–75", luego el gabinete de tarja de 30" bajo la ventana y un relleno o extraíble hasta el marco de la puerta.
+- **La posición de la tarja no está definida.** Las marcas en obra ponen el gabinete de la tarja de 72" a 102". El plan anterior dice de 75" a 105", con centro a 90". No colocar el gabinete de la tarja ni mover el desagüe hasta que se revisen las fotos del trazo.
+- **Paso junto a la puerta:** comparar un relleno de 6" con uno de 12" y revisar el espacio para caminar, contando el vuelo de la cubierta.
+- **Repisas pie-safe:** el hueco antiguo se queda, aprox. de 26" a 59" desde la esquina sureste, con su parte alta a unas 80" del piso. Los contactos de la cubierta van a los lados, a 18" y 66" de la esquina y a 41" del piso. Nunca debajo.
+- **Muro Este (88"):** gabinete de esquina de 36", gabinete de 24" y un espacio de 28" para el refrigerador (27-9/16" de ancho; dejar 2" atrás; sin gabinete arriba). Contactos de cubierta a 12" y 48" de la esquina sureste, a 41" del piso.
+- **Muro Norte:** el vano al pasillo (29-3/8" × 84"), tres apagadores a 48" del piso y el bastidor del muro del tablero (D04). No cerrar ese muro todavía.
+- **Plomería:** la alimentación y el desagüe de la tarja y las conexiones del lavavajillas van dentro del gabinete de tarja de 30".
+- **Modelo:** refrigerador Haier QJS15HYRFS.

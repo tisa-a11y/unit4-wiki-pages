@@ -3,28 +3,28 @@
   "steps": [
     {
       "done": true,
-      "en": "Rough-in, Ervin gas-box fix & LG WashTower order (Dec 1) done",
-      "es": "Instalaciones, ajuste caja de gas y pedido LG WashTower (1 dic) listos"
+      "en": "Rough-in done, gas box moved, WashTower ordered (Dec 1)",
+      "es": "Instalaciones listas, caja de gas movida, WashTower pedida (1 dic)"
     },
     {
       "done": false,
-      "en": "Verify 120V outlet opening & open-wall photos before close-in",
-      "es": "Verificar contacto 120V y fotos de muro abierto antes de cerrar"
+      "en": "Check the outlet opening and photograph the open wall before closing it",
+      "es": "Revisar la abertura del contacto y fotografiar el muro abierto antes de cerrarlo"
     },
     {
       "done": false,
-      "en": "Drywall close-in, prime, baseboard & finish paint",
-      "es": "Tablaroca, fondeo, zoclo y pintura final del clóset"
+      "en": "Drywall, primer, baseboard and paint",
+      "es": "Tablaroca, sellador, zoclo y pintura"
     },
     {
       "done": false,
-      "en": "Measure opening, build & hang 5-panel Murphy bookcase door",
-      "es": "Medir vano, fabricar y colgar puerta librero Murphy de 5 paneles"
+      "en": "Measure the opening; build and hang the bookcase door",
+      "es": "Medir el vano; fabricar y colgar la puerta librero"
     },
     {
       "done": false,
-      "en": "Receive LG WashTower (Dec 1), connect & test",
-      "es": "Recibir LG WashTower (1 dic), conectar y probar"
+      "en": "Receive the WashTower Dec 1, connect and test",
+      "es": "Recibir la WashTower el 1 dic, conectar y probar"
     }
   ]
 }

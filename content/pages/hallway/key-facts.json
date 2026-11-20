@@ -1,25 +1,25 @@
 [
   {
-    "kEn": "Attic Hatch",
-    "kEs": "Escotilla",
-    "vEn": "24\"×36\" clear (#attic-access)",
-    "vEs": "24\"×36\" libre (#attic-access)"
+    "kEn": "Attic hatch",
+    "kEs": "Escotilla del ático",
+    "vEn": "24\" × 36\" clear",
+    "vEs": "24\" × 36\" libres"
   },
   {
-    "kEn": "Murphy Door",
-    "kEs": "Puerta Murphy",
-    "vEn": "Trim interface only (specs on #laundry)",
-    "vEs": "Solo marco (specs en #laundry)"
+    "kEn": "Laundry door",
+    "kEs": "Puerta de lavandería",
+    "vEn": "Trim only · door details on Laundry",
+    "vEs": "Solo moldura · detalles en Lavandería"
   },
   {
-    "kEn": "Moulding",
+    "kEn": "Mouldings",
     "kEs": "Molduras",
-    "vEn": "H01–H07 · NR-11 to NR-13 studies",
-    "vEs": "H01–H07 · Estudios NR-11 a NR-13"
+    "vEn": "Walls H01–H07",
+    "vEs": "Muros H01–H07"
   },
   {
-    "kEn": "Next Gate",
-    "kEs": "Siguiente",
+    "kEn": "Next",
+    "kEs": "Sigue",
     "vEn": "4 daylight photos + fire-rating check",
     "vEs": "4 fotos de día + revisión contra fuego"
   }

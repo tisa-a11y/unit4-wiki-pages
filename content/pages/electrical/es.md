@@ -1,10 +1,10 @@
-# Electricidad Unidad 4
+# Electricidad
 
 ## Concepto
-Nuevo subpanel Eaton 125A / 20 espacios centrado en el marco superior izquierdo del muro `D04` del comedor, alimentando 9 circuitos de cocina en Romex, 2× 20A GFCI de baño, servicio de ático y ductos ENT en cuartos.
+Un tablero Eaton nuevo de 125 amperes va en el muro del comedor (D04), centrado en el marco de moldura superior izquierdo. Alimenta la cocina, el baño, el ático y los contactos de los cuartos.
 
-## Subpanel, alimentador y circuitos
-- **Subpanel (Muro `D04` comedor):** Caja Eaton `BRP20L125G` en obra; alcance NEXT cubre alimentador exterior EMT `1"` (`80A / #4 AWG`) e instalación con permiso — conciliar `80A` vs `100A` con Serge y Alex el lun 23 nov. Retener cierre de `D04` hasta revisar entradas laterales.
-- **Cocina (9 circuitos, Romex AFCI/GFCI):** 3× `20A` cubierta, `20A` refri, lavavajillas, triturador, estufa, circuito dedicado `15A` AFCI campana `Circuit HD` (bloqueo `422.31(B)`) e iluminación.
-- **Baño y Ático:** `2× 20A` GFCI en baño, cable directo de techo a caja en ático, luz LED + apagador y **GFCI 120V lado línea a `≤ 25 pies`** independiente del desconectador.
-- **Cuartos con muros cerrados:** Instalar cajas + **tubo ENT (smurf) vacío** en Recámara, Sala/Comedor (sin contacto `D5` ni en puertas corredizas) y Pasillo. Subir cable de bajo voltaje por el muro izquierdo del clóset al ático.
+## Tablero, alimentador y circuitos
+- **Tablero:** la caja Eaton (BRP20L125G, 20 espacios) está en obra. NEXT HVAC instala el tablero y trae el alimentador desde afuera en tubo metálico de 1", con permiso. El tamaño del alimentador no está definido (80 amperes con cable #4, o 100 amperes); Serge y Alex lo confirman el lunes 23 de nov. No cerrar el muro del tablero hasta resolver la entrada lateral del cable.
+- **Cocina — nueve circuitos (Romex, con protección de arco y de falla a tierra):** tres circuitos de cubierta de 20 amperes, uno de 20 amperes para el refrigerador, lavavajillas, triturador, encendido de la estufa, el circuito propio de 15 amperes de la campana y luces.
+- **Baño y ático:** dos cajas GFCI de 20 amperes en el baño; el cable del techo del baño va directo a una caja de conexiones en el ático; luz del ático con apagador; y un contacto GFCI de 120V a no más de 25 pies que siga con corriente cuando la caldera esté apagada.
+- **Cuartos con muros cerrados (recámara, sala, comedor, pasillo):** fijar cajas de contacto y pasar tubo flexible vacío (smurf tube). Todavía no se jala cable. Sin contacto en el muro donde abate la puerta junto al tablero. No entrar en los huecos de las puertas corredizas. Subir un cable de bajo voltaje enrollado para el apagador por el muro izquierdo del clóset de la recámara hasta el ático.

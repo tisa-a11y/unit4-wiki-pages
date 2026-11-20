@@ -1,10 +1,10 @@
-# Clóset de lavandería Unidad 4
+# Clóset de lavandería
 
 ## Concepto
-Clóset compacto para la torre **LG WashTower** (entrega 1 dic) oculto desde el pasillo tras una **puerta librero Murphy de 5 paneles** (`MD-02`).
+Un clóset pequeño para la torre LG WashTower (llega el 1 de diciembre), oculto desde el pasillo detrás de una puerta librero.
 
-## Instalaciones, equipo y puerta Murphy
-- **Estado actual:** Plomería, gas y ventilación en bruto listos; reubicación de caja de gas completada por Ervin (11 nov).
-- **Compuerta pre-cierre:** Verificar posición/altura del contacto 120V y fotografiar instalaciones abiertas con cinta métrica antes de cerrar con tablaroca.
-- **Acabado interior:** Cierre de tablaroca, fondeo, zoclo faltante y pintura final antes de la entrega del 1 de diciembre.
-- **Puerta librero Murphy de 5 paneles (`MD-02`):** Vive en este proyecto (Pasillo solo lleva el encuentro de marco). Completar medidas del vano antes de fabricar y colgar.
+## Lo que hay que saber
+- **Hecho:** instalaciones en bruto de plomería, gas y ducto de la secadora. Ervin movió la caja de gas el 11 de noviembre.
+- **Antes de cerrar los muros:** revisar la altura y posición de la abertura del contacto de 120V y fotografiar el muro abierto con el flexómetro en la foto.
+- **Después:** tablaroca, sellador, el zoclo que falta y pintura final cuando se apruebe el color, todo antes de que llegue la WashTower el 1 de diciembre.
+- **Puerta librero (plano MD-02):** puerta oculta de cinco paneles. Pertenece a esta página; el pasillo solo ve la moldura alrededor. Medir el vano y revisar el ajuste antes de fabricar y colgar la puerta.

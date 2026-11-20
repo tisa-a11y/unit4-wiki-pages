@@ -3,33 +3,33 @@
   "steps": [
     {
       "done": true,
-      "en": "24\"×36\" finished-clear hatch & 33.25\"×14.19\"×29\" furnace basis settled",
-      "es": "Escotilla 24\"×36\" libres terminadas y base de caldera confirmadas"
+      "en": "Hatch size (24\" × 36\" clear) and furnace size are settled",
+      "es": "Tamaño de la escotilla (24\" × 36\" libres) y de la caldera definidos"
     },
     {
       "done": false,
-      "en": "Measure open bedroom closet + daylight hatch photos, fire-rating & bay B",
-      "es": "Medir clóset abierto + fotos de día de escotilla, fuego y claro B"
+      "en": "Measure the open bedroom closet; daylight photos of the hatch spot; fire-rating and joist check",
+      "es": "Medir el clóset abierto; fotos de día del lugar de la escotilla; revisar fuego y vigas"
     },
     {
       "done": false,
-      "en": "Build 24\"×36\" clear hatch, 4-sided 2\" dam, air-seal & R-matched batts",
-      "es": "Construir escotilla 24\"×36\", retén 2\", sello de aire y batts"
+      "en": "Build the hatch with its dam, seal and insulation",
+      "es": "Construir la escotilla con barrera, sello y aislamiento"
     },
     {
       "done": false,
-      "en": "Build 24\" wood walkway (≤ 20 ft, 23/32\" OSB or 3/4\" ply)",
-      "es": "Construir pasarela de madera 24\" (≤ 20 pies, OSB 23/32\" o triplay 3/4\")"
+      "en": "Build the 24\" walkway (20 ft max)",
+      "es": "Construir la pasarela de 24\" (máx. 20 pies)"
     },
     {
       "done": false,
-      "en": "Build 30\"×30\" platform & wire LED light, switch + live 120V GFCI ≤ 25 ft",
-      "es": "Plataforma 30\"×30\" + luz LED, apagador y GFCI 120V vivo ≤ 25 pies"
+      "en": "Build the 30\" × 30\" platform; wire the light, switch and outlet",
+      "es": "Construir la plataforma de 30\" × 30\"; cablear luz, apagador y contacto"
     },
     {
       "done": false,
-      "en": "Close bedroom closet only after LV cable & permanent hallway hatch exist",
-      "es": "Cerrar clóset solo tras cable LV y escotilla permanente del pasillo"
+      "en": "Close the bedroom closet ceiling only after the cable and the hatch are in",
+      "es": "Cerrar el techo del clóset solo cuando estén el cable y la escotilla"
     }
   ]
 }

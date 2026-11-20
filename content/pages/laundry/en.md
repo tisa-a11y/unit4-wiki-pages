@@ -1,10 +1,10 @@
-# Unit 4 Laundry Closet
+# Laundry Closet
 
 ## Concept
-Compact stacked laundry closet for the **LG WashTower** (delivers Dec 1) concealed from the hallway behind a custom **5-panel Murphy bookcase door** (`MD-02`).
+A small closet for the stacked LG WashTower (arrives Dec 1), hidden from the hallway behind a bookcase door.
 
-## Rough-In, Appliance & Murphy Door Specs
-- **Site State:** Plumbing, gas, and dryer vent rough-in complete; gas-box repositioning completed by Ervin (Nov 11).
-- **Pre-Close-In Gate:** Verify laundry 120V outlet opening height/position and photograph open-wall utilities with tape measure before drywall close-in.
-- **Interior Finish:** Drywall close-in, prime, remaining baseboard, and approved finish paint ahead of Dec 1 WashTower delivery.
-- **5-Panel Murphy Bookcase Door (`MD-02`):** Owned here (hallway carries only trim interface). Complete opening measurements and fit review before shop build and hardware hang.
+## What to know
+- **Done:** plumbing, gas and dryer vent rough-in. Ervin moved the gas box on Nov 11.
+- **Before the walls close:** check the height and position of the 120V outlet opening, and photograph the open wall with a tape measure in the picture.
+- **Then:** drywall, primer, the remaining baseboard, and finish paint once the color is approved, all before the WashTower arrives Dec 1.
+- **Bookcase door (plan MD-02):** a five-panel hidden door. It belongs to this page; the hallway only handles the trim around it. Measure the opening and review the fit before the door is built and hung.

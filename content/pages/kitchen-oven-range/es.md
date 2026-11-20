@@ -1,11 +1,16 @@
-# Cocina › Tramo de estufa y campana
+# Tramo de estufa y campana
 
 ## Concepto
-Muro oeste con estufa de gas Viking `VGCC5304BSS` de 30", campana Zephyr Savona `ZSA-E30AS` de 30" y azulejo hasta el techo (sin gabinetes altos en campana).
+El muro Oeste: estufa de gas Viking de 30" con campana Zephyr Savona de 30" arriba y azulejo hasta el techo. Sin gabinetes altos junto a la campana.
 
-## Especificaciones verificadas (OEM Viking + Zephyr)
-- **Altura gobernante:** Viking exige **`30"–36"` sobre la estufa (`66"–72"` NPT con cubierta a `36"`)** (`64"` NPT incumple por `2"`).
-- **Bloqueo sólido de madera:** Doble zona en **`68"–86"` NPT** (soporte Línea B a `9-9/16"` sobre Línea A, separación `9-27/32"`, empotramiento `≥ 1-1/2"`) y **`104"–121-1/2"` NPT** (ducto superior). Sumar espesor de piso `t`.
-- **Separación trasera Viking:** Moldura `1"` Island Trim exige **`6"` atrás a combustibles**; respaldo **`8"` Backguard** permite **`0"`** arriba de cubierta (separador `3/4"`). Moldura lateral `3/8"` sobre cubierta.
-- **Electricidad (`Circuit HD`):** Circuito dedicado **`15A` AFCI** con **bloqueo `CEC 422.31(B)`** (`120V / 3.4A`, `> 300 VA`, nunca compartido con `LT`). Caja a `100"` NPT dentro de la funda de `8-5/8"`, libre del ducto de `6"`. Estufa con llave de gas `1/2"` y contacto `120V`.
-- **Ducto y brecha al techo:** **Ducto metálico rígido redondo de `6"`** (sin ducto flexible, `685 CFM`). Cubredacto estándar llega a `116"–117"`, dejando brecha de **`4-1/2"`–`13-1/2"`** en techo de `121-1/2"` (cajillo vs. extensión `Z1C-00SA`).
+## Lo que hay que saber antes de construir
+- **Este fin de semana es solo una prueba.** No hacer conexión eléctrica definitiva, no conectar el ducto final, no poner tablaroca en este muro.
+- **Paso a paso con fotos:** abrir la guía para la cuadrilla (R3) en Documentos.
+- **Altura de la campana:** la base de la campana va de 30" a 36" sobre la parrilla. Eso es de 66" a 72" desde el piso terminado. Esta regla la pone Viking; 64" queda muy bajo.
+- **Refuerzos de madera:** madera sólida en dos franjas, de 68" a 86" y de 104" a 121-1/2" desde el piso terminado. Si se mide desde el subpiso, sumar el espesor del piso. Los tornillos de soporte de la campana quedan 9-9/16" arriba de la base de la campana y a 9-27/32" entre sí, y necesitan al menos 1-1/2" de madera sólida.
+- **Detrás de la estufa:** revisar qué moldura trasera trae la Viking. El respaldo de 8" puede ir contra el muro (separador de 3/4"). La moldura tipo isla de 1" necesita 6" de separación a cualquier material que se pueda quemar. La moldura lateral queda 3/8" arriba de la cubierta.
+- **Corriente de la campana:** la campana lleva su propio circuito de 15 amperes, con pastilla que se pueda bloquear. Nunca compartirlo con las luces. La caja de conexiones va a unas 100" del piso, dentro de la cubierta de chimenea de 8-5/8" y libre del ducto.
+- **Conexiones de la estufa:** llave de paso de gas de 1/2" y un contacto de 120V.
+- **Ducto:** redondo rígido de metal de 6", vertical (685 CFM). Nada de ducto flexible.
+- **Hueco al techo:** la cubierta de la campana no llega al techo de 121-1/2". Medir el hueco durante la prueba.
+- **Modelos:** estufa Viking VGCC5304BSS · campana Zephyr Savona ZSA-E30AS.

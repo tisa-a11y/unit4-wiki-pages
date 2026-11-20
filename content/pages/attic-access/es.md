@@ -1,16 +1,16 @@
-# HVAC › Acceso al ático
+# Acceso al ático
 
 ## Concepto
-Escotilla permanente sellada y aislada de **`24"×36"` libres terminadas** con pasarela de madera de `24"` (`≤ 20 pies`), plataforma `30"×30"`, luz LED con apagador y GFCI 120V vivo.
+Una escotilla permanente en el techo del pasillo, de 24" × 36" libres ya terminada, sellada y aislada. En el ático: una pasarela de madera de 24" de ancho, una plataforma nivelada de 30" × 30" junto a la caldera, una luz con apagador y un contacto con corriente.
 
-## 5 reglas de envolvente (Verificar antes de cortar)
-1. **Resistencia al fuego y claro `B` primero:** Confirmar si el techo exige acceso certificado contra fuego Y medir el claro `B` entre viguetas (`27-1/2"` corte propuesto) antes de comprar o cortar.
-2. **Sellado de aire y barrera térmica:** Cordón `3/8"` + sellador en marco fijo; burlete `1/2"×1/8"` en pestañas `1×2`; dejar junta de tapa removible **sin caulk**; sujetar 2 batts de fibra sin papel con 3 lazos flojos cal. 16 (armellas `≤ 1/2"`); retén de triplay en 4 lados `2"` arriba del relleno.
-3. **Pasadores libres:** Todos los cierres fuera del claro libre de `24"×36"` (acabado remetido sujeto a aprobación).
-4. **Pausa en clóset de recámara:** Nunca cerrar el techo temporal del clóset hasta instalar cable LV **Y** escotilla permanente `24"×36"`.
-5. **Cero goteras:** Reparar cualquier filtración activa antes de cerrar o aislar.
+## Cinco reglas antes de cortar
+1. **Revisar primero el techo.** Averiguar si este techo necesita una escotilla resistente al fuego y medir el ancho entre las vigas (el plan supone un corte de madera de 27-1/2"). Hacerlo antes de comprar madera o cortar.
+2. **Sellar y aislar la escotilla.** Cordón de respaldo (3/8") y sellador en el marco fijo. Burlete de espuma (1/2" × 1/8") en los apoyos de 1×2. No sellar la junta de la tapa; la tapa tiene que poder levantarse. Dos colchonetas de fibra de vidrio iguales al aislamiento del ático van sobre la tapa, sujetas con tres lazos flojos de alambre calibre 16 en armellas de no más de 1/2". Hacer una barrera de triplay en los cuatro lados, 2" más alta que el aislamiento suelto.
+3. **Mantener libre la abertura.** Ningún pasador o herraje puede meterse en la abertura de 24" × 36". El acabado de la tapa remetida espera el visto bueno de Tisa.
+4. **Dejar abierto el techo del clóset de la recámara** hasta que esté puesto el cable de bajo voltaje del apagador y exista la escotilla permanente.
+5. **Primero reparar las goteras.** No se cierra ni se aísla nada mientras el techo o el ático tengan goteras.
 
-## Pasarela, plataforma y electricidad
-- **Pasarela (`CMC 304.4`):** Altura de `66"` limita recorrido a **`≤ 20 pies`**, ancho `24"` (`30"` paso libre). Usar **OSB clasificado `23/32"`** (más económico) o triplay `3/4"` / `2×` (**nunca `3/8"`**; 1 tira por hoja 4×8; tornillos `#9 × 2-1/2"` o `3"`).
-- **Plataforma (`CMC 304.4.3`):** Nivelada de **`30"×30"`** mín. atornillada a viguetas (**John no pone almohadillas**). Tiro Tipo B `≥ 1"` libre.
-- **Electricidad:** Luz LED cerrada + apagador en acceso + **GFCI 120V a `≤ 25 pies`** conectado **vivo en lado línea** independiente del desconectador.
+## Pasarela, plataforma y corriente
+- **Pasarela:** 24" de ancho con 30" de paso libre, no más de 20 pies de largo (el ático mide 66" de alto). Usar OSB de 23/32", triplay de 3/4" o madera de 2×. Nunca de 3/8". Una tira por hoja de 4×8. Atornillar a la estructura con tornillos para madera #9 de 2-1/2" o 3". (Código: CMC 304.4.)
+- **Plataforma:** nivelada, de al menos 30" × 30", atornillada a la estructura del lado por donde se da servicio a la caldera. John no necesita poner bases antivibración. Dejar 1" libre del tiro Tipo B. (Código: CMC 304.4.3.)
+- **Corriente:** una luz LED cerrada con apagador en la escotilla y un contacto GFCI de 120V a no más de 25 pies, que siga con corriente cuando se apague la caldera.

@@ -1,9 +1,9 @@
-# Unit 4 Hallway
+# Hallway
 
 ## Concept
-Clean central corridor linking all rooms, carrying continuous wall mouldings (`H01–H07`), the permanent **`24"×36"` attic hatch** (`#attic-access`), and the trim interface to the laundry Murphy door (`#laundry`).
+The central hallway connects every room. It carries the wall mouldings (walls H01–H07), the permanent attic hatch in the ceiling, and the trim around the hidden laundry door.
 
-## Scope & Room Interfaces
-- **Permanent Attic Hatch (`#attic-access`):** Sized at `24"×36"` finished clear; hold ceiling cuts until daylight photos, fire-rating check, and joist bay `B` clear.
-- **Murphy Bookcase Door Interface (`#laundry`):** 5-panel hidden laundry door specs and drawings live on **Laundry Closet**; Hallway owns casing/trim alignment only.
-- **Trim & Electrical:** Hallway moulding (`NR-11–13` studies) aligns to existing baseboard/high trim; install outlet/lighting rough-in and attic hatch entrance switch before patching and paint.
+## What belongs here
+- **Attic hatch:** 24" × 36" clear when finished. Do not cut the ceiling until the daylight photos, the fire-rating check and the joist measurement are done. Details are on [Attic Access](#attic-access).
+- **Laundry door:** the five-panel bookcase door and its drawings are on [Laundry Closet](#laundry). The hallway only lines up the casing and trim.
+- **Trim and electrical:** hallway mouldings line up with the existing baseboard and high trim (layout studies NR-11 to NR-13). Rough-in the outlets, the lights and the attic hatch light switch before patching and paint.

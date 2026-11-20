@@ -1,26 +1,26 @@
 [
   {
-    "kEn": "Panel Wall",
-    "kEs": "Muro panel",
-    "vEn": "D04 dining side · No D5 outlet",
-    "vEs": "D04 lado comedor · Sin contacto D5"
+    "kEn": "Panel wall",
+    "kEs": "Muro del tablero",
+    "vEn": "D04, dining side · no outlet by the door swing",
+    "vEs": "D04, lado del comedor · sin contacto junto a la puerta"
   },
   {
-    "kEn": "Walls",
-    "kEs": "Muros",
+    "kEn": "Wall labels",
+    "kEs": "Nombres de muros",
     "vEn": "Dining D01–D04 · Living L01–L06",
     "vEs": "Comedor D01–D04 · Sala L01–L06"
   },
   {
     "kEn": "Outlets",
     "kEs": "Contactos",
-    "vEn": "Empty ENT · Clear of pocket doors",
-    "vEs": "ENT vacío · Fuera de puertas corredizas"
+    "vEn": "Empty conduit · clear of pocket doors",
+    "vEs": "Tubo vacío · lejos de puertas corredizas"
   },
   {
-    "kEn": "Active Hold",
-    "kEs": "Pausa",
-    "vEn": "Outlet height & Option A/B moulding",
-    "vEs": "Altura contactos y molduras Op. A/B"
+    "kEn": "On hold",
+    "kEs": "En espera",
+    "vEn": "Outlet height · moulding choice",
+    "vEs": "Altura de contactos · elección de moldura"
   }
 ]

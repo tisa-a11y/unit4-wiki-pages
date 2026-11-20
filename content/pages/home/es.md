@@ -1,13 +1,13 @@
 # Unidad 4 — Inicio
 
-## Listo para el lunes (Vie–Dom, 20–22 nov)
-- **Cocina:** Despejar el cuarto, terminar repisa/marco de ventana y subir fotos rotuladas del trazo en L.
-- **Cocina › Tramo de estufa y campana:** Instalar bloqueo, presentar campana Zephyr a `30"–36"` sobre estufa Viking (`66"–72"` NPT, sin alacenas) y medir ducto/techo.
-- **Baño:** Instalar moldura original de ventana sobre HardieBoard antes del azulejo de muro, fijar 2 cajas GFCI y acomodar accesorios.
-- **HVAC › Acceso al ático:** Tomar 4 fotos de día del sitio de escotilla `24"×36"` en pasillo, medir clóset de recámara y revisar por dentro si hay goteras.
-- **Preparación fin de semana:** Completar refuerzos y bastidores antes de la entrega de tablaroca del lunes.
+## Listo para el lunes (vie–dom, 20–22 nov)
+- **Cocina:** Despejar el cuarto, terminar el marco de la ventana y mandar fotos rotuladas del trazo completo en L.
+- **Cocina › Tramo de estufa y campana:** Colocar los refuerzos de madera, colgar la campana de prueba con su base a 66"–72" del piso (sin gabinetes altos) y medir el hueco al techo y el ducto.
+- **Baño:** Colocar la moldura original de la ventana antes de cualquier azulejo de muro, fijar las dos cajas GFCI y presentar los muebles.
+- **HVAC › Acceso al ático:** Tomar 4 fotos de día del lugar de la escotilla (24" × 36"), medir el clóset abierto de la recámara y buscar goteras solo desde adentro.
+- **Carpintería del fin de semana:** Terminar bastidores y refuerzos antes de la entrega de tablaroca del lunes.
 
-## Próxima semana (A partir del lun 23 nov)
-- **Entrega de tablaroca (Lun):** Recibir y acomodar material; mantener pausas de cierre hasta liberar cada cuarto.
-- **Visita NEXT HVAC (Lun 2:00–4:00 p.m.):** Confirmar posición de caldera, escape, escotilla `24"×36"` y subpanel `D04` con Serge y Alex.
-- **Avance por cuarto:** Continuar azulejo de baño, preparación del ático y cableado en bruto.
+## Próxima semana (desde el lun 23 nov)
+- **Lunes:** Llega la tablaroca. Apilarla; no cerrar ningún muro hasta que se libere ese cuarto.
+- **Lun 2:00–4:00 p.m.:** Visita de NEXT HVAC con Serge Kalitov y Alex: lugar de la caldera, tiro en azotea, escotilla y alimentador del tablero.
+- **Después:** Azulejo de muros del baño, preparación del ático e instalaciones en bruto cuarto por cuarto.

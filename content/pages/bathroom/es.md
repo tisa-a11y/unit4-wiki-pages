@@ -1,15 +1,18 @@
-# Baño Unidad 4
+# Baño
 
 ## Concepto
-Baño luminoso con piso porcelanato mate Calacatta Gem, muros blancos 3×6 brillantes, llaves Champagne Bronze, botiquín sobrepuesto y tina empotrada Kohler.
+Un baño claro y clásico: piso de azulejo tipo mármol, azulejo blanco brillante tipo subway en los muros, accesorios en bronce cálido, tina de sobreponer y botiquín montado sobre el muro.
 
-## Medidas y muebles
-- **Dimensiones (`Magicplan MASTER`):** `72-1/8" × 82-1/8"`. Lavabo de pedestal a la izquierda, inodoro de 10" a la derecha, tina al fondo (ventana izquierda, llaves derecha).
-- **Tina y mezcladora:** Kohler `K-1821` 66×32 (instalada y probada 9 nov) · Delta `Arcadia 144892-CZ-HS` Champagne Bronze · Extractor Panasonic `FV-0511VQC1` (ducto listo).
-- **Puerta:** Puerta corrediza **pospuesta (13 nov)** — evaluar puerta abatible hacia afuera (hoja de `28"` conservada).
-- **Regla de acabado:** Botiquín **sobrepuesto** (no empotrado). Todos los herrajes en **Champagne Bronze**.
+## Cuarto y muebles
+- **Medidas del cuarto:** 72-1/8" × 82-1/8". Lavabo de pedestal a la izquierda, inodoro a la derecha y tina en el muro del fondo, con la ventana a la izquierda y las llaves a la derecha.
+- **Tina:** Kohler de sobreponer de 66" × 32", instalada y probada contra fugas el 9 de noviembre.
+- **Accesorios:** todo el metal es Champagne Bronze. El inodoro es de 10" al eje. El ducto del extractor está terminado.
+- **Botiquín:** montado sobre el muro, no empotrado.
+- **Puerta:** la puerta corrediza empotrada está en espera. No enmarcarla ni comprar el riel. Se está viendo una puerta abatible hacia afuera; se conserva la puerta de 28".
 
-## Superficies y secuencia
-- **Piso:** Porcelanato mate Calacatta Gem 12×24 (`SM421224XTMTLW`) sobre Schluter; emboquillar con **Warm Gray** tras revisar brida de inodoro. Zoclo bullnose 3×12.
-- **Muros y nichos:** HardieBoard y nichos (`12-1/2"×20"` principal, `10"×10"` jabón) listos. **Instalar moldura original de ventana sobre HardieBoard ANTES del azulejo** (Daltile Restore Bright White 3×6).
-- **Electricidad:** `2× 20A` GFCI (`BATH-R`), `15A` luz/extractor (`BATH-L`), techo cableado directo a caja en el ático (sin tubo smurf).
+## Azulejo y orden del trabajo
+- **Primero la moldura de la ventana.** Colocar la moldura original de la ventana sobre el HardieBoard antes de poner azulejo en los muros.
+- **Piso:** el azulejo está colocado sobre la membrana Schluter y todavía sin boquilla. Revisar la brida del inodoro y luego emboquillar con Warm Gray. El zoclo es remate boleado de 3" × 12" a juego.
+- **Muros:** el HardieBoard y los dos nichos están puestos (nicho principal 12-1/2" × 20", nicho de jabón 10" × 10"). El azulejo de muro es blanco tipo subway de 3" × 6".
+- **Electricidad:** dos circuitos GFCI de 20 amperes para contactos (BATH-R) y un circuito de 15 amperes para luces y extractor (BATH-L). El cable del techo va directo a una caja de conexiones en el ático, sin tubo vacío.
+- **Modelos:** tina Kohler K-1821 · válvula Delta Arcadia 144892-CZ-HS · extractor Panasonic FV-0511VQC1 · azulejo de piso STAINMASTER Calacatta Gem 12×24 mate (SM421224XTMTLW) · azulejo de muro Daltile Restore Bright White 3×6 (RE1536MODHD1P4).

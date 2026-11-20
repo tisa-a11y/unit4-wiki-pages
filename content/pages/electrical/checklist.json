@@ -3,33 +3,33 @@
   "steps": [
     {
       "done": true,
-      "en": "D04 dining-side wall settled for Eaton 125A subpanel (no D5 outlet)",
-      "es": "Muro D04 lado comedor definido para subpanel Eaton 125A (sin D5)"
+      "en": "Panel location settled: dining-room wall (D04)",
+      "es": "Lugar del tablero definido: muro del comedor (D04)"
     },
     {
       "done": false,
-      "en": "Frame D04 bay with side-entry routing & reconcile feeder with NEXT/Alex",
-      "es": "Enmarcar D04 con entradas laterales y conciliar alimentador con NEXT/Alex"
+      "en": "Frame the panel wall with side cable entry; confirm the feeder with NEXT and Alex",
+      "es": "Enmarcar el muro del tablero con entrada lateral; confirmar el alimentador con NEXT y Alex"
     },
     {
       "done": false,
-      "en": "Bathroom 2× 20A GFCI, attic J-box, attic LED/switch & live 120V GFCI",
-      "es": "2× 20A GFCI baño, caja ático, luz LED/apagador y GFCI 120V vivo"
+      "en": "Bathroom GFCI circuits, attic junction box, attic light and outlet",
+      "es": "Circuitos GFCI del baño, caja de conexiones, luz y contacto del ático"
     },
     {
       "done": false,
-      "en": "Kitchen 9-circuit Romex rough-in incl. 15A AFCI hood Circuit HD",
-      "es": "9 circuitos Romex en cocina incl. 15A AFCI campana Circuit HD"
+      "en": "Kitchen rough-in: nine circuits, including the hood's own",
+      "es": "Instalación en bruto de la cocina: nueve circuitos, incluido el de la campana"
     },
     {
       "done": false,
-      "en": "Outlet boxes + empty ENT smurf tube in closed rooms & closet LV cable",
-      "es": "Cajas + tubo ENT vacío en cuartos cerrados y cable LV en clóset"
+      "en": "Outlet boxes and empty conduit in the closed-wall rooms; closet switch cable",
+      "es": "Cajas y tubo vacío en cuartos con muros cerrados; cable del apagador en el clóset"
     },
     {
       "done": false,
-      "en": "Install feeder/subpanel, pull circuits, trim out & test AFCI/GFCI",
-      "es": "Instalar alimentador/subpanel, cablear, montar dispositivos y probar"
+      "en": "Install feeder and panel, pull wire, install devices and test",
+      "es": "Instalar alimentador y tablero, jalar cable, colocar accesorios y probar"
     }
   ]
 }

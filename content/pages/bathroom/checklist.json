@@ -3,33 +3,33 @@
   "steps": [
     {
       "done": true,
-      "en": "Plumbing rough-in, fan duct, Kohler tub leak-test & Schluter done",
-      "es": "Plomería, ducto extractor, prueba tina Kohler y Schluter listos"
+      "en": "Plumbing rough-in, fan duct, tub leak test and floor membrane done",
+      "es": "Plomería en bruto, ducto del extractor, prueba de la tina y membrana de piso listos"
     },
     {
       "done": true,
-      "en": "Calacatta Gem floor laid (ungrouted) & HardieBoard/niches up",
-      "es": "Piso Calacatta Gem colocado (sin boquilla) y HardieBoard/nichos listos"
+      "en": "Floor tile laid (not grouted); HardieBoard and niches up",
+      "es": "Azulejo de piso colocado (sin boquilla); HardieBoard y nichos puestos"
     },
     {
       "done": false,
-      "en": "Install original window trim over HardieBoard (before wall tile) & 2 GFCI boxes",
-      "es": "Instalar moldura original sobre HardieBoard (antes de azulejo) y 2 cajas GFCI"
+      "en": "Install the original window trim before wall tile; set the two GFCI boxes",
+      "es": "Colocar la moldura original de la ventana antes del azulejo; fijar las dos cajas GFCI"
     },
     {
       "done": false,
-      "en": "Check toilet flange, Warm Gray floor grout & 3×6 white wall tile",
-      "es": "Revisar brida, boquilla Warm Gray en piso y azulejo blanco 3×6"
+      "en": "Check the toilet flange, grout the floor, tile the walls",
+      "es": "Revisar la brida del inodoro, emboquillar el piso y poner azulejo en los muros"
     },
     {
       "done": false,
-      "en": "Attic ceiling J-box, close ceiling, prime/paint & hang door",
-      "es": "Caja en ático, cerrar techo, fondear/pintar y colgar puerta"
+      "en": "Attic junction box, close the ceiling, prime, paint and hang the door",
+      "es": "Caja de conexiones en el ático, cerrar el techo, sellar, pintar y colgar la puerta"
     },
     {
       "done": false,
-      "en": "Install pedestal sink, 10\" toilet, Champagne Bronze trim, glass & lights",
-      "es": "Instalar lavabo, inodoro 10\", llaves Champagne Bronze, cancel y luces"
+      "en": "Install sink, toilet, bronze trim, glass and lights",
+      "es": "Instalar lavabo, inodoro, accesorios de bronce, vidrio y luces"
     }
   ]
 }

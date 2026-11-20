@@ -1,26 +1,26 @@
 [
   {
-    "kEn": "Appliance",
-    "kEs": "Equipo",
-    "vEn": "LG WashTower · Delivers Dec 1",
-    "vEs": "LG WashTower · Entrega 1 dic"
+    "kEn": "Washer/dryer",
+    "kEs": "Lavadora/secadora",
+    "vEn": "LG WashTower · arrives Dec 1",
+    "vEs": "LG WashTower · llega el 1 dic"
   },
   {
     "kEn": "Door",
     "kEs": "Puerta",
-    "vEn": "5-panel Murphy bookcase (MD-02)",
-    "vEs": "Librero Murphy 5 paneles (MD-02)"
+    "vEn": "Five-panel bookcase door (MD-02)",
+    "vEs": "Puerta librero de cinco paneles (MD-02)"
   },
   {
-    "kEn": "Gas Box",
+    "kEn": "Gas box",
     "kEs": "Caja de gas",
-    "vEn": "Repositioned by Ervin (Nov 11)",
-    "vEs": "Reubicada por Ervin (11 nov)"
+    "vEn": "Moved by Ervin, Nov 11",
+    "vEs": "Movida por Ervin, 11 nov"
   },
   {
-    "kEn": "Next Gate",
-    "kEs": "Siguiente",
+    "kEn": "Next",
+    "kEs": "Sigue",
     "vEn": "Outlet check + open-wall photos",
-    "vEs": "Revisar contacto + fotos abiertas"
+    "vEs": "Revisar contacto + fotos del muro abierto"
   }
 ]

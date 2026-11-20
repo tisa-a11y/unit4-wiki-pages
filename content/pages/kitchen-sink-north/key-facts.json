@@ -1,26 +1,26 @@
 [
   {
-    "kEn": "South Run",
-    "kEs": "Tramo sur",
-    "vEn": "Corner 0–36 · Trash 36–51 · DW 51–75",
-    "vEs": "Esq. 0–36 · Bas. 36–51 · Lav. 51–75"
+    "kEn": "South wall",
+    "kEs": "Muro Sur",
+    "vEn": "Corner 0–36 · Trash 36–51 · Dishwasher 51–75",
+    "vEs": "Esquina 0–36 · Basura 36–51 · Lavavajillas 51–75"
   },
   {
-    "kEn": "Sink Base",
-    "kEs": "Base tarja",
-    "vEn": "30\" centered on window (reconcile CL)",
-    "vEs": "30\" centrada en ventana (conciliar)"
+    "kEn": "Sink",
+    "kEs": "Tarja",
+    "vEn": "30\" under the window · position not settled",
+    "vEs": "30\" bajo la ventana · posición por definir"
   },
   {
-    "kEn": "East Fridge",
-    "kEs": "Refri este",
-    "vEn": "Haier QJS15HYRFS · 28\" bay · 2\" rear",
-    "vEs": "Haier QJS15HYRFS · vano 28\" · 2\" atrás"
+    "kEn": "Refrigerator",
+    "kEs": "Refrigerador",
+    "vEn": "Haier · 28\" space · 2\" behind",
+    "vEs": "Haier · espacio de 28\" · 2\" atrás"
   },
   {
-    "kEn": "Pie-Safe",
+    "kEn": "Pie-safe",
     "kEs": "Pie-safe",
-    "vEn": "Open shelves · Outlets at 18\" & 66\"",
-    "vEs": "Repisas abiertas · Contactos 18\" y 66\""
+    "vEn": "Open shelves · outlets at 18\" and 66\"",
+    "vEs": "Repisas abiertas · contactos a 18\" y 66\""
   }
 ]

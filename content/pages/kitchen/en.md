@@ -1,11 +1,17 @@
-# Unit 4 Kitchen
+# Kitchen
 
 ## Concept
-Custom L-shaped kitchen with Essex Green base cabinets, brass hardware, light countertops, pie-safe open shelves, and ceiling-height tile behind the 30" Viking range and Zephyr hood (no uppers at hood).
+An L-shaped kitchen with dark green (Essex Green) lower cabinets, brass hardware, light countertops and open shelves in the old pie-safe recess. Tile runs to the ceiling behind the range and hood, and there are no upper cabinets beside the hood.
 
-## Wall-by-Wall Dimensions & Scope
-- **Footprint (Magicplan MASTER):** `147" × 126"`, ceiling `121-1/2"` (confirm finished floor buildup `t ≈ 3/4"` before markout).
-- **West Wall (`#kitchen-oven-range`):** 30" Viking `VGCC5304BSS` range + 30" Zephyr `ZSA-E30AS` chimney hood (`30"–36"` above range = `66"–72"` AFF), dedicated `15A` AFCI `Circuit HD`, `6"` rigid vertical duct.
-- **South & East Walls (`#kitchen-sink-north`):** South run `0"–115"` (corner `0"–36"`, trash `36"–51"`, DW `51"–75"`, 30" sink base centered on window, pie-safe open shelves) + East `88"` return with counter-depth Haier `QJS15HYRFS` fridge.
-- **North Wall (`#kitchen-sink-north`):** `29-3/8" × 84"` cased hall opening, 3-gang switch bank at `48"` AFF, and `D04` subpanel framing.
-- **Electrical (9 Circuits, Romex AFCI/GFCI):** 3× `20A` counter, `20A` fridge, DW, disposal, range ignition, dedicated `15A` hood `Circuit HD`, lighting.
+## Room and walls
+- **Room size:** 147" × 126", ceiling 121-1/2". Measure the finished floor thickness (about 3/4") before marking cabinet heights.
+- **West wall — range and hood:** 30" Viking gas range with a 30" Zephyr hood above it. Details and steps are on [Oven / Range Run](#kitchen-oven-range).
+- **South wall — sink:** starting at the southeast corner: corner cabinet, trash pull-out, dishwasher, then the 30" sink cabinet under the window. The pie-safe shelves are on this wall too. Details are on [Sink & North Wall Runs](#kitchen-sink-north).
+- **East wall — refrigerator:** an 88" run that ends with the counter-depth Haier refrigerator.
+- **North wall — hall opening:** the opening to the hallway (29-3/8" × 84"), three light switches at 48" from the floor, and the framing for the electrical panel wall (D04).
+- **Electrical:** nine circuits: three for the counters, and one each for the refrigerator, dishwasher, disposal, range, hood and lights.
+
+## Do not do yet
+- Do not set the sink cabinet. Its exact position against the window is still being checked.
+- Do not close the panel wall (D04).
+- Do not order cabinets or countertops until the layout photos are reviewed.

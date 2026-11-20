@@ -1,26 +1,26 @@
 [
   {
-    "kEn": "Room Size",
+    "kEn": "Room size",
     "kEs": "Medidas",
-    "vEn": "72-1/8\" × 82-1/8\" (Magicplan)",
-    "vEs": "72-1/8\" × 82-1/8\" (Magicplan)"
+    "vEn": "72-1/8\" × 82-1/8\"",
+    "vEs": "72-1/8\" × 82-1/8\""
   },
   {
-    "kEn": "Critical Gate",
-    "kEs": "Regla clave",
-    "vEn": "Window trim over HardieBoard BEFORE tile",
-    "vEs": "Moldura sobre HardieBoard ANTES de azulejo"
+    "kEn": "Do first",
+    "kEs": "Primero",
+    "vEn": "Window trim before any wall tile",
+    "vEs": "Moldura de ventana antes del azulejo"
   },
   {
-    "kEn": "Floor & Grout",
-    "kEs": "Piso y boquilla",
-    "vEn": "Calacatta Gem laid · Warm Gray grout",
-    "vEs": "Calacatta Gem puesto · Boquilla Warm Gray"
+    "kEn": "Floor",
+    "kEs": "Piso",
+    "vEn": "Tile laid · Warm Gray grout next",
+    "vEs": "Azulejo colocado · sigue boquilla Warm Gray"
   },
   {
     "kEn": "Fixtures",
-    "kEs": "Acabados",
-    "vEn": "Champagne Bronze · 10\" toilet · Surface med cab",
-    "vEs": "Champagne Bronze · Inodoro 10\" · Botiquín ext."
+    "kEs": "Accesorios",
+    "vEn": "Champagne Bronze · 10\" toilet · surface medicine cabinet",
+    "vEs": "Champagne Bronze · inodoro de 10\" · botiquín sobre el muro"
   }
 ]

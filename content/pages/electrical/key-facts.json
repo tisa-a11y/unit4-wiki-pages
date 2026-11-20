@@ -1,26 +1,26 @@
 [
   {
-    "kEn": "Panel Spot",
-    "kEs": "Ubicación",
-    "vEn": "D04 dining wall · Upper-left frame",
-    "vEs": "Muro D04 comedor · Marco sup. izq."
+    "kEn": "Panel location",
+    "kEs": "Lugar del tablero",
+    "vEn": "Dining-room wall (D04) · upper-left frame",
+    "vEs": "Muro del comedor (D04) · marco superior izquierdo"
   },
   {
-    "kEn": "Panel Box",
+    "kEn": "Panel",
     "kEs": "Tablero",
-    "vEn": "Eaton 125A / 20-space (BRP20L125G)",
-    "vEs": "Eaton 125A / 20 espacios (BRP20L125G)"
+    "vEn": "Eaton 125-amp, 20 spaces (on site)",
+    "vEs": "Eaton de 125 amperes, 20 espacios (en obra)"
   },
   {
-    "kEn": "Feeder Check",
+    "kEn": "Feeder",
     "kEs": "Alimentador",
-    "vEn": "Reconcile 80A vs 100A Mon Nov 23",
-    "vEs": "Conciliar 80A vs 100A lun 23 nov"
+    "vEn": "80 or 100 amps: confirm Mon Nov 23",
+    "vEs": "80 o 100 amperes: confirmar lun 23 nov"
   },
   {
-    "kEn": "Closed Walls",
+    "kEn": "Closed walls",
     "kEs": "Muros cerrados",
-    "vEn": "Boxes + empty ENT smurf tube",
-    "vEs": "Cajas + tubo ENT (smurf) vacío"
+    "vEn": "Boxes + empty conduit · no wire yet",
+    "vEs": "Cajas + tubo vacío · sin cable todavía"
   }
 ]

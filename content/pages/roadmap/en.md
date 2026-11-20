@@ -1,15 +1,15 @@
 # Unit 4 — Roadmap
-Updated Nov 19, 2026. Compact room-by-room sequence across the active remodel.
+Updated Nov 19, 2026. Where each room stands, what comes next, and what to leave alone for now.
 
-| Room | Current Status | Next Step | Active Hold |
+| Room | Where it stands | Next | Do not do yet |
 |---|---|---|---|
-| **Kitchen** | Full-L review; Zephyr R3 & Range Wall R1 PDFs live | Clear room, window framing, full-L photos & Zephyr mock-hang | C3 sink base, D04 closure & cabinet/quartz order |
-| **Bathroom** | Tub leak-tested; floor tile & HardieBoard/niches up | Original window trim over HardieBoard & 2 GFCI boxes | Wall tile until trim; floor grout until toilet flange check |
-| **HVAC** | NEXT HVAC + subpanel scope defined | Mon Nov 23 (2–4 p.m.) walkthrough with Serge & Alex | Install paused until walkthrough & attic prep |
-| **HVAC › Attic** | `24"×36"` clear hatch & R5 Guide published | 4 daylight hatch photos & bedroom closet measurement | Ceiling fire-rating & joist bay B check before cutting |
-| **Electrical** | `D04` dining-side wall settled; Eaton panel on site | Reconcile 80A vs 100A feeder on Mon Nov 23 | `D04` closure & kitchen branch wiring |
-| **Laundry** | Rough-in & gas-box fix done; LG delivers Dec 1 | Verify outlet opening & open-wall photos | Wall close-in until photo check |
-| **Bedroom** | Wall A–D orientation & R2 packet issued | Keep closet open for LV cable + permanent hatch | Moulding cuts & closet ceiling close-in |
-| **Living & Dining** | `D04` mockup & Wall Treatments R2 live | Confirm outlet height & moulding profile | Moulding cuts & outlet pull |
-| **Hallway** | `24"×36"` hatch planning; Murphy door on Laundry | 4 daylight hatch photos | Ceiling cut pending fire-rating & bay B |
-| **Paint & Floors** | Bathroom floor laid (Warm Gray grout next) | Confirm kitchen floor thickness (`~3/4"`) | Paint colors & kitchen tile lock |
+| **Kitchen** | Layout under review; hood guide and range-wall plan posted | Clear the room, finish the window framing, photograph the full L, test-hang the hood | Setting the sink cabinet, closing the panel wall, ordering cabinets and countertops |
+| **Bathroom** | Tub tested; floor tile, HardieBoard and niches up | Original window trim and two GFCI boxes | Wall tile before the trim; floor grout before the toilet flange check |
+| **HVAC** | NEXT HVAC's work is defined | Walkthrough Mon Nov 23, 2–4 p.m., with Serge and Alex | Any install before the walkthrough and attic prep |
+| **Attic Access** | Hatch size settled; R5 guide posted | 4 daylight photos of the hatch spot; measure the bedroom closet | Cutting the ceiling before the fire-rating and joist check |
+| **Electrical** | Panel wall chosen; Eaton panel on site | Confirm an 80 or 100-amp feeder Mon Nov 23 | Closing the panel wall; kitchen circuit wiring |
+| **Laundry** | Rough-in done; gas box moved; WashTower arrives Dec 1 | Check the outlet opening; photograph the open wall | Closing the wall before the photos |
+| **Bedroom** | Wall names set; R2 trim packet issued | Keep the closet ceiling open for the cable and the hatch | Cutting moulding; closing the closet ceiling |
+| **Living & Dining** | Panel-wall mockup and wall-treatment plan posted | Confirm outlet height and moulding choice | Cutting moulding; pulling wire |
+| **Hallway** | Hatch being planned; laundry door is on the Laundry page | 4 daylight photos of the hatch spot | Cutting the ceiling before the checks |
+| **Paint & Floors** | Bathroom floor laid; grout is next | Confirm kitchen floor thickness | Paint colors and kitchen tile are not chosen |

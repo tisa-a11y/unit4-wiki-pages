@@ -1,8 +1,8 @@
 {
   "en": "Visuals & Mockups",
   "es": "Vistas y maquetas",
-  "noteEn": "Visual reference — governing SPEC/PDF dimensions rule.",
-  "noteEs": "Referencia visual — las medidas de SPEC/PDF mandan.",
+  "noteEn": "For reference only. Use the measurements in the drawings under Documents.",
+  "noteEs": "Solo de referencia. Usar las medidas de los planos en Documentos.",
   "items": [
     {
       "img": "./wiki-images/2026-11-18_U4_kitchen_overhead-concept_R2.jpg",

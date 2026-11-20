@@ -3,28 +3,28 @@
   "steps": [
     {
       "done": true,
-      "en": "Wall A–D orientation & R2 trim installation packet established",
-      "es": "Orientación Muros A–D y paquete de molduras R2 establecidos"
+      "en": "Wall names set; R2 trim packet issued",
+      "es": "Nombres de muros definidos; paquete de molduras R2 emitido"
     },
     {
       "done": false,
-      "en": "Check closet furnace passage & run coiled LV switch cable to attic",
-      "es": "Revisar paso de caldera en clóset y subir cable LV al ático"
+      "en": "Check the closet opening for the furnace; run the switch cable to the attic",
+      "es": "Revisar el paso de la caldera por el clóset; subir el cable del apagador al ático"
     },
     {
       "done": false,
-      "en": "Set outlet boxes + empty ENT smurf tube & patch hardwood floor",
-      "es": "Instalar cajas + tubo ENT vacío y reparar parche de madera"
+      "en": "Outlet boxes and empty conduit; patch the hardwood floor",
+      "es": "Cajas de contacto y tubo vacío; reparar la duela"
     },
     {
       "done": false,
-      "en": "Tape-fit wall moulding frames from centerlines & install trim",
-      "es": "Presentar marcos con cinta desde ejes centrales e instalar molduras"
+      "en": "Lay out the moulding frames with tape and install",
+      "es": "Trazar los marcos de moldura con cinta e instalar"
     },
     {
       "done": false,
-      "en": "Close closet ceiling (after permanent hatch), rod, prime & paint",
-      "es": "Cerrar techo clóset (tras escotilla permanente), barra, fondear y pintar"
+      "en": "Close the closet ceiling after the hatch exists; rod, primer and paint",
+      "es": "Cerrar el techo del clóset cuando exista la escotilla; tubo, sellador y pintura"
     }
   ]
 }

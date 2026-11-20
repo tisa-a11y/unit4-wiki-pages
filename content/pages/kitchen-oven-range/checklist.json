@@ -3,28 +3,28 @@
   "steps": [
     {
       "done": true,
-      "en": "Viking 30\" range & Zephyr 30\" hood on hand; R3 & R1 PDFs live",
-      "es": "Estufa Viking 30\" y campana Zephyr en obra; PDFs R3 y R1 listos"
+      "en": "Range and hood are on site; crew guide and wall plan posted",
+      "es": "Estufa y campana en obra; guía y plan del muro publicados"
     },
     {
       "done": false,
-      "en": "Set solid wood backing (68\"–86\" & 104\"–121-1/2\" AFF)",
-      "es": "Instalar bloqueo sólido de madera (68\"–86\" y 104\"–121-1/2\" NPT)"
+      "en": "Install wood backing in both bands (68\"–86\" and 104\"–121-1/2\")",
+      "es": "Colocar refuerzos de madera en las dos franjas (68\"–86\" y 104\"–121-1/2\")"
     },
     {
       "done": false,
-      "en": "Pre-drywall mock-hang at 66\"–72\" AFF & measure ceiling gap/duct",
-      "es": "Presentar a 66\"–72\" NPT y medir brecha al techo y ducto"
+      "en": "Test-hang the hood at 66\"–72\" and measure the ceiling gap and the duct",
+      "es": "Colgar la campana de prueba a 66\"–72\" y medir el hueco al techo y el ducto"
     },
     {
       "done": false,
-      "en": "Rough-in 15A AFCI Circuit HD (422.31(B)) & 1/2\" gas shutoff",
-      "es": "Instalar circuito 15A AFCI Circuit HD (422.31(B)) y llave gas 1/2\""
+      "en": "Rough-in the hood's own circuit and the range gas shutoff",
+      "es": "Instalar en bruto el circuito propio de la campana y la llave de gas de la estufa"
     },
     {
       "done": false,
-      "en": "Full-height tile, Viking backguard & final hood/range tie-in",
-      "es": "Azulejo hasta techo, respaldo Viking y conexión final"
+      "en": "Tile to the ceiling, Viking backguard, final hood and range connection",
+      "es": "Azulejo hasta el techo, respaldo Viking y conexión final de campana y estufa"
     }
   ]
 }

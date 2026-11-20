@@ -1,11 +1,16 @@
-# Kitchen › Oven / Range Run
+# Oven / Range Run
 
 ## Concept
-West range wall with 30" Viking `VGCC5304BSS` gas range, 30" Zephyr Savona `ZSA-E30AS` chimney hood, and full-height statement tile (no upper cabinets at hood).
+The West wall: a 30" Viking gas range with a 30" Zephyr Savona hood above it, and tile to the ceiling. No upper cabinets beside the hood.
 
-## Verified Engineering Specs (Viking + Zephyr OEM)
-- **Governing Mounting Height:** Viking requires **`30"–36"` above cooking surface (`66"–72"` AFF at `36"` counter)** (`64"` AFF fails Viking spec by `2"`).
-- **Solid Wood Backing:** Dual blocking zones at **`68"–86"` AFF** (canopy bracket Line B = `9-9/16"` above Line A, `9-27/32"` screw spread, `≥ 1-1/2"` wood embedment) and **`104"–121-1/2"` AFF** (upper flue). Adjust by finished floor thickness `t`.
-- **Viking Rear Clearance:** `1"` Island Trim requires **`6"` rear clearance to combustibles**; **`8"` High Backguard** allows **`0"`** above counter (`3/4"` rear standoff). Side trim `3/8"` above counter.
-- **Electrical (`Circuit HD`):** Dedicated **`15A` AFCI** with **`CEC 422.31(B)` breaker lock-off** (`120V / 3.4A`, `> 300 VA`, never shared with `LT`). Junction box at `100"` AFF inside `8-5/8"` flue cover, clear of `6"` duct. Range uses `1/2"` gas shutoff + `120V` outlet.
-- **Venting & Ceiling Gap:** Vertical **`6"` round rigid metal duct** (no flex duct, `685 CFM`). Stock cover maxes at `116"–117"`, leaving a **`4-1/2"`–`13-1/2"` gap** at the `121-1/2"` ceiling (soffit vs. `Z1C-00SA` extension).
+## What to know before you build
+- **This weekend is a mockup only.** No final wiring, no final duct connection, no drywall on this wall.
+- **Step by step with photos:** open the crew guide (R3) under Documents.
+- **Hood height:** the bottom of the hood goes 30"–36" above the cooktop. That is 66"–72" from the finished floor. Viking sets this rule; 64" is too low.
+- **Wood backing:** solid blocking in two bands, 68"–86" and 104"–121-1/2" from the finished floor. If you measure from the subfloor, add the floor thickness. The hood's hanger screws sit 9-9/16" above the bottom of the hood and 9-27/32" apart, and need at least 1-1/2" of solid wood.
+- **Behind the range:** check which rear trim the Viking has. The 8" backguard can sit against the wall (3/4" standoff). The 1" island trim needs 6" of clearance to anything that can burn. The side trim sits 3/8" above the countertop.
+- **Hood power:** the hood gets its own 15-amp circuit, with a breaker that can be locked off. Never share it with the lights. The junction box goes at about 100" from the floor, inside the 8-5/8" chimney cover and clear of the duct.
+- **Range hookups:** a 1/2" gas shutoff and a 120V outlet.
+- **Duct:** 6" round rigid metal, straight up (685 CFM). No flex duct.
+- **Gap at the ceiling:** the hood's cover stops short of the 121-1/2" ceiling. Measure the gap during the test-hang.
+- **Models:** Viking VGCC5304BSS range · Zephyr Savona ZSA-E30AS hood.

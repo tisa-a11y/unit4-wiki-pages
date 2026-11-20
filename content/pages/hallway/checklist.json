@@ -3,28 +3,28 @@
   "steps": [
     {
       "done": true,
-      "en": "24\"×36\" clear hatch settled (#attic-access); Murphy door on #laundry",
-      "es": "Escotilla 24\"×36\" fija (#attic-access); puerta Murphy en #laundry"
+      "en": "Hatch size settled; laundry door handled on the Laundry page",
+      "es": "Tamaño de la escotilla definido; la puerta de lavandería se ve en Lavandería"
     },
     {
       "done": false,
-      "en": "Daylight hatch photos, fire-rating check & joist bay B (#attic-access)",
-      "es": "Fotos de día, revisión contra fuego y claro B (#attic-access)"
+      "en": "Daylight photos, fire-rating check and joist measurement",
+      "es": "Fotos de día, revisión contra fuego y medida entre vigas"
     },
     {
       "done": false,
-      "en": "Build permanent 24\"×36\" clear hatch & entrance light switch",
-      "es": "Construir escotilla permanente 24\"×36\" y apagador de entrada"
+      "en": "Build the hatch and its light switch",
+      "es": "Construir la escotilla y su apagador de luz"
     },
     {
       "done": false,
-      "en": "Hallway outlets/lights, moulding layout & Murphy trim interface",
-      "es": "Contactos/luces, trazo de molduras e interfaz de marco Murphy"
+      "en": "Outlets, lights, moulding layout and trim around the laundry door",
+      "es": "Contactos, luces, trazo de molduras y moldura de la puerta de lavandería"
     },
     {
       "done": false,
-      "en": "Install trim, patch walls/ceiling, prime & paint",
-      "es": "Instalar molduras, resanar muros/techo, fondear y pintar"
+      "en": "Install trim, patch, primer and paint",
+      "es": "Instalar molduras, resanar, sellador y pintura"
     }
   ]
 }

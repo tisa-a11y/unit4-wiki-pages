@@ -1,9 +1,10 @@
-# Pintura y pisos Unidad 4
+# Pintura y pisos
 
 ## Concepto
-Paleta y secuencia unificada de pisos en toda la unidad: piso Calacatta Gem en baño con boquilla Warm Gray, duela reparada en recámara, piso mate en cocina y pintura coordinada.
+Un solo juego de colores y pisos para toda la unidad: azulejo tipo mármol en el baño, duela restaurada en los cuartos, azulejo mate en la cocina, y pintura de molduras y muros a juego.
 
-## Especificaciones de pisos y pintura
-- **Piso de baño:** Porcelanato mate Calacatta Gem 12×24 colocado; emboquillar con **Warm Gray** tras revisar brida de inodoro.
-- **Piso de cocina y parche de recámara:** Confirmar espesor de piso mate de cocina (`t ≈ 3/4"`) antes del trazo final de gabinetes; reparar parche de madera en recámara.
-- **Molduras y paleta (Por confirmar):** Colores candidatos en revisión: **BM Essex Green (HC-188)** gabinetes de cocina, **SW Urbane Bronze (SW 7048)**, **BM Pale Oak (OC-20)**, **BM Chantilly Lace (OC-65)**. Fondear y pintar tras cierre de tablaroca.
+## Pisos y pintura
+- **Piso del baño:** el azulejo Calacatta Gem de 12" × 24" mate está colocado. Revisar la brida del inodoro y luego emboquillar con Warm Gray.
+- **Piso de la cocina:** confirmar el espesor del piso de azulejo mate (aprox. 3/4") antes de las marcas finales de los gabinetes.
+- **Piso de la recámara:** reparar el pedazo de duela que falta antes de las molduras.
+- **Los colores de pintura todavía no se eligen.** En revisión: Benjamin Moore Essex Green (HC-188) para los gabinetes bajos de la cocina, Sherwin-Williams Urbane Bronze (SW 7048), Benjamin Moore Pale Oak (OC-20) y Benjamin Moore Chantilly Lace (OC-65). Sellar y pintar después de cerrar la tablaroca.

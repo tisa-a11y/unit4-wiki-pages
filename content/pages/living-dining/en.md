@@ -1,9 +1,10 @@
-# Unit 4 Living & Dining
+# Living & Dining
 
 ## Concept
-Cohesive Edwardian living and dining rooms with centerline picture-frame mouldings across `D01–D04` and `L01–L06` and the new subpanel cleanly centered inside the `D04` upper-left frame.
+The Edwardian living and dining rooms get picture-frame mouldings on every wall. The new electrical panel sits centered in the upper-left frame on the dining-room panel wall (D04).
 
-## Wall Framing, Electrical & Trim Specs
-- **`D04` Subpanel Wall:** Dining-side doorway infill framed with solid backing and side-entry routing; subpanel centered in upper-left moulding frame. No `D5` outlet on door-swing wall.
-- **Outlets & Pocket Doors:** Install outlet boxes + empty ENT smurf tube on `D01–D04` and `L01–L06`, strictly clear of pocket-door cavities. Confirm outlet height rule (`18"` vs `11-1/2"`) before pulling wire.
-- **Moulding & Finish:** Hold trim cuts until Option A (no chair rail) vs Option B lock; align to existing baseboard/high trim and preserve dining hutch and fireplace character.
+## Walls, outlets and trim
+- **Wall labels:** dining walls are D01–D04 and living walls are L01–L06, as on the drawings.
+- **Panel wall (D04):** the old doorway on the dining side is framed in with solid backing, leaving room for cable to enter from the side. No outlet on the door-swing wall next to it.
+- **Outlets:** set boxes and empty flexible conduit (smurf tube) on all walls. Stay out of the pocket-door cavities. The outlet height is not settled (18" or 11-1/2"), so do not pull wire yet.
+- **Mouldings:** do not cut trim yet. The choice between frames with no chair rail (Option A) and frames with a chair rail (Option B) is still open. Line up with the existing baseboard and high trim, and keep the dining hutch and fireplace details.
