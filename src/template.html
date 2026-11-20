@@ -3028,7 +3028,7 @@ function renderDecisions(){
     const c=document.createElement("div"); c.className="dec"+(d.status==="locked"?" locked":d.priority===1?" p1":"");
     const page=PAGES.find(x=>x.key===d.project);
     const priLabel = d.status==="locked" ? (es?"DECIDIDO":"LOCKED") : ((es?PRI_ES[d.priority]:PRI[d.priority])||"");
-    c.innerHTML=`<div class="meta"><span>${priLabel}</span>${page?`<a href="#${page.key}">${pageLabel(page)}</a>`:""}<span>${d.id.toUpperCase()}</span></div>`;
+    c.innerHTML=`<div class="meta"><span>${priLabel}</span>${page?`<a href="#${page.key}">${pageLabel(page)}</a>`:""}</div>`;
     const h3=document.createElement("h3"); h3.textContent=(es && d.questionEs) ? d.questionEs : (d.question||""); c.appendChild(h3);
     [[es?"Por qué importa":"Why it matters", (es&&d.whyEs)?d.whyEs:d.why],[es?"Opciones en revisión":"Options on the table", (es&&d.optionsEs)?d.optionsEs:d.options],[es?"Lo que aporta John en obra":"What John can bring", (es&&d.johnInputEs)?d.johnInputEs:d.johnInput]].forEach(([k,v])=>{ if(!v)return; const w=document.createElement("div"); const kk=document.createElement("div"); kk.className="k"; kk.textContent=k; const vv=document.createElement("div"); vv.textContent=v; w.append(kk,vv); c.appendChild(w); });
     if (d.status==="locked"){ const o=document.createElement("div"); o.className="out"; o.textContent="Decision: "+(d.outcome||""); c.appendChild(o); }
@@ -3051,7 +3051,7 @@ function renderDecisions(){
         decision: d.id,
         project: d.project || "general",
         roomKey: d.project || "general",
-        item: "Decision " + d.id.toUpperCase(),
+        item: "Decision: " + String(d.question||"").slice(0,80),
         kind: "Answer to a decision",
         noteType: "Answer to a decision",
         raw: v,

@@ -8,7 +8,7 @@ Piso de azulejo tipo mármol, azulejo blanco tipo metro en muros, accesorios col
 - **Tina:** instalada y probada sin fugas el 9 de nov.
 - **Inodoro:** descarga a 10".
 - **Botiquín:** sobre el muro, no empotrado.
-- **Puerta:** en espera. No enmarcar puerta corrediza ni comprar el riel.
+- **Puerta:** no enmarcar puerta corrediza ni comprar el riel.
 
 ## Azulejo y orden del trabajo
 - **Primero la moldura de la ventana.** La moldura original va antes de cualquier azulejo de muro.

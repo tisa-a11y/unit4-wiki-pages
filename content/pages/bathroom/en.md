@@ -8,7 +8,7 @@ Marble-look floor tile, white subway wall tile, bronze fixtures, drop-in tub.
 - **Tub:** installed and leak-tested Nov 9.
 - **Toilet:** 10" rough-in.
 - **Medicine cabinet:** on the wall surface, not recessed.
-- **Door:** on hold. Do not frame a pocket door or buy the track.
+- **Door:** do not frame a pocket door or buy the track.
 
 ## Tile and order of work
 - **Window trim first.** Original trim goes on before any wall tile.

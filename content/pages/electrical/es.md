@@ -5,7 +5,6 @@ Tablero Eaton nuevo en el muro del comedor. Alimenta cocina, baño, ático y los
 
 ## Tablero, alimentador y circuitos
 - **Tablero:** la caja Eaton está en obra. La instala NEXT HVAC.
-- **Alimentador:** 80 o 100 amperes. Se confirma el lun 23 de nov.
 - **Muro del tablero:** no cerrarlo. El cable entra por un lado.
 - **Cocina:** nueve circuitos. La campana tiene el suyo.
 - **Baño:** dos cajas GFCI.

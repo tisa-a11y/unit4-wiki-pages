@@ -9,8 +9,8 @@ var DEFAULT_OPEN_DECISIONS = [
     questionEs: "¿Dónde va exactamente la tarja de la cocina y de qué ancho es el relleno junto a la puerta?",
     why: "The marks on site put the sink cabinet at 72–102 in. The earlier plan says 75–105 in., centered at 90 in. This has to be settled before the sink drain is moved or cabinets and countertops are ordered.",
     whyEs: "Las marcas en obra ponen el gabinete de la tarja de 72 a 102 pulg. El plan anterior dice de 75 a 105 pulg., con centro a 90 pulg. Hay que definirlo antes de mover el desagüe o pedir gabinetes y cubiertas.",
-    options: "Compare John's labeled photos of the full L layout with the overhead render (R2). Compare a 6-in. filler with a 12-in. one for walking space, counting the countertop overhang.",
-    optionsEs: "Comparar las fotos rotuladas de John del trazo completo en L con el render desde arriba (R2). Comparar un relleno de 6 pulg. con uno de 12 pulg. para el espacio de paso, contando el vuelo de la cubierta.",
+    options: "Compare John's labeled photos of the full L layout with the picture of the kitchen from above. Compare a 6-in. filler with a 12-in. one for walking space, counting the countertop overhang.",
+    optionsEs: "Comparar las fotos rotuladas de John del trazo completo en L con la imagen de la cocina desde arriba. Comparar un relleno de 6 pulg. con uno de 12 pulg. para el espacio de paso, contando el vuelo de la cubierta.",
     johnInput: "Mark the full L layout on the floor and walls and send the 5 groups of labeled photos.",
     johnInputEs: "Marcar el trazo completo en L en piso y muros y mandar los 5 grupos de fotos rotuladas."
   },
@@ -88,5 +88,20 @@ var DEFAULT_OPEN_DECISIONS = [
     optionsEs: "Colores en revisión: Benjamin Moore Essex Green (HC-188) para los gabinetes bajos de la cocina, Sherwin-Williams Urbane Bronze (SW 7048), Benjamin Moore Pale Oak (OC-20) y Chantilly Lace (OC-65).",
     johnInput: "Confirm the finished floor thickness before the final marks for cabinet height.",
     johnInputEs: "Confirmar el espesor del piso terminado antes de las marcas finales de altura de gabinetes."
+  },
+  {
+    id: "d07",
+    project: "electrical",
+    priority: 2,
+    order: 7,
+    status: "open",
+    question: "Is the new panel feeder 80 amps or 100 amps?",
+    questionEs: "¿El alimentador del tablero nuevo es de 80 o de 100 amperes?",
+    why: "The earlier plan said 100 amps. The current plan is an 80-amp copper feeder. The Eaton panel on site is rated 125 amps.",
+    whyEs: "El plan anterior decía 100 amperes. El plan actual es un alimentador de cobre de 80 amperes. El tablero Eaton en obra es de 125 amperes.",
+    options: "Serge and Alex confirm it at the walkthrough on Monday, Nov 23.",
+    optionsEs: "Serge y Alex lo confirman en la visita del lunes 23 de nov.",
+    johnInput: "Keep the panel wall open until this is confirmed.",
+    johnInputEs: "Dejar abierto el muro del tablero hasta que se confirme."
   }
 ];

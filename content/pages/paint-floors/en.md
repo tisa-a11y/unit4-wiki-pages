@@ -7,4 +7,4 @@ Marble-look tile in the bathroom, restored hardwood in the rooms, matte tile in 
 - **Bathroom floor:** tile is laid. Check the toilet flange, then grout Warm Gray.
 - **Kitchen floor:** confirm the tile floor thickness (about 3/4") before final cabinet marks.
 - **Bedroom floor:** patch the missing hardwood before trim.
-- **Paint:** colors are not chosen. Prime and paint after drywall.
+- **Paint:** prime and paint after drywall.

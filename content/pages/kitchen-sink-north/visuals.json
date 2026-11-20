@@ -1,8 +1,8 @@
 {
   "en": "Pictures",
   "es": "Imágenes",
-  "noteEn": "For reference only. The sink position is not settled; do not cut from these.",
-  "noteEs": "Solo de referencia. La posición de la tarja no está definida; no cortar con base en estas imágenes.",
+  "noteEn": "For reference only. Do not cut from these.",
+  "noteEs": "Solo de referencia. No cortar con base en estas imágenes.",
   "items": [
     {
       "img": "./wiki-images/kitchen-magicplan-dedb66d9b37f5023a2b650b6ebff20dc.jpg",
