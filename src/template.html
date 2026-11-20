@@ -18,6 +18,18 @@
 .u4-vd-mp-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 11px;border-radius:999px;border:1px solid var(--line,#d1d5db);background:var(--bg,#fff);color:var(--fg,#1f2937);font:600 12px/1.2 var(--body);cursor:pointer}
 .u4-vd-mp-btn:hover{background:#f3f4f6}
 
+.viewer.is-packet .u4-preview-tabs,.viewer.is-packet > p.hint{display:none}
+.viewer.is-packet h1{font-size:24px;margin:10px 0 12px}
+.u4-packets{margin:22px 0}
+.u4-packet-list{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.u4-packet{display:flex;flex-direction:column;gap:3px;padding:14px 16px;min-height:60px;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;background:var(--panel);text-decoration:none;color:var(--fg)}
+.u4-packet:active{transform:scale(.99)}
+.u4-packet-t{font-weight:700;font-size:16.5px;color:var(--accent);line-height:1.25}
+.u4-packet-room{font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.u4-packet-n{font-size:14px;color:var(--muted);line-height:1.35}
+.rail-packet-link{display:block;padding:7px 10px 7px 26px;font-size:13.5px;color:var(--fg);text-decoration:none;border-radius:6px}
+.rail-packet-link.is-child-packet{padding-left:40px}
+.rail-packet-link[aria-current="page"]{background:var(--accent-soft);font-weight:600}
 </style></head><body>
 <meta name="description" content="Agent brief: shared home of the 1231 11th Ave Unit 4 remodel so Tisa (owner, locks decisions) and John (lead carpenter) work from one current picture; the spine of the Todoist board — every card traces to a wiki spec or decision; agents file every note into specs, Todoist and decisions. Read #agent-brief (= unit-4-renovation/START-HERE.md).">
 <!--
@@ -1376,6 +1388,34 @@ function getRoomSubsections(key){
   return list;
 }
 
+// ---- Instruction packets: bilingual crew guides, each with its own menu entry and address (#<packet key>) ----
+const PACKETS = @@U4:JSON:packets.json@@;
+function packetByKey(raw){
+  const k = String(raw||"").trim().toLowerCase().replace(/^#/,"");
+  if (!k) return null;
+  return PACKETS.find(x=>x.key===k) || PACKETS.find(x=>(x.aliases||[]).some(a=>String(a).toLowerCase()===k)) || null;
+}
+window.packetByKey = packetByKey;
+function packetTitle(pk){ return LANG==="es" ? pk.titleEs : pk.titleEn; }
+function packetNote(pk){ return LANG==="es" ? (pk.noteEs||"") : (pk.noteEn||""); }
+function packetDocId(pk){ return LANG==="es" ? (pk.docEs||pk.docEn) : (pk.docEn||pk.docEs); }
+function packetsFor(roomKey){ return PACKETS.filter(x=>x.room===roomKey && x.inMenu!==false); }
+function packetCardsBlock(list, showRoom){
+  if (!list.length) return "";
+  const es = LANG==="es";
+  const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  return '<section class="u4-packets" id="sec-packets"><h2>'+(es?"Guías de trabajo":"Instruction packets")+'</h2><div class="u4-packet-list">'
+    + list.map(pk=>{ const room = showRoom ? PAGES.find(x=>x.key===pk.room) : null;
+        return '<a class="u4-packet" href="#'+pk.key+'">'
+          + (room?'<span class="u4-packet-room">'+esc(pageLabel(room))+'</span>':'')
+          + '<span class="u4-packet-t">'+esc(packetTitle(pk))+'</span>'
+          + (packetNote(pk)?'<span class="u4-packet-n">'+esc(packetNote(pk))+'</span>':'')+'</a>'; }).join("")
+    + '</div></section>';
+}
+function markActivePacket(key){
+  document.querySelectorAll(".rail-packet-link").forEach(a=>{ if (a.dataset.key===key) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
+  const j=document.getElementById("jump"); if (j && key) { try{ j.value=key; }catch(e){} }
+}
 function roomSubnavBar(p){
   const es = LANG==="es";
   const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -1443,6 +1483,7 @@ function crewRoom(p, srcMd){
     h += keyFactsBlock(p.key);
   }
 
+  h += packetCardsBlock(packetsFor(p.key), false);
   h += ckBlock(p.key);
 
   if (p.key==="kitchen") {
@@ -1495,6 +1536,7 @@ window.parseRoomAndSection = parseRoomAndSection;
 function resolvePageKey(rawKey){
   const k = String(rawKey || "").trim().toLowerCase();
   if (!k) return "home";
+  { const pk = packetByKey(k); if (pk) return pk.key; }
   if (k === "attic" || k === "hvac/attic" || k === "attic-access") return "attic-access";
   const direct = PAGES.find(x => x.key === k);
   if (direct) return direct.key;
@@ -1551,6 +1593,7 @@ function appendRailRoomNode(p, isChildSubpage){
     row.appendChild(btn);
   }
   rail.appendChild(row);
+  packetsFor(p.key).forEach(pk=>{ const pa=document.createElement("a"); pa.className="sub rail-packet-link"+(isChildSubpage?" is-child-packet":""); pa.href="#"+pk.key; pa.dataset.key=pk.key; pa.textContent="▤ "+packetTitle(pk); rail.appendChild(pa); });
 
   if (subsecs.length) {
     const subBox = document.createElement("div");
@@ -1632,7 +1675,7 @@ function renderNav(){
   const ovGrp = document.createElement("div"); ovGrp.className="grp"; ovGrp.textContent=groupLabel("Overview"); rail.appendChild(ovGrp);
   PAGES.filter(p=>p.group==="Overview").forEach(p=>{
     appendRailRoomNode(p, false);
-    const o=document.createElement("option"); o.value=p.key; o.textContent=pageLabel(p); jump.appendChild(o);
+    const o=document.createElement("option"); o.value=p.key; o.textContent=pageLabel(p); jump.appendChild(o); packetsFor(p.key).forEach(pk=>{ const po2=document.createElement("option"); po2.value=pk.key; po2.textContent="\u00a0\u00a0\u25A4 "+packetTitle(pk); jump.appendChild(po2); });
   });
 
   // 2. Previews section (Persistent session PDF queue!)
@@ -1683,7 +1726,7 @@ function renderNav(){
     const childPages = PAGES.filter(c=>c.parent===p.key);
     childPages.forEach(cp=>appendRailRoomNode(cp, true));
 
-    const o=document.createElement("option"); o.value=p.key; o.textContent=pageLabel(p); jump.appendChild(o);
+    const o=document.createElement("option"); o.value=p.key; o.textContent=pageLabel(p); jump.appendChild(o); packetsFor(p.key).forEach(pk=>{ const po2=document.createElement("option"); po2.value=pk.key; po2.textContent="\u00a0\u00a0\u25A4 "+packetTitle(pk); jump.appendChild(po2); });
     if (p.key === activeKey) {
       getRoomSubsections(p.key).forEach(s => {
         const so = document.createElement("option");
@@ -1839,6 +1882,23 @@ function scrollToTargetSection(targetSectionId){
 }
 
 function show(key){
+  const __pk = packetByKey(key);
+  if (__pk){
+    const r = show("doc:"+packetDocId(__pk));
+    try {
+      const v = document.querySelector("#doc .viewer");
+      if (v) {
+        v.classList.add("is-packet");
+        const h = v.querySelector("h1"); if (h) h.textContent = packetTitle(__pk);
+        const room = PAGES.find(x=>x.key===__pk.room);
+        const back = v.querySelector(".vbar a.btn"); if (back && room) { back.href = "#"+room.key; back.textContent = "← "+pageLabel(room); }
+        if (room) window.__backTo = room.key;
+      }
+    } catch(e){}
+    markActivePacket(__pk.key); setTimeout(function(){ markActivePacket(__pk.key); }, 60);
+    return r;
+  }
+  markActivePacket(null);
   pdfTok++;
   const bbtn=document.getElementById("backBtn");
   if (key==="decisions") decFilter="agenda";
@@ -1904,7 +1964,7 @@ function show(key){
   let body = '<div class="mdbody">' + render(srcMd) + '</div>';
   if (p.key==="roadmap") body += hoursBlock() + linksBlock();
   if (p.key==="home") {
-    body = homeHeader() + goalsBlock() + roomsBlock() + aboutBlock()
+    body = homeHeader() + goalsBlock() + packetCardsBlock(PACKETS.filter(x=>x.inMenu!==false), true) + roomsBlock() + aboutBlock()
       + '<p class="foot"><a href="#decisions">' + t("openDecisionsLink") + '</a> · <span class="u4-build-stamp">Build 2026-11-19 · r3f-usability</span></p>';
   }
   const isCrew = p.group==="Projects";
@@ -3582,7 +3642,8 @@ async function executeWikiBridgeAction(actionName, params) {
   const canon = map[String(actionName || "").trim()];
   if (!canon) return { ok: false, code: "DISALLOWED_BRIDGE_ACTION", action: String(actionName || ""), allowedActions: CANONICAL_BRIDGE_FUNCTIONS.slice() };
   if (canon === "navigate_room") {
-    const rk = String(p.roomKey || p.key || "").trim();
+    let rk = String(p.roomKey || p.key || "").trim();
+    { const pk = packetByKey(rk); if (pk) { location.hash = "#" + pk.key; show(pk.key); return { ok: true, action: canon, roomKey: pk.key, packet: true, title: packetTitle(pk) }; } }
     if (!CREW_ALLOWED_ROOM_KEYS.includes(rk)) return { ok: false, code: "DISALLOWED_ROOM_KEY", action: canon, roomKey: rk, validOptions: CREW_ALLOWED_ROOM_KEYS.slice() };
     show(rk);
     return { ok: true, action: canon, roomKey: rk };
@@ -5216,6 +5277,13 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
 
     navigate_room: async function(args) {
       var room = String((args && (args.room || args.roomKey || args.key)) || "").trim().toLowerCase();
+      var pkHit = (typeof packetByKey === "function") ? packetByKey(room) : null;
+      if (pkHit) {
+        location.hash = "#" + pkHit.key;
+        if (typeof show === "function") show(pkHit.key);
+        appendNavEventChip((currentUiLang() === "es" ? "Abri\u00f3 " : "Opened ") + packetTitle(pkHit));
+        return { ok: true, action: "navigate_room", room: pkHit.key, packet: true, title: packetTitle(pkHit), documentId: packetDocId(pkHit) };
+      }
       if (ALLOWED_ROOMS.indexOf(room) === -1) {
         return { ok: false, code: "DISALLOWED_ROOM_KEY", validOptions: ALLOWED_ROOMS };
       }
@@ -5904,6 +5972,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
                   text: "System guide context for Unit 4 AI Helper:\n" +
                     "- Reply concisely and naturally in whatever language the speaker uses (English, Espa\u00f1ol, etc.) automatically.\n" +
                     "- Proactively help the user navigate: use navigate_room, open_document, go_to_document_page, and focus_section whenever they ask about a room, plan, or section.\n" +
+                    "- Instruction packets are the crew's bilingual step-by-step guides. Open one with navigate_room using its key: " + PACKETS.map(function(p){ return p.key + " = " + p.titleEn + " / " + p.titleEs; }).join("; ") + ".\n" +
                     "- Keep Todoist IDs invisible unless specifically asked; speak about tasks in plain human room/checklist terms.\n" +
                     "- Owner-approval rule (Tisa, 2026-11-12): Never imply crew or collaborators can confirm or lock open design/finish choices (exact paint colors/sheens, kitchen matte floor tile, chair-rail Option A vs. B / Royal 164 profile, 10-inch toilet model, or material purchases). Always state clearly that Tisa's explicit approval is required before buying, cutting, painting, or locking any open selection, and flag review-only packets (Bedroom R2, Option A/B molding, Bathroom TP1-R3a, D04 framing) as 'Awaiting Tisa review / field check \u2014 do not cut or install yet'.\n\n" +
                     initialContext

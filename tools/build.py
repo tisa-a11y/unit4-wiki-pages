@@ -85,6 +85,16 @@ for rel in list(HTML):
     if m and f"{m.group(1)}.{'es' if m.group(2) == 'en' else 'en'}.html" not in HTML:
         errors.append(f"{rel} has no matching {'Spanish' if m.group(2) == 'en' else 'English'} file (both must exist)")
 
+if exists("packets.json"):
+    seen = set()
+    for n, pk in enumerate(load("packets.json") or []):
+        name = pk.get("key") or f"entry {n+1}"
+        for fld in ("key", "room", "titleEn", "titleEs", "docEn", "docEs"):
+            if not pk.get(fld): errors.append(f"packets.json: {name} is missing \"{fld}\" (every packet needs English and Spanish)")
+        if pk.get("room") and pk["room"] not in keys: errors.append(f"packets.json: {name}: room \"{pk['room']}\" is not a page")
+        if pk.get("key") in seen or pk.get("key") in keys: errors.append(f"packets.json: key \"{name}\" is used twice or is also a page name")
+        seen.add(pk.get("key"))
+
 T = read("src/template.html", ROOT)
 for u in sorted(set(re.findall(r'"(pages/[^"]+\.html)"', T)) - set(HTML)): errors.append(f"template uses {u} but content/{u} is missing")
 
