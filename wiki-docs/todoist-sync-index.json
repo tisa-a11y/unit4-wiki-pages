@@ -1,6 +1,6 @@
 {
   "schema": "unit4-todoist-wiki-sync-index-v1",
-  "updatedAt": "2026-11-19T23:52:12.990493+00:00",
+  "updatedAt": "2026-11-20T01:48:44.628408+00:00",
   "todoistBoard": {
     "name": "Full 1231 11th Avenue Remodel",
     "projectId": "6hcMQpGhXWprg6m7",
@@ -28,8 +28,8 @@
   },
   "summary": {
     "roomCount": 9,
-    "checklistItemCount": 115,
-    "uniqueLinkedTodoistCards": 96
+    "checklistItemCount": 116,
+    "uniqueLinkedTodoistCards": 97
   },
   "rooms": [
     {
@@ -650,6 +650,20 @@
       "note": "November 19: six photos are partial evidence. Reconcile shared datum, casing endpoint, window centerline and clear passage; full-layout, subpanel, electrical and ordering holds remain.",
       "noteEs": "19 de noviembre: seis fotos son evidencia parcial. Conciliar cero común, borde de moldura, eje de ventana y paso libre; siguen las retenciones de trazado completo, subpanel, electricidad y pedidos.",
       "items": [
+        {
+          "id": "kitchen-mockup-photo-6j3hQfxHXHJhWgG7",
+          "done": false,
+          "en": "John — P1 labeled photos for the latest mockup, due November 19 at 5:43 p.m. Pacific: full L; fridge return/corner and swings; sink/window datum; 6-inch versus 12-inch clear passage including countertop; uppers and pie-safe shrink. Label each image and its purpose; direct link + description. One evidence set also satisfies the existing photo task; all holds remain.",
+          "es": "John — P1 fotos rotuladas del render reciente, vence 19 de noviembre a las 5:43 p. m. del Pacífico: L completa; retorno/esquina del refrigerador y aperturas; referencia fregadero/ventana; paso libre con opciones de 6 y 12 pulgadas incluida cubierta; alacenas y reducción del pie-safe. Rotular cada imagen y su propósito; enlace individual + descripción. Un juego también satisface la tarea de fotos existente; siguen las retenciones.",
+          "todoistTaskIds": [
+            "6j3hQfxHXHJhWgG7"
+          ],
+          "todoistUrls": [
+            "https://todoist.com/showTask?id=6j3hQfxHXHJhWgG7"
+          ],
+          "sourcePath": "kitchen/SPEC.md",
+          "checklistPath": "kitchen/CHECKLIST.md"
+        },
         {
           "id": "kitchen-nov19-0f638faf7d",
           "done": false,
@@ -3456,6 +3470,24 @@
         "hvac/CHECKLIST.md",
         "hvac/SPEC.md"
       ]
+    },
+    "6j3hQfxHXHJhWgG7": {
+      "taskId": "6j3hQfxHXHJhWgG7",
+      "url": "https://todoist.com/showTask?id=6j3hQfxHXHJhWgG7",
+      "rooms": [
+        "kitchen"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "John — P1 labeled photos for the latest mockup, due November 19 at 5:43 p.m. Pacific: full L; fridge return/corner and swings; sink/window datum; 6-inch versus 12-inch clear passage including countertop; uppers and pie-safe shrink. Label each image and its purpose; direct link + description. One evidence set also satisfies the existing photo task; all holds remain."
+      ],
+      "wikiItemsEs": [
+        "John — P1 fotos rotuladas del render reciente, vence 19 de noviembre a las 5:43 p. m. del Pacífico: L completa; retorno/esquina del refrigerador y aperturas; referencia fregadero/ventana; paso libre con opciones de 6 y 12 pulgadas incluida cubierta; alacenas y reducción del pie-safe. Rotular cada imagen y su propósito; enlace individual + descripción. Un juego también satisface la tarea de fotos existente; siguen las retenciones."
+      ],
+      "governingDocs": [
+        "kitchen/CHECKLIST.md",
+        "kitchen/SPEC.md"
+      ]
     }
   },
   "sourceRefreshScope": {
@@ -3463,6 +3495,7 @@
       "kitchen",
       "laundry"
     ],
-    "source": "Canonical SPEC and CHECKLIST snapshots, November 19; other room records retained without new verification."
+    "source": "Canonical SPEC and CHECKLIST snapshots, November 19; other room records retained without new verification.",
+    "latestScopedUpdate": "November 19: added John P1 mockup verification task and exact design reference; preserved prior room snapshots and holds."
   }
 }
