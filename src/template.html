@@ -1059,7 +1059,7 @@ const UI = {
     unitTitle: "Unit 4 Wiki", unitMobileTitle: "\u2302 Home", unitSub: "1231 11th Ave · Remodel",
     menuBtn: "☰ Menu", backBtn: "← Back", backShort: "Back", closeBtn: "Close",
     langToggleLabel: "Español", langToggleAria: "Switch to Spanish",
-    grpOverview: "Overview", grpPreviews: "Previews", grpProjects: "Projects",
+    grpOverview: "Overview", grpPreviews: "Previews", grpProjects: "Rooms",
     previewsEmpty: "Click any PDF to add here", clearAll: "Clear", inPreviews: "In Previews",
     openPreviewsLbl: "Open Previews:", previewTabsLbl: "Previews:",
     savedCopy: "Saved copy · Nov 19, 2026", latestFromDrive: "Latest from Drive", checkingDrive: "checking Drive…",
@@ -1084,7 +1084,7 @@ const UI = {
     unitTitle: "Wiki Unidad 4", unitMobileTitle: "\u2302 Inicio", unitSub: "1231 11th Ave · Remodelación",
     menuBtn: "☰ Menú", backBtn: "← Atrás", backShort: "Atrás", closeBtn: "Cerrar",
     langToggleLabel: "English", langToggleAria: "Cambiar a inglés",
-    grpOverview: "Resumen", grpPreviews: "Vistas previas", grpProjects: "Proyectos",
+    grpOverview: "Resumen", grpPreviews: "Vistas previas", grpProjects: "Cuartos",
     previewsEmpty: "Toca un PDF para agregarlo aquí", clearAll: "Limpiar", inPreviews: "En vistas previas",
     openPreviewsLbl: "Vistas previas abiertas:", previewTabsLbl: "Vistas previas:",
     savedCopy: "Copia guardada · 19 nov 2026", latestFromDrive: "Lo más reciente de Drive", checkingDrive: "revisando Drive…",
@@ -1279,9 +1279,9 @@ function homeMenuBlock(){
   const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const prog = k => { const it=(CHECKLISTS[k]&&CHECKLISTS[k].items)||[]; return it.length ? '<span class="u4-hm-prog">'+it.filter(x=>x[0]).length+'/'+it.length+'</span>' : ''; };
   const packets = (k, deep) => packetsFor(k).map(pk=>'<a class="u4-hm-packet'+(deep?' is-deep':'')+'" href="#'+pk.key+'">'+esc(packetTitle(pk))+'</a>').join("");
-  const room = (p, child) => '<a class="u4-hm-room'+(child?' is-child':'')+'" href="#'+p.key+'"><span>'+esc(pageLabel(p))+'</span>'+prog(p.key)+'</a>'+packets(p.key, child);
+  const room = (p, child) => '<a class="u4-hm-room'+(child?' is-child':'')+'" href="#'+p.key+'"><span>'+esc(pageLabel(p))+'</span>'+prog(p.key)+'</a>'+(child?packets(p.key, true):"");
   const tops = PAGES.filter(x=>x.group==="Projects" && !x.parent);
-  const groups = tops.map(p=>'<div class="u4-hm-group">'+room(p,false)+PAGES.filter(c=>c.parent===p.key).map(c=>room(c,true)).join("")+'</div>').join("");
+  const groups = tops.map(p=>'<div class="u4-hm-group">'+room(p,false)+PAGES.filter(c=>c.parent===p.key).map(c=>room(c,true)).join("")+packets(p.key,false)+'</div>').join("");
   const plan = PAGES.filter(x=>x.key==="roadmap"||x.key==="decisions").map(p=>'<a href="#'+p.key+'">'+esc(pageLabel(p))+'</a>').join(" · ");
   return '<nav class="u4-home-menu" aria-label="'+(es?"Cuartos y guías":"Rooms and guides")+'"><h2>'+(es?"Cuartos y guías":"Rooms and guides")+'</h2>'+groups
     + (plan?'<p class="u4-hm-plan">'+(es?"Planeación: ":"Planning: ")+plan+'</p>':'')+'</nav>';
@@ -1295,8 +1295,9 @@ function roomAreasBlock(p){
   const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const prog = k => { const it=(CHECKLISTS[k]&&CHECKLISTS[k].items)||[]; return it.length ? '<span class="u4-hm-prog">'+it.filter(x=>x[0]).length+'/'+it.length+'</span>' : ''; };
   const pkt = (pk, deep) => '<a class="u4-hm-packet'+(deep?' is-deep':'')+'" href="#'+pk.key+'">'+esc(packetTitle(pk))+(packetNote(pk)?'<span class="u4-hm-note">'+esc(packetNote(pk))+'</span>':'')+'</a>';
-  let rows = own.map(pk=>pkt(pk,false)).join("");
+  let rows = "";
   kids.forEach(c=>{ rows += '<a class="u4-hm-room is-area" href="#'+c.key+'"><span>'+esc(pageLabel(c))+'</span>'+prog(c.key)+'</a>' + packetsFor(c.key).map(pk=>pkt(pk,true)).join(""); });
+  rows += own.map(pk=>pkt(pk,false)).join("");
   return '<nav class="u4-room-areas" id="sec-packets" aria-label="'+(es?"En este cuarto":"In this room")+'"><h2>'+(kids.length?(es?"Áreas y guías":"Areas and guides"):(es?"Guías de trabajo":"Instruction packets"))+'</h2><div class="u4-hm-group">'+rows+'</div></nav>';
 }
 function roomsBlock(){
@@ -1624,7 +1625,11 @@ function appendRailRoomNode(p, isChildSubpage){
   a.className = "rail-room-link " + (isRoom ? "rail-room" : (isChildSubpage ? "rail-leaf rail-area" : "rail-top"));
   a.textContent = pageLabel(p);
   rail.appendChild(a);
-  packetsFor(p.key).forEach(pk=>{ const pa=document.createElement("a"); pa.className="rail-packet-link "+(isChildSubpage?"rail-leaf2":"rail-leaf"); pa.href="#"+pk.key; pa.dataset.key=pk.key; pa.textContent=packetTitle(pk); rail.appendChild(pa); });
+  if (isChildSubpage || !isRoom) appendRailPackets(p, isChildSubpage);
+}
+// Guides for a room or area. A room's own guides come after its areas (see renderNav).
+function appendRailPackets(p, deep){
+  packetsFor(p.key).forEach(pk=>{ const pa=document.createElement("a"); pa.className="rail-packet-link "+(deep?"rail-leaf2":"rail-leaf"); pa.href="#"+pk.key; pa.dataset.key=pk.key; pa.textContent=packetTitle(pk); rail.appendChild(pa); });
 }
 function appendPlanningNav(){
   if (!rail) return;
@@ -1643,7 +1648,6 @@ function renderNav(){
   jump.innerHTML = "";
 
   // 1. Overview pages
-  const ovGrp = document.createElement("div"); ovGrp.className="grp"; ovGrp.textContent=groupLabel("Overview"); rail.appendChild(ovGrp);
   PAGES.filter(p=>p.group==="Overview").forEach(p=>{
     appendRailRoomNode(p, false);
     const o=document.createElement("option"); o.value=p.key; o.textContent=pageLabel(p); jump.appendChild(o); packetsFor(p.key).forEach(pk=>{ const po2=document.createElement("option"); po2.value=pk.key; po2.textContent="\u00a0\u00a0\u25A4 "+packetTitle(pk); jump.appendChild(po2); });
@@ -1654,8 +1658,8 @@ function renderNav(){
   prevHead.className = "grp rail-prev-head";
   prevHead.innerHTML = '<span>'+t("grpPreviews")+(PREVIEW_QUEUE.length?' ('+PREVIEW_QUEUE.length+')':'')+'</span>'
     + (PREVIEW_QUEUE.length ? '<button type="button" class="rail-prev-clear" data-clear-previews="1">'+t("clearAll")+'</button>' : '');
-  rail.appendChild(prevHead);
-  if (!PREVIEW_QUEUE.length) {
+  if (PREVIEW_QUEUE.length) rail.appendChild(prevHead);
+  if (false) {
     const empty = document.createElement("div");
     empty.className = "rail-prev-empty";
     empty.textContent = t("previewsEmpty");
@@ -1696,6 +1700,7 @@ function renderNav(){
     appendRailRoomNode(p, false);
     const childPages = PAGES.filter(c=>c.parent===p.key);
     childPages.forEach(cp=>appendRailRoomNode(cp, true));
+    appendRailPackets(p, false);
 
     const o=document.createElement("option"); o.value=p.key; o.textContent=pageLabel(p); jump.appendChild(o); packetsFor(p.key).forEach(pk=>{ const po2=document.createElement("option"); po2.value=pk.key; po2.textContent="\u00a0\u00a0\u25A4 "+packetTitle(pk); jump.appendChild(po2); });
     if (p.key === activeKey) {

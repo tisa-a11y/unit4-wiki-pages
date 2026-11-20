@@ -1,16 +1,222 @@
 [
-  {"key": "hood-test-hang", "room": "kitchen-oven-range", "titleEn": "Hood test-hang guide", "titleEs": "Guía: colgar la campana de prueba", "noteEn": "Blocking, vent, test-hang, 5 photos.", "noteEs": "Refuerzos, ducto, prueba, 5 fotos.", "docEn": "1GX4JjvGexhCi6ILkCzGva9Y0qDrWQfMc", "docEs": "181C6zPqPPVPTYFKljPXibbjZ0q_UKiRS", "aliases": ["zephyr", "zephyr guide", "hood guide", "hood mockup", "mock hookup", "campana", "guia de la campana"]},
-  {"key": "range-wall-plan", "room": "kitchen-oven-range", "titleEn": "Range wall plan", "titleEs": "Plan del muro de la estufa", "noteEn": "Full West wall drawings.", "noteEs": "Planos completos del muro Oeste.", "docEn": "1-aotDnDzAM9u5-qnHP4gSOi2UmVQJmaS", "docEs": "1ANxZ-9tJpXd0s_3Zz1PJ0jQgpOAKXvHS", "aliases": ["range wall", "west wall plan", "muro de la estufa"]},
-  {"key": "kitchen-plan", "room": "kitchen", "titleEn": "Kitchen plan", "titleEs": "Plan de la cocina", "noteEn": "Whole-kitchen layout.", "noteEs": "Distribución de toda la cocina.", "docEn": "1MtSmNvzrQnAP5mfQuA3w_1wGYD2sUMAJ", "docEs": "17quaLGnDuRcQyO1bmY8wzYKcyIleNA-L", "aliases": ["kitchen master plan", "plan de cocina"]},
-  {"key": "kitchen-electrical-drawings", "room": "kitchen-sink-north", "titleEn": "Kitchen electrical drawings", "titleEs": "Planos eléctricos de la cocina", "noteEn": "Outlets, switches, circuits.", "noteEs": "Contactos, apagadores, circuitos.", "docEn": "10D_YpGKMtzfC6yF6HBBVdLVfKFKu6JTG", "docEs": "1_fBtZtmTohFwIO4CdC7HeKvZGp8OnUOL", "aliases": ["kitchen electrical", "electrical drawings", "planos electricos"]},
-  {"key": "panel-wall-framing", "room": "electrical", "titleEn": "Panel wall framing", "titleEs": "Bastidor del muro del tablero", "noteEn": "Framing the old doorway for the panel (D04).", "noteEs": "Bastidor de la puerta antigua para el tablero (D04).", "docEn": "17_Qe5LTY6OOIiv4-KeQnA79FIm_M2yjO", "docEs": "1GsVm7VrFU897ax3yAxypfW5lowapbZKB", "aliases": ["d04", "d04 framing", "panel wall", "muro del tablero"]},
-  {"key": "bathroom-plan", "room": "bathroom", "titleEn": "Bathroom plan", "titleEs": "Plan del baño", "noteEn": "The plan given to John.", "noteEs": "El plan entregado a John.", "docEn": "1taIg19r1lPEztEDybHcrDh_H702WusVy", "docEs": "1NY9eaXvYK_oICJBK8FrMnkw5iCx5lVuQ", "aliases": ["bath plan", "plan del bano"]},
-  {"key": "bathroom-tile", "room": "bathroom", "titleEn": "Bathroom tile and surfaces", "titleEs": "Azulejo y acabados del baño", "noteEn": "Floor, walls, niches.", "noteEs": "Piso, muros, nichos.", "docEn": "1aYu9yWuRRFk8T5E3nQ6NDTHWpeRcrXgW", "docEs": "19BYgPOC5-RoRmaj-qidSJBTcEZoXR6tR", "aliases": ["bathroom surfaces", "bathroom tile", "azulejo del bano"]},
-  {"key": "bathroom-blocking", "room": "bathroom", "titleEn": "Bathroom blocking", "titleEs": "Refuerzos del baño", "noteEn": "Where the wood backing goes.", "noteEs": "Dónde van los refuerzos de madera.", "docEn": "1Tgb82HNVsMrTEe-W3OXmvuVHm4EL1JpO", "docEs": "1mAC3K0dQZUO9heLN9ac8YYR0Yl-2bE22", "aliases": ["blocking", "refuerzos del bano"]},
-  {"key": "attic-hatch-guide", "room": "attic-access", "titleEn": "Attic hatch guide", "titleEs": "Guía de la escotilla del ático", "noteEn": "8 pages: location, materials, cuts, sealing.", "noteEs": "8 páginas: ubicación, materiales, cortes, sellado.", "docEn": "2026-11-19_Attic-hatch-practical-guide_R5_EN", "docEs": "2026-11-19_Attic-hatch-practical-guide_R5_ES", "aliases": ["attic guide", "hatch guide", "r5", "escotilla"]},
-  {"key": "attic-opening-plan", "room": "attic-access", "titleEn": "Attic opening plan and checklist", "titleEs": "Plan y lista de la abertura del ático", "noteEn": "Step-by-step, both languages.", "noteEs": "Paso a paso, en los dos idiomas.", "docEn": "2026-11-19_Attic-Opening-Plan-Interactive", "docEs": "2026-11-19_Attic-Opening-Plan-Interactive", "aliases": ["attic opening", "attic plan", "abertura del atico"]},
-  {"key": "bedroom-trim-packet", "room": "bedroom", "titleEn": "Bedroom trim packet", "titleEs": "Paquete de molduras de la recámara", "noteEn": "Wall-by-wall moulding layout.", "noteEs": "Trazo de molduras muro por muro.", "docEn": "1jiGfPGxC122ZaippBSkCe4UBWUnMgJmQ", "docEs": "1WTPBOcSCPfVmSmrbXUWiCw29XUT49XYU", "aliases": ["bedroom packet", "trim packet", "molduras de la recamara"]},
-  {"key": "bedroom-trim-method", "room": "bedroom", "titleEn": "Bedroom trim: tape-fit method", "titleEs": "Molduras de la recámara: método con cinta", "noteEn": "How to lay out frames with tape.", "noteEs": "Cómo trazar los marcos con cinta.", "docEn": "2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_EN", "docEs": "2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_ES", "aliases": ["tape fit", "tape-fit", "metodo con cinta"]},
-  {"key": "bookcase-door-drawings", "room": "laundry", "titleEn": "Bookcase door drawings", "titleEs": "Planos de la puerta librero", "noteEn": "The hidden laundry door.", "noteEs": "La puerta oculta de la lavandería.", "docEn": "1fMS5FN0zmR0LcoTj8x7GJf7B335iJXcn", "docEs": "1RyQo3l4hc0yTdMbgdO01IdbA7e3JJ8J7", "aliases": ["murphy door", "murphy drawings", "bookcase door", "puerta librero", "puerta murphy"]},
-  {"key": "walls-trim-outlets", "room": "paint-floors", "titleEn": "Walls, trim and outlets plan", "titleEs": "Plan de muros, molduras y contactos", "noteEn": "Whole unit.", "noteEs": "Toda la unidad.", "docEn": "1j_ol20Uk3Tbp_gCbxcynK-AVLZ2dEMoO", "docEs": "2026-11-02_U4_Unidad_Muros-Molduras-Contactos_R1_ES", "aliases": ["walls plan", "trim plan", "whole unit plan", "muros y molduras"]}
+  {
+    "key": "hood-test-hang",
+    "room": "kitchen-oven-range",
+    "titleEn": "Hood test-hang guide",
+    "titleEs": "Guía: colgar la campana de prueba",
+    "noteEn": "Blocking, vent, test-hang, 5 photos.",
+    "noteEs": "Refuerzos, ducto, prueba, 5 fotos.",
+    "docEn": "1GX4JjvGexhCi6ILkCzGva9Y0qDrWQfMc",
+    "docEs": "181C6zPqPPVPTYFKljPXibbjZ0q_UKiRS",
+    "aliases": [
+      "zephyr",
+      "zephyr guide",
+      "hood guide",
+      "hood mockup",
+      "mock hookup",
+      "campana",
+      "guia de la campana"
+    ]
+  },
+  {
+    "key": "range-wall-plan",
+    "room": "kitchen-oven-range",
+    "titleEn": "Range wall plan",
+    "titleEs": "Plan del muro de la estufa",
+    "noteEn": "Full West wall drawings.",
+    "noteEs": "Planos completos del muro Oeste.",
+    "docEn": "1-aotDnDzAM9u5-qnHP4gSOi2UmVQJmaS",
+    "docEs": "1ANxZ-9tJpXd0s_3Zz1PJ0jQgpOAKXvHS",
+    "aliases": [
+      "range wall",
+      "west wall plan",
+      "muro de la estufa"
+    ]
+  },
+  {
+    "key": "kitchen-plan",
+    "room": "kitchen",
+    "titleEn": "Kitchen plan",
+    "titleEs": "Plan de la cocina",
+    "noteEn": "Whole-kitchen layout.",
+    "noteEs": "Distribución de toda la cocina.",
+    "docEn": "1MtSmNvzrQnAP5mfQuA3w_1wGYD2sUMAJ",
+    "docEs": "17quaLGnDuRcQyO1bmY8wzYKcyIleNA-L",
+    "aliases": [
+      "kitchen master plan",
+      "plan de cocina"
+    ],
+    "inMenu": false
+  },
+  {
+    "key": "kitchen-electrical-drawings",
+    "room": "kitchen-sink-north",
+    "titleEn": "Kitchen electrical drawings",
+    "titleEs": "Planos eléctricos de la cocina",
+    "noteEn": "Outlets, switches, circuits.",
+    "noteEs": "Contactos, apagadores, circuitos.",
+    "docEn": "10D_YpGKMtzfC6yF6HBBVdLVfKFKu6JTG",
+    "docEs": "1_fBtZtmTohFwIO4CdC7HeKvZGp8OnUOL",
+    "aliases": [
+      "kitchen electrical",
+      "electrical drawings",
+      "planos electricos"
+    ]
+  },
+  {
+    "key": "panel-wall-framing",
+    "room": "electrical",
+    "titleEn": "Panel wall framing",
+    "titleEs": "Bastidor del muro del tablero",
+    "noteEn": "Framing the old doorway for the panel (D04).",
+    "noteEs": "Bastidor de la puerta antigua para el tablero (D04).",
+    "docEn": "17_Qe5LTY6OOIiv4-KeQnA79FIm_M2yjO",
+    "docEs": "1GsVm7VrFU897ax3yAxypfW5lowapbZKB",
+    "aliases": [
+      "d04",
+      "d04 framing",
+      "panel wall",
+      "muro del tablero"
+    ]
+  },
+  {
+    "key": "bathroom-plan",
+    "room": "bathroom",
+    "titleEn": "Bathroom plan",
+    "titleEs": "Plan del baño",
+    "noteEn": "The plan given to John.",
+    "noteEs": "El plan entregado a John.",
+    "docEn": "1taIg19r1lPEztEDybHcrDh_H702WusVy",
+    "docEs": "1NY9eaXvYK_oICJBK8FrMnkw5iCx5lVuQ",
+    "aliases": [
+      "bath plan",
+      "plan del bano"
+    ]
+  },
+  {
+    "key": "bathroom-tile",
+    "room": "bathroom",
+    "titleEn": "Bathroom tile and surfaces",
+    "titleEs": "Azulejo y acabados del baño",
+    "noteEn": "Floor, walls, niches.",
+    "noteEs": "Piso, muros, nichos.",
+    "docEn": "1aYu9yWuRRFk8T5E3nQ6NDTHWpeRcrXgW",
+    "docEs": "19BYgPOC5-RoRmaj-qidSJBTcEZoXR6tR",
+    "aliases": [
+      "bathroom surfaces",
+      "bathroom tile",
+      "azulejo del bano"
+    ]
+  },
+  {
+    "key": "bathroom-blocking",
+    "room": "bathroom",
+    "titleEn": "Bathroom blocking",
+    "titleEs": "Refuerzos del baño",
+    "noteEn": "Where the wood backing goes.",
+    "noteEs": "Dónde van los refuerzos de madera.",
+    "docEn": "1Tgb82HNVsMrTEe-W3OXmvuVHm4EL1JpO",
+    "docEs": "1mAC3K0dQZUO9heLN9ac8YYR0Yl-2bE22",
+    "aliases": [
+      "blocking",
+      "refuerzos del bano"
+    ],
+    "inMenu": false
+  },
+  {
+    "key": "attic-hatch-guide",
+    "room": "attic-access",
+    "titleEn": "Attic hatch guide",
+    "titleEs": "Guía de la escotilla del ático",
+    "noteEn": "8 pages: location, materials, cuts, sealing.",
+    "noteEs": "8 páginas: ubicación, materiales, cortes, sellado.",
+    "docEn": "2026-11-19_Attic-hatch-practical-guide_R5_EN",
+    "docEs": "2026-11-19_Attic-hatch-practical-guide_R5_ES",
+    "aliases": [
+      "attic guide",
+      "hatch guide",
+      "r5",
+      "escotilla"
+    ]
+  },
+  {
+    "key": "attic-opening-plan",
+    "room": "attic-access",
+    "titleEn": "Attic opening plan and checklist",
+    "titleEs": "Plan y lista de la abertura del ático",
+    "noteEn": "Step-by-step, both languages.",
+    "noteEs": "Paso a paso, en los dos idiomas.",
+    "docEn": "2026-11-19_Attic-Opening-Plan-Interactive",
+    "docEs": "2026-11-19_Attic-Opening-Plan-Interactive",
+    "aliases": [
+      "attic opening",
+      "attic plan",
+      "abertura del atico"
+    ]
+  },
+  {
+    "key": "bedroom-trim-packet",
+    "room": "bedroom",
+    "titleEn": "Bedroom trim packet",
+    "titleEs": "Paquete de molduras de la recámara",
+    "noteEn": "Wall-by-wall moulding layout.",
+    "noteEs": "Trazo de molduras muro por muro.",
+    "docEn": "1jiGfPGxC122ZaippBSkCe4UBWUnMgJmQ",
+    "docEs": "1WTPBOcSCPfVmSmrbXUWiCw29XUT49XYU",
+    "aliases": [
+      "bedroom packet",
+      "trim packet",
+      "molduras de la recamara"
+    ],
+    "inMenu": false
+  },
+  {
+    "key": "bedroom-trim-method",
+    "room": "bedroom",
+    "titleEn": "Bedroom trim: tape-fit method",
+    "titleEs": "Molduras de la recámara: método con cinta",
+    "noteEn": "How to lay out frames with tape.",
+    "noteEs": "Cómo trazar los marcos con cinta.",
+    "docEn": "2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_EN",
+    "docEs": "2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_ES",
+    "aliases": [
+      "tape fit",
+      "tape-fit",
+      "metodo con cinta"
+    ]
+  },
+  {
+    "key": "bookcase-door-drawings",
+    "room": "laundry",
+    "titleEn": "Bookcase door drawings",
+    "titleEs": "Planos de la puerta librero",
+    "noteEn": "The hidden laundry door.",
+    "noteEs": "La puerta oculta de la lavandería.",
+    "docEn": "1fMS5FN0zmR0LcoTj8x7GJf7B335iJXcn",
+    "docEs": "1RyQo3l4hc0yTdMbgdO01IdbA7e3JJ8J7",
+    "aliases": [
+      "murphy door",
+      "murphy drawings",
+      "bookcase door",
+      "puerta librero",
+      "puerta murphy"
+    ]
+  },
+  {
+    "key": "walls-trim-outlets",
+    "room": "paint-floors",
+    "titleEn": "Walls, trim and outlets plan",
+    "titleEs": "Plan de muros, molduras y contactos",
+    "noteEn": "Whole unit.",
+    "noteEs": "Toda la unidad.",
+    "docEn": "1j_ol20Uk3Tbp_gCbxcynK-AVLZ2dEMoO",
+    "docEs": "2026-11-02_U4_Unidad_Muros-Molduras-Contactos_R1_ES",
+    "aliases": [
+      "walls plan",
+      "trim plan",
+      "whole unit plan",
+      "muros y molduras"
+    ],
+    "inMenu": false
+  }
 ]
