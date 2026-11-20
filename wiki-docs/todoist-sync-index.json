@@ -1,6 +1,6 @@
 {
   "schema": "unit4-todoist-wiki-sync-index-v1",
-  "updatedAt": "2026-11-20T06:06:00+00:00",
+  "updatedAt": "2026-11-20T06:22:00+00:00",
   "todoistBoard": {
     "name": "Full 1231 11th Avenue Remodel",
     "projectId": "6hcMQpGhXWprg6m7",
@@ -488,41 +488,36 @@
       "title": "HVAC",
       "esTitle": "Climatización",
       "driveChecklistId": "1dYEurki2VQ8Zd5yxkRA4UzVL2uGJwMdG",
-      "note": "High-level NEXT (#5153-3) & crew coordination checklist. Broader HVAC installation remains paused until GoGreen financing approval, Mon Nov 23 (2–4 p.m. PT) planning walkthrough, and crew attic prep on HVAC → Attic (#attic-access) are complete.",
-      "noteEs": "Lista general de coordinación entre NEXT (#5153-3) y nuestra cuadrilla. La instalación general de HVAC sigue en pausa hasta contar con aprobación de GoGreen, la visita del lunes 23 nov (2–4 p.m. PT) y la preparación del ático en HVAC → Ático (#attic-access).",
+      "note": "Macro sequence (5 general milestones). Detailed 7-step attic hatch, enclosure & walkway checklist lives on HVAC → Attic (#attic-access).",
+      "noteEs": "Secuencia general (5 etapas principales). La lista detallada de 7 pasos de escotilla, envolvente y pasarela vive en HVAC → Ático (#attic-access).",
       "items": [
         {
           "done": true,
-          "en": "Combined HVAC + 80A Subpanel Estimate #5153-3 signed (Nov 19, 2026); GoGreen financing application submitted",
-          "es": "Presupuesto combinado de HVAC + Subpanel de 80A #5153-3 firmado (19 nov 2026); solicitud de financiamiento GoGreen enviada",
+          "en": "Combined HVAC + 80A Subpanel scope (#5153-3) & settled 24\"×36\" finished-clear attic hatch basis defined",
+          "es": "Alcance combinado de HVAC + Subpanel de 80A (#5153-3) y base fija de escotilla de 24\"×36\" libres terminadas definidos",
           "todoistTaskIds": [],
           "checklistPath": "hvac/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Mon Nov 23 (2:00–4:00 p.m. PT) planning walkthrough with NEXT (Serge Kalitov + Alex): confirm furnace placement, exhaust vent route minimizing roof penetrations, attic access route, and reconcile 80A/#4 feeder & NEXT-supplied Eaton subpanel scope against earlier 100A plan & onsite Eaton BRP20L125G box",
-          "es": "Lunes 23 nov (2:00–4:00 p.m. PT) visita de planeación con NEXT (Serge Kalitov y Alex): confirmar ubicación de caldera, ruta de escape minimizando perforaciones en techo, ruta de acceso al ático y conciliar alimentador de 80A/#4 y subpanel Eaton de NEXT frente al plan previo de 100A y la caja Eaton BRP20L125G en obra",
+          "en": "Phase 1 — Before NEXT (Our Crew): Keep temporary bedroom-closet ceiling open (6j3j3pXFrFWhH2w7), upload 4 daylight hatch-site photos (6j3RvWmJ329qPCc7), frame D04 subpanel bay (hold closure), and fix active roof leaks",
+          "es": "Fase 1 — Antes de NEXT (Nuestra cuadrilla): Mantener abierto el techo temporal del clóset (6j3j3pXFrFWhH2w7), subir 4 fotos de día del sitio de escotilla (6j3RvWmJ329qPCc7), enmarcar vano D04 (en espera de cierre) y reparar goteras activas",
+          "todoistTaskIds": [
+            "6j3RvWmJ329qPCc7"
+          ],
+          "checklistPath": "hvac/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Mon Nov 23 (2:00–4:00 p.m. PT) Walkthrough (Serge Kalitov + Alex): Confirm furnace spot, exhaust route, permanent 24\"×36\" hallway hatch location, D04 feeder entry & attic light wiring",
+          "es": "Visita Lunes 23 nov (2:00–4:00 p.m. PT) (Serge Kalitov y Alex): Confirmar ubicación de caldera, ruta de escape, escotilla permanente 24\"×36\", entrada del alimentador D04 y cableado de luz del ático",
           "todoistTaskIds": [],
           "checklistPath": "hvac/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Confirm GoGreen / CalCoast financing approval before scheduling physical HVAC installation",
-          "es": "Confirmar aprobación de financiamiento GoGreen / CalCoast antes de programar la instalación física de HVAC",
-          "todoistTaskIds": [],
-          "checklistPath": "hvac/CHECKLIST.md"
-        },
-        {
-          "done": false,
-          "en": "Resolve active main-roof / attic water leak before enclosing or insulating attic access",
-          "es": "Reparar filtración activa de agua en techo principal / ático antes de cerrar o aislar el acceso al ático",
-          "todoistTaskIds": [],
-          "checklistPath": "hvac/CHECKLIST.md"
-        },
-        {
-          "done": false,
-          "en": "Complete crew attic prep prerequisites on HVAC → Attic (#attic-access — 7 steps assigned to John Speer) before NEXT install date — 6j3Rf8FVhMVQ7vQf",
-          "es": "Completar los requisitos de preparación del ático de nuestra cuadrilla en HVAC → Ático (#attic-access — 7 pasos asignados a John Speer) antes de la fecha de instalación de NEXT — 6j3Rf8FVhMVQ7vQf",
+          "en": "Phase 2 — With NEXT: Build permanent 24\"×36\" hatch, 24\" walkway (≤ 20 ft), 30\"×30\" platform & switched attic light/GFCI (#attic-access — 6j3Rf8FVhMVQ7vQf); NEXT installs furnace, ducts, 80A feeder/Eaton subpanel & pulls City permits",
+          "es": "Fase 2 — Con NEXT: Construir escotilla 24\"×36\", pasarela de 24\" (≤ 20 pies), plataforma 30\"×30\" y luz/GFCI (#attic-access — 6j3Rf8FVhMVQ7vQf); NEXT instala caldera, ductos, alimentador 80A/subpanel Eaton y permisos municipales",
           "todoistTaskIds": [
             "6j3Rf8FVhMVQ7vQf"
           ],
@@ -530,11 +525,9 @@
         },
         {
           "done": false,
-          "en": "Coordinate NEXT HVAC + Electrical Subpanel permits, install, HERS test & City inspections; follow with crew drywall/stucco/cosmetic restoration (excluded from NEXT #5153-3) — 6hvj3CgXpVqrJgvf",
-          "es": "Coordinar permisos de HVAC y Subpanel Eléctrico de NEXT, instalación, prueba HERS e inspecciones de la Ciudad; continuar con reparación de tablaroca/estuco/acabados por nuestra cuadrilla (excluidos de NEXT #5153-3) — 6hvj3CgXpVqrJgvf",
-          "todoistTaskIds": [
-            "6hvj3CgXpVqrJgvf"
-          ],
+          "en": "Phase 3 — After NEXT: Pass HERS test & City HVAC/Electrical inspections, then close temporary bedroom closet ceiling (6j3Rf89g8M6hPPx7) and complete crew drywall/patch/paint finish",
+          "es": "Fase 3 — Después de NEXT: Aprobar prueba HERS e inspecciones municipales de HVAC/Electricidad, luego cerrar techo temporal del clóset (6j3Rf89g8M6hPPx7) y terminar tablaroca, resanes y pintura",
+          "todoistTaskIds": [],
           "checklistPath": "hvac/CHECKLIST.md"
         }
       ]
@@ -608,6 +601,55 @@
             "6j3Rf89g8M6hPPx7"
           ],
           "checklistPath": "attic-access/CHECKLIST.md"
+        }
+      ]
+    },
+    {
+      "key": "kitchen-range-hood",
+      "title": "Kitchen → Range & Hood",
+      "esTitle": "Cocina → Estufa y campana",
+      "driveChecklistId": null,
+      "note": "Pre-drywall range hood & gas range sequence (5 steps). Friday Nov 20 P1 is a dry mock-hang and duct/gap check only — no upper cabinets at hood.",
+      "noteEs": "Secuencia previa a tablaroca para campana y estufa (5 pasos). El P1 del viernes 20 nov es solo presentación en seco y revisión de ducto/brecha — sin gabinetes altos junto a la campana.",
+      "items": [
+        {
+          "done": true,
+          "en": "Viking 30\" gas range (VGCC5304BSS) and Zephyr Savona 30\" chimney hood (ZSA-E30AS) on hand; OEM manual & spec sheet loaded",
+          "es": "Estufa de gas Viking 30\" (VGCC5304BSS) y campana Zephyr Savona 30\" (ZSA-E30AS) en obra; manual y ficha técnica OEM cargados",
+          "todoistTaskIds": [],
+          "checklistPath": "kitchen/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Friday Nov 20 P1 (John): Install solid wood stud blocking on West range wall centered on 42\" alcove (OEM Line B bracket screws 9-9/16\" above hood bottom, 9-27/32\" spread) — 6j3RXQ97qmMCGhQf",
+          "es": "Viernes 20 nov P1 (John): Instalar bloqueo sólido de madera en muro oeste centrado en el nicho de 42\" (tornillos Línea B a 9-9/16\" sobre la base, separación de 9-27/32\") — 6j3RXQ97qmMCGhQf",
+          "todoistTaskIds": [
+            "6j3RXQ97qmMCGhQf"
+          ],
+          "checklistPath": "kitchen/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Friday Nov 20 P1 (John): Mock-hang Zephyr ZSA-E30AS at 28\"–36\" above range (64\"–72\" AFF) with NO upper cabinets, and measure/photograph the 4-1/2\"–13-1/2\" ceiling gap at the 121-1/2\" ceiling — 6j3RXQ97qmMCGhQf",
+          "es": "Viernes 20 nov P1 (John): Presentar campana Zephyr ZSA-E30AS a 28\"–36\" sobre estufa (64\"–72\" NPT) SIN gabinetes altos, y medir/fotografiar la brecha de 4-1/2\"–13-1/2\" en el techo de 121-1/2\" — 6j3RXQ97qmMCGhQf",
+          "todoistTaskIds": [
+            "6j3RXQ97qmMCGhQf"
+          ],
+          "checklistPath": "kitchen/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Inspect existing ceiling exhaust duct route (6\" rigid metal vertical duct required; verify separately from unidentified vent 6hxQ5GjHm2QhrxVf & deferred roof ducts 6j2X5f4W65jvCmpf)",
+          "es": "Inspeccionar ruta del ducto de escape en techo (requiere ducto metálico rígido vertical de 6\"; verificar por separado de ventilación 6hxQ5GjHm2QhrxVf y ductos en azotea 6j2X5f4W65jvCmpf)",
+          "todoistTaskIds": [],
+          "checklistPath": "kitchen/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "After layout & electrical release: run dedicated 120V / 15A–20A hardwired hood circuit (3.4A max) and 1/2\" range gas + 120V cord, tile range wall to ceiling, and complete final hood/range install",
+          "es": "Tras liberar trazado y electricidad: correr circuito dedicado 120V / 15A–20A para campana (3.4A máx.) y gas 1/2\" + contacto 120V de estufa, instalar azulejo hasta el techo y montaje final",
+          "todoistTaskIds": [],
+          "checklistPath": "kitchen/CHECKLIST.md"
         }
       ]
     }
