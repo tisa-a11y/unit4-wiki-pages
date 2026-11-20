@@ -1,6 +1,6 @@
 {
   "schema": "unit4-todoist-wiki-sync-index-v1",
-  "updatedAt": "2026-11-20T03:09:53.703586+00:00",
+  "updatedAt": "2026-11-20T03:38:00+00:00",
   "todoistBoard": {
     "name": "Full 1231 11th Avenue Remodel",
     "projectId": "6hcMQpGhXWprg6m7",
@@ -28,8 +28,8 @@
   },
   "summary": {
     "roomCount": 9,
-    "checklistItemCount": 121,
-    "uniqueLinkedTodoistCards": 102
+    "checklistItemCount": 109,
+    "uniqueLinkedTodoistCards": 105
   },
   "rooms": [
     {
@@ -3573,6 +3573,7 @@
         "Construir acceso permanente de pasillo con paso libre terminado de 24 × 36 pulgadas; sujeto a ubicación y sistema revisados"
       ],
       "governingDocs": [
+        "hvac/ATTIC-OPENING-PLAN.md",
         "hvac/CHECKLIST.md",
         "hvac/SPEC.md"
       ]
@@ -3647,6 +3648,59 @@
       "governingDocs": [
         "hvac/CHECKLIST.md",
         "hvac/SPEC.md"
+      ]
+    },
+    "6j3j3pQ9cxVj3xP7": {
+      "taskId": "6j3j3pQ9cxVj3xP7",
+      "url": "https://app.todoist.com/app/task/6j3j3pQ9cxVj3xP7",
+      "rooms": [
+        "bathroom"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "BLOCKER BEFORE WALL TILE: Install bathroom window trim/casing over HardieBoard (John Speer)"
+      ],
+      "wikiItemsEs": [
+        "BLOQUEO ANTES DEL AZULEJO: Instalar moldura original de ventana sobre HardieBoard (John Speer)"
+      ],
+      "governingDocs": [
+        "bathroom/CHECKLIST.md"
+      ]
+    },
+    "6j3j3pXFrFWhH2w7": {
+      "taskId": "6j3j3pXFrFWhH2w7",
+      "url": "https://app.todoist.com/app/task/6j3j3pXFrFWhH2w7",
+      "rooms": [
+        "hvac"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Step 1: Verify temporary bedroom closet opening (dimensions, framing & HVAC passage) — John Speer"
+      ],
+      "wikiItemsEs": [
+        "Paso 1: Verificar abertura temporal del clóset de recámara (medidas, estructura y paso HVAC) — John Speer"
+      ],
+      "governingDocs": [
+        "hvac/ATTIC-OPENING-PLAN.md",
+        "hvac/CHECKLIST.md"
+      ]
+    },
+    "6j3j3pqfM4GC53Qf": {
+      "taskId": "6j3j3pqfM4GC53Qf",
+      "url": "https://app.todoist.com/app/task/6j3j3pqfM4GC53Qf",
+      "rooms": [
+        "hvac"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Step 5: Build 30 × 30 in level attic furnace service platform (no vibration pads needed) — John Speer"
+      ],
+      "wikiItemsEs": [
+        "Paso 5: Construir plataforma nivelada de 30 × 30 pulg. (sin almohadillas antivibración) — John Speer"
+      ],
+      "governingDocs": [
+        "hvac/ATTIC-OPENING-PLAN.md",
+        "hvac/CHECKLIST.md"
       ]
     }
   },
