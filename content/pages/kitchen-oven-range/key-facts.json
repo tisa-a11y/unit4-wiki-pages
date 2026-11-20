@@ -6,10 +6,10 @@
     "vEs": "Base a 66\"–72\" del piso terminado (hoy subpiso: sumar ~3/4\"; prueba 67\"–68\")"
   },
   {
-    "kEn": "Wood backing",
-    "kEs": "Refuerzos",
-    "vEn": "Within 30\" hood width · 68\"–86\" & 104\"–121-1/2\" (+ ~3/4\" from bare subfloor)",
-    "vEs": "Dentro de 30\" de campana · 68\"–86\" y 104\"–121-1/2\" (+ ~3/4\" desde subpiso)"
+    "kEn": "Backing & wall",
+    "kEs": "Refuerzos y muro",
+    "vEn": "Within 30\" hood width · 68\"–86\" & 104\"–121-1/2\" (+ ~3/4\" subfloor) · 1/2\" drywall + 1/2\" HardieBacker (NO 3/16\" shims)",
+    "vEs": "Dentro de 30\" de campana · 68\"–86\" y 104\"–121-1/2\" (+ ~3/4\" subpiso) · tablaroca 1/2\" + HardieBacker 1/2\" (SIN calzas 3/16\")"
   },
   {
     "kEn": "Power & duct",
@@ -18,9 +18,9 @@
     "vEs": "Conexión directa ~83\"–86\" (caja 2\"×3\", +1\" al frente) · Ducto exclusivo cubo izq. ≥ 6\" (cuadrilla, no NEXT HVAC)"
   },
   {
-    "kEn": "Tile edges (zero metal)",
-    "kEs": "Orillas de azulejo (cero metal)",
-    "vEn": "NO metal/Schluter · North: silicone 90° corner · South: bullnose, pencil, painted wood trim, or glazed edge (no 45° miter)",
-    "vEs": "CERO metal/Schluter · Norte: esquina 90° solo silicón · Sur: bullnose, lápiz, madera pintada o canto vidriado (sin 45°)"
+    "kEn": "Tile & edges (TBD, zero metal)",
+    "kEs": "Azulejo y orillas (por definir, cero metal)",
+    "vEn": "Tile brand TBD · NO metal/Schluter · North: silicone 90° corner · South: bullnose, pencil, painted wood trim, or glazed edge (no 45° miter)",
+    "vEs": "Marca de azulejo por definir · CERO metal/Schluter · Norte: esquina 90° solo silicón · Sur: bullnose, lápiz, madera pintada o canto vidriado (sin 45°)"
   }
 ]

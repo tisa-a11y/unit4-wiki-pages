@@ -11,7 +11,8 @@ Cocina en L. Gabinetes bajos verde oscuro, herrajes de latón, cubiertas claras.
 - **Muro Este:** tramo de 88" que termina en el refrigerador.
 - **Muro Norte:** paso al pasillo, tres apagadores, muro del tablero eléctrico.
 - **Piso (subpiso al descubierto hoy):** La Unidad 4 está actualmente en **subpiso sin piso terminado** — sumar el espesor estimado del piso terminado (unos 3/4", por confirmar) a cada altura referida al piso al medir desde el subpiso.
-- **Orillas de azulejo en muro de estufa (CERO metal / Schluter):** Nunca usar moldura metálica ni Schluter en el azulejo de la Unidad 4. El borde derecho (Norte) llega al muro Norte (esquina interior a 90° — solo silicón, cero moldura); el borde izquierdo (Sur) termina contra muro pintado liso sin retorno de azulejo — **solo 4 opciones sin metal**: Bullnose cerámico, Lápiz / Cuarto de caña cerámico, Moldura de madera pintada estilo Edwardian o Azulejo con canto vidriado de fábrica (sin corte inglete a 45°).
+- **Azulejo y orillas en muro de estufa (marca por definir, CERO metal / Schluter):** La marca y selección de azulejo de cocina está **por definir (TBD)** (sin marca predeterminada). Nunca usar moldura metálica ni Schluter en el azulejo de la Unidad 4. El borde derecho (Norte) llega al muro Norte (esquina interior a 90° — solo silicón, cero moldura); el borde izquierdo (Sur) termina contra muro pintado liso sin retorno de azulejo — **solo 4 opciones sin metal**: Bullnose cerámico, Lápiz / Cuarto de caña cerámico, Moldura de madera pintada estilo Edwardian o Azulejo con canto vidriado de fábrica (sin corte inglete a 45°).
+- **Tablaroca y respaldo (SOLO tablaroca de 1/2" — SIN calzas de 3/16"):** La Unidad 4 SOLO compró **tablaroca de 1/2"** (NO de 5/8"); el HardieBacker 500 de 1/2" (0.42") se une a la tablaroca de 1/2" (0.50") **SIN calzas de 3/16"** (solo ~1/16" de pasta/desvanecido en la junta).
 
 ## Todavía no hacer
 - No fijar el gabinete de la tarja.

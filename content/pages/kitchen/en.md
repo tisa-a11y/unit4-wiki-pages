@@ -11,7 +11,8 @@ L-shaped kitchen. Dark green lower cabinets, brass hardware, light counters. Til
 - **East wall:** 88" run ending at the refrigerator.
 - **North wall:** hall opening, three light switches, electrical panel wall.
 - **Floor (bare subfloor now):** Unit 4 is currently on **bare subfloor (finished floor not installed yet)** — add the finished-floor thickness allowance (about 3/4", to confirm) to every floor-referenced height when measuring from bare subfloor.
-- **Range wall tile edges (ZERO metal / Schluter):** Never use metal edge trim or Schluter anywhere on Unit 4 tile. Right (North) edge dies into the North wall (inside 90° corner — silicone only, zero trim); Left (South) edge ends on a painted flat return wall with no tiled return — **4 zero-metal options only**: Ceramic Bullnose, Ceramic Pencil / Quarter-Round, Painted Edwardian Wood Trim, or Factory Glazed-Edge Tile (no 45° miter).
+- **Range wall tile edges (TBD brand, ZERO metal / Schluter):** Kitchen tile brand/selection is TBD (no hardcoded default). Never use metal edge trim or Schluter anywhere on Unit 4 tile. Right (North) edge dies into the North wall (inside 90° corner — silicone only, zero trim); Left (South) edge ends on a painted flat return wall with no tiled return — **4 zero-metal options only**: Ceramic Bullnose, Ceramic Pencil / Quarter-Round, Painted Edwardian Wood Trim, or Factory Glazed-Edge Tile (no 45° miter).
+- **Drywall &amp; backer (1/2" drywall ONLY — NO 3/16" shims):** Unit 4 ONLY purchased **1/2" drywall** (NOT 5/8"); 1/2" HardieBacker 500 (0.42") meets 1/2" drywall (0.50") with **NO 3/16" stud shims** (only ~1/16" feather/skim at transition).
 
 ## Do not do yet
 - Do not set the sink cabinet.
