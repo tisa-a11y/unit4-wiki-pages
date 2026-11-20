@@ -313,7 +313,7 @@ nav.rail a.sub .k,.docs .k{display:block;font-family:var(--mono);font-size:10.5p
 
 /* U4_R5_V9_COMPLETE_UI_CSS_START */
 /* Hide redundant legacy voice pills and broken floating 'Send a note' pill/panel */
-main .bar .u4-voice-pill,main .bar .u4-voice-status,.mobile .u4-voice-pill,.mobile .u4-voice-status,#waVoiceMicPill,#waVoiceStatus,#qpBtn,.qp-fab,#qpPanel,.qp-panel{display:none!important;visibility:hidden!important;pointer-events:none!important}
+main .bar .u4-voice-pill,main .bar .u4-voice-status,.mobile .u4-voice-pill,.mobile .u4-voice-status,main .bar > #waVoiceMicPill,main .bar > #waVoiceStatus,.mobile > #waVoiceMicPill,.mobile > #waVoiceStatus,#qpBtn,.qp-fab,#qpPanel,.qp-panel{display:none!important;visibility:hidden!important;pointer-events:none!important}
 main{padding-bottom:64px!important}
 
 /* Inline title + AI Helper row right next to 'Unit 4 Wiki — Home' and room headings (never blocking screen) */
@@ -604,8 +604,15 @@ main > .bar button.small,.u4-rjump-pill,.dtabs button{
 
 
 /* U4_R5_V7_LIVE_ORB_MUTE_RENDERS_CSS_START */
-.u4-ai-dock{position:fixed;top:16px;right:20px;z-index:95;display:flex;align-items:center;gap:10px;pointer-events:none;font-family:var(--body)}
-@media (max-width:760px){.u4-ai-dock{top:calc(env(safe-area-inset-top,0px) + 6px);right:10px;gap:7px}}
+.shade{z-index:98}
+@media (max-width:760px){nav.rail.open{z-index:99}}
+main > .bar{align-items:center;justify-content:flex-start}
+.u4-ai-dock{position:relative;z-index:25;display:inline-flex;align-items:center;gap:10px;margin-left:auto;pointer-events:auto;font-family:var(--body)}
+.u4-ai-dock[data-open="false"]:not([data-live="off"]){position:fixed;top:16px;right:20px;z-index:95;pointer-events:none}
+@media (max-width:760px){
+  .u4-ai-dock{gap:7px}
+  .u4-ai-dock[data-open="false"]:not([data-live="off"]){top:calc(env(safe-area-inset-top,0px) + 64px);right:10px;z-index:25}
+}
 @keyframes u4HelperPoint{0%,100%{transform:translateX(0)}50%{transform:translateX(7px)}}
 @keyframes u4LiveAura{0%{box-shadow:0 0 0 0 rgba(16,185,129,.48),0 6px 20px rgba(0,0,0,.28)}70%{box-shadow:0 0 0 13px rgba(16,185,129,0),0 6px 20px rgba(0,0,0,.28)}100%{box-shadow:0 0 0 0 rgba(16,185,129,0),0 6px 20px rgba(0,0,0,.28)}}
 @keyframes u4EqBar{0%,100%{transform:scaleY(.38)}50%{transform:scaleY(1.15)}}
@@ -5467,7 +5474,8 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
           '<span id="u4AiStateBadge" class="u4-ai-orb-pill">OFF</span>' +
         '</button>';
 
-      document.body.appendChild(dock);
+      var hostBar = document.querySelector("main > .bar") || document.querySelector("main") || document.body;
+      hostBar.appendChild(dock);
 
       var dialog = document.createElement("aside");
       dialog.id = "u4VoiceChatDialog";
