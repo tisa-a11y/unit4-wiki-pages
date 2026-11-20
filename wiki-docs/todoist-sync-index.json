@@ -1,6 +1,6 @@
 {
   "schema": "unit4-todoist-wiki-sync-index-v1",
-  "updatedAt": "2026-11-20T03:38:00+00:00",
+  "updatedAt": "2026-11-20T04:25:00+00:00",
   "todoistBoard": {
     "name": "Full 1231 11th Avenue Remodel",
     "projectId": "6hcMQpGhXWprg6m7",
@@ -27,8 +27,8 @@
     ]
   },
   "summary": {
-    "roomCount": 9,
-    "checklistItemCount": 109,
+    "roomCount": 10,
+    "checklistItemCount": 131,
     "uniqueLinkedTodoistCards": 105
   },
   "rooms": [
@@ -1653,18 +1653,30 @@
       "title": "HVAC",
       "esTitle": "Climatización",
       "driveChecklistId": "1dYEurki2VQ8Zd5yxkRA4UzVL2uGJwMdG",
-      "note": "Hatch planning accepted/in progress; John provides four bounded site checks. Retain closet access until low-voltage AND permanent hatch. Broader installation remains paused. Model and 24 × 36 finished-clear size already selected; recover the existing citation, do not reselect. R4 proposed practical guide is current. Before full ceiling cut, confirm ceiling-compatible assembly AND site-specific supporting-opening/joist plan; wood cover and 27.5×39.5 cut are not approved site decisions.",
-      "noteEs": "Plan del acceso aceptado/en curso; John confirma cuatro puntos en obra. Conservar clóset hasta bajo voltaje Y acceso permanente. Instalación general en pausa. Modelo y paso libre de 24 × 36 ya elegidos; recuperar cita existente, sin volver a elegir. Guía práctica R4 propuesta vigente. Antes de cortar todo el techo, confirmar sistema compatible Y plan específico de abertura/apoyo/viguetas; tapa de madera y corte 27.5×39.5 no son decisiones de obra aprobadas.",
+      "note": "Attic access details, enclosure rules, and the 7-step opening checklist now live on #attic-access (Attic Access submenu) with the R5 Practical Guide and interactive plan (./wiki-docs/attic-opening-plan.html). Broader HVAC installation remains paused. Model and 24 × 36 finished-clear size are settled. Before full ceiling cut, confirm ceiling fire-rating compatibility AND site-specific supporting-opening/joist plan.",
+      "noteEs": "Los detalles del acceso al ático, las reglas de envolvente y la lista de 7 pasos ahora viven en #attic-access (submenú Acceso al ático) con la Guía Práctica R5 y el plan interactivo (./wiki-docs/attic-opening-plan.html). La instalación general de HVAC sigue en pausa. El modelo y el paso libre de 24 × 36 ya están decididos. Antes de cortar todo el techo, confirmar clasificación contra fuego del techo Y plan específico de abertura/apoyo/viguetas.",
       "items": [
+        {
+          "id": "hvac-attic-access-link",
+          "done": false,
+          "en": "See Attic Access (#attic-access) & R5 Practical Guide for Special Notes: Attic Enclosure, 24×36 hatch specs, and interactive checklist (./wiki-docs/attic-opening-plan.html)",
+          "es": "Ver Acceso al ático (#attic-access) y Guía Práctica R5 para Notas especiales: envolvente del ático, medidas 24×36 y lista interactiva (./wiki-docs/attic-opening-plan.html)",
+          "todoistTaskIds": [],
+          "todoistUrls": [],
+          "sourcePath": "attic/SPEC.md",
+          "checklistPath": "attic/CHECKLIST.md"
+        },
         {
           "id": "hvac-nov19-3d2d8a04b9",
           "done": false,
-          "en": "Plans & Measurements — hatch plan accepted/in progress; John supplies four labeled site checks: location/context, 24 × 36 finished-clear markout/offsets, attic framing/obstructions, and furnace route/headroom/turning. Keep closet access until low-voltage cable AND permanent hatch; no cutting release",
-          "es": "Planes y Medidas — plan de acceso aceptado/en curso; John aporta cuatro comprobaciones rotuladas: lugar/contexto, trazo libre terminado de 24 × 36 con distancias, estructura/obstáculos arriba y recorrido/altura/giro del equipo. Conservar acceso del clóset hasta cable de bajo voltaje Y acceso permanente; sin autorización de cortes",
+          "en": "Step 1–2 (John): Verify temp bedroom closet opening (6j3j3pXFrFWhH2w7) + 4 labeled hatch photos, ceiling fire-rating check, bay B, and ≤ 20 ft route (6j3RvWmJ329qPCc7)",
+          "es": "Pasos 1–2 (John): Verificar abertura temporal del clóset (6j3j3pXFrFWhH2w7) + 4 fotos rotuladas, resistencia al fuego del techo, claro B y ruta ≤ 20 pies (6j3RvWmJ329qPCc7)",
           "todoistTaskIds": [
+            "6j3j3pXFrFWhH2w7",
             "6j3RvWmJ329qPCc7"
           ],
           "todoistUrls": [
+            "https://app.todoist.com/app/task/6j3j3pXFrFWhH2w7",
             "https://app.todoist.com/app/task/6j3RvWmJ329qPCc7"
           ],
           "sourcePath": "hvac/SPEC.md",
@@ -1673,8 +1685,8 @@
         {
           "id": "hvac-nov19-dbf792a242",
           "done": false,
-          "en": "Build permanent hallway hatch, finished clear opening 24 × 36 in",
-          "es": "Construir acceso permanente de pasillo con paso libre terminado de 24 × 36 pulgadas; sujeto a ubicación y sistema revisados",
+          "en": "Step 3 (John): Build permanent hallway hatch, 24 × 36 in FINISHED CLEAR, per R5 enclosure/air-seal/dam rules after cut release — 6j3Rf8FVhMVQ7vQf",
+          "es": "Paso 3 (John): Construir acceso permanente de pasillo 24 × 36 pulg. LIBRES TERMINADAS según reglas R5 de envolvente/sellado/cajón tras aprobar corte — 6j3Rf8FVhMVQ7vQf",
           "todoistTaskIds": [
             "6j3Rf8FVhMVQ7vQf"
           ],
@@ -1685,29 +1697,17 @@
           "checklistPath": "hvac/CHECKLIST.md"
         },
         {
-          "id": "hvac-nov19-9bc0239f0d",
-          "done": false,
-          "en": "Frame bedroom closet opening with timing around temporary HVAC access",
-          "es": "Enmarcar abertura del clóset según paso temporal del equipo; no cerrar techo hasta cable de bajo voltaje Y acceso permanente",
-          "todoistTaskIds": [
-            "6j3Rf89g8M6hPPx7"
-          ],
-          "todoistUrls": [
-            "https://app.todoist.com/app/task/6j3Rf89g8M6hPPx7"
-          ],
-          "sourcePath": "hvac/SPEC.md",
-          "checklistPath": "hvac/CHECKLIST.md"
-        },
-        {
           "id": "hvac-nov19-d350b2a97c",
           "done": false,
-          "en": "Build continuous secured wooden walkway for the whole attic service route",
-          "es": "Construir paso continuo de madera asegurado en todo el recorrido de servicio del ático",
+          "en": "Step 4–5 (John): Build continuous 24\" walkway (≤ 20 ft, 23/32\" OSB/3/4\" ply/2×, #9 screws) + 30×30 service platform (NO vibration pads; Type B vent ≥ 1\") — 6j3RvWq3q6RRFXf7, 6j3j3pqfM4GC53Qf",
+          "es": "Pasos 4–5 (John): Construir pasarela continua de 24\" (≤ 20 pies, OSB 23/32\"/triplay 3/4\"/2×, tornillos #9) + plataforma 30×30 (SIN almohadillas; tiro Tipo B ≥ 1\") — 6j3RvWq3q6RRFXf7, 6j3j3pqfM4GC53Qf",
           "todoistTaskIds": [
-            "6j3RvWq3q6RRFXf7"
+            "6j3RvWq3q6RRFXf7",
+            "6j3j3pqfM4GC53Qf"
           ],
           "todoistUrls": [
-            "https://app.todoist.com/app/task/6j3RvWq3q6RRFXf7"
+            "https://app.todoist.com/app/task/6j3RvWq3q6RRFXf7",
+            "https://app.todoist.com/app/task/6j3j3pqfM4GC53Qf"
           ],
           "sourcePath": "hvac/SPEC.md",
           "checklistPath": "hvac/CHECKLIST.md"
@@ -1715,13 +1715,27 @@
         {
           "id": "hvac-nov19-474a382131",
           "done": false,
-          "en": "John — install one permanent switched attic light",
-          "es": "John — instalar una luz permanente de ático con apagador",
+          "en": "Step 6 (John): Install enclosed LED light, hatch switch, 120V GFCI ≤ 25 ft live independent of disconnect, and furnace circuit — 6hvjQJgpw2W5VcQf",
+          "es": "Paso 6 (John): Instalar luz LED cerrada, apagador de entrada, GFCI 120V ≤ 25 pies vivo independiente del desconectador y circuito — 6hvjQJgpw2W5VcQf",
           "todoistTaskIds": [
             "6hvjQJgpw2W5VcQf"
           ],
           "todoistUrls": [
             "https://app.todoist.com/app/task/6hvjQJgpw2W5VcQf"
+          ],
+          "sourcePath": "hvac/SPEC.md",
+          "checklistPath": "hvac/CHECKLIST.md"
+        },
+        {
+          "id": "hvac-nov19-9bc0239f0d",
+          "done": false,
+          "en": "Step 7 (John): Frame & close bedroom closet ONLY after LV cable AND permanent 24×36 hatch exist — 6j3Rf89g8M6hPPx7",
+          "es": "Paso 7 (John): Enmarcar y cerrar clóset de recámara SOLO tras cable LV Y registro permanente 24×36 — 6j3Rf89g8M6hPPx7",
+          "todoistTaskIds": [
+            "6j3Rf89g8M6hPPx7"
+          ],
+          "todoistUrls": [
+            "https://app.todoist.com/app/task/6j3Rf89g8M6hPPx7"
           ],
           "sourcePath": "hvac/SPEC.md",
           "checklistPath": "hvac/CHECKLIST.md"
@@ -1739,8 +1753,8 @@
         {
           "id": "hvac-todoist-reconcile-02",
           "done": false,
-          "en": "After NEXT's second visit, obtain the permanent attic-hatch location",
-          "es": "Después de la segunda visita de NEXT, conciliar la ubicación permanente con el plan en curso; cita no confirmada",
+          "en": "Mon Nov 23 (2–4 p.m. PT) NEXT planning walkthrough with Serge & Alex (planning only — no cuts or furnace install released)",
+          "es": "Lunes 23 nov (2–4 p.m. PT) visita de planeación con NEXT (Serge y Alex; solo planeación — sin cortes ni instalación)",
           "todoistTaskIds": [],
           "todoistUrls": [],
           "sourcePath": "hvac/SPEC.md",
@@ -1749,8 +1763,8 @@
         {
           "id": "hvac-todoist-reconcile-03",
           "done": false,
-          "en": "When Tisa restarts HVAC, reconcile equipment, routes, registers and electrical coordination before work",
-          "es": "Cuando Tisa reactive la instalación HVAC, conciliar equipo, recorridos, rejillas y coordinación eléctrica; plan acotado del acceso ya en curso",
+          "en": "When Tisa restarts HVAC, reconcile equipment, routes, registers and electrical coordination before work — 6hvj3CgXpVqrJgvf",
+          "es": "Cuando Tisa reactive la instalación HVAC, conciliar equipo, recorridos, rejillas y coordinación eléctrica antes de trabajar — 6hvj3CgXpVqrJgvf",
           "todoistTaskIds": [
             "6hvj3CgXpVqrJgvf"
           ],
@@ -1759,6 +1773,140 @@
           ],
           "sourcePath": "hvac/SPEC.md",
           "checklistPath": "hvac/CHECKLIST.md"
+        }
+      ]
+    },
+    {
+      "key": "attic-access",
+      "title": "Attic Access",
+      "esTitle": "Acceso al ático",
+      "driveChecklistId": null,
+      "note": "Permanent 24 × 36 in FINISHED CLEAR hatch & attic enclosure plan (R5 guide). Resolve ceiling fire-rating check and joist bay B BEFORE buying/cutting. Continuous air-seal (3/8\" backer rod + sealant, 1/2\"×1/8\" closed-cell ledge weatherstrip, uncaulked lid seam), 2 unfaced fiberglass batts w/ 3 loose wire loops + ≤1/2\" screw eyes, 4-sided plywood dam 2\" above insulation, proposed recessed ~1-1/2\" lid pending owner OK with latches outside 24×36. Keep temp bedroom closet open until LV cable AND permanent hatch; fix active roof/attic leaks before enclosing.",
+      "noteEs": "Plan de acceso permanente 24 × 36 pulg. LIBRES TERMINADAS y envolvente del ático (guía R5). Confirmar clasificación contra fuego del techo y claro B ANTES de comprar o cortar. Sello continuo de aire (cordón 3/8\" + sellador, burlete 1/2\"×1/8\", junta de tapa sin calafatear), 2 colchonetas de fibra de vidrio con 3 lazos de alambre + armellas ≤1/2\", cajón de triplay en 4 lados 2\" arriba del aislante, tapa remetida ~1-1/2\" pendiente de aprobación con cierres fuera de 24×36. Conservar abierto el clóset hasta cable LV Y registro permanente; reparar filtraciones antes de cerrar.",
+      "items": [
+        {
+          "id": "attic-access-step-1",
+          "done": false,
+          "en": "Step 1 (John): Verify temporary bedroom closet opening (clear dimensions, framing/joists, 33.25×14.19×29 furnace pass check; keep open until LV cable AND permanent hatch) — 6j3j3pXFrFWhH2w7",
+          "es": "Paso 1 (John): Verificar abertura temporal del clóset de recámara (medidas libres, viguetas, paso del calefactor 33.25×14.19×29; no cerrar hasta cable LV Y registro permanente) — 6j3j3pXFrFWhH2w7",
+          "todoistTaskIds": [
+            "6j3j3pXFrFWhH2w7"
+          ],
+          "todoistUrls": [
+            "https://app.todoist.com/app/task/6j3j3pXFrFWhH2w7"
+          ],
+          "sourcePath": "attic/SPEC.md",
+          "checklistPath": "attic/CHECKLIST.md"
+        },
+        {
+          "id": "attic-access-step-2",
+          "done": false,
+          "en": "Step 2 (John): Confirm hatch site, ceiling fire-rating check FIRST, joist bay B (=, >, < 27-1/2\"), and route L ≤ 20 ft (at 66\" height) with 4 labeled photos — 6j3RvWmJ329qPCc7",
+          "es": "Paso 2 (John): Confirmar ubicación, revisar PRIMERO si el techo exige resistencia al fuego, claro B (=, >, < 27-1/2\") y ruta ≤ 20 pies (altura 66\") con 4 fotos rotuladas — 6j3RvWmJ329qPCc7",
+          "todoistTaskIds": [
+            "6j3RvWmJ329qPCc7"
+          ],
+          "todoistUrls": [
+            "https://app.todoist.com/app/task/6j3RvWmJ329qPCc7"
+          ],
+          "sourcePath": "attic/SPEC.md",
+          "checklistPath": "attic/CHECKLIST.md"
+        },
+        {
+          "id": "attic-access-step-3",
+          "done": false,
+          "en": "Step 3 (John): After cut & ceiling-assembly release, build permanent 24×36 FINISHED CLEAR hatch with 3/8\" backer rod/sealant, 1/2\"×1/8\" ledge weatherstrip, uncaulked recessed ~1-1/2\" lid (pending owner OK), latches outside 24×36, 2 unfaced batts (3 wire loops + ≤1/2\" screw eyes), and 4-sided plywood dam 2\" above insulation; upload clear-tape & turn photo — 6j3Rf8FVhMVQ7vQf",
+          "es": "Paso 3 (John): Tras aprobar corte y sistema del techo, construir registro permanente 24×36 LIBRES con cordón 3/8\" + sellador, burlete 1/2\"×1/8\", tapa remetida ~1-1/2\" sin calafatear (pendiente de aprobación), cierres fuera de 24×36, 2 colchonetas (3 lazos + armellas ≤1/2\") y cajón de triplay 2\" arriba del aislante; subir foto con cinta — 6j3Rf8FVhMVQ7vQf",
+          "todoistTaskIds": [
+            "6j3Rf8FVhMVQ7vQf"
+          ],
+          "todoistUrls": [
+            "https://app.todoist.com/app/task/6j3Rf8FVhMVQ7vQf"
+          ],
+          "sourcePath": "attic/SPEC.md",
+          "checklistPath": "attic/CHECKLIST.md"
+        },
+        {
+          "id": "attic-access-step-4",
+          "done": false,
+          "en": "Step 4 (John): Build continuous 24\" wood walkway (≤ 20 ft max, 30\" clear) using cheapest 23/32\" rated OSB / 3/4\" ply / 2× lumber (never 3/8\"; 1 strip/sheet kerf rule; #9 × 2-1/2\" or 3\" wood screws) — 6j3RvWq3q6RRFXf7",
+          "es": "Paso 4 (John): Construir pasarela continua de 24\" (≤ 20 pies, paso 30\") con OSB 23/32\" / triplay 3/4\" / 2× (nunca 3/8\"; 1 tira/hoja; tornillos #9 × 2-1/2\" o 3\") — 6j3RvWq3q6RRFXf7",
+          "todoistTaskIds": [
+            "6j3RvWq3q6RRFXf7"
+          ],
+          "todoistUrls": [
+            "https://app.todoist.com/app/task/6j3RvWq3q6RRFXf7"
+          ],
+          "sourcePath": "attic/SPEC.md",
+          "checklistPath": "attic/CHECKLIST.md"
+        },
+        {
+          "id": "attic-access-step-5",
+          "done": false,
+          "en": "Step 5 (John): Build level 30×30 in furnace service platform (NO vibration pads from John; Type B double-wall vent ≥ 1\" clear) — 6j3j3pqfM4GC53Qf",
+          "es": "Paso 5 (John): Construir plataforma nivelada 30×30 pulg. de servicio (SIN almohadillas antivibración; tiro Tipo B ≥ 1\" libre) — 6j3j3pqfM4GC53Qf",
+          "todoistTaskIds": [
+            "6j3j3pqfM4GC53Qf"
+          ],
+          "todoistUrls": [
+            "https://app.todoist.com/app/task/6j3j3pqfM4GC53Qf"
+          ],
+          "sourcePath": "attic/SPEC.md",
+          "checklistPath": "attic/CHECKLIST.md"
+        },
+        {
+          "id": "attic-access-step-6",
+          "done": false,
+          "en": "Step 6 (John): Install enclosed LED attic light, entry wall switch (keep landing light), 120V GFCI ≤ 25 ft wired live independent of furnace disconnect, and furnace circuit/disconnect — 6hvjQJgpw2W5VcQf",
+          "es": "Paso 6 (John): Instalar luz LED cerrada, apagador de entrada (conservar luz descanso), GFCI 120V ≤ 25 pies vivo independiente del desconectador y circuito — 6hvjQJgpw2W5VcQf",
+          "todoistTaskIds": [
+            "6hvjQJgpw2W5VcQf"
+          ],
+          "todoistUrls": [
+            "https://app.todoist.com/app/task/6hvjQJgpw2W5VcQf"
+          ],
+          "sourcePath": "attic/SPEC.md",
+          "checklistPath": "attic/CHECKLIST.md"
+        },
+        {
+          "id": "attic-access-step-7",
+          "done": false,
+          "en": "Step 7 (John): Frame & close temporary bedroom closet ONLY after LV switch cable AND permanent 24×36 hatch exist (fix active leaks first) — 6j3Rf89g8M6hPPx7",
+          "es": "Paso 7 (John): Enmarcar y cerrar clóset de recámara SOLO tras cable LV Y registro permanente 24×36 (reparar filtraciones primero) — 6j3Rf89g8M6hPPx7",
+          "todoistTaskIds": [
+            "6j3Rf89g8M6hPPx7"
+          ],
+          "todoistUrls": [
+            "https://app.todoist.com/app/task/6j3Rf89g8M6hPPx7"
+          ],
+          "sourcePath": "attic/SPEC.md",
+          "checklistPath": "attic/CHECKLIST.md"
+        },
+        {
+          "id": "attic-access-enclosure-gate",
+          "done": false,
+          "en": "Attic Enclosure Gate: Confirm ceiling fire-rating compatibility, obtain owner OK on proposed recessed ~1-1/2\" lid finish, and fix active roof/attic leaks before enclosing",
+          "es": "Compuerta de envolvente: Confirmar clasificación contra fuego del techo, obtener aprobación de tapa remetida ~1-1/2\" y reparar filtraciones activas antes de cerrar",
+          "todoistTaskIds": [
+            "6j3RvWmJ329qPCc7",
+            "6j3Rf8FVhMVQ7vQf"
+          ],
+          "todoistUrls": [
+            "https://app.todoist.com/app/task/6j3RvWmJ329qPCc7",
+            "https://app.todoist.com/app/task/6j3Rf8FVhMVQ7vQf"
+          ],
+          "sourcePath": "attic/SPEC.md",
+          "checklistPath": "attic/CHECKLIST.md"
+        },
+        {
+          "id": "attic-access-settled-basis",
+          "done": true,
+          "en": "Settled basis confirmed by Tisa: 24×36 in FINISHED CLEAR hatch, 33.25×14.19×29 furnace envelope, 66\" attic height (≤ 20 ft max walkway)",
+          "es": "Bases fijas confirmadas por Tisa: registro 24×36 LIBRES TERMINADAS, calefactor 33.25×14.19×29, altura 66\" (pasarela máx ≤ 20 pies)",
+          "todoistTaskIds": [],
+          "todoistUrls": [],
+          "sourcePath": "attic/SPEC.md",
+          "checklistPath": "attic/CHECKLIST.md"
         }
       ]
     }
@@ -3545,91 +3693,120 @@
       "taskId": "6j3RvWmJ329qPCc7",
       "url": "https://app.todoist.com/app/task/6j3RvWmJ329qPCc7",
       "rooms": [
+        "attic-access",
         "hvac"
       ],
       "doneInWiki": false,
       "wikiItemsEn": [
-        "Plans & Measurements — hatch plan accepted/in progress; John supplies four labeled site checks: location/context, 24 × 36 finished-clear markout/offsets, attic framing/obstructions, and furnace route/headroom/turning. Keep closet access until low-voltage cable AND permanent hatch; no cutting release"
+        "Step 1–2 (John): Verify temp bedroom closet opening (6j3j3pXFrFWhH2w7) + 4 labeled hatch photos, ceiling fire-rating check, bay B, and ≤ 20 ft route (6j3RvWmJ329qPCc7)",
+        "Step 2 (John): Confirm hatch site, ceiling fire-rating check FIRST, joist bay B (=, >, < 27-1/2\"), and route L ≤ 20 ft (at 66\" height) with 4 labeled photos — 6j3RvWmJ329qPCc7",
+        "Attic Enclosure Gate: Confirm ceiling fire-rating compatibility, obtain owner OK on proposed recessed ~1-1/2\" lid finish, and fix active roof/attic leaks before enclosing"
       ],
       "wikiItemsEs": [
-        "Planes y Medidas — plan de acceso aceptado/en curso; John aporta cuatro comprobaciones rotuladas: lugar/contexto, trazo libre terminado de 24 × 36 con distancias, estructura/obstáculos arriba y recorrido/altura/giro del equipo. Conservar acceso del clóset hasta cable de bajo voltaje Y acceso permanente; sin autorización de cortes"
+        "Pasos 1–2 (John): Verificar abertura temporal del clóset (6j3j3pXFrFWhH2w7) + 4 fotos rotuladas, resistencia al fuego del techo, claro B y ruta ≤ 20 pies (6j3RvWmJ329qPCc7)",
+        "Paso 2 (John): Confirmar ubicación, revisar PRIMERO si el techo exige resistencia al fuego, claro B (=, >, < 27-1/2\") y ruta ≤ 20 pies (altura 66\") con 4 fotos rotuladas — 6j3RvWmJ329qPCc7",
+        "Compuerta de envolvente: Confirmar clasificación contra fuego del techo, obtener aprobación de tapa remetida ~1-1/2\" y reparar filtraciones activas antes de cerrar"
       ],
       "governingDocs": [
         "hvac/CHECKLIST.md",
-        "hvac/SPEC.md"
+        "hvac/SPEC.md",
+        "attic/SPEC.md",
+        "attic/CHECKLIST.md"
       ]
     },
     "6j3Rf8FVhMVQ7vQf": {
       "taskId": "6j3Rf8FVhMVQ7vQf",
       "url": "https://app.todoist.com/app/task/6j3Rf8FVhMVQ7vQf",
       "rooms": [
+        "attic-access",
         "hvac"
       ],
       "doneInWiki": false,
       "wikiItemsEn": [
-        "Build permanent hallway hatch, finished clear opening 24 × 36 in"
+        "Step 3 (John): Build permanent hallway hatch, 24 × 36 in FINISHED CLEAR, per R5 enclosure/air-seal/dam rules after cut release — 6j3Rf8FVhMVQ7vQf",
+        "Step 3 (John): After cut & ceiling-assembly release, build permanent 24×36 FINISHED CLEAR hatch with 3/8\" backer rod/sealant, 1/2\"×1/8\" ledge weatherstrip, uncaulked recessed ~1-1/2\" lid (pending owner OK), latches outside 24×36, 2 unfaced batts (3 wire loops + ≤1/2\" screw eyes), and 4-sided plywood dam 2\" above insulation; upload clear-tape & turn photo — 6j3Rf8FVhMVQ7vQf",
+        "Attic Enclosure Gate: Confirm ceiling fire-rating compatibility, obtain owner OK on proposed recessed ~1-1/2\" lid finish, and fix active roof/attic leaks before enclosing"
       ],
       "wikiItemsEs": [
-        "Construir acceso permanente de pasillo con paso libre terminado de 24 × 36 pulgadas; sujeto a ubicación y sistema revisados"
+        "Paso 3 (John): Construir acceso permanente de pasillo 24 × 36 pulg. LIBRES TERMINADAS según reglas R5 de envolvente/sellado/cajón tras aprobar corte — 6j3Rf8FVhMVQ7vQf",
+        "Paso 3 (John): Tras aprobar corte y sistema del techo, construir registro permanente 24×36 LIBRES con cordón 3/8\" + sellador, burlete 1/2\"×1/8\", tapa remetida ~1-1/2\" sin calafatear (pendiente de aprobación), cierres fuera de 24×36, 2 colchonetas (3 lazos + armellas ≤1/2\") y cajón de triplay 2\" arriba del aislante; subir foto con cinta — 6j3Rf8FVhMVQ7vQf",
+        "Compuerta de envolvente: Confirmar clasificación contra fuego del techo, obtener aprobación de tapa remetida ~1-1/2\" y reparar filtraciones activas antes de cerrar"
       ],
       "governingDocs": [
         "hvac/ATTIC-OPENING-PLAN.md",
         "hvac/CHECKLIST.md",
-        "hvac/SPEC.md"
+        "hvac/SPEC.md",
+        "attic/SPEC.md",
+        "attic/CHECKLIST.md"
       ]
     },
     "6j3Rf89g8M6hPPx7": {
       "taskId": "6j3Rf89g8M6hPPx7",
       "url": "https://app.todoist.com/app/task/6j3Rf89g8M6hPPx7",
       "rooms": [
+        "attic-access",
         "hvac"
       ],
       "doneInWiki": false,
       "wikiItemsEn": [
-        "Frame bedroom closet opening with timing around temporary HVAC access"
+        "Step 7 (John): Frame & close bedroom closet ONLY after LV cable AND permanent 24×36 hatch exist — 6j3Rf89g8M6hPPx7",
+        "Step 7 (John): Frame & close temporary bedroom closet ONLY after LV switch cable AND permanent 24×36 hatch exist (fix active leaks first) — 6j3Rf89g8M6hPPx7"
       ],
       "wikiItemsEs": [
-        "Enmarcar abertura del clóset según paso temporal del equipo; no cerrar techo hasta cable de bajo voltaje Y acceso permanente"
+        "Paso 7 (John): Enmarcar y cerrar clóset de recámara SOLO tras cable LV Y registro permanente 24×36 — 6j3Rf89g8M6hPPx7",
+        "Paso 7 (John): Enmarcar y cerrar clóset de recámara SOLO tras cable LV Y registro permanente 24×36 (reparar filtraciones primero) — 6j3Rf89g8M6hPPx7"
       ],
       "governingDocs": [
         "hvac/CHECKLIST.md",
-        "hvac/SPEC.md"
+        "hvac/SPEC.md",
+        "attic/SPEC.md",
+        "attic/CHECKLIST.md"
       ]
     },
     "6j3RvWq3q6RRFXf7": {
       "taskId": "6j3RvWq3q6RRFXf7",
       "url": "https://app.todoist.com/app/task/6j3RvWq3q6RRFXf7",
       "rooms": [
+        "attic-access",
         "hvac"
       ],
       "doneInWiki": false,
       "wikiItemsEn": [
-        "Build continuous secured wooden walkway for the whole attic service route"
+        "Step 4–5 (John): Build continuous 24\" walkway (≤ 20 ft, 23/32\" OSB/3/4\" ply/2×, #9 screws) + 30×30 service platform (NO vibration pads; Type B vent ≥ 1\") — 6j3RvWq3q6RRFXf7, 6j3j3pqfM4GC53Qf",
+        "Step 4 (John): Build continuous 24\" wood walkway (≤ 20 ft max, 30\" clear) using cheapest 23/32\" rated OSB / 3/4\" ply / 2× lumber (never 3/8\"; 1 strip/sheet kerf rule; #9 × 2-1/2\" or 3\" wood screws) — 6j3RvWq3q6RRFXf7"
       ],
       "wikiItemsEs": [
-        "Construir paso continuo de madera asegurado en todo el recorrido de servicio del ático"
+        "Pasos 4–5 (John): Construir pasarela continua de 24\" (≤ 20 pies, OSB 23/32\"/triplay 3/4\"/2×, tornillos #9) + plataforma 30×30 (SIN almohadillas; tiro Tipo B ≥ 1\") — 6j3RvWq3q6RRFXf7, 6j3j3pqfM4GC53Qf",
+        "Paso 4 (John): Construir pasarela continua de 24\" (≤ 20 pies, paso 30\") con OSB 23/32\" / triplay 3/4\" / 2× (nunca 3/8\"; 1 tira/hoja; tornillos #9 × 2-1/2\" o 3\") — 6j3RvWq3q6RRFXf7"
       ],
       "governingDocs": [
         "hvac/CHECKLIST.md",
-        "hvac/SPEC.md"
+        "hvac/SPEC.md",
+        "attic/SPEC.md",
+        "attic/CHECKLIST.md"
       ]
     },
     "6hvjQJgpw2W5VcQf": {
       "taskId": "6hvjQJgpw2W5VcQf",
       "url": "https://app.todoist.com/app/task/6hvjQJgpw2W5VcQf",
       "rooms": [
+        "attic-access",
         "hvac"
       ],
       "doneInWiki": false,
       "wikiItemsEn": [
-        "John — install one permanent switched attic light"
+        "Step 6 (John): Install enclosed LED light, hatch switch, 120V GFCI ≤ 25 ft live independent of disconnect, and furnace circuit — 6hvjQJgpw2W5VcQf",
+        "Step 6 (John): Install enclosed LED attic light, entry wall switch (keep landing light), 120V GFCI ≤ 25 ft wired live independent of furnace disconnect, and furnace circuit/disconnect — 6hvjQJgpw2W5VcQf"
       ],
       "wikiItemsEs": [
-        "John — instalar una luz permanente de ático con apagador"
+        "Paso 6 (John): Instalar luz LED cerrada, apagador de entrada, GFCI 120V ≤ 25 pies vivo independiente del desconectador y circuito — 6hvjQJgpw2W5VcQf",
+        "Paso 6 (John): Instalar luz LED cerrada, apagador de entrada (conservar luz descanso), GFCI 120V ≤ 25 pies vivo independiente del desconectador y circuito — 6hvjQJgpw2W5VcQf"
       ],
       "governingDocs": [
         "hvac/CHECKLIST.md",
-        "hvac/SPEC.md"
+        "hvac/SPEC.md",
+        "attic/SPEC.md",
+        "attic/CHECKLIST.md"
       ]
     },
     "6hvj3CgXpVqrJgvf": {
@@ -3640,10 +3817,10 @@
       ],
       "doneInWiki": false,
       "wikiItemsEn": [
-        "When Tisa restarts HVAC, reconcile equipment, routes, registers and electrical coordination before work"
+        "When Tisa restarts HVAC, reconcile equipment, routes, registers and electrical coordination before work — 6hvj3CgXpVqrJgvf"
       ],
       "wikiItemsEs": [
-        "Cuando Tisa reactive la instalación HVAC, conciliar equipo, recorridos, rejillas y coordinación eléctrica; plan acotado del acceso ya en curso"
+        "Cuando Tisa reactive la instalación HVAC, conciliar equipo, recorridos, rejillas y coordinación eléctrica antes de trabajar — 6hvj3CgXpVqrJgvf"
       ],
       "governingDocs": [
         "hvac/CHECKLIST.md",
@@ -3671,45 +3848,57 @@
       "taskId": "6j3j3pXFrFWhH2w7",
       "url": "https://app.todoist.com/app/task/6j3j3pXFrFWhH2w7",
       "rooms": [
+        "attic-access",
         "hvac"
       ],
       "doneInWiki": false,
       "wikiItemsEn": [
-        "Step 1: Verify temporary bedroom closet opening (dimensions, framing & HVAC passage) — John Speer"
+        "Step 1–2 (John): Verify temp bedroom closet opening (6j3j3pXFrFWhH2w7) + 4 labeled hatch photos, ceiling fire-rating check, bay B, and ≤ 20 ft route (6j3RvWmJ329qPCc7)",
+        "Step 1 (John): Verify temporary bedroom closet opening (clear dimensions, framing/joists, 33.25×14.19×29 furnace pass check; keep open until LV cable AND permanent hatch) — 6j3j3pXFrFWhH2w7"
       ],
       "wikiItemsEs": [
-        "Paso 1: Verificar abertura temporal del clóset de recámara (medidas, estructura y paso HVAC) — John Speer"
+        "Pasos 1–2 (John): Verificar abertura temporal del clóset (6j3j3pXFrFWhH2w7) + 4 fotos rotuladas, resistencia al fuego del techo, claro B y ruta ≤ 20 pies (6j3RvWmJ329qPCc7)",
+        "Paso 1 (John): Verificar abertura temporal del clóset de recámara (medidas libres, viguetas, paso del calefactor 33.25×14.19×29; no cerrar hasta cable LV Y registro permanente) — 6j3j3pXFrFWhH2w7"
       ],
       "governingDocs": [
         "hvac/ATTIC-OPENING-PLAN.md",
-        "hvac/CHECKLIST.md"
+        "hvac/CHECKLIST.md",
+        "attic/SPEC.md",
+        "attic/CHECKLIST.md"
       ]
     },
     "6j3j3pqfM4GC53Qf": {
       "taskId": "6j3j3pqfM4GC53Qf",
       "url": "https://app.todoist.com/app/task/6j3j3pqfM4GC53Qf",
       "rooms": [
+        "attic-access",
         "hvac"
       ],
       "doneInWiki": false,
       "wikiItemsEn": [
-        "Step 5: Build 30 × 30 in level attic furnace service platform (no vibration pads needed) — John Speer"
+        "Step 4–5 (John): Build continuous 24\" walkway (≤ 20 ft, 23/32\" OSB/3/4\" ply/2×, #9 screws) + 30×30 service platform (NO vibration pads; Type B vent ≥ 1\") — 6j3RvWq3q6RRFXf7, 6j3j3pqfM4GC53Qf",
+        "Step 5 (John): Build level 30×30 in furnace service platform (NO vibration pads from John; Type B double-wall vent ≥ 1\" clear) — 6j3j3pqfM4GC53Qf"
       ],
       "wikiItemsEs": [
-        "Paso 5: Construir plataforma nivelada de 30 × 30 pulg. (sin almohadillas antivibración) — John Speer"
+        "Pasos 4–5 (John): Construir pasarela continua de 24\" (≤ 20 pies, OSB 23/32\"/triplay 3/4\"/2×, tornillos #9) + plataforma 30×30 (SIN almohadillas; tiro Tipo B ≥ 1\") — 6j3RvWq3q6RRFXf7, 6j3j3pqfM4GC53Qf",
+        "Paso 5 (John): Construir plataforma nivelada 30×30 pulg. de servicio (SIN almohadillas antivibración; tiro Tipo B ≥ 1\" libre) — 6j3j3pqfM4GC53Qf"
       ],
       "governingDocs": [
         "hvac/ATTIC-OPENING-PLAN.md",
-        "hvac/CHECKLIST.md"
+        "hvac/CHECKLIST.md",
+        "attic/SPEC.md",
+        "attic/CHECKLIST.md"
       ]
     }
   },
   "sourceRefreshScope": {
     "rooms": [
       "kitchen",
-      "laundry"
+      "laundry",
+      "attic-access",
+      "hvac"
     ],
-    "source": "Canonical SPEC and CHECKLIST snapshots, November 19; other room records retained without new verification.",
-    "latestScopedUpdate": "November 19: publish corrected R4 as proposed practical guide; settled model/24×36 clear preserved, ceiling compatibility and site-specific support plan required before full ceiling cut."
+    "source": "Canonical SPEC, CHECKLIST, and Nov 19 Debrief/R5 snapshots; other room records retained without new verification.",
+    "latestScopedUpdate": "November 19: promote Attic Access (#attic-access) to its own submenu & page with R5 Practical Guide links and Special Notes: Attic Enclosure; sync all 7 John-assigned cards across Attic Access and HVAC."
   }
 }

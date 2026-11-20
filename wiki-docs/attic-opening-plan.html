@@ -24,6 +24,11 @@
   .btn:hover{opacity:.92}
   .banner{background:var(--accent);color:#fff;padding:12px 16px;border-radius:10px;font-weight:700;font-size:15px;margin:14px 0}
   .warn{background:var(--warn-bg);border:1px solid var(--warn-line);color:var(--warn-fg);padding:12px 15px;border-radius:10px;margin:14px 0;font-size:14px}
+  .enclosure{background:#eef5f9;border:2px solid #2b6cb0;color:#143656;padding:14px 16px;border-radius:12px;margin:14px 0;font-size:14px}
+  .enclosure h2{color:#143656;border-bottom-color:#b7d4ea;margin:0 0 8px;font-size:18px}
+  .enclosure ul{margin:6px 0 0;padding-left:20px}
+  .enclosure li{margin:4px 0}
+  .tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
   .card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0}
   .card h2{margin:0 0 10px;font-size:18px;color:var(--accent)}
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:12px 0}
@@ -53,6 +58,7 @@
   [data-lang="es"]{display:none}
   body.es [data-lang="en"]{display:none}
   body.es [data-lang="es"]{display:block}
+  body.es table[data-lang="es"]{display:table}
   body.es span[data-lang="es"],body.es a[data-lang="es"]{display:inline}
   body:not(.es) span[data-lang="en"],body:not(.es) a[data-lang="en"]{display:inline}
 </style>
@@ -69,9 +75,9 @@
     </div>
     <div class="actions">
       <button class="btn primary" id="langBtn" type="button">Español</button>
-      <a class="btn" href="../#hvac"><span data-lang="en">← Back to HVAC Wiki</span><span data-lang="es">← Volver a Clima Wiki</span></a>
-      <a class="btn" href="../#doc:2026-11-19_U4_HVAC_Attic-Hatch-Practical-Guide_R4_EN">R4 PDF (EN)</a>
-      <a class="btn" href="../#doc:2026-11-19_U4_HVAC_Attic-Hatch-Practical-Guide_R4_ES">Guía R4 PDF (ES)</a>
+      <a class="btn" href="../#attic-access"><span data-lang="en">← Back to Attic Access</span><span data-lang="es">← Volver a Acceso al ático</span></a>
+      <a class="btn" href="https://tisa-a11y.github.io/unit4-wiki-pages/wiki-docs/attic-hatch-r5/Attic-hatch-practical-guide_R5_EN.pdf" target="_blank" rel="noopener">R5 PDF (EN)</a>
+      <a class="btn" href="https://tisa-a11y.github.io/unit4-wiki-pages/wiki-docs/attic-hatch-r5/Attic-hatch-practical-guide_R5_ES.pdf" target="_blank" rel="noopener">Guía R5 PDF (ES)</a>
     </div>
   </div>
 
@@ -88,6 +94,31 @@
   <div class="warn" data-lang="es">
     <strong>Compuerta de Planeación — Visita de NEXT Lunes 23 nov (2–4 p.m. PT, Serge y Alex):</strong> Visita solo de planeación — sin cortes ni instalación hasta confirmar: (1) medidas y viguetas de la <strong>abertura temporal actual del clóset de recámara</strong> (Paso 1), (2) si el techo requiere conjunto resistente al fuego vs registro de madera, y (3) claro de viguetas <code>B</code> y apoyos desde arriba (Paso 2). No cerrar el techo del clóset hasta instalar cable de bajo voltaje <strong>Y</strong> tener el registro permanente. Reparar filtraciones antes de tapar.
   </div>
+
+  <section class="enclosure" data-lang="en">
+    <h2>Special Notes: Attic Enclosure</h2>
+    <ul>
+      <li><strong>Fire-Rating Check First:</strong> Confirm ceiling fire-rating requirement before buying wood or cutting (custom shop-built wood hatch vs fire-rated ceiling access assembly).</li>
+      <li><strong>Continuous Air-Seal (Fixed vs Removable Seam):</strong> Seal the fixed perimeter frame to ceiling/framing with <code>3/8"</code> backer rod + sealant, install <code>1/2" × 1/8"</code> closed-cell foam weatherstrip on the inner lid ledges, and keep the removable lid-to-frame seam <strong>uncaulked</strong> so the panel opens cleanly without tearing.</li>
+      <li><strong>Lid Insulation &amp; Retention:</strong> Strap two unfaced fiberglass batts (matching attic R-value) to the back of the lid using <strong>3 loose 16-ga wire loops</strong> anchored with <code>≤ 1/2"</code> screw eyes so batts are not compressed.</li>
+      <li><strong>4-Sided Loose-Fill Insulation Dam:</strong> Build a 4-sided plywood collar dam around the rough opening rising at least <code>2"</code> above surrounding attic loose-fill insulation.</li>
+      <li><strong>Proposed Recessed Lid (Pending Owner OK):</strong> Proposed <code>~1-1/2"</code> recessed panel is pending owner finish approval; place draw/turn latches outside the <code>24" × 36"</code> clear chute so hardware never steals clearance.</li>
+      <li><strong>Temporary Bedroom Closet Sequencing:</strong> Keep the existing bedroom closet ceiling opening uncovered until the low-voltage hatch light switch cable is pulled <strong>AND</strong> the permanent hatch is built/installed (confirm Step 1 dimensions first: <code>6j3j3pXFrFWhH2w7</code>).</li>
+      <li><strong>Leak Pre-Gate:</strong> Fix any active roof or attic leaks before enclosing ceiling framing or insulation.</li>
+    </ul>
+  </section>
+  <section class="enclosure" data-lang="es">
+    <h2>Notas especiales: envolvente del ático</h2>
+    <ul>
+      <li><strong>Revisar clasificación contra fuego primero:</strong> Confirmar si el cielo raso exige tapa certificada contra fuego antes de comprar madera o cortar.</li>
+      <li><strong>Sellado continuo de aire (fijo vs tapa removible):</strong> Sellar el marco fijo al cielo raso con cordón de respaldo (backer rod) de <code>3/8"</code> + sellador, colocar burlete de celda cerrada de <code>1/2" × 1/8"</code> en las pestañas interiores y dejar la junta de la tapa removible <strong>sin sellador (sin caulk)</strong> para poder abrirla sin dañar el sello.</li>
+      <li><strong>Aislamiento de la tapa:</strong> Sujetar dos colchonetas (batts) de fibra de vidrio sin cara de papel al reverso de la tapa (igualando el valor R del ático) con <strong>3 lazos flojos de alambre cal. 16</strong> y armellas de <code>≤ 1/2"</code> para no aplastar el aislamiento.</li>
+      <li><strong>Retén perimetral de 4 lados:</strong> Armar un collarín de triplay de 4 lados alrededor de la abertura que suba al menos <code>2"</code> por encima del aislamiento suelto del ático.</li>
+      <li><strong>Tapa remetida propuesta (pendiente aprobación de Tisa):</strong> El diseño con panel remetido de <code>~1-1/2"</code> queda sujeto a aprobación de acabado; ubicar pasadores fuera del paso libre de <code>24" × 36"</code>.</li>
+      <li><strong>Secuencia de abertura temporal en clóset de recámara:</strong> Mantener abierta la abertura actual del clóset hasta tender el cable de bajo voltaje del apagador <strong>Y</strong> contar con el registro permanente (verificar primero Paso 1: <code>6j3j3pXFrFWhH2w7</code>).</li>
+      <li><strong>Cero filtraciones antes de cerrar:</strong> Reparar cualquier gotera o filtración activa en techo o ático antes de tapar o aislar.</li>
+    </ul>
+  </section>
 
   <div class="card">
     <h2 data-lang="en">1. Locked Description &amp; Code/Site Requirements</h2>
@@ -123,11 +154,12 @@
       </div>
     </div>
 
+    <div class="tbl-wrap">
     <table data-lang="en">
       <thead><tr><th>Requirement Area</th><th>Locked / Code Standard</th><th>Notes &amp; Hold Points</th></tr></thead>
       <tbody>
         <tr><td><strong>1. Temp Closet Opening</strong></td><td>Verify existing open ceiling framing, clear dimensions &amp; headroom</td><td>John checks &amp; photos whether furnace passes closet or must wait for permanent 24"×36" hatch. Keep open until LV cable AND permanent hatch exist.</td></tr>
-        <tr><td><strong>2. Permanent Hatch Size &amp; Framing Gate</strong></td><td><strong>24" × 36" FINISHED CLEAR</strong> (R4 wood proposal cut: 27-1/2" × 39-1/2")</td><td>Confirm landing fire-rating requirement FIRST. From attic side check bay width <code>B</code>: <code>B = 27-1/2"</code> fits; <code>B &gt; 27-1/2"</code> uses designed solid side backing; <code>B &lt; 27-1/2"</code> needs structural plan or alternate spot — never narrow 24×36 clear.</td></tr>
+        <tr><td><strong>2. Permanent Hatch Size &amp; Framing Gate</strong></td><td><strong>24" × 36" FINISHED CLEAR</strong> (R5 wood proposal cut: 27-1/2" × 39-1/2")</td><td>Confirm landing fire-rating requirement FIRST. From attic side check bay width <code>B</code>: <code>B = 27-1/2"</code> fits; <code>B &gt; 27-1/2"</code> uses designed solid side backing; <code>B &lt; 27-1/2"</code> needs structural plan or alternate spot — never narrow 24×36 clear.</td></tr>
         <tr><td><strong>3. Continuous Walkway</strong></td><td><strong>24" wide</strong> solid wood floor · <strong>30"</strong> unobstructed passage · <strong>≤ 20 ft</strong> max run</td><td>Cheapest: <strong>23/32" rated OSB</strong> (or 3/4" ply / 2× lumber). 1 strip/sheet saw-kerf rule: ≤7 ft = 1 sheet; 7–14 ft = 2; 14–20 ft = 3. Support every joint/edge on joists/blocking; keep wires/pipes/insulation uncrushed.</td></tr>
         <tr><td><strong>4. Working Platform</strong></td><td><strong>30" × 30" min</strong> level solid platform at furnace service side</td><td>23/32" OSB or 3/4" ply screwed into verified framing (never ceiling drywall). <strong>No vibration pads needed from John</strong> (NEXT installs furnace).</td></tr>
         <tr><td><strong>5. Attic Electrical</strong></td><td><strong>LED light + entry switch + 120V GFCI ≤ 25 ft + dedicated circuit/disconnect</strong></td><td>Enclosed LED utility light controlled by single-pole switch at hatch entry (keep landing light). <strong>120V GFCI outlet within 25 ft</strong> (ideally at 30"×30" platform), <strong>wired live on line side independent of furnace disconnect</strong>. Dedicated circuit + disconnect in sight.</td></tr>
@@ -139,13 +171,14 @@
       <thead><tr><th>Área</th><th>Estándar / Código Fijo</th><th>Notas y Puntos de Control</th></tr></thead>
       <tbody>
         <tr><td><strong>1. Abertura Temporal Clóset</strong></td><td>Medir y fotografiar abertura abierta actual del clóset</td><td>Confirmar medidas libres, viguetas y altura para ver si cabe el equipo. Conservar abierto hasta cable de bajo voltaje Y registro permanente.</td></tr>
-        <tr><td><strong>2. Registro Permanente</strong></td><td><strong>24" × 36" LIBRES TERMINADOS</strong> (corte R4 propuesto: 27-1/2" × 39-1/2")</td><td>Confirmar primero si el techo exige registro resistente al fuego. Revisar claro <code>B</code> arriba: <code>B = 27-1/2"</code> cabe; <code>B &gt; 27-1/2"</code> usa apoyo lateral sólido diseñado; <code>B &lt; 27-1/2"</code> requiere solución estructural u otro sitio.</td></tr>
+        <tr><td><strong>2. Registro Permanente</strong></td><td><strong>24" × 36" LIBRES TERMINADOS</strong> (corte R5 propuesto: 27-1/2" × 39-1/2")</td><td>Confirmar primero si el techo exige registro resistente al fuego. Revisar claro <code>B</code> arriba: <code>B = 27-1/2"</code> cabe; <code>B &gt; 27-1/2"</code> usa apoyo lateral sólido diseñado; <code>B &lt; 27-1/2"</code> requiere solución estructural u otro sitio.</td></tr>
         <tr><td><strong>3. Pasarela Continua</strong></td><td>Piso sólido <strong>24" ancho mín.</strong> · paso libre <strong>30"</strong> · máx <strong>≤ 20 pies</strong></td><td>Más barato: <strong>OSB 23/32"</strong> (o triplay 3/4" / 2×). 1 tira por hoja 4×8 (≤7 ft = 1; 7–14 ft = 2; 14–20 ft = 3). Tornillos #9×2-1/2" o 3" a viguetas verificadas (nunca sobre tablaroca/cables/aislante).</td></tr>
         <tr><td><strong>4. Plataforma de Servicio</strong></td><td><strong>30" × 30" mín.</strong> nivelada en lado de servicio del calefactor</td><td>OSB 23/32" o triplay 3/4" atornillado a estructura. <strong>John NO compra ni pone almohadillas antivibración</strong> (NEXT instala calefactor).</td></tr>
         <tr><td><strong>5. Electricidad Ático</strong></td><td><strong>Luz LED + apagador entrada + GFCI 120V ≤ 25 pies + desconectador</strong></td><td>Lámpara LED cerrada con apagador al entrar (conservar luz descanso). <strong>Contacto GFCI 120V dentro de 25 pies</strong> (ideal en plataforma) conectado <strong>vivo independiente del desconectador del calefactor</strong>. Circuito dedicado + desconectador a la vista.</td></tr>
         <tr><td><strong>6. Tiro Tipo B</strong></td><td>Separación <strong>≥ 1"</strong> a materiales combustibles</td><td>Ducto de gases independiente de campana de cocina y extractor de baño.</td></tr>
       </tbody>
     </table>
+    </div>
   </div>
 
   <div class="card">
@@ -170,7 +203,7 @@
         <h3 data-lang="es">Confirmar punto de registro, tipo de techo, claro B y ruta ≤ 20 pies</h3>
         <p data-lang="en">Deliver the 4 labeled photos from John's "Here" blue-ceiling photo (landing outside Door 4 vs interior hall; taped 24"×36" finished-clear rectangle + wall offsets; attic joists/wires/pipes above; furnace lift/turn + walkway route ≤ 20 ft). Resolve fire-rated ceiling gate and bay width cases (<code>B =, &gt;, &lt; 27-1/2"</code>) BEFORE buying wood or cutting ceiling.</p>
         <p data-lang="es">Entregar 4 fotos rotuladas (descanso exterior Puerta 4 vs pasillo; cinta de 24"×36" libre + distancias a muros; viguetas/cables/tubos arriba; maniobra y ruta ≤ 20 pies). Confirmar si requiere registro resistente al fuego y casos <code>B</code> antes de comprar o cortar.</p>
-        <div class="meta">Todoist (John Speer): <a href="https://app.todoist.com/app/task/6j3RvWmJ329qPCc7" target="_blank" rel="noopener">6j3RvWmJ329qPCc7</a> · Guide: <a href="../#doc:2026-11-19_U4_HVAC_Attic-Hatch-Practical-Guide_R4_EN:p5">R4 p. 5</a></div>
+        <div class="meta">Todoist (John Speer): <a href="https://app.todoist.com/app/task/6j3RvWmJ329qPCc7" target="_blank" rel="noopener">6j3RvWmJ329qPCc7</a> · <span data-lang="en">Guide: <a href="https://tisa-a11y.github.io/unit4-wiki-pages/wiki-docs/attic-hatch-r5/Attic-hatch-practical-guide_R5_EN.pdf#page=5" target="_blank" rel="noopener">R5 p. 5 (EN)</a> · <a href="../#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p5">Wiki Viewer</a></span><span data-lang="es">Guía: <a href="https://tisa-a11y.github.io/unit4-wiki-pages/wiki-docs/attic-hatch-r5/Attic-hatch-practical-guide_R5_ES.pdf#page=5" target="_blank" rel="noopener">R5 pág. 5 (ES)</a> · <a href="../#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p5">Visor Wiki</a></span></div>
       </div>
     </div>
 
@@ -179,8 +212,8 @@
       <div>
         <h3 data-lang="en">Frame, install &amp; prove permanent 24" × 36" FINISHED CLEAR hatch</h3>
         <h3 data-lang="es">Enmarcar, instalar y comprobar el registro permanente de 24" × 36" LIBRES</h3>
-        <p data-lang="en">Only after Step 2 approval: install end blocks + end connectors, set square lining frame (27"×39" OD proposed wood kit), 1×2 ledges preserving full 24"×36" clear, removable weatherstripped/insulated lid with compression latches clear of passage. Test-open twice, check 14.19"×29" furnace pass + 33.25" turn, and upload tape-measured photos.</p>
-        <p data-lang="es">Solo tras aprobar Paso 2: poner travesaños y conectores, marco a escuadra, repisas 1×2 conservando 24"×36" libres, tapa aislada con burlete y cierres fuera del paso libre. Probar dos veces y subir foto con cinta métrica.</p>
+        <p data-lang="en">Only after Step 2 approval &amp; owner OK on proposed <code>~1-1/2"</code> recessed lid: install end blocks + connectors, set square frame (27"×39" OD wood kit if non-rated ceiling fits), seal fixed frame to ceiling with <code>3/8"</code> backer rod + sealant, set 1×2 ledges preserving 24"×36" clear with <code>1/2"×1/8"</code> closed-cell weatherstrip, keep removable lid seam uncaulked, strap 2 fiberglass batts with 3 loose 16-ga wire loops + <code>≤ 1/2"</code> screw eyes, add 4-sided plywood insulation dam <code>2"</code> above loose-fill, and place latches outside 24"×36". Test-open twice, verify 14.19"×29" / 33.25" furnace pass, and upload tape-measured photos.</p>
+        <p data-lang="es">Solo tras aprobar Paso 2 y visto bueno de la tapa remetida <code>~1-1/2"</code>: instalar travesaños y conectores, marco a escuadra, sellar marco fijo con cordón <code>3/8"</code> + sellador, repisas 1×2 con burlete de celda cerrada <code>1/2"×1/8"</code> manteniendo 24"×36" libres, dejar junta de tapa removible sin caulk, sujetar 2 batts con 3 lazos flojos de alambre cal. 16 + armellas <code>≤ 1/2"</code>, retén de triplay de 4 lados <code>2"</code> arriba del aislamiento y pasadores fuera de 24"×36". Probar dos veces y subir foto con cinta métrica.</p>
         <div class="meta">Todoist Parent (John Speer): <a href="https://app.todoist.com/app/task/6j3Rf8FVhMVQ7vQf" target="_blank" rel="noopener">6j3Rf8FVhMVQ7vQf</a> · Photo: <a href="https://app.todoist.com/app/task/6j3RvWrhQMw5F5Wf" target="_blank" rel="noopener">6j3RvWrhQMw5F5Wf</a></div>
       </div>
     </div>
