@@ -871,7 +871,7 @@ nav.rail a.subpage-link[aria-current="page"], .rail-item-row.is-child-row > a.ra
 nav.rail a.sub.subsec-link{display:flex;align-items:center;gap:6px;padding:4px 8px;border-radius:5px;font-size:12.2px;color:var(--muted);text-decoration:none;line-height:1.3;transition:background .12s,color .12s}
 nav.rail a.sub.subsec-link:hover,nav.rail a.sub.subsec-link.is-sec-active{background:var(--accent-soft);color:var(--accent);font-weight:600}
 .u4-subnav-bar{max-width:74ch;margin:4px 0 16px;display:grid;gap:8px;padding:9px 11px;border-radius:10px;border:1px solid var(--line);background:var(--panel)}
-.u4-subpage-tabs{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding-bottom:7px;border-bottom:1px solid var(--line)}
+.u4-subpage-tabs{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
 .u4-subpage-tab{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border-radius:7px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font:600 12.8px/1.25 var(--body);text-decoration:none;white-space:nowrap;transition:background .14s,border-color .14s,color .14s}
 .u4-subpage-tab:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
 .u4-subpage-tab[aria-current="page"]{background:var(--accent);border-color:var(--accent);color:var(--panel)}
@@ -1550,16 +1550,8 @@ function roomSubnavBar(p){
         + '</div>';
     }
   }
-  const subsecs = getRoomSubsections(p.key);
-  let pillsHtml = "";
-  if (subsecs.length) {
-    pillsHtml = '<div class="u4-subsec-pills" role="navigation" aria-label="'+(es?"Secciones de la página":"Page sections")+'">'
-      + '<span class="u4-subsec-label">'+esc(t("subnavSectionsLabel"))+'</span>'
-      + subsecs.map(s => '<a class="u4-subsec-pill" href="#'+p.key+'/'+s.id+'" data-room="'+p.key+'" data-sec="'+s.id+'">'+esc(es?s.es:s.en)+'</a>').join("")
-      + '</div>';
-  }
-  if (!tabsHtml && !pillsHtml) return "";
-  return '<div class="u4-subnav-bar">'+tabsHtml+pillsHtml+'</div>';
+  if (!tabsHtml) return "";
+  return '<div class="u4-subnav-bar">'+tabsHtml+'</div>';
 }
 
 function crewRoom(p, srcMd){
