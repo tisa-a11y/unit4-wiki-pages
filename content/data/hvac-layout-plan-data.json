@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0.0",
+  "project": "1231 11th Avenue Unit 4, San Francisco, CA",
+  "room_id": "hvac",
+  "element_id": "HVAC-ATTIC-LAYOUT-01",
+  "title_en": "Interactive Attic HVAC, Ductwork, Intake/Exhaust & Walkway Layout",
+  "title_es": "Plano Interactivo de Calefacción (HVAC), Ductos, Retorno/Extracción y Pasillo en Ático",
+  "governing_spec": "hvac/SPEC.md",
+  "companion_docs": [
+    "attic/SPEC.md",
+    "hvac/ATTIC-OPENING-PLAN.md",
+    "attic/attic-hatch-plan-data.json"
+  ],
+  "base_rev": "rev-20261120-hvac-001",
+  "status": "PLANNING_SANDBOX_MON_NOV23_WALKTHROUGH",
+  "orientation": {
+    "north_angle_deg": 0,
+    "compass_required": true,
+    "unit_floorplan_overlay": "Unit 4 MASTER (8 rooms, 121-1/2\" ceiling, 66\" attic height)"
+  },
+  "movable_nodes": {
+    "attic_hatch": {
+      "label_en": "Permanent Attic Hatch (24\" × 36\" Finished Clear)",
+      "location": "Right outside front door (Door 4 landing)",
+      "locked_clear_in": [24.0, 36.0],
+      "fire_rating_gate": "UNVERIFIED_HOLD",
+      "exact_offsets": "MEASURE_ON_SITE"
+    },
+    "furnace_unit": {
+      "label_en": "Attic Gas Furnace (Carrier/Bryant Legacy 45k BTU, 80% AFUE, Low NOx)",
+      "cabinet_in": { "height": 33.25, "width": 14.19, "depth": 29.0 },
+      "service_platform_in": [30.0, 30.0],
+      "position_state": "DRAGGABLE_PROPOSED_VERIFY_MON_NOV23",
+      "vibration_pads_by_john": false
+    },
+    "walkway_route": {
+      "label_en": "Continuous 24\" Solid Wood Walkway (30\" Clear Passage)",
+      "placement_state": "TBD_TRACE_ON_FLOORPLAN",
+      "attic_height_in": 66.0,
+      "max_run_ft": 20.0,
+      "material_options": ["23/32\" rated OSB (cheapest compliant)", "3/4\" structural plywood", "2x lumber (NEVER 3/8\" ply)"],
+      "saw_kerf_rule": "1 true 24\" strip per 4x8 sheet (<=7ft: 1, 7-14ft: 2, 14-20ft: 3)"
+    },
+    "ducts": {
+      "supply_ducts": [
+        { "id": "supply-1", "target_room": "Living Room", "boot_position": "DRAGGABLE_VERIFY_MON_NOV23" },
+        { "id": "supply-2", "target_room": "Dining Room / Kitchen Zone", "boot_position": "DRAGGABLE_VERIFY_MON_NOV23" },
+        { "id": "supply-3", "target_room": "Bedroom", "boot_position": "DRAGGABLE_VERIFY_MON_NOV23" }
+      ],
+      "return_intake": {
+        "id": "return-1",
+        "label_en": "Return Air Intake + Filter Box",
+        "position": "DRAGGABLE_VERIFY_MON_NOV23"
+      },
+      "jump_duct": {
+        "id": "jump-1",
+        "label_en": "Pressure-Relief Jump Duct",
+        "position": "DRAGGABLE_VERIFY_MON_NOV23"
+      },
+      "exhaust_flue": {
+        "id": "flue-1",
+        "type": "Type B double-wall gas exhaust vent",
+        "min_clearance_to_combustibles_in": 1.0,
+        "roof_penetration_goal": "Minimize new roof penetrations — confirm existing roof jack route Mon Nov 23"
+      }
+    },
+    "electrical_service": {
+      "attic_light": "Entrance-switched enclosed LED utility light (retain landing light)",
+      "gfci_outlet": {
+        "max_distance_from_furnace_ft": 25.0,
+        "wiring_rule": "Live on line side independent of furnace disconnect (ideally at 30\"×30\" platform)"
+      },
+      "disconnect": "Dedicated furnace circuit + disconnecting means in sight of furnace"
+    }
+  },
+  "live_what_if_checks": [
+    "Moving furnace recalculates walkway run L from outside-Door-4 hatch and flags FAIL if L > 20 ft (at 66\" attic height)",
+    "Moving furnace recalculates 4x8 OSB/plywood sheet count (1 true 24\" strip per sheet)",
+    "Moving furnace checks 120V GFCI distance <= 25 ft and rotates 30\"×30\" service platform on service side",
+    "Moving furnace or registers recalculates all 3 supply runs, 1 return intake, 1 jump duct, and flags crossings over hatch bay or walkway",
+    "Moving furnace updates Type B exhaust flue path to existing roof penetration and checks >= 1\" combustible clearance"
+  ],
+  "field_overrides": [],
+  "pins": []
+}

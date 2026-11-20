@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attic Furnace &amp; Ducts — Interactive Layout</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./hvac-styles.css">
+</head>
+<body>
+  <header class="app-header no-print">
+    <div class="header-inner">
+      <div class="brand-block">
+        <nav class="plan-nav no-print" aria-label="Room and plan navigation">
+          <a id="nav-back-room" class="plan-nav-link" href="../../index.html#hvac">&larr; Back to HVAC Room Page</a>
+          <a id="nav-peer-hatch" class="plan-nav-link plan-nav-peer" href="../attic-hatch/index.html">Permanent Attic Hatch Plan &rarr;</a>
+        </nav>
+        <h1 id="hdr-title">Attic Furnace &amp; Ducts &mdash; Interactive Layout</h1>
+        <div class="brand-meta">
+          <span id="hdr-sub">Mon Nov 23 Walkthrough (Serge + Alex) · Carrier/Bryant Legacy 45k BTU · Zero Prices</span>
+          <span id="tailnet-badge" class="pill pill-neutral">Checking Tailnet…</span>
+          <span id="rev-badge" class="pill pill-info">rev-20261120-hvac-001</span>
+        </div>
+      </div>
+
+      <div class="toolbar-actions">
+        <button type="button" id="btn-lang" class="btn" aria-label="Switch language">Español (MX)</button>
+        <button type="button" id="btn-circle-toggle" class="btn">Circle-to-Correct</button>
+        <button type="button" id="btn-export-svg" class="btn">Export SVG</button>
+        <button type="button" id="btn-download-pdf" class="btn btn-primary">Download / Print PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <div id="hold-banner" class="hold-banner" role="status">
+      <strong>PLANNING SANDBOX — MON NOV 23 WALKTHROUGH (2–4 P.M. WITH SERGE &amp; ALEX):</strong>
+      Zero ceiling cuts, zero roof penetrations, and zero equipment installation are released today. Confirm furnace spot, vent route, fire-rating, and main-to-subpanel feeder at the walkthrough first.
+    </div>
+
+    <div id="conflict-banner" class="conflict-banner no-print" hidden role="alert">
+      <div id="conflict-text">A newer revision was saved by another editor. Reload the latest plan before saving again.</div>
+      <button type="button" id="btn-reload-latest" class="btn btn-sm btn-primary">Reload Latest Plan</button>
+    </div>
+
+    <!-- VISUAL-FIRST HERO: Site Photo + Unit 4 Plan Proof + Interactive True-Scale SVG -->
+    <section class="visual-hero" aria-label="Interactive HVAC attic floor plan and site visuals">
+      <div class="panel svg-panel">
+        <div class="panel-head">
+          <h2 id="svg-panel-title">True-to-Scale Attic Floor Plan &amp; Section (Uniform Scale)</h2>
+          <div class="layer-toggles no-print" aria-label="Drawing layer visibility">
+            <label class="layer-chip"><input type="checkbox" id="lyr-furnace" checked> <span data-i18n="lyr_furnace">Furnace &amp; Platform</span></label>
+            <label class="layer-chip"><input type="checkbox" id="lyr-walkway" checked> <span data-i18n="lyr_walkway">Walkway &amp; Hatch</span></label>
+            <label class="layer-chip"><input type="checkbox" id="lyr-ducts" checked> <span data-i18n="lyr_ducts">3 Supply · 1 Return · 1 Jump</span></label>
+            <label class="layer-chip"><input type="checkbox" id="lyr-mep" checked> <span data-i18n="lyr_mep">Type B Flue &amp; GFCI</span></label>
+            <label class="layer-chip"><input type="checkbox" id="lyr-trim" checked> <span data-i18n="lyr_trim">Original Trim &amp; Clashes</span></label>
+          </div>
+        </div>
+
+        <div class="view-tabs no-print" role="tablist" aria-label="Coupled room views">
+          <button type="button" class="view-tab active" data-view="all" id="tab-view-all">All Coupled Views</button>
+          <button type="button" class="view-tab" data-view="plan" id="tab-view-plan">Attic Floor Plan</button>
+          <button type="button" class="view-tab" data-view="section" id="tab-view-section">Attic Vertical Section (66&quot; Height)</button>
+        </div>
+
+        <div class="status-bar-strip no-print">
+          <span id="walkway-pill" class="pill pill-pass">Walkway: PASS (≤ 20 ft)</span>
+          <span id="sheets-pill" class="pill pill-info">4×8 Sheets: 2</span>
+          <span id="gfci-pill" class="pill pill-pass">120V GFCI: PASS (≤ 25 ft)</span>
+          <span id="flue-pill" class="pill pill-pass">Type B Clear: ≥ 1&quot;</span>
+          <span id="clash-pill" class="pill pill-pass">Clear of Hatch</span>
+          <span id="sync-stamp-pill" class="pill pill-neutral">Baseline Loaded</span>
+        </div>
+
+        <div class="svg-stage-wrap">
+          <div class="svg-stage" id="svg-stage">
+            <svg id="hvac-svg" viewBox="0 0 920 1120" width="920" height="1120"
+                 xmlns="http://www.w3.org/2000/svg" role="img"
+                 aria-label="Unit 4 Attic HVAC and Ductwork Interactive What-If Layout"></svg>
+            <canvas id="hvac-sketch-canvas" aria-label="Circle-to-Correct drawing overlay"></canvas>
+          </div>
+        </div>
+
+        <div id="circle-bar" class="circle-bar no-print" hidden>
+          <span id="circle-bar-hint">Draw a circle around any spot on the HVAC plan (touch or mouse), then add your note below.</span>
+          <div>
+            <button type="button" id="btn-clear-sketch" class="btn btn-sm">Clear Sketch</button>
+            <button type="button" id="btn-circle-done" class="btn btn-sm btn-danger">Exit Circle Mode</button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="panel photo-panel" aria-label="Hallway hatch candidate and floor plan visuals">
+        <div class="panel-head print-keep-head">
+          <h2 id="photo-panel-title">Candidate Access &amp; Floor Plan Reference</h2>
+          <span class="pill pill-warn" id="photo-badge">VERIFY MON NOV 23</span>
+        </div>
+        <div class="photo-body">
+          <div class="photo-frame">
+            <img src="./assets/attic-hatch-candidate.jpg" alt="Entry landing outside Door 4 showing painted ceiling and existing woodwork trim" loading="eager">
+            <div class="photo-compass-overlay">
+              <span id="photo-left-lbl">West / Door 4</span>
+              <span id="photo-mid-lbl">DOOR 4 LANDING</span>
+              <span id="photo-right-lbl">MEASURE ON SITE</span>
+            </div>
+          </div>
+
+          <div class="photo-frame">
+            <img src="./assets/unit4-floorplan-proof.png" alt="True-to-scale Unit 4 eight-room floor plan geometry for supply, return, jump duct, and walkway coordination" loading="eager">
+            <div class="photo-compass-overlay">
+              <span>← WEST (Kitchen)</span>
+              <span>NORTH UP</span>
+              <span>EAST (Bay) →</span>
+            </div>
+          </div>
+
+          <ul class="photo-callouts" id="photo-callouts">
+            <li class="callout-alert"><strong>Drag on Plan:</strong> Drag Furnace, Supply Boots (S1–S3), Return (RET), Jump Duct, GFCI, or Type B Flue directly on the SVG to test walkway length and clashes.</li>
+            <li><strong>66&quot; Attic Height Cap:</strong> Continuous 24&quot; wood walkway is capped at <strong>20 ft max</strong> with a 30&quot; clear passage and <strong>1 true 24&quot; strip per 4×8 sheet</strong> (saw kerf).</li>
+            <li><strong>Isolation Included by NEXT:</strong> John builds the level 30&quot; × 30&quot; solid platform only — <strong>do NOT buy vibration pads</strong>.</li>
+            <li><strong>Feeder Reconciliation Open:</strong> Reconcile NEXT 80A/#4 feeder proposal vs. 100A/onsite Eaton panel box on Mon Nov 23.</li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+
+    <!-- IMMUTABLE CLASHES & HOLD GATES -->
+    <section class="panel" aria-label="Immutable clashes and Mon Nov 23 checks">
+      <div class="panel-head print-keep-head">
+        <h2 id="clashes-title">Clashes, Clearance Flags &amp; Mon Nov 23 Checks</h2>
+        <span class="pill pill-fail" id="clashes-lock-pill">Live + Immutable Flags</span>
+      </div>
+      <div class="clashes-grid" id="clashes-grid"></div>
+    </section>
+
+    <!-- LIVE PROPOSED MATERIALS TAKEOFF + ORIGINAL TRIM BASELINE (ZERO PRICES) -->
+    <section class="panel takeoff-panel" aria-label="Live proposed materials takeoff and existing trim">
+      <div class="panel-head print-keep-head">
+        <h2 id="takeoff-title">Live Proposed Materials Takeoff &amp; Existing Original Trim</h2>
+        <span class="pill pill-info" id="takeoff-zero-pill">Quantities Only · Zero Prices</span>
+      </div>
+      <div class="takeoff-notice" id="takeoff-notice">
+        PLANNING QUANTITIES ONLY — ZERO PRICES. Verify stock on site before ordering any plywood, screws, or electrical boxes.
+      </div>
+      <div class="takeoff-controls no-print">
+        <label class="takeoff-control-group" for="inp-waste-pct">
+          <span data-i18n="lbl_waste">Wood / Duct Waste Factor (%):</span>
+          <input type="number" id="inp-waste-pct" step="1" min="0" max="30" value="10">
+        </label>
+        <label class="takeoff-control-group" for="sel-walkway-mat">
+          <span data-i18n="lbl_walkway_mat">Walkway Decking:</span>
+          <select id="sel-walkway-mat">
+            <option value="osb_23_32">23/32&quot; Rated OSB (cheapest compliant)</option>
+            <option value="ply_3_4">3/4&quot; Structural Plywood</option>
+            <option value="lumber_2x">2× Solid Framing Lumber (NEVER 3/8&quot; ply)</option>
+          </select>
+        </label>
+      </div>
+      <div class="takeoff-grid" id="takeoff-grid"></div>
+      <div style="padding: 0 14px 12px;">
+        <div class="trim-baseline-note" id="trim-baseline-note"></div>
+      </div>
+    </section>
+
+    <!-- LIVE NODE COORDINATE & DUCT RUN TABLE -->
+    <section class="panel" aria-label="Live what-if coordinates and runs">
+      <div class="panel-head print-keep-head">
+        <h2 id="marks-title">Live Attic Nodes, Duct Runs &amp; Service Clearances</h2>
+        <span class="pill pill-info" id="marks-summary-pill">Walkway · Platform · Flue · GFCI</span>
+      </div>
+      <div class="table-scroll">
+        <table class="mark-table">
+          <thead>
+            <tr>
+              <th id="th-item">Equipment / Route Element</th>
+              <th id="th-pos">Plan Position (from NW Corner)</th>
+              <th id="th-run">Computed Length / Clearance</th>
+              <th id="th-gate">Rule / Check Status</th>
+              <th id="th-bound">Boundary &amp; Provenance</th>
+            </tr>
+          </thead>
+          <tbody id="marks-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE WHAT-IF CONTROLS + CIRCLE/VOICE + EOD REVIEW -->
+    <section class="workspace-grid no-print" aria-label="Interactive what-if controls and EOD review">
+      <div class="panel">
+        <div class="panel-head">
+          <h2 id="editor-title">Interactive What-If Controls (Walkthrough Sandbox)</h2>
+          <span class="pill pill-neutral" id="editor-mode-pill">Local Preview + Export</span>
+        </div>
+
+        <form id="hvac-form" class="form-body" novalidate>
+          <div class="preset-row">
+            <span class="preset-label" id="preset-lbl">What-If Test:</span>
+            <button type="button" class="btn btn-sm" id="preset-baseline">Mon Nov 23 Baseline</button>
+            <button type="button" class="btn btn-sm" id="preset-fail-walkway">Test Walkway &gt;20 ft (FAIL)</button>
+            <button type="button" class="btn btn-sm" id="preset-fail-clash">Test Duct Over Hatch (CLASH)</button>
+            <button type="button" class="btn btn-sm" id="preset-fail-gfci">Test GFCI &gt;25 ft (FAIL)</button>
+            <button type="button" class="btn btn-sm" id="btn-reset-baseline">Reset</button>
+          </div>
+
+          <div class="dim-grid">
+            <div class="field-group">
+              <label class="field-label-row" for="inp-author">
+                <span data-i18n="lbl_author">Editor Name</span>
+                <span class="boundary-tag">author</span>
+              </label>
+              <select id="inp-author">
+                <option value="Tisa">Tisa</option>
+                <option value="John">John</option>
+                <option value="Serge">Serge (NEXT)</option>
+                <option value="Alex">Alex</option>
+                <option value="Ervin">Ervin</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="sel-platform-side">
+                <span data-i18n="lbl_platform_side">30&quot;×30&quot; Platform Service Side</span>
+                <span class="boundary-tag">subfloor</span>
+              </label>
+              <select id="sel-platform-side">
+                <option value="south">South (Facing Hallway)</option>
+                <option value="north">North (Facing Attic Peak)</option>
+                <option value="east">East (Toward Bedroom)</option>
+                <option value="west">West (Toward Door 4 Hatch)</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-furnace-x">
+                <span data-i18n="lbl_furnace_x">Furnace East Offset from West Wall (in)</span>
+                <span class="pill pill-warn" id="prov-furnace-x">PROPOSED</span>
+              </label>
+              <div class="field-input-row">
+                <input type="number" id="inp-furnace-x" step="1" min="160" max="430">
+                <select id="bnd-furnace-x" class="boundary-select" aria-label="Furnace X boundary"></select>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-furnace-y">
+                <span data-i18n="lbl_furnace_y">Furnace South Offset from North Wall (in)</span>
+                <span class="pill pill-warn" id="prov-furnace-y">PROPOSED</span>
+              </label>
+              <div class="field-input-row">
+                <input type="number" id="inp-furnace-y" step="1" min="24" max="265">
+                <select id="bnd-furnace-y" class="boundary-select" aria-label="Furnace Y boundary"></select>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-attic-h">
+                <span data-i18n="lbl_attic_h">Confirmed Attic Ridge Height (in)</span>
+                <span class="boundary-tag">wall_to_wall</span>
+              </label>
+              <div class="field-input-row">
+                <input type="number" id="inp-attic-h" step="0.5" min="48" max="96">
+                <select id="bnd-attic-h" class="boundary-select" aria-label="Attic height boundary"></select>
+              </div>
+              <div class="field-help" data-i18n="help_attic_h">66&quot; (&lt; 6 ft) caps continuous 24&quot; walkway at 20 ft max.</div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-flue-clear">
+                <span data-i18n="lbl_flue_clear">Type B Vent Clear to Combustibles (in)</span>
+                <span class="boundary-tag">wall_to_wall</span>
+              </label>
+              <div class="field-input-row">
+                <input type="number" id="inp-flue-clear" step="0.25" min="0" max="12">
+                <select id="bnd-flue-clear" class="boundary-select" aria-label="Flue clearance boundary"></select>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="sel-roof-route">
+                <span data-i18n="lbl_roof_route">Exhaust Roof Vent Strategy</span>
+              </label>
+              <select id="sel-roof-route">
+                <option value="existing_jack">Reuse Existing Roof Jack (Minimize Roof Cuts)</option>
+                <option value="new_jack_mon_tbd">New Roof Jack Penetration (Requires Owner + Mon Check)</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-gfci-dist">
+                <span data-i18n="lbl_gfci_mode">120V GFCI Service Location</span>
+              </label>
+              <select id="sel-gfci-mode">
+                <option value="at_platform">Mounted at 30&quot;×30&quot; Service Platform (Live Independent)</option>
+                <option value="custom_drag">Custom Spot on Floor Plan (Drag GFCI Icon)</option>
+              </select>
+            </div>
+
+            <div class="field-group full-span">
+              <label class="field-label-row" for="inp-hatch-x">
+                <span data-i18n="lbl_hatch_offset">Candidate 24&quot;×36&quot; Hatch Position at Door 4 Landing (X / Y in from NW)</span>
+                <span class="pill pill-fail">MEASURE ON SITE</span>
+              </label>
+              <div class="field-input-row">
+                <input type="number" id="inp-hatch-x" step="1" min="150" max="240" aria-label="Hatch X">
+                <input type="number" id="inp-hatch-y" step="1" min="20" max="130" aria-label="Hatch Y">
+                <select id="sel-hatch-dir" aria-label="Hatch long dimension">
+                  <option value="ns">36&quot; North–South × 24&quot; East–West</option>
+                  <option value="ew">36&quot; East–West × 24&quot; North–South</option>
+                </select>
+              </div>
+              <div class="field-help help-alert" data-i18n="help_hatch">Exact Door 4 landing offsets and ceiling fire-rating remain MEASURE ON SITE before any ceiling cut.</div>
+            </div>
+          </div>
+
+          <div class="action-bar">
+            <button type="button" id="btn-apply-local" class="btn btn-essex">Apply Live Preview</button>
+            <button type="button" id="btn-save-tailnet" class="btn btn-primary" disabled>Save Live to Tailnet</button>
+            <button type="button" id="btn-export-json" class="btn">Download JSON</button>
+          </div>
+          <div id="save-hint" class="field-help">Off-tailnet devices preview and export locally only. Connect to Tisa&apos;s Tailscale network to save live overrides.</div>
+        </form>
+      </div>
+
+      <div class="right-stack">
+        <div class="panel">
+          <div class="panel-head">
+            <h2 id="voice-title">Circle-to-Correct &amp; Voice Field Note</h2>
+            <span class="pill pill-info" id="voice-lang-pill">en-US</span>
+          </div>
+          <div class="form-body">
+            <div class="field-group">
+              <label class="field-label-row" for="sel-pin-intent">
+                <span data-i18n="lbl_intent">Note Type</span>
+                <span id="sketch-status-pill" class="pill pill-neutral">No Circle Drawn</span>
+              </label>
+              <select id="sel-pin-intent">
+                <option value="propose_edit">Propose Spot / Measurement</option>
+                <option value="flag_problem">Flag Obstacle / Leak / Clash</option>
+                <option value="ask_question">Ask Question (&quot;What is this right here?&quot;)</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-voice-note">
+                <span data-i18n="lbl_note">Field Note or Spoken Command</span>
+              </label>
+              <textarea id="inp-voice-note" rows="3" placeholder="Example: &quot;Rotate platform east&quot;, &quot;Waste 15&quot;, or &quot;Existing ridge vent sits above dining&quot; (Zero prices)"></textarea>
+            </div>
+
+            <div class="voice-row">
+              <button type="button" id="btn-dictate" class="btn">Dictate Voice Note</button>
+              <button type="button" id="btn-apply-note" class="btn btn-primary">Add Attached Comment</button>
+            </div>
+            <div id="voice-status" class="field-help">Tap Circle-to-Correct above to circle any area on the plan, then dictate or type your note.</div>
+
+            <div id="pin-list" class="pin-list"></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2 id="eod-title">End-of-Day Review &amp; Revert (Tisa)</h2>
+            <span class="pill pill-warn" id="eod-count-pill">0 pending</span>
+          </div>
+          <div class="form-body">
+            <p class="empty-note" id="eod-desc">
+              Walkthrough saves stamp the plan immediately with a revision ID. At end-of-day, Tisa taps
+              <strong>Accept</strong> (promotes to <code>hvac/SPEC.md</code>) or <strong>Reject</strong> (reverts atomically).
+            </p>
+            <div id="eod-list" class="eod-list"></div>
+            <div class="action-bar">
+              <button type="button" id="btn-refresh-eod" class="btn btn-sm">Refresh From Tailnet</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="status-toast" class="status-toast" hidden role="status" aria-live="polite"></div>
+
+  <script src="../vendor/jspdf.umd.min.js"></script>
+  <script src="../vendor/svg2pdf.umd.min.js"></script>
+  <script src="../vendor/ks4-pdf-export.js"></script>
+  <script src="./hvac-renderer.js"></script>
+</body>
+</html>

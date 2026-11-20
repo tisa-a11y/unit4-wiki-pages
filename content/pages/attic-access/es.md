@@ -1,7 +1,7 @@
 # Acceso al ático
 
 ## Concepto
-Escotilla permanente en el techo del pasillo, 24" × 36" libres. En el ático: pasarela de madera, plataforma nivelada junto al calefactor, luz y contacto.
+Escotilla permanente en el techo del pasillo, 24" × 36" libres. En el ático: pasarela de madera, plataforma nivelada junto al calefactor, luz y contacto. Abrir el [Plano Interactivo de Escotilla Permanente](./plans/attic-hatch/index.html?lang=es) o revisar el [Plano de Calefacción y Ductos](./plans/hvac-layout/index.html?lang=es).
 
 ## Cinco reglas antes de cortar
 1. **Revisar primero el techo.** No cortar hasta revisar si va contra fuego y medir entre las vigas.

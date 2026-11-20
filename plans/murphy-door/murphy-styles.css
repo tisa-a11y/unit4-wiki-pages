@@ -1,0 +1,1273 @@
+/* Unit 4 Kitchen — West Vent Hood Wall (K-S4) Interactive Architectural Sheet
+   Design system: cool drafting bond + blueprint ink + BM Essex Green HC-188 accent.
+   Zero external CDN dependencies; responsive phone -> tablet -> desktop -> Letter print. */
+
+:root {
+  --paper: #f5f7f4;
+  --surface: #ffffff;
+  --surface-alt: #f8fafc;
+  --ink: #10202b;
+  --muted: #4b5c69;
+  --line: #cfd8e3;
+  --line-strong: #1e293b;
+  --blueprint: #15539e;
+  --blueprint-soft: #e8f1fb;
+  --essex: #2f4f42;
+  --essex-soft: #e6efe9;
+  --timber: #8f4a16;
+  --timber-soft: #fef3c7;
+  --alert: #b91c1c;
+  --alert-soft: #fef2f2;
+  --amber: #b45309;
+  --amber-soft: #fffbeb;
+  --radius: 8px;
+  --radius-sm: 5px;
+  --font-sans: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+.page-shell > *,
+.visual-hero > *,
+.workspace-grid > *,
+.panel {
+  min-width: 0;
+  max-width: 100%;
+}
+
+a {
+  color: var(--blueprint);
+}
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2.5px solid var(--blueprint);
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* ── Sticky Compact Architectural Toolbar ────────────────────────────── */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 1.5px solid var(--line);
+  padding: 10px 16px;
+}
+
+.header-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+}
+
+.plan-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.plan-nav-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--blueprint);
+  background: var(--blueprint-soft);
+  border: 1px solid #bfdbfe;
+  max-width: 100%;
+}
+
+.plan-nav-link:hover {
+  background: #dbeafe;
+}
+
+.plan-nav-peer {
+  color: var(--essex);
+  background: var(--essex-soft);
+  border-color: #bbf7d0;
+}
+
+.plan-nav-peer:hover {
+  background: #d1fae5;
+}
+
+.brand-block h1 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.brand-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.toolbar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Buttons & Pills */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 6px 11px;
+  border-radius: var(--radius-sm);
+  border: 1.25px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.14s ease, border-color 0.14s ease, color 0.14s ease;
+}
+
+.btn:hover:not(:disabled) {
+  background: var(--surface-alt);
+  border-color: #94a3b8;
+}
+
+.btn:disabled {
+  opacity: 0.48;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--blueprint);
+  border-color: var(--blueprint);
+  color: #ffffff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #10427f;
+  border-color: #10427f;
+}
+
+.btn-essex {
+  background: var(--essex);
+  border-color: var(--essex);
+  color: #ffffff;
+}
+
+.btn-essex:hover:not(:disabled) {
+  background: #223b31;
+  border-color: #223b31;
+}
+
+.btn-danger {
+  background: var(--alert);
+  border-color: var(--alert);
+  color: #ffffff;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: #991b1b;
+  border-color: #991b1b;
+}
+
+.btn-active {
+  background: var(--alert-soft);
+  border-color: var(--alert);
+  color: var(--alert);
+}
+
+.btn-sm {
+  min-height: 30px;
+  padding: 4px 9px;
+  font-size: 12px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 700;
+  border: 1px solid transparent;
+  line-height: 1.35;
+}
+
+.pill-pass {
+  background: var(--essex-soft);
+  color: var(--essex);
+  border-color: #a7cbb7;
+}
+
+.pill-fail {
+  background: var(--alert-soft);
+  color: var(--alert);
+  border-color: #fca5a5;
+}
+
+.pill-warn {
+  background: var(--amber-soft);
+  color: var(--amber);
+  border-color: #fcd34d;
+}
+
+.pill-info {
+  background: var(--blueprint-soft);
+  color: var(--blueprint);
+  border-color: #bfdbfe;
+}
+
+.pill-neutral {
+  background: #eef2f6;
+  color: var(--muted);
+  border-color: var(--line);
+}
+
+/* ── Main Container ──────────────────────────────────────────────────── */
+.page-shell {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 12px 16px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.hold-banner {
+  background: var(--alert-soft);
+  border: 1.5px solid #dc2626;
+  border-left: 5px solid #b91c1c;
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  color: #7f1d1d;
+  font-size: 12.5px;
+}
+
+.conflict-banner {
+  background: var(--amber-soft);
+  border: 1.5px solid #d97706;
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  color: #78350f;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.conflict-banner[hidden] {
+  display: none;
+}
+
+/* ── Visual-First Hero Stage (Photo + Parametric SVG ABOVE all text) ── */
+.visual-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(300px, 0.72fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.panel {
+  background: var(--surface);
+  border: 1.25px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.panel-head {
+  padding: 10px 14px;
+  background: var(--surface-alt);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.panel-head h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.layer-toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.layer-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+}
+
+.layer-chip input {
+  margin: 0;
+  accent-color: var(--blueprint);
+}
+
+/* SVG + Circle-to-Correct Canvas Stage */
+.status-bar-strip {
+  padding: 8px 14px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.svg-stage-wrap {
+  position: relative;
+  width: 100%;
+  background: #ffffff;
+  padding: 8px;
+}
+
+.svg-stage {
+  position: relative;
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+#murphy-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #ffffff;
+  user-select: none;
+}
+
+#murphy-sketch-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+#murphy-sketch-canvas.drawing-active {
+  pointer-events: auto;
+  cursor: crosshair;
+  touch-action: none;
+  outline: 2.5px dashed var(--alert);
+  outline-offset: -2px;
+  background: rgba(185, 28, 28, 0.03);
+}
+
+.circle-bar {
+  padding: 8px 14px;
+  background: var(--alert-soft);
+  border-top: 1px solid #fecaca;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12.5px;
+  color: #7f1d1d;
+}
+
+.circle-bar[hidden] {
+  display: none;
+}
+
+/* Site Photo Card */
+.photo-body {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.photo-frame {
+  position: relative;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #0f172a;
+}
+
+.photo-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 460px;
+  object-fit: cover;
+}
+
+.photo-compass-overlay {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 9px;
+  background: rgba(16, 32, 43, 0.86);
+  color: #ffffff;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.photo-callouts {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12.5px;
+}
+
+.photo-callouts li {
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-alt);
+  border: 1px solid var(--line);
+}
+
+.photo-callouts li.callout-alert {
+  background: var(--amber-soft);
+  border-color: #fcd34d;
+  color: #78350f;
+}
+
+/* ── Clashes & Mark Sheet Section ────────────────────────────────────── */
+.clashes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  padding: 12px 14px;
+}
+
+.clash-card {
+  padding: 10px 11px;
+  border-radius: var(--radius-sm);
+  border: 1.25px solid #fca5a5;
+  background: var(--alert-soft);
+  font-size: 12.5px;
+}
+
+.clash-card.sev-medium {
+  border-color: #fcd34d;
+  background: var(--amber-soft);
+}
+
+.clash-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 5px;
+  font-weight: 700;
+  font-size: 11.5px;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.mark-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+
+.mark-table th,
+.mark-table td {
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.mark-table th {
+  background: var(--surface-alt);
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.mark-table tr.row-fail td {
+  background: var(--alert-soft);
+}
+
+.mark-table tr.row-measure td {
+  background: var(--amber-soft);
+}
+
+/* ── Live Proposed Materials Takeoff & Existing Original Trim Cards ──── */
+.takeoff-notice {
+  padding: 8px 14px;
+  background: var(--amber-soft);
+  border-bottom: 1px solid #fcd34d;
+  color: #78350f;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.takeoff-controls {
+  padding: 10px 14px;
+  background: var(--surface-alt);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+}
+
+.takeoff-control-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.takeoff-control-group input[type="number"] {
+  width: 74px;
+  min-height: 30px;
+  padding: 3px 7px;
+  border: 1.25px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font-size: 12.5px;
+}
+
+.takeoff-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  padding: 12px 14px;
+}
+
+.takeoff-card {
+  padding: 10px 11px;
+  border-radius: var(--radius-sm);
+  border: 1.25px solid var(--line);
+  background: var(--surface-alt);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.takeoff-card.card-primary {
+  border-color: #93c5fd;
+  background: var(--blueprint-soft);
+}
+
+.takeoff-card-title {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.takeoff-card-big {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.takeoff-card-sub {
+  font-size: 11.5px;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.trim-baseline-note {
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--essex-soft);
+  border: 1px solid #a7cbb7;
+  color: var(--essex);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.boundary-tag {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: #edf2f7;
+  border: 1px solid #cbd5e1;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: #334155;
+  white-space: nowrap;
+}
+
+/* ── Interactive Controls Workspace ──────────────────────────────────── */
+.workspace-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.95fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.form-body {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.preset-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.preset-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.dim-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 12px;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field-group.full-span {
+  grid-column: 1 / -1;
+}
+
+.field-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.field-input-row {
+  display: flex;
+  gap: 6px;
+}
+
+.field-input-row input,
+.field-input-row select,
+.field-group input[type="text"],
+.field-group select,
+.field-group textarea {
+  width: 100%;
+  min-height: 36px;
+  padding: 6px 9px;
+  border: 1.25px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font-size: 13px;
+}
+
+.field-input-row select.boundary-select {
+  width: auto;
+  max-width: 165px;
+  font-size: 11.5px;
+  background: var(--surface-alt);
+}
+
+.field-help {
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+.field-help.help-alert {
+  color: var(--alert);
+  font-weight: 600;
+}
+
+.action-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+
+.right-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Voice & Pins Card */
+.voice-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.pin-list,
+.eod-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.pin-item,
+.eod-item {
+  padding: 9px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface-alt);
+  font-size: 12.5px;
+}
+
+.eod-item-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 5px;
+}
+
+.eod-item-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.empty-note {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.status-toast {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 60;
+  max-width: 420px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--ink);
+  color: #ffffff;
+  font-size: 12.5px;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(16, 32, 43, 0.25);
+}
+
+.status-toast.toast-error {
+  background: var(--alert);
+}
+
+.status-toast.toast-ok {
+  background: var(--essex);
+}
+
+.status-toast[hidden] {
+  display: none;
+}
+
+/* ── Responsive Breakpoints (Tablet & iPhone) ────────────────────────── */
+@media (max-width: 1080px) {
+  .visual-hero,
+  .workspace-grid {
+    grid-template-columns: 1fr;
+  }
+  .clashes-grid {
+    grid-template-columns: 1fr;
+  }
+  .takeoff-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .takeoff-grid {
+    grid-template-columns: 1fr;
+  }
+  .app-header {
+    padding: 8px 10px;
+  }
+  .header-inner,
+  .brand-block,
+  .toolbar-actions {
+    min-width: 0;
+    max-width: 100%;
+  }
+  .brand-block h1 {
+    font-size: 15px;
+    overflow-wrap: anywhere;
+  }
+  .page-shell {
+    padding: 10px 10px 28px;
+  }
+  .dim-grid {
+    grid-template-columns: 1fr;
+  }
+  .btn {
+    min-height: 38px;
+    padding: 5px 9px;
+    font-size: 12px;
+    white-space: normal;
+  }
+  .field-input-row {
+    flex-direction: column;
+  }
+  .field-input-row select.boundary-select {
+    max-width: 100%;
+  }
+  #murphy-svg {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Architectural Print & Official Headless Chrome PDF Mode ─────────── */
+@page {
+  size: letter portrait;
+  margin: 0.25in;
+}
+
+@media print {
+  .no-print,
+  .app-header,
+  .conflict-banner,
+  .layer-toggles,
+  .circle-bar,
+  .status-toast,
+  .workspace-grid,
+  .status-bar-strip {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff;
+    font-size: 10pt;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page-shell {
+    max-width: none;
+    padding: 0;
+    gap: 8pt;
+  }
+
+  .hold-banner {
+    padding: 4pt 8pt;
+    font-size: 8.5pt;
+    margin-bottom: 4pt;
+  }
+
+  .visual-hero {
+    display: block;
+  }
+
+  .panel {
+    border: none;
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  .panel-head {
+    display: none;
+  }
+
+  /* Page 1: Single full-page vector architectural sheet */
+  .svg-panel {
+    break-after: page;
+    page-break-after: always;
+  }
+
+  .svg-stage-wrap {
+    padding: 0;
+  }
+
+  .svg-stage {
+    max-width: 7.9in;
+  }
+
+  #murphy-svg {
+    width: 100%;
+    max-height: 9.7in;
+  }
+
+  /* Page 2: Visual site photo + Flagged Clashes + Takeoff + Mark Table (fits cleanly in 2 Letter pages) */
+  .panel {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 4pt;
+  }
+
+  .photo-panel {
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    margin-bottom: 4pt;
+    break-inside: avoid;
+  }
+
+  .photo-panel .panel-head,
+  .print-keep-head {
+    display: flex !important;
+    padding: 3pt 6pt;
+  }
+
+  .photo-panel .panel-head h2,
+  .print-keep-head h2 {
+    font-size: 9pt;
+  }
+
+  .photo-body {
+    display: grid;
+    grid-template-columns: 1.65in 1.95in 1fr;
+    gap: 5pt;
+    padding: 4pt 6pt;
+    align-items: start;
+  }
+
+  .photo-frame img {
+    height: 1.24in;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .photo-compass-overlay {
+    font-size: 5pt;
+    padding: 2px 4px;
+    gap: 2px;
+    line-height: 1.1;
+    flex-wrap: wrap;
+  }
+
+  .concept-disclaimer {
+    font-size: 5pt;
+    padding: 1px 4px;
+    white-space: normal;
+  }
+
+  .photo-callouts {
+    gap: 2pt;
+    font-size: 7.2pt;
+    line-height: 1.22;
+  }
+
+  .photo-callouts li {
+    padding: 2pt 4pt;
+  }
+
+  .clashes-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 3.5pt 5pt;
+    gap: 4pt;
+  }
+
+  .clash-card {
+    padding: 3pt 4pt;
+    font-size: 7.2pt;
+    line-height: 1.22;
+  }
+
+  .table-scroll {
+    overflow: visible;
+  }
+
+  .mark-table {
+    font-size: 7.1pt;
+    line-height: 1.18;
+    table-layout: fixed;
+  }
+
+  .mark-table th,
+  .mark-table td {
+    padding: 2.2pt 4pt;
+    white-space: normal;
+    word-wrap: break-word;
+  }
+
+  .mark-table th:nth-child(1) { width: 25%; }
+  .mark-table th:nth-child(2) { width: 15%; }
+  .mark-table th:nth-child(3) { width: 15%; }
+  .mark-table th:nth-child(4) { width: 23%; }
+  .mark-table th:nth-child(5) { width: 22%; }
+
+  .mark-table .pill,
+  .mark-table .boundary-tag {
+    font-size: 6.5pt;
+    padding: 1px 3px;
+  }
+
+  /* Compact Proposed Materials Takeoff strip on Print Page 2 (fits strictly within 2 Letter pages) */
+  .takeoff-panel {
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    margin-top: 2pt;
+    break-inside: avoid;
+  }
+
+  .takeoff-notice {
+    padding: 2pt 5pt;
+    font-size: 7pt;
+  }
+
+  .takeoff-grid {
+    grid-template-columns: repeat(4, 1fr);
+    padding: 3pt 5pt;
+    gap: 4pt;
+  }
+
+  .takeoff-card {
+    padding: 2.5pt 4pt;
+    gap: 1.5pt;
+  }
+
+  .takeoff-card-title {
+    font-size: 6.5pt;
+  }
+
+  .takeoff-card-big {
+    font-size: 8.4pt;
+  }
+
+  .takeoff-card-sub {
+    font-size: 6.4pt;
+    line-height: 1.15;
+  }
+
+  .trim-baseline-note {
+    padding: 2.5pt 5pt;
+    font-size: 7pt;
+    line-height: 1.2;
+  }
+}
+
+/* Explicit ?print=1 preview parity for headless automation */
+body.print-mode .no-print,
+body.print-mode .app-header,
+body.print-mode .conflict-banner,
+body.print-mode .layer-toggles,
+body.print-mode .circle-bar,
+body.print-mode .status-toast,
+body.print-mode .workspace-grid {
+  display: none !important;
+}
+
+body.print-mode .page-shell {
+  max-width: 8.2in;
+  padding: 0.15in;
+}
+
+body.print-mode .visual-hero {
+  display: block;
+}
+
+body.print-mode .svg-panel {
+  margin-bottom: 14px;
+}
+
+
+/* ── Coupled View Switcher Tabs & Interactive Drag Handles ───────────── */
+.view-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 6px 14px;
+  background: var(--surface-alt);
+  border-bottom: 1px solid var(--line);
+}
+.view-tab {
+  min-height: 28px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.view-tab.active {
+  background: var(--blueprint);
+  border-color: var(--blueprint);
+  color: #ffffff;
+}
+.concept-disclaimer {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: var(--amber-soft);
+  color: var(--amber);
+  border: 1px solid #fcd34d;
+  text-align: center;
+}
+.svg-draggable {
+  cursor: grab;
+}
+.svg-draggable:active {
+  cursor: grabbing;
+}
+.callout-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 6px;
+}
+@media (max-width: 640px) {
+  .callout-list { grid-template-columns: 1fr; }
+}
+@media print {
+  .view-tabs { display: none !important; }
+}
+
+/* ── Addendum #2: Attached Comment Callout Cards, Per-Card Mic & Send to Agent ── */
+.pin-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 9px 10px;
+  border: 1.25px solid var(--line);
+  border-left: 4px solid var(--blueprint);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+.pin-card.intent-flag_problem { border-left-color: var(--alert); }
+.pin-card.intent-propose_edit { border-left-color: var(--essex); }
+.pin-card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+.pin-num-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+}
+.pin-card textarea {
+  width: 100%;
+  min-height: 46px;
+  padding: 5px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  resize: vertical;
+}
+.pin-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.pin-answer {
+  padding: 7px 9px;
+  border-radius: var(--radius-sm);
+  background: var(--blueprint-soft);
+  border: 1px solid #bfdbfe;
+  font-size: 12px;
+  color: var(--ink);
+}

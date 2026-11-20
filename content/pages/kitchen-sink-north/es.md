@@ -9,4 +9,5 @@ Muro Sur con la tarja y las repisas pie-safe. Muro Este con el refrigerador. Mur
 - **Repisas pie-safe:** de unas 26" a 59" desde la esquina, parte alta a unas 80" del piso. Contactos a un lado, nunca debajo.
 - **Muro Este (88"):** esquinero de 36", gabinete de 24", espacio de 28" para el refrigerador. Dejar 2" detrás del refrigerador. Sin gabinete arriba.
 - **Contactos de cubierta:** a 41" del piso.
+- **Planta completa:** Revisar medidas del trazo en L y paso más angosto en los 4 muros en el [Plano Interactivo de Cocina Completa](./plans/kitchen-floor-plan/index.html?lang=es) antes de cortar o pedir material.
 - **Muro Norte:** tres apagadores a 48". No cerrar el muro del tablero.

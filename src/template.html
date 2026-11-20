@@ -434,16 +434,42 @@ header.home-head.u4-has-ai .u4-home-head-copy{min-width:0;flex:1 1 200px}
 .u4-vd-chips::-webkit-scrollbar{display:none}
 .u4-nudge-chip{flex:none;font:500 11.5px/1.2 var(--body);padding:4px 9px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--fg);cursor:pointer;white-space:nowrap}
 .u4-nudge-chip:hover{border-color:var(--accent);color:var(--accent)}
-.u4-vd-ask-row{display:flex;gap:6px;align-items:center}
+.u4-vd-ask-row{display:flex;gap:6px;align-items:center;min-width:0}
 .u4-vd-ask-inp{flex:1 1 auto;min-width:0;font:inherit;font-size:13px;padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--fg)}
 .u4-vd-ask-send{width:28px;height:28px;border-radius:50%;border:1px solid var(--accent);background:var(--accent);color:var(--panel);font:700 13px/1 var(--body);cursor:pointer;flex:none;display:inline-flex;align-items:center;justify-content:center;padding:0}
+.u4-vd-photo-bar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;min-width:0;max-width:100%}
+.u4-vd-photo-btn{min-height:30px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--fg);font:600 12px/1.2 var(--body);cursor:pointer;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.u4-vd-photo-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.u4-vd-photo-preview{display:flex;align-items:center;gap:7px;padding:5px 8px;border-radius:10px;border:1px solid var(--line);background:var(--panel);min-width:0;max-width:100%}
+.u4-vd-photo-preview[hidden]{display:none!important}
+.u4-vd-photo-preview img{width:34px;height:34px;object-fit:cover;border-radius:6px;border:1px solid var(--line);flex:none}
+.u4-vd-photo-name{font:500 12px/1.2 var(--body);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1 1 auto;min-width:0}
+.u4-vd-photo-send{min-height:28px;padding:3px 10px;border-radius:999px;border:1px solid var(--accent);background:var(--accent);color:var(--panel);font:600 11.5px/1.2 var(--body);cursor:pointer;flex:none;white-space:nowrap}
+.u4-vd-photo-clear{border:0;background:transparent;color:var(--muted);font:700 14px/1 var(--body);cursor:pointer;padding:2px 5px;flex:none}
+.u4-chat-bubble-img{display:block;max-width:168px;max-height:126px;width:auto;height:auto;border-radius:8px;margin:0 0 5px;border:1px solid rgba(255,255,255,.28);object-fit:cover}
+.u4-camera-modal{position:fixed;inset:0;z-index:220;background:rgba(15,23,42,.72);display:flex;align-items:center;justify-content:center;padding:12px}
+.u4-camera-modal[hidden]{display:none!important}
+.u4-camera-card{width:100%;max-width:460px;background:var(--panel);color:var(--fg);border:1px solid var(--line);border-radius:14px;box-shadow:0 14px 36px rgba(0,0,0,.32);overflow:hidden;display:grid;gap:10px;padding:12px}
+.u4-camera-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.u4-camera-title{font:700 15px/1.2 var(--display);margin:0}
+.u4-camera-stage{position:relative;width:100%;aspect-ratio:4/3;max-height:56vh;background:#0f172a;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.u4-camera-stage video,.u4-camera-stage img{width:100%;height:100%;object-fit:contain;display:block}
+.u4-camera-stage video[hidden],.u4-camera-stage img[hidden]{display:none!important}
+.u4-camera-status{margin:0;font-size:12.5px;color:var(--muted);line-height:1.35}
+.u4-camera-status.is-err{color:#b91c1c}
+.u4-camera-actions{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;align-items:center}
+.u4-camera-actions .u4-photo-btn.is-primary{background:var(--accent)!important;border-color:var(--accent)!important;color:var(--panel)!important}
+@media (max-width:600px){
+  .u4-vd-foot{padding:7px 8px;min-width:0}
+  .u4-camera-card{max-width:calc(100vw - 24px);padding:10px}
+}
 
 /* Clean, organized bottom Field Note form (#field):
    - Identity input + quick crew chips
    - Organized About dropdown (NO Type/What-kind dropdown!)
    - NO Voice Memo choose-file (permanently retired — live dictation only!)
    - Live streaming dictation mic + encouraged Photo capture + Send */
-#field.u4-simple-field .pp-link,#field.u4-simple-field #repPhoto{display:none!important}
+#field.u4-simple-field .pp-link,#field.u4-simple-field #repPhoto,#field.u4-simple-field #repPhotoCamera{display:none!important}
 #field.u4-simple-field{margin-top:32px;padding:18px 20px;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.04)}
 #field.u4-simple-field h2{font-size:20px;margin:0 0 12px;display:flex;align-items:center;justify-content:space-between}
 #field.u4-simple-field .row2{display:grid;grid-template-columns:1.15fr 1fr;gap:12px;align-items:start;margin-bottom:4px}
@@ -489,6 +515,7 @@ main > .bar #path{display:none!important}
 .docs li a{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 12px;min-height:44px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--fg);text-decoration:none;font-weight:600;font-size:14.5px;transition:border-color .15s,background .15s}
 .docs li a:hover{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
 .docs .k{margin-left:auto;padding:2px 8px;border-radius:999px;background:var(--bg);border:1px solid var(--line);font-size:11px}
+.docs .k-interactive{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:700}
 
 /* 5. PDF Viewer Page Number Labels */
 .u4-pdf-page-lbl{font:600 11.5px/1.2 var(--mono);color:var(--muted);margin:6px 0 2px}
@@ -1018,8 +1045,10 @@ html body .u4-home-sec,html body .u4-home-sec:first-child{border-top:0;border-le
           <div class="u4-composer-bar">
             <div class="u4-composer-left">
               <input type="file" id="repPhoto" accept="image/*" hidden>
+              <input type="file" id="repPhotoCamera" accept="image/*" capture="environment" hidden>
               <div id="u4PhotoBar" class="u4-photo-bar">
-                <button type="button" id="u4PhotoTriggerBtn" class="u4-photo-btn"><span id="u4PhotoBtnText">📷 Add photo</span></button>
+                <button type="button" id="u4PhotoTriggerBtn" class="u4-photo-btn"><span id="u4PhotoBtnText">📎 Attach photo</span></button>
+                <button type="button" id="u4CameraTriggerBtn" class="u4-photo-btn"><span id="u4CameraBtnText">📷 Take photo</span></button>
                 <span id="u4PhotoEncourageText" class="u4-photo-note">Include a photo whenever possible</span>
                 <span id="u4PhotoPreviewBadge" class="u4-photo-preview" hidden>
                   <img id="u4PhotoThumb" alt="Selected photo">
@@ -1073,7 +1102,8 @@ const UI = {
     fullPlanDetails: "More detail", techSpecsDetails: "More detail",
     subnavOverviewTab: "Overview", fieldNoteHeading: "Field note", fromYourName: "From (your name)",
     fromPlaceholder: "Tap your name below or type it…", aboutTopic: "About",
-    fieldPlaceholder: "Write a field note, or tap the mic to dictate…", addPhotoBtn: "📷 Add photo",
+    fieldPlaceholder: "Write a field note, or tap the mic to dictate…", addPhotoBtn: "📎 Attach photo",
+    takePhotoBtn: "📷 Take photo",
     photoEncourage: "Include a photo whenever possible", removePhotoAria: "Remove photo",
     dictateAria: "Dictate note by voice", sendBtn: "Send", sendNoteFab: "Send a note",
     allFieldReportsLink: "All field reports → Project Planning", openDecisionsLink: "Open decisions → Project Planning",
@@ -1098,7 +1128,8 @@ const UI = {
     fullPlanDetails: "Más detalle", techSpecsDetails: "Más detalle",
     subnavOverviewTab: "Resumen", fieldNoteHeading: "Nota de obra", fromYourName: "De (tu nombre)",
     fromPlaceholder: "Toca tu nombre abajo o escríbelo…", aboutTopic: "Tema",
-    fieldPlaceholder: "Escribe una nota o toca el micrófono para dictar…", addPhotoBtn: "📷 Foto",
+    fieldPlaceholder: "Escribe una nota o toca el micrófono para dictar…", addPhotoBtn: "📎 Adjuntar foto",
+    takePhotoBtn: "📷 Tomar foto",
     photoEncourage: "Incluye foto siempre que puedas", removePhotoAria: "Quitar foto",
     dictateAria: "Dictar nota por voz", sendBtn: "Enviar", sendNoteFab: "Enviar una nota",
     allFieldReportsLink: "Todos los reportes → Planificación", openDecisionsLink: "Decisiones abiertas → Planificación",
@@ -1124,6 +1155,8 @@ const KITCHEN_HOSTED_LINKS = {
   "2026-11-19_Attic-Enclosure-and-Requirements": "#attic-access",
   "2026-11-20_Kitchen-Vent-Hood-Wall-Interactive_EN": "./plans/kitchen-west-ks4/index.html?lang=en",
   "2026-11-20_Kitchen-Vent-Hood-Wall-Interactive_ES": "./plans/kitchen-west-ks4/index.html?lang=es",
+  "2026-11-20_Kitchen-Floor-Plan-Interactive_EN": "./plans/kitchen-floor-plan/index.html?lang=en",
+  "2026-11-20_Kitchen-Floor-Plan-Interactive_ES": "./plans/kitchen-floor-plan/index.html?lang=es",
   "2026-11-20_Attic-Hatch-Interactive_EN": "./plans/attic-hatch/index.html?lang=en",
   "2026-11-20_Attic-Hatch-Interactive_ES": "./plans/attic-hatch/index.html?lang=es",
   "2026-11-20_HVAC-Layout-Interactive_EN": "./plans/hvac-layout/index.html?lang=en",
@@ -1161,7 +1194,8 @@ function docLabel(d){
   }
   return {t:s, date:date};
 }
-function docKind(d){ if (isPdf(d)) return "pdf"; if ((d.title||"").indexOf(".")<0) return "doc"; const e=(d.title.split(".").pop()||"").toLowerCase(); return e==="jpeg"?"jpg":e; }
+function isInteractiveDoc(d){ return Boolean(d && KITCHEN_HOSTED_LINKS[d.id] && KITCHEN_HOSTED_LINKS[d.id].indexOf("./plans/") === 0); }
+function docKind(d){ if (isInteractiveDoc(d)) return LANG==="es" ? "Plano interactivo" : "Interactive plan"; if (isPdf(d)) return "pdf"; if ((d.title||"").indexOf(".")<0) return "doc"; const e=(d.title.split(".").pop()||"").toLowerCase(); return e==="jpeg"?"jpg":e; }
 function docUrl(d){ return "https://drive.google.com/file/d/"+d.id+"/view"; }
 function isPdf(d){ return Boolean(d && (/\.pdf$/i.test(d.title||"") || (typeof PDF_BLOBS==="object" && PDF_BLOBS && PDF_BLOBS[d.id]))); }
 function docHref(d){ return KITCHEN_HOSTED_LINKS[d.id] || (isPdf(d) ? "#doc:"+d.id : docUrl(d)); }
@@ -1536,7 +1570,7 @@ function docsBlock(key){
     const dl = d.docLang || d.lang || "both";
     const enOnlyBadge = (LANG==="es" && dl==="en") ? ' <span class="k">'+esc(t("englishOnlyTag"))+'</span>' : '';
     const inPrevTag = inPrevIds.has(d.id) ? ' <span class="u4-in-prev-tag">'+esc(t("inPreviews"))+'</span>' : '';
-    return '<li><a href="'+docHref(d)+'"'+((isPdf(d)||docHref(d).startsWith("#"))?'':' target="_blank" rel="noopener"')+'>'+esc(L.t)+'</a> <span class="k">'+docKind(d)+(L.date?' · '+niceDate(L.date):'')+'</span>'+(d.review?' <span class="k">'+esc(t("awaitingReview"))+'</span>':'')+enOnlyBadge+inPrevTag+'</li>';
+    return '<li><a href="'+docHref(d)+'"'+((isPdf(d)||docHref(d).startsWith("#"))?'':' target="_blank" rel="noopener"')+'>'+esc(L.t)+'</a> <span class="k'+(isInteractiveDoc(d)?' k-interactive':'')+'">'+docKind(d)+(L.date?' · '+niceDate(L.date):'')+'</span>'+(d.review?' <span class="k">'+esc(t("awaitingReview"))+'</span>':'')+enOnlyBadge+inPrevTag+'</li>';
   }).join("");
   const history=archived.length?'<details><summary>'+esc(t("historyHeading"))+' ('+archived.length+')</summary><ul>'+rows(archived)+'</ul></details>':"";
   return '<section class="docs" id="sec-docs"><h2>'+esc(t("documentsHeading"))+' ('+active.length+')</h2>'+prevStrip+'<ul>'+rows(active)+'</ul>'+history+'</section>';
@@ -1577,13 +1611,13 @@ function crewRoom(p, srcMd){
 
   if (p.key==="kitchen") {
     h += '<div class="u4-subpage-dir" id="sec-subpages">'
-      + '<a class="u4-subpage-row" href="#kitchen-oven-range"><div><span class="u4-subpage-row-title">'+(es?"Cocina › Tramo de estufa y campana":"Kitchen › Oven / Range Run")+'</span><span class="u4-subpage-row-desc">'+(es?"Viking 30&quot;, campana Zephyr (66&quot;–72&quot; NPT), circuito 15A HD y PDFs R3 / R1.":"Viking 30&quot; range, Zephyr hood (66&quot;–72&quot; AFF), 15A HD circuit &amp; R3 / R1 PDFs.")+'</span></div><span class="u4-subpage-row-arrow" aria-hidden="true">→</span></a>'
+      + '<a class="u4-subpage-row" href="#kitchen-oven-range"><div><span class="u4-subpage-row-title">'+(es?"Cocina › Tramo de estufa y campana":"Kitchen › Oven / Range Run")+'</span><span class="u4-subpage-row-desc">'+(es?"Estufa Viking 30&quot;, campana Zephyr (66&quot;–72&quot; alto), caja directa, plano interactivo y 4 láminas de prueba.":"Viking 30&quot; range, Zephyr hood (66&quot;–72&quot; height), direct hardwire box, interactive plan &amp; 4 test-hang sheets.")+'</span></div><span class="u4-subpage-row-arrow" aria-hidden="true">→</span></a>'
       + '<a class="u4-subpage-row" href="#kitchen-sink-north"><div><span class="u4-subpage-row-title">'+(es?"Cocina › Fregadero y muro norte":"Kitchen › Sink &amp; North Wall Runs")+'</span><span class="u4-subpage-row-desc">'+(es?"Tramo sur (0&quot;–115&quot;), repisas pie-safe, retorno este Haier y muro norte D04.":"South run (0&quot;–115&quot;), pie-safe shelves, East Haier return &amp; North D04 wall.")+'</span></div><span class="u4-subpage-row-arrow" aria-hidden="true">→</span></a>'
       + '</div>';
   }
   if (p.key==="hvac") {
     h += '<div class="u4-subpage-dir" id="sec-subpages">'
-      + '<a class="u4-subpage-row" href="#attic-access"><div><span class="u4-subpage-row-title">'+(es?"HVAC › Acceso al ático":"HVAC › Attic Access")+'</span><span class="u4-subpage-row-desc">'+(es?"Escotilla 24&quot;×36&quot; libre, 5 reglas de envolvente, pasarela y Guía Práctica R5.":"24&quot;×36&quot; clear hatch, 5 enclosure rules, walkway &amp; Practical Guide R5.")+'</span></div><span class="u4-subpage-row-arrow" aria-hidden="true">→</span></a>'
+      + '<a class="u4-subpage-row" href="#attic-access"><div><span class="u4-subpage-row-title">'+(es?"HVAC › Acceso al ático":"HVAC › Attic Access")+'</span><span class="u4-subpage-row-desc">'+(es?"Escotilla 24&quot;×36&quot; libre, 5 reglas de envolvente, pasarela, plano interactivo y guía práctica.":"24&quot;×36&quot; clear hatch, 5 enclosure rules, walkway, interactive hatch plan &amp; practical guide.")+'</span></div><span class="u4-subpage-row-arrow" aria-hidden="true">→</span></a>'
       + '</div>';
   }
 
@@ -1895,6 +1929,8 @@ function syncChromeLabels(){
   if (rt) { rt.placeholder = t("fieldPlaceholder"); rt.setAttribute("aria-label", t("fieldNoteHeading")); }
   const pb = document.getElementById("u4PhotoBtnText");
   if (pb) pb.textContent = t("addPhotoBtn");
+  const cb = document.getElementById("u4CameraBtnText");
+  if (cb) cb.textContent = t("takePhotoBtn");
   const pe = document.getElementById("u4PhotoEncourageText");
   if (pe) pe.textContent = t("photoEncourage");
   const pc = document.getElementById("u4PhotoClearBtn");
@@ -1910,6 +1946,7 @@ function syncChromeLabels(){
   const qc = document.getElementById("qpClose");
   if (qc) { qc.textContent = t("closeBtn"); qc.setAttribute("aria-label", t("closeBtn")); }
   wireFieldToggle();
+  if (typeof window.__u4SyncFloatingAiUi === "function") window.__u4SyncFloatingAiUi();
 }
 
 function setLang(l){
@@ -2844,7 +2881,8 @@ document.getElementById("repForm").addEventListener("submit", async ev=>{
     window.__u4SetSavedSenderName(whoVal);
   }
   const photoInput=document.getElementById("repPhoto");
-  const file=(photoInput && photoInput.files && photoInput.files[0]) || window.__u4SelectedPhotoFile || null;
+  const camPhotoInput=document.getElementById("repPhotoCamera");
+  const file=window.__u4SelectedPhotoFile || (photoInput && photoInput.files && photoInput.files[0]) || (camPhotoInput && camPhotoInput.files && camPhotoInput.files[0]) || null;
   if (!cleanText && !file){
     msg.className="msg err";
     msg.textContent=(LANG==="es")?"Escribe o dicta una nota, o agrega una foto primero.":"Write or dictate a note, or add a photo first.";
@@ -2864,7 +2902,7 @@ document.getElementById("repForm").addEventListener("submit", async ev=>{
       photoDesc = await readFileAsAttachmentDescriptor(file, "image/jpeg");
       if (assets && typeof assets.upload === "function") {
         msg.textContent=(LANG==="es")?"Subiendo foto…":"Uploading photo…";
-        const up=await assets.upload(file);
+        const up=await assets.upload(file.file || file);
         photoAssetId=up && up.id ? up.id : null;
       }
     }
@@ -2984,7 +3022,9 @@ document.getElementById("repForm").addEventListener("submit", async ev=>{
   }
   window.__u4SelectedPhotoFile = null;
   try { if (photoInput) photoInput.value=""; } catch(e){}
+  try { if (camPhotoInput) camPhotoInput.value=""; } catch(e){}
   if (photoInput && photoInput.files && photoInput.files._isMockFileList) photoInput.files = [];
+  if (camPhotoInput && camPhotoInput.files && camPhotoInput.files._isMockFileList) camPhotoInput.files = [];
   if (typeof window.__u4SyncPhotoBadge === "function") window.__u4SyncPhotoBadge();
 
   msg.className="msg";
@@ -4007,15 +4047,26 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       status: "live",
       aliases: ["kitchen-west-ks4","ks4","k-s4","vent hood wall","hood wall","interactive hood plan","interactive range wall","live hood plan","plano interactivo campana","muro de campana"]
     },
+    "kitchen-floor-plan": {
+      id: "kitchen-floor-plan",
+      room: "kitchen",
+      url: "./plans/kitchen-floor-plan/index.html",
+      docIdEn: "2026-11-20_Kitchen-Floor-Plan-Interactive_EN",
+      docIdEs: "2026-11-20_Kitchen-Floor-Plan-Interactive_ES",
+      titleEn: "Interactive full kitchen floor plan and cabinet schedule",
+      titleEs: "Plano interactivo de cocina completa y lista de gabinetes",
+      status: "live",
+      aliases: ["kitchen-floor-plan","kitchen floor plan","full kitchen plan","cabinet schedule","plano de cocina interactivo","lista de gabinetes"]
+    },
     "attic-hatch": {
       id: "attic-hatch",
       room: "attic-access",
       url: "./plans/attic-hatch/index.html",
       docIdEn: "2026-11-20_Attic-Hatch-Interactive_EN",
       docIdEs: "2026-11-20_Attic-Hatch-Interactive_ES",
-      titleEn: "Interactive attic hatch plan",
-      titleEs: "Plano interactivo de la escotilla del ático",
-      status: "wave_b",
+      titleEn: "Permanent attic hatch interactive plan",
+      titleEs: "Plano interactivo de la escotilla permanente del ático",
+      status: "live",
       aliases: ["attic-hatch","interactive attic","attic hatch interactive","escotilla interactiva"]
     },
     "hvac-layout": {
@@ -4024,10 +4075,10 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       url: "./plans/hvac-layout/index.html",
       docIdEn: "2026-11-20_HVAC-Layout-Interactive_EN",
       docIdEs: "2026-11-20_HVAC-Layout-Interactive_ES",
-      titleEn: "Interactive HVAC and ductwork layout",
-      titleEs: "Plano interactivo de clima y ductos",
-      status: "wave_b",
-      aliases: ["hvac-layout","interactive hvac","hvac what-if","ductwork layout","plano interactivo clima"]
+      titleEn: "Attic furnace and ducts interactive layout",
+      titleEs: "Plano interactivo de calefacción y ductos en ático",
+      status: "live",
+      aliases: ["hvac-layout","interactive hvac","hvac what-if","ductwork layout","attic furnace","plano interactivo clima"]
     },
     "murphy-door": {
       id: "murphy-door",
@@ -4035,9 +4086,9 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       url: "./plans/murphy-door/index.html",
       docIdEn: "2026-11-20_Murphy-Door-Interactive_EN",
       docIdEs: "2026-11-20_Murphy-Door-Interactive_ES",
-      titleEn: "Interactive bookcase door plan",
-      titleEs: "Plano interactivo de la puerta librero",
-      status: "wave_b",
+      titleEn: "Murphy bookcase door interactive plan",
+      titleEs: "Plano interactivo de la puerta librero Murphy",
+      status: "live",
       aliases: ["murphy-door","interactive murphy","interactive bookcase door","puerta librero interactiva"]
     }
   };
@@ -4500,7 +4551,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         "Unit 4 Nov 20 Wiki, Interactive Plans & Backend Architecture:\n" +
         "- Pages (16 allowed rooms): " + ALLOWED_ROOMS.join(", ") + ".\n" +
         "- Plain-language crew guides: Oven / Range Run has 4 standalone 1-page Zephyr hood test-hang visual sheets + live Interactive Range & Hood Wall Plan (./plans/kitchen-west-ks4/index.html).\n" +
-        "- All 4 interactive parametric plan URLs: ./plans/kitchen-west-ks4/ (live), ./plans/attic-hatch/, ./plans/hvac-layout/, ./plans/murphy-door/.\n" +
+        "- All 5 interactive parametric plan URLs: ./plans/kitchen-west-ks4/, ./plans/kitchen-floor-plan/, ./plans/attic-hatch/, ./plans/hvac-layout/, ./plans/murphy-door/.\n" +
         "- Wiki build workflow: content/pages/<room>/ + content/data/ + src/template.html -> python3 tools/build.py -> index.html (never hand-edit index.html).\n" +
         "- Live backends: Mac mini :8791 (https://mac-mini.tailcf4007.ts.net) serves /api/unit4/voice-token (15 tools), /api/unit4/knowledge, /api/unit4/wiki-intake, /api/unit4/healthz; Mac mini :8444 (tailnet-only, never Funnel) persists live interactive plan edits with EOD Accept/Reject review."
       );
@@ -4850,7 +4901,11 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     }
     var photoBtnTxt = document.getElementById("u4PhotoBtnText");
     if (photoBtnTxt) {
-      photoBtnTxt.textContent = es ? "📷 Foto" : "📷 Add photo";
+      photoBtnTxt.textContent = es ? "📎 Adjuntar foto" : "📎 Attach photo";
+    }
+    var camBtnTxt = document.getElementById("u4CameraBtnText");
+    if (camBtnTxt) {
+      camBtnTxt.textContent = es ? "📷 Tomar foto" : "📷 Take photo";
     }
     var photoHintTxt = document.getElementById("u4PhotoEncourageText");
     if (photoHintTxt) {
@@ -5217,8 +5272,442 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     playCursor: 0,
     activeSources: [],
     lastContextSignature: null,
-    pendingPrompt: ""
+    pendingPrompt: "",
+    pendingPhoto: null,
+    stagedPhoto: null,
+    lastSentPhoto: null
   };
+
+  function buildPhotoAttachmentPayload(src) {
+    if (!src) return null;
+    if (typeof src === "string") return src;
+    var data = src.data || src.dataUrl || "";
+    if (!data && src.rawBase64) {
+      data = "data:" + (src.type || "image/jpeg") + ";base64," + src.rawBase64;
+    }
+    if (!data) return null;
+    return {
+      name: String(src.name || "site-photo.jpg"),
+      type: String(src.type || "image/jpeg"),
+      size: typeof src.size === "number" ? src.size : data.length,
+      data: data
+    };
+  }
+
+  function makeJpegFileFromBlob(blob, baseName) {
+    var cleanName = String(baseName || "site-photo").replace(/\.[^.]+$/, "") + ".jpg";
+    if (typeof File === "function") {
+      try { return new File([blob], cleanName, { type: "image/jpeg" }); } catch (e) {}
+    }
+    try { blob.name = cleanName; } catch (e) {}
+    return blob;
+  }
+
+  function dataUrlToRawBase64(dataUrl) {
+    var s = String(dataUrl || "");
+    var idx = s.indexOf(",");
+    return idx !== -1 ? s.slice(idx + 1) : s;
+  }
+
+  function readBlobViaFileReader(blob) {
+    return new Promise(function(resolve, reject) {
+      if (typeof FileReader === "undefined") {
+        reject(new Error("FileReader unavailable"));
+        return;
+      }
+      var fr = new FileReader();
+      fr.onload = function() { resolve(String(fr.result || "")); };
+      fr.onerror = function() { reject(fr.error || new Error("FileReader failed")); };
+      fr.readAsDataURL(blob);
+    });
+  }
+
+  function drawScaledToJpegDescriptor(drawSrc, srcW, srcH, maxDim, quality, fileName) {
+    var scale = 1;
+    var maxSide = Math.max(srcW || 1, srcH || 1);
+    if (maxDim && maxSide > maxDim) scale = maxDim / maxSide;
+    var outW = Math.max(1, Math.round((srcW || 640) * scale));
+    var outH = Math.max(1, Math.round((srcH || 480) * scale));
+    var canvas = document.createElement("canvas");
+    canvas.width = outW;
+    canvas.height = outH;
+    var ctx = canvas.getContext("2d");
+    if (!ctx) throw new Error("Canvas 2D unavailable");
+    ctx.drawImage(drawSrc, 0, 0, outW, outH);
+    var dataUrl = canvas.toDataURL("image/jpeg", quality || 0.85);
+    var rawBase64 = dataUrlToRawBase64(dataUrl);
+    return new Promise(function(resolve) {
+      if (typeof canvas.toBlob === "function") {
+        try {
+          canvas.toBlob(function(blob) {
+            var outBlob = blob || null;
+            var fileObj = outBlob ? makeJpegFileFromBlob(outBlob, fileName) : null;
+            var byteSize = outBlob ? outBlob.size : Math.round(rawBase64.length * 0.75);
+            resolve({
+              file: fileObj,
+              name: (fileObj && fileObj.name) || (String(fileName || "site-photo").replace(/\.[^.]+$/, "") + ".jpg"),
+              type: "image/jpeg",
+              size: byteSize,
+              data: dataUrl,
+              dataUrl: dataUrl,
+              rawBase64: rawBase64
+            });
+          }, "image/jpeg", quality || 0.85);
+          return;
+        } catch (e) {}
+      }
+      resolve({
+        file: null,
+        name: String(fileName || "site-photo").replace(/\.[^.]+$/, "") + ".jpg",
+        type: "image/jpeg",
+        size: Math.round(rawBase64.length * 0.75),
+        data: dataUrl,
+        dataUrl: dataUrl,
+        rawBase64: rawBase64
+      });
+    });
+  }
+
+  async function u4CompressImageToJpeg(source, maxDim, quality) {
+    if (!source) return null;
+    var targetMax = maxDim || 1600;
+    var targetQ = quality || 0.85;
+    if (typeof HTMLVideoElement !== "undefined" && source instanceof HTMLVideoElement) {
+      var vw = source.videoWidth || 640;
+      var vh = source.videoHeight || 480;
+      return await drawScaledToJpegDescriptor(source, vw, vh, targetMax, targetQ, "camera-photo-" + Date.now());
+    }
+    if (typeof HTMLCanvasElement !== "undefined" && source instanceof HTMLCanvasElement) {
+      return await drawScaledToJpegDescriptor(source, source.width || 640, source.height || 480, targetMax, targetQ, "camera-photo-" + Date.now());
+    }
+    var origName = String(source.name || "site-photo.jpg");
+    var objUrl = (typeof URL !== "undefined" && typeof URL.createObjectURL === "function") ? URL.createObjectURL(source) : "";
+    try {
+      if (objUrl) {
+        var img = await new Promise(function(resolve, reject) {
+          var el = new Image();
+          el.onload = function() { resolve(el); };
+          el.onerror = function() { reject(new Error("Image decode failed")); };
+          el.src = objUrl;
+        });
+        return await drawScaledToJpegDescriptor(img, img.naturalWidth || img.width || 640, img.naturalHeight || img.height || 480, targetMax, targetQ, origName);
+      }
+    } catch (e) {
+    } finally {
+      if (objUrl && typeof URL !== "undefined" && typeof URL.revokeObjectURL === "function") {
+        try { URL.revokeObjectURL(objUrl); } catch (err) {}
+      }
+    }
+    if (typeof source.dataUrl === "string" && source.dataUrl) {
+      var r64 = source.rawBase64 || dataUrlToRawBase64(source.dataUrl);
+      return {
+        file: source.file || null,
+        name: origName,
+        type: String(source.type || "image/jpeg"),
+        size: source.size || Math.round(r64.length * 0.75),
+        data: source.dataUrl,
+        dataUrl: source.dataUrl,
+        rawBase64: r64
+      };
+    }
+    var fallbackUrl = await readBlobViaFileReader(source);
+    var fallbackB64 = dataUrlToRawBase64(fallbackUrl);
+    return {
+      file: source,
+      name: origName,
+      type: String(source.type || "image/jpeg"),
+      size: typeof source.size === "number" ? source.size : Math.round(fallbackB64.length * 0.75),
+      data: fallbackUrl,
+      dataUrl: fallbackUrl,
+      rawBase64: fallbackB64
+    };
+  }
+
+  var camModalState = {
+    mounted: false,
+    open: false,
+    stream: null,
+    facingMode: "environment",
+    deviceIds: [],
+    deviceIdx: -1,
+    captured: null,
+    preferVoice: false,
+    fallbackInputEl: null,
+    onCaptured: null
+  };
+
+  function stopCameraStream() {
+    var vid = document.getElementById("u4CamVideo");
+    var streams = [];
+    if (camModalState.stream) streams.push(camModalState.stream);
+    if (vid && vid.srcObject && vid.srcObject !== camModalState.stream) streams.push(vid.srcObject);
+    streams.forEach(function(st) {
+      try {
+        if (typeof st.getTracks === "function") {
+          st.getTracks().forEach(function(t) { try { t.stop(); } catch (e) {} });
+        }
+      } catch (e) {}
+    });
+    camModalState.stream = null;
+    if (vid) {
+      try { vid.pause(); } catch (e) {}
+      try { vid.srcObject = null; } catch (e) {}
+    }
+  }
+
+  function syncCameraModalLabels() {
+    var modal = document.getElementById("u4CameraModal");
+    if (!modal) return;
+    var es = currentUiLang() === "es";
+    var setTxt = function(id, enVal, esVal) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = es ? esVal : enVal;
+    };
+    setTxt("u4CamTitle", "Take site photo", "Tomar foto de obra");
+    setTxt("u4CamSwitchBtn", "🔄 Switch camera", "🔄 Cambiar cámara");
+    setTxt("u4CamSnapBtn", "📸 Capture", "📸 Capturar");
+    setTxt("u4CamRetakeBtn", "Retake", "Tomar otra");
+    setTxt("u4CamUseBtn", "Use photo", "Usar foto");
+    setTxt("u4CamCancelBtn", "Cancel", "Cancelar");
+    setTxt("u4CamFallbackBtn", "Choose file instead", "Elegir archivo");
+    var cl = document.getElementById("u4CamCloseBtn");
+    if (cl) cl.setAttribute("aria-label", es ? "Cerrar cámara" : "Close camera");
+  }
+
+  function closeCameraModal() {
+    stopCameraStream();
+    camModalState.open = false;
+    camModalState.captured = null;
+    var modal = document.getElementById("u4CameraModal");
+    if (modal) modal.hidden = true;
+    var shotImg = document.getElementById("u4CamShotImg");
+    if (shotImg) {
+      shotImg.hidden = true;
+      shotImg.removeAttribute("src");
+    }
+    var vid = document.getElementById("u4CamVideo");
+    if (vid) vid.hidden = false;
+  }
+
+  function setCameraStageState(mode, errText) {
+    var vid = document.getElementById("u4CamVideo");
+    var shot = document.getElementById("u4CamShotImg");
+    var snapBtn = document.getElementById("u4CamSnapBtn");
+    var switchBtn = document.getElementById("u4CamSwitchBtn");
+    var retakeBtn = document.getElementById("u4CamRetakeBtn");
+    var useBtn = document.getElementById("u4CamUseBtn");
+    var fbBtn = document.getElementById("u4CamFallbackBtn");
+    var statusEl = document.getElementById("u4CamStatus");
+    var es = currentUiLang() === "es";
+    if (mode === "captured") {
+      if (vid) vid.hidden = true;
+      if (shot) shot.hidden = false;
+      if (snapBtn) snapBtn.hidden = true;
+      if (switchBtn) switchBtn.hidden = true;
+      if (retakeBtn) retakeBtn.hidden = false;
+      if (useBtn) useBtn.hidden = false;
+      if (fbBtn) fbBtn.hidden = true;
+      if (statusEl) {
+        statusEl.className = "u4-camera-status";
+        statusEl.textContent = es ? "Foto lista. Usa esta foto o toma otra." : "Photo ready. Use this photo or retake.";
+      }
+    } else if (mode === "error") {
+      if (vid) vid.hidden = true;
+      if (shot) shot.hidden = true;
+      if (snapBtn) snapBtn.hidden = true;
+      if (switchBtn) switchBtn.hidden = true;
+      if (retakeBtn) retakeBtn.hidden = true;
+      if (useBtn) useBtn.hidden = true;
+      if (fbBtn) fbBtn.hidden = !camModalState.fallbackInputEl;
+      if (statusEl) {
+        statusEl.className = "u4-camera-status is-err";
+        statusEl.textContent = errText || (es ? "No se pudo abrir la cámara. Usa Elegir archivo." : "Camera unavailable. Use Choose file instead.");
+      }
+    } else {
+      if (vid) vid.hidden = false;
+      if (shot) shot.hidden = true;
+      if (snapBtn) snapBtn.hidden = false;
+      if (switchBtn) switchBtn.hidden = camModalState.deviceIds.length < 2 && !window.__u4ForceCameraModal;
+      if (retakeBtn) retakeBtn.hidden = true;
+      if (useBtn) useBtn.hidden = true;
+      if (fbBtn) fbBtn.hidden = true;
+      if (statusEl) {
+        statusEl.className = "u4-camera-status";
+        statusEl.textContent = es ? "Apunta al área de obra y toca Capturar." : "Point at the site detail and tap Capture.";
+      }
+    }
+  }
+
+  async function startCameraPreviewStream() {
+    stopCameraStream();
+    setCameraStageState("live");
+    var es = currentUiLang() === "es";
+    if (!navigator.mediaDevices || typeof navigator.mediaDevices.getUserMedia !== "function") {
+      setCameraStageState("error", es ? "Cámara no disponible en este navegador." : "Camera is not supported in this browser.");
+      return;
+    }
+    try {
+      if (typeof navigator.mediaDevices.enumerateDevices === "function") {
+        var devs = await navigator.mediaDevices.enumerateDevices().catch(function() { return []; });
+        camModalState.deviceIds = devs.filter(function(d) { return d && d.kind === "videoinput" && d.deviceId; }).map(function(d) { return d.deviceId; });
+      }
+    } catch (e) {}
+
+    var constraints;
+    if (camModalState.deviceIdx >= 0 && camModalState.deviceIds[camModalState.deviceIdx]) {
+      constraints = { video: { deviceId: { exact: camModalState.deviceIds[camModalState.deviceIdx] } }, audio: false };
+    } else {
+      constraints = { video: { facingMode: { ideal: camModalState.facingMode } }, audio: false };
+    }
+
+    var stream = null;
+    try {
+      stream = await navigator.mediaDevices.getUserMedia(constraints);
+    } catch (firstErr) {
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+      } catch (secondErr) {
+        setCameraStageState(
+          "error",
+          es
+            ? "Permiso de cámara bloqueado o no encontrado. Usa Elegir archivo."
+            : "Camera permission blocked or unavailable. Use Choose file instead."
+        );
+        return;
+      }
+    }
+    if (!camModalState.open) {
+      if (stream && typeof stream.getTracks === "function") {
+        stream.getTracks().forEach(function(t) { try { t.stop(); } catch (e) {} });
+      }
+      return;
+    }
+    camModalState.stream = stream;
+    var vid = document.getElementById("u4CamVideo");
+    if (vid) {
+      try { vid.srcObject = stream; } catch (e) {}
+      try { await vid.play(); } catch (e) {}
+    }
+    setCameraStageState("live");
+  }
+
+  function ensureCameraModalMounted() {
+    if (camModalState.mounted || document.getElementById("u4CameraModal")) {
+      camModalState.mounted = true;
+      return;
+    }
+    camModalState.mounted = true;
+    var modal = document.createElement("div");
+    modal.id = "u4CameraModal";
+    modal.className = "u4-camera-modal";
+    modal.setAttribute("role", "dialog");
+    modal.setAttribute("aria-modal", "true");
+    modal.setAttribute("aria-labelledby", "u4CamTitle");
+    modal.hidden = true;
+    modal.innerHTML =
+      '<div class="u4-camera-card">' +
+        '<div class="u4-camera-head">' +
+          '<h3 id="u4CamTitle" class="u4-camera-title">Take site photo</h3>' +
+          '<button type="button" id="u4CamCloseBtn" class="u4-vd-icon-btn" aria-label="Close camera">✕</button>' +
+        '</div>' +
+        '<div class="u4-camera-stage">' +
+          '<video id="u4CamVideo" autoplay playsinline muted></video>' +
+          '<img id="u4CamShotImg" alt="Captured photo preview" hidden>' +
+        '</div>' +
+        '<p id="u4CamStatus" class="u4-camera-status" role="status" aria-live="polite"></p>' +
+        '<div class="u4-camera-actions">' +
+          '<button type="button" id="u4CamFallbackBtn" class="u4-photo-btn" hidden>Choose file instead</button>' +
+          '<button type="button" id="u4CamSwitchBtn" class="u4-photo-btn" hidden>🔄 Switch camera</button>' +
+          '<button type="button" id="u4CamRetakeBtn" class="u4-photo-btn" hidden>Retake</button>' +
+          '<button type="button" id="u4CamSnapBtn" class="u4-photo-btn is-primary">📸 Capture</button>' +
+          '<button type="button" id="u4CamUseBtn" class="u4-photo-btn is-primary" hidden>Use photo</button>' +
+          '<button type="button" id="u4CamCancelBtn" class="u4-photo-btn">Cancel</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(modal);
+
+    modal.addEventListener("click", function(ev) {
+      if (ev && ev.target === modal) closeCameraModal();
+    });
+    document.getElementById("u4CamCloseBtn").addEventListener("click", function(ev) {
+      if (ev && ev.preventDefault) ev.preventDefault();
+      closeCameraModal();
+    });
+    document.getElementById("u4CamCancelBtn").addEventListener("click", function(ev) {
+      if (ev && ev.preventDefault) ev.preventDefault();
+      closeCameraModal();
+    });
+    document.getElementById("u4CamFallbackBtn").addEventListener("click", function(ev) {
+      if (ev && ev.preventDefault) ev.preventDefault();
+      var fb = camModalState.fallbackInputEl;
+      closeCameraModal();
+      if (fb) fb.click();
+    });
+    document.getElementById("u4CamSwitchBtn").addEventListener("click", function(ev) {
+      if (ev && ev.preventDefault) ev.preventDefault();
+      if (camModalState.deviceIds.length >= 2) {
+        camModalState.deviceIdx = (camModalState.deviceIdx + 1) % camModalState.deviceIds.length;
+      } else {
+        camModalState.facingMode = camModalState.facingMode === "environment" ? "user" : "environment";
+      }
+      startCameraPreviewStream();
+    });
+    document.getElementById("u4CamSnapBtn").addEventListener("click", async function(ev) {
+      if (ev && ev.preventDefault) ev.preventDefault();
+      var vid = document.getElementById("u4CamVideo");
+      if (!vid) return;
+      var maxDim = camModalState.preferVoice ? 1280 : 1600;
+      var quality = camModalState.preferVoice ? 0.82 : 0.85;
+      var captured = await u4CompressImageToJpeg(vid, maxDim, quality);
+      stopCameraStream();
+      camModalState.captured = captured;
+      var shotImg = document.getElementById("u4CamShotImg");
+      if (shotImg && captured && captured.dataUrl) shotImg.src = captured.dataUrl;
+      setCameraStageState("captured");
+    });
+    document.getElementById("u4CamRetakeBtn").addEventListener("click", function(ev) {
+      if (ev && ev.preventDefault) ev.preventDefault();
+      camModalState.captured = null;
+      startCameraPreviewStream();
+    });
+    document.getElementById("u4CamUseBtn").addEventListener("click", function(ev) {
+      if (ev && ev.preventDefault) ev.preventDefault();
+      var result = camModalState.captured;
+      var cb = camModalState.onCaptured;
+      closeCameraModal();
+      if (typeof cb === "function" && result) cb(result);
+    });
+    if (!document.__u4CamEscBound) {
+      document.__u4CamEscBound = true;
+      document.addEventListener("keydown", function(ev) {
+        if (ev && ev.key === "Escape" && camModalState.open) closeCameraModal();
+      });
+      window.addEventListener("beforeunload", stopCameraStream);
+    }
+  }
+
+  function openCameraCapture(opts) {
+    var o = opts || {};
+    var hasGum = Boolean(typeof navigator !== "undefined" && navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === "function");
+    var isTouchMobile = !window.__u4ForceCameraModal && (
+      (typeof navigator !== "undefined" && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent || "")) ||
+      (typeof window.matchMedia === "function" && window.matchMedia("(pointer: coarse)").matches && (navigator.maxTouchPoints || 0) > 0)
+    );
+    if ((isTouchMobile || !hasGum) && o.fallbackInputEl) {
+      o.fallbackInputEl.click();
+      return;
+    }
+    ensureCameraModalMounted();
+    syncCameraModalLabels();
+    camModalState.open = true;
+    camModalState.captured = null;
+    camModalState.preferVoice = Boolean(o.preferVoice);
+    camModalState.fallbackInputEl = o.fallbackInputEl || null;
+    camModalState.onCaptured = o.onCaptured || null;
+    var modal = document.getElementById("u4CameraModal");
+    if (modal) modal.hidden = false;
+    startCameraPreviewStream();
+  }
 
   var chatStream = {
     activeRole: null,
@@ -5294,13 +5783,24 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     }
   }
 
-  function appendCompleteChatLine(role, fullText) {
+  function appendCompleteChatLine(role, fullText, photoObj) {
     var clean = String(fullText || "").trim();
-    if (!clean) return;
+    if (!clean && !(photoObj && photoObj.dataUrl)) return;
     sealActiveChatTurn();
     var bub = createChatTurnElement(role);
     if (bub) {
-      bub.textContent = clean;
+      if (photoObj && photoObj.dataUrl) {
+        var img = document.createElement("img");
+        img.className = "u4-chat-bubble-img";
+        img.src = photoObj.dataUrl;
+        img.alt = photoObj.name || "Site photo";
+        bub.appendChild(img);
+      }
+      if (clean) {
+        var sp = document.createElement("span");
+        sp.textContent = clean;
+        bub.appendChild(sp);
+      }
       scrollChatToBottom();
     }
   }
@@ -5735,6 +6235,11 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         if (fieldSec) fieldSec.hidden = false;
         document.getElementById("repText").value = text;
         autoGrowFieldNoteTextarea(document.getElementById("repText"));
+        var activeVoicePhoto = liveState.lastSentPhoto || liveState.stagedPhoto;
+        if (!window.__u4SelectedPhotoFile && activeVoicePhoto) {
+          window.__u4SelectedPhotoFile = activeVoicePhoto;
+          if (typeof window.__u4SyncPhotoBadge === "function") window.__u4SyncPhotoBadge();
+        }
       } else {
         if (typeof openQP === "function" && !qpVisible) openQP();
         else if (typeof window.openQP === "function" && !qpVisible) window.openQP();
@@ -5779,6 +6284,8 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       }
       var kindVal = String((args && (args.kind || args.noteType || args.note_type)) || "Note");
       var itemVal = String((args && args.item) || "General");
+      var carryPhoto = (args && args.photo) || buildPhotoAttachmentPayload(liveState.lastSentPhoto || liveState.stagedPhoto || window.__u4SelectedPhotoFile);
+      var carryPhotoLabel = (args && args.photoLabel) || (carryPhoto && carryPhoto.name) || null;
       var res = await dispatchNoteToDriveTriage({
         submissionId: args && (args.submissionId || args.idempotencyKey),
         source: "submit_voice_memo",
@@ -5792,6 +6299,8 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         text: text,
         measurement: (args && args.measurement) || "",
         datum: (args && args.datum) || itemVal,
+        photo: carryPhoto || null,
+        photoLabel: carryPhotoLabel || null,
         audio: (args && args.audio) || null,
         audioLabel: (args && args.audioLabel) || null,
         transcript: (args && args.transcript) || text,
@@ -5973,6 +6482,8 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
 
       var subId = "u4-vedit-" + deterministicHash(room + "|" + editKind + "|" + targetItem + "|" + newValue + "|" + Math.floor(now / 15000));
       var kindLabel = "Proposed Edit (" + editKind + ")";
+      var proposePhoto = (args && args.photo) || buildPhotoAttachmentPayload(liveState.lastSentPhoto || liveState.stagedPhoto || window.__u4SelectedPhotoFile);
+      var proposePhotoLabel = (args && args.photoLabel) || (proposePhoto && proposePhoto.name) || null;
       var structuredPayload = {
         schema: "unit4-worker-note-submission-v1",
         submissionId: subId,
@@ -5997,6 +6508,9 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         datum: boundary,
         text: summaryText,
         raw: summaryText,
+        photo: proposePhoto || null,
+        photoLabel: proposePhotoLabel || null,
+        photo_ref: proposePhotoLabel || null,
         interactive_plan_url: planHint ? planHint.url : null
       };
 
@@ -6029,7 +6543,9 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
           raw: summaryText,
           text: summaryText,
           measurement: editKind === "measurement_update" ? newValue : "",
-          datum: boundary
+          datum: boundary,
+          photo: proposePhoto || null,
+          photoLabel: proposePhotoLabel || null
         });
       }
 
@@ -6312,7 +6828,25 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     if (askInp) {
       askInp.placeholder = es ? "O escribe una pregunta para navegar\u2026" : "Or type a question to navigate\u2026";
     }
+    var vdPhotoBtn = document.getElementById("u4VdPhotoBtn");
+    if (vdPhotoBtn) {
+      vdPhotoBtn.textContent = es ? "📎 Adjuntar foto" : "📎 Attach photo";
+    }
+    var vdCamBtn = document.getElementById("u4VdCameraBtn");
+    if (vdCamBtn) {
+      vdCamBtn.textContent = es ? "📷 Tomar foto" : "📷 Take photo";
+    }
+    var vdPhotoSend = document.getElementById("u4VdPhotoSendBtn");
+    if (vdPhotoSend) {
+      vdPhotoSend.textContent = es ? "Enviar foto" : "Send photo";
+    }
+    var vdPhotoClr = document.getElementById("u4VdPhotoClearBtn");
+    if (vdPhotoClr) {
+      vdPhotoClr.setAttribute("aria-label", es ? "Quitar foto" : "Remove photo");
+    }
+    syncCameraModalLabels();
   }
+  window.__u4SyncFloatingAiUi = syncFloatingAiUi;
 
   function pcm16ToBase64(float32Buf, inputRate) {
     var ratio = inputRate / 16000;
@@ -6378,14 +6912,60 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     } catch (e) {}
   }
 
-  function sendPromptToLiveAgent(promptText) {
+  function syncVoicePhotoPreviewUi() {
+    var box = document.getElementById("u4VdPhotoPreview");
+    var thumb = document.getElementById("u4VdPhotoThumb");
+    var nm = document.getElementById("u4VdPhotoName");
+    var p = liveState.stagedPhoto;
+    if (!box) return;
+    if (!p) {
+      box.hidden = true;
+      if (thumb) thumb.removeAttribute("src");
+      if (nm) nm.textContent = "";
+      return;
+    }
+    if (thumb && p.dataUrl) thumb.src = p.dataUrl;
+    if (nm) nm.textContent = p.name || "photo.jpg";
+    box.hidden = false;
+  }
+
+  function clearVoiceStagedPhoto() {
+    liveState.stagedPhoto = null;
+    var pIn = document.getElementById("u4VdPhotoInput");
+    var cIn = document.getElementById("u4VdCameraInput");
+    try { if (pIn) pIn.value = ""; } catch (e) {}
+    try { if (cIn) cIn.value = ""; } catch (e) {}
+    syncVoicePhotoPreviewUi();
+  }
+
+  function stageVoicePhoto(photoObj) {
+    if (!photoObj) return;
+    liveState.stagedPhoto = photoObj;
+    syncVoicePhotoPreviewUi();
+  }
+
+  function sendPromptToLiveAgent(promptText, photoObj) {
     var clean = String(promptText || "").trim();
-    if (!clean || !liveState.active || !liveState.ws || liveState.ws.readyState !== WebSocket.OPEN) return;
+    var p = photoObj && photoObj.rawBase64 ? photoObj : null;
+    if ((!clean && !p) || !liveState.active || !liveState.ws || liveState.ws.readyState !== WebSocket.OPEN) return;
     stopPlaybackQueue();
-    appendCompleteChatLine("user", clean);
+    var es = currentUiLang() === "es";
+    var parts = [];
+    if (p) {
+      liveState.lastSentPhoto = p;
+      parts.push({
+        inlineData: {
+          mimeType: p.type || "image/jpeg",
+          data: p.rawBase64
+        }
+      });
+    }
+    var promptForModel = clean || (es ? "Revisa esta foto de obra" : "Inspect this site photo");
+    parts.push({ text: promptForModel });
+    appendCompleteChatLine("user", clean || (p ? (es ? "📷 Foto enviada" : "📷 Sent site photo") : ""), p);
     liveState.ws.send(JSON.stringify({
       clientContent: {
-        turns: [{ role: "user", parts: [{ text: clean }] }],
+        turns: [{ role: "user", parts: parts }],
         turnComplete: true
       }
     }));
@@ -6398,6 +6978,9 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     liveState.muted = false;
     liveState.lastContextSignature = null;
     liveState.pendingPrompt = "";
+    liveState.pendingPhoto = null;
+    liveState.lastSentPhoto = null;
+    clearVoiceStagedPhoto();
     sealActiveChatTurn();
     stopPlaybackQueue();
     if (liveState.processor) { try { liveState.processor.disconnect(); } catch (e) {} liveState.processor = null; }
@@ -6408,22 +6991,27 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     syncFloatingAiUi();
   }
 
-  async function startGeminiLiveSession(userGestureEvent, initialPromptOpt) {
+  async function startGeminiLiveSession(userGestureEvent, initialPromptOpt, initialPhotoOpt) {
     if (!userGestureEvent || (!userGestureEvent.isTrusted && !userGestureEvent.__allowSyntheticTest)) return;
     if (noteVoiceState.active) cancelNoteVoiceRecording("");
 
     setDialogOpen(true);
 
     if (liveState.active) {
-      if (initialPromptOpt) sendPromptToLiveAgent(initialPromptOpt);
+      if (initialPromptOpt || initialPhotoOpt) sendPromptToLiveAgent(initialPromptOpt, initialPhotoOpt);
       return;
     }
-    if (liveState.connecting) return;
+    if (liveState.connecting) {
+      if (initialPromptOpt) liveState.pendingPrompt = String(initialPromptOpt).trim();
+      if (initialPhotoOpt) liveState.pendingPhoto = initialPhotoOpt;
+      return;
+    }
 
     var generation = ++liveState.generation;
     liveState.connecting = true;
     liveState.muted = false;
     liveState.pendingPrompt = String(initialPromptOpt || "").trim();
+    liveState.pendingPhoto = initialPhotoOpt || null;
     syncFloatingAiUi();
     var subEl = document.getElementById("waVoiceStatus");
     if (subEl) {
@@ -6496,9 +7084,10 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
                 parts: [{
                   text: "System guide context for Unit 4 AI Helper (Voice Agent R8 · 15 tools):\n" +
                     "- Reply concisely and naturally in whatever language the speaker uses (English, Espa\u00f1ol, etc.) automatically.\n" +
-                    "- Proactively help the user navigate all 16 rooms (" + ALLOWED_ROOMS.join(", ") + ") and interactive plans (./plans/kitchen-west-ks4/, ./plans/attic-hatch/, ./plans/hvac-layout/, ./plans/murphy-door/): use navigate_room, open_document, go_to_document_page, and focus_section.\n" +
+                    "- Proactively help the user navigate all 16 rooms (" + ALLOWED_ROOMS.join(", ") + ") and all 5 interactive plans (./plans/kitchen-west-ks4/, ./plans/kitchen-floor-plan/, ./plans/attic-hatch/, ./plans/hvac-layout/, ./plans/murphy-door/): use navigate_room, open_document, go_to_document_page, and focus_section.\n" +
                     "- Use query_wiki_and_backend_knowledge whenever asked about specs, other rooms, interactive plans, the modular content/ build workflow, or the :8791/:8444 Mac mini backend.\n" +
                     "- Use propose_wiki_or_plan_edit whenever someone wants to change a measurement, flag a clash, or edit a wiki/plan item — ALWAYS read back the exact proposal first and wait for spoken_confirmation=true before submitting, and mention the room's interactive plan link if available.\n" +
+                    "- Users can attach or take site photos directly inside Voice Chat; inspect attached photos directly, and know that the most recent Voice Chat photo is automatically saved into to-triage/ when calling submit_voice_memo, propose_wiki_or_plan_edit, or fill_draft_note.\n" +
                     "- Instruction packets are the crew's bilingual step-by-step guides (including the 4 standalone Zephyr hood test-hang sheets and live Interactive Range & Hood Wall Plan). Open one with navigate_room using its key: " + PACKETS.map(function(p){ return p.key + " = " + p.titleEn + " / " + p.titleEs; }).join("; ") + ".\n" +
                     "- Use plain on-site crew language (no R1/R2/R3/R5, no sheet codes, no raw filenames, no Todoist IDs unless asked). Never disclose prices, bids, financing, or private links.\n" +
                     "- Owner-approval rule (Tisa, 2026-11-12): Never imply crew or collaborators can confirm or lock open design/finish choices or material purchases. Always state clearly that Tisa's explicit approval is required before buying, cutting, painting, or locking any open selection.\n\n" +
@@ -6509,10 +7098,12 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
             }
           }));
 
-          if (liveState.pendingPrompt) {
+          if (liveState.pendingPrompt || liveState.pendingPhoto) {
             var qNow = liveState.pendingPrompt;
+            var pNow = liveState.pendingPhoto;
             liveState.pendingPrompt = "";
-            sendPromptToLiveAgent(qNow);
+            liveState.pendingPhoto = null;
+            sendPromptToLiveAgent(qNow, pNow);
           }
 
           var srcNode = liveState.inCtx.createMediaStreamSource(stream);
@@ -6598,7 +7189,9 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       };
     } catch (err) {
       if (generation !== liveState.generation) return;
+      var unsentPhoto = liveState.pendingPhoto || liveState.stagedPhoto;
       stopGeminiLiveSession();
+      if (unsentPhoto) stageVoicePhoto(unsentPhoto);
       var errSub = document.getElementById("waVoiceStatus");
       if (errSub) {
         errSub.textContent = (currentUiLang() === "es" ? "Voz no disponible: " : "Voice unavailable: ") + String(err && err.message || err);
@@ -6612,6 +7205,11 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
 
     var oldTop = document.getElementById("u4TopAssistant");
     if (oldTop && oldTop.parentNode) oldTop.parentNode.removeChild(oldTop);
+    Array.prototype.slice.call(document.querySelectorAll("#waVoiceMicPill, #waVoiceStatus")).forEach(function(legacyEl) {
+      if (legacyEl && (!legacyEl.closest || !legacyEl.closest("#u4VoiceChatDialog")) && legacyEl.parentNode) {
+        legacyEl.parentNode.removeChild(legacyEl);
+      }
+    });
 
     if (!document.getElementById("u4AiFloatingDock")) {
       var dock = document.createElement("div");
@@ -6670,6 +7268,18 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         '<div id="u4VoiceChatTranscript" class="u4-vd-log" role="log" aria-live="polite"></div>' +
         '<div class="u4-vd-foot">' +
           '<div id="u4AiNudges" class="u4-vd-chips"></div>' +
+          '<input id="u4VdPhotoInput" type="file" accept="image/*" hidden>' +
+          '<input id="u4VdCameraInput" type="file" accept="image/*" capture="environment" hidden>' +
+          '<div id="u4VdPhotoPreview" class="u4-vd-photo-preview" hidden>' +
+            '<img id="u4VdPhotoThumb" alt="Selected voice photo">' +
+            '<span id="u4VdPhotoName" class="u4-vd-photo-name"></span>' +
+            '<button type="button" id="u4VdPhotoSendBtn" class="u4-vd-photo-send">Send photo</button>' +
+            '<button type="button" id="u4VdPhotoClearBtn" class="u4-vd-photo-clear" aria-label="Remove photo">\u2715</button>' +
+          '</div>' +
+          '<div class="u4-vd-photo-bar">' +
+            '<button type="button" id="u4VdPhotoBtn" class="u4-vd-photo-btn">📎 Attach photo</button>' +
+            '<button type="button" id="u4VdCameraBtn" class="u4-vd-photo-btn">📷 Take photo</button>' +
+          '</div>' +
           '<form id="u4VdAskForm" class="u4-vd-ask-row" novalidate>' +
             '<input id="u4VdAskInput" class="u4-vd-ask-inp" type="text" autocomplete="off" placeholder="Or type a question to navigate\u2026">' +
             '<button type="submit" class="u4-vd-ask-send" aria-label="Ask AI Helper">\u2191</button>' +
@@ -6716,18 +7326,56 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         }
       });
 
-      document.getElementById("u4VdAskForm").addEventListener("submit", function(ev) {
+      var vdPhotoBtn = document.getElementById("u4VdPhotoBtn");
+      var vdPhotoIn = document.getElementById("u4VdPhotoInput");
+      var vdCamBtn = document.getElementById("u4VdCameraBtn");
+      var vdCamIn = document.getElementById("u4VdCameraInput");
+      var handleVoiceInputPick = async function(inputEl) {
+        var rawFile = (inputEl && inputEl.files && inputEl.files[0]) || null;
+        if (!rawFile) return;
+        try {
+          var compressed = await u4CompressImageToJpeg(rawFile, 1280, 0.82);
+          if (compressed) stageVoicePhoto(compressed);
+        } catch (err) {}
+      };
+      if (vdPhotoBtn && vdPhotoIn) {
+        vdPhotoBtn.addEventListener("click", function(ev) {
+          if (ev && ev.preventDefault) ev.preventDefault();
+          vdPhotoIn.click();
+        });
+        vdPhotoIn.addEventListener("change", function() { handleVoiceInputPick(vdPhotoIn); });
+      }
+      if (vdCamBtn && vdCamIn) {
+        vdCamBtn.addEventListener("click", function(ev) {
+          if (ev && ev.preventDefault) ev.preventDefault();
+          openCameraCapture({
+            preferVoice: true,
+            fallbackInputEl: vdCamIn,
+            onCaptured: function(photoObj) { stageVoicePhoto(photoObj); }
+          });
+        });
+        vdCamIn.addEventListener("change", function() { handleVoiceInputPick(vdCamIn); });
+      }
+      document.getElementById("u4VdPhotoClearBtn").addEventListener("click", function(ev) {
+        if (ev && ev.preventDefault) ev.preventDefault();
+        clearVoiceStagedPhoto();
+      });
+      var submitVoicePromptOrPhoto = function(ev) {
         if (ev && ev.preventDefault) ev.preventDefault();
         var inp = document.getElementById("u4VdAskInput");
         var q = inp ? String(inp.value || "").trim() : "";
-        if (!q) return;
-        inp.value = "";
+        var p = liveState.stagedPhoto || null;
+        if (!q && !p) return;
+        if (inp) inp.value = "";
+        if (p) clearVoiceStagedPhoto();
         if (liveState.active) {
-          sendPromptToLiveAgent(q);
+          sendPromptToLiveAgent(q, p);
         } else {
-          startGeminiLiveSession(ev, q);
+          startGeminiLiveSession(ev, q, p);
         }
-      });
+      };
+      document.getElementById("u4VdPhotoSendBtn").addEventListener("click", submitVoicePromptOrPhoto);
+      document.getElementById("u4VdAskForm").addEventListener("submit", submitVoicePromptOrPhoto);
     }
 
     if (!document.__u4MuteShortcutBound) {
@@ -6828,12 +7476,14 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       });
     }
 
-    // 3. Wire clean photo pill (#u4PhotoTriggerBtn), preview badge (#u4PhotoPreviewBadge), and clear button (#u4PhotoClearBtn)
+    // 3. Wire clean photo pills (#u4PhotoTriggerBtn + #u4CameraTriggerBtn), preview badge (#u4PhotoPreviewBadge), and clear button (#u4PhotoClearBtn)
     var photoInput = document.getElementById("repPhoto");
+    var camInput = document.getElementById("repPhotoCamera");
     var photoTrig = document.getElementById("u4PhotoTriggerBtn");
+    var camTrig = document.getElementById("u4CameraTriggerBtn");
     var photoClr = document.getElementById("u4PhotoClearBtn");
     var syncPhotoBadge = function() {
-      var f = (photoInput && photoInput.files && photoInput.files[0]) || window.__u4SelectedPhotoFile || null;
+      var f = window.__u4SelectedPhotoFile || (photoInput && photoInput.files && photoInput.files[0]) || (camInput && camInput.files && camInput.files[0]) || null;
       var badge = document.getElementById("u4PhotoPreviewBadge");
       var hintEl = document.getElementById("u4PhotoEncourageText");
       var thumb = document.getElementById("u4PhotoThumb");
@@ -6847,8 +7497,12 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       if (nm) nm.textContent = f.name || "photo.jpg";
       if (badge) badge.hidden = false;
       if (hintEl) hintEl.hidden = true;
-      if (thumb && typeof URL !== "undefined" && typeof URL.createObjectURL === "function") {
-        try { thumb.src = URL.createObjectURL(f); } catch (e) {}
+      if (thumb) {
+        if (f.dataUrl || f.data) {
+          thumb.src = f.dataUrl || f.data;
+        } else if (typeof URL !== "undefined" && typeof URL.createObjectURL === "function") {
+          try { thumb.src = URL.createObjectURL(f.file || f); } catch (e) {}
+        }
       }
     };
     window.__u4SyncPhotoBadge = syncPhotoBadge;
@@ -6859,13 +7513,41 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         photoInput.click();
       });
     }
+    var handleFieldPhotoPick = async function(inputEl) {
+      var rawFile = (inputEl && inputEl.files && inputEl.files[0]) || null;
+      if (!rawFile) {
+        window.__u4SelectedPhotoFile = null;
+        syncPhotoBadge();
+        return;
+      }
+      try {
+        window.__u4SelectedPhotoFile = (await u4CompressImageToJpeg(rawFile, 1600, 0.85)) || rawFile;
+      } catch (e) {
+        window.__u4SelectedPhotoFile = rawFile;
+      }
+      syncPhotoBadge();
+    };
     if (photoInput && !photoInput.__u4PhotoChangeBound) {
       photoInput.__u4PhotoChangeBound = true;
-      photoInput.addEventListener("change", function() {
-        var f = (photoInput.files && photoInput.files[0]) || null;
-        window.__u4SelectedPhotoFile = f;
-        syncPhotoBadge();
+      photoInput.addEventListener("change", function() { handleFieldPhotoPick(photoInput); });
+    }
+    if (camTrig && camInput && !camTrig.__u4CamBound) {
+      camTrig.__u4CamBound = true;
+      camTrig.addEventListener("click", function(ev) {
+        if (ev && ev.preventDefault) ev.preventDefault();
+        openCameraCapture({
+          preferVoice: false,
+          fallbackInputEl: camInput,
+          onCaptured: function(photoObj) {
+            window.__u4SelectedPhotoFile = photoObj;
+            syncPhotoBadge();
+          }
+        });
       });
+    }
+    if (camInput && !camInput.__u4CamChangeBound) {
+      camInput.__u4CamChangeBound = true;
+      camInput.addEventListener("change", function() { handleFieldPhotoPick(camInput); });
     }
     if (photoClr && !photoClr.__u4PhotoClearBound) {
       photoClr.__u4PhotoClearBound = true;
@@ -6873,7 +7555,9 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         if (ev && ev.preventDefault) ev.preventDefault();
         window.__u4SelectedPhotoFile = null;
         try { if (photoInput) photoInput.value = ""; } catch (e) {}
+        try { if (camInput) camInput.value = ""; } catch (e) {}
         if (photoInput && photoInput.files && photoInput.files._isMockFileList) photoInput.files = [];
+        if (camInput && camInput.files && camInput.files._isMockFileList) camInput.files = [];
         syncPhotoBadge();
       });
     }

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Murphy Bookcase Door — Middle Hallway to Laundry Closet</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./murphy-styles.css">
+</head>
+<body>
+  <header class="app-header no-print">
+    <div class="header-inner">
+      <div class="brand-block">
+        <nav class="plan-nav no-print" aria-label="Room and plan navigation">
+          <a id="nav-back-room" class="plan-nav-link" href="../../index.html#laundry">&larr; Back to Laundry Closet Page</a>
+          <a id="nav-peer-hall" class="plan-nav-link plan-nav-peer" href="../../index.html#hallway">Hallway Context &rarr;</a>
+        </nav>
+        <h1 id="hdr-title">Murphy Bookcase Door &mdash; Middle Hallway to Laundry Closet</h1>
+        <div class="brand-meta">
+          <span id="hdr-sub">Middle Hall Doorway to Laundry Closet · Left Pivot Out-Swing · Zero Prices / Order #</span>
+          <span id="tailnet-badge" class="pill pill-neutral">Checking Tailnet…</span>
+          <span id="rev-badge" class="pill pill-info">rev-20261120-murphy-001</span>
+        </div>
+      </div>
+
+      <div class="toolbar-actions">
+        <button type="button" id="btn-lang" class="btn" aria-label="Switch language">Español (MX)</button>
+        <button type="button" id="btn-circle-toggle" class="btn">Circle-to-Correct</button>
+        <button type="button" id="btn-export-svg" class="btn">Export SVG</button>
+        <button type="button" id="btn-download-pdf" class="btn btn-primary">Download / Print PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <div id="hold-banner" class="hold-banner" role="status">
+      <strong>HARD HOLD — DO NOT CUT WOOD OR DRILL PIVOTS:</strong>
+      All 9 inside-jamb measurements (excluding outside trim), actual kit hinge thicknesses, and a full-size cardboard swing mockup are required before cutting.
+      <strong>NEVER use Bathroom Doorway A measurements (27-1/4&quot; × 79-3/8&quot;).</strong>
+    </div>
+
+    <div id="conflict-banner" class="conflict-banner no-print" hidden role="alert">
+      <div id="conflict-text">A newer revision was saved by another editor. Reload the latest plan before saving again.</div>
+      <button type="button" id="btn-reload-latest" class="btn btn-sm btn-primary">Reload Latest Plan</button>
+    </div>
+
+    <!-- VISUAL-FIRST HERO: Coupled True-Scale 3-View SVG + Hallway Site Photo & Concept Render -->
+    <section class="visual-hero" aria-label="Coupled Murphy doorway elevation, floor plan, and closet interior views">
+      <div class="panel svg-panel">
+        <div class="panel-head">
+          <h2 id="svg-panel-title">Coupled Hallway, Plan &amp; Laundry Closet Views (True Uniform Scale)</h2>
+          <div class="layer-toggles no-print" aria-label="Drawing layer visibility">
+            <label class="layer-chip"><input type="checkbox" id="lyr-trim" checked> <span data-i18n="lyr_trim">Original Trim (Keep)</span></label>
+            <label class="layer-chip"><input type="checkbox" id="lyr-case" checked> <span data-i18n="lyr_case">Bookcase &amp; Shelves</span></label>
+            <label class="layer-chip"><input type="checkbox" id="lyr-swing" checked> <span data-i18n="lyr_swing">90° Swing &amp; WashTower</span></label>
+            <label class="layer-chip"><input type="checkbox" id="lyr-vents" checked> <span data-i18n="lyr_vents">Vents &amp; Clashes</span></label>
+          </div>
+        </div>
+
+        <div class="view-tabs no-print" role="tablist" aria-label="Coupled Murphy room views">
+          <button type="button" class="view-tab active" data-view="all" id="tab-view-all">All Coupled Views</button>
+          <button type="button" class="view-tab" data-view="hall" id="tab-view-hall">Hallway Elevation (Facing North)</button>
+          <button type="button" class="view-tab" data-view="plan" id="tab-view-plan">Floor Plan &amp; 90° Swing</button>
+          <button type="button" class="view-tab" data-view="closet" id="tab-view-closet">Closet Interior &amp; Louver Vents</button>
+        </div>
+
+        <div class="status-bar-strip no-print">
+          <span id="hold-count-pill" class="pill pill-fail">9-Point Hold: 0/9 Measured (HOLD)</span>
+          <span id="square-pill" class="pill pill-warn">Squareness: Measure Diagonals</span>
+          <span id="case-size-pill" class="pill pill-warn">Case: MEASURE ON SITE</span>
+          <span id="vent-pill" class="pill pill-pass">LG Louver Vents: 100+ sq in</span>
+          <span id="wallab-pill" class="pill pill-warn">Wall A–B: Verify Framing</span>
+          <span id="sync-stamp-pill" class="pill pill-neutral">Baseline Loaded</span>
+        </div>
+
+        <div class="svg-stage-wrap">
+          <div class="svg-stage" id="svg-stage">
+            <svg id="murphy-svg" viewBox="0 0 920 1120" width="920" height="1120"
+                 xmlns="http://www.w3.org/2000/svg" role="img"
+                 aria-label="Unit 4 Murphy Bookcase Door Coupled True-Scale Elevation, Floor Plan, and Closet Vent Diagram"></svg>
+            <canvas id="murphy-sketch-canvas" aria-label="Circle-to-Correct drawing overlay"></canvas>
+          </div>
+        </div>
+
+        <div id="circle-bar" class="circle-bar no-print" hidden>
+          <span id="circle-bar-hint">Draw a circle around any spot on the Murphy drawings (touch or mouse), then add your note below.</span>
+          <div>
+            <button type="button" id="btn-clear-sketch" class="btn btn-sm">Clear Sketch</button>
+            <button type="button" id="btn-circle-done" class="btn btn-sm btn-danger">Exit Circle Mode</button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="panel photo-panel" aria-label="Hallway site photo and concept render">
+        <div class="panel-head print-keep-head">
+          <h2 id="photo-panel-title">Hallway Site Photo &amp; Visual Goal</h2>
+          <span class="pill pill-fail" id="photo-badge">DO NOT CUT YET</span>
+        </div>
+        <div class="photo-body">
+          <div class="photo-frame">
+            <img src="./assets/hallway-doorway-b-photo.png" alt="Actual Unit 4 hallway looking North showing Door A bathroom on left, middle Door B becoming the Murphy bookcase, and Door C bedroom on right" loading="eager">
+            <div class="photo-compass-overlay">
+              <span>← WEST (Door A Bath)</span>
+              <span>DOORWAY B (FACING NORTH)</span>
+              <span>EAST (Bedroom C) →</span>
+            </div>
+          </div>
+
+          <div class="photo-frame">
+            <img src="./assets/murphy-bookcase-concept.png" alt="Illustrative built-in hallway bookcase concept showing preserved casing and crown" loading="eager">
+            <div class="photo-compass-overlay">
+              <span>Built-in Goal (Chantilly Lace OC-65)</span>
+              <span class="concept-disclaimer" id="concept-disclaimer">Concept reference only — not to scale</span>
+            </div>
+          </div>
+
+          <ul class="photo-callouts" id="photo-callouts">
+            <li class="callout-alert"><strong>Measure Inside Jambs Only:</strong> Stand in hallway facing Doorway B. Exclude outside casings and measure twice to nearest 1/16&quot;.</li>
+            <li><strong>Preserve Existing Woodwork:</strong> Keep original hallway crown molding, door casings around Doors A/B/C, and hallway baseboard untouched.</li>
+            <li><strong>Wall A–B Check:</strong> Nov 19 update deferred the bathroom pocket door for a hinged door — verify actual Wall A–B framing before setting pivot blocking.</li>
+            <li><strong>WashTower Louvers &amp; Release:</strong> Upper vent ≥ 48 sq in net (≥ 72&quot; up) + lower ≥ 24 sq in net (≤ 12&quot; up), total ≥ 100 sq in net + inside release handle.</li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+
+    <!-- IMMUTABLE CLASHES & SAFETY GATES -->
+    <section class="panel" aria-label="Flagged clashes and safety checks">
+      <div class="panel-head print-keep-head">
+        <h2 id="clashes-title">Flagged Clashes &amp; Field Holds (Never Auto-Resolved)</h2>
+        <span class="pill pill-fail" id="clashes-lock-pill">Immutable · Verify in Field</span>
+      </div>
+      <div class="clashes-grid" id="clashes-grid"></div>
+    </section>
+
+    <!-- LIVE PROPOSED MATERIALS TAKEOFF + EXISTING ORIGINAL TRIM (ZERO PRICES / ORDER #) -->
+    <section class="panel takeoff-panel" aria-label="Live proposed materials takeoff and existing original trim">
+      <div class="panel-head print-keep-head">
+        <h2 id="takeoff-title">Live Proposed Materials Takeoff &amp; Existing Original Trim</h2>
+        <span class="pill pill-info" id="takeoff-zero-pill">Quantities Only · Zero Prices · Zero Order #</span>
+      </div>
+      <div class="takeoff-notice" id="takeoff-notice">
+        PROPOSED QUANTITIES ONLY — ZERO PRICES, ZERO ORDER NUMBERS. Verify onsite hardware kit delivery and 9-point measurements before buying or cutting plywood.
+      </div>
+      <div class="takeoff-controls no-print">
+        <label class="takeoff-control-group" for="inp-waste-pct">
+          <span data-i18n="lbl_waste">Sheet / Trim Waste Factor (%):</span>
+          <input type="number" id="inp-waste-pct" step="1" min="0" max="30" value="10">
+        </label>
+        <label class="takeoff-control-group" for="sel-case-depth">
+          <span data-i18n="lbl_case_depth">Bookcase Overall Depth (D):</span>
+          <select id="sel-case-depth">
+            <option value="8.25">8-1/4&quot; (Usable shelf ~7-3/16&quot;)</option>
+            <option value="9.0625">9-1/16&quot; Deeper option (Tisa confirm after mockup)</option>
+          </select>
+        </label>
+      </div>
+      <div class="takeoff-grid" id="takeoff-grid"></div>
+      <div style="padding: 0 14px 12px;">
+        <div class="trim-baseline-note" id="trim-baseline-note"></div>
+      </div>
+    </section>
+
+    <!-- LIVE COMPUTED DOORWAY + CASE + LOUVER SUMMARY TABLE -->
+    <section class="panel" aria-label="Live Murphy door measurements and fabrication table">
+      <div class="panel-head print-keep-head">
+        <h2 id="marks-title">Live 9-Point Doorway Summary, Case Cut Size &amp; Louver Vent Checks</h2>
+        <span class="pill pill-info" id="marks-summary-pill">Updates Live From 9-Point Inputs</span>
+      </div>
+      <div class="table-scroll">
+        <table class="mark-table">
+          <thead>
+            <tr>
+              <th id="th-feat">Item / Worksheet Row</th>
+              <th id="th-val">Measured / Computed Value</th>
+              <th id="th-rule">Target / Formula Check</th>
+              <th id="th-bound">Measurement Boundary</th>
+              <th id="th-stat">Release Status</th>
+            </tr>
+          </thead>
+          <tbody id="marks-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE 9-POINT MEASUREMENT FORM + CIRCLE/VOICE + EOD REVIEW -->
+    <section class="workspace-grid no-print" aria-label="Interactive 9-point worksheet and EOD review">
+      <div class="panel">
+        <div class="panel-head">
+          <h2 id="editor-title">Interactive 9-Point Doorway &amp; Louver Worksheet</h2>
+          <span class="pill pill-neutral" id="editor-mode-pill">Local Preview + Export</span>
+        </div>
+
+        <form id="murphy-form" class="form-body" novalidate>
+          <div class="preset-row">
+            <span class="preset-label" id="preset-lbl">Quick Check:</span>
+            <button type="button" class="btn btn-sm" id="preset-hold">Unmeasured HOLD (Baseline)</button>
+            <button type="button" class="btn btn-sm" id="preset-sample-pass">Test Sample 9-Pt (PASS)</button>
+            <button type="button" class="btn btn-sm" id="preset-fail-square">Test Out-of-Square (&gt;1/8&quot; FAIL)</button>
+            <button type="button" class="btn btn-sm" id="preset-fail-vents">Test Vents &lt;100 sq in (FAIL)</button>
+            <button type="button" class="btn btn-sm" id="btn-reset-baseline">Reset</button>
+          </div>
+
+          <div class="dim-grid">
+            <div class="field-group">
+              <label class="field-label-row" for="inp-author">
+                <span data-i18n="lbl_author">Measurer / Editor Name</span>
+                <span class="boundary-tag">author</span>
+              </label>
+              <select id="inp-author">
+                <option value="Tisa">Tisa</option>
+                <option value="John">John</option>
+                <option value="Ervin">Ervin</option>
+                <option value="Joel">Joel</option>
+                <option value="Alex">Alex</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="sel-floor-done">
+                <span data-i18n="lbl_floor_done">Finished Hallway Floor Down?</span>
+                <span class="boundary-tag">above_finished_floor</span>
+              </label>
+              <select id="sel-floor-done">
+                <option value="unknown">UNVERIFIED — Confirm Before Measuring Heights</option>
+                <option value="yes">Yes — Measuring off final finished floor</option>
+                <option value="no">No — Subfloor only (add finished floor buildup)</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-b7">
+                <span data-i18n="lbl_b7">Top Width Inside Jamb (in)</span>
+                <span class="boundary-tag">clear_between_casings</span>
+              </label>
+              <input type="number" id="inp-b7" step="0.0625" min="20" max="42" placeholder="MEASURE ON SITE (~28.4375 est.)">
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-b8">
+                <span data-i18n="lbl_b8">Middle Width Inside Jamb (in)</span>
+                <span class="boundary-tag">clear_between_casings</span>
+              </label>
+              <input type="number" id="inp-b8" step="0.0625" min="20" max="42" placeholder="MEASURE ON SITE (~28.4375 est.)">
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-b9">
+                <span data-i18n="lbl_b9">Bottom Width Inside Jamb (in)</span>
+                <span class="boundary-tag">clear_between_casings</span>
+              </label>
+              <input type="number" id="inp-b9" step="0.0625" min="20" max="42" placeholder="MEASURE ON SITE (~28.4375 est.)">
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-b10">
+                <span data-i18n="lbl_b10">Left Height from Finished Floor (in)</span>
+                <span class="boundary-tag">above_finished_floor</span>
+              </label>
+              <input type="number" id="inp-b10" step="0.0625" min="68" max="96" placeholder="MEASURE ON SITE (~80.4375 est.)">
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-b11">
+                <span data-i18n="lbl_b11">Center Height from Finished Floor (in)</span>
+                <span class="boundary-tag">above_finished_floor</span>
+              </label>
+              <input type="number" id="inp-b11" step="0.0625" min="68" max="96" placeholder="MEASURE ON SITE (~80.4375 est.)">
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-b12">
+                <span data-i18n="lbl_b12">Right Height from Finished Floor (in)</span>
+                <span class="boundary-tag">above_finished_floor</span>
+              </label>
+              <input type="number" id="inp-b12" step="0.0625" min="68" max="96" placeholder="MEASURE ON SITE (~80.4375 est.)">
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-b13">
+                <span data-i18n="lbl_b13">Diagonal A (Top-Left to Bottom-Right, in)</span>
+                <span class="boundary-tag">clear_between_casings</span>
+              </label>
+              <input type="number" id="inp-b13" step="0.0625" min="70" max="110" placeholder="MEASURE ON SITE">
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-b14">
+                <span data-i18n="lbl_b14">Diagonal B (Top-Right to Bottom-Left, in)</span>
+                <span class="boundary-tag">clear_between_casings</span>
+              </label>
+              <input type="number" id="inp-b14" step="0.0625" min="70" max="110" placeholder="MEASURE ON SITE">
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-b15">
+                <span data-i18n="lbl_b15">Jamb Depth J (Hall Face to Closet Face, in)</span>
+                <span class="boundary-tag">wall_to_wall</span>
+              </label>
+              <input type="number" id="inp-b15" step="0.0625" min="3" max="12" placeholder="MEASURE ON SITE (~4.75 est.)">
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-ah">
+                <span data-i18n="lbl_ah">Kit Hinge Stack Ah (in · Verify Kit)</span>
+                <span class="boundary-tag">clear_between_casings</span>
+              </label>
+              <input type="number" id="inp-ah" step="0.0625" min="1" max="5" value="2.375">
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-v1-area">
+                <span data-i18n="lbl_v1">Upper Louver Net Free Area / Height (≥48 sq in @ ≥72&quot;)</span>
+              </label>
+              <div class="field-input-row">
+                <input type="number" id="inp-v1-area" step="1" min="0" max="150" value="48" aria-label="Upper louver net square inches">
+                <input type="number" id="inp-v1-h" step="0.5" min="48" max="90" value="72.5" aria-label="Upper louver height inches">
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-v2-area">
+                <span data-i18n="lbl_v2">Lower Louver Net Free Area / Top (≥24 sq in @ ≤12&quot;)</span>
+              </label>
+              <div class="field-input-row">
+                <input type="number" id="inp-v2-area" step="1" min="0" max="150" value="52" aria-label="Lower louver net square inches">
+                <input type="number" id="inp-v2-h" step="0.5" min="1" max="30" value="7" aria-label="Lower louver top height inches">
+              </div>
+            </div>
+          </div>
+
+          <div class="action-bar">
+            <button type="button" id="btn-apply-local" class="btn btn-essex">Apply Live Preview</button>
+            <button type="button" id="btn-save-tailnet" class="btn btn-primary" disabled>Save Live to Tailnet</button>
+            <button type="button" id="btn-export-json" class="btn">Download JSON</button>
+          </div>
+          <div id="save-hint" class="field-help">Off-tailnet devices preview and export locally only. Connect to Tisa&apos;s Tailscale network to save live overrides.</div>
+        </form>
+      </div>
+
+      <div class="right-stack">
+        <div class="panel">
+          <div class="panel-head">
+            <h2 id="voice-title">Circle-to-Correct &amp; Voice Field Note</h2>
+            <span class="pill pill-info" id="voice-lang-pill">en-US</span>
+          </div>
+          <div class="form-body">
+            <div class="field-group">
+              <label class="field-label-row" for="sel-pin-intent">
+                <span data-i18n="lbl_intent">Note Type</span>
+                <span id="sketch-status-pill" class="pill pill-neutral">No Circle Drawn</span>
+              </label>
+              <select id="sel-pin-intent">
+                <option value="propose_edit">Modify Plan / Enter Measurement</option>
+                <option value="ask_question">Answer a Question (&quot;What is this right here?&quot;)</option>
+                <option value="flag_problem">Flag Problem / Framing Clash</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-voice-note">
+                <span data-i18n="lbl_note">Field Note or Spoken Command</span>
+              </label>
+              <textarea id="inp-voice-note" rows="3" placeholder="Example: &quot;Top width 28.5&quot;, &quot;Jamb depth 4.75&quot;, or &quot;Is Wall A-B framed solid?&quot; (Zero prices)"></textarea>
+            </div>
+
+            <div class="voice-row">
+              <button type="button" id="btn-dictate" class="btn">Dictate Voice Note</button>
+              <button type="button" id="btn-apply-note" class="btn btn-primary">Add Attached Comment</button>
+            </div>
+            <div id="voice-status" class="field-help">Tap Circle-to-Correct above to circle any spot, add a comment card with leader line, then dictate or Send to Agent per comment.</div>
+
+            <div id="pin-list" class="pin-list"></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2 id="eod-title">End-of-Day Review &amp; Revert (Tisa)</h2>
+            <span class="pill pill-warn" id="eod-count-pill">0 pending</span>
+          </div>
+          <div class="form-body">
+            <p class="empty-note" id="eod-desc">
+              Field saves stamp the plan immediately with a revision ID. At end-of-day, Tisa taps
+              <strong>Accept</strong> (promotes to <code>laundry/SPEC.md</code>) or <strong>Reject</strong> (reverts atomically).
+            </p>
+            <div id="eod-list" class="eod-list"></div>
+            <div class="action-bar">
+              <button type="button" id="btn-refresh-eod" class="btn btn-sm">Refresh From Tailnet</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="status-toast" class="status-toast" hidden role="status" aria-live="polite"></div>
+
+  <script src="../vendor/jspdf.umd.min.js"></script>
+  <script src="../vendor/svg2pdf.umd.min.js"></script>
+  <script src="../vendor/ks4-pdf-export.js"></script>
+  <script src="./murphy-renderer.js"></script>
+</body>
+</html>

@@ -16,6 +16,68 @@
     ]
   },
   {
+    "key": "interactive-kitchen-floor-plan",
+    "room": "kitchen",
+    "titleEn": "Interactive full kitchen floor plan and cabinet schedule",
+    "titleEs": "Plano interactivo de cocina completa y lista de gabinetes",
+    "noteEn": "All 4 walls coupled, 6\" vs. 12\" walkway check, tape-ready cabinet list.",
+    "noteEs": "4 muros acoplados, paso libre de 6\" vs. 12\" y lista de gabinetes.",
+    "docEn": "2026-11-20_Kitchen-Floor-Plan-Interactive_EN",
+    "docEs": "2026-11-20_Kitchen-Floor-Plan-Interactive_ES",
+    "aliases": [
+      "kitchen floor plan",
+      "full kitchen plan",
+      "cabinet schedule",
+      "plano de cocina interactivo"
+    ]
+  },
+  {
+    "key": "interactive-attic-hatch-plan",
+    "room": "attic-access",
+    "titleEn": "Permanent attic hatch interactive plan",
+    "titleEs": "Plano interactivo de escotilla permanente del ático",
+    "noteEn": "24\"×36\" opening, joist direction, 66\" height cap, walkway calculator.",
+    "noteEs": "Paso libre de 24\"×36\", dirección de vigas, límite de 20 pies y altura 66\".",
+    "docEn": "2026-11-20_Attic-Hatch-Interactive_EN",
+    "docEs": "2026-11-20_Attic-Hatch-Interactive_ES",
+    "aliases": [
+      "attic hatch interactive",
+      "permanent attic hatch",
+      "escotilla interactiva"
+    ]
+  },
+  {
+    "key": "interactive-hvac-layout",
+    "room": "hvac",
+    "titleEn": "Attic furnace and ducts interactive layout",
+    "titleEs": "Plano interactivo de calefacción y ductos en ático",
+    "noteEn": "Mon Nov 23 walkthrough layout: furnace, 30\"×30\" platform, ducts & GFCI.",
+    "noteEs": "Recorrido 23 nov: calefactor, plataforma 30\"×30\", ductos y GFCI.",
+    "docEn": "2026-11-20_HVAC-Layout-Interactive_EN",
+    "docEs": "2026-11-20_HVAC-Layout-Interactive_ES",
+    "aliases": [
+      "hvac layout",
+      "attic furnace",
+      "ductwork layout",
+      "plano interactivo clima"
+    ]
+  },
+  {
+    "key": "interactive-murphy-door-plan",
+    "room": "laundry",
+    "titleEn": "Murphy bookcase door interactive plan",
+    "titleEs": "Plano interactivo de puerta librero Murphy",
+    "noteEn": "9-point doorway check, 90° hallway swing & LG WashTower louver vents.",
+    "noteEs": "Lista de 9 medidas, giro 90° en pasillo y rejillas de aire.",
+    "docEn": "2026-11-20_Murphy-Door-Interactive_EN",
+    "docEs": "2026-11-20_Murphy-Door-Interactive_ES",
+    "aliases": [
+      "murphy door interactive",
+      "interactive bookcase door",
+      "puerta librero interactiva"
+    ]
+  },
+  {
     "key": "hood-test-hang",
     "room": "kitchen-oven-range",
     "titleEn": "Hood test-hang: overview and site checks",

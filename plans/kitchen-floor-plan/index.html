@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kitchen Floor Plan &amp; Cabinet Schedule — Unit 4</title>
+  <link rel="stylesheet" href="./kitchen-floorplan-styles.css">
+</head>
+<body>
+  <header class="app-header no-print">
+    <nav class="top-jump-bar" aria-label="Cross-plan navigation">
+      <a id="link-back-room" class="jump-link" href="../../#kitchen">&larr; Back to Kitchen Page</a>
+      <a id="link-west-hood-top" class="jump-link jump-link-sibling" href="../interactive-pilot/index.html">West Range &amp; Hood Wall &rarr;</a>
+    </nav>
+    <div class="header-inner">
+      <div class="brand-block">
+        <h1 id="hdr-title">Kitchen Floor Plan &amp; Cabinet Schedule</h1>
+        <div class="brand-meta">
+          <span id="hdr-sub">147&quot; × 126-1/4&quot; True-to-Scale Coupled Room Model (X = Y) · All 4 Walls Synced · Zero Prices</span>
+          <span id="tailnet-badge" class="pill pill-neutral">Checking Tailnet…</span>
+          <span id="rev-badge" class="pill pill-info">rev-20261120-kitchen-fp-001</span>
+        </div>
+      </div>
+
+      <div class="toolbar-actions">
+        <button type="button" id="btn-lang" class="btn" aria-label="Switch language">Español (MX)</button>
+        <button type="button" id="btn-circle-toggle" class="btn">Circle-to-Correct</button>
+        <button type="button" id="btn-export-svg" class="btn">Export SVG</button>
+        <button type="button" id="btn-download-pdf" class="btn btn-primary">Download / Print PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <div id="hold-banner" class="hold-banner" role="status">
+      <strong>LAYOUT STAGING HOLD — VERIFY ON FRIDAY MOCKUP PHOTOS:</strong> Reconcile South sink station (<strong>75&quot;–105&quot;</strong> vs. taped <strong>72&quot;–102&quot;</strong>), rear door casing span (<strong>114&quot;</strong> vs. <strong>115&quot;</strong>), <strong>6&quot; vs. 12&quot;</strong> passage width, and East <strong>D04</strong> subpanel side-entry hold before relocating sink plumbing, ordering cabinets/stone, or closing drywall.
+    </div>
+
+    <div id="conflict-banner" class="conflict-banner no-print" hidden role="alert">
+      <div id="conflict-text">A newer revision was saved on Tailnet by another editor (HTTP 409). Reload the latest plan before saving again.</div>
+      <button type="button" id="btn-reload-latest" class="btn btn-sm btn-primary">Reload Latest Plan</button>
+    </div>
+
+    <!-- VISUAL-FIRST HERO: Coupled Multi-Wall True-Scale SVG + Real South Wall Site Photo + Tap-to-Inspect Card -->
+    <section class="visual-hero" aria-label="Coupled kitchen floor plan and site photo">
+      <div class="panel svg-panel">
+        <div class="panel-head">
+          <h2 id="svg-panel-title">True-to-Scale Kitchen Floor Plan (147&quot; × 126-1/4&quot;)</h2>
+          <a id="link-west-hood" class="cross-link-btn no-print" href="../interactive-pilot/index.html">Detailed West Range &amp; Hood Wall &rarr;</a>
+        </div>
+
+        <!-- Coupled Room View Tabs (Floor Plan + All 4 Connected Walls from ONE JSON) -->
+        <div class="view-tabs-bar no-print" aria-label="Coupled kitchen views">
+          <div class="view-tabs" role="tablist">
+            <button type="button" class="view-tab active" data-view="floor" id="tab-floor" role="tab" aria-selected="true">Floor Plan (147&quot;×126-1/4&quot;)</button>
+            <button type="button" class="view-tab" data-view="west" id="tab-west" role="tab" aria-selected="false">West Wall (Range)</button>
+            <button type="button" class="view-tab" data-view="south" id="tab-south" role="tab" aria-selected="false">South Wall (Sink)</button>
+            <button type="button" class="view-tab" data-view="east" id="tab-east" role="tab" aria-selected="false">East Wall (Fridge)</button>
+            <button type="button" class="view-tab" data-view="north" id="tab-north" role="tab" aria-selected="false">North Wall (Open)</button>
+          </div>
+        </div>
+
+        <!-- 4 Phone/iPad Friendly 1-Tap Crew Layer Toggles -->
+        <div class="crew-layer-bar no-print" aria-label="1-tap crew drawing layers">
+          <div class="layer-toggle-pills">
+            <button type="button" class="toggle-pill-btn on" id="tgl-base" aria-pressed="true">Base Cabinets &amp; Appliances</button>
+            <button type="button" class="toggle-pill-btn on" id="tgl-uppers" aria-pressed="true">Wall Upper Cabinets</button>
+            <button type="button" class="toggle-pill-btn on" id="tgl-swings" aria-pressed="true">Swings &amp; Clear Walkways</button>
+            <button type="button" class="toggle-pill-btn on-alert" id="tgl-utilities" aria-pressed="true">Rough-In Utilities (HOLD)</button>
+          </div>
+        </div>
+
+        <!-- Coupled South 6" vs 12" Option + Sink Station Basis Quick Switcher -->
+        <div class="option-switch-bar no-print" aria-label="Live South wall layout comparisons">
+          <strong id="lbl-south-opt">South End Box:</strong>
+          <button type="button" class="btn btn-sm btn-primary" id="btn-opt-6">6&quot; Filler / Pull-Out</button>
+          <button type="button" class="btn btn-sm" id="btn-opt-12">12&quot; Cabinet Option</button>
+          <span style="color:#64748b;">|</span>
+          <strong id="lbl-sink-basis">Sink Station:</strong>
+          <button type="button" class="btn btn-sm btn-essex" id="btn-sink-75">75&quot;–105&quot; (CL 90&quot; Window)</button>
+          <button type="button" class="btn btn-sm" id="btn-sink-72">72&quot;–102&quot; (Site Tape CL 87&quot;)</button>
+          <button type="button" class="btn btn-sm" id="btn-reset-baseline">Reset Baseline</button>
+        </div>
+
+        <div class="status-bar-strip no-print">
+          <span id="walkway-pill" class="pill pill-pass">Narrowest Walkway: 34-1/4&quot; clear</span>
+          <span id="casing-pill" class="pill pill-pass">South Casing Clearance: PASS</span>
+          <span id="uppers-pill" class="pill pill-info">West Wall Uppers: NONE (Locked)</span>
+          <span id="scale-pill" class="pill pill-pass">True Scale 1:1 (X = Y)</span>
+          <span id="sync-stamp-pill" class="pill pill-neutral">Baseline Loaded</span>
+        </div>
+
+        <div class="svg-stage-wrap">
+          <div class="svg-stage" id="svg-stage">
+            <svg id="kitchen-fp-svg" viewBox="0 0 920 1120" width="920" height="1120"
+                 xmlns="http://www.w3.org/2000/svg" role="img"
+                 aria-label="Unit 4 Kitchen Coupled True-to-Scale Floor Plan and Four-Wall Cabinet Elevations"></svg>
+            <canvas id="kitchen-fp-sketch-canvas" aria-label="Circle-to-Correct drawing overlay"></canvas>
+          </div>
+        </div>
+
+        <div id="circle-bar" class="circle-bar no-print" hidden>
+          <span id="circle-bar-hint">Draw a circle around any spot on the drawing (touch or mouse) to attach a callout note.</span>
+          <div>
+            <button type="button" id="btn-clear-sketch" class="btn btn-sm">Clear Sketch</button>
+            <button type="button" id="btn-circle-done" class="btn btn-sm btn-danger">Exit Circle Mode</button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="panel photo-panel" aria-label="South wall site photo and tapped cabinet inspector">
+        <div class="panel-head print-keep-head">
+          <h2 id="photo-panel-title">South Sink &amp; Pie-Safe Wall (Real Photo)</h2>
+          <span class="pill pill-warn" id="photo-badge">VERIFY FRIDAY</span>
+        </div>
+        <div class="photo-body">
+          <div id="inspector-box" class="inspector-box no-print">
+            <strong id="insp-title">Tap Any Cabinet or Appliance Box to Inspect</strong>
+            <div id="insp-body">Tap any rectangle on the floor plan or wall elevation (or any row in the Cabinet Schedule below) to highlight it, check its station from the named corner, or edit its width live.</div>
+          </div>
+
+          <div class="photo-frame">
+            <img src="./assets/kitchen-south-wall.jpg" alt="Real Unit 4 open-stud South kitchen wall showing old dining doorway on left, existing recessed pie-safe with blue tape at 36 inch counter line, South window with plumbing stubs below, and rear door on right" loading="eager">
+            <div class="photo-compass-overlay">
+              <span id="photo-left-lbl">&larr; SE CORNER (0&quot; ref)</span>
+              <span id="photo-mid-lbl">SOUTH SINK WALL</span>
+              <span id="photo-right-lbl">REAR DOOR (SW) &rarr;</span>
+            </div>
+          </div>
+
+          <ul class="photo-callouts" id="photo-callouts">
+            <li class="callout-alert"><strong>Existing Recessed Pie-Safe (~26&quot;–59&quot; from SE):</strong> Blue tape marks 36&quot; counter line. Final width &amp; depth are <strong>Measure on site / verify Friday</strong>.</li>
+            <li><strong>South Window &amp; Sink Stubs:</strong> Reconcile 75&quot;–105&quot; (CL 90&quot;) vs. taped 72&quot;–102&quot; (CL 87&quot;) before moving drain/water lines.</li>
+            <li><strong>Rear Door Casing (Right):</strong> Verify 114&quot; vs. 115&quot; usable span and test 6&quot; vs. 12&quot; box with 1&quot; countertop overhang.</li>
+          </ul>
+          <div id="concept-disclaimer-box" class="concept-disclaimer no-print">
+            <strong>Site Photo vs. Concept:</strong> Above photo is the real South kitchen wall. Any separate 3D L-layout concept renders in Drive are <em>Concept reference only — not to scale</em>; always mark out from this true-scale floor plan.
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- WALL-BY-WALL KITCHEN CABINET SCHEDULE & LIVE CLOSURE CHECK (ZERO PRICES / ZERO ORDER #s) -->
+    <section class="panel print-panel" id="schedule-panel" aria-label="Wall-by-wall kitchen cabinet schedule">
+      <div class="panel-head print-keep-head">
+        <h2 id="schedule-title">Wall-by-Wall Kitchen Cabinet Schedule (Base vs. Wall Upper · Live Closure)</h2>
+        <span class="pill pill-info" id="schedule-counts-pill">0 Base · 0 Upper · 0 Appliance</span>
+      </div>
+
+      <!-- 4-Wall Dimensional Closure Summary Strip -->
+      <div class="closure-strip" id="closure-strip"></div>
+
+      <div class="schedule-filter-bar no-print">
+        <div class="view-tabs">
+          <button type="button" class="btn btn-sm btn-primary" data-wall-filter="ALL" id="flt-all">All 4 Walls</button>
+          <button type="button" class="btn btn-sm" data-wall-filter="West" id="flt-west">West (Range)</button>
+          <button type="button" class="btn btn-sm" data-wall-filter="South" id="flt-south">South (Sink)</button>
+          <button type="button" class="btn btn-sm" data-wall-filter="East" id="flt-east">East (Fridge)</button>
+          <button type="button" class="btn btn-sm" data-wall-filter="North" id="flt-north">North (Open)</button>
+        </div>
+        <div class="view-tabs">
+          <select id="sel-type-filter" aria-label="Filter cabinet type">
+            <option value="ALL">All Types (Base + Upper + Appliance + Filler)</option>
+            <option value="Base">Base Cabinets Only</option>
+            <option value="Wall Upper">Wall Upper Cabinets Only</option>
+            <option value="Appliance Bay">Appliance Bays Only</option>
+            <option value="Filler">Fillers / Pull-Outs Only</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-scroll">
+        <table class="schedule-table">
+          <thead>
+            <tr>
+              <th id="th-wall">Wall / ID</th>
+              <th id="th-label">Cabinet / Appliance Label</th>
+              <th id="th-type">Type</th>
+              <th id="th-station">L&rarr;R Station (From Corner)</th>
+              <th id="th-size">W × D × H (in · Live Edit W)</th>
+              <th id="th-boundary">Boundary</th>
+              <th id="th-status">Status</th>
+            </tr>
+          </thead>
+          <tbody id="schedule-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- IMMUTABLE FLAGGED CLASHES -->
+    <section class="panel print-panel" aria-label="Flagged kitchen clashes">
+      <div class="panel-head print-keep-head">
+        <h2 id="clashes-title">Flagged Clashes &amp; Field Checks (Never Auto-Resolved)</h2>
+        <span class="pill pill-fail" id="clashes-lock-pill">Immutable · Verify in Field</span>
+      </div>
+      <div class="clashes-grid" id="clashes-grid"></div>
+    </section>
+
+    <!-- LIVE CROSS-WALL WRAP-AROUND TILE, BACKER & COUNTERTOP TAKEOFF (ZERO PRICES) -->
+    <section class="panel print-panel takeoff-panel" id="takeoff-panel" aria-label="Live cross-wall kitchen materials takeoff">
+      <div class="panel-head print-keep-head">
+        <h2 id="takeoff-title">Live Cross-Wall Tile, Backer &amp; Countertop Takeoff (Quantities Only · Zero Prices)</h2>
+        <span class="pill pill-warn" id="takeoff-waste-pill">Waste Factor: +15%</span>
+      </div>
+      <div class="takeoff-notice" id="takeoff-notice">
+        Gross Proposed Quantities Only (Zero Prices · Zero Order Numbers) — Verify On-Hand Stock Before Ordering.
+      </div>
+      <div class="takeoff-controls no-print">
+        <div class="takeoff-control-group">
+          <span id="lbl-waste-pct">Waste / Overage (%):</span>
+          <button type="button" class="btn btn-sm" id="btn-waste-10">+10% Straight</button>
+          <button type="button" class="btn btn-sm btn-primary" id="btn-waste-15">+15% Brick/Pattern</button>
+          <input type="number" id="inp-waste-pct" min="0" max="35" step="1" value="15" aria-label="Tile waste percentage">
+        </div>
+        <div class="takeoff-control-group">
+          <label for="inp-box-sqft" id="lbl-box-sqft">Tile Box Coverage (sq ft/box):</label>
+          <input type="number" id="inp-box-sqft" min="1" max="50" step="0.1" placeholder="Optional" aria-label="Square feet per box">
+        </div>
+        <label style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;">
+          <input type="checkbox" id="chk-south-tile" checked>
+          <span id="lbl-south-tile">Include South Sink Backsplash</span>
+        </label>
+        <label style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;">
+          <input type="checkbox" id="chk-east-tile" checked>
+          <span id="lbl-east-tile">Include East Return Backsplash</span>
+        </label>
+      </div>
+      <div class="takeoff-grid" id="takeoff-grid"></div>
+    </section>
+
+    <!-- WORKSPACE: EXISTING ORIGINAL TRIM + SAVE/EXPORT + ATTACHED COMMENTS + EOD REVIEW -->
+    <section class="workspace-grid no-print" aria-label="Original trim baseline, attached comments and EOD review">
+      <div class="right-stack">
+        <div class="panel">
+          <div class="panel-head">
+            <h2 id="trim-title">Existing Original Trim Baseline &amp; Live Room Controls</h2>
+            <span class="pill pill-pass" id="trim-badge">Edwardian Original</span>
+          </div>
+          <div class="form-body">
+            <div class="trim-baseline-note" id="trim-rule-note">
+              Preserve original Edwardian baseboards (9-1/2&quot;), high picture rail (103&quot;), and door/window casings. Never mix original trim with proposed new cabinet fillers.
+            </div>
+            <div class="dim-grid">
+              <div class="field-group">
+                <label class="field-label-row" for="inp-author">
+                  <span data-i18n="lbl_author">Editor Name</span>
+                  <span class="boundary-tag">author</span>
+                </label>
+                <select id="inp-author">
+                  <option value="Tisa">Tisa</option>
+                  <option value="John">John</option>
+                  <option value="Ervin">Ervin</option>
+                  <option value="Alex">Alex</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label-row" for="inp-floor-t">
+                  <span data-i18n="lbl_floor_t">Floor Build-Up (t) (in)</span>
+                  <span class="pill pill-warn" id="prov-floor-t">MEASURE ON SITE</span>
+                </label>
+                <input type="number" id="inp-floor-t" step="0.0625" min="0" max="4" value="0.75">
+              </div>
+
+              <div class="field-group">
+                <label class="field-label-row" for="inp-trim-baseboard">
+                  <span data-i18n="lbl_trim_base">Original Baseboard Height (in)</span>
+                  <span class="pill pill-warn" id="prov-trim-base">VERIFY ON SITE</span>
+                </label>
+                <input type="number" id="inp-trim-baseboard" step="0.125" min="3" max="16" value="9.5">
+              </div>
+
+              <div class="field-group">
+                <label class="field-label-row" for="inp-trim-rail">
+                  <span data-i18n="lbl_trim_rail">Original High Picture Rail Height (in)</span>
+                  <span class="pill pill-warn" id="prov-trim-rail">VERIFY ON SITE</span>
+                </label>
+                <input type="number" id="inp-trim-rail" step="0.25" min="72" max="120" value="103">
+              </div>
+
+              <div class="field-group">
+                <label class="field-label-row" for="inp-trim-door-casing">
+                  <span data-i18n="lbl_trim_door">Original Door Casing Width (in)</span>
+                  <span class="pill pill-fail" id="prov-trim-door">MEASURE ON SITE</span>
+                </label>
+                <input type="number" id="inp-trim-door-casing" step="0.125" min="1" max="10" placeholder="MEASURE ON SITE">
+              </div>
+
+              <div class="field-group">
+                <label class="field-label-row" for="inp-trim-win-casing">
+                  <span data-i18n="lbl_trim_win">Original Window Casing Width (in)</span>
+                  <span class="pill pill-fail" id="prov-trim-win">MEASURE ON SITE</span>
+                </label>
+                <input type="number" id="inp-trim-win-casing" step="0.125" min="1" max="10" placeholder="MEASURE ON SITE">
+              </div>
+            </div>
+
+            <div class="action-bar">
+              <button type="button" id="btn-save-tailnet" class="btn btn-primary" disabled>Save Live to Tailnet</button>
+              <button type="button" id="btn-export-json" class="btn">Download Schedule JSON</button>
+            </div>
+            <div id="save-hint" class="field-help">Off-tailnet Read-Only / Local Export mode: live edits update preview &amp; local exports only. Connect to Tisa&apos;s Tailscale network to save live overrides.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="right-stack">
+        <div class="panel">
+          <div class="panel-head">
+            <h2 id="voice-title">Attached Comment Callouts &amp; Voice Note</h2>
+            <span class="pill pill-info" id="voice-lang-pill">en-US</span>
+          </div>
+          <div class="form-body">
+            <div class="field-group">
+              <label class="field-label-row" for="sel-pin-intent">
+                <span data-i18n="lbl_intent">Comment Action</span>
+                <span id="sketch-status-pill" class="pill pill-neutral">No Circle Drawn</span>
+              </label>
+              <select id="sel-pin-intent">
+                <option value="propose_edit">Modify Plan / Field Measurement</option>
+                <option value="flag_problem">Flag Problem / Clash</option>
+                <option value="ask_question">Answer a Question (&quot;What is this right here?&quot;)</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-voice-note">
+                <span data-i18n="lbl_note">Field Note or Spoken Command</span>
+              </label>
+              <textarea id="inp-voice-note" rows="3" placeholder="Example: &quot;Try 12 inch South box&quot;, &quot;Switch to 6 inch filler&quot;, or &quot;Does the fridge have an upper cabinet?&quot; (Zero prices)"></textarea>
+            </div>
+
+            <div class="voice-row">
+              <button type="button" id="btn-dictate" class="btn">Dictate Voice Note</button>
+              <button type="button" id="btn-apply-note" class="btn btn-primary">Attach Comment Pin</button>
+            </div>
+            <div id="voice-status" class="field-help">Tap Circle-to-Correct above to circle a spot on the floor plan or wall — each pin gets a visible leader line, mic button, and Send to Agent button.</div>
+
+            <div id="pin-list" class="pin-list"></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2 id="eod-title">End-of-Day Review &amp; Revert (Tisa)</h2>
+            <span class="pill pill-warn" id="eod-count-pill">0 pending</span>
+          </div>
+          <div class="form-body">
+            <p class="empty-note" id="eod-desc">
+              Workers never wait: saved tailnet edits stamp the live plan immediately with a revision ID.
+              At end-of-day, Tisa taps <strong>Accept</strong> (promotes to the kitchen room spec) or <strong>Reject</strong> (reverts atomically).
+            </p>
+            <div id="eod-list" class="eod-list"></div>
+            <div class="action-bar">
+              <button type="button" id="btn-refresh-eod" class="btn btn-sm">Refresh From Tailnet</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="status-toast" class="status-toast" hidden role="status" aria-live="polite"></div>
+
+    <script src="../vendor/jspdf.umd.min.js"></script>
+  <script src="../vendor/svg2pdf.umd.min.js"></script>
+  <script src="../vendor/ks4-pdf-export.js"></script>
+  <script src="./kitchen-floorplan-renderer.js"></script>
+</body>
+</html>

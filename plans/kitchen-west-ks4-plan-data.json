@@ -1,0 +1,157 @@
+{
+  "schema_version": "1.0.0",
+  "project": "1231 11th Avenue Unit 4, San Francisco, CA",
+  "room_id": "kitchen",
+  "wall_id": "K-S4",
+  "title_en": "Kitchen West Vent Hood Wall (K-S4)",
+  "title_es": "Muro Oeste de Campana y Estufa (K-S4)",
+  "governing_spec": "kitchen/SPEC.md",
+  "companion_specialist_plan": "2026-11-19_U4_kitchen_range-wall-full-plan_R1_EN.pdf",
+  "companion_mockup_guide": "2026-11-19_U4_kitchen_zephyr-savona-mock-hookup-plan_R3_EN.pdf",
+  "base_rev": "rev-20261120-001",
+  "status": "MOCKUP_ONLY_HOLD_CLOSEIN",
+  "orientation": {
+    "north_angle_deg": 0,
+    "wall_cardinal": "WEST",
+    "left_corner_cardinal": "SOUTH",
+    "left_corner_label_en": "South Step Corner (0\" ref)",
+    "left_corner_label_es": "Esquina Escalonada Sur (0\" ref)",
+    "right_corner_cardinal": "NORTH",
+    "right_corner_label_en": "North Corner (Hallway)",
+    "right_corner_label_es": "Esquina Norte (Pasillo)"
+  },
+  "appliances": {
+    "range": {
+      "model": "Viking VGCC5304BSS",
+      "width_in": 29.875,
+      "clearance_min_in": 30.0,
+      "clearance_max_in": 36.0,
+      "source": "Viking S10 Manual F20543H p. 11 (governs over Zephyr 28\" min)"
+    },
+    "hood": {
+      "model": "Zephyr Savona ZSA-E30AS",
+      "width_in": 29.875,
+      "depth_in": 19.4375,
+      "chimney_width_in": 8.625,
+      "chimney_depth_in": 7.5,
+      "cfm": 685,
+      "duct_diameter_in": 6.0,
+      "line_b_offset_above_a_in": 9.5625,
+      "stock_cover_reach_min_in": 110.0,
+      "stock_cover_reach_max_in": 117.0,
+      "source": "Zephyr Spec may08.0101 + Manual AUG06.0301"
+    }
+  },
+  "dimensions": {
+    "wall_width_in": {
+      "value": 66.25,
+      "measure_boundary": "wall_to_wall",
+      "verified": "VERIFY_ON_SITE",
+      "source": "Magicplan MASTER abb2d2c6 + K-S4 R8",
+      "date": "2026-11-19"
+    },
+    "ceiling_height_in": {
+      "value": 121.5,
+      "measure_boundary": "aff",
+      "verified": "VERIFY_ON_SITE",
+      "source": "Magicplan MASTER abb2d2c6 (10.127 ft)",
+      "date": "2026-11-19"
+    },
+    "floor_buildup_t_in": {
+      "value": 0.75,
+      "measure_boundary": "subfloor",
+      "verified": "MEASURE_ON_SITE",
+      "source": "kitchen/SPEC.md provisional t (~3/4\" TO MEASURE)",
+      "date": "2026-11-19"
+    },
+    "counter_height_in": {
+      "value": 36.0,
+      "measure_boundary": "aff",
+      "verified": "LOCKED",
+      "source": "kitchen/SPEC.md",
+      "date": "2026-11-19"
+    },
+    "hood_bottom_aff_in": {
+      "value": 66.9375,
+      "measure_boundary": "aff",
+      "verified": "K_S4_BASELINE",
+      "source": "K-S4 baseline 66-15/16\" AFF (passes Viking 66\"-72\" AFF)",
+      "date": "2026-11-19"
+    },
+    "left_base_cab_in": {
+      "value": 18.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "K_S4_BASELINE",
+      "source": "K-S4 18\" + 30\" + 18\" = 66\" (+1/4\" scribe)",
+      "date": "2026-11-19"
+    },
+    "range_opening_in": {
+      "value": 30.0,
+      "measure_boundary": "clear_between_casings",
+      "verified": "LOCKED",
+      "source": "Viking VGCC5304BSS 30\" range bay",
+      "date": "2026-11-19"
+    },
+    "right_base_cab_in": {
+      "value": 18.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "K_S4_BASELINE",
+      "source": "K-S4 18\" + 30\" + 18\" = 66\" (+1/4\" scribe)",
+      "date": "2026-11-19"
+    },
+    "lower_blocking_min_aff_in": {
+      "value": 68.0,
+      "measure_boundary": "aff",
+      "verified": "LOCKED",
+      "source": "kitchen/SPEC.md dual-datum backing 68\"-86\" AFF (+t)",
+      "date": "2026-11-19"
+    },
+    "lower_blocking_max_aff_in": {
+      "value": 86.0,
+      "measure_boundary": "aff",
+      "verified": "LOCKED",
+      "source": "kitchen/SPEC.md dual-datum backing 68\"-86\" AFF (+t)",
+      "date": "2026-11-19"
+    },
+    "upper_blocking_min_aff_in": {
+      "value": 104.0,
+      "measure_boundary": "aff",
+      "verified": "LOCKED",
+      "source": "kitchen/SPEC.md upper backing 104\"-121-1/2\" AFF (+t), 8\"-10\" duct bay clear",
+      "date": "2026-11-19"
+    },
+    "left_chase_width_in": {
+      "value": null,
+      "measure_boundary": "wall_to_wall",
+      "verified": "MEASURE_ON_SITE",
+      "source": "Site photo P03-IMG_5152.jpeg (framed pipe/flue chase width unmeasured)",
+      "date": "2026-11-19"
+    }
+  },
+  "options": {
+    "rear_trim": "island_trim_1in",
+    "ceiling_gap_solution": "open_tbd"
+  },
+  "flagged_clashes": [
+    {
+      "id": "clash-ks4-alcove",
+      "severity": "HIGH",
+      "en": "SPEC §2 mentions a 42\" alcove / 4\" pilasters vs. Magicplan K-S4 flat 66-1/4\" wall. Flagged for field verification — never auto-resolved.",
+      "es": "SPEC §2 menciona nicho de 42\" / pilastras de 4\" vs. muro liso K-S4 de 66-1/4\". Marcado para verificar en obra — no se resuelve en código."
+    },
+    {
+      "id": "clash-ks7-jbox",
+      "severity": "HIGH",
+      "en": "K-S7 100\" J-box collides with 6\" duct inside 8-5/8\" chimney. Offset 4\"×4\" J-box (1\" mud ring) beside duct or route inside Option A soffit after checking chassis knockout.",
+      "es": "Caja K-S7 a 100\" choca con ducto de 6\" dentro de chimenea de 8-5/8\". Desplazar caja 4\"×4\" (aro 1\") junto al ducto o terminar en cajillo Opc. A tras verificar chasis."
+    },
+    {
+      "id": "clash-left-chase",
+      "severity": "MEDIUM",
+      "en": "Existing left-side framed pipe/flue chase width is MEASURE ON SITE (confirm Friday if chase stays, shifts, or opens).",
+      "es": "Ancho del cajón existente de tuberías al lado izquierdo: MEDIR EN OBRA (confirmar el viernes si se queda, recorre o abre)."
+    }
+  ],
+  "field_overrides": [],
+  "pins": []
+}

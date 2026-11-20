@@ -1,42 +1,27 @@
-# Unit 4 Kitchen — West Vent Hood Wall (K-S4) Interactive Plan Pilot
+# Unit 4 Kitchen — West Range & Vent Hood Wall Interactive Plan (Module 1B)
 
-**Owner (Overnight Lane 1):** `@ag-unit-4-specialists` (`83beabda`)
-**Status:** Planning & Friday Nov 20 Mockup Reference Only (`MOCKUP_ONLY_HOLD_CLOSEIN` — NOT final tie-in, NOT wall close-in release).
-**Zero Pricing:** Strict private-data firewall enforced (`0` currency symbols, prices, bids, estimates, financing, or private mail links).
+Self-contained, offline-first, true-to-scale interactive architectural plan for the **Unit 4 Kitchen West Range & Vent Hood Wall** (`Viking VGCC5304BSS` + `Zephyr Savona ZSA-E30AS`).
 
----
+## What's Inside
+- `index.html` — Visual-first responsive app (phone -> tablet -> desktop -> exact 2-page Letter print PDF) with plain on-site English & Mexican Spanish UI.
+- `ks4-renderer.js` — Strict uniform-scale (`scaleX === scaleY`) parametric SVG engine (`viewBox="0 0 920 1120"`), Coupled Corners & Floor Plan view tab, pre-seeded `existing_original_trim` baseline, Live Proposed Materials Takeoff calculator (**quantities only — zero prices**), Attached Comment Callout UX (SVG leader lines + per-comment mic dictation + individual **Send to Agent** for Modify Plan `:8444` or Answer a Question `:8791`), and EOD Accept/Reject drawer.
+- `ks4-styles.css` — Cool drafting bond + blueprint ink + BM Essex Green HC-188 architectural styling, zero external CDN dependencies.
+- `assets/P03-IMG_5152.jpeg` — Real open-stud West wall site photo (`← SOUTH 0" ref | NORTH →`).
 
-## 1. File Manifest
-- `index.html` — Visual-First standalone interactive HTML sheet (zero CDN scripts/fonts).
-- `ks4-renderer.js` — Parametric SVG generator (`viewBox="0 0 920 1120"`), dual-datum (`AFF` + `Subfloor +t`) live math, Viking `30"–36"` (`66"–72"` AFF) validator, EN/ES localization, touch/mouse Circle-to-Correct canvas, Web Speech API voice note parser, and Tailnet-only persistence client (`:8444` / `?api=`).
-- `ks4-styles.css` — Architectural drafting studio stylesheet with mobile/tablet/desktop responsive layout and clean `@media print` / `?print=1` Letter pagination (Page 1: single full-page architectural SVG; Page 2: open-stud site photo + live dual-datum mark table + immutable clashes).
-- `assets/P03-IMG_5152.jpeg` — Verified open-stud West range wall site photo downloaded directly from Google Drive `1aEkoxrzR_XpTJhWQ4I5x8EjUUa_13Mxh` (`543,703` B, SHA-256 `3b4ef3a41125a2045ed16c98d8499ce8e9473aecce49ea6ae81858e285507205`).
+## Unified Integration Contract (`window.U4PLAN` + `window.U4KS4` alias)
+- `planId`: `'kitchen-west-ks4'`
+- `getSvgElement()`: returns `<svg id="ks4-svg">`
+- `getState()`: returns deep clone of live plan JSON (including `existing_original_trim` & `takeoff_settings`)
+- `getTakeoff()`: returns live gross proposed materials takeoff (**zero prices**)
+- `getScaleInfo()`: returns `{ view, scaleX, scaleY, uniform: true }` (`scaleX === scaleY` always enforced)
+- `getView()` / `setView('elevation' | 'coupled')`: switch coupled views programmatically
+- `getLang()` / `setLang('en' | 'es')`: switch English / Mexican Spanish
+- `getRevisionStamp()`, `getAnnotationDataUrl()`, `applyLocalPatch(patch)`, `render()`
+- `#btn-download-pdf` auto-wires to `window.U4PlanPdfExport?.exportPdf()` -> `window.U4KS4PdfExport?.exportPdf()` -> `window.print()`.
 
-## 2. Locked Integration Contract (`window.U4KS4` — Lane 3 / PDF Bundle Ready)
-`ks4-renderer.js` exposes `window.U4KS4` synchronously on load:
-- `window.U4KS4.getSvgElement()` — Returns the live `<svg id="ks4-svg">` element (`viewBox="0 0 920 1120"`).
-- `window.U4KS4.getState()` — Returns a deep-cloned copy of the active `kitchen-west-ks4-plan-data` state object.
-- `window.U4KS4.getLang()` — Returns `"en"` or `"es"`.
-- `window.U4KS4.getRevisionStamp()` — Returns the exact single-line revision & sync status stamp (e.g., `rev-20261120-001 · Synced to K-S4 Baseline`, `Field Update · Pending EOD Review`, or `Not Yet Synced (Local Preview)`).
-- `window.U4KS4.getAnnotationDataUrl()` — Returns a PNG `data:image/png;base64,...` snapshot of the Circle-to-Correct canvas when drawn, or `null` when blank.
-- **Query parameters supported:**
-  - `?lang=en` or `?lang=es` — Boots directly into English or Mexican Spanish.
-  - `?print=1` — Activates print-ready mode matching `@media print` for `plans/generate_official_pdfs.py`.
-  - `?api=http://127.0.0.1:8792` — Overrides the default Tailnet origin (`https://mac-mini.tailcf4007.ts.net:8444`) for local persistence testing.
-- **Zero-friction PDF button hook:** `#btn-download-pdf` automatically invokes `window.U4KS4PdfExport.exportPdf()` when Lane 3 injects `plans/vendor/ks4-pdf-export.js`, falling back cleanly to `window.print()` standalone.
-
-## 3. Security, Concurrency & Data Provenance Rules
-- **Tailnet-Only Write Guard:** Calls `GET /api/unit4/plans/kitchen-west-ks4/health` on boot. Devices off Tisa's tailnet automatically enter **Read-Only / Local Preview & Export** mode (Save button disabled). Zero fake PINs, tokens, or offline queues in JS or `localStorage`/`sessionStorage`.
-- **Optimistic Concurrency (`base_rev`):** HTTP `409 Conflict` surfaces an explicit reload banner rather than overwriting concurrent edits.
-- **No Fabricated Numbers:** Unmeasured field values (`left_chase_width_in: null`) render explicitly as `MEASURE ON SITE` / `MEDIR EN OBRA`.
-- **Immutable Clashes:** `flagged_clashes` (`clash-ks4-alcove`, `clash-ks7-jbox`, `clash-left-chase`) remain permanently surfaced and are never auto-resolved in code.
-
-## 4. Local Verification Commands
-```bash
-# 1. JS syntax check
-node --check ks4-renderer.js
-
-# 2. Serve locally and inspect in headless Chrome / Playwright
-python3 -m http.server 8799 --directory "/Volumes/tisavo/Agent Shared - Mini Hosted/1231 11th Avenue Unit 4/kitchen"
-# Open http://127.0.0.1:8799/interactive-pilot/?lang=en  and  ?lang=es
-```
+## Security, Privacy & Accuracy Invariants
+- **Strict True Scale (`scaleX === scaleY`):** `18"` base cabinet : `30"` range = `3:5`; `36"` height : `18"` base = `2:1`; `24"` base depth in coupled floor plan.
+- **Provisional Dashed Outlines:** Any `null` dimension (`left_chase_width_in`, unmeasured casings) renders with dashed `"Measure on site — proportion provisional"` / `"Medir en obra — proporción provisional"` and snaps to solid true scale on edit.
+- **Zero Prices / Private-Data Firewall:** Strictly quantities only; blocks currency symbols, prices, bids, estimates, financing, and mail links.
+- **Tailnet-Only Persistence:** Connects to `https://mac-mini.tailcf4007.ts.net:8444/api/unit4/plans/kitchen-west-ks4` (`?api=` override; voice knowledge via `:8791` / `?voice_api=`). Zero fake PIN/token, zero browser web-storage offline queue; graceful Read-Only / Local-Export mode off-tailnet.
+- **Immutable `flagged_clashes`:** Never auto-resolved in client code.

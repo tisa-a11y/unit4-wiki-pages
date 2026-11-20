@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0.0",
+  "project": "1231 11th Avenue Unit 4, San Francisco, CA",
+  "room_id": "laundry",
+  "element_id": "MURPHY-DOOR-B",
+  "title_en": "Murphy Bookcase Door — Middle Hallway Doorway to Laundry Closet",
+  "title_es": "Puerta Librero Murphy — Puerta Central del Pasillo al Clóset de Lavandería",
+  "governing_spec": "laundry/SPEC.md",
+  "companion_docs": [
+    "2026-11-02_U4_laundry_murphy-door-drawings_EN_RevA.pdf",
+    "2026-11-02_U4_laundry_murphy-door-drawings_ES_RevA.pdf",
+    "Murphy Door Measurements Worksheet (B7:B15)"
+  ],
+  "base_rev": "rev-20261120-murphy-001",
+  "status": "HOLD_UNTIL_9_POINT_FIELD_MEASUREMENTS",
+  "orientation": {
+    "north_angle_deg": 0,
+    "viewing_from": "Hallway facing middle doorway B (left: bathroom doorway A; right: bedroom opening C)",
+    "pivot_side": "LEFT (out-swing into hallway; press right edge inward to release latch, pull outward)",
+    "swing_arc_check": "Confirm full 90-degree out-swing against hallway clear width before drilling"
+  },
+  "nine_point_measurements_b7_b15": {
+    "instructions": "Stand in hallway facing middle doorway B. Measure inside wood jambs excluding outside trim, twice to nearest 1/16\". Heights from finished floor. NEVER use bathroom doorway readings (27.25\" x 79.375\").",
+    "floor_finished": null,
+    "b7_top_width_in": { "value": null, "provisional_magicplan": 28.4375, "measure_boundary": "clear_between_casings", "verified": "MEASURE_ON_SITE" },
+    "b8_mid_width_in": { "value": null, "provisional_magicplan": 28.4375, "measure_boundary": "clear_between_casings", "verified": "MEASURE_ON_SITE" },
+    "b9_bot_width_in": { "value": null, "provisional_magicplan": 28.4375, "measure_boundary": "clear_between_casings", "verified": "MEASURE_ON_SITE" },
+    "b10_left_height_in": { "value": null, "provisional_magicplan": 80.4375, "measure_boundary": "aff", "verified": "MEASURE_ON_SITE" },
+    "b11_center_height_in": { "value": null, "provisional_magicplan": 80.4375, "measure_boundary": "aff", "verified": "MEASURE_ON_SITE" },
+    "b12_right_height_in": { "value": null, "provisional_magicplan": 80.4375, "measure_boundary": "aff", "verified": "MEASURE_ON_SITE" },
+    "b13_diagonal_a_in": { "value": null, "measure_boundary": "clear_between_casings", "verified": "MEASURE_ON_SITE" },
+    "b14_diagonal_b_in": { "value": null, "measure_boundary": "clear_between_casings", "verified": "MEASURE_ON_SITE" },
+    "b15_jamb_depth_j_in": { "value": null, "measure_boundary": "wall_to_wall", "verified": "MEASURE_ON_SITE" }
+  },
+  "case_and_hardware_parameters": {
+    "hardware_kit": "Murphy Door Single Hidden Door Hardware Kit (verify delivery & measure actual hinge stack T + Bt before cutting)",
+    "push_latch": "Sugatsune ML-ZN80-BL black push latch (confirm delivery; latch height ~40\" above floor)",
+    "case_depth_d_in": { "value": 8.25, "usable_shelf_depth_in": 7.1875, "alt_depth_in": 9.0625, "verified": "OWNER_TO_CONFIRM_AFTER_MOCKUP" },
+    "hinge_side_gap_gl_in": { "value": 0.25, "verified": "PRELIM_VERIFY_WITH_KIT_TEMPLATE" },
+    "free_side_gap_gr_in": { "value": 1.0, "verified": "PRELIM_VERIFY_WITH_KIT_TEMPLATE" },
+    "hinge_stack_total_ah_in": { "value": 2.375, "formula": "T + Bt + 0.125", "verified": "PRELIM_MEASURE_KIT_HARDWARE" },
+    "computed_case_width_wc_formula": "min(b7, b8, b9) - gl - gr",
+    "computed_case_height_hc_formula": "min(b10, b11, b12) - ah",
+    "squareness_check_formula": "abs(b13 - b14) <= 0.125",
+    "hall_clear_width_in": { "value": 41.25, "measure_boundary": "clear_between_casings", "verified": "VERIFY_ON_SITE" },
+    "closet_interior_in": { "width": 36.3125, "depth": 82.625, "verified": "VERIFY_ON_SITE" },
+    "finish_intent": "Paint-grade plywood carcass, applied back, 4 fixed shelves with 1-1/2\" retaining lips (3/4\" above shelf), solid poplar face frame; keep existing crown and casing untouched; Chantilly Lace OC-65 woodwork (sheen TBD)."
+  },
+  "appliance_and_vent_requirements": {
+    "appliance": "LG WKG101HVA stacked gas WashTower (27\" W x 30-3/8\" D x 74-3/8\" H; delivery Tue Dec 1, 2026)",
+    "side_clearance_min_in": 1.0,
+    "rear_clearance_min_in": 4.0,
+    "upper_vent_v1": { "min_net_sq_in": 48, "min_height_above_floor_in": 72, "planned_height_in": 72.5 },
+    "lower_vent_v2": { "min_net_sq_in": 24, "max_height_above_floor_in": 12, "planned_top_in": 7.0 },
+    "total_net_vent_min_sq_in": 100,
+    "inside_release_required": true
+  },
+  "flagged_clashes": [
+    {
+      "id": "clash-murphy-pocket-deferred",
+      "severity": "MEDIUM",
+      "en": "Older Nov 2 drawings assume a 28\" bathroom pocket door sliding into wall A-B ('no fasteners in pocket cavity'). Per Nov 19 bathroom/SPEC.md, the pocket door is DEFERRED in favor of an outward-swing hinged door — verify actual wall A-B framing on site before placing pivot blocking.",
+      "es": "Los planos del 2 nov suponen una puerta corrediza de baño de 28\" dentro del muro A-B. Según bathroom/SPEC.md (19 nov), la corrediza está EN PAUSA — verificar el bastidor real del muro A-B en obra antes de colocar refuerzos de pivote."
+    },
+    {
+      "id": "clash-murphy-unmeasured",
+      "severity": "HIGH",
+      "en": "All 9 doorway readings (B7:B15) and kit hinge stack (T, Bt) are UNMEASURED. Zero cutting or drilling until measured and full-size cardboard swing mockup passes.",
+      "es": "Las 9 medidas del vano (B7:B15) y el grosor de bisagras (T, Bt) siguen SIN MEDIR. Cero cortes ni perforaciones hasta medir y aprobar la plantilla de cartón a tamaño real."
+    }
+  ],
+  "field_overrides": [],
+  "pins": []
+}

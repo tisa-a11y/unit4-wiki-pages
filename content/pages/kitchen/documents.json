@@ -1,5 +1,49 @@
 [
   {
+    "title": "Interactive-Full-Kitchen-Floor-Plan_EN.html",
+    "titleEn": "Interactive full kitchen floor plan and cabinet schedule · English",
+    "titleEs": "Plano interactivo de cocina completa y gabinetes · inglés",
+    "id": "2026-11-20_Kitchen-Floor-Plan-Interactive_EN",
+    "path": "Full kitchen L-layout, 4 coupled walls & cabinet schedule (English)",
+    "date": "2026-11-20",
+    "lang": "en",
+    "pairId": "kitchen-floor-plan-interactive",
+    "pin": true
+  },
+  {
+    "title": "Interactive-Full-Kitchen-Floor-Plan_ES.html",
+    "titleEn": "Interactive full kitchen floor plan and cabinet schedule · Spanish",
+    "titleEs": "Plano interactivo de cocina completa y gabinetes · español",
+    "id": "2026-11-20_Kitchen-Floor-Plan-Interactive_ES",
+    "path": "Planta completa de cocina en L, 4 muros y lista de gabinetes (español)",
+    "date": "2026-11-20",
+    "lang": "es",
+    "pairId": "kitchen-floor-plan-interactive",
+    "pin": true
+  },
+  {
+    "title": "2026-11-20_U4_kitchen_floor-plan-interactive_R1_EN.pdf",
+    "titleEn": "Printable kitchen floor plan & cabinet schedule · English",
+    "titleEs": "Plano imprimible de cocina completa y gabinetes · inglés",
+    "id": "2026-11-20_U4_kitchen_floor-plan-interactive_R1_EN",
+    "path": "Printable full kitchen floor plan and cabinet takeoff (English)",
+    "date": "2026-11-20",
+    "lang": "en",
+    "pairId": "kitchen-floor-plan-printable",
+    "pin": true
+  },
+  {
+    "title": "2026-11-20_U4_kitchen_floor-plan-interactive_R1_ES.pdf",
+    "titleEn": "Printable kitchen floor plan & cabinet schedule · Spanish",
+    "titleEs": "Plano imprimible de cocina completa y gabinetes · español",
+    "id": "2026-11-20_U4_kitchen_floor-plan-interactive_R1_ES",
+    "path": "Plano imprimible de cocina completa y lista de materiales (español)",
+    "date": "2026-11-20",
+    "lang": "es",
+    "pairId": "kitchen-floor-plan-printable",
+    "pin": true
+  },
+  {
     "title": "2026-11-02_U4_Kitchen_Master-Plan_R2_EN.html",
     "titleEn": "Kitchen plan from Nov 2 (for review only) · English",
     "titleEs": "Plan de cocina del 2 de nov (solo para revisión) · inglés",

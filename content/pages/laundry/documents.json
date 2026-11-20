@@ -1,5 +1,49 @@
 [
   {
+    "title": "Murphy-Bookcase-Door-Interactive_EN.html",
+    "titleEn": "Murphy bookcase door interactive plan · English",
+    "titleEs": "Plano interactivo de la puerta librero Murphy · inglés",
+    "id": "2026-11-20_Murphy-Door-Interactive_EN",
+    "path": "9-point doorway worksheet, 90° hallway swing & louver vents (English)",
+    "date": "2026-11-20",
+    "lang": "en",
+    "pairId": "murphy-door-interactive",
+    "pin": true
+  },
+  {
+    "title": "Murphy-Bookcase-Door-Interactive_ES.html",
+    "titleEn": "Murphy bookcase door interactive plan · Spanish",
+    "titleEs": "Plano interactivo de la puerta librero Murphy · español",
+    "id": "2026-11-20_Murphy-Door-Interactive_ES",
+    "path": "Hoja de 9 medidas, giro 90° en pasillo y rejillas de aire (español)",
+    "date": "2026-11-20",
+    "lang": "es",
+    "pairId": "murphy-door-interactive",
+    "pin": true
+  },
+  {
+    "title": "2026-11-20_U4_laundry_murphy-door-interactive_R1_EN.pdf",
+    "titleEn": "Printable Murphy bookcase door plan · English",
+    "titleEs": "Plano imprimible de la puerta librero Murphy · inglés",
+    "id": "2026-11-20_U4_laundry_murphy-door-interactive_R1_EN",
+    "path": "Printable 9-point worksheet, plan & vent checks (English)",
+    "date": "2026-11-20",
+    "lang": "en",
+    "pairId": "murphy-door-printable",
+    "pin": true
+  },
+  {
+    "title": "2026-11-20_U4_laundry_murphy-door-interactive_R1_ES.pdf",
+    "titleEn": "Printable Murphy bookcase door plan · Spanish",
+    "titleEs": "Plano imprimible de la puerta librero Murphy · español",
+    "id": "2026-11-20_U4_laundry_murphy-door-interactive_R1_ES",
+    "path": "Hoja imprimible de 9 puntos, planta y ventilación (español)",
+    "date": "2026-11-20",
+    "lang": "es",
+    "pairId": "murphy-door-printable",
+    "pin": true
+  },
+  {
     "title": "2026-11-02_U4_laundry_murphy-door-drawings_EN_RevA.pdf",
     "titleEn": "Bookcase door drawings · English",
     "titleEs": "Planos de la puerta librero · inglés",

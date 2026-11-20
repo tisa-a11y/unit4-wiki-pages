@@ -4,11 +4,11 @@
 West wall. 30" Viking gas range, 30" Zephyr hood above, tile to the ceiling.
 
 ## What to know before you build
-- **This weekend is a test only.** No final wiring. No final duct. No drywall on this wall.
-- **Follow the hood test-hang guide.** It has every step and measurement.
-- **Hood height:** bottom of hood 66"–72" from the finished floor. 64" is too low.
-- **Wood backing:** two bands, 68"–86" and 104"–121-1/2" from the finished floor.
-- **Hood power:** its own 15-amp circuit. Never shared with the lights.
-- **Duct:** 6" round rigid metal, straight up. No flex duct.
-- **Range:** 1/2" gas shutoff and a 120V outlet.
-- **Ceiling gap:** 4-1/2" to 11-1/2" above the hood cover. Measure it at the test-hang.
+- **This weekend is a test only.** No final wiring hookup. No final duct cut. No drywall close-in on this wall.
+- **Interactive plan & 4 test-hang sheets:** Open the [Interactive Range &amp; Hood Wall Plan](./plans/kitchen-west-ks4/index.html), [Sheet 1: Overview &amp; Site Checks](#doc:176xbLAm3cIv9tTgyc3rgV5OvIoBHNptH), [Sheet 2: Wall Wood Blocking](#doc:1vdNvEEgbYIcpW1sSR9RFnN14a6qPr0pt), [Sheet 3: Vent &amp; Rigid Duct](#doc:1_qHAwalUzUoMT8XYsI4G1rhGS8GgwCPT), and [Sheet 4: Dry-Hang, Wiring &amp; Photos](#doc:1PNIj1k70IHGafUm0jBRe0xZ2kHXmSqn8).
+- **Hood height:** Bottom of hood **66"–72" from finished floor** (Viking VGCC5304BSS 30"–36" rule; dry-hang target 67"–68"). 64" fails Viking clearance.
+- **Wood backing:** Compact solid wood blocking strictly inside the **30" hood width** across both bands (**68"–86"** and **104"–121-1/2"** from finished floor), leaving an **8"–10"** clear center duct bay.
+- **Hood power (direct hardwire):** Dedicated 15-amp AFCI circuit, never shared with lights. Stub wire out **right above the hood canopy (~83"–86" from finished floor)** into a **flush 1-gang 2" × 3" box set ~1" proud** (for 1/2" HardieBacker + tile) at **center ± 2-1/4"** inside the 8-5/8" × 7-1/2" shroud — feeding straight into the hood's top wiring box (NOT a 4" × 4" box at 100").
+- **Dedicated kitchen duct:** 6" round rigid smooth metal, straight up, zero flex duct. Existing left-chase duct is **dedicated solely to kitchen range exhaust** (nothing else connected); **John / crew** verifies exact diameter (≥ 6") and owns kitchen vent work (**NEXT HVAC is furnace/heating only — not range hood exhaust**).
+- **Range &amp; manuals:** 1/2" gas shutoff (≤ 2" poke-out) + side-by-side 120V outlet. Verified low trim only on Viking range (no 8" backguard — keep non-combustible tile over 1/2" HardieBacker behind range); see [Zephyr Installation Manual](#doc:1QH6N_nnFVBHvfaEZiU0ZP1pyJDXAeNz3) &amp; [Zephyr Spec Sheet](#doc:1D2YflscPC7hJGxr-AptP887Gci1LZLKO).
+- **Ceiling gap:** 4-1/2" to 11-1/2" above stock hood cover — photograph at the dry-hang for Tisa to pick tiled soffit vs. extension cover.

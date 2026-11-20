@@ -1,7 +1,7 @@
 # Attic Access
 
 ## Concept
-Permanent hatch in the hallway ceiling, 24" × 36" clear. In the attic: a wood walkway, a level platform at the furnace, a light and an outlet.
+Permanent hatch in the hallway ceiling, 24" × 36" clear. In the attic: a wood walkway, a level platform at the furnace, a light and an outlet. Open the [Permanent Attic Hatch Interactive Plan](./plans/attic-hatch/index.html) or coordinate layout with the [Attic Furnace &amp; Ducts Plan](./plans/hvac-layout/index.html).
 
 ## Five rules before any cutting
 1. **Check the ceiling first.** No cutting until the fire-rating check and the joist measurement are done.

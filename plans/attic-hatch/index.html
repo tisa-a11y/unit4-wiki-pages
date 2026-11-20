@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Permanent Attic Hatch — Unit 4</title>
+  <link rel="stylesheet" href="./attic-styles.css">
+</head>
+<body>
+  <header class="app-header no-print">
+    <nav class="top-jump-bar" aria-label="Cross-plan navigation">
+      <a id="link-back-room" class="jump-link" href="../../#attic-access">&larr; Back to Attic Page</a>
+      <a id="link-hvac-plan" class="jump-link jump-link-sibling" href="../../hvac/interactive-pilot/index.html">Attic Furnace &amp; Ducts &rarr;</a>
+    </nav>
+    <div class="header-inner">
+      <div class="brand-block">
+        <h1 id="hdr-title">Permanent Attic Hatch</h1>
+        <div class="brand-meta">
+          <span id="hdr-sub">Working Planning Draft · True Scale (X = Y) · Furnace End-First &amp; Walkway Calculator · Zero Prices</span>
+          <span id="tailnet-badge" class="pill pill-neutral">Checking Tailnet…</span>
+          <span id="rev-badge" class="pill pill-info">rev-20261120-attic-001</span>
+        </div>
+      </div>
+
+      <div class="toolbar-actions">
+        <button type="button" id="btn-lang" class="btn" aria-label="Switch language">Español (MX)</button>
+        <button type="button" id="btn-circle-toggle" class="btn">Circle-to-Correct</button>
+        <button type="button" id="btn-export-svg" class="btn">Export SVG</button>
+        <button type="button" id="btn-download-pdf" class="btn btn-primary">Download / Print PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <div id="hold-banner" class="hold-banner" role="status">
+      <strong>WORKING PLANNING DRAFT — ZERO CEILING CUTS HOLD:</strong> Location (Door 4 landing vs. interior hall), ceiling fire-rating status, and joist bay width <strong>B</strong> are unverified.
+      <strong>ZERO</strong> ceiling cuts, <strong>ZERO</strong> wood-kit purchases, and keep the temporary bedroom closet opening <strong>OPEN</strong> until all gates pass and the active roof leak is repaired.
+    </div>
+
+    <div id="conflict-banner" class="conflict-banner no-print" hidden role="alert">
+      <div id="conflict-text">A newer revision was saved on Tailnet by another editor (HTTP 409). Reload the latest plan before saving again.</div>
+      <button type="button" id="btn-reload-latest" class="btn btn-sm btn-primary">Reload Latest Plan</button>
+    </div>
+
+    <!-- VISUAL-FIRST HERO: True-Scale Parametric SVG + Upright Candidate Photo FIRST -->
+    <section class="visual-hero" aria-label="Attic hatch true-scale plan and candidate ceiling photo">
+      <div class="panel svg-panel">
+        <div class="panel-head">
+          <h2 id="svg-panel-title">True-to-Scale Attic Hatch &amp; Walkway Plan (24&quot; × 36&quot; Clear)</h2>
+          <div class="layer-toggles no-print" aria-label="Drawing layers">
+            <label class="layer-chip"><input type="checkbox" id="lyr-framing" checked> <span data-i18n="lyr_framing">Joists &amp; Cut</span></label>
+            <label class="layer-chip"><input type="checkbox" id="lyr-furnace" checked> <span data-i18n="lyr_furnace">Furnace Pass &amp; Platform</span></label>
+            <label class="layer-chip"><input type="checkbox" id="lyr-enclosure" checked> <span data-i18n="lyr_enclosure">Dam, Seals &amp; Power</span></label>
+          </div>
+        </div>
+
+        <div class="view-tabs-bar no-print" aria-label="Coupled attic views">
+          <div class="view-tabs" role="tablist">
+            <button type="button" class="view-tab active" id="tab-view-plan" role="tab" aria-selected="true">Ceiling &amp; Hallway Plan</button>
+            <button type="button" class="view-tab" id="tab-view-section" role="tab" aria-selected="false">Attic Vertical Section</button>
+          </div>
+          <span class="drag-hint-pill" id="drag-hint-lbl">Drag walkway handle on drawing or edit ft below</span>
+        </div>
+
+        <div class="status-bar-strip no-print">
+          <span id="fire-gate-pill" class="pill pill-fail">Fire-Rating Gate: UNVERIFIED HOLD</span>
+          <span id="joist-pill" class="pill pill-warn">Joist Bay B: MEASURE ON SITE</span>
+          <span id="walkway-pill" class="pill pill-warn">Walkway L: MEASURE ON SITE (&le; 20 ft max)</span>
+          <span id="scale-pill" class="pill pill-pass">True Scale 1:1 (X = Y)</span>
+          <span id="sync-stamp-pill" class="pill pill-neutral">Baseline Loaded</span>
+        </div>
+
+        <div class="svg-stage-wrap">
+          <div class="svg-stage" id="svg-stage">
+            <svg id="attic-svg" viewBox="0 0 920 1120" width="920" height="1120"
+                 xmlns="http://www.w3.org/2000/svg" role="img"
+                 aria-label="Unit 4 Permanent Attic Hatch 24 by 36 Finished Clear True-to-Scale Plan and Vertical Section"></svg>
+            <canvas id="attic-sketch-canvas" aria-label="Circle-to-Correct drawing overlay"></canvas>
+          </div>
+        </div>
+
+        <div id="circle-bar" class="circle-bar no-print" hidden>
+          <span id="circle-bar-hint">Draw a circle around any spot on the plan (touch or mouse) to attach a callout note.</span>
+          <div>
+            <button type="button" id="btn-clear-sketch" class="btn btn-sm">Clear Sketch</button>
+            <button type="button" id="btn-circle-done" class="btn btn-sm btn-danger">Exit Circle Mode</button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="panel photo-panel" aria-label="Candidate ceiling upright site photo">
+        <div class="panel-head print-keep-head">
+          <h2 id="photo-panel-title">Candidate Ceiling Area — Door 4 Landing (Real Photo)</h2>
+          <span class="pill pill-fail" id="photo-badge">LOCATION UNCONFIRMED</span>
+        </div>
+        <div class="photo-body">
+          <div class="photo-frame">
+            <img src="./assets/attic-hatch-candidate.jpg" alt="Upright site photo of Unit 4 Door 4 landing showing blue ceiling, light opening, original high picture rail, Door 4 on right, window on left, and stair railing below" loading="eager">
+            <div class="photo-compass-overlay">
+              <span id="photo-left-lbl">Stairwell / Window</span>
+              <span id="photo-mid-lbl">CANDIDATE CEILING (HOLD)</span>
+              <span id="photo-right-lbl">Door 4 Entry &rarr;</span>
+            </div>
+          </div>
+
+          <ul class="photo-callouts" id="photo-callouts">
+            <li class="callout-alert"><strong>Unconfirmed Spot &amp; Fire Rating:</strong> Confirm whether hatch belongs on Door 4 landing or inside Unit 4 hallway AND whether this ceiling is fire-rated before cutting.</li>
+            <li><strong>Ceiling Light Fixture:</strong> Keep landing light; add entrance-switched enclosed LED utility light inside attic.</li>
+            <li><strong>Original 103&quot; High Picture Rail:</strong> Visible original Edwardian moulding along walls — preserve intact, keep separate from hatch trim.</li>
+            <li><strong>Stair Railing Clearance:</strong> Verify ladder setup and lid swing clear stairs, Door 4 swing, and original door/window casings.</li>
+          </ul>
+          <div id="concept-disclaimer-box" class="concept-disclaimer no-print">
+            <strong>Site Photo vs. Concept:</strong> Above photo is the real Door 4 landing ceiling. Any separate illustrative attic sketches are <em>Concept reference only — not to scale</em>; always verify from true-scale drawings and field checks.
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ALL 5 ENCLOSURE RULES & ELECTRICAL GATES -->
+    <section class="panel print-panel" aria-label="Five attic hatch enclosure rules">
+      <div class="panel-head print-keep-head">
+        <h2 id="rules-title">5 Mandatory Enclosure &amp; Hold Rules (Before Any Cut or Close-In)</h2>
+        <span class="pill pill-info" id="rules-pill">24&quot; × 36&quot; Clear Locked</span>
+      </div>
+      <div class="rules-grid" id="rules-grid"></div>
+    </section>
+
+    <!-- IMMUTABLE FLAGGED CLASHES -->
+    <section class="panel print-panel" aria-label="Immutable flagged clashes">
+      <div class="panel-head print-keep-head">
+        <h2 id="clashes-title">Flagged Clashes &amp; Field Checks (Never Auto-Resolved)</h2>
+        <span class="pill pill-fail" id="clashes-lock-pill">Immutable · Verify in Field</span>
+      </div>
+      <div class="clashes-grid" id="clashes-grid"></div>
+    </section>
+
+    <!-- LIVE PROPOSED MATERIALS TAKEOFF (ZERO PRICES) -->
+    <section class="panel print-panel takeoff-panel" id="takeoff-panel" aria-label="Live proposed materials takeoff">
+      <div class="panel-head print-keep-head">
+        <h2 id="takeoff-title">Live Proposed Materials Takeoff (Quantities Only · Zero Prices)</h2>
+        <span class="pill pill-warn" id="takeoff-waste-pill">Waste Factor: +10%</span>
+      </div>
+      <div class="takeoff-notice" id="takeoff-notice">
+        Gross Proposed Quantities Only (Zero Prices) — Verify On-Hand Stock Before Ordering. Never use 3/8&quot; plywood for walkway.
+      </div>
+      <div class="takeoff-controls no-print">
+        <div class="takeoff-control-group">
+          <span id="lbl-waste-pct">Waste / Overage (%):</span>
+          <button type="button" class="btn btn-sm btn-primary" id="btn-waste-10">+10% Standard</button>
+          <button type="button" class="btn btn-sm" id="btn-waste-15">+15% Extra</button>
+          <input type="number" id="inp-waste-pct" min="0" max="30" step="1" value="10" aria-label="Waste percentage">
+        </div>
+        <span class="field-help" id="saw-kerf-hint">Saw-kerf rule: 1 true 24&quot; strip per 4×8 sheet (&le;7 ft = 1 sheet, 7–14 ft = 2 sheets, 14–20 ft = 3 sheets).</span>
+      </div>
+      <div class="takeoff-grid" id="takeoff-grid"></div>
+    </section>
+
+    <!-- INTERACTIVE FIELD CONTROLS, TRIM BASELINE, ATTACHED COMMENTS & EOD REVIEW -->
+    <section class="workspace-grid no-print" aria-label="Interactive controls and EOD review">
+      <div class="right-stack">
+        <div class="panel">
+          <div class="panel-head">
+            <h2 id="editor-title">Live Gates, Joist Bay &amp; Walkway Calculator</h2>
+            <span class="pill pill-neutral" id="editor-mode-pill">Off-Tailnet Read-Only + Local Export</span>
+          </div>
+
+          <form id="attic-form" class="form-body" novalidate>
+            <div class="preset-row">
+              <span class="preset-label" id="preset-lbl">Quick Field Test:</span>
+              <button type="button" class="btn btn-sm" id="preset-b-275">Bay B = 27.5&quot; (Fits)</button>
+              <button type="button" class="btn btn-sm" id="preset-b-30">Bay B = 30&quot; (Side Backing)</button>
+              <button type="button" class="btn btn-sm" id="preset-b-22">Bay B = 22&quot; (Header Needed)</button>
+              <button type="button" class="btn btn-sm" id="preset-l-12">Walkway 12 ft (2 Sheets)</button>
+              <button type="button" class="btn btn-sm" id="preset-l-22">Walkway 22 ft (FAIL &gt;20 ft)</button>
+              <button type="button" class="btn btn-sm" id="btn-reset-baseline">Reset Baseline</button>
+            </div>
+
+            <div class="dim-grid">
+              <div class="field-group">
+                <label class="field-label-row" for="inp-author">
+                  <span data-i18n="lbl_author">Editor Name</span>
+                  <span class="boundary-tag">author</span>
+                </label>
+                <select id="inp-author">
+                  <option value="Tisa">Tisa</option>
+                  <option value="John">John</option>
+                  <option value="Ervin">Ervin</option>
+                  <option value="Alex">Alex</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label-row" for="sel-location">
+                  <span data-i18n="lbl_location">Candidate Location Status</span>
+                </label>
+                <select id="sel-location">
+                  <option value="UNCONFIRMED_INTERIOR_HALL_VS_DOOR4_LANDING">UNCONFIRMED — Door 4 Landing vs. Interior Hall</option>
+                  <option value="CONFIRMED_INTERIOR_HALL">Confirmed — Inside Unit 4 Interior Hallway</option>
+                  <option value="CONFIRMED_DOOR4_LANDING">Confirmed — Door 4 Landing (Verify Fire Rating)</option>
+                </select>
+              </div>
+
+              <div class="field-group full-span">
+                <label class="field-label-row" for="sel-fire-gate">
+                  <span data-i18n="lbl_fire_gate">Ceiling Fire-Rating Gate (Blocks Cut &amp; Wood Kit When Fire-Rated)</span>
+                  <span class="pill pill-fail" id="prov-fire-gate">UNVERIFIED HOLD</span>
+                </label>
+                <select id="sel-fire-gate">
+                  <option value="UNVERIFIED_HOLD">UNVERIFIED HOLD — Do NOT cut ceiling or buy wood kit yet</option>
+                  <option value="NON_RATED_CONFIRMED">Non-Rated Ceiling Confirmed — Proposed 27-1/2&quot; × 39-1/2&quot; wood kit eligible</option>
+                  <option value="FIRE_RATED_REQUIRED">FIRE-RATED CEILING REQUIRED — Wood kit DISABLED (listed 24&quot; × 36&quot; fire-rated hatch required)</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label-row" for="inp-joist-b">
+                  <span data-i18n="lbl_joist_b">Measured Joist Bay Width B (in)</span>
+                  <span class="pill pill-fail" id="prov-joist-b">MEASURE ON SITE</span>
+                </label>
+                <input type="number" id="inp-joist-b" step="0.125" min="10" max="48" placeholder="MEASURE ON SITE">
+                <div class="field-help" id="help-joist-b">27.5&quot; fits cleanly · &gt;27.5&quot; needs solid side backing · &lt;27.5&quot; needs structural header or new spot (never shrink 24&quot;×36&quot;).</div>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label-row" for="inp-walkway-l">
+                  <span data-i18n="lbl_walkway_l">Walkway Run Length L (ft · max 20 ft)</span>
+                  <span class="pill pill-fail" id="prov-walkway-l">MEASURE ON SITE</span>
+                </label>
+                <div class="field-input-row">
+                  <input type="number" id="inp-walkway-l" step="0.5" min="0" max="25" placeholder="MEASURE ON SITE" style="max-width: 140px;">
+                  <input type="range" id="rng-walkway-l" min="0" max="25" step="0.5" value="12" aria-label="Walkway length slider">
+                </div>
+                <div class="field-help" id="help-walkway-l">66&quot; attic headroom (&lt;6 ft) caps walkway at 20 ft max. Drag on SVG or type exact feet.</div>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label-row" for="inp-offset-1">
+                  <span data-i18n="lbl_offset_1">Corner / Wall Offset 1 (in · wall_to_wall)</span>
+                  <span class="pill pill-fail" id="prov-offset-1">MEASURE ON SITE</span>
+                </label>
+                <input type="number" id="inp-offset-1" step="0.25" min="0" max="120" placeholder="MEASURE ON SITE">
+              </div>
+
+              <div class="field-group">
+                <label class="field-label-row" for="inp-offset-2">
+                  <span data-i18n="lbl_offset_2">Corner / Wall Offset 2 (in · wall_to_wall)</span>
+                  <span class="pill pill-fail" id="prov-offset-2">MEASURE ON SITE</span>
+                </label>
+                <input type="number" id="inp-offset-2" step="0.25" min="0" max="120" placeholder="MEASURE ON SITE">
+              </div>
+
+              <div class="field-group full-span">
+                <label class="field-label-row" for="sel-lid-finish">
+                  <span data-i18n="lbl_lid_finish">Recessed Lid Finish Status (~1-1/2&quot; recessed 3/4&quot; ply lid)</span>
+                </label>
+                <select id="sel-lid-finish">
+                  <option value="PENDING_OWNER_OK">Proposed ~1-1/2&quot; recessed 3/4&quot; ply lid (Pending Owner Approval) + latches outside 24&quot;×36&quot;</option>
+                  <option value="APPROVED_RECESSED_PLY">Owner Approved — Recessed 3/4&quot; ply lid + compression latches outside 24&quot;×36&quot;</option>
+                  <option value="LISTED_FIRE_RATED_DOOR">Listed Fire-Rated Insulated Attic Door (24&quot; × 36&quot; finished clear)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="action-bar">
+              <button type="button" id="btn-apply-local" class="btn btn-essex">Apply Live Preview</button>
+              <button type="button" id="btn-save-tailnet" class="btn btn-primary" disabled>Save Live to Tailnet</button>
+              <button type="button" id="btn-export-json" class="btn">Download JSON</button>
+            </div>
+            <div id="save-hint" class="field-help">Off-tailnet Read-Only / Local Export mode: live edits update preview &amp; local exports only. Connect to Tisa&apos;s Tailscale network to save live overrides.</div>
+          </form>
+        </div>
+
+        <!-- Pre-Seeded Existing Original Trim Baseline -->
+        <div class="panel">
+          <div class="panel-head">
+            <h2 id="trim-title">Existing Original Trim Baseline (Keep Separate From Hatch Trim)</h2>
+            <span class="pill pill-pass" id="trim-badge">Edwardian Original</span>
+          </div>
+          <div class="form-body">
+            <div class="trim-baseline-note" id="trim-rule-note">
+              Preserve original Edwardian baseboard (9-1/2&quot;), high picture rail (103&quot; — visible in candidate photo), and Door 4 / window casings. Keep completely separate from proposed hatch trim.
+            </div>
+            <div class="dim-grid">
+              <div class="field-group">
+                <label class="field-label-row" for="inp-trim-baseboard">
+                  <span data-i18n="lbl_trim_base">Original Baseboard Height (in)</span>
+                  <span class="pill pill-warn" id="prov-trim-base">VERIFY ON SITE</span>
+                </label>
+                <input type="number" id="inp-trim-baseboard" step="0.125" min="3" max="16" value="9.5">
+              </div>
+
+              <div class="field-group">
+                <label class="field-label-row" for="inp-trim-rail">
+                  <span data-i18n="lbl_trim_rail">Original High Picture Rail Height (in)</span>
+                  <span class="pill pill-warn" id="prov-trim-rail">VERIFY ON SITE</span>
+                </label>
+                <input type="number" id="inp-trim-rail" step="0.25" min="72" max="118" value="103">
+              </div>
+
+              <div class="field-group">
+                <label class="field-label-row" for="inp-trim-door-casing">
+                  <span data-i18n="lbl_trim_door">Original Door 4 Casing Width (in)</span>
+                  <span class="pill pill-fail" id="prov-trim-door">MEASURE ON SITE</span>
+                </label>
+                <input type="number" id="inp-trim-door-casing" step="0.125" min="1" max="10" placeholder="MEASURE ON SITE">
+              </div>
+
+              <div class="field-group">
+                <label class="field-label-row" for="inp-trim-win-casing">
+                  <span data-i18n="lbl_trim_win">Original Window Casing Width (in)</span>
+                  <span class="pill pill-fail" id="prov-trim-win">MEASURE ON SITE</span>
+                </label>
+                <input type="number" id="inp-trim-win-casing" step="0.125" min="1" max="10" placeholder="MEASURE ON SITE">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Stack: Attached Comment Callouts + Voice + EOD Review -->
+      <div class="right-stack">
+        <div class="panel">
+          <div class="panel-head">
+            <h2 id="voice-title">Attached Comment Callouts &amp; Voice Note</h2>
+            <span class="pill pill-info" id="voice-lang-pill">en-US</span>
+          </div>
+          <div class="form-body">
+            <div class="field-group">
+              <label class="field-label-row" for="sel-pin-intent">
+                <span data-i18n="lbl_intent">Comment Action</span>
+                <span id="sketch-status-pill" class="pill pill-neutral">No Circle Drawn</span>
+              </label>
+              <select id="sel-pin-intent">
+                <option value="propose_edit">Modify Plan / Field Measurement</option>
+                <option value="flag_problem">Flag Problem / Clash</option>
+                <option value="ask_question">Answer a Question (&quot;What is this right here?&quot;)</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-voice-note">
+                <span data-i18n="lbl_note">Field Note or Spoken Command</span>
+              </label>
+              <textarea id="inp-voice-note" rows="3" placeholder="Example: &quot;Joist bay is 27.5 inches&quot;, &quot;Walkway is 14 feet&quot;, or &quot;Is this ceiling fire rated?&quot; (Zero prices)"></textarea>
+            </div>
+
+            <div class="voice-row">
+              <button type="button" id="btn-dictate" class="btn">Dictate Voice Note</button>
+              <button type="button" id="btn-apply-note" class="btn btn-primary">Attach Comment Pin</button>
+            </div>
+            <div id="voice-status" class="field-help">Tap Circle-to-Correct above to circle a spot on the drawing — each pin gets a visible leader line, mic button, and Send to Agent button.</div>
+
+            <div id="pin-list" class="pin-list"></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2 id="eod-title">End-of-Day Review &amp; Revert (Tisa)</h2>
+            <span class="pill pill-warn" id="eod-count-pill">0 pending</span>
+          </div>
+          <div class="form-body">
+            <p class="empty-note" id="eod-desc">
+              Workers never wait: saved tailnet edits stamp the live plan immediately with a revision ID.
+              At end-of-day, Tisa taps <strong>Accept</strong> (promotes to the attic room spec) or <strong>Reject</strong> (reverts atomically).
+            </p>
+            <div id="eod-list" class="eod-list"></div>
+            <div class="action-bar">
+              <button type="button" id="btn-refresh-eod" class="btn btn-sm">Refresh From Tailnet</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="status-toast" class="status-toast" hidden role="status" aria-live="polite"></div>
+
+    <script src="../vendor/jspdf.umd.min.js"></script>
+  <script src="../vendor/svg2pdf.umd.min.js"></script>
+  <script src="../vendor/ks4-pdf-export.js"></script>
+  <script src="./attic-renderer.js"></script>
+</body>
+</html>

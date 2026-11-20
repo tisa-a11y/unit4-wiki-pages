@@ -2,25 +2,25 @@
   {
     "kEn": "Hood height",
     "kEs": "Altura de la campana",
-    "vEn": "Bottom 66\"–72\" from the floor",
-    "vEs": "Base a 66\"–72\" del piso"
+    "vEn": "Bottom 66\"–72\" from finished floor (dry-hang 67\"–68\")",
+    "vEs": "Base a 66\"–72\" del piso terminado (prueba 67\"–68\")"
+  },
+  {
+    "kEn": "Wood backing",
+    "kEs": "Refuerzos",
+    "vEn": "Within 30\" hood width · 68\"–86\" & 104\"–121-1/2\"",
+    "vEs": "Dentro de 30\" de campana · 68\"–86\" y 104\"–121-1/2\""
   },
   {
     "kEn": "Hood power",
-    "kEs": "Corriente de la campana",
-    "vEn": "Its own 15-amp circuit",
-    "vEs": "Circuito propio de 15 amperes"
+    "kEs": "Corriente de campana",
+    "vEn": "Direct hardwire ~83\"–86\" (1-gang 2\"×3\", +1\" proud, C/L ±2-1/4\")",
+    "vEs": "Conexión directa ~83\"–86\" (caja 2\"×3\", +1\" al frente)"
   },
   {
-    "kEn": "Duct",
-    "kEs": "Ducto",
-    "vEn": "6\" rigid metal, straight up, no flex",
-    "vEs": "Rígido de metal de 6\", vertical, sin flexible"
-  },
-  {
-    "kEn": "Ceiling gap",
-    "kEs": "Hueco al techo",
-    "vEn": "4-1/2\" to 11-1/2\" · measure at the test-hang",
-    "vEs": "De 4-1/2\" a 11-1/2\" · medir en la prueba"
+    "kEn": "Kitchen duct",
+    "kEs": "Ducto cocina",
+    "vEn": "Dedicated left chase (verify ≥ 6\") · John/crew (not NEXT HVAC)",
+    "vEs": "Exclusivo cubo izq. (revisar ≥ 6\") · cuadrilla (no NEXT HVAC)"
   }
 ]

@@ -1,1 +1,46 @@
-[]
+[
+  {
+    "title": "Attic-Furnace-and-Ducts-Interactive_EN.html",
+    "titleEn": "Attic furnace and ducts layout · English",
+    "titleEs": "Plano de calefacción y ductos en ático · inglés",
+    "id": "2026-11-20_HVAC-Layout-Interactive_EN",
+    "path": "Attic furnace spot, 24\" walkway, supply/return ducts & GFCI (English)",
+    "date": "2026-11-20",
+    "lang": "en",
+    "pairId": "hvac-layout-interactive",
+    "pin": true
+  },
+  {
+    "title": "Attic-Furnace-and-Ducts-Interactive_ES.html",
+    "titleEn": "Attic furnace and ducts layout · Spanish",
+    "titleEs": "Plano de calefacción y ductos en ático · español",
+    "id": "2026-11-20_HVAC-Layout-Interactive_ES",
+    "path": "Ubicación de calefactor, pasarela 24\", ductos y contacto GFCI (español)",
+    "date": "2026-11-20",
+    "lang": "es",
+    "pairId": "hvac-layout-interactive",
+    "pin": true
+  },
+  {
+    "title": "2026-11-20_U4_hvac_layout-interactive_R1_EN.pdf",
+    "titleEn": "Printable attic furnace and ducts layout · English",
+    "titleEs": "Plano imprimible de calefacción y ductos · inglés",
+    "id": "2026-11-20_U4_hvac_layout-interactive_R1_EN",
+    "path": "Mon Nov 23 walkthrough sheet + live takeoff (English)",
+    "date": "2026-11-20",
+    "lang": "en",
+    "pairId": "hvac-layout-printable",
+    "pin": true
+  },
+  {
+    "title": "2026-11-20_U4_hvac_layout-interactive_R1_ES.pdf",
+    "titleEn": "Printable attic furnace and ducts layout · Spanish",
+    "titleEs": "Plano imprimible de calefacción y ductos · español",
+    "id": "2026-11-20_U4_hvac_layout-interactive_R1_ES",
+    "path": "Hoja de recorrido 23 nov + materiales en vivo (español)",
+    "date": "2026-11-20",
+    "lang": "es",
+    "pairId": "hvac-layout-printable",
+    "pin": true
+  }
+]
