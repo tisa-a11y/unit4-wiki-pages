@@ -99,7 +99,7 @@
 
   const state = {
     lang: params.get("lang") === "es" ? "es" : "en",
-    theme: "light",
+    theme: (params.get("theme") || "").toLowerCase() === "dark" ? "dark" : "light",
     activeTab: "range-hood-plan",
     installStep: "ks4-live",
     hoodAff: 68,
@@ -384,6 +384,7 @@
 
     document.documentElement.lang = state.lang;
     document.documentElement.setAttribute("data-theme", state.theme);
+    if (window.U4LiveAi && typeof window.U4LiveAi.setLang === "function") window.U4LiveAi.setLang(state.lang);
     if (backEl) { backEl.href = backHref; backEl.textContent = es ? "← Cocina" : "← Back to Kitchen"; }
     if (fpEl) { fpEl.href = fpHref; fpEl.textContent = es ? "Planta de Cocina →" : "Full Floor Plan →"; }
     if (langBtn) langBtn.textContent = es ? "English (EN)" : "Español (MX)";
@@ -608,8 +609,8 @@
       } else {
         mark.status = "applied";
         mark.reply = es
-          ? `✓ Cambio propuesto registrado en "${zone}" para revisión al final del día (EOD): "${txt || "Ajuste marcado"}".`
-          : `✓ Proposed edit logged on "${zone}" and queued for EOD review: "${txt || "Marked adjustment"}".`;
+          ? `✓ Cambio propuesto registrado en "${zone}" en la bandeja del proyecto para revisión: "${txt || "Ajuste marcado"}".`
+          : `✓ Proposed edit logged on "${zone}" and saved to project intake for review: "${txt || "Marked adjustment"}".`;
       }
       showToast(es ? "Agente aplicó el cambio al plano" : "Agent applied comment to plan");
       renderAll();
@@ -1276,8 +1277,8 @@
               <!-- COMPACT Upper 2x6 Wood Blocking (116"–121.5" AFF, 1 stud bay 14-1/2" W ONLY!) -->
               <rect x="${blkX}" y="${ceilY}" width="${blkW}" height="${(upBotY - ceilY).toFixed(1)}" fill="url(#woodHatch)" stroke="#A15206" stroke-width="1.2"/>
               <line x1="114" y1="${((ceilY + upBotY) / 2).toFixed(1)}" x2="${blkX}" y2="${((ceilY + upBotY) / 2).toFixed(1)}" stroke="#A15206" stroke-width="0.9"/>
-              <text x="110" y="${((ceilY + upBotY) / 2 - 1).toFixed(1)}" text-anchor="end" font-size="7.2" font-weight="700" fill="#A15206">${es ? "BLOQUE 2×6 SUP." : "2×6 UPPER BLOCK"}</text>
-              <text x="110" y="${((ceilY + upBotY) / 2 + 8).toFixed(1)}" text-anchor="end" font-size="6.7" font-family="monospace" fill="#78350F">${es ? '116"–121.5" · 1 claro' : '116"–121.5" · 1 bay'}</text>
+              <text x="110" y="${(ceilY + 12).toFixed(1)}" text-anchor="end" font-size="7.2" font-weight="700" fill="#A15206">${es ? "BLOQUE 2×6 SUP." : "2×6 UPPER BLOCK"}</text>
+              <text x="110" y="${(ceilY + 21).toFixed(1)}" text-anchor="end" font-size="6.7" font-family="monospace" fill="#78350F">${es ? '116"–121.5" · 1 claro' : '116"–121.5" · 1 bay'}</text>
 
               <!-- COMPACT Lower 2x10 Wood Blocking (73"–82-1/4" AFF, 1 stud bay 14-1/2" W ONLY!) -->
               <rect x="${blkX}" y="${lowTopY}" width="${blkW}" height="${(lowBotY - lowTopY).toFixed(1)}" fill="url(#woodHatch)" stroke="#A15206" stroke-width="1.2"/>
@@ -1458,7 +1459,8 @@
               <!-- LOWER 2x10 WOOD BLOCKING -->
               <rect x="${blkX0}" y="140" width="${blkW}" height="68" fill="url(#woodHatchS1)" stroke="#A15206" stroke-width="1.8"/>
               ${is2Bay ? `<rect x="186" y="140" width="8" height="68" fill="#EFE6D8" stroke="#BEA98D" stroke-width="1"/>` : ""}
-              <text x="190" y="134" text-anchor="middle" font-size="7.4" font-weight="700" fill="#78350F">${es ? `BLOQUE 2×10 INF.: ${fmtFrac(lowBlkBotAff)}"–${fmtFrac(lowBlkTopAff)}" piso (Subpiso: ${lowSub})` : `2×10 LOWER BLOCK: ${fmtFrac(lowBlkBotAff)}"–${fmtFrac(lowBlkTopAff)}" off floor (Subfloor: ${lowSub})`}</text>
+              <rect x="74" y="121" width="232" height="15" rx="3" fill="#FFFFFF" fill-opacity="0.96"/>
+              <text x="190" y="131.5" text-anchor="middle" font-size="6.9" font-weight="700" fill="#78350F">${es ? `BLOQUE 2×10 INF.: ${fmtFrac(lowBlkBotAff)}"–${fmtFrac(lowBlkTopAff)}" piso (Sub: ${lowSub})` : `2×10 LOWER BLOCK: ${fmtFrac(lowBlkBotAff)}"–${fmtFrac(lowBlkTopAff)}" floor (Sub: ${lowSub})`}</text>
 
               <!-- EXACT 2 ZEPHYR HANGING SCREWS -->
               <line x1="112" y1="${lineBY}" x2="268" y2="${lineBY}" stroke="#B42318" stroke-width="1" stroke-dasharray="3 2"/>
@@ -1689,7 +1691,7 @@
               <text x="16" y="170" font-size="7.4" font-weight="700" font-family="monospace" fill="#184E77">${es ? "EMPALME AL DUCTO DEDICADO DE COCINA (SOLO CAMPANA · NO NEXT HVAC)" : "EXISTING DEDICATED KITCHEN DUCT TIE-IN (FORMER HOOD ONLY · NOT NEXT HVAC)"}</text>
 
               <rect x="20" y="176" width="340" height="44" fill="#F8FAFC" stroke="#DCE2E9" stroke-width="1"/>
-              <text x="354" y="190" text-anchor="end" font-size="7.2" font-weight="700" fill="#485563">${es ? "ESPACIO ÁTICO" : "ATTIC SPACE"}</text>
+              <text x="354" y="187" text-anchor="end" font-size="6.8" font-weight="700" fill="#485563">${es ? "ESPACIO ÁTICO" : "ATTIC SPACE"}</text>
               <line x1="20" y1="220" x2="360" y2="220" stroke="#131A22" stroke-width="2"/>
               <text x="354" y="233" text-anchor="end" font-size="7.2" font-weight="700" fill="#485563">${es ? 'TECHO COCINA (121-1/2")' : 'KITCHEN CEILING (121-1/2")'}</text>
 
@@ -1705,7 +1707,7 @@
                 <path d="M 190 284 L 190 208 L 116 190 L 96 190" fill="none" stroke="#1B6B46" stroke-width="14" stroke-linejoin="round"/>
                 <path d="M 190 284 L 190 208 L 116 190 L 96 190" fill="none" stroke="#E5F4EC" stroke-width="10" stroke-linejoin="round"/>
                 <rect x="72" y="274" width="26" height="6" fill="#1B6B46"/>
-                <text x="204" y="191" text-anchor="start" font-size="7.1" font-weight="700" fill="#1B6B46">${es ? "45° + 45° EN ÁTICO (-18 pies equiv.)" : "45° + 45° IN ATTIC (-18 ft equiv)"}</text>
+                <text x="204" y="205" text-anchor="start" font-size="6.8" font-weight="700" fill="#1B6B46">${es ? "45° + 45° EN ÁTICO (~18 pies equiv.)" : "45° + 45° IN ATTIC (~18 ft equiv.)"}</text>
                 <text x="108" y="280" font-size="6.7" font-weight="700" fill="#1B6B46">${es ? "Tapar tramo viejo" : "Cap dead stub"}</text>
                 <text x="242" y="258" font-size="7.3" font-weight="700" fill="#1B6B46">${es ? "✓ RUTA MÁS LIMPIA" : "✓ CLEANEST ROUTE"}</text>
                 <text x="242" y="268" font-size="6.8" fill="#485563">${es ? 'Sube recto 6" en cubierta' : 'Straight 6" up inside casing'}</text>
@@ -1824,8 +1826,8 @@
 
               <!-- Bold RED MAX HEIGHT CEILING LINE FOR GAS & OUTLET! -->
               <line x1="48" y1="92" x2="332" y2="92" stroke="#B42318" stroke-width="1.8" stroke-dasharray="5 3"/>
-              <rect x="76" y="42" width="228" height="44" rx="4" fill="#FEECEB" stroke="#B42318" stroke-width="1"/>
-              <text x="190" y="55" text-anchor="middle" font-size="7.6" font-weight="800" fill="#B42318">${es ? '▲ ALTURA MÁX. GAS Y CONTACTO: 4-15/16" DEL PISO ▲' : '▲ MAX HEIGHT FOR GAS & OUTLET: 4-15/16" OFF FLOOR ▲'}</text>
+              <rect x="64" y="42" width="252" height="44" rx="4" fill="#FEECEB" stroke="#B42318" stroke-width="1"/>
+              <text x="190" y="55" text-anchor="middle" font-size="7.0" font-weight="800" fill="#B42318">${es ? '▲ ALTURA MÁX. GAS Y CONTACTO: 4-15/16" DEL PISO ▲' : '▲ MAX HEIGHT FOR GAS & OUTLET: 4-15/16" OFF FLOOR ▲'}</text>
               <text x="190" y="67" text-anchor="middle" font-size="7.1" font-weight="700" fill="#78350F">${state.floorInstalled ? (es ? 'NO SUBIR ARRIBA DE 4-15/16" (piso terminado)' : 'DO NOT GO ABOVE 4-15/16" (finished floor)') : (es ? `MAX ${bandHighSub}" DESDE SUBPISO CRUDO (mín. ${bandLowSub}")` : `MAX ${bandHighSub}" OFF BARE SUBFLOOR (min ${bandLowSub}")`)}</text>
               <text x="190" y="79" text-anchor="middle" font-size="6.5" fill="#485563">${es ? "Más arriba choca con el horno — la estufa no pegaría atrás" : "Anything higher hits the oven body — stove won't sit flush"}</text>
 
@@ -2155,11 +2157,15 @@
           gridSvg = `<g transform="rotate(-45 190 ${wallMidY})">${rects}</g>`;
         }
       } else {
-        gridSvg = `
-          <text x="190" y="${(wallMidY + 8).toFixed(1)}" text-anchor="middle" font-size="8.2" font-weight="700" fill="#8C9BAB">${es ? '39.3 ft² — elige medida o busca un producto' : '39.3 sq ft — pick a size or search a product'}</text>
-          <text x="190" y="${(wallMidY + 20).toFixed(1)}" text-anchor="middle" font-size="7.1" fill="#8C9BAB">${es ? 'para ver el patrón en vivo aquí' : 'to preview the tile pattern live here'}</text>
-        `;
+        gridSvg = "";
       }
+      const emptyCalloutSvg = hasTile ? "" : `
+        <g pointer-events="none">
+          <rect x="${(wx0 + 8).toFixed(1)}" y="${(counterY - 58).toFixed(1)}" width="${(wpx - 16).toFixed(1)}" height="32" rx="6" fill="#FFFFFF" fill-opacity="0.97" stroke="#C2CCD6" stroke-width="1"/>
+          <text x="190" y="${(counterY - 44).toFixed(1)}" text-anchor="middle" font-size="6.4" font-weight="800" fill="#184E77">${es ? '39.3 ft² — elige medida o producto abajo' : '39.3 sq ft — pick a size or product below'}</text>
+          <text x="190" y="${(counterY - 33).toFixed(1)}" text-anchor="middle" font-size="5.9" fill="#485563">${es ? 'para ver el patrón en vivo aquí' : 'to preview the live pattern on this wall'}</text>
+        </g>
+      `;
 
       let leftEdgePiecesSvg = "";
       const trimColor = { bullnose: "#A15206", quarter: "#6D28D9", wood: "#2D4A3E", glazed: "#184E77" }[state.tileTrim];
@@ -2216,7 +2222,7 @@
           <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:9px">
             <div style="padding:7px 9px;border-radius:8px;background:var(--surface);border:1px solid var(--rule)">
               <div style="font-size:10.5px;color:var(--ink-3);font-weight:600;text-transform:uppercase">${es ? "Área total pared" : "Total wall area"}</div>
-              <div style="font-size:15px;font-weight:800;color:var(--cobalt)">${grossSqft} sq ft</div>
+              <div style="font-size:15px;font-weight:800;color:var(--cobalt)">${grossSqft} ${es ? "ft²" : "sq ft"}</div>
               <div style="font-size:10.5px;color:var(--ink-2)">66-1/4" W × 85-1/2" H</div>
             </div>
             <div style="padding:7px 9px;border-radius:8px;background:var(--surface);border:1px solid var(--rule)">
@@ -2226,7 +2232,7 @@
             </div>
             <div style="padding:7px 9px;border-radius:8px;background:var(--surface);border:1px solid var(--rule)">
               <div style="font-size:10.5px;color:var(--ink-3);font-weight:600;text-transform:uppercase">${es ? "Cajas / cant." : "Est. qty / boxes"}</div>
-              <div style="font-size:15px;font-weight:800;color:#1B6B46">${(hasTile && boxesNeeded != null) ? `${boxesNeeded} ${es ? "cajas" : "boxes"}` : (hasTile ? `${orderSqft} sq ft` : "—")}</div>
+              <div style="font-size:15px;font-weight:800;color:var(--pine)">${(hasTile && boxesNeeded != null) ? `${boxesNeeded} ${es ? "cajas" : "boxes"}` : (hasTile ? `${orderSqft} sq ft` : "—")}</div>
               <div style="font-size:10.5px;color:var(--ink-2)">${hasTile ? (es ? `Incluye +${state.tileWastePct}% margen` : `Includes +${state.tileWastePct}% waste`) : (es ? "Solo cantidades" : "Quantities only")}</div>
             </div>
           </div>
@@ -2295,6 +2301,7 @@
               <text x="190" y="${(counterY + 24).toFixed(1)}" text-anchor="middle" font-size="7.2" font-weight="700" fill="#1B6B46">${es ? 'CUBIERTA PLANA 36" — SIN ZOCLO DE PIEDRA 4" (silicón al color · baja 1 fila atrás de estufa)' : 'FLAT 36" COUNTER — NO 4" STONE CURB (color-matched silicone · drop 1 row behind stove)'}</text>
               <text x="190" y="${(counterY + 35).toFixed(1)}" text-anchor="middle" font-size="6.7" fill="#485563">${es ? 'HardieBacker 1/2" (0.42") junto a tablaroca 1/2" comprada (0.50") · emparejar ~1/16" en unión' : '1/2" HardieBacker 500 (0.42") next to purchased 1/2" drywall (0.50") · feather ~1/16" seam'}</text>
 
+              ${emptyCalloutSvg}
               ${svgMarksHtml("tile-plan")}
             </svg>
             ${activePinSteerHtml("tile-plan")}
@@ -2663,9 +2670,20 @@
       setAppMode("blueprint");
       return;
     }
+    const STEP_ALIASES = {
+      layout: "ks4-live",
+      wall: "ks4-live",
+      blocking: "hood-s1",
+      hood: "hood-s2",
+      vent: "hood-s2",
+      gas: "range-gas",
+      outlet: "range-gas",
+      tile: "tile-plan"
+    };
     const m = h.match(/^step=([a-z0-9-]+)$/i);
-    if (m && PLANS[m[1]]) {
-      openPlan(m[1]);
+    if (m) {
+      const key = STEP_ALIASES[m[1].toLowerCase()] || m[1];
+      if (PLANS[key]) openPlan(key);
     }
   }
 
@@ -2699,6 +2717,34 @@
       }, 20);
     });
 
+    if (window.U4PlanNav && document.getElementById("u4hTopbar")) {
+      window.U4PlanNav.init({
+        planId: "kitchen-west-ks4",
+        headerEl: document.getElementById("u4hTopbar"),
+        onLangChange: (l) => {
+          state.lang = l === "es" ? "es" : "en";
+          if (window.U4PLAN && typeof window.U4PLAN.setLang === "function") window.U4PLAN.setLang(state.lang);
+          renderAll();
+          if (window.U4LiveAi) window.U4LiveAi.refreshPrompts();
+        },
+        onThemeChange: (th) => {
+          state.theme = th === "dark" ? "dark" : "light";
+          renderTopChrome();
+        }
+      });
+    }
+    if (window.U4LiveAi) {
+      window.U4LiveAi.init({
+        planId: "kitchen-west-ks4",
+        room: "kitchen-oven-range",
+        titleEn: "Kitchen West Range & Hood Wall",
+        titleEs: "Cocina: Muro de Estufa y Campana",
+        getContext: () => "Step=" + (currentSheetKey() || state.activeTab) + ", HoodBottomAFF=" + state.hoodAff + "in, FloorInstalled=" + state.floorInstalled + ", StudLayout=" + state.studLayout + ", DuctMode=" + state.ductMode + ", TileTrim=" + state.tileTrim + " (zero metal trim, zero 45deg miter).",
+        quickPrompts: (lang) => lang === "es"
+          ? ["¿Altura del bloque 2×10 desde subpiso?", "¿Dónde va la caja 15A de la campana?", "¿Por qué cero metal en la orilla del azulejo?"]
+          : ["What height is the 2×10 block off bare subfloor?", "Where does the 15A hood box go?", "Why zero metal edge trim on the tile?"]
+      });
+    }
     setAppMode("guide");
     renderAll();
     applyHashRoute();

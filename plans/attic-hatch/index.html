@@ -5,12 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Permanent Attic Hatch — Unit 4</title>
   <link rel="stylesheet" href="./attic-styles.css">
+  <link rel="stylesheet" href="../vendor/u4-human-guide-shell.css">
+  <link rel="stylesheet" href="../vendor/u4-live-ai-widget.css">
 </head>
-<body>
+<body class="u4-mode-human">
+  <!-- HUMAN-FIRST INTERACTIVE CREW GUIDE (DEFAULT ON SCREEN · ZERO BACKEND CLUTTER · ZERO PRICES) -->
+  <div id="u4-human-app" class="u4h-app no-print">
+    <header id="u4hTopbar" class="u4h-topbar"></header>
+    <main class="u4h-main">
+      <div id="u4hHoldStrip" class="u4h-hold-strip" role="status"></div>
+      <div id="u4hBody"></div>
+    </main>
+  </div>
+
+  <!-- HIDDEN PRINT & TECHNICAL BLUEPRINT ENGINE (?print=1 / 2-Page Letter PDF / window.U4PLAN) -->
+  <div id="blueprint-sheet-shell" hidden>
+    <div class="u4g-bp-return-bar no-print">
+      <span id="u4gBpReturnLabel">Viewing Technical Print Blueprint</span>
+      <button type="button" id="u4gBpReturnBtn" class="u4g-bp-return-btn">&larr; Back to Interactive Guide</button>
+    </div>
+
   <header class="app-header no-print">
     <nav class="top-jump-bar" aria-label="Cross-plan navigation">
       <a id="link-back-room" class="jump-link" href="../../#attic-access">&larr; Back to Attic Page</a>
-      <a id="link-hvac-plan" class="jump-link jump-link-sibling" href="../../hvac/interactive-pilot/index.html">Attic Furnace &amp; Ducts &rarr;</a>
+      <a id="link-hvac-plan" class="jump-link jump-link-sibling" href="../hvac-layout/index.html">Attic Furnace &amp; Ducts &rarr;</a>
     </nav>
     <div class="header-inner">
       <div class="brand-block">
@@ -376,9 +394,14 @@
 
   <div id="status-toast" class="status-toast" hidden role="status" aria-live="polite"></div>
 
-    <script src="../vendor/jspdf.umd.min.js"></script>
+      </div>
+
+  <script src="../vendor/jspdf.umd.min.js"></script>
   <script src="../vendor/svg2pdf.umd.min.js"></script>
   <script src="../vendor/ks4-pdf-export.js"></script>
   <script src="./attic-renderer.js"></script>
+  <script src="../vendor/u4-plan-nav.js"></script>
+  <script src="../vendor/u4-live-ai-widget.js"></script>
+  <script src="./attic-human-guide.js"></script>
 </body>
 </html>

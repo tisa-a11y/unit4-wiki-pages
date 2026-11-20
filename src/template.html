@@ -57,6 +57,12 @@
 .u4-packet-t{font-weight:700;font-size:16.5px;color:var(--accent);line-height:1.25}
 .u4-packet-room{font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
 .u4-packet-n{font-size:14px;color:var(--muted);line-height:1.35}
+
+/* 2026-11-20 Wave D: mobile AI dock cleanly bottom-right (matches interactive plans, never overlaps hero photo) */
+@media (max-width: 640px){
+  #u4AiFloatingDock{position:fixed!important;right:12px!important;bottom:calc(env(safe-area-inset-bottom,0px) + 14px)!important;top:auto!important;z-index:92!important;margin-left:0!important}
+  #u4AiFloatingDock .u4-ai-pointer{display:none!important}
+}
 </style></head><body>
 <meta name="description" content="Agent brief: shared home of the 1231 11th Ave Unit 4 remodel so Tisa (owner, locks decisions) and John (lead carpenter) work from one current picture; the spine of the Todoist board — every card traces to a wiki spec or decision; agents file every note into specs, Todoist and decisions. Read #agent-brief (= unit-4-renovation/START-HERE.md).">
 <!--
@@ -291,9 +297,9 @@ main{padding-bottom:96px}
 .about h2{font-size:17px;margin:14px 0 6px}.about p{margin:0 0 8px}.about ul{margin:0;padding-left:20px}.about li{margin:5px 0;line-height:1.45}
 #field .reports{display:grid}#field .reports:empty{display:none}.rep .tag.warn{background:var(--open-soft);color:var(--open)}.u4-voice-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;border:1px solid var(--line,#cfd5d2);background:#fff;color:var(--fg,#1d2326);font:600 13px/1.2 -apple-system,BlinkMacSystemFont,'IBM Plex Sans',sans-serif;cursor:pointer;margin-left:auto}.u4-voice-pill[aria-pressed='true']{background:var(--accent,#1f5f7a);border-color:var(--accent,#1f5f7a);color:#fff}.u4-voice-dot{width:8px;height:8px;border-radius:50%;background:#7b878c;display:inline-block}.u4-voice-pill[aria-pressed='true'] .u4-voice-dot{background:#7ef29d}.u4-voice-status{font-size:12px;color:#4b555a;margin-left:6px}.pp-link{font-size:14px;margin:6px 0 0}.legend a{font-weight:600}
 .is-home .bar .status,.is-home #status{display:none}
-.done-list{max-width:74ch;margin:0 0 18px}.done-list ul{list-style:none;padding-left:4px;margin:0}.done-list li{margin:8px 0;padding-left:32px;text-indent:-32px}.done-list .chk{display:inline-block;width:22px;height:22px;border-radius:6px;background:var(--accent);color:#fff;text-align:center;line-height:22px;font-size:14px;font-weight:700;margin-right:10px;text-indent:0;vertical-align:-3px}
+.done-list{max-width:74ch;margin:0 0 18px}.done-list ul{list-style:none;padding-left:4px;margin:0}.done-list li{margin:8px 0;padding-left:32px;text-indent:-32px}.done-list .chk{display:inline-block;width:22px;height:22px;border-radius:6px;background:var(--accent);color:var(--panel);text-align:center;line-height:22px;font-size:14px;font-weight:700;margin-right:10px;text-indent:0;vertical-align:-3px}
 .goals.week h2{border-top:none;padding-top:0;margin-top:0}main{padding-bottom:96px}
-.ck{max-width:74ch;margin:6px 0 16px;border:1px solid var(--line, rgba(127,127,127,.3));border-radius:12px;padding:10px 14px}.ck h2{font-size:18px;margin:2px 0 6px;border-top:none;padding-top:0}.ck-n{font-size:13px;font-weight:500;color:var(--muted);margin-left:6px}.ck ul{list-style:none;margin:0;padding:0}.ck li{display:flex;gap:10px;align-items:flex-start;margin:7px 0;line-height:1.4}.ck li.is-done{color:var(--muted)}.chk{flex:none;display:inline-block;width:22px;height:22px;border-radius:6px;background:var(--accent);color:#fff;text-align:center;line-height:22px;font-size:14px;font-weight:700}.chk.todo{background:transparent;border:2px solid var(--accent);box-sizing:border-box}.jumpwrap{margin:0 0 14px}.jumpfield{font:inherit;font-size:15px;font-weight:600;padding:10px 14px;min-height:44px;border-radius:10px;border:1px solid var(--accent);background:var(--accent-soft);color:inherit;cursor:pointer}.fulldet{max-width:74ch;margin:18px 0;border-top:1px solid var(--line, rgba(127,127,127,.25));padding-top:10px}.fulldet summary{cursor:pointer;font-weight:600;font-size:16px;min-height:44px;display:flex;align-items:center}.concept{max-width:74ch}.concept .mdbody p{font-size:17px;line-height:1.5}.gallery{max-width:74ch;margin:4px 0 16px}.gallery h2{font-size:18px;margin:4px 0 2px;border-top:none;padding-top:0}.gal-note{font-size:13px;color:var(--muted);margin:0 0 8px}.gal{display:grid;grid-template-columns:1fr;gap:12px}@media(min-width:700px){.gal{grid-template-columns:1fr 1fr}}.gal figure{margin:0}.gal img{width:100%;height:auto;border-radius:10px;border:1px solid var(--line, rgba(127,127,127,.3));display:block}.gal figcaption{font-size:13px;color:var(--muted);margin-top:4px}.tbl{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}.is-crew #status,.is-crew .bar .status{display:none}.agentlink{display:none!important}.foot{font-size:13px;color:var(--muted);margin:28px 0 0}.foot a{color:inherit}
+.ck{max-width:74ch;margin:6px 0 16px;border:1px solid var(--line, rgba(127,127,127,.3));border-radius:12px;padding:10px 14px}.ck h2{font-size:18px;margin:2px 0 6px;border-top:none;padding-top:0}.ck-n{font-size:13px;font-weight:500;color:var(--muted);margin-left:6px}.ck ul{list-style:none;margin:0;padding:0}.ck li{display:flex;gap:10px;align-items:flex-start;margin:7px 0;line-height:1.4}.ck li.is-done{color:var(--muted)}.chk{flex:none;display:inline-block;width:22px;height:22px;border-radius:6px;background:var(--accent);color:var(--panel);text-align:center;line-height:22px;font-size:14px;font-weight:700}.chk.todo{background:transparent;border:2px solid var(--accent);box-sizing:border-box}.jumpwrap{margin:0 0 14px}.jumpfield{font:inherit;font-size:15px;font-weight:600;padding:10px 14px;min-height:44px;border-radius:10px;border:1px solid var(--accent);background:var(--accent-soft);color:inherit;cursor:pointer}.fulldet{max-width:74ch;margin:18px 0;border-top:1px solid var(--line, rgba(127,127,127,.25));padding-top:10px}.fulldet summary{cursor:pointer;font-weight:600;font-size:16px;min-height:44px;display:flex;align-items:center}.concept{max-width:74ch}.concept .mdbody p{font-size:17px;line-height:1.5}.gallery{max-width:74ch;margin:4px 0 16px}.gallery h2{font-size:18px;margin:4px 0 2px;border-top:none;padding-top:0}.gal-note{font-size:13px;color:var(--muted);margin:0 0 8px}.gal{display:grid;grid-template-columns:1fr;gap:12px}@media(min-width:700px){.gal{grid-template-columns:1fr 1fr}}.gal figure{margin:0}.gal img{width:100%;height:auto;border-radius:10px;border:1px solid var(--line, rgba(127,127,127,.3));display:block}.gal figcaption{font-size:13px;color:var(--muted);margin-top:4px}.tbl{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}.is-crew #status,.is-crew .bar .status{display:none}.agentlink{display:none!important}.foot{font-size:13px;color:var(--muted);margin:28px 0 0}.foot a{color:inherit}
 .about.howto{font-size:14px;line-height:1.45;color:var(--muted)}.about.howto h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;margin:10px 0 4px}.about.howto li{margin:3px 0}.h2-note{font-size:14px;font-weight:400;color:var(--muted)}
 .home-head{margin:0 0 18px}.home-title{font-size:30px;font-weight:700;line-height:1.15}.home-sub{color:var(--muted);font-size:14px;margin-top:4px}
 .unit-concept{max-width:74ch;margin:0 0 14px}.unit-concept p{margin:2px 0 0;font-size:20px;line-height:1.35;font-weight:600}
@@ -1162,7 +1168,9 @@ const KITCHEN_HOSTED_LINKS = {
   "2026-11-20_HVAC-Layout-Interactive_EN": "./plans/hvac-layout/index.html?lang=en",
   "2026-11-20_HVAC-Layout-Interactive_ES": "./plans/hvac-layout/index.html?lang=es",
   "2026-11-20_Murphy-Door-Interactive_EN": "./plans/murphy-door/index.html?lang=en",
-  "2026-11-20_Murphy-Door-Interactive_ES": "./plans/murphy-door/index.html?lang=es"
+  "2026-11-20_Murphy-Door-Interactive_ES": "./plans/murphy-door/index.html?lang=es",
+  "2026-11-20_Kitchen-Electrical-Interactive_EN": "./plans/kitchen-electrical/index.html?lang=en",
+  "2026-11-20_Kitchen-Electrical-Interactive_ES": "./plans/kitchen-electrical/index.html?lang=es"
 };
 
 function isDocVisibleInLang(d, list, lang){
@@ -1198,7 +1206,24 @@ function isInteractiveDoc(d){ return Boolean(d && KITCHEN_HOSTED_LINKS[d.id] && 
 function docKind(d){ if (isInteractiveDoc(d)) return LANG==="es" ? "Plano interactivo" : "Interactive plan"; if (isPdf(d)) return "pdf"; if ((d.title||"").indexOf(".")<0) return "doc"; const e=(d.title.split(".").pop()||"").toLowerCase(); return e==="jpeg"?"jpg":e; }
 function docUrl(d){ return "https://drive.google.com/file/d/"+d.id+"/view"; }
 function isPdf(d){ return Boolean(d && (/\.pdf$/i.test(d.title||"") || (typeof PDF_BLOBS==="object" && PDF_BLOBS && PDF_BLOBS[d.id]))); }
-function docHref(d){ return KITCHEN_HOSTED_LINKS[d.id] || (isPdf(d) ? "#doc:"+d.id : docUrl(d)); }
+function currentWikiTheme(){
+  var dt = document.documentElement.getAttribute("data-theme");
+  if (dt === "dark" || dt === "light") return dt;
+  try { return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } catch(e){ return "light"; }
+}
+function withPlanParams(href){
+  if (!href || href.indexOf("./plans/") !== 0) return href;
+  var hashIdx = href.indexOf("#");
+  var hash = hashIdx >= 0 ? href.slice(hashIdx) : "";
+  var base = hashIdx >= 0 ? href.slice(0, hashIdx) : href;
+  var qIdx = base.indexOf("?");
+  var path = qIdx >= 0 ? base.slice(0, qIdx) : base;
+  var sp = new URLSearchParams(qIdx >= 0 ? base.slice(qIdx + 1) : "");
+  sp.set("lang", LANG === "es" ? "es" : "en");
+  sp.set("theme", currentWikiTheme());
+  return path + "?" + sp.toString() + hash;
+}
+function docHref(d){ var h = KITCHEN_HOSTED_LINKS[d.id] || (isPdf(d) ? "#doc:"+d.id : docUrl(d)); return withPlanParams(h); }
 
 const DOC_BY_ID = {};
 Object.keys(DOCS).forEach(k=>(DOCS[k]||[]).forEach(d=>{ if(!DOC_BY_ID[d.id]) DOC_BY_ID[d.id]={d:d,key:k}; }));
@@ -1570,7 +1595,7 @@ function docsBlock(key){
     const dl = d.docLang || d.lang || "both";
     const enOnlyBadge = (LANG==="es" && dl==="en") ? ' <span class="k">'+esc(t("englishOnlyTag"))+'</span>' : '';
     const inPrevTag = inPrevIds.has(d.id) ? ' <span class="u4-in-prev-tag">'+esc(t("inPreviews"))+'</span>' : '';
-    return '<li><a href="'+docHref(d)+'"'+((isPdf(d)||docHref(d).startsWith("#"))?'':' target="_blank" rel="noopener"')+'>'+esc(L.t)+'</a> <span class="k'+(isInteractiveDoc(d)?' k-interactive':'')+'">'+docKind(d)+(L.date?' · '+niceDate(L.date):'')+'</span>'+(d.review?' <span class="k">'+esc(t("awaitingReview"))+'</span>':'')+enOnlyBadge+inPrevTag+'</li>';
+    return '<li><a href="'+docHref(d)+'"'+((isPdf(d)||isInteractiveDoc(d)||docHref(d).startsWith("#"))?'':' target="_blank" rel="noopener"')+'>'+esc(L.t)+'</a> <span class="k'+(isInteractiveDoc(d)?' k-interactive':'')+'">'+docKind(d)+(L.date?' · '+niceDate(L.date):'')+'</span>'+(d.review?' <span class="k">'+esc(t("awaitingReview"))+'</span>':'')+enOnlyBadge+inPrevTag+'</li>';
   }).join("");
   const history=archived.length?'<details><summary>'+esc(t("historyHeading"))+' ('+archived.length+')</summary><ul>'+rows(archived)+'</ul></details>':"";
   return '<section class="docs" id="sec-docs"><h2>'+esc(t("documentsHeading"))+' ('+active.length+')</h2>'+prevStrip+'<ul>'+rows(active)+'</ul>'+history+'</section>';
@@ -1754,7 +1779,7 @@ function appendRailRoomNode(p, isChildSubpage){
           da.className = "sub rail-doc-link";
           da.href = docHref(d);
           da.dataset.doc = d.id;
-          if (!isPdf(d) && !docHref(d).startsWith("#")) { da.target = "_blank"; da.rel = "noopener"; }
+          if (!isPdf(d) && !isInteractiveDoc(d) && !docHref(d).startsWith("#")) { da.target = "_blank"; da.rel = "noopener"; }
           const dl = docLabel(d).t;
           da.title = dl;
           da.innerHTML = '<span class="rail-doc-label">' + (isPdf(d) ? "📄 " : "↗ ") + dl.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])) + '</span>';
@@ -4090,6 +4115,17 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       titleEs: "Plano interactivo de la puerta librero Murphy",
       status: "live",
       aliases: ["murphy-door","interactive murphy","interactive bookcase door","puerta librero interactiva"]
+    },
+    "kitchen-electrical": {
+      id: "kitchen-electrical",
+      room: "electrical",
+      url: "./plans/kitchen-electrical/index.html",
+      docIdEn: "2026-11-20_Kitchen-Electrical-Interactive_EN",
+      docIdEs: "2026-11-20_Kitchen-Electrical-Interactive_ES",
+      titleEn: "Kitchen electrical and subpanel D04 interactive plan",
+      titleEs: "Plano interactivo eléctrico de cocina y subpanel D04",
+      status: "live",
+      aliases: ["kitchen-electrical","electrical plan","subpanel d04","kitchen circuits","plano electrico cocina","subpanel d04"]
     }
   };
 

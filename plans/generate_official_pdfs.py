@@ -32,6 +32,11 @@ PLAN_REGISTRY = {
         "en_name": "2026-11-20_U4_kitchen_floor-plan-interactive_R1_EN.pdf",
         "es_name": "2026-11-20_U4_kitchen_floor-plan-interactive_R1_ES.pdf",
     },
+    "kitchen-electrical": {
+        "html": "plans/kitchen-electrical/index.html",
+        "en_name": "2026-11-20_U4_kitchen_electrical-d04-interactive_R1_EN.pdf",
+        "es_name": "2026-11-20_U4_kitchen_electrical-d04-interactive_R1_ES.pdf",
+    },
     "attic-hatch": {
         "html": "plans/attic-hatch/index.html",
         "en_name": "2026-11-20_U4_attic_hatch-interactive_R1_EN.pdf",

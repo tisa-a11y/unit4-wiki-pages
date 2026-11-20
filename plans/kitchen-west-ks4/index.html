@@ -5,23 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>West Range &amp; Hood Wall — Unit 4 Kitchen</title>
   <link rel="stylesheet" href="./ks4-styles.css">
+  <link rel="stylesheet" href="../vendor/u4-human-guide-shell.css">
+  <link rel="stylesheet" href="../vendor/u4-live-ai-widget.css">
   <link rel="stylesheet" href="./ks4-5step-guide.css">
 </head>
 <body class="mode-5step">
   <!-- TISA'S CLEAN 5-STEP INTERACTIVE VISUAL GUIDE (DEFAULT ON SCREEN · ZERO BACKEND CLUTTER · ZERO PRICES) -->
   <div id="u4-5step-app" class="u4-5step-app no-print">
-    <header class="u4g-topbar">
-      <div class="u4g-nav-left">
-        <a id="u4gBackKitchen" class="u4g-nav-link" href="../../#kitchen-oven-range">&larr; Back to Kitchen</a>
-        <a id="u4gFloorPlanLink" class="u4g-nav-link sibling" href="../kitchen-floor-plan/index.html">Full Floor Plan &rarr;</a>
-      </div>
-      <div class="u4g-nav-right">
-        <button type="button" id="u4gLangBtn" class="u4g-lang-btn" aria-label="Switch English or Spanish">Español (MX)</button>
-        <button type="button" id="u4gThemeBtn" class="mini-btn" aria-label="Toggle light or dark theme">&#9790; Dark</button>
-        <button type="button" id="u4gPdfBtn" class="mini-btn primary">Print / PDF</button>
-        <button type="button" id="u4gBlueprintBtn" class="mini-btn" hidden>Technical Blueprint</button>
-      </div>
-    </header>
+    <header id="u4hTopbar" class="u4h-topbar"></header>
     <div id="u4gToolBar" class="u4g-subbar"></div>
     <main class="u4g-main">
       <div id="u4gHoldStrip" class="u4g-hold-strip" role="status"></div>
@@ -649,6 +640,8 @@
   <script src="../vendor/svg2pdf.umd.min.js"></script>
   <script src="../vendor/ks4-pdf-export.js"></script>
   <script src="./ks4-renderer.js"></script>
+  <script src="../vendor/u4-plan-nav.js"></script>
+  <script src="../vendor/u4-live-ai-widget.js"></script>
   <script src="./ks4-5step-guide.js"></script>
 </body>
 </html>

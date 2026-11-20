@@ -1,0 +1,1075 @@
+/* Unit 4 Kitchen — Coupled Interactive Kitchen Electrical Plan (Module 6 / Wave D)
+   Design system: cool drafting bond + blueprint ink + BM Essex Green HC-188 + copper/circuit accents.
+   Zero external CDN dependencies; responsive phone (390px) -> tablet -> desktop -> exact 2-page Letter print. */
+
+:root {
+  --paper: #f5f7f4;
+  --surface: #ffffff;
+  --surface-alt: #f8fafc;
+  --ink: #10202b;
+  --muted: #4b5c69;
+  --line: #cfd8e3;
+  --blueprint: #15539e;
+  --blueprint-soft: #e8f1fb;
+  --essex: #2f4f42;
+  --essex-soft: #e6efe9;
+  --wire12: #b45309;
+  --wire12-soft: #fef3c7;
+  --wire14: #1d4ed8;
+  --wire14-soft: #eff6ff;
+  --wire143: #6d28d9;
+  --wire143-soft: #f5f3ff;
+  --alert: #b91c1c;
+  --alert-soft: #fef2f2;
+  --amber: #b45309;
+  --amber-soft: #fffbeb;
+  --radius: 8px;
+  --radius-sm: 5px;
+  --font-sans: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+.page-shell > *,
+.visual-hero > *,
+.workspace-grid > *,
+.panel {
+  min-width: 0;
+  max-width: 100%;
+}
+
+a { color: var(--blueprint); }
+button, input, select, textarea { font: inherit; color: inherit; }
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2.5px solid var(--blueprint);
+  outline-offset: 2px;
+}
+
+/* ── Sticky Compact Architectural Toolbar ────────────────────────────── */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 1.5px solid var(--line);
+  padding: 8px 16px 10px;
+}
+
+.top-jump-bar {
+  max-width: 1440px;
+  margin: 0 auto 7px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 10px;
+  font-size: 12.5px;
+}
+
+.jump-links-right {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.jump-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--blueprint);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: var(--radius-sm);
+}
+
+.jump-link:hover {
+  background: var(--blueprint-soft);
+  text-decoration: underline;
+}
+
+.jump-link-sibling {
+  color: var(--essex);
+  background: var(--essex-soft);
+  border: 1px solid #b8cfc2;
+  padding: 2px 9px;
+}
+
+.jump-link-sibling:hover {
+  background: #d7e7dd;
+  text-decoration: none;
+}
+
+.header-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+}
+
+.brand-block h1 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+.brand-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.toolbar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 6px 11px;
+  border-radius: var(--radius-sm);
+  border: 1.25px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.14s ease, border-color 0.14s ease, color 0.14s ease;
+}
+
+.btn:hover:not(:disabled) { background: var(--surface-alt); border-color: #94a3b8; }
+.btn:disabled { opacity: 0.48; cursor: not-allowed; }
+.btn-primary { background: var(--blueprint); border-color: var(--blueprint); color: #ffffff; }
+.btn-primary:hover:not(:disabled) { background: #10427f; border-color: #10427f; }
+.btn-essex { background: var(--essex); border-color: var(--essex); color: #ffffff; }
+.btn-essex:hover:not(:disabled) { background: #223b31; border-color: #223b31; }
+.btn-danger { background: var(--alert); border-color: var(--alert); color: #ffffff; }
+.btn-danger:hover:not(:disabled) { background: #991b1b; border-color: #991b1b; }
+.btn-active { background: var(--alert-soft); border-color: var(--alert); color: var(--alert); }
+.btn-sm { min-height: 30px; padding: 4px 9px; font-size: 12px; }
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 700;
+  border: 1px solid transparent;
+  line-height: 1.35;
+}
+
+.pill-pass { background: var(--essex-soft); color: var(--essex); border-color: #a7cbb7; }
+.pill-fail { background: var(--alert-soft); color: var(--alert); border-color: #fca5a5; }
+.pill-warn { background: var(--amber-soft); color: var(--amber); border-color: #fcd34d; }
+.pill-info { background: var(--blueprint-soft); color: var(--blueprint); border-color: #bfdbfe; }
+.pill-neutral { background: #eef2f6; color: var(--muted); border-color: var(--line); }
+
+/* ── Main Shell ──────────────────────────────────────────────────────── */
+.page-shell {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 12px 16px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.hold-banner {
+  background: var(--alert-soft);
+  border: 1.5px solid #dc2626;
+  border-left: 5px solid #b91c1c;
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  color: #7f1d1d;
+  font-size: 12.5px;
+}
+
+.conflict-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 9px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--amber-soft);
+  border: 1.5px solid var(--amber);
+  color: #78350f;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.conflict-banner[hidden] { display: none; }
+
+/* ── Panels & Visual-First Hero ──────────────────────────────────────── */
+.visual-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.48fr) minmax(300px, 0.72fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.panel {
+  background: var(--surface);
+  border: 1.25px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.panel-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 9px 12px;
+  background: var(--surface-alt);
+  border-bottom: 1px solid var(--line);
+}
+
+.panel-head h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* ── 6 Coupled View Tabs & Live Option Switchers ─────────────────────── */
+.view-tabs-bar {
+  padding: 8px 12px;
+  background: #f1f5f9;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.view-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.view-tab {
+  min-height: 32px;
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  border: 1.25px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.view-tab:hover { background: var(--blueprint-soft); border-color: #93c5fd; }
+.view-tab.active {
+  background: var(--blueprint);
+  border-color: var(--blueprint);
+  color: #ffffff;
+}
+
+.crew-layer-bar {
+  padding: 7px 12px;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.layer-toggle-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.toggle-pill-btn {
+  min-height: 30px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1.25px solid var(--line);
+  background: var(--surface-alt);
+  color: var(--muted);
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.toggle-pill-btn.on {
+  background: var(--essex-soft);
+  border-color: var(--essex);
+  color: var(--essex);
+}
+
+.toggle-pill-btn.on-alert {
+  background: var(--alert-soft);
+  border-color: var(--alert);
+  color: var(--alert);
+}
+
+.option-switch-bar {
+  padding: 7px 12px;
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  font-size: 12px;
+}
+
+.opt-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+}
+
+.opt-divider {
+  color: #94a3b8;
+  font-weight: 700;
+}
+
+/* Bare Subfloor Datum Bar */
+.subfloor-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 14px;
+  padding: 8px 12px;
+  background: #fffdf5;
+  border-bottom: 1px solid #f0dfb3;
+  font-size: 12.5px;
+}
+
+.subfloor-toggle-group,
+.subfloor-allow-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.subfloor-allow-group input[type="number"] {
+  width: 68px;
+  min-height: 30px;
+  padding: 3px 6px;
+  border: 1.25px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font-weight: 700;
+}
+
+.subfloor-unit {
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+/* South Wall Interactive Drag / Position Bar (visible on South view) */
+.south-drag-bar {
+  padding: 7px 12px;
+  background: #f0f7ff;
+  border-bottom: 1px solid #bfdbfe;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  font-size: 12px;
+}
+.south-drag-bar[hidden] { display: none; }
+.south-drag-bar input[type="range"] { width: 110px; accent-color: var(--blueprint); }
+
+/* East Wall Dining D04 Flip Bar (visible on East view) */
+.east-flip-bar {
+  padding: 7px 12px;
+  background: #fef2f2;
+  border-bottom: 1px solid #fecaca;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12px;
+}
+.east-flip-bar[hidden] { display: none; }
+
+.status-bar-strip {
+  padding: 7px 12px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ── SVG Drafting Stage ──────────────────────────────────────────────── */
+.svg-stage-wrap {
+  padding: 8px;
+  background: #eef2f5;
+  display: flex;
+  justify-content: center;
+}
+
+.svg-stage {
+  position: relative;
+  width: 100%;
+  max-width: 920px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+#kitchen-elec-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+#kitchen-elec-sketch-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+#kitchen-elec-sketch-canvas.drawing-on {
+  pointer-events: auto;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.circle-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--alert-soft);
+  border-top: 1px solid #fca5a5;
+  font-size: 12px;
+  color: #7f1d1d;
+  font-weight: 600;
+}
+.circle-bar[hidden] { display: none; }
+
+/* ── Side Photo & Inspector Panel ────────────────────────────────────── */
+.photo-body {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inspector-box {
+  background: var(--blueprint-soft);
+  border: 1.25px solid #93c5fd;
+  border-radius: var(--radius-sm);
+  padding: 9px 10px;
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+.inspector-box strong {
+  display: block;
+  color: var(--blueprint);
+  margin-bottom: 3px;
+}
+
+.photo-frame {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: #0f172a;
+}
+
+.photo-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 270px;
+  object-fit: cover;
+}
+
+.photo-compass-overlay {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
+  background: rgba(16, 32, 43, 0.9);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.photo-callouts {
+  margin: 0;
+  padding-left: 17px;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.photo-callouts li.callout-alert {
+  color: #7f1d1d;
+  background: var(--alert-soft);
+  padding: 5px 7px;
+  border-radius: 4px;
+  border-left: 3px solid var(--alert);
+  list-style-position: inside;
+  margin-left: -17px;
+}
+
+.concept-disclaimer {
+  font-size: 11.5px;
+  color: var(--muted);
+  background: var(--surface-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 7px 9px;
+}
+
+/* ── Panel Schedule Table (20 Spaces) ────────────────────────────────── */
+.closure-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  padding: 10px 12px;
+  background: #f8fafc;
+  border-bottom: 1px solid var(--line);
+}
+
+.closure-card {
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.closure-card strong {
+  display: block;
+  font-size: 12.5px;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+
+.closure-card.ok { border-left: 4px solid var(--essex); }
+.closure-card.warn { border-left: 4px solid var(--amber); }
+.closure-card.fail { border-left: 4px solid var(--alert); }
+
+.schedule-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--line);
+  background: #ffffff;
+}
+
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+
+.schedule-table th,
+.schedule-table td {
+  padding: 7px 9px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+  vertical-align: top;
+}
+
+.schedule-table th {
+  background: #f1f5f9;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.schedule-table tbody tr {
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+}
+
+.schedule-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.schedule-table tbody tr.row-selected {
+  background: #dbeafe !important;
+  outline: 1.5px solid var(--blueprint);
+}
+
+.schedule-table tbody tr.row-unit-other {
+  color: #475569;
+  background: #fafafa;
+}
+
+.schedule-table tbody tr.row-spare {
+  color: #64748b;
+  font-style: italic;
+}
+
+.boundary-tag {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: #eef2f6;
+  border: 1px solid #cbd5e1;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: #334155;
+}
+
+.wire-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.wire-12 { background: var(--wire12-soft); color: var(--wire12); border: 1px solid #fcd34d; }
+.wire-14 { background: var(--wire14-soft); color: var(--wire14); border: 1px solid #bfdbfe; }
+.wire-143 { background: var(--wire143-soft); color: var(--wire143); border: 1px solid #ddd6fe; }
+.wire-none { background: #f1f5f9; color: #64748b; border: 1px solid #cbd5e1; }
+
+/* ── Clashes & Active Holds Grid ─────────────────────────────────────── */
+.clashes-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  padding: 12px;
+}
+
+.clash-card {
+  border: 1px solid #fecaca;
+  border-left: 4px solid var(--alert);
+  border-radius: var(--radius-sm);
+  background: #fffafa;
+  padding: 9px 10px;
+  font-size: 12px;
+  line-height: 1.38;
+}
+
+.clash-card.sev-medium {
+  border-color: #fde68a;
+  border-left-color: var(--amber);
+  background: #fffdf5;
+}
+
+.clash-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 6px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+/* ── Live Manhattan Cable & Material Takeoff (Zero Prices) ───────────── */
+.takeoff-notice {
+  padding: 8px 12px;
+  background: var(--amber-soft);
+  border-bottom: 1px solid #fde68a;
+  color: #78350f;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.takeoff-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  background: #ffffff;
+  font-size: 12.5px;
+}
+
+.takeoff-control-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.takeoff-control-group input[type="number"] {
+  width: 68px;
+  min-height: 30px;
+  padding: 3px 6px;
+  border: 1.25px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+}
+
+.takeoff-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  padding: 12px;
+}
+
+.takeoff-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 11px;
+  border: 1.25px solid var(--line);
+  border-top: 3px solid var(--blueprint);
+  border-radius: var(--radius-sm);
+  background: var(--surface-alt);
+}
+
+.takeoff-card.card-12 { border-top-color: var(--wire12); }
+.takeoff-card.card-14 { border-top-color: var(--wire14); }
+.takeoff-card.card-143 { border-top-color: var(--wire143); }
+.takeoff-card.card-essex { border-top-color: var(--essex); }
+
+.takeoff-card-title {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+}
+
+.takeoff-card-big {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.15;
+}
+
+.takeoff-card-sub {
+  font-size: 11.5px;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+/* ── Workspace: Trim Baseline, Save/Export, Comments & EOD Review ────── */
+.workspace-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  align-items: start;
+}
+
+.right-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form-body {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.trim-baseline-note {
+  padding: 8px 10px;
+  background: var(--essex-soft);
+  border: 1px solid #b8cfc2;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  color: var(--essex);
+}
+
+.dim-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.field-group input,
+.field-group select,
+.field-group textarea {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1.25px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  font-size: 12.5px;
+}
+
+.field-help {
+  font-size: 11.5px;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.action-bar,
+.voice-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.pin-list,
+.eod-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pin-item,
+.eod-item {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  background: var(--surface-alt);
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pin-head,
+.eod-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.pin-actions,
+.eod-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.empty-note {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.status-toast {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 60;
+  max-width: 420px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--ink);
+  color: #ffffff;
+  font-size: 12.5px;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(16, 32, 43, 0.25);
+}
+.status-toast.toast-error { background: var(--alert); }
+.status-toast.toast-ok { background: var(--essex); }
+.status-toast[hidden] { display: none; }
+
+@media (max-width: 1080px) {
+  .visual-hero, .workspace-grid { grid-template-columns: 1fr; }
+  .closure-strip, .takeoff-grid, .clashes-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+  .app-header { padding: 8px 10px; }
+  .header-inner, .brand-block, .toolbar-actions { min-width: 0; max-width: 100%; }
+  .brand-block h1 { font-size: 15px; overflow-wrap: anywhere; }
+  .page-shell { padding: 10px 10px 28px; }
+  .dim-grid, .closure-strip, .takeoff-grid, .clashes-grid { grid-template-columns: 1fr; }
+  .btn, .view-tab, .toggle-pill-btn { min-height: 36px; padding: 5px 9px; font-size: 12px; white-space: normal; }
+  #kitchen-elec-svg { max-width: 100%; height: auto; }
+}
+
+.tbl-sub {
+  font-size: 10.5px;
+  color: #4b5c69;
+}
+
+/* ── Exact 2-Page Architectural Letter Print & Headless Chrome PDF ───── */
+@page {
+  size: letter portrait;
+  margin: 0.25in;
+}
+
+@media print {
+  .no-print,
+  .app-header,
+  .conflict-banner,
+  .view-tabs-bar,
+  .crew-layer-bar,
+  .option-switch-bar,
+  .subfloor-bar,
+  .south-drag-bar,
+  .east-flip-bar,
+  .status-bar-strip,
+  .schedule-filter-bar,
+  .takeoff-controls,
+  .circle-bar,
+  .status-toast,
+  .workspace-grid,
+  .inspector-box {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff;
+    font-size: 9pt;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page-shell { max-width: none !important; padding: 0 !important; gap: 2.5pt; }
+  .hold-banner { padding: 2.5pt 6pt; font-size: 7.2pt; margin-bottom: 1.5pt; }
+  .visual-hero { display: block; }
+  .panel { border: none; border-radius: 0; overflow: visible; }
+  .panel-head { display: none; }
+
+  /* Page 1: Full-page proportional Kitchen Electrical Plan SVG */
+  .svg-panel { break-after: page; page-break-after: always; }
+  .svg-stage-wrap { padding: 0; background: #ffffff; }
+  .svg-stage { max-width: 7.9in; border: none; }
+  #kitchen-elec-svg { width: 100%; max-height: 9.75in; }
+
+  /* Page 2: D04 20-Space Schedule + Active Holds + Live Manhattan Cable & Material Takeoff (Strictly 2 Letter Pages) */
+  .photo-panel { display: none !important; }
+  .print-panel { border: 1px solid #cbd5e1; border-radius: 4px; margin-bottom: 2pt; break-inside: avoid; }
+  .print-keep-head { display: flex !important; padding: 1.6pt 5pt; }
+  .print-keep-head h2 { font-size: 7.4pt; }
+
+  .closure-strip { grid-template-columns: repeat(4, 1fr); padding: 1.5pt 4pt; gap: 2.5pt; }
+  .closure-card { padding: 1.6pt 3pt; font-size: 5.7pt; line-height: 1.08; }
+  .closure-card strong { font-size: 6.1pt; }
+
+  .table-scroll { overflow: visible; }
+  .schedule-table { font-size: 5.5pt; line-height: 1.04; table-layout: fixed; }
+  .schedule-table th, .schedule-table td { padding: 0.9pt 2.4pt; white-space: normal; word-wrap: break-word; overflow-wrap: anywhere; }
+  .tbl-sub { font-size: 4.9pt; line-height: 1.02; color: #4b5c69; }
+  .schedule-table th:nth-child(1) { width: 6.5%; }
+  .schedule-table th:nth-child(2) { width: 10%; }
+  .schedule-table th:nth-child(3) { width: 32%; }
+  .schedule-table th:nth-child(4) { width: 7.5%; }
+  .schedule-table th:nth-child(5) { width: 17%; }
+  .schedule-table th:nth-child(6) { width: 15%; }
+  .schedule-table th:nth-child(7) { width: 12%; }
+  .schedule-table .pill, .schedule-table .wire-chip { font-size: 5.1pt; padding: 0.3px 2.5px; white-space: nowrap; }
+
+  .clashes-grid { grid-template-columns: repeat(4, 1fr); padding: 1.5pt 4pt; gap: 2.5pt; }
+  .clash-card { padding: 1.6pt 3pt; font-size: 5.3pt; line-height: 1.06; }
+  .clash-card-head { font-size: 5.7pt; margin-bottom: 0.8pt; }
+
+  .takeoff-notice { padding: 1.2pt 4pt; font-size: 5.6pt; }
+  .takeoff-grid { grid-template-columns: repeat(4, 1fr); padding: 1.5pt 4pt; gap: 2.5pt; }
+  .takeoff-card { padding: 1.6pt 3pt; gap: 0.8pt; }
+  .takeoff-card-title { font-size: 5.3pt; }
+  .takeoff-card-big { font-size: 7pt; }
+  .takeoff-card-sub { font-size: 5.2pt; line-height: 1.05; }
+}
+
+body.print-mode .no-print,
+body.print-mode .app-header,
+body.print-mode .conflict-banner,
+body.print-mode .view-tabs-bar,
+body.print-mode .crew-layer-bar,
+body.print-mode .option-switch-bar,
+body.print-mode .subfloor-bar,
+body.print-mode .south-drag-bar,
+body.print-mode .east-flip-bar,
+body.print-mode .status-bar-strip,
+body.print-mode .schedule-filter-bar,
+body.print-mode .takeoff-controls,
+body.print-mode .circle-bar,
+body.print-mode .status-toast,
+body.print-mode .workspace-grid {
+  display: none !important;
+}
+body.print-mode .page-shell { max-width: 8.2in; padding: 0.15in; }
+body.print-mode .visual-hero { display: block; }

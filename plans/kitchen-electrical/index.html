@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kitchen Electrical &amp; Subpanel D04 Plan — Unit 4</title>
+  <link rel="stylesheet" href="./kitchen-electrical-styles.css">
+  <link rel="stylesheet" href="../vendor/u4-human-guide-shell.css">
+  <link rel="stylesheet" href="../vendor/u4-live-ai-widget.css">
+</head>
+<body class="u4-mode-human">
+  <!-- HUMAN-FIRST INTERACTIVE CREW GUIDE (DEFAULT ON SCREEN · ZERO BACKEND CLUTTER · ZERO PRICES) -->
+  <div id="u4-human-app" class="u4h-app no-print">
+    <header id="u4hTopbar" class="u4h-topbar"></header>
+    <main class="u4h-main">
+      <div id="u4hHoldStrip" class="u4h-hold-strip" role="status"></div>
+      <div id="u4hBody"></div>
+    </main>
+  </div>
+
+  <!-- HIDDEN PRINT & TECHNICAL BLUEPRINT ENGINE (?print=1 / 2-Page Letter PDF / window.U4PLAN) -->
+  <div id="blueprint-sheet-shell" hidden>
+    <div class="u4g-bp-return-bar no-print">
+      <span id="u4gBpReturnLabel">Viewing Technical Print Blueprint</span>
+      <button type="button" id="u4gBpReturnBtn" class="u4g-bp-return-btn">&larr; Back to Interactive Guide</button>
+    </div>
+
+  <header class="app-header no-print">
+    <nav class="top-jump-bar" aria-label="Cross-plan navigation">
+      <a id="link-back-room" class="jump-link" href="../../#kitchen">&larr; Back to Kitchen Page</a>
+      <div class="jump-links-right">
+        <a id="link-floor-plan-top" class="jump-link jump-link-sibling" href="../kitchen-floor-plan/index.html">Kitchen Floor Plan &rarr;</a>
+        <a id="link-west-hood-top" class="jump-link jump-link-sibling" href="../kitchen-west-ks4/index.html">West Range &amp; Hood Wall &rarr;</a>
+      </div>
+    </nav>
+    <div class="header-inner">
+      <div class="brand-block">
+        <h1 id="hdr-title">Kitchen Electrical &amp; Subpanel D04 Plan</h1>
+        <div class="brand-meta">
+          <span id="hdr-sub">6 Coupled True-Scale Views (X = Y) · 9 Kitchen Circuits on Eaton D04 · Zero Prices</span>
+          <span id="tailnet-badge" class="pill pill-neutral">Checking Tailnet…</span>
+          <span id="rev-badge" class="pill pill-info">rev-20261120-elec-001</span>
+        </div>
+      </div>
+
+      <div class="toolbar-actions">
+        <button type="button" id="btn-lang" class="btn" aria-label="Switch language">Español (MX)</button>
+        <button type="button" id="btn-circle-toggle" class="btn">Circle-to-Correct</button>
+        <button type="button" id="btn-export-svg" class="btn">Export SVG</button>
+        <button type="button" id="btn-download-pdf" class="btn btn-primary">Download / Print PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <div id="hold-banner" class="hold-banner" role="status">
+      <strong>PLANNING &amp; MOCKUP ONLY — ROUGH-IN ON HOLD:</strong> Do NOT pull interior kitchen wire, cut subpanel <strong>D04</strong> side-entry notches, or close drywall until Friday layout photos and the Mon Nov 23 electrical walkthrough confirm exact stations, <strong>D04</strong> feeder size, and box clearances.
+    </div>
+
+    <div id="conflict-banner" class="conflict-banner no-print" hidden role="alert">
+      <div id="conflict-text">A newer revision was saved on Tailnet by another editor (HTTP 409). Reload the latest plan before saving again.</div>
+      <button type="button" id="btn-reload-latest" class="btn btn-sm btn-primary">Reload Latest Plan</button>
+    </div>
+
+    <!-- VISUAL-FIRST HERO: 6 Coupled Proportional SVG Views + Live Inspector + Real Open-Stud Site Photo -->
+    <section class="visual-hero" aria-label="Coupled kitchen electrical plan and site photo">
+      <div class="panel svg-panel">
+        <div class="panel-head">
+          <h2 id="svg-panel-title">View 1 — Top-Down Floor, Ceiling &amp; Cable Routes (147&quot; × 126-1/4&quot;)</h2>
+          <span id="active-circuit-pill" class="pill pill-info">Showing: All 9 Kitchen Circuits</span>
+        </div>
+
+        <!-- 6 Coupled Proportional Views -->
+        <div class="view-tabs-bar no-print" aria-label="Coupled electrical views">
+          <div class="view-tabs" role="tablist">
+            <button type="button" class="view-tab active" data-view="floor" id="tab-floor" role="tab" aria-selected="true">1. Floor &amp; Cable Routes</button>
+            <button type="button" class="view-tab" data-view="south" id="tab-south" role="tab" aria-selected="false">2. South Sink Wall</button>
+            <button type="button" class="view-tab" data-view="east" id="tab-east" role="tab" aria-selected="false">3. East Fridge / D04</button>
+            <button type="button" class="view-tab" data-view="west" id="tab-west" role="tab" aria-selected="false">4. West Range / HD-1</button>
+            <button type="button" class="view-tab" data-view="north" id="tab-north" role="tab" aria-selected="false">5. North Entry Wall</button>
+            <button type="button" class="view-tab" data-view="panel" id="tab-panel" role="tab" aria-selected="false">6. D04 Panel Schedule</button>
+          </div>
+        </div>
+
+        <!-- 1-Tap Crew Layer Toggles -->
+        <div class="crew-layer-bar no-print" aria-label="1-tap crew drawing layers">
+          <div class="layer-toggle-pills">
+            <button type="button" class="toggle-pill-btn on" id="tgl-routes" aria-pressed="true">Cable Routes &amp; Bore Bands</button>
+            <button type="button" class="toggle-pill-btn on" id="tgl-reach" aria-pressed="true">24&quot; Counter Reach Arcs</button>
+            <button type="button" class="toggle-pill-btn on" id="tgl-ceiling" aria-pressed="true">Ceiling Lights &amp; Switches</button>
+            <button type="button" class="toggle-pill-btn on" id="tgl-trim" aria-pressed="true">Original Historic Trim</button>
+            <button type="button" class="toggle-pill-btn on-alert" id="tgl-holds" aria-pressed="true">D04 No-Screw &amp; Holds</button>
+          </div>
+        </div>
+
+        <!-- Live Global Electrical Options -->
+        <div class="option-switch-bar no-print" aria-label="Live electrical layout options">
+          <span class="opt-group">
+            <strong id="lbl-outlet-h">Counter Outlets:</strong>
+            <button type="button" class="btn btn-sm btn-primary" id="btn-h-44">44&quot; above floor</button>
+            <button type="button" class="btn btn-sm" id="btn-h-41">41&quot; above floor</button>
+          </span>
+          <span class="opt-divider">|</span>
+          <span class="opt-group">
+            <strong id="lbl-sink-ctrl">Sink Control:</strong>
+            <button type="button" class="btn btn-sm btn-essex" id="btn-sink-optA">Option A: Air Button + Wireless</button>
+            <button type="button" class="btn btn-sm" id="btn-sink-optB">Option B: Wired 2-Gang @ 70&quot;</button>
+          </span>
+          <span class="opt-divider">|</span>
+          <span class="opt-group">
+            <strong id="lbl-lights-opt">Sink Lights:</strong>
+            <button type="button" class="btn btn-sm btn-primary" id="btn-lt-3task">3 Task Lights</button>
+            <button type="button" class="btn btn-sm" id="btn-lt-2pend">2 Pendants</button>
+          </span>
+          <span class="opt-divider">|</span>
+          <span class="opt-group">
+            <strong id="lbl-route-opt">South Routing:</strong>
+            <button type="button" class="btn btn-sm btn-primary" id="btn-rt-inwall">In-Wall Bore Bands</button>
+            <button type="button" class="btn btn-sm" id="btn-rt-attic">Via Attic</button>
+          </span>
+          <button type="button" class="btn btn-sm" id="btn-reset-elec">Reset</button>
+        </div>
+
+        <!-- Bare Subfloor vs. Finished Floor Datum Toggle -->
+        <div class="subfloor-bar no-print" id="subfloor-bar" aria-label="Current site floor condition">
+          <div class="subfloor-toggle-group" role="group" aria-label="Floor installation state">
+            <strong id="lbl-floor-cond">Floor Condition Today:</strong>
+            <button type="button" class="btn btn-sm btn-primary" id="btn-floor-bare" aria-pressed="true">Bare subfloor (not installed yet)</button>
+            <button type="button" class="btn btn-sm" id="btn-floor-finished" aria-pressed="false">Finished floor already down</button>
+          </div>
+          <div class="subfloor-allow-group" id="subfloor-allow-wrap">
+            <label for="inp-subfloor-allow" id="lbl-subfloor-allow">Finished-floor allowance (+t):</label>
+            <input type="number" id="inp-subfloor-allow" step="0.0625" min="0" max="4" value="0.75" aria-label="Finished floor thickness allowance in inches">
+            <span class="subfloor-unit" id="subfloor-status-note">in (added to vertical marks pulled from bare subfloor)</span>
+          </div>
+        </div>
+
+        <!-- View 2 Context Bar: Draggable Pie-Safe & Sink Base Position Controls -->
+        <div class="south-drag-bar no-print" id="south-drag-bar" hidden aria-label="South wall draggable pie-safe and sink controls">
+          <strong id="lbl-south-drag">Drag directly on drawing or adjust:</strong>
+          <label class="opt-group" for="rng-piesafe">
+            <span id="lbl-piesafe-pos">Pie-Safe Start (from SE):</span>
+            <input type="range" id="rng-piesafe" min="18" max="40" step="0.5" value="26">
+            <strong id="val-piesafe-pos">26&quot;–59&quot;</strong>
+          </label>
+          <label class="opt-group" for="rng-sink">
+            <span id="lbl-sink-pos">30&quot; Sink Base Start (from SE):</span>
+            <input type="range" id="rng-sink" min="70" max="80" step="0.5" value="75">
+            <strong id="val-sink-pos">75&quot;–105&quot;</strong>
+          </label>
+        </div>
+
+        <!-- View 3 Context Bar: 1-Tap Dining D04 Front Flip -->
+        <div class="east-flip-bar no-print" id="east-flip-bar" hidden aria-label="East wall kitchen vs dining subpanel flip">
+          <span id="east-flip-desc"><strong>Kitchen Backside:</strong> Red hatched zone (53&quot;–77&quot; above floor) = NO screws, NO boxes, NO back entry into Dining Subpanel <strong>D04</strong>.</span>
+          <button type="button" class="btn btn-sm btn-danger" id="btn-flip-dining" aria-pressed="false">Flip to Dining Room Side (D04 Front)</button>
+        </div>
+
+        <!-- Live Verification Status Strip -->
+        <div class="status-bar-strip no-print">
+          <span id="reach-pill" class="pill pill-pass">24&quot; Counter Reach: PASS</span>
+          <span id="d04-zone-pill" class="pill pill-fail">D04 Backside: NO SCREWS 53&quot;–77&quot;</span>
+          <span id="hd1-pill" class="pill pill-pass">HD-1: 1-Gang 2&quot;×3&quot; @ 83&quot;–86&quot;</span>
+          <span id="scale-pill" class="pill pill-pass">True Scale 1:1 (X = Y)</span>
+          <span id="sync-stamp-pill" class="pill pill-neutral">Baseline Loaded</span>
+        </div>
+
+        <div class="svg-stage-wrap">
+          <div class="svg-stage" id="svg-stage">
+            <svg id="kitchen-elec-svg" viewBox="0 0 920 1120" width="920" height="1120"
+                 xmlns="http://www.w3.org/2000/svg" role="img"
+                 aria-label="Unit 4 Kitchen Coupled True-to-Scale Electrical Plan and Subpanel D04 Views"></svg>
+            <canvas id="kitchen-elec-sketch-canvas" aria-label="Circle-to-Correct drawing overlay"></canvas>
+          </div>
+        </div>
+
+        <div id="circle-bar" class="circle-bar no-print" hidden>
+          <span id="circle-bar-hint">Draw a circle around any spot on the drawing (touch or mouse) to attach a callout note.</span>
+          <div>
+            <button type="button" id="btn-clear-sketch" class="btn btn-sm">Clear Sketch</button>
+            <button type="button" id="btn-circle-done" class="btn btn-sm btn-danger">Exit Circle Mode</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visual-First Side Panel: Live Box/Circuit Inspector + Real Open-Stud Site Photo -->
+      <aside class="panel photo-panel" aria-label="Active box inspector and site photo">
+        <div class="panel-head print-keep-head">
+          <h2 id="photo-panel-title">Site Reference Photo &amp; Live Inspector</h2>
+          <span class="pill pill-warn" id="photo-badge">VERIFY ON SITE</span>
+        </div>
+        <div class="photo-body">
+          <div id="inspector-box" class="inspector-box no-print">
+            <strong id="insp-title">Tap Any Box, Cable Route, or D04 Breaker Slot</strong>
+            <div id="insp-body">Tap any electrical box on the drawing or any space (1–20) in the Subpanel D04 schedule below to highlight its route, exact heights from bare subfloor (+t) and finished floor, and crew rules.</div>
+          </div>
+
+          <div class="photo-frame">
+            <img id="site-photo-img" src="./assets/south-sink-wall.jpg" alt="Real Unit 4 open-stud kitchen wall photo for electrical reference" loading="eager">
+            <div class="photo-compass-overlay">
+              <span id="photo-left-lbl">&larr; SE CORNER (0&quot; ref)</span>
+              <span id="photo-mid-lbl">SOUTH SINK WALL</span>
+              <span id="photo-right-lbl">REAR DOOR (SW) &rarr;</span>
+            </div>
+          </div>
+
+          <ul class="photo-callouts" id="photo-callouts"></ul>
+
+          <div id="concept-disclaimer-box" class="concept-disclaimer no-print">
+            <strong>Site Photo vs. Scale Plan:</strong> Photo shows the actual open-stud kitchen wall. Always pull box heights and bore bands from this uniform true-scale drawing and confirm finished-floor thickness (+t) before fastening boxes.
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- VIEW 6 COMPANION: INTERACTIVE D04 EATON BRP20L125G 20-SPACE PANEL SCHEDULE -->
+    <section class="panel print-panel" id="panel-schedule-section" aria-label="Interactive D04 Eaton 20-space panel schedule">
+      <div class="panel-head print-keep-head">
+        <h2 id="panel-sched-title">Subpanel D04 — Eaton BRP20L125G 20-Space Schedule (Tap Any Space to Highlight Routes)</h2>
+        <span class="pill pill-info" id="panel-counts-pill">9 Kitchen · 10 Unit · 1 Spare</span>
+      </div>
+
+      <div class="closure-strip" id="elec-summary-strip"></div>
+
+      <div class="schedule-filter-bar no-print">
+        <div class="view-tabs">
+          <button type="button" class="btn btn-sm btn-primary" data-slot-filter="ALL" id="flt-slots-all">All 20 Spaces</button>
+          <button type="button" class="btn btn-sm" data-slot-filter="kitchen" id="flt-slots-kitchen">Kitchen Only (1–9)</button>
+          <button type="button" class="btn btn-sm" data-slot-filter="unit_other" id="flt-slots-unit">Other Unit Spaces (10–20)</button>
+        </div>
+        <button type="button" class="btn btn-sm" id="btn-clear-circuit">Show All Kitchen Circuits</button>
+      </div>
+
+      <div class="table-scroll">
+        <table class="schedule-table">
+          <thead>
+            <tr>
+              <th id="th-space">Space</th>
+              <th id="th-ckt">Circuit</th>
+              <th id="th-serves">Serves / Boxes</th>
+              <th id="th-amps">Amps</th>
+              <th id="th-breaker">Eaton BR Breaker</th>
+              <th id="th-cable">Cable &amp; Route</th>
+              <th id="th-len">Live Length</th>
+            </tr>
+          </thead>
+          <tbody id="panel-schedule-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ACTIVE HOLDS & IMMUTABLE FIELD CHECKS -->
+    <section class="panel print-panel" aria-label="Active electrical holds and safety checks">
+      <div class="panel-head print-keep-head">
+        <h2 id="holds-title">Active Holds &amp; Hard Field Rules (Never Auto-Resolved)</h2>
+        <span class="pill pill-fail" id="holds-lock-pill">Immutable · Verify on Site</span>
+      </div>
+      <div class="clashes-grid" id="clashes-grid"></div>
+    </section>
+
+    <!-- LIVE MANHATTAN CABLE LENGTH & EATON BR MATERIAL TAKEOFF (STRICTLY ZERO PRICES) -->
+    <section class="panel print-panel takeoff-panel" id="takeoff-panel" aria-label="Live Manhattan cable length and electrical material takeoff">
+      <div class="panel-head print-keep-head">
+        <h2 id="takeoff-title">Live Manhattan Cable Calculator &amp; Breaker/Box Takeoff (Quantities Only · Zero Prices)</h2>
+        <span class="pill pill-warn" id="takeoff-waste-pill">Waste Factor: +15%</span>
+      </div>
+      <div class="takeoff-notice" id="takeoff-notice">
+        Gross Proposed Qty — Verify On-Hand Stock Before Ordering (Zero Prices · Zero Order Numbers). Manhattan formula: |Δx| + |Δy| + |Δz| + 18&quot; box tails.
+      </div>
+      <div class="takeoff-controls no-print">
+        <div class="takeoff-control-group">
+          <span id="lbl-waste-pct">Cable Waste / Overage (%):</span>
+          <button type="button" class="btn btn-sm btn-primary" id="btn-waste-15">+15% Standard</button>
+          <button type="button" class="btn btn-sm" id="btn-waste-20">+20% Extra</button>
+          <input type="number" id="inp-waste-pct" min="0" max="40" step="1" value="15" aria-label="Cable waste percentage">
+        </div>
+        <div class="takeoff-control-group">
+          <label for="sel-rg-gfci" id="lbl-rg-gfci">Gas Range Protection:</label>
+          <select id="sel-rg-gfci" aria-label="Gas range circuit protection method">
+            <option value="df_breaker_at_d04">Dual-Function 15A Breaker at D04 (BRN115DF)</option>
+            <option value="afci_breaker_plus_accessible_deadfront_gfci">15A AFCI Breaker (BRN115AF) + Accessible Dead-Front GFCI</option>
+          </select>
+        </div>
+      </div>
+      <div class="takeoff-grid" id="takeoff-grid"></div>
+    </section>
+
+    <!-- WORKSPACE: ORIGINAL TRIM BASELINE, TAILNET SAVE, ATTACHED CALLOUTS & EOD REVIEW -->
+    <section class="workspace-grid no-print" aria-label="Original trim baseline, tailnet sync, callouts and EOD review">
+      <div class="right-stack">
+        <div class="panel">
+          <div class="panel-head">
+            <h2 id="trim-title">Original Trim Baseline &amp; Live Plan Sync</h2>
+            <span class="pill pill-pass" id="trim-badge">Edwardian Original</span>
+          </div>
+          <div class="form-body">
+            <div class="trim-baseline-note" id="trim-rule-note">
+              Original historic trim (9-1/2&quot; baseboard, 103&quot; picture rail, door/window casings) stays on its own layer. West range wall uses 1/2&quot; drywall (0.50&quot;) to 1/2&quot; HardieBacker (0.42&quot;) with NO stud shims (~1/16&quot; skim) and ~1&quot; proud tile rings.
+            </div>
+            <div class="dim-grid">
+              <div class="field-group">
+                <label class="field-label-row" for="inp-author">
+                  <span id="lbl-author">Editor Name</span>
+                  <span class="boundary-tag">author</span>
+                </label>
+                <select id="inp-author">
+                  <option value="Tisa">Tisa</option>
+                  <option value="John">John</option>
+                  <option value="Ervin">Ervin</option>
+                  <option value="Alex">Alex</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label-row" for="inp-dining-w">
+                  <span id="lbl-dining-w">Dining Wall Width W (in, for D04 CL)</span>
+                  <span class="pill pill-warn" id="prov-dining-w">MEASURE ON SITE</span>
+                </label>
+                <input type="number" id="inp-dining-w" step="0.25" min="60" max="180" value="91.5">
+              </div>
+
+              <div class="field-group">
+                <label class="field-label-row" for="inp-trim-baseboard">
+                  <span id="lbl-trim-base">Original Baseboard Height (in)</span>
+                  <span class="pill pill-warn">VERIFY ON SITE</span>
+                </label>
+                <input type="number" id="inp-trim-baseboard" step="0.125" min="3" max="16" value="9.5">
+              </div>
+
+              <div class="field-group">
+                <label class="field-label-row" for="inp-trim-rail">
+                  <span id="lbl-trim-rail">Original Picture Rail Height (in)</span>
+                  <span class="pill pill-warn">VERIFY ON SITE</span>
+                </label>
+                <input type="number" id="inp-trim-rail" step="0.25" min="72" max="120" value="103">
+              </div>
+            </div>
+
+            <div class="action-bar">
+              <button type="button" id="btn-save-tailnet" class="btn btn-primary" disabled>Save Live to Tailnet</button>
+              <button type="button" id="btn-export-json" class="btn">Download Electrical JSON</button>
+            </div>
+            <div id="save-hint" class="field-help">Off-tailnet Read-Only / Local Export mode: live edits update preview &amp; local exports only. Connect to Tisa&apos;s Tailscale network to save live overrides to :8444.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="right-stack">
+        <div class="panel">
+          <div class="panel-head">
+            <h2 id="voice-title">Attached Comment Callouts &amp; Voice Note</h2>
+            <span class="pill pill-info" id="voice-lang-pill">en-US</span>
+          </div>
+          <div class="form-body">
+            <div class="field-group">
+              <label class="field-label-row" for="sel-pin-intent">
+                <span id="lbl-intent">Comment Action</span>
+                <span id="sketch-status-pill" class="pill pill-neutral">No Circle Drawn</span>
+              </label>
+              <select id="sel-pin-intent">
+                <option value="propose_edit">Modify Plan / Field Measurement</option>
+                <option value="flag_problem">Flag Problem / Clash</option>
+                <option value="ask_question">Answer a Question (&quot;What is this right here?&quot;)</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label-row" for="inp-voice-note">
+                <span id="lbl-note">Field Note or Spoken Command</span>
+              </label>
+              <textarea id="inp-voice-note" rows="3" placeholder="Example: &quot;Switch counter outlets to 41 in&quot;, &quot;Verify HD-1 knockout left of center&quot;, or &quot;Where is the dishwasher box?&quot; (Zero prices)"></textarea>
+            </div>
+
+            <div class="voice-row">
+              <button type="button" id="btn-dictate" class="btn">Dictate Voice Note</button>
+              <button type="button" id="btn-apply-note" class="btn btn-primary">Attach Comment Pin</button>
+            </div>
+            <div id="voice-status" class="field-help">Tap Circle-to-Correct above to circle any box or cable route — each pin gets a visible leader line, mic button, and Send to Agent button.</div>
+
+            <div id="pin-list" class="pin-list"></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2 id="eod-title">End-of-Day Review &amp; Revert (Tisa)</h2>
+            <span class="pill pill-warn" id="eod-count-pill">0 pending</span>
+          </div>
+          <div class="form-body">
+            <p class="empty-note" id="eod-desc">
+              Workers never wait: saved tailnet edits stamp the live plan immediately with a revision ID.
+              At end-of-day, Tisa taps <strong>Accept</strong> (promotes to room spec) or <strong>Reject</strong> (reverts atomically).
+            </p>
+            <div id="eod-list" class="eod-list"></div>
+            <div class="action-bar">
+              <button type="button" id="btn-refresh-eod" class="btn btn-sm">Refresh From Tailnet</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="status-toast" class="status-toast" hidden role="status" aria-live="polite"></div>
+
+    </div>
+
+  <script src="../vendor/jspdf.umd.min.js"></script>
+  <script src="../vendor/svg2pdf.umd.min.js"></script>
+  <script src="../vendor/ks4-pdf-export.js"></script>
+  <script src="./kitchen-electrical-renderer.js"></script>
+  <script src="../vendor/u4-plan-nav.js"></script>
+  <script src="../vendor/u4-live-ai-widget.js"></script>
+  <script src="./kelec-human-guide.js"></script>
+</body>
+</html>

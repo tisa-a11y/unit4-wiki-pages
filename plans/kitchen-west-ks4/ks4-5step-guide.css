@@ -773,6 +773,7 @@ body.mode-5step {
   }
   .status-strip.pass { background: var(--pine-soft); color: var(--pine); }
   .status-strip.fail { background: var(--crimson-soft); color: var(--crimson); }
+  .status-strip.warn { background: var(--amber-soft); color: var(--amber); }
 
 
   .toast {
@@ -996,4 +997,19 @@ body.print-mode .u4g-bp-return-bar {
 
 body.print-mode #blueprint-sheet-shell {
   display: block !important;
+}
+
+/* Wave D Style Fixes: High-Contrast Dark Buttons, Smooth Entrance & AI Orb Space */
+html[data-theme="dark"] .u4g-lang-btn,
+html[data-theme="dark"] .calc-mat-btn:not(.open) {
+  color: #0D1116;
+}
+.u4-5step-app {
+  padding-bottom: 84px;
+}
+.sheet-card {
+  animation: u4FadeSlideIn 180ms ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sheet-card { animation: none; }
 }
