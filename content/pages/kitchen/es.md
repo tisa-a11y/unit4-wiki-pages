@@ -10,7 +10,8 @@ Cocina en L. Gabinetes bajos verde oscuro, herrajes de latón, cubiertas claras.
 - **Muro Sur:** tarja bajo la ventana, repisas pie-safe. Ver [Fregadero y muro norte](#kitchen-sink-north).
 - **Muro Este:** tramo de 88" que termina en el refrigerador.
 - **Muro Norte:** paso al pasillo, tres apagadores, muro del tablero eléctrico.
-- **Piso:** medir el espesor del piso terminado (unos 3/4") antes de marcar alturas de gabinetes.
+- **Piso (subpiso al descubierto hoy):** La Unidad 4 está actualmente en **subpiso sin piso terminado** — sumar el espesor estimado del piso terminado (unos 3/4", por confirmar) a cada altura referida al piso al medir desde el subpiso.
+- **Orillas de azulejo en muro de estufa (CERO metal / Schluter):** Nunca usar moldura metálica ni Schluter en el azulejo de la Unidad 4. El borde derecho (Norte) llega al muro Norte (esquina interior a 90° — solo silicón, cero moldura); el borde izquierdo (Sur) termina contra muro pintado liso sin retorno de azulejo — **solo 4 opciones sin metal**: Bullnose cerámico, Lápiz / Cuarto de caña cerámico, Moldura de madera pintada estilo Edwardian o Azulejo con canto vidriado de fábrica (sin corte inglete a 45°).
 
 ## Todavía no hacer
 - No fijar el gabinete de la tarja.

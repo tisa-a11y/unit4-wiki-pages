@@ -2,25 +2,25 @@
   {
     "kEn": "Hood height",
     "kEs": "Altura de la campana",
-    "vEn": "Bottom 66\"–72\" from finished floor (dry-hang 67\"–68\")",
-    "vEs": "Base a 66\"–72\" del piso terminado (prueba 67\"–68\")"
+    "vEn": "Bottom 66\"–72\" from finished floor (bare subfloor now: add ~3/4\"; dry-hang 67\"–68\")",
+    "vEs": "Base a 66\"–72\" del piso terminado (hoy subpiso: sumar ~3/4\"; prueba 67\"–68\")"
   },
   {
     "kEn": "Wood backing",
     "kEs": "Refuerzos",
-    "vEn": "Within 30\" hood width · 68\"–86\" & 104\"–121-1/2\"",
-    "vEs": "Dentro de 30\" de campana · 68\"–86\" y 104\"–121-1/2\""
+    "vEn": "Within 30\" hood width · 68\"–86\" & 104\"–121-1/2\" (+ ~3/4\" from bare subfloor)",
+    "vEs": "Dentro de 30\" de campana · 68\"–86\" y 104\"–121-1/2\" (+ ~3/4\" desde subpiso)"
   },
   {
-    "kEn": "Hood power",
-    "kEs": "Corriente de campana",
-    "vEn": "Direct hardwire ~83\"–86\" (1-gang 2\"×3\", +1\" proud, C/L ±2-1/4\")",
-    "vEs": "Conexión directa ~83\"–86\" (caja 2\"×3\", +1\" al frente)"
+    "kEn": "Power & duct",
+    "kEs": "Corriente y ducto",
+    "vEn": "Direct hardwire ~83\"–86\" (1-gang 2\"×3\", +1\" proud, C/L ±2-1/4\") · Dedicated left chase ≥ 6\" (John/crew, not NEXT HVAC)",
+    "vEs": "Conexión directa ~83\"–86\" (caja 2\"×3\", +1\" al frente) · Ducto exclusivo cubo izq. ≥ 6\" (cuadrilla, no NEXT HVAC)"
   },
   {
-    "kEn": "Kitchen duct",
-    "kEs": "Ducto cocina",
-    "vEn": "Dedicated left chase (verify ≥ 6\") · John/crew (not NEXT HVAC)",
-    "vEs": "Exclusivo cubo izq. (revisar ≥ 6\") · cuadrilla (no NEXT HVAC)"
+    "kEn": "Tile edges (zero metal)",
+    "kEs": "Orillas de azulejo (cero metal)",
+    "vEn": "NO metal/Schluter · North: silicone 90° corner · South: bullnose, pencil, painted wood trim, or glazed edge (no 45° miter)",
+    "vEs": "CERO metal/Schluter · Norte: esquina 90° solo silicón · Sur: bullnose, lápiz, madera pintada o canto vidriado (sin 45°)"
   }
 ]
