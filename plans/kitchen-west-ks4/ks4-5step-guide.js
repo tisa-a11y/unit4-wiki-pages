@@ -1060,7 +1060,7 @@
     return `
       <div class="equip-block">
         <div class="equip-head">
-          <span>🧰 ${es ? "Equipo y herramientas para este paso" : "Equipment & tools needed for this step"}</span>
+          <span>🔧 ${es ? "Equipo y herramientas para este paso" : "Equipment & tools needed for this step"}</span>
         </div>
         <div class="equip-grid">
           ${items.map(it => `
@@ -1143,15 +1143,15 @@
     return `
       <div class="calc-mat-wrap">
         <button class="calc-mat-btn ${isOpen ? "open" : ""}" data-calc-step="${stepId}" type="button" aria-expanded="${isOpen}">
-          🧰 ${isOpen
-            ? (es ? "Ocultar equipo y materiales calculados ▴" : "Hide Equipment & Calculated Materials ▴")
-            : (es ? "Ver equipo necesario y calcular materiales ▾" : "Equipment Needed & Calculate Materials ▾")}
+          🔧 ${isOpen
+            ? (es ? "Ocultar equipo y suministros ▴" : "Hide Equipment & Supplies ▴")
+            : (es ? "Equipo y suministros ▾" : "Equipment & Supplies ▾")}
         </button>
         ${isOpen ? `
           <div class="calc-mat-panel">
             ${equipStripHtml(stepId, es)}
             <div style="font-weight:800;color:var(--cobalt);font-size:12.5px;margin-top:2px">
-              🧮 ${es ? "Materiales calculados según tus opciones actuales:" : "Calculated supplies from your current selections:"}
+              🧮 ${es ? "Suministros calculados según tus opciones actuales:" : "Calculated supplies from your current selections:"}
             </div>
             <div>
               ${rows.map(([item, qty]) => `<div class="calc-row"><span>${item}</span><span class="calc-qty">${qty}</span></div>`).join("")}
