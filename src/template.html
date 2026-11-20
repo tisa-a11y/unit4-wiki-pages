@@ -173,18 +173,31 @@ Source: `work-control/wiki-source/` (template updated 2026-11-05 to include the 
 <style>
 /* Layout: fixed project rail on the left (stacks to a top bar on phones), one reading column of ~70ch on the right. */
 :root{
-  --bg:#f4f5f3; --panel:#ffffff; --fg:#1d2326; --muted:#5d686d; --line:#d9dedc;
-  --accent:#1f5f7a; --accent-soft:#e3eef2; --lock:#2f6b3f; --lock-soft:#e4f0e6; --open:#9a5b06; --open-soft:#f7ecd9;
-  --display:"Archivo Narrow","Arial Narrow",Arial,sans-serif;
-  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --paper:#F6F8FA; --surface:#FFFFFF; --rail:#FFFFFF; --ink:#131A22; --ink-2:#485563; --line:#DCE2E9;
+  --cobalt:#184E77; --cobalt-soft:#EBF3FA; --pine:#1B6B46; --pine-soft:#E6F4EE;
+  --amber:#A15206; --amber-soft:#FDF3E2; --crimson:#B42318; --crimson-soft:#FEF1F0;
+  --bg:var(--paper); --panel:var(--surface); --fg:var(--ink); --muted:var(--ink-2);
+  --accent:var(--cobalt); --accent-soft:var(--cobalt-soft); --lock:var(--pine); --lock-soft:var(--pine-soft); --open:var(--amber); --open-soft:var(--amber-soft);
+  --display:-apple-system,BlinkMacSystemFont,"SF Pro Display","IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --body:-apple-system,BlinkMacSystemFont,"SF Pro Text","IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"SF Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#121618; --panel:#1a2023; --fg:#e4e9ea; --muted:#98a4a8; --line:#2c3539;
-  --accent:#7cc0dc; --accent-soft:#1d3440; --lock:#8fd19e; --lock-soft:#1e3324; --open:#f0b75a; --open-soft:#3a2d17; color-scheme:dark}}
+  --paper:#12171D; --surface:#1A2129; --rail:#161C23; --ink:#ECF1F6; --ink-2:#A7B4C2; --line:#28323D;
+  --cobalt:#6FB3E6; --cobalt-soft:#1B2B3A; --pine:#6CD4A0; --pine-soft:#172B23;
+  --amber:#F5B461; --amber-soft:#312515; --crimson:#F97066; --crimson-soft:#361C1B;
+  --bg:var(--paper); --panel:var(--surface); --fg:var(--ink); --muted:var(--ink-2);
+  --accent:var(--cobalt); --accent-soft:var(--cobalt-soft); --lock:var(--pine); --lock-soft:var(--pine-soft); --open:var(--amber); --open-soft:var(--amber-soft);
+  color-scheme:dark;
+}}
 :root[data-theme="dark"]{
-  --bg:#121618; --panel:#1a2023; --fg:#e4e9ea; --muted:#98a4a8; --line:#2c3539;
-  --accent:#7cc0dc; --accent-soft:#1d3440; --lock:#8fd19e; --lock-soft:#1e3324; --open:#f0b75a; --open-soft:#3a2d17; color-scheme:dark}
+  --paper:#12171D; --surface:#1A2129; --rail:#161C23; --ink:#ECF1F6; --ink-2:#A7B4C2; --line:#28323D;
+  --cobalt:#6FB3E6; --cobalt-soft:#1B2B3A; --pine:#6CD4A0; --pine-soft:#172B23;
+  --amber:#F5B461; --amber-soft:#312515; --crimson:#F97066; --crimson-soft:#361C1B;
+  --bg:var(--paper); --panel:var(--surface); --fg:var(--ink); --muted:var(--ink-2);
+  --accent:var(--cobalt); --accent-soft:var(--cobalt-soft); --lock:var(--pine); --lock-soft:var(--pine-soft); --open:var(--amber); --open-soft:var(--amber-soft);
+  color-scheme:dark;
+}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.55}
 .wrap{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100vh}
@@ -360,7 +373,7 @@ nav.rail a.sub .k,.docs .k{display:block;font-family:var(--mono);font-size:10.5p
 /* U4_R5_V9_COMPLETE_UI_CSS_START */
 /* Hide redundant legacy voice pills and broken floating 'Send a note' pill/panel */
 main .bar .u4-voice-pill,main .bar .u4-voice-status,.mobile .u4-voice-pill,.mobile .u4-voice-status,main .bar > #waVoiceMicPill,main .bar > #waVoiceStatus,.mobile > #waVoiceMicPill,.mobile > #waVoiceStatus,#qpBtn,.qp-fab,#qpPanel,.qp-panel{display:none!important;visibility:hidden!important;pointer-events:none!important}
-main{padding-bottom:64px!important}
+main{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))!important}
 
 /* Inline title + AI Helper row right next to 'Unit 4 Wiki — Home' and room headings (never blocking screen) */
 .u4-title-row,header.home-head.u4-has-ai{display:flex;align-items:center;justify-content:space-between;gap:10px 14px;flex-wrap:wrap;max-width:74ch;margin:0 0 14px}
@@ -499,7 +512,7 @@ header.home-head.u4-has-ai .u4-home-head-copy{min-width:0;flex:1 1 200px}
 /* U4_V15_USABILITY_AUDIT_OVERHAUL_START */
 /* 1. Prevent iOS Safari forced viewport zoom on tap (all inputs/selects/textareas >= 16px on touch viewports) */
 @media (max-width:820px){
-  .mobile select,.field select,.field textarea,.field input[type=text],.u4-vd-ask-inp,#u4RepSenderName,#repItem,#repText{font-size:16px!important}
+  .mobile select,.field select,.field textarea,.field input[type=text],.u4-vd-ask-inp,#u4RepSenderName,#repItem,#repText,.u4-gal-caption-inp{font-size:16px!important}
 }
 
 /* 2. Clean top bar: comfortable 38px touch pills for Back & Español/English, hide raw repo file path noise */
@@ -591,33 +604,6 @@ nav.rail a.sub.subpage-link .k.subpage-badge{display:inline-block;padding:1px 6p
 /* U4_V15_USABILITY_AUDIT_OVERHAUL_END */
 
 /* U4_SUBTLE_DE_CLAUDE_POLISH_START */
-:root{
-  --bg:#f8f9fb;
-  --panel:#ffffff;
-  --fg:#182026;
-  --muted:#5c6873;
-  --line:#dfe4e8;
-  --accent:#2b4c65;
-  --accent-soft:#edf3f8;
-  --lock:#24633b;
-  --lock-soft:#e6f4ea;
-  --open:#9a5408;
-  --open-soft:#fef3df;
-  --display:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter","Segoe UI",system-ui,sans-serif;
-  --body:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter","Segoe UI",system-ui,sans-serif;
-  --mono:"SF Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#101418;
-    --panel:#171d23;
-    --fg:#e8edf2;
-    --muted:#94a3b2;
-    --line:#28323c;
-    --accent:#7cb3d8;
-    --accent-soft:#1d2f3f;
-  }
-}
 body{
   -webkit-font-smoothing:antialiased;
 }
@@ -1012,6 +998,93 @@ html body .u4-lead-pic figcaption{font-size:13.5px;color:var(--muted);margin-top
 html body .mobile select#jump{display:none!important}
 html body .u4-home-menu{display:none!important}
 html body .u4-home-sec,html body .u4-home-sec:first-child{border-top:0;border-left:3px solid var(--line);padding:2px 0 4px 14px;margin:0 0 22px}
+
+/* Wave E (2026-11-20): Interactive plan pills/highlights (all 5 surfaces), Dual Per-Room Galleries + Lightbox, Light/Dark Header Parity */
+:root[data-theme="dark"] .u4-voice-pill{background:var(--panel);color:var(--fg);border-color:var(--line)}
+:root[data-theme="dark"] .u4-chat-render-link{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+:root[data-theme="dark"] .u4-chat-render-link.is-deferred{background:var(--open-soft);border-color:var(--open);color:var(--open)}
+main > .bar button.small.themebtn{border-color:var(--line);color:var(--fg);background:var(--panel)}
+main > .bar button.small.themebtn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.u4-interactive-pill{display:inline-flex;align-items:center;gap:4px;font:700 10px/1.2 var(--mono);text-transform:uppercase;letter-spacing:.06em;padding:2px 7px;border-radius:999px;background:var(--accent);color:var(--panel);white-space:nowrap;flex:none}
+.u4-interactive-pill.is-compact{font-size:9.5px;padding:1.5px 6px}
+.u4-interactive-pill.is-mini{font-size:9px;padding:1px 5px}
+.u4-interactive-pill.is-inline{font-size:9.5px;padding:1.5px 6px;margin-left:5px}
+.u4-hm-packet.is-interactive{display:flex;align-items:center;justify-content:space-between;gap:10px;border-left:3.5px solid var(--accent);background:linear-gradient(90deg,var(--accent-soft) 0%,var(--panel) 88%);color:var(--accent)!important;font-weight:600!important}
+.u4-hm-packet.is-interactive::before{display:none}
+.u4-hm-packet.is-interactive .u4-hm-text{display:block;min-width:0;flex:1 1 auto}
+.u4-hm-packet.is-interactive .u4-hm-title::before{content:"\26A1\00a0"}
+.u4-packet.is-interactive{border-color:var(--accent);border-left-width:4.5px;background:linear-gradient(180deg,var(--accent-soft) 0%,var(--panel) 100%);box-shadow:0 2px 10px rgba(24,78,119,.08)}
+.u4-packet.is-interactive .u4-packet-t{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.docs li a.is-interactive{border-color:var(--accent);border-left:4px solid var(--accent);background:linear-gradient(90deg,var(--accent-soft) 0%,var(--panel) 88%);color:var(--accent)}
+.docs li a.is-interactive .u4-doc-title{min-width:0;flex:1 1 auto}
+nav.rail a.sub.rail-doc-link.is-interactive{flex-wrap:wrap;gap:3px 6px;padding:5px 7px;border:1px solid var(--accent);background:var(--accent-soft);color:var(--accent);font-weight:600}
+nav.rail a.sub.rail-doc-link.is-interactive .rail-doc-label{flex:1 1 100%;white-space:normal;line-height:1.25;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+nav.rail a.sub.rail-doc-link.is-interactive:hover{filter:brightness(.97)}
+nav.rail a.sub.rail-doc-link.is-interactive[aria-current="page"]{background:var(--accent);color:var(--panel)}
+nav.rail a.sub.rail-doc-link.is-interactive[aria-current="page"] .u4-interactive-pill{background:var(--panel);color:var(--accent)}
+a.u4-inline-interactive{display:inline-flex;align-items:center;flex-wrap:wrap;gap:4px;padding:1px 7px 1.5px;border-radius:6px;border:1px solid var(--accent);background:var(--accent-soft);color:var(--accent);font-weight:600;text-decoration:none;vertical-align:baseline}
+a.u4-inline-interactive:hover{filter:brightness(.96);text-decoration:underline}
+
+.u4-lead-pic img{cursor:zoom-in}
+.u4-gal-sec{max-width:74ch;margin:14px 0 18px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.u4-gal-head{display:flex;align-items:center;justify-content:space-between;gap:8px 12px;flex-wrap:wrap;margin:0 0 6px}
+.u4-gal-title-wrap{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0}
+.u4-gal-sec h2{margin:0!important;padding:0!important;border:0!important;font-family:var(--display);font-size:18px;font-weight:650;color:var(--fg)}
+.u4-gal-count{font:600 11.5px/1.2 var(--mono);padding:2px 8px;border-radius:999px;background:var(--bg);border:1px solid var(--line);color:var(--muted)}
+.u4-gal-actions{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.u4-gal-btn{min-height:36px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font:600 12.5px/1.2 var(--body);cursor:pointer;display:inline-flex;align-items:center;gap:5px;white-space:nowrap;transition:border-color .15s,background .15s,color .15s}
+.u4-gal-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.u4-gal-btn.is-primary{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.u4-gal-btn.is-submit{border-color:var(--accent);background:var(--accent);color:var(--panel)}
+.u4-gal-btn[disabled]{opacity:.55;cursor:default}
+.u4-gal-banner{margin:6px 0 10px;padding:8px 11px;border-radius:8px;border:1px solid var(--open);background:var(--open-soft);color:var(--fg);font-size:12.5px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;line-height:1.4}
+.u4-gal-banner.is-ok{border-color:var(--lock);background:var(--lock-soft)}
+.u4-gal-tray{margin:10px 0 12px;padding:12px;border:1.5px solid var(--accent);border-radius:10px;background:var(--bg);display:grid;gap:10px}
+.u4-gal-tray[hidden]{display:none!important}
+.u4-gal-tray-top{display:flex;align-items:center;gap:10px}
+.u4-gal-tray-top img{width:68px;height:68px;object-fit:cover;border-radius:8px;border:1px solid var(--line);flex:none;background:var(--panel)}
+.u4-gal-caption-inp{flex:1 1 auto;min-width:0;min-height:40px;padding:7px 11px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--fg);font:inherit;font-size:14px}
+.u4-gal-caption-inp:focus{outline:2px solid var(--accent);outline-offset:1px}
+.u4-gal-tray-who{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.u4-gal-who-lbl{font:700 11px/1.2 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-right:2px}
+.u4-gal-chip{min-height:34px;padding:4px 11px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--fg);font:600 12.5px/1.2 var(--body);cursor:pointer}
+.u4-gal-chip.is-active{background:var(--accent);border-color:var(--accent);color:var(--panel)}
+.u4-gal-tray-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.u4-gal-msg{font-size:12.5px;color:var(--muted);min-height:1.2em}
+.u4-gal-msg.is-err{color:var(--crimson,#b42318);font-weight:600}
+.u4-gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:10px;margin-top:8px}
+.u4-gal-card{display:flex;flex-direction:column;border-radius:10px;border:1px solid var(--line);background:var(--bg);overflow:hidden;color:var(--fg);padding:0;text-align:left;font:inherit;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.u4-gal-card:hover{border-color:var(--accent);box-shadow:0 3px 10px rgba(0,0,0,.1)}
+.u4-gal-card.is-deferred{border-color:var(--open);background:var(--open-soft)}
+.u4-gal-card img{width:100%;height:146px;object-fit:cover;display:block;background:var(--line)}
+.u4-gal-meta{padding:8px 10px;display:grid;gap:3px;width:100%}
+.u4-gal-badge-row{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap}
+.u4-gal-tag{display:inline-block;font:700 10px/1.2 var(--mono);text-transform:uppercase;letter-spacing:.05em;padding:1.5px 6px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+.u4-gal-tag.is-live{background:var(--lock-soft);color:var(--lock)}
+.u4-gal-tag.is-deferred{background:var(--open-soft);color:var(--open)}
+.u4-gal-cap{font:600 13px/1.35 var(--body);color:var(--fg);overflow-wrap:anywhere}
+.u4-gal-sub{font:500 11.5px/1.3 var(--mono);color:var(--muted);overflow-wrap:anywhere}
+.u4-gal-empty{margin:8px 0 2px;font-size:13px;color:var(--muted);line-height:1.45}
+
+.u4-lb-backdrop{position:fixed;inset:0;z-index:260;background:rgba(10,14,19,.88);display:flex;align-items:center;justify-content:center;padding:16px}
+.u4-lb-backdrop[hidden]{display:none!important}
+.u4-lb-box{position:relative;width:100%;max-width:920px;max-height:92vh;background:var(--panel);color:var(--fg);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:grid;grid-template-rows:auto minmax(0,1fr) auto;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.u4-lb-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--bg)}
+.u4-lb-kicker{font:700 11.5px/1.2 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent)}
+.u4-lb-close{min-width:34px;min-height:34px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--fg);font:700 15px/1 var(--body);cursor:pointer}
+.u4-lb-stage{position:relative;display:flex;align-items:center;justify-content:center;background:#0d1117;min-height:240px;max-height:66vh;overflow:hidden}
+.u4-lb-stage img{max-width:100%;max-height:66vh;object-fit:contain;display:block}
+.u4-lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(15,23,42,.72);color:#fff;font:700 20px/1 var(--body);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.u4-lb-nav:hover{background:var(--accent)}
+.u4-lb-nav.prev{left:10px}
+.u4-lb-nav.next{right:10px}
+.u4-lb-nav[hidden]{display:none!important}
+.u4-lb-foot{padding:11px 14px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.u4-lb-cap-wrap{min-width:0;flex:1 1 240px;display:grid;gap:3px}
+.u4-lb-title{font:650 14.5px/1.35 var(--body);color:var(--fg)}
+.u4-lb-sub{font:500 12px/1.35 var(--mono);color:var(--muted)}
+.u4-lb-ext{display:inline-flex;align-items:center;gap:5px;min-height:36px;padding:6px 12px;border-radius:999px;border:1px solid var(--accent);background:var(--accent-soft);color:var(--accent);font:600 12.5px/1.2 var(--body);text-decoration:none;white-space:nowrap}
+.u4-lb-ext[hidden]{display:none!important}
 </style>
 
 <section id="agent-brief" class="sr-only" aria-label="Agent brief"># START HERE — Unit 4 remodel, 1231 11th Ave (San Francisco)<br><br>**This is the only start-here file.** Every person and agent opening this folder reads this first, fully, before acting.<br>Updated 2026-11-05 17:45 PT by Claude (Tisa&#x27;s account, cloud session). The same text is the wiki&#x27;s &quot;For AI agents: read first&quot; section.<br><br>## 0. Where to work — Google Drive is the single source of truth<br>- **Unit 4 folder (work here):** https://drive.google.com/drive/folders/1NnUfcuJfnzcjJz3XRvDQDhfvtMkrlSOr (`1231-11th-avenue/unit-4-renovation`)<br>- **Whole-building parent:** https://drive.google.com/drive/folders/1StmWHtnrDQlpd1CbUUfUEOI1vg-jHn29 (`1231-11th-avenue`)<br>- Everyone — Tisa&#x27;s Claude, John&#x27;s Claude, Dibble, any other agent — reads and writes through this Drive folder. (It is backed by Tisa&#x27;s Mini and syncs automatically; you never need the Mini path.)<br>- Every Unit 4 document now lives here, including copies of everything from the old locations (section 3). If you can&#x27;t find something, look in the room folder&#x27;s `from-remodel-hub/`, `from-unit4-bath-folder/` or `from-my-drive/` subfolder before assuming it&#x27;s missing.<br>- Older start-here, AGENTS and CLAUDE files were retired 2026-11-05 to `continuity/_superseded/start-here-history/` — don&#x27;t follow them.<br><br>---<br><br>## 1. Who and what<br>- **Tisa** owns the project and makes and locks every decision. **John** is lead carpenter on site. **Ervin, Joel, Alex** are crew (Spanish speakers).<br>- **Wiki** — https://tisa-a11y.github.io/unit4-wiki-pages/ — the shared picture: roadmap, one spec per project, open decisions, documents (PDFs preview in the page). It reads the `.md` files in this folder.<br>- **Todoist** board `Full 1231 11th Avenue Remodel` (id ). The wiki is its spine: every card traces to a spec, a locked decision or captured input.<br>- **Magicplan** MASTER plan is the geometry source: https://cloud.magicplan.app/plan/abb2d2c6-aa1c-4a88-a57e-1260847b6410<br>- **Your job:** keep the project moving with as little effort from Tisa and John as possible. Answer from the specs, capture what they tell you, file it, keep wiki and Todoist in step.<br><br>## 2. Read in this order<br>1. `STATUS-NOW.md` — what&#x27;s locked, what&#x27;s blocking, what&#x27;s next on site. Answer &quot;what&#x27;s up?&quot; from here first.<br>2. `continuity/ROADMAP.md` — sequence and phases.<br>3. `&lt;room&gt;/SPEC.md` for the area you&#x27;re working on.<br>4. `continuity/CURRENT-DECISIONS.md` and `continuity/KNOWN-GAPS.md` only if you need the history.<br><br>## 3. Folder map<br>| Folder | Holds |<br>|---|---|<br>| `kitchen/` `bathroom/` `electrical/` `laundry/` `bedroom/` `living-dining/` `hallway/` `paint-floors/` `hvac/` | One per room or trade; each has `SPEC.md` (governs) plus dated drawings and packages. |<br>| `interior-design/` | Wall treatment, trim, outlet and finish plans (dated revision folders). |<br>| `general/` | Whole-unit items; `from-remodel-hub/` = imported old crew-hub files. |<br>| `sprint/` | Current sprint plan and session agendas. |<br>| `continuity/` | Roadmap, decisions log, known gaps, labor ballpark, history and source snapshots. |<br>| `work-control/` | Agent index, Todoist runbook (dated snapshot), `wiki-source/` (wiki build files). |<br>| `to-triage/` | Drop box for any input (notes, photos, voice memos, session minutes). Claude routes it and moves it to `to-triage/_done/`. |<br>| `sessions/` | One folder per working session: minutes (and transcript when available). |<br>| `_to_delete/` | Marked for removal; only Tisa empties it. |<br><br>Outside this folder: `../building/` (common areas, backyard, alley; `building/earlier-renovations-not-unit-4…/` holds older renovation docs that are **not** Unit 4 — don&#x27;t use them for Unit 4), `../GOOGLE-DOCS-INDEX.md`, and the separate private folder `1231-11th-avenue-private` (leases, costs, payroll, bids — **never share with crew**).<br><br>**Old locations — still readable for history, never the place to work:** Drive &quot;1231 11th Ave - Unit 4 Remodel&quot; (old crew hub, folders 01–12), Drive &quot;11th Ave Unit 4 Bath&quot;. Everything in them was copied here on 2026-11-04/05. If an old file and a file here disagree, the room&#x27;s `SPEC.md` governs.<br><br>## 4. Which version is the latest<br>1. Names carry date and revision: `YYYY-MM-DD_U4_&lt;room or trade&gt;_&lt;what&gt;_R#` (issued drawings may use `RevA`, `RevB`), then `_EN` or `_ES`. English and Spanish are always separate files.<br>2. The latest lives in the topic folder. A replaced file moves, name unchanged, to that folder&#x27;s `_superseded/` (or `history/`). Nothing is deleted.<br>3. If a folder still has more than one live iteration, its `CURRENT.md` names the one that governs.<br>4. `from-remodel-hub/`, `from-unit4-bath-folder/`, `from-my-drive/` are copies imported 2026-11-04 so no mockup or image is lost; they&#x27;re being reconciled. Until then the room&#x27;s `SPEC.md` and the dated files outside them govern.<br><br>## 5. Golden rule: John never has to enter anything himself<br>When John or Tisa tells you something — a task, a measurement, a problem, a question, a decision needed — capture it for them in their words and file it (section 7). Don&#x27;t send them to a form. Confirm back in one line what you filed and where.<br><br>## 6. What each kind of agent can do<br>| You are… | You can |<br>|---|---|<br>| **Claude on Tisa&#x27;s claude.ai account** (this Project, Cowork, Claude Code) | Everything: wiki data via the ArtifactData tool (URL above), republish the wiki via the Artifact tool, edit files here, Todoist via the connector (connected 2026-11-03). |<br>| **John&#x27;s Claude** (claude.ai cloud, often voice on John&#x27;s iPhone) | Read the wiki link, this Drive folder and the Todoist board. Its Drive connector can **create** files but can&#x27;t overwrite existing ones, so it writes session minutes and notes to `to-triage/` as `YYYY-MM-DD_HHMM_session_&lt;topic&gt;.md` with an author line (which Claude, which device, cloud or local). Tisa&#x27;s Claude routes them into the wiki, specs, STATUS-NOW and Todoist. |<br>| **Any other agent** (Dibble, Codex, Gemini, Antigravity) | Read and edit the files here (section 8 rules), update `STATUS-NOW.md`, drop input in `to-triage/`. Access comes from this Drive folder being shared with John&#x27;s Google account as Editor. |<br>| **Any agent with a browser** | Open the wiki and help John use it on his phone. |<br><br>**Dropping input (non-Claude agents):** `to-triage/YYYY-MM-DD_HHMM_&lt;who&gt;_&lt;short&gt;.md`<br>```<br>type: task | fact | decision | note<br>project: kitchen | bathroom | electrical | laundry | bedroom | living-dining | hallway | paint-floors | hvac | general<br>from: &lt;agent&gt; on behalf of &lt;John/Tisa&gt;<br>---<br>&lt;their words&gt;<br>```<br>**Claude capture:** write to the wiki&#x27;s `inbox` collection `{type, project, section, title, details, raw, source:&quot;agent&quot;, from, createdAt, status:&quot;queued&quot;}`, then route it in the same turn.<br><br>## 7. Routing — where each thing goes<br>| Came in | Do this |<br>|---|---|<br>| **Task** | Look for an existing card first (comment rather than duplicate). Create it in the project&#x27;s section — Kitchen / Cocina · Bathroom / Baño · Electrical / Electricidad · Laundry / Lavandería · Walls, Molding &amp; Paint · General &amp; HVAC (bedroom, living-dining, hallway, HVAC, building) · New Tasks (need triage) · Backlog · On Hold or Blocked. Re-check section names live before writing. Plain title; description = State / Trade / Next physical action / Governing source (link to SPEC.md). **Unassigned** unless Tisa names someone. |<br>| **Site fact** | Add to the project&#x27;s SPEC.md with date and &quot;(John, field)&quot;. Comment on the card if it changes one. |<br>| **Decision needed** | Add a wiki `decisions` doc (`status: open`, priority 1 blocking / 2 next / 3 later). Only Tisa locks. |<br>| **Locked decision** (`synced: false`) | Update SPEC.md (mark LOCKED), matching cards, the Spanish crew edition, `STATUS-NOW.md`; set `synced: true`. |<br>| **Field report / session notes** | File facts as above; next steps → unassigned cards; open items → decisions; mark `recorded`. |<br><br>Wiki and cards disagree → the wiki wins (never the reverse without Tisa). Any change you make → update `STATUS-NOW.md` in the same pass.<br><br>## 8. Rules that always hold<br>- Tisa&#x27;s direction is locked; anything an AI produces is a suggestion until she locks it.<br>- Nothing is sent, signed, ordered, paid or scheduled without Tisa&#x27;s approval.<br>- Magicplan and existing drawings first. Never ask John to re-measure what&#x27;s recorded; ask only for the specific missing number.<br>- Crew-facing documents: English first, then a **separate** Spanish edition. Never mix languages. Replies to Tisa in English.<br>- Edit an existing spec rather than making a new file beside it (new files break wiki links).<br>- Superseded files go to `_superseded`; never delete. No credentials in any file here.<br>- **Wiki and Drive mirror each other** (Tisa, 2026-11-06): every wiki page and document list matches a folder in `1231 11th Avenue Unit 4`, and each document sits under the same room in both. When you add or move a document or folder in Drive, update the wiki in the same pass, and the reverse. Example: the Laundry Closet is its own project, so its documents live in `laundry/`, not `electrical/`.<br>- **Spanish for the wiki lives only in the wiki's own text** (Tisa, 2026-11-06): the English/Español toggle. Never create Spanish copies of the .md files in Drive. Crew plans keep their existing English and Spanish PDFs.<br>- **Work record (Beads):** canonical ledger `/Users/tisavo/Work/Projects/1231-11th-avenue/unit-4-renovation` on the MacBook Pro (`.beads/embeddeddolt`, main issue `tisa-wi0.6`). Run `bd where` before writing; never initialize a duplicate ledger; keep existing issue IDs. Agents that can&#x27;t reach it (cloud sessions) record state in `STATUS-NOW.md` and say Beads is pending. Last check from a cloud session (2026-11-05): not reachable, status unverified.<br>- Every session&#x27;s minutes say the date, who attended and which Claude wrote them (account, device, cloud or local).<br>- Say plainly what you verified vs. only wrote. Trust the source file over another agent&#x27;s summary.<br><br>## 9. Maintaining the wiki (Claude only)<br>Source: `work-control/wiki-source/` (template updated 2026-11-05 to include the live Home page and collapsible document lists) — `wiki_template.html`, `build_wiki.py` (embeds the specs and document lists), `brief.py` (embeds this file as the agent brief), `drive_docs.json`, `pdf_blobs.json`. Rebuild, then publish to the same artifact URL. Collections: `decisions` (Tisa/admin write), `decisionNotes`, `reports`, `sessionNotes`, `inbox`.<br><br>## 10. More detail, if needed<br>- Routing detail and history: `work-control/2026-11-03_U4_AgentWork_Index_R2.md`<br>- Todoist runbook (11/2 snapshot, has known errors): `work-control/TODOIST-PROJECT-MANAGER-RUNBOOK.md`<br>- Kitchen governing revision: `kitchen/CURRENT.md`<br></section>
@@ -1026,7 +1099,7 @@ html body .u4-home-sec,html body .u4-home-sec:first-child{border-top:0;border-le
     <div class="brand"><a class="homelink" href="#home">Unit 4 Wiki</a><small>1231 11th Ave · Remodel</small></div>
   </nav>
   <main>
-    <div class="bar"><button type="button" class="small" id="backBtn" hidden>← Back</button><button type="button" class="small langbtn" id="langBtn" aria-label="Cambiar a español">Español</button><span class="chip" id="status"><span class="dot"></span><span id="statusText">Saved copy · Nov 19, 2026</span></span><button class="small" id="refresh" hidden>Load latest from Drive</button><span class="u4-build-stamp" id="u4BuildStamp" title="Live build version">Build 2026-11-19 · r3f-usability</span><span id="path"></span></div>
+    <div class="bar"><button type="button" class="small" id="backBtn" hidden>← Back</button><button type="button" class="small langbtn" id="langBtn" aria-label="Cambiar a español">Español</button><button type="button" class="small themebtn" id="themeBtn" aria-pressed="false" aria-label="Switch to dark mode">☾ Dark</button><span class="chip" id="status"><span class="dot"></span><span id="statusText">Saved copy · Nov 19, 2026</span></span><button class="small" id="refresh" hidden>Load latest from Drive</button><span class="u4-build-stamp" id="u4BuildStamp" title="Live build version">Build 2026-11-19 · r3f-usability</span><span id="path"></span></div>
     <article id="doc"></article>
     <section class="field u4-simple-field" id="field" hidden>
       <h2 id="u4FieldHeading">Field note</h2>
@@ -1097,11 +1170,48 @@ var LANG = (function(){
     return localStorage.getItem("u4lang")==="es" ? "es" : "en";
   } catch(e){ return "en"; }
 })();
+var THEME = (function(){
+  try {
+    var qp = (new URLSearchParams(location.search || "").get("theme") || "").toLowerCase();
+    var sysDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    var val = (qp === "dark" || qp === "light") ? qp : (localStorage.getItem("u4theme") || (sysDark ? "dark" : "light"));
+    val = (val === "dark") ? "dark" : "light";
+    if (qp === "dark" || qp === "light") { try { localStorage.setItem("u4theme", val); } catch(e){} }
+    document.documentElement.setAttribute("data-theme", val);
+    return val;
+  } catch(e){ return "light"; }
+})();
 const UI = {
   en: {
     unitTitle: "Unit 4 Wiki", unitMobileTitle: "Unit 4", unitSub: "1231 11th Ave · Remodel",
     menuBtn: "☰ Menu", backBtn: "← Back", backShort: "Back", closeBtn: "Close",
     langToggleLabel: "Español", langToggleAria: "Switch to Spanish",
+    themeToDarkLabel: "☾ Dark", themeToDarkAria: "Switch to dark mode",
+    themeToLightLabel: "☀ Light", themeToLightAria: "Switch to light mode",
+    interactiveBadge: "INTERACTIVE",
+    rendersHeading: "Rendered Images & Mockups",
+    rendersNote: "Concept renders and mockups — governing room SPEC dimensions rule",
+    rendersAddBtn: "+ Add Render / Mockup",
+    rendersSubmitBtn: "Upload Render",
+    rendersEmpty: "No renders or mockups yet — tap + Add Render / Mockup or 📷 Take Photo to add one.",
+    referencesHeading: "Reference Photos",
+    referencesNoteFallback: "Site reference photos, field details, and uploaded crew photos",
+    referencesAddBtn: "+ Add Reference Photo",
+    referencesSubmitBtn: "Upload Photo",
+    referencesEmpty: "No reference photos yet — tap + Add Reference Photo or 📷 Take Photo to save one for John and the crew.",
+    galUploading: "Uploading…",
+    galUploaded: "Photo uploaded and saved for this room.",
+    galCaptionPlaceholder: "Add a short caption (optional)…",
+    galFromLabel: "From:",
+    galCancelBtn: "Cancel",
+    galRetryBtn: "Retry",
+    galOfflineWarn: "Couldn't reach Mac mini live gallery. Static images still work. On Chrome/iPhone on Tailscale, allow Local network access.",
+    galTagUploaded: "Uploaded",
+    galTagCurated: "Reference",
+    galTagDeferred: "Deferred",
+    lbOpenDoc: "Open Document / Original ↗",
+    lbPrevAria: "Previous photo",
+    lbNextAria: "Next photo",
     grpOverview: "Overview", grpPreviews: "Previews", grpProjects: "Projects",
     previewsEmpty: "Click any PDF to add here", clearAll: "Clear", inPreviews: "In Previews",
     openPreviewsLbl: "Open Previews:", previewTabsLbl: "Previews:",
@@ -1128,6 +1238,32 @@ const UI = {
     unitTitle: "Wiki Unidad 4", unitMobileTitle: "Unidad 4", unitSub: "1231 11th Ave · Remodelación",
     menuBtn: "☰ Menú", backBtn: "← Atrás", backShort: "Atrás", closeBtn: "Cerrar",
     langToggleLabel: "English", langToggleAria: "Cambiar a inglés",
+    themeToDarkLabel: "☾ Oscuro", themeToDarkAria: "Cambiar a modo oscuro",
+    themeToLightLabel: "☀ Claro", themeToLightAria: "Cambiar a modo claro",
+    interactiveBadge: "INTERACTIVO",
+    rendersHeading: "Imágenes renderizadas y maquetas",
+    rendersNote: "Renders conceptuales y maquetas — las medidas de las especificaciones mandan",
+    rendersAddBtn: "+ Agregar render o maqueta",
+    rendersSubmitBtn: "Subir render",
+    rendersEmpty: "Todavía no hay renders ni maquetas — toca + Agregar render o maqueta o 📷 Tomar foto para subir uno.",
+    referencesHeading: "Fotos de referencia",
+    referencesNoteFallback: "Fotos de referencia, detalles de obra y fotos subidas por la cuadrilla",
+    referencesAddBtn: "+ Agregar foto de referencia",
+    referencesSubmitBtn: "Subir foto",
+    referencesEmpty: "Todavía no hay fotos de referencia — toca + Agregar foto de referencia o 📷 Tomar foto para guardar una.",
+    galUploading: "Subiendo…",
+    galUploaded: "Foto subida y guardada en este cuarto.",
+    galCaptionPlaceholder: "Agrega una descripción breve (opcional)…",
+    galFromLabel: "De:",
+    galCancelBtn: "Cancelar",
+    galRetryBtn: "Reintentar",
+    galOfflineWarn: "No se pudo conectar con la galería de Mac mini ahora. Las fotos fijas siguen disponibles. En Chrome/iPhone con Tailscale, permite Acceso a red local.",
+    galTagUploaded: "Subida",
+    galTagCurated: "Referencia",
+    galTagDeferred: "Pospuesta",
+    lbOpenDoc: "Abrir documento / original ↗",
+    lbPrevAria: "Foto anterior",
+    lbNextAria: "Siguiente foto",
     grpOverview: "Resumen", grpPreviews: "Vistas previas", grpProjects: "Proyectos",
     previewsEmpty: "Toca un PDF para agregarlo aquí", clearAll: "Limpiar", inPreviews: "En vistas previas",
     openPreviewsLbl: "Vistas previas abiertas:", previewTabsLbl: "Vistas previas:",
@@ -1161,6 +1297,7 @@ const DOC_DATES = @@U4:JSON:data/document-dates.json@@;
 const ROOM_KEY_FACTS = @@U4:PERPAGE:ROOM_KEY_FACTS@@;
 const UNIFIED_VISUALS = @@U4:PERPAGE:UNIFIED_VISUALS@@;
 const CHECKLISTS = @@U4:PERPAGE:CHECKLISTS@@;
+@@U4:RAW:data/concept-renders.js@@
 
 const KITCHEN_HOSTED_LINKS = {
   "1MtSmNvzrQnAP5mfQuA3w_1wGYD2sUMAJ": "./wiki-docs/2026-11-02_U4_Kitchen_Master-Plan_R2_EN.html",
@@ -1212,6 +1349,29 @@ function docLabel(d){
   return {t:s, date:date};
 }
 function isInteractiveDoc(d){ return Boolean(d && KITCHEN_HOSTED_LINKS[d.id] && KITCHEN_HOSTED_LINKS[d.id].indexOf("./plans/") === 0); }
+function interactivePillHtml(cls){ return '<span class="u4-interactive-pill'+(cls?' '+cls:'')+'">'+t("interactiveBadge")+'</span>'; }
+function enhanceInteractiveLinks(rootEl){
+  const scope = rootEl || document;
+  if (!scope || !scope.querySelectorAll) return;
+  scope.querySelectorAll('a[href^="./plans/"], a[data-u4-plan-base]').forEach(a=>{
+    const raw = a.dataset.u4PlanBase || a.getAttribute("href") || "";
+    if (raw.indexOf("./plans/") !== 0) return;
+    a.dataset.u4PlanBase = raw;
+    a.setAttribute("href", withPlanParams(raw));
+    a.removeAttribute("target");
+    a.removeAttribute("rel");
+    if (!a.closest(".u4-hm-packet, .u4-packet, .docs, nav.rail")) {
+      a.classList.add("u4-inline-interactive");
+      let pill = a.querySelector(".u4-interactive-pill");
+      if (!pill) {
+        pill = document.createElement("span");
+        pill.className = "u4-interactive-pill is-inline";
+        a.appendChild(pill);
+      }
+      pill.textContent = t("interactiveBadge");
+    }
+  });
+}
 function docKind(d){ if (isInteractiveDoc(d)) return LANG==="es" ? "Plano interactivo" : "Interactive plan"; if (isPdf(d)) return "pdf"; if ((d.title||"").indexOf(".")<0) return "doc"; const e=(d.title.split(".").pop()||"").toLowerCase(); return e==="jpeg"?"jpg":e; }
 function docUrl(d){ return "https://drive.google.com/file/d/"+d.id+"/view"; }
 function isPdf(d){ return Boolean(d && (/\.pdf$/i.test(d.title||"") || (typeof PDF_BLOBS==="object" && PDF_BLOBS && PDF_BLOBS[d.id]))); }
@@ -1353,7 +1513,13 @@ function homeMenuBlock(){
   const es = LANG==="es";
   const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const prog = k => { const it=(CHECKLISTS[k]&&CHECKLISTS[k].items)||[]; return it.length ? '<span class="u4-hm-prog">'+it.filter(x=>x[0]).length+'/'+it.length+'</span>' : ''; };
-  const packets = (k, deep) => packetsFor(k).map(pk=>'<a class="u4-hm-packet'+(deep?' is-deep':'')+'" href="'+esc(packetHref(pk))+'">'+esc(packetTitle(pk))+'</a>').join("");
+  const packets = (k, deep) => packetsFor(k).map(pk=>{
+    const isInt = Boolean(packetHostedPlanUrl(pk));
+    const cls = 'u4-hm-packet'+(deep?' is-deep':'')+(isInt?' is-interactive':'');
+    const baseAttr = isInt ? ' data-u4-plan-base="'+esc(KITCHEN_HOSTED_LINKS[packetDocId(pk)])+'"' : '';
+    const inner = isInt ? '<span class="u4-hm-text"><span class="u4-hm-title">'+esc(packetTitle(pk))+'</span></span>'+interactivePillHtml("is-compact") : esc(packetTitle(pk));
+    return '<a class="'+cls+'" href="'+esc(packetHref(pk))+'"'+baseAttr+'>'+inner+'</a>';
+  }).join("");
   const room = (p, child) => '<a class="u4-hm-room'+(child?' is-child':'')+'" href="#'+p.key+'"><span>'+esc(pageLabel(p))+'</span>'+prog(p.key)+'</a>'+(child?packets(p.key, true):"");
   const tops = PAGES.filter(x=>x.group==="Projects" && !x.parent);
   const groups = tops.map(p=>'<div class="u4-hm-group">'+room(p,false)+PAGES.filter(c=>c.parent===p.key).map(c=>room(c,true)).join("")+packets(p.key,false)+'</div>').join("");
@@ -1369,7 +1535,13 @@ function roomAreasBlock(p){
   const es = LANG==="es";
   const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const prog = k => { const it=(CHECKLISTS[k]&&CHECKLISTS[k].items)||[]; return it.length ? '<span class="u4-hm-prog">'+it.filter(x=>x[0]).length+'/'+it.length+'</span>' : ''; };
-  const pkt = (pk, deep) => '<a class="u4-hm-packet'+(deep?' is-deep':'')+'" href="'+esc(packetHref(pk))+'">'+esc(packetTitle(pk))+(packetNote(pk)?'<span class="u4-hm-note">'+esc(packetNote(pk))+'</span>':'')+'</a>';
+  const pkt = (pk, deep) => {
+    const isInt = Boolean(packetHostedPlanUrl(pk));
+    const cls = 'u4-hm-packet'+(deep?' is-deep':'')+(isInt?' is-interactive':'');
+    const baseAttr = isInt ? ' data-u4-plan-base="'+esc(KITCHEN_HOSTED_LINKS[packetDocId(pk)])+'"' : '';
+    const txt = '<span class="u4-hm-text"><span class="u4-hm-title">'+esc(packetTitle(pk))+'</span>'+(packetNote(pk)?'<span class="u4-hm-note">'+esc(packetNote(pk))+'</span>':'')+'</span>';
+    return '<a class="'+cls+'" href="'+esc(packetHref(pk))+'"'+baseAttr+'>'+(isInt ? txt+interactivePillHtml("is-compact") : esc(packetTitle(pk))+(packetNote(pk)?'<span class="u4-hm-note">'+esc(packetNote(pk))+'</span>':''))+'</a>';
+  };
   let rows = "";
   kids.forEach(c=>{ rows += '<a class="u4-hm-room is-area" href="#'+c.key+'"><span>'+esc(pageLabel(c))+'</span>'+prog(c.key)+'</a>' + packetsFor(c.key).map(pk=>pkt(pk,true)).join(""); });
   rows += own.map(pk=>pkt(pk,false)).join("");
@@ -1493,28 +1665,521 @@ function leadPictureBlock(key){
   const src = (es && it.imgEs) ? it.imgEs : it.img; const cap = es ? it.es : it.en;
   return '<figure class="u4-lead-pic"><img src="'+esc(src)+'" alt="'+esc(cap)+'"><figcaption>'+esc(cap)+'</figcaption></figure>';
 }
-function visualsBlock(key){
-  const v0 = UNIFIED_VISUALS[key]; if (!v0 || !v0.items || !v0.items.length) return "";
-  const leadI = leadPictureIndex(key);
-  const v = Object.assign({}, v0, {items: v0.items.filter((_,i)=>i!==leadI)});
-  if (!v.items.length) return "";
-  const es = LANG==="es";
-  const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-  return '<section class="gallery" id="sec-visuals"><h2>'+esc(es?v.es:v.en)+'</h2>'
-    + '<p class="gal-note">'+esc(es?v.noteEs:v.noteEn)+'</p>'
-    + '<div class="u4-vis-grid">'
-    + v.items.map(it => {
-        const src = (es && it.imgEs) ? it.imgEs : it.img;
-        const href = (es && it.hrefEs) ? it.hrefEs : (it.href || src);
-        const cap = es ? it.es : it.en;
-        const isDoc = href.startsWith("#doc:");
-        return '<a class="u4-vis-card'+(it.deferred?' is-deferred':'')+'" href="'+esc(href)+'"'+(isDoc?'':' target="_blank" rel="noopener"')+'>'
-          + '<img src="'+esc(src)+'" alt="'+esc(cap)+'" loading="lazy">'
-          + '<span class="u4-vis-cap">'+esc(cap)+(isDoc?'':' ↗')+'</span>'
-          + '</a>';
-      }).join("")
-    + '</div></section>';
+function u4GalEsc(s){ return String(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+function u4GalOrigin(){
+  const raw = (typeof window !== "undefined" && (window.U4_GALLERY_ORIGIN || window.U4_MINI_BACKEND_ORIGIN)) || "https://mac-mini.tailcf4007.ts.net";
+  return String(raw).replace(/\/+$/,"");
 }
+function u4GalResolveUrl(raw){
+  const u = String(raw || "").trim();
+  if (!u) return "";
+  if (/^https?:\/\//i.test(u) || /^data:/i.test(u) || /^blob:/i.test(u) || u.startsWith("./") || u.startsWith("../")) return u;
+  if (u.startsWith("/")) return u4GalOrigin() + u;
+  return u;
+}
+function u4GalExtractKey(raw){
+  const s = String(raw || "").trim();
+  if (!s) return "";
+  const mId = /[?&]id=([-\w]{18,})|\/d\/([-\w]{18,})/.exec(s);
+  if (mId) return (mId[1] || mId[2]).toLowerCase();
+  const base = s.split("?")[0].split("#")[0].split("/").pop() || "";
+  return base.toLowerCase();
+}
+function u4GalFormatDate(ts){
+  if (!ts) return "";
+  try {
+    const d = typeof ts === "number" ? new Date(ts < 1e12 ? ts * 1000 : ts) : new Date(ts);
+    if (!isNaN(d.getTime())) return d.toLocaleDateString(LANG==="es" ? "es-MX" : "en-US", { month:"short", day:"numeric" });
+  } catch(e){}
+  return String(ts).slice(0, 16);
+}
+function u4GalNormalizeLiveItem(it, fallbackKind){
+  if (!it || typeof it !== "object") return null;
+  const g = String(it.gallery || it.gallery_type || it.galleryType || fallbackKind || "references").toLowerCase() === "renders" ? "renders" : "references";
+  const imgUrl = u4GalResolveUrl(it.url || it.file_url || it.fileUrl || it.thumbUrl || it.img || "");
+  if (!imgUrl) return null;
+  const cap = String(it.caption || it.title || it.filename || it.name || (LANG==="es"?"Foto de obra":"Site photo")).trim();
+  const author = String(it.author || it.from || "").trim();
+  const dateTxt = u4GalFormatDate(it.uploaded_at || it.created_at || it.createdAt || it.ts);
+  return {
+    uid: "live:" + g + ":" + String(it.id || it.filename || imgUrl),
+    gallery: g,
+    thumbUrl: imgUrl,
+    fullUrl: imgUrl,
+    title: cap,
+    note: [author, dateTxt].filter(Boolean).join(" · "),
+    href: u4GalResolveUrl(it.href || imgUrl),
+    deferred: false,
+    source: "live",
+    author: author,
+    uploadedAt: dateTxt
+  };
+}
+function getStaticRoomGalleryItems(roomKey){
+  const es = LANG === "es";
+  const crMap = (typeof U4_CONCEPT_RENDERS === "object" && U4_CONCEPT_RENDERS) ? U4_CONCEPT_RENDERS : {};
+  const rawRenders = Array.isArray(crMap[roomKey]) ? crMap[roomKey] : [];
+  const seenKeys = new Set();
+  const renders = rawRenders.map((it, idx) => {
+    const thumb = it.thumbUrl || "";
+    const drv = it.driveUrl || "";
+    if (it.id) seenKeys.add(String(it.id).toLowerCase());
+    [thumb, drv].forEach(u => { const k = u4GalExtractKey(u); if (k) seenKeys.add(k); });
+    return {
+      uid: "cr:" + String(it.id || idx),
+      gallery: "renders",
+      thumbUrl: thumb,
+      fullUrl: thumb || drv,
+      title: es ? (it.titleEs || it.titleEn || "") : (it.titleEn || it.titleEs || ""),
+      note: es ? (it.statusEs || it.statusEn || "") : (it.statusEn || it.statusEs || ""),
+      href: drv,
+      deferred: Boolean(it.deferred),
+      source: "curated"
+    };
+  });
+  const v0 = UNIFIED_VISUALS[roomKey];
+  const leadI = leadPictureIndex(roomKey);
+  const references = [];
+  if (v0 && Array.isArray(v0.items)) {
+    v0.items.forEach((it, idx) => {
+      if (idx === leadI) return;
+      const src = (es && it.imgEs) ? it.imgEs : (it.img || "");
+      const href = (es && it.hrefEs) ? it.hrefEs : (it.href || src);
+      const k1 = u4GalExtractKey(src), k2 = u4GalExtractKey(href);
+      if ((k1 && seenKeys.has(k1)) || (k2 && seenKeys.has(k2))) return;
+      references.push({
+        uid: "uv:" + idx,
+        gallery: "references",
+        thumbUrl: src,
+        fullUrl: src,
+        title: es ? (it.es || it.en || "") : (it.en || it.es || ""),
+        note: "",
+        href: href,
+        deferred: Boolean(it.deferred),
+        source: "curated"
+      });
+    });
+  }
+  return { renders, references };
+}
+
+var u4RoomGalleryState = {};
+var u4GalleryDrafts = {};
+var u4LightboxState = { items: [], idx: 0, title: "" };
+
+function getRoomGalleryState(roomKey){
+  if (!u4RoomGalleryState[roomKey]) {
+    u4RoomGalleryState[roomKey] = { status: "idle", renders: [], references: [], errMsg: "", fetchedAt: 0, notices: {} };
+  }
+  return u4RoomGalleryState[roomKey];
+}
+function getRoomGalleryMergedItems(roomKey, kind){
+  const st = getStaticRoomGalleryItems(roomKey);
+  const live = getRoomGalleryState(roomKey);
+  const staticList = kind === "renders" ? st.renders : st.references;
+  const liveList = kind === "renders" ? live.renders : live.references;
+  return (liveList || []).concat(staticList || []);
+}
+function getActiveGalleryAuthor(draft){
+  if (draft && draft.author) return draft.author;
+  try {
+    const saved = localStorage.getItem("u4_sender_name_v1") || "";
+    if (saved.trim()) return saved.trim();
+  } catch(e){}
+  const inp = document.getElementById("u4RepSenderName");
+  return (inp && inp.value.trim()) ? inp.value.trim() : "";
+}
+function renderSingleGallerySection(roomKey, kind){
+  const isRenders = kind === "renders";
+  const items = getRoomGalleryMergedItems(roomKey, kind);
+  const st = getRoomGalleryState(roomKey);
+  const draftKey = roomKey + ":" + kind;
+  const draft = u4GalleryDrafts[draftKey];
+  const v0 = UNIFIED_VISUALS[roomKey];
+  const secId = isRenders ? "sec-renders" : "sec-visuals";
+  const heading = isRenders ? t("rendersHeading") : t("referencesHeading");
+  const note = isRenders ? t("rendersNote") : ((v0 && (LANG==="es" ? v0.noteEs : v0.noteEn)) || t("referencesNoteFallback"));
+  const addLbl = isRenders ? t("rendersAddBtn") : t("referencesAddBtn");
+  const submitLbl = isRenders ? t("rendersSubmitBtn") : t("referencesSubmitBtn");
+  const emptyMsg = isRenders ? t("rendersEmpty") : t("referencesEmpty");
+  const team = ["John", "Ervin", "Joel", "Alex", "Tisa"];
+  const curAuthor = getActiveGalleryAuthor(draft);
+
+  const errBanner = (st.status === "error")
+    ? '<div class="u4-gal-banner" role="status"><span>'+u4GalEsc(t("galOfflineWarn"))+'</span><button type="button" class="u4-gal-btn" data-u4-gal-retry="1">'+u4GalEsc(t("galRetryBtn"))+'</button></div>'
+    : "";
+  const okNotice = st.notices && st.notices[kind]
+    ? '<div class="u4-gal-banner is-ok" role="status"><span>'+u4GalEsc(st.notices[kind])+'</span></div>'
+    : "";
+
+  let trayHtml = '<div class="u4-gal-tray" data-u4-gal-tray="'+kind+'" hidden></div>';
+  if (draft && draft.dataUrl) {
+    const chips = team.map(name => '<button type="button" class="u4-gal-chip'+(curAuthor.toLowerCase()===name.toLowerCase()?' is-active':'')+'" data-u4-gal-who="'+u4GalEsc(name)+'">'+u4GalEsc(name)+'</button>').join("");
+    trayHtml = '<div class="u4-gal-tray" data-u4-gal-tray="'+kind+'">'
+      + '<div class="u4-gal-tray-top">'
+      + '<img src="'+u4GalEsc(draft.dataUrl)+'" alt="Upload preview">'
+      + '<input type="text" class="u4-gal-caption-inp" data-u4-gal-caption="1" maxlength="200" value="'+u4GalEsc(draft.caption||"")+'" placeholder="'+u4GalEsc(t("galCaptionPlaceholder"))+'">'
+      + '</div>'
+      + '<div class="u4-gal-tray-who"><span class="u4-gal-who-lbl">'+u4GalEsc(t("galFromLabel"))+'</span>'+chips+'</div>'
+      + '<div class="u4-gal-tray-foot">'
+      + '<span class="u4-gal-msg'+(draft.isErr?' is-err':'')+'">'+u4GalEsc(draft.statusMsg||"")+'</span>'
+      + '<div class="u4-gal-actions">'
+      + '<button type="button" class="u4-gal-btn" data-u4-gal-cancel="1"'+(draft.uploading?' disabled':'')+'>'+u4GalEsc(t("galCancelBtn"))+'</button>'
+      + '<button type="button" class="u4-gal-btn is-submit" data-u4-gal-submit="1"'+(draft.uploading?' disabled':'')+'>'+u4GalEsc(draft.uploading ? t("galUploading") : submitLbl)+'</button>'
+      + '</div></div></div>';
+  }
+
+  const cardsHtml = items.length
+    ? '<div class="u4-gal-grid">' + items.map((it, idx) => {
+        const badgeCls = it.deferred ? "u4-gal-tag is-deferred" : (it.source === "live" ? "u4-gal-tag is-live" : "u4-gal-tag");
+        const badgeLbl = it.deferred ? t("galTagDeferred") : (it.source === "live" ? t("galTagUploaded") : (isRenders ? "Render" : t("galTagCurated")));
+        return '<button type="button" class="u4-gal-card'+(it.deferred?' is-deferred':'')+'" data-u4-gal-idx="'+idx+'">'
+          + '<img src="'+u4GalEsc(it.thumbUrl)+'" alt="'+u4GalEsc(it.title)+'" loading="lazy">'
+          + '<div class="u4-gal-meta">'
+          + '<div class="u4-gal-badge-row"><span class="'+badgeCls+'">'+u4GalEsc(badgeLbl)+'</span></div>'
+          + '<span class="u4-gal-cap">'+u4GalEsc(it.title)+'</span>'
+          + (it.note ? '<span class="u4-gal-sub">'+u4GalEsc(it.note)+'</span>' : '')
+          + '</div></button>';
+      }).join("") + '</div>'
+    : '<p class="u4-gal-empty">'+u4GalEsc(emptyMsg)+'</p>';
+
+  return '<section class="gallery u4-gal-sec" id="'+secId+'" data-u4-gallery="'+kind+'" data-u4-room="'+u4GalEsc(roomKey)+'">'
+    + '<div class="u4-gal-head">'
+    + '<div class="u4-gal-title-wrap"><h2>'+u4GalEsc(heading)+'</h2><span class="u4-gal-count">'+items.length+'</span></div>'
+    + '<div class="u4-gal-actions">'
+    + '<button type="button" class="u4-gal-btn is-primary" data-u4-gal-add="1">'+u4GalEsc(addLbl)+'</button>'
+    + '<button type="button" class="u4-gal-btn" data-u4-gal-cam="1">'+u4GalEsc(t("takePhotoBtn"))+'</button>'
+    + '</div></div>'
+    + '<p class="gal-note">'+u4GalEsc(note)+'</p>'
+    + '<input type="file" accept="image/*" class="u4-gal-file-inp" hidden>'
+    + '<input type="file" accept="image/*" capture="environment" class="u4-gal-cam-inp" hidden>'
+    + errBanner + okNotice + trayHtml + cardsHtml
+    + '</section>';
+}
+function roomGalleriesHtml(roomKey){
+  if (!roomKey) return "";
+  return renderSingleGallerySection(roomKey, "renders") + renderSingleGallerySection(roomKey, "references");
+}
+function rerenderRoomGalleryDom(roomKey){
+  ["renders", "references"].forEach(kind => {
+    const cur = document.querySelector('section.u4-gal-sec[data-u4-room="'+roomKey+'"][data-u4-gallery="'+kind+'"]');
+    if (!cur || !cur.parentNode) return;
+    const tmp = document.createElement("div");
+    tmp.innerHTML = renderSingleGallerySection(roomKey, kind);
+    const next = tmp.firstElementChild;
+    if (next) cur.parentNode.replaceChild(next, cur);
+  });
+}
+async function fetchRoomGallery(roomKey, force){
+  if (!roomKey) return;
+  const st = getRoomGalleryState(roomKey);
+  if (st.status === "loading" && !force) return;
+  if (!force && st.status === "ok" && (Date.now() - st.fetchedAt) < 15000) return;
+  st.status = "loading";
+  const ac = typeof AbortController === "function" ? new AbortController() : null;
+  const tid = ac ? setTimeout(() => ac.abort(), 9000) : null;
+  try {
+    const resp = await fetch(u4GalOrigin() + "/api/unit4/gallery?room=" + encodeURIComponent(roomKey), {
+      method: "GET",
+      mode: "cors",
+      signal: ac ? ac.signal : undefined
+    });
+    if (!resp.ok) throw new Error("HTTP " + resp.status);
+    const data = await resp.json();
+    const rawR = Array.isArray(data.renders) ? data.renders : [];
+    const rawF = Array.isArray(data.references) ? data.references : [];
+    let normR = rawR.map(x => u4GalNormalizeLiveItem(x, "renders")).filter(Boolean);
+    let normF = rawF.map(x => u4GalNormalizeLiveItem(x, "references")).filter(Boolean);
+    if (!rawR.length && !rawF.length) {
+      const flat = Array.isArray(data.items) ? data.items : (Array.isArray(data.photos) ? data.photos : []);
+      flat.forEach(x => {
+        const n = u4GalNormalizeLiveItem(x, "references");
+        if (!n) return;
+        if (n.gallery === "renders") normR.push(n);
+        else normF.push(n);
+      });
+    }
+    st.renders = normR;
+    st.references = normF;
+    st.status = "ok";
+    st.errMsg = "";
+    st.fetchedAt = Date.now();
+  } catch (err) {
+    st.status = "error";
+    st.errMsg = String(err && err.message || "Network error");
+  } finally {
+    if (tid) clearTimeout(tid);
+  }
+  if (current && current.key === roomKey) rerenderRoomGalleryDom(roomKey);
+}
+async function u4CompressImageFallback(file){
+  if (typeof window.__u4CompressImageToJpeg === "function") {
+    return await window.__u4CompressImageToJpeg(file, 1600, 0.85);
+  }
+  return await new Promise((resolve, reject) => {
+    if (file && file.dataUrl) { resolve(file); return; }
+    const fr = new FileReader();
+    fr.onload = () => {
+      const dataUrl = String(fr.result || "");
+      const idx = dataUrl.indexOf("base64,");
+      resolve({ name: (file && file.name) || "photo.jpg", type: (file && file.type) || "image/jpeg", dataUrl: dataUrl, rawBase64: idx >= 0 ? dataUrl.slice(idx + 7) : "" });
+    };
+    fr.onerror = () => reject(new Error("File read failed"));
+    fr.readAsDataURL(file);
+  });
+}
+async function onGalleryFileChosen(roomKey, kind, source){
+  if (!source) return;
+  const draftKey = roomKey + ":" + kind;
+  const compressed = await u4CompressImageFallback(source);
+  if (!compressed || !compressed.dataUrl) return;
+  const existingCap = u4GalleryDrafts[draftKey] ? u4GalleryDrafts[draftKey].caption : "";
+  u4GalleryDrafts[draftKey] = {
+    dataUrl: compressed.dataUrl,
+    rawBase64: compressed.rawBase64 || "",
+    type: compressed.type || "image/jpeg",
+    name: compressed.name || ("u4-" + kind + ".jpg"),
+    caption: existingCap || "",
+    author: getActiveGalleryAuthor(u4GalleryDrafts[draftKey]),
+    uploading: false,
+    statusMsg: "",
+    isErr: false
+  };
+  rerenderRoomGalleryDom(roomKey);
+  setTimeout(() => {
+    const capInp = document.querySelector('section.u4-gal-sec[data-u4-room="'+roomKey+'"][data-u4-gallery="'+kind+'"] .u4-gal-caption-inp');
+    if (capInp) capInp.focus();
+  }, 30);
+}
+async function uploadGalleryDraft(roomKey, kind){
+  const draftKey = roomKey + ":" + kind;
+  const draft = u4GalleryDrafts[draftKey];
+  if (!draft || !draft.dataUrl || draft.uploading) return;
+  draft.uploading = true;
+  draft.isErr = false;
+  draft.statusMsg = t("galUploading");
+  rerenderRoomGalleryDom(roomKey);
+  try {
+    const resp = await fetch(u4GalOrigin() + "/api/unit4/gallery/upload", {
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        room: roomKey,
+        gallery: kind,
+        caption: (draft.caption || "").trim(),
+        author: getActiveGalleryAuthor(draft) || "Crew",
+        filename: draft.name || ("u4-" + kind + "-" + Date.now() + ".jpg"),
+        mime_type: draft.type || "image/jpeg",
+        image_base64: draft.dataUrl
+      })
+    });
+    const data = await resp.json().catch(() => ({}));
+    if (!resp.ok || data.ok === false) {
+      throw new Error(data.error || ("HTTP " + resp.status));
+    }
+    const st = getRoomGalleryState(roomKey);
+    if (Array.isArray(data.renders)) st.renders = data.renders.map(x => u4GalNormalizeLiveItem(x, "renders")).filter(Boolean);
+    if (Array.isArray(data.references)) st.references = data.references.map(x => u4GalNormalizeLiveItem(x, "references")).filter(Boolean);
+    if (!Array.isArray(data.renders) && !Array.isArray(data.references)) {
+      const added = u4GalNormalizeLiveItem(data.item || data.photo || {
+        id: "opt-" + Date.now(),
+        gallery: kind,
+        url: draft.dataUrl,
+        caption: (draft.caption || "").trim() || draft.name,
+        author: getActiveGalleryAuthor(draft) || "Crew",
+        uploaded_at: new Date().toISOString()
+      }, kind);
+      if (added) {
+        if (kind === "renders") st.renders.unshift(added);
+        else st.references.unshift(added);
+      }
+    }
+    st.status = "ok";
+    st.errMsg = "";
+    st.fetchedAt = Date.now();
+    st.notices[kind] = t("galUploaded");
+    delete u4GalleryDrafts[draftKey];
+    rerenderRoomGalleryDom(roomKey);
+    setTimeout(() => { if (st.notices && st.notices[kind]) { delete st.notices[kind]; rerenderRoomGalleryDom(roomKey); } }, 4500);
+    fetchRoomGallery(roomKey, true);
+  } catch (err) {
+    draft.uploading = false;
+    draft.isErr = true;
+    draft.statusMsg = t("galOfflineWarn") + (err && err.message ? " (" + err.message + ")" : "");
+    rerenderRoomGalleryDom(roomKey);
+  }
+}
+function ensureGalleryLightbox(){
+  let lb = document.getElementById("u4GalLightbox");
+  if (lb) return lb;
+  lb = document.createElement("div");
+  lb.id = "u4GalLightbox";
+  lb.className = "u4-lb-backdrop";
+  lb.setAttribute("role", "dialog");
+  lb.setAttribute("aria-modal", "true");
+  lb.setAttribute("aria-labelledby", "u4LbTitle");
+  lb.hidden = true;
+  lb.innerHTML =
+    '<div class="u4-lb-box">' +
+      '<div class="u4-lb-head">' +
+        '<span class="u4-lb-kicker" id="u4LbKicker"></span>' +
+        '<button type="button" class="u4-lb-close" id="u4LbClose" aria-label="Close">✕</button>' +
+      '</div>' +
+      '<div class="u4-lb-stage">' +
+        '<button type="button" class="u4-lb-nav prev" id="u4LbPrev">‹</button>' +
+        '<img id="u4LbImg" alt="">' +
+        '<button type="button" class="u4-lb-nav next" id="u4LbNext">›</button>' +
+      '</div>' +
+      '<div class="u4-lb-foot">' +
+        '<div class="u4-lb-cap-wrap"><div class="u4-lb-title" id="u4LbTitle"></div><div class="u4-lb-sub" id="u4LbSub"></div></div>' +
+        '<a class="u4-lb-ext" id="u4LbExt" href="#"></a>' +
+      '</div>' +
+    '</div>';
+  document.body.appendChild(lb);
+  lb.addEventListener("click", ev => { if (ev.target === lb) closeGalleryLightbox(); });
+  document.getElementById("u4LbClose").addEventListener("click", closeGalleryLightbox);
+  document.getElementById("u4LbPrev").addEventListener("click", () => stepGalleryLightbox(-1));
+  document.getElementById("u4LbNext").addEventListener("click", () => stepGalleryLightbox(1));
+  document.getElementById("u4LbExt").addEventListener("click", () => {
+    const href = document.getElementById("u4LbExt").getAttribute("href") || "";
+    if (href.startsWith("#")) closeGalleryLightbox();
+  });
+  return lb;
+}
+function renderGalleryLightbox(){
+  const items = u4LightboxState.items || [];
+  if (!items.length) return;
+  const idx = ((u4LightboxState.idx % items.length) + items.length) % items.length;
+  u4LightboxState.idx = idx;
+  const it = items[idx];
+  const img = document.getElementById("u4LbImg");
+  const title = document.getElementById("u4LbTitle");
+  const sub = document.getElementById("u4LbSub");
+  const kicker = document.getElementById("u4LbKicker");
+  const ext = document.getElementById("u4LbExt");
+  const prev = document.getElementById("u4LbPrev");
+  const next = document.getElementById("u4LbNext");
+  const cl = document.getElementById("u4LbClose");
+  if (img) { img.src = it.fullUrl || it.thumbUrl || ""; img.alt = it.title || ""; }
+  if (title) title.textContent = it.title || "";
+  if (sub) sub.textContent = it.note || "";
+  if (kicker) kicker.textContent = (u4LightboxState.title ? u4LightboxState.title + " · " : "") + (idx + 1) + " / " + items.length;
+  if (cl) cl.setAttribute("aria-label", t("closeBtn"));
+  if (prev) { prev.hidden = items.length < 2; prev.setAttribute("aria-label", t("lbPrevAria")); }
+  if (next) { next.hidden = items.length < 2; next.setAttribute("aria-label", t("lbNextAria")); }
+  if (ext) {
+    const hasExt = Boolean(it.href && it.href !== it.fullUrl && it.href !== it.thumbUrl);
+    ext.hidden = !hasExt;
+    if (hasExt) {
+      ext.href = it.href;
+      ext.textContent = t("lbOpenDoc");
+      if (it.href.startsWith("#")) { ext.removeAttribute("target"); ext.removeAttribute("rel"); }
+      else { ext.target = "_blank"; ext.rel = "noopener noreferrer"; }
+    }
+  }
+}
+function openGalleryLightbox(items, idx, title){
+  if (!items || !items.length) return;
+  const lb = ensureGalleryLightbox();
+  u4LightboxState = { items: items, idx: idx || 0, title: title || "" };
+  renderGalleryLightbox();
+  lb.hidden = false;
+}
+function stepGalleryLightbox(delta){
+  const lb = document.getElementById("u4GalLightbox");
+  if (!lb || lb.hidden) return;
+  u4LightboxState.idx += delta;
+  renderGalleryLightbox();
+}
+function closeGalleryLightbox(){
+  const lb = document.getElementById("u4GalLightbox");
+  if (lb) lb.hidden = true;
+}
+function ensureGalleryDelegation(){
+  if (typeof document === "undefined" || document.__u4GalleryDelegated) return;
+  document.__u4GalleryDelegated = true;
+  document.addEventListener("click", ev => {
+    const leadImg = ev.target && ev.target.closest ? ev.target.closest(".u4-lead-pic img") : null;
+    if (leadImg) {
+      const fig = leadImg.closest(".u4-lead-pic");
+      const cap = fig && fig.querySelector("figcaption") ? fig.querySelector("figcaption").textContent : "";
+      openGalleryLightbox([{ fullUrl: leadImg.currentSrc || leadImg.src, thumbUrl: leadImg.src, title: cap, note: "" }], 0, current ? pageLabel(current) : "");
+      return;
+    }
+    const sec = ev.target && ev.target.closest ? ev.target.closest("section.u4-gal-sec") : null;
+    if (!sec) return;
+    const roomKey = sec.getAttribute("data-u4-room") || (current && current.key) || "";
+    const kind = sec.getAttribute("data-u4-gallery") || "references";
+    if (ev.target.closest("[data-u4-gal-add]")) {
+      const inp = sec.querySelector(".u4-gal-file-inp");
+      if (inp) { inp.value = ""; inp.click(); }
+      return;
+    }
+    if (ev.target.closest("[data-u4-gal-cam]")) {
+      const camInp = sec.querySelector(".u4-gal-cam-inp");
+      if (typeof window.__u4OpenCameraCapture === "function") {
+        window.__u4OpenCameraCapture({ fallbackInputEl: camInp, onCaptured: res => onGalleryFileChosen(roomKey, kind, res) });
+      } else if (camInp) {
+        camInp.value = ""; camInp.click();
+      }
+      return;
+    }
+    const chip = ev.target.closest("[data-u4-gal-who]");
+    if (chip) {
+      const name = chip.getAttribute("data-u4-gal-who") || "";
+      const draftKey = roomKey + ":" + kind;
+      if (u4GalleryDrafts[draftKey]) u4GalleryDrafts[draftKey].author = name;
+      if (typeof window.__u4SetSavedSenderName === "function") window.__u4SetSavedSenderName(name);
+      else { try { localStorage.setItem("u4_sender_name_v1", name); } catch(e){} }
+      rerenderRoomGalleryDom(roomKey);
+      return;
+    }
+    if (ev.target.closest("[data-u4-gal-cancel]")) {
+      delete u4GalleryDrafts[roomKey + ":" + kind];
+      rerenderRoomGalleryDom(roomKey);
+      return;
+    }
+    if (ev.target.closest("[data-u4-gal-submit]")) {
+      uploadGalleryDraft(roomKey, kind);
+      return;
+    }
+    if (ev.target.closest("[data-u4-gal-retry]")) {
+      fetchRoomGallery(roomKey, true);
+      return;
+    }
+    const card = ev.target.closest("[data-u4-gal-idx]");
+    if (card) {
+      const idx = parseInt(card.getAttribute("data-u4-gal-idx"), 10) || 0;
+      const items = getRoomGalleryMergedItems(roomKey, kind);
+      openGalleryLightbox(items, idx, kind === "renders" ? t("rendersHeading") : t("referencesHeading"));
+    }
+  });
+  document.addEventListener("change", ev => {
+    const inp = ev.target && ev.target.closest ? ev.target.closest("section.u4-gal-sec input[type=file]") : null;
+    if (!inp || !inp.files || !inp.files[0]) return;
+    const sec = inp.closest("section.u4-gal-sec");
+    if (!sec) return;
+    const roomKey = sec.getAttribute("data-u4-room") || (current && current.key) || "";
+    const kind = sec.getAttribute("data-u4-gallery") || "references";
+    onGalleryFileChosen(roomKey, kind, inp.files[0]);
+  });
+  document.addEventListener("input", ev => {
+    const capInp = ev.target && ev.target.closest ? ev.target.closest("section.u4-gal-sec .u4-gal-caption-inp") : null;
+    if (!capInp) return;
+    const sec = capInp.closest("section.u4-gal-sec");
+    if (!sec) return;
+    const draftKey = (sec.getAttribute("data-u4-room") || "") + ":" + (sec.getAttribute("data-u4-gallery") || "references");
+    if (u4GalleryDrafts[draftKey]) u4GalleryDrafts[draftKey].caption = capInp.value;
+  });
+  document.addEventListener("keydown", ev => {
+    const lb = document.getElementById("u4GalLightbox");
+    if (!lb || lb.hidden) return;
+    if (ev.key === "ArrowLeft") { ev.preventDefault(); stepGalleryLightbox(-1); }
+    else if (ev.key === "ArrowRight") { ev.preventDefault(); stepGalleryLightbox(1); }
+  });
+}
+function visualsBlock(key){ return roomGalleriesHtml(key); }
 
 function crewSplit(md){
   const lines = String(md||"").replace(/\r/g,"").split("\n"); let title=""; const secs=[]; let cur={h:"",body:[]};
@@ -1532,8 +2197,12 @@ function getRoomSubsections(key){
   if (CHECKLISTS[key]) {
     list.push({id:"sec-checklist", en:"Checklist", es:"Lista de trabajo"});
   }
-  if (UNIFIED_VISUALS[key]) {
-    list.push({id:"sec-visuals", en:"Visuals", es:"Vistas"});
+  const pg = PAGES.find(x=>x.key===key);
+  if (pg && pg.group==="Projects") {
+    list.push({id:"sec-renders", en:"Renders & Mockups", es:"Renders y maquetas"});
+    list.push({id:"sec-visuals", en:"Reference Photos", es:"Fotos de referencia"});
+  } else if (UNIFIED_VISUALS[key]) {
+    list.push({id:"sec-visuals", en:"Reference Photos", es:"Fotos de referencia"});
   }
   const activeDocs = (DOCS[key]||[]).filter(d=>!d.history && isDocVisibleInLang(d, (DOCS[key]||[]).filter(x=>!x.history), LANG));
   if (activeDocs.length) {
@@ -1568,10 +2237,11 @@ function packetCardsBlock(list, showRoom){
   const es = LANG==="es";
   const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   return '<section class="u4-packets" id="sec-packets"><h2>'+(es?"Guías":"Guides")+'</h2><div class="u4-packet-list">'
-    + list.map(pk=>{ const room = showRoom ? PAGES.find(x=>x.key===pk.room) : null;
-        return '<a class="u4-packet" href="'+esc(packetHref(pk))+'">'
+    + list.map(pk=>{ const room = showRoom ? PAGES.find(x=>x.key===pk.room) : null; const isInt = Boolean(packetHostedPlanUrl(pk));
+        const baseAttr = isInt ? ' data-u4-plan-base="'+esc(KITCHEN_HOSTED_LINKS[packetDocId(pk)])+'"' : '';
+        return '<a class="u4-packet'+(isInt?' is-interactive':'')+'" href="'+esc(packetHref(pk))+'"'+baseAttr+'>'
           + (room?'<span class="u4-packet-room">'+esc(pageLabel(room))+'</span>':'')
-          + '<span class="u4-packet-t">'+esc(packetTitle(pk))+'</span>'
+          + '<span class="u4-packet-t"><span>'+esc(packetTitle(pk))+'</span>'+(isInt?interactivePillHtml():'')+'</span>'
           + (packetNote(pk)?'<span class="u4-packet-n">'+esc(packetNote(pk))+'</span>':'')+'</a>'; }).join("")
     + '</div></section>';
 }
@@ -1611,7 +2281,9 @@ function docsBlock(key){
     const dl = d.docLang || d.lang || "both";
     const enOnlyBadge = (LANG==="es" && dl==="en") ? ' <span class="k">'+esc(t("englishOnlyTag"))+'</span>' : '';
     const inPrevTag = inPrevIds.has(d.id) ? ' <span class="u4-in-prev-tag">'+esc(t("inPreviews"))+'</span>' : '';
-    return '<li><a href="'+docHref(d)+'"'+((isPdf(d)||isInteractiveDoc(d)||docHref(d).startsWith("#"))?'':' target="_blank" rel="noopener"')+'>'+esc(L.t)+'</a> <span class="k'+(isInteractiveDoc(d)?' k-interactive':'')+'">'+docKind(d)+(L.date?' · '+niceDate(L.date):'')+'</span>'+(d.review?' <span class="k">'+esc(t("awaitingReview"))+'</span>':'')+enOnlyBadge+inPrevTag+'</li>';
+    const isInt = isInteractiveDoc(d);
+    const baseAttr = isInt ? ' data-u4-plan-base="'+esc(KITCHEN_HOSTED_LINKS[d.id])+'"' : '';
+    return '<li><a'+(isInt?' class="is-interactive"':'')+' href="'+docHref(d)+'"'+baseAttr+((isPdf(d)||isInt||docHref(d).startsWith("#"))?'':' target="_blank" rel="noopener"')+'><span class="u4-doc-title">'+esc(L.t)+'</span>'+(isInt?interactivePillHtml():'')+'</a> <span class="k'+(isInt?' k-interactive':'')+'">'+docKind(d)+(L.date?' · '+niceDate(L.date):'')+'</span>'+(d.review?' <span class="k">'+esc(t("awaitingReview"))+'</span>':'')+enOnlyBadge+inPrevTag+'</li>';
   }).join("");
   const history=archived.length?'<details><summary>'+esc(t("historyHeading"))+' ('+archived.length+')</summary><ul>'+rows(archived)+'</ul></details>':"";
   return '<section class="docs" id="sec-docs"><h2>'+esc(t("documentsHeading"))+' ('+active.length+')</h2>'+prevStrip+'<ul>'+rows(active)+'</ul>'+history+'</section>';
@@ -1792,13 +2464,15 @@ function appendRailRoomNode(p, isChildSubpage){
         dList.hidden = !dOpen;
         s.docs.forEach(d => {
           const da = document.createElement("a");
-          da.className = "sub rail-doc-link";
+          const isInt = isInteractiveDoc(d);
+          da.className = "sub rail-doc-link" + (isInt ? " is-interactive" : "");
           da.href = docHref(d);
+          if (isInt) da.dataset.u4PlanBase = KITCHEN_HOSTED_LINKS[d.id];
           da.dataset.doc = d.id;
-          if (!isPdf(d) && !isInteractiveDoc(d) && !docHref(d).startsWith("#")) { da.target = "_blank"; da.rel = "noopener"; }
+          if (!isPdf(d) && !isInt && !docHref(d).startsWith("#")) { da.target = "_blank"; da.rel = "noopener"; }
           const dl = docLabel(d).t;
           da.title = dl;
-          da.innerHTML = '<span class="rail-doc-label">' + (isPdf(d) ? "📄 " : "↗ ") + dl.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])) + '</span>';
+          da.innerHTML = '<span class="rail-doc-label">' + (isPdf(d) ? "📄 " : (isInt ? "🧭 " : "↗ ")) + dl.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])) + '</span>' + (isInt ? interactivePillHtml("is-mini") : "");
           dList.appendChild(da);
         });
         dBtn.addEventListener("click", function(ev){
@@ -1956,6 +2630,13 @@ function syncChromeLabels(){
   if (bBtn) bBtn.textContent = t("backBtn");
   const lBtn = document.getElementById("langBtn");
   if (lBtn) { lBtn.textContent = t("langToggleLabel"); lBtn.setAttribute("aria-label", t("langToggleAria")); }
+  const thBtn = document.getElementById("themeBtn");
+  if (thBtn) {
+    const isDark = THEME === "dark";
+    thBtn.textContent = isDark ? t("themeToLightLabel") : t("themeToDarkLabel");
+    thBtn.setAttribute("aria-label", isDark ? t("themeToLightAria") : t("themeToDarkAria"));
+    thBtn.setAttribute("aria-pressed", isDark ? "true" : "false");
+  }
   const refBtn = document.getElementById("refresh");
   if (refBtn) refBtn.textContent = t("loadLatestDrive");
   const fh = document.getElementById("u4FieldHeading");
@@ -1990,6 +2671,13 @@ function syncChromeLabels(){
   if (typeof window.__u4SyncFloatingAiUi === "function") window.__u4SyncFloatingAiUi();
 }
 
+function setTheme(next){
+  THEME = (next === "dark") ? "dark" : "light";
+  try { localStorage.setItem("u4theme", THEME); } catch(e){}
+  document.documentElement.setAttribute("data-theme", THEME);
+  syncChromeLabels();
+  enhanceInteractiveLinks(document);
+}
 function setLang(l){
   LANG = l==="es" ? "es" : "en";
   try{ localStorage.setItem("u4lang", LANG); }catch(e){}
@@ -2145,6 +2833,8 @@ function show(key){
   document.body.classList.toggle("is-home", p.key==="home");
   document.body.classList.toggle("is-crew", isCrew);
   document.getElementById("doc").innerHTML = body;
+  enhanceInteractiveLinks(document.getElementById("doc"));
+  if (isCrew) { ensureGalleryDelegation(); fetchRoomGallery(p.key, false); }
   document.getElementById("path").textContent = "";
   if (l) setStatus("live", t("latestFromDrive") + " · " + new Date(l.at).toLocaleString([], {month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}), false);
   else setStatus("", t("savedCopy") + (mcp ? " · " + t("checkingDrive") : ""), false);
@@ -2221,7 +2911,7 @@ document.addEventListener("click", e=>{
     if (href.startsWith("#") && location.hash.slice(1) === href.slice(1)) { e.preventDefault(); show(href.slice(1)); }
   }
 });
-document.addEventListener("keydown",e=>{ if(e.key==="Escape") setMenu(false); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") { setMenu(false); closeGalleryLightbox(); } });
 var navDepth=0;
 const backBtn=document.getElementById("backBtn");
 backBtn.addEventListener("click",()=>{ if(navDepth>0){ history.back(); return; } const h=location.hash.slice(1); location.hash = h.startsWith("decisions:") ? "decisions" : h.startsWith("doc:") ? (window.__backTo||"home") : "home"; });
@@ -4051,6 +4741,8 @@ window.toggleVoiceCompanionSession = toggleVoiceCompanionSession;
 
 show(location.hash.slice(1) || "home");
 document.getElementById("langBtn").addEventListener("click", ()=>setLang(LANG==="es" ? "en" : "es"));
+var __themeBtn = document.getElementById("themeBtn");
+if (__themeBtn) __themeBtn.addEventListener("click", ()=>setTheme(THEME==="dark" ? "light" : "dark"));
 if (LANG==="es") setLang("es"); else document.documentElement.lang="en";
 
 // live Drive reads light up when available
@@ -4627,7 +5319,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         "Unit 4 Nov 20 Wiki, Interactive Plans & Backend Architecture:\n" +
         "- Pages (16 allowed rooms): " + ALLOWED_ROOMS.join(", ") + ".\n" +
         "- Plain-language crew guides: Oven / Range Run has 4 standalone 1-page Zephyr hood test-hang visual sheets + live Interactive Range & Hood Wall Plan (./plans/kitchen-west-ks4/index.html).\n" +
-        "- All 5 interactive parametric plan URLs: ./plans/kitchen-west-ks4/, ./plans/kitchen-floor-plan/, ./plans/attic-hatch/, ./plans/hvac-layout/, ./plans/murphy-door/.\n" +
+        "- All 6 interactive parametric plan URLs: ./plans/kitchen-west-ks4/, ./plans/kitchen-floor-plan/, ./plans/kitchen-electrical/, ./plans/attic-hatch/, ./plans/hvac-layout/, ./plans/murphy-door/.\n" +
         "- Wiki build workflow: content/pages/<room>/ + content/data/ + src/template.html -> python3 tools/build.py -> index.html (never hand-edit index.html).\n" +
         "- Live backends: Mac mini :8791 (https://mac-mini.tailcf4007.ts.net) serves /api/unit4/voice-token (15 tools), /api/unit4/knowledge, /api/unit4/wiki-intake, /api/unit4/healthz; Mac mini :8444 (tailnet-only, never Funnel) persists live interactive plan edits with EOD Accept/Reject review."
       );
@@ -5925,7 +6617,8 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   }
 
 
-@@U4:RAW:data/concept-renders.js@@
+  window.__u4CompressImageToJpeg = u4CompressImageToJpeg;
+  window.__u4OpenCameraCapture = openCameraCapture;
 
   function getConceptRendersForRoom(roomKey) {
     var rk = String(roomKey || "").trim().toLowerCase();
@@ -6023,7 +6716,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       }
       mountRoomConceptRendersGallery();
       var items = getConceptRendersForRoom(rk);
-      var gal = document.getElementById("sec-visuals") || document.getElementById("u4RoomConceptRenders");
+      var gal = document.getElementById("sec-renders") || document.getElementById("sec-visuals");
       if (gal && gal.scrollIntoView) gal.scrollIntoView({ behavior: "smooth", block: "nearest" });
       appendChatRenderLinks(items, rk);
       appendNavEventChip((currentUiLang() === "es" ? "Vistas conceptuales: " : "Concept renders: ") + rk);
@@ -7175,7 +7868,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
                 parts: [{
                   text: "System guide context for Unit 4 AI Helper (Voice Agent R8 · 15 tools):\n" +
                     "- Reply concisely and naturally in whatever language the speaker uses (English, Espa\u00f1ol, etc.) automatically.\n" +
-                    "- Proactively help the user navigate all 16 rooms (" + ALLOWED_ROOMS.join(", ") + ") and all 5 interactive plans (./plans/kitchen-west-ks4/, ./plans/kitchen-floor-plan/, ./plans/attic-hatch/, ./plans/hvac-layout/, ./plans/murphy-door/): use navigate_room, open_document, go_to_document_page, and focus_section.\n" +
+                    "- Proactively help the user navigate all 16 rooms (" + ALLOWED_ROOMS.join(", ") + ") and all 6 interactive plans (./plans/kitchen-west-ks4/, ./plans/kitchen-floor-plan/, ./plans/kitchen-electrical/, ./plans/attic-hatch/, ./plans/hvac-layout/, ./plans/murphy-door/): use navigate_room, open_document, go_to_document_page, and focus_section.\n" +
                     "- Use query_wiki_and_backend_knowledge whenever asked about specs, other rooms, interactive plans, the modular content/ build workflow, or the :8791/:8444 Mac mini backend.\n" +
                     "- Use propose_wiki_or_plan_edit whenever someone wants to change a measurement, flag a clash, or edit a wiki/plan item — ALWAYS read back the exact proposal first and wait for spoken_confirmation=true before submitting, and mention the room's interactive plan link if available.\n" +
                     "- Users can attach or take site photos directly inside Voice Chat; inspect attached photos directly, and know that the most recent Voice Chat photo is automatically saved into to-triage/ when calling submit_voice_memo, propose_wiki_or_plan_edit, or fill_draft_note.\n" +
