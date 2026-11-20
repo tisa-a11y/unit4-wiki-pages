@@ -43,6 +43,22 @@
 .u4-hm-room.is-area .u4-hm-prog{margin-left:auto}
 .u4-hm-packet.is-deep{padding-left:44px}
 .u4-hm-note{display:block;font-size:13.5px;color:var(--muted);margin-top:2px}
+/* Room (bold) > its own plans and its subsections (level 1) > each subsection's guides and plans (level 2). */
+.u4-hm-room.is-child,.u4-hm-room.is-area{font-size:16px!important;font-weight:600!important;padding-left:30px!important;min-height:46px;color:var(--fg)}
+.u4-hm-packet{font-size:15.5px!important;font-weight:400!important;padding-left:30px!important;color:var(--fg)!important;min-height:46px}
+.u4-hm-packet.is-deep{padding-left:52px!important}
+.u4-hm-room.is-child::after{content:"\203A";font-size:20px;color:var(--muted);margin-left:6px}
+.u4-hm-room.is-child .u4-hm-prog{margin-left:auto}
+.u4-hm-room.is-area::after{font-size:20px}
+.u4-hm-note{padding-left:0}
+nav.rail a.rail-room{display:block;font-weight:700!important;font-size:15px!important;padding:9px 10px!important;margin:10px 0 0!important;color:var(--fg);border-radius:8px;text-decoration:none}
+nav.rail a.rail-top{display:block;font-weight:600;font-size:14.5px;padding:8px 10px;color:var(--fg);border-radius:8px;text-decoration:none}
+nav.rail a.rail-leaf{display:block;font-weight:400!important;font-size:14px!important;padding:7px 10px 7px 22px!important;margin:0!important;color:var(--fg)!important;border:0!important;border-radius:8px;text-decoration:none;background:none}
+nav.rail a.rail-leaf[aria-current="page"],nav.rail a.rail-room[aria-current="page"],nav.rail a.rail-top[aria-current="page"]{background:var(--accent)!important;color:var(--panel)!important;font-weight:600!important}
+nav.rail a.rail-leaf.rail-area{font-weight:600!important}
+nav.rail a.rail-leaf2{display:block;font-weight:400!important;font-size:13.5px!important;padding:6px 10px 6px 38px!important;margin:0!important;color:var(--fg)!important;border:0!important;border-radius:8px;text-decoration:none;background:none}
+nav.rail a.rail-leaf2[aria-current="page"]{background:var(--accent)!important;color:var(--panel)!important;font-weight:600!important}
+nav.rail .rail-planning-grp{margin-top:22px}
 .u4-packets{margin:22px 0}
 .u4-packet-list{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
 .u4-packet{display:flex;flex-direction:column;gap:3px;padding:14px 16px;min-height:60px;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;background:var(--panel);text-decoration:none;color:var(--fg)}
@@ -1262,8 +1278,8 @@ function homeMenuBlock(){
   const es = LANG==="es";
   const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const prog = k => { const it=(CHECKLISTS[k]&&CHECKLISTS[k].items)||[]; return it.length ? '<span class="u4-hm-prog">'+it.filter(x=>x[0]).length+'/'+it.length+'</span>' : ''; };
-  const packets = k => packetsFor(k).map(pk=>'<a class="u4-hm-packet" href="#'+pk.key+'">'+esc(packetTitle(pk))+'</a>').join("");
-  const room = (p, child) => '<a class="u4-hm-room'+(child?' is-child':'')+'" href="#'+p.key+'"><span>'+esc(pageLabel(p))+'</span>'+prog(p.key)+'</a>'+packets(p.key);
+  const packets = (k, deep) => packetsFor(k).map(pk=>'<a class="u4-hm-packet'+(deep?' is-deep':'')+'" href="#'+pk.key+'">'+esc(packetTitle(pk))+'</a>').join("");
+  const room = (p, child) => '<a class="u4-hm-room'+(child?' is-child':'')+'" href="#'+p.key+'"><span>'+esc(pageLabel(p))+'</span>'+prog(p.key)+'</a>'+packets(p.key, child);
   const tops = PAGES.filter(x=>x.group==="Projects" && !x.parent);
   const groups = tops.map(p=>'<div class="u4-hm-group">'+room(p,false)+PAGES.filter(c=>c.parent===p.key).map(c=>room(c,true)).join("")+'</div>').join("");
   const plan = PAGES.filter(x=>x.key==="roadmap"||x.key==="decisions").map(p=>'<a href="#'+p.key+'">'+esc(pageLabel(p))+'</a>').join(" · ");
@@ -1601,115 +1617,21 @@ function resolvePageKey(rawKey){
 window.resolvePageKey = resolvePageKey;
 
 function appendRailRoomNode(p, isChildSubpage){
-  const es = LANG==="es";
-  const row = document.createElement("div");
-  row.className = "rail-item-row" + (isChildSubpage ? " is-child-row" : "");
+  // One room = one group in the menu. Its areas and plans follow at one level, lighter than the room name.
+  const isRoom = p.group==="Projects" && !isChildSubpage;
   const a = document.createElement("a");
-  a.href = "#" + p.key;
-  a.dataset.key = p.key;
-  if (p.parent) a.dataset.parentKey = p.parent;
-  const lbl = pageLabel(p);
-  if (isChildSubpage) {
-    a.className = "sub subpage-link subpage-pinned rail-room-link";
-    const tSpan = document.createElement("span");
-    tSpan.className = "subpage-title";
-    tSpan.textContent = "↳ " + lbl;
-    a.appendChild(tSpan);
-  } else {
-    a.className = "rail-room-link";
-    a.textContent = lbl;
-  }
-  row.appendChild(a);
-
-  const subsecs = getRoomSubsections(p.key);
-  if (subsecs.length) {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "rail-toggle";
-    btn.dataset.toggleFor = p.key;
-    btn.setAttribute("aria-expanded", "false");
-    btn.setAttribute("aria-label", (es ? "Subcategorías de " : "Subcategories for ") + lbl);
-    btn.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>';
-    btn.addEventListener("click", function(ev){
-      ev.preventDefault();
-      ev.stopPropagation();
-      const box = rail.querySelector('.subdocs[data-for="'+p.key+'"]');
-      const nowOpen = box ? box.hidden : true;
-      if (nowOpen) { subExpanded.add(p.key); subCollapsed.delete(p.key); }
-      else { subCollapsed.add(p.key); subExpanded.delete(p.key); }
-      syncSubs();
-    });
-    row.appendChild(btn);
-  }
-  rail.appendChild(row);
-  packetsFor(p.key).forEach(pk=>{ const pa=document.createElement("a"); pa.className="sub rail-packet-link"+(isChildSubpage?" is-child-packet":""); pa.href="#"+pk.key; pa.dataset.key=pk.key; pa.textContent="▤ "+packetTitle(pk); rail.appendChild(pa); });
-
-  if (subsecs.length) {
-    const subBox = document.createElement("div");
-    subBox.className = "subdocs" + (isChildSubpage ? " is-child-subdocs" : "");
-    subBox.dataset.for = p.key;
-    subBox.hidden = true;
-    subsecs.forEach(s => {
-      if (s.isDocsGroup && Array.isArray(s.docs) && s.docs.length) {
-        const wrap = document.createElement("div");
-        wrap.className = "rail-subdocs-group";
-        const dRow = document.createElement("div");
-        dRow.className = "rail-subcat-row";
-        const sa = document.createElement("a");
-        sa.className = "sub subsec-link";
-        sa.href = "#" + p.key + "/" + s.id;
-        sa.dataset.room = p.key;
-        sa.dataset.sec = s.id;
-        sa.textContent = "· " + (es ? s.es : s.en);
-        dRow.appendChild(sa);
-
-        const dBtn = document.createElement("button");
-        dBtn.type = "button";
-        dBtn.className = "rail-toggle";
-        const dOpen = docTreeExpanded.has(p.key) || (subActive === p.key);
-        dBtn.setAttribute("aria-expanded", dOpen ? "true" : "false");
-        dBtn.setAttribute("aria-label", (es ? "Ver documentos de " : "Toggle documents for ") + lbl);
-        dBtn.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>';
-        dRow.appendChild(dBtn);
-        wrap.appendChild(dRow);
-
-        const dList = document.createElement("div");
-        dList.className = "rail-doc-list";
-        dList.hidden = !dOpen;
-        s.docs.forEach(d => {
-          const da = document.createElement("a");
-          da.className = "sub rail-doc-link";
-          da.href = docHref(d);
-          da.dataset.doc = d.id;
-          if (!isPdf(d) && !docHref(d).startsWith("#")) { da.target = "_blank"; da.rel = "noopener"; }
-          const dl = docLabel(d).t;
-          da.title = dl;
-          da.innerHTML = '<span class="rail-doc-label">' + (isPdf(d) ? "📄 " : "↗ ") + dl.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])) + '</span>';
-          dList.appendChild(da);
-        });
-        dBtn.addEventListener("click", function(ev){
-          ev.preventDefault();
-          ev.stopPropagation();
-          const next = dList.hidden;
-          dList.hidden = !next;
-          dBtn.setAttribute("aria-expanded", next ? "true" : "false");
-          if (next) docTreeExpanded.add(p.key);
-          else docTreeExpanded.delete(p.key);
-        });
-        wrap.appendChild(dList);
-        subBox.appendChild(wrap);
-      } else {
-        const sa = document.createElement("a");
-        sa.className = "sub subsec-link";
-        sa.href = "#" + p.key + "/" + s.id;
-        sa.dataset.room = p.key;
-        sa.dataset.sec = s.id;
-        sa.textContent = "· " + (es ? s.es : s.en);
-        subBox.appendChild(sa);
-      }
-    });
-    rail.appendChild(subBox);
-  }
+  a.href = "#" + p.key; a.dataset.key = p.key; if (p.parent) a.dataset.parentKey = p.parent;
+  a.className = "rail-room-link " + (isRoom ? "rail-room" : (isChildSubpage ? "rail-leaf rail-area" : "rail-top"));
+  a.textContent = pageLabel(p);
+  rail.appendChild(a);
+  packetsFor(p.key).forEach(pk=>{ const pa=document.createElement("a"); pa.className="rail-packet-link "+(isChildSubpage?"rail-leaf2":"rail-leaf"); pa.href="#"+pk.key; pa.dataset.key=pk.key; pa.textContent=packetTitle(pk); rail.appendChild(pa); });
+}
+function appendPlanningNav(){
+  if (!rail) return;
+  const moved = ["roadmap","decisions"].map(k=>rail.querySelector('a[data-key="'+k+'"]')).filter(Boolean);
+  if (!moved.length) return;
+  const g = document.createElement("div"); g.className = "grp rail-planning-grp"; g.textContent = LANG==="es" ? "Planeación" : "Planning"; rail.appendChild(g);
+  moved.forEach(a=>rail.appendChild(a));
 }
 
 function renderNav(){
@@ -1811,6 +1733,8 @@ function renderNav(){
   });
   syncSubs(activeKey, subActiveSec);
 }
+const __renderNavBase = renderNav;
+renderNav = function(){ __renderNavBase(); appendPlanningNav(); if (typeof markActivePacket==="function") { const pk = packetByKey(location.hash.slice(1)); if (pk) markActivePacket(pk.key); } };
 
 function syncSubs(activeKey, activeSecId){
   if (activeKey!==undefined) {
