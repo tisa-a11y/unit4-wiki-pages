@@ -1,6 +1,6 @@
 {
   "schema": "unit4-todoist-wiki-sync-index-v1",
-  "updatedAt": "2026-11-20T01:48:44.628408+00:00",
+  "updatedAt": "2026-11-20T02:00:40.040828+00:00",
   "todoistBoard": {
     "name": "Full 1231 11th Avenue Remodel",
     "projectId": "6hcMQpGhXWprg6m7",
@@ -28,8 +28,8 @@
   },
   "summary": {
     "roomCount": 9,
-    "checklistItemCount": 116,
-    "uniqueLinkedTodoistCards": 97
+    "checklistItemCount": 121,
+    "uniqueLinkedTodoistCards": 102
   },
   "rooms": [
     {
@@ -1653,14 +1653,84 @@
       "title": "HVAC",
       "esTitle": "Climatización",
       "driveChecklistId": "1dYEurki2VQ8Zd5yxkRA4UzVL2uGJwMdG",
-      "note": "Paused. These links preserve the deferred work; they are not instructions to restart it.",
-      "noteEs": "En pausa. Los enlaces conservan el trabajo pendiente; no indican reiniciarlo.",
+      "note": "Hatch planning accepted/in progress; John provides four bounded site checks. Retain closet access until low-voltage AND permanent hatch. Broader installation remains paused.",
+      "noteEs": "Plan del acceso aceptado/en curso; John confirma cuatro puntos en obra. Conservar clóset hasta bajo voltaje Y acceso permanente. Instalación general en pausa.",
       "items": [
         {
-          "id": "hvac-todoist-reconcile-01",
+          "id": "hvac-nov19-3d2d8a04b9",
+          "done": false,
+          "en": "Plans & Measurements — hatch plan accepted/in progress; John supplies four labeled site checks: location/context, 24 × 36 finished-clear markout/offsets, attic framing/obstructions, and furnace route/headroom/turning. Keep closet access until low-voltage cable AND permanent hatch; no cutting release",
+          "es": "Planes y Medidas — plan de acceso aceptado/en curso; John aporta cuatro comprobaciones rotuladas: lugar/contexto, trazo libre terminado de 24 × 36 con distancias, estructura/obstáculos arriba y recorrido/altura/giro del equipo. Conservar acceso del clóset hasta cable de bajo voltaje Y acceso permanente; sin autorización de cortes",
+          "todoistTaskIds": [
+            "6j3RvWmJ329qPCc7"
+          ],
+          "todoistUrls": [
+            "https://app.todoist.com/app/task/6j3RvWmJ329qPCc7"
+          ],
+          "sourcePath": "hvac/SPEC.md",
+          "checklistPath": "hvac/CHECKLIST.md"
+        },
+        {
+          "id": "hvac-nov19-dbf792a242",
+          "done": false,
+          "en": "Build permanent hallway hatch, finished clear opening 24 × 36 in",
+          "es": "Construir acceso permanente de pasillo con paso libre terminado de 24 × 36 pulgadas; sujeto a ubicación y sistema revisados",
+          "todoistTaskIds": [
+            "6j3Rf8FVhMVQ7vQf"
+          ],
+          "todoistUrls": [
+            "https://app.todoist.com/app/task/6j3Rf8FVhMVQ7vQf"
+          ],
+          "sourcePath": "hvac/SPEC.md",
+          "checklistPath": "hvac/CHECKLIST.md"
+        },
+        {
+          "id": "hvac-nov19-9bc0239f0d",
+          "done": false,
+          "en": "Frame bedroom closet opening with timing around temporary HVAC access",
+          "es": "Enmarcar abertura del clóset según paso temporal del equipo; no cerrar techo hasta cable de bajo voltaje Y acceso permanente",
+          "todoistTaskIds": [
+            "6j3Rf89g8M6hPPx7"
+          ],
+          "todoistUrls": [
+            "https://app.todoist.com/app/task/6j3Rf89g8M6hPPx7"
+          ],
+          "sourcePath": "hvac/SPEC.md",
+          "checklistPath": "hvac/CHECKLIST.md"
+        },
+        {
+          "id": "hvac-nov19-d350b2a97c",
+          "done": false,
+          "en": "Build continuous secured wooden walkway for the whole attic service route",
+          "es": "Construir paso continuo de madera asegurado en todo el recorrido de servicio del ático",
+          "todoistTaskIds": [
+            "6j3RvWq3q6RRFXf7"
+          ],
+          "todoistUrls": [
+            "https://app.todoist.com/app/task/6j3RvWq3q6RRFXf7"
+          ],
+          "sourcePath": "hvac/SPEC.md",
+          "checklistPath": "hvac/CHECKLIST.md"
+        },
+        {
+          "id": "hvac-nov19-474a382131",
+          "done": false,
+          "en": "John — install one permanent switched attic light",
+          "es": "John — instalar una luz permanente de ático con apagador",
+          "todoistTaskIds": [
+            "6hvjQJgpw2W5VcQf"
+          ],
+          "todoistUrls": [
+            "https://app.todoist.com/app/task/6hvjQJgpw2W5VcQf"
+          ],
+          "sourcePath": "hvac/SPEC.md",
+          "checklistPath": "hvac/CHECKLIST.md"
+        },
+        {
+          "id": "hvac-nov19-c0927dcc40",
           "done": true,
-          "en": "Trane / American Standard furnace model recorded as selected",
-          "es": "Modelo Trane / American Standard registrado como elegido",
+          "en": "Historical Trane / American Standard selection record retained; current exact model remains unresolved",
+          "es": "Se conserva registro histórico de selección Trane / American Standard; el modelo exacto actual sigue sin resolver",
           "todoistTaskIds": [],
           "todoistUrls": [],
           "sourcePath": "hvac/SPEC.md",
@@ -1670,7 +1740,7 @@
           "id": "hvac-todoist-reconcile-02",
           "done": false,
           "en": "After NEXT's second visit, obtain the permanent attic-hatch location",
-          "es": "Después de la segunda visita de NEXT, obtener ubicación del acceso permanente al ático",
+          "es": "Después de la segunda visita de NEXT, conciliar la ubicación permanente con el plan en curso; cita no confirmada",
           "todoistTaskIds": [],
           "todoistUrls": [],
           "sourcePath": "hvac/SPEC.md",
@@ -1680,7 +1750,7 @@
           "id": "hvac-todoist-reconcile-03",
           "done": false,
           "en": "When Tisa restarts HVAC, reconcile equipment, routes, registers and electrical coordination before work",
-          "es": "Cuando Tisa reactive climatización, conciliar equipo, recorridos, rejillas y coordinación eléctrica",
+          "es": "Cuando Tisa reactive la instalación HVAC, conciliar equipo, recorridos, rejillas y coordinación eléctrica; plan acotado del acceso ya en curso",
           "todoistTaskIds": [
             "6hvj3CgXpVqrJgvf"
           ],
@@ -2471,6 +2541,24 @@
       "governingDocs": [
         "bathroom/CHECKLIST.md",
         "bathroom/SPEC.md"
+      ]
+    },
+    "6j3hQfxHXHJhWgG7": {
+      "taskId": "6j3hQfxHXHJhWgG7",
+      "url": "https://todoist.com/showTask?id=6j3hQfxHXHJhWgG7",
+      "rooms": [
+        "kitchen"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "John — P1 labeled photos for the latest mockup, due November 19 at 5:43 p.m. Pacific: full L; fridge return/corner and swings; sink/window datum; 6-inch versus 12-inch clear passage including countertop; uppers and pie-safe shrink. Label each image and its purpose; direct link + description. One evidence set also satisfies the existing photo task; all holds remain."
+      ],
+      "wikiItemsEs": [
+        "John — P1 fotos rotuladas del render reciente, vence 19 de noviembre a las 5:43 p. m. del Pacífico: L completa; retorno/esquina del refrigerador y aperturas; referencia fregadero/ventana; paso libre con opciones de 6 y 12 pulgadas incluida cubierta; alacenas y reducción del pie-safe. Rotular cada imagen y su propósito; enlace individual + descripción. Un juego también satisface la tarea de fotos existente; siguen las retenciones."
+      ],
+      "governingDocs": [
+        "kitchen/CHECKLIST.md",
+        "kitchen/SPEC.md"
       ]
     },
     "6j3RXQ6hVVH87CR7": {
@@ -3453,6 +3541,96 @@
         "paint-floors/SPEC.md"
       ]
     },
+    "6j3RvWmJ329qPCc7": {
+      "taskId": "6j3RvWmJ329qPCc7",
+      "url": "https://app.todoist.com/app/task/6j3RvWmJ329qPCc7",
+      "rooms": [
+        "hvac"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Plans & Measurements — hatch plan accepted/in progress; John supplies four labeled site checks: location/context, 24 × 36 finished-clear markout/offsets, attic framing/obstructions, and furnace route/headroom/turning. Keep closet access until low-voltage cable AND permanent hatch; no cutting release"
+      ],
+      "wikiItemsEs": [
+        "Planes y Medidas — plan de acceso aceptado/en curso; John aporta cuatro comprobaciones rotuladas: lugar/contexto, trazo libre terminado de 24 × 36 con distancias, estructura/obstáculos arriba y recorrido/altura/giro del equipo. Conservar acceso del clóset hasta cable de bajo voltaje Y acceso permanente; sin autorización de cortes"
+      ],
+      "governingDocs": [
+        "hvac/CHECKLIST.md",
+        "hvac/SPEC.md"
+      ]
+    },
+    "6j3Rf8FVhMVQ7vQf": {
+      "taskId": "6j3Rf8FVhMVQ7vQf",
+      "url": "https://app.todoist.com/app/task/6j3Rf8FVhMVQ7vQf",
+      "rooms": [
+        "hvac"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Build permanent hallway hatch, finished clear opening 24 × 36 in"
+      ],
+      "wikiItemsEs": [
+        "Construir acceso permanente de pasillo con paso libre terminado de 24 × 36 pulgadas; sujeto a ubicación y sistema revisados"
+      ],
+      "governingDocs": [
+        "hvac/CHECKLIST.md",
+        "hvac/SPEC.md"
+      ]
+    },
+    "6j3Rf89g8M6hPPx7": {
+      "taskId": "6j3Rf89g8M6hPPx7",
+      "url": "https://app.todoist.com/app/task/6j3Rf89g8M6hPPx7",
+      "rooms": [
+        "hvac"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Frame bedroom closet opening with timing around temporary HVAC access"
+      ],
+      "wikiItemsEs": [
+        "Enmarcar abertura del clóset según paso temporal del equipo; no cerrar techo hasta cable de bajo voltaje Y acceso permanente"
+      ],
+      "governingDocs": [
+        "hvac/CHECKLIST.md",
+        "hvac/SPEC.md"
+      ]
+    },
+    "6j3RvWq3q6RRFXf7": {
+      "taskId": "6j3RvWq3q6RRFXf7",
+      "url": "https://app.todoist.com/app/task/6j3RvWq3q6RRFXf7",
+      "rooms": [
+        "hvac"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Build continuous secured wooden walkway for the whole attic service route"
+      ],
+      "wikiItemsEs": [
+        "Construir paso continuo de madera asegurado en todo el recorrido de servicio del ático"
+      ],
+      "governingDocs": [
+        "hvac/CHECKLIST.md",
+        "hvac/SPEC.md"
+      ]
+    },
+    "6hvjQJgpw2W5VcQf": {
+      "taskId": "6hvjQJgpw2W5VcQf",
+      "url": "https://app.todoist.com/app/task/6hvjQJgpw2W5VcQf",
+      "rooms": [
+        "hvac"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "John — install one permanent switched attic light"
+      ],
+      "wikiItemsEs": [
+        "John — instalar una luz permanente de ático con apagador"
+      ],
+      "governingDocs": [
+        "hvac/CHECKLIST.md",
+        "hvac/SPEC.md"
+      ]
+    },
     "6hvj3CgXpVqrJgvf": {
       "taskId": "6hvj3CgXpVqrJgvf",
       "url": "https://app.todoist.com/app/task/6hvj3CgXpVqrJgvf",
@@ -3464,29 +3642,11 @@
         "When Tisa restarts HVAC, reconcile equipment, routes, registers and electrical coordination before work"
       ],
       "wikiItemsEs": [
-        "Cuando Tisa reactive climatización, conciliar equipo, recorridos, rejillas y coordinación eléctrica"
+        "Cuando Tisa reactive la instalación HVAC, conciliar equipo, recorridos, rejillas y coordinación eléctrica; plan acotado del acceso ya en curso"
       ],
       "governingDocs": [
         "hvac/CHECKLIST.md",
         "hvac/SPEC.md"
-      ]
-    },
-    "6j3hQfxHXHJhWgG7": {
-      "taskId": "6j3hQfxHXHJhWgG7",
-      "url": "https://todoist.com/showTask?id=6j3hQfxHXHJhWgG7",
-      "rooms": [
-        "kitchen"
-      ],
-      "doneInWiki": false,
-      "wikiItemsEn": [
-        "John — P1 labeled photos for the latest mockup, due November 19 at 5:43 p.m. Pacific: full L; fridge return/corner and swings; sink/window datum; 6-inch versus 12-inch clear passage including countertop; uppers and pie-safe shrink. Label each image and its purpose; direct link + description. One evidence set also satisfies the existing photo task; all holds remain."
-      ],
-      "wikiItemsEs": [
-        "John — P1 fotos rotuladas del render reciente, vence 19 de noviembre a las 5:43 p. m. del Pacífico: L completa; retorno/esquina del refrigerador y aperturas; referencia fregadero/ventana; paso libre con opciones de 6 y 12 pulgadas incluida cubierta; alacenas y reducción del pie-safe. Rotular cada imagen y su propósito; enlace individual + descripción. Un juego también satisface la tarea de fotos existente; siguen las retenciones."
-      ],
-      "governingDocs": [
-        "kitchen/CHECKLIST.md",
-        "kitchen/SPEC.md"
       ]
     }
   },
@@ -3496,6 +3656,6 @@
       "laundry"
     ],
     "source": "Canonical SPEC and CHECKLIST snapshots, November 19; other room records retained without new verification.",
-    "latestScopedUpdate": "November 19: added John P1 mockup verification task and exact design reference; preserved prior room snapshots and holds."
+    "latestScopedUpdate": "November 19: HVAC hatch planning ownership and four site checks; restored canonical eight-item HVAC checklist to current snapshot. Other rooms preserved."
   }
 }
