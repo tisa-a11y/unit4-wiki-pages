@@ -219,17 +219,22 @@
   function computeMurphyMetrics() {
     const pts = state.nine_point_measurements_b7_b15 || {};
     const cfg = state.case_and_hardware_parameters || {};
-    const getVal = (k) => (pts[k] && typeof pts[k].value === 'number' ? pts[k].value : null);
+    const getVal = (k, minV, maxV) => {
+      const v = pts[k] && typeof pts[k].value === 'number' ? pts[k].value : null;
+      if (v === null || Number.isNaN(v) || v <= 0) return null;
+      if (minV !== undefined && (v < minV || v > maxV)) return null;
+      return v;
+    };
 
-    const b7 = getVal('b7_top_width_in');
-    const b8 = getVal('b8_mid_width_in');
-    const b9 = getVal('b9_bot_width_in');
-    const b10 = getVal('b10_left_height_in');
-    const b11 = getVal('b11_center_height_in');
-    const b12 = getVal('b12_right_height_in');
-    const b13 = getVal('b13_diagonal_a_in');
-    const b14 = getVal('b14_diagonal_b_in');
-    const b15 = getVal('b15_jamb_depth_j_in');
+    const b7 = getVal('b7_top_width_in', 18, 48);
+    const b8 = getVal('b8_mid_width_in', 18, 48);
+    const b9 = getVal('b9_bot_width_in', 18, 48);
+    const b10 = getVal('b10_left_height_in', 60, 96);
+    const b11 = getVal('b11_center_height_in', 60, 96);
+    const b12 = getVal('b12_right_height_in', 60, 96);
+    const b13 = getVal('b13_diagonal_a_in', 60, 110);
+    const b14 = getVal('b14_diagonal_b_in', 60, 110);
+    const b15 = getVal('b15_jamb_depth_j_in', 2, 12);
 
     const measuredCount = [b7, b8, b9, b10, b11, b12, b13, b14, b15].filter((v) => v !== null).length;
     const allMeasured = measuredCount === 9;

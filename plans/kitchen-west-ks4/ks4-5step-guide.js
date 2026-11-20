@@ -3036,6 +3036,11 @@
           renderTopChrome();
         }
       });
+      state.lang = window.U4PlanNav.getLang() === "es" ? "es" : "en";
+      state.theme = window.U4PlanNav.getTheme() === "dark" ? "dark" : "light";
+      if (window.U4PLAN && typeof window.U4PLAN.setLang === "function") {
+        try { window.U4PLAN.setLang(state.lang); } catch (_) {}
+      }
     }
     if (window.U4LiveAi) {
       window.U4LiveAi.init({

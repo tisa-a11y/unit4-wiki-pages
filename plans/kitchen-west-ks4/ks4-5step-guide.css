@@ -1,55 +1,118 @@
-/* Unit 4 Kitchen West Range & Hood Wall — Tisa's 5-Step Interactive Visual Guide (Zero CDN, Zero Prices) */
+/* Unit 4 Kitchen West Range & Hood Wall — Tisa's 5-Step Interactive Visual Guide (Classic Old Wiki Style · Zero CDN · Zero Prices) */
   :root {
-    --studio-bar: #161C24;
-    --paper: #F6F8FA;
-    --surface: #FFFFFF;
-    --rail: #EEF1F5;
-    --sheet-bg: #E6ECF2;
-    --ink: #131A22;
-    --ink-2: #485563;
-    --ink-3: #6E7D8C;
-    --rule: #DCE2E9;
-    --rule-strong: #C2CCD6;
-    --cobalt: #184E77;
-    --cobalt-hover: #123D5E;
-    --cobalt-soft: #E6F0F8;
-    --pine: #1B6B46;
-    --pine-soft: #E5F4EC;
-    --amber: #A15206;
-    --amber-soft: #FDF2E4;
-    --crimson: #B42318;
-    --crimson-soft: #FEECEB;
-    --shadow-sm: 0 1px 3px rgba(19, 26, 34, 0.06);
-    --shadow-md: 0 10px 28px rgba(19, 26, 34, 0.14);
-    --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
-    --display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif;
-    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --studio-bar: #1a2023;
+    --bg: #f4f5f3;
+    --panel: #ffffff;
+    --fg: #1d2326;
+    --muted: #5d686d;
+    --line: #d9dedc;
+    --accent: #1f5f7a;
+    --accent-soft: #e3eef2;
+    --lock: #2f6b3f;
+    --lock-soft: #e4f0e6;
+    --open: #9a5b06;
+    --open-soft: #f7ecd9;
+
+    --paper: #f4f5f3;
+    --surface: #ffffff;
+    --rail: #ecedea;
+    --sheet-bg: #f4f5f3;
+    --ink: #1d2326;
+    --ink-2: #5d686d;
+    --ink-3: #6c777c;
+    --rule: #d9dedc;
+    --rule-strong: #c5ccc9;
+    --cobalt: #1f5f7a;
+    --cobalt-hover: #17495e;
+    --cobalt-soft: #e3eef2;
+    --pine: #2f6b3f;
+    --pine-soft: #e4f0e6;
+    --amber: #9a5b06;
+    --amber-soft: #f7ecd9;
+    --crimson: #a8281c;
+    --crimson-soft: #f9e6e4;
+    --shadow-sm: none;
+    --shadow-md: 0 4px 16px rgba(18, 22, 24, 0.14);
+    --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --display: "Archivo Narrow", "Arial Narrow", Arial, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
     --r-sm: 6px;
-    --r-md: 10px;
-    --r-lg: 14px;
+    --r-md: 8px;
+    --r-lg: 8px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121618;
+      --panel: #1a2023;
+      --fg: #e4e9ea;
+      --muted: #98a4a8;
+      --line: #2c3539;
+      --accent: #7cc0dc;
+      --accent-soft: #1d3440;
+      --lock: #8fd19e;
+      --lock-soft: #1e3324;
+      --open: #f0b75a;
+      --open-soft: #3a2d17;
+
+      --paper: #121618;
+      --surface: #1a2023;
+      --rail: #161b1e;
+      --sheet-bg: #121618;
+      --ink: #e4e9ea;
+      --ink-2: #98a4a8;
+      --ink-3: #7f8c90;
+      --rule: #2c3539;
+      --rule-strong: #39444a;
+      --cobalt: #7cc0dc;
+      --cobalt-hover: #97cde4;
+      --cobalt-soft: #1d3440;
+      --pine: #8fd19e;
+      --pine-soft: #1e3324;
+      --amber: #f0b75a;
+      --amber-soft: #3a2d17;
+      --crimson: #f28479;
+      --crimson-soft: #3a1f1d;
+      --shadow-sm: none;
+      --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.42);
+      color-scheme: dark;
+    }
   }
 
   html[data-theme="dark"] {
-    --paper: #12171D;
-    --surface: #1A2129;
-    --rail: #161C23;
-    --sheet-bg: #0D1116;
-    --ink: #ECF1F6;
-    --ink-2: #A7B4C2;
-    --ink-3: #7A8999;
-    --rule: #28323D;
-    --rule-strong: #3A4756;
-    --cobalt: #6FB3E6;
-    --cobalt-hover: #8DC6F0;
-    --cobalt-soft: #1B2E3E;
-    --pine: #6CD4A0;
-    --pine-soft: #173025;
-    --amber: #F5B461;
-    --amber-soft: #352715;
-    --crimson: #F97066;
-    --crimson-soft: #3A1B1A;
-    --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 14px 36px rgba(0, 0, 0, 0.5);
+    --bg: #121618;
+    --panel: #1a2023;
+    --fg: #e4e9ea;
+    --muted: #98a4a8;
+    --line: #2c3539;
+    --accent: #7cc0dc;
+    --accent-soft: #1d3440;
+    --lock: #8fd19e;
+    --lock-soft: #1e3324;
+    --open: #f0b75a;
+    --open-soft: #3a2d17;
+
+    --paper: #121618;
+    --surface: #1a2023;
+    --rail: #161b1e;
+    --sheet-bg: #121618;
+    --ink: #e4e9ea;
+    --ink-2: #98a4a8;
+    --ink-3: #7f8c90;
+    --rule: #2c3539;
+    --rule-strong: #39444a;
+    --cobalt: #7cc0dc;
+    --cobalt-hover: #97cde4;
+    --cobalt-soft: #1d3440;
+    --pine: #8fd19e;
+    --pine-soft: #1e3324;
+    --amber: #f0b75a;
+    --amber-soft: #3a2d17;
+    --crimson: #f28479;
+    --crimson-soft: #3a1f1d;
+    --shadow-sm: none;
+    --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.42);
+    color-scheme: dark;
   }
 
 body.mode-5step {
@@ -363,42 +426,48 @@ body.mode-5step {
   }
   .sheet-card {
     background: var(--surface);
-    border: 1px solid var(--rule-strong);
-    border-radius: var(--r-md);
-    padding: 14px;
-    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: none;
   }
   .sheet-head {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: 8px;
-    border-bottom: 2px solid var(--ink);
-    padding-bottom: 8px;
-    margin-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 9px;
+    margin-bottom: 11px;
   }
-  .sheet-title { font-family: var(--display); font-weight: 700; font-size: 14.5px; }
-  .sheet-sub { font-size: 11.5px; color: var(--ink-2); margin-top: 2px; }
+  .sheet-title { font-family: var(--display); font-weight: 700; font-size: 20px; line-height: 1.18; }
+  .sheet-sub { font-size: 12.5px; color: var(--ink-2); margin-top: 2px; }
   .compass {
     font-family: var(--mono);
     font-size: 10.5px;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--cobalt);
-    border: 1.5px solid var(--cobalt);
+    background: var(--cobalt-soft);
+    border: 1px solid var(--line);
     border-radius: 999px;
-    padding: 2px 8px;
+    padding: 2px 9px;
     white-space: nowrap;
   }
 
   .ks4-svg-wrap {
     position: relative;
-    border: 1px solid var(--rule);
-    border-radius: var(--r-sm);
-    background: #FAFBFD;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #ffffff;
     overflow: visible;
     cursor: default;
     user-select: none;
     touch-action: none;
+  }
+  html[data-theme="dark"] .ks4-svg-wrap {
+    background: #ecefed;
+    border: 1.5px solid #39444a;
+    box-shadow: inset 0 0 0 1px rgba(18, 22, 24, 0.12);
   }
   .pin-steer {
     position: absolute;
@@ -1021,17 +1090,20 @@ body.print-mode #blueprint-sheet-shell {
   display: block !important;
 }
 
-/* Wave D Style Fixes: High-Contrast Dark Buttons, Smooth Entrance & AI Orb Space */
+/* Wave E Classic Old Wiki Style, High-Contrast Dark Buttons, Smooth Entrance & Reduced-Motion Guard */
 html[data-theme="dark"] .u4g-lang-btn,
 html[data-theme="dark"] .calc-mat-btn:not(.open) {
-  color: #0D1116;
+  color: #121618;
 }
 .u4-5step-app {
   padding-bottom: 84px;
 }
 .sheet-card {
-  animation: u4FadeSlideIn 180ms ease-out;
+  animation: u4FadeSlideIn 140ms ease-out;
 }
 @media (prefers-reduced-motion: reduce) {
-  .sheet-card { animation: none; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }

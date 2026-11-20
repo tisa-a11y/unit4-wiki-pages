@@ -1,7 +1,8 @@
 /* ============================================================================
    Murphy Bookcase Door (Hallway B) — Real-World Human-First Interactive Guide
-   Two-Layer Architecture: 9-Point Live Site Calculator + Hidden #blueprint-sheet-shell
-   Zero External CDNs · Zero Prices · Zero Backend Clutter · Zero Storage · EN / MX-ES
+   Interactive 9-Point R4 Segment Highlighter · Diag A/B Lean & Scribing Guide
+   Strict [P1-U5] Range Validation · Strict 1:1 True-Scale Deep Closet (MD-1)
+   Zero External CDNs · Zero Prices · Zero Backend Clutter · EN / MX-ES
    ============================================================================ */
 (function () {
   "use strict";
@@ -13,15 +14,76 @@
     { id: "trim", en: "4. Trim & Supplies", es: "4. Molduras y Kit" }
   ];
 
+  // Field definitions with R4 Worksheet guidance & strict architectural bounds [P1-U5]
+  var FIELDS = [
+    {
+      k: "b7", num: 1, kind: "w", min: 18, max: 48, ph: "28-7/16",
+      en: "1. Top width", es: "1. Ancho arriba",
+      guideEn: "Hook tape inside left wood jamb just below the head jamb → measure straight across to inside right wood jamb (exclude outside trim).",
+      guideEs: "Engancha la cinta por dentro de la jamba izquierda justo debajo del cabezal → mide en línea recta a la jamba derecha (sin molduras exteriores)."
+    },
+    {
+      k: "b8", num: 2, kind: "w", min: 18, max: 48, ph: "28-7/16",
+      en: "2. Mid width", es: "2. Ancho medio",
+      guideEn: "Measure horizontally across the middle (~40\" off floor) between the inside faces of the left and right wood jambs.",
+      guideEs: "Mide horizontalmente al centro (~40\" del piso) entre las caras interiores de las jambas izquierda y derecha."
+    },
+    {
+      k: "b9", num: 3, kind: "w", min: 18, max: 48, ph: "28-7/16",
+      en: "3. Bottom width", es: "3. Ancho abajo",
+      guideEn: "Measure horizontally just above the finished floor between the inside faces of both wood jambs (keep tape flat).",
+      guideEs: "Mide horizontalmente justo arriba del piso terminado entre las caras interiores de ambas jambas (cinta plana)."
+    },
+    {
+      k: "b10", num: 4, kind: "h", min: 60, max: 96, ph: "80-7/16",
+      en: "4. Left height", es: "4. Alto izq.",
+      guideEn: "Stand tape on finished floor along the LEFT (hinge-side) jamb straight up to the underside of the head jamb.",
+      guideEs: "Apoya la cinta en el piso terminado junto a la jamba IZQUIERDA (lado pivote) hasta la cara inferior del cabezal."
+    },
+    {
+      k: "b11", num: 5, kind: "h", min: 60, max: 96, ph: "80-7/16",
+      en: "5. Center height", es: "5. Alto centro",
+      guideEn: "Stand tape on finished floor at the exact CENTER of Doorway B straight up to the underside of the head jamb.",
+      guideEs: "Apoya la cinta en el piso terminado justo al CENTRO de la Puerta B hasta la cara inferior del cabezal."
+    },
+    {
+      k: "b12", num: 6, kind: "h", min: 60, max: 96, ph: "80-7/16",
+      en: "6. Right height", es: "6. Alto der.",
+      guideEn: "Stand tape on finished floor along the RIGHT (latch-side) jamb straight up to the underside of the head jamb.",
+      guideEs: "Apoya la cinta en el piso terminado junto a la jamba DERECHA (lado seguro) hasta la cara inferior del cabezal."
+    },
+    {
+      k: "b13", num: 7, kind: "d", min: 60, max: 110, ph: "85-5/16",
+      en: "7. Diagonal A (TL→BR)", es: "7. Diagonal A (SI→ID)",
+      guideEn: "Press tape hook tight into the TOP-LEFT inside corner → stretch straight to the BOTTOM-RIGHT inside corner at the floor.",
+      guideEs: "Presiona la punta de la cinta en la esquina interior SUPERIOR-IZQUIERDA → estira recto a la esquina INFERIOR-DERECHA en el piso."
+    },
+    {
+      k: "b14", num: 8, kind: "d", min: 60, max: 110, ph: "85-5/16",
+      en: "8. Diagonal B (TR→BL)", es: "8. Diagonal B (SD→II)",
+      guideEn: "Press tape hook tight into the TOP-RIGHT inside corner → stretch straight to the BOTTOM-LEFT inside corner. Compare |A − B| (≤ 1/8\" is square).",
+      guideEs: "Presiona la punta en la esquina interior SUPERIOR-DERECHA → estira recto a la esquina INFERIOR-IZQUIERDA. Compara |A − B| (≤ 1/8\" está a escuadra)."
+    },
+    {
+      k: "b15", num: 9, kind: "j", min: 2, max: 12, ph: "4-3/4",
+      en: "9. Jamb depth (J)", es: "9. Fondo jamba (J)",
+      guideEn: "Measure straight through the wood jamb from the hallway face to the laundry-closet face (EXCLUDE outside trim casings).",
+      guideEs: "Mide el grosor de la jamba de madera desde la cara del pasillo hasta la cara del clóset (SIN contar chambranas exteriores)."
+    }
+  ];
+
+  var FIELD_MAP = {};
+  FIELDS.forEach(function (f) { FIELD_MAP[f.k] = f; });
+
   var state = {
     step: "measure",
-    // 9-point inside-jamb readings (blank until John enters real site tape!)
+    activeField: "b7",
     b7: "", b8: "", b9: "",     // top/mid/bot widths
     b10: "", b11: "", b12: "",  // left/center/right heights
-    b13: "", b14: "",           // diagonals A & B
+    b13: "", b14: "",           // diagonals A (TL->BR) & B (TR->BL)
     b15: "",                    // jamb depth J
     hingeStack: 2.375,          // T + Bt + 1/8"
-    depthOpt: "8.25",           // "8.25" (7-3/16" shelf) or "9.0625"
+    depthOpt: "8.25",           // "8.25" (7-3/16" shelf) or "9.0625" (8" shelf)
     equipOpen: false
   };
 
@@ -38,170 +100,404 @@
   }
 
   function parseIn(v) {
-    var s = String(v == null ? "" : v).trim();
-    if (!s) return null;
-    // Support decimals ("28.4375") AND fractions ("28-7/16" or "28 7/16")
-    var m = s.match(/^(\d+)(?:[\s-]+(\d+)\/(\d+))?$/);
-    if (m) {
-      var whole = parseFloat(m[1]);
-      if (m[2] && m[3] && parseFloat(m[3]) > 0) return whole + parseFloat(m[2]) / parseFloat(m[3]);
-      return whole;
+    var s = String(v == null ? "" : v).trim().replace(/"/g, "");
+    if (!s) return { empty: true, num: null, badSyntax: false };
+    // Allow negative sign to be parsed so we explicitly flag it as out-of-range!
+    var fracM = s.match(/^(-?\d+)(?:[\s-]+(\d+)\/(\d+))$/);
+    if (fracM) {
+      var whole = parseFloat(fracM[1]);
+      var num = parseFloat(fracM[2]);
+      var den = parseFloat(fracM[3]);
+      if (den > 0) {
+        var val = whole < 0 ? whole - num / den : whole + num / den;
+        return { empty: false, num: val, badSyntax: false };
+      }
+      return { empty: false, num: null, badSyntax: true };
     }
-    var n = parseFloat(s);
-    return isNaN(n) ? null : n;
+    if (/^-?\d+(?:\.\d+)?$/.test(s)) {
+      return { empty: false, num: parseFloat(s), badSyntax: false };
+    }
+    return { empty: false, num: null, badSyntax: true };
   }
 
   function fmtIn(n) {
     if (n == null || isNaN(n)) return "—";
-    var r = Math.round(n * 16) / 16;
+    var neg = n < 0;
+    var r = Math.round(Math.abs(n) * 16) / 16;
     var whole = Math.floor(r);
     var num = Math.round((r - whole) * 16);
-    if (num === 0) return whole + '"';
+    if (num === 16) { whole += 1; num = 0; }
+    var sign = neg ? "-" : "";
+    if (num === 0) return sign + whole + '"';
     var den = 16;
     while (num % 2 === 0 && den > 1) { num /= 2; den /= 2; }
-    return (whole ? whole + "-" : "") + num + "/" + den + '"';
+    return sign + (whole ? whole + "-" : "") + num + "/" + den + '"';
   }
 
   function computeMath() {
-    var vals = [state.b7, state.b8, state.b9, state.b10, state.b11, state.b12, state.b13, state.b14, state.b15].map(parseIn);
-    var filledCount = vals.filter(function (x) { return x != null; }).length;
-    var ws = [vals[0], vals[1], vals[2]].filter(function (x) { return x != null; });
-    var hs = [vals[3], vals[4], vals[5]].filter(function (x) { return x != null; });
-    var minW = ws.length ? Math.min.apply(null, ws) : null;
-    var minH = hs.length ? Math.min.apply(null, hs) : null;
-    // Preliminary gap formula: gl = 1/4" hinge side, gr = 1" latch side, ah = hingeStack (2-3/8" prelim)
-    var caseW = minW != null ? +(minW - 0.25 - 1.0).toFixed(4) : null;
-    var caseH = minH != null ? +(minH - state.hingeStack).toFixed(4) : null;
-    var diagDiff = (vals[6] != null && vals[7] != null) ? Math.abs(vals[6] - vals[7]) : null;
+    var parsed = {};
+    var invalidKeys = [];
+    var validCount = 0;
+
+    FIELDS.forEach(function (f) {
+      var p = parseIn(state[f.k]);
+      if (p.empty) {
+        parsed[f.k] = { empty: true, valid: false, invalid: false, val: null };
+      } else if (p.badSyntax || p.num === null || p.num <= 0 || p.num < f.min || p.num > f.max) {
+        parsed[f.k] = { empty: false, valid: false, invalid: true, val: null, rawNum: p.num };
+        invalidKeys.push(f.k);
+      } else {
+        parsed[f.k] = { empty: false, valid: true, invalid: false, val: p.num };
+        validCount += 1;
+      }
+    });
+
+    var hasAnyInvalid = invalidKeys.length > 0;
+    var wInvalid = invalidKeys.some(function (k) { return k === "b7" || k === "b8" || k === "b9"; });
+    var hInvalid = invalidKeys.some(function (k) { return k === "b10" || k === "b11" || k === "b12"; });
+    var dInvalid = invalidKeys.some(function (k) { return k === "b13" || k === "b14"; });
+
+    var ws = [parsed.b7.val, parsed.b8.val, parsed.b9.val].filter(function (x) { return x != null; });
+    var hs = [parsed.b10.val, parsed.b11.val, parsed.b12.val].filter(function (x) { return x != null; });
+
+    var minW = (!wInvalid && ws.length) ? Math.min.apply(null, ws) : null;
+    var minH = (!hInvalid && hs.length) ? Math.min.apply(null, hs) : null;
+
+    // [P1-U5] Never compute or display negative/bogus box dimensions if ANY reading is invalid!
+    var rawCaseW = (!hasAnyInvalid && minW != null) ? +(minW - 0.25 - 1.0).toFixed(4) : null;
+    var rawCaseH = (!hasAnyInvalid && minH != null) ? +(minH - state.hingeStack).toFixed(4) : null;
+    var caseW = (rawCaseW != null && rawCaseW > 0) ? rawCaseW : null;
+    var caseH = (rawCaseH != null && rawCaseH > 0) ? rawCaseH : null;
+
+    var diagA = parsed.b13.val;
+    var diagB = parsed.b14.val;
+    var diagDiff = (!dInvalid && diagA != null && diagB != null) ? +Math.abs(diagA - diagB).toFixed(4) : null;
     var squareOk = diagDiff != null ? diagDiff <= 0.125 : null;
+    // Exact geometry: Diag A = TL->BR, Diag B = TR->BL. If A > B, top leans LEFT (West toward Bath A); if B > A, top leans RIGHT (East toward Bed C).
+    var leanDir = null;
+    if (diagDiff != null && diagDiff > 0.125) {
+      leanDir = diagA > diagB ? "left" : "right";
+    }
+
     var depth = parseFloat(state.depthOpt);
     var shelfDepth = depth === 8.25 ? 7.1875 : 8.0;
     var doorSwingW = caseW != null ? caseW : 27.1875;
     var hallPassLeft = +(41.25 - doorSwingW).toFixed(2);
+
     // Guard against accidentally entering Bathroom Doorway A (27.25" x 79.375")
-    var looksLikeDoorA = (minW != null && Math.abs(minW - 27.25) <= 0.25) || (minH != null && Math.abs(minH - 79.375) <= 0.25);
+    var looksLikeDoorA = !hasAnyInvalid && (
+      (minW != null && Math.abs(minW - 27.25) <= 0.25) ||
+      (minH != null && Math.abs(minH - 79.375) <= 0.25)
+    );
 
     return {
-      filledCount: filledCount,
+      parsed: parsed,
+      invalidKeys: invalidKeys,
+      hasAnyInvalid: hasAnyInvalid,
+      dInvalid: dInvalid,
+      filledCount: validCount,
       minW: minW,
       minH: minH,
       caseW: caseW,
       caseH: caseH,
+      diagA: diagA,
+      diagB: diagB,
       diagDiff: diagDiff,
       squareOk: squareOk,
+      leanDir: leanDir,
       depth: depth,
       shelfDepth: shelfDepth,
       doorSwingW: doorSwingW,
       hallPassLeft: hallPassLeft,
-      jambDepth: vals[8],
+      jambDepth: parsed.b15.val,
       looksLikeDoorA: looksLikeDoorA
     };
   }
 
   function renderDoorwayElevationSvg(m, es) {
-    var ready = m.filledCount === 9 && m.squareOk !== false && !m.looksLikeDoorA;
-    var strokeB = ready ? "#1B6B46" : "#A15206";
-    var wTxt = m.caseW != null ? fmtIn(m.caseW) : (es ? "27-3/16\" (prov.)" : "27-3/16\" (prov.)");
-    var hTxt = m.caseH != null ? fmtIn(m.caseH) : (es ? "78-1/16\" (prov.)" : "78-1/16\" (prov.)");
+    var ready = m.filledCount === 9 && !m.hasAnyInvalid && m.squareOk !== false && !m.looksLikeDoorA;
+    var strokeB = m.hasAnyInvalid ? "#a8281c" : (ready ? "#2f6b3f" : "#9a5b06");
+    var wTxt = m.hasAnyInvalid ? "—" : (m.caseW != null ? fmtIn(m.caseW) : '27-3/16" (prov.)');
+    var hTxt = m.hasAnyInvalid ? "—" : (m.caseH != null ? fmtIn(m.caseH) : '78-1/16" (prov.)');
+    var af = state.activeField || "b7";
 
-    return '<svg viewBox="0 0 460 245" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + esc(es ? "Elevación del pasillo mostrando Puertas A, B y C" : "Hallway elevation showing Doors A, B and C") + '">' +
-      '<text x="230" y="18" text-anchor="middle" font-size="9.6" font-weight="800" fill="#184E77">' +
-        (es ? "PASILLO MIRANDO AL NORTE · ← OESTE (Baño A) | CENTRO (Murphy B) | ESTE (Recámara C) →" : "HALLWAY FACING NORTH · ← WEST (Bath A) | CENTER (Murphy B) | EAST (Bedroom C) →") + "</text>" +
+    // Doorway B inside-jamb rect coordinates:
+    var bx = 166, by = 56, bw = 104, bh = 166;
+    var bx2 = bx + bw, by2 = by + bh;
+    var bmx = bx + bw / 2, bmy = by + bh / 2;
+
+    // Build vivid R4 segment highlight layer for whichever field b7..b15 is focused/selected!
+    var segOverlay = "";
+    var activeCol = "#a8281c";
+    var diagACol = "#1f5f7a";
+    var diagBCol = "#9a5b06";
+
+    function arrowH(y, label, val) {
+      return '<line x1="' + (bx + 2) + '" y1="' + y + '" x2="' + (bx2 - 2) + '" y2="' + y + '" stroke="' + activeCol + '" stroke-width="2.8" marker-start="url(#murArr)" marker-end="url(#murArr)"/>' +
+        '<circle cx="' + (bx + 2) + '" cy="' + y + '" r="3.5" fill="' + activeCol + '"/>' +
+        '<circle cx="' + (bx2 - 2) + '" cy="' + y + '" r="3.5" fill="' + activeCol + '"/>' +
+        '<rect x="' + (bmx - 36) + '" y="' + (y - 16) + '" width="72" height="14" rx="3" fill="' + activeCol + '"/>' +
+        '<text x="' + bmx + '" y="' + (y - 6.5) + '" text-anchor="middle" font-size="6.8" font-weight="800" fill="#ffffff">' + esc(label + (val ? " " + val : "")) + "</text>";
+    }
+
+    function arrowV(x, label, val) {
+      var lx = x < bmx ? x + 22 : (x > bmx ? x - 22 : x);
+      return '<line x1="' + x + '" y1="' + (by + 2) + '" x2="' + x + '" y2="' + (by2 - 2) + '" stroke="' + activeCol + '" stroke-width="2.8"/>' +
+        '<circle cx="' + x + '" cy="' + (by + 2) + '" r="3.5" fill="' + activeCol + '"/>' +
+        '<circle cx="' + x + '" cy="' + (by2 - 2) + '" r="3.5" fill="' + activeCol + '"/>' +
+        '<rect x="' + (lx - 29) + '" y="' + (bmy - 8) + '" width="58" height="15" rx="3" fill="' + activeCol + '"/>' +
+        '<text x="' + lx + '" y="' + (bmy + 2) + '" text-anchor="middle" font-size="6.8" font-weight="800" fill="#ffffff">' + esc(label + (val ? " " + val : "")) + "</text>";
+    }
+
+    var activeVal = m.parsed[af] && m.parsed[af].valid ? fmtIn(m.parsed[af].val) : "";
+
+    if (af === "b7") segOverlay += arrowH(by + 16, "#1 Top W", activeVal);
+    else if (af === "b8") segOverlay += arrowH(bmy, "#2 Mid W", activeVal);
+    else if (af === "b9") segOverlay += arrowH(by2 - 14, "#3 Bot W", activeVal);
+    else if (af === "b10") segOverlay += arrowV(bx + 14, "#4 L Ht", activeVal);
+    else if (af === "b11") segOverlay += arrowV(bmx, "#5 C Ht", activeVal);
+    else if (af === "b12") segOverlay += arrowV(bx2 - 14, "#6 R Ht", activeVal);
+
+    // Diagonals A (TL -> BR) and B (TR -> BL): always show active diagonal vividly, and show BOTH when both entered!
+    var showA = af === "b13" || (m.diagA != null && m.diagB != null);
+    var showB = af === "b14" || (m.diagA != null && m.diagB != null);
+    if (showA) {
+      var colA = af === "b13" ? activeCol : diagACol;
+      segOverlay +=
+        '<line x1="' + (bx + 3) + '" y1="' + (by + 3) + '" x2="' + (bx2 - 3) + '" y2="' + (by2 - 3) + '" stroke="' + colA + '" stroke-width="' + (af === "b13" ? 3 : 2.1) + '"/>' +
+        '<circle cx="' + (bx + 3) + '" cy="' + (by + 3) + '" r="4.2" fill="' + colA + '"/>' +
+        '<circle cx="' + (bx2 - 3) + '" cy="' + (by2 - 3) + '" r="4.2" fill="' + colA + '"/>' +
+        '<rect x="' + (bx + 6) + '" y="' + (by + 18) + '" width="58" height="14" rx="3" fill="' + colA + '"/>' +
+        '<text x="' + (bx + 35) + '" y="' + (by + 27.5) + '" text-anchor="middle" font-size="6.4" font-weight="800" fill="#ffffff">A: ' + (m.diagA != null ? fmtIn(m.diagA) : "TL→BR") + "</text>";
+    }
+    if (showB) {
+      var colB = af === "b14" ? activeCol : diagBCol;
+      segOverlay +=
+        '<line x1="' + (bx2 - 3) + '" y1="' + (by + 3) + '" x2="' + (bx + 3) + '" y2="' + (by2 - 3) + '" stroke="' + colB + '" stroke-width="' + (af === "b14" ? 3 : 2.1) + '" stroke-dasharray="' + (af === "b14" ? "none" : "5 3") + '"/>' +
+        '<circle cx="' + (bx2 - 3) + '" cy="' + (by + 3) + '" r="4.2" fill="' + colB + '"/>' +
+        '<circle cx="' + (bx + 3) + '" cy="' + (by2 - 3) + '" r="4.2" fill="' + colB + '"/>' +
+        '<rect x="' + (bx2 - 64) + '" y="' + (by2 - 34) + '" width="58" height="14" rx="3" fill="' + colB + '"/>' +
+        '<text x="' + (bx2 - 35) + '" y="' + (by2 - 24.5) + '" text-anchor="middle" font-size="6.4" font-weight="800" fill="#ffffff">B: ' + (m.diagB != null ? fmtIn(m.diagB) : "TR→BL") + "</text>";
+    }
+
+    // Right-hand side panel inside SVG: Top-down Jamb Depth Cross-Section Inset (highlighted on #9 b15) + Clickable 1-9 Pills
+    var jambHighlight = af === "b15";
+    var jambBorder = jambHighlight ? "#a8281c" : "#c5ccc9";
+    var jambBg = jambHighlight ? "#f9e6e4" : "#f4f5f3";
+    var jambValTxt = m.jambDepth != null ? fmtIn(m.jambDepth) : (es ? "Medir J" : "Measure J");
+
+    var quickPillsSvg = FIELDS.map(function (f, idx) {
+      var col = idx % 3;
+      var row = Math.floor(idx / 3);
+      var rx = 294 + col * 58;
+      var ry = 166 + row * 18;
+      var isAct = f.k === af;
+      var isInv = m.parsed[f.k] && m.parsed[f.k].invalid;
+      var isVal = m.parsed[f.k] && m.parsed[f.k].valid;
+      var fill = isInv ? "#a8281c" : (isAct ? "#1f5f7a" : (isVal ? "#e4f0e6" : "#ffffff"));
+      var stroke = isInv ? "#a8281c" : (isAct ? "#1f5f7a" : (isVal ? "#2f6b3f" : "#c5ccc9"));
+      var tcol = (isInv || isAct) ? "#ffffff" : (isVal ? "#2f6b3f" : "#1d2326");
+      var lbl = f.num + "." + (f.k === "b13" ? "DiagA" : f.k === "b14" ? "DiagB" : f.k === "b15" ? "Jamb" : (f.kind === "w" ? "W" : "H"));
+      return '<g class="mur-svg-pill" data-pick-mf="' + f.k + '" style="cursor:pointer">' +
+        '<rect x="' + rx + '" y="' + ry + '" width="54" height="15" rx="7.5" fill="' + fill + '" stroke="' + stroke + '" stroke-width="1"/>' +
+        '<text x="' + (rx + 27) + '" y="' + (ry + 10) + '" text-anchor="middle" font-size="6.3" font-weight="700" fill="' + tcol + '">' + lbl + "</text>" +
+      "</g>";
+    }).join("");
+
+    return '<svg id="murElevSvg" viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + esc(es ? "Elevación interactiva 9 puntos Puerta B" : "Interactive 9-point Doorway B elevation") + '">' +
+      '<text x="240" y="17" text-anchor="middle" font-size="9.2" font-weight="800" fill="#1f5f7a">' +
+        (es ? "PASILLO AL NORTE · ← OESTE (Baño A) | CENTRO (Murphy B) | ESTE (Jamba / Puntos 1–9) →"
+            : "HALLWAY FACING NORTH · ← WEST (Bath A) | CENTER (Murphy B) | EAST (Jamb / Points 1–9) →") + "</text>" +
+
       // Original Edwardian Crown Molding
-      '<rect x="20" y="28" width="420" height="12" fill="#E5F4EC" stroke="#1B6B46" stroke-width="1"/>' +
-      '<text x="230" y="37" text-anchor="middle" font-size="7.4" font-weight="800" fill="#1B6B46">' + (es ? "MOLDURA CORONA ORIGINAL — NO TOCAR" : "ORIGINAL CROWN MOLDING — KEEP UNTOUCHED") + "</text>" +
+      '<rect x="14" y="25" width="268" height="12" fill="#e4f0e6" stroke="#2f6b3f" stroke-width="1"/>' +
+      '<text x="148" y="34" text-anchor="middle" font-size="7" font-weight="800" fill="#2f6b3f">' + (es ? "MOLDURA CORONA ORIGINAL — NO TOCAR" : "ORIGINAL CROWN MOLDING — KEEP UNTOUCHED") + "</text>" +
+
       // Door A (Bathroom — DO NOT MEASURE)
-      '<rect x="34" y="58" width="76" height="162" fill="#FEECEB" stroke="#B42318" stroke-width="1.4"/>' +
-      '<text x="72" y="122" text-anchor="middle" font-size="8.6" font-weight="800" fill="#B42318">' + (es ? "PUERTA A" : "DOOR A") + "</text>" +
-      '<text x="72" y="135" text-anchor="middle" font-size="7.4" fill="#B42318">' + (es ? "Baño" : "Bathroom") + "</text>" +
-      '<text x="72" y="148" text-anchor="middle" font-size="7.2" font-weight="800" fill="#B42318">' + (es ? "NO MEDIR" : "DO NOT USE") + "</text>" +
+      '<rect x="20" y="56" width="72" height="166" fill="#f9e6e4" stroke="#a8281c" stroke-width="1.4"/>' +
+      '<text x="56" y="122" text-anchor="middle" font-size="8.2" font-weight="800" fill="#a8281c">' + (es ? "PUERTA A" : "DOOR A") + "</text>" +
+      '<text x="56" y="135" text-anchor="middle" font-size="7.2" fill="#a8281c">' + (es ? "Baño" : "Bathroom") + "</text>" +
+      '<text x="56" y="148" text-anchor="middle" font-size="7" font-weight="800" fill="#a8281c">' + (es ? "NO MEDIR" : "DO NOT USE") + "</text>" +
+
       // Wall A-B warning zone
-      '<rect x="116" y="58" width="60" height="162" fill="#FDF2E4" stroke="#A15206" stroke-width="1" stroke-dasharray="4 2"/>' +
-      '<text x="146" y="128" text-anchor="middle" font-size="7.2" font-weight="800" fill="#A15206">' + (es ? "MURO A–B" : "WALL A–B") + "</text>" +
-      '<text x="146" y="140" text-anchor="middle" font-size="6.6" fill="#A15206">' + (es ? "Revisar bastidor" : "Check framing") + "</text>" +
-      // Doorway B — MURPHY BOOKCASE TARGET (with 9 measurement markers!)
-      '<rect x="182" y="56" width="96" height="164" fill="#E6F0F8" stroke="' + strokeB + '" stroke-width="2.4" stroke-dasharray="' + (ready ? "none" : "6 3") + '"/>' +
-      // 4 fixed shelves inside Doorway B
-      '<line x1="186" y1="90" x2="274" y2="90" stroke="#184E77" stroke-width="1.5"/>' +
-      '<line x1="186" y1="124" x2="274" y2="124" stroke="#184E77" stroke-width="1.5"/>' +
-      '<line x1="186" y1="158" x2="274" y2="158" stroke="#184E77" stroke-width="1.5"/>' +
-      '<line x1="186" y1="192" x2="274" y2="192" stroke="#184E77" stroke-width="1.5"/>' +
+      '<rect x="98" y="56" width="60" height="166" fill="#f7ecd9" stroke="#9a5b06" stroke-width="1" stroke-dasharray="4 2"/>' +
+      '<text x="128" y="128" text-anchor="middle" font-size="7" font-weight="800" fill="#9a5b06">' + (es ? "MURO A–B" : "WALL A–B") + "</text>" +
+      '<text x="128" y="140" text-anchor="middle" font-size="6.4" fill="#9a5b06">' + (es ? "Revisar bastidor" : "Check framing") + "</text>" +
+
+      // Doorway B — MURPHY BOOKCASE TARGET (with live 9-point highlight!)
+      '<rect x="' + (bx - 5) + '" y="' + (by - 5) + '" width="' + (bw + 10) + '" height="' + (bh + 5) + '" fill="none" stroke="#2f6b3f" stroke-width="2.2"/>' +
+      '<rect x="' + bx + '" y="' + by + '" width="' + bw + '" height="' + bh + '" fill="#e3eef2" stroke="' + strokeB + '" stroke-width="2.2" stroke-dasharray="' + (ready ? "none" : "6 3") + '"/>' +
+      // Faint shelf guides
+      '<line x1="' + (bx + 4) + '" y1="92" x2="' + (bx2 - 4) + '" y2="92" stroke="#1f5f7a" stroke-width="1" opacity="0.35"/>' +
+      '<line x1="' + (bx + 4) + '" y1="126" x2="' + (bx2 - 4) + '" y2="126" stroke="#1f5f7a" stroke-width="1" opacity="0.35"/>' +
+      '<line x1="' + (bx + 4) + '" y1="160" x2="' + (bx2 - 4) + '" y2="160" stroke="#1f5f7a" stroke-width="1" opacity="0.35"/>' +
+      '<line x1="' + (bx + 4) + '" y1="194" x2="' + (bx2 - 4) + '" y2="194" stroke="#1f5f7a" stroke-width="1" opacity="0.35"/>' +
       // Left pivot + Right push latch indicator
-      '<circle cx="187" cy="64" r="3.5" fill="#184E77"/><circle cx="187" cy="212" r="3.5" fill="#184E77"/>' +
-      '<circle cx="272" cy="142" r="4" fill="#B42318"/>' +
-      '<text x="230" y="78" text-anchor="middle" font-size="8.4" font-weight="800" fill="#184E77">' + (es ? "PUERTA B (MURPHY)" : "DOOR B (MURPHY)") + "</text>" +
-      '<text x="230" y="109" text-anchor="middle" font-size="7.6" font-weight="800" fill="' + strokeB + '">W: ' + esc(wTxt) + "</text>" +
-      '<text x="230" y="120" text-anchor="middle" font-size="7.6" font-weight="800" fill="' + strokeB + '">H: ' + esc(hTxt) + "</text>" +
-      '<text x="225" y="145" text-anchor="middle" font-size="6.3" font-weight="700" fill="#485563">' + (es ? "Pivote Izq · Empuje" : "Left Pivot · Push") + "</text>" +
-      // Door C (Bedroom)
-      '<rect x="316" y="58" width="90" height="162" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.4"/>' +
-      '<text x="361" y="132" text-anchor="middle" font-size="8.4" font-weight="800" fill="#485563">' + (es ? "PUERTA C" : "DOOR C") + "</text>" +
-      '<text x="361" y="145" text-anchor="middle" font-size="7.4" fill="#6E7D8C">' + (es ? "Recámara" : "Bedroom") + "</text>" +
-      // Floor line
-      '<line x1="20" y1="220" x2="440" y2="220" stroke="#131A22" stroke-width="2.2"/>' +
-      '<text x="230" y="236" text-anchor="middle" font-size="8" font-weight="700" fill="#184E77">' +
+      '<circle cx="' + (bx + 5) + '" cy="' + (by + 7) + '" r="3" fill="#1f5f7a"/><circle cx="' + (bx + 5) + '" cy="' + (by2 - 7) + '" r="3" fill="#1f5f7a"/>' +
+      '<circle cx="' + (bx2 - 5) + '" cy="142" r="3.4" fill="#a8281c"/>' +
+      '<text x="' + bmx + '" y="48" text-anchor="middle" font-size="8" font-weight="800" fill="#1f5f7a">' + (es ? "PUERTA B (MURPHY)" : "DOOR B (MURPHY)") + "</text>" +
+      '<text x="' + bmx + '" y="109" text-anchor="middle" font-size="7.2" font-weight="800" fill="' + strokeB + '">W: ' + esc(wTxt) + "</text>" +
+      '<text x="' + bmx + '" y="120" text-anchor="middle" font-size="7.2" font-weight="800" fill="' + strokeB + '">H: ' + esc(hTxt) + "</text>" +
+
+      // Live Active Segment Highlight Layer
+      segOverlay +
+
+      // Floor line left side
+      '<line x1="14" y1="222" x2="282" y2="222" stroke="#1d2326" stroke-width="2.2"/>' +
+
+      // Right-hand Panel: Top-Down Jamb Depth Inset (#9 b15) + Interactive 1-9 Picker
+      '<rect x="288" y="25" width="180" height="128" rx="6" fill="' + jambBg + '" stroke="' + jambBorder + '" stroke-width="' + (jambHighlight ? 2 : 1.1) + '"/>' +
+      '<text x="378" y="39" text-anchor="middle" font-size="7.4" font-weight="800" fill="' + (jambHighlight ? "#a8281c" : "#1f5f7a") + '">' + (es ? "#9 CORTE SUPERIOR JAMBA (SIN MOLDURA)" : "#9 TOP-DOWN JAMB DEPTH (NO TRIM)") + "</text>" +
+      // Wall core + wood jamb + outside casings labeled clearly
+      '<text x="378" y="53" text-anchor="middle" font-size="6.4" font-weight="700" fill="#5d686d">' + (es ? "↑ Clóset Lavandería (Norte)" : "↑ Laundry Closet (North)") + "</text>" +
+      '<rect x="304" y="60" width="38" height="44" fill="#d9dedc" stroke="#5d686d" stroke-width="1.2"/>' +
+      '<rect x="342" y="60" width="12" height="44" fill="#f7ecd9" stroke="#9a5b06" stroke-width="1.5"/>' +
+      '<rect x="304" y="55" width="44" height="5" fill="#e4f0e6" stroke="#2f6b3f" stroke-width="0.9"/>' +
+      '<rect x="304" y="104" width="44" height="5" fill="#e4f0e6" stroke="#2f6b3f" stroke-width="0.9"/>' +
+      // Bold Jamb Depth J arrow (strictly between wood jamb faces, excluding green casings!)
+      '<line x1="364" y1="60" x2="364" y2="104" stroke="' + (jambHighlight ? "#a8281c" : "#1f5f7a") + '" stroke-width="2.2"/>' +
+      '<line x1="358" y1="60" x2="370" y2="60" stroke="' + (jambHighlight ? "#a8281c" : "#1f5f7a") + '" stroke-width="1.6"/>' +
+      '<line x1="358" y1="104" x2="370" y2="104" stroke="' + (jambHighlight ? "#a8281c" : "#1f5f7a") + '" stroke-width="1.6"/>' +
+      '<text x="374" y="80" font-size="7.4" font-weight="800" fill="' + (jambHighlight ? "#a8281c" : "#1f5f7a") + '">J = ' + esc(jambValTxt) + "</text>" +
+      '<text x="374" y="92" font-size="6.2" font-weight="600" fill="#5d686d">' + (es ? "Solo madera jamba" : "Wood jamb only") + "</text>" +
+      '<text x="374" y="102" font-size="6" fill="#2f6b3f">' + (es ? "(excluir chambrana)" : "(exclude casing)") + "</text>" +
+      '<text x="378" y="122" text-anchor="middle" font-size="6.4" font-weight="700" fill="#5d686d">' + (es ? "↓ Pasillo (Sur)" : "↓ Hallway (South)") + "</text>" +
+      '<text x="378" y="144" text-anchor="middle" font-size="6.6" font-weight="700" fill="#5d686d">' + (es ? "Toca un punto 1–9 para resaltar:" : "Tap any point 1–9 to highlight:") + "</text>" +
+      quickPillsSvg +
+
+      '<text x="240" y="241" text-anchor="middle" font-size="7.6" font-weight="700" fill="#1f5f7a">' +
         (es ? "Medir POR DENTRO de las jambas (sin molduras exteriores) al 1/16\" más cercano, dos veces"
             : "Measure INSIDE wood jambs (excluding outside trim) to nearest 1/16\", twice") +
       "</text>" +
     "</svg>";
   }
 
+  // Strict 1:1 True-Scale (scaleX === scaleY = 2.0 px/in) Deep Laundry Closet & Hallway Swing Plan matching MD-1 & unit4-floorplan-proof.png!
   function renderSwingPlanSvg(m, es) {
-    return '<svg viewBox="0 0 460 225" xmlns="http://www.w3.org/2000/svg">' +
-      '<text x="230" y="18" text-anchor="middle" font-size="9.6" font-weight="800" fill="#184E77">' +
-        (es ? 'PLANTA DE GIRO 90° HACIA EL PASILLO (41-1/4" LIBRE) Y CLÓSET LAVANDERÍA' : '90° OUT-SWING PLAN INTO HALLWAY (41-1/4" CLEAR) & LAUNDRY CLOSET') + "</text>" +
-      // Laundry Closet top (36-5/16" W x 82-5/8" D)
-      '<rect x="148" y="30" width="110" height="90" fill="#FCFDFE" stroke="#131A22" stroke-width="2"/>' +
-      // LG WashTower inside closet (27" W x 30-3/8" D)
-      '<rect x="166" y="42" width="74" height="58" rx="4" fill="#E6F0F8" stroke="#184E77" stroke-width="1.6"/>' +
-      '<text x="203" y="68" text-anchor="middle" font-size="8" font-weight="800" fill="#184E77">LG WashTower</text>' +
-      '<text x="203" y="80" text-anchor="middle" font-size="7" fill="#485563">27" W × 30-3/8" D</text>' +
-      '<text x="203" y="92" text-anchor="middle" font-size="6.7" fill="#1B6B46">' + (es ? '≥1" lados · ≥4" atrás' : '≥1" sides · ≥4" rear') + "</text>" +
-      // Hallway walls (41-1/4" clear height)
-      '<line x1="28" y1="120" x2="174" y2="120" stroke="#131A22" stroke-width="4"/>' +
-      '<line x1="242" y1="120" x2="432" y2="120" stroke="#131A22" stroke-width="4"/>' +
-      '<line x1="28" y1="204" x2="432" y2="204" stroke="#131A22" stroke-width="2.2"/>' +
-      // Left-pivot bookcase door swung 90° open into hallway
-      '<rect x="174" y="120" width="18" height="58" fill="#FDF2E4" stroke="#A15206" stroke-width="1.8"/>' +
-      '<path d="M 240 120 A 66 66 0 0 1 174 178" fill="none" stroke="#184E77" stroke-width="1.6" stroke-dasharray="4 3"/>' +
-      '<circle cx="177" cy="122" r="4" fill="#184E77"/>' +
-      '<text x="250" y="156" font-size="8.2" font-weight="800" fill="#184E77">' + (es ? "Giro 90° afuera (pivote izq.)" : "90° out-swing (left pivot)") + "</text>" +
-      '<text x="250" y="169" font-size="7.6" font-weight="700" fill="#1B6B46">' +
-        (es ? "Paso libre restante: ~" + fmtIn(m.hallPassLeft) + ' · Fondo librero: ' + fmtIn(m.depth)
-            : "Remaining hall pass: ~" + fmtIn(m.hallPassLeft) + ' · Case depth: ' + fmtIn(m.depth)) +
-      "</text>" +
-      '<text x="96" y="166" text-anchor="middle" font-size="8" font-weight="800" fill="#485563">' + (es ? 'Pasillo 41-1/4"' : 'Hallway 41-1/4"') + "</text>" +
-      '<text x="230" y="219" text-anchor="middle" font-size="7.8" font-weight="700" fill="#A15206">' +
-        (es ? "OBLIGATORIO: hacer plantilla de cartón a tamaño real para probar el giro antes de perforar"
-            : "REQUIRED: test full-size cardboard swing mockup in hallway before drilling pivots") +
+    var S = 2.0; // exact 1:1 uniform scale: 1 inch = 2.0 px in BOTH X and Y!
+    var closetWIn = 36.3125; // 36-5/16"
+    var closetDIn = 82.625;  // 82-5/8" (~2.28:1 deep shaft!)
+    var washWIn = 27.0;
+    var washDIn = 30.375;
+    var hallDIn = 41.25;     // 41-1/4"
+    var jambDIn = m.jambDepth != null ? m.jambDepth : 4.75;
+    var doorWIn = m.doorSwingW; // ~27.19"
+    var caseDIn = m.depth;      // 8.25" or 9.0625"
+
+    var closetW = +(closetWIn * S).toFixed(1); // 72.6 px
+    var closetD = +(closetDIn * S).toFixed(1); // 165.3 px
+    var closetX = 118;
+    var closetY = 34;
+    var wallTopY = +(closetY + closetD).toFixed(1);       // 199.3
+    var wallBotY = +(wallTopY + jambDIn * S).toFixed(1);  // ~208.8
+    var hallBotY = +(wallBotY + hallDIn * S).toFixed(1);  // ~291.3
+
+    var washW = +(washWIn * S).toFixed(1); // 54.0 px
+    var washD = +(washDIn * S).toFixed(1); // 60.8 px
+    var washX = +(closetX + (closetW - washW) / 2).toFixed(1);
+    var washY = +(closetY + 4.0 * S).toFixed(1); // 4" rear clearance!
+    var clearFrontIn = +(closetDIn - 4.0 - washDIn).toFixed(1); // ~48.25" (~4 ft clear!)
+    var clearFrontTop = +(washY + washD).toFixed(1);
+
+    var openWpx = +(28.4375 * S).toFixed(1);
+    var openX = +(closetX + (closetW - openWpx) / 2).toFixed(1);
+    var openX2 = +(openX + openWpx).toFixed(1);
+    var doorLenPx = +(doorWIn * S).toFixed(1);
+    var caseDpx = +(caseDIn * S).toFixed(1);
+
+    return '<svg id="murSwingSvg" viewBox="0 0 460 326" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + esc(es ? "Planta a escala 1:1 del clóset profundo de lavandería y giro 90 grados" : "Strict 1:1 true-scale deep laundry closet and 90-degree out-swing plan") + '">' +
+      '<text x="14" y="18" font-size="8.8" font-weight="800" fill="#1f5f7a">' +
+        (es ? 'PLANTA ESCALA REAL 1:1 (X = Y) · CLÓSET 36-5/16" × 82-5/8" Y PASILLO 41-1/4"'
+            : 'TRUE 1:1 SCALE PLAN (X = Y) · CLOSET 36-5/16" × 82-5/8" & HALLWAY 41-1/4"') + "</text>" +
+      // N/S/E/W Compass Rose
+      '<g transform="translate(436,24)">' +
+        '<circle r="13" fill="#f4f5f3" stroke="#98a4a8" stroke-width="1"/>' +
+        '<polygon points="0,-9 -2.8,-3 2.8,-3" fill="#a8281c"/>' +
+        '<text x="0" y="-10" text-anchor="middle" font-size="5.8" font-weight="800" fill="#a8281c">N</text>' +
+        '<text x="0" y="11" text-anchor="middle" font-size="5.2" font-weight="700" fill="#5d686d">S</text>' +
+      "</g>" +
+
+      // Deep Laundry Closet (strict 1:1 36-5/16" W x 82-5/8" D -> ~2.28:1 vertical proportion!)
+      '<rect id="murClosetRect" data-w-in="' + closetWIn + '" data-d-in="' + closetDIn + '" x="' + closetX + '" y="' + closetY + '" width="' + closetW + '" height="' + closetD + '" fill="#fbfcfb" stroke="#1d2326" stroke-width="2.2"/>' +
+      // Closet width & depth dimensions
+      '<text x="' + (closetX + closetW / 2).toFixed(1) + '" y="' + (closetY - 4) + '" text-anchor="middle" font-size="7" font-weight="800" fill="#1f5f7a">36-5/16" W</text>' +
+      '<line x1="' + (closetX - 12) + '" y1="' + closetY + '" x2="' + (closetX - 12) + '" y2="' + wallTopY + '" stroke="#1f5f7a" stroke-width="1.2"/>' +
+      '<line x1="' + (closetX - 16) + '" y1="' + closetY + '" x2="' + (closetX - 8) + '" y2="' + closetY + '" stroke="#1f5f7a" stroke-width="1.2"/>' +
+      '<line x1="' + (closetX - 16) + '" y1="' + wallTopY + '" x2="' + (closetX - 8) + '" y2="' + wallTopY + '" stroke="#1f5f7a" stroke-width="1.2"/>' +
+      '<text x="' + (closetX - 17) + '" y="' + ((closetY + wallTopY) / 2 + 2).toFixed(1) + '" text-anchor="end" font-size="7.4" font-weight="800" fill="#1f5f7a">82-5/8"</text>' +
+      '<text x="' + (closetX - 17) + '" y="' + ((closetY + wallTopY) / 2 + 12).toFixed(1) + '" text-anchor="end" font-size="6.4" fill="#5d686d">' + (es ? "fondo real" : "true depth") + "</text>" +
+
+      // LG WashTower (27" W x 30-3/8" D) tucked at far North end (>=4" rear, >=1" each side)
+      '<rect x="' + washX + '" y="' + washY + '" width="' + washW + '" height="' + washD + '" rx="3" fill="#e3eef2" stroke="#1f5f7a" stroke-width="1.6"/>' +
+      '<text x="' + (washX + washW / 2).toFixed(1) + '" y="' + (washY + 24).toFixed(1) + '" text-anchor="middle" font-size="7" font-weight="800" fill="#1f5f7a">LG</text>' +
+      '<text x="' + (washX + washW / 2).toFixed(1) + '" y="' + (washY + 34).toFixed(1) + '" text-anchor="middle" font-size="6.6" font-weight="700" fill="#1d2326">WashTower</text>' +
+      '<text x="' + (washX + washW / 2).toFixed(1) + '" y="' + (washY + 45).toFixed(1) + '" text-anchor="middle" font-size="6" fill="#5d686d">27"×30-3/8"</text>' +
+      // Rear 4" gap note & Clear ~4 ft front closet floor space!
+      '<rect x="' + (closetX + 6) + '" y="' + (clearFrontTop + 12).toFixed(1) + '" width="' + (closetW - 12).toFixed(1) + '" height="' + (wallTopY - clearFrontTop - 22).toFixed(1) + '" rx="4" fill="#e4f0e6" fill-opacity="0.55" stroke="#2f6b3f" stroke-width="1" stroke-dasharray="3 2"/>' +
+      '<text x="' + (closetX + closetW / 2).toFixed(1) + '" y="' + ((clearFrontTop + wallTopY) / 2 - 2).toFixed(1) + '" text-anchor="middle" font-size="7" font-weight="800" fill="#2f6b3f">~4 ft (' + Math.round(clearFrontIn) + '")</text>' +
+      '<text x="' + (closetX + closetW / 2).toFixed(1) + '" y="' + ((clearFrontTop + wallTopY) / 2 + 8).toFixed(1) + '" text-anchor="middle" font-size="6.1" font-weight="700" fill="#2f6b3f">' + (es ? "libre al frente" : "clear floor") + "</text>" +
+
+      // Hallway North Wall (with Jamb Depth J) & South Hallway Wall (41-1/4" clear at exact same 2.0 px/in!)
+      '<rect x="20" y="' + wallTopY + '" width="' + (openX - 20).toFixed(1) + '" height="' + (wallBotY - wallTopY).toFixed(1) + '" fill="#d9dedc" stroke="#1d2326" stroke-width="1.6"/>' +
+      '<rect x="' + openX2 + '" y="' + wallTopY + '" width="' + (254 - openX2).toFixed(1) + '" height="' + (wallBotY - wallTopY).toFixed(1) + '" fill="#d9dedc" stroke="#1d2326" stroke-width="1.6"/>' +
+      // Wall A-B caution hatch left of Door B
+      '<rect x="44" y="' + (wallTopY + 1) + '" width="56" height="' + Math.max(4, wallBotY - wallTopY - 2).toFixed(1) + '" fill="#f9e6e4" stroke="#a8281c" stroke-width="1" stroke-dasharray="3 2"/>' +
+      '<text x="72" y="' + (wallTopY - 5) + '" text-anchor="middle" font-size="6.6" font-weight="800" fill="#a8281c">' + (es ? "Muro A–B" : "Wall A–B") + "</text>" +
+      '<line x1="20" y1="' + hallBotY + '" x2="254" y2="' + hallBotY + '" stroke="#1d2326" stroke-width="2.4"/>' +
+
+      // Hallway 41-1/4" vertical dimension on far left
+      '<line x1="34" y1="' + wallBotY + '" x2="34" y2="' + hallBotY + '" stroke="#5d686d" stroke-width="1.2"/>' +
+      '<text x="40" y="' + ((wallBotY + hallBotY) / 2 + 3).toFixed(1) + '" font-size="7.2" font-weight="800" fill="#5d686d">' + (es ? 'Pasillo 41-1/4"' : 'Hall 41-1/4"') + "</text>" +
+
+      // Bookcase Door Closed (ghost inside jamb) + Swung 90° Open South into Hallway!
+      '<rect x="' + openX + '" y="' + wallTopY + '" width="' + doorLenPx + '" height="' + caseDpx + '" fill="#e4f0e6" fill-opacity="0.55" stroke="#2f6b3f" stroke-width="1.2" stroke-dasharray="3 2"/>' +
+      '<rect x="' + openX + '" y="' + wallBotY + '" width="' + caseDpx + '" height="' + doorLenPx + '" fill="#f7ecd9" stroke="#9a5b06" stroke-width="1.8"/>' +
+      '<path d="M ' + (openX + doorLenPx).toFixed(1) + " " + wallBotY + " A " + doorLenPx + " " + doorLenPx + " 0 0 1 " + openX + " " + (wallBotY + doorLenPx).toFixed(1) + '" fill="none" stroke="#1f5f7a" stroke-width="1.6" stroke-dasharray="4 3"/>' +
+      '<circle cx="' + (openX + 2) + '" cy="' + (wallBotY + 2) + '" r="3.5" fill="#1f5f7a"/>' +
+
+      // Right-hand Legend & Coupled Clearance Box (completely clear of deep closet & hallway!)
+      '<rect x="266" y="44" width="180" height="248" rx="6" fill="#f4f5f3" stroke="#c5ccc9" stroke-width="1.1"/>' +
+      '<text x="278" y="64" font-size="8" font-weight="800" fill="#1f5f7a">' + (es ? "PROPORCIÓN REAL (MD-1)" : "TRUE SCALE CHECK (MD-1)") + "</text>" +
+      '<text x="278" y="82" font-size="7.4" font-weight="700" fill="#1d2326">• ' + (es ? 'Clóset: 36-5/16" × 82-5/8" (~2.28:1)' : 'Closet: 36-5/16" W × 82-5/8" D') + "</text>" +
+      '<text x="278" y="98" font-size="7.4" font-weight="700" fill="#2f6b3f">• ' + (es ? 'LG: 27"×30-3/8" (≥4" atrás, ≥1" lados)' : 'LG: 27"×30-3/8" (≥4" rear, ≥1" sides)') + "</text>" +
+      '<text x="278" y="114" font-size="7.4" font-weight="700" fill="#2f6b3f">• ' + (es ? 'Espacio frontal libre: ~4 pies (48")' : 'Front floor space: ~4 ft (48" clear)') + "</text>" +
+      '<line x1="278" y1="128" x2="434" y2="128" stroke="#d9dedc" stroke-width="1"/>' +
+      '<text x="278" y="146" font-size="8" font-weight="800" fill="#9a5b06">' + (es ? "GIRO 90° HACIA EL PASILLO" : "90° OUT-SWING INTO HALL") + "</text>" +
+      '<text x="278" y="164" font-size="7.4" font-weight="700" fill="#1d2326">• ' + (es ? "Fondo librero: " : "Case depth: ") + fmtIn(m.depth) + "</text>" +
+      '<text x="278" y="179" font-size="7.4" font-weight="700" fill="#1d2326">• ' + (es ? "Repisa útil: ~" : "Usable shelf: ~") + fmtIn(m.shelfDepth) + "</text>" +
+      '<text x="278" y="194" font-size="7.4" font-weight="700" fill="#1f5f7a">• ' + (es ? 'Pasillo libre: 41-1/4"' : 'Hallway clear: 41-1/4"') + "</text>" +
+      '<text x="278" y="209" font-size="7.4" font-weight="800" fill="#2f6b3f">• ' + (es ? "Paso libre al abrir: ~" : "Pass clear open: ~") + fmtIn(m.hallPassLeft) + "</text>" +
+      '<text x="278" y="226" font-size="6.8" fill="#5d686d">' + (es ? "Pivote izquierdo · Presiona derecha" : "Left pivot · Press right edge to open") + "</text>" +
+      '<rect x="276" y="242" width="160" height="38" rx="4" fill="#f7ecd9" stroke="#9a5b06" stroke-width="0.9"/>' +
+      '<text x="356" y="256" text-anchor="middle" font-size="6.8" font-weight="800" fill="#9a5b06">' + (es ? "OBLIGATORIO ANTES DE CORTAR:" : "REQUIRED BEFORE DRILLING:") + "</text>" +
+      '<text x="356" y="269" text-anchor="middle" font-size="6.6" font-weight="700" fill="#1d2326">' + (es ? "Plantilla de cartón a tamaño real" : "Full-size cardboard swing mockup") + "</text>" +
+
+      '<text x="230" y="314" text-anchor="middle" font-size="7.4" font-weight="700" fill="#5d686d">' +
+        (es ? "Escala estricta 1:1 (2.0 px/pulg en X y Y) · Alineado con MD-1 y planta Unidad 4"
+            : "Strict 1:1 true scale (2.0 px/in in X & Y) · Matches MD-1 & Unit 4 floor plan") +
       "</text>" +
     "</svg>";
   }
 
   function renderVentsSvg(es) {
     return '<svg viewBox="0 0 460 220" xmlns="http://www.w3.org/2000/svg">' +
-      '<text x="230" y="18" text-anchor="middle" font-size="9.6" font-weight="800" fill="#184E77">' +
+      '<text x="230" y="18" text-anchor="middle" font-size="9.4" font-weight="800" fill="#1f5f7a">' +
         (es ? "REJILLAS DE VENTILACIÓN LG WASHTOWER (GAS) Y APERTURA INTERIOR" : "LG GAS WASHTOWER LOUVER VENTS & INSIDE SAFETY RELEASE") + "</text>" +
-      // Interior view of door leaf
-      '<rect x="150" y="30" width="120" height="170" rx="4" fill="#FCFDFE" stroke="#184E77" stroke-width="2"/>' +
-      // Upper vent >= 48 sq in net at >= 72"
-      '<rect x="168" y="42" width="84" height="28" rx="3" fill="#E5F4EC" stroke="#1B6B46" stroke-width="1.8"/>' +
-      '<text x="210" y="54" text-anchor="middle" font-size="7.8" font-weight="800" fill="#1B6B46">' + (es ? "Rejilla alta" : "Upper Vent") + "</text>" +
-      '<text x="210" y="65" text-anchor="middle" font-size="7.2" font-weight="700" fill="#1B6B46">≥ 48 sq in net</text>' +
-      '<text x="282" y="58" font-size="7.8" font-weight="800" fill="#1B6B46">' + (es ? 'Altura ≥ 72" (plan 72-1/2")' : 'Height ≥ 72" (plan 72-1/2")') + "</text>" +
-      // Inside safety release handle (~40")
-      '<rect x="234" y="106" width="22" height="10" rx="3" fill="#B42318"/>' +
-      '<text x="282" y="114" font-size="8" font-weight="800" fill="#B42318">' + (es ? 'Manija interior de emergencia (~40")' : 'Inside safety release (~40" high)') + "</text>" +
-      // Lower vent >= 24 sq in net at <= 12"
-      '<rect x="168" y="160" width="84" height="28" rx="3" fill="#E5F4EC" stroke="#1B6B46" stroke-width="1.8"/>' +
-      '<text x="210" y="172" text-anchor="middle" font-size="7.8" font-weight="800" fill="#1B6B46">' + (es ? "Rejilla baja" : "Lower Vent") + "</text>" +
-      '<text x="210" y="183" text-anchor="middle" font-size="7.2" font-weight="700" fill="#1B6B46">≥ 24 sq in net</text>' +
-      '<text x="282" y="176" font-size="7.8" font-weight="800" fill="#1B6B46">' + (es ? 'Tope ≤ 12" (plan 7")' : 'Top ≤ 12" (plan 7")') + "</text>" +
-      // Left summary pill
-      '<rect x="18" y="84" width="118" height="58" rx="7" fill="#E6F0F8" stroke="#184E77" stroke-width="1.2"/>' +
-      '<text x="77" y="104" text-anchor="middle" font-size="8.4" font-weight="800" fill="#184E77">' + (es ? "TOTAL MÍNIMO" : "TOTAL MINIMUM") + "</text>" +
-      '<text x="77" y="120" text-anchor="middle" font-size="11" font-weight="800" fill="#1B6B46">≥ 100 sq in</text>' +
-      '<text x="77" y="133" text-anchor="middle" font-size="7" fill="#485563">' + (es ? "área libre neta" : "net free airflow") + "</text>" +
+      '<rect x="150" y="30" width="120" height="170" rx="4" fill="#fbfcfb" stroke="#1f5f7a" stroke-width="2"/>' +
+      '<rect x="168" y="42" width="84" height="28" rx="3" fill="#e4f0e6" stroke="#2f6b3f" stroke-width="1.8"/>' +
+      '<text x="210" y="54" text-anchor="middle" font-size="7.8" font-weight="800" fill="#2f6b3f">' + (es ? "Rejilla alta" : "Upper Vent") + "</text>" +
+      '<text x="210" y="65" text-anchor="middle" font-size="7.2" font-weight="700" fill="#2f6b3f">≥ 48 sq in net</text>' +
+      '<text x="282" y="58" font-size="7.8" font-weight="800" fill="#2f6b3f">' + (es ? 'Altura ≥ 72" (plan 72-1/2")' : 'Height ≥ 72" (plan 72-1/2")') + "</text>" +
+      '<rect x="234" y="106" width="22" height="10" rx="3" fill="#a8281c"/>' +
+      '<text x="282" y="114" font-size="8" font-weight="800" fill="#a8281c">' + (es ? 'Manija interior de emergencia (~40")' : 'Inside safety release (~40" high)') + "</text>" +
+      '<rect x="168" y="160" width="84" height="28" rx="3" fill="#e4f0e6" stroke="#2f6b3f" stroke-width="1.8"/>' +
+      '<text x="210" y="172" text-anchor="middle" font-size="7.8" font-weight="800" fill="#2f6b3f">' + (es ? "Rejilla baja" : "Lower Vent") + "</text>" +
+      '<text x="210" y="183" text-anchor="middle" font-size="7.2" font-weight="700" fill="#2f6b3f">≥ 24 sq in net</text>' +
+      '<text x="282" y="176" font-size="7.8" font-weight="800" fill="#2f6b3f">' + (es ? 'Tope ≤ 12" (plan 7")' : 'Top ≤ 12" (plan 7")') + "</text>" +
+      '<rect x="18" y="84" width="118" height="58" rx="7" fill="#e3eef2" stroke="#1f5f7a" stroke-width="1.2"/>' +
+      '<text x="77" y="104" text-anchor="middle" font-size="8.4" font-weight="800" fill="#1f5f7a">' + (es ? "TOTAL MÍNIMO" : "TOTAL MINIMUM") + "</text>" +
+      '<text x="77" y="120" text-anchor="middle" font-size="11" font-weight="800" fill="#2f6b3f">≥ 100 sq in</text>' +
+      '<text x="77" y="133" text-anchor="middle" font-size="7" fill="#5d686d">' + (es ? "área libre neta" : "net free airflow") + "</text>" +
     "</svg>";
   }
 
@@ -233,6 +529,133 @@
     "</div>";
   }
 
+  function buildGuidanceHtml(m, es) {
+    var f = FIELD_MAP[state.activeField] || FIELDS[0];
+    var parts = [];
+    parts.push('<div><strong>' + esc(es ? f.es : f.en) + ':</strong> ' + esc(es ? f.guideEs : f.guideEn) + "</div>");
+
+    // When both diagonals A & B are validly entered, show live |A - B| + lean/rack carpentry help!
+    if (m.diagDiff != null) {
+      if (m.squareOk) {
+        parts.push('<div style="margin-top:6px;color:var(--lock);font-weight:600">' +
+          (es ? "✓ Escuadra confirmada: |Diag A − Diag B| = " + fmtIn(m.diagDiff) + " (≤ 1/8\"). El marco está a escuadra — puedes construir la caja recta al menor ancho/alto."
+              : "✓ Frame is square: |Diag A − Diag B| = " + fmtIn(m.diagDiff) + " (≤ 1/8\"). Build bookcase straight to the smallest measured width & height.") +
+        "</div>");
+      } else {
+        var dirTxtEn = m.leanDir === "left"
+          ? "Top of frame leans LEFT (West toward Bathroom A) because Diag A (TL→BR) is longer than Diag B (TR→BL)."
+          : "Top of frame leans RIGHT (East toward Bedroom C) because Diag B (TR→BL) is longer than Diag A (TL→BR).";
+        var dirTxtEs = m.leanDir === "left"
+          ? "La parte superior del marco se inclina a la IZQUIERDA (Oeste hacia Baño A) porque Diag A es mayor que Diag B."
+          : "La parte superior del marco se inclina a la DERECHA (Este hacia Recámara C) porque Diag B es mayor que Diag A.";
+        parts.push('<div style="margin-top:6px;color:var(--crimson);font-weight:600">' +
+          (es ? "⚠ Descuadre de " + fmtIn(m.diagDiff) + " (> 1/8\"): " + dirTxtEs + " Acción de carpintería: NO cortes a medida nominal — descuenta el desplome en el ancho inscrito o cepilla/calza el marco frontal y prueba primero en plantilla de cartón."
+              : "⚠ Out of square by " + fmtIn(m.diagDiff) + " (> 1/8\"): " + dirTxtEn + " Carpentry action: reduce inscribed box width or plan face-frame scribing/shimming, and verify swing with full-size cardboard mockup before cutting wood.") +
+        "</div>");
+      }
+    }
+    return parts.join("");
+  }
+
+  function updateMeasureLive() {
+    var es = isEs();
+    var m = computeMath();
+
+    // Update SVG in place without wiping inputs!
+    var svgHost = document.getElementById("murSvgHost");
+    if (svgHost) {
+      svgHost.innerHTML = renderDoorwayElevationSvg(m, es);
+      wireSvgPillPickers();
+    }
+
+    // Update KPI readouts in place
+    var kCount = document.getElementById("murKpiCount");
+    var kCountSub = document.getElementById("murKpiCountSub");
+    if (kCount) {
+      kCount.className = "u4h-kpi-val " + (m.hasAnyInvalid ? "is-fail" : (m.filledCount === 9 ? "is-ok" : "is-warn"));
+      kCount.textContent = m.filledCount + " / 9";
+    }
+    if (kCountSub) {
+      kCountSub.textContent = m.hasAnyInvalid
+        ? (es ? "Revisar medidas marcadas" : "Check highlighted inputs")
+        : (m.filledCount === 9 ? (es ? "Todas completas" : "All 9 entered") : (es ? "Faltan medidas" : "Hold until 9/9"));
+    }
+
+    var kSq = document.getElementById("murKpiSq");
+    var kSqSub = document.getElementById("murKpiSqSub");
+    var sqText = m.dInvalid
+      ? (es ? "Revisar diag. (60\"–110\")" : "Check diag (60\"–110\")")
+      : (m.diagDiff == null
+          ? (es ? "Medir diagonales" : "Enter diagonals")
+          : (m.squareOk
+              ? (es ? "✓ Escuadrado (" + fmtIn(m.diagDiff) + ")" : "✓ Square (" + fmtIn(m.diagDiff) + ")")
+              : (es ? "⚠ Descuadrado (" + fmtIn(m.diagDiff) + ")" : "⚠ Out of square (" + fmtIn(m.diagDiff) + ")")));
+    if (kSq) {
+      kSq.className = "u4h-kpi-val " + ((m.dInvalid || m.squareOk === false) ? "is-fail" : (m.squareOk === true ? "is-ok" : "is-warn"));
+      kSq.textContent = sqText;
+    }
+    if (kSqSub) {
+      kSqSub.textContent = m.leanDir
+        ? (m.leanDir === "left" ? (es ? "Inclinado a la izq. (Oeste)" : "Leans left at top (West)") : (es ? "Inclinado a la der. (Este)" : "Leans right at top (East)"))
+        : (es ? "Tolerancia ≤ 1/8\"" : "Tolerance ≤ 1/8\"");
+    }
+
+    var kBox = document.getElementById("murKpiBox");
+    var kBoxSub = document.getElementById("murKpiBoxSub");
+    if (kBox) {
+      kBox.className = "u4h-kpi-val " + (m.hasAnyInvalid ? "is-fail" : "is-info");
+      kBox.textContent = (m.caseW != null && !m.hasAnyInvalid ? fmtIn(m.caseW) : "—") + " × " + (m.caseH != null && !m.hasAnyInvalid ? fmtIn(m.caseH) : "—");
+    }
+    if (kBoxSub) {
+      kBoxSub.textContent = m.hasAnyInvalid
+        ? (es ? "En pausa — corregir medida" : "Held — fix invalid reading")
+        : (es ? "Resta juegos y bisagras" : "Minus gaps & hinge stack");
+    }
+
+    // Update [P1-U5] invalid banner & Door A guard banner
+    var invEl = document.getElementById("murInvalidBanner");
+    if (invEl) {
+      invEl.hidden = !m.hasAnyInvalid;
+      invEl.textContent = es
+        ? '⛔ Revisar medida fuera de rango (Ancho 18"–48" · Alto 60"–96" · Diagonales 60"–110" · Jamba 2"–12"). El cálculo de corte queda en — × — hasta corregir.'
+        : '⛔ Check reading (18"–48" W / 60"–96" H / 60"–110" Diag / 2"–12" Jamb). Calculated box size is held at — × — until all entered numbers are in range.';
+    }
+    var doorAEl = document.getElementById("murDoorABanner");
+    if (doorAEl) doorAEl.hidden = !m.looksLikeDoorA;
+
+    // Update R4 live guidance box
+    var gEl = document.getElementById("murGuidanceBox");
+    if (gEl) gEl.innerHTML = buildGuidanceHtml(m, es);
+
+    // Update active/invalid classes & inline error text on every .u4h-field WITHOUT touching <input> value/focus!
+    FIELDS.forEach(function (f) {
+      var wrap = document.getElementById("murFieldWrap_" + f.k);
+      var err = document.getElementById("murFieldErr_" + f.k);
+      if (!wrap) return;
+      var st = m.parsed[f.k];
+      wrap.classList.toggle("is-active", state.activeField === f.k);
+      wrap.classList.toggle("is-invalid", !!(st && st.invalid));
+      if (err) {
+        err.hidden = !(st && st.invalid);
+        err.textContent = es ? ("Rango: " + f.min + '"–' + f.max + '"') : ("Range: " + f.min + '"–' + f.max + '"');
+      }
+    });
+  }
+
+  function wireSvgPillPickers() {
+    var svg = document.getElementById("murElevSvg");
+    if (!svg) return;
+    svg.querySelectorAll("[data-pick-mf]").forEach(function (g) {
+      g.addEventListener("click", function () {
+        var k = g.getAttribute("data-pick-mf");
+        state.activeField = k;
+        updateMeasureLive();
+        var inp = document.getElementById("mur_" + k);
+        if (inp) inp.focus();
+      });
+    });
+  }
+
   function render() {
     var host = document.getElementById("u4hBody");
     var holdEl = document.getElementById("u4hHoldStrip");
@@ -256,17 +679,13 @@
       }).join("") +
     "</div>";
 
-    var titleEn = "Measure Middle Doorway B (9 Points)";
-    var titleEs = "Medir Puerta Central B (9 Puntos)";
-    var subEn = "Enter your tape readings below to calculate squareness and exact bookcase cut size live";
-    var subEs = "Ingresa tus medidas abajo para calcular escuadra y corte exacto del librero en vivo";
+    var titleEn = "Measure Middle Doorway B (9 Points · R4)";
+    var titleEs = "Medir Puerta Central B (9 Puntos · R4)";
+    var subEn = "Tap any input (1–9) to highlight the exact tape path on Doorway B and calculate squareness & box size live";
+    var subEs = "Toca cualquier campo (1–9) para resaltar la ruta exacta de la cinta en Puerta B y calcular escuadra y corte";
     var inner = "";
 
     if (state.step === "measure") {
-      var sqText = m.diagDiff == null
-        ? (es ? "Medir diagonales" : "Enter diagonals")
-        : (m.squareOk ? (es ? "✓ Escuadrado (≤1/8\")" : "✓ Square (≤1/8\")") : (es ? "⚠ Descuadrado (" + fmtIn(m.diagDiff) + ")" : "⚠ Out of square (" + fmtIn(m.diagDiff) + ")"));
-
       inner =
         '<div class="u4h-photo-grid">' +
           '<div class="u4h-photo-card">' +
@@ -285,45 +704,39 @@
 
         '<div class="u4h-kpi-grid">' +
           '<div class="u4h-kpi">' +
-            '<div class="u4h-kpi-lbl">' + (es ? "Lecturas capturadas" : "Readings entered") + "</div>" +
-            '<div class="u4h-kpi-val ' + (m.filledCount === 9 ? "is-ok" : "is-warn") + '">' + m.filledCount + " / 9</div>" +
-            '<div class="u4h-kpi-sub">' + (m.filledCount === 9 ? (es ? "Todas completas" : "All 9 entered") : (es ? "Faltan medidas" : "Hold until 9/9")) + "</div>" +
+            '<div class="u4h-kpi-lbl">' + (es ? "Lecturas válidas" : "Valid readings") + "</div>" +
+            '<div id="murKpiCount" class="u4h-kpi-val is-warn">' + m.filledCount + " / 9</div>" +
+            '<div id="murKpiCountSub" class="u4h-kpi-sub">' + (es ? "Faltan medidas" : "Hold until 9/9") + "</div>" +
           "</div>" +
           '<div class="u4h-kpi">' +
             '<div class="u4h-kpi-lbl">' + (es ? "Escuadra (Diag A–B)" : "Squareness (Diag A–B)") + "</div>" +
-            '<div class="u4h-kpi-val ' + (m.squareOk === true ? "is-ok" : (m.squareOk === false ? "is-fail" : "is-warn")) + '">' + esc(sqText) + "</div>" +
-            '<div class="u4h-kpi-sub">' + (es ? "Tolerancia ≤ 1/8\"" : "Tolerance ≤ 1/8\"") + "</div>" +
+            '<div id="murKpiSq" class="u4h-kpi-val is-warn">' + (es ? "Medir diagonales" : "Enter diagonals") + "</div>" +
+            '<div id="murKpiSqSub" class="u4h-kpi-sub">' + (es ? "Tolerancia ≤ 1/8\"" : "Tolerance ≤ 1/8\"") + "</div>" +
           "</div>" +
           '<div class="u4h-kpi">' +
             '<div class="u4h-kpi-lbl">' + (es ? "Corte estimado caja" : "Calculated box size") + "</div>" +
-            '<div class="u4h-kpi-val is-info">' + (m.caseW != null ? fmtIn(m.caseW) : "—") + " × " + (m.caseH != null ? fmtIn(m.caseH) : "—") + "</div>" +
-            '<div class="u4h-kpi-sub">' + (es ? "Resta juegos y bisagras" : "Minus gaps & hinge stack") + "</div>" +
+            '<div id="murKpiBox" class="u4h-kpi-val is-info">— × —</div>' +
+            '<div id="murKpiBoxSub" class="u4h-kpi-sub">' + (es ? "Resta juegos y bisagras" : "Minus gaps & hinge stack") + "</div>" +
           "</div>" +
         "</div>" +
 
-        (m.looksLikeDoorA
-          ? '<div class="u4h-status is-fail">' + (es ? "⛔ ¡ALERTA! Esas medidas parecen de la PUERTA A DEL BAÑO (27-1/4\" × 79-3/8\"). Verifica que estás midiendo la PUERTA CENTRAL B." : "⛔ WARNING! Those numbers match BATHROOM DOOR A (27-1/4\" × 79-3/8\"). Double-check that you are measuring MIDDLE DOORWAY B!") + "</div>"
-          : "") +
+        '<div id="murInvalidBanner" class="u4h-status is-fail" hidden></div>' +
+        '<div id="murDoorABanner" class="u4h-status is-fail"' + (m.looksLikeDoorA ? "" : " hidden") + ">" +
+          (es ? "⛔ ¡ALERTA! Esas medidas parecen de la PUERTA A DEL BAÑO (27-1/4\" × 79-3/8\"). Verifica que estás midiendo la PUERTA CENTRAL B."
+              : "⛔ WARNING! Those numbers match BATHROOM DOOR A (27-1/4\" × 79-3/8\"). Double-check that you are measuring MIDDLE DOORWAY B!") +
+        "</div>" +
 
-        '<div class="u4h-svg-wrap">' + renderDoorwayElevationSvg(m, es) + "</div>" +
+        '<div id="murSvgHost" class="u4h-svg-wrap">' + renderDoorwayElevationSvg(m, es) + "</div>" +
+        '<div id="murGuidanceBox" class="u4h-info-box">' + buildGuidanceHtml(m, es) + "</div>" +
 
         '<div class="u4h-controls">' +
           '<div class="u4h-ctrl-lbl">' + (es ? "Ingresa medidas de Puerta B (acepta decimales o fracciones, ej. 28-7/16):" : "Enter Doorway B inside-jamb readings (decimals or fractions, e.g. 28-7/16):") + "</div>" +
           '<div class="u4h-input-grid">' +
-            [
-              ["b7", es ? "1. Ancho arriba" : "1. Top width"],
-              ["b8", es ? "2. Ancho medio" : "2. Mid width"],
-              ["b9", es ? "3. Ancho abajo" : "3. Bottom width"],
-              ["b10", es ? "4. Alto izq." : "4. Left height"],
-              ["b11", es ? "5. Alto centro" : "5. Center height"],
-              ["b12", es ? "6. Alto der." : "6. Right height"],
-              ["b13", es ? "7. Diagonal A" : "7. Diagonal A"],
-              ["b14", es ? "8. Diagonal B" : "8. Diagonal B"],
-              ["b15", es ? "9. Fondo jamba" : "9. Jamb depth"]
-            ].map(function (f) {
-              return '<div class="u4h-field">' +
-                '<label for="mur_' + f[0] + '">' + esc(f[1]) + "</label>" +
-                '<input id="mur_' + f[0] + '" data-mf="' + f[0] + '" type="text" inputmode="decimal" placeholder=\'e.g. 28-7/16\' value="' + esc(state[f[0]]) + '">' +
+            FIELDS.map(function (f) {
+              return '<div id="murFieldWrap_' + f.k + '" class="u4h-field' + (state.activeField === f.k ? " is-active" : "") + '">' +
+                '<label for="mur_' + f.k + '">' + esc(es ? f.es : f.en) + "</label>" +
+                '<input id="mur_' + f.k + '" data-mf="' + f.k + '" type="text" inputmode="decimal" placeholder="e.g. ' + esc(f.ph) + '" value="' + esc(state[f.k]) + '">' +
+                '<span id="murFieldErr_' + f.k + '" class="u4h-field-err" hidden></span>' +
               "</div>";
             }).join("") +
           "</div>" +
@@ -333,10 +746,10 @@
         "</div>";
 
     } else if (state.step === "swing") {
-      titleEn = "90° Out-Swing, Depth & Wall A–B Check";
-      titleEs = "Giro 90° Afuera, Fondo y Revisión Muro A–B";
-      subEn = "Compare bookcase depth against 41-1/4\" hallway width and check Wall A–B framing";
-      subEs = "Compara fondo del librero en el pasillo de 41-1/4\" y revisa bastidor del muro A–B";
+      titleEn = "90° Out-Swing, True-Scale Deep Closet & Wall A–B";
+      titleEs = "Giro 90° Afuera, Clóset Escala 1:1 y Muro A–B";
+      subEn = 'Strict 1:1 scale (36-5/16" W × 82-5/8" deep closet + 41-1/4" hall) matching MD-1 & floor plan';
+      subEs = 'Escala real 1:1 (clóset 36-5/16" × 82-5/8" fondo + pasillo 41-1/4") según MD-1 y planta';
 
       inner =
         '<div class="u4h-svg-wrap">' + renderSwingPlanSvg(m, es) + "</div>" +
@@ -405,7 +818,7 @@
             '<div class="u4h-title">' + esc(es ? titleEs : titleEn) + "</div>" +
             '<div class="u4h-sub">' + esc(es ? subEs : subEn) + "</div>" +
           "</div>" +
-          '<span class="u4h-compass">' + (es ? "Puerta B" : "Door B") + "</span>" +
+          '<span class="u4h-compass">' + (es ? "Puerta B · R4" : "Door B · R4") + "</span>" +
         "</div>" +
         stepPills +
         inner +
@@ -415,12 +828,23 @@
     host.querySelectorAll("[data-step]").forEach(function (b) {
       b.addEventListener("click", function () { state.step = b.getAttribute("data-step"); render(); window.scrollTo(0, 0); });
     });
-    host.querySelectorAll("[data-mf]").forEach(function (inp) {
-      inp.addEventListener("change", function () {
-        state[inp.getAttribute("data-mf")] = inp.value;
-        render();
+
+    if (state.step === "measure") {
+      host.querySelectorAll("[data-mf]").forEach(function (inp) {
+        var k = inp.getAttribute("data-mf");
+        inp.addEventListener("focus", function () {
+          state.activeField = k;
+          updateMeasureLive();
+        });
+        inp.addEventListener("input", function () {
+          state.activeField = k;
+          state[k] = inp.value;
+          updateMeasureLive();
+        });
       });
-    });
+      updateMeasureLive();
+    }
+
     host.querySelectorAll("[data-depth]").forEach(function (b) {
       b.addEventListener("click", function () { state.depthOpt = b.getAttribute("data-depth"); render(); });
     });
@@ -457,12 +881,12 @@
         titleEs: "Puerta Librero Murphy (Pasillo B)",
         getContext: function () {
           var m = computeMath();
-          return "Step=" + state.step + ", ReadingsEntered=" + m.filledCount + "/9, CaseEst=" + fmtIn(m.caseW) + "x" + fmtIn(m.caseH) + ", Depth=" + fmtIn(m.depth) + ", Hard hold until all 9 inside-jamb readings of Middle Doorway B (never Bathroom Door A) + cardboard mockup pass.";
+          return "Step=" + state.step + ", ActivePoint=" + state.activeField + ", ValidReadings=" + m.filledCount + "/9, CaseEst=" + fmtIn(m.caseW) + "x" + fmtIn(m.caseH) + ", Depth=" + fmtIn(m.depth) + ", Hard hold until all 9 inside-jamb readings of Middle Doorway B (never Bathroom Door A) + cardboard mockup pass.";
         },
         quickPrompts: function (lang) {
           return lang === "es"
-            ? ["¿Cómo tomo las 9 medidas de Puerta B?", "¿Cuánta ventilación pide la LG WashTower?", "¿Qué cambió con la puerta del baño A–B?"]
-            : ["How do I take the 9 measurements of Door B?", "What louver vent size does the LG WashTower need?", "What changed about Wall A–B pocket door?"];
+            ? ["¿Cómo tomo las 9 medidas de Puerta B?", "¿Qué significa si Diagonal A es mayor que B?", "¿Cuánta ventilación pide la LG WashTower?"]
+            : ["How do I take the 9 measurements of Door B?", "What if Diagonal A is longer than Diagonal B?", "What louver vent size does the LG WashTower need?"];
         }
       });
     }

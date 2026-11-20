@@ -36,29 +36,29 @@
       unit_floorplan_overlay: 'Unit 4 MASTER (8 rooms, 121-1/2" ceiling, 66" attic height)'
     },
     dimensions: {
-      furnace_x_in: { value: 285, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_MON_NOV23' },
-      furnace_y_in: { value: 162, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_MON_NOV23' },
-      hatch_x_in: { value: 177, measure_boundary: 'clear_between_casings', verified: 'MEASURE_ON_SITE' },
-      hatch_y_in: { value: 56, measure_boundary: 'clear_between_casings', verified: 'MEASURE_ON_SITE' },
+      furnace_x_in: { value: 198, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
+      furnace_y_in: { value: 262, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
+      hatch_x_in: { value: 112, measure_boundary: 'clear_between_casings', verified: 'MEASURE_ON_SITE' },
+      hatch_y_in: { value: 74, measure_boundary: 'clear_between_casings', verified: 'MEASURE_ON_SITE' },
       attic_height_in: { value: 66.0, measure_boundary: 'wall_to_wall', verified: 'FIELD_VERIFIED' },
-      flue_clearance_in: { value: 1.5, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_MON_NOV23' },
-      supply1_x_in: { value: 405, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_MON_NOV23' },
-      supply1_y_in: { value: 225, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_MON_NOV23' },
-      supply2_x_in: { value: 215, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_MON_NOV23' },
-      supply2_y_in: { value: 218, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_MON_NOV23' },
-      supply3_x_in: { value: 410, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_MON_NOV23' },
-      supply3_y_in: { value: 64, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_MON_NOV23' },
-      return1_x_in: { value: 235, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_MON_NOV23' },
-      return1_y_in: { value: 112, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_MON_NOV23' },
-      jump1_x_in: { value: 365, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_MON_NOV23' },
-      jump1_y_in: { value: 112, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_MON_NOV23' },
-      flue_x_in: { value: 295, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_MON_NOV23' },
-      flue_y_in: { value: 145, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_MON_NOV23' },
-      gfci_x_in: { value: 268, measure_boundary: 'subfloor', verified: 'PROPOSED_MON_NOV23' },
-      gfci_y_in: { value: 196, measure_boundary: 'subfloor', verified: 'PROPOSED_MON_NOV23' }
+      flue_clearance_in: { value: 1.5, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
+      supply1_x_in: { value: 168, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
+      supply1_y_in: { value: 126, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
+      supply2_x_in: { value: 312, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
+      supply2_y_in: { value: 212, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
+      supply3_x_in: { value: 368, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
+      supply3_y_in: { value: 112, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
+      return1_x_in: { value: 248, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
+      return1_y_in: { value: 114, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
+      jump1_x_in: { value: 334, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
+      jump1_y_in: { value: 88, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
+      flue_x_in: { value: 198, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
+      flue_y_in: { value: 292, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
+      gfci_x_in: { value: 184, measure_boundary: 'subfloor', verified: 'PROPOSED_REV_P2_MON_NOV23' },
+      gfci_y_in: { value: 232, measure_boundary: 'subfloor', verified: 'PROPOSED_REV_P2_MON_NOV23' }
     },
     options: {
-      platform_side: 'south',
+      platform_side: 'north',
       hatch_orientation: 'ns',
       roof_route: 'existing_jack',
       gfci_mode: 'at_platform',
@@ -292,15 +292,17 @@
     const hatchW = hatchDir === 'ns' ? 24 : 36;
     const hatchH = hatchDir === 'ns' ? 36 : 24;
 
-    /* Orthogonal walkway path from hatch edge to platform edge via hallway spine (y ~ 108 if crossing Hallway) */
-    const startX = hx;
-    const startY = hy + hatchH / 2;
-    const endX = px;
-    const endY = py;
+    /* Staggered L-shaped walkway path from exterior Door 4 landing hatch -> east across Door 4 into Hallway -> north/south to F1 platform */
+    const startX = hx + hatchW / 2;
+    const startY = hy;
+    const entryX = 166;
     const midY = 108;
+    const endX = px;
+    const endY = py <= midY ? py + 15 : py - 15;
     const waypoints = [
       { x: startX, y: startY },
-      { x: startX, y: midY },
+      { x: entryX, y: startY },
+      { x: entryX, y: midY },
       { x: endX, y: midY },
       { x: endX, y: endY }
     ];
@@ -428,26 +430,27 @@
       es ? 'PLANTA DEL ÁTICO SOBRE UNIDAD 4 · ← OESTE (Cocina) | NORTE ARRIBA | ESTE (Bahía) →'
          : 'ATTIC PLAN OVER UNIT 4 (8 ROOMS) · ← WEST (Kitchen) | NORTH UP | EAST (Bay) →';
 
-    /* Draw 8 rooms to exact uniform Magicplan inches */
+    /* Draw 8 rooms to exact uniform Magicplan inches (matching unit4-floorplan-proof.png + Exterior Door 4 Landing WEST of Door 4) */
     const rooms = [
-      { id: 'kitchen', en: 'Kitchen\n147"×126"', es: 'Cocina\n147"×126"', poly: `M${px(31.5)},${py(158)} L${px(147)},${py(158)} L${px(147)},${py(284)} L${px(0)},${py(284)} L${px(0)},${py(224.25)} L${px(31.5)},${py(224.25)} Z`, lx: 78, ly: 222 },
-      { id: 'door4', en: 'Door 4 (60")', es: 'Puerta 4 (60")', poly: `M${px(147)},${py(20)} L${px(207)},${py(20)} L${px(207)},${py(88)} L${px(147)},${py(88)} Z`, lx: 177, ly: 31 },
+      { id: 'kitchen', en: 'Kitchen\n147"×126"', es: 'Cocina\n147"×126"', poly: `M${px(31.5)},${py(108)} L${px(147)},${py(108)} L${px(147)},${py(234)} L${px(0)},${py(234)} L${px(0)},${py(174)} L${px(31.5)},${py(174)} Z`, lx: 78, ly: 174 },
+      { id: 'door4', en: 'Outside Front\nDoor 4 (Landing)', es: 'Afuera Puerta 4\n(Descanso Ext.)', poly: `M${px(72)},${py(38)} L${px(147)},${py(38)} L${px(147)},${py(108)} L${px(72)},${py(108)} Z`, lx: 110, ly: 49 },
       { id: 'bath', en: 'Bathroom\n72-1/8"', es: 'Baño\n72-1/8"', poly: `M${px(207)},${py(0)} L${px(279.125)},${py(0)} L${px(279.125)},${py(88)} L${px(207)},${py(88)} Z`, lx: 243, ly: 38 },
-      { id: 'laundry', en: 'Laundry\n36-5/16"', es: 'Lavandería\n36-5/16"', poly: `M${px(285)},${py(0)} L${px(321.3)},${py(0)} L${px(321.3)},${py(82.6)} L${px(285)},${py(82.6)} Z`, lx: 303, ly: 40 },
-      { id: 'bedroom', en: 'Bedroom\n122-1/8" + Bay', es: 'Recámara\n122-1/8"+Bahía', poly: `M${px(327)},${py(0)} L${px(449.1)},${py(0)} L${px(484)},${py(32)} L${px(484)},${py(92)} L${px(449.1)},${py(127.25)} L${px(327)},${py(127.25)} Z`, lx: 400, ly: 32 },
-      { id: 'hall', en: 'Hall · 205-7/16" × 41-1/4"', es: 'Pasillo · 205-7/16" × 41-1/4"', poly: `M${px(147)},${py(89)} L${px(352.4)},${py(89)} L${px(352.4)},${py(130.25)} L${px(147)},${py(130.25)} Z`, lx: 250, ly: 109 },
-      { id: 'dining', en: 'Dining\n146-11/16"×155-3/4"', es: 'Comedor\n146-11/16"×155-3/4"', poly: `M${px(147)},${py(136)} L${px(293.7)},${py(136)} L${px(293.7)},${py(291.75)} L${px(147)},${py(291.75)} Z`, lx: 215, ly: 255 },
-      { id: 'living', en: 'Living Room\n179-3/4"×155-3/4"', es: 'Sala\n179-3/4"×155-3/4"', poly: `M${px(293.7)},${py(136)} L${px(473.4)},${py(136)} L${px(473.4)},${py(168)} L${px(508)},${py(202)} L${px(508)},${py(260)} L${px(473.4)},${py(291.75)} L${px(293.7)},${py(291.75)} Z`, lx: 388, ly: 262 }
+      { id: 'laundry', en: 'Laundry\n36-5/16"', es: 'Lavandería\n36-5/16"', poly: `M${px(279.125)},${py(5.4)} L${px(315.4)},${py(5.4)} L${px(315.4)},${py(88)} L${px(279.125)},${py(88)} Z`, lx: 297, ly: 42 },
+      { id: 'bedroom', en: 'Bedroom\n122-1/8" + Bay', es: 'Recámara\n122-1/8"+Bahía', poly: `M${px(315.4)},${py(0)} L${px(437.5)},${py(0)} L${px(474)},${py(34)} L${px(474)},${py(96)} L${px(437.5)},${py(136)} L${px(352)},${py(136)} L${px(352)},${py(88)} L${px(315.4)},${py(88)} Z`, lx: 396, ly: 42 },
+      { id: 'hall', en: 'Hall · 205-7/16" × 41-1/4"', es: 'Pasillo · 205-7/16" × 41-1/4"', poly: `M${px(147)},${py(58)} L${px(207)},${py(58)} L${px(207)},${py(88)} L${px(352.4)},${py(88)} L${px(352.4)},${py(142)} L${px(147)},${py(142)} Z`, lx: 246, ly: 132 },
+      { id: 'dining', en: 'Dining\n146-11/16"×155-3/4"', es: 'Comedor\n146-11/16"×155-3/4"', poly: `M${px(147)},${py(142)} L${px(293.7)},${py(142)} L${px(293.7)},${py(297.75)} L${px(147)},${py(297.75)} Z`, lx: 222, ly: 184 },
+      { id: 'living', en: 'Living Room\n179-3/4"×155-3/4"', es: 'Sala\n179-3/4"×155-3/4"', poly: `M${px(293.7)},${py(142)} L${px(473.4)},${py(142)} L${px(508)},${py(178)} L${px(508)},${py(258)} L${px(473.4)},${py(297.75)} L${px(293.7)},${py(297.75)} Z`, lx: 396, ly: 228 }
     ];
 
     rooms.forEach((rm) => {
       svgEl('path', {
         d: rm.poly,
         fill: rm.id === 'door4' ? '#fffbeb' : '#f8fafc',
-        stroke: '#334155',
-        'stroke-width': 2.2
+        stroke: rm.id === 'door4' ? '#b45309' : '#334155',
+        'stroke-width': rm.id === 'door4' ? 1.8 : 2.2,
+        'stroke-dasharray': rm.id === 'door4' ? '5,3' : 'none'
       }, svg);
-      if (layers.trim) {
+      if (layers.trim && rm.id !== 'door4') {
         svgEl('path', {
           d: rm.poly,
           fill: 'none',
@@ -465,10 +468,16 @@
           'text-anchor': 'middle',
           'font-size': idx === 0 ? 10 : 8.5,
           'font-weight': idx === 0 ? 700 : 500,
-          fill: '#475569'
+          fill: rm.id === 'door4' ? '#92400e' : '#475569'
         }, svg).textContent = ln;
       });
     });
+
+    /* Entry Door 4 on West Wall of Hallway swinging INWARD (East) */
+    svgEl('line', { x1: px(147), y1: py(68), x2: px(147), y2: py(100), stroke: '#f8fafc', 'stroke-width': 4 }, svg);
+    svgEl('line', { x1: px(147), y1: py(68), x2: px(177), y2: py(68), stroke: '#15539e', 'stroke-width': 2.4 }, svg);
+    svgEl('path', { d: `M${px(177)},${py(68)} A${(30 * sc).toFixed(1)},${(30 * sc).toFixed(1)} 0 0,1 ${px(147)},${py(98)}`, fill: 'none', stroke: '#15539e', 'stroke-width': 1.4, 'stroke-dasharray': '4,3' }, svg);
+    svgEl('text', { x: px(172), y: py(84), 'font-size': 8, 'font-weight': 800, fill: '#15539e' }, svg).textContent = es ? 'Puerta 4 →' : 'Door 4 →';
 
     /* Existing original trim preservation badge on Plan */
     if (layers.trim) {

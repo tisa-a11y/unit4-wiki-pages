@@ -1115,11 +1115,12 @@
       <rect x="24" y="76" width="478" height="22" rx="4" fill="#f1f5f9"/>
       <text x="36" y="91" font-size="8.8" font-weight="700" fill="#15539e">1. ${isEs ? 'PLANTA DE PLAFÓN — CLARO VIGAS B Y PASO CALEFACTOR (scaleX = scaleY)' : 'CEILING FRAMING PLAN — JOIST BAY B & FURNACE PASS (scaleX = scaleY)'}</text>
 
-      <!-- Hallway Walls & Provisional Wall Offsets -->
+      <!-- Hallway / Door 4 Landing Cardinal Landmarks (Aligned with unit4-floorplan-proof.png: N ↑ / S ↓ / ← W / E →) -->
       <line x1="42" y1="126" x2="486" y2="126" stroke="#475569" stroke-width="2.0" ${off1Prov ? 'stroke-dasharray="6,4"' : ''}/>
-      <text x="264" y="118" font-size="7.2" text-anchor="middle" font-weight="700" fill="${off1Prov ? '#b45309' : '#10202b'}">${esc(off1Txt)}</text>
+      <text x="264" y="118" font-size="7.2" text-anchor="middle" font-weight="700" fill="${off1Prov ? '#b45309' : '#10202b'}">↑ N (${isEs ? 'Ventana / Muro Norte' : 'Frosted Window / North Wall'}) · ${esc(off1Txt)}</text>
       <line x1="42" y1="454" x2="486" y2="454" stroke="#475569" stroke-width="2.0" ${off2Prov ? 'stroke-dasharray="6,4"' : ''}/>
-      <text x="264" y="468" font-size="7.2" text-anchor="middle" font-weight="700" fill="${off2Prov ? '#b45309' : '#10202b'}">${esc(off2Txt)}</text>
+      <text x="264" y="468" font-size="7.2" text-anchor="middle" font-weight="700" fill="${off2Prov ? '#b45309' : '#10202b'}">↓ S (${isEs ? 'Muro Norte Cocina 115-1/2"' : 'Kitchen North Wall 115-1/2"'}) · ${esc(off2Txt)}</text>
+      <text x="480" y="142" font-size="6.8" text-anchor="end" font-weight="700" fill="#15539e">${isEs ? 'Puerta 4 (abre Este al Pasillo) →' : 'Entry Door 4 (swings East into Hall) →'}</text>
 
       <!-- Ceiling Joists framing Joist Bay B (physically moves on edit!) -->
       ${layers.framing ? `
