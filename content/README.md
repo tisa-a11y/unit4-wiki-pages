@@ -72,3 +72,7 @@ Run `python3 tools/extract_from_index.py` to pull their edits back into `content
 - English and Spanish special blocks come in pairs; a page without `es.md` gets a warning.
 - A checklist outside 4-7 steps gets a warning.
 - The built page has no JavaScript syntax error.
+
+## Interactive Plans, Official PDFs & Full Repo Guide
+
+For the full repository architecture, interactive plan directories (`plans/*`), official 2-page EN/ES PDF generator (`python3 plans/generate_official_pdfs.py`), synced backend knowledge mirror (`wiki-assets/unit4-backend-knowledge.json`), photo/camera capture UI, Mac mini `:8791` / `:8444` integration, and `python3 tools/build.py --check`, read the root [`README.md`](../README.md).
