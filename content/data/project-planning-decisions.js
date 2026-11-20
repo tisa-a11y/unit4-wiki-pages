@@ -91,7 +91,8 @@ var DEFAULT_OPEN_DECISIONS = [
   },
   {
     id: "d07",
-    project: "electrical",
+    project: "hvac",
+    group: "hvac",
     priority: 2,
     order: 7,
     status: "open",

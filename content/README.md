@@ -3,6 +3,25 @@
 The wiki's words live in this folder, one small folder per page. `index.html` is built from them.
 **Never edit `index.html` by hand.** It is overwritten on every build.
 
+## Rules for what goes on the wiki (Tisa, Nov 19-20, 2026)
+
+These are Tisa's directions. Follow them on every edit.
+
+1. **Only what is clean and useful for the crew and John goes on room pages.** Brief notes like what you would say on site. No long explanations.
+2. **Open or unconfirmed decisions live only on Project Planning** (`content/data/project-planning-decisions.js`). On a room page keep at most one short "wait" line where the crew could do work that is hard to undo.
+3. **No codes that mean nothing to the crew.** No decision numbers, no revision labels (R2, R5, RevB), no file names, no sheet codes, no "AFF" or code citations. Wall names that are printed on the drawings (D04, L01) may stay.
+4. **Documents go by a plain name** (`titleEn` / `titleEs` in `documents.json`), for example "Hood test-hang guide". Old or planning documents say so in the name ("do not use", "for review").
+5. **Guides** (`content/packets.json`) are the crew's step-by-step documents. Each needs an English and a Spanish edition. Read a document before listing it as a guide; planning and working documents are not guides.
+6. **The menu bar stays as built.** Do not redesign it. Sections that belong together are tied by a line down the left side.
+7. **Phone and iPad first.** Check every change at phone width.
+8. **English and Spanish are separate and both required.** Never mix them on one page.
+9. **Never invent a measurement.** If the spec or field record lacks a number, write "measure on site".
+10. **Nothing private:** no costs, bids, pay, financing or order numbers.
+11. **PDFs need an HTML source** kept with them, so they can be updated as things change.
+12. **The room spec in Drive (`<room>/SPEC.md`) governs.** The wiki page is a short copy for the crew. When a spec changes, update the page; when a page needs a new fact, the spec gets it first.
+
+In Project Planning, give each question a `group` when it belongs to a meeting (for example `group: "hvac"` for the HVAC walkthrough). Without one, priority 1 shows under "Blocking work now" and the rest under "Next up".
+
 ## To change something
 
 1. Edit the file for that page (table below).

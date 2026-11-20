@@ -971,6 +971,7 @@ nav.rail a.sub.rail-doc-link:hover,nav.rail a.sub.rail-doc-link[aria-current="pa
 
 html body main .bar .u4-build-stamp{display:none!important}
 html body .u4-subpage-dir,html body article .src{display:none!important}
+html body article h2.dec-group{font-size:19px;margin:26px 0 8px;padding:0 0 0 12px;border:0;border-left:3px solid var(--accent)}
 /* 2026-11-20 (Tisa): menu bar stays as built; no page drop-down beside it; Home sections tied by a side line */
 html body .mobile select#jump{display:none!important}
 html body .u4-home-menu{display:none!important}
@@ -3020,15 +3021,30 @@ function renderDecisions(){
   if (decFilter==="call"){ doc.innerHTML=h; renderCall(doc, open); doc.querySelectorAll(".dtabs button").forEach(b=>b.onclick=()=>{ location.hash = b.dataset.f==="agenda" ? "decisions" : "decisions:"+b.dataset.f; }); return; }
   if (decFilter==="reports"){ renderAllReports(doc, h); doc.querySelectorAll(".dtabs button").forEach(b=>b.onclick=()=>{ location.hash = b.dataset.f==="agenda" ? "decisions" : "decisions:"+b.dataset.f; }); return; }
   if (decFilter==="notes"){ doc.innerHTML=h; renderSessionNotes(doc); doc.querySelectorAll(".dtabs button").forEach(b=>b.onclick=()=>{ location.hash = b.dataset.f==="agenda" ? "decisions" : "decisions:"+b.dataset.f; }); return; }
-  if (decFilter==="agenda") h+=decAgendaHTML(open);
   doc.innerHTML=h;
   const notesBy={};
   (Array.isArray(noteDocs) ? noteDocs : []).concat(Array.isArray(localDecisionNoteDocs) ? localDecisionNoteDocs : []).forEach(n=>{ const r=(n && typeof n.data==="function") ? (n.data()||{}) : (n||{}); (notesBy[r.decision]=notesBy[r.decision]||[]).push(r); });
-  showList.forEach(d=>{
+  // Next-session view: one heading per group, so each question sits with the meeting or reason it belongs to.
+  const DEC_GROUPS = [
+    ["blocking", "Blocking work now", "Detiene trabajo ahora"],
+    ["hvac", "Questions for the HVAC walkthrough \u00b7 Mon Nov 23", "Preguntas para la visita de HVAC \u00b7 lun 23 de nov"],
+    ["next", "Next up", "Lo que sigue"]
+  ];
+  const decGroupOf = d => d.group || (d.priority===1 ? "blocking" : "next");
+  const grouped = decFilter==="agenda";
+  const orderedList = grouped ? DEC_GROUPS.flatMap(g=>showList.filter(d=>decGroupOf(d)===g[0])) : showList;
+  let lastGroup = null;
+  orderedList.forEach(d=>{
+    if (grouped && decGroupOf(d)!==lastGroup) {
+      lastGroup = decGroupOf(d);
+      const g = DEC_GROUPS.find(x=>x[0]===lastGroup);
+      const n = showList.filter(x=>decGroupOf(x)===lastGroup).length;
+      const hd = document.createElement("h2"); hd.className = "dec-group"; hd.textContent = (es?g[2]:g[1]) + " (" + n + ")"; doc.appendChild(hd);
+    }
     const c=document.createElement("div"); c.className="dec"+(d.status==="locked"?" locked":d.priority===1?" p1":"");
     const page=PAGES.find(x=>x.key===d.project);
-    const priLabel = d.status==="locked" ? (es?"DECIDIDO":"LOCKED") : ((es?PRI_ES[d.priority]:PRI[d.priority])||"");
-    c.innerHTML=`<div class="meta"><span>${priLabel}</span>${page?`<a href="#${page.key}">${pageLabel(page)}</a>`:""}</div>`;
+    const priLabel = grouped ? "" : (d.status==="locked" ? (es?"DECIDIDO":"LOCKED") : ((es?PRI_ES[d.priority]:PRI[d.priority])||""));
+    c.innerHTML=`<div class="meta">${priLabel?`<span>${priLabel}</span>`:""}${page?`<a href="#${page.key}">${pageLabel(page)}</a>`:""}</div>`;
     const h3=document.createElement("h3"); h3.textContent=(es && d.questionEs) ? d.questionEs : (d.question||""); c.appendChild(h3);
     [[es?"Por qué importa":"Why it matters", (es&&d.whyEs)?d.whyEs:d.why],[es?"Opciones en revisión":"Options on the table", (es&&d.optionsEs)?d.optionsEs:d.options],[es?"Lo que aporta John en obra":"What John can bring", (es&&d.johnInputEs)?d.johnInputEs:d.johnInput]].forEach(([k,v])=>{ if(!v)return; const w=document.createElement("div"); const kk=document.createElement("div"); kk.className="k"; kk.textContent=k; const vv=document.createElement("div"); vv.textContent=v; w.append(kk,vv); c.appendChild(w); });
     if (d.status==="locked"){ const o=document.createElement("div"); o.className="out"; o.textContent="Decision: "+(d.outcome||""); c.appendChild(o); }
