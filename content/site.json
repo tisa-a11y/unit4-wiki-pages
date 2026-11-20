@@ -80,7 +80,8 @@
         "bedroom",
         "bathroom",
         "living-dining",
-        "attic-access"
+        "attic-access",
+        "hallway"
       ]
     }
   }

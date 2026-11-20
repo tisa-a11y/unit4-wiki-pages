@@ -972,6 +972,9 @@ nav.rail a.sub.rail-doc-link:hover,nav.rail a.sub.rail-doc-link[aria-current="pa
 html body main .bar .u4-build-stamp{display:none!important}
 html body .u4-subpage-dir,html body article .src{display:none!important}
 html body article h2.dec-group{font-size:19px;margin:26px 0 8px;padding:0 0 0 12px;border:0;border-left:3px solid var(--accent)}
+html body .u4-lead-pic{margin:0 0 14px;max-width:74ch}
+html body .u4-lead-pic img{display:block;width:100%;max-height:340px;object-fit:cover;border-radius:10px}
+html body .u4-lead-pic figcaption{font-size:13.5px;color:var(--muted);margin-top:5px}
 /* 2026-11-20 (Tisa): menu bar stays as built; no page drop-down beside it; Home sections tied by a side line */
 html body .mobile select#jump{display:none!important}
 html body .u4-home-menu{display:none!important}
@@ -1402,8 +1405,23 @@ function keyFactsBlock(key){
     + '</div>';
 }
 
+// Every page starts with a picture: the item marked "lead" in visuals.json, or the first one.
+function leadPictureIndex(key){
+  const v = UNIFIED_VISUALS[key]; if (!v || !v.items || !v.items.length) return -1;
+  return (typeof v.lead==="number" && v.items[v.lead]) ? v.lead : 0;
+}
+function leadPictureBlock(key){
+  const i = leadPictureIndex(key); if (i<0) return "";
+  const es = LANG==="es"; const it = UNIFIED_VISUALS[key].items[i];
+  const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const src = (es && it.imgEs) ? it.imgEs : it.img; const cap = es ? it.es : it.en;
+  return '<figure class="u4-lead-pic"><img src="'+esc(src)+'" alt="'+esc(cap)+'"><figcaption>'+esc(cap)+'</figcaption></figure>';
+}
 function visualsBlock(key){
-  const v = UNIFIED_VISUALS[key]; if (!v || !v.items || !v.items.length) return "";
+  const v0 = UNIFIED_VISUALS[key]; if (!v0 || !v0.items || !v0.items.length) return "";
+  const leadI = leadPictureIndex(key);
+  const v = Object.assign({}, v0, {items: v0.items.filter((_,i)=>i!==leadI)});
+  if (!v.items.length) return "";
   const es = LANG==="es";
   const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   return '<section class="gallery" id="sec-visuals"><h2>'+esc(es?v.es:v.en)+'</h2>'
@@ -1530,9 +1548,10 @@ function crewRoom(p, srcMd){
       + '<span class="u4-crumb-sep" aria-hidden="true">›</span>'
       + '<span class="u4-crumb-cur">'+label+'</span>'
       + '</nav>'
+      + leadPictureBlock(p.key)
       + '<h1>'+label+'</h1>';
   } else {
-    h += '<h1>'+label+'</h1>';
+    h += leadPictureBlock(p.key) + '<h1>'+label+'</h1>';
   }
   h += roomSubnavBar(p);
 

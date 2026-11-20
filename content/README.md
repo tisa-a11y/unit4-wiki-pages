@@ -20,6 +20,8 @@ These are Tisa's directions. Follow them on every edit.
 11. **PDFs need an HTML source** kept with them, so they can be updated as things change.
 12. **The room spec in Drive (`<room>/SPEC.md`) governs.** The wiki page is a short copy for the crew. When a spec changes, update the page; when a page needs a new fact, the spec gets it first.
 
+13. **Every page starts with a picture.** In `visuals.json`, `"lead"` is the number of the picture that goes first (counting from 0); without it the first picture is used. Use a real photo or drawing of that room. Do not use a picture of another room.
+
 In Project Planning, give each question a `group` when it belongs to a meeting (for example `group: "hvac"` for the HVAC walkthrough). Without one, priority 1 shows under "Blocking work now" and the rest under "Next up".
 
 ## To change something

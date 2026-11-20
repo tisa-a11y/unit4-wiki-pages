@@ -1,6 +1,6 @@
 {
-  "en": "Attic hatch guide and site photo",
-  "es": "Guía de la escotilla del ático y foto del sitio",
+  "en": "Attic hatch guide",
+  "es": "Guía de la escotilla del ático",
   "noteEn": "Tap a page to open the guide.",
   "noteEs": "Toca una página para abrir la guía.",
   "items": [
@@ -74,5 +74,6 @@
       "en": "John's photo of the hatch spot",
       "es": "Foto de John del lugar de la escotilla"
     }
-  ]
+  ],
+  "lead": 8
 }
