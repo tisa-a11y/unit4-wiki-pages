@@ -39,8 +39,35 @@
       "line_b_offset_above_a_in": 9.5625,
       "stock_cover_reach_min_in": 110.0,
       "stock_cover_reach_max_in": 117.0,
+      "electrical_box": {
+        "id": "HD-1",
+        "circuit": "HD",
+        "panel_space": 8,
+        "amps": 15,
+        "breaker": "15A AFCI + Breaker Handle Lock-Off (BRN115AF + BRLW1)",
+        "box_type": "Flush 1-gang 2\"×3\" box set ~1\" proud for 1/2\" HardieBacker + tile (direct hardwire into Zephyr top wiring box)",
+        "center_from_south_step_in": 33.0,
+        "offset_from_cl_in": 2.25,
+        "aff_min_in": 83.0,
+        "aff_max_in": 86.0,
+        "aff_target_in": 84.5,
+        "measure_boundary": "aff",
+        "verified": "LOCKED",
+        "supersedes": "Retired 4\"×4\" wall J-box at 100\" / 104\" above finished floor",
+        "source": "Zephyr Savona ZSA-E30AS Manual p. 3 + kitchen/SPEC.md (2026-11-20)"
+      },
       "source": "Zephyr Spec may08.0101 + Manual AUG06.0301"
     }
+  },
+  "wall_substrate": {
+    "kitchen_drywall_in": 0.5,
+    "range_wall_backer_in": 0.5,
+    "backer_product": "1/2\" HardieBacker 500 (0.42\" actual)",
+    "stud_shims_in": 0,
+    "seam_transition_en": "Unit 4 purchased 1/2\" drywall only (no 5/8\" drywall). 1/2\" drywall (0.50\") meets 1/2\" HardieBacker 500 (0.42\") directly on studs with NO stud shims (~1/16\" thinset/skim feather at seam only).",
+    "seam_transition_es": "Unidad 4 compró solo tablaroca de 1/2\" (no de 5/8\"). Tablaroca 1/2\" (0.50\") une directo con HardieBacker 1/2\" (0.42\") SIN calzas en montantes (solo ~1/16\" de pasta en la junta).",
+    "verified": "LOCKED",
+    "date": "2026-11-20"
   },
   "dimensions": {
     "wall_width_in": {
@@ -142,8 +169,8 @@
     {
       "id": "clash-ks7-jbox",
       "severity": "HIGH",
-      "en": "K-S7 100\" J-box collides with 6\" duct inside 8-5/8\" chimney. Offset 4\"×4\" J-box (1\" mud ring) beside duct or route inside Option A soffit after checking chassis knockout.",
-      "es": "Caja K-S7 a 100\" choca con ducto de 6\" dentro de chimenea de 8-5/8\". Desplazar caja 4\"×4\" (aro 1\") junto al ducto o terminar en cajillo Opc. A tras verificar chasis."
+      "en": "Prior 100\" / 104\" 4\"×4\" J-box collides with 6\" duct inside 8-5/8\" chimney and is RETIRED. Superseded by Zephyr Manual p. 3 direct hardwire HD-1 flush 1-gang 2\"×3\" box (~83\"–86\" above finished floor + t off bare subfloor, C/L 33\" ± 2-1/4\", ~1\" proud for 1/2\" HardieBacker + tile). Verify exact knockout side on owned hood downstairs — never auto-resolved.",
+      "es": "La caja previa 4\"×4\" a 100\" / 104\" choca con el ducto de 6\" dentro del cubre-ducto de 8-5/8\" y queda DESCARTADA. Reemplazada por conexión directa Manual Zephyr p. 3: caja sencilla HD-1 de 2\"×3\" (~83\"–86\" sobre piso terminado + t desde subpiso, eje 33\" ± 2-1/4\", ~1\" salida para HardieBacker 1/2\" + azulejo). Verificar lado exacto del orificio en la campana abajo — nunca auto-resuelto."
     },
     {
       "id": "clash-left-chase",

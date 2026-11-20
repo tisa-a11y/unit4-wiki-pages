@@ -78,6 +78,22 @@
     ]
   },
   {
+    "key": "interactive-kitchen-electrical",
+    "room": "electrical",
+    "titleEn": "Interactive kitchen electrical and panel D04 plan",
+    "titleEs": "Plano interactivo eléctrico de cocina y tablero D04",
+    "noteEn": "6 coupled views, D04 breaker map, hood 1-gang box & wire lengths.",
+    "noteEs": "6 vistas acopladas, tablero D04, caja de campana y largos de cable.",
+    "docEn": "2026-11-20_Kitchen-Electrical-Interactive_EN",
+    "docEs": "2026-11-20_Kitchen-Electrical-Interactive_ES",
+    "aliases": [
+      "kitchen electrical plan",
+      "interactive kitchen electrical",
+      "d04 interactive",
+      "plano electrico cocina"
+    ]
+  },
+  {
     "key": "hood-test-hang",
     "room": "kitchen-oven-range",
     "titleEn": "Hood test-hang: overview and site checks",
@@ -133,8 +149,8 @@
     "titleEs": "Prueba de campana: prueba, corriente y fotos",
     "noteEn": "Sheet 4 of 4: test-hang height, hood circuit, 5 site photos.",
     "noteEs": "Hoja 4 de 4: altura de prueba, circuito y 5 fotos.",
-    "docEn": "1PNIj1k70IHGafUm0jBRe0xZ2kHXmSqn8",
-    "docEs": "1oyzjDbzuRZiIITWSGF1UR05drrvrL0XB",
+    "docEn": "2026-11-20_U4_kitchen_zephyr-savona-mock-hookup_04-hood-electrical_R2_EN",
+    "docEs": "2026-11-20_U4_kitchen_zephyr-savona-mock-hookup_04-hood-electrical_R2_ES",
     "aliases": [
       "hood dry hang",
       "hood electrical",

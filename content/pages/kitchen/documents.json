@@ -44,6 +44,50 @@
     "pin": true
   },
   {
+    "title": "Interactive-Kitchen-Electrical-D04_EN.html",
+    "titleEn": "Interactive kitchen electrical and panel D04 plan · English",
+    "titleEs": "Plano interactivo eléctrico de cocina y tablero D04 · inglés",
+    "id": "2026-11-20_Kitchen-Electrical-Interactive_EN",
+    "path": "6 coupled views, D04 20-space panel & hood box routing (English)",
+    "date": "2026-11-20",
+    "lang": "en",
+    "pairId": "kitchen-electrical-interactive",
+    "pin": true
+  },
+  {
+    "title": "Interactive-Kitchen-Electrical-D04_ES.html",
+    "titleEn": "Interactive kitchen electrical and panel D04 plan · Spanish",
+    "titleEs": "Plano interactivo eléctrico de cocina y tablero D04 · español",
+    "id": "2026-11-20_Kitchen-Electrical-Interactive_ES",
+    "path": "6 vistas acopladas, tablero D04 de 20 espacios y ruta de campana (español)",
+    "date": "2026-11-20",
+    "lang": "es",
+    "pairId": "kitchen-electrical-interactive",
+    "pin": true
+  },
+  {
+    "title": "2026-11-20_U4_kitchen_electrical-d04-interactive_R1_EN.pdf",
+    "titleEn": "Printable kitchen electrical and panel D04 plan · English",
+    "titleEs": "Plano imprimible eléctrico de cocina y tablero D04 · inglés",
+    "id": "2026-11-20_U4_kitchen_electrical-d04-interactive_R1_EN",
+    "path": "Printable 2-page kitchen electrical & D04 plan (English)",
+    "date": "2026-11-20",
+    "lang": "en",
+    "pairId": "kitchen-electrical-printable",
+    "pin": true
+  },
+  {
+    "title": "2026-11-20_U4_kitchen_electrical-d04-interactive_R1_ES.pdf",
+    "titleEn": "Printable kitchen electrical and panel D04 plan · Spanish",
+    "titleEs": "Plano imprimible eléctrico de cocina y tablero D04 · español",
+    "id": "2026-11-20_U4_kitchen_electrical-d04-interactive_R1_ES",
+    "path": "Plano imprimible eléctrico de cocina y tablero D04 (español)",
+    "date": "2026-11-20",
+    "lang": "es",
+    "pairId": "kitchen-electrical-printable",
+    "pin": true
+  },
+  {
     "title": "2026-11-02_U4_Kitchen_Master-Plan_R2_EN.html",
     "titleEn": "Kitchen plan from Nov 2 (for review only) · English",
     "titleEs": "Plan de cocina del 2 de nov (solo para revisión) · inglés",

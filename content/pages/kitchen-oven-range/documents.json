@@ -110,26 +110,48 @@
     "pin": true
   },
   {
+    "title": "2026-11-20_U4_kitchen_zephyr-savona-mock-hookup_04-hood-electrical_R2_EN.pdf",
+    "titleEn": "Hood test-hang: wiring, dry-hang and photos · English",
+    "titleEs": "Prueba de campana: corriente, montaje y fotos · inglés",
+    "id": "2026-11-20_U4_kitchen_zephyr-savona-mock-hookup_04-hood-electrical_R2_EN",
+    "path": "Sheet 4 of 4 · Flush 1-gang hood box & 1/2-in drywall transition (English)",
+    "date": "2026-11-20",
+    "lang": "en",
+    "pairId": "zephyr-mock-sheet-04-r2",
+    "pin": true
+  },
+  {
+    "title": "2026-11-20_U4_kitchen_zephyr-savona-mock-hookup_04-hood-electrical_R2_ES.pdf",
+    "titleEn": "Hood test-hang: wiring, dry-hang and photos · Spanish",
+    "titleEs": "Prueba de campana: corriente, montaje y fotos · español",
+    "id": "2026-11-20_U4_kitchen_zephyr-savona-mock-hookup_04-hood-electrical_R2_ES",
+    "path": "Hoja 4 de 4 · Caja sencilla de campana y junta tablaroca 1/2 (español)",
+    "date": "2026-11-20",
+    "lang": "es",
+    "pairId": "zephyr-mock-sheet-04-r2",
+    "pin": true
+  },
+  {
     "title": "2026-11-19_U4_kitchen_zephyr-savona-mock-hookup_04-hood-electrical_R1_EN.pdf",
-    "titleEn": "Hood test-hang: dry-hang, wiring and photos · English",
-    "titleEs": "Prueba de campana: prueba, corriente y fotos · inglés",
+    "titleEn": "Hood test-hang: wiring and photos (older version) · English",
+    "titleEs": "Prueba de campana: corriente y fotos (versión anterior) · inglés",
     "id": "1PNIj1k70IHGafUm0jBRe0xZ2kHXmSqn8",
     "path": "Sheet 4 of 4 · Hood dry-hang, wiring and 5 site photos (English)",
     "date": "2026-11-19",
     "lang": "en",
     "pairId": "zephyr-mock-sheet-04",
-    "pin": true
+    "history": true
   },
   {
     "title": "2026-11-19_U4_kitchen_zephyr-savona-mock-hookup_04-hood-electrical_R1_ES.pdf",
-    "titleEn": "Hood test-hang: dry-hang, wiring and photos · Spanish",
-    "titleEs": "Prueba de campana: prueba, corriente y fotos · español",
+    "titleEn": "Hood test-hang: wiring and photos (older version) · Spanish",
+    "titleEs": "Prueba de campana: corriente y fotos (versión anterior) · español",
     "id": "1oyzjDbzuRZiIITWSGF1UR05drrvrL0XB",
     "path": "Hoja 4 de 4 · Montaje de prueba, corriente y 5 fotos (español)",
     "date": "2026-11-19",
     "lang": "es",
     "pairId": "zephyr-mock-sheet-04",
-    "pin": true
+    "history": true
   },
   {
     "title": "2026-11-19_U4_kitchen_range-wall-full-plan_R1_EN.pdf",

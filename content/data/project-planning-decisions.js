@@ -20,12 +20,12 @@ var DEFAULT_OPEN_DECISIONS = [
     priority: 1,
     order: 2,
     status: "open",
-    question: "How do we close the gap between the hood and the ceiling, and which rear trim goes on the range?",
-    questionEs: "¿Cómo cerramos el hueco entre la campana y el techo, y qué moldura trasera lleva la estufa?",
-    why: "The hood's standard cover does not reach the 121-1/2 in. ceiling, so a gap of 4-1/2 to 11-1/2 in. is left at the top. Behind the range, the 1-in. island trim needs 6 in. of clearance to anything that can burn; the 8-in. backguard needs none.",
-    whyEs: "La cubierta estándar de la campana no llega al techo de 121-1/2 pulg., así que queda un hueco de 4-1/2 a 11-1/2 pulg. arriba. Detrás de la estufa, la moldura tipo isla de 1 pulg. necesita 6 pulg. de separación a cualquier material que se pueda quemar; el respaldo de 8 pulg. no necesita ninguna.",
-    options: "Option A: build a tiled box (soffit) above the hood. Option B: order Zephyr's cover extension (Z1C-00SA). Also confirm the 8-in. backguard or the 1-in. island trim.",
-    optionsEs: "Opción A: hacer un cajón forrado de azulejo arriba de la campana. Opción B: pedir la extensión de cubierta de Zephyr (Z1C-00SA). También confirmar el respaldo de 8 pulg. o la moldura tipo isla de 1 pulg.",
+    question: "How do we close the gap between the hood and the ceiling?",
+    questionEs: "¿Cómo cerramos el hueco entre la campana y el techo?",
+    why: "The hood's standard cover does not reach the 121-1/2 in. ceiling, so a gap of 4-1/2 to 11-1/2 in. is left at the top. The Viking range uses the low 1-in. island trim (no 8-in. backguard), so full-height tile over 1/2-in. HardieBacker is required behind the range.",
+    whyEs: "La cubierta estándar de la campana no llega al techo de 121-1/2 pulg., así que queda un hueco de 4-1/2 a 11-1/2 pulg. arriba. La estufa Viking lleva la moldura baja de 1 pulg. (sin respaldo alto de 8 pulg.), así que detrás de la estufa va HardieBacker de 1/2 pulg. con azulejo hasta el techo.",
+    options: "Option A: build a tiled box (soffit) above the hood. Option B: order Zephyr's cover extension (Z1C-00SA).",
+    optionsEs: "Opción A: hacer un cajón forrado de azulejo arriba de la campana. Opción B: pedir la extensión de cubierta de Zephyr (Z1C-00SA).",
     johnInput: "Test-hang the hood 30–36 in. above the cooktop (66–72 in. from the floor) and measure the exact gap to the ceiling and where the 6-in. duct lands.",
     johnInputEs: "Colgar la campana de prueba a 30–36 pulg. sobre la parrilla (66–72 pulg. del piso) y medir el hueco exacto al techo y dónde cae el ducto de 6 pulg."
   },
@@ -104,5 +104,20 @@ var DEFAULT_OPEN_DECISIONS = [
     optionsEs: "Serge y Alex lo confirman en la visita del lunes 23 de nov.",
     johnInput: "Keep the panel wall open until this is confirmed.",
     johnInputEs: "Dejar abierto el muro del tablero hasta que se confirme."
+  },
+  {
+    id: "d08",
+    project: "electrical",
+    priority: 2,
+    order: 8,
+    status: "open",
+    question: "Confirm three kitchen electrical choices: 2 pendants vs. 3 task lights, sink-deck air button vs. wired disposal switch, and which side the Zephyr hood wiring knockout sits on.",
+    questionEs: "Confirmar tres opciones eléctricas de cocina: 2 lámparas colgantes vs. 3 luces de trabajo, botón de aire en cubierta vs. apagador cableado para triturador, y de qué lado va la entrada de cable de la campana Zephyr.",
+    why: "Pendant vs. task-light boxes, disposal switching, and the exact hood box knockout side should be settled before rough-in inspection and drywall.",
+    whyEs: "Las cajas de colgantes o luces de trabajo, el apagador del triturador y el lado exacto de conexión de la campana deben quedar definidos antes de inspección y tablarroca.",
+    options: "Pick 2 pendants or 3 task lights, pick air button or wired wall switch, and check the actual Zephyr hood downstairs to verify knockout side.",
+    optionsEs: "Elegir 2 colgantes o 3 luces de trabajo, botón de aire o apagador en muro, y revisar abajo la campana Zephyr real para confirmar el lado de conexión.",
+    johnInput: "Hold ceiling/backsplash boxes until confirmed and check the Zephyr hood downstairs before closing the hood wall.",
+    johnInputEs: "Esperar en cajas de techo/salpicadero hasta confirmar y revisar abajo la campana Zephyr antes de cerrar ese muro."
   }
 ];

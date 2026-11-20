@@ -1,5 +1,71 @@
 [
   {
+    "title": "Interactive-Kitchen-Electrical-D04_EN.html",
+    "titleEn": "Interactive kitchen electrical and panel D04 plan · English",
+    "titleEs": "Plano interactivo eléctrico de cocina y tablero D04 · inglés",
+    "id": "2026-11-20_Kitchen-Electrical-Interactive_EN",
+    "path": "6 coupled views, D04 20-space panel & hood box routing (English)",
+    "date": "2026-11-20",
+    "lang": "en",
+    "pairId": "kitchen-electrical-interactive",
+    "pin": true
+  },
+  {
+    "title": "Interactive-Kitchen-Electrical-D04_ES.html",
+    "titleEn": "Interactive kitchen electrical and panel D04 plan · Spanish",
+    "titleEs": "Plano interactivo eléctrico de cocina y tablero D04 · español",
+    "id": "2026-11-20_Kitchen-Electrical-Interactive_ES",
+    "path": "6 vistas acopladas, tablero D04 de 20 espacios y ruta de campana (español)",
+    "date": "2026-11-20",
+    "lang": "es",
+    "pairId": "kitchen-electrical-interactive",
+    "pin": true
+  },
+  {
+    "title": "2026-11-20_U4_kitchen_electrical-d04-interactive_R1_EN.pdf",
+    "titleEn": "Printable kitchen electrical and panel D04 plan · English",
+    "titleEs": "Plano imprimible eléctrico de cocina y tablero D04 · inglés",
+    "id": "2026-11-20_U4_kitchen_electrical-d04-interactive_R1_EN",
+    "path": "Printable 2-page kitchen electrical & D04 plan (English)",
+    "date": "2026-11-20",
+    "lang": "en",
+    "pairId": "kitchen-electrical-printable",
+    "pin": true
+  },
+  {
+    "title": "2026-11-20_U4_kitchen_electrical-d04-interactive_R1_ES.pdf",
+    "titleEn": "Printable kitchen electrical and panel D04 plan · Spanish",
+    "titleEs": "Plano imprimible eléctrico de cocina y tablero D04 · español",
+    "id": "2026-11-20_U4_kitchen_electrical-d04-interactive_R1_ES",
+    "path": "Plano imprimible eléctrico de cocina y tablero D04 (español)",
+    "date": "2026-11-20",
+    "lang": "es",
+    "pairId": "kitchen-electrical-printable",
+    "pin": true
+  },
+  {
+    "title": "2026-11-20_U4_kitchen_zephyr-savona-mock-hookup_04-hood-electrical_R2_EN.pdf",
+    "titleEn": "Hood test-hang: wiring, dry-hang and photos · English",
+    "titleEs": "Prueba de campana: corriente, montaje y fotos · inglés",
+    "id": "2026-11-20_U4_kitchen_zephyr-savona-mock-hookup_04-hood-electrical_R2_EN",
+    "path": "Sheet 4 of 4 · Flush 1-gang hood box & 1/2-in drywall transition (English)",
+    "date": "2026-11-20",
+    "lang": "en",
+    "pairId": "zephyr-mock-sheet-04-r2",
+    "pin": true
+  },
+  {
+    "title": "2026-11-20_U4_kitchen_zephyr-savona-mock-hookup_04-hood-electrical_R2_ES.pdf",
+    "titleEn": "Hood test-hang: wiring, dry-hang and photos · Spanish",
+    "titleEs": "Prueba de campana: corriente, montaje y fotos · español",
+    "id": "2026-11-20_U4_kitchen_zephyr-savona-mock-hookup_04-hood-electrical_R2_ES",
+    "path": "Hoja 4 de 4 · Caja sencilla de campana y junta tablaroca 1/2 (español)",
+    "date": "2026-11-20",
+    "lang": "es",
+    "pairId": "zephyr-mock-sheet-04-r2",
+    "pin": true
+  },
+  {
     "title": "2026-11-02_U4_Electrical_Whole-Unit-Wiring-Plan_R1.pdf",
     "titleEn": "Whole-unit wiring plan",
     "titleEs": "Plan de cableado de toda la unidad",
