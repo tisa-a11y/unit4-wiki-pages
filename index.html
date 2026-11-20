@@ -1123,7 +1123,13 @@ const KITCHEN_HOSTED_LINKS = {
   "2026-11-19_U4_HVAC_Attic-Opening-Plan_EN-ES": "./wiki-docs/attic-opening-plan.html",
   "2026-11-19_Attic-Enclosure-and-Requirements": "#attic-access",
   "2026-11-20_Kitchen-Vent-Hood-Wall-Interactive_EN": "./plans/kitchen-west-ks4/index.html?lang=en",
-  "2026-11-20_Kitchen-Vent-Hood-Wall-Interactive_ES": "./plans/kitchen-west-ks4/index.html?lang=es"
+  "2026-11-20_Kitchen-Vent-Hood-Wall-Interactive_ES": "./plans/kitchen-west-ks4/index.html?lang=es",
+  "2026-11-20_Attic-Hatch-Interactive_EN": "./plans/attic-hatch/index.html?lang=en",
+  "2026-11-20_Attic-Hatch-Interactive_ES": "./plans/attic-hatch/index.html?lang=es",
+  "2026-11-20_HVAC-Layout-Interactive_EN": "./plans/hvac-layout/index.html?lang=en",
+  "2026-11-20_HVAC-Layout-Interactive_ES": "./plans/hvac-layout/index.html?lang=es",
+  "2026-11-20_Murphy-Door-Interactive_EN": "./plans/murphy-door/index.html?lang=en",
+  "2026-11-20_Murphy-Door-Interactive_ES": "./plans/murphy-door/index.html?lang=es"
 };
 
 function isDocVisibleInLang(d, list, lang){
@@ -3789,8 +3795,8 @@ document.getElementById("qpClose").addEventListener("click", closeQP);
 document.addEventListener("keydown", e=>{ if(e.key==="Escape" && qpOpen) closeQP(); });
 
 // ---------- Minimal Voice Entry Point (#waVoiceMicPill) & 6-Action Client Bridge ----------
-var CREW_ALLOWED_ROOM_KEYS = ["home","roadmap","kitchen","kitchen-oven-range","kitchen-sink-north","bathroom","electrical","laundry","bedroom","living-dining","hallway","paint-floors","hvac","attic-access"];
-var CANONICAL_BRIDGE_FUNCTIONS = ["navigate_room","focus_section","open_document","set_language","fill_draft_note","submit_voice_memo"];
+var CREW_ALLOWED_ROOM_KEYS = ["home","roadmap","decisions","kitchen","kitchen-oven-range","kitchen-sink-north","bathroom","electrical","laundry","bedroom","living-dining","hallway","paint-floors","hvac","attic-access","agents"];
+var CANONICAL_BRIDGE_FUNCTIONS = ["navigate_room","focus_section","open_document","go_to_document_page","read_active_document","set_language","fill_draft_note","submit_voice_memo","query_todoist_cards","show_room_renders","get_pm_standup_brief","load_pm_skill","apply_pm_action","query_wiki_and_backend_knowledge","propose_wiki_or_plan_edit"];
 var voiceCompanionState = { active: false, state: "idle", micOpenedOnLoad: false, lastSubmitAt: 0 };
 
 function toggleVoiceCompanionSession(opts) {
@@ -4067,11 +4073,18 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
 
   
   var BASE = (window.U4_MINI_BACKEND_ORIGIN || "https://mac-mini.tailcf4007.ts.net").replace(/\/+$/, "");
+  var BACKEND_ORIGIN = BASE;
   if (!window.U4_INTAKE_HTTP_ENDPOINT || /127\.0\.0\.1|localhost/.test(String(window.U4_INTAKE_HTTP_ENDPOINT))) {
     var defaultIntake = BASE + "/api/unit4/wiki-intake/voice-memo";
     window.U4_INTAKE_HTTP_ENDPOINT = defaultIntake;
     window.UNIT4_WIKI_INTAKE_URL = defaultIntake;
     window.UNIT4_INTAKE_URL = defaultIntake;
+  }
+  if (!window.U4_STRUCTURED_INTAKE_ENDPOINT || /127\.0\.0\.1|localhost/.test(String(window.U4_STRUCTURED_INTAKE_ENDPOINT))) {
+    window.U4_STRUCTURED_INTAKE_ENDPOINT = BASE + "/api/unit4/wiki-intake";
+  }
+  if (!window.U4_KNOWLEDGE_HTTP_ENDPOINT || /127\.0\.0\.1|localhost/.test(String(window.U4_KNOWLEDGE_HTTP_ENDPOINT))) {
+    window.U4_KNOWLEDGE_HTTP_ENDPOINT = BASE + "/api/unit4/knowledge";
   }
   if (!window.U4_VOICE_TOKEN_ENDPOINT || /127\.0\.0\.1|localhost/.test(String(window.U4_VOICE_TOKEN_ENDPOINT))) {
     window.U4_VOICE_TOKEN_ENDPOINT = BASE + "/api/unit4/voice-token";
@@ -4089,7 +4102,135 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   ];
   var PROJECT_ROOMS = ["kitchen","kitchen-oven-range","kitchen-sink-north","bathroom","electrical","laundry","bedroom","living-dining","hallway","paint-floors","hvac","attic-access"];
 
+  var INTERACTIVE_PLAN_MODULES = {
+    "kitchen-west-ks4": {
+      id: "kitchen-west-ks4",
+      room: "kitchen-oven-range",
+      url: "./plans/kitchen-west-ks4/index.html",
+      docIdEn: "2026-11-20_Kitchen-Vent-Hood-Wall-Interactive_EN",
+      docIdEs: "2026-11-20_Kitchen-Vent-Hood-Wall-Interactive_ES",
+      titleEn: "Interactive range and hood wall plan",
+      titleEs: "Plano interactivo del muro de estufa y campana",
+      status: "live",
+      aliases: ["kitchen-west-ks4","ks4","k-s4","vent hood wall","hood wall","interactive hood plan","interactive range wall","live hood plan","plano interactivo campana","muro de campana"]
+    },
+    "attic-hatch": {
+      id: "attic-hatch",
+      room: "attic-access",
+      url: "./plans/attic-hatch/index.html",
+      docIdEn: "2026-11-20_Attic-Hatch-Interactive_EN",
+      docIdEs: "2026-11-20_Attic-Hatch-Interactive_ES",
+      titleEn: "Interactive attic hatch plan",
+      titleEs: "Plano interactivo de la escotilla del ático",
+      status: "wave_b",
+      aliases: ["attic-hatch","interactive attic","attic hatch interactive","escotilla interactiva"]
+    },
+    "hvac-layout": {
+      id: "hvac-layout",
+      room: "hvac",
+      url: "./plans/hvac-layout/index.html",
+      docIdEn: "2026-11-20_HVAC-Layout-Interactive_EN",
+      docIdEs: "2026-11-20_HVAC-Layout-Interactive_ES",
+      titleEn: "Interactive HVAC and ductwork layout",
+      titleEs: "Plano interactivo de clima y ductos",
+      status: "wave_b",
+      aliases: ["hvac-layout","interactive hvac","hvac what-if","ductwork layout","plano interactivo clima"]
+    },
+    "murphy-door": {
+      id: "murphy-door",
+      room: "laundry",
+      url: "./plans/murphy-door/index.html",
+      docIdEn: "2026-11-20_Murphy-Door-Interactive_EN",
+      docIdEs: "2026-11-20_Murphy-Door-Interactive_ES",
+      titleEn: "Interactive bookcase door plan",
+      titleEs: "Plano interactivo de la puerta librero",
+      status: "wave_b",
+      aliases: ["murphy-door","interactive murphy","interactive bookcase door","puerta librero interactiva"]
+    }
+  };
+
+  var FRIENDLY_ROOM_ALIASES = {
+    "inicio": "home", "start": "home", "overview": "home", "this week": "home",
+    "hoja de ruta": "roadmap", "schedule": "roadmap", "phases": "roadmap",
+    "project planning": "decisions", "planificacion": "decisions", "planificación": "decisions", "open decisions": "decisions", "decisiones": "decisions",
+    "cocina": "kitchen",
+    "oven": "kitchen-oven-range", "range": "kitchen-oven-range", "hood": "kitchen-oven-range", "oven/range": "kitchen-oven-range", "oven and range": "kitchen-oven-range", "range wall": "kitchen-oven-range", "estufa": "kitchen-oven-range", "campana": "kitchen-oven-range", "tramo de estufa": "kitchen-oven-range",
+    "sink": "kitchen-sink-north", "north wall": "kitchen-sink-north", "sink and north wall": "kitchen-sink-north", "fregadero": "kitchen-sink-north", "muro norte": "kitchen-sink-north",
+    "bath": "bathroom", "baño": "bathroom", "bano": "bathroom", "shower": "bathroom",
+    "elec": "electrical", "panel": "electrical", "lighting": "electrical", "eléctrico": "electrical", "electrico": "electrical", "electricidad": "electrical",
+    "laundry closet": "laundry", "lavanderia": "laundry", "lavandería": "laundry", "murphy": "laundry", "bookcase door": "laundry", "puerta librero": "laundry",
+    "bed": "bedroom", "recamara": "bedroom", "recámara": "bedroom",
+    "living": "living-dining", "dining": "living-dining", "living room": "living-dining", "sala": "living-dining", "comedor": "living-dining", "sala y comedor": "living-dining",
+    "hall": "hallway", "pasillo": "hallway",
+    "paint": "paint-floors", "floors": "paint-floors", "trim": "paint-floors", "moulding": "paint-floors", "molding": "paint-floors", "pintura": "paint-floors", "pisos": "paint-floors",
+    "heating": "hvac", "cooling": "hvac", "furnace": "hvac", "clima": "hvac", "calefaccion": "hvac", "calefacción": "hvac",
+    "attic": "attic-access", "hatch": "attic-access", "atico": "attic-access", "ático": "attic-access", "escotilla": "attic-access",
+    "agent": "agents", "agent brief": "agents", "start here": "agents"
+  };
+
+  var VALID_EDIT_KINDS = ["measurement_update","plan_correction","wiki_text_edit","checklist_update","new_question_or_blocker","field_note"];
+  var VALID_MEASURE_BOUNDARIES = ["wall_to_wall","to_outer_casing","clear_between_casings","rough_opening","aff","subfloor","n_a"];
+  var cachedBackendKnowledge = null;
+
+  function resolveRoomOrAlias(rawVal) {
+    var low = String(rawVal || "").trim().toLowerCase().replace(/^#/, "");
+    if (!low) return "";
+    if (ALLOWED_ROOMS.indexOf(low) !== -1) return low;
+    if (FRIENDLY_ROOM_ALIASES[low]) return FRIENDLY_ROOM_ALIASES[low];
+    return low;
+  }
+
+  function resolveInteractivePlanAlias(rawVal) {
+    var low = String(rawVal || "").trim().toLowerCase().replace(/^#/, "");
+    if (!low) return null;
+    var ids = Object.keys(INTERACTIVE_PLAN_MODULES);
+    for (var i = 0; i < ids.length; i++) {
+      var mod = INTERACTIVE_PLAN_MODULES[ids[i]];
+      if (low === mod.id || low === mod.url.toLowerCase() || (mod.aliases && mod.aliases.indexOf(low) !== -1)) {
+        return mod;
+      }
+    }
+    return null;
+  }
+
+  function interactivePlanHintForRoom(roomKey, lang) {
+    var l = (lang === "es") ? "es" : "en";
+    var ids = Object.keys(INTERACTIVE_PLAN_MODULES);
+    for (var i = 0; i < ids.length; i++) {
+      var mod = INTERACTIVE_PLAN_MODULES[ids[i]];
+      if (mod.room === roomKey || (roomKey === "kitchen" && mod.id === "kitchen-west-ks4")) {
+        return {
+          planId: mod.id,
+          url: mod.url + "?lang=" + l,
+          title: l === "es" ? mod.titleEs : mod.titleEn,
+          status: mod.status
+        };
+      }
+    }
+    return null;
+  }
+
+  function violatesVoicePrivateFirewall(text) {
+    return /\$\s*\d|\bestimate\s*#|\bgogreen\b|\bcalcoast\b|mail\.google\.com|\bpayroll\b|\blease\b/i.test(String(text || ""));
+  }
+
+  async function loadCachedBackendKnowledgeMirror() {
+    if (cachedBackendKnowledge) return cachedBackendKnowledge;
+    try {
+      var r = await fetch("./wiki-assets/unit4-backend-knowledge.json", { cache: "no-store" });
+      if (r && r.ok) {
+        cachedBackendKnowledge = await r.json();
+        return cachedBackendKnowledge;
+      }
+    } catch (e) {}
+    return null;
+  }
+
   var ROOM_LABELS = {
+    home: { en: "Home", es: "Inicio" },
+    roadmap: { en: "Roadmap", es: "Hoja de ruta" },
+    decisions: { en: "Project Planning", es: "Planificación del proyecto" },
+    agents: { en: "Agent Brief", es: "Guía de agentes" },
     kitchen: { en: "Kitchen", es: "Cocina" },
     bathroom: { en: "Bathroom", es: "Ba\u00f1o" },
     electrical: { en: "Electrical & Lighting", es: "El\u00e9ctrico e iluminaci\u00f3n" },
@@ -4457,7 +4598,19 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     if (info.specText) {
       lines.push("Governing room spec (" + view.room + "):\n" + info.specText.slice(0, view.kind === "doc" ? 2600 : 4400));
     }
+    var planHint = interactivePlanHintForRoom(view.room, currentUiLang());
+    if (planHint) {
+      lines.push("Interactive parametric plan for this room: " + planHint.title + " (" + planHint.url + ", status=" + planHint.status + ").");
+    }
     if (includeFullMemory) {
+      lines.push(
+        "Unit 4 Nov 20 Wiki, Interactive Plans & Backend Architecture:\n" +
+        "- Pages (16 allowed rooms): " + ALLOWED_ROOMS.join(", ") + ".\n" +
+        "- Plain-language crew guides: Oven / Range Run has 4 standalone 1-page Zephyr hood test-hang visual sheets + live Interactive Range & Hood Wall Plan (./plans/kitchen-west-ks4/index.html).\n" +
+        "- All 4 interactive parametric plan URLs: ./plans/kitchen-west-ks4/ (live), ./plans/attic-hatch/, ./plans/hvac-layout/, ./plans/murphy-door/.\n" +
+        "- Wiki build workflow: content/pages/<room>/ + content/data/ + src/template.html -> python3 tools/build.py -> index.html (never hand-edit index.html).\n" +
+        "- Live backends: Mac mini :8791 (https://mac-mini.tailcf4007.ts.net) serves /api/unit4/voice-token (15 tools), /api/unit4/knowledge, /api/unit4/wiki-intake, /api/unit4/healthz; Mac mini :8444 (tailnet-only, never Funnel) persists live interactive plan edits with EOD Accept/Reject review."
+      );
       lines.push(formatTodoistMemoryForPrompt());
     }
     return lines.join("\n\n");
@@ -5599,20 +5752,44 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     },
 
     navigate_room: async function(args) {
-      var room = String((args && (args.room || args.roomKey || args.key)) || "").trim().toLowerCase();
-      var pkHit = (typeof packetByKey === "function") ? packetByKey(room) : null;
+      var rawRoom = String((args && (args.room || args.roomKey || args.key)) || "").trim().toLowerCase();
+      var planMod = resolveInteractivePlanAlias(rawRoom);
+      if (planMod) {
+        var esPlan = currentUiLang() === "es";
+        var planDocId = esPlan ? planMod.docIdEs : planMod.docIdEn;
+        var planUrl = planMod.url + "?lang=" + (esPlan ? "es" : "en");
+        if (KITCHEN_HOSTED_LINKS[planDocId]) {
+          location.hash = "#doc:" + planDocId;
+          if (typeof show === "function") show("doc:" + planDocId);
+          else if (typeof window.show === "function") window.show("doc:" + planDocId);
+        }
+        appendNavEventChip((esPlan ? "Abri\u00f3 plano interactivo: " : "Opened interactive plan: ") + (esPlan ? planMod.titleEs : planMod.titleEn));
+        return {
+          ok: true,
+          action: "navigate_room",
+          room: planMod.room,
+          interactivePlan: planMod.id,
+          title: esPlan ? planMod.titleEs : planMod.titleEn,
+          url: planUrl,
+          docId: planDocId,
+          status: planMod.status
+        };
+      }
+      var pkHit = (typeof packetByKey === "function") ? packetByKey(rawRoom) : null;
       if (pkHit) {
         location.hash = "#" + pkHit.key;
         if (typeof show === "function") show(pkHit.key);
         appendNavEventChip((currentUiLang() === "es" ? "Abri\u00f3 " : "Opened ") + packetTitle(pkHit));
         return { ok: true, action: "navigate_room", room: pkHit.key, packet: true, title: packetTitle(pkHit), documentId: packetDocId(pkHit) };
       }
+      var room = resolveRoomOrAlias(rawRoom);
       if (ALLOWED_ROOMS.indexOf(room) === -1) {
         return { ok: false, code: "DISALLOWED_ROOM_KEY", validOptions: ALLOWED_ROOMS };
       }
-      location.hash = "#" + room;
-      if (typeof show === "function") show(room);
-      else if (typeof window.show === "function") window.show(room);
+      var routeTarget = (room === "agents") ? "agent-brief" : room;
+      location.hash = "#" + routeTarget;
+      if (typeof show === "function") show(routeTarget);
+      else if (typeof window.show === "function") window.show(routeTarget);
       refreshDialogSuggestions();
       var es = currentUiLang() === "es";
       var rl = ROOM_LABELS[room] ? (es ? ROOM_LABELS[room].es : ROOM_LABELS[room].en) : room;
@@ -5623,6 +5800,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         action: "navigate_room",
         room: room,
         roomKey: room,
+        interactivePlan: interactivePlanHintForRoom(room, currentUiLang()),
         checklist: summary.checklist,
         documents: summary.documents,
         specExcerpt: summary.specText.slice(0, 3500)
@@ -5855,6 +6033,254 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       appendLocalReceiptRow(targetList, "Voice", roomKey, text, Boolean(res.persistedToDrive));
       appendNavEventChip(currentUiLang() === "es" ? "Nota guardada en to-triage" : "Saved note to to-triage");
       return Object.assign({ action: "submit_voice_memo", language: lang }, res);
+    },
+
+    query_wiki_and_backend_knowledge: async function(args) {
+      var query = String((args && (args.query || args.q)) || "").trim();
+      if (!query) return { ok: false, action: "query_wiki_and_backend_knowledge", code: "MISSING_QUERY" };
+      var rawRoom = String((args && (args.room || args.roomKey)) || "").trim();
+      var room = rawRoom ? resolveRoomOrAlias(rawRoom) : "";
+      var scope = String((args && args.scope) || "all").trim().toLowerCase();
+      if (["all","wiki","specs","architecture","interactive_plan"].indexOf(scope) === -1) scope = "all";
+
+      var tokens = query.toLowerCase().split(/\s+/).filter(function(w){ return w.length >= 2; });
+      var wikiMatches = [];
+
+      // 1. Search local wiki pages, checklists, key facts, packets, and documents
+      if (scope === "all" || scope === "wiki" || scope === "specs" || scope === "interactive_plan") {
+        (PAGES || []).forEach(function(pg) {
+          if (room && pg.key !== room && pg.parent !== room) return;
+          var hay = [pg.key, pg.label, pg.labelEs, pg.md, pg.mdEs, JSON.stringify(CHECKLISTS[pg.key] || []), JSON.stringify(ROOM_KEY_FACTS[pg.key] || [])].join("\n").toLowerCase();
+          var hits = tokens.filter(function(tk){ return hay.indexOf(tk) !== -1; }).length;
+          if (hits > 0) {
+            var excerpt = String((currentUiLang() === "es" && pg.mdEs) ? pg.mdEs : (pg.md || "")).slice(0, 700);
+            if (!violatesVoicePrivateFirewall(excerpt)) {
+              wikiMatches.push({
+                source: "wiki_page",
+                room: pg.key,
+                title: pageLabel(pg),
+                score: hits,
+                excerpt: excerpt,
+                interactivePlan: interactivePlanHintForRoom(pg.key, currentUiLang())
+              });
+            }
+          }
+        });
+        wikiMatches.sort(function(a, b){ return b.score - a.score; });
+        wikiMatches = wikiMatches.slice(0, 5);
+      }
+
+      // 2. Search cached static backend knowledge mirror (./wiki-assets/unit4-backend-knowledge.json)
+      var mirrorMatches = [];
+      var mirror = await loadCachedBackendKnowledgeMirror();
+      if (mirror && Array.isArray(mirror.records || mirror.items || mirror.documents)) {
+        var recs = mirror.records || mirror.items || mirror.documents;
+        recs.forEach(function(rec) {
+          if (room && rec.room && rec.room !== room && rec.room !== "general") return;
+          var blob = [rec.id, rec.title, rec.room, rec.scope, rec.path, rec.sourcePath, rec.statusHint, rec.summary, rec.excerpt, rec.text, rec.content].join(" ").toLowerCase();
+          var hits = tokens.filter(function(tk){ return blob.indexOf(tk) !== -1; }).length;
+          if (hits > 0) {
+            var snippet = String(rec.excerpt || rec.summary || rec.text || rec.content || "").slice(0, 650);
+            if (!violatesVoicePrivateFirewall(snippet)) {
+              mirrorMatches.push({ source: "mirror_knowledge", id: rec.id || rec.sourcePath || rec.path || "", room: rec.room || "general", title: rec.title || rec.sourcePath || rec.path || "", score: hits, snippet: snippet });
+            }
+          }
+        });
+        mirrorMatches.sort(function(a, b){ return b.score - a.score; });
+        mirrorMatches = mirrorMatches.slice(0, 5);
+      }
+
+      // 3. Query live Mac mini :8791 GET /api/unit4/knowledge (non-blocking 3.5s timeout)
+      var backendReachable = false;
+      var backendMatches = [];
+      try {
+        var ctrl = (typeof AbortController !== "undefined") ? new AbortController() : null;
+        var timer = ctrl ? setTimeout(function(){ ctrl.abort(); }, 3500) : null;
+        var qs = "?q=" + encodeURIComponent(query) + (room ? ("&room=" + encodeURIComponent(room)) : "") + "&scope=" + encodeURIComponent(scope);
+        var knowUrl = (window.U4_KNOWLEDGE_HTTP_ENDPOINT || (BACKEND_ORIGIN + "/api/unit4/knowledge")) + qs;
+        var resp = await fetch(knowUrl, Object.assign({ method: "GET", mode: "cors" }, ctrl ? { signal: ctrl.signal } : {}));
+        if (timer) clearTimeout(timer);
+        if (resp && resp.ok) {
+          var kd = await resp.json().catch(function(){ return null; });
+          if (kd && (kd.ok !== false)) {
+            backendReachable = true;
+            var rawHits = Array.isArray(kd.matches) ? kd.matches : (Array.isArray(kd.results) ? kd.results : (Array.isArray(kd.records) ? kd.records : []));
+            backendMatches = rawHits.slice(0, 6).filter(function(m){
+              return !violatesVoicePrivateFirewall(JSON.stringify(m));
+            });
+          }
+        }
+      } catch (e) {}
+
+      appendNavEventChip((currentUiLang() === "es" ? "Consult\u00f3 conocimiento: " : "Queried knowledge: ") + query.slice(0, 42));
+      return {
+        ok: true,
+        action: "query_wiki_and_backend_knowledge",
+        query: query,
+        room: room || null,
+        scope: scope,
+        backendReachable: backendReachable,
+        backendMatches: backendMatches,
+        mirrorMatches: mirrorMatches,
+        wikiMatches: wikiMatches,
+        interactivePlans: Object.keys(INTERACTIVE_PLAN_MODULES).map(function(k){
+          var m = INTERACTIVE_PLAN_MODULES[k];
+          return { id: m.id, room: m.room, url: m.url, titleEn: m.titleEn, titleEs: m.titleEs, status: m.status };
+        }),
+        architectureSummary: {
+          wikiBuild: "content/pages/<room>/ + content/data/ + src/template.html -> python3 tools/build.py -> index.html",
+          voiceBackend: BACKEND_ORIGIN + " (:8791: /voice-token 15 tools, /knowledge, /wiki-intake, /healthz)",
+          planEditsBackend: "https://mac-mini.tailcf4007.ts.net:8444 (tailnet-only live plan persistence + EOD Accept/Reject)"
+        }
+      };
+    },
+
+    propose_wiki_or_plan_edit: async function(args) {
+      var a = args || {};
+      var room = resolveRoomOrAlias(a.room || a.roomKey || activeRoomKey());
+      if (ALLOWED_ROOMS.indexOf(room) === -1) {
+        return { ok: false, action: "propose_wiki_or_plan_edit", code: "DISALLOWED_ROOM_KEY", validOptions: ALLOWED_ROOMS };
+      }
+      var editKind = String(a.edit_kind || a.editKind || "").trim().toLowerCase();
+      if (VALID_EDIT_KINDS.indexOf(editKind) === -1) {
+        return { ok: false, action: "propose_wiki_or_plan_edit", code: "INVALID_EDIT_KIND", validOptions: VALID_EDIT_KINDS };
+      }
+      var targetItem = String(a.target_item || a.targetItem || "").trim();
+      var newValue = String(a.new_value || a.newValue || "").trim();
+      var oldValue = String(a.old_value || a.oldValue || "").trim();
+      var verbatimReq = String(a.verbatim_request || a.verbatimRequest || "").trim();
+      var boundary = String(a.measure_boundary || a.measureBoundary || "n_a").trim().toLowerCase();
+      if (VALID_MEASURE_BOUNDARIES.indexOf(boundary) === -1) boundary = "n_a";
+      var author = String(a.author || "").trim() || "Field";
+      if (!targetItem || !newValue || !verbatimReq) {
+        return { ok: false, action: "propose_wiki_or_plan_edit", code: "MISSING_REQUIRED_FIELDS", required: ["room","edit_kind","target_item","new_value","verbatim_request"] };
+      }
+      if (violatesVoicePrivateFirewall([targetItem, oldValue, newValue, verbatimReq].join(" "))) {
+        return { ok: false, action: "propose_wiki_or_plan_edit", code: "PRIVATE_DATA_BLOCKED", error: "Prices, bids, estimates, financing, and private mail links cannot be logged on the crew wiki." };
+      }
+      var lang = (a.language === "es" || a.language === "en") ? a.language : detectSpokenOrWrittenLanguage(verbatimReq, currentUiLang());
+      var planHint = interactivePlanHintForRoom(room, lang);
+      var summaryText = "[Proposed Edit: " + editKind + "] " + targetItem + ": " +
+        (oldValue ? (oldValue + " -> ") : "") + newValue +
+        (boundary !== "n_a" ? (" [" + boundary + "]") : "") +
+        " | Verbatim (" + author + "): " + verbatimReq;
+
+      var confirmed = Boolean(a.spoken_confirmation === true || a.readbackConfirmed === true);
+      if (!confirmed) {
+        readbackArmedHash = deterministicHash(summaryText + "|" + lang);
+        await bridgeActions.fill_draft_note({
+          text: summaryText,
+          language: lang,
+          room: room,
+          item: targetItem,
+          measurement: editKind === "measurement_update" ? newValue : "",
+          datum: boundary
+        });
+        return {
+          ok: false,
+          action: "propose_wiki_or_plan_edit",
+          code: "VOICE_READBACK_CONFIRMATION_REQUIRED",
+          room: room,
+          edit_kind: editKind,
+          target_item: targetItem,
+          new_value: newValue,
+          measure_boundary: boundary,
+          interactivePlanUrl: planHint ? planHint.url : null,
+          verbalReadbackEn: "I prepared a proposed " + editKind.replace(/_/g, " ") + " for " + room + ": set " + targetItem + " to " + newValue + ". Say 'send it' to file it for Tisa's review.",
+          verbalReadbackEs: "Prepar\u00e9 una propuesta de cambio para " + room + ": cambiar " + targetItem + " a " + newValue + ". Di 'm\u00e1ndalo' para guardarlo para revisi\u00f3n de Tisa."
+        };
+      }
+
+      var now = Date.now();
+      if (now - lastVoiceSubmitAt < 5000) {
+        return { ok: false, action: "propose_wiki_or_plan_edit", code: "COOLDOWN_ACTIVE", retryAfterMs: 5000 - (now - lastVoiceSubmitAt) };
+      }
+      lastVoiceSubmitAt = now;
+
+      var subId = "u4-vedit-" + deterministicHash(room + "|" + editKind + "|" + targetItem + "|" + newValue + "|" + Math.floor(now / 15000));
+      var kindLabel = "Proposed Edit (" + editKind + ")";
+      var structuredPayload = {
+        schema: "unit4-worker-note-submission-v1",
+        submissionId: subId,
+        idempotencyKey: subId,
+        source: "propose_wiki_or_plan_edit",
+        commandSource: "voice_edit_proposal",
+        project: room,
+        roomKey: room,
+        page_id: room,
+        kind: kindLabel,
+        noteType: kindLabel,
+        edit_kind: editKind,
+        target_item: targetItem,
+        old_value: oldValue || null,
+        new_value: newValue,
+        measure_boundary: boundary,
+        author: author,
+        verbatim_request: verbatimReq,
+        language: lang,
+        item: targetItem,
+        measurement: editKind === "measurement_update" ? newValue : "",
+        datum: boundary,
+        text: summaryText,
+        raw: summaryText,
+        interactive_plan_url: planHint ? planHint.url : null
+      };
+
+      var submitResult = null;
+      var structuredUrl = window.U4_STRUCTURED_INTAKE_ENDPOINT || (BACKEND_ORIGIN + "/api/unit4/wiki-intake");
+      try {
+        var postResp = await fetch(structuredUrl, {
+          method: "POST",
+          mode: "cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(structuredPayload)
+        });
+        var postData = await postResp.json().catch(function(){ return null; });
+        if (postResp && postResp.ok && postData && postData.ok !== false) {
+          submitResult = Object.assign({ ok: true, endpoint: structuredUrl }, postData);
+        }
+      } catch (e) {}
+
+      if (!submitResult) {
+        submitResult = await dispatchNoteToDriveTriage({
+          submissionId: subId,
+          source: "propose_wiki_or_plan_edit",
+          commandSource: "voice_edit_proposal",
+          project: room,
+          roomKey: room,
+          item: targetItem,
+          kind: kindLabel,
+          noteType: kindLabel,
+          language: lang,
+          raw: summaryText,
+          text: summaryText,
+          measurement: editKind === "measurement_update" ? newValue : "",
+          datum: boundary
+        });
+      }
+
+      if (!submitResult || !submitResult.ok) {
+        lastVoiceSubmitAt = 0;
+        return Object.assign({ ok: false, action: "propose_wiki_or_plan_edit", interactivePlanUrl: planHint ? planHint.url : null }, submitResult || { error: "Upload failed" });
+      }
+
+      readbackArmedHash = null;
+      var qpPanel2 = document.getElementById("qpPanel");
+      var targetList2 = (qpPanel2 && !qpPanel2.hidden && document.getElementById("inList")) ? "inList" : "repList";
+      appendLocalReceiptRow(targetList2, kindLabel, room, summaryText, Boolean(submitResult.persistedToDrive || submitResult.verified_saved_in_triage));
+      appendNavEventChip(currentUiLang() === "es" ? "Propuesta enviada para revisi\u00f3n" : "Proposed edit sent for review");
+      return Object.assign({
+        ok: true,
+        action: "propose_wiki_or_plan_edit",
+        room: room,
+        edit_kind: editKind,
+        target_item: targetItem,
+        new_value: newValue,
+        measure_boundary: boundary,
+        language: lang,
+        interactivePlanUrl: planHint ? planHint.url : null,
+        interactivePlanHint: planHint
+      }, submitResult);
     }
   };
 
@@ -5871,7 +6297,9 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     readActiveDocument: "read_active_document", read_active_document: "read_active_document",
     setLanguage: "set_language", set_language: "set_language",
     fillDraftNote: "fill_draft_note", fill_draft_note: "fill_draft_note",
-    submitToTriageQueue: "submit_voice_memo", submit_voice_memo: "submit_voice_memo"
+    submitToTriageQueue: "submit_voice_memo", submit_voice_memo: "submit_voice_memo",
+    queryWikiAndBackendKnowledge: "query_wiki_and_backend_knowledge", query_wiki_and_backend_knowledge: "query_wiki_and_backend_knowledge",
+    proposeWikiOrPlanEdit: "propose_wiki_or_plan_edit", propose_wiki_or_plan_edit: "propose_wiki_or_plan_edit"
   };
 
   window.executeWikiBridgeAction = async function(actionName, params) {
@@ -6292,12 +6720,14 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
               turns: [{
                 role: "user",
                 parts: [{
-                  text: "System guide context for Unit 4 AI Helper:\n" +
+                  text: "System guide context for Unit 4 AI Helper (Voice Agent R8 · 15 tools):\n" +
                     "- Reply concisely and naturally in whatever language the speaker uses (English, Espa\u00f1ol, etc.) automatically.\n" +
-                    "- Proactively help the user navigate: use navigate_room, open_document, go_to_document_page, and focus_section whenever they ask about a room, plan, or section.\n" +
-                    "- Instruction packets are the crew's bilingual step-by-step guides. Open one with navigate_room using its key: " + PACKETS.map(function(p){ return p.key + " = " + p.titleEn + " / " + p.titleEs; }).join("; ") + ".\n" +
-                    "- Keep Todoist IDs invisible unless specifically asked; speak about tasks in plain human room/checklist terms.\n" +
-                    "- Owner-approval rule (Tisa, 2026-11-12): Never imply crew or collaborators can confirm or lock open design/finish choices (exact paint colors/sheens, kitchen matte floor tile, chair-rail Option A vs. B / Royal 164 profile, 10-inch toilet model, or material purchases). Always state clearly that Tisa's explicit approval is required before buying, cutting, painting, or locking any open selection, and flag review-only packets (Bedroom R2, Option A/B molding, Bathroom TP1-R3a, D04 framing) as 'Awaiting Tisa review / field check \u2014 do not cut or install yet'.\n\n" +
+                    "- Proactively help the user navigate all 16 rooms (" + ALLOWED_ROOMS.join(", ") + ") and interactive plans (./plans/kitchen-west-ks4/, ./plans/attic-hatch/, ./plans/hvac-layout/, ./plans/murphy-door/): use navigate_room, open_document, go_to_document_page, and focus_section.\n" +
+                    "- Use query_wiki_and_backend_knowledge whenever asked about specs, other rooms, interactive plans, the modular content/ build workflow, or the :8791/:8444 Mac mini backend.\n" +
+                    "- Use propose_wiki_or_plan_edit whenever someone wants to change a measurement, flag a clash, or edit a wiki/plan item — ALWAYS read back the exact proposal first and wait for spoken_confirmation=true before submitting, and mention the room's interactive plan link if available.\n" +
+                    "- Instruction packets are the crew's bilingual step-by-step guides (including the 4 standalone Zephyr hood test-hang sheets and live Interactive Range & Hood Wall Plan). Open one with navigate_room using its key: " + PACKETS.map(function(p){ return p.key + " = " + p.titleEn + " / " + p.titleEs; }).join("; ") + ".\n" +
+                    "- Use plain on-site crew language (no R1/R2/R3/R5, no sheet codes, no raw filenames, no Todoist IDs unless asked). Never disclose prices, bids, financing, or private links.\n" +
+                    "- Owner-approval rule (Tisa, 2026-11-12): Never imply crew or collaborators can confirm or lock open design/finish choices or material purchases. Always state clearly that Tisa's explicit approval is required before buying, cutting, painting, or locking any open selection.\n\n" +
                     initialContext
                 }]
               }],

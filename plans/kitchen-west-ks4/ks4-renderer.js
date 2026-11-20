@@ -2395,6 +2395,7 @@
       renderAll();
     }
   };
+  window.U4PLAN = Object.assign({ planId: 'kitchen-west-ks4' }, window.U4KS4);
 
   /* ── Boot Sequence ────────────────────────────────────────────────── */
   async function boot() {

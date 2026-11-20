@@ -19,10 +19,33 @@ import sys
 import threading
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DEFAULT_HTML = "plans/kitchen-west-ks4/index.html"
 DEFAULT_OUT_DIR = "wiki-pdfs"
-DEFAULT_EN_PDF = "2026-11-20_U4_kitchen_ks4-interactive_R1_EN.pdf"
-DEFAULT_ES_PDF = "2026-11-20_U4_kitchen_ks4-interactive_R1_ES.pdf"
+
+PLAN_REGISTRY = {
+    "kitchen-west-ks4": {
+        "html": "plans/kitchen-west-ks4/index.html",
+        "en_name": "2026-11-20_U4_kitchen_ks4-interactive_R1_EN.pdf",
+        "es_name": "2026-11-20_U4_kitchen_ks4-interactive_R1_ES.pdf",
+    },
+    "attic-hatch": {
+        "html": "plans/attic-hatch/index.html",
+        "en_name": "2026-11-20_U4_attic_hatch-interactive_R1_EN.pdf",
+        "es_name": "2026-11-20_U4_attic_hatch-interactive_R1_ES.pdf",
+    },
+    "hvac-layout": {
+        "html": "plans/hvac-layout/index.html",
+        "en_name": "2026-11-20_U4_hvac_layout-interactive_R1_EN.pdf",
+        "es_name": "2026-11-20_U4_hvac_layout-interactive_R1_ES.pdf",
+    },
+    "murphy-door": {
+        "html": "plans/murphy-door/index.html",
+        "en_name": "2026-11-20_U4_laundry_murphy-door-interactive_R1_EN.pdf",
+        "es_name": "2026-11-20_U4_laundry_murphy-door-interactive_R1_ES.pdf",
+    },
+}
+DEFAULT_HTML = PLAN_REGISTRY["kitchen-west-ks4"]["html"]
+DEFAULT_EN_PDF = PLAN_REGISTRY["kitchen-west-ks4"]["en_name"]
+DEFAULT_ES_PDF = PLAN_REGISTRY["kitchen-west-ks4"]["es_name"]
 
 CHROME_CANDIDATES = [
     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
@@ -123,13 +146,32 @@ def generate_pdfs(html_rel, out_dir, en_name, es_name):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Generate official EN & ES K-S4 PDFs via headless Chrome.")
-    parser.add_argument("--html", default=DEFAULT_HTML, help="Repo-relative path to interactive K-S4 HTML")
+    parser = argparse.ArgumentParser(description="Generate official EN & ES Unit 4 interactive plan PDFs via headless Chrome (supports window.U4PLAN || window.U4KS4).")
+    parser.add_argument("--plan", choices=sorted(PLAN_REGISTRY.keys()), help="Named Unit 4 interactive plan module")
+    parser.add_argument("--all", action="store_true", help="Generate PDFs for all installed modules in PLAN_REGISTRY")
+    parser.add_argument("--html", default=None, help="Repo-relative path to interactive plan HTML")
     parser.add_argument("--out-dir", default=DEFAULT_OUT_DIR, help="Output directory relative to repo root")
-    parser.add_argument("--en-name", default=DEFAULT_EN_PDF, help="English PDF filename")
-    parser.add_argument("--es-name", default=DEFAULT_ES_PDF, help="Spanish PDF filename")
+    parser.add_argument("--en-name", default=None, help="English PDF filename")
+    parser.add_argument("--es-name", default=None, help="Spanish PDF filename")
     args = parser.parse_args()
-    generate_pdfs(args.html, args.out_dir, args.en_name, args.es_name)
+
+    if args.all:
+        ran = 0
+        for pid, cfg in PLAN_REGISTRY.items():
+            if os.path.isfile(os.path.join(ROOT, cfg["html"])):
+                generate_pdfs(cfg["html"], args.out_dir, cfg["en_name"], cfg["es_name"])
+                ran += 1
+            else:
+                print(f"[SKIP] {pid}: {cfg['html']} not present yet")
+        if ran == 0:
+            raise FileNotFoundError("No interactive plan HTML files found under plans/")
+        return
+
+    cfg = PLAN_REGISTRY.get(args.plan or "kitchen-west-ks4")
+    html_rel = args.html or cfg["html"]
+    en_name = args.en_name or cfg["en_name"]
+    es_name = args.es_name or cfg["es_name"]
+    generate_pdfs(html_rel, args.out_dir, en_name, es_name)
 
 
 if __name__ == "__main__":

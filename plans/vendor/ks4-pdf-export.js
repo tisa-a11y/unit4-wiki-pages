@@ -171,17 +171,53 @@
     return null;
   }
 
+  var PLAN_DEFAULTS = {
+    "kitchen-west-ks4": {
+      titleEn: "Kitchen West Vent Hood Wall (K-S4)",
+      titleEs: "Muro Oeste de Campana y Estufa (K-S4)",
+      spec: "kitchen/SPEC.md",
+      filePrefix: "2026-11-20_U4_kitchen_ks4-interactive_"
+    },
+    "attic-hatch": {
+      titleEn: "Attic Hatch & Access Plan (24\" × 36\" Clear)",
+      titleEs: "Plan de Escotilla y Acceso al Ático (24\" × 36\" Libre)",
+      spec: "attic/SPEC.md",
+      filePrefix: "2026-11-20_U4_attic_hatch-interactive_"
+    },
+    "hvac-layout": {
+      titleEn: "HVAC & Ductwork What-If Layout",
+      titleEs: "Plano Interactivo de Clima y Ductos",
+      spec: "hvac/SPEC.md",
+      filePrefix: "2026-11-20_U4_hvac_layout-interactive_"
+    },
+    "murphy-door": {
+      titleEn: "Murphy Bookcase Door — Laundry Closet",
+      titleEs: "Puerta Librero Oculta — Clóset de Lavandería",
+      spec: "laundry/SPEC.md",
+      filePrefix: "2026-11-20_U4_laundry_murphy-door-interactive_"
+    }
+  };
+
   async function buildPdfDoc(opts) {
     var o = opts || {};
-    var hook = o.hook || root.U4KS4;
+    var hook = o.hook || root.U4PLAN || root.U4KS4;
     if (!hook || typeof hook.getSvgElement !== "function") {
-      throw new Error("window.U4KS4 hook is not registered on this page.");
+      throw new Error("window.U4PLAN (or window.U4KS4) hook is not registered on this page.");
     }
     var svgEl = hook.getSvgElement();
     if (!svgEl) {
-      throw new Error("window.U4KS4.getSvgElement() returned null.");
+      throw new Error("window.U4PLAN.getSvgElement() returned null.");
     }
     var state = typeof hook.getState === "function" ? (hook.getState() || {}) : {};
+    var planId = String(
+      o.planId || hook.planId || state.plan_id || state.module_id || (state.wall_id === "K-S4" ? "kitchen-west-ks4" : "kitchen-west-ks4")
+    ).trim().toLowerCase();
+    var meta = PLAN_DEFAULTS[planId] || {
+      titleEn: state.title_en || "Unit 4 Interactive Plan",
+      titleEs: state.title_es || "Plano Interactivo Unidad 4",
+      spec: state.governing_spec || "START-HERE.md",
+      filePrefix: "2026-11-20_U4_" + planId.replace(/[^a-z0-9_-]+/g, "-") + "_"
+    };
     var lang = (o.lang || (typeof hook.getLang === "function" ? hook.getLang() : "en") || "en").toLowerCase() === "es" ? "es" : "en";
     var es = lang === "es";
     var rawStamp = typeof hook.getRevisionStamp === "function" ? hook.getRevisionStamp() : null;
@@ -208,8 +244,8 @@
     doc.roundedRect(margin, margin, contentW, 56, 4, 4, "FD");
 
     var title = es
-      ? (state.title_es || "Muro Oeste de Campana y Estufa (K-S4)")
-      : (state.title_en || "Kitchen West Vent Hood Wall (K-S4)");
+      ? (state.title_es || meta.titleEs)
+      : (state.title_en || meta.titleEn);
     var subtitle = es
       ? "1231 11th Ave Unidad 4 · Plano interactivo paramétrico · N/S/E/O obligatorio"
       : "1231 11th Ave Unit 4 · Interactive Parametric Plan · Mandatory N/S/E/W Orientation";
@@ -292,9 +328,10 @@
 
     var overrideCount = Array.isArray(state.field_overrides) ? state.field_overrides.length : 0;
     var pinCount = Array.isArray(state.pins) ? state.pins.length : 0;
+    var specPath = state.governing_spec || meta.spec || "START-HERE.md";
     var footLine1 = es
-      ? ("Especificación gobernante: kitchen/SPEC.md  ·  Revisión: " + stamp.revId + "  ·  Ajustes de obra: " + overrideCount + "  ·  Marcas: " + pinCount)
-      : ("Governing spec: kitchen/SPEC.md  ·  Revision: " + stamp.revId + "  ·  Field overrides: " + overrideCount + "  ·  Pins: " + pinCount);
+      ? ("Especificación gobernante: " + specPath + "  ·  Revisión: " + stamp.revId + "  ·  Ajustes de obra: " + overrideCount + "  ·  Marcas: " + pinCount)
+      : ("Governing spec: " + specPath + "  ·  Revision: " + stamp.revId + "  ·  Field overrides: " + overrideCount + "  ·  Pins: " + pinCount);
     var footLine2 = es
       ? ("Exportado: " + stamp.updatedAt + "  ·  Todas las medidas etiquetadas MEDIR EN OBRA deben verificarse antes de cortar o cerrar.")
       : ("Exported: " + stamp.updatedAt + "  ·  Verify all MEASURE ON SITE dimensions before cutting or wall close-in.");
@@ -303,8 +340,8 @@
     doc.text(footLine2, margin, footY + 14);
 
     var safeRev = stamp.revId.replace(/[^a-zA-Z0-9._-]+/g, "_");
-    var filename = o.filename || ("2026-11-20_U4_kitchen_ks4-interactive_" + lang.toUpperCase() + "_" + safeRev + ".pdf");
-    return { doc: doc, filename: filename, stamp: stamp, lang: lang };
+    var filename = o.filename || (meta.filePrefix + lang.toUpperCase() + "_" + safeRev + ".pdf");
+    return { doc: doc, filename: filename, stamp: stamp, lang: lang, planId: planId };
   }
 
   async function exportPdf(opts) {
@@ -313,6 +350,7 @@
     built.doc.save(built.filename);
     return {
       ok: true,
+      planId: built.planId,
       filename: built.filename,
       revId: built.stamp.revId,
       mode: built.stamp.mode,
@@ -321,10 +359,14 @@
     };
   }
 
-  root.U4KS4PdfExport = {
-    version: "1.0.0",
+  var api = {
+    version: "2.0.0",
     buildPdfDoc: buildPdfDoc,
     exportPdf: exportPdf,
-    normalizeStamp: normalizeStamp
+    normalizeStamp: normalizeStamp,
+    planDefaults: PLAN_DEFAULTS
   };
+
+  root.U4PlanPdfExport = api;
+  root.U4KS4PdfExport = api;
 })(typeof window !== "undefined" ? window : globalThis);
