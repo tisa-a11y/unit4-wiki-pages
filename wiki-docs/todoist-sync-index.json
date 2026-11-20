@@ -1,6 +1,6 @@
 {
   "schema": "unit4-todoist-wiki-sync-index-v1",
-  "updatedAt": "2026-11-20T06:28:00+00:00",
+  "updatedAt": "2026-11-20T06:36:00+00:00",
   "todoistBoard": {
     "name": "Full 1231 11th Avenue Remodel",
     "projectId": "6hcMQpGhXWprg6m7",
@@ -37,48 +37,48 @@
       "title": "Kitchen",
       "esTitle": "Cocina",
       "driveChecklistId": "1Ol2N6vIUfYA6FTONZlumowSwQogpAulN",
-      "note": "High-level phase sequence (6 milestones). Detailed subpage plans live on Kitchen → Oven / Range Run (#kitchen-oven-range) and Kitchen → Sink & North Wall Runs (#kitchen-sink-north).",
-      "noteEs": "Secuencia general por etapas (6 hitos). Los planes detallados viven en Cocina → Tramo de estufa y campana (#kitchen-oven-range) y Cocina → Fregadero y muro norte (#kitchen-sink-north).",
+      "note": "Phase sequence (6 milestones). Subpages: Kitchen › Oven / Range Run (#kitchen-oven-range) & Kitchen › Sink & North Wall Runs (#kitchen-sink-north).",
+      "noteEs": "Secuencia por etapas (6 hitos). Subpáginas: Cocina › Tramo de estufa y campana (#kitchen-oven-range) y Cocina › Fregadero y muro norte (#kitchen-sink-north).",
       "items": [
         {
           "done": true,
-          "en": "Core appliances & sink on hand (Viking 30\" gas range, Zephyr Savona ZSA-E30AS hood, Haier counter-depth fridge, 30\" sink); pie-safe cleared for built-in shelves",
-          "es": "Electrodomésticos principales y tarja en obra (estufa Viking 30\", campana Zephyr Savona ZSA-E30AS, refri Haier, tarja 30\"); nicho pie-safe despejado para repisas",
+          "en": "Core appliances & 30\" sink on hand; old pie-safe cleared for built-in shelving",
+          "es": "Electrodomésticos principales y tarja de 30\" en obra; nicho pie-safe despejado",
           "todoistTaskIds": [],
           "checklistPath": "kitchen/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Full-L floor & wall layout staging, window sill/framing, and sink datum alignment (#kitchen-sink-north)",
-          "es": "Trazo completo en L sobre piso y muros, repisa/marco de ventana y alineación de referencia del fregadero (#kitchen-sink-north)",
+          "en": "Full-L floor/wall layout markout, window sill/framing & sink datum alignment (#kitchen-sink-north)",
+          "es": "Trazo completo en L, repisa/marco de ventana y alineación del fregadero (#kitchen-sink-north)",
           "todoistTaskIds": [],
           "checklistPath": "kitchen/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Range-wall blocking & Zephyr hood pre-drywall mock-hang at 30\"–36\" above range (66\"–72\" AFF, no upper cabinets at hood — #kitchen-oven-range)",
-          "es": "Bloqueo en muro de estufa y presentación previa a tablaroca de campana Zephyr a 30\"–36\" sobre estufa (66\"–72\" NPT, sin gabinetes altos — #kitchen-oven-range)",
+          "en": "West range-wall wood backing & Zephyr hood mock-hang at 30\"–36\" above range (66\"–72\" AFF — #kitchen-oven-range)",
+          "es": "Bloqueo en muro oeste y presentación de campana Zephyr a 30\"–36\" sobre estufa (66\"–72\" NPT — #kitchen-oven-range)",
           "todoistTaskIds": [],
           "checklistPath": "kitchen/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Electrical (9 circuits + D04 subpanel bay), plumbing & gas rough-in",
-          "es": "Instalaciones en bruto de electricidad (9 circuitos y vano de subpanel D04), plomería y gas",
+          "en": "Kitchen 9-circuit electrical, D04 subpanel bay, plumbing & gas rough-in",
+          "es": "Instalación en bruto de 9 circuitos eléctricos, vano D04, plomería y gas",
           "todoistTaskIds": [],
           "checklistPath": "kitchen/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Drywall close-in, Essex Green base cabinets, built-in pie-safe shelves, countertops, ceiling-height range-wall tile & matte floor",
-          "es": "Cierre con tablaroca, gabinetes bajos Essex Green, repisas integradas pie-safe, cubiertas, azulejo hasta el techo en muro de estufa y piso mate",
+          "en": "Drywall close-in, Essex Green base cabinets, pie-safe shelves, countertops, range-wall tile & matte floor",
+          "es": "Cierre con tablaroca, gabinetes bajos Essex Green, repisas pie-safe, cubiertas, azulejo y piso mate",
           "todoistTaskIds": [],
           "checklistPath": "kitchen/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Final appliance hookup, trim & paint finish, AFCI/GFCI circuit testing, and kitchen punch list",
-          "es": "Conexión final de equipos, pintura de muros y molduras, pruebas AFCI/GFCI y lista final de detalles",
+          "en": "Final appliance hookup, trim & paint finish, AFCI/GFCI testing & punch list",
+          "es": "Conexión final de equipos, pintura de muros y molduras, pruebas AFCI/GFCI y detalles finales",
           "todoistTaskIds": [],
           "checklistPath": "kitchen/CHECKLIST.md"
         }
@@ -86,44 +86,44 @@
     },
     {
       "key": "kitchen-oven-range",
-      "title": "Kitchen → Oven / Range Run",
-      "esTitle": "Cocina → Tramo de estufa y campana",
+      "title": "Kitchen › Oven / Range Run",
+      "esTitle": "Cocina › Tramo de estufa y campana",
       "driveChecklistId": null,
-      "note": "High-level West range wall sequence (5 milestones). Governing height: Viking 30\"–36\" above cooking surface (66\"–72\" AFF at 36\" counter).",
-      "noteEs": "Secuencia general del muro oeste de estufa y campana (5 hitos). Altura gobernante: Viking 30\"–36\" sobre estufa (66\"–72\" NPT).",
+      "note": "West range wall sequence (5 milestones). Governing height: Viking 30\"–36\" above range (66\"–72\" AFF at 36\" counter; no upper cabinets at hood).",
+      "noteEs": "Secuencia del muro oeste de estufa y campana (5 hitos). Altura gobernante: Viking 30\"–36\" sobre estufa (66\"–72\" NPT; sin gabinetes altos).",
       "items": [
         {
           "done": true,
-          "en": "Viking 30\" gas range (VGCC5304BSS) & Zephyr Savona 30\" hood (ZSA-E30AS) on hand; Mock Hookup Plan R1, Range Wall Master Plan R1 & OEM manuals published",
-          "es": "Estufa Viking 30\" (VGCC5304BSS) y campana Zephyr Savona 30\" (ZSA-E30AS) en obra; Plan de Presentación R1, Plan Maestro R1 y manuales OEM publicados",
+          "en": "Viking 30\" gas range & Zephyr Savona 30\" hood on hand; Mock Hookup Plan R2 & Master Plan R1 published",
+          "es": "Estufa Viking 30\" y campana Zephyr Savona 30\" en obra; Plan de Presentación R2 y Plan Maestro R1 publicados",
           "todoistTaskIds": [],
           "checklistPath": "kitchen/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Dual-datum wood backing (68\"–86\" AFF & 104\"–121-1/2\" AFF + floor buildup t; Line B bracket screws 9-9/16\" above hood bottom, 9-27/32\" spread, ≥ 1-1/2\" embedment)",
-          "es": "Bloqueo sólido de madera en dos zonas (68\"–86\" NPT y 104\"–121-1/2\" NPT + espesor de piso t; tornillos Línea B a 9-9/16\" sobre la base, separación 9-27/32\")",
+          "en": "Install solid wood backing across lower canopy (68\"–86\" AFF) & upper flue (104\"–121-1/2\" AFF) zones",
+          "es": "Instalar bloqueo sólido de madera en zona inferior de campana (68\"–86\" NPT) y superior de ducto (104\"–121-1/2\" NPT)",
           "todoistTaskIds": [],
           "checklistPath": "kitchen/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Pre-drywall mock-hang at 30\"–36\" above range (66\"–72\" AFF, no upper cabinets) & 121-1/2\" ceiling-gap / 6\" rigid vertical duct check",
-          "es": "Presentación previa a tablaroca a 30\"–36\" sobre estufa (66\"–72\" NPT, sin gabinetes altos) y revisión de brecha al techo de 121-1/2\" y ducto rígido vertical de 6\"",
+          "en": "Pre-drywall mock-hang at 30\"–36\" above range (66\"–72\" AFF) & 121-1/2\" ceiling-gap / 6\" rigid vertical duct check",
+          "es": "Presentación previa a tablaroca a 30\"–36\" sobre estufa (66\"–72\" NPT) y revisión de brecha al techo y ducto rígido de 6\"",
           "todoistTaskIds": [],
           "checklistPath": "kitchen/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Dedicated 15A AFCI Circuit HD rough-in (with 422.31(B) breaker lock-off & junction box clear of 6\" duct) and 1/2\" range gas + 120V receptacle rough-in",
-          "es": "Instalación en bruto de circuito dedicado 15A AFCI Circuit HD (con bloqueo 422.31(B) y caja libre del ducto de 6\") y gas de 1/2\" + contacto 120V de estufa",
+          "en": "Rough-in dedicated 15A AFCI hood Circuit HD (with 422.31(B) lock-off) & 1/2\" range gas shutoff + 120V outlet",
+          "es": "Instalar circuito dedicado 15A AFCI Circuit HD (con bloqueo 422.31(B)), llave de gas de 1/2\" y contacto 120V de estufa",
           "todoistTaskIds": [],
           "checklistPath": "kitchen/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Ceiling-height range-wall tile, rear clearance / 8\" backguard installation, final hood & range tie-in, and exhaust commissioning",
-          "es": "Azulejo hasta el techo en muro de estufa, instalación de respaldo/claros traseros, conexión final de campana y estufa y pruebas de extracción",
+          "en": "Install ceiling-height range-wall tile, Viking rear backguard/clearance assembly, final hood & range tie-in",
+          "es": "Instalar azulejo hasta el techo, respaldo/claros traseros de estufa Viking y conexión final de campana y estufa",
           "todoistTaskIds": [],
           "checklistPath": "kitchen/CHECKLIST.md"
         }
@@ -131,44 +131,44 @@
     },
     {
       "key": "kitchen-sink-north",
-      "title": "Kitchen → Sink & North Wall Runs",
-      "esTitle": "Cocina → Fregadero y muro norte",
+      "title": "Kitchen › Sink & North Wall Runs",
+      "esTitle": "Cocina › Fregadero y muro norte",
       "driveChecklistId": null,
-      "note": "High-level South sink wall, East fridge return & North hall-opening sequence (5 milestones).",
-      "noteEs": "Secuencia general del tramo sur de fregadero, retorno este del refrigerador y muro norte (5 hitos).",
+      "note": "South sink wall, East fridge return & North hall-opening sequence (5 milestones).",
+      "noteEs": "Secuencia del tramo sur de fregadero, retorno este del refrigerador y muro norte (5 hitos).",
       "items": [
         {
           "done": true,
-          "en": "30\" sink and counter-depth Haier refrigerator (QJS15HYRFS) on hand; old pie-safe cleared for built-in open shelving",
-          "es": "Fregadero de 30\" y refrigerador Haier (QJS15HYRFS) en obra; antigua alacena pie-safe despejada para repisas abiertas",
+          "en": "30\" sink & counter-depth Haier refrigerator on hand; pie-safe recess cleared for open shelves",
+          "es": "Fregadero de 30\" y refrigerador Haier en obra; nicho pie-safe despejado para repisas abiertas",
           "todoistTaskIds": [],
           "checklistPath": "kitchen/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Window sill/framing completion & South-wall station alignment (common SE zero, window centerline, 30\" sink base & clear walking passage)",
-          "es": "Terminación de repisa/marco de ventana y alineación del tramo sur (cero común SE, eje de ventana, base de fregadero de 30\" y paso libre)",
+          "en": "Window sill/framing & South-wall station alignment (SE zero, window centerline & 30\" sink base)",
+          "es": "Terminar repisa/marco de ventana y alinear estaciones del tramo sur (cero SE, eje de ventana y base de 30\")",
           "todoistTaskIds": [],
           "checklistPath": "kitchen/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Pie-safe built-in shelf framing & exterior weather-sealing prep, plus D04 North-wall subpanel bay & 3-gang entry switch framing",
-          "es": "Enmarcado de repisas pie-safe y sellado exterior, más bastidor del subpanel D04 y caja de 3 apagadores en muro norte",
+          "en": "Pie-safe shelf framing & exterior weather-sealing, plus North-wall 3-gang switch & D04 subpanel bay framing",
+          "es": "Enmarcar repisas pie-safe y sellado exterior, más caja de 3 apagadores en muro norte y vano de subpanel D04",
           "todoistTaskIds": [],
           "checklistPath": "kitchen/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Sink & dishwasher plumbing rough-in and South/East countertop & appliance circuit rough-in (outlets beside pie-safe, not under it)",
-          "es": "Plomería en bruto de fregadero y lavavajillas y circuitos de cubierta/equipos en muros sur y este (contactos a los lados del pie-safe, no debajo)",
+          "en": "Sink & dishwasher plumbing rough-in and South/East countertop & appliance circuits (outlets beside pie-safe)",
+          "es": "Plomería en bruto de fregadero/lavavajillas y circuitos de cubierta en muros sur y este (contactos fuera del pie-safe)",
           "todoistTaskIds": [],
           "checklistPath": "kitchen/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Install South & East base cabinets, built-in pie-safe shelves, countertops, sink/faucet/dishwasher/disposal, and set Haier refrigerator",
-          "es": "Instalar gabinetes bajos sur y este, repisas pie-safe, cubiertas, fregadero/llave/lavavajillas/triturador y colocar refrigerador Haier",
+          "en": "Install South & East base cabinets, pie-safe shelves, countertops, sink/faucet/dishwasher & Haier refrigerator",
+          "es": "Instalar gabinetes bajos sur y este, repisas pie-safe, cubiertas, fregadero/llave/lavavajillas y refrigerador Haier",
           "todoistTaskIds": [],
           "checklistPath": "kitchen/CHECKLIST.md"
         }
@@ -179,13 +179,13 @@
       "title": "Bathroom",
       "esTitle": "Baño",
       "driveChecklistId": "1Ip5esr8DOQSh55f0qFoDeWVhoDWOPpQz",
-      "note": "High-level phase sequence (6 milestones). Install original window trim over HardieBoard before wall tile; verify toilet flange before Warm Gray floor grouting.",
-      "noteEs": "Secuencia general por etapas (6 hitos). Instalar moldura original de ventana sobre HardieBoard antes del azulejo de muro; verificar brida antes de emboquillar piso con Warm Gray.",
+      "note": "Phase sequence (6 milestones). Install original window trim over HardieBoard before wall tile; verify toilet flange before Warm Gray floor grouting.",
+      "noteEs": "Secuencia por etapas (6 hitos). Instalar moldura original de ventana sobre HardieBoard antes del azulejo de muro; verificar brida antes de emboquillar piso.",
       "items": [
         {
           "done": true,
-          "en": "Demolition, plumbing rough-in, exhaust fan duct, Kohler K-1821 tub set & leak-tested, Schluter floor waterproofing, and towel-bar blocking complete",
-          "es": "Demolición, plomería en bruto, ducto de extractor, tina Kohler K-1821 instalada y probada, impermeabilizante Schluter en piso y refuerzos listos",
+          "en": "Demolition, plumbing rough-in, exhaust fan duct, Kohler K-1821 tub set & leak-tested, and Schluter floor waterproofing complete",
+          "es": "Demolición, plomería en bruto, ducto de extractor, tina Kohler K-1821 instalada y probada e impermeabilizante Schluter listos",
           "todoistTaskIds": [],
           "checklistPath": "bathroom/CHECKLIST.md"
         },
@@ -198,29 +198,29 @@
         },
         {
           "done": false,
-          "en": "Original window trim/casing installation over HardieBoard (before wall tile) & bathroom rough-in electrical / 20A GFCI boxes",
-          "es": "Instalación de moldura original de ventana sobre HardieBoard (antes del azulejo de muro) y cajas eléctricas / GFCI de 20A",
+          "en": "Install original window trim over HardieBoard (before wall tile) & set 20A GFCI rough-in boxes",
+          "es": "Instalar moldura original de ventana sobre HardieBoard (antes del azulejo de muro) y cajas GFCI de 20A",
           "todoistTaskIds": [],
           "checklistPath": "bathroom/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Toilet flange check, Warm Gray floor grouting, and white 3×6 glossy wall tile, niches & tub surround completion",
-          "es": "Verificación de brida de inodoro, boquilla Warm Gray en piso y terminación de azulejo blanco 3×6 en muros, nichos y contorno de tina",
+          "en": "Verify toilet flange, grout floor with Warm Gray grout, and complete white 3×6 wall tile, niches & tub surround",
+          "es": "Verificar brida de inodoro, emboquillar piso con Warm Gray y terminar azulejo blanco 3×6 en muros y nichos",
           "todoistTaskIds": [],
           "checklistPath": "bathroom/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Attic ceiling electrical junction, bathroom ceiling close-in, drywall prime/paint & outward-swing hinged door installation",
-          "es": "Conexión eléctrica de techo en ático, cierre de techo del baño, pintura y colocación de puerta abatible",
+          "en": "Complete attic ceiling electrical junction, close bathroom ceiling, prime/paint & hang outward-swing door",
+          "es": "Completar conexión eléctrica en ático, cerrar techo del baño, fondear/pintar y colocar puerta abatible",
           "todoistTaskIds": [],
           "checklistPath": "bathroom/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Pedestal sink, 10\" rough-in toilet, Champagne Bronze valve trim/faucets, fixed glass screen, surface-mount medicine cabinet & lighting install",
-          "es": "Instalación de lavabo de pedestal, inodoro de 10\", llaves Champagne Bronze, cancel fijo de vidrio, botiquín de sobreponer e iluminación",
+          "en": "Install pedestal sink, 10\" rough-in toilet, Champagne Bronze trim/faucets, glass screen, medicine cabinet & lights",
+          "es": "Instalar lavabo de pedestal, inodoro de 10\", llaves Champagne Bronze, cancel de vidrio, botiquín e iluminación",
           "todoistTaskIds": [],
           "checklistPath": "bathroom/CHECKLIST.md"
         }
@@ -231,41 +231,41 @@
       "title": "HVAC",
       "esTitle": "Calefacción (HVAC)",
       "driveChecklistId": "1dYEurki2VQ8Zd5yxkRA4UzVL2uGJwMdG",
-      "note": "High-level NEXT HVAC & crew coordination sequence (5 milestones). Attic hatch, enclosure & walkway specifics live on HVAC → Attic Access (#attic-access).",
-      "noteEs": "Secuencia general de coordinación entre NEXT HVAC y nuestra cuadrilla (5 hitos). Los detalles de escotilla, envolvente y pasarela viven en HVAC → Acceso al ático (#attic-access).",
+      "note": "NEXT HVAC & crew coordination sequence (5 milestones). Attic hatch & walkway specifics live on HVAC › Attic Access (#attic-access).",
+      "noteEs": "Secuencia de coordinación entre NEXT HVAC y nuestra cuadrilla (5 hitos). Los detalles del ático viven en HVAC › Acceso al ático (#attic-access).",
       "items": [
         {
           "done": true,
-          "en": "Combined attic gas furnace, ductwork & electrical subpanel scope defined with NEXT HVAC; 24\"×36\" finished-clear attic hatch basis settled",
-          "es": "Alcance combinado de caldera de gas en ático, ductos y subpanel definido con NEXT HVAC; base fija de escotilla de 24\"×36\" libres terminadas confirmada",
+          "en": "Combined attic gas furnace, ductwork & electrical subpanel scope defined with NEXT HVAC; 24\"×36\" clear hatch settled",
+          "es": "Alcance de caldera de gas, ductos y subpanel definido con NEXT HVAC; escotilla libre de 24\"×36\" confirmada",
           "todoistTaskIds": [],
           "checklistPath": "hvac/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Phase 1 — Before NEXT (Our Crew): Keep temporary bedroom-closet ceiling open, complete hallway hatch site checks, frame D04 bay & fix active roof leaks",
-          "es": "Fase 1 — Antes de NEXT (Nuestra cuadrilla): Mantener abierto el techo del clóset, completar revisiones del sitio de escotilla, enmarcar D04 y reparar goteras",
+          "en": "Phase 1 — Before NEXT (Our Crew): Keep bedroom-closet ceiling open, photograph hallway hatch site, frame D04 bay & fix roof leaks",
+          "es": "Fase 1 — Antes de NEXT (Cuadrilla): Mantener abierto techo de clóset, fotografiar sitio de escotilla, enmarcar D04 y reparar goteras",
           "todoistTaskIds": [],
           "checklistPath": "hvac/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Monday Nov 23 (2:00–4:00 p.m.) Planning Walkthrough (Serge Kalitov & Alex): Confirm furnace placement, exhaust route, 24\"×36\" hatch & D04 feeder entry",
-          "es": "Visita de planeación Lunes 23 nov (2:00–4:00 p.m.) (Serge Kalitov y Alex): Confirmar posición de caldera, ruta de escape, escotilla 24\"×36\" y alimentador D04",
+          "en": "Mon Nov 23 (2:00–4:00 p.m.) Walkthrough (Serge Kalitov & Alex): Confirm furnace spot, exhaust route, 24\"×36\" hatch & D04 feeder",
+          "es": "Visita Lun 23 nov (2:00–4:00 p.m.) (Serge Kalitov y Alex): Confirmar posición de caldera, escape, escotilla 24\"×36\" y alimentador D04",
           "todoistTaskIds": [],
           "checklistPath": "hvac/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Phase 2 — With NEXT: Build permanent 24\"×36\" hatch, 24\" walkway, 30\"×30\" platform & switched attic light/GFCI (#attic-access); NEXT installs furnace, ducts & subpanel",
-          "es": "Fase 2 — Con NEXT: Construir escotilla 24\"×36\", pasarela de 24\", plataforma 30\"×30\" y luz/GFCI (#attic-access); NEXT instala caldera, ductos y subpanel",
+          "en": "Phase 2 — With NEXT: Build 24\"×36\" hatch, walkway, 30\"×30\" platform & attic light/GFCI (#attic-access); NEXT installs furnace, ducts & subpanel",
+          "es": "Fase 2 — Con NEXT: Construir escotilla 24\"×36\", pasarela, plataforma 30\"×30\" y luz/GFCI (#attic-access); NEXT instala caldera, ductos y subpanel",
           "todoistTaskIds": [],
           "checklistPath": "hvac/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Phase 3 — After NEXT: Pass HERS test & City HVAC/Electrical inspections, close temporary bedroom-closet ceiling, and finish drywall & paint",
-          "es": "Fase 3 — Después de NEXT: Aprobar prueba HERS e inspecciones municipales, cerrar techo temporal del clóset y terminar tablaroca y pintura",
+          "en": "Phase 3 — After NEXT: Pass HERS test & City HVAC/Electrical inspections, close bedroom-closet ceiling, and finish drywall & paint",
+          "es": "Fase 3 — Después de NEXT: Aprobar prueba HERS e inspecciones municipales, cerrar techo del clóset y terminar tablaroca y pintura",
           "todoistTaskIds": [],
           "checklistPath": "hvac/CHECKLIST.md"
         }
@@ -273,51 +273,51 @@
     },
     {
       "key": "attic-access",
-      "title": "HVAC → Attic Access",
-      "esTitle": "HVAC → Acceso al ático",
+      "title": "HVAC › Attic Access",
+      "esTitle": "HVAC › Acceso al ático",
       "driveChecklistId": null,
-      "note": "High-level attic access, enclosure & service walkway sequence (6 milestones from Practical Guide R5). Confirm ceiling fire-rating and joist bay B before cutting.",
-      "noteEs": "Secuencia general de acceso al ático, envolvente y pasarela (6 hitos de la Guía Práctica R5). Confirmar resistencia al fuego del techo y claro B antes de cortar.",
+      "note": "Attic hatch, enclosure & walkway sequence (6 milestones from Practical Guide R5). Confirm ceiling fire-rating and joist bay B before cutting.",
+      "noteEs": "Secuencia de escotilla, envolvente y pasarela (6 hitos de la Guía Práctica R5). Confirmar resistencia al fuego y claro B antes de cortar.",
       "items": [
         {
           "done": true,
-          "en": "Settled basis: 24\"×36\" FINISHED CLEAR hallway hatch, 33.25\"×14.19\"×29\" furnace envelope (pass 14.19\"×29\" end-first), and 66\" attic height (≤ 20 ft walkway)",
-          "es": "Base confirmada: escotilla de 24\"×36\" LIBRES TERMINADAS, caldera de 33.25\"×14.19\"×29\" (entra primero 14.19\"×29\") y altura de 66\" (pasarela ≤ 20 pies)",
+          "en": "Settled basis: 24\"×36\" FINISHED CLEAR hallway hatch, 33.25\"×14.19\"×29\" furnace envelope, and 66\" attic height (≤ 20 ft walkway)",
+          "es": "Base confirmada: escotilla de 24\"×36\" LIBRES TERMINADAS, caldera de 33.25\"×14.19\"×29\" y altura de 66\" (pasarela ≤ 20 pies)",
           "todoistTaskIds": [],
           "checklistPath": "attic/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Temporary bedroom-closet opening check & daylight verification of candidate hallway hatch site, ceiling fire-rating gate & joist bay B width",
-          "es": "Verificación de abertura temporal del clóset y revisión con luz de día del sitio de escotilla, resistencia al fuego del techo y ancho B entre viguetas",
+          "en": "Verify temporary bedroom-closet opening & daylight check of hallway hatch site, ceiling fire-rating & joist bay B width",
+          "es": "Verificar abertura temporal del clóset y revisar con luz de día el sitio de escotilla, resistencia al fuego y ancho B de viguetas",
           "todoistTaskIds": [],
           "checklistPath": "attic/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Build permanent 24\"×36\" finished-clear hatch, 4-sided 2\" plywood loose-fill dam, continuous air-seal & 2 unfaced R-matched fiberglass batts",
-          "es": "Construir escotilla permanente 24\"×36\" libres terminadas, retén de triplay de 2\" en 4 lados, sellado continuo de aire y 2 colchonetas de fibra de vidrio",
+          "en": "Build permanent 24\"×36\" finished-clear hatch, 4-sided 2\" plywood insulation dam, continuous air-seal & R-matched fiberglass batts",
+          "es": "Construir escotilla permanente 24\"×36\" libres terminadas, retén de triplay de 2\" en 4 lados, sello de aire y colchonetas de fibra",
           "todoistTaskIds": [],
           "checklistPath": "attic/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Install continuous 24\" wood walkway (≤ 20 ft max, 30\" clear passage) using 23/32\" rated OSB / 3/4\" ply / 2× lumber (#9 wood screws)",
-          "es": "Instalar pasarela continua de madera de 24\" (≤ 20 pies máx., paso libre 30\") con OSB clasificado de 23/32\" / triplay 3/4\" / madera 2× (tornillos #9)",
+          "en": "Install continuous 24\" wood walkway (≤ 20 ft max, 30\" clear passage) using 23/32\" rated OSB or 3/4\" plywood",
+          "es": "Instalar pasarela continua de madera de 24\" (≤ 20 pies máx., paso libre 30\") con OSB clasificado de 23/32\" o triplay de 3/4\"",
           "todoistTaskIds": [],
           "checklistPath": "attic/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Build level 30\"×30\" furnace service platform (no vibration pads from crew; ≥ 1\" Type B vent clearance) & wire enclosed LED light, switch + line-side 120V GFCI ≤ 25 ft",
-          "es": "Construir plataforma nivelada de 30\"×30\" (sin almohadillas de la cuadrilla; ≥ 1\" libre en tiro Tipo B) e instalar luz LED cerrada, apagador y GFCI 120V ≤ 25 pies",
+          "en": "Build level 30\"×30\" service platform (≥ 1\" Type B vent clearance) & wire enclosed LED light, entry switch + line-side 120V GFCI ≤ 25 ft",
+          "es": "Construir plataforma nivelada de 30\"×30\" (≥ 1\" libre en tiro Tipo B) y conectar luz LED cerrada, apagador y GFCI 120V ≤ 25 pies",
           "todoistTaskIds": [],
           "checklistPath": "attic/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Close and drywall temporary bedroom-closet ceiling only after low-voltage switch cable, furnace passage, and permanent hallway hatch are complete",
-          "es": "Cerrar con tablaroca el techo temporal del clóset solo después de completar el cable de bajo voltaje, el paso del equipo y la escotilla permanente",
+          "en": "Close temporary bedroom-closet ceiling only after low-voltage switch cable, furnace passage & permanent hallway hatch are complete",
+          "es": "Cerrar techo temporal del clóset solo tras completar cable de bajo voltaje, paso de caldera y escotilla permanente del pasillo",
           "todoistTaskIds": [],
           "checklistPath": "attic/CHECKLIST.md"
         }
@@ -328,48 +328,48 @@
       "title": "Electrical",
       "esTitle": "Electricidad",
       "driveChecklistId": "1cShX-tf8guhceW3uOwCQCy2B4PfWZzxj",
-      "note": "High-level whole-unit electrical sequence (6 milestones).",
-      "noteEs": "Secuencia general eléctrica de toda la unidad (6 hitos).",
+      "note": "Whole-unit electrical sequence (6 milestones).",
+      "noteEs": "Secuencia eléctrica de toda la unidad (6 hitos).",
       "items": [
         {
           "done": true,
           "en": "Subpanel location settled at D04 dining-side wall (centered in upper-left moulding frame; no D5 outlet on door-swing wall)",
-          "es": "Ubicación del subpanel definida en muro D04 lado comedor (centrado en el marco superior izquierdo; sin contacto D5 en el abatimiento de puerta)",
+          "es": "Ubicación del subpanel definida en muro D04 lado comedor (centrado en el marco superior izquierdo; sin contacto D5)",
           "todoistTaskIds": [],
           "checklistPath": "electrical/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "D04 subpanel bay framing, side-entry routing & Monday Nov 23 feeder/subpanel coordination with NEXT and Alex",
-          "es": "Enmarcado del vano del subpanel D04, entradas laterales y coordinación de alimentador/subpanel el lunes 23 nov con NEXT y Alex",
+          "en": "Frame D04 subpanel bay with side-entry routing & coordinate feeder/subpanel install with NEXT and Alex",
+          "es": "Enmarcar vano del subpanel D04 con entradas laterales y coordinar alimentador/subpanel con NEXT y Alex",
           "todoistTaskIds": [],
           "checklistPath": "electrical/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Bathroom & attic electrical rough-in (2× 20A bathroom GFCI circuits, attic junction box, enclosed attic LED + switch & line-side 120V attic GFCI ≤ 25 ft)",
-          "es": "Instalación eléctrica en bruto de baño y ático (2 circuitos GFCI 20A en baño, caja en ático, luz LED + apagador y GFCI 120V ≤ 25 pies en ático)",
+          "en": "Bathroom & attic rough-in: 2× 20A bathroom GFCI circuits, attic junction box, enclosed attic LED + switch & line-side 120V GFCI ≤ 25 ft",
+          "es": "Instalación en bruto de baño y ático: 2 circuitos GFCI 20A en baño, caja en ático, luz LED + apagador y GFCI 120V ≤ 25 pies",
           "todoistTaskIds": [],
           "checklistPath": "electrical/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Kitchen 9-circuit Romex rough-in (3 countertop 20A, fridge 20A, dishwasher, disposal, range, dedicated 15A AFCI hood Circuit HD w/ 422.31(B), lights)",
-          "es": "Instalación en bruto de 9 circuitos de cocina en Romex (3 cubierta 20A, refri 20A, lavavajillas, triturador, estufa, campana 15A AFCI Circuit HD con 422.31(B), luces)",
+          "en": "Kitchen 9-circuit Romex rough-in (3 countertop 20A, fridge, dishwasher, disposal, range, 15A AFCI hood Circuit HD & lighting)",
+          "es": "Instalación en bruto de 9 circuitos de cocina en Romex (3 cubierta 20A, refri, lavavajillas, triturador, estufa, campana 15A e iluminación)",
           "todoistTaskIds": [],
           "checklistPath": "electrical/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Non-kitchen rooms (Bedroom, Living & Dining, Hallway): set outlet boxes, empty ENT smurf tube, and bedroom closet low-voltage switch cable",
-          "es": "Cuartos fuera de cocina (Recámara, Sala y comedor, Pasillo): instalar cajas, tubo smurf ENT vacío y cable de bajo voltaje en clóset de recámara",
+          "en": "Non-kitchen rooms (Bedroom, Living & Dining, Hallway): set outlet boxes, empty ENT smurf tube & closet low-voltage switch cable",
+          "es": "Cuartos fuera de cocina (Recámara, Sala/Comedor, Pasillo): instalar cajas, tubo smurf ENT vacío y cable LV en clóset",
           "todoistTaskIds": [],
           "checklistPath": "electrical/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Subpanel & feeder installation, branch wire pulls, device/fixture trim-out, and AFCI/GFCI circuit testing",
-          "es": "Instalación de subpanel y alimentador, jalado de circuitos derivados, montaje de dispositivos/luminarias y pruebas AFCI/GFCI",
+          "en": "Install feeder & subpanel, pull branch circuits, trim out devices/fixtures & complete AFCI/GFCI testing",
+          "es": "Instalar alimentador y subpanel, jalar circuitos derivados, montar dispositivos/luminarias y completar pruebas AFCI/GFCI",
           "todoistTaskIds": [],
           "checklistPath": "electrical/CHECKLIST.md"
         }
@@ -380,26 +380,26 @@
       "title": "Laundry Closet",
       "esTitle": "Clóset de lavandería",
       "driveChecklistId": "1kKY92-MUELZmCo1VDwMI_Dffnrc-Frdi",
-      "note": "High-level laundry closet & Murphy bookcase door sequence (5 milestones).",
-      "noteEs": "Secuencia general del clóset de lavandería y puerta librero Murphy (5 hitos).",
+      "note": "Laundry closet & Murphy bookcase door sequence (5 milestones).",
+      "noteEs": "Secuencia del clóset de lavandería y puerta librero Murphy (5 hitos).",
       "items": [
         {
           "done": true,
-          "en": "Plumbing/gas/vent rough-in, gas-box repositioning, LG WashTower purchase (Dec 1 delivery) & Murphy bookcase door location complete",
-          "es": "Instalaciones en bruto, reubicación de caja de gas, compra de torre LG WashTower (entrega 1 dic) y ubicación de puerta librero Murphy terminadas",
+          "en": "Plumbing/gas/vent rough-in, gas-box repositioning, LG WashTower purchase (Dec 1 delivery) & Murphy door location complete",
+          "es": "Instalaciones en bruto, reubicación de caja de gas, compra de torre LG WashTower (entrega 1 dic) y ubicación Murphy listas",
           "todoistTaskIds": [],
           "checklistPath": "laundry/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Laundry outlet opening position check & open-wall rough-in photo verification before drywall close-in",
-          "es": "Verificación de abertura de contacto eléctrico y fotos de instalaciones abiertas antes de cerrar con tablaroca",
+          "en": "Verify laundry outlet opening position & photograph open-wall rough-in before drywall close-in",
+          "es": "Verificar abertura de contacto eléctrico y fotografiar instalaciones abiertas antes de cerrar con tablaroca",
           "todoistTaskIds": [],
           "checklistPath": "laundry/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Drywall close-in, priming, baseboard installation, and closet wall/ceiling finish paint",
+          "en": "Drywall close-in, priming, baseboard installation & closet wall/ceiling finish paint",
           "es": "Cierre con tablaroca, fondeo, colocación de zoclo y pintura final de muros y techo del clóset",
           "todoistTaskIds": [],
           "checklistPath": "laundry/CHECKLIST.md"
@@ -413,8 +413,8 @@
         },
         {
           "done": false,
-          "en": "LG WashTower delivery (Dec 1), placement, water/gas/vent/120V hookup, and operational testing",
-          "es": "Recepción de torre LG WashTower (1 dic), colocación, conexión de agua/gas/ventilación/120V y pruebas de funcionamiento",
+          "en": "Receive LG WashTower (Dec 1), set in place, connect water/gas/vent/120V & test operation",
+          "es": "Recibir torre LG WashTower (1 dic), colocar, conectar agua/gas/ventilación/120V y probar funcionamiento",
           "todoistTaskIds": [],
           "checklistPath": "laundry/CHECKLIST.md"
         }
@@ -425,41 +425,41 @@
       "title": "Bedroom",
       "esTitle": "Recámara",
       "driveChecklistId": "1X2EqyKgqqZQCieUrfEE44Zp1XecrJ3ae",
-      "note": "High-level bedroom & closet niche sequence (5 milestones). Keep closet ceiling open as temporary attic access until LV cable and permanent 24\"×36\" hallway hatch are in place.",
-      "noteEs": "Secuencia general de recámara y nicho de clóset (5 hitos). Mantener abierto el techo del clóset como acceso temporal hasta instalar cable LV y escotilla permanente 24\"×36\".",
+      "note": "Bedroom & closet niche sequence (5 milestones). Keep closet ceiling open as temporary attic access until LV cable and permanent 24\"×36\" hallway hatch exist.",
+      "noteEs": "Secuencia de recámara y clóset (5 hitos). Mantener abierto el techo del clóset hasta instalar cable LV y escotilla permanente 24\"×36\".",
       "items": [
         {
           "done": true,
-          "en": "Canonical Wall A (North), Wall B (East bay window, no frames), Wall C (South) & Wall D (West entry/closet) orientation and R2 trim packet established",
-          "es": "Orientación oficial de Muros A (Norte), B (Este ventana, sin marcos), C (Sur) y D (Oeste entrada/clóset) y paquete de molduras R2 establecidos",
+          "en": "Canonical Wall A (North), Wall B (East bay window), Wall C (South) & Wall D (West entry/closet) orientation established",
+          "es": "Orientación oficial de Muros A (Norte), B (Este ventana), C (Sur) y D (Oeste entrada/clóset) establecida",
           "todoistTaskIds": [],
           "checklistPath": "bedroom/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Temporary closet ceiling furnace-passage check & coiled low-voltage switch cable run up left closet wall to attic",
-          "es": "Verificación de paso de caldera en techo temporal del clóset y tendido de cable de bajo voltaje al ático por el lado izquierdo",
+          "en": "Verify temporary closet furnace passage & run coiled low-voltage switch cable up left closet wall to attic",
+          "es": "Verificar paso de caldera en clóset temporal y subir cable de bajo voltaje por el muro izquierdo al ático",
           "todoistTaskIds": [],
           "checklistPath": "bedroom/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Outlet boxes + empty ENT smurf tube installation and missing hardwood floor patch repair",
-          "es": "Instalación de cajas de contactos + tubo smurf (ENT vacío) y reparación de parche faltante en piso de madera",
+          "en": "Install outlet boxes + empty ENT smurf tube and repair missing hardwood floor patch",
+          "es": "Instalar cajas de contactos + tubo smurf (ENT vacío) y reparar parche faltante de piso de madera",
           "todoistTaskIds": [],
           "checklistPath": "bedroom/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Wall moulding frame tape-fit layout from wall centerlines (aligned to existing baseboard and high trim) & trim installation",
-          "es": "Presentación de marcos de molduras con cinta desde el eje central (alineados al zoclo y moldura alta existentes) e instalación",
+          "en": "Tape-fit wall moulding frames from wall centerlines (aligned to existing baseboard & high trim) and install trim",
+          "es": "Presentar marcos de molduras con cinta desde el eje central (alineados al zoclo y moldura alta) e instalar",
           "todoistTaskIds": [],
           "checklistPath": "bedroom/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Closet ceiling framing/drywall close-in (after permanent hallway hatch exists), closet rod install, and room priming & finish paint",
-          "es": "Enmarcado y cierre con tablaroca del techo del clóset (tras escotilla permanente), barra de clóset, fondeo y pintura final",
+          "en": "Close temporary closet ceiling (after permanent hallway hatch exists), install closet rod, prime & paint room",
+          "es": "Cerrar techo del clóset (tras escotilla permanente), colocar barra, fondear y pintar recámara",
           "todoistTaskIds": [],
           "checklistPath": "bedroom/CHECKLIST.md"
         }
@@ -470,41 +470,41 @@
       "title": "Living & Dining",
       "esTitle": "Sala y comedor",
       "driveChecklistId": "10wWsl89_qWvDuqkOr2BThS75gJBsuP1r",
-      "note": "High-level living & dining room sequence (5 milestones).",
-      "noteEs": "Secuencia general de sala y comedor (5 hitos).",
+      "note": "Living & dining room sequence (5 milestones).",
+      "noteEs": "Secuencia de sala y comedor (5 hitos).",
       "items": [
         {
           "done": true,
-          "en": "D04 dining-side wall selected for subpanel bay (centered inside upper-left picture-frame moulding; no D5 outlet on door-swing wall)",
-          "es": "Muro D04 lado comedor elegido para subpanel (centrado en el marco superior izquierdo de molduras; sin contacto D5 en el abatimiento de puerta)",
+          "en": "D04 dining-side wall selected for subpanel bay (centered inside upper-left moulding frame; no D5 outlet on door-swing wall)",
+          "es": "Muro D04 lado comedor elegido para subpanel (centrado en el marco superior izquierdo; sin contacto D5)",
           "todoistTaskIds": [],
           "checklistPath": "living/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "D04 doorway infill & subpanel bay framing with solid backing and side-entry routing",
-          "es": "Enmarcado de relleno de puerta D04 y vano de subpanel con refuerzos y entradas laterales",
+          "en": "Frame D04 doorway infill & subpanel bay with solid backing and side-entry routing",
+          "es": "Enmarcar relleno de puerta D04 y vano de subpanel con refuerzos y entradas laterales",
           "todoistTaskIds": [],
           "checklistPath": "living/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Outlet boxes & empty ENT smurf tube rough-in across D01–D04 and L01–L06 walls (clear of pocket-door cavities)",
-          "es": "Instalación de cajas de contactos y tubo smurf (ENT vacío) en muros D01–D04 y L01–L06 (fuera de cavidades de puertas corredizas)",
+          "en": "Install outlet boxes & empty ENT smurf tube across D01–D04 and L01–L06 walls (clear of pocket-door cavities)",
+          "es": "Instalar cajas de contactos y tubo smurf (ENT vacío) en muros D01–D04 y L01–L06 (fuera de puertas corredizas)",
           "todoistTaskIds": [],
           "checklistPath": "living/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Picture-frame wall moulding tape-fit layout from wall centerlines (aligned to existing baseboard & high trim) and installation",
-          "es": "Presentación con cinta desde ejes centrales e instalación de marcos de molduras alineados con zoclo y moldura alta existentes",
+          "en": "Tape-fit picture-frame wall mouldings from wall centerlines (aligned to existing baseboard & high trim) and install",
+          "es": "Presentar con cinta desde ejes centrales e instalar marcos de molduras alineados al zoclo y moldura alta",
           "todoistTaskIds": [],
           "checklistPath": "living/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Dining hutch/fireplace trim finish, wall & trim priming, and finish paint",
-          "es": "Detalle de vitrina y chimenea, fondeo y pintura final de muros y molduras",
+          "en": "Complete dining hutch/fireplace trim details, wall/trim priming & finish paint",
+          "es": "Terminar detalles de vitrina y chimenea, fondeo y pintura final de muros y molduras",
           "todoistTaskIds": [],
           "checklistPath": "living/CHECKLIST.md"
         }
@@ -515,41 +515,41 @@
       "title": "Hallway",
       "esTitle": "Pasillo",
       "driveChecklistId": "1Y9H-bCmZF_Q0xBIwMSoWCmcilmL6Dwv2",
-      "note": "High-level hallway sequence (5 milestones). Permanent 24\"×36\" attic hatch details live on HVAC → Attic Access (#attic-access); Murphy bookcase door lives on Laundry Closet (#laundry).",
-      "noteEs": "Secuencia general del pasillo (5 hitos). La escotilla permanente 24\"×36\" vive en HVAC → Acceso al ático (#attic-access); la puerta librero Murphy vive en Lavandería (#laundry).",
+      "note": "Hallway sequence (5 milestones). Permanent 24\"×36\" attic hatch details live on HVAC › Attic Access (#attic-access); Murphy door lives on Laundry Closet (#laundry).",
+      "noteEs": "Secuencia del pasillo (5 hitos). La escotilla permanente 24\"×36\" vive en HVAC › Acceso al ático (#attic-access); la puerta Murphy vive en Lavandería (#laundry).",
       "items": [
         {
           "done": true,
-          "en": "Permanent hallway attic hatch sized at 24\"×36\" FINISHED CLEAR opening (#attic-access); Murphy bookcase door assigned to Laundry Closet (#laundry)",
-          "es": "Escotilla permanente del pasillo definida en 24\"×36\" LIBRES TERMINADAS (#attic-access); puerta librero Murphy asignada a Lavandería (#laundry)",
+          "en": "Permanent hallway attic hatch sized at 24\"×36\" FINISHED CLEAR opening (#attic-access); Murphy door assigned to Laundry (#laundry)",
+          "es": "Escotilla permanente del pasillo definida en 24\"×36\" LIBRES TERMINADAS (#attic-access); puerta Murphy en Lavandería (#laundry)",
           "todoistTaskIds": [],
           "checklistPath": "hallway/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Daylight site verification, ceiling fire-rating check & joist bay B confirmation for the 24\"×36\" hallway hatch (#attic-access)",
-          "es": "Verificación con luz de día, revisión contra fuego del techo y confirmación del claro B para la escotilla de 24\"×36\" (#attic-access)",
+          "en": "Daylight site verification, ceiling fire-rating check & joist bay B confirmation for 24\"×36\" hallway hatch (#attic-access)",
+          "es": "Verificación con luz de día, revisión contra fuego del techo y confirmación del claro B para escotilla 24\"×36\" (#attic-access)",
           "todoistTaskIds": [],
           "checklistPath": "hallway/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Permanent 24\"×36\" finished-clear hallway hatch framing, air-sealed enclosure & entrance light switch installation",
-          "es": "Construcción de escotilla permanente 24\"×36\" libres terminadas, envolvente sellada y apagador de entrada al ático",
+          "en": "Frame permanent 24\"×36\" finished-clear hallway hatch, air-sealed enclosure & entrance light switch",
+          "es": "Construir escotilla permanente 24\"×36\" libres terminadas, envolvente sellada y apagador de entrada",
           "todoistTaskIds": [],
           "checklistPath": "hallway/CHECKLIST.md"
         },
         {
           "done": false,
           "en": "Hallway outlet/lighting rough-in, wall moulding layout & 5-panel Murphy bookcase door trim interface",
-          "es": "Instalación eléctrica en pasillo, trazo de molduras e interfaz de marco con la puerta librero Murphy",
+          "es": "Instalación eléctrica en pasillo, trazo de molduras e interfaz de marco con puerta librero Murphy",
           "todoistTaskIds": [],
           "checklistPath": "hallway/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Hallway trim installation, wall/ceiling patching, priming & finish paint",
-          "es": "Instalación de molduras, resanes en muros y techo, fondeo y pintura final del pasillo",
+          "en": "Complete hallway trim installation, wall/ceiling patching, priming & finish paint",
+          "es": "Terminar instalación de molduras, resanes en muros y techo, fondeo y pintura final del pasillo",
           "todoistTaskIds": [],
           "checklistPath": "hallway/CHECKLIST.md"
         }
@@ -560,8 +560,8 @@
       "title": "Paint & Floors",
       "esTitle": "Pintura y pisos",
       "driveChecklistId": "1X6tuZMgvcY1y7RmhbDvScSAab77CGNFQ",
-      "note": "High-level unit-wide paint, moulding & flooring sequence (5 milestones).",
-      "noteEs": "Secuencia general de pintura, molduras y pisos de toda la unidad (5 hitos).",
+      "note": "Unit-wide paint, moulding & flooring sequence (5 milestones).",
+      "noteEs": "Secuencia de pintura, molduras y pisos de toda la unidad (5 hitos).",
       "items": [
         {
           "done": true,
@@ -572,29 +572,29 @@
         },
         {
           "done": false,
-          "en": "Finished floor buildup thickness (~3/4\" t) verification and bedroom hardwood patch repair",
-          "es": "Verificación del espesor de piso terminado (~3/4\" t) y reparación del parche de madera en recámara",
+          "en": "Verify finished floor buildup thickness (~3/4\" t) and repair missing bedroom hardwood patch",
+          "es": "Verificar espesor de piso terminado (~3/4\" t) y reparar parche faltante de madera en recámara",
           "todoistTaskIds": [],
           "checklistPath": "paint/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Consolidated whole-unit moulding order and centerline tape-fit frame layout across rooms",
-          "es": "Pedido consolidado de molduras de toda la unidad y presentación con cinta desde los ejes centrales",
+          "en": "Complete consolidated whole-unit moulding order and centerline tape-fit frame layout across rooms",
+          "es": "Completar pedido consolidado de molduras y presentación con cinta desde los ejes centrales",
           "todoistTaskIds": [],
           "checklistPath": "paint/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Kitchen matte floor tile & doorway transitions installation and finished-floor protection",
-          "es": "Instalación de piso mate de cocina y transiciones de puerta, con protección de pisos terminados",
+          "en": "Install kitchen matte floor tile & doorway transitions and protect finished floors",
+          "es": "Instalar piso mate de cocina y transiciones de puerta y proteger pisos terminados",
           "todoistTaskIds": [],
           "checklistPath": "paint/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Whole-unit wall, ceiling, trim & Essex Green kitchen cabinet priming and finish painting after drywall close-in",
-          "es": "Fondeo y pintura final de muros, techos, molduras y gabinetes Essex Green de cocina tras cierre de tablaroca",
+          "en": "Prime and finish-paint rooms, trim & Essex Green kitchen cabinets after drywall close-in",
+          "es": "Fondear y pintar cuartos, molduras y gabinetes Essex Green de cocina tras cierre de tablaroca",
           "todoistTaskIds": [],
           "checklistPath": "paint/CHECKLIST.md"
         }
