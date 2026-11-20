@@ -115,15 +115,15 @@
       '<text x="' + HATCH_X + '" y="' + (HATCH_Y + 3) + '" text-anchor="middle" font-size="7.2" font-weight="800" fill="#A15206">24"×36"</text>' +
 
       // Continuous 24" Walkway L-path from Hatch to Furnace
-      '<path d="M ' + HATCH_X + " " + (HATCH_Y + 12) + " L " + HATCH_X + " " + fy + " L " + fx + " " + fy + '" fill="none" stroke="' + walkCol + '" stroke-width="12" stroke-linejoin="round" opacity="0.22"/>' +
-      '<path d="M ' + HATCH_X + " " + (HATCH_Y + 12) + " L " + HATCH_X + " " + fy + " L " + fx + " " + fy + '" fill="none" stroke="' + walkCol + '" stroke-width="2" stroke-dasharray="5 3"/>' +
+      '<path id="hvacWalkBg" d="M ' + HATCH_X + " " + (HATCH_Y + 12) + " L " + HATCH_X + " " + fy + " L " + fx + " " + fy + '" fill="none" stroke="' + walkCol + '" stroke-width="12" stroke-linejoin="round" opacity="0.22"/>' +
+      '<path id="hvacWalkLn" d="M ' + HATCH_X + " " + (HATCH_Y + 12) + " L " + HATCH_X + " " + fy + " L " + fx + " " + fy + '" fill="none" stroke="' + walkCol + '" stroke-width="2" stroke-dasharray="5 3"/>' +
 
       // Supply Duct Lines (Blue) + Return (Teal Dashed) + Jump (Purple)
-      '<line x1="' + fx + '" y1="' + fy + '" x2="' + s1.x + '" y2="' + s1.y + '" stroke="#184E77" stroke-width="2.2"/>' +
-      '<line x1="' + fx + '" y1="' + fy + '" x2="' + s2.x + '" y2="' + s2.y + '" stroke="#184E77" stroke-width="2.2"/>' +
-      '<line x1="' + fx + '" y1="' + fy + '" x2="' + s3.x + '" y2="' + s3.y + '" stroke="#184E77" stroke-width="2.2"/>' +
-      '<line x1="' + fx + '" y1="' + fy + '" x2="' + ret.x + '" y2="' + ret.y + '" stroke="#0F766E" stroke-width="2" stroke-dasharray="4 3"/>' +
-      '<line x1="' + fx + '" y1="' + fy + '" x2="' + jd.x + '" y2="' + jd.y + '" stroke="#6D28D9" stroke-width="1.6" stroke-dasharray="3 3"/>' +
+      '<line id="hvacL1" x1="' + fx + '" y1="' + fy + '" x2="' + s1.x + '" y2="' + s1.y + '" stroke="#184E77" stroke-width="2.2"/>' +
+      '<line id="hvacL2" x1="' + fx + '" y1="' + fy + '" x2="' + s2.x + '" y2="' + s2.y + '" stroke="#184E77" stroke-width="2.2"/>' +
+      '<line id="hvacL3" x1="' + fx + '" y1="' + fy + '" x2="' + s3.x + '" y2="' + s3.y + '" stroke="#184E77" stroke-width="2.2"/>' +
+      '<line id="hvacLR" x1="' + fx + '" y1="' + fy + '" x2="' + ret.x + '" y2="' + ret.y + '" stroke="#0F766E" stroke-width="2" stroke-dasharray="4 3"/>' +
+      '<line id="hvacLJ" x1="' + fx + '" y1="' + fy + '" x2="' + jd.x + '" y2="' + jd.y + '" stroke="#6D28D9" stroke-width="1.6" stroke-dasharray="3 3"/>' +
 
       // Register pills
       [s1, s2, s3].map(function (pt) {
@@ -136,7 +136,7 @@
       '<text x="' + jd.x + '" y="' + (jd.y + 2.5) + '" text-anchor="middle" font-size="7" font-weight="800" fill="#FFFFFF">JD</text>' +
 
       // Draggable Furnace + 30x30 Platform + Type B Flue badge
-      '<g id="hvacDragFurnace" style="cursor:grab">' +
+      '<g id="hvacDragFurnace" class="u4-drag-move" tabindex="0" role="application" aria-label="Drag attic furnace position" transform="translate(0, 0)">' +
         '<rect x="' + (fx - 26) + '" y="' + (fy - 22) + '" width="52" height="44" rx="5" fill="#E5F4EC" stroke="#1B6B46" stroke-width="1.5" stroke-dasharray="3 2"/>' +
         '<rect x="' + (fx - 21) + '" y="' + (fy - 14) + '" width="42" height="28" rx="4" fill="#131A22" stroke="#6FB3E6" stroke-width="1.8"/>' +
         '<text x="' + fx + '" y="' + (fy - 1) + '" text-anchor="middle" font-size="7.2" font-weight="800" fill="#FFFFFF">' + (es ? "EQUIPO" : "FURNACE") + "</text>" +
@@ -146,8 +146,8 @@
       "</g>" +
 
       // Clean floating walkway badge at bottom-left clear of rooms
-      '<rect x="22" y="274" width="416" height="20" rx="5" fill="' + walkFill + '" stroke="' + walkCol + '" stroke-width="1"/>' +
-      '<text x="230" y="287" text-anchor="middle" font-size="8.2" font-weight="800" fill="' + walkCol + '">' +
+      '<rect id="hvacSvgPill" x="22" y="274" width="416" height="20" rx="5" fill="' + walkFill + '" stroke="' + walkCol + '" stroke-width="1"/>' +
+      '<text id="hvacSvgPillTxt" x="230" y="287" text-anchor="middle" font-size="8.2" font-weight="800" fill="' + walkCol + '">' +
         (es ? "Pasillo 24\": " + m.walkFt + " pies / 20 máx. (" + (m.walkPass ? "PASA ✓" : "EXCEDE ✗") + ") · " + m.sheets + " hojas 4×8 · GFCI: " + state.gfciOffsetFt + " pies · Ducto B: " + state.flueClearIn + '"'
             : "24\" Walkway: " + m.walkFt + " ft / 20 ft max (" + (m.walkPass ? "PASS ✓" : "OVER LIMIT ✗") + ") · " + m.sheets + " sheets 4×8 · GFCI: " + state.gfciOffsetFt + " ft · Type B: " + state.flueClearIn + '"') +
       "</text>" +
@@ -207,52 +207,74 @@
     "</div>";
   }
 
-  function wireDrag(host) {
+  function wireDrag() {
     var svg = document.getElementById("hvacHumanSvg");
     var handle = document.getElementById("hvacDragFurnace");
     if (!svg || !handle) return;
+    var initFx = state.furnaceX;
+    var initFy = state.furnaceY;
 
-    function ptFromEvent(ev) {
-      var rect = svg.getBoundingClientRect();
-      var cx = (ev.touches ? ev.touches[0].clientX : ev.clientX) - rect.left;
-      var cy = (ev.touches ? ev.touches[0].clientY : ev.clientY) - rect.top;
-      return {
-        x: Math.max(122, Math.min(340, Math.round((cx / rect.width) * 460))),
-        y: Math.max(92, Math.min(212, Math.round((cy / rect.height) * 300)))
-      };
+    function updateLive(nx, ny) {
+      var fx = Math.max(122, Math.min(340, Math.round(nx)));
+      var fy = Math.max(92, Math.min(212, Math.round(ny)));
+      state.furnaceX = fx;
+      state.furnaceY = fy;
+      var m = computeMetrics();
+      var walkCol = m.walkPass ? "#1B6B46" : "#B42318";
+      var walkFill = m.walkPass ? "#E5F4EC" : "#FEECEB";
+      var es = isEs();
+
+      handle.setAttribute("transform", "translate(" + (fx - initFx) + ", " + (fy - initFy) + ")");
+      var dStr = "M " + HATCH_X + " " + (HATCH_Y + 12) + " L " + HATCH_X + " " + fy + " L " + fx + " " + fy;
+      var bg = document.getElementById("hvacWalkBg"), ln = document.getElementById("hvacWalkLn");
+      if (bg) { bg.setAttribute("d", dStr); bg.setAttribute("stroke", walkCol); }
+      if (ln) { ln.setAttribute("d", dStr); ln.setAttribute("stroke", walkCol); }
+      ["hvacL1", "hvacL2", "hvacL3", "hvacLR", "hvacLJ"].forEach(function (lid) {
+        var el = document.getElementById(lid);
+        if (el) { el.setAttribute("x1", String(fx)); el.setAttribute("y1", String(fy)); }
+      });
+      var pill = document.getElementById("hvacSvgPill"), ptxt = document.getElementById("hvacSvgPillTxt");
+      if (pill) { pill.setAttribute("fill", walkFill); pill.setAttribute("stroke", walkCol); }
+      if (ptxt) {
+        ptxt.setAttribute("fill", walkCol);
+        ptxt.textContent = es
+          ? "Pasillo 24\": " + m.walkFt + " pies / 20 máx. (" + (m.walkPass ? "PASA ✓" : "EXCEDE ✗") + ") · " + m.sheets + " hojas 4×8 · GFCI: " + state.gfciOffsetFt + " pies · Ducto B: " + state.flueClearIn + '"'
+          : "24\" Walkway: " + m.walkFt + " ft / 20 ft max (" + (m.walkPass ? "PASS ✓" : "OVER LIMIT ✗") + ") · " + m.sheets + " sheets 4×8 · GFCI: " + state.gfciOffsetFt + " ft · Type B: " + state.flueClearIn + '"';
+      }
     }
 
-    function onMove(ev) {
-      if (!state.dragActive) return;
+    handle.addEventListener("pointerdown", function (ev) {
+      if (ev.button !== undefined && ev.button !== 0 && ev.pointerType === "mouse") return;
       ev.preventDefault();
-      var pt = ptFromEvent(ev);
-      state.furnaceX = pt.x;
-      state.furnaceY = pt.y;
-      render();
-    }
-
-    function onUp() {
-      state.dragActive = false;
-      window.removeEventListener("mousemove", onMove);
-      window.removeEventListener("mouseup", onUp);
-      window.removeEventListener("touchmove", onMove);
-      window.removeEventListener("touchend", onUp);
-      window.removeEventListener("touchcancel", onUp);
-    }
-
-    handle.addEventListener("mousedown", function (ev) {
-      ev.preventDefault();
+      var pid = ev.pointerId;
       state.dragActive = true;
-      window.addEventListener("mousemove", onMove);
-      window.addEventListener("mouseup", onUp);
+      handle.classList.add("is-dragging");
+      try { handle.setPointerCapture(pid); } catch (_) {}
+      var blockScroll = function (tev) { if (tev.cancelable) tev.preventDefault(); };
+      window.addEventListener("touchmove", blockScroll, { passive: false });
+
+      function onMove(e) {
+        if (!state.dragActive || e.pointerId !== pid) return;
+        var rect = svg.getBoundingClientRect();
+        var nx = ((e.clientX - rect.left) / (rect.width || 460)) * 460;
+        var ny = ((e.clientY - rect.top) / (rect.height || 300)) * 300;
+        updateLive(nx, ny);
+      }
+      function finish(e) {
+        if (e && e.pointerId !== pid) return;
+        state.dragActive = false;
+        handle.classList.remove("is-dragging");
+        document.removeEventListener("pointermove", onMove);
+        document.removeEventListener("pointerup", finish);
+        document.removeEventListener("pointercancel", finish);
+        window.removeEventListener("touchmove", blockScroll);
+        try { if (handle.hasPointerCapture && handle.hasPointerCapture(pid)) handle.releasePointerCapture(pid); } catch (_) {}
+        render();
+      }
+      document.addEventListener("pointermove", onMove);
+      document.addEventListener("pointerup", finish);
+      document.addEventListener("pointercancel", finish);
     });
-    handle.addEventListener("touchstart", function (ev) {
-      ev.preventDefault();
-      state.dragActive = true;
-      window.addEventListener("touchmove", onMove, { passive: false });
-      window.addEventListener("touchend", onUp);
-      window.addEventListener("touchcancel", onUp);
-    }, { passive: false });
   }
 
   function render() {

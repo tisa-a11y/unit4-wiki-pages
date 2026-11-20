@@ -548,6 +548,47 @@ html[data-theme="dark"] .u4h-step-btn.is-active {
   max-width: 100%;
 }
 
+/* Direct 2-Way Synced SVG Dragging Affordances (Native Pointer Events) */
+.u4-drag-ns {
+  cursor: ns-resize;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.u4-drag-ew {
+  cursor: ew-resize;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.u4-drag-move {
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.u4-drag-move.is-dragging {
+  cursor: grabbing;
+}
+
+.u4-drag-ns:hover .u4-drag-grip,
+.u4-drag-ew:hover .u4-drag-grip,
+.u4-drag-move:hover .u4-drag-grip,
+.is-dragging .u4-drag-grip {
+  filter: brightness(0.95);
+  stroke-width: 2.2;
+}
+
+.u4-drag-ns:focus-visible,
+.u4-drag-ew:focus-visible,
+.u4-drag-move:focus-visible {
+  outline: 2px solid var(--cobalt);
+  outline-offset: 2px;
+}
+
 .u4h-svg-hint {
   font-size: 11.5px;
   color: var(--ink-2);

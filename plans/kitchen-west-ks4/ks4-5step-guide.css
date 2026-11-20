@@ -404,6 +404,8 @@ body.mode-5step {
     position: absolute;
     z-index: 25;
     width: min(296px, calc(100% - 16px));
+    max-width: calc(100% - 16px);
+    box-sizing: border-box;
     background: var(--surface);
     border: 1.5px solid var(--cobalt);
     border-radius: 10px;
@@ -411,6 +413,14 @@ body.mode-5step {
     box-shadow: var(--shadow-md);
     display: grid;
     gap: 6px;
+  }
+  @media (max-width: 560px) {
+    .pin-steer {
+      left: 8px !important;
+      right: 8px !important;
+      width: auto !important;
+      max-width: calc(100% - 16px);
+    }
   }
   .pin-steer-head {
     display: flex;
@@ -494,6 +504,9 @@ body.mode-5step {
     background: var(--crimson);
     color: #fff;
     border-style: solid;
+  }
+  html[data-theme="dark"] .drag-pill.is-armed {
+    color: #0D1116;
   }
   .drag-ghost {
     position: fixed;
@@ -786,8 +799,10 @@ body.mode-5step {
   .toast {
     position: fixed;
     left: 50%;
-    bottom: 24px;
+    bottom: 76px;
     transform: translateX(-50%) translateY(20px);
+    max-width: calc(100vw - 24px);
+    text-align: center;
     background: #131A22;
     color: #FFFFFF;
     padding: 9px 16px;

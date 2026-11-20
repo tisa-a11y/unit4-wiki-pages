@@ -114,7 +114,7 @@
 
   function wikiBackUrl() {
     var m = getPlanMeta(state.planId);
-    return "../../index.html?lang=" + state.lang + "#" + m.roomHash;
+    return "../../index.html?lang=" + state.lang + "&theme=" + state.theme + "#" + m.roomHash;
   }
 
   function applyThemeAndLang() {

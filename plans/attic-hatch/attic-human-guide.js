@@ -87,15 +87,25 @@
     "</svg>";
   }
 
+  function syncBlueprintWalkway(ft) {
+    try {
+      var hiddenRng = document.getElementById("rng-walkway-l");
+      if (hiddenRng) {
+        hiddenRng.value = String(ft);
+        hiddenRng.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+    } catch (_) {}
+  }
+
   function renderWalkwaySvg(es) {
     var ft = state.walkwayFt;
     var pass = ft <= 20;
     var sheets = calcSheets(ft);
     var col = pass ? "#1B6B46" : "#B42318";
-    var barW = Math.min(240, Math.max(55, (ft / 24) * 240));
+    var barW = (ft / 24) * 240; // exact linear 10 px/ft from x=96
     var maxLineX = 96 + (20 / 24) * 240;
 
-    return '<svg viewBox="0 0 460 225" xmlns="http://www.w3.org/2000/svg">' +
+    return '<svg id="attWalkSvg" viewBox="0 0 460 232" xmlns="http://www.w3.org/2000/svg">' +
       '<text x="230" y="18" text-anchor="middle" font-size="10" font-weight="800" fill="#184E77">' +
         (es ? 'PASILLO SÓLIDO 24" + PLATAFORMA 30"×30" (ALTURA ÁTICO 66")' : 'SOLID 24" WALKWAY + 30"×30" SERVICE PLATFORM (66" ATTIC HEIGHT)') + "</text>" +
       // Attic roof triangle context
@@ -106,17 +116,22 @@
       '<text x="67" y="146" text-anchor="middle" font-size="8" font-weight="800" fill="#184E77">' + (es ? "Escotilla" : "Hatch") + "</text>" +
       '<text x="67" y="158" text-anchor="middle" font-size="7.4" fill="#184E77">24"×36"</text>' +
       // 24" Walkway bar
-      '<rect x="96" y="136" width="' + barW.toFixed(1) + '" height="24" fill="' + (pass ? "#E5F4EC" : "#FEECEB") + '" stroke="' + col + '" stroke-width="2"/>' +
-      '<text x="' + (96 + barW / 2).toFixed(1) + '" y="151" text-anchor="middle" font-size="8.6" font-weight="800" fill="' + col + '">' + ft + (es ? " pies" : " ft") + " (" + sheets + (es ? " hojas)" : " shts)") + "</text>" +
+      '<rect id="attWalkBar" x="96" y="136" width="' + barW.toFixed(1) + '" height="24" fill="' + (pass ? "#E5F4EC" : "#FEECEB") + '" stroke="' + col + '" stroke-width="2"/>' +
+      '<text id="attWalkBarTxt" x="' + (96 + barW / 2).toFixed(1) + '" y="151" text-anchor="middle" font-size="8.6" font-weight="800" fill="' + col + '">' + ft + (es ? " pies" : " ft") + " (" + sheets + (es ? " hojas)" : " shts)") + "</text>" +
       // 20 ft code max vertical line
-      '<line x1="' + maxLineX.toFixed(1) + '" y1="110" x2="' + maxLineX.toFixed(1) + '" y2="188" stroke="#B42318" stroke-width="1.6" stroke-dasharray="4 2"/>' +
-      '<text x="' + maxLineX.toFixed(1) + '" y="104" text-anchor="middle" font-size="7.8" font-weight="800" fill="#B42318">' + (es ? "MÁX. CÓDIGO 20 pies" : "20 ft CODE MAX") + "</text>" +
-      // 30x30 Service Platform + Furnace
-      '<rect x="' + (96 + barW).toFixed(1) + '" y="124" width="62" height="48" rx="4" fill="#FDF2E4" stroke="#A15206" stroke-width="1.8"/>' +
-      '<text x="' + (96 + barW + 31).toFixed(1) + '" y="144" text-anchor="middle" font-size="7.6" font-weight="800" fill="#A15206">30"×30"</text>' +
-      '<text x="' + (96 + barW + 31).toFixed(1) + '" y="156" text-anchor="middle" font-size="7" fill="#485563">' + (es ? "Plataforma" : "Platform") + "</text>" +
+      '<line x1="' + maxLineX.toFixed(1) + '" y1="108" x2="' + maxLineX.toFixed(1) + '" y2="192" stroke="#B42318" stroke-width="1.6" stroke-dasharray="4 2"/>' +
+      '<text x="' + maxLineX.toFixed(1) + '" y="102" text-anchor="middle" font-size="7.8" font-weight="800" fill="#B42318">' + (es ? "MÁX. CÓDIGO 20 pies" : "20 ft CODE MAX") + "</text>" +
+      // DIRECTLY DRAGGABLE 30x30 Service Platform + Furnace (2-way synced with #attWalkSlider & #rng-walkway-l!)
+      '<g id="attPlatformDragHandle" class="u4-drag-ew" tabindex="0" role="slider" aria-label="' + esc(es ? "Arrastrar distancia del pasillo en pies" : "Drag attic walkway distance in feet") + '" aria-valuemin="6" aria-valuemax="24" aria-valuenow="' + ft + '" transform="translate(' + barW.toFixed(1) + ', 0)">' +
+        '<rect x="88" y="118" width="78" height="68" fill="transparent"/>' +
+        '<rect class="u4-drag-grip" x="96" y="124" width="62" height="48" rx="5" fill="#FDF2E4" stroke="#A15206" stroke-width="2"/>' +
+        '<text x="127" y="142" text-anchor="middle" font-size="7.6" font-weight="800" fill="#A15206" pointer-events="none">30"×30"</text>' +
+        '<text x="127" y="154" text-anchor="middle" font-size="7" fill="#485563" pointer-events="none">' + (es ? "Plataforma" : "Platform") + "</text>" +
+        '<rect x="103" y="160" width="48" height="12" rx="6" fill="#A15206" pointer-events="none"/>' +
+        '<text x="127" y="168.5" text-anchor="middle" font-size="6.4" font-weight="800" fill="#FFFFFF" pointer-events="none">' + (es ? "↔ MOVER" : "↔ DRAG") + "</text>" +
+      "</g>" +
       // GFCI & Light callout bottom
-      '<text x="230" y="206" text-anchor="middle" font-size="8.2" font-weight="700" fill="#184E77">' +
+      '<text x="230" y="214" text-anchor="middle" font-size="8.2" font-weight="700" fill="#184E77">' +
         (es ? 'Usar OSB 23/32" o triplay 3/4" (NUNCA triplay 3/8") · 1 tira real de 24" por hoja 4×8 · GFCI 120V ≤ 25 pies'
             : 'Use 23/32" OSB or 3/4" ply (NEVER 3/8" ply) · 1 true 24" strip per 4×8 sheet · 120V GFCI ≤ 25 ft') +
       "</text>" +
@@ -265,12 +280,12 @@
         '<div class="u4h-kpi-grid">' +
           '<div class="u4h-kpi">' +
             '<div class="u4h-kpi-lbl">' + (es ? "Largo de pasillo" : "Walkway length") + "</div>" +
-            '<div class="u4h-kpi-val ' + (pass ? "is-ok" : "is-fail") + '">' + state.walkwayFt + (es ? " pies / 20 máx." : " ft / 20 ft max") + "</div>" +
+            '<div id="attKpiWalkVal" class="u4h-kpi-val ' + (pass ? "is-ok" : "is-fail") + '">' + state.walkwayFt + (es ? " pies / 20 máx." : " ft / 20 ft max") + "</div>" +
             '<div class="u4h-kpi-sub">' + (pass ? (es ? "Cumple CMC 304.4" : "Meets 20 ft code cap") : (es ? "¡Demasiado lejos!" : "Over 20 ft limit!")) + "</div>" +
           "</div>" +
           '<div class="u4h-kpi">' +
             '<div class="u4h-kpi-lbl">' + (es ? "Hojas 4×8 necesarias" : "4×8 sheets needed") + "</div>" +
-            '<div class="u4h-kpi-val is-info">' + sheets + (es ? " hojas" : " sheets") + "</div>" +
+            '<div id="attKpiSheetsVal" class="u4h-kpi-val is-info">' + sheets + (es ? " hojas" : " sheets") + "</div>" +
             '<div class="u4h-kpi-sub">' + (es ? '1 tira real 24" por hoja' : '1 true 24" strip/sheet') + "</div>" +
           "</div>" +
           '<div class="u4h-kpi">' +
@@ -285,11 +300,11 @@
             '<span class="u4h-ctrl-lbl">' + (es ? "Distancia de escotilla a calefacción (pies):" : "Distance from hatch to furnace (ft):") + "</span>" +
             '<div class="u4h-slider-row">' +
               '<input type="range" id="attWalkSlider" min="6" max="24" step="1" value="' + state.walkwayFt + '">' +
-              '<span class="u4h-slider-val">' + state.walkwayFt + " ft</span>" +
+              '<span id="attWalkSliderVal" class="u4h-slider-val">' + state.walkwayFt + (es ? " pies" : " ft") + "</span>" +
             "</div>" +
           "</div>" +
         "</div>" +
-        '<div class="u4h-status ' + (pass ? "is-pass" : "is-fail") + '">' +
+        '<div id="attWalkStatus" class="u4h-status ' + (pass ? "is-pass" : "is-fail") + '">' +
           (pass
             ? (es ? "✓ PASA (" + state.walkwayFt + " pies ≤ 20 pies) — Compra " + sheets + " hoja(s) de OSB 23/32\" o triplay 3/4\". NUNCA usar triplay de 3/8\"."
                   : "✓ PASS (" + state.walkwayFt + " ft ≤ 20 ft max) — Plan " + sheets + " sheet(s) of 23/32\" OSB or 3/4\" structural ply. NEVER use 3/8\" ply.")
@@ -377,8 +392,85 @@
     host.querySelectorAll("[data-bay]").forEach(function (b) {
       b.addEventListener("click", function () { state.joistBay = b.getAttribute("data-bay"); render(); });
     });
+    function updateAtticWalkLive(rawFt) {
+      var ft = Math.max(6, Math.min(24, Math.round(rawFt)));
+      state.walkwayFt = ft;
+      var pass = ft <= 20;
+      var sheets = calcSheets(ft);
+      var col = pass ? "#1B6B46" : "#B42318";
+      var barW = (ft / 24) * 240;
+
+      var bar = document.getElementById("attWalkBar");
+      var txt = document.getElementById("attWalkBarTxt");
+      var grp = document.getElementById("attPlatformDragHandle");
+      if (bar) { bar.setAttribute("width", barW.toFixed(1)); bar.setAttribute("fill", pass ? "#E5F4EC" : "#FEECEB"); bar.setAttribute("stroke", col); }
+      if (txt) { txt.setAttribute("x", (96 + barW / 2).toFixed(1)); txt.setAttribute("fill", col); txt.textContent = ft + (es ? " pies (" : " ft (") + sheets + (es ? " hojas)" : " shts)"); }
+      if (grp) { grp.setAttribute("transform", "translate(" + barW.toFixed(1) + ", 0)"); grp.setAttribute("aria-valuenow", String(ft)); }
+
+      var kW = document.getElementById("attKpiWalkVal");
+      if (kW) { kW.className = "u4h-kpi-val " + (pass ? "is-ok" : "is-fail"); kW.textContent = ft + (es ? " pies / 20 máx." : " ft / 20 ft max"); }
+      var kS = document.getElementById("attKpiSheetsVal");
+      if (kS) kS.textContent = sheets + (es ? " hojas" : " sheets");
+      var sv = document.getElementById("attWalkSliderVal");
+      if (sv) sv.textContent = ft + (es ? " pies" : " ft");
+      var slEl = document.getElementById("attWalkSlider");
+      if (slEl) slEl.value = String(ft);
+      var st = document.getElementById("attWalkStatus");
+      if (st) {
+        st.className = "u4h-status " + (pass ? "is-pass" : "is-fail");
+        st.textContent = pass
+          ? (es ? "✓ PASA (" + ft + " pies ≤ 20 pies) — Compra " + sheets + " hoja(s) de OSB 23/32\" o triplay 3/4\". NUNCA usar triplay de 3/8\"."
+                : "✓ PASS (" + ft + " ft ≤ 20 ft max) — Plan " + sheets + " sheet(s) of 23/32\" OSB or 3/4\" structural ply. NEVER use 3/8\" ply.")
+          : (es ? "✗ FALLA (" + ft + " pies > 20 pies) — Con 66\" de altura en ático el pasillo NO puede pasar de 20 pies. Acerca la calefacción o mueve la escotilla."
+                : "✗ FAIL (" + ft + " ft > 20 ft max) — At 66\" attic height, walkway cannot exceed 20 ft. Place furnace closer or move hatch.");
+      }
+      syncBlueprintWalkway(ft);
+    }
+
     var sl = document.getElementById("attWalkSlider");
-    if (sl) sl.addEventListener("input", function () { state.walkwayFt = parseInt(sl.value, 10) || 16; render(); });
+    if (sl) {
+      sl.addEventListener("input", function () { updateAtticWalkLive(parseFloat(sl.value) || 16); });
+      sl.addEventListener("change", function () { render(); });
+    }
+    var dragGrp = document.getElementById("attPlatformDragHandle");
+    var walkSvg = document.getElementById("attWalkSvg");
+    if (dragGrp && walkSvg) {
+      dragGrp.addEventListener("pointerdown", function (e) {
+        if (e.button !== undefined && e.button !== 0 && e.pointerType === "mouse") return;
+        e.preventDefault();
+        var pid = e.pointerId;
+        var startFt = state.walkwayFt;
+        var startX = e.clientX;
+        var rect = walkSvg.getBoundingClientRect();
+        var pxPerSvgX = (rect.width || 460) / 460;
+        dragGrp.classList.add("is-dragging");
+        try { dragGrp.setPointerCapture(pid); } catch (_) {}
+        var blockScroll = function (tev) { if (tev.cancelable) tev.preventDefault(); };
+        window.addEventListener("touchmove", blockScroll, { passive: false });
+        function onMove(ev) {
+          if (ev.pointerId !== pid) return;
+          var dxSvg = (ev.clientX - startX) / (pxPerSvgX || 1);
+          updateAtticWalkLive(startFt + dxSvg / 10);
+        }
+        function finish(ev) {
+          if (ev && ev.pointerId !== pid) return;
+          dragGrp.classList.remove("is-dragging");
+          document.removeEventListener("pointermove", onMove);
+          document.removeEventListener("pointerup", finish);
+          document.removeEventListener("pointercancel", finish);
+          window.removeEventListener("touchmove", blockScroll);
+          try { if (dragGrp.hasPointerCapture && dragGrp.hasPointerCapture(pid)) dragGrp.releasePointerCapture(pid); } catch (_) {}
+          render();
+        }
+        document.addEventListener("pointermove", onMove);
+        document.addEventListener("pointerup", finish);
+        document.addEventListener("pointercancel", finish);
+      });
+      dragGrp.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowRight" || e.key === "ArrowUp") { e.preventDefault(); updateAtticWalkLive(state.walkwayFt + 1); }
+        if (e.key === "ArrowLeft" || e.key === "ArrowDown") { e.preventDefault(); updateAtticWalkLive(state.walkwayFt - 1); }
+      });
+    }
     host.querySelectorAll("[data-gate]").forEach(function (cb) {
       cb.addEventListener("change", function () { state.gates[cb.getAttribute("data-gate")] = cb.checked; render(); });
     });
