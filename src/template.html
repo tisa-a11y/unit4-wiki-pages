@@ -1117,6 +1117,94 @@ body.u4-pin-armed #doc,body.u4-pin-armed .u4-lb-stage,body.u4-pin-armed .u4-pdf-
 .u4-pin-steer-status{font:500 11.5px/1.35 var(--mono);color:var(--muted)}
 .u4-pin-steer-status.is-ok{color:var(--lock)}
 .u4-pin-steer-status.is-err{color:var(--crimson,#b42318)}
+
+/* Wave G (2026-11-20): Persistent Full-Bleed #u4PlanShell + 3-State Classic Live AI UI (z-index: 9500) */
+.u4-plan-shell{position:fixed;inset:0;z-index:40;background:var(--bg);display:block}
+.u4-plan-shell[hidden]{display:none!important}
+.u4-plan-frame{width:100%;height:100%;border:0;display:block;background:var(--bg)}
+body.u4-in-plan{overflow:hidden}
+body.u4-in-plan .u4-pin-fab,body.u4-ai-sheet-open .u4-pin-fab{display:none!important}
+@media (max-width:640px){
+  body.u4-live-minibar .u4-pin-fab{bottom:calc(env(safe-area-inset-bottom,0px) + 68px)!important}
+}
+
+/* State A: Collapsed Floating AI Dock (bottom-right above #u4PlanShell & Wiki, hidden whenever Mini-Bar or Sheet is open) */
+#u4AiFloatingDock.u4-ai-dock{position:fixed!important;right:max(14px,env(safe-area-inset-right,0px))!important;bottom:calc(env(safe-area-inset-bottom,0px) + 14px)!important;top:auto!important;left:auto!important;z-index:9500!important;margin-left:0!important;display:inline-flex;align-items:center;gap:8px;pointer-events:auto}
+#u4AiFloatingDock[hidden]{display:none!important}
+#u4AiFloatingDock .u4-ai-pointer{background:var(--panel)!important;color:var(--fg)!important;border:1px solid var(--accent)!important;box-shadow:0 2px 10px rgba(0,0,0,.14)!important;padding:7px 12px!important;font:600 12.5px/1.2 var(--body)!important;border-radius:999px!important;animation:none!important}
+#u4AiFloatingDock .u4-ai-orb{width:48px!important;height:48px!important;border:1.5px solid var(--accent)!important;background:var(--accent)!important;color:var(--panel)!important;box-shadow:0 3px 12px rgba(0,0,0,.2)!important}
+#u4AiFloatingDock[data-live="connecting"] .u4-ai-orb{background:var(--open)!important;border-color:var(--open)!important;color:var(--panel)!important}
+#u4AiFloatingDock[data-live="on"] .u4-ai-orb{background:var(--lock)!important;border-color:var(--lock)!important;color:var(--panel)!important}
+#u4AiFloatingDock .u4-ai-orb svg{width:24px!important;height:24px!important}
+#u4AiFloatingDock .u4-ai-orb-pill{background:var(--panel)!important;color:var(--fg)!important;border:1px solid var(--line)!important}
+@media (max-width:600px){
+  #u4AiFloatingDock.u4-ai-dock{right:12px!important;bottom:calc(env(safe-area-inset-bottom,0px) + 14px)!important}
+  #u4AiFloatingDock .u4-ai-pointer{display:none!important}
+}
+
+/* State B: 48px Compact Live Mini-Bar (desktop + mobile) */
+.u4-voice-minbar{position:fixed;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(env(safe-area-inset-bottom,0px) + 14px);z-index:9500;height:48px;max-width:calc(100vw - 24px);padding:0 8px 0 12px;border-radius:999px;border:1px solid var(--accent);background:var(--panel);color:var(--fg);box-shadow:0 4px 16px rgba(0,0,0,.22);display:inline-flex;align-items:center;gap:8px;font-family:var(--body);transition:border-color .15s,background .15s}
+.u4-voice-minbar[hidden]{display:none!important}
+.u4-voice-minbar[data-live="muted"]{border-color:var(--open);background:var(--open-soft)}
+.u4-voice-minbar[data-live="connecting"]{border-color:var(--open)}
+.u4-minbar-status{display:inline-flex;align-items:center;gap:6px;min-width:0;cursor:pointer}
+.u4-minbar-dot{width:8px;height:8px;border-radius:50%;background:var(--lock);flex:none}
+.u4-voice-minbar[data-live="muted"] .u4-minbar-dot,.u4-voice-minbar[data-live="connecting"] .u4-minbar-dot{background:var(--open)}
+.u4-minbar-lbl{font:700 11.5px/1.1 var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--fg);white-space:nowrap}
+.u4-rms-meter{display:inline-flex;align-items:flex-end;gap:2px;height:16px;padding:0 2px;flex:none}
+.u4-rms-bar{width:3px;min-height:3px;height:3px;border-radius:2px;background:var(--lock);transition:height 60ms linear}
+.u4-voice-minbar[data-live="muted"] .u4-rms-bar,.u4-rms-meter.is-muted .u4-rms-bar{height:3px!important;background:var(--muted);opacity:.45}
+.u4-voice-minbar[data-live="connecting"] .u4-rms-bar{background:var(--open)}
+.u4-minbar-btn{height:32px;padding:0 10px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font:600 12px/1 var(--body);cursor:pointer;display:inline-flex;align-items:center;gap:4px;white-space:nowrap;flex:none}
+.u4-minbar-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.u4-minbar-btn.is-muted{border-color:var(--open);background:var(--open);color:var(--panel)}
+.u4-minbar-btn.is-end{border-color:var(--crimson,#b42318);color:var(--crimson,#b42318);background:var(--panel);padding:0 9px}
+.u4-minbar-btn.is-end:hover{background:var(--crimson,#b42318);color:#fff}
+@media (max-width:600px){
+  .u4-voice-minbar{right:10px;bottom:calc(env(safe-area-inset-bottom,0px) + 12px);gap:6px;padding:0 6px 0 10px}
+  .u4-minbar-btn{padding:0 8px;font-size:11.5px}
+}
+
+/* State C: Expanded Classic Sheet (Desktop bottom-right drawer; Mobile <=600px flush bottom sheet w/ zero peeking gap!) */
+#u4VoiceChatDialog.u4-voice-dialog{position:fixed!important;right:max(16px,env(safe-area-inset-right,0px))!important;bottom:calc(env(safe-area-inset-bottom,0px) + 14px)!important;top:auto!important;left:auto!important;z-index:9500!important;width:min(395px,calc(100vw - 24px))!important;height:min(560px,calc(100vh - 34px))!important;border-radius:10px!important;border:1px solid var(--line)!important;background:var(--panel)!important;color:var(--fg)!important;box-shadow:0 8px 28px rgba(0,0,0,.22)!important;display:flex;flex-direction:column;overflow:hidden}
+#u4VoiceChatDialog.u4-voice-dialog[hidden]{display:none!important}
+@media (max-width:600px){
+  #u4VoiceChatDialog.u4-voice-dialog{left:0!important;right:0!important;bottom:0!important;top:auto!important;width:100%!important;max-width:100%!important;height:min(76dvh,calc(100dvh - env(safe-area-inset-top,0px) - 20px))!important;max-height:85dvh!important;border-radius:14px 14px 0 0!important;border-left:0!important;border-right:0!important;border-bottom:0!important;padding-bottom:env(safe-area-inset-bottom,0px)!important}
+}
+#u4VoiceChatDialog .u4-vd-head{padding:9px 12px;border-bottom:1px solid var(--line);background:var(--bg);gap:6px;flex:none}
+#u4VoiceChatDialog .u4-vd-title{font-family:var(--display);font-size:15px;font-weight:700;color:var(--fg)}
+#u4VoiceChatDialog .u4-vd-state{font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--muted)}
+#u4VoiceChatDialog[data-live="on"] .u4-vd-state{background:var(--lock-soft);color:var(--lock);border-color:var(--lock)}
+#u4VoiceChatDialog[data-live="muted"] .u4-vd-state,#u4VoiceChatDialog[data-live="connecting"] .u4-vd-state{background:var(--open-soft);color:var(--open);border-color:var(--open)}
+#u4VoiceChatDialog[data-live="muted"] .u4-vd-sub{background:var(--open-soft);color:var(--open)}
+#u4VoiceChatDialog .u4-vd-sub{padding:5px 12px;font-size:11.5px;border-bottom:1px solid var(--line);background:var(--panel);color:var(--muted);flex:none}
+#u4VoiceChatDialog .u4-vd-sub[hidden]{display:none!important}
+.u4-deadmic-banner{margin:6px 10px 0;padding:7px 10px;border-radius:8px;border:1px solid var(--open);background:var(--open-soft);color:var(--fg);font:600 12px/1.35 var(--body);display:flex;align-items:center;justify-content:space-between;gap:8px;flex:none}
+.u4-deadmic-banner[hidden]{display:none!important}
+.u4-deadmic-btn{padding:4px 10px;border-radius:999px;border:1px solid var(--open);background:var(--panel);color:var(--fg);font:600 11.5px/1.2 var(--mono);cursor:pointer;white-space:nowrap;flex:none}
+.u4-deadmic-btn:hover{background:var(--open);color:var(--panel)}
+#u4VoiceChatDialog .u4-vd-log{flex:1 1 auto!important;min-height:100px!important;max-height:none!important;padding:10px 12px;overflow-y:auto;background:var(--panel)}
+#u4VoiceChatDialog .u4-vd-foot{flex:none;border-top:1px solid var(--line);padding:8px 10px;background:var(--bg);display:grid;gap:6px}
+#u4VoiceChatDialog .u4-vd-chips{display:flex;flex-wrap:nowrap!important;overflow-x:auto!important;gap:6px!important;padding-bottom:2px;-webkit-overflow-scrolling:touch}
+#u4VoiceChatDialog .u4-vd-chips[hidden]{display:none!important}
+#u4VoiceChatDialog .u4-nudge-chip{flex:none;min-height:30px;padding:4px 10px!important;font-size:12px!important;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--fg)}
+#u4VoiceChatDialog .u4-vd-ask-row{display:flex;align-items:center;gap:6px;min-width:0}
+.u4-vd-cam-mini{width:36px;height:36px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--fg);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;flex:none;font-size:15px;padding:0}
+.u4-vd-cam-mini:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+#u4VoiceChatDialog .u4-vd-ask-inp{flex:1 1 auto;min-width:0;min-height:38px;padding:7px 12px!important;border-radius:8px!important;border:1px solid var(--line)!important;background:var(--panel)!important;color:var(--fg)!important;font-size:14px}
+@media (max-width:600px){#u4VoiceChatDialog .u4-vd-ask-inp{font-size:16px!important}}
+#u4VoiceChatDialog .u4-vd-ask-send{width:38px!important;height:38px!important;border-radius:8px!important;border:1px solid var(--accent)!important;background:var(--accent)!important;color:var(--panel)!important;font:700 16px/1 var(--body)!important;flex:none}
+#u4VoiceChatDialog .u4-vd-btn{border-radius:8px;font:600 12px/1.1 var(--mono)}
+#u4VoiceChatDialog .u4-vd-btn.is-mute-ctl{background:var(--panel);color:var(--fg);border-color:var(--line)}
+#u4VoiceChatDialog .u4-vd-btn.is-mute-ctl.is-muted{background:var(--open-soft);color:var(--open);border-color:var(--open)}
+#u4VoiceChatDialog .u4-vd-btn.is-end{background:var(--crimson,#b42318);border-color:var(--crimson,#b42318);color:#fff}
+.u4-snap-card{display:grid;gap:6px;padding:8px;border-radius:8px;border:1px solid var(--line);background:var(--bg);max-width:240px}
+.u4-snap-card img{width:100%;max-height:140px;object-fit:contain;border-radius:6px;border:1px solid var(--line);background:var(--panel);display:block}
+.u4-snap-cap{font:600 11.5px/1.3 var(--mono);color:var(--fg)}
+.u4-snap-acts{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.u4-snap-btn{display:inline-flex;align-items:center;gap:4px;padding:4px 8px;border-radius:6px;border:1px solid var(--accent);background:var(--panel);color:var(--accent);font:600 11px/1.2 var(--mono);text-decoration:none;cursor:pointer}
+.u4-snap-btn:hover{background:var(--accent-soft)}
+.u4-snap-btn.is-ok{border-color:var(--lock);background:var(--lock-soft);color:var(--lock)}
 </style>
 
 <section id="agent-brief" class="sr-only" aria-label="Agent brief"># START HERE — Unit 4 remodel, 1231 11th Ave (San Francisco)<br><br>**This is the only start-here file.** Every person and agent opening this folder reads this first, fully, before acting.<br>Updated 2026-11-05 17:45 PT by Claude (Tisa&#x27;s account, cloud session). The same text is the wiki&#x27;s &quot;For AI agents: read first&quot; section.<br><br>## 0. Where to work — Google Drive is the single source of truth<br>- **Unit 4 folder (work here):** https://drive.google.com/drive/folders/1NnUfcuJfnzcjJz3XRvDQDhfvtMkrlSOr (`1231-11th-avenue/unit-4-renovation`)<br>- **Whole-building parent:** https://drive.google.com/drive/folders/1StmWHtnrDQlpd1CbUUfUEOI1vg-jHn29 (`1231-11th-avenue`)<br>- Everyone — Tisa&#x27;s Claude, John&#x27;s Claude, Dibble, any other agent — reads and writes through this Drive folder. (It is backed by Tisa&#x27;s Mini and syncs automatically; you never need the Mini path.)<br>- Every Unit 4 document now lives here, including copies of everything from the old locations (section 3). If you can&#x27;t find something, look in the room folder&#x27;s `from-remodel-hub/`, `from-unit4-bath-folder/` or `from-my-drive/` subfolder before assuming it&#x27;s missing.<br>- Older start-here, AGENTS and CLAUDE files were retired 2026-11-05 to `continuity/_superseded/start-here-history/` — don&#x27;t follow them.<br><br>---<br><br>## 1. Who and what<br>- **Tisa** owns the project and makes and locks every decision. **John** is lead carpenter on site. **Ervin, Joel, Alex** are crew (Spanish speakers).<br>- **Wiki** — https://tisa-a11y.github.io/unit4-wiki-pages/ — the shared picture: roadmap, one spec per project, open decisions, documents (PDFs preview in the page). It reads the `.md` files in this folder.<br>- **Todoist** board `Full 1231 11th Avenue Remodel` (id ). The wiki is its spine: every card traces to a spec, a locked decision or captured input.<br>- **Magicplan** MASTER plan is the geometry source: https://cloud.magicplan.app/plan/abb2d2c6-aa1c-4a88-a57e-1260847b6410<br>- **Your job:** keep the project moving with as little effort from Tisa and John as possible. Answer from the specs, capture what they tell you, file it, keep wiki and Todoist in step.<br><br>## 2. Read in this order<br>1. `STATUS-NOW.md` — what&#x27;s locked, what&#x27;s blocking, what&#x27;s next on site. Answer &quot;what&#x27;s up?&quot; from here first.<br>2. `continuity/ROADMAP.md` — sequence and phases.<br>3. `&lt;room&gt;/SPEC.md` for the area you&#x27;re working on.<br>4. `continuity/CURRENT-DECISIONS.md` and `continuity/KNOWN-GAPS.md` only if you need the history.<br><br>## 3. Folder map<br>| Folder | Holds |<br>|---|---|<br>| `kitchen/` `bathroom/` `electrical/` `laundry/` `bedroom/` `living-dining/` `hallway/` `paint-floors/` `hvac/` | One per room or trade; each has `SPEC.md` (governs) plus dated drawings and packages. |<br>| `interior-design/` | Wall treatment, trim, outlet and finish plans (dated revision folders). |<br>| `general/` | Whole-unit items; `from-remodel-hub/` = imported old crew-hub files. |<br>| `sprint/` | Current sprint plan and session agendas. |<br>| `continuity/` | Roadmap, decisions log, known gaps, labor ballpark, history and source snapshots. |<br>| `work-control/` | Agent index, Todoist runbook (dated snapshot), `wiki-source/` (wiki build files). |<br>| `to-triage/` | Drop box for any input (notes, photos, voice memos, session minutes). Claude routes it and moves it to `to-triage/_done/`. |<br>| `sessions/` | One folder per working session: minutes (and transcript when available). |<br>| `_to_delete/` | Marked for removal; only Tisa empties it. |<br><br>Outside this folder: `../building/` (common areas, backyard, alley; `building/earlier-renovations-not-unit-4…/` holds older renovation docs that are **not** Unit 4 — don&#x27;t use them for Unit 4), `../GOOGLE-DOCS-INDEX.md`, and the separate private folder `1231-11th-avenue-private` (leases, costs, payroll, bids — **never share with crew**).<br><br>**Old locations — still readable for history, never the place to work:** Drive &quot;1231 11th Ave - Unit 4 Remodel&quot; (old crew hub, folders 01–12), Drive &quot;11th Ave Unit 4 Bath&quot;. Everything in them was copied here on 2026-11-04/05. If an old file and a file here disagree, the room&#x27;s `SPEC.md` governs.<br><br>## 4. Which version is the latest<br>1. Names carry date and revision: `YYYY-MM-DD_U4_&lt;room or trade&gt;_&lt;what&gt;_R#` (issued drawings may use `RevA`, `RevB`), then `_EN` or `_ES`. English and Spanish are always separate files.<br>2. The latest lives in the topic folder. A replaced file moves, name unchanged, to that folder&#x27;s `_superseded/` (or `history/`). Nothing is deleted.<br>3. If a folder still has more than one live iteration, its `CURRENT.md` names the one that governs.<br>4. `from-remodel-hub/`, `from-unit4-bath-folder/`, `from-my-drive/` are copies imported 2026-11-04 so no mockup or image is lost; they&#x27;re being reconciled. Until then the room&#x27;s `SPEC.md` and the dated files outside them govern.<br><br>## 5. Golden rule: John never has to enter anything himself<br>When John or Tisa tells you something — a task, a measurement, a problem, a question, a decision needed — capture it for them in their words and file it (section 7). Don&#x27;t send them to a form. Confirm back in one line what you filed and where.<br><br>## 6. What each kind of agent can do<br>| You are… | You can |<br>|---|---|<br>| **Claude on Tisa&#x27;s claude.ai account** (this Project, Cowork, Claude Code) | Everything: wiki data via the ArtifactData tool (URL above), republish the wiki via the Artifact tool, edit files here, Todoist via the connector (connected 2026-11-03). |<br>| **John&#x27;s Claude** (claude.ai cloud, often voice on John&#x27;s iPhone) | Read the wiki link, this Drive folder and the Todoist board. Its Drive connector can **create** files but can&#x27;t overwrite existing ones, so it writes session minutes and notes to `to-triage/` as `YYYY-MM-DD_HHMM_session_&lt;topic&gt;.md` with an author line (which Claude, which device, cloud or local). Tisa&#x27;s Claude routes them into the wiki, specs, STATUS-NOW and Todoist. |<br>| **Any other agent** (Dibble, Codex, Gemini, Antigravity) | Read and edit the files here (section 8 rules), update `STATUS-NOW.md`, drop input in `to-triage/`. Access comes from this Drive folder being shared with John&#x27;s Google account as Editor. |<br>| **Any agent with a browser** | Open the wiki and help John use it on his phone. |<br><br>**Dropping input (non-Claude agents):** `to-triage/YYYY-MM-DD_HHMM_&lt;who&gt;_&lt;short&gt;.md`<br>```<br>type: task | fact | decision | note<br>project: kitchen | bathroom | electrical | laundry | bedroom | living-dining | hallway | paint-floors | hvac | general<br>from: &lt;agent&gt; on behalf of &lt;John/Tisa&gt;<br>---<br>&lt;their words&gt;<br>```<br>**Claude capture:** write to the wiki&#x27;s `inbox` collection `{type, project, section, title, details, raw, source:&quot;agent&quot;, from, createdAt, status:&quot;queued&quot;}`, then route it in the same turn.<br><br>## 7. Routing — where each thing goes<br>| Came in | Do this |<br>|---|---|<br>| **Task** | Look for an existing card first (comment rather than duplicate). Create it in the project&#x27;s section — Kitchen / Cocina · Bathroom / Baño · Electrical / Electricidad · Laundry / Lavandería · Walls, Molding &amp; Paint · General &amp; HVAC (bedroom, living-dining, hallway, HVAC, building) · New Tasks (need triage) · Backlog · On Hold or Blocked. Re-check section names live before writing. Plain title; description = State / Trade / Next physical action / Governing source (link to SPEC.md). **Unassigned** unless Tisa names someone. |<br>| **Site fact** | Add to the project&#x27;s SPEC.md with date and &quot;(John, field)&quot;. Comment on the card if it changes one. |<br>| **Decision needed** | Add a wiki `decisions` doc (`status: open`, priority 1 blocking / 2 next / 3 later). Only Tisa locks. |<br>| **Locked decision** (`synced: false`) | Update SPEC.md (mark LOCKED), matching cards, the Spanish crew edition, `STATUS-NOW.md`; set `synced: true`. |<br>| **Field report / session notes** | File facts as above; next steps → unassigned cards; open items → decisions; mark `recorded`. |<br><br>Wiki and cards disagree → the wiki wins (never the reverse without Tisa). Any change you make → update `STATUS-NOW.md` in the same pass.<br><br>## 8. Rules that always hold<br>- Tisa&#x27;s direction is locked; anything an AI produces is a suggestion until she locks it.<br>- Nothing is sent, signed, ordered, paid or scheduled without Tisa&#x27;s approval.<br>- Magicplan and existing drawings first. Never ask John to re-measure what&#x27;s recorded; ask only for the specific missing number.<br>- Crew-facing documents: English first, then a **separate** Spanish edition. Never mix languages. Replies to Tisa in English.<br>- Edit an existing spec rather than making a new file beside it (new files break wiki links).<br>- Superseded files go to `_superseded`; never delete. No credentials in any file here.<br>- **Wiki and Drive mirror each other** (Tisa, 2026-11-06): every wiki page and document list matches a folder in `1231 11th Avenue Unit 4`, and each document sits under the same room in both. When you add or move a document or folder in Drive, update the wiki in the same pass, and the reverse. Example: the Laundry Closet is its own project, so its documents live in `laundry/`, not `electrical/`.<br>- **Spanish for the wiki lives only in the wiki's own text** (Tisa, 2026-11-06): the English/Español toggle. Never create Spanish copies of the .md files in Drive. Crew plans keep their existing English and Spanish PDFs.<br>- **Work record (Beads):** canonical ledger `/Users/tisavo/Work/Projects/1231-11th-avenue/unit-4-renovation` on the MacBook Pro (`.beads/embeddeddolt`, main issue `tisa-wi0.6`). Run `bd where` before writing; never initialize a duplicate ledger; keep existing issue IDs. Agents that can&#x27;t reach it (cloud sessions) record state in `STATUS-NOW.md` and say Beads is pending. Last check from a cloud session (2026-11-05): not reachable, status unverified.<br>- Every session&#x27;s minutes say the date, who attended and which Claude wrote them (account, device, cloud or local).<br>- Say plainly what you verified vs. only wrote. Trust the source file over another agent&#x27;s summary.<br><br>## 9. Maintaining the wiki (Claude only)<br>Source: `work-control/wiki-source/` (template updated 2026-11-05 to include the live Home page and collapsible document lists) — `wiki_template.html`, `build_wiki.py` (embeds the specs and document lists), `brief.py` (embeds this file as the agent brief), `drive_docs.json`, `pdf_blobs.json`. Rebuild, then publish to the same artifact URL. Collections: `decisions` (Tisa/admin write), `decisionNotes`, `reports`, `sessionNotes`, `inbox`.<br><br>## 10. More detail, if needed<br>- Routing detail and history: `work-control/2026-11-03_U4_AgentWork_Index_R2.md`<br>- Todoist runbook (11/2 snapshot, has known errors): `work-control/TODOIST-PROJECT-MANAGER-RUNBOOK.md`<br>- Kitchen governing revision: `kitchen/CURRENT.md`<br></section>
@@ -1125,6 +1213,9 @@ body.u4-pin-armed #doc,body.u4-pin-armed .u4-lb-stage,body.u4-pin-armed .u4-pdf-
 <div id="qpPanel" class="qp-panel" role="dialog" aria-modal="false" aria-labelledby="qpTitle" hidden>
   <div class="qp-head"><h2 id="qpTitle">Send a note</h2><button type="button" id="qpClose" class="btn ghost" aria-label="Close">Close</button></div>
   <div id="qpBody"></div>
+</div>
+<div id="u4PlanShell" class="u4-plan-shell" hidden aria-label="Interactive Plan Viewer">
+  <iframe id="u4PlanFrame" class="u4-plan-frame" allow="microphone; camera; clipboard-write" title="Unit 4 Interactive Plan"></iframe>
 </div>
 <div class="wrap">
   <nav class="rail" id="rail" aria-label="Wiki pages">
@@ -1422,7 +1513,7 @@ function enhanceInteractiveLinks(rootEl){
     const raw = a.dataset.u4PlanBase || a.getAttribute("href") || "";
     if (raw.indexOf("./plans/") !== 0) return;
     a.dataset.u4PlanBase = raw;
-    a.setAttribute("href", withPlanParams(raw));
+    a.setAttribute("href", planUrlToHash(raw) || withPlanParams(raw));
     a.removeAttribute("target");
     a.removeAttribute("rel");
     if (!a.closest(".u4-hm-packet, .u4-packet, .docs, nav.rail")) {
@@ -1445,6 +1536,45 @@ function currentWikiTheme(){
   if (dt === "dark" || dt === "light") return dt;
   try { return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } catch(e){ return "light"; }
 }
+function planIdFromRaw(rawVal){
+  var s = String(rawVal || "").trim();
+  if (!s) return "";
+  var m = /\.\/plans\/([a-z0-9-]+)(?:\/|$|\?)/i.exec(s) || /^plan:([a-z0-9-]+)(?:\?|$)/i.exec(s);
+  return m ? m[1].toLowerCase() : "";
+}
+function planUrlToHash(href, opts){
+  var o = opts || {};
+  var pid = planIdFromRaw(href) || (href && /^[a-z0-9-]+$/i.test(String(href).trim()) ? String(href).trim().toLowerCase() : "");
+  if (!pid) return "";
+  var out = new URLSearchParams();
+  var qIdx = String(href || "").indexOf("?");
+  if (qIdx >= 0) {
+    var baseSp = new URLSearchParams(String(href).slice(qIdx + 1).split("#")[0]);
+    ["step", "wall", "zoom"].forEach(function(k){
+      if (baseSp.get(k)) out.set(k, baseSp.get(k));
+    });
+  }
+  ["step", "wall", "zoom"].forEach(function(k){
+    if (o[k] !== undefined && o[k] !== null && String(o[k]).trim() !== "") out.set(k, String(o[k]).trim());
+  });
+  var qs = out.toString();
+  return "#plan:" + pid + (qs ? ("?" + qs) : "");
+}
+function parsePlanHash(rawKey){
+  var k = String(rawKey || "").replace(/^#/, "").trim();
+  if (k.indexOf("plan:") !== 0) return null;
+  var rest = k.slice(5);
+  var qIdx = rest.indexOf("?");
+  var pid = (qIdx >= 0 ? rest.slice(0, qIdx) : rest).replace(/\/+$/, "").trim().toLowerCase();
+  if (!pid) return null;
+  var sp = new URLSearchParams(qIdx >= 0 ? rest.slice(qIdx + 1) : "");
+  return {
+    planId: pid,
+    step: sp.get("step") || "",
+    wall: sp.get("wall") || "",
+    zoom: sp.get("zoom") || ""
+  };
+}
 function withPlanParams(href){
   if (!href || href.indexOf("./plans/") !== 0) return href;
   var hashIdx = href.indexOf("#");
@@ -1457,7 +1587,11 @@ function withPlanParams(href){
   sp.set("theme", currentWikiTheme());
   return path + "?" + sp.toString() + hash;
 }
-function docHref(d){ var h = KITCHEN_HOSTED_LINKS[d.id] || (isPdf(d) ? "#doc:"+d.id : docUrl(d)); return withPlanParams(h); }
+function docHref(d){
+  var h = KITCHEN_HOSTED_LINKS[d.id] || (isPdf(d) ? "#doc:"+d.id : docUrl(d));
+  if (h && h.indexOf("./plans/") === 0) return planUrlToHash(h) || withPlanParams(h);
+  return withPlanParams(h);
+}
 
 const DOC_BY_ID = {};
 Object.keys(DOCS).forEach(k=>(DOCS[k]||[]).forEach(d=>{ if(!DOC_BY_ID[d.id]) DOC_BY_ID[d.id]={d:d,key:k}; }));
@@ -3192,7 +3326,10 @@ function packetHostedPlanUrl(pk){
   const hosted = id ? KITCHEN_HOSTED_LINKS[id] : null;
   return (hosted && hosted.indexOf("./plans/") === 0) ? withPlanParams(hosted) : null;
 }
-function packetHref(pk){ return packetHostedPlanUrl(pk) || ("#" + pk.key); }
+function packetHref(pk){
+  var hosted = packetHostedPlanUrl(pk);
+  return hosted ? (planUrlToHash(hosted) || hosted) : ("#" + pk.key);
+}
 function packetsFor(roomKey){ return PACKETS.filter(x=>x.room===roomKey && x.inMenu!==false); }
 function packetCardsBlock(list, showRoom){
   if (!list.length) return "";
@@ -3644,6 +3781,15 @@ function syncUrlSearchParams(){
     }
   } catch(e){}
 }
+function syncPlanFramePrefs(){
+  try {
+    var sh = document.getElementById("u4PlanShell");
+    var fr = document.getElementById("u4PlanFrame");
+    if (sh && !sh.hidden && fr && fr.contentWindow) {
+      fr.contentWindow.postMessage({ type: "u4:set-pref", lang: LANG === "es" ? "es" : "en", theme: currentWikiTheme() }, "*");
+    }
+  } catch(e){}
+}
 function setTheme(next, fromStorage){
   THEME = (next === "dark") ? "dark" : "light";
   if (!fromStorage) { try { localStorage.setItem("u4_theme", THEME); } catch(e){} }
@@ -3651,8 +3797,10 @@ function setTheme(next, fromStorage){
   syncUrlSearchParams();
   syncChromeLabels();
   enhanceInteractiveLinks(document);
+  syncPlanFramePrefs();
 }
 function setLang(l, fromStorage){
+  var prevLang = LANG;
   LANG = l==="es" ? "es" : "en";
   if (!fromStorage) { try{ localStorage.setItem("u4_lang", LANG); }catch(e){} }
   document.documentElement.lang = LANG;
@@ -3660,6 +3808,10 @@ function setLang(l, fromStorage){
   syncUrlSearchParams();
   syncChromeLabels();
   renderNav();
+  syncPlanFramePrefs();
+  if (prevLang !== LANG && window.U4GeminiLiveAssistant && typeof window.U4GeminiLiveAssistant.onUiLanguageChanged === "function") {
+    try { window.U4GeminiLiveAssistant.onUiLanguageChanged(LANG); } catch(e){}
+  }
   if (typeof show==="function" && document.getElementById("doc")) show(location.hash.slice(1) || "home");
 }
 if (typeof window !== "undefined" && !window.__u4StorageSyncBound) {
@@ -3735,11 +3887,77 @@ function scrollToTargetSection(targetSectionId){
   }, 60);
 }
 
+function closePlanShell(){
+  var sh = document.getElementById("u4PlanShell");
+  var fr = document.getElementById("u4PlanFrame");
+  document.body.classList.remove("u4-in-plan");
+  if (sh && !sh.hidden) sh.hidden = true;
+  if (fr && fr.dataset.planId) {
+    fr.dataset.planId = "";
+    try { if (fr.getAttribute("src") && fr.getAttribute("src") !== "about:blank") fr.setAttribute("src", "about:blank"); } catch(e){}
+  }
+  window.__u4ActivePlanContext = null;
+}
+
+function openPlanShell(planSpec){
+  if (!planSpec || !planSpec.planId) return false;
+  var sh = document.getElementById("u4PlanShell");
+  var fr = document.getElementById("u4PlanFrame");
+  if (!sh || !fr) return false;
+  var pid = planSpec.planId;
+  var sp = new URLSearchParams();
+  sp.set("lang", LANG === "es" ? "es" : "en");
+  sp.set("theme", currentWikiTheme());
+  sp.set("embedded", "1");
+  if (planSpec.step) sp.set("step", String(planSpec.step));
+  if (planSpec.wall) sp.set("wall", String(planSpec.wall));
+  if (planSpec.zoom) sp.set("zoom", String(planSpec.zoom));
+  var targetSrc = "./plans/" + encodeURIComponent(pid) + "/index.html?" + sp.toString();
+  var samePlanLoaded = (!sh.hidden && fr.dataset.planId === pid && fr.getAttribute("src") && fr.getAttribute("src") !== "about:blank");
+  sh.hidden = false;
+  document.body.classList.add("u4-in-plan");
+  if (typeof setMenu === "function") try { setMenu(false); } catch(e){}
+  window.__u4ActivePlanContext = Object.assign(window.__u4ActivePlanContext || {}, {
+    planId: pid,
+    step: planSpec.step || (window.__u4ActivePlanContext && window.__u4ActivePlanContext.step) || "",
+    wall: planSpec.wall || (window.__u4ActivePlanContext && window.__u4ActivePlanContext.wall) || "",
+    zoom: planSpec.zoom || (window.__u4ActivePlanContext && window.__u4ActivePlanContext.zoom) || ""
+  });
+  if (samePlanLoaded) {
+    syncPlanFramePrefs();
+    if ((planSpec.step || planSpec.wall || planSpec.zoom) && typeof window.__u4PostPlanCmd === "function") {
+      window.__u4PostPlanCmd("show_plan_view", {
+        plan: pid,
+        step: planSpec.step ? parseInt(planSpec.step, 10) : undefined,
+        wall: planSpec.wall || undefined,
+        zoom: planSpec.zoom || undefined
+      }).catch(function(){});
+    }
+  } else {
+    fr.dataset.planId = pid;
+    fr.setAttribute("src", targetSrc);
+  }
+  return true;
+}
+
 function show(key){
+  const __planRoute = parsePlanHash(key);
+  if (__planRoute){
+    pdfTok++;
+    openPlanShell(__planRoute);
+    return;
+  }
+  closePlanShell();
   const __pk = packetByKey(key);
   if (__pk){
     const __planUrl = packetHostedPlanUrl(__pk);
-    if (__planUrl) { window.location.replace(__planUrl); return; }
+    if (__planUrl) {
+      const __pHash = planUrlToHash(__planUrl);
+      if (__pHash) {
+        try { if (typeof history !== "undefined" && history.replaceState) history.replaceState(null, "", location.pathname + location.search + __pHash); else location.hash = __pHash; } catch(e) { location.hash = __pHash; }
+        return show(__pHash.slice(1));
+      }
+    }
     const r = show("doc:"+packetDocId(__pk));
     try {
       const v = document.querySelector("#doc .viewer");
@@ -3773,8 +3991,11 @@ function show(key){
       return show(targetKey);
     }
     if (hosted && hosted.indexOf("./plans/") === 0){
-      window.location.replace(withPlanParams(hosted));
-      return;
+      const __docPlanHash = planUrlToHash(hosted);
+      if (__docPlanHash) {
+        try { if (typeof history !== "undefined" && history.replaceState) history.replaceState(null, "", location.pathname + location.search + __docPlanHash); else location.hash = __docPlanHash; } catch(e) { location.hash = __docPlanHash; }
+        return show(__docPlanHash.slice(1));
+      }
     }
     const hit=DOC_BY_ID[id]; const d=hit?hit.d:{title:"Document",id:id,path:""}; const L=docLabel(d);
     const fromRoom=(current && current.group==="Projects" && current.key && !String(current.key).startsWith("doc:")) ? PAGES.find(x=>x.key===current.key) : null;
@@ -3943,6 +4164,22 @@ document.addEventListener("click", e=>{
   if (pill && !e.defaultPrevented) {
     const href = pill.getAttribute("href") || "";
     if (href.startsWith("#") && location.hash.slice(1) === href.slice(1)) { e.preventDefault(); show(href.slice(1)); }
+  }
+  const link = e.target.closest && e.target.closest("a[href]");
+  if (link && !e.defaultPrevented && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0 && link.getAttribute("target") !== "_blank") {
+    const rawHref = link.dataset.u4PlanBase || link.getAttribute("href") || "";
+    if (rawHref.indexOf("./plans/") === 0 && rawHref.indexOf("print=1") === -1) {
+      const pHash = planUrlToHash(rawHref);
+      if (pHash) {
+        e.preventDefault();
+        setMenu(false);
+        if (location.hash === pHash) show(pHash.slice(1));
+        else location.hash = pHash;
+      }
+    } else if (rawHref.indexOf("#plan:") === 0) {
+      setMenu(false);
+      if (location.hash === rawHref) { e.preventDefault(); show(rawHref.slice(1)); }
+    }
   }
 });
 document.addEventListener("keydown",e=>{ if(e.key==="Escape") { setMenu(false); closeGalleryLightbox(); if (typeof setUniversalPinArmed === "function") setUniversalPinArmed(false); if (typeof u4PinState !== "undefined" && u4PinState.selectedId) { u4PinState.selectedId = null; renderPinsOnSurface(); } } });
@@ -5500,7 +5737,7 @@ document.addEventListener("keydown", e=>{ if(e.key==="Escape" && qpOpen) closeQP
 
 // ---------- Minimal Voice Entry Point (#waVoiceMicPill) & 6-Action Client Bridge ----------
 var CREW_ALLOWED_ROOM_KEYS = ["home","roadmap","decisions","kitchen","kitchen-oven-range","kitchen-sink-north","bathroom","electrical","laundry","bedroom","living-dining","hallway","paint-floors","hvac","attic-access","agents"];
-var CANONICAL_BRIDGE_FUNCTIONS = ["navigate_room","focus_section","open_document","go_to_document_page","read_active_document","set_language","fill_draft_note","submit_voice_memo","query_todoist_cards","show_room_renders","get_pm_standup_brief","load_pm_skill","apply_pm_action","query_wiki_and_backend_knowledge","propose_wiki_or_plan_edit"];
+var CANONICAL_BRIDGE_FUNCTIONS = ["navigate_room","focus_section","open_document","go_to_document_page","read_active_document","set_language","fill_draft_note","submit_voice_memo","query_todoist_cards","show_room_renders","get_pm_standup_brief","load_pm_skill","apply_pm_action","query_wiki_and_backend_knowledge","propose_wiki_or_plan_edit","show_plan_view","update_plan_state","capture_screen_snapshot"];
 var voiceCompanionState = { active: false, state: "idle", micOpenedOnLoad: false, lastSubmitAt: 0 };
 
 function toggleVoiceCompanionSession(opts) {
@@ -5562,8 +5799,12 @@ async function executeWikiBridgeAction(actionName, params) {
       if (pk) {
         const planUrl = packetHostedPlanUrl(pk);
         if (planUrl) {
-          setTimeout(() => { window.location.assign(planUrl); }, 60);
-          return { ok: true, action: canon, roomKey: pk.key, packet: true, url: planUrl, title: packetTitle(pk) };
+          const pHash = planUrlToHash(planUrl);
+          if (pHash) {
+            location.hash = pHash;
+            show(pHash.slice(1));
+          }
+          return { ok: true, action: canon, roomKey: pk.key, packet: true, url: planUrl, hash: pHash, title: packetTitle(pk) };
         }
         location.hash = "#" + pk.key;
         show(pk.key);
@@ -5590,8 +5831,12 @@ async function executeWikiBridgeAction(actionName, params) {
     const hostedPlan = KITCHEN_HOSTED_LINKS[baseId];
     if (hostedPlan && hostedPlan.indexOf("./plans/") === 0) {
       const targetPlanUrl = withPlanParams(hostedPlan);
-      setTimeout(() => { window.location.assign(targetPlanUrl); }, 60);
-      return { ok: true, action: canon, docId: baseId, url: targetPlanUrl };
+      const pHash = planUrlToHash(hostedPlan);
+      if (pHash) {
+        location.hash = pHash;
+        show(pHash.slice(1));
+      }
+      return { ok: true, action: canon, docId: baseId, url: targetPlanUrl, hash: pHash };
     }
     location.hash = "#doc:" + resolvedKey;
     show("doc:" + resolvedKey);
@@ -6164,12 +6409,12 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
           var tokens = q.split(/\s+/).filter(Boolean);
           if (!tokens.every(function(tok){ return hay.indexOf(tok) !== -1; })) return;
         }
+        var taskText = currentUiLang() === "es" ? (it.es || it.en) : it.en;
         matches.push({
           room: rm.key,
-          roomTitle: rm.title,
+          roomTitle: (currentUiLang() === "es" && rm.esTitle) ? rm.esTitle : rm.title,
           done: Boolean(it.done),
-          task: it.en,
-          taskEs: it.es || it.en,
+          task: taskText,
           todoistTaskIds: it.todoistTaskIds || [],
           checklistPath: it.checklistPath || (rm.key + "/CHECKLIST.md")
         });
@@ -6186,6 +6431,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   function formatTodoistMemoryForPrompt() {
     var rooms = (U4_TODOIST_MEMORY && Array.isArray(U4_TODOIST_MEMORY.rooms)) ? U4_TODOIST_MEMORY.rooms : [];
     var board = (U4_TODOIST_MEMORY && U4_TODOIST_MEMORY.todoistBoard) || {};
+    var useEs = currentUiLang() === "es";
     var out = [
       "TODOIST TASKS IN MEMORY (ALL ROOMS):",
       "Board: " + (board.name || "Full 1231 11th Avenue Remodel") + " | Synchronicity rule: any task update pairs 1:1 with its wiki doc | Onsite cards require nested @verification-photo subtasks."
@@ -6200,7 +6446,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       out.push(
         rm.key + " (" + doneCnt + " done, " + openCnt + " open):\n" +
         items.map(function(it){
-          return "  " + (it.done ? "[DONE] " : "[OPEN] ") + it.en;
+          return "  " + (it.done ? "[DONE] " : "[OPEN] ") + (useEs ? (it.es || it.en) : it.en);
         }).join("\n")
       );
     });
@@ -6209,6 +6455,23 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
 
   function parseActiveHashView() {
     var rawHash = String((typeof location !== "undefined" && location.hash) || "").replace(/^#/, "").trim();
+    if (rawHash.indexOf("plan:") === 0 && typeof parsePlanHash === "function") {
+      var ps = parsePlanHash(rawHash);
+      if (ps) {
+        var mod = INTERACTIVE_PLAN_MODULES[ps.planId] || null;
+        return {
+          kind: "plan",
+          planId: ps.planId,
+          docId: null,
+          page: 0,
+          room: (mod && mod.room) || "home",
+          step: ps.step || "",
+          wall: ps.wall || "",
+          zoom: ps.zoom || "",
+          rawHash: rawHash
+        };
+      }
+    }
     if (rawHash.indexOf("doc:") === 0) {
       var spec = rawHash.slice(4);
       var m = /^(.*?)(?::p(\d+)|[?#]page=(\d+))$/i.exec(spec);
@@ -6284,24 +6547,29 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
 
   function getRoomSpecSummary(roomKey) {
     var out = { room: roomKey, specText: "", checklist: [], documents: [] };
+    var useEs = currentUiLang() === "es";
     try {
       if (typeof PAGES !== "undefined" && Array.isArray(PAGES)) {
         var p = PAGES.find(function(x){ return x.key === roomKey; });
         if (p) {
-          var rawMd = (currentUiLang() === "es" && p.mdEs) ? p.mdEs : (p.md || "");
-          out.label = p.label || roomKey;
+          var rawMd = (useEs && p.mdEs) ? p.mdEs : (p.md || "");
+          out.label = useEs ? (p.labelEs || p.labelEn || p.label || roomKey) : (p.labelEn || p.label || roomKey);
           out.specText = String(rawMd || "").slice(0, 5200);
         }
       }
       if (typeof CHECKLISTS === "object" && CHECKLISTS && CHECKLISTS[roomKey] && Array.isArray(CHECKLISTS[roomKey].items)) {
-        var useEs = currentUiLang() === "es";
         out.checklist = CHECKLISTS[roomKey].items.map(function(it) {
           return (it[0] ? "[DONE] " : "[OPEN] ") + (useEs && it[2] ? it[2] : it[1]);
         });
       }
       if (typeof DOCS === "object" && DOCS && Array.isArray(DOCS[roomKey])) {
-        out.documents = DOCS[roomKey].filter(function(d){ return !d.history; }).map(function(d) {
-          return { id: d.id, title: d.title, date: d.date || null, awaitingReview: Boolean(d.review) };
+        var visDocs = DOCS[roomKey].filter(function(d){
+          if (d.history) return false;
+          return (typeof isDocVisibleInLang === "function") ? isDocVisibleInLang(d, DOCS[roomKey], currentUiLang()) : true;
+        });
+        out.documents = visDocs.map(function(d) {
+          var dLbl = (typeof docLabel === "function") ? docLabel(d).t : d.title;
+          return { id: d.id, title: dLbl, date: d.date || null, awaitingReview: Boolean(d.review) };
         });
       }
     } catch (e) {}
@@ -6310,15 +6578,29 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
 
   async function buildRichWalkthroughContext(focusPageOpt, includeFullMemory) {
     var view = parseActiveHashView();
+    var lang = currentUiLang();
     var info = getRoomSpecSummary(view.room);
-    var headings = Array.prototype.slice.call(document.querySelectorAll("#doc h1, #doc h2, #doc h3"))
-      .slice(0, 16)
-      .map(function(h){ return (h.textContent || "").trim(); });
+    var planCtx = window.__u4ActivePlanContext || null;
+    var headings = view.kind === "plan"
+      ? []
+      : Array.prototype.slice.call(document.querySelectorAll("#doc h1, #doc h2, #doc h3"))
+          .slice(0, 16)
+          .map(function(h){ return (h.textContent || "").trim(); });
+    var screenDesc = view.kind === "doc"
+      ? ("PDF Document " + view.docId + " (page " + (focusPageOpt || view.page || 1) + ")")
+      : (view.kind === "plan"
+          ? ("Interactive Plan " + view.planId +
+             ((planCtx && planCtx.step) || view.step ? (" step " + ((planCtx && planCtx.step) || view.step)) : "") +
+             ((planCtx && planCtx.wall) || view.wall ? (" wall " + ((planCtx && planCtx.wall) || view.wall)) : ""))
+          : ("Page '" + view.room + "'"));
     var lines = [
-      "Current screen: " + (view.kind === "doc" ? ("PDF Document " + view.docId + " (page " + (focusPageOpt || view.page || 1) + ")") : ("Page '" + view.room + "'")) +
-      " | Room context: " + view.room + " | UI language: " + currentUiLang(),
-      "Headings on screen: " + headings.join(" | ")
-    ];
+      "Current screen: " + screenDesc +
+      " | Room context: " + view.room + " | UI language: " + lang,
+      headings.length ? ("Headings on screen: " + headings.join(" | ")) : ((planCtx && planCtx.summary) ? ("Interactive plan state: " + planCtx.summary) : "")
+    ].filter(Boolean);
+    if (view.kind === "plan" && planCtx && planCtx.state) {
+      lines.push("Interactive plan live parameters (" + view.planId + "): " + JSON.stringify(planCtx.state).slice(0, 1200));
+    }
     if (info.checklist.length) {
       lines.push("Room checklist (" + view.room + "):\n" + info.checklist.join("\n"));
     }
@@ -6344,18 +6626,20 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     if (info.specText) {
       lines.push("Governing room spec (" + view.room + "):\n" + info.specText.slice(0, view.kind === "doc" ? 2600 : 4400));
     }
-    var planHint = interactivePlanHintForRoom(view.room, currentUiLang());
+    var planHint = interactivePlanHintForRoom(view.room, lang);
     if (planHint) {
-      lines.push("Interactive parametric plan for this room: " + planHint.title + " (" + planHint.url + ", status=" + planHint.status + ").");
+      lines.push("Interactive parametric plan for this room: " + planHint.title + " (#plan:" + planHint.planId + ", status=" + planHint.status + ").");
     }
     if (includeFullMemory) {
       lines.push(
-        "Unit 4 Nov 20 Wiki, Interactive Plans & Backend Architecture:\n" +
+        "Unit 4 Wiki, Interactive Plans & Backend Architecture:\n" +
         "- Pages (16 allowed rooms): " + ALLOWED_ROOMS.join(", ") + ".\n" +
-        "- Plain-language crew guides: Oven / Range Run has 4 standalone 1-page Zephyr hood test-hang visual sheets + live Interactive Range & Hood Wall Plan (./plans/kitchen-west-ks4/index.html).\n" +
-        "- All 6 interactive parametric plan URLs: ./plans/kitchen-west-ks4/, ./plans/kitchen-floor-plan/, ./plans/kitchen-electrical/, ./plans/attic-hatch/, ./plans/hvac-layout/, ./plans/murphy-door/.\n" +
-        "- Wiki build workflow: content/pages/<room>/ + content/data/ + src/template.html -> python3 tools/build.py -> index.html (never hand-edit index.html).\n" +
-        "- Live backends: Mac mini :8791 (https://mac-mini.tailcf4007.ts.net) serves /api/unit4/voice-token (15 tools), /api/unit4/knowledge, /api/unit4/wiki-intake, /api/unit4/healthz; Mac mini :8444 (tailnet-only, never Funnel) persists live interactive plan edits with EOD Accept/Reject review."
+        "- All 6 interactive parametric plans (always keep open inside #plan:<planId> shell so Live AI stays connected): " +
+        Object.keys(INTERACTIVE_PLAN_MODULES).map(function(k){
+          var m = INTERACTIVE_PLAN_MODULES[k];
+          return m.id + " (" + (lang === "es" ? m.titleEs : m.titleEn) + ")";
+        }).join("; ") + ".\n" +
+        "- Live backends: Mac mini :8791 serves /api/unit4/voice-token (18 tools), /api/unit4/knowledge, /api/unit4/wiki-intake, /api/unit4/healthz; Mac mini :8444 (tailnet-only) persists live interactive plan edits with EOD Accept/Reject review."
       );
       lines.push(formatTodoistMemoryForPrompt());
     }
@@ -7068,16 +7352,28 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     generation: 0,
     ws: null,
     micStream: null,
+    audioCtx: null,
     inCtx: null,
     outCtx: null,
+    micSource: null,
     processor: null,
+    micGain: null,
+    workletBlobUrl: null,
     playCursor: 0,
     activeSources: [],
     lastContextSignature: null,
     pendingPrompt: "",
     pendingPhoto: null,
     stagedPhoto: null,
-    lastSentPhoto: null
+    lastSentPhoto: null,
+    pcmPending: [],
+    pcmPendingLen: 0,
+    rmsLevel: 0,
+    maxRmsSeen: 0,
+    pcmFramesSent: 0,
+    watchdogTimer: null,
+    deadMicShown: false,
+    hasConversationTurns: false
   };
 
   function buildPhotoAttachmentPayload(src) {
@@ -7832,29 +8128,24 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       var rawRoom = String((args && (args.room || args.roomKey || args.key)) || "").trim().toLowerCase();
       var planMod = resolveInteractivePlanAlias(rawRoom);
       if (planMod) {
-        var esPlan = currentUiLang() === "es";
-        var planDocId = esPlan ? planMod.docIdEs : planMod.docIdEn;
-        var planUrl = withPlanParams(planMod.url + "?lang=" + (esPlan ? "es" : "en"));
-        appendNavEventChip((esPlan ? "Abri\u00f3 plano interactivo: " : "Opened interactive plan: ") + (esPlan ? planMod.titleEs : planMod.titleEn));
-        setTimeout(function () { window.location.assign(planUrl); }, 80);
-        return {
-          ok: true,
-          action: "navigate_room",
-          room: planMod.room,
-          interactivePlan: planMod.id,
-          title: esPlan ? planMod.titleEs : planMod.titleEn,
-          url: planUrl,
-          docId: planDocId,
-          status: planMod.status
-        };
+        return bridgeActions.show_plan_view({
+          plan: planMod.id,
+          wall: args && args.wall,
+          step: args && args.step,
+          zoom: args && args.zoom
+        });
       }
       var pkHit = (typeof packetByKey === "function") ? packetByKey(rawRoom) : null;
       if (pkHit) {
         var pkPlanUrl = packetHostedPlanUrl(pkHit);
         if (pkPlanUrl) {
+          var pkHash = planUrlToHash(pkPlanUrl);
+          if (pkHash) {
+            location.hash = pkHash;
+            if (typeof show === "function") show(pkHash.slice(1));
+          }
           appendNavEventChip((currentUiLang() === "es" ? "Abri\u00f3 " : "Opened ") + packetTitle(pkHit));
-          setTimeout(function () { window.location.assign(pkPlanUrl); }, 80);
-          return { ok: true, action: "navigate_room", room: pkHit.key, packet: true, title: packetTitle(pkHit), url: pkPlanUrl, documentId: packetDocId(pkHit) };
+          return { ok: true, action: "navigate_room", room: pkHit.key, packet: true, title: packetTitle(pkHit), hash: pkHash, documentId: packetDocId(pkHit) };
         }
         location.hash = "#" + pkHit.key;
         if (typeof show === "function") show(pkHit.key);
@@ -7927,16 +8218,25 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         return bridgeActions.navigate_room({ room: hostedTarget.slice(1) });
       }
       if (hostedTarget && hostedTarget.indexOf("./plans/") === 0) {
-        var hostedUrl = withPlanParams(hostedTarget);
-        var hostedPlanTitle = (typeof DOC_BY_ID === "object" && DOC_BY_ID[docId] && DOC_BY_ID[docId].d && DOC_BY_ID[docId].d.title) || docId;
+        var docPlanId = planIdFromRaw(hostedTarget);
+        var docPlanHash = planUrlToHash(hostedTarget);
+        if (docPlanHash) {
+          location.hash = docPlanHash;
+          if (typeof show === "function") show(docPlanHash.slice(1));
+        }
+        var docMod = docPlanId ? INTERACTIVE_PLAN_MODULES[docPlanId] : null;
+        var hostedPlanTitle = docMod
+          ? (currentUiLang() === "es" ? docMod.titleEs : docMod.titleEn)
+          : docId;
         appendNavEventChip((currentUiLang() === "es" ? "Abri\u00f3 plano interactivo: " : "Opened interactive plan: ") + hostedPlanTitle);
-        setTimeout(function () { window.location.assign(hostedUrl); }, 80);
+        refreshDialogSuggestions();
         return {
           ok: true,
           action: "open_document",
           docId: docId,
+          planId: docPlanId || null,
           title: hostedPlanTitle,
-          hostedUrl: hostedUrl
+          hash: docPlanHash
         };
       }
       var hashSpec = (!hostedTarget && targetPage > 1) ? (docId + ":p" + targetPage) : docId;
@@ -8191,12 +8491,12 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         mirrorMatches = mirrorMatches.slice(0, 5);
       }
 
-      // 3. Query live Mac mini :8791 GET /api/unit4/knowledge (non-blocking 3.5s timeout)
+      // 3. Query live Mac mini :8791 GET /api/unit4/knowledge (non-blocking 1200ms timeout)
       var backendReachable = false;
       var backendMatches = [];
       try {
         var ctrl = (typeof AbortController !== "undefined") ? new AbortController() : null;
-        var timer = ctrl ? setTimeout(function(){ ctrl.abort(); }, 3500) : null;
+        var timer = ctrl ? setTimeout(function(){ ctrl.abort(); }, 1200) : null;
         var qs = "?q=" + encodeURIComponent(query) + (room ? ("&room=" + encodeURIComponent(room)) : "") + "&scope=" + encodeURIComponent(scope);
         var knowUrl = (window.U4_KNOWLEDGE_HTTP_ENDPOINT || (BACKEND_ORIGIN + "/api/unit4/knowledge")) + qs;
         var resp = await fetch(knowUrl, Object.assign({ method: "GET", mode: "cors" }, ctrl ? { signal: ctrl.signal } : {}));
@@ -8214,6 +8514,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       } catch (e) {}
 
       appendNavEventChip((currentUiLang() === "es" ? "Consult\u00f3 conocimiento: " : "Queried knowledge: ") + query.slice(0, 42));
+      var esNow = currentUiLang() === "es";
       return {
         ok: true,
         action: "query_wiki_and_backend_knowledge",
@@ -8226,11 +8527,11 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         wikiMatches: wikiMatches,
         interactivePlans: Object.keys(INTERACTIVE_PLAN_MODULES).map(function(k){
           var m = INTERACTIVE_PLAN_MODULES[k];
-          return { id: m.id, room: m.room, url: m.url, titleEn: m.titleEn, titleEs: m.titleEs, status: m.status };
+          return { id: m.id, room: m.room, hash: "#plan:" + m.id, title: esNow ? m.titleEs : m.titleEn, status: m.status };
         }),
         architectureSummary: {
           wikiBuild: "content/pages/<room>/ + content/data/ + src/template.html -> python3 tools/build.py -> index.html",
-          voiceBackend: BACKEND_ORIGIN + " (:8791: /voice-token 15 tools, /knowledge, /wiki-intake, /healthz)",
+          voiceBackend: BACKEND_ORIGIN + " (:8791: /voice-token 18 tools, /knowledge, /wiki-intake, /healthz)",
           planEditsBackend: "https://mac-mini.tailcf4007.ts.net:8444 (tailnet-only live plan persistence + EOD Accept/Reject)"
         }
       };
@@ -8389,8 +8690,520 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         interactivePlanUrl: planHint ? planHint.url : null,
         interactivePlanHint: planHint
       }, submitResult);
+    },
+
+    show_plan_view: async function(args) {
+      var a = args || {};
+      var ctxPlan = (window.__u4ActivePlanContext && window.__u4ActivePlanContext.planId) || "";
+      var rawPlan = String(a.plan || a.planId || a.room || ctxPlan || "").trim().toLowerCase();
+      var mod = resolveInteractivePlanAlias(rawPlan);
+      if (!mod) {
+        return {
+          ok: false,
+          action: "show_plan_view",
+          code: "UNKNOWN_INTERACTIVE_PLAN",
+          validPlans: Object.keys(INTERACTIVE_PLAN_MODULES)
+        };
+      }
+      var pHash = planUrlToHash(mod.id, { step: a.step, wall: a.wall, zoom: a.zoom });
+      var cmdArgs = { plan: mod.id };
+      if (a.wall !== undefined && a.wall !== null && String(a.wall).trim() !== "") cmdArgs.wall = String(a.wall).trim();
+      if (a.step !== undefined && a.step !== null && String(a.step).trim() !== "") cmdArgs.step = parseInt(a.step, 10) || String(a.step);
+      if (a.zoom !== undefined && a.zoom !== null && String(a.zoom).trim() !== "") cmdArgs.zoom = String(a.zoom).trim();
+
+      var fr = document.getElementById("u4PlanFrame");
+      var wasAlreadyLoaded = Boolean(fr && !document.getElementById("u4PlanShell")?.hidden && fr.dataset.planId === mod.id);
+      if (pHash) {
+        if (location.hash !== pHash) location.hash = pHash;
+        if (typeof show === "function") show(pHash.slice(1));
+      }
+      var cmdRes = null;
+      if (wasAlreadyLoaded || cmdArgs.wall || cmdArgs.step || cmdArgs.zoom) {
+        try {
+          await waitForPlanFrameReady(3200);
+          cmdRes = await postPlanCmd("show_plan_view", cmdArgs);
+        } catch (e) {}
+      } else {
+        await waitForPlanFrameReady(2400);
+      }
+      refreshDialogSuggestions();
+      var esNow = currentUiLang() === "es";
+      var pTitle = esNow ? mod.titleEs : mod.titleEn;
+      var partsLbl = [pTitle];
+      if (cmdArgs.wall) partsLbl.push(cmdArgs.wall);
+      if (cmdArgs.step) partsLbl.push((esNow ? "paso " : "step ") + cmdArgs.step);
+      appendNavEventChip((esNow ? "Abri\u00f3 plano: " : "Showing plan: ") + partsLbl.join(" \u00b7 "));
+      return {
+        ok: true,
+        action: "show_plan_view",
+        plan: mod.id,
+        hash: pHash,
+        title: pTitle,
+        wall: cmdArgs.wall || null,
+        step: cmdArgs.step || null,
+        zoom: cmdArgs.zoom || null,
+        cmdResult: cmdRes,
+        planContext: window.__u4ActivePlanContext || null
+      };
+    },
+
+    update_plan_state: async function(args) {
+      var a = args || {};
+      var act = String(a.action || "").trim();
+      if (!act) return { ok: false, action: "update_plan_state", code: "MISSING_ACTION" };
+      var ctxPlan = (window.__u4ActivePlanContext && window.__u4ActivePlanContext.planId) || "";
+      var mod = a.plan ? resolveInteractivePlanAlias(a.plan) : (ctxPlan ? INTERACTIVE_PLAN_MODULES[ctxPlan] : null);
+      if (!mod) {
+        return {
+          ok: false,
+          action: "update_plan_state",
+          code: "NO_ACTIVE_PLAN",
+          hint: "Open one of the 6 interactive plans with show_plan_view first.",
+          validPlans: Object.keys(INTERACTIVE_PLAN_MODULES)
+        };
+      }
+      var sh = document.getElementById("u4PlanShell");
+      if (!sh || sh.hidden || !document.getElementById("u4PlanFrame") || document.getElementById("u4PlanFrame").dataset.planId !== mod.id) {
+        var ph = planUrlToHash(mod.id);
+        location.hash = ph;
+        if (typeof show === "function") show(ph.slice(1));
+      }
+      await waitForPlanFrameReady(3500);
+      var cmdRes = await postPlanCmd("update_plan_state", {
+        action: act,
+        target: a.target !== undefined ? String(a.target) : undefined,
+        value: a.value !== undefined ? String(a.value) : undefined
+      });
+      var esNow = currentUiLang() === "es";
+      appendNavEventChip((esNow ? "Actualiz\u00f3 plano (" : "Updated plan (") + act + ")");
+      return {
+        ok: Boolean(cmdRes && cmdRes.ok !== false),
+        action: "update_plan_state",
+        plan: mod.id,
+        cmdResult: cmdRes,
+        planContext: window.__u4ActivePlanContext || null
+      };
+    },
+
+    capture_screen_snapshot: async function(args) {
+      var a = args || {};
+      var target = String(a.target || "").trim().toLowerCase();
+      var label = String(a.label || "").trim();
+      var snap = await captureCurrentSurfaceSnapshot(target, label);
+      if (!snap || !snap.jpegBase64) {
+        return { ok: false, action: "capture_screen_snapshot", code: "CAPTURE_FAILED", error: (snap && snap.error) || "Could not capture current view" };
+      }
+      var sentVideo = false;
+      if (liveState.active && liveState.ws && typeof WebSocket !== "undefined" && liveState.ws.readyState === WebSocket.OPEN) {
+        try {
+          liveState.ws.send(JSON.stringify({
+            realtimeInput: {
+              video: { mimeType: "image/jpeg", data: snap.jpegBase64 }
+            }
+          }));
+          sentVideo = true;
+        } catch (e) {}
+      }
+      appendSnapshotCard(snap);
+      appendNavEventChip((currentUiLang() === "es" ? "Captura: " : "Snapshot: ") + snap.label);
+      return {
+        ok: true,
+        action: "capture_screen_snapshot",
+        surface: snap.surface,
+        label: snap.label,
+        width: snap.width,
+        height: snap.height,
+        sentVideoFrame: sentVideo,
+        contextSummary: snap.contextSummary || ""
+      };
     }
   };
+
+  var planCmdSeq = 0;
+  var pendingPlanCmds = {};
+  var planReadyWaiters = [];
+
+  function resolvePlanReadyWaiters() {
+    while (planReadyWaiters.length) {
+      var fn = planReadyWaiters.shift();
+      try { fn(); } catch (e) {}
+    }
+  }
+
+  function waitForPlanFrameReady(timeoutMs) {
+    return new Promise(function(resolve) {
+      var sh = document.getElementById("u4PlanShell");
+      var fr = document.getElementById("u4PlanFrame");
+      if (!sh || sh.hidden || !fr || !fr.dataset.planId) return resolve(false);
+      var ctx = window.__u4ActivePlanContext;
+      if (ctx && ctx.planId === fr.dataset.planId && ctx.receivedFromFrame) return resolve(true);
+      var done = false;
+      var finish = function(ok) {
+        if (done) return;
+        done = true;
+        clearTimeout(tid);
+        resolve(ok);
+      };
+      var tid = setTimeout(function(){ finish(true); }, timeoutMs || 2800);
+      planReadyWaiters.push(function(){ finish(true); });
+    });
+  }
+
+  function postPlanCmd(cmd, args) {
+    return new Promise(function(resolve) {
+      var fr = document.getElementById("u4PlanFrame");
+      var sh = document.getElementById("u4PlanShell");
+      if (!fr || !sh || sh.hidden || !fr.contentWindow) {
+        return resolve({ ok: false, code: "PLAN_FRAME_NOT_OPEN" });
+      }
+      var id = "cmd-" + Date.now() + "-" + (++planCmdSeq);
+      var tid = setTimeout(function() {
+        if (pendingPlanCmds[id]) {
+          delete pendingPlanCmds[id];
+          resolve({ ok: false, cmd: cmd, code: "PLAN_CMD_TIMEOUT" });
+        }
+      }, 4500);
+      pendingPlanCmds[id] = function(msg) {
+        clearTimeout(tid);
+        delete pendingPlanCmds[id];
+        resolve(msg || { ok: true, cmd: cmd });
+      };
+      var flat = {};
+      if (args && typeof args === "object") {
+        Object.keys(args).forEach(function(k) {
+          if (k !== "type" && k !== "id" && k !== "cmd" && args[k] !== undefined) flat[k] = args[k];
+        });
+      }
+      var targetOrigin = (window.location.protocol === "file:") ? "*" : window.location.origin;
+      fr.contentWindow.postMessage(Object.assign(flat, {
+        type: "u4:plan-cmd",
+        id: id,
+        cmd: cmd,
+        args: args || {}
+      }), targetOrigin);
+    });
+  }
+  window.__u4PostPlanCmd = postPlanCmd;
+
+  if (typeof window !== "undefined" && !window.__u4PlanBridgeBound) {
+    window.__u4PlanBridgeBound = true;
+    var planFr = document.getElementById("u4PlanFrame");
+    if (planFr) {
+      planFr.addEventListener("load", function() {
+        syncPlanFramePrefs();
+        setTimeout(resolvePlanReadyWaiters, 120);
+      });
+    }
+    window.addEventListener("message", function(ev) {
+      if (!ev || !ev.data || typeof ev.data !== "object") return;
+      if (ev.origin && ev.origin !== "null" && ev.origin !== window.location.origin) return;
+      var fr = document.getElementById("u4PlanFrame");
+      if (fr && fr.contentWindow && ev.source && ev.source !== fr.contentWindow) return;
+      var d = ev.data;
+      var typ = String(d.type || "");
+      if (typ === "u4:nav-wiki") {
+        var rKey = resolveRoomOrAlias(d.room || String(d.href || "").replace(/^.*#/, "")) || "home";
+        if (typeof closePlanShell === "function") closePlanShell();
+        location.hash = "#" + rKey;
+        if (typeof show === "function") show(rKey);
+        pushLiveContextIfChanged();
+      } else if (typ === "u4:nav-plan") {
+        var ph = planUrlToHash(d.planId || d.href, { step: d.step, wall: d.wall, zoom: d.zoom });
+        if (ph) {
+          location.hash = ph;
+          if (typeof show === "function") show(ph.slice(1));
+          pushLiveContextIfChanged();
+        }
+      } else if (typ === "u4:sync-pref") {
+        if ((d.lang === "en" || d.lang === "es") && d.lang !== currentUiLang() && typeof setLang === "function") {
+          setLang(d.lang);
+        }
+        if ((d.theme === "light" || d.theme === "dark") && d.theme !== currentWikiTheme() && typeof setTheme === "function") {
+          setTheme(d.theme);
+        }
+      } else if (typ === "u4:plan-context") {
+        window.__u4ActivePlanContext = Object.assign({}, window.__u4ActivePlanContext || {}, d, { receivedFromFrame: true, updatedAt: Date.now() });
+        resolvePlanReadyWaiters();
+        refreshDialogSuggestions();
+        pushLiveContextIfChanged();
+      } else if (typ === "u4:ai-open") {
+        var mode = d.mode || "ask";
+        var spotBits = [d.planId, d.step ? ("step " + d.step) : "", d.wall ? ("wall " + d.wall) : "", d.locationTag].filter(Boolean).join(" \u00b7 ");
+        var bodyTxt = String(d.prompt || d.text || "").trim();
+        var combined = spotBits ? ("[" + spotBits + "] " + bodyTxt) : bodyTxt;
+        if (mode === "note") {
+          setDialogOpen(true);
+          var inpN = document.getElementById("u4VdAskInput");
+          if (inpN && combined) inpN.value = combined;
+          if (liveState.active && combined) sendPromptToLiveAgent("Log/prepare field note: " + combined);
+        } else {
+          if (window.U4GeminiLiveAssistant && typeof window.U4GeminiLiveAssistant.askSpot === "function") {
+            window.U4GeminiLiveAssistant.askSpot(combined || ("Inspect " + (spotBits || "this interactive plan")), null);
+          } else {
+            setDialogOpen(true);
+          }
+        }
+      } else if (typ === "u4:plan-cmd-result" && d.id && pendingPlanCmds[d.id]) {
+        pendingPlanCmds[d.id](d);
+      }
+    });
+  }
+
+  function drawPinOverlaysOnCanvas(ctx, containerEl, outW, outH) {
+    if (!ctx || !containerEl) return;
+    var cr = containerEl.getBoundingClientRect();
+    if (!cr || !cr.width || !cr.height) return;
+    var markers = containerEl.querySelectorAll(".u4-pin-marker");
+    markers.forEach(function(mk, idx) {
+      var xPct = parseFloat(mk.style.left) || 50;
+      var yPct = parseFloat(mk.style.top) || 50;
+      var px = (xPct / 100) * outW;
+      var py = (yPct / 100) * outH;
+      var isSent = mk.classList.contains("is-sent");
+      var isSel = mk.classList.contains("is-selected");
+      var strokeCol = isSent ? "#2f6b3f" : (isSel ? "#1f5f7a" : "#b42318");
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(px, py, Math.max(14, outW * 0.018), 0, Math.PI * 2);
+      ctx.fillStyle = isSent ? "rgba(47,107,63,0.18)" : (isSel ? "rgba(31,95,122,0.18)" : "rgba(180,35,24,0.18)");
+      ctx.fill();
+      ctx.lineWidth = Math.max(2.5, outW * 0.003);
+      ctx.strokeStyle = strokeCol;
+      ctx.stroke();
+      ctx.fillStyle = strokeCol;
+      ctx.beginPath();
+      ctx.arc(px, py, 4, 0, Math.PI * 2);
+      ctx.fill();
+      var tag = "#" + (idx + 1);
+      ctx.font = "bold " + Math.max(12, Math.round(outW * 0.014)) + "px monospace";
+      var tw = ctx.measureText(tag).width + 10;
+      ctx.fillStyle = strokeCol;
+      ctx.fillRect(px + 10, py - 20, tw, 18);
+      ctx.fillStyle = "#ffffff";
+      ctx.fillText(tag, px + 15, py - 7);
+      ctx.restore();
+    });
+  }
+
+  function canvasToDualSnapshots(canvas, surface, label, summary) {
+    var pngDataUrl = canvas.toDataURL("image/png");
+    var maxW = 1280;
+    var jCanvas = canvas;
+    if (canvas.width > maxW) {
+      var sc = maxW / canvas.width;
+      jCanvas = document.createElement("canvas");
+      jCanvas.width = Math.round(canvas.width * sc);
+      jCanvas.height = Math.round(canvas.height * sc);
+      jCanvas.getContext("2d").drawImage(canvas, 0, 0, jCanvas.width, jCanvas.height);
+    }
+    var jpegDataUrl = jCanvas.toDataURL("image/jpeg", 0.86);
+    var jpegBase64 = jpegDataUrl.split(",")[1] || "";
+    return {
+      ok: true,
+      surface: surface,
+      label: label,
+      width: canvas.width,
+      height: canvas.height,
+      pngDataUrl: pngDataUrl,
+      jpegDataUrl: jpegDataUrl,
+      jpegBase64: jpegBase64,
+      contextSummary: summary || ""
+    };
+  }
+
+  function dataUrlToDualSnapshots(dataUrl, surface, label, summary) {
+    return new Promise(function(resolve) {
+      var img = new Image();
+      img.onload = function() {
+        var dpr = Math.min(window.devicePixelRatio || 1, 2);
+        var w = Math.max(320, Math.min(1800, Math.round((img.naturalWidth || 960) * (img.naturalWidth < 800 ? dpr : 1))));
+        var h = Math.max(200, Math.round(w * ((img.naturalHeight || 600) / (img.naturalWidth || 960))));
+        var c = document.createElement("canvas");
+        c.width = w;
+        c.height = h;
+        var ctx = c.getContext("2d");
+        ctx.drawImage(img, 0, 0, w, h);
+        try { resolve(canvasToDualSnapshots(c, surface, label, summary)); }
+        catch (e) { resolve({ ok: false, error: e.message }); }
+      };
+      img.onerror = function() { resolve({ ok: false, error: "snapshot_image_decode_failed" }); };
+      img.src = dataUrl;
+    });
+  }
+
+  function svgElToCanvas(svgEl, hostContainer, label) {
+    return new Promise(function(resolve) {
+      try {
+        var rect = svgEl.getBoundingClientRect();
+        var w = Math.max(480, Math.min(1800, Math.round((rect.width || 800) * 2)));
+        var h = Math.max(280, Math.round(w * ((rect.height || 500) / (rect.width || 800))));
+        var clone = svgEl.cloneNode(true);
+        if (!clone.getAttribute("xmlns")) clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+        var xml = new XMLSerializer().serializeToString(clone);
+        var blob = new Blob([xml], { type: "image/svg+xml;charset=utf-8" });
+        var url = URL.createObjectURL(blob);
+        var img = new Image();
+        img.onload = function() {
+          URL.revokeObjectURL(url);
+          var c = document.createElement("canvas");
+          c.width = w;
+          c.height = h;
+          var ctx = c.getContext("2d");
+          ctx.fillStyle = currentWikiTheme() === "dark" ? "#1a2023" : "#ffffff";
+          ctx.fillRect(0, 0, w, h);
+          ctx.drawImage(img, 0, 0, w, h);
+          if (hostContainer) drawPinOverlaysOnCanvas(ctx, hostContainer, w, h);
+          resolve(canvasToDualSnapshots(c, "svg", label, "Inline SVG capture (" + w + "x" + h + ")"));
+        };
+        img.onerror = function() { URL.revokeObjectURL(url); resolve(null); };
+        img.src = url;
+      } catch (e) { resolve(null); }
+    });
+  }
+
+  async function captureCurrentSurfaceSnapshot(targetHint, labelOpt) {
+    var view = parseActiveHashView();
+    var es = currentUiLang() === "es";
+    var sh = document.getElementById("u4PlanShell");
+    if ((targetHint === "plan" || !targetHint || targetHint === "screen") && sh && !sh.hidden) {
+      await waitForPlanFrameReady(2400);
+      var cmdOut = await postPlanCmd("capture_snapshot", { target: targetHint || "plan", label: labelOpt || "" });
+      var pay = (cmdOut && cmdOut.result) || cmdOut;
+      if (pay && (pay.dataUrl || pay.base64)) {
+        var du = pay.dataUrl || ("data:" + (pay.mimeType || "image/jpeg") + ";base64," + pay.base64);
+        var pLabel = labelOpt || pay.label || ((window.__u4ActivePlanContext && window.__u4ActivePlanContext.title) || view.planId || "Interactive Plan");
+        var dual = await dataUrlToDualSnapshots(du, "plan", pLabel, (window.__u4ActivePlanContext && window.__u4ActivePlanContext.summary) || pLabel);
+        if (dual && dual.ok) return dual;
+      }
+    }
+
+    var lb = document.getElementById("u4GalLightbox");
+    if (lb && !lb.hidden) {
+      var lbImg = document.querySelector("#u4LbZoomStage img");
+      var lbStage = document.getElementById("u4LbZoomStage");
+      if (lbImg && lbImg.complete && lbImg.naturalWidth > 0) {
+        try {
+          var lw = Math.min(1600, lbImg.naturalWidth);
+          var lh = Math.round(lw * (lbImg.naturalHeight / lbImg.naturalWidth));
+          var lc = document.createElement("canvas");
+          lc.width = lw; lc.height = lh;
+          var lctx = lc.getContext("2d");
+          lctx.drawImage(lbImg, 0, 0, lw, lh);
+          drawPinOverlaysOnCanvas(lctx, lbStage, lw, lh);
+          return canvasToDualSnapshots(lc, "lightbox", labelOpt || document.getElementById("u4LbTitle")?.textContent || "Lightbox", "Lightbox photo");
+        } catch (e) {}
+      }
+    }
+
+    if (targetHint === "pdf" || view.kind === "doc") {
+      var boxes = Array.prototype.slice.call(document.querySelectorAll(".u4-pdf-page-box"));
+      var bestBox = boxes.find(function(b) {
+        var r = b.getBoundingClientRect();
+        return r.bottom > 80 && r.top < window.innerHeight - 60 && b.querySelector("canvas.pdfpage");
+      }) || boxes.find(function(b){ return b.querySelector("canvas.pdfpage"); });
+      if (bestBox) {
+        var pdfCanvas = bestBox.querySelector("canvas.pdfpage");
+        if (pdfCanvas && pdfCanvas.width > 0) {
+          var pw = Math.min(1600, pdfCanvas.width);
+          var ph = Math.round(pw * (pdfCanvas.height / pdfCanvas.width));
+          var oc = document.createElement("canvas");
+          oc.width = pw; oc.height = ph;
+          var octx = oc.getContext("2d");
+          octx.fillStyle = "#ffffff";
+          octx.fillRect(0, 0, pw, ph);
+          octx.drawImage(pdfCanvas, 0, 0, pw, ph);
+          drawPinOverlaysOnCanvas(octx, bestBox, pw, ph);
+          var pNo = bestBox.dataset.pageNumber || "1";
+          var pdfTitle = (window.__u4ActiveDocContext && window.__u4ActiveDocContext.title) || view.docId || "PDF";
+          return canvasToDualSnapshots(oc, "pdf", labelOpt || (pdfTitle + " · p." + pNo), pdfTitle + " page " + pNo);
+        }
+      }
+    }
+
+    var docRoot = document.getElementById("doc");
+    if (docRoot) {
+      var svgEl = docRoot.querySelector(".u4-zoom-inline-stage svg, svg");
+      if (svgEl) {
+        var svgSnap = await svgElToCanvas(svgEl, svgEl.closest(".u4-zoom-inline-stage") || svgEl.parentElement, labelOpt || (document.querySelector("#doc h1")?.textContent || view.room) + " diagram");
+        if (svgSnap && svgSnap.ok) return svgSnap;
+      }
+    }
+
+    var fc = document.createElement("canvas");
+    fc.width = 960; fc.height = 540;
+    var fctx = fc.getContext("2d");
+    var isDark = currentWikiTheme() === "dark";
+    fctx.fillStyle = isDark ? "#1a2023" : "#ffffff";
+    fctx.fillRect(0, 0, 960, 540);
+    fctx.strokeStyle = isDark ? "#7cc0dc" : "#1f5f7a";
+    fctx.lineWidth = 4;
+    fctx.strokeRect(18, 18, 924, 504);
+    fctx.fillStyle = isDark ? "#e4e9ea" : "#1d2326";
+    fctx.font = "bold 28px sans-serif";
+    var roomHdr = labelOpt || (document.querySelector("#doc h1, #doc .home-title")?.textContent || view.room || (es ? "Vista Unidad 4" : "Unit 4 View"));
+    fctx.fillText(String(roomHdr).slice(0, 52), 42, 72);
+    fctx.font = "18px sans-serif";
+    fctx.fillStyle = isDark ? "#98a4a8" : "#5d686d";
+    var heads = Array.prototype.slice.call(document.querySelectorAll("#doc h2, #doc h3")).slice(0, 8);
+    heads.forEach(function(h, idx) {
+      fctx.fillText("• " + String(h.textContent || "").trim().slice(0, 68), 46, 128 + idx * 42);
+    });
+    return canvasToDualSnapshots(fc, "room", String(roomHdr).slice(0, 48), "Screen summary (" + view.room + ")");
+  }
+
+  function appendSnapshotCard(snap) {
+    var log = document.getElementById("u4VoiceChatTranscript");
+    if (!log || !snap) return;
+    sealActiveChatTurn();
+    liveState.hasConversationTurns = true;
+    var es = currentUiLang() === "es";
+    var row = document.createElement("div");
+    row.className = "u4-chat-turn is-ai";
+    var card = document.createElement("div");
+    card.className = "u4-snap-card";
+    var img = document.createElement("img");
+    img.src = snap.pngDataUrl || snap.jpegDataUrl;
+    img.alt = snap.label || "Snapshot";
+    var cap = document.createElement("div");
+    cap.className = "u4-snap-cap";
+    cap.textContent = (es ? "Captura: " : "Snapshot: ") + (snap.label || snap.surface) + " (" + snap.width + "x" + snap.height + ")";
+    var acts = document.createElement("div");
+    acts.className = "u4-snap-acts";
+    var dl = document.createElement("a");
+    dl.className = "u4-snap-btn";
+    dl.href = snap.pngDataUrl || snap.jpegDataUrl;
+    dl.download = "unit4-" + String(snap.surface || "view") + "-snapshot.png";
+    dl.textContent = es ? "Descargar PNG" : "Download PNG";
+    var att = document.createElement("button");
+    att.type = "button";
+    att.className = "u4-snap-btn";
+    att.textContent = es ? "Adjuntar a nota" : "Attach to Note";
+    att.addEventListener("click", function() {
+      var fn = "unit4-" + String(snap.surface || "view") + "-snapshot.jpg";
+      var photoObj = {
+        name: fn,
+        type: "image/jpeg",
+        size: snap.jpegDataUrl.length,
+        data: snap.jpegDataUrl,
+        dataUrl: snap.jpegDataUrl,
+        rawBase64: snap.jpegBase64
+      };
+      stageVoicePhoto(photoObj);
+      window.__u4SelectedPhotoFile = photoObj;
+      if (typeof window.__u4SyncPhotoBadge === "function") window.__u4SyncPhotoBadge();
+      att.classList.add("is-ok");
+      att.textContent = es ? "Adjuntada ✓" : "Attached ✓";
+    });
+    acts.appendChild(dl);
+    acts.appendChild(att);
+    card.appendChild(img);
+    card.appendChild(cap);
+    card.appendChild(acts);
+    row.appendChild(card);
+    log.appendChild(row);
+    scrollChatToBottom();
+    syncFloatingAiUi();
+  }
 
   var actionAliases = {
     queryTodoistCards: "query_todoist_cards", query_todoist_cards: "query_todoist_cards",
@@ -8407,7 +9220,10 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     fillDraftNote: "fill_draft_note", fill_draft_note: "fill_draft_note",
     submitToTriageQueue: "submit_voice_memo", submit_voice_memo: "submit_voice_memo",
     queryWikiAndBackendKnowledge: "query_wiki_and_backend_knowledge", query_wiki_and_backend_knowledge: "query_wiki_and_backend_knowledge",
-    proposeWikiOrPlanEdit: "propose_wiki_or_plan_edit", propose_wiki_or_plan_edit: "propose_wiki_or_plan_edit"
+    proposeWikiOrPlanEdit: "propose_wiki_or_plan_edit", propose_wiki_or_plan_edit: "propose_wiki_or_plan_edit",
+    showPlanView: "show_plan_view", show_plan_view: "show_plan_view",
+    updatePlanState: "update_plan_state", update_plan_state: "update_plan_state",
+    captureScreenSnapshot: "capture_screen_snapshot", capture_screen_snapshot: "capture_screen_snapshot"
   };
 
   window.executeWikiBridgeAction = async function(actionName, params) {
@@ -8427,6 +9243,19 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   function getSuggestionsForCurrentView() {
     var view = parseActiveHashView();
     var es = currentUiLang() === "es";
+    if (view.kind === "plan") {
+      return es
+        ? [
+            { label: "Capturar vista", prompt: "Toma una captura de esta vista actual del plano." },
+            { label: "Muro sur", prompt: "Muéstrame la vista del muro sur." },
+            { label: "Volver al cuarto", prompt: "Llévame de regreso a la página del cuarto en la wiki." }
+          ]
+        : [
+            { label: "Snapshot view", prompt: "Capture a snapshot of this plan view." },
+            { label: "Show south wall", prompt: "Show the south wall view on this plan." },
+            { label: "Back to room", prompt: "Navigate back to the room page in the wiki." }
+          ];
+    }
     if (view.kind === "doc") {
       return es
         ? [
@@ -8476,6 +9305,35 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     }).join("");
   }
 
+  function updateRmsMeterBars(rms, isMutedNow) {
+    var val = isMutedNow ? 0 : Math.min(1, Math.max(0, (rms || 0) * 10));
+    liveState.rmsLevel = val;
+    var weights = [0.48, 0.78, 1.0, 0.78, 0.48];
+    document.querySelectorAll(".u4-rms-meter").forEach(function(meter) {
+      meter.classList.toggle("is-muted", Boolean(isMutedNow));
+      var bars = meter.querySelectorAll(".u4-rms-bar");
+      for (var i = 0; i < bars.length; i++) {
+        var w = weights[i % weights.length];
+        var h = isMutedNow ? 3 : Math.max(3, Math.round(3 + val * w * 13));
+        bars[i].style.height = h + "px";
+      }
+    });
+  }
+
+  function clearMicPipeline() {
+    if (liveState.watchdogTimer) { try { clearTimeout(liveState.watchdogTimer); } catch (e) {} liveState.watchdogTimer = null; }
+    if (liveState.processor) {
+      try { if (liveState.processor.port) liveState.processor.port.onmessage = null; } catch (e) {}
+      try { liveState.processor.disconnect(); } catch (e) {}
+      liveState.processor = null;
+    }
+    if (liveState.micSource) { try { liveState.micSource.disconnect(); } catch (e) {} liveState.micSource = null; }
+    if (liveState.micGain) { try { liveState.micGain.disconnect(); } catch (e) {} liveState.micGain = null; }
+    if (liveState.workletBlobUrl) { try { URL.revokeObjectURL(liveState.workletBlobUrl); } catch (e) {} liveState.workletBlobUrl = null; }
+    liveState.pcmPending = [];
+    liveState.pcmPendingLen = 0;
+  }
+
   function setDialogOpen(openFlag) {
     liveState.dialogOpen = Boolean(openFlag);
     var dlg = document.getElementById("u4VoiceChatDialog");
@@ -8484,13 +9342,56 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       if (liveState.dialogOpen) {
         ensureChatDialogHasWelcome();
         scrollChatToBottom();
+        if (liveState.audioCtx && liveState.audioCtx.state === "suspended") {
+          try { liveState.audioCtx.resume(); } catch (e) {}
+        }
       }
     }
     syncFloatingAiUi();
   }
 
+  function flushPcmAndSend(forceAll) {
+    if (!liveState.ws || liveState.ws.readyState !== WebSocket.OPEN) {
+      liveState.pcmPending = [];
+      liveState.pcmPendingLen = 0;
+      return;
+    }
+    var targetChunk = 640; // ~40ms at 16kHz
+    while (liveState.pcmPendingLen >= targetChunk || (forceAll && liveState.pcmPendingLen > 0)) {
+      var take = forceAll ? Math.min(liveState.pcmPendingLen, targetChunk * 2) : targetChunk;
+      var combined = new Int16Array(take);
+      var filled = 0;
+      while (filled < take && liveState.pcmPending.length) {
+        var head = liveState.pcmPending[0];
+        var need = take - filled;
+        if (head.length <= need) {
+          combined.set(head, filled);
+          filled += head.length;
+          liveState.pcmPending.shift();
+        } else {
+          combined.set(head.subarray(0, need), filled);
+          liveState.pcmPending[0] = head.subarray(need);
+          filled += need;
+        }
+      }
+      liveState.pcmPendingLen -= filled;
+      var bytes = new Uint8Array(combined.buffer, 0, filled * 2);
+      var bin = "";
+      for (var j = 0; j < bytes.length; j++) bin += String.fromCharCode(bytes[j]);
+      liveState.pcmFramesSent += 1;
+      try {
+        liveState.ws.send(JSON.stringify({
+          realtimeInput: {
+            audio: { mimeType: "audio/pcm;rate=16000", data: btoa(bin) }
+          }
+        }));
+      } catch (e) { break; }
+    }
+  }
+
   function setLiveMuted(mutedFlag) {
     var nextMuted = Boolean(mutedFlag) && Boolean(liveState.active);
+    var wasMuted = Boolean(liveState.muted);
     liveState.muted = nextMuted;
     if (liveState.micStream) {
       var tracks = (typeof liveState.micStream.getAudioTracks === "function")
@@ -8501,8 +9402,20 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       });
     }
     if (nextMuted) {
+      if (!wasMuted) {
+        flushPcmAndSend(true);
+        if (liveState.ws && typeof WebSocket !== "undefined" && liveState.ws.readyState === WebSocket.OPEN) {
+          try { liveState.ws.send(JSON.stringify({ realtimeInput: { audioStreamEnd: true } })); } catch (e) {}
+        }
+      }
       stopPlaybackQueue();
       sealActiveChatTurn();
+      updateRmsMeterBars(0, true);
+    } else if (liveState.active) {
+      if (liveState.audioCtx && liveState.audioCtx.state === "suspended") {
+        try { liveState.audioCtx.resume(); } catch (e) {}
+      }
+      updateRmsMeterBars(liveState.rmsLevel, false);
     }
     syncFloatingAiUi();
     return liveState.muted;
@@ -8515,90 +9428,80 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
 
   function syncFloatingAiUi() {
     var es = currentUiLang() === "es";
+    var isLive = Boolean(liveState.active || liveState.connecting);
     var stateMode = liveState.active
       ? (liveState.muted ? "muted" : "on")
       : (liveState.connecting ? "connecting" : "off");
+    var sheetOpen = Boolean(liveState.dialogOpen);
+    var showMinibar = !sheetOpen && isLive;
+    var showDock = !sheetOpen && !isLive;
+
+    if (document.body) {
+      document.body.classList.toggle("u4-live-minibar", showMinibar);
+      document.body.classList.toggle("u4-ai-sheet-open", sheetOpen);
+    }
 
     var dock = document.getElementById("u4AiFloatingDock");
     if (dock) {
+      dock.hidden = !showDock;
       dock.setAttribute("data-live", stateMode);
-      dock.setAttribute("data-open", liveState.dialogOpen ? "true" : "false");
+      dock.setAttribute("data-open", sheetOpen ? "true" : "false");
+    }
+
+    var minBar = document.getElementById("u4VoiceMinBar");
+    if (minBar) {
+      minBar.hidden = !showMinibar;
+      minBar.setAttribute("data-live", stateMode);
+      var mLbl = document.getElementById("u4MiniLbl");
+      if (mLbl) {
+        mLbl.textContent = stateMode === "muted"
+          ? (es ? "SILENCIADO" : "MUTED")
+          : (stateMode === "connecting" ? "\u2026" : "LIVE");
+      }
+      var mMute = document.getElementById("u4MiniMuteBtn");
+      if (mMute) {
+        mMute.hidden = !liveState.active;
+        mMute.classList.toggle("is-muted", Boolean(liveState.muted));
+        mMute.setAttribute("aria-pressed", liveState.muted ? "true" : "false");
+        mMute.textContent = liveState.muted ? (es ? "Activar" : "Unmute") : (es ? "Silenciar" : "Mute");
+      }
+      var mExp = document.getElementById("u4MiniExpandBtn");
+      if (mExp) mExp.textContent = es ? "Abrir" : "Expand";
+      var mEnd = document.getElementById("u4MiniEndBtn");
+      if (mEnd) mEnd.textContent = es ? "Fin" : "End";
     }
 
     var ptrText = document.getElementById("u4AiPointerText");
     if (ptrText) {
-      if (stateMode === "muted" && !liveState.dialogOpen) {
-        ptrText.textContent = es ? "Silenciado \u00b7 abrir chat" : "Muted \u00b7 open chat";
-      } else if (stateMode === "muted" && liveState.dialogOpen) {
-        ptrText.textContent = es ? "Mic silenciado (M)" : "Mic muted (M)";
-      } else if (stateMode === "on" && !liveState.dialogOpen) {
-        ptrText.textContent = es ? "En vivo \u00b7 abrir chat" : "Live \u00b7 open chat";
-      } else if (stateMode === "on" && liveState.dialogOpen) {
-        ptrText.textContent = es ? "Voz IA activa" : "Live voice active";
-      } else if (stateMode === "connecting") {
-        ptrText.textContent = es ? "Conectando IA\u2026" : "Connecting AI\u2026";
-      } else {
-        ptrText.textContent = es ? "Usa el asistente IA" : "Use the AI helper";
-      }
-    }
-
-    var quickMute = document.getElementById("u4AiQuickMuteBtn");
-    if (quickMute) {
-      quickMute.hidden = !liveState.active;
-      quickMute.classList.toggle("is-muted", Boolean(liveState.muted));
-      quickMute.setAttribute("aria-pressed", liveState.muted ? "true" : "false");
-      var qLabel = liveState.muted ? (es ? "Activar mic" : "Unmute") : (es ? "Silenciar" : "Mute");
-      var qTitle = liveState.muted
-        ? (es ? "Activar micr\u00f3fono (tecla M)" : "Unmute microphone (shortcut M)")
-        : (es ? "Silenciar micr\u00f3fono y voz IA (tecla M)" : "Mute microphone & AI audio (shortcut M)");
-      quickMute.setAttribute("aria-label", qTitle);
-      quickMute.title = qTitle;
-      quickMute.innerHTML = (liveState.muted ? SVG_MIC_MUTED : SVG_MIC_ON) + '<span>' + escHtml(qLabel) + '</span>';
+      ptrText.textContent = es ? "Asistente IA" : "Ask AI";
     }
 
     var orbPill = document.getElementById("u4AiStateBadge");
     if (orbPill) {
-      if (stateMode === "muted") {
-        orbPill.textContent = es ? "SILENCIADO" : "MUTED";
-      } else if (stateMode === "on") {
-        orbPill.textContent = "LIVE";
-      } else if (stateMode === "connecting") {
-        orbPill.textContent = "\u2026";
-      } else {
-        orbPill.textContent = "OFF";
-      }
+      orbPill.textContent = stateMode === "muted" ? (es ? "SIL" : "MUTED") : (stateMode === "on" ? "LIVE" : (stateMode === "connecting" ? "\u2026" : "OFF"));
     }
 
     var orb = document.getElementById("u4AiBubbleOrb");
     if (orb) {
       orb.setAttribute("aria-pressed", liveState.active ? "true" : "false");
-      orb.setAttribute("aria-expanded", liveState.dialogOpen ? "true" : "false");
-      orb.title = liveState.active
-        ? (liveState.dialogOpen
-            ? (es ? "Minimizar chat (la sesi\u00f3n sigue abierta)" : "Minimize chat (session stays open)")
-            : (es ? "Reabrir chat de voz" : "Reopen live voice chat"))
-        : (es ? "Hablar con el asistente IA" : "Start live conversation with AI Helper");
+      orb.setAttribute("aria-expanded", sheetOpen ? "true" : "false");
+      orb.title = es ? "Hablar con el asistente IA" : "Start live conversation with AI Helper";
     }
 
     var dlg = document.getElementById("u4VoiceChatDialog");
     if (dlg) {
+      dlg.hidden = !sheetOpen;
       dlg.setAttribute("data-live", stateMode);
     }
     var dlgTitle = document.getElementById("u4VdTitle");
-    if (dlgTitle) {
-      dlgTitle.textContent = es ? "Asistente IA" : "AI Helper";
-    }
+    if (dlgTitle) dlgTitle.textContent = es ? "Asistente IA" : "AI Helper";
+
     var dlgState = document.getElementById("u4VdState");
     if (dlgState) {
-      if (stateMode === "muted") {
-        dlgState.textContent = es ? "\u23F8 SILENCIADO" : "\u23F8 MUTED";
-      } else if (stateMode === "on") {
-        dlgState.textContent = es ? "\u25CF EN VIVO" : "\u25CF LIVE";
-      } else if (stateMode === "connecting") {
-        dlgState.textContent = es ? "CONECTANDO" : "CONNECTING";
-      } else {
-        dlgState.textContent = es ? "APAGADO" : "OFF";
-      }
+      if (stateMode === "muted") dlgState.textContent = es ? "\u23F8 SILENCIADO" : "\u23F8 MUTED";
+      else if (stateMode === "on") dlgState.textContent = es ? "\u25CF EN VIVO" : "\u25CF LIVE";
+      else if (stateMode === "connecting") dlgState.textContent = es ? "CONECTANDO" : "CONNECTING";
+      else dlgState.textContent = es ? "APAGADO" : "OFF";
     }
 
     var dlgMute = document.getElementById("waVoiceMuteBtn");
@@ -8607,9 +9510,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       dlgMute.classList.toggle("is-muted", Boolean(liveState.muted));
       dlgMute.setAttribute("aria-pressed", liveState.muted ? "true" : "false");
       var dLabel = liveState.muted ? (es ? "Activar mic" : "Unmute") : (es ? "Silenciar" : "Mute");
-      var dTitle = liveState.muted
-        ? (es ? "Activar micr\u00f3fono (M)" : "Unmute mic (M)")
-        : (es ? "Silenciar micr\u00f3fono y audio IA (M)" : "Mute mic & AI audio (M)");
+      var dTitle = liveState.muted ? (es ? "Activar mic (M)" : "Unmute mic (M)") : (es ? "Silenciar mic (M)" : "Mute mic (M)");
       dlgMute.textContent = dLabel;
       dlgMute.title = dTitle;
       dlgMute.setAttribute("aria-label", dTitle);
@@ -8617,84 +9518,115 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
 
     var sessionBtn = document.getElementById("waVoiceMicPill");
     if (sessionBtn) {
-      var isRunning = liveState.active || liveState.connecting;
-      sessionBtn.classList.toggle("is-end", isRunning);
-      sessionBtn.setAttribute("aria-pressed", isRunning ? "true" : "false");
-      sessionBtn.textContent = isRunning
-        ? (es ? "Terminar voz" : "End voice")
-        : (es ? "Iniciar voz" : "Start voice");
+      sessionBtn.classList.toggle("is-end", isLive);
+      sessionBtn.setAttribute("aria-pressed", isLive ? "true" : "false");
+      sessionBtn.textContent = isLive ? (es ? "Terminar" : "End") : (es ? "Iniciar voz" : "Start voice");
     }
 
     var subEl = document.getElementById("waVoiceStatus");
     if (subEl && !liveState.connecting) {
-      if (stateMode === "muted") {
+      if (liveState.lastCloseError && !isLive) {
+        subEl.textContent = liveState.lastCloseError;
+        subEl.hidden = false;
+      } else if (stateMode === "muted") {
         subEl.textContent = es
-          ? "Micr\u00f3fono silenciado (sesi\u00f3n abierta) \u2014 toca Activar mic o presiona M para hablar, o escribe abajo."
-          : "Mic muted (session stays open) \u2014 tap Unmute or press M to talk, or type below.";
+          ? "Mic silenciado (sesi\u00f3n abierta) \u2014 toca Activar mic (M) o escribe abajo."
+          : "Mic muted (session stays open) \u2014 tap Unmute (M) or type below.";
+        subEl.hidden = false;
       } else if (stateMode === "on") {
-        subEl.textContent = es
-          ? "Habla con naturalidad \u2014 toca Silenciar (M) para pausar el mic o el bot\u00f3n redondo para minimizar."
-          : "Speak naturally \u2014 tap Mute (M) anytime to pause your mic, or tap the round button to minimize.";
+        subEl.textContent = es ? "En vivo \u2014 habla o escribe para navegar y editar planos." : "Live \u2014 speak or type to navigate and inspect plans.";
+        subEl.hidden = true;
       } else {
-        subEl.textContent = es
-          ? "Micr\u00f3fono apagado \u2014 toca Iniciar voz o haz una pregunta abajo para navegar."
-          : "Mic is off \u2014 tap Start voice or pick a prompt below to navigate.";
+        subEl.textContent = es ? "Toca Iniciar voz o escribe abajo." : "Tap Start voice or pick a prompt below.";
+        subEl.hidden = false;
       }
+    }
+
+    var deadBanner = document.getElementById("u4VoiceDeadMicBanner");
+    if (deadBanner) {
+      deadBanner.hidden = !(liveState.active && !liveState.muted && liveState.deadMicShown);
+      var dmTxt = deadBanner.querySelector("[data-u4-dm-text]");
+      var dmBtn = deadBanner.querySelector("[data-u4-dm-reset]");
+      if (dmTxt) dmTxt.textContent = es ? "No entra audio del micr\u00f3fono." : "No mic audio detected.";
+      if (dmBtn) dmBtn.textContent = es ? "Reiniciar mic" : "Reset Mic";
+    }
+
+    var nudgesEl = document.getElementById("u4AiNudges");
+    if (nudgesEl) {
+      nudgesEl.hidden = Boolean(liveState.hasConversationTurns);
     }
 
     var askInp = document.getElementById("u4VdAskInput");
     if (askInp) {
-      askInp.placeholder = es ? "O escribe una pregunta para navegar\u2026" : "Or type a question to navigate\u2026";
+      askInp.placeholder = es ? "Pregunta o navega…" : "Ask or navigate…";
     }
     var vdPhotoBtn = document.getElementById("u4VdPhotoBtn");
-    if (vdPhotoBtn) {
-      vdPhotoBtn.textContent = es ? "📎 Adjuntar foto" : "📎 Attach photo";
-    }
+    if (vdPhotoBtn) vdPhotoBtn.title = es ? "Adjuntar foto" : "Attach photo";
     var vdCamBtn = document.getElementById("u4VdCameraBtn");
-    if (vdCamBtn) {
-      vdCamBtn.textContent = es ? "📷 Tomar foto" : "📷 Take photo";
-    }
+    if (vdCamBtn) vdCamBtn.title = es ? "Tomar foto" : "Take photo";
     var vdPhotoSend = document.getElementById("u4VdPhotoSendBtn");
-    if (vdPhotoSend) {
-      vdPhotoSend.textContent = es ? "Enviar foto" : "Send photo";
-    }
+    if (vdPhotoSend) vdPhotoSend.textContent = es ? "Enviar foto" : "Send photo";
     var vdPhotoClr = document.getElementById("u4VdPhotoClearBtn");
-    if (vdPhotoClr) {
-      vdPhotoClr.setAttribute("aria-label", es ? "Quitar foto" : "Remove photo");
-    }
+    if (vdPhotoClr) vdPhotoClr.setAttribute("aria-label", es ? "Quitar foto" : "Remove photo");
     syncCameraModalLabels();
   }
   window.__u4SyncFloatingAiUi = syncFloatingAiUi;
 
-  function pcm16ToBase64(float32Buf, inputRate) {
-    var ratio = inputRate / 16000;
+  function resampleBox16kInt16(float32Buf, inputRate) {
+    var srcRate = inputRate || 48000;
+    var ratio = srcRate / 16000;
     var outLen = Math.max(1, Math.floor(float32Buf.length / ratio));
     var pcm16 = new Int16Array(outLen);
+    var sumSq = 0;
     for (var i = 0; i < outLen; i++) {
-      var s = float32Buf[Math.min(float32Buf.length - 1, Math.floor(i * ratio))];
+      var s;
+      if (ratio > 1.05) {
+        var start = Math.floor(i * ratio);
+        var end = Math.min(float32Buf.length, Math.max(start + 1, Math.floor((i + 1) * ratio)));
+        var acc = 0;
+        for (var k = start; k < end; k++) acc += float32Buf[k];
+        s = acc / (end - start);
+      } else {
+        var pos = Math.min(float32Buf.length - 1, i * ratio);
+        var idx = Math.floor(pos);
+        var frac = pos - idx;
+        var a = float32Buf[idx];
+        var b = float32Buf[Math.min(float32Buf.length - 1, idx + 1)];
+        s = a + (b - a) * frac;
+      }
       s = Math.max(-1, Math.min(1, s));
+      sumSq += s * s;
       pcm16[i] = s < 0 ? s * 0x8000 : s * 0x7FFF;
     }
-    var bytes = new Uint8Array(pcm16.buffer);
+    return { pcm16: pcm16, rms: Math.sqrt(sumSq / outLen) };
+  }
+
+  function pcm16ToBase64(float32Buf, inputRate) {
+    var r = resampleBox16kInt16(float32Buf, inputRate);
+    var bytes = new Uint8Array(r.pcm16.buffer);
     var bin = "";
     for (var j = 0; j < bytes.length; j++) bin += String.fromCharCode(bytes[j]);
     return btoa(bin);
   }
 
   function playBase64Pcm24k(b64) {
-    if (!liveState.outCtx || liveState.muted) return;
+    var ctx = liveState.audioCtx || liveState.outCtx;
+    if (!ctx || liveState.muted) return;
+    if (ctx.state === "suspended") {
+      try { ctx.resume(); } catch (e) {}
+    }
     var bin = atob(b64);
     var bytes = new Uint8Array(bin.length);
     for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
     var int16 = new Int16Array(bytes.buffer);
     var float32 = new Float32Array(int16.length);
     for (var k = 0; k < int16.length; k++) float32[k] = int16[k] / 32768;
-    var audioBuf = liveState.outCtx.createBuffer(1, float32.length, 24000);
+    var audioBuf = ctx.createBuffer(1, float32.length, 24000);
     audioBuf.getChannelData(0).set(float32);
-    var src = liveState.outCtx.createBufferSource();
+    var src = ctx.createBufferSource();
     src.buffer = audioBuf;
-    src.connect(liveState.outCtx.destination);
-    var startAt = Math.max(liveState.outCtx.currentTime, liveState.playCursor);
+    src.connect(ctx.destination);
+    var startAt = Math.max(ctx.currentTime, liveState.playCursor);
     src.start(startAt);
     liveState.playCursor = startAt + audioBuf.duration;
     liveState.activeSources.push(src);
@@ -8709,20 +9641,24 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       var s = liveState.activeSources.pop();
       try { s.stop(); } catch (e) {}
     }
-    if (liveState.outCtx) liveState.playCursor = liveState.outCtx.currentTime;
+    var ctx = liveState.audioCtx || liveState.outCtx;
+    if (ctx) liveState.playCursor = ctx.currentTime;
   }
 
-  async function pushLiveContextIfChanged() {
+  async function pushLiveContextIfChanged(forceMsgOpt) {
     if (!liveState.active || !liveState.ws || typeof WebSocket === "undefined" || liveState.ws.readyState !== WebSocket.OPEN) return;
-    var sig = String((typeof location !== "undefined" && location.hash) || "#home") + "|" + currentUiLang();
-    if (sig === liveState.lastContextSignature) return;
+    var planSig = (window.__u4ActivePlanContext && window.__u4ActivePlanContext.planId)
+      ? (window.__u4ActivePlanContext.planId + ":" + (window.__u4ActivePlanContext.step || "") + ":" + (window.__u4ActivePlanContext.wall || ""))
+      : "";
+    var sig = String((typeof location !== "undefined" && location.hash) || "#home") + "|" + currentUiLang() + "|" + planSig;
+    if (!forceMsgOpt && sig === liveState.lastContextSignature) return;
     liveState.lastContextSignature = sig;
     try {
       var summary = await buildRichWalkthroughContext(null, false);
       if (liveState.active && liveState.ws && liveState.ws.readyState === WebSocket.OPEN) {
         liveState.ws.send(JSON.stringify({
           clientContent: {
-            turns: [{ role: "user", parts: [{ text: "Screen navigation update:\n" + summary }] }],
+            turns: [{ role: "user", parts: [{ text: (forceMsgOpt ? (forceMsgOpt + "\n") : "Screen navigation update:\n") + summary }] }],
             turnComplete: false
           }
         }));
@@ -8766,6 +9702,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     var clean = String(promptText || "").trim();
     var p = photoObj && photoObj.rawBase64 ? photoObj : null;
     if ((!clean && !p) || !liveState.active || !liveState.ws || liveState.ws.readyState !== WebSocket.OPEN) return;
+    liveState.hasConversationTurns = true;
     stopPlaybackQueue();
     var es = currentUiLang() === "es";
     var parts = [];
@@ -8787,9 +9724,113 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         turnComplete: true
       }
     }));
+    syncFloatingAiUi();
   }
 
-  function stopGeminiLiveSession() {
+  function handleMicFloatSamples(ch) {
+    if (!liveState.active || liveState.muted || !liveState.ws || liveState.ws.readyState !== WebSocket.OPEN) return;
+    var rate = (liveState.audioCtx && liveState.audioCtx.sampleRate) || 48000;
+    var res = resampleBox16kInt16(ch, rate);
+    if (res.rms > liveState.maxRmsSeen) liveState.maxRmsSeen = res.rms;
+    if (liveState.deadMicShown && res.rms > 0.0005) {
+      liveState.deadMicShown = false;
+      syncFloatingAiUi();
+    }
+    updateRmsMeterBars(res.rms, false);
+    liveState.pcmPending.push(res.pcm16);
+    liveState.pcmPendingLen += res.pcm16.length;
+    flushPcmAndSend(false);
+  }
+
+  async function setupMicCapturePipeline(stream, audioCtx, ws, generation) {
+    clearMicPipeline();
+    if (!stream || !audioCtx || generation !== liveState.generation) return;
+    liveState.maxRmsSeen = 0;
+    liveState.pcmFramesSent = 0;
+    liveState.deadMicShown = false;
+
+    var srcNode = audioCtx.createMediaStreamSource(stream);
+    var silentGain = audioCtx.createGain();
+    silentGain.gain.value = 0;
+    liveState.micSource = srcNode;
+    liveState.micGain = silentGain;
+
+    var workletAttached = false;
+    if (audioCtx.audioWorklet && typeof AudioWorkletNode === "function" && typeof Blob === "function" && typeof URL !== "undefined" && URL.createObjectURL) {
+      try {
+        var workletCode =
+          'class U4MicProc extends AudioWorkletProcessor{' +
+          'process(inputs){var ch=inputs[0]&&inputs[0][0];if(ch&&ch.length){var c=new Float32Array(ch.length);c.set(ch);this.port.postMessage(c,[c.buffer]);}return true;}' +
+          '}registerProcessor("u4-mic-proc",U4MicProc);';
+        var blob = new Blob([workletCode], { type: "application/javascript" });
+        liveState.workletBlobUrl = URL.createObjectURL(blob);
+        await audioCtx.audioWorklet.addModule(liveState.workletBlobUrl);
+        if (generation !== liveState.generation || !liveState.active) return;
+        var wn = new AudioWorkletNode(audioCtx, "u4-mic-proc");
+        wn.port.onmessage = function(mEv) {
+          if (mEv && mEv.data && generation === liveState.generation) handleMicFloatSamples(mEv.data);
+        };
+        srcNode.connect(wn);
+        wn.connect(silentGain);
+        silentGain.connect(audioCtx.destination);
+        liveState.processor = wn;
+        workletAttached = true;
+      } catch (e) {
+        if (liveState.workletBlobUrl) { try { URL.revokeObjectURL(liveState.workletBlobUrl); } catch (_) {} liveState.workletBlobUrl = null; }
+      }
+    }
+
+    if (!workletAttached && typeof audioCtx.createScriptProcessor === "function") {
+      var proc = audioCtx.createScriptProcessor(2048, 1, 1);
+      proc.onaudioprocess = function(audioEv) {
+        if (generation !== liveState.generation) return;
+        var ch = audioEv.inputBuffer.getChannelData(0);
+        handleMicFloatSamples(ch);
+      };
+      srcNode.connect(proc);
+      proc.connect(silentGain);
+      silentGain.connect(audioCtx.destination);
+      liveState.processor = proc;
+    }
+
+    liveState.watchdogTimer = setTimeout(function() {
+      if (generation !== liveState.generation || !liveState.active || liveState.muted) return;
+      if (liveState.pcmFramesSent === 0 || liveState.maxRmsSeen < 0.0001) {
+        liveState.deadMicShown = true;
+        syncFloatingAiUi();
+      }
+    }, 3500);
+  }
+
+  async function resetMicCapture() {
+    if (!liveState.active) return;
+    var gen = liveState.generation;
+    liveState.deadMicShown = false;
+    syncFloatingAiUi();
+    try {
+      if (liveState.micStream) {
+        liveState.micStream.getTracks().forEach(function(t){ try { t.stop(); } catch (e) {} });
+        liveState.micStream = null;
+      }
+      var stream = await navigator.mediaDevices.getUserMedia({
+        audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true, channelCount: 1 }
+      });
+      if (gen !== liveState.generation || !liveState.active) {
+        stream.getTracks().forEach(function(t){ try { t.stop(); } catch (e) {} });
+        return;
+      }
+      liveState.micStream = stream;
+      if (liveState.audioCtx && liveState.audioCtx.state === "suspended") {
+        await liveState.audioCtx.resume();
+      }
+      await setupMicCapturePipeline(stream, liveState.audioCtx, liveState.ws, gen);
+    } catch (e) {
+      liveState.deadMicShown = true;
+      syncFloatingAiUi();
+    }
+  }
+
+  function stopGeminiLiveSession(diagMsg) {
     liveState.generation += 1;
     liveState.active = false;
     liveState.connecting = false;
@@ -8798,14 +9839,18 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     liveState.pendingPrompt = "";
     liveState.pendingPhoto = null;
     liveState.lastSentPhoto = null;
+    liveState.deadMicShown = false;
+    liveState.lastCloseError = diagMsg || "";
     clearVoiceStagedPhoto();
     sealActiveChatTurn();
     stopPlaybackQueue();
-    if (liveState.processor) { try { liveState.processor.disconnect(); } catch (e) {} liveState.processor = null; }
-    if (liveState.inCtx) { try { liveState.inCtx.close(); } catch (e) {} liveState.inCtx = null; }
-    if (liveState.outCtx) { try { liveState.outCtx.close(); } catch (e) {} liveState.outCtx = null; }
+    clearMicPipeline();
+    if (liveState.audioCtx) { try { liveState.audioCtx.close(); } catch (e) {} liveState.audioCtx = null; }
+    liveState.inCtx = null;
+    liveState.outCtx = null;
     if (liveState.micStream) { liveState.micStream.getTracks().forEach(function(t){ try { t.stop(); } catch (e) {} }); liveState.micStream = null; }
     if (liveState.ws) { try { liveState.ws.close(); } catch (e) {} liveState.ws = null; }
+    updateRmsMeterBars(0, true);
     syncFloatingAiUi();
   }
 
@@ -8828,44 +9873,59 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     var generation = ++liveState.generation;
     liveState.connecting = true;
     liveState.muted = false;
+    liveState.lastCloseError = "";
+    liveState.deadMicShown = false;
     liveState.pendingPrompt = String(initialPromptOpt || "").trim();
     liveState.pendingPhoto = initialPhotoOpt || null;
     syncFloatingAiUi();
     var subEl = document.getElementById("waVoiceStatus");
     if (subEl) {
+      subEl.hidden = false;
       subEl.textContent = currentUiLang() === "es" ? "Conectando voz en vivo\u2026" : "Connecting live voice\u2026";
     }
 
+    var acquiredStream = null;
     try {
-      var AudioCtx = window.AudioContext || window.webkitAudioContext;
-      liveState.inCtx = new AudioCtx();
-      liveState.outCtx = new AudioCtx({ sampleRate: 24000 });
-      await Promise.all([
-        liveState.inCtx.state === "suspended" ? liveState.inCtx.resume() : Promise.resolve(),
-        liveState.outCtx.state === "suspended" ? liveState.outCtx.resume() : Promise.resolve()
-      ]);
-      if (generation !== liveState.generation) return;
-      liveState.playCursor = liveState.outCtx.currentTime;
-
-      var tokResp = await fetch(window.U4_VOICE_TOKEN_ENDPOINT, {
+      var tokenPromise = fetch(window.U4_VOICE_TOKEN_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ room: activeRoomKey(), uiLanguage: currentUiLang() })
+      }).then(async function(tokResp) {
+        var tokData = await tokResp.json().catch(function(){ return null; });
+        if (!tokResp.ok || !tokData || !tokData.wsUrl) {
+          throw new Error((tokData && tokData.error) || ("Token HTTP " + tokResp.status));
+        }
+        return tokData;
       });
-      var tokData = await tokResp.json().catch(function(){ return null; });
-      if (!tokResp.ok || !tokData || !tokData.wsUrl) {
-        throw new Error((tokData && tokData.error) || ("Token HTTP " + tokResp.status));
-      }
-      if (generation !== liveState.generation) return;
-
-      var stream = await navigator.mediaDevices.getUserMedia({
+      var micPromise = navigator.mediaDevices.getUserMedia({
         audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true, channelCount: 1 }
       });
+
+      var parallel = await Promise.all([tokenPromise, micPromise]);
+      var tokData = parallel[0];
+      var stream = parallel[1];
+      acquiredStream = stream;
+
       if (generation !== liveState.generation) {
-        stream.getTracks().forEach(function(t){ t.stop(); });
+        stream.getTracks().forEach(function(t){ try { t.stop(); } catch (e) {} });
         return;
       }
       liveState.micStream = stream;
+
+      var AudioCtx = window.AudioContext || window.webkitAudioContext;
+      var audioCtx = new AudioCtx({ latencyHint: "interactive" });
+      liveState.audioCtx = audioCtx;
+      liveState.inCtx = audioCtx;
+      liveState.outCtx = audioCtx;
+      audioCtx.addEventListener("statechange", function() {
+        if (generation !== liveState.generation || !liveState.active) return;
+        if (audioCtx.state === "suspended" && !liveState.muted) {
+          try { audioCtx.resume(); } catch (e) {}
+        }
+      });
+      if (audioCtx.state === "suspended") await audioCtx.resume();
+      if (generation !== liveState.generation) return;
+      liveState.playCursor = audioCtx.currentTime;
 
       var ws = new WebSocket(tokData.wsUrl);
       liveState.ws = ws;
@@ -8891,54 +9951,49 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
           liveState.active = true;
           syncFloatingAiUi();
 
-          var initialContext = await buildRichWalkthroughContext(null, true);
-          if (!liveState.active || generation !== liveState.generation || ws.readyState !== WebSocket.OPEN) return;
-          liveState.lastContextSignature = String((typeof location !== "undefined" && location.hash) || "#home") + "|" + currentUiLang();
+          // Wire microphone capture IMMEDIATELY before async context build
+          setupMicCapturePipeline(stream, audioCtx, ws, generation);
 
-          ws.send(JSON.stringify({
-            clientContent: {
-              turns: [{
-                role: "user",
-                parts: [{
-                  text: "System guide context for Unit 4 AI Helper (Voice Agent R8 · 15 tools):\n" +
-                    "- Reply concisely and naturally in whatever language the speaker uses (English, Espa\u00f1ol, etc.) automatically.\n" +
-                    "- Proactively help the user navigate all 16 rooms (" + ALLOWED_ROOMS.join(", ") + ") and all 6 interactive plans (./plans/kitchen-west-ks4/, ./plans/kitchen-floor-plan/, ./plans/kitchen-electrical/, ./plans/attic-hatch/, ./plans/hvac-layout/, ./plans/murphy-door/): use navigate_room, open_document, go_to_document_page, and focus_section.\n" +
-                    "- Use query_wiki_and_backend_knowledge whenever asked about specs, other rooms, interactive plans, the modular content/ build workflow, or the :8791/:8444 Mac mini backend.\n" +
-                    "- Use propose_wiki_or_plan_edit whenever someone wants to change a measurement, flag a clash, or edit a wiki/plan item — ALWAYS read back the exact proposal first and wait for spoken_confirmation=true before submitting, and mention the room's interactive plan link if available.\n" +
-                    "- Users can attach or take site photos directly inside Voice Chat; inspect attached photos directly, and know that the most recent Voice Chat photo is automatically saved into to-triage/ when calling submit_voice_memo, propose_wiki_or_plan_edit, or fill_draft_note.\n" +
-                    "- Instruction packets are the crew's bilingual step-by-step guides (including the 4 standalone Zephyr hood test-hang sheets and live Interactive Range & Hood Wall Plan). Open one with navigate_room using its key: " + PACKETS.map(function(p){ return p.key + " = " + p.titleEn + " / " + p.titleEs; }).join("; ") + ".\n" +
-                    "- Use plain on-site crew language (no R1/R2/R3/R5, no sheet codes, no raw filenames, no Todoist IDs unless asked). Never disclose prices, bids, financing, or private links.\n" +
-                    "- Owner-approval rule (Tisa, 2026-11-12): Never imply crew or collaborators can confirm or lock open design/finish choices or material purchases. Always state clearly that Tisa's explicit approval is required before buying, cutting, painting, or locking any open selection.\n\n" +
-                    initialContext
-                }]
-              }],
-              turnComplete: false
-            }
-          }));
+          var langNow = currentUiLang();
+          var esNow = langNow === "es";
+          buildRichWalkthroughContext(null, true).then(function(initialContext) {
+            if (!liveState.active || generation !== liveState.generation || ws.readyState !== WebSocket.OPEN) return;
+            liveState.lastContextSignature = String((typeof location !== "undefined" && location.hash) || "#home") + "|" + langNow;
+            var langRule = esNow
+              ? "- Idioma activo: Espa\u00f1ol mexicano (es). Responde SIEMPRE en espa\u00f1ol mexicano de forma breve y clara (1-2 oraciones salvo que pidan detalle)."
+              : "- Active UI language: English (en). Respond strictly in concise English (1-2 short sentences unless asked for details). Never switch to Spanish unless the user explicitly asks for Spanish or speaks a complete Spanish sentence.";
+            var planUrls = Object.keys(INTERACTIVE_PLAN_MODULES).map(function(k){ return "#plan:" + k; }).join(", ");
+            var packetKeys = PACKETS.map(function(p){ return p.key + " = " + (esNow ? p.titleEs : p.titleEn); }).join("; ");
 
-          if (liveState.pendingPrompt || liveState.pendingPhoto) {
-            var qNow = liveState.pendingPrompt;
-            var pNow = liveState.pendingPhoto;
-            liveState.pendingPrompt = "";
-            liveState.pendingPhoto = null;
-            sendPromptToLiveAgent(qNow, pNow);
-          }
-
-          var srcNode = liveState.inCtx.createMediaStreamSource(stream);
-          var proc = liveState.inCtx.createScriptProcessor(4096, 1, 1);
-          liveState.processor = proc;
-          proc.onaudioprocess = function(audioEv) {
-            if (!liveState.active || liveState.muted || !setupDone || ws.readyState !== WebSocket.OPEN) return;
-            var ch = audioEv.inputBuffer.getChannelData(0);
-            var b64 = pcm16ToBase64(ch, liveState.inCtx.sampleRate);
             ws.send(JSON.stringify({
-              realtimeInput: {
-                audio: { mimeType: "audio/pcm;rate=16000", data: b64 }
+              clientContent: {
+                turns: [{
+                  role: "user",
+                  parts: [{
+                    text: "System guide context for Unit 4 AI Helper (Voice Agent R9 · 18 tools):\n" +
+                      langRule + "\n" +
+                      "- Proactively help the user navigate all 16 rooms (" + ALLOWED_ROOMS.join(", ") + ") and all 6 interactive plans (" + planUrls + ") without leaving the persistent shell.\n" +
+                      "- Use show_plan_view(plan, wall, step, zoom) to open or switch wall/step views inside interactive plans; use update_plan_state(action, target, value) for live interactive controls; use capture_screen_snapshot(target, label) to inspect the current plan, SVG, PDF page, or lightbox.\n" +
+                      "- Use query_wiki_and_backend_knowledge whenever asked about specs, other rooms, interactive plans, or backend routes.\n" +
+                      "- Use propose_wiki_or_plan_edit when someone wants to change a measurement, flag a clash, or edit a wiki/plan item — ALWAYS read back the exact proposal first and wait for spoken_confirmation=true before submitting.\n" +
+                      "- Instruction packets (open with navigate_room using key): " + packetKeys + ".\n" +
+                      "- Use plain on-site crew language (never disclose prices, bids, financing, or private links).\n" +
+                      "- Owner-approval rule: Tisa's explicit approval is required before buying, cutting, painting, or locking any open selection.\n\n" +
+                      initialContext
+                  }]
+                }],
+                turnComplete: false
               }
             }));
-          };
-          srcNode.connect(proc);
-          proc.connect(liveState.inCtx.destination);
+
+            if (liveState.pendingPrompt || liveState.pendingPhoto) {
+              var qNow = liveState.pendingPrompt;
+              var pNow = liveState.pendingPhoto;
+              liveState.pendingPrompt = "";
+              liveState.pendingPhoto = null;
+              sendPromptToLiveAgent(qNow, pNow);
+            }
+          }).catch(function(){});
           return;
         }
 
@@ -8950,6 +10005,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
             chatStream.sawOutputTranscriptInTurn = false;
           }
           if (!liveState.muted && sc.inputTranscription && typeof sc.inputTranscription.text === "string" && sc.inputTranscription.text) {
+            if (!liveState.hasConversationTurns) { liveState.hasConversationTurns = true; syncFloatingAiUi(); }
             appendStreamingChatChunk("user", sc.inputTranscription.text);
           }
           if (sc.outputTranscription && typeof sc.outputTranscription.text === "string" && sc.outputTranscription.text) {
@@ -8976,44 +10032,50 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
 
         if (msg.toolCall && Array.isArray(msg.toolCall.functionCalls)) {
           sealActiveChatTurn();
+          if (!liveState.hasConversationTurns) { liveState.hasConversationTurns = true; syncFloatingAiUi(); }
           var responses = [];
           for (var j = 0; j < msg.toolCall.functionCalls.length; j++) {
-            if (!liveState.active || generation !== liveState.generation) return;
             var fc = msg.toolCall.functionCalls[j];
-            var out = await window.U4WikiClientBridge.execute(fc.name, fc.args || {});
-            responses.push({ id: fc.id, name: fc.name, response: { result: out } });
+            var out = null;
+            try {
+              out = await window.U4WikiClientBridge.execute(fc.name, fc.args || {});
+            } catch (toolErr) {
+              out = { ok: false, error: String((toolErr && toolErr.message) || toolErr) };
+            }
+            responses.push({ id: fc.id, name: fc.name, response: { result: out || { ok: false } } });
           }
-          if (ws.readyState === WebSocket.OPEN) {
+          if (responses.length && ws.readyState === WebSocket.OPEN) {
             ws.send(JSON.stringify({ toolResponse: { functionResponses: responses } }));
-            await pushLiveContextIfChanged();
+            pushLiveContextIfChanged();
           }
         }
       };
 
       ws.onerror = function() {
         if (generation !== liveState.generation) return;
-        stopGeminiLiveSession();
-        var sEl = document.getElementById("waVoiceStatus");
-        if (sEl) {
-          sEl.textContent = currentUiLang() === "es"
-            ? "Conexi\u00f3n interrumpida \u2014 toca Iniciar voz para reconectar."
-            : "Connection interrupted \u2014 tap Start voice to reconnect.";
-        }
+        stopGeminiLiveSession(currentUiLang() === "es"
+          ? "Conexi\u00f3n interrumpida \u2014 toca Iniciar voz."
+          : "Connection interrupted \u2014 tap Start voice.");
       };
-      ws.onclose = function() {
+      ws.onclose = function(cEv) {
         if ((liveState.active || liveState.connecting) && generation === liveState.generation) {
-          stopGeminiLiveSession();
+          var code = cEv && cEv.code;
+          var reason = (cEv && cEv.reason) ? (": " + String(cEv.reason)) : "";
+          var diag = (code && code !== 1000 && code !== 1005)
+            ? ((currentUiLang() === "es" ? "Voz cerrada (" : "Voice closed (") + code + reason + ")")
+            : "";
+          stopGeminiLiveSession(diag);
         }
       };
     } catch (err) {
+      if (acquiredStream && !liveState.micStream) {
+        acquiredStream.getTracks().forEach(function(t){ try { t.stop(); } catch (e) {} });
+      }
       if (generation !== liveState.generation) return;
       var unsentPhoto = liveState.pendingPhoto || liveState.stagedPhoto;
-      stopGeminiLiveSession();
+      var errMsg = (currentUiLang() === "es" ? "Voz no disponible: " : "Voice unavailable: ") + String(err && err.message || err);
+      stopGeminiLiveSession(errMsg);
       if (unsentPhoto) stageVoicePhoto(unsentPhoto);
-      var errSub = document.getElementById("waVoiceStatus");
-      if (errSub) {
-        errSub.textContent = (currentUiLang() === "es" ? "Voz no disponible: " : "Voice unavailable: ") + String(err && err.message || err);
-      }
     }
   }
 
