@@ -732,7 +732,87 @@
       bindHDrag("kelecPieDrag", function () { return state.pieStart; }, updatePieLive);
       bindHDrag("kelecSinkDrag", function () { return state.sinkStart; }, updateSinkLive);
     }
+
+    if (window.U4PlanNav && typeof window.U4PlanNav.reportPlanContext === "function") {
+      window.U4PlanNav.reportPlanContext();
+    }
   }
+
+  function applyKelecView(args) {
+    args = args || {};
+    var changed = false;
+    var wallRaw = String(args.wall || "").toLowerCase().trim();
+    if (wallRaw === "south" || wallRaw === "east" || wallRaw === "west" || wallRaw === "north") {
+      state.step = "walls";
+      state.wallTab = wallRaw;
+      changed = true;
+    } else if (wallRaw === "plan" || wallRaw === "all") {
+      state.step = "outlets";
+      changed = true;
+    }
+    var stepRaw = args.step;
+    if (stepRaw != null && stepRaw !== "") {
+      var n = Number(stepRaw);
+      if (isFinite(n) && n >= 1 && n <= STEPS.length) {
+        state.step = STEPS[n - 1].id;
+        changed = true;
+      } else {
+        var s = String(stepRaw).toLowerCase().trim();
+        var map = { overview: "outlets", all: "outlets", d04: "panel", subpanel: "panel", checklist: "holds" };
+        var id = map[s] || s;
+        if (STEPS.some(function (x) { return x.id === id; })) { state.step = id; changed = true; }
+      }
+    }
+    if (changed) render();
+    return changed;
+  }
+
+  window.U4PlanControl = {
+    showView: function (args) { return applyKelecView(args); },
+    applyChange: function (args) {
+      args = args || {};
+      var act = String(args.action || args.target || "").toLowerCase();
+      var val = args.value;
+      if (act === "pie_start" || act === "piesafe") {
+        var v = Math.max(18, Math.min(40, Math.round(Number(val) * 2) / 2));
+        if (!isFinite(v)) return false;
+        state.pieStart = v;
+        state.step = "walls";
+        state.wallTab = "south";
+      } else if (act === "sink_start" || act === "sink") {
+        var sv = Math.max(70, Math.min(80, Math.round(Number(val) * 2) / 2));
+        if (!isFinite(sv)) return false;
+        state.sinkStart = sv;
+        state.step = "walls";
+        state.wallTab = "south";
+      } else if (act === "counter_h") {
+        state.counterH = Number(val) === 41 ? 41 : 44;
+      } else if (act === "wall") {
+        return applyKelecView({ wall: val });
+      } else if (act === "reset") {
+        state.pieStart = 26.0;
+        state.sinkStart = 75.0;
+        state.counterH = 44;
+        state.floorDown = false;
+      } else {
+        return false;
+      }
+      render();
+      return true;
+    },
+    getState: function () {
+      return {
+        planId: "kitchen-electrical",
+        step: state.step,
+        wall: state.step === "walls" ? state.wallTab : "all",
+        pieStart: state.pieStart,
+        sinkStart: state.sinkStart,
+        counterH: state.counterH,
+        selectedCircuit: state.selectedCircuit,
+        summary: "Kitchen Electrical & D04: step=" + state.step + (state.step === "walls" ? (" (" + state.wallTab + " wall)") : "") + ", pieStart=" + state.pieStart + "in, sinkStart=" + state.sinkStart + "in, counterH=" + state.counterH + "in."
+      };
+    }
+  };
 
   function boot() {
     if (window.U4PlanNav) {
@@ -741,6 +821,8 @@
         headerEl: document.getElementById("u4hTopbar"),
         onLangChange: function () { render(); if (window.U4LiveAi) window.U4LiveAi.refreshPrompts(); }
       });
+      var bp = window.U4PlanNav.getBootParams ? window.U4PlanNav.getBootParams() : {};
+      if (bp.wall || bp.step) applyKelecView(bp);
     }
     if (window.U4LiveAi) {
       window.U4LiveAi.init({

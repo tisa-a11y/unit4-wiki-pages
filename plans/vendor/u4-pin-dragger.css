@@ -111,7 +111,7 @@ html[data-theme="dark"] .u4-pin-arm-btn.is-armed {
   position: absolute;
   width: 32px;
   height: 32px;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(var(--u4-inv-scale, 1));
   border-radius: 50%;
   border: 2px dashed var(--crimson, #a8281c);
   background: rgba(168, 40, 28, 0.14);

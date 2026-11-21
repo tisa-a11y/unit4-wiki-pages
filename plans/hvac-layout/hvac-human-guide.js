@@ -1159,7 +1159,88 @@
     if (nBtn) nBtn.addEventListener("click", function () { if (idx < STEPS.length - 1) { state.step = STEPS[idx + 1].id; render(); window.scrollTo(0, 0); } });
 
     if (state.step === "layout") wireAllNodeDrags();
+
+    if (window.U4PlanNav && typeof window.U4PlanNav.reportPlanContext === "function") {
+      window.U4PlanNav.reportPlanContext();
+    }
   }
+
+  function applyHvacView(args) {
+    args = args || {};
+    var changed = false;
+    var stepRaw = args.step;
+    if (stepRaw != null && stepRaw !== "") {
+      var n = Number(stepRaw);
+      if (isFinite(n) && n >= 1 && n <= STEPS.length) {
+        state.step = STEPS[n - 1].id;
+        changed = true;
+      } else {
+        var s = String(stepRaw).toLowerCase().trim();
+        var map = { plan: "layout", attic: "layout", ducts: "layout", height: "section", vent: "section", clearance: "section", mon: "walkthrough", checklist: "walkthrough" };
+        var id = map[s] || s;
+        if (STEPS.some(function (x) { return x.id === id; })) { state.step = id; changed = true; }
+      }
+    }
+    if (changed) render();
+    return changed;
+  }
+
+  window.U4PlanControl = {
+    showView: function (args) { return applyHvacView(args); },
+    applyChange: function (args) {
+      args = args || {};
+      var act = String(args.action || args.target || "").toLowerCase();
+      var val = args.value;
+      if (act === "duct_mode" || act === "mode") {
+        state.ductMode = String(val).toLowerCase().indexOf("rad") >= 0 ? "radial" : "trunk";
+      } else if (act === "discharge" || act === "discharge_dir") {
+        state.dischargeDir = String(val).toLowerCase().indexOf("left") >= 0 || String(val).toLowerCase().indexOf("west") >= 0 ? "left" : "right";
+      } else if (act === "preset" || act === "furnace_preset") {
+        var p = String(val || "").toLowerCase();
+        if (p.indexOf("cent") >= 0 || p === "close") {
+          state.nodes.f1 = { x: 204, y: 198 };
+          state.activePreset = "close";
+        } else if (p.indexOf("far") >= 0 || p.indexOf("east") >= 0) {
+          state.nodes.f1 = { x: 350, y: 248 };
+          state.activePreset = "far";
+        } else {
+          state.nodes = cloneRevP2();
+          state.dischargeDir = "right";
+          state.activePreset = "revp2";
+        }
+      } else if (act === "move_node" || state.nodes[act]) {
+        var nk = state.nodes[act] ? act : String(args.target || "").toLowerCase();
+        if (!state.nodes[nk]) return false;
+        var pos = (val && typeof val === "object") ? val : args;
+        if (pos.x != null && isFinite(Number(pos.x))) state.nodes[nk].x = Math.max(90, Math.min(440, Number(pos.x)));
+        if (pos.y != null && isFinite(Number(pos.y))) state.nodes[nk].y = Math.max(40, Math.min(272, Number(pos.y)));
+      } else if (act === "reset") {
+        state.nodes = cloneRevP2();
+        state.ductMode = "trunk";
+        state.dischargeDir = "right";
+        state.activePreset = "revp2";
+      } else {
+        return false;
+      }
+      syncBlueprintHiddenState();
+      render();
+      return true;
+    },
+    getState: function () {
+      var m = computeMetrics();
+      return {
+        planId: "hvac-layout",
+        step: state.step,
+        wall: "attic_plan",
+        ductMode: state.ductMode,
+        dischargeDir: state.dischargeDir,
+        walkFt: m.walkFt,
+        runs: { sa1: m.sa1Ft, sa2: m.sa2Ft, sa3: m.sa3Ft, ra1: m.ra1Ft },
+        nodes: state.nodes,
+        summary: "HVAC Rev P2 Manual D: step=" + state.step + ", mode=" + state.ductMode + ", discharge=" + state.dischargeDir + ", hatch=outside Front Door 4, walkway=" + m.walkFt + "ft, runs=SA1 " + m.sa1Ft + "'/SA2 " + m.sa2Ft + "'/SA3 " + m.sa3Ft + "'/RA1 " + m.ra1Ft + "'."
+      };
+    }
+  };
 
   function boot() {
     if (window.U4PlanNav) {
@@ -1168,6 +1249,8 @@
         headerEl: document.getElementById("u4hTopbar"),
         onLangChange: function () { render(); if (window.U4LiveAi) window.U4LiveAi.refreshPrompts(); }
       });
+      var bp = window.U4PlanNav.getBootParams ? window.U4PlanNav.getBootParams() : {};
+      if (bp.step) applyHvacView(bp);
     }
     if (window.U4LiveAi) {
       window.U4LiveAi.init({

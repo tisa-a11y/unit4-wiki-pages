@@ -115,3 +115,15 @@ Users MUST have a consistent drag-or-tap spot marker tool on **every interactive
     - Draggable repositioning & delete/clear controls, completely hidden on print (`no-print`).
 - **Main Wiki & Static PDF Viewer (`.viewer` in `src/template.html` — owned by `@ag-unit4-pm-macbook`):**
   - Mirror the exact same classic old-wiki `⊕ Drag / Tap to Pin Spot` pill, ghost ring, numbered pin markers, and viewport-clamped callout popup over `.viewer` PDF pages and static room photos/cards, capturing `{ docId, pdfPage, xPct, yPct }` when routing to `#u4VoiceChatDialog` or `:8791/api/unit4/wiki-intake`.
+
+---
+
+## 7. Smooth Zoom & Pan on Interactive Drawings & Reference Photos (`plans/vendor/u4-zoom-pan.{css,js}` — Wave F)
+
+Per Tisa (`2026-11-20`: *"Make the interactive images zoomable"*), every interactive SVG drawing (`.u4h-svg-wrap`, KS4 `.ks4-svg-wrap`) and every reference photo (`.u4h-photo-card`) across all 6 interactive plans MUST support smooth zoom & pan without disrupting normal scrolling, fixture dragging, or pin accuracy:
+- **Classic Old-Wiki Controls (`.u4-zoom-bar no-print`):** Slim flat toolbar directly above `.u4-zoom-viewport` (never overlapping compass roses, titles, or photo subjects) with **`−`** | **`100%`** (click to reset) | **`+`** (`100%`–`300%`), EN/ES localized labels synced to `u4_lang`, and dark/light parity.
+- **Gestures & Scroll Discipline:**
+  - `Ctrl` / `⌘` + Mouse Wheel (including macOS trackpad pinch) zooms smoothly around cursor focal point (`100%`–`300%`). Plain wheel without `Ctrl`/`⌘` NEVER intercepts normal vertical page scrolling.
+  - 2-finger touch pinch zooms smoothly around midpoint via Pointer Events multi-touch tracking (`touch-action: pan-y` at `100%`, switching to `touch-action: none` only while zoomed `> 1×`).
+  - Drag-to-pan activates **ONLY when zoom `> 1×`**, **NOT** armed for pin drop (`.is-pin-armed` / `.drop-target`), and **NOT** starting on a fixture drag handle, SVG mark, pin dot, or interactive button/input — clamped strictly to the stage bounds.
+- **1:1 Coordinate & Pin Lock:** `<svg>` / `<img>` + `.u4-pin-layer` live inside `.u4-zoom-stage` (`transform: translate3d(tx, ty, 0) scale(z)` with `--u4-inv-scale` keeping pin badges crisp); all fixture drag handlers and pin drops compute coordinates from live transformed `getBoundingClientRect()` so dragging & pinning remain 1:1 accurate at `100%`, `200%`, and `300%` zoom. Hidden cleanly on `@media print` and `body.u4-mode-blueprint`.

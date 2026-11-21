@@ -106,7 +106,7 @@
   }
 
   function dropPinOnTarget(targetEl, idx, clientX, clientY) {
-    var boxEl = (targetEl && targetEl.querySelector) ? (targetEl.querySelector(":scope > .u4-zoom-stage") || targetEl) : targetEl;
+    var boxEl = (targetEl && targetEl.querySelector) ? (targetEl.querySelector(".u4-zoom-stage") || targetEl) : targetEl;
     var rect = boxEl.getBoundingClientRect();
     if (!rect.width || !rect.height) return;
     var xPct = Math.max(4, Math.min(96, +(((clientX - rect.left) / rect.width) * 100).toFixed(1)));
@@ -188,7 +188,7 @@
       targetEl.classList.add("u4-pin-target");
       targetEl.classList.toggle("is-pin-armed", state.armed);
 
-      var stage = targetEl.querySelector(":scope > .u4-zoom-stage") || targetEl;
+      var stage = targetEl.querySelector(".u4-zoom-stage") || targetEl;
       var layer = stage.querySelector(":scope > .u4-pin-layer");
       if (!layer) {
         layer = document.createElement("div");
@@ -265,7 +265,7 @@
             if (e.pointerId !== ptrId) return;
             if (Math.hypot(e.clientX - startX, e.clientY - startY) > 4) moved = true;
             if (!moved) return;
-            var boxEl = targetEl.querySelector(":scope > .u4-zoom-stage") || targetEl;
+            var boxEl = targetEl.querySelector(".u4-zoom-stage") || targetEl;
             var r = boxEl.getBoundingClientRect();
             pin.xPct = Math.max(4, Math.min(96, +(((e.clientX - r.left) / (r.width || 1)) * 100).toFixed(1)));
             pin.yPct = Math.max(4, Math.min(96, +(((e.clientY - r.top) / (r.height || 1)) * 100).toFixed(1)));

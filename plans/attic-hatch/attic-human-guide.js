@@ -179,22 +179,22 @@
       '<line x1="34" y1="74" x2="426" y2="74" stroke="#d9a86c" stroke-width="6" stroke-dasharray="10 4" opacity="0.55"/>' +
       '<line x1="34" y1="196" x2="426" y2="196" stroke="#d9a86c" stroke-width="6" stroke-dasharray="10 4" opacity="0.55"/>' +
 
-      // West & East Landmarks
-      '<text x="40" y="65" font-size="7" font-weight="700" fill="#5d686d">' + esc(westLandmark) + "</text>" +
-      '<text x="420" y="65" text-anchor="end" font-size="7" font-weight="800" fill="#1f5f7a">' + esc(eastLandmark) + "</text>" +
+      // West & East Landmarks cleanly on top rim (zero overlap with rough-cut header below!)
+      '<text x="40" y="60" font-size="7" font-weight="700" fill="#5d686d">' + esc(westLandmark) + "</text>" +
+      '<text x="420" y="60" text-anchor="end" font-size="7" font-weight="800" fill="#1f5f7a">' + esc(eastLandmark) + "</text>" +
 
-      // Proposed outer rough cut (27.5" x 39.5")
+      // Proposed outer rough cut (27.5" x 39.5") with label cleanly inside top framing strip
       '<rect x="108" y="68" width="244" height="136" fill="#f7ecd9" fill-opacity="0.45" stroke="' + frameStroke + '" stroke-width="2" stroke-dasharray="6 4"/>' +
-      '<text x="230" y="61" text-anchor="middle" font-size="8" font-weight="800" fill="' + frameStroke + '">' + esc(frameLabel) + "</text>" +
+      '<text x="230" y="79" text-anchor="middle" font-size="7.5" font-weight="800" fill="' + frameStroke + '">' + esc(frameLabel) + "</text>" +
 
       // Locked finished clear 24" x 36"
-      '<rect x="122" y="82" width="216" height="108" fill="#e3eef2" stroke="#1f5f7a" stroke-width="2.4"/>' +
+      '<rect x="122" y="86" width="216" height="106" fill="#e3eef2" stroke="#1f5f7a" stroke-width="2.4"/>' +
 
       // Carrier/Bryant Furnace end-first footprint (14.19" x 29" scaled proportionally inside 24" x 36")
-      '<rect x="143" y="102" width="174" height="68" rx="4" fill="#e4f0e6" stroke="#2f6b3f" stroke-width="2"/>' +
-      '<text x="230" y="126" text-anchor="middle" font-size="9" font-weight="800" fill="#2f6b3f">' + (es ? "CALEFACCIÓN ENTRA DE PUNTA: PASA ✓" : "FURNACE END-FIRST: PASS ✓") + "</text>" +
-      '<text x="230" y="140" text-anchor="middle" font-size="8" font-weight="700" fill="#1d2326">14-3/16" × 29" (Carrier / Bryant 45k)</text>' +
-      '<text x="230" y="153" text-anchor="middle" font-size="7.4" font-weight="700" fill="#2f6b3f">' + (es ? '+9-3/4" de ancho y +7" de largo libres' : '+9-3/4" width & +7" length to spare') + "</text>" +
+      '<rect x="143" y="105" width="174" height="68" rx="4" fill="#e4f0e6" stroke="#2f6b3f" stroke-width="2"/>' +
+      '<text x="230" y="128" text-anchor="middle" font-size="9" font-weight="800" fill="#2f6b3f">' + (es ? "CALEFACCIÓN ENTRA DE PUNTA: PASA ✓" : "FURNACE END-FIRST: PASS ✓") + "</text>" +
+      '<text x="230" y="142" text-anchor="middle" font-size="8" font-weight="700" fill="#1d2326">14-3/16" × 29" (Carrier / Bryant 45k)</text>' +
+      '<text x="230" y="155" text-anchor="middle" font-size="7.4" font-weight="700" fill="#2f6b3f">' + (es ? '+9-3/4" de ancho y +7" de largo libres' : '+9-3/4" width & +7" length to spare') + "</text>" +
 
       // Clear dimension labels
       '<rect x="130" y="202" width="200" height="16" rx="4" fill="#ffffff" fill-opacity="0.96"/>' +
@@ -709,7 +709,76 @@
     var nBtn = document.getElementById("attNextBtn");
     if (pBtn) pBtn.addEventListener("click", function () { if (idx > 0) { state.step = STEPS[idx - 1].id; render(); window.scrollTo(0, 0); } });
     if (nBtn) nBtn.addEventListener("click", function () { if (idx < STEPS.length - 1) { state.step = STEPS[idx + 1].id; render(); window.scrollTo(0, 0); } });
+
+    if (window.U4PlanNav && typeof window.U4PlanNav.reportPlanContext === "function") {
+      window.U4PlanNav.reportPlanContext();
+    }
   }
+
+  function applyAtticView(args) {
+    args = args || {};
+    var changed = false;
+    var stepRaw = args.step;
+    if (stepRaw != null && stepRaw !== "") {
+      var n = Number(stepRaw);
+      if (isFinite(n) && n >= 1 && n <= STEPS.length) {
+        state.step = STEPS[n - 1].id;
+        changed = true;
+      } else {
+        var s = String(stepRaw).toLowerCase().trim();
+        var map = { hatch: "spot", framing: "spot", plan: "spot", clearance: "walkway", sheets: "walkway", lid: "seal", checklist: "gates", holds: "gates" };
+        var id = map[s] || s;
+        if (STEPS.some(function (x) { return x.id === id; })) { state.step = id; changed = true; }
+      }
+    }
+    if (changed) render();
+    return changed;
+  }
+
+  window.U4PlanControl = {
+    showView: function (args) { return applyAtticView(args); },
+    applyChange: function (args) {
+      args = args || {};
+      var act = String(args.action || args.target || "").toLowerCase();
+      var val = args.value;
+      if (act === "walkway_ft" || act === "walkway" || act === "walkway_length") {
+        var ft = Math.max(6, Math.min(24, Math.round(Number(val))));
+        if (!isFinite(ft)) return false;
+        state.walkwayFt = ft;
+        syncBlueprintWalkway(ft);
+      } else if (act === "hatch_location" || act === "location" || act === "spot") {
+        state.location = String(val).toLowerCase().indexOf("hall") >= 0 ? "hall" : "door4";
+        syncBlueprintWalkway(state.walkwayFt);
+      } else if (act === "fire_rating") {
+        state.fireRating = String(val || "unknown");
+      } else if (act === "joist_bay") {
+        state.joistBay = String(val || "unknown");
+      } else if (act === "reset") {
+        state.location = "door4";
+        state.walkwayFt = 18;
+        state.fireRating = "unknown";
+        state.joistBay = "unknown";
+        syncBlueprintWalkway(18);
+      } else {
+        return false;
+      }
+      render();
+      return true;
+    },
+    getState: function () {
+      return {
+        planId: "attic-hatch",
+        step: state.step,
+        wall: state.location === "door4" ? "exterior_door4_landing" : "interior_hallway",
+        location: state.location,
+        walkwayFt: state.walkwayFt,
+        sheets: calcSheets(state.walkwayFt),
+        fireRating: state.fireRating,
+        joistBay: state.joistBay,
+        summary: "Attic Hatch: step=" + state.step + ", location=" + state.location + ", lockedClear=24x36in, walkway=" + state.walkwayFt + "ft (" + calcSheets(state.walkwayFt) + " sheets)."
+      };
+    }
+  };
 
   function boot() {
     if (window.U4PlanNav) {
@@ -718,6 +787,8 @@
         headerEl: document.getElementById("u4hTopbar"),
         onLangChange: function () { render(); if (window.U4LiveAi) window.U4LiveAi.refreshPrompts(); }
       });
+      var bp = window.U4PlanNav.getBootParams ? window.U4PlanNav.getBootParams() : {};
+      if (bp.step) applyAtticView(bp);
     }
     if (window.U4LiveAi) {
       window.U4LiveAi.init({
