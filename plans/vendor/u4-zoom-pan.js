@@ -420,6 +420,7 @@
       }
     },
     setPrimaryZoom: function (z) {
+      attachAll();
       var primary = document.querySelector("#u4hBody .u4h-svg-wrap, #u4gBody .ks4-svg-wrap, #u4hBody .u4h-photo-card");
       if (primary) window.U4ZoomPan.setZoom(primary, z);
     },
