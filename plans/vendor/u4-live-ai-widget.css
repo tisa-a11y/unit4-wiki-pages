@@ -1,6 +1,7 @@
 /* ============================================================================
-   Unit 4 Interactive Plans — Live AI Chat & Voice Guidance Widget
-   Classic Old Wiki Tokens & Flat 8px Chrome · Zero External CDNs · Zero Prices
+   Unit 4 Interactive Plans — Live AI Chat & Voice Guidance Widget (Wave G)
+   Classic Old-Wiki 3-State UI (Idle Pill · Open Sheet · 48px Live Mini-Bar)
+   Zero Duplicate Mute · Flush Mobile Bottom Sheet (16px Input) · Zero Prices
    ============================================================================ */
 
 .u4-live-ai-root {
@@ -13,7 +14,13 @@
   }
 }
 
-/* Floating Bottom-Right Dock */
+/* Hide idle dock whenever dialog is open OR 48px live mini-bar is active (zero duplicate Mute!) */
+.u4-live-ai-root[data-open="true"] .u4-lai-dock,
+.u4-live-ai-root[data-live="on"] .u4-lai-dock {
+  display: none !important;
+}
+
+/* State 1: Idle Floating Bottom-Right Pill */
 .u4-lai-dock {
   position: fixed;
   right: 16px;
@@ -46,11 +53,6 @@
   transform: translateY(-1px);
 }
 
-.u4-lai-dock[data-live="on"] .u4-lai-pill {
-  background: var(--lock, #2f6b3f);
-  border-color: var(--lock, #2f6b3f);
-}
-
 .u4-lai-orb-icon {
   width: 20px;
   height: 20px;
@@ -74,47 +76,58 @@ html[data-theme="dark"] .u4-lai-badge {
   background: rgba(18, 22, 24, 0.22);
 }
 
-.u4-lai-dock[data-live="on"] .u4-lai-badge {
-  background: var(--lock-soft, #e4f0e6);
-  color: var(--lock, #2f6b3f);
-}
-
-.u4-lai-qmute {
-  padding: 7px 12px;
+/* State 3: Compact 48px Live Voice Mini-Bar (when live & dialog minimized) */
+.u4-lai-minibar {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  height: 48px;
+  z-index: 92;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
   border-radius: 999px;
-  border: 1px solid var(--line, #d9dedc);
   background: var(--panel, #ffffff);
   color: var(--fg, #1d2326);
-  font-family: var(--mono, "IBM Plex Mono", ui-monospace, monospace);
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(18, 22, 24, 0.12);
+  border: 1.5px solid var(--lock, #2f6b3f);
+  box-shadow: 0 6px 20px rgba(18, 22, 24, 0.22);
 }
 
-.u4-lai-qmute[aria-pressed="true"] {
-  background: var(--crimson-soft, #f9e6e4);
-  color: var(--crimson, #a8281c);
-  border-color: var(--crimson, #a8281c);
-}
-
-.u4-lai-qmute[hidden] {
+.u4-lai-minibar[hidden],
+.u4-live-ai-root[data-open="true"] .u4-lai-minibar {
   display: none !important;
 }
 
-/* Docked Live Guidance Drawer (Flat Classic Old Wiki Card) */
+/* 5-Bar Live Audio RMS Meter */
+.u4-lai-rms {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  height: 18px;
+}
+
+.u4-lai-rms span {
+  width: 3px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--lock, #2f6b3f);
+  transition: height 60ms linear;
+}
+
+/* State 2: Docked Classic Old-Wiki Dialog */
 .u4-lai-dialog {
   position: fixed;
   right: 16px;
-  bottom: 66px;
-  width: min(390px, calc(100vw - 24px));
-  max-height: min(620px, calc(100vh - 96px));
+  bottom: 16px;
+  width: min(400px, calc(100vw - 24px));
+  max-height: min(620px, calc(100vh - 32px));
   z-index: 95;
   background: var(--panel, #ffffff);
   color: var(--fg, #1d2326);
   border: 1px solid var(--line, #d9dedc);
   border-radius: 8px;
-  box-shadow: 0 8px 26px rgba(18, 22, 24, 0.18);
+  box-shadow: 0 8px 26px rgba(18, 22, 24, 0.22);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -125,7 +138,7 @@ html[data-theme="dark"] .u4-lai-badge {
 }
 
 .u4-lai-head {
-  padding: 10px 12px;
+  padding: 9px 12px;
   background: var(--bg, #f4f5f3);
   border-bottom: 1px solid var(--line, #d9dedc);
   display: flex;
@@ -149,7 +162,7 @@ html[data-theme="dark"] .u4-lai-badge {
   flex-shrink: 0;
 }
 
-.u4-lai-dialog[data-live="on"] .u4-lai-dot {
+.u4-live-ai-root[data-live="on"] .u4-lai-dot {
   background: var(--lock, #2f6b3f);
   box-shadow: 0 0 0 3px rgba(47, 107, 63, 0.22);
 }
@@ -206,13 +219,13 @@ html[data-theme="dark"] .u4-lai-badge {
 }
 
 .u4-lai-close {
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   border-radius: 999px;
   border: 1px solid var(--line, #d9dedc);
   background: transparent;
   color: var(--muted, #5d686d);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
   display: inline-flex;
@@ -222,18 +235,22 @@ html[data-theme="dark"] .u4-lai-badge {
 
 .u4-lai-status {
   margin: 0;
-  padding: 6px 12px;
+  padding: 5px 12px;
   font-family: var(--mono, "IBM Plex Mono", ui-monospace, monospace);
   font-size: 11px;
   color: var(--muted, #5d686d);
   background: var(--panel, #ffffff);
   border-bottom: 1px solid var(--line, #d9dedc);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 }
 
 .u4-lai-log {
   flex: 1;
   min-height: 150px;
-  max-height: 280px;
+  max-height: 320px;
   overflow-y: auto;
   padding: 10px 12px;
   display: flex;
@@ -275,22 +292,60 @@ html[data-theme="dark"] .u4-lai-badge {
   text-align: center;
 }
 
+.u4-lai-snap-card {
+  align-self: flex-start;
+  max-width: 92%;
+  padding: 6px;
+  border-radius: 8px;
+  background: var(--panel, #ffffff);
+  border: 1px solid var(--line, #d9dedc);
+}
+
+.u4-lai-snap-card img {
+  display: block;
+  width: 100%;
+  max-height: 180px;
+  object-fit: contain;
+  border-radius: 4px;
+  background: #ffffff;
+}
+
+.u4-lai-snap-cap {
+  margin-top: 4px;
+  font-family: var(--mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 10.5px;
+  color: var(--muted, #5d686d);
+}
+
 .u4-lai-foot {
-  padding: 9px 11px 11px;
+  padding: 8px 10px calc(10px + env(safe-area-inset-bottom, 0px));
   background: var(--panel, #ffffff);
   border-top: 1px solid var(--line, #d9dedc);
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 6px;
 }
 
+/* Auto-collapsing horizontal scrolling quick-prompt chips (never stacked clutter!) */
 .u4-lai-chips {
   display: flex;
   gap: 5px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.u4-lai-chips::-webkit-scrollbar {
+  display: none;
+}
+
+.u4-lai-chips[hidden] {
+  display: none !important;
 }
 
 .u4-lai-chip {
+  flex-shrink: 0;
   padding: 4px 9px;
   border-radius: 999px;
   border: 1px solid var(--line, #d9dedc);
@@ -299,36 +354,12 @@ html[data-theme="dark"] .u4-lai-badge {
   font-size: 11.5px;
   font-weight: 600;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .u4-lai-chip:hover {
   background: var(--accent-soft, #e3eef2);
   border-color: var(--accent, #1f5f7a);
-}
-
-.u4-lai-tools-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.u4-lai-tool-btn {
-  padding: 4px 9px;
-  border-radius: 6px;
-  border: 1px solid var(--line, #d9dedc);
-  background: var(--bg, #f4f5f3);
-  color: var(--fg, #1d2326);
-  font-family: var(--mono, "IBM Plex Mono", ui-monospace, monospace);
-  font-size: 11px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.u4-lai-tool-btn:hover {
-  border-color: var(--accent, #1f5f7a);
-  color: var(--accent, #1f5f7a);
-  background: var(--accent-soft, #e3eef2);
 }
 
 .u4-lai-photo-bar {
@@ -352,22 +383,45 @@ html[data-theme="dark"] .u4-lai-badge {
   border-radius: 4px;
 }
 
+/* Single-Row Compact Composer */
 .u4-lai-form {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
+}
+
+.u4-lai-icon-btn {
+  width: 32px;
+  height: 34px;
+  border-radius: 6px;
+  border: 1px solid var(--line, #d9dedc);
+  background: var(--bg, #f4f5f3);
+  color: var(--fg, #1d2326);
+  font-size: 14px;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.u4-lai-icon-btn.is-active {
+  background: var(--accent-soft, #e3eef2);
+  border-color: var(--accent, #1f5f7a);
+  color: var(--accent, #1f5f7a);
 }
 
 .u4-lai-input {
   flex: 1;
   min-width: 0;
-  padding: 7px 11px;
+  height: 34px;
+  padding: 0 10px;
   border-radius: 6px;
   border: 1px solid var(--line, #d9dedc);
   background: var(--bg, #f4f5f3);
   color: var(--fg, #1d2326);
   font-family: inherit;
-  font-size: 13.5px;
+  font-size: 14px;
 }
 
 .u4-lai-input:focus {
@@ -388,14 +442,39 @@ html[data-theme="dark"] .u4-lai-badge {
   flex-shrink: 0;
 }
 
-@media (max-width: 480px) {
+/* Flush Mobile Bottom Sheet (<= 640px): Zero peeking gap + 16px input (no iOS zoom) */
+@media (max-width: 640px) {
   .u4-lai-dock {
-    right: 10px;
+    right: 12px;
     bottom: 12px;
   }
+  .u4-lai-minibar {
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    justify-content: space-between;
+  }
   .u4-lai-dialog {
-    right: 8px;
-    bottom: 62px;
-    width: calc(100vw - 16px);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 100%;
+    max-height: 78vh;
+    border-radius: 12px 12px 0 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+  }
+  .u4-lai-input {
+    font-size: 16px;
+    height: 38px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .u4-lai-pill,
+  .u4-lai-rms span {
+    transition: none !important;
   }
 }

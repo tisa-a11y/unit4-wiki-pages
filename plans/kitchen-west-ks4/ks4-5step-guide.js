@@ -3065,6 +3065,84 @@
       setLang: (l) => { state.lang = l === "es" ? "es" : "en"; if (window.U4PLAN) window.U4PLAN.setLang(state.lang); renderAll(); },
       setMode: (m) => setAppMode(m)
     };
+
+    function applyKs4View(args) {
+      args = args || {};
+      var stepRaw = args.step;
+      var target = null;
+      if (stepRaw != null && stepRaw !== "") {
+        var n = Number(stepRaw);
+        if (isFinite(n) && n >= 1 && n <= INSTALL_STEPS.length) {
+          target = INSTALL_STEPS[n - 1];
+        } else {
+          var s = String(stepRaw).toLowerCase().trim();
+          var map = {
+            layout: "ks4-live", step1: "ks4-live", wall: "ks4-live", west: "ks4-live",
+            blocking: "hood-s1", step2: "hood-s1",
+            vent: "hood-s2", "15a": "hood-s2", step3: "hood-s2",
+            gas: "range-gas", outlet: "range-gas", step4: "range-gas",
+            tile: "tile-plan", step5: "tile-plan"
+          };
+          target = map[s] || (INSTALL_STEPS.indexOf(s) >= 0 ? s : null);
+        }
+      }
+      if (target) {
+        openPlan(target);
+        if (window.U4PlanNav && typeof window.U4PlanNav.reportPlanContext === "function") {
+          window.U4PlanNav.reportPlanContext();
+        }
+        return true;
+      }
+      return false;
+    }
+
+    window.U4PlanControl = {
+      showView: (args) => applyKs4View(args),
+      applyChange: (args) => {
+        args = args || {};
+        var act = String(args.action || args.target || "").toLowerCase();
+        var val = args.value;
+        if (act === "hood_aff" || act === "hood_height" || act === "hood") {
+          var aff = Math.max(64, Math.min(74, Math.round(Number(val))));
+          if (!isFinite(aff)) return false;
+          state.hoodAff = aff;
+          renderAll();
+          if (window.U4PlanNav) window.U4PlanNav.reportPlanContext();
+          return true;
+        }
+        if (act === "floor_installed" || act === "floor_down" || act === "floor") {
+          state.floorInstalled = val === true || val === "yes" || val === "done" || val === "true";
+          renderAll();
+          if (window.U4PlanNav) window.U4PlanNav.reportPlanContext();
+          return true;
+        }
+        if (act === "reset") {
+          state.hoodAff = 68;
+          state.floorInstalled = false;
+          renderAll();
+          if (window.U4PlanNav) window.U4PlanNav.reportPlanContext();
+          return true;
+        }
+        return false;
+      },
+      getState: () => ({
+        planId: "kitchen-west-ks4",
+        step: currentSheetKey() || state.activeTab,
+        wall: "west",
+        hoodAff: state.hoodAff,
+        floorInstalled: state.floorInstalled,
+        studLayout: state.studLayout,
+        ductMode: state.ductMode,
+        tileTrim: state.tileTrim,
+        summary: "Kitchen West Range & Hood Wall: step=" + (currentSheetKey() || state.activeTab) + ", hoodBottomAFF=" + state.hoodAff + "in, floorInstalled=" + state.floorInstalled + "."
+      })
+    };
+
+    if (window.U4PlanNav && typeof window.U4PlanNav.getBootParams === "function") {
+      var bp = window.U4PlanNav.getBootParams();
+      if (bp.step) applyKs4View(bp);
+      window.U4PlanNav.reportPlanContext();
+    }
   }
 
   if (document.readyState === "loading") {

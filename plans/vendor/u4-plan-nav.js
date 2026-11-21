@@ -1,5 +1,6 @@
 /* ============================================================================
-   Unit 4 Interactive Plans — Unified Top Bar, Sibling Switcher & Print Bridge
+   Unit 4 Interactive Plans — Unified Top Bar, Sibling Switcher, Print Bridge
+   & Wave G Persistent Shell Iframe Bridge (Auto-Wrap + postMessage + Snapshot)
    Global App-Wide EN/ES & Dark/Light Sync (u4_lang / u4_theme + ?lang=/?theme=)
    Classic Old Wiki Chrome · Zero External CDNs · Escape-Safe Popover
    ============================================================================ */
@@ -117,27 +118,88 @@
     return "light";
   }
 
+  function detectPlanIdFromPath() {
+    var path = String(window.location.pathname || "");
+    for (var i = 0; i < ALL_PLANS.length; i++) {
+      if (path.indexOf("/" + ALL_PLANS[i].id + "/") >= 0) return ALL_PLANS[i].id;
+    }
+    return "kitchen-floor-plan";
+  }
+
   var params = new URLSearchParams(window.location.search || "");
+  var initialPlanId = detectPlanIdFromPath();
+  var initialLang = resolveInitialLang(params);
+  var initialTheme = resolveInitialTheme(params);
+  var isTopLevel = false;
+  try { isTopLevel = (window.self === window.top); } catch (_) { isTopLevel = false; }
+  var isEmbedded = !isTopLevel || params.has("embedded");
+
+  /* Wave G: Auto-wrap direct top-level plan visits into persistent index.html#plan:<planId> shell
+     so Live AI voice/chat & transcript persist unbroken across the entire Unit 4 site.
+     Preserves ?print=1, ?standalone=1, #view=blueprint, file:// local SMB opens, and iframes! */
+  if (
+    isTopLevel &&
+    !params.has("print") &&
+    !params.has("standalone") &&
+    !params.has("embedded") &&
+    window.location.hash !== "#view=blueprint" &&
+    window.location.protocol !== "file:"
+  ) {
+    var hashParts = [];
+    if (params.get("step")) hashParts.push("step=" + encodeURIComponent(params.get("step")));
+    if (params.get("wall")) hashParts.push("wall=" + encodeURIComponent(params.get("wall")));
+    if (params.get("zoom")) hashParts.push("zoom=" + encodeURIComponent(params.get("zoom")));
+    var wrapTarget =
+      "../../index.html?lang=" + encodeURIComponent(initialLang) +
+      "&theme=" + encodeURIComponent(initialTheme) +
+      "#plan:" + encodeURIComponent(initialPlanId) +
+      (hashParts.length ? "?" + hashParts.join("&") : "");
+    try {
+      window.location.replace(wrapTarget);
+    } catch (_) {}
+  }
+
   var state = {
-    planId: "kitchen-floor-plan",
-    lang: resolveInitialLang(params),
-    theme: resolveInitialTheme(params),
+    planId: initialPlanId,
+    lang: initialLang,
+    theme: initialTheme,
     mode: params.get("print") === "1" ? "blueprint" : "human",
     menuOpen: false,
     onLangChange: null,
     onThemeChange: null,
-    headerEl: null
+    headerEl: null,
+    ctxTimer: null
   };
 
   /* Apply immediately on script execution to prevent light/dark flash */
   document.documentElement.lang = state.lang;
   document.documentElement.setAttribute("data-theme", state.theme);
+  if (isEmbedded) {
+    document.documentElement.setAttribute("data-u4-embedded", "1");
+  }
+
+  function postToParent(payload) {
+    if (!isEmbedded || !window.parent || window.parent === window) return;
+    try {
+      window.parent.postMessage(payload, "*");
+    } catch (_) {}
+  }
 
   function getPlanMeta(id) {
     for (var i = 0; i < ALL_PLANS.length; i++) {
       if (ALL_PLANS[i].id === id) return ALL_PLANS[i];
     }
     return ALL_PLANS[0];
+  }
+
+  function matchPlanIdFromHref(href) {
+    if (!href) return null;
+    for (var i = 0; i < ALL_PLANS.length; i++) {
+      if (href.indexOf("/" + ALL_PLANS[i].id + "/") >= 0 || href.indexOf(ALL_PLANS[i].id + "/index.html") >= 0) {
+        return ALL_PLANS[i].id;
+      }
+    }
+    return null;
   }
 
   function esc(s) {
@@ -150,7 +212,8 @@
 
   function planUrl(id) {
     var m = getPlanMeta(id);
-    return m.rel + "?lang=" + state.lang + "&theme=" + state.theme;
+    var suffix = params.has("standalone") ? "&standalone=1" : (params.has("embedded") ? "&embedded=1" : "");
+    return m.rel + "?lang=" + state.lang + "&theme=" + state.theme + suffix;
   }
 
   function wikiBackUrl() {
@@ -232,6 +295,227 @@
     }
   }
 
+  function getFullPlanState() {
+    var cur = getPlanMeta(state.planId);
+    var ctrlState = (window.U4PlanControl && typeof window.U4PlanControl.getState === "function")
+      ? window.U4PlanControl.getState()
+      : {};
+    var zoom = (window.U4ZoomPan && typeof window.U4ZoomPan.getPrimaryZoom === "function")
+      ? window.U4ZoomPan.getPrimaryZoom()
+      : 1;
+    return Object.assign({
+      planId: state.planId,
+      room: cur.roomHash,
+      title: state.lang === "es" ? cur.labelEs : cur.labelEn,
+      lang: state.lang,
+      theme: state.theme,
+      zoom: Math.round(zoom * 100) + "%",
+      zoomScale: zoom
+    }, ctrlState || {});
+  }
+
+  function reportPlanContext(extra) {
+    if (!isEmbedded) return;
+    clearTimeout(state.ctxTimer);
+    state.ctxTimer = setTimeout(function () {
+      var full = getFullPlanState();
+      if (extra && typeof extra === "object") Object.assign(full, extra);
+      postToParent({
+        type: "u4:plan-context",
+        planId: full.planId,
+        room: full.room,
+        title: full.title,
+        step: full.step || "",
+        wall: full.wall || "",
+        zoom: full.zoom || "100%",
+        summary: full.summary || "",
+        state: full
+      });
+    }, 40);
+  }
+
+  function drawPinOverlaysOnCanvas(ctx, hostEl, canvasW, canvasH) {
+    if (!hostEl) return;
+    var dots = hostEl.querySelectorAll(".u4-pin-dot");
+    if (!dots || !dots.length) return;
+    for (var i = 0; i < dots.length; i++) {
+      var xPct = parseFloat(dots[i].style.left);
+      var yPct = parseFloat(dots[i].style.top);
+      if (!isFinite(xPct) || !isFinite(yPct)) continue;
+      var cx = (xPct / 100) * canvasW;
+      var cy = (yPct / 100) * canvasH;
+      var r = Math.max(14, Math.round(canvasW * 0.018));
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(168, 40, 28, 0.16)";
+      ctx.fill();
+      ctx.lineWidth = 3;
+      ctx.setLineDash([5, 3]);
+      ctx.strokeStyle = "#a8281c";
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.beginPath();
+      ctx.arc(cx, cy, Math.max(9, Math.round(r * 0.56)), 0, Math.PI * 2);
+      ctx.fillStyle = "#a8281c";
+      ctx.fill();
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "bold " + Math.max(11, Math.round(r * 0.72)) + "px sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(String(i + 1), cx, cy + 1);
+      ctx.restore();
+    }
+  }
+
+  function captureActivePlanSnapshot(opts) {
+    opts = opts || {};
+    var full = getFullPlanState();
+    var targetPref = String(opts.target || "").toLowerCase();
+    var root = document.getElementById("u4hBody") || document.getElementById("u4gBody") || document.body;
+    var svgEl = null;
+    var imgEl = null;
+
+    if (targetPref === "photo") {
+      imgEl = root.querySelector(".u4h-photo-card img");
+    }
+    if (!imgEl) {
+      var svgs = root.querySelectorAll(".u4h-svg-wrap svg, .ks4-svg-wrap svg, svg");
+      for (var i = 0; i < svgs.length; i++) {
+        var r = svgs[i].getBoundingClientRect();
+        if (r.width > 40 && r.height > 40) { svgEl = svgs[i]; break; }
+      }
+      if (!svgEl) imgEl = root.querySelector(".u4h-photo-card img, img");
+    }
+
+    var label = opts.label || (full.title + (full.wall ? " (" + full.wall + ")" : "") + (full.step ? " — " + full.step : ""));
+
+    return new Promise(function (resolve) {
+      function fallbackCanvas(errNote) {
+        var c = document.createElement("canvas");
+        c.width = 800;
+        c.height = 420;
+        var ctx = c.getContext("2d");
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, c.width, c.height);
+        ctx.strokeStyle = "#1f5f7a";
+        ctx.lineWidth = 4;
+        ctx.strokeRect(12, 12, c.width - 24, c.height - 24);
+        ctx.fillStyle = "#1d2326";
+        ctx.font = "bold 24px sans-serif";
+        ctx.fillText(label.slice(0, 60), 32, 70);
+        ctx.font = "16px sans-serif";
+        ctx.fillStyle = "#5d686d";
+        ctx.fillText(String(full.summary || errNote || "Unit 4 Interactive Plan").slice(0, 96), 32, 118);
+        var dataUrl = c.toDataURL("image/jpeg", 0.85);
+        resolve({
+          dataUrl: dataUrl,
+          base64: dataUrl.split(",")[1] || "",
+          mimeType: "image/jpeg",
+          width: c.width,
+          height: c.height,
+          planId: full.planId,
+          step: full.step || "",
+          wall: full.wall || "",
+          label: label
+        });
+      }
+
+      if (svgEl) {
+        try {
+          var hostEl = svgEl.closest(".u4h-svg-wrap, .ks4-svg-wrap");
+          var vb = svgEl.viewBox && svgEl.viewBox.baseVal;
+          var vbW = (vb && vb.width) ? vb.width : (svgEl.getBoundingClientRect().width || 460);
+          var vbH = (vb && vb.height) ? vb.height : (svgEl.getBoundingClientRect().height || 300);
+          var outW = Math.min(1200, Math.max(640, Math.round(vbW * 2)));
+          var outH = Math.max(320, Math.round((outW / vbW) * vbH));
+
+          var clone = svgEl.cloneNode(true);
+          clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+          clone.setAttribute("width", String(outW));
+          clone.setAttribute("height", String(outH));
+          if (!clone.getAttribute("viewBox")) {
+            clone.setAttribute("viewBox", "0 0 " + vbW + " " + vbH);
+          }
+          var styleEl = document.createElementNS("http://www.w3.org/2000/svg", "style");
+          styleEl.textContent = "text{font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,Arial,sans-serif;}";
+          clone.insertBefore(styleEl, clone.firstChild);
+
+          var xml = new XMLSerializer().serializeToString(clone);
+          var svgDataUrl = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(xml);
+          var img = new Image();
+          img.onload = function () {
+            try {
+              var canvas = document.createElement("canvas");
+              canvas.width = outW;
+              canvas.height = outH;
+              var ctx = canvas.getContext("2d");
+              ctx.fillStyle = "#ffffff";
+              ctx.fillRect(0, 0, outW, outH);
+              ctx.drawImage(img, 0, 0, outW, outH);
+              drawPinOverlaysOnCanvas(ctx, hostEl, outW, outH);
+              var dataUrl = canvas.toDataURL("image/jpeg", 0.86);
+              resolve({
+                dataUrl: dataUrl,
+                base64: dataUrl.split(",")[1] || "",
+                mimeType: "image/jpeg",
+                width: outW,
+                height: outH,
+                planId: full.planId,
+                step: full.step || "",
+                wall: full.wall || "",
+                label: label
+              });
+            } catch (e) {
+              fallbackCanvas(String(e));
+            }
+          };
+          img.onerror = function () { fallbackCanvas("svg_render_error"); };
+          img.src = svgDataUrl;
+          return;
+        } catch (e) {
+          fallbackCanvas(String(e));
+          return;
+        }
+      }
+
+      if (imgEl && imgEl.complete && imgEl.naturalWidth > 0) {
+        try {
+          var photoHost = imgEl.closest(".u4h-photo-card");
+          var scale = Math.min(1, 1200 / imgEl.naturalWidth);
+          var pw = Math.max(320, Math.round(imgEl.naturalWidth * scale));
+          var ph = Math.max(240, Math.round(imgEl.naturalHeight * scale));
+          var c2 = document.createElement("canvas");
+          c2.width = pw;
+          c2.height = ph;
+          var ctx2 = c2.getContext("2d");
+          ctx2.fillStyle = "#ffffff";
+          ctx2.fillRect(0, 0, pw, ph);
+          ctx2.drawImage(imgEl, 0, 0, pw, ph);
+          drawPinOverlaysOnCanvas(ctx2, photoHost, pw, ph);
+          var d2 = c2.toDataURL("image/jpeg", 0.86);
+          resolve({
+            dataUrl: d2,
+            base64: d2.split(",")[1] || "",
+            mimeType: "image/jpeg",
+            width: pw,
+            height: ph,
+            planId: full.planId,
+            step: full.step || "",
+            wall: full.wall || "",
+            label: label
+          });
+          return;
+        } catch (e) {
+          fallbackCanvas(String(e));
+          return;
+        }
+      }
+
+      fallbackCanvas("no_visual_element");
+    });
+  }
+
   function renderHeader() {
     var host = state.headerEl;
     if (!host) return;
@@ -244,7 +528,7 @@
       segHtml = '<div class="u4h-seg-switch" role="navigation" aria-label="' + (es ? "Planos relacionados" : "Related plans") + '">' +
         siblings.map(function (s) {
           var active = s.id === cur.id;
-          return '<a class="u4h-seg-item' + (active ? " is-active" : "") + '" href="' + esc(planUrl(s.id)) + '"' + (active ? ' aria-current="page"' : "") + '>' +
+          return '<a class="u4h-seg-item' + (active ? " is-active" : "") + '" data-plan-id="' + s.id + '" href="' + esc(planUrl(s.id)) + '"' + (active ? ' aria-current="page"' : "") + '>' +
             esc(es ? s.shortEs : s.shortEn) + '</a>';
         }).join("") +
         "</div>";
@@ -257,7 +541,7 @@
       '<div id="u4hAllPlansPop" class="u4h-plans-pop"' + (state.menuOpen ? "" : " hidden") + ">" +
         ALL_PLANS.map(function (p) {
           var isCur = p.id === cur.id;
-          return '<a href="' + esc(planUrl(p.id)) + '" class="' + (isCur ? "is-current" : "") + '">' +
+          return '<a href="' + esc(planUrl(p.id)) + '" data-plan-id="' + p.id + '" class="' + (isCur ? "is-current" : "") + '">' +
             '<span>' + (isCur ? "✓ " : "") + esc(es ? p.labelEs : p.labelEn) + "</span>" +
             '<span class="u4h-pop-room">' + esc(es ? p.roomEs : p.roomEn) + "</span>" +
           "</a>";
@@ -267,7 +551,7 @@
 
     host.innerHTML =
       '<div class="u4h-nav-left">' +
-        '<a class="u4h-nav-link" href="' + esc(wikiBackUrl()) + '">&larr; ' + esc(es ? ("Volver a " + cur.roomEs) : ("Back to " + cur.roomEn)) + "</a>" +
+        '<a class="u4h-nav-link" id="u4hBackLink" href="' + esc(wikiBackUrl()) + '">&larr; ' + esc(es ? ("Volver a " + cur.roomEs) : ("Back to " + cur.roomEn)) + "</a>" +
         segHtml +
         menuHtml +
       "</div>" +
@@ -276,6 +560,28 @@
         '<button type="button" id="u4hThemeBtn" class="u4h-mini-btn">' + (state.theme === "dark" ? (es ? "☀ Claro" : "☀ Light") : (es ? "☾ Oscuro" : "☾ Dark")) + "</button>" +
         '<button type="button" id="u4hPdfBtn" class="u4h-mini-btn primary">' + (es ? "Imprimir / PDF" : "Print / PDF") + "</button>" +
       "</div>";
+
+    var backLink = document.getElementById("u4hBackLink");
+    if (backLink && isEmbedded) {
+      backLink.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        postToParent({ type: "u4:nav-wiki", room: cur.roomHash, href: wikiBackUrl() });
+      });
+    }
+
+    if (isEmbedded) {
+      host.querySelectorAll("[data-plan-id]").forEach(function (a) {
+        a.addEventListener("click", function (ev) {
+          var targetId = a.getAttribute("data-plan-id");
+          if (!targetId) return;
+          ev.preventDefault();
+          closeAllPlansMenu(false);
+          if (targetId !== state.planId) {
+            postToParent({ type: "u4:nav-plan", planId: targetId });
+          }
+        });
+      });
+    }
 
     var allBtn = document.getElementById("u4hAllPlansBtn");
     var pop = document.getElementById("u4hAllPlansPop");
@@ -295,6 +601,8 @@
       applyThemeAndLang();
       renderHeader();
       if (typeof state.onLangChange === "function") state.onLangChange(state.lang);
+      postToParent({ type: "u4:sync-pref", lang: state.lang, theme: state.theme });
+      reportPlanContext();
     });
 
     document.getElementById("u4hThemeBtn").addEventListener("click", function () {
@@ -304,17 +612,35 @@
       applyThemeAndLang();
       renderHeader();
       if (typeof state.onThemeChange === "function") state.onThemeChange(state.theme);
+      postToParent({ type: "u4:sync-pref", lang: state.lang, theme: state.theme });
     });
 
     document.getElementById("u4hPdfBtn").addEventListener("click", triggerPrintPdf);
   }
 
+  /* Intercept in-body cross-plan links (e.g. "Open Range Wall ->") when embedded in persistent shell */
   document.addEventListener("click", function (ev) {
-    if (!state.menuOpen) return;
-    var pop = document.getElementById("u4hAllPlansPop");
-    var btn = document.getElementById("u4hAllPlansBtn");
-    if (pop && !pop.contains(ev.target) && btn && !btn.contains(ev.target)) {
-      closeAllPlansMenu(false);
+    if (state.menuOpen) {
+      var pop = document.getElementById("u4hAllPlansPop");
+      var btn = document.getElementById("u4hAllPlansBtn");
+      if (pop && !pop.contains(ev.target) && btn && !btn.contains(ev.target)) {
+        closeAllPlansMenu(false);
+      }
+    }
+    if (!isEmbedded) return;
+    var a = ev.target && ev.target.closest ? ev.target.closest("a[href]") : null;
+    if (!a || (state.headerEl && state.headerEl.contains(a))) return;
+    var href = a.getAttribute("href") || "";
+    var targetPlan = matchPlanIdFromHref(href);
+    if (targetPlan) {
+      ev.preventDefault();
+      postToParent({ type: "u4:nav-plan", planId: targetPlan });
+      return;
+    }
+    if (href.indexOf("../../index.html") === 0) {
+      ev.preventDefault();
+      var hashPart = href.indexOf("#") >= 0 ? href.split("#")[1] : getPlanMeta(state.planId).roomHash;
+      postToParent({ type: "u4:nav-wiki", room: hashPart, href: href });
     }
   });
 
@@ -322,6 +648,87 @@
     if (ev.key === "Escape" && state.menuOpen) {
       ev.preventDefault();
       closeAllPlansMenu(true);
+    }
+  });
+
+  /* Parent -> Child Persistent Shell Bridge (u4:set-pref & u4:plan-cmd) */
+  window.addEventListener("message", async function (ev) {
+    var msg = ev && ev.data;
+    if (!msg || typeof msg !== "object" || typeof msg.type !== "string") return;
+
+    if (msg.type === "u4:set-pref") {
+      var langChanged = false;
+      var themeChanged = false;
+      if ((msg.lang === "en" || msg.lang === "es") && msg.lang !== state.lang) {
+        state.lang = msg.lang;
+        writePref("u4_lang", state.lang);
+        langChanged = true;
+      }
+      if ((msg.theme === "light" || msg.theme === "dark") && msg.theme !== state.theme) {
+        state.theme = msg.theme;
+        writePref("u4_theme", state.theme);
+        themeChanged = true;
+      }
+      if (langChanged || themeChanged) {
+        syncUrlSearchParams();
+        applyThemeAndLang();
+        renderHeader();
+        if (langChanged && typeof state.onLangChange === "function") state.onLangChange(state.lang);
+        if (themeChanged && typeof state.onThemeChange === "function") state.onThemeChange(state.theme);
+        reportPlanContext();
+      }
+      return;
+    }
+
+    if (msg.type === "u4:plan-cmd") {
+      var cmd = String(msg.cmd || "");
+      var reqId = msg.id || null;
+      var args = (msg.args && typeof msg.args === "object") ? msg.args : msg;
+      try {
+        if (cmd === "show_plan_view") {
+          if (window.U4PlanControl && typeof window.U4PlanControl.showView === "function") {
+            window.U4PlanControl.showView(args);
+          }
+          if (args.zoom != null && args.zoom !== "" && window.U4ZoomPan) {
+            window.U4ZoomPan.setPrimaryZoom(args.zoom);
+          }
+          var stView = getFullPlanState();
+          reportPlanContext();
+          postToParent({ type: "u4:plan-cmd-result", id: reqId, ok: true, cmd: cmd, result: stView });
+          return;
+        }
+
+        if (cmd === "update_plan_state") {
+          var handled = false;
+          if (window.U4PlanControl && typeof window.U4PlanControl.applyChange === "function") {
+            handled = window.U4PlanControl.applyChange(args) !== false;
+          }
+          var actLow = String(args.action || "").toLowerCase();
+          if ((actLow === "zoom" || actLow === "set_zoom" || String(args.target || "").toLowerCase() === "zoom") && window.U4ZoomPan) {
+            window.U4ZoomPan.setPrimaryZoom(args.value != null ? args.value : args.zoom);
+            handled = true;
+          }
+          var stUpd = getFullPlanState();
+          reportPlanContext();
+          postToParent({ type: "u4:plan-cmd-result", id: reqId, ok: true, cmd: cmd, handled: handled, result: stUpd });
+          return;
+        }
+
+        if (cmd === "get_plan_state") {
+          postToParent({ type: "u4:plan-cmd-result", id: reqId, ok: true, cmd: cmd, result: getFullPlanState() });
+          return;
+        }
+
+        if (cmd === "capture_snapshot" || cmd === "capture_screen_snapshot") {
+          var snap = await captureActivePlanSnapshot(args);
+          postToParent({ type: "u4:plan-cmd-result", id: reqId, ok: true, cmd: cmd, result: snap });
+          return;
+        }
+
+        postToParent({ type: "u4:plan-cmd-result", id: reqId, ok: false, cmd: cmd, error: "unknown_cmd" });
+      } catch (err) {
+        postToParent({ type: "u4:plan-cmd-result", id: reqId, ok: false, cmd: cmd, error: String(err && err.message ? err.message : err) });
+      }
     }
   });
 
@@ -366,9 +773,24 @@
           setMode("human");
         }
       });
+
+      // Notify parent persistent shell once initial plan render completes
+      reportPlanContext();
     },
     getLang: function () { return state.lang; },
     getTheme: function () { return state.theme; },
+    getPlanId: function () { return state.planId; },
+    isEmbedded: function () { return isEmbedded; },
+    getBootParams: function () {
+      return {
+        step: params.get("step") || "",
+        wall: params.get("wall") || "",
+        zoom: params.get("zoom") || ""
+      };
+    },
+    postToParent: postToParent,
+    reportPlanContext: reportPlanContext,
+    captureActivePlanSnapshot: captureActivePlanSnapshot,
     planUrl: planUrl,
     wikiBackUrl: wikiBackUrl,
     renderHeader: renderHeader,

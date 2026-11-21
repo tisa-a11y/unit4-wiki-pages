@@ -1,7 +1,12 @@
 /* ============================================================================
-   Unit 4 Interactive Plans — Live AI Chat & Voice Guidance Widget
-   Zero External CDNs · Zero Prices · Zero Storage · Bilingual EN / MX-ES
-   Wired to Mac mini :8791 (/api/unit4/voice-token, /knowledge, /wiki-intake)
+   Unit 4 Interactive Plans — Live AI Chat & Voice Guidance Widget (Wave G)
+   - Embedded in Persistent Shell (iframe / ?embedded=1): ZERO duplicate DOM/WS;
+     forwards Ask AI / Field Note triggers via window.parent.postMessage('u4:ai-open')
+   - Standalone (?standalone=1 / local): Full R9 msg.toolCall handler
+     (show_plan_view, update_plan_state, capture_screen_snapshot, knowledge, intake),
+     single shared AudioContext resumed AFTER getUserMedia, box-averaged 16kHz PCM,
+     AudioWorklet (ScriptProcessor 2048 -> GainNode(0) fallback), 5-bar RMS meter,
+     audioStreamEnd on Mute, strict single-language context & Classic 3-State UI
    ============================================================================ */
 (function () {
   "use strict";
@@ -10,6 +15,10 @@
   var VOICE_TOKEN_URL = BACKEND_ORIGIN + "/api/unit4/voice-token";
   var KNOWLEDGE_URL = BACKEND_ORIGIN + "/api/unit4/knowledge";
   var INTAKE_URL = BACKEND_ORIGIN + "/api/unit4/wiki-intake";
+
+  var params = new URLSearchParams(window.location.search || "");
+  var isEmbedded = false;
+  try { isEmbedded = (window.self !== window.top) || params.has("embedded"); } catch (_) { isEmbedded = true; }
 
   var cfg = {
     planId: "unit4-plan",
@@ -26,11 +35,13 @@
     liveActive: false,
     liveConnecting: false,
     muted: false,
+    hasUserMsg: false,
     ws: null,
     micStream: null,
-    inCtx: null,
-    outCtx: null,
-    processor: null,
+    audioCtx: null,
+    captureNode: null,
+    muteGain: null,
+    workletUrl: null,
     playCursor: 0,
     playSources: [],
     generation: 0,
@@ -52,26 +63,48 @@
       .replace(/"/g, "&quot;");
   }
 
-  function pcm16ToBase64(float32Arr, inRate) {
+  /* Anti-aliased box-averaged downsampler (e.g. 48kHz -> 16kHz PCM16LE base64) + RMS */
+  function downsampleBoxAvg16k(float32Arr, inRate) {
     var outRate = 16000;
     var ratio = inRate / outRate;
     var outLen = Math.max(1, Math.floor(float32Arr.length / ratio));
     var buf = new ArrayBuffer(outLen * 2);
     var view = new DataView(buf);
+    var sumSq = 0;
+
     for (var i = 0; i < outLen; i++) {
-      var idx = Math.min(float32Arr.length - 1, Math.floor(i * ratio));
-      var sample = Math.max(-1, Math.min(1, float32Arr[idx]));
+      var start = Math.floor(i * ratio);
+      var end = Math.min(float32Arr.length, Math.max(start + 1, Math.floor((i + 1) * ratio)));
+      var acc = 0;
+      for (var k = start; k < end; k++) acc += float32Arr[k];
+      var sample = Math.max(-1, Math.min(1, acc / (end - start)));
+      sumSq += sample * sample;
       view.setInt16(i * 2, sample < 0 ? sample * 0x8000 : sample * 0x7fff, true);
     }
+
+    var rms = Math.sqrt(sumSq / outLen);
     var bytes = new Uint8Array(buf);
     var bin = "";
     for (var j = 0; j < bytes.length; j++) bin += String.fromCharCode(bytes[j]);
-    return btoa(bin);
+    return { base64: btoa(bin), rms: rms };
+  }
+
+  function updateRmsBars(rms) {
+    var lvl = state.muted ? 0 : Math.min(1, rms * 7.5);
+    var weights = [0.55, 0.85, 1.0, 0.8, 0.5];
+    document.querySelectorAll(".u4-lai-rms").forEach(function (meter) {
+      var bars = meter.querySelectorAll("span");
+      for (var i = 0; i < bars.length; i++) {
+        var h = Math.round(4 + lvl * 14 * (weights[i] || 0.7));
+        bars[i].style.height = h + "px";
+      }
+    });
   }
 
   function playBase64Pcm24k(b64) {
-    if (!state.outCtx || state.muted) return;
+    if (!state.audioCtx || state.muted) return;
     try {
+      if (state.audioCtx.state === "suspended") state.audioCtx.resume().catch(function () {});
       var bin = atob(b64);
       var len = Math.floor(bin.length / 2);
       var f32 = new Float32Array(len);
@@ -82,12 +115,12 @@
         if (val >= 0x8000) val -= 0x10000;
         f32[i] = val / 0x8000;
       }
-      var abuf = state.outCtx.createBuffer(1, len, 24000);
+      var abuf = state.audioCtx.createBuffer(1, len, 24000);
       abuf.getChannelData(0).set(f32);
-      var src = state.outCtx.createBufferSource();
+      var src = state.audioCtx.createBufferSource();
       src.buffer = abuf;
-      src.connect(state.outCtx.destination);
-      var now = state.outCtx.currentTime;
+      src.connect(state.audioCtx.destination);
+      var now = state.audioCtx.currentTime;
       if (state.playCursor < now) state.playCursor = now + 0.02;
       src.start(state.playCursor);
       state.playCursor += abuf.duration;
@@ -102,12 +135,17 @@
   function stopAudioPlayback() {
     state.playSources.forEach(function (s) { try { s.stop(); } catch (_) {} });
     state.playSources = [];
-    if (state.outCtx) state.playCursor = state.outCtx.currentTime;
+    if (state.audioCtx) state.playCursor = state.audioCtx.currentTime;
   }
 
   function appendMsg(role, text) {
     var log = document.getElementById("u4LaiLog");
     if (!log) return null;
+    if (role === "user") {
+      state.hasUserMsg = true;
+      var chips = document.getElementById("u4LaiChips");
+      if (chips) chips.hidden = true;
+    }
     state.streamBubble = null;
     state.streamRole = "";
     var div = document.createElement("div");
@@ -116,6 +154,18 @@
     log.appendChild(div);
     log.scrollTop = log.scrollHeight;
     return div;
+  }
+
+  function appendSnapshotCard(dataUrl, label) {
+    var log = document.getElementById("u4LaiLog");
+    if (!log || !dataUrl) return;
+    var card = document.createElement("div");
+    card.className = "u4-lai-snap-card";
+    card.innerHTML =
+      '<img src="' + dataUrl + '" alt="' + escHtml(label || "Plan snapshot") + '">' +
+      '<div class="u4-lai-snap-cap">' + escHtml(label || "Active plan snapshot") + "</div>";
+    log.appendChild(card);
+    log.scrollTop = log.scrollHeight;
   }
 
   function appendStreamChunk(role, chunk) {
@@ -131,61 +181,66 @@
   }
 
   function setStatus(text) {
-    var el = document.getElementById("u4LaiStatus");
+    var el = document.getElementById("u4LaiStatusTxt");
     if (el) el.textContent = text;
   }
 
   function syncUi() {
-    var dock = document.getElementById("u4LaiDock");
+    if (isEmbedded) return;
+    var root = document.getElementById("u4LiveAiRoot");
     var dlg = document.getElementById("u4LaiDialog");
+    var mini = document.getElementById("u4LaiMiniBar");
+    var pill = document.getElementById("u4LaiPill");
     var pillLbl = document.getElementById("u4LaiPillLbl");
     var badge = document.getElementById("u4LaiBadge");
-    var qMute = document.getElementById("u4LaiQuickMute");
     var titleEl = document.getElementById("u4LaiTitle");
     var voiceBtn = document.getElementById("u4LaiVoiceBtn");
     var muteBtn = document.getElementById("u4LaiMuteBtn");
+    var miniMute = document.getElementById("u4LaiMiniMute");
+    var miniOpen = document.getElementById("u4LaiMiniOpen");
+    var miniEnd = document.getElementById("u4LaiMiniEnd");
     var inp = document.getElementById("u4LaiInput");
-    var photoBtn = document.getElementById("u4LaiPhotoBtn");
-    var camBtn = document.getElementById("u4LaiCamBtn");
     var noteBtn = document.getElementById("u4LaiNoteBtn");
+    var chips = document.getElementById("u4LaiChips");
     var es = isEs();
 
-    if (dock) dock.setAttribute("data-live", state.liveActive ? "on" : "off");
-    if (dlg) {
-      dlg.setAttribute("data-live", state.liveActive ? "on" : "off");
-      dlg.hidden = !state.open;
+    if (root) {
+      root.setAttribute("data-live", state.liveActive ? "on" : "off");
+      root.setAttribute("data-open", state.open ? "true" : "false");
     }
+    if (dlg) dlg.hidden = !state.open;
+    if (mini) mini.hidden = !state.liveActive || state.open;
+    if (pill) pill.setAttribute("aria-expanded", state.open ? "true" : "false");
     if (pillLbl) pillLbl.textContent = es ? "Ayuda IA / Voz" : "AI Helper / Voice";
-    if (badge) badge.textContent = state.liveActive ? (es ? "VIVO" : "LIVE") : (state.liveConnecting ? "..." : (es ? "CHAT" : "ASK"));
-    if (titleEl) titleEl.textContent = es ? "Guía IA en Vivo · Unidad 4" : "Live AI Guidance · Unit 4";
+    if (badge) badge.textContent = state.liveConnecting ? "..." : (es ? "CHAT" : "ASK");
+    if (titleEl) titleEl.textContent = es ? "Guía IA · Unidad 4" : "Live AI · Unit 4";
 
     if (voiceBtn) {
       voiceBtn.setAttribute("aria-pressed", state.liveActive ? "true" : "false");
       voiceBtn.textContent = state.liveConnecting
         ? (es ? "Conectando..." : "Connecting...")
-        : (state.liveActive ? (es ? "Detener voz" : "Stop voice") : (es ? "Iniciar voz" : "Start voice"));
+        : (state.liveActive ? (es ? "Detener" : "End") : (es ? "Voz" : "Voice"));
     }
     if (muteBtn) {
       muteBtn.hidden = !state.liveActive;
       muteBtn.setAttribute("aria-pressed", state.muted ? "true" : "false");
-      muteBtn.textContent = state.muted ? (es ? "Activar mic" : "Unmute") : (es ? "Silenciar" : "Mute");
+      muteBtn.textContent = state.muted ? (es ? "Activar" : "Unmute") : (es ? "Silenciar" : "Mute");
     }
-    if (qMute) {
-      qMute.hidden = !state.liveActive;
-      qMute.setAttribute("aria-pressed", state.muted ? "true" : "false");
-      qMute.textContent = state.muted ? (es ? "🔇 Silenciado" : "🔇 Muted") : (es ? "🎙 Silenciar" : "🎙 Mute");
+    if (miniMute) {
+      miniMute.setAttribute("aria-pressed", state.muted ? "true" : "false");
+      miniMute.textContent = state.muted ? (es ? "🔇 Silenciado" : "🔇 Muted") : (es ? "🎙 Silenciar" : "🎙 Mute");
     }
-    if (photoBtn) photoBtn.textContent = es ? "📎 Foto" : "📎 Photo";
-    if (camBtn) camBtn.textContent = es ? "📷 Cámara" : "📷 Camera";
+    if (miniOpen) miniOpen.textContent = es ? "Abrir" : "Open";
+    if (miniEnd) miniEnd.textContent = es ? "Fin" : "End";
     if (noteBtn) {
-      noteBtn.textContent = state.noteMode
-        ? (es ? "✓ Modo nota de obra" : "✓ Field note mode")
-        : (es ? "📝 Enviar nota / medida" : "📝 Log note / measurement");
+      noteBtn.classList.toggle("is-active", state.noteMode);
+      noteBtn.title = es ? "Modo nota de obra" : "Field note mode";
     }
+    if (chips) chips.hidden = state.hasUserMsg;
     if (inp) {
       inp.placeholder = state.noteMode
-        ? (es ? "Escribe medida o nota para enviar al PM..." : "Type field measurement or note to log for PM...")
-        : (es ? "Pregunta sobre este plano o toca Iniciar voz..." : "Ask a question about this plan or tap Start voice...");
+        ? (es ? "Escribe nota o medida para PM..." : "Type field measurement or note...")
+        : (es ? "Pregunta sobre este plano..." : "Ask about this plan...");
     }
 
     renderChips();
@@ -198,9 +253,9 @@
     var prompts = typeof cfg.quickPrompts === "function"
       ? cfg.quickPrompts(state.lang)
       : (Array.isArray(cfg.quickPrompts) ? cfg.quickPrompts : [
-          es ? "¿Qué debemos medir antes de cortar?" : "What must we measure before cutting?",
-          es ? "¿Qué bloqueos activos hay aquí?" : "What holds apply on this plan?",
-          es ? "¿Qué herramientas y suministros ocupo?" : "What tools and supplies do I need?"
+          es ? "¿Qué medir antes de cortar?" : "What must we measure first?",
+          es ? "¿Qué bloqueos hay aquí?" : "What holds apply here?",
+          es ? "¿Qué herramientas ocupo?" : "What tools do I need?"
         ]);
     box.innerHTML = (prompts || []).slice(0, 3).map(function (p) {
       return '<button type="button" class="u4-lai-chip">' + escHtml(p) + "</button>";
@@ -214,12 +269,22 @@
     });
   }
 
-  function buildContextSummary() {
+  function buildSingleLangContext() {
     var extra = "";
     if (typeof cfg.getContext === "function") {
       try { extra = String(cfg.getContext(state.lang) || ""); } catch (_) {}
     }
-    return "Active Interactive Plan: " + cfg.titleEn + " (" + cfg.planId + ", room=" + cfg.room + "). " + extra;
+    var ctrlSummary = "";
+    if (window.U4PlanControl && typeof window.U4PlanControl.getState === "function") {
+      try {
+        var st = window.U4PlanControl.getState();
+        if (st && st.summary) ctrlSummary = " " + st.summary;
+      } catch (_) {}
+    }
+    if (isEs()) {
+      return "Plano interactivo activo: " + cfg.titleEs + " (" + cfg.planId + ", cuarto=" + cfg.room + "). " + extra + ctrlSummary;
+    }
+    return "Active Interactive Plan: " + cfg.titleEn + " (" + cfg.planId + ", room=" + cfg.room + "). " + extra + ctrlSummary;
   }
 
   function stopVoiceSession() {
@@ -228,26 +293,180 @@
     state.liveConnecting = false;
     state.muted = false;
     stopAudioPlayback();
+    updateRmsBars(0);
     if (state.ws) { try { state.ws.close(); } catch (_) {} state.ws = null; }
-    if (state.processor) { try { state.processor.disconnect(); } catch (_) {} state.processor = null; }
+    if (state.captureNode) { try { state.captureNode.disconnect(); } catch (_) {} state.captureNode = null; }
+    if (state.muteGain) { try { state.muteGain.disconnect(); } catch (_) {} state.muteGain = null; }
+    if (state.workletUrl) { try { URL.revokeObjectURL(state.workletUrl); } catch (_) {} state.workletUrl = null; }
     if (state.micStream) {
       state.micStream.getTracks().forEach(function (t) { try { t.stop(); } catch (_) {} });
       state.micStream = null;
     }
-    if (state.inCtx) { try { state.inCtx.close(); } catch (_) {} state.inCtx = null; }
-    if (state.outCtx) { try { state.outCtx.close(); } catch (_) {} state.outCtx = null; }
-    setStatus(isEs() ? "Chat listo · Toca Iniciar voz para hablar en vivo." : "Chat ready · Tap Start voice to talk live.");
+    if (state.audioCtx) { try { state.audioCtx.close(); } catch (_) {} state.audioCtx = null; }
+    setStatus(isEs() ? "Listo · Toca Voz para hablar en vivo." : "Ready · Tap Voice to talk live.");
     syncUi();
   }
 
   function toggleMute() {
     if (!state.liveActive) return;
     state.muted = !state.muted;
-    if (state.muted) stopAudioPlayback();
+    if (state.muted) {
+      stopAudioPlayback();
+      updateRmsBars(0);
+      if (state.ws && state.ws.readyState === WebSocket.OPEN) {
+        try { state.ws.send(JSON.stringify({ realtimeInput: { audioStreamEnd: true } })); } catch (_) {}
+      }
+    }
     setStatus(state.muted
       ? (isEs() ? "Micrófono silenciado." : "Microphone muted.")
       : (isEs() ? "Escuchando en vivo..." : "Listening live..."));
     syncUi();
+  }
+
+  async function wireMicCapture(ctx, stream, ws, isReadyFn) {
+    var srcNode = ctx.createMediaStreamSource(stream);
+    var zeroGain = ctx.createGain();
+    zeroGain.gain.value = 0;
+    state.muteGain = zeroGain;
+
+    function sendChunk(f32) {
+      if (!state.liveActive || state.muted || !isReadyFn() || ws.readyState !== WebSocket.OPEN) return;
+      var out = downsampleBoxAvg16k(f32, ctx.sampleRate);
+      updateRmsBars(out.rms);
+      ws.send(JSON.stringify({ realtimeInput: { audio: { mimeType: "audio/pcm;rate=16000", data: out.base64 } } }));
+    }
+
+    if (ctx.audioWorklet && typeof AudioWorkletNode === "function") {
+      try {
+        var workletCode =
+          "class U4PcmCap extends AudioWorkletProcessor {" +
+          "  constructor(){ super(); this._buf = []; this._len = 0; }" +
+          "  process(inputs){" +
+          "    const ch = inputs[0] && inputs[0][0];" +
+          "    if (!ch) return true;" +
+          "    this._buf.push(new Float32Array(ch)); this._len += ch.length;" +
+          "    if (this._len >= 2048){" +
+          "      const out = new Float32Array(this._len); let off = 0;" +
+          "      for (const b of this._buf){ out.set(b, off); off += b.length; }" +
+          "      this._buf = []; this._len = 0;" +
+          "      this.port.postMessage(out, [out.buffer]);" +
+          "    }" +
+          "    return true;" +
+          "  }" +
+          "}" +
+          "registerProcessor('u4-pcm-cap', U4PcmCap);";
+        var blob = new Blob([workletCode], { type: "application/javascript" });
+        state.workletUrl = URL.createObjectURL(blob);
+        await ctx.audioWorklet.addModule(state.workletUrl);
+        var wn = new AudioWorkletNode(ctx, "u4-pcm-cap");
+        wn.port.onmessage = function (ev) {
+          if (ev.data) sendChunk(ev.data);
+        };
+        state.captureNode = wn;
+        srcNode.connect(wn);
+        wn.connect(zeroGain);
+        zeroGain.connect(ctx.destination);
+        return;
+      } catch (_) {
+        /* Fallback to ScriptProcessorNode(2048) -> GainNode(0) */
+      }
+    }
+
+    var proc = ctx.createScriptProcessor(2048, 1, 1);
+    state.captureNode = proc;
+    proc.onaudioprocess = function (aev) {
+      sendChunk(aev.inputBuffer.getChannelData(0));
+    };
+    srcNode.connect(proc);
+    proc.connect(zeroGain);
+    zeroGain.connect(ctx.destination);
+  }
+
+  async function executeToolCall(fc, ws) {
+    var name = String(fc.name || "");
+    var args = (fc.args && typeof fc.args === "object") ? fc.args : {};
+    var respObj = { ok: true };
+
+    try {
+      if (name === "show_plan_view") {
+        if (args.plan && args.plan !== cfg.planId && window.U4PlanNav) {
+          var targetUrl = window.U4PlanNav.planUrl(args.plan);
+          if (args.step) targetUrl += "&step=" + encodeURIComponent(args.step);
+          if (args.wall) targetUrl += "&wall=" + encodeURIComponent(args.wall);
+          if (args.zoom) targetUrl += "&zoom=" + encodeURIComponent(args.zoom);
+          respObj = { ok: true, navigating: args.plan, url: targetUrl };
+          setTimeout(function () { window.location.href = targetUrl; }, 250);
+        } else {
+          if (window.U4PlanControl && typeof window.U4PlanControl.showView === "function") {
+            window.U4PlanControl.showView(args);
+          }
+          if (args.zoom != null && args.zoom !== "" && window.U4ZoomPan) {
+            window.U4ZoomPan.setPrimaryZoom(args.zoom);
+          }
+          respObj = {
+            ok: true,
+            state: window.U4PlanControl ? window.U4PlanControl.getState() : { planId: cfg.planId }
+          };
+        }
+      } else if (name === "update_plan_state") {
+        if (window.U4PlanControl && typeof window.U4PlanControl.applyChange === "function") {
+          window.U4PlanControl.applyChange(args);
+        }
+        if ((String(args.action || "").toLowerCase() === "zoom" || String(args.target || "").toLowerCase() === "zoom") && window.U4ZoomPan) {
+          window.U4ZoomPan.setPrimaryZoom(args.value);
+        }
+        respObj = {
+          ok: true,
+          state: window.U4PlanControl ? window.U4PlanControl.getState() : { planId: cfg.planId }
+        };
+      } else if (name === "capture_screen_snapshot" || name === "capture_snapshot") {
+        if (window.U4PlanNav && typeof window.U4PlanNav.captureActivePlanSnapshot === "function") {
+          var snap = await window.U4PlanNav.captureActivePlanSnapshot(args);
+          appendSnapshotCard(snap.dataUrl, snap.label);
+          if (ws && ws.readyState === WebSocket.OPEN && snap.base64) {
+            ws.send(JSON.stringify({
+              realtimeInput: { video: { mimeType: snap.mimeType || "image/jpeg", data: snap.base64 } }
+            }));
+          }
+          respObj = { ok: true, captured: true, label: snap.label, planId: snap.planId, step: snap.step, wall: snap.wall, width: snap.width, height: snap.height };
+        } else {
+          respObj = { ok: false, error: "snapshot_unavailable" };
+        }
+      } else if (name === "search_project_knowledge") {
+        var q = args.query || args.q || "";
+        var r = args.room || cfg.room;
+        var ctl = new AbortController();
+        var t = setTimeout(function () { ctl.abort(); }, 1200);
+        try {
+          var kRes = await fetch(KNOWLEDGE_URL + "?q=" + encodeURIComponent(q) + "&room=" + encodeURIComponent(r) + "&limit=3", { signal: ctl.signal });
+          clearTimeout(t);
+          respObj = kRes.ok ? await kRes.json() : { ok: false, status: kRes.status };
+        } catch (ke) {
+          clearTimeout(t);
+          respObj = { ok: false, fallback: buildSingleLangContext(), error: String(ke) };
+        }
+      } else if (name === "log_field_note") {
+        var iRes = await fetch(INTAKE_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            room: args.room || cfg.room,
+            edit_kind: "field_note",
+            summary: args.summary || ("[" + cfg.planId + "] Field note"),
+            details: args.details || buildSingleLangContext(),
+            source_page: window.location.pathname,
+            ui_language: state.lang
+          })
+        });
+        respObj = { ok: iRes.ok, status: iRes.status };
+      } else {
+        respObj = { ok: true, context: buildSingleLangContext() };
+      }
+    } catch (err) {
+      respObj = { ok: false, error: String(err && err.message ? err.message : err) };
+    }
+
+    return { id: fc.id, name: name, response: respObj };
   }
 
   async function startVoiceSession(initialPrompt) {
@@ -263,32 +482,44 @@
     syncUi();
 
     try {
-      var AudioCtx = window.AudioContext || window.webkitAudioContext;
-      state.inCtx = new AudioCtx();
-      state.outCtx = new AudioCtx({ sampleRate: 24000 });
-      if (state.inCtx.state === "suspended") await state.inCtx.resume();
-      if (state.outCtx.state === "suspended") await state.outCtx.resume();
-      state.playCursor = state.outCtx.currentTime;
+      /* Wave G: Parallel fetch(voice-token) + getUserMedia (zero serial wait!) */
+      var pair = await Promise.all([
+        fetch(VOICE_TOKEN_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ room: cfg.room, uiLanguage: state.lang })
+        }).then(function (r) {
+          return r.json().catch(function () { return null; }).then(function (d) { return { ok: r.ok, status: r.status, data: d }; });
+        }),
+        navigator.mediaDevices.getUserMedia({
+          audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true, channelCount: 1 }
+        })
+      ]);
 
-      var tokResp = await fetch(VOICE_TOKEN_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ room: cfg.room, uiLanguage: state.lang })
-      });
-      var tokData = await tokResp.json().catch(function () { return null; });
-      if (!tokResp.ok || !tokData || !tokData.wsUrl) {
-        throw new Error((tokData && tokData.error) || ("HTTP " + tokResp.status));
-      }
-      if (gen !== state.generation) return;
-
-      var stream = await navigator.mediaDevices.getUserMedia({
-        audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true, channelCount: 1 }
-      });
       if (gen !== state.generation) {
-        stream.getTracks().forEach(function (t) { t.stop(); });
+        if (pair[1]) pair[1].getTracks().forEach(function (t) { t.stop(); });
         return;
       }
+
+      var tokWrap = pair[0];
+      var stream = pair[1];
+      if (!tokWrap.ok || !tokWrap.data || !tokWrap.data.wsUrl) {
+        stream.getTracks().forEach(function (t) { t.stop(); });
+        throw new Error((tokWrap.data && tokWrap.data.error) || ("HTTP " + tokWrap.status));
+      }
+      var tokData = tokWrap.data;
       state.micStream = stream;
+
+      /* Single shared AudioContext created & resumed AFTER getUserMedia (fixes iOS AVAudioSession suspend!) */
+      var AudioCtx = window.AudioContext || window.webkitAudioContext;
+      state.audioCtx = new AudioCtx();
+      state.audioCtx.addEventListener("statechange", function () {
+        if (state.liveActive && state.audioCtx && state.audioCtx.state === "suspended") {
+          state.audioCtx.resume().catch(function () {});
+        }
+      });
+      if (state.audioCtx.state === "suspended") await state.audioCtx.resume();
+      state.playCursor = state.audioCtx.currentTime;
 
       var ws = new WebSocket(tokData.wsUrl);
       state.ws = ws;
@@ -311,35 +542,36 @@
           setupDone = true;
           state.liveConnecting = false;
           state.liveActive = true;
-          setStatus(es ? "Voz en vivo conectada — habla o escribe." : "Live voice connected — speak or type.");
+          setStatus(es ? "Escuchando en vivo..." : "Listening live...");
           syncUi();
+
+          /* Wire mic BEFORE sending initial context so first spoken words are never missed! */
+          await wireMicCapture(state.audioCtx, stream, ws, function () { return setupDone; });
+
+          var ctxPrompt = isEs()
+            ? ("Contexto del plano activo (responde en español de México en 1-2 frases concisas, sin precios ni datos privados): " +
+                buildSingleLangContext() + (initialPrompt ? ("\nPregunta: " + initialPrompt) : ""))
+            : ("Active plan context (reply in English only in 1-2 concise sentences; never switch to Spanish unless spoken to in a clear Spanish sentence; never mention prices): " +
+                buildSingleLangContext() + (initialPrompt ? ("\nQuestion: " + initialPrompt) : ""));
 
           ws.send(JSON.stringify({
             clientContent: {
-              turns: [{
-                role: "user",
-                parts: [{
-                  text: "Context for Unit 4 Interactive Plan Helper:\n" +
-                    "- Reply concisely in the user's language (English or Mexican Spanish).\n" +
-                    "- Never mention prices or private owner info. Always remind that Tisa approves open design/purchase choices.\n" +
-                    "- " + buildContextSummary() +
-                    (initialPrompt ? ("\nUser question: " + initialPrompt) : "")
-                }]
-              }],
+              turns: [{ role: "user", parts: [{ text: ctxPrompt }] }],
               turnComplete: Boolean(initialPrompt)
             }
           }));
+          return;
+        }
 
-          var srcNode = state.inCtx.createMediaStreamSource(stream);
-          var proc = state.inCtx.createScriptProcessor(4096, 1, 1);
-          state.processor = proc;
-          proc.onaudioprocess = function (aev) {
-            if (!state.liveActive || state.muted || !setupDone || ws.readyState !== WebSocket.OPEN) return;
-            var b64 = pcm16ToBase64(aev.inputBuffer.getChannelData(0), state.inCtx.sampleRate);
-            ws.send(JSON.stringify({ realtimeInput: { audio: { mimeType: "audio/pcm;rate=16000", data: b64 } } }));
-          };
-          srcNode.connect(proc);
-          proc.connect(state.inCtx.destination);
+        /* Full Wave G msg.toolCall handler! */
+        if (msg.toolCall && Array.isArray(msg.toolCall.functionCalls)) {
+          var responses = [];
+          for (var i = 0; i < msg.toolCall.functionCalls.length; i++) {
+            responses.push(await executeToolCall(msg.toolCall.functionCalls[i], ws));
+          }
+          if (ws.readyState === WebSocket.OPEN) {
+            ws.send(JSON.stringify({ toolResponse: { functionResponses: responses } }));
+          }
           return;
         }
 
@@ -390,20 +622,20 @@
 
   function lnaTipText() {
     return isEs()
-      ? "Si el navegador bloquea la conexión en vivo, toca el ícono a la izquierda de la dirección → Acceso a red local → Permitir. Abajo puedes seguir usando la guía local."
-      : "Live helper blocked by browser? Click Site Settings left of the address bar → Local network access → Allow. Local plan guidance still works below.";
+      ? "Si el navegador bloquea la conexión en vivo, toca Configuración del sitio → Acceso a red local → Permitir. La guía local sigue activa."
+      : "Live helper blocked by browser? Open Site Settings → Local network access → Allow. Built-in plan guidance still works.";
   }
 
   async function sendFieldNote(text) {
     var es = isEs();
     appendMsg("user", (es ? "📝 Nota: " : "📝 Note: ") + text);
-    setStatus(es ? "Enviando nota al registro del proyecto..." : "Sending field note to project intake...");
+    setStatus(es ? "Enviando nota al proyecto..." : "Sending field note...");
     try {
       var payload = {
         room: cfg.room,
         edit_kind: "field_note",
         summary: "[" + cfg.planId + "] " + text,
-        details: buildContextSummary() + "\nMessage: " + text,
+        details: buildSingleLangContext() + "\nMessage: " + text,
         source_page: window.location.pathname + window.location.hash,
         ui_language: state.lang
       };
@@ -421,12 +653,12 @@
       state.noteMode = false;
       syncUi();
       appendMsg("ai", es
-        ? "✓ Listo — guardamos tu nota en la bandeja del proyecto para revisión de Tisa y John."
-        : "✓ Saved — your field note was sent to project intake for Tisa & John to review.");
+        ? "✓ Listo — nota guardada en la bandeja del proyecto para Tisa y John."
+        : "✓ Saved — field note logged for Tisa & John to review.");
       setStatus(es ? "Nota guardada." : "Note saved.");
     } catch (_) {
       appendMsg("sys", lnaTipText());
-      setStatus(es ? "No se pudo conectar ahora." : "Could not reach live intake right now.");
+      setStatus(es ? "No se pudo conectar ahora." : "Could not reach intake right now.");
     }
   }
 
@@ -443,7 +675,7 @@
     appendMsg("user", text);
 
     if (state.liveActive && state.ws && state.ws.readyState === WebSocket.OPEN) {
-      var parts = [{ text: buildContextSummary() + "\n" + text }];
+      var parts = [{ text: buildSingleLangContext() + "\n" + text }];
       if (state.stagedPhoto && state.stagedPhoto.base64) {
         parts.push({ inlineData: { mimeType: state.stagedPhoto.mime || "image/jpeg", data: state.stagedPhoto.base64 } });
         clearStagedPhoto();
@@ -454,10 +686,10 @@
       return;
     }
 
-    setStatus(es ? "Buscando en la guía del proyecto..." : "Searching project guidance...");
+    setStatus(es ? "Buscando guía del proyecto..." : "Searching project guidance...");
     try {
       var ctl = new AbortController();
-      var timer = setTimeout(function () { ctl.abort(); }, 3600);
+      var timer = setTimeout(function () { ctl.abort(); }, 1200);
       var url = KNOWLEDGE_URL + "?q=" + encodeURIComponent(text) + "&room=" + encodeURIComponent(cfg.room) + "&limit=3";
       var res = await fetch(url, { signal: ctl.signal });
       clearTimeout(timer);
@@ -472,22 +704,21 @@
         });
         appendMsg("ai", lines.join("\n\n"));
       } else {
-        appendMsg("ai", localFallbackAnswer(text));
+        appendMsg("ai", localFallbackAnswer());
       }
-      setStatus(es ? "Listo · Toca Iniciar voz para conversar." : "Ready · Tap Start voice for hands-free help.");
+      setStatus(es ? "Listo · Toca Voz para conversar." : "Ready · Tap Voice for hands-free help.");
     } catch (_) {
-      appendMsg("ai", localFallbackAnswer(text));
-      appendMsg("sys", lnaTipText());
+      appendMsg("ai", localFallbackAnswer());
       setStatus(es ? "Mostrando guía local de este plano." : "Showing built-in plan guidance.");
     }
   }
 
-  function localFallbackAnswer(question) {
+  function localFallbackAnswer() {
     var es = isEs();
-    var ctx = buildContextSummary();
-    return (es
-      ? "Contexto actual del plano:\n" + ctx + "\n\nRecuerda: ninguna decisión abierta de diseño o compra se confirma sin aprobación de Tisa. Toca '📝 Enviar nota / medida' si quieres registrar una medida de obra."
-      : "Current plan guidance:\n" + ctx + "\n\nReminder: open design/finish choices or purchases always require Tisa's approval. Tap '📝 Log note / measurement' to record a field measurement.");
+    var ctx = buildSingleLangContext();
+    return es
+      ? (ctx + "\n\nTisa aprueba cualquier cambio abierto de diseño o compra. Toca 📝 para enviar una medida.")
+      : (ctx + "\n\nOpen design or purchase choices always need Tisa's approval. Tap 📝 to log a field measurement.");
   }
 
   function clearStagedPhoto() {
@@ -515,14 +746,39 @@
     reader.readAsDataURL(file);
   }
 
+  function forwardToParentAi(mode, promptText, zoneLabel) {
+    var ctrl = (window.U4PlanControl && typeof window.U4PlanControl.getState === "function")
+      ? window.U4PlanControl.getState()
+      : {};
+    var fullText = (zoneLabel && promptText)
+      ? ("[" + zoneLabel + "] " + promptText)
+      : (promptText || (zoneLabel ? ((isEs() ? "Sobre " : "About ") + zoneLabel + ": ") : ""));
+    try {
+      window.parent.postMessage({
+        type: "u4:ai-open",
+        mode: mode || "ask",
+        prompt: String(promptText || ""),
+        text: fullText,
+        locationTag: String(zoneLabel || ""),
+        planId: cfg.planId,
+        room: cfg.room,
+        step: ctrl.step || "",
+        wall: ctrl.wall || ""
+      }, "*");
+    } catch (_) {}
+  }
+
   function mount() {
+    if (isEmbedded) return; /* Persistent parent wiki shell owns the single Live AI UI! */
     if (document.getElementById("u4LiveAiRoot")) return;
+
     var root = document.createElement("div");
     root.id = "u4LiveAiRoot";
     root.className = "u4-live-ai-root no-print";
+    root.setAttribute("data-live", "off");
+    root.setAttribute("data-open", "false");
     root.innerHTML =
-      '<div id="u4LaiDock" class="u4-lai-dock" data-live="off">' +
-        '<button type="button" id="u4LaiQuickMute" class="u4-lai-qmute" aria-pressed="false" hidden>🎙 Mute</button>' +
+      '<div id="u4LaiDock" class="u4-lai-dock">' +
         '<button type="button" id="u4LaiPill" class="u4-lai-pill" aria-expanded="false" aria-controls="u4LaiDialog">' +
           '<span class="u4-lai-orb-icon" aria-hidden="true">' +
             '<svg viewBox="0 0 28 28" width="22" height="22" fill="none">' +
@@ -537,19 +793,29 @@
           '<span id="u4LaiBadge" class="u4-lai-badge">ASK</span>' +
         "</button>" +
       "</div>" +
+      '<div id="u4LaiMiniBar" class="u4-lai-minibar" hidden>' +
+        '<span class="u4-lai-dot" aria-hidden="true"></span>' +
+        '<span class="u4-lai-rms" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>' +
+        '<button type="button" id="u4LaiMiniMute" class="u4-lai-btn is-mute" aria-pressed="false">🎙 Mute</button>' +
+        '<button type="button" id="u4LaiMiniOpen" class="u4-lai-btn">Open</button>' +
+        '<button type="button" id="u4LaiMiniEnd" class="u4-lai-btn is-voice" aria-pressed="true">End</button>' +
+      "</div>" +
       '<aside id="u4LaiDialog" class="u4-lai-dialog" role="dialog" aria-label="Unit 4 Live AI Guidance" hidden>' +
         '<div class="u4-lai-head">' +
           '<div class="u4-lai-title-wrap">' +
             '<span class="u4-lai-dot" aria-hidden="true"></span>' +
-            '<span id="u4LaiTitle" class="u4-lai-title">Live AI Guidance · Unit 4</span>' +
+            '<span id="u4LaiTitle" class="u4-lai-title">Live AI · Unit 4</span>' +
           "</div>" +
           '<div class="u4-lai-head-btns">' +
             '<button type="button" id="u4LaiMuteBtn" class="u4-lai-btn is-mute" aria-pressed="false" hidden>Mute</button>' +
-            '<button type="button" id="u4LaiVoiceBtn" class="u4-lai-btn is-voice" aria-pressed="false">Start voice</button>' +
+            '<button type="button" id="u4LaiVoiceBtn" class="u4-lai-btn is-voice" aria-pressed="false">Voice</button>' +
             '<button type="button" id="u4LaiCloseBtn" class="u4-lai-close" aria-label="Close AI Helper">&times;</button>' +
           "</div>" +
         "</div>" +
-        '<p id="u4LaiStatus" class="u4-lai-status" role="status" aria-live="polite"></p>' +
+        '<div class="u4-lai-status" role="status" aria-live="polite">' +
+          '<span id="u4LaiStatusTxt"></span>' +
+          '<span class="u4-lai-rms" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>' +
+        "</div>" +
         '<div id="u4LaiLog" class="u4-lai-log" role="log" aria-live="polite"></div>' +
         '<div class="u4-lai-foot">' +
           '<div id="u4LaiChips" class="u4-lai-chips"></div>' +
@@ -558,14 +824,12 @@
             '<span id="u4LaiPhotoName" style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>' +
             '<button type="button" id="u4LaiPhotoClear" class="u4-lai-close" aria-label="Remove photo">&times;</button>' +
           "</div>" +
-          '<div class="u4-lai-tools-row">' +
-            '<button type="button" id="u4LaiNoteBtn" class="u4-lai-tool-btn">📝 Log note / measurement</button>' +
-            '<button type="button" id="u4LaiPhotoBtn" class="u4-lai-tool-btn">📎 Photo</button>' +
-            '<button type="button" id="u4LaiCamBtn" class="u4-lai-tool-btn">📷 Camera</button>' +
+          '<form id="u4LaiForm" class="u4-lai-form" novalidate>' +
+            '<button type="button" id="u4LaiNoteBtn" class="u4-lai-icon-btn" title="Field note">📝</button>' +
+            '<button type="button" id="u4LaiPhotoBtn" class="u4-lai-icon-btn" title="Photo">📎</button>' +
+            '<button type="button" id="u4LaiCamBtn" class="u4-lai-icon-btn" title="Camera">📷</button>' +
             '<input id="u4LaiPhotoIn" type="file" accept="image/*" hidden>' +
             '<input id="u4LaiCamIn" type="file" accept="image/*" capture="environment" hidden>' +
-          "</div>" +
-          '<form id="u4LaiForm" class="u4-lai-form" novalidate>' +
             '<input id="u4LaiInput" class="u4-lai-input" type="text" autocomplete="off">' +
             '<button type="submit" class="u4-lai-send" aria-label="Send">&uarr;</button>' +
           "</form>" +
@@ -574,26 +838,33 @@
 
     document.body.appendChild(root);
 
-    document.getElementById("u4LaiPill").addEventListener("click", function () {
-      state.open = !state.open;
-      document.getElementById("u4LaiPill").setAttribute("aria-expanded", state.open ? "true" : "false");
+    function openDialog() {
+      state.open = true;
       syncUi();
-      if (state.open) {
-        var log = document.getElementById("u4LaiLog");
-        if (log && !log.children.length) {
-          appendMsg("ai", isEs()
-            ? "¡Hola! Pregúntame cualquier medida, paso o bloqueo de este plano, o toca Iniciar voz para hablar manos libres."
-            : "Hi! Ask me any measurement, step, or hold on this plan, or tap Start voice for hands-free help.");
-        }
-        setStatus(isEs() ? "Chat listo · Toca Iniciar voz para hablar en vivo." : "Chat ready · Tap Start voice to talk live.");
+      var log = document.getElementById("u4LaiLog");
+      if (log && !log.children.length) {
+        appendMsg("ai", isEs()
+          ? "¡Hola! Pregúntame sobre este plano o toca Voz para hablar manos libres."
+          : "Hi! Ask me anything about this plan or tap Voice for hands-free help.");
       }
+      if (!state.liveActive && !state.liveConnecting) {
+        setStatus(isEs() ? "Listo · Toca Voz para hablar en vivo." : "Ready · Tap Voice to talk live.");
+      }
+    }
+
+    document.getElementById("u4LaiPill").addEventListener("click", function () {
+      if (state.open) { state.open = false; syncUi(); }
+      else openDialog();
     });
 
     document.getElementById("u4LaiCloseBtn").addEventListener("click", function () {
       state.open = false;
-      document.getElementById("u4LaiPill").setAttribute("aria-expanded", "false");
       syncUi();
     });
+
+    document.getElementById("u4LaiMiniOpen").addEventListener("click", openDialog);
+    document.getElementById("u4LaiMiniMute").addEventListener("click", toggleMute);
+    document.getElementById("u4LaiMiniEnd").addEventListener("click", stopVoiceSession);
 
     document.getElementById("u4LaiVoiceBtn").addEventListener("click", function () {
       if (state.liveActive || state.liveConnecting) stopVoiceSession();
@@ -601,7 +872,6 @@
     });
 
     document.getElementById("u4LaiMuteBtn").addEventListener("click", toggleMute);
-    document.getElementById("u4LaiQuickMute").addEventListener("click", toggleMute);
 
     document.getElementById("u4LaiNoteBtn").addEventListener("click", function () {
       state.noteMode = !state.noteMode;
@@ -644,26 +914,31 @@
       if (options && typeof options === "object") {
         Object.assign(cfg, options);
       }
-      var params = new URLSearchParams(window.location.search || "");
       var storedLang = "";
       try { storedLang = window.localStorage.getItem("u4_lang") || ""; } catch (_) {}
       var navLang = (window.U4PlanNav && typeof window.U4PlanNav.getLang === "function") ? window.U4PlanNav.getLang() : "";
       var qLang = params.get("lang") || navLang || storedLang || document.documentElement.lang || "en";
       state.lang = qLang.toLowerCase().indexOf("es") === 0 ? "es" : "en";
+      if (isEmbedded) return;
       if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", mount, { once: true });
       } else {
         mount();
       }
     },
+    isEmbedded: function () { return isEmbedded; },
     setLang: function (lang) {
       state.lang = String(lang || "en").toLowerCase().indexOf("es") === 0 ? "es" : "en";
       syncUi();
     },
     refreshPrompts: function () {
-      renderChips();
+      if (!isEmbedded) renderChips();
     },
     open: function (promptText, zoneLabel) {
+      if (isEmbedded) {
+        forwardToParentAi("ask", promptText, zoneLabel);
+        return;
+      }
       mount();
       state.open = true;
       state.noteMode = false;
@@ -682,6 +957,10 @@
       }
     },
     openNote: function (prefillText) {
+      if (isEmbedded) {
+        forwardToParentAi("note", prefillText, "");
+        return;
+      }
       mount();
       state.open = true;
       state.noteMode = true;

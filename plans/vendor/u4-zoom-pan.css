@@ -1,0 +1,199 @@
+/* ============================================================================
+   Unit 4 Interactive Plans — Smooth Zoom & Pan (Classic Old-Wiki Style)
+   Auto-mounts onto .u4h-svg-wrap, .ks4-svg-wrap & .u4h-photo-card across all 6 plans
+   − / 100% / + bar · Ctrl/⌘-Wheel · 2-Finger Pinch · Drag-Pan ONLY when > 1×
+   Zero External CDNs · Zero Prices · Hidden on Print & Blueprint Mode
+   ============================================================================ */
+
+@media print {
+  .u4-zoom-bar {
+    display: none !important;
+  }
+  .u4-zoom-stage {
+    transform: none !important;
+  }
+}
+
+body.u4-mode-blueprint .u4-zoom-bar {
+  display: none !important;
+}
+
+body.u4-mode-blueprint .u4-zoom-stage {
+  transform: none !important;
+}
+
+.u4-zoom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 5px 8px;
+  margin-bottom: 6px;
+  border-radius: 6px;
+  background: var(--bg, #f4f5f3);
+  border: 1px solid var(--line, #d9dedc);
+  font-family: var(--mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 11px;
+  color: var(--muted, #5d686d);
+  user-select: none;
+}
+
+.u4h-photo-card .u4-zoom-bar {
+  margin: 0;
+  border-radius: 0;
+  border: 0;
+  border-bottom: 1px solid var(--line, #d9dedc);
+  padding: 5px 9px;
+}
+
+html[data-theme="dark"] .u4h-svg-wrap .u4-zoom-bar,
+html[data-theme="dark"] .ks4-svg-wrap .u4-zoom-bar {
+  background: #1a2023;
+  border-color: #2b3438;
+  color: #9ba8ad;
+}
+
+.u4-zoom-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--sans, "IBM Plex Sans", -apple-system, sans-serif);
+  font-size: 11.5px;
+  color: var(--muted, #5d686d);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+html[data-theme="dark"] .u4h-svg-wrap .u4-zoom-hint,
+html[data-theme="dark"] .ks4-svg-wrap .u4-zoom-hint {
+  color: #9ba8ad;
+}
+
+.u4-zoom-ctrl {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.u4-zoom-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 26px;
+  padding: 0 7px;
+  border-radius: 5px;
+  border: 1px solid var(--line, #d9dedc);
+  background: var(--panel, #ffffff);
+  color: var(--fg, #1d2326);
+  font-family: var(--mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+}
+
+html[data-theme="dark"] .u4h-svg-wrap .u4-zoom-btn,
+html[data-theme="dark"] .ks4-svg-wrap .u4-zoom-btn,
+html[data-theme="dark"] .u4h-photo-card .u4-zoom-btn {
+  background: #121618;
+  border-color: #2b3438;
+  color: #e4e9ea;
+}
+
+.u4-zoom-btn:hover:not(:disabled) {
+  border-color: var(--accent, #1f5f7a);
+  color: var(--accent, #1f5f7a);
+  background: var(--accent-soft, #e3eef2);
+}
+
+html[data-theme="dark"] .u4h-svg-wrap .u4-zoom-btn:hover:not(:disabled),
+html[data-theme="dark"] .ks4-svg-wrap .u4-zoom-btn:hover:not(:disabled),
+html[data-theme="dark"] .u4h-photo-card .u4-zoom-btn:hover:not(:disabled) {
+  border-color: #7cc0dc;
+  color: #7cc0dc;
+  background: #1b2c34;
+}
+
+.u4-zoom-btn:disabled {
+  opacity: 0.42;
+  cursor: default;
+}
+
+.u4-zoom-pct {
+  min-width: 48px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.u4-zoom-pct.is-zoomed {
+  background: var(--accent-soft, #e3eef2);
+  border-color: var(--accent, #1f5f7a);
+  color: var(--accent, #1f5f7a);
+}
+
+html[data-theme="dark"] .u4h-svg-wrap .u4-zoom-pct.is-zoomed,
+html[data-theme="dark"] .ks4-svg-wrap .u4-zoom-pct.is-zoomed,
+html[data-theme="dark"] .u4h-photo-card .u4-zoom-pct.is-zoomed {
+  background: #1b2c34;
+  border-color: #7cc0dc;
+  color: #7cc0dc;
+}
+
+.u4-zoom-viewport {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+.u4-zoom-viewport.is-zoomed {
+  cursor: grab;
+  touch-action: none;
+}
+
+.u4-zoom-viewport.is-panning {
+  cursor: grabbing !important;
+  user-select: none;
+}
+
+.u4-zoom-stage {
+  position: relative;
+  width: 100%;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+.u4-zoom-stage > svg,
+.u4-zoom-stage > img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.u4h-photo-card .u4-zoom-stage > img {
+  max-height: 360px;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+@media (max-width: 560px) {
+  .u4-zoom-btn {
+    min-width: 32px;
+    height: 30px;
+  }
+  .u4-zoom-pct {
+    min-width: 50px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .u4-zoom-btn {
+    transition: none !important;
+  }
+}

@@ -331,6 +331,67 @@
     var d04Low = 53 + m.floorOffset;
     var d04High = 77 + m.floorOffset;
 
+    if (state.wallTab === "west") {
+      var hoodLow = 68 + m.floorOffset;
+      var hoodHigh = 72 + m.floorOffset;
+      return '<svg viewBox="0 0 460 250" xmlns="http://www.w3.org/2000/svg">' +
+        '<text x="230" y="18" text-anchor="middle" font-size="10" font-weight="800" fill="#184E77">' +
+          (es ? 'MURO OESTE — ESTUFA Y CAMPANA (66-1/4" DE SUR A NORTE)' : 'WEST WALL — RANGE & HOOD (66-1/4" SOUTH → NORTH)') + "</text>" +
+        '<text x="230" y="31" text-anchor="middle" font-size="8.2" font-weight="700" fill="#485563">' + esc(offNote) + ' · ' + (es ? "Techo 121-1/2\" · SIN GABINETES ALTOS" : "Ceiling 121-1/2\" · NO UPPER CABINETS") + "</text>" +
+        '<line x1="35" y1="44" x2="425" y2="44" stroke="#131A22" stroke-width="1.8"/>' +
+        '<line x1="35" y1="214" x2="425" y2="214" stroke="#131A22" stroke-width="2.2"/>' +
+        // Full-height backsplash tile field
+        '<rect x="64" y="44" width="332" height="170" fill="#FAFBFD" stroke="#D9DEDC" stroke-width="1"/>' +
+        '<text x="122" y="88" text-anchor="middle" font-size="7.6" font-weight="700" fill="#2f6b3f">' + (es ? "AZULEJO HASTA TECHO" : "FULL-HEIGHT TILE") + "</text>" +
+        '<text x="338" y="88" text-anchor="middle" font-size="7.6" font-weight="700" fill="#2f6b3f">' + (es ? "SIN ALTOS (FIJO)" : "NO UPPERS (LOCKED)") + "</text>" +
+        // Zephyr 30" Hood + 8-5/8" Shroud centered at x=230
+        '<rect x="208" y="44" width="44" height="58" fill="#E3EEF2" stroke="#1f5f7a" stroke-width="1.4"/>' +
+        '<polygon points="208,102 252,102 305,126 155,126" fill="#DCE4E8" stroke="#1f5f7a" stroke-width="1.8"/>' +
+        '<text x="230" y="118" text-anchor="middle" font-size="8.2" font-weight="800" fill="#1d2326">ZEPHYR 30"</text>' +
+        '<text x="230" y="75" text-anchor="middle" font-size="7" font-weight="700" fill="#1f5f7a">8-5/8"</text>' +
+        '<text x="230" y="142" text-anchor="middle" font-size="7.6" font-weight="700" fill="#1f5f7a">' +
+          (es ? "Borde campana: " : "Hood bottom: ") + fmtIn(hoodLow) + "–" + fmtIn(hoodHigh) + "</text>" +
+        // 18" Base (S) | 30" Viking Range | 18" Base (N)
+        '<rect x="64" y="158" width="90" height="56" fill="#EEF4F0" stroke="#2D4A3E" stroke-width="1.5"/>' +
+        '<text x="109" y="189" text-anchor="middle" font-size="8.6" font-weight="800" fill="#131A22">18" Base (S)</text>' +
+        '<rect x="154" y="158" width="150" height="56" fill="#E6F0F8" stroke="#184E77" stroke-width="1.8"/>' +
+        '<text x="229" y="184" text-anchor="middle" font-size="9.2" font-weight="800" fill="#184E77">VIKING 30"</text>' +
+        '<text x="229" y="198" text-anchor="middle" font-size="7.4" fill="#485563">' + (es ? 'Eje 33" desde Sur' : 'Center 33" from South') + "</text>" +
+        '<rect x="304" y="158" width="92" height="56" fill="#EEF4F0" stroke="#2D4A3E" stroke-width="1.5"/>' +
+        '<text x="350" y="189" text-anchor="middle" font-size="8.6" font-weight="800" fill="#131A22">18" Base (N)</text>' +
+        '<text x="64" y="232" font-size="8.2" font-weight="800" fill="#184E77">0" (' + (es ? "Sur" : "South") + ")</text>" +
+        '<text x="229" y="232" text-anchor="middle" font-size="8" font-weight="700" fill="#485563">33" CL</text>' +
+        '<text x="396" y="232" text-anchor="end" font-size="8.2" font-weight="800" fill="#184E77">66-1/4" (' + (es ? "Norte" : "North") + ")</text>" +
+      "</svg>";
+    }
+
+    if (state.wallTab === "north") {
+      return '<svg viewBox="0 0 460 250" xmlns="http://www.w3.org/2000/svg">' +
+        '<text x="230" y="18" text-anchor="middle" font-size="10" font-weight="800" fill="#184E77">' +
+          (es ? 'MURO NORTE (115-1/2" · COLINDA CON DESCANSO EXTERIOR Y PASILLO)' : 'NORTH WALL (115-1/2" · BORDERS EXTERIOR LANDING & HALLWAY)') + "</text>" +
+        '<text x="230" y="31" text-anchor="middle" font-size="8.2" font-weight="700" fill="#485563">' +
+          (es ? "Sin gabinetes · Paso libre hacia Pasillo / Comedor (lado Este)" : "No cabinets on North wall · Open entry into Hallway / Dining on East") + "</text>" +
+        '<line x1="35" y1="44" x2="425" y2="44" stroke="#131A22" stroke-width="1.8"/>' +
+        '<line x1="35" y1="214" x2="425" y2="214" stroke="#131A22" stroke-width="2.2"/>' +
+        // Left: West wall 24" base cabinet return
+        '<rect x="44" y="158" width="76" height="56" fill="#EEF4F0" stroke="#2D4A3E" stroke-width="1.5"/>' +
+        '<text x="82" y="184" text-anchor="middle" font-size="8" font-weight="800" fill="#131A22">' + (es ? "Retorno" : "West Return") + "</text>" +
+        '<text x="82" y="196" text-anchor="middle" font-size="7.4" fill="#485563">24" D</text>' +
+        // Center: Solid shared wall behind exterior stair landing (no cabinets)
+        '<rect x="120" y="54" width="188" height="160" fill="#F4F5F3" stroke="#9AA5B1" stroke-width="1.3" stroke-dasharray="4 3"/>' +
+        '<text x="214" y="114" text-anchor="middle" font-size="9" font-weight="800" fill="#1d2326">' + (es ? "MURO NORTE LIBRE" : "OPEN NORTH WALL") + "</text>" +
+        '<text x="214" y="130" text-anchor="middle" font-size="7.8" fill="#5d686d">' + (es ? "Atrás: descanso exterior Puerta 4" : "Behind: Exterior Front Door 4 landing") + "</text>" +
+        '<text x="214" y="144" text-anchor="middle" font-size="7.4" fill="#5d686d">' + (es ? "(Sin gabinetes — paso limpio)" : "(Zero cabinets — clear walkway)") + "</text>" +
+        // Right: Open Hallway / Dining threshold
+        '<rect x="308" y="66" width="104" height="148" fill="#E4F0E6" stroke="#2f6b3f" stroke-width="1.6"/>' +
+        '<text x="360" y="132" text-anchor="middle" font-size="8.8" font-weight="800" fill="#2f6b3f">' + (es ? "PASO AL" : "OPEN TO") + "</text>" +
+        '<text x="360" y="146" text-anchor="middle" font-size="8.8" font-weight="800" fill="#2f6b3f">' + (es ? "PASILLO" : "HALLWAY") + "</text>" +
+        '<text x="360" y="162" text-anchor="middle" font-size="7.3" fill="#2f6b3f">' + (es ? "Junto a Refri (E)" : "Next to Fridge (E)") + "</text>" +
+        '<text x="44" y="232" font-size="8.2" font-weight="800" fill="#184E77">' + (es ? "← Oeste (Estufa)" : "← West (Range)") + "</text>" +
+        '<text x="412" y="232" text-anchor="end" font-size="8.2" font-weight="800" fill="#184E77">' + (es ? "Este (Pasillo) →" : "East (Hall) →") + "</text>" +
+      "</svg>";
+    }
+
     if (state.wallTab === "east") {
       return '<svg viewBox="0 0 460 250" xmlns="http://www.w3.org/2000/svg">' +
         '<text x="230" y="18" text-anchor="middle" font-size="10" font-weight="800" fill="#184E77">' +
@@ -553,7 +614,8 @@
             '<div class="u4h-pill-group">' +
               '<button type="button" class="u4h-pill' + (state.wallTab === "south" ? " is-active" : "") + '" data-wall="south">' + (es ? "Muro Sur (Tarja y Alacena)" : "South Wall (Sink & Pie-Safe)") + "</button>" +
               '<button type="button" class="u4h-pill' + (state.wallTab === "east" ? " is-active" : "") + '" data-wall="east">' + (es ? "Muro Este (Refri y D04)" : "East Wall (Fridge & D04)") + "</button>" +
-              '<a class="u4h-pill" style="text-decoration:none" href="' + esc(window.U4PlanNav.planUrl("kitchen-west-ks4")) + '">' + (es ? "Muro Oeste (Estufa) →" : "West Wall (Range) →") + "</a>" +
+              '<button type="button" class="u4h-pill' + (state.wallTab === "west" ? " is-active" : "") + '" data-wall="west">' + (es ? "Muro Oeste (Estufa)" : "West Wall (Range)") + "</button>" +
+              '<button type="button" class="u4h-pill' + (state.wallTab === "north" ? " is-active" : "") + '" data-wall="north">' + (es ? "Muro Norte (Pasillo)" : "North Wall (Hall)") + "</button>" +
             "</div>" +
           "</div>" +
         "</div>" +
@@ -567,6 +629,28 @@
                       : "Blue tape marks 36\" counter height. Existing recessed pie-safe sits left (~26\"–59\" from SE); sink window and rear door on right.") +
                 "</div>" +
               "</div>" +
+            "</div>"
+          : state.wallTab === "west"
+          ? '<div class="u4h-info-box">' +
+              '<div class="u4h-info-title">' + (es ? "Muro Oeste — Estufa Viking 30\" y Campana Zephyr 30\"" : "West Wall — Viking 30\" Range & Zephyr 30\" Hood") + "</div>" +
+              '<ul class="u4h-info-list">' +
+                "<li><strong>" + (es ? "Tramo fijo 66-1/4\":" : "Locked 66-1/4\" run:") + "</strong> 18\" Base (S) · 30\" Viking Range (CL 33\") · 18\" Base (N) + 1/4\" scribe. " +
+                  (es ? "SIN gabinetes altos — azulejo completo hasta techo (121-1/2\")." : "NO upper cabinets — full-height tile to 121-1/2\" ceiling.") + "</li>" +
+                '<li><a class="u4h-nav-link" style="display:inline-flex;margin-top:4px;padding:4px 10px;font-size:12px" href="' + esc(window.U4PlanNav.planUrl("kitchen-west-ks4")) + '">' +
+                  (es ? "Abrir Guía Completa de 5 Pasos (Muro Oeste) →" : "Open Full 5-Step West Range & Hood Guide →") + "</a></li>" +
+              "</ul>" +
+            "</div>"
+          : state.wallTab === "north"
+          ? '<div class="u4h-info-box">' +
+              '<div class="u4h-info-title">' + (es ? "Muro Norte (115-1/2\") — Colindancia y Paso" : "North Wall (115-1/2\") — Adjacent Landing & Entry") + "</div>" +
+              '<ul class="u4h-info-list">' +
+                "<li><strong>" + (es ? "Paso abierto al Pasillo:" : "Open Hallway entry:") + "</strong> " +
+                  (es ? "Muro libre sin gabinetes para mantener paso amplio entre estufa, refrigerador y pasillo principal."
+                      : "Clear wall with zero cabinets to keep unobstructed circulation between range, fridge, and main hallway.") + "</li>" +
+                "<li><strong>" + (es ? "Atrás del muro:" : "Behind North wall:") + "</strong> " +
+                  (es ? "Descanso exterior afuera de Puerta Principal 4 (donde va la escotilla del ático 24\"×36\")."
+                      : "Exterior stair landing outside Front Door 4 (confirmed exterior 24\"×36\" attic hatch location).") + "</li>" +
+              "</ul>" +
             "</div>"
           : '<div class="u4h-info-box">' +
               '<div class="u4h-info-title">' + (es ? "Reglas críticas del Muro Este" : "Critical East Wall Rules") + "</div>" +
@@ -778,7 +862,88 @@
     if (nextBtn) nextBtn.addEventListener("click", function () {
       if (idx < STEPS.length - 1) { state.step = STEPS[idx + 1].id; renderStepBody(); window.scrollTo(0, 0); }
     });
+
+    if (window.U4PlanNav && typeof window.U4PlanNav.reportPlanContext === "function") {
+      window.U4PlanNav.reportPlanContext();
+    }
   }
+
+  function applyViewArgs(args) {
+    args = args || {};
+    var changed = false;
+    var wallRaw = String(args.wall || "").toLowerCase().trim();
+    if (wallRaw === "south" || wallRaw === "east" || wallRaw === "west" || wallRaw === "north") {
+      state.step = "walls";
+      state.wallTab = wallRaw;
+      changed = true;
+    } else if (wallRaw === "plan" || wallRaw === "all" || wallRaw === "floor") {
+      state.step = "floor";
+      changed = true;
+    }
+    var stepRaw = args.step;
+    if (stepRaw != null && stepRaw !== "") {
+      var n = Number(stepRaw);
+      if (isFinite(n) && n >= 1 && n <= STEPS.length) {
+        state.step = STEPS[n - 1].id;
+        changed = true;
+      } else {
+        var s = String(stepRaw).toLowerCase().trim();
+        var match = STEPS.find(function (x) { return x.id === s; });
+        if (match) { state.step = match.id; changed = true; }
+      }
+    }
+    if (changed) renderStepBody();
+    return changed;
+  }
+
+  window.U4PlanControl = {
+    showView: function (args) {
+      return applyViewArgs(args);
+    },
+    applyChange: function (args) {
+      args = args || {};
+      var act = String(args.action || args.target || "").toLowerCase();
+      var val = args.value;
+      if (act === "south_end" || act === "end_box" || act === "end") {
+        state.southEnd = String(val) === "12" ? "12" : "6";
+      } else if (act === "sink_basis" || act === "sink") {
+        state.sinkBasis = String(val).toLowerCase().indexOf("tape") >= 0 || String(val) === "72" ? "tape" : "window";
+      } else if (act === "floor_down" || act === "floor") {
+        state.floorDown = val === true || val === "done" || val === "yes" || val === "true";
+      } else if (act === "wall") {
+        return applyViewArgs({ wall: val });
+      } else if (act === "select_cabinet" && val) {
+        state.selectedId = String(val);
+      } else if (act === "reset") {
+        state.southEnd = "6";
+        state.sinkBasis = "window";
+        state.floorDown = false;
+        state.step = "floor";
+        state.wallTab = "south";
+      } else {
+        return false;
+      }
+      syncUnderlyingPrintEngine();
+      renderStepBody();
+      return true;
+    },
+    getState: function () {
+      var m = computeLayout();
+      return {
+        planId: "kitchen-floor-plan",
+        step: state.step,
+        wall: state.step === "walls" ? state.wallTab : "plan",
+        southEnd: m.endW,
+        sinkBasis: state.sinkBasis,
+        floorDown: state.floorDown,
+        casingPass114: m.casingPass114,
+        narrowestWalk: m.narrowestWalk,
+        summary: "Kitchen Floor Plan: step=" + state.step +
+          (state.step === "walls" ? (" (" + state.wallTab + " wall)") : "") +
+          ", southEnd=" + m.endW + "in, sink=" + m.sinkStart + "-" + m.sinkEnd + "in, southWithOverhang=" + m.southWithOverhang + "in."
+      };
+    }
+  };
 
   function boot() {
     if (window.U4PlanNav) {
@@ -788,6 +953,8 @@
         onLangChange: function () { renderStepBody(); if (window.U4LiveAi) window.U4LiveAi.refreshPrompts(); },
         onThemeChange: function () {}
       });
+      var bp = window.U4PlanNav.getBootParams ? window.U4PlanNav.getBootParams() : {};
+      if (bp.wall || bp.step) applyViewArgs(bp);
     }
     if (window.U4LiveAi) {
       window.U4LiveAi.init({
@@ -796,8 +963,7 @@
         titleEn: "Kitchen Floor Plan & Cabinet Schedule",
         titleEs: "Planta de Cocina y Lista de Gabinetes",
         getContext: function () {
-          var m = computeLayout();
-          return "Step=" + state.step + ", SouthEnd=" + m.endW + "in, Sink=" + m.sinkStart + "-" + m.sinkEnd + "in, SouthWithOverhang=" + m.southWithOverhang + "in (rear door casing 114in tape / 115in scan), NarrowestWalkway=" + m.narrowestWalk + "in, WestUppers=NONE, EastD04NoScrews=53-77in.";
+          return window.U4PlanControl.getState().summary;
         },
         quickPrompts: function (lang) {
           return lang === "es"

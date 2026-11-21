@@ -561,10 +561,15 @@
     var es = isEs();
     var m = computeMath();
 
-    // Update SVG in place without wiping inputs!
+    // Update SVG in place without wiping inputs, zoom stage, or dropped pins!
     var svgHost = document.getElementById("murSvgHost");
     if (svgHost) {
-      svgHost.innerHTML = renderDoorwayElevationSvg(m, es);
+      var oldSvg = svgHost.querySelector("svg");
+      if (oldSvg) {
+        oldSvg.outerHTML = renderDoorwayElevationSvg(m, es);
+      } else {
+        svgHost.innerHTML = renderDoorwayElevationSvg(m, es);
+      }
       wireSvgPillPickers();
     }
 
@@ -863,7 +868,94 @@
     var nBtn = document.getElementById("murNextBtn");
     if (pBtn) pBtn.addEventListener("click", function () { if (idx > 0) { state.step = STEPS[idx - 1].id; render(); window.scrollTo(0, 0); } });
     if (nBtn) nBtn.addEventListener("click", function () { if (idx < STEPS.length - 1) { state.step = STEPS[idx + 1].id; render(); window.scrollTo(0, 0); } });
+
+    if (window.U4PlanNav && typeof window.U4PlanNav.reportPlanContext === "function") {
+      window.U4PlanNav.reportPlanContext();
+    }
   }
+
+  function applyMurphyView(args) {
+    args = args || {};
+    var changed = false;
+    var stepRaw = args.step;
+    if (stepRaw != null && stepRaw !== "") {
+      var n = Number(stepRaw);
+      if (isFinite(n) && n >= 1 && n <= STEPS.length) {
+        state.step = STEPS[n - 1].id;
+        changed = true;
+      } else {
+        var s = String(stepRaw).toLowerCase().trim();
+        var map = { r4: "measure", door: "measure", closet: "swing", depth: "swing", airflow: "vents", laundry: "vents", supplies: "trim" };
+        var id = map[s] || s;
+        if (STEPS.some(function (x) { return x.id === id; })) { state.step = id; changed = true; }
+      }
+    }
+    if (changed) render();
+    return changed;
+  }
+
+  window.U4PlanControl = {
+    showView: function (args) { return applyMurphyView(args); },
+    applyChange: function (args) {
+      args = args || {};
+      var act = String(args.action || args.target || "").toLowerCase();
+      var val = args.value;
+      if (act === "depth" || act === "bookcase_depth") {
+        var ds = String(val);
+        if (ds === "8.25" || ds === "9.5" || ds === "10.5") state.depthOpt = ds;
+        else return false;
+        render();
+        return true;
+      }
+      if (act === "focus_pt" || act === "point") {
+        var idxPt = Number(val);
+        if (idxPt >= 1 && idxPt <= 9) {
+          state.step = "measure";
+          state.activeField = "b" + (6 + idxPt);
+          render();
+          return true;
+        }
+        return false;
+      }
+      if (/^b(7|8|9|10|11|12|13|14|15)$/.test(act)) {
+        state.step = "measure";
+        state.activeField = act;
+        state[act] = String(val == null ? "" : val);
+        render();
+        return true;
+      }
+      if (act === "measure" && val && typeof val === "object") {
+        state.step = "measure";
+        Object.keys(val).forEach(function (k) {
+          if (/^b(7|8|9|10|11|12|13|14|15)$/.test(k)) state[k] = String(val[k]);
+        });
+        render();
+        return true;
+      }
+      if (act === "reset") {
+        ["b7","b8","b9","b10","b11","b12","b13","b14","b15"].forEach(function (k) { state[k] = ""; });
+        state.depthOpt = "8.25";
+        state.activeField = "b7";
+        render();
+        return true;
+      }
+      return false;
+    },
+    getState: function () {
+      var m = computeMath();
+      return {
+        planId: "murphy-door",
+        step: state.step,
+        wall: "hallway_door_b",
+        activeField: state.activeField,
+        filledCount: m.filledCount,
+        depthOpt: state.depthOpt,
+        caseW: m.caseW,
+        caseH: m.caseH,
+        summary: "Murphy Bookcase Door (Hallway B): step=" + state.step + ", activePt=" + state.activeField + ", readings=" + m.filledCount + "/9, depth=" + fmtIn(m.depth) + "."
+      };
+    }
+  };
 
   function boot() {
     if (window.U4PlanNav) {
@@ -872,6 +964,8 @@
         headerEl: document.getElementById("u4hTopbar"),
         onLangChange: function () { render(); if (window.U4LiveAi) window.U4LiveAi.refreshPrompts(); }
       });
+      var bp = window.U4PlanNav.getBootParams ? window.U4PlanNav.getBootParams() : {};
+      if (bp.step) applyMurphyView(bp);
     }
     if (window.U4LiveAi) {
       window.U4LiveAi.init({
