@@ -8751,6 +8751,14 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       var a = args || {};
       var act = String(a.action || "").trim();
       if (!act) return { ok: false, action: "update_plan_state", code: "MISSING_ACTION" };
+      if (act === "set_theme" || act === "theme") {
+        var nextTheme = String(a.value || a.theme || "").toLowerCase() === "dark" ? "dark" : "light";
+        if (typeof setTheme === "function") setTheme(nextTheme);
+        else if (typeof window.setTheme === "function") window.setTheme(nextTheme);
+        syncPlanFramePrefs();
+        appendNavEventChip((currentUiLang() === "es" ? "Tema: " : "Theme: ") + nextTheme);
+        return { ok: true, action: "update_plan_state", updated: "set_theme", theme: nextTheme };
+      }
       var ctxPlan = (window.__u4ActivePlanContext && window.__u4ActivePlanContext.planId) || "";
       var mod = a.plan ? resolveInteractivePlanAlias(a.plan) : (ctxPlan ? INTERACTIVE_PLAN_MODULES[ctxPlan] : null);
       if (!mod) {
@@ -10121,8 +10129,24 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
           '<span id="u4AiStateBadge" class="u4-ai-orb-pill">OFF</span>' +
         '</button>';
 
-      var hostBar = document.querySelector("main > .bar") || document.querySelector("main") || document.body;
-      hostBar.appendChild(dock);
+      document.body.appendChild(dock);
+
+      var minBar = document.createElement("div");
+      minBar.id = "u4VoiceMinBar";
+      minBar.className = "u4-voice-minbar";
+      minBar.hidden = true;
+      minBar.innerHTML =
+        '<div id="u4MiniStatusBtn" class="u4-minbar-status" role="button" tabindex="0" title="Expand AI Helper">' +
+          '<span class="u4-minbar-dot" aria-hidden="true"></span>' +
+          '<span id="u4MiniLbl" class="u4-minbar-lbl">LIVE</span>' +
+          '<span class="u4-rms-meter" aria-hidden="true">' +
+            '<span class="u4-rms-bar"></span><span class="u4-rms-bar"></span><span class="u4-rms-bar"></span><span class="u4-rms-bar"></span><span class="u4-rms-bar"></span>' +
+          '</span>' +
+        '</div>' +
+        '<button type="button" id="u4MiniMuteBtn" class="u4-minbar-btn" aria-pressed="false" hidden>Mute</button>' +
+        '<button type="button" id="u4MiniExpandBtn" class="u4-minbar-btn">Expand</button>' +
+        '<button type="button" id="u4MiniEndBtn" class="u4-minbar-btn is-end">End</button>';
+      document.body.appendChild(minBar);
 
       var dialog = document.createElement("aside");
       dialog.id = "u4VoiceChatDialog";
@@ -10137,6 +10161,9 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
             '<span class="u4-vd-dot" aria-hidden="true"></span>' +
             '<span id="u4VdTitle" class="u4-vd-title">AI Helper</span>' +
             '<span id="u4VdState" class="u4-vd-state">OFF</span>' +
+            '<span class="u4-rms-meter" aria-hidden="true">' +
+              '<span class="u4-rms-bar"></span><span class="u4-rms-bar"></span><span class="u4-rms-bar"></span><span class="u4-rms-bar"></span><span class="u4-rms-bar"></span>' +
+            '</span>' +
           '</div>' +
           '<div class="u4-vd-controls">' +
             '<button type="button" id="waVoiceMuteBtn" class="u4-vd-btn is-mute-ctl" aria-pressed="false" hidden>Mute</button>' +
@@ -10145,6 +10172,10 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
           '</div>' +
         '</div>' +
         '<p id="waVoiceStatus" class="u4-vd-sub" role="status" aria-live="polite"></p>' +
+        '<div id="u4VoiceDeadMicBanner" class="u4-deadmic-banner" hidden>' +
+          '<span data-u4-dm-text>No mic audio detected.</span>' +
+          '<button type="button" class="u4-deadmic-btn" data-u4-dm-reset>Reset Mic</button>' +
+        '</div>' +
         '<div id="u4VoiceChatTranscript" class="u4-vd-log" role="log" aria-live="polite"></div>' +
         '<div class="u4-vd-foot">' +
           '<div id="u4AiNudges" class="u4-vd-chips"></div>' +
@@ -10156,12 +10187,11 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
             '<button type="button" id="u4VdPhotoSendBtn" class="u4-vd-photo-send">Send photo</button>' +
             '<button type="button" id="u4VdPhotoClearBtn" class="u4-vd-photo-clear" aria-label="Remove photo">\u2715</button>' +
           '</div>' +
-          '<div class="u4-vd-photo-bar">' +
-            '<button type="button" id="u4VdPhotoBtn" class="u4-vd-photo-btn">📎 Attach photo</button>' +
-            '<button type="button" id="u4VdCameraBtn" class="u4-vd-photo-btn">📷 Take photo</button>' +
-          '</div>' +
           '<form id="u4VdAskForm" class="u4-vd-ask-row" novalidate>' +
-            '<input id="u4VdAskInput" class="u4-vd-ask-inp" type="text" autocomplete="off" placeholder="Or type a question to navigate\u2026">' +
+            '<button type="button" id="u4VdPhotoBtn" class="u4-vd-cam-mini" title="Attach photo" aria-label="Attach photo">\uD83D\uDCCE</button>' +
+            '<button type="button" id="u4VdCameraBtn" class="u4-vd-cam-mini" title="Take photo" aria-label="Take photo">\uD83D\uDCF7</button>' +
+            '<button type="button" id="u4VdSnapBtn" class="u4-vd-cam-mini" title="Snapshot active plan or diagram" aria-label="Snapshot diagram">\uD83D\uDCF8</button>' +
+            '<input id="u4VdAskInput" class="u4-vd-ask-inp" type="text" autocomplete="off" placeholder="Ask or navigate\u2026">' +
             '<button type="submit" class="u4-vd-ask-send" aria-label="Ask AI Helper">\u2191</button>' +
           '</form>' +
         '</div>';
@@ -10186,6 +10216,37 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         if (ev && ev.stopPropagation) ev.stopPropagation();
         toggleLiveMute();
       });
+
+      document.getElementById("u4MiniStatusBtn").addEventListener("click", function(ev) {
+        if (ev && ev.preventDefault) ev.preventDefault();
+        setDialogOpen(true);
+      });
+      document.getElementById("u4MiniExpandBtn").addEventListener("click", function(ev) {
+        if (ev && ev.preventDefault) ev.preventDefault();
+        setDialogOpen(true);
+      });
+      document.getElementById("u4MiniMuteBtn").addEventListener("click", function(ev) {
+        if (ev && ev.preventDefault) ev.preventDefault();
+        toggleLiveMute();
+      });
+      document.getElementById("u4MiniEndBtn").addEventListener("click", function(ev) {
+        if (ev && ev.preventDefault) ev.preventDefault();
+        stopGeminiLiveSession();
+      });
+      var dmResetBtn = dialog.querySelector("[data-u4-dm-reset]");
+      if (dmResetBtn) {
+        dmResetBtn.addEventListener("click", function(ev) {
+          if (ev && ev.preventDefault) ev.preventDefault();
+          resetMicCapture();
+        });
+      }
+      var vdSnapBtn = document.getElementById("u4VdSnapBtn");
+      if (vdSnapBtn) {
+        vdSnapBtn.addEventListener("click", function(ev) {
+          if (ev && ev.preventDefault) ev.preventDefault();
+          bridgeActions.capture_screen_snapshot({ target: "active_diagram" });
+        });
+      }
 
       document.getElementById("waVoiceMuteBtn").addEventListener("click", function(ev) {
         if (ev && ev.preventDefault) ev.preventDefault();
