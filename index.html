@@ -1166,10 +1166,10 @@ body.u4-in-plan .u4-pin-fab,body.u4-ai-sheet-open .u4-pin-fab{display:none!impor
 }
 
 /* State C: Expanded Classic Sheet (Desktop bottom-right drawer; Mobile <=600px flush bottom sheet w/ zero peeking gap!) */
-#u4VoiceChatDialog.u4-voice-dialog{position:fixed!important;right:max(16px,env(safe-area-inset-right,0px))!important;bottom:calc(env(safe-area-inset-bottom,0px) + 14px)!important;top:auto!important;left:auto!important;z-index:9500!important;width:min(395px,calc(100vw - 24px))!important;height:min(560px,calc(100vh - 34px))!important;border-radius:10px!important;border:1px solid var(--line)!important;background:var(--panel)!important;color:var(--fg)!important;box-shadow:0 8px 28px rgba(0,0,0,.22)!important;display:flex;flex-direction:column;overflow:hidden}
+#u4VoiceChatDialog.u4-voice-dialog{position:fixed!important;right:max(16px,env(safe-area-inset-right,0px))!important;bottom:calc(env(safe-area-inset-bottom,0px) + 14px)!important;top:auto!important;left:auto!important;margin:0!important;z-index:9500!important;width:min(395px,calc(100vw - 24px))!important;height:min(560px,calc(100vh - 34px))!important;border-radius:10px!important;border:1px solid var(--line)!important;background:var(--panel)!important;color:var(--fg)!important;box-shadow:0 8px 28px rgba(0,0,0,.22)!important;display:flex;flex-direction:column;overflow:hidden}
 #u4VoiceChatDialog.u4-voice-dialog[hidden]{display:none!important}
 @media (max-width:600px){
-  #u4VoiceChatDialog.u4-voice-dialog{left:0!important;right:0!important;bottom:0!important;top:auto!important;width:100%!important;max-width:100%!important;height:min(76dvh,calc(100dvh - env(safe-area-inset-top,0px) - 20px))!important;max-height:85dvh!important;border-radius:14px 14px 0 0!important;border-left:0!important;border-right:0!important;border-bottom:0!important;padding-bottom:env(safe-area-inset-bottom,0px)!important}
+  #u4VoiceChatDialog.u4-voice-dialog{left:0!important;right:0!important;bottom:0!important;top:auto!important;margin:0!important;width:100%!important;max-width:100%!important;height:min(76dvh,calc(100dvh - env(safe-area-inset-top,0px) - 20px))!important;max-height:85dvh!important;border-radius:14px 14px 0 0!important;border-left:0!important;border-right:0!important;border-bottom:0!important;padding-bottom:env(safe-area-inset-bottom,0px)!important}
 }
 #u4VoiceChatDialog .u4-vd-head{padding:9px 12px;border-bottom:1px solid var(--line);background:var(--bg);gap:6px;flex:none}
 #u4VoiceChatDialog .u4-vd-title{font-family:var(--display);font-size:15px;font-weight:700;color:var(--fg)}
@@ -3904,8 +3904,16 @@ function syncPlanFramePrefs(){
   try {
     var sh = document.getElementById("u4PlanShell");
     var fr = document.getElementById("u4PlanFrame");
+    var langNorm = LANG === "es" ? "es" : "en";
+    var themeNorm = currentWikiTheme();
     if (sh && !sh.hidden && fr && fr.contentWindow) {
-      fr.contentWindow.postMessage({ type: "u4:set-pref", lang: LANG === "es" ? "es" : "en", theme: currentWikiTheme() }, "*");
+      try {
+        if (fr.contentDocument && fr.contentDocument.documentElement) {
+          fr.contentDocument.documentElement.setAttribute("data-theme", themeNorm);
+          fr.contentDocument.documentElement.lang = langNorm;
+        }
+      } catch(e2){}
+      fr.contentWindow.postMessage({ type: "u4:set-pref", lang: langNorm, theme: themeNorm }, "*");
     }
   } catch(e){}
 }
@@ -9314,7 +9322,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     var view = parseActiveHashView();
     var es = currentUiLang() === "es";
     var sh = document.getElementById("u4PlanShell");
-    if ((targetHint === "plan" || !targetHint || targetHint === "screen") && sh && !sh.hidden) {
+    if ((targetHint === "plan" || targetHint === "active_diagram" || targetHint === "page_view" || !targetHint || targetHint === "screen") && sh && !sh.hidden) {
       await waitForPlanFrameReady(2400);
       var cmdOut = await postPlanCmd("capture_snapshot", { target: targetHint || "plan", label: labelOpt || "" });
       var pay = (cmdOut && cmdOut.result) || cmdOut;
