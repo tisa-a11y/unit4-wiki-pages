@@ -132,28 +132,6 @@
     "pin": true
   },
   {
-    "title": "2026-11-19_U4_kitchen_zephyr-savona-mock-hookup_04-hood-electrical_R1_EN.pdf",
-    "titleEn": "Hood test-hang: wiring and photos (older version) · English",
-    "titleEs": "Prueba de campana: corriente y fotos (versión anterior) · inglés",
-    "id": "1PNIj1k70IHGafUm0jBRe0xZ2kHXmSqn8",
-    "path": "Sheet 4 of 4 · Hood dry-hang, wiring and 5 site photos (English)",
-    "date": "2026-11-19",
-    "lang": "en",
-    "pairId": "zephyr-mock-sheet-04",
-    "history": true
-  },
-  {
-    "title": "2026-11-19_U4_kitchen_zephyr-savona-mock-hookup_04-hood-electrical_R1_ES.pdf",
-    "titleEn": "Hood test-hang: wiring and photos (older version) · Spanish",
-    "titleEs": "Prueba de campana: corriente y fotos (versión anterior) · español",
-    "id": "1oyzjDbzuRZiIITWSGF1UR05drrvrL0XB",
-    "path": "Hoja 4 de 4 · Montaje de prueba, corriente y 5 fotos (español)",
-    "date": "2026-11-19",
-    "lang": "es",
-    "pairId": "zephyr-mock-sheet-04",
-    "history": true
-  },
-  {
     "title": "2026-11-19_U4_kitchen_range-wall-full-plan_R1_EN.pdf",
     "titleEn": "Range wall plan (8 sheets) · English",
     "titleEs": "Plan del muro de la estufa (8 láminas) · inglés",
@@ -194,6 +172,28 @@
     "date": "2026-11-19",
     "lang": "en",
     "pin": true
+  },
+  {
+    "title": "2026-11-19_U4_kitchen_zephyr-savona-mock-hookup_04-hood-electrical_R1_EN.pdf",
+    "titleEn": "Hood test-hang: wiring and photos (older version) · English",
+    "titleEs": "Prueba de campana: corriente y fotos (versión anterior) · inglés",
+    "id": "1PNIj1k70IHGafUm0jBRe0xZ2kHXmSqn8",
+    "path": "Sheet 4 of 4 · Hood dry-hang, wiring and 5 site photos (English)",
+    "date": "2026-11-19",
+    "lang": "en",
+    "pairId": "zephyr-mock-sheet-04",
+    "history": true
+  },
+  {
+    "title": "2026-11-19_U4_kitchen_zephyr-savona-mock-hookup_04-hood-electrical_R1_ES.pdf",
+    "titleEn": "Hood test-hang: wiring and photos (older version) · Spanish",
+    "titleEs": "Prueba de campana: corriente y fotos (versión anterior) · español",
+    "id": "1oyzjDbzuRZiIITWSGF1UR05drrvrL0XB",
+    "path": "Hoja 4 de 4 · Montaje de prueba, corriente y 5 fotos (español)",
+    "date": "2026-11-19",
+    "lang": "es",
+    "pairId": "zephyr-mock-sheet-04",
+    "history": true
   },
   {
     "title": "2026-11-19_U4_kitchen_zephyr-savona-mock-hookup-plan_R3_EN.pdf",

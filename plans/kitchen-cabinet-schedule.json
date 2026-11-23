@@ -273,7 +273,7 @@
       "wall": "South",
       "type": "Appliance Bay",
       "order": 3,
-      "label_en": "24\" Dishwasher Bay (Panel-Ready)",
+      "label_en": "24\" Dishwasher Bay (Finished-Front)",
       "label_es": "Claro Lavavajillas 24\" (Panelable)",
       "station_start_in": 48,
       "width_in": 24,
@@ -547,7 +547,7 @@
       "severity": "MEDIUM",
       "title_en": "West Wall: Dedicated Hood Duct Chase (>= 6\") & 1-Gang Direct Hardwire",
       "title_es": "Muro Oeste: Ducto Exclusivo Campana (>= 6\") y Caja Sencilla 2\"×3\"",
-      "en": "Hood-only chase: verify duct≥6 in. NEXT is heating only. Nov 20 R 2: HD-1 flush one-gang 83–86 in AFF; verify OEM/field mounting. Viking 1 in island trim only. Old 4×4/mud-ring/104 in instructions retired.",
+      "en": "Hood-only chase: verify duct≥6 in. NEXT is heating only. Current hood electrical plan: HD-1 flush one-gang 83–86 in AFF; verify OEM/field mounting. Viking 1 in island trim only. Old 4×4/mud-ring/104 in instructions retired.",
       "es": "Ducto exclusivo campana: verificar≥6 pulg. NEXT solo calefacción. R 2: HD-1 sencilla al ras 83–86 pulg sobre piso; verificar montaje/manual. Viking solo remate 1 pulg.4×4/anillo/104 pulg retirados."
     }
   ],

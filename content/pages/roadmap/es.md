@@ -1,5 +1,5 @@
 # Unidad 4 — Ruta de trabajo
-Actualizado el 19 de noviembre de 2026. Cómo va cada cuarto, qué sigue y qué no tocar por ahora.
+Actualizado el 23 de noviembre de 2026. Cómo va cada cuarto, qué sigue y qué no tocar por ahora.
 
 | Cuarto | Cómo va | Sigue | Todavía no hacer |
 |---|---|---|---|

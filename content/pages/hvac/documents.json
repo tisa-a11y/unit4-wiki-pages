@@ -1,5 +1,27 @@
 [
   {
+    "title": "Attic-Furnace-and-Ducts-Interactive_EN.html",
+    "titleEn": "Attic furnace and ducts layout · English",
+    "titleEs": "Plano de calefacción y ductos en ático · inglés",
+    "id": "2026-11-20_HVAC-Layout-Interactive_EN",
+    "path": "Attic furnace spot, 24\" walkway, supply/return ducts & GFCI (English)",
+    "date": "2026-11-20",
+    "lang": "en",
+    "pairId": "hvac-layout-interactive",
+    "pin": true
+  },
+  {
+    "title": "Attic-Furnace-and-Ducts-Interactive_ES.html",
+    "titleEn": "Attic furnace and ducts layout · Spanish",
+    "titleEs": "Plano de calefacción y ductos en ático · español",
+    "id": "2026-11-20_HVAC-Layout-Interactive_ES",
+    "path": "Ubicación de calefactor, pasarela 24\", ductos y contacto GFCI (español)",
+    "date": "2026-11-20",
+    "lang": "es",
+    "pairId": "hvac-layout-interactive",
+    "pin": true
+  },
+  {
     "title": "2026-11-22_U4_hvac_layout_R3_EN.pdf",
     "titleEn": "Attic furnace and ducts layout · English · Nov 22",
     "titleEs": "Plano de calefacción y ductos en ático · inglés · 22 nov",
@@ -22,26 +44,26 @@
     "pin": true
   },
   {
-    "title": "Attic-Furnace-and-Ducts-Interactive_EN.html",
-    "titleEn": "Attic furnace and ducts layout · English",
-    "titleEs": "Plano de calefacción y ductos en ático · inglés",
-    "id": "2026-11-20_HVAC-Layout-Interactive_EN",
-    "path": "Attic furnace spot, 24\" walkway, supply/return ducts & GFCI (English)",
-    "date": "2026-11-20",
+    "title": "Attic hatch and walkway build guide (English)",
+    "titleEn": "Attic hatch and walkway build guide (English)",
+    "titleEs": "Guía de construcción: escotilla y pasillo (Inglés)",
+    "id": "2026-11-19_Attic-hatch-practical-guide_R5_EN",
+    "path": "Location, materials, cuts, sealing (English)",
+    "date": "2026-11-19",
     "lang": "en",
-    "pairId": "hvac-layout-interactive",
-    "pin": true
+    "pairId": "attic-hatch-r5",
+    "history": true
   },
   {
-    "title": "Attic-Furnace-and-Ducts-Interactive_ES.html",
-    "titleEn": "Attic furnace and ducts layout · Spanish",
-    "titleEs": "Plano de calefacción y ductos en ático · español",
-    "id": "2026-11-20_HVAC-Layout-Interactive_ES",
-    "path": "Ubicación de calefactor, pasarela 24\", ductos y contacto GFCI (español)",
-    "date": "2026-11-20",
+    "title": "Attic hatch and walkway build guide (Spanish)",
+    "titleEn": "Attic hatch and walkway build guide (Spanish)",
+    "titleEs": "Guía de construcción: escotilla y pasillo (Español)",
+    "id": "2026-11-19_Attic-hatch-practical-guide_R5_ES",
+    "path": "Ubicación, materiales, cortes y sellado (español)",
+    "date": "2026-11-19",
     "lang": "es",
-    "pairId": "hvac-layout-interactive",
-    "pin": true
+    "pairId": "attic-hatch-r5",
+    "history": true
   },
   {
     "title": "2026-11-20_U4_hvac_layout-interactive_R1_EN.pdf",
@@ -65,28 +87,6 @@
     "lang": "es",
     "pairId": "hvac-layout-printable",
     "pin": true,
-    "history": true
-  },
-  {
-    "title": "Attic hatch and walkway build guide (English)",
-    "titleEn": "Attic hatch and walkway build guide (English)",
-    "titleEs": "Guía de construcción: escotilla y pasillo (Inglés)",
-    "id": "2026-11-19_Attic-hatch-practical-guide_R5_EN",
-    "path": "Location, materials, cuts, sealing (English)",
-    "date": "2026-11-19",
-    "lang": "en",
-    "pairId": "attic-hatch-r5",
-    "history": true
-  },
-  {
-    "title": "Attic hatch and walkway build guide (Spanish)",
-    "titleEn": "Attic hatch and walkway build guide (Spanish)",
-    "titleEs": "Guía de construcción: escotilla y pasillo (Español)",
-    "id": "2026-11-19_Attic-hatch-practical-guide_R5_ES",
-    "path": "Ubicación, materiales, cortes y sellado (español)",
-    "date": "2026-11-19",
-    "lang": "es",
-    "pairId": "attic-hatch-r5",
     "history": true
   }
 ]

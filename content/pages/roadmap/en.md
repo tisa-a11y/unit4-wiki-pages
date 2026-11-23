@@ -1,5 +1,5 @@
 # Unit 4 — Roadmap
-Updated Nov 19, 2026. Where each room stands, what comes next, and what to leave alone for now.
+Updated Nov 23, 2026. Where each room stands, what comes next, and what to leave alone for now.
 
 | Room | Where it stands | Next | Do not do yet |
 |---|---|---|---|

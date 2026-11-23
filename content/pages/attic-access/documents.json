@@ -1,27 +1,5 @@
 [
   {
-    "title": "2026-11-22_U4_attic_hatch_R3_EN.pdf",
-    "titleEn": "Permanent attic hatch plan · English · Nov 22",
-    "titleEs": "Plano de escotilla permanente del ático · inglés · 22 nov",
-    "id": "2026-11-22_U4_attic_hatch_R3_EN",
-    "path": "Current Nov 22 print revision · attic-hatch",
-    "date": "2026-11-22",
-    "lang": "en",
-    "pairId": "attic-hatch-printable-current",
-    "pin": true
-  },
-  {
-    "title": "2026-11-22_U4_attic_hatch_R3_ES.pdf",
-    "titleEn": "Permanent attic hatch plan · Spanish · Nov 22",
-    "titleEs": "Plano de escotilla permanente del ático · español · 22 nov",
-    "id": "2026-11-22_U4_attic_hatch_R3_ES",
-    "path": "Current Nov 22 print revision · attic-hatch",
-    "date": "2026-11-22",
-    "lang": "es",
-    "pairId": "attic-hatch-printable-current",
-    "pin": true
-  },
-  {
     "title": "Permanent-Attic-Hatch-Interactive_EN.html",
     "titleEn": "Permanent attic hatch interactive plan · English",
     "titleEs": "Plano interactivo de escotilla permanente del ático · inglés",
@@ -44,26 +22,37 @@
     "pin": true
   },
   {
-    "title": "2026-11-20_U4_attic_hatch-interactive_R1_EN.pdf",
-    "titleEn": "Printable permanent attic hatch plan · English (older reference)",
-    "titleEs": "Plano imprimible de escotilla del ático · inglés (referencia anterior)",
-    "id": "2026-11-20_U4_attic_hatch-interactive_R1_EN",
-    "path": "True-scale attic hatch & walkway sheet (English)",
-    "date": "2026-11-20",
-    "lang": "en",
-    "pairId": "attic-hatch-printable",
-    "history": true
+    "title": "Attic Opening Plan & Step Checklist.html",
+    "titleEn": "Attic opening plan and checklist",
+    "titleEs": "Plan y lista de pasos para abrir el ático",
+    "id": "2026-11-19_Attic-Opening-Plan-Interactive",
+    "path": "hvac/ATTIC-OPENING-PLAN.md · Interactive EN/ES Plan & Checklists",
+    "date": "2026-11-19",
+    "lang": "both",
+    "pin": true,
+    "tier": "history"
   },
   {
-    "title": "2026-11-20_U4_attic_hatch-interactive_R1_ES.pdf",
-    "titleEn": "Printable permanent attic hatch plan · Spanish (older reference)",
-    "titleEs": "Plano imprimible de escotilla del ático · español (referencia anterior)",
-    "id": "2026-11-20_U4_attic_hatch-interactive_R1_ES",
-    "path": "Plano imprimible de escotilla y pasarela en ático (español)",
-    "date": "2026-11-20",
+    "title": "2026-11-22_U4_attic_hatch_R3_EN.pdf",
+    "titleEn": "Permanent attic hatch plan · English · Nov 22",
+    "titleEs": "Plano de escotilla permanente del ático · inglés · 22 nov",
+    "id": "2026-11-22_U4_attic_hatch_R3_EN",
+    "path": "Current Nov 22 print revision · attic-hatch",
+    "date": "2026-11-22",
+    "lang": "en",
+    "pairId": "attic-hatch-printable-current",
+    "pin": true
+  },
+  {
+    "title": "2026-11-22_U4_attic_hatch_R3_ES.pdf",
+    "titleEn": "Permanent attic hatch plan · Spanish · Nov 22",
+    "titleEs": "Plano de escotilla permanente del ático · español · 22 nov",
+    "id": "2026-11-22_U4_attic_hatch_R3_ES",
+    "path": "Current Nov 22 print revision · attic-hatch",
+    "date": "2026-11-22",
     "lang": "es",
-    "pairId": "attic-hatch-printable",
-    "history": true
+    "pairId": "attic-hatch-printable-current",
+    "pin": true
   },
   {
     "title": "Attic hatch and walkway build guide (English)",
@@ -88,15 +77,26 @@
     "history": true
   },
   {
-    "title": "Attic Opening Plan & Step Checklist.html",
-    "titleEn": "Attic opening plan and checklist",
-    "titleEs": "Plan y lista de pasos para abrir el ático",
-    "id": "2026-11-19_Attic-Opening-Plan-Interactive",
-    "path": "hvac/ATTIC-OPENING-PLAN.md · Interactive EN/ES Plan & Checklists",
-    "date": "2026-11-19",
-    "lang": "both",
-    "pin": true,
-    "tier": "history"
+    "title": "2026-11-20_U4_attic_hatch-interactive_R1_EN.pdf",
+    "titleEn": "Printable permanent attic hatch plan · English (older reference)",
+    "titleEs": "Plano imprimible de escotilla del ático · inglés (referencia anterior)",
+    "id": "2026-11-20_U4_attic_hatch-interactive_R1_EN",
+    "path": "True-scale attic hatch & walkway sheet (English)",
+    "date": "2026-11-20",
+    "lang": "en",
+    "pairId": "attic-hatch-printable",
+    "history": true
+  },
+  {
+    "title": "2026-11-20_U4_attic_hatch-interactive_R1_ES.pdf",
+    "titleEn": "Printable permanent attic hatch plan · Spanish (older reference)",
+    "titleEs": "Plano imprimible de escotilla del ático · español (referencia anterior)",
+    "id": "2026-11-20_U4_attic_hatch-interactive_R1_ES",
+    "path": "Plano imprimible de escotilla y pasarela en ático (español)",
+    "date": "2026-11-20",
+    "lang": "es",
+    "pairId": "attic-hatch-printable",
+    "history": true
   },
   {
     "title": "2026-11-19_U4_HVAC_Attic-Hatch-Visual-Field-Guide_R3_EN.pdf",

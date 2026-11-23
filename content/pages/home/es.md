@@ -1,13 +1,8 @@
-# Unidad 4 — Inicio
+# Unidad 4 — Esta semana (23–27 nov 2026)
 
-## Listo para el lunes (vie–dom, 20–22 nov)
-- **Primero el ático — prioridad, para el 22 de nov:** Terminar el plano de abertura. Trazar los 24" × 36" libres terminados afuera de la puerta 4 y documentar vigas y ruta de subida. Esperar aprobación antes de cortar.
-- **Cocina:** Despejar el cuarto, terminar el marco de la ventana y mandar fotos rotuladas del trazo completo en L.
-- **Cocina › Tramo de estufa y campana:** Colocar los refuerzos de madera, colgar la campana de prueba con su base a 66"–72" del piso (sin gabinetes altos) y medir el hueco al techo y el ducto.
-- **Baño:** Colocar la moldura original de la ventana antes de cualquier azulejo de muro, fijar las dos cajas GFCI y presentar los muebles.
-- **Carpintería del fin de semana:** Terminar bastidores y refuerzos antes de la entrega de tablaroca del lunes.
-
-## Próxima semana (desde el lun 23 nov)
-- **Lunes:** Llega la tablaroca. Apilarla; no cerrar ningún muro hasta que se libere ese cuarto.
-- **Lun 2:00–4:00 p.m.:** Visita de NEXT HVAC con Serge Kalitov y Alex: lugar del calefactor, tiro en azotea, escotilla y alimentador del tablero.
-- **Después:** Azulejo de muros del baño, preparación del ático e instalaciones en bruto cuarto por cuarto.
+## Programa vigente y retenciones
+- **Entrega de tablaroca pospuesta:** En espera hasta que Ervin y Joel puedan cargarla (incluso después de Thanksgiving). Sin compromiso de recepción el miércoles; no cerrar muros.
+- **Lunes 23 nov:** John termina el marco de ventana y preparación de azulejo del [baño](#bathroom), revisa el [plano interactivo de Ático y HVAC](./plans/attic-hvac/index.html?lang=es) y participa en la visita de [NEXT HVAC](#hvac) de **2:00 a 4:00 p.m.** con Serge y Alex. Tisa y HVAC confirman ubicación y ruta de la escotilla antes de cortar.
+- **Martes 24 nov:** Alex inicia el [azulejo de muros del baño](#bathroom) solo en secciones liberadas (marco de ventana, fotos, trazo y revisión de zona húmeda siguen vigentes).
+- **Miércoles 25 nov:** John inicia trabajo [eléctrico](#electrical) elegible; siguen vigentes la conciliación cocina/D04 y la regla de no cablear fuera de cocina antes de inspección.
+- **Compras de cocina y campana:** Tisa y John revisan las 4 opciones de [cubierta de campana](#kitchen-oven-range); John cotiza gabinetes con Brett y coordina acabados en Daltile; el lavavajillas pasa a **frente terminado** (nuevo o usado, espacio de 24", sin panel de puerta).

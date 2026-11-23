@@ -1,5 +1,73 @@
 [
   {
+    "title": "Interactive-Full-Kitchen-Floor-Plan_EN.html",
+    "titleEn": "Interactive full kitchen floor plan and cabinet schedule · English",
+    "titleEs": "Plano interactivo de cocina completa y gabinetes · inglés",
+    "id": "2026-11-20_Kitchen-Floor-Plan-Interactive_EN",
+    "path": "Full kitchen L-layout, 4 coupled walls & cabinet schedule (English)",
+    "date": "2026-11-20",
+    "lang": "en",
+    "pairId": "kitchen-floor-plan-interactive",
+    "pin": true
+  },
+  {
+    "title": "Interactive-Full-Kitchen-Floor-Plan_ES.html",
+    "titleEn": "Interactive full kitchen floor plan and cabinet schedule · Spanish",
+    "titleEs": "Plano interactivo de cocina completa y gabinetes · español",
+    "id": "2026-11-20_Kitchen-Floor-Plan-Interactive_ES",
+    "path": "Planta completa de cocina en L, 4 muros y lista de gabinetes (español)",
+    "date": "2026-11-20",
+    "lang": "es",
+    "pairId": "kitchen-floor-plan-interactive",
+    "pin": true
+  },
+  {
+    "title": "Interactive-Kitchen-Electrical-D04_EN.html",
+    "titleEn": "Interactive kitchen electrical and panel D04 plan · English",
+    "titleEs": "Plano interactivo eléctrico de cocina y tablero D04 · inglés",
+    "id": "2026-11-20_Kitchen-Electrical-Interactive_EN",
+    "path": "6 coupled views, D04 20-space panel & hood box routing (English)",
+    "date": "2026-11-20",
+    "lang": "en",
+    "pairId": "kitchen-electrical-interactive",
+    "pin": true
+  },
+  {
+    "title": "Interactive-Kitchen-Electrical-D04_ES.html",
+    "titleEn": "Interactive kitchen electrical and panel D04 plan · Spanish",
+    "titleEs": "Plano interactivo eléctrico de cocina y tablero D04 · español",
+    "id": "2026-11-20_Kitchen-Electrical-Interactive_ES",
+    "path": "6 vistas acopladas, tablero D04 de 20 espacios y ruta de campana (español)",
+    "date": "2026-11-20",
+    "lang": "es",
+    "pairId": "kitchen-electrical-interactive",
+    "pin": true
+  },
+  {
+    "title": "Kitchen-RevC-EN.html",
+    "titleEn": "Kitchen drawings from Nov 2 (web page) · English",
+    "titleEs": "Planos de cocina del 2 de nov (página web) · inglés",
+    "id": "1hHeDrjPwn0b_64Hda78LFk6hP-t8RplK",
+    "path": "outputs/rev-c-2026-11-02/Kitchen-RevC-EN.html",
+    "date": "2026-11-02",
+    "lang": "en",
+    "pairId": "kitchen-revc-html",
+    "history": true,
+    "pin": true
+  },
+  {
+    "title": "Kitchen-RevC-ES.html",
+    "titleEn": "Kitchen drawings from Nov 2 (web page) · Spanish",
+    "titleEs": "Planos de cocina del 2 de nov (página web) · español",
+    "id": "1_0EK9jHb95d6-mLOAJX9unUm7d9eoUSQ",
+    "path": "outputs/rev-c-2026-11-02/Kitchen-RevC-ES.html",
+    "date": "2026-11-02",
+    "lang": "es",
+    "pairId": "kitchen-revc-html",
+    "history": true,
+    "pin": true
+  },
+  {
     "title": "2026-11-22_U4_kitchen_electrical_R2_EN.pdf",
     "titleEn": "Kitchen electrical plan · English · Nov 22",
     "titleEs": "Plano eléctrico de cocina · inglés · 22 nov",
@@ -44,28 +112,6 @@
     "pin": true
   },
   {
-    "title": "Interactive-Full-Kitchen-Floor-Plan_EN.html",
-    "titleEn": "Interactive full kitchen floor plan and cabinet schedule · English",
-    "titleEs": "Plano interactivo de cocina completa y gabinetes · inglés",
-    "id": "2026-11-20_Kitchen-Floor-Plan-Interactive_EN",
-    "path": "Full kitchen L-layout, 4 coupled walls & cabinet schedule (English)",
-    "date": "2026-11-20",
-    "lang": "en",
-    "pairId": "kitchen-floor-plan-interactive",
-    "pin": true
-  },
-  {
-    "title": "Interactive-Full-Kitchen-Floor-Plan_ES.html",
-    "titleEn": "Interactive full kitchen floor plan and cabinet schedule · Spanish",
-    "titleEs": "Plano interactivo de cocina completa y gabinetes · español",
-    "id": "2026-11-20_Kitchen-Floor-Plan-Interactive_ES",
-    "path": "Planta completa de cocina en L, 4 muros y lista de gabinetes (español)",
-    "date": "2026-11-20",
-    "lang": "es",
-    "pairId": "kitchen-floor-plan-interactive",
-    "pin": true
-  },
-  {
     "title": "2026-11-20_U4_kitchen_floor-plan-interactive_R1_EN.pdf",
     "titleEn": "Printable kitchen floor plan & cabinet schedule · English (older reference)",
     "titleEs": "Plano imprimible de cocina completa y gabinetes · inglés (referencia anterior)",
@@ -86,28 +132,6 @@
     "lang": "es",
     "pairId": "kitchen-floor-plan-printable",
     "history": true
-  },
-  {
-    "title": "Interactive-Kitchen-Electrical-D04_EN.html",
-    "titleEn": "Interactive kitchen electrical and panel D04 plan · English",
-    "titleEs": "Plano interactivo eléctrico de cocina y tablero D04 · inglés",
-    "id": "2026-11-20_Kitchen-Electrical-Interactive_EN",
-    "path": "6 coupled views, D04 20-space panel & hood box routing (English)",
-    "date": "2026-11-20",
-    "lang": "en",
-    "pairId": "kitchen-electrical-interactive",
-    "pin": true
-  },
-  {
-    "title": "Interactive-Kitchen-Electrical-D04_ES.html",
-    "titleEn": "Interactive kitchen electrical and panel D04 plan · Spanish",
-    "titleEs": "Plano interactivo eléctrico de cocina y tablero D04 · español",
-    "id": "2026-11-20_Kitchen-Electrical-Interactive_ES",
-    "path": "6 vistas acopladas, tablero D04 de 20 espacios y ruta de campana (español)",
-    "date": "2026-11-20",
-    "lang": "es",
-    "pairId": "kitchen-electrical-interactive",
-    "pin": true
   },
   {
     "title": "2026-11-20_U4_kitchen_electrical-d04-interactive_R1_EN.pdf",
@@ -171,28 +195,6 @@
     "date": "2026-11-02",
     "lang": "es",
     "pairId": "kitchen-revc-pdf",
-    "history": true
-  },
-  {
-    "title": "Kitchen-RevC-EN.html",
-    "titleEn": "Kitchen drawings from Nov 2 (web page) · English",
-    "titleEs": "Planos de cocina del 2 de nov (página web) · inglés",
-    "id": "1hHeDrjPwn0b_64Hda78LFk6hP-t8RplK",
-    "path": "outputs/rev-c-2026-11-02/Kitchen-RevC-EN.html",
-    "date": "2026-11-02",
-    "lang": "en",
-    "pairId": "kitchen-revc-html",
-    "history": true
-  },
-  {
-    "title": "Kitchen-RevC-ES.html",
-    "titleEn": "Kitchen drawings from Nov 2 (web page) · Spanish",
-    "titleEs": "Planos de cocina del 2 de nov (página web) · español",
-    "id": "1_0EK9jHb95d6-mLOAJX9unUm7d9eoUSQ",
-    "path": "outputs/rev-c-2026-11-02/Kitchen-RevC-ES.html",
-    "date": "2026-11-02",
-    "lang": "es",
-    "pairId": "kitchen-revc-html",
     "history": true
   }
 ]
