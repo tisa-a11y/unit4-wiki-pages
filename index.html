@@ -2125,7 +2125,10 @@ body:has(#u4VoiceChatDialog:not([hidden])) #u4AiFloatingDock {
 #u4VoiceChatDialog:not([data-live="on"]):not([data-live="muted"]):not([data-live="connecting"]) .u4-vd-dot,
 #u4VoiceChatDialog:not([data-live="on"]):not([data-live="muted"]):not([data-live="connecting"]) .u4-vd-state,
 #u4VoiceChatDialog:not([data-live="on"]):not([data-live="muted"]):not([data-live="connecting"]) .u4-rms-meter,
-#u4VoiceChatDialog[data-live="off"] #waVoiceStatus {
+#u4VoiceChatDialog[data-live="off"] #waVoiceStatus,
+#u4VoiceChatDialog[data-live="on"] #waVoiceStatus,
+#u4VoiceChatDialog[data-live="muted"] #waVoiceStatus,
+#u4VoiceChatDialog[data-live="muted"] .u4-rms-meter {
   display: none !important;
 }
 #u4VoiceChatDialog .u4-vd-title {
