@@ -1510,3 +1510,33 @@ html[data-theme="dark"] .u4h-check-row.is-checked {
   }
 }
 /* U4_UNIFIED_ES_EN_TOGGLE_PLAN_END */
+
+/* U4_DEEP_UX_POLISH_PLAN_START */
+.u4h-nav-link,
+.u4h-plans-btn,
+.u4h-mini-btn.u4h-pdf-compact {
+  min-height: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  box-sizing: border-box;
+  line-height: 1;
+}
+.u4h-mini-btn.u4h-pdf-compact {
+  padding: 0 11px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+@media (max-width: 640px) {
+  .u4h-nav-link,
+  .u4h-plans-btn,
+  .u4h-mini-btn.u4h-pdf-compact {
+    min-height: 36px;
+    height: 36px;
+  }
+}
+/* U4_DEEP_UX_POLISH_PLAN_END */
