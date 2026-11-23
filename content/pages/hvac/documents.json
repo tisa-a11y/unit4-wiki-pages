@@ -1,5 +1,27 @@
 [
   {
+    "title": "2026-11-22_U4_hvac_layout_R2_EN.pdf",
+    "titleEn": "Attic furnace and ducts layout · English · Nov 22",
+    "titleEs": "Plano de calefacción y ductos en ático · inglés · 22 nov",
+    "id": "2026-11-22_U4_hvac_layout_R2_EN",
+    "path": "Current Nov 22 print revision · hvac-layout",
+    "date": "2026-11-22",
+    "lang": "en",
+    "pairId": "hvac-layout-printable-current",
+    "pin": true
+  },
+  {
+    "title": "2026-11-22_U4_hvac_layout_R2_ES.pdf",
+    "titleEn": "Attic furnace and ducts layout · Spanish · Nov 22",
+    "titleEs": "Plano de calefacción y ductos en ático · español · 22 nov",
+    "id": "2026-11-22_U4_hvac_layout_R2_ES",
+    "path": "Current Nov 22 print revision · hvac-layout",
+    "date": "2026-11-22",
+    "lang": "es",
+    "pairId": "hvac-layout-printable-current",
+    "pin": true
+  },
+  {
     "title": "Attic-Furnace-and-Ducts-Interactive_EN.html",
     "titleEn": "Attic furnace and ducts layout · English",
     "titleEs": "Plano de calefacción y ductos en ático · inglés",

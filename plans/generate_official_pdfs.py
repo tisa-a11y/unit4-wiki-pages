@@ -29,23 +29,23 @@ PLAN_REGISTRY = {
     },
     "kitchen-floor-plan": {
         "html": "plans/kitchen-floor-plan/index.html",
-        "en_name": "2026-11-20_U4_kitchen_floor-plan-interactive_R1_EN.pdf",
-        "es_name": "2026-11-20_U4_kitchen_floor-plan-interactive_R1_ES.pdf",
+        "en_name": "2026-11-22_U4_kitchen_floor-plan_R2_EN.pdf",
+        "es_name": "2026-11-22_U4_kitchen_floor-plan_R2_ES.pdf",
     },
     "kitchen-electrical": {
         "html": "plans/kitchen-electrical/index.html",
-        "en_name": "2026-11-20_U4_kitchen_electrical-d04-interactive_R1_EN.pdf",
-        "es_name": "2026-11-20_U4_kitchen_electrical-d04-interactive_R1_ES.pdf",
+        "en_name": "2026-11-22_U4_kitchen_electrical_R2_EN.pdf",
+        "es_name": "2026-11-22_U4_kitchen_electrical_R2_ES.pdf",
     },
     "attic-hatch": {
         "html": "plans/attic-hatch/index.html",
-        "en_name": "2026-11-20_U4_attic_hatch-interactive_R1_EN.pdf",
-        "es_name": "2026-11-20_U4_attic_hatch-interactive_R1_ES.pdf",
+        "en_name": "2026-11-22_U4_attic_hatch_R2_EN.pdf",
+        "es_name": "2026-11-22_U4_attic_hatch_R2_ES.pdf",
     },
     "hvac-layout": {
         "html": "plans/hvac-layout/index.html",
-        "en_name": "2026-11-20_U4_hvac_layout-interactive_R1_EN.pdf",
-        "es_name": "2026-11-20_U4_hvac_layout-interactive_R1_ES.pdf",
+        "en_name": "2026-11-22_U4_hvac_layout_R2_EN.pdf",
+        "es_name": "2026-11-22_U4_hvac_layout_R2_ES.pdf",
     },
     "murphy-door": {
         "html": "plans/murphy-door/index.html",
@@ -132,7 +132,7 @@ def generate_pdfs(html_rel, out_dir, en_name, es_name):
     try:
         for lang, fname in [("en", en_name), ("es", es_name)]:
             target_pdf = os.path.join(out_abs, fname)
-            url = f"http://127.0.0.1:{port}/{html_rel.lstrip('/')}?lang={lang}&print=1"
+            url = f"http://127.0.0.1:{port}/{html_rel.lstrip('/')}?lang={lang}&print=1&snapshot=1"
             cmd = [
                 chrome,
                 "--headless=new",

@@ -292,7 +292,7 @@
       var pieClashS2 = (state.pieStart + 33) > 64;
       var sinkClash = (state.sinkStart + 30) > 108;
       var southSvg =
-        '<div class="u4h-svg-hint"><span>' + (es ? '✋ Arrastra la Alacena o el Gabinete de Tarja directo sobre el muro Sur (o usa las barras abajo) para probar contactos:' : '✋ Drag the Pie-Safe or 30" Sink Base directly along the South wall (or slide below) to check outlet clearances:') + "</span></div>" +
+        '<div class="u4h-svg-hint"><span>' + (es ? '✋ Arrastra el Hueco Anterior o el Gabinete de Tarja directo sobre el muro Sur (o usa las barras abajo) para probar contactos:' : '✋ Drag the Former Opening or 30" Sink Base directly along the South wall (or slide below) to check outlet clearances:') + "</span></div>" +
         '<div class="u4h-svg-wrap">' +
           '<svg id="kelecSouthSvg" viewBox="0 0 460 245" xmlns="http://www.w3.org/2000/svg">' +
             '<text x="230" y="18" text-anchor="middle" font-size="9.6" font-weight="800" fill="#184E77">' + (es ? 'MURO SUR ELÉCTRICO · SE 0" → OESTE (CHAMBRANA 114")' : 'SOUTH WALL ELECTRICAL · SE 0" → WEST (REAR DOOR 114")') + "</text>" +
@@ -309,9 +309,9 @@
             '<rect x="' + (x0 + 65 * Sx - 7).toFixed(1) + '" y="136" width="14" height="12" rx="2" fill="#184E77"/>' +
             '<text x="' + (x0 + 65 * Sx).toFixed(1) + '" y="144.5" text-anchor="middle" font-size="6.4" font-weight="800" fill="#FFFFFF">S2</text>' +
             // DRAGGABLE Pie-Safe (33" W)
-            '<g id="kelecPieDrag" class="u4-drag-ew" tabindex="0" role="slider" aria-label="' + esc(es ? "Arrastrar alacena existente" : "Drag recessed pie-safe") + '" aria-valuemin="18" aria-valuemax="40" aria-valuenow="' + state.pieStart + '" transform="translate(' + pieX.toFixed(1) + ', 0)">' +
+            '<g id="kelecPieDrag" class="u4-drag-ew" tabindex="0" role="slider" aria-label="' + esc(es ? "Arrastrar hueco anterior por cubrir" : "Drag former opening to be covered") + '" aria-valuemin="18" aria-valuemax="40" aria-valuenow="' + state.pieStart + '" transform="translate(' + pieX.toFixed(1) + ', 0)">' +
               '<rect class="u4-drag-grip" x="0" y="76" width="' + pieW.toFixed(1) + '" height="68" rx="4" fill="' + (pieClashS1 || pieClashS2 ? "#FEECEB" : "#FDF2E4") + '" stroke="' + (pieClashS1 || pieClashS2 ? "#B42318" : "#A15206") + '" stroke-width="1.8" stroke-dasharray="5 3"/>' +
-              '<text x="' + (pieW / 2).toFixed(1) + '" y="98" text-anchor="middle" font-size="8" font-weight="800" fill="' + (pieClashS1 || pieClashS2 ? "#B42318" : "#A15206") + '" pointer-events="none">' + (es ? 'ALACENA 33"' : 'PIE-SAFE 33"') + "</text>" +
+              '<text x="' + (pieW / 2).toFixed(1) + '" y="98" text-anchor="middle" font-size="8" font-weight="800" fill="' + (pieClashS1 || pieClashS2 ? "#B42318" : "#A15206") + '" pointer-events="none">' + (es ? 'CUBRIR HUECO 33"' : 'COVER OPENING 33"') + "</text>" +
               '<text id="kelecPieSvgLbl" x="' + (pieW / 2).toFixed(1) + '" y="111" text-anchor="middle" font-size="7.2" font-weight="700" fill="#485563" pointer-events="none">' + fmtIn(state.pieStart) + "–" + fmtIn(state.pieStart + 33) + "</text>" +
               '<rect x="' + (pieW / 2 - 26).toFixed(1) + '" y="120" width="52" height="13" rx="6" fill="#A15206" pointer-events="none"/>' +
               '<text x="' + (pieW / 2).toFixed(1) + '" y="129" text-anchor="middle" font-size="6.3" font-weight="800" fill="#FFFFFF" pointer-events="none">' + (es ? "↔ MOVER" : "↔ DRAG") + "</text>" +
@@ -336,7 +336,7 @@
         "</div>" +
         '<div class="u4h-controls">' +
           '<div class="u4h-ctrl-row">' +
-            '<span class="u4h-ctrl-lbl">' + (es ? "Alacena existente (desde SE):" : "Pie-Safe start (from SE):") + "</span>" +
+            '<span class="u4h-ctrl-lbl">' + (es ? "Hueco anterior (desde SE):" : "Former opening start (from SE):") + "</span>" +
             '<div class="u4h-slider-row" style="max-width:340px">' +
               '<input id="kelecPieSlider" type="range" min="18" max="40" step="0.5" value="' + state.pieStart + '">' +
               '<span id="kelecPieReadout" class="u4h-slider-val">' + fmtIn(state.pieStart) + "–" + fmtIn(state.pieStart + 33) + "</span>" +

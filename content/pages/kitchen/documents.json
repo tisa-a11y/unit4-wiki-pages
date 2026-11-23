@@ -1,5 +1,49 @@
 [
   {
+    "title": "2026-11-22_U4_kitchen_electrical_R2_EN.pdf",
+    "titleEn": "Kitchen electrical plan · English · Nov 22",
+    "titleEs": "Plano eléctrico de cocina · inglés · 22 nov",
+    "id": "2026-11-22_U4_kitchen_electrical_R2_EN",
+    "path": "Current Nov 22 print revision · kitchen-electrical",
+    "date": "2026-11-22",
+    "lang": "en",
+    "pairId": "kitchen-electrical-printable-current",
+    "pin": true
+  },
+  {
+    "title": "2026-11-22_U4_kitchen_electrical_R2_ES.pdf",
+    "titleEn": "Kitchen electrical plan · Spanish · Nov 22",
+    "titleEs": "Plano eléctrico de cocina · español · 22 nov",
+    "id": "2026-11-22_U4_kitchen_electrical_R2_ES",
+    "path": "Current Nov 22 print revision · kitchen-electrical",
+    "date": "2026-11-22",
+    "lang": "es",
+    "pairId": "kitchen-electrical-printable-current",
+    "pin": true
+  },
+  {
+    "title": "2026-11-22_U4_kitchen_floor-plan_R2_EN.pdf",
+    "titleEn": "Kitchen floor plan and cabinet schedule · English · Nov 22",
+    "titleEs": "Plano de cocina y lista de gabinetes · inglés · 22 nov",
+    "id": "2026-11-22_U4_kitchen_floor-plan_R2_EN",
+    "path": "Current Nov 22 print revision · kitchen-floor-plan",
+    "date": "2026-11-22",
+    "lang": "en",
+    "pairId": "kitchen-floor-plan-printable-current",
+    "pin": true
+  },
+  {
+    "title": "2026-11-22_U4_kitchen_floor-plan_R2_ES.pdf",
+    "titleEn": "Kitchen floor plan and cabinet schedule · Spanish · Nov 22",
+    "titleEs": "Plano de cocina y lista de gabinetes · español · 22 nov",
+    "id": "2026-11-22_U4_kitchen_floor-plan_R2_ES",
+    "path": "Current Nov 22 print revision · kitchen-floor-plan",
+    "date": "2026-11-22",
+    "lang": "es",
+    "pairId": "kitchen-floor-plan-printable-current",
+    "pin": true
+  },
+  {
     "title": "Interactive-Full-Kitchen-Floor-Plan_EN.html",
     "titleEn": "Interactive full kitchen floor plan and cabinet schedule · English",
     "titleEs": "Plano interactivo de cocina completa y gabinetes · inglés",

@@ -184,7 +184,7 @@
         title_en: 'Candidate Spot & Ceiling Fire Rating Unverified',
         title_es: 'Ubicación y Clasificación Cortafuego Sin Verificar',
         en: 'The common landing outside Front Door 4 is selected. Hold ceiling cuts and hatch kit until markout, fire protection and support have been verified.',
-        es: 'Ubicación candidata (descanso Puerta 4 vs. pasillo interior) y clasificación cortafuego del plafón SIN VERIFICAR. Cero cortes ni compra de madera hasta confirmar.'
+        es: 'El descanso común fuera de la Puerta Principal 4 está elegido. No cortar el plafón ni comprar el kit hasta verificar el trazo, la protección contra incendios y los apoyos.'
       },
       {
         id: 'clash-attic-joist-bay',
@@ -225,8 +225,8 @@
       circle_bar_hint: 'Draw a circle around any spot on the plan (touch or mouse) to attach a callout note.',
       btn_clear_sketch: 'Clear Sketch',
       btn_circle_done: 'Exit Circle Mode',
-      photo_panel_title: 'Candidate Ceiling Area — Door 4 Landing (Real Photo)',
-      photo_badge: 'LOCATION UNCONFIRMED',
+      photo_panel_title: 'Selected Landing — Exact Ceiling Markout Pending (Site Photo)',
+      photo_badge: 'LOCATION SELECTED · MARKOUT PENDING',
       photo_left: 'Stairwell / Window',
       photo_mid: 'CANDIDATE CEILING (HOLD)',
       photo_right: 'Door 4 Entry →',
@@ -344,7 +344,7 @@
       btn_circle_off: 'Dibujo Activo…',
       btn_export_svg: 'Exportar SVG',
       btn_download_pdf: 'Descargar / Imprimir PDF',
-      hold_html: '<strong>BORRADOR DE PLANEACIÓN — CERO CORTES EN PLAFÓN:</strong> Ubicación (descanso Puerta 4 vs. pasillo interior), clasificación cortafuego del plafón y claro entre vigas <strong>B</strong> siguen sin confirmar. <strong>CERO</strong> cortes, <strong>CERO</strong> compra de kit de madera, y mantener <strong>ABIERTA</strong> la abertura temporal del clóset hasta pasar todas las compuertas y reparar la gotera del techo.',
+      hold_html: '<strong>BORRADOR DE PLANEACIÓN — CERO CORTES EN PLAFÓN:</strong> Está elegido el descanso común fuera de la Puerta Principal 4. El trazo exacto, la protección contra incendios del plafón y el claro entre vigas <strong>B</strong> siguen sin verificar. <strong>CERO</strong> cortes, <strong>CERO</strong> compra de kit de madera, y mantener <strong>ABIERTA</strong> la abertura temporal del clóset hasta pasar todas las compuertas y reparar la gotera del techo.',
       conflict_text: 'Otro editor guardó una revisión más reciente en Tailnet (HTTP 409). Recarga el plano más reciente y vuelve a aplicar tu cambio.',
       btn_reload: 'Recargar Plano Actual',
       svg_title_plan: 'Planta a Escala Real — Escotilla de Ático y Pasillo (24" × 36" Libre)',
@@ -358,13 +358,13 @@
       circle_bar_hint: 'Dibuja un círculo sobre cualquier punto del plano (dedo o ratón) para adjuntar un comentario.',
       btn_clear_sketch: 'Borrar Trazo',
       btn_circle_done: 'Salir de Círculo',
-      photo_panel_title: 'Área Candidata de Plafón — Descanso Puerta 4 (Foto Real)',
-      photo_badge: 'UBICACIÓN SIN CONFIRMAR',
+      photo_panel_title: 'Descanso elegido — Trazo exacto del plafón pendiente (foto de obra)',
+      photo_badge: 'UBICACIÓN ELEGIDA · TRAZO PENDIENTE',
       photo_left: 'Escaleras / Ventana',
       photo_mid: 'PLAFÓN CANDIDATO (ESPERA)',
       photo_right: 'Acceso Puerta 4 →',
       photo_callouts: [
-        '<li class="callout-alert"><strong>Ubicación y Cortafuego Sin Confirmar:</strong> Confirmar si va en el descanso de Puerta 4 o en el pasillo interior Y si este plafón exige resistencia al fuego antes de cortar.</li>',
+        '<li class="callout-alert"><strong>Descanso común fuera de la Puerta Principal 4:</strong> Confirmar el trazo exacto, los apoyos y la protección contra incendios antes de cortar.</li>',
         '<li><strong>Lámpara de Plafón:</strong> Conservar la luz del descanso y agregar lámpara LED cerrada con apagador en la entrada del ático.</li>',
         '<li><strong>Moldura Alta Original (103"):</strong> Moldura Edwardian original visible en muros — conservar intacta y separar del marco de escotilla.</li>',
         '<li><strong>Libramiento Barandal de Escalera:</strong> Verificar espacio para escalera y apertura de tapa libre de barandal, Puerta 4 y chambranas.</li>'
@@ -1234,7 +1234,7 @@
 
       <!-- RIGHT COLUMN: N/S/E/W COMPASS + GATE STATUS + LIVE TAKEOFF SUMMARY -->
       <rect x="514" y="76" width="382" height="170" rx="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.1"/>
-      <text x="526" y="95" font-size="9.0" font-weight="700" fill="#10202b">${isEs ? 'BRÚJULA N/S/E/O Y UBICACIÓN CANDIDATA' : 'N/S/E/W COMPASS & CANDIDATE LOCATION'}</text>
+      <text x="526" y="95" font-size="9.0" font-weight="700" fill="#10202b">${isEs ? 'BRÚJULA N/S/E/O Y DESCANSO ELEGIDO' : 'N/S/E/W COMPASS & SELECTED LANDING'}</text>
       <g transform="translate(822, 152)">
         <circle cx="0" cy="0" r="34" fill="#ffffff" stroke="#334155" stroke-width="1.2"/>
         <polygon points="0,-26 6,-6 0,-11 -6,-6" fill="#10202b"/>
@@ -2522,7 +2522,7 @@
     await hydrateFromLocalJson();
     syncFormFromState();
     renderAll();
-    await checkTailnetAndLoad();
+    if (params.get('snapshot') !== '1') await checkTailnetAndLoad();
   }
 
   if (document.readyState === 'loading') {

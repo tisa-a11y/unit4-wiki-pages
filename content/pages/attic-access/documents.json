@@ -1,5 +1,27 @@
 [
   {
+    "title": "2026-11-22_U4_attic_hatch_R2_EN.pdf",
+    "titleEn": "Permanent attic hatch plan · English · Nov 22",
+    "titleEs": "Plano de escotilla permanente del ático · inglés · 22 nov",
+    "id": "2026-11-22_U4_attic_hatch_R2_EN",
+    "path": "Current Nov 22 print revision · attic-hatch",
+    "date": "2026-11-22",
+    "lang": "en",
+    "pairId": "attic-hatch-printable-current",
+    "pin": true
+  },
+  {
+    "title": "2026-11-22_U4_attic_hatch_R2_ES.pdf",
+    "titleEn": "Permanent attic hatch plan · Spanish · Nov 22",
+    "titleEs": "Plano de escotilla permanente del ático · español · 22 nov",
+    "id": "2026-11-22_U4_attic_hatch_R2_ES",
+    "path": "Current Nov 22 print revision · attic-hatch",
+    "date": "2026-11-22",
+    "lang": "es",
+    "pairId": "attic-hatch-printable-current",
+    "pin": true
+  },
+  {
     "title": "Permanent-Attic-Hatch-Interactive_EN.html",
     "titleEn": "Permanent attic hatch interactive plan · English",
     "titleEs": "Plano interactivo de escotilla permanente del ático · inglés",

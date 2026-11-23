@@ -1364,13 +1364,13 @@
 
       return `
         <tr class="${rowCls}" data-schedule-row="${esc(c.id)}">
-          <td><strong>${esc(c.wall)}</strong><br><span class="boundary-tag">${esc(c.id)}</span></td>
-          <td><strong>${esc(label)}</strong></td>
-          <td><span class="pill pill-neutral">${esc(c.type)}</span></td>
+          <td><strong>${esc(currentLang === 'es' ? ({West:'Oeste',South:'Sur',East:'Este'}[c.wall] || c.wall) : c.wall)}</strong><br><span class="boundary-tag">${esc(c.id)}</span></td>
+          <td><strong>${esc(label)}</strong>${c.status.startsWith('Owner Width Locked') ? `<br><small>${currentLang === 'es' ? '* Posiciones derivadas; medir en obra' : '* Stations derived; verify on site'}</small>` : ''}</td>
+          <td><span class="pill pill-neutral">${esc(currentLang === 'es' ? ({Base:'Gabinete bajo','Wall Upper':'Gabinete alto','Appliance Bay':'Hueco de aparato',Filler:'Relleno','Wall Closure':'Cierre de muro'}[c.type] || c.type) : c.type)}</span></td>
           <td>${esc(stTxt)}</td>
           <td>${sizeCell}</td>
-          <td><span class="boundary-tag">${esc(c.measure_boundary)}</span></td>
-          <td><span class="pill ${statusCls}">${esc(c.status)}</span></td>
+          <td><span class="boundary-tag">${esc(currentLang === 'es' ? 'entre muros' : 'wall to wall')}</span></td>
+          <td><span class="pill ${statusCls}">${esc(c.status.startsWith('Owner Width Locked') ? (currentLang === 'es' ? 'Ancho fijo*' : 'Width locked*') : c.status.startsWith('Seal and Cover') ? (currentLang === 'es' ? 'Sellar y tapar' : 'Seal & cover') : currentLang === 'es' ? ({Locked:'Confirmado','Open Option':'Opción abierta','Verify on Site':'Medir en obra'}[c.status] || c.status) : c.status)}</span></td>
         </tr>`;
     }).join('');
 
@@ -2985,7 +2985,7 @@
     await hydrateFromLocalJson();
     syncFormFromState();
     renderAll();
-    await checkTailnetAndLoad();
+    if (params.get('snapshot') !== '1') await checkTailnetAndLoad();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);

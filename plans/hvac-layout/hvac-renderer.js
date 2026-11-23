@@ -2019,7 +2019,7 @@
     await hydrateFromLocalJson();
     syncFormFromState();
     renderAll();
-    await checkTailnetAndLoad();
+    if (params.get('snapshot') !== '1') await checkTailnetAndLoad();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
