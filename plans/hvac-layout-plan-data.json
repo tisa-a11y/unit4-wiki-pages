@@ -174,8 +174,7 @@
       ],
       "platform_side": "north (X=174.0, Y=228.5)",
       "position_state": "RECONCILED_PIN_VERIFY_MON_NOV23",
-      "vibration_pads_by_john": false
-    },
+      "vibration_pads_tbd_with_next": true,},
     "walkway_route": {
       "label_en": "Continuous 24\" Solid Wood Walkway (30\" Clear Passage, 2025 CMC 304.4)",
       "placement_state": "RECONCILED_ORTHOGONAL_15_8_FT_PASS",
@@ -267,8 +266,8 @@
     {
       "id": "clash-hvac-feeder-80v100",
       "severity": "HIGH",
-      "en": "Electrical reconciliation required Mon Nov 23: NEXT scope includes 80A (#4 copper) feeder + 125A 20-space panel vs. earlier 100A / onsite panel box note; keep Kitchen West 6\" Savona hood duct separate.",
-      "es": "Confirmar el lunes 23 nov con Serge y Alex: propuesta NEXT trae alimentador 80A (#4 cobre) y tablero 125A frente a nota previa de 100A; ducto de campana 6\" de cocina va separado."
+      "en": "Electrical reconciliation required Mon Nov 23: NEXT scope includes 80A (#4 copper) feeder + 125A 20-space panel vs. earlier 100A / onsite panel box note; keep Kitchen West 6\" Savona separate exhaust separate.",
+      "es": "Confirmar el lunes 23 nov con Serge y Alex: propuesta NEXT trae alimentador 80A (#4 cobre) y tablero 125A frente a nota previa de 100A; ducto de separate exhaust\" de cocina va separado."
     },
     {
       "id": "clash-hvac-roof-leaks",

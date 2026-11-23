@@ -1317,11 +1317,11 @@
       pc.innerHTML = es
         ? '<li class="callout-alert"><strong>Arrastrar en Planta:</strong> Arrastra Equipo, Inyecciones (S1–S3), Retorno (RET), Paso, GFCI o Escape Tipo B en el SVG para probar largo del pasillo y cruces.</li>' +
           '<li><strong>Tope por Altura 66":</strong> El pasillo continuo de 24" máximo mide <strong>20 ft</strong> con 30" de paso libre y <strong>1 tira real de 24" por hoja 4×8</strong> (corte de sierra).</li>' +
-          '<li><strong>Aislamiento Incluido por NEXT:</strong> John arma solo la plataforma nivelada de 30" × 30" — <strong>NO comprar gomas antivibración</strong>.</li>' +
+          '<li><strong>Aislamiento Incluido por NEXT:</strong> John arma solo la plataforma nivelada de 30" × 30" — <strong>confirmar bases antivibración con NEXT</strong>.</li>' +
           '<li><strong>Alimentador por Confirmar:</strong> Confirmar el lunes 23 nov propuesta NEXT 80A/#4 vs. nota previa de 100A / tablero Eaton en sitio.</li>'
         : '<li class="callout-alert"><strong>Drag on Plan:</strong> Drag Furnace, Supply Boots (S1–S3), Return (RET), Jump Duct, GFCI, or Type B Flue directly on the SVG to test walkway length and clashes.</li>' +
           '<li><strong>66&quot; Attic Height Cap:</strong> Continuous 24&quot; wood walkway is capped at <strong>20 ft max</strong> with a 30&quot; clear passage and <strong>1 true 24&quot; strip per 4×8 sheet</strong> (saw kerf).</li>' +
-          '<li><strong>Isolation Included by NEXT:</strong> John builds the level 30&quot; × 30&quot; solid platform only — <strong>do NOT buy vibration pads</strong>.</li>' +
+          '<li><strong>Isolation Included by NEXT:</strong> John builds the level 30&quot; × 30&quot; solid platform only — <strong>confirm vibration mounts w/ NEXT</strong>.</li>' +
           '<li><strong>Feeder Reconciliation Open:</strong> Reconcile NEXT 80A/#4 feeder proposal vs. 100A/onsite Eaton panel box on Mon Nov 23.</li>';
     }
     const tb = document.getElementById('tailnet-badge');
@@ -1623,8 +1623,8 @@
       const q = (pin.note || '').toLowerCase();
       if (/pad|vibrat|isolat|platform|aislam|plataform/.test(q)) {
         pin.answer = currentLang === 'es'
-          ? 'Respuesta local (Spec HVAC): Sí — NEXT incluye las gomas de aislamiento contra vibración en su alcance. John y equipo solo arman la plataforma sólida nivelada de 30" × 30"; NO comprar gomas aparte.'
-          : 'Local Spec Answer (Attic HVAC): Yes — NEXT includes vibration isolation pads in their furnace install scope. Crew builds only a solid, level 30" × 30" service platform; do NOT buy vibration pads separately.';
+          ? 'Respuesta local (Spec HVAC): Sí — NEXT confirmar bases antivibración de aislamiento contra vibración en su alcance. John y equipo solo arman la plataforma sólida nivelada de 30" × 30"; confirmar bases antivibración con NEXT aparte.'
+          : 'Local Spec Answer (Attic HVAC): Yes — NEXT includes vibration isolation pads in their furnace install scope. Crew builds only a solid, level 30" × 30" service platform; confirm vibration mounts w/ NEXT separately.';
       } else if (/feeder|80a|100a|panel|electr|gfci|tablero|aliment/.test(q)) {
         pin.answer = currentLang === 'es'
           ? `Respuesta local (Spec HVAC): Revisar el lunes 23 nov con Serge y Alex el alimentador (NEXT marca 80A #4 cobre + tablero 125A frente a nota previa de 100A). Contacto GFCI 120V actual = ${m.gfciFt} ft (máx 25 ft).`

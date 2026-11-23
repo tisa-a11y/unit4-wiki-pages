@@ -1,13 +1,12 @@
 /* ============================================================================
    Unit 4 Interactive Plans — Unified Top Bar, Sibling Switcher, Print Bridge
-   & Persistent Shell Iframe Bridge (Single Unified Attic + HVAC Plan)
+   & Persistent Shell Iframe Bridge (Two Distinct Attic & HVAC Plans)
    ============================================================================ */
 (function () {
   "use strict";
 
   var LEGACY_PLAN_ALIASES = {
-    "attic-hatch": "attic-hvac",
-    "hvac-layout": "attic-hvac"
+    "attic-hvac": "hvac-layout"
   };
 
   var ALL_PLANS = [
@@ -48,15 +47,27 @@
       group: "kitchen"
     },
     {
-      id: "attic-hvac",
-      rel: "../attic-hvac/index.html",
+      id: "attic-hatch",
+      rel: "../attic-hatch/index.html",
+      roomHash: "attic-access",
+      roomEn: "Attic Access",
+      roomEs: "Acceso Ático",
+      shortEn: "1. Hatch & Wood Walkway",
+      shortEs: "1. Escotilla y Pasillo",
+      labelEn: "Attic Hatch, Wood Walkway & Platform",
+      labelEs: "Escotilla del Ático, Pasillo de Madera y Plataforma",
+      group: "attic-hvac"
+    },
+    {
+      id: "hvac-layout",
+      rel: "../hvac-layout/index.html",
       roomHash: "hvac",
-      roomEn: "HVAC & Attic",
-      roomEs: "HVAC y Ático",
-      shortEn: "Attic & HVAC Plan",
-      shortEs: "Plano Ático y HVAC",
-      labelEn: "Attic Hatch, Walkway, Furnace & Ducts",
-      labelEs: "Escotilla, Pasillo, Calefacción y Ductos",
+      roomEn: "Heating / HVAC",
+      roomEs: "Calefacción",
+      shortEn: "2. Furnace, Ducts & Exhaust",
+      shortEs: "2. Calefactor, Ductos y Salida",
+      labelEn: "Heating System: Furnace, Ducts & Sidewall Exhaust",
+      labelEs: "Sistema de Calefacción: Calefactor, Ductos y Salida Lateral",
       group: "attic-hvac"
     },
     {
@@ -116,9 +127,8 @@
 
   function detectPlanIdFromPath() {
     var path = String(window.location.pathname || "");
-    if (path.indexOf("/attic-hvac/") >= 0 || path.indexOf("/attic-hatch/") >= 0 || path.indexOf("/hvac-layout/") >= 0) {
-      return "attic-hvac";
-    }
+    if (path.indexOf("/attic-hatch/") >= 0) return "attic-hatch";
+    if (path.indexOf("/hvac-layout/") >= 0 || path.indexOf("/attic-hvac/") >= 0) return "hvac-layout";
     for (var i = 0; i < ALL_PLANS.length; i++) {
       if (path.indexOf("/" + ALL_PLANS[i].id + "/") >= 0) return ALL_PLANS[i].id;
     }
@@ -190,12 +200,12 @@
 
   function matchPlanIdFromHref(href) {
     if (!href) return null;
+    if (href.indexOf("/attic-hatch/") >= 0 || href.indexOf("attic-hatch/index.html") >= 0) return "attic-hatch";
     if (
-      href.indexOf("/attic-hatch/") >= 0 || href.indexOf("attic-hatch/index.html") >= 0 ||
       href.indexOf("/hvac-layout/") >= 0 || href.indexOf("hvac-layout/index.html") >= 0 ||
       href.indexOf("/attic-hvac/") >= 0 || href.indexOf("attic-hvac/index.html") >= 0
     ) {
-      return "attic-hvac";
+      return "hvac-layout";
     }
     for (var i = 0; i < ALL_PLANS.length; i++) {
       if (href.indexOf("/" + ALL_PLANS[i].id + "/") >= 0 || href.indexOf(ALL_PLANS[i].id + "/index.html") >= 0) {
@@ -216,9 +226,8 @@
   function planUrl(id) {
     var norm = normalizePlanId(id);
     var m = getPlanMeta(norm);
-    var stepArg = id === "attic-hatch" ? "&step=hatch" : "";
     var suffix = params.has("standalone") ? "&standalone=1" : (params.has("embedded") ? "&embedded=1" : "");
-    return m.rel + "?lang=" + state.lang + "&theme=" + state.theme + stepArg + suffix;
+    return m.rel + "?lang=" + state.lang + "&theme=" + state.theme + suffix;
   }
 
   function wikiBackUrl() {

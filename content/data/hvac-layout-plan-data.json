@@ -31,8 +31,7 @@
       "cabinet_in": { "height": 33.25, "width": 14.19, "depth": 29.0 },
       "service_platform_in": [30.0, 30.0],
       "position_state": "DRAGGABLE_PROPOSED_VERIFY_MON_NOV23",
-      "vibration_pads_by_john": false
-    },
+      "vibration_pads_tbd_with_next": true,},
     "walkway_route": {
       "label_en": "Continuous 24\" Solid Wood Walkway (30\" Clear Passage)",
       "placement_state": "TBD_TRACE_ON_FLOORPLAN",
@@ -61,7 +60,7 @@
         "id": "flue-1",
         "type": "Type B double-wall gas exhaust vent",
         "min_clearance_to_combustibles_in": 1.0,
-        "roof_penetration_goal": "Minimize new roof penetrations — confirm existing roof jack route Mon Nov 23"
+        "roof_penetration_goal": "Minimize new roof penetrations — confirm existing sidewall exhaust route Mon Nov 23"
       }
     },
     "electrical_service": {

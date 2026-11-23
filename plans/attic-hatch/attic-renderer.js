@@ -124,7 +124,7 @@
         value: [30.0, 30.0],
         measure_boundary: 'clear_between_casings',
         verified: 'LOCKED',
-        source: '30" × 30" level service platform (NO vibration pads from John)',
+        source: '30" × 30" level service platform (confirm vibration mount requirements w/ NEXT)',
         date: '2026-11-19'
       }
     },
@@ -905,7 +905,7 @@
       <text x="536" y="362" font-size="7.5" fill="#334155">• ${isEs ? 'Lámpara LED cerrada con apagador en entrada (conservar luz descanso).' : 'Entrance-switched enclosed LED light (retain landing light).'}</text>
       <text x="536" y="376" font-size="7.5" fill="#334155">• ${isEs ? 'Contacto 120V GFCI <= 25 pies en lado línea (independiente).' : '120V GFCI <= 25 ft wired live on line side (independent of disconnect).'}</text>
       <text x="536" y="390" font-size="7.5" fill="#334155">• ${isEs ? 'Circuito dedicado calefactor + desconectador a la vista.' : 'Dedicated furnace circuit + disconnect switch in sight.'}</text>
-      <text x="536" y="410" font-size="7.5" font-weight="700" fill="#b91c1c">• ${isEs ? 'Plataforma 30"×30": SIN almohadillas antivibración de John.' : '30"×30" Platform: NO vibration pads from John (HVAC handles install).'}</text>
+      <text x="536" y="410" font-size="7.5" font-weight="700" fill="#b91c1c">• ${isEs ? 'Plataforma 30"×30": SIN almohadillas antivibración de John.' : '30"×30" Platform: confirm vibration mount requirements w/ NEXT (HVAC handles install).'}</text>
 
       <!-- Bar Scale -->
       <text x="${barX}" y="${barY - 14}" font-size="8.2" font-weight="700" fill="#10202b">${isEs ? 'ESCALA GRÁFICA CORTE (Escala Real X = Y)' : 'SECTION BAR SCALE (Uniform True Scale X = Y)'}</text>
@@ -1234,7 +1234,7 @@
         ${isEs ? 'Pasillo L:' : 'Walkway L:'} ${walkProv ? tr.provisional_outline : `${m.walkFt} ft · ${tk.walkway_sheets_4x8} ${isEs ? 'hojas 4×8 (1 tira 24"/hoja por sierra)' : 'sheets 4×8 (1 true 24" strip/sheet)'}`}
       </text>
       <text x="36" y="812" font-size="7.4" fill="#334155">• ${isEs ? 'Material obligatorio: OSB 23/32" o triplay estructural 3/4" (NUNCA 3/8").' : 'Required decking: 23/32" OSB or 3/4" structural ply (NEVER 3/8" ply).'}</text>
-      <text x="36" y="828" font-size="7.4" fill="#334155">• ${isEs ? 'Plataforma 30"×30" nivelada · SIN almohadillas antivibración de John.' : 'Level 30"×30" service platform · NO vibration pads from John.'}</text>
+      <text x="36" y="828" font-size="7.4" fill="#334155">• ${isEs ? 'Plataforma 30"×30" nivelada · SIN almohadillas antivibración de John.' : 'Level 30"×30" service platform · confirm vibration mount requirements w/ NEXT.'}</text>
       <text x="36" y="844" font-size="7.4" fill="#334155">• ${isEs ? 'Paso libre mínimo 30" · Lámpara LED cerrada + GFCI 120V en lado línea <= 25 pies.' : '30" clear passage · Enclosed LED utility light + line-side 120V GFCI <= 25 ft.'}</text>
       <text x="36" y="864" font-size="7.4" font-weight="700" fill="#15539e">${isEs ? 'Arrastra el círculo azul ↔ para probar largo L (0–25 pies) y ver hojas 4×8 en vivo.' : 'Drag blue ↔ handle to test walkway L (0–25 ft) and recalculate 4×8 sheets live.'}</text>
 
