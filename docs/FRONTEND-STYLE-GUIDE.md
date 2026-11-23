@@ -127,3 +127,11 @@ Per Tisa (`2026-11-20`: *"Make the interactive images zoomable"*), every interac
   - 2-finger touch pinch zooms smoothly around midpoint via Pointer Events multi-touch tracking (`touch-action: pan-y` at `100%`, switching to `touch-action: none` only while zoomed `> 1×`).
   - Drag-to-pan activates **ONLY when zoom `> 1×`**, **NOT** armed for pin drop (`.is-pin-armed` / `.drop-target`), and **NOT** starting on a fixture drag handle, SVG mark, pin dot, or interactive button/input — clamped strictly to the stage bounds.
 - **1:1 Coordinate & Pin Lock:** `<svg>` / `<img>` + `.u4-pin-layer` live inside `.u4-zoom-stage` (`transform: translate3d(tx, ty, 0) scale(z)` with `--u4-inv-scale` keeping pin badges crisp); all fixture drag handlers and pin drops compute coordinates from live transformed `getBoundingClientRect()` so dragging & pinning remain 1:1 accurate at `100%`, `200%`, and `300%` zoom. Hidden cleanly on `@media print` and `body.u4-mode-blueprint`.
+
+---
+
+## 9. Canonical Interactive Symbol, Compact Switches & Modern AI Helper UI (Locked 2026-11-23)
+
+- **Canonical Interactive Plan Symbol (Zero Sidebar Redundancy):** Use ONE monochrome inline-SVG pointer-click icon (`12px–14px`, `var(--accent)`, inverting to `var(--panel)` when active) to denote interactive plans. Never use the raw `⚡` lightning-bolt emoji (it visually collides with Electrical). Show the icon **once** on the `INTERACTIVE PLANS` sidebar group heading and individually **only** where interactive plan links appear mixed with static PDFs or room guides (such as `.subdocs` and room Guide cards)—never repeated on every row under a dedicated `INTERACTIVE PLANS` heading.
+- **Compact Sliding Top-Bar Switches:** Use compact sliding segmented `EN | ES` and inline-SVG Sun/Moon switches across the main wiki, mobile header, all 6 interactive plans, and standalone docs.
+- **Modern AI Helper Popover (`#u4VoiceChatDialog`):** Anchor bottom-right with `height: auto` (collapsing empty transcript so it never blocks drawings), symbol-only `32×32` circular voice (waveform / stop square) and mute (mic / slashed-mic, `M` shortcut) controls, hidden redundant status banners during idle/live/muted states (shown only while connecting or alerting), zero robotic welcome bubble or repeated sender labels, and a unified 2-deck composer card.

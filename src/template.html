@@ -2282,42 +2282,50 @@ body:has(#u4VoiceChatDialog:not([hidden])) #u4AiFloatingDock {
 :root {
   --u4-ico-interactive: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.55' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7.2 7.2 13.6 9.5l-2.7.9-.9 2.7-2.8-5.9Z'/%3E%3Cpath d='M7.2 2.2V4M2.2 7.2H4M3.6 3.6l1.3 1.3M10.4 4l-1.1 1.1M4 10.4l1.1-1.1'/%3E%3C/svg%3E");
 }
-nav.rail a[href^="#plan:"],
-nav.rail a[href^="plans/"],
-nav.rail a[href*="/plans/"],
-nav.rail a[data-plan],
-nav.rail a[data-plan-id],
-nav.rail a.u4-plan-link,
-nav.rail a.u4-r7-plan-link {
+/* Show icon ONCE on the INTERACTIVE PLANS group heading (never repeated on all 6 rows underneath) */
+nav.rail .grp:has(+ a[href^="#plan:"]),
+nav.rail .grp:has(+ a[href^="plans/"]),
+nav.rail .grp:has(+ a[href*="/plans/"]),
+nav.rail .grp:has(+ a[data-plan]) {
   display: flex !important;
   align-items: center !important;
-  gap: 7px !important;
+  gap: 6px !important;
 }
-nav.rail a[href^="#plan:"]::before,
-nav.rail a[href^="plans/"]::before,
-nav.rail a[href*="/plans/"]::before,
-nav.rail a[data-plan]::before,
-nav.rail a[data-plan-id]::before,
-nav.rail a.u4-plan-link::before,
-nav.rail a.u4-r7-plan-link::before {
+nav.rail .grp:has(+ a[href^="#plan:"])::before,
+nav.rail .grp:has(+ a[href^="plans/"])::before,
+nav.rail .grp:has(+ a[href*="/plans/"])::before,
+nav.rail .grp:has(+ a[data-plan])::before {
   content: "";
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   flex: none;
   background-color: var(--accent);
-  opacity: 0.92;
-  -webkit-mask: var(--u4-ico-interactive) center / 14px 14px no-repeat;
-  mask: var(--u4-ico-interactive) center / 14px 14px no-repeat;
+  -webkit-mask: var(--u4-ico-interactive) center / 12px 12px no-repeat;
+  mask: var(--u4-ico-interactive) center / 12px 12px no-repeat;
 }
-nav.rail a[href^="#plan:"][aria-current="page"]::before,
-nav.rail a[href^="plans/"][aria-current="page"]::before,
-nav.rail a[href*="/plans/"][aria-current="page"]::before,
-nav.rail a[data-plan][aria-current="page"]::before,
-nav.rail a[data-plan-id][aria-current="page"]::before,
-nav.rail a.u4-plan-link[aria-current="page"]::before,
-nav.rail a.u4-r7-plan-link[aria-current="page"]::before {
+/* Show individual icon ONLY when an interactive plan appears mixed with static PDFs in room subdocs */
+nav.rail .subdocs a[href^="#plan:"],
+nav.rail .subdocs a[href^="plans/"],
+nav.rail .subdocs a[href*="/plans/"],
+nav.rail .subdocs a[data-plan] {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+nav.rail .subdocs a[href^="#plan:"]::before,
+nav.rail .subdocs a[href^="plans/"]::before,
+nav.rail .subdocs a[href*="/plans/"]::before,
+nav.rail .subdocs a[data-plan]::before {
+  content: "";
+  width: 13px;
+  height: 13px;
+  flex: none;
+  background-color: var(--accent);
+  -webkit-mask: var(--u4-ico-interactive) center / 13px 13px no-repeat;
+  mask: var(--u4-ico-interactive) center / 13px 13px no-repeat;
+}
+nav.rail .subdocs a[aria-current="page"]::before {
   background-color: var(--panel);
-  opacity: 1;
 }
 /* U4_SIDEBAR_INTERACTIVE_ICON_END */
 </style>
