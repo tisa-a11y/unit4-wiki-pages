@@ -20,7 +20,37 @@ small{color:var(--mut)}
 
   @media (prefers-color-scheme: dark){ a{color:#7cc0dc} a:visited{color:#a5b4fc} }
   html[data-theme='dark'] a{color:#7cc0dc}
+
+/* U4_UNIFIED_ES_EN_TOGGLE_DOC_START */
+.u4-doc-langbar{display:flex;justify-content:flex-end;align-items:center;margin:10px 0 6px}
+.u4-lang-pill,#langBtn.u4-lang-pill{
+  padding:5px 12px !important;
+  min-height:34px !important;
+  border-radius:999px !important;
+  border:1px solid var(--u4-accent,#1f5f7a) !important;
+  background:var(--u4-accent,#1f5f7a) !important;
+  color:var(--u4-panel,#ffffff) !important;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace !important;
+  font-size:12px !important;
+  font-weight:600 !important;
+  line-height:1.2 !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  white-space:nowrap !important;
+  cursor:pointer;
+  text-decoration:none !important;
+  box-sizing:border-box;
+}
+.u4-lang-pill:hover,#langBtn.u4-lang-pill:hover{filter:brightness(0.92)}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--u4-accent:#7cc0dc;--u4-panel:#1b2124}
+}
+:root[data-theme="dark"]{--u4-accent:#7cc0dc;--u4-panel:#1b2124}
+@media print{.u4-doc-langbar,.u4-lang-pill{display:none !important}}
+/* U4_UNIFIED_ES_EN_TOGGLE_DOC_END */
 </style></head><body><main>
+<div class="u4-doc-langbar"><a class="u4-lang-pill" href="2026-11-02_U4_Kitchen_Master-Plan_R2_EN.html" aria-label="Cambiar a inglés">English (EN)</a></div>
 <h1>Cocina de la Unidad 4 — Plan maestro R2</h1>
 <p class="sub">1231 11th Ave, Unidad 4 · 2 nov 2026 (R2, noche) · Edición en español (la edición en inglés es un archivo aparte y es la que rige) · Solo para revisión: no autoriza compras, cortes ni asignaciones.</p>
 

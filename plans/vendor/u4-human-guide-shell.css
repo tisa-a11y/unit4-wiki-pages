@@ -1425,3 +1425,35 @@ html[data-theme="dark"] .u4h-check-row.is-checked {
   gap: 12px;
   margin-top: 12px;
 }
+
+/* U4_UNIFIED_ES_EN_TOGGLE_PLAN_START */
+.u4h-lang-btn {
+  padding: 5px 12px;
+  min-height: 34px;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--panel);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.u4h-lang-btn:hover {
+  filter: brightness(0.92);
+}
+@media (max-width: 640px) {
+  .u4h-lang-btn {
+    min-height: 34px;
+    padding: 5px 12px;
+    font-size: 12px;
+    line-height: 1.2;
+  }
+}
+/* U4_UNIFIED_ES_EN_TOGGLE_PLAN_END */

@@ -75,6 +75,35 @@
     .stat,.chk,tr:nth-child(even) td{background:#161C23}
     .chk.done{background:#173025}
   }
+
+/* U4_UNIFIED_ES_EN_TOGGLE_DOC_START */
+.u4-doc-langbar{display:flex;justify-content:flex-end;align-items:center;margin:10px 0 6px}
+.u4-lang-pill,#langBtn.u4-lang-pill{
+  padding:5px 12px !important;
+  min-height:34px !important;
+  border-radius:999px !important;
+  border:1px solid var(--u4-accent,#1f5f7a) !important;
+  background:var(--u4-accent,#1f5f7a) !important;
+  color:var(--u4-panel,#ffffff) !important;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace !important;
+  font-size:12px !important;
+  font-weight:600 !important;
+  line-height:1.2 !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  white-space:nowrap !important;
+  cursor:pointer;
+  text-decoration:none !important;
+  box-sizing:border-box;
+}
+.u4-lang-pill:hover,#langBtn.u4-lang-pill:hover{filter:brightness(0.92)}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--u4-accent:#7cc0dc;--u4-panel:#1b2124}
+}
+:root[data-theme="dark"]{--u4-accent:#7cc0dc;--u4-panel:#1b2124}
+@media print{.u4-doc-langbar,.u4-lang-pill{display:none !important}}
+/* U4_UNIFIED_ES_EN_TOGGLE_DOC_END */
 </style>
 </head>
 <body>
@@ -88,7 +117,7 @@
       <p class="sub" data-lang="es">Verificado el 19 nov 2026 · Espejo exacto de tarjetas en Todoist (John Speer) · NO cortar ni comprar madera antes de aprobar Pasos 1–2</p>
     </div>
     <div class="actions">
-      <button class="btn primary" id="langBtn" type="button">Español</button>
+      <button class="btn primary u4-lang-pill" id="langBtn" type="button">Español (MX)</button>
       <a class="btn" href="../#attic-access"><span data-lang="en">← Back to Attic Access</span><span data-lang="es">← Volver a Acceso al ático</span></a>
       <a class="btn" href="./attic-hatch-r5/Attic-hatch-practical-guide_R5_EN.pdf" target="_blank" rel="noopener">R5 PDF (EN)</a>
       <a class="btn" href="./attic-hatch-r5/Attic-hatch-practical-guide_R5_ES.pdf" target="_blank" rel="noopener">Guía R5 PDF (ES)</a>
@@ -338,7 +367,7 @@
   var btn=document.getElementById("langBtn");
   function setLang(es){
     document.body.classList.toggle("es", es);
-    btn.textContent = es ? "English" : "Español";
+    btn.textContent = es ? "English (EN)" : "Español (MX)";
     try{ localStorage.setItem("u4_attic_lang", es ? "es" : "en"); }catch(e){}
   }
   btn.addEventListener("click", function(){ setLang(!document.body.classList.contains("es")); });

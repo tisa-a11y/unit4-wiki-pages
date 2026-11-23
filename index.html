@@ -1450,10 +1450,52 @@ body.u4-in-plan .u4-pin-fab,body.u4-ai-sheet-open .u4-pin-fab{display:none!impor
 .u4-snap-btn{display:inline-flex;align-items:center;gap:4px;padding:4px 8px;border-radius:6px;border:1px solid var(--accent);background:var(--panel);color:var(--accent);font:600 11px/1.2 var(--mono);text-decoration:none;cursor:pointer}
 .u4-snap-btn:hover{background:var(--accent-soft)}
 .u4-snap-btn.is-ok{border-color:var(--lock);background:var(--lock-soft);color:var(--lock)}
+
+/* U4_UNIFIED_ES_EN_TOGGLE_START */
+button.small.langbtn,
+main > .bar button.small.langbtn,
+#langBtn,
+#mobileLangBtn {
+  padding: 5px 12px !important;
+  min-height: 34px !important;
+  border-radius: 999px !important;
+  border: 1px solid var(--accent) !important;
+  background: var(--accent) !important;
+  color: var(--panel) !important;
+  font-family: var(--mono) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  white-space: nowrap !important;
+  cursor: pointer;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+button.small.langbtn:hover,
+main > .bar button.small.langbtn:hover,
+#langBtn:hover,
+#mobileLangBtn:hover {
+  filter: brightness(0.92);
+}
+.mobile #mobileLangBtn {
+  margin-left: auto;
+}
+.mobile .menubtn {
+  margin-left: 0;
+}
+@media (max-width: 760px) {
+  main > .bar #langBtn {
+    display: none !important;
+  }
+}
+/* U4_UNIFIED_ES_EN_TOGGLE_END */
 </style>
 
 <section id="agent-brief" class="sr-only" aria-label="Agent brief"># START HERE — Unit 4 remodel, 1231 11th Ave (San Francisco)<br><br>**This is the only start-here file.** Every person and agent opening this folder reads this first, fully, before acting.<br>Updated 2026-11-05 17:45 PT by Claude (Tisa&#x27;s account, cloud session). The same text is the wiki&#x27;s &quot;For AI agents: read first&quot; section.<br><br>## 0. Where to work — Google Drive is the single source of truth<br>- **Unit 4 folder (work here):** https://drive.google.com/drive/folders/1NnUfcuJfnzcjJz3XRvDQDhfvtMkrlSOr (`1231-11th-avenue/unit-4-renovation`)<br>- **Whole-building parent:** https://drive.google.com/drive/folders/1StmWHtnrDQlpd1CbUUfUEOI1vg-jHn29 (`1231-11th-avenue`)<br>- Everyone — Tisa&#x27;s Claude, John&#x27;s Claude, Dibble, any other agent — reads and writes through this Drive folder. (It is backed by Tisa&#x27;s Mini and syncs automatically; you never need the Mini path.)<br>- Every Unit 4 document now lives here, including copies of everything from the old locations (section 3). If you can&#x27;t find something, look in the room folder&#x27;s `from-remodel-hub/`, `from-unit4-bath-folder/` or `from-my-drive/` subfolder before assuming it&#x27;s missing.<br>- Older start-here, AGENTS and CLAUDE files were retired 2026-11-05 to `continuity/_superseded/start-here-history/` — don&#x27;t follow them.<br><br>---<br><br>## 1. Who and what<br>- **Tisa** owns the project and makes and locks every decision. **John** is lead carpenter on site. **Ervin, Joel, Alex** are crew (Spanish speakers).<br>- **Wiki** — https://tisa-a11y.github.io/unit4-wiki-pages/ — the shared picture: roadmap, one spec per project, open decisions, documents (PDFs preview in the page). It reads the `.md` files in this folder.<br>- **Todoist** board `Full 1231 11th Avenue Remodel` (id ). The wiki is its spine: every card traces to a spec, a locked decision or captured input.<br>- **Magicplan** MASTER plan is the geometry source: https://cloud.magicplan.app/plan/abb2d2c6-aa1c-4a88-a57e-1260847b6410<br>- **Your job:** keep the project moving with as little effort from Tisa and John as possible. Answer from the specs, capture what they tell you, file it, keep wiki and Todoist in step.<br><br>## 2. Read in this order<br>1. `STATUS-NOW.md` — what&#x27;s locked, what&#x27;s blocking, what&#x27;s next on site. Answer &quot;what&#x27;s up?&quot; from here first.<br>2. `continuity/ROADMAP.md` — sequence and phases.<br>3. `&lt;room&gt;/SPEC.md` for the area you&#x27;re working on.<br>4. `continuity/CURRENT-DECISIONS.md` and `continuity/KNOWN-GAPS.md` only if you need the history.<br><br>## 3. Folder map<br>| Folder | Holds |<br>|---|---|<br>| `kitchen/` `bathroom/` `electrical/` `laundry/` `bedroom/` `living-dining/` `hallway/` `paint-floors/` `hvac/` | One per room or trade; each has `SPEC.md` (governs) plus dated drawings and packages. |<br>| `interior-design/` | Wall treatment, trim, outlet and finish plans (dated revision folders). |<br>| `general/` | Whole-unit items; `from-remodel-hub/` = imported old crew-hub files. |<br>| `sprint/` | Current sprint plan and session agendas. |<br>| `continuity/` | Roadmap, decisions log, known gaps, labor ballpark, history and source snapshots. |<br>| `work-control/` | Agent index, Todoist runbook (dated snapshot), `wiki-source/` (wiki build files). |<br>| `to-triage/` | Drop box for any input (notes, photos, voice memos, session minutes). Claude routes it and moves it to `to-triage/_done/`. |<br>| `sessions/` | One folder per working session: minutes (and transcript when available). |<br>| `_to_delete/` | Marked for removal; only Tisa empties it. |<br><br>Outside this folder: `../building/` (common areas, backyard, alley; `building/earlier-renovations-not-unit-4…/` holds older renovation docs that are **not** Unit 4 — don&#x27;t use them for Unit 4), `../GOOGLE-DOCS-INDEX.md`, and the separate private folder `1231-11th-avenue-private` (leases, costs, payroll, bids — **never share with crew**).<br><br>**Old locations — still readable for history, never the place to work:** Drive &quot;1231 11th Ave - Unit 4 Remodel&quot; (old crew hub, folders 01–12), Drive &quot;11th Ave Unit 4 Bath&quot;. Everything in them was copied here on 2026-11-04/05. If an old file and a file here disagree, the room&#x27;s `SPEC.md` governs.<br><br>## 4. Which version is the latest<br>1. Names carry date and revision: `YYYY-MM-DD_U4_&lt;room or trade&gt;_&lt;what&gt;_R#` (issued drawings may use `RevA`, `RevB`), then `_EN` or `_ES`. English and Spanish are always separate files.<br>2. The latest lives in the topic folder. A replaced file moves, name unchanged, to that folder&#x27;s `_superseded/` (or `history/`). Nothing is deleted.<br>3. If a folder still has more than one live iteration, its `CURRENT.md` names the one that governs.<br>4. `from-remodel-hub/`, `from-unit4-bath-folder/`, `from-my-drive/` are copies imported 2026-11-04 so no mockup or image is lost; they&#x27;re being reconciled. Until then the room&#x27;s `SPEC.md` and the dated files outside them govern.<br><br>## 5. Golden rule: John never has to enter anything himself<br>When John or Tisa tells you something — a task, a measurement, a problem, a question, a decision needed — capture it for them in their words and file it (section 7). Don&#x27;t send them to a form. Confirm back in one line what you filed and where.<br><br>## 6. What each kind of agent can do<br>| You are… | You can |<br>|---|---|<br>| **Claude on Tisa&#x27;s claude.ai account** (this Project, Cowork, Claude Code) | Everything: wiki data via the ArtifactData tool (URL above), republish the wiki via the Artifact tool, edit files here, Todoist via the connector (connected 2026-11-03). |<br>| **John&#x27;s Claude** (claude.ai cloud, often voice on John&#x27;s iPhone) | Read the wiki link, this Drive folder and the Todoist board. Its Drive connector can **create** files but can&#x27;t overwrite existing ones, so it writes session minutes and notes to `to-triage/` as `YYYY-MM-DD_HHMM_session_&lt;topic&gt;.md` with an author line (which Claude, which device, cloud or local). Tisa&#x27;s Claude routes them into the wiki, specs, STATUS-NOW and Todoist. |<br>| **Any other agent** (Dibble, Codex, Gemini, Antigravity) | Read and edit the files here (section 8 rules), update `STATUS-NOW.md`, drop input in `to-triage/`. Access comes from this Drive folder being shared with John&#x27;s Google account as Editor. |<br>| **Any agent with a browser** | Open the wiki and help John use it on his phone. |<br><br>**Dropping input (non-Claude agents):** `to-triage/YYYY-MM-DD_HHMM_&lt;who&gt;_&lt;short&gt;.md`<br>```<br>type: task | fact | decision | note<br>project: kitchen | bathroom | electrical | laundry | bedroom | living-dining | hallway | paint-floors | hvac | general<br>from: &lt;agent&gt; on behalf of &lt;John/Tisa&gt;<br>---<br>&lt;their words&gt;<br>```<br>**Claude capture:** write to the wiki&#x27;s `inbox` collection `{type, project, section, title, details, raw, source:&quot;agent&quot;, from, createdAt, status:&quot;queued&quot;}`, then route it in the same turn.<br><br>## 7. Routing — where each thing goes<br>| Came in | Do this |<br>|---|---|<br>| **Task** | Look for an existing card first (comment rather than duplicate). Create it in the project&#x27;s section — Kitchen / Cocina · Bathroom / Baño · Electrical / Electricidad · Laundry / Lavandería · Walls, Molding &amp; Paint · General &amp; HVAC (bedroom, living-dining, hallway, HVAC, building) · New Tasks (need triage) · Backlog · On Hold or Blocked. Re-check section names live before writing. Plain title; description = State / Trade / Next physical action / Governing source (link to SPEC.md). **Unassigned** unless Tisa names someone. |<br>| **Site fact** | Add to the project&#x27;s SPEC.md with date and &quot;(John, field)&quot;. Comment on the card if it changes one. |<br>| **Decision needed** | Add a wiki `decisions` doc (`status: open`, priority 1 blocking / 2 next / 3 later). Only Tisa locks. |<br>| **Locked decision** (`synced: false`) | Update SPEC.md (mark LOCKED), matching cards, the Spanish crew edition, `STATUS-NOW.md`; set `synced: true`. |<br>| **Field report / session notes** | File facts as above; next steps → unassigned cards; open items → decisions; mark `recorded`. |<br><br>Wiki and cards disagree → the wiki wins (never the reverse without Tisa). Any change you make → update `STATUS-NOW.md` in the same pass.<br><br>## 8. Rules that always hold<br>- Tisa&#x27;s direction is locked; anything an AI produces is a suggestion until she locks it.<br>- Nothing is sent, signed, ordered, paid or scheduled without Tisa&#x27;s approval.<br>- Magicplan and existing drawings first. Never ask John to re-measure what&#x27;s recorded; ask only for the specific missing number.<br>- Crew-facing documents: English first, then a **separate** Spanish edition. Never mix languages. Replies to Tisa in English.<br>- Edit an existing spec rather than making a new file beside it (new files break wiki links).<br>- Superseded files go to `_superseded`; never delete. No credentials in any file here.<br>- **Wiki and Drive mirror each other** (Tisa, 2026-11-06): every wiki page and document list matches a folder in `1231 11th Avenue Unit 4`, and each document sits under the same room in both. When you add or move a document or folder in Drive, update the wiki in the same pass, and the reverse. Example: the Laundry Closet is its own project, so its documents live in `laundry/`, not `electrical/`.<br>- **Spanish for the wiki lives only in the wiki's own text** (Tisa, 2026-11-06): the English/Español toggle. Never create Spanish copies of the .md files in Drive. Crew plans keep their existing English and Spanish PDFs.<br>- **Work record (Beads):** canonical ledger `/Users/tisavo/Work/Projects/1231-11th-avenue/unit-4-renovation` on the MacBook Pro (`.beads/embeddeddolt`, main issue `tisa-wi0.6`). Run `bd where` before writing; never initialize a duplicate ledger; keep existing issue IDs. Agents that can&#x27;t reach it (cloud sessions) record state in `STATUS-NOW.md` and say Beads is pending. Last check from a cloud session (2026-11-05): not reachable, status unverified.<br>- Every session&#x27;s minutes say the date, who attended and which Claude wrote them (account, device, cloud or local).<br>- Say plainly what you verified vs. only wrote. Trust the source file over another agent&#x27;s summary.<br><br>## 9. Maintaining the wiki (Claude only)<br>Source: `work-control/wiki-source/` (template updated 2026-11-05 to include the live Home page and collapsible document lists) — `wiki_template.html`, `build_wiki.py` (embeds the specs and document lists), `brief.py` (embeds this file as the agent brief), `drive_docs.json`, `pdf_blobs.json`. Rebuild, then publish to the same artifact URL. Collections: `decisions` (Tisa/admin write), `decisionNotes`, `reports`, `sessionNotes`, `inbox`.<br><br>## 10. More detail, if needed<br>- Routing detail and history: `work-control/2026-11-03_U4_AgentWork_Index_R2.md`<br>- Todoist runbook (11/2 snapshot, has known errors): `work-control/TODOIST-PROJECT-MANAGER-RUNBOOK.md`<br>- Kitchen governing revision: `kitchen/CURRENT.md`<br></section>
-<div class="mobile"><div class="brand"><a class="homelink" href="#home">Unit 4</a></div><button type="button" id="menuBtn" class="menubtn" aria-controls="rail" aria-expanded="false">☰ Menu</button><label for="jump" class="sr-only">Go to page</label><select id="jump" aria-label="Go to page"></select></div><div id="railShade" class="shade" hidden></div>
+<div class="mobile"><div class="brand"><a class="homelink" href="#home">Unit 4</a></div><button type="button" class="small langbtn" id="mobileLangBtn" aria-label="Switch to Spanish">Español (MX)</button><button type="button" id="menuBtn" class="menubtn" aria-controls="rail" aria-expanded="false">☰ Menu</button><label for="jump" class="sr-only">Go to page</label><select id="jump" aria-label="Go to page"></select></div><div id="railShade" class="shade" hidden></div>
 <button id="qpBtn" class="qp-fab" type="button" aria-haspopup="dialog" aria-controls="qpPanel">Send a note</button>
 <div id="qpPanel" class="qp-panel" role="dialog" aria-modal="false" aria-labelledby="qpTitle" hidden>
   <div class="qp-head"><h2 id="qpTitle">Send a note</h2><button type="button" id="qpClose" class="btn ghost" aria-label="Close">Close</button></div>
@@ -1467,7 +1509,7 @@ body.u4-in-plan .u4-pin-fab,body.u4-ai-sheet-open .u4-pin-fab{display:none!impor
     <div class="brand"><a class="homelink" href="#home">Unit 4 Wiki</a><small>1231 11th Ave · Remodel</small></div>
   </nav>
   <main>
-    <div class="bar"><button type="button" class="small" id="backBtn" hidden>← Back</button><button type="button" class="small langbtn" id="langBtn" aria-label="Cambiar a español">Español</button><button type="button" class="small themebtn" id="themeBtn" aria-pressed="false" aria-label="Switch to dark mode">☾ Dark</button><span class="chip" id="status"><span class="dot"></span><span id="statusText">Saved copy · Nov 19, 2026</span></span><button class="small" id="refresh" hidden>Load latest from Drive</button><span class="u4-build-stamp" id="u4BuildStamp" title="Live build version">Build 2026-11-19 · r3f-usability</span><span id="path"></span></div>
+    <div class="bar"><button type="button" class="small" id="backBtn" hidden>← Back</button><button type="button" class="small langbtn" id="langBtn" aria-label="Cambiar a español">Español (MX)</button><button type="button" class="small themebtn" id="themeBtn" aria-pressed="false" aria-label="Switch to dark mode">☾ Dark</button><span class="chip" id="status"><span class="dot"></span><span id="statusText">Saved copy · Nov 19, 2026</span></span><button class="small" id="refresh" hidden>Load latest from Drive</button><span class="u4-build-stamp" id="u4BuildStamp" title="Live build version">Build 2026-11-19 · r3f-usability</span><span id="path"></span></div>
     <article id="doc"></article>
     <section class="field u4-simple-field" id="field" hidden>
       <h2 id="u4FieldHeading">Field note</h2>
@@ -1552,7 +1594,7 @@ const UI = {
   en: {
     unitTitle: "Unit 4 Wiki", unitMobileTitle: "Unit 4", unitSub: "1231 11th Ave · Remodel",
     menuBtn: "☰ Menu", backBtn: "← Back", backShort: "Back", closeBtn: "Close",
-    langToggleLabel: "Español", langToggleAria: "Switch to Spanish",
+    langToggleLabel: "Español (MX)", langToggleAria: "Switch to Spanish",
     themeToDarkLabel: "☾ Dark", themeToDarkAria: "Switch to dark mode",
     themeToLightLabel: "☀ Light", themeToLightAria: "Switch to light mode",
     interactiveBadge: "INTERACTIVE",
@@ -1621,7 +1663,7 @@ const UI = {
   es: {
     unitTitle: "Wiki Unidad 4", unitMobileTitle: "Unidad 4", unitSub: "1231 11th Ave · Remodelación",
     menuBtn: "☰ Menú", backBtn: "← Atrás", backShort: "Atrás", closeBtn: "Cerrar",
-    langToggleLabel: "English", langToggleAria: "Cambiar a inglés",
+    langToggleLabel: "English (EN)", langToggleAria: "Cambiar a inglés",
     themeToDarkLabel: "☾ Oscuro", themeToDarkAria: "Cambiar a modo oscuro",
     themeToLightLabel: "☀ Claro", themeToLightAria: "Cambiar a modo claro",
     interactiveBadge: "INTERACTIVO",
@@ -4095,8 +4137,10 @@ function syncChromeLabels(){
   if (mBtn) mBtn.textContent = t("menuBtn");
   const bBtn = document.getElementById("backBtn");
   if (bBtn) bBtn.textContent = t("backBtn");
-  const lBtn = document.getElementById("langBtn");
-  if (lBtn) { lBtn.textContent = t("langToggleLabel"); lBtn.setAttribute("aria-label", t("langToggleAria")); }
+  ["langBtn", "mobileLangBtn"].forEach(function(id) {
+    const lBtn = document.getElementById(id);
+    if (lBtn) { lBtn.textContent = t("langToggleLabel"); lBtn.setAttribute("aria-label", t("langToggleAria")); }
+  });
   const thBtn = document.getElementById("themeBtn");
   if (thBtn) {
     const isDark = THEME === "dark";
@@ -6518,7 +6562,10 @@ window.toggleVoiceCompanionSession = toggleVoiceCompanionSession;
 })();
 
 show(location.hash.slice(1) || "home");
-document.getElementById("langBtn").addEventListener("click", ()=>setLang(LANG==="es" ? "en" : "es"));
+["langBtn", "mobileLangBtn"].forEach(function(id) {
+  var _b = document.getElementById(id);
+  if (_b) _b.addEventListener("click", ()=>setLang(LANG==="es" ? "en" : "es"));
+});
 var __themeBtn = document.getElementById("themeBtn");
 if (__themeBtn) __themeBtn.addEventListener("click", ()=>setTheme(THEME==="dark" ? "light" : "dark"));
 if (LANG==="es") setLang("es"); else document.documentElement.lang="en";
@@ -11086,10 +11133,11 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       });
     }
 
-    var langBtn = document.getElementById("langBtn");
-    if (langBtn && !langBtn.__u4CleanLangBound) {
-      langBtn.__u4CleanLangBound = true;
-      langBtn.addEventListener("click", function() {
+    ["langBtn", "mobileLangBtn"].forEach(function(_lid) {
+      var langBtn = document.getElementById(_lid);
+      if (langBtn && !langBtn.__u4CleanLangBound) {
+        langBtn.__u4CleanLangBound = true;
+        langBtn.addEventListener("click", function() {
         setTimeout(function() {
           syncQpChromeLabels();
           populateOrganizedAboutSelect(activeRoomKey());
@@ -11097,9 +11145,10 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
           updateNoteVoiceButtons();
           refreshDialogSuggestions();
           try { mountRoomConceptRendersGallery(); } catch (e) {}
-        }, 50);
-      });
-    }
+          }, 50);
+        });
+      }
+    });
 
     populateOrganizedAboutSelect(activeRoomKey());
     syncQpChromeLabels();
@@ -11291,7 +11340,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       if (existing) existing.remove();
       return;
     }
-    var pageHost = document.getElementById("md") || document.getElementById("page") || document.querySelector("main article, main");
+    var pageHost = document.getElementById("doc") || document.querySelector("main article");
     if (!pageHost || activePlanFromHash()) return;
     if (existing && pageHost.contains(existing)) return;
     if (existing) existing.remove();
@@ -11446,13 +11495,20 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     if (room === "hvac" && subId === "sec-hvac-summary") {
       var visibleNow = target && target.offsetHeight > 24 && (target.textContent || "").trim().length > 80;
       if (!visibleNow) {
-        var host = document.getElementById("md") || document.getElementById("page") || document.querySelector("main article, main");
+        var host = document.getElementById("doc") || document.querySelector("main article");
         if (host) {
           unhideChain(host);
           var mount = existingFallback || document.createElement("div");
           mount.id = "u4-r7-hvac-summary-mount";
           mount.innerHTML = getLang() === "es" ? HVAC_SUMMARY_FALLBACK_ES : HVAC_SUMMARY_FALLBACK_EN;
-          if (!mount.parentElement) host.insertBefore(mount, host.firstChild);
+          if (!mount.parentElement) {
+            var hdrAnchor = host.querySelector(".u4-subnav-bar") || host.querySelector("h1");
+            if (hdrAnchor && hdrAnchor.parentNode === host) {
+              host.insertBefore(mount, hdrAnchor.nextSibling);
+            } else {
+              host.insertBefore(mount, host.firstChild);
+            }
+          }
         }
       } else if (existingFallback && target !== existingFallback && !existingFallback.contains(target)) {
         existingFallback.remove();
