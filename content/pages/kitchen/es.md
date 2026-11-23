@@ -1,5 +1,7 @@
 # Cocina
 
+**Decisión abierta — 23 de noviembre:** Tisa y John revisarán extensión original Savona, cubierta inoxidable a medida, cajillo pequeño crema o arco crema con campana inoxidable visible y repisas opcionales. Falta medir el espacio exacto; ninguna opción está aprobada. [Decisión y revisión de John](https://app.todoist.com/app/task/6hvjQGhG62xHf437). Arco R1 y tutorial R2 son solo propuestas.
+
 ## Concepto
 Cocina en L. Gabinetes bajos verde oscuro, herrajes de latón, cubiertas claras. Azulejo hasta el techo detrás de la estufa. Sin gabinetes altos junto a la campana.
 

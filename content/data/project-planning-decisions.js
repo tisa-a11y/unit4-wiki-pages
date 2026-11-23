@@ -15,20 +15,21 @@ var DEFAULT_OPEN_DECISIONS = [
     johnInputEs: "Fotografiar la L completa, los dos extremos de la tarja, el borde exterior de la moldura de puerta y el paso libre más angosto."
   },
   {
-    id: "d02",
-    project: "kitchen-oven-range",
-    priority: 1,
-    order: 2,
-    status: "open",
-    question: "How do we close the gap between the hood and the ceiling?",
-    questionEs: "¿Cómo cerramos el hueco entre la campana y el techo?",
-    why: "The hood's standard cover does not reach the 121-1/2 in. ceiling, so a gap of 4-1/2 to 11-1/2 in. is left at the top. The Viking range uses the low 1-in. island trim (no 8-in. backguard), so full-height tile over 1/2-in. HardieBacker is required behind the range.",
-    whyEs: "La cubierta estándar de la campana no llega al techo de 121-1/2 pulg., así que queda un hueco de 4-1/2 a 11-1/2 pulg. arriba. La estufa Viking lleva la moldura baja de 1 pulg. (sin respaldo alto de 8 pulg.), así que detrás de la estufa va HardieBacker de 1/2 pulg. con azulejo hasta el techo.",
-    options: "Option A: build a tiled box (soffit) above the hood. Option B: order Zephyr's cover extension (Z1C-00SA).",
-    optionsEs: "Opción A: hacer un cajón forrado de azulejo arriba de la campana. Opción B: pedir la extensión de cubierta de Zephyr (Z1C-00SA).",
-    johnInput: "Test-hang the hood 30–36 in. above the cooktop (66–72 in. from the floor) and measure the exact gap to the ceiling and where the 6-in. duct lands.",
-    johnInputEs: "Colgar la campana de prueba a 30–36 pulg. sobre la parrilla (66–72 pulg. del piso) y medir el hueco exacto al techo y dónde cae el ducto de 6 pulg."
+    "id": "d02",
+    "project": "kitchen-oven-range",
+    "priority": 1,
+    "order": 2,
+    "status": "open",
+    "question": "Tisa + John: which hood-to-ceiling option should we choose on November 23?",
+    "questionEs": "Tisa y John: ¿qué opción de campana al techo elegimos el 23 de noviembre?",
+    "why": "Exact cover-to-ceiling gap is not measured. Earlier 117-inch/~10.5-inch wording was contradictory. Z1C-01SA and Vissani WECH03 are not confirmed compatible with the owned Savona ZSA-E30AS.",
+    "whyEs": "Falta medir el espacio exacto entre cubreducto y techo. Las cifras anteriores de 117/~10.5 pulgadas eran contradictorias. No está confirmada la compatibilidad de Z1C-01SA ni Vissani WECH03 con la Savona ZSA-E30AS existente.",
+    "options": "All four OPEN: original Z1C-00SA extension specified for this Savona; removable custom stainless cover; small cream ceiling box; cream curved arch with stainless hood exposed and optional side shelves. R1 arch and R2 tutorial are proposals only. Review fit, appearance, work, access and availability. No purchase, fabrication or close-in release.",
+    "optionsEs": "Cuatro opciones ABIERTAS: extensión original Z1C-00SA indicada para esta Savona; cubierta desmontable de acero inoxidable a medida; cajillo pequeño color crema; arco curvo crema con campana inoxidable visible y repisas opcionales. Arco R1 y tutorial R2 son propuestas. Revisar ajuste, apariencia, trabajo, acceso y disponibilidad. No autoriza compra, fabricación ni cierre.",
+    "johnInput": "John reviews with Tisa on November 23. Reuse adequate photos; add missing exact top-of-assembled-cover to finished-ceiling gap, floor datum, telescoping pieces/overlap and bracket evidence. Single decision: https://app.todoist.com/app/task/6hvjQGhG62xHf437",
+    "johnInputEs": "John revisa con Tisa el 23 de noviembre. Reutilizar fotos suficientes; completar solo espacio exacto del cubreducto armado al techo terminado, referencia de piso, piezas/traslape y fijaciones. Decisión única: https://app.todoist.com/app/task/6hvjQGhG62xHf437"
   },
+
   {
     id: "d03",
     project: "attic-access",

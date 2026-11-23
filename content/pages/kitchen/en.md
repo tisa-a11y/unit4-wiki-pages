@@ -1,5 +1,7 @@
 # Kitchen
 
+**Open decision — November 23:** Tisa and John will review the original Savona extension, custom stainless cover, small cream ceiling box, or cream arch with exposed stainless hood and optional shelves. Exact gap remains unmeasured; no option is approved. [Decision and John’s review](https://app.todoist.com/app/task/6hvjQGhG62xHf437). The arch R1 and tutorial R2 are proposals only.
+
 ## Concept
 L-shaped kitchen. Dark green lower cabinets, brass hardware, light counters. Tile to the ceiling behind the range. No upper cabinets beside the hood.
 

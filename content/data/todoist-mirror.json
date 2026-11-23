@@ -1,6 +1,6 @@
 {
   "schema": "unit4-todoist-wiki-sync-index-v1",
-  "updatedAt": "2026-11-23T00:46:00+00:00",
+  "updatedAt": "2026-11-23T02:16:43.320561+00:00",
   "todoistBoard": {
     "name": "Full 1231 11th Avenue Remodel",
     "projectId": "6hcMQpGhXWprg6m7",
@@ -87,6 +87,33 @@
           "es": "Conexión final de equipos, pintura de muros y molduras, pruebas AFCI/GFCI y detalles finales",
           "todoistTaskIds": [],
           "checklistPath": "kitchen/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Tisa + John: review four hood-to-ceiling options on November 23; choice remains open",
+          "es": "Tisa y John: revisar cuatro opciones de campana al techo el 23 de noviembre; decisión abierta",
+          "todoistTaskIds": [
+            "6hvjQGhG62xHf437"
+          ],
+          "checklistPath": "kitchen/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "John: review fit and recommendation with Tisa",
+          "es": "John: revisar ajuste y recomendación con Tisa",
+          "todoistTaskIds": [
+            "6j4P6HFr2rfpmpj7"
+          ],
+          "checklistPath": "kitchen/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Reuse existing photos; add only missing exact assembled-cover-to-finished-ceiling gap evidence",
+          "es": "Reutilizar fotos; agregar solo evidencia faltante del espacio entre cubreducto armado y techo terminado",
+          "todoistTaskIds": [
+            "6j4P6JjqHqhcV6Q7"
+          ],
+          "checklistPath": "kitchen/CHECKLIST.md"
         }
       ]
     },
@@ -135,6 +162,33 @@
           "en": "Install ceiling-height range-wall tile, Viking 1-inch island trim only, final hood and range tie-in after field checks",
           "es": "Instalar azulejo hasta el techo, solo remate Viking de isla de1 pulgada y conexión final de campana/estufa después de verificaciones",
           "todoistTaskIds": [],
+          "checklistPath": "kitchen/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Tisa + John: review four hood-to-ceiling options on November 23; choice remains open",
+          "es": "Tisa y John: revisar cuatro opciones de campana al techo el 23 de noviembre; decisión abierta",
+          "todoistTaskIds": [
+            "6hvjQGhG62xHf437"
+          ],
+          "checklistPath": "kitchen/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "John: review fit and recommendation with Tisa",
+          "es": "John: revisar ajuste y recomendación con Tisa",
+          "todoistTaskIds": [
+            "6j4P6HFr2rfpmpj7"
+          ],
+          "checklistPath": "kitchen/CHECKLIST.md"
+        },
+        {
+          "done": false,
+          "en": "Reuse existing photos; add only missing exact assembled-cover-to-finished-ceiling gap evidence",
+          "es": "Reutilizar fotos; agregar solo evidencia faltante del espacio entre cubreducto armado y techo terminado",
+          "todoistTaskIds": [
+            "6j4P6JjqHqhcV6Q7"
+          ],
           "checklistPath": "kitchen/CHECKLIST.md"
         }
       ]
@@ -3091,6 +3145,119 @@
       "wikiItemsEs": [
         "Fotos: bastidor y acceso del clóset de recámara"
       ]
+    },
+    "6hvjQGhG62xHf437": {
+      "id": "6hvjQGhG62xHf437",
+      "content": "Tisa + John: choose hood extension or enclosure / Elegir extensión o envolvente de campana",
+      "description": "### ENGLISH — November 22\nTisa and John: review the hood-to-ceiling options and record the decision Monday, November 23. This is the single D4 decision card; John's review is nested below.\n\nOptions: (1) original Zephyr Z1C-00SA extension specified for the owned Savona ZSA-E30AS; (2) custom removable stainless cover; (3) small cream-painted ceiling box; (4) cream-painted curved arch with stainless hood exposed and optional side shelves. The arch is a proposal, not selected for construction. Compare appearance, fit, work involved, service access and availability; discuss costs privately.\n\nThe newer Z1C-01SA is NOT confirmed compatible with this older model. The Vissani WECH03 is not a confirmed generic fit. John reports several inches short; exact gap remains unknown. Earlier 117-inch/~10.5-inch wording was inconsistent and must not be used as field evidence.\n\nReview John's labeled gap/cover photos, then record the chosen route and any remaining prerequisites here. Do not purchase, fabricate or close in from this review task alone.\n[Existing hood work](https://app.todoist.com/app/task/6j3RXQ97qmMCGhQf) · [Manufacturer specification](https://docs.zephyronline.com/docs/brand_essentials/products/specsheets/savona_spec.pdf)\nProject files: kitchen/2026-11-22_1745_Curved-hood-enclosure_R1/ and kitchen/2026-11-22_Curved-hood-tutorial_R2/.\n\n### ESPAÑOL\nTisa y John: revisar las opciones para cubrir el espacio entre la campana y el techo y registrar la decisión el lunes 23 de noviembre. Esta es la única tarjeta de decisión D4; la revisión de John está como subtarea.\n\nOpciones: (1) extensión original Zephyr Z1C-00SA indicada para la Savona ZSA-E30AS existente; (2) cubierta desmontable de acero inoxidable hecha a medida; (3) cajillo pequeño pintado color crema; (4) arco curvo color crema con campana inoxidable visible y repisas laterales opcionales. El arco es propuesta, no obra aprobada. Comparar apariencia, ajuste, trabajo necesario, acceso de mantenimiento y disponibilidad; tratar costos en privado.\n\nNo está confirmada la compatibilidad de Z1C-01SA ni de la opción genérica Vissani WECH03. John reporta varias pulgadas faltantes; falta medir el espacio exacto. Las cifras anteriores de 117 pulgadas/~10.5 pulgadas eran contradictorias; no usarlas como medición.\n\nRevisar las fotos rotuladas de John y registrar aquí la opción elegida y condiciones pendientes. Esta revisión no autoriza compra, fabricación ni cierre.",
+      "dueDate": "2026-11-23",
+      "recurring": false,
+      "priority": "p2",
+      "projectId": "6hcMQpGhXWprg6m7",
+      "sectionId": "6hrm2qJ2GRMchm97",
+      "parentId": "6hrm36WxpVfhqvQf",
+      "labels": [
+        "11th_This_Week",
+        "Kitchen",
+        "Needs confirmation"
+      ],
+      "responsibleUid": "42877258",
+      "assignedByUid": "42877258",
+      "checked": false,
+      "addedAt": "2026-11-03T02:58:05.869Z",
+      "taskId": "6hvjQGhG62xHf437",
+      "url": "https://app.todoist.com/app/task/6hvjQGhG62xHf437",
+      "rooms": [
+        "kitchen",
+        "kitchen-oven-range"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Tisa + John: review four hood-to-ceiling options on November 23; choice remains open"
+      ],
+      "wikiItemsEs": [
+        "Tisa y John: revisar cuatro opciones de campana al techo el 23 de noviembre; decisión abierta"
+      ],
+      "governingDocs": [
+        "kitchen/CHECKLIST.md",
+        "kitchen/SPEC.md"
+      ]
+    },
+    "6j4P6HFr2rfpmpj7": {
+      "id": "6j4P6HFr2rfpmpj7",
+      "content": "John: review hood options with Tisa / Revisar opciones de campana con Tisa",
+      "description": "ENGLISH\nReview all four options on the parent D4 card with Tisa on Monday, November 23. Confirm which solution fits the actual hood/cover and ceiling, the work and access it needs, and your recommendation. Use existing adequate evidence first; obtain only missing exact gap/cover measurements through the photo subtask. Dibble is John's Dot and should summarize the options to John ASAP. Tisa records the final decision on the parent card. No construction or purchase release.\n\nESPAÑOL\nRevisar con Tisa las cuatro opciones de la tarjeta principal D4 el lunes 23 de noviembre. Confirmar cuál se ajusta a la campana/cubierta y techo reales, el trabajo y acceso necesarios, y tu recomendación. Usar primero la evidencia existente; completar solo medidas faltantes en la subtarea de fotos. Dibble es el asistente de John y debe resumirle las opciones cuanto antes. Tisa registra la decisión final en la tarjeta principal. No autoriza obra ni compra.",
+      "dueDate": "2026-11-23",
+      "recurring": false,
+      "priority": "p2",
+      "projectId": "6hcMQpGhXWprg6m7",
+      "sectionId": "6hrm2qJ2GRMchm97",
+      "parentId": "6hvjQGhG62xHf437",
+      "labels": [
+        "11th_This_Week",
+        "John",
+        "Kitchen",
+        "Needs confirmation"
+      ],
+      "responsibleUid": "56238243",
+      "assignedByUid": "42877258",
+      "checked": false,
+      "addedAt": "2026-11-23T02:15:09.992Z",
+      "taskId": "6j4P6HFr2rfpmpj7",
+      "url": "https://app.todoist.com/app/task/6j4P6HFr2rfpmpj7",
+      "rooms": [
+        "kitchen",
+        "kitchen-oven-range"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "John: review fit and recommendation with Tisa"
+      ],
+      "wikiItemsEs": [
+        "John: revisar ajuste y recomendación con Tisa"
+      ],
+      "governingDocs": [
+        "kitchen/CHECKLIST.md",
+        "kitchen/SPEC.md"
+      ]
+    },
+    "6j4P6JjqHqhcV6Q7": {
+      "id": "6j4P6JjqHqhcV6Q7",
+      "content": "Photos: verify hood-cover gap and fit / Fotos: verificar espacio y ajuste del cubreducto",
+      "description": "ENGLISH\nReuse adequate existing photos. Add only missing evidence: one overall West-wall view (left South/right North) and a close-up with tape showing the exact vertical gap from the TOP OF THE ASSEMBLED COVER to the FINISHED CEILING. State hood-bottom height and finished-floor/subfloor datum; confirm all owned telescoping cover pieces are present and assembled with the required overlap. Show cover outside width/depth if not documented, plus bracket/fastening arrangement for an extension or custom sleeve. Label each photo with date, endpoints and what it verifies. Attach to this task. These are fit checks, not installation approval.\n\nESPAÑOL\nReutilizar fotos existentes suficientes. Agregar solo evidencia faltante: vista completa del muro Oeste (Sur a izquierda/Norte a derecha) y acercamiento con cinta mostrando el espacio vertical exacto entre BORDE SUPERIOR DEL CUBREDUCTO ARMADO y TECHO TERMINADO. Indicar altura inferior de campana y referencia de piso terminado/subpiso; confirmar todas las piezas telescópicas existentes y el traslape requerido. Mostrar ancho/profundidad exterior si no están documentados y soporte/fijaciones para extensión o cubierta a medida. Rotular fecha, extremos y qué verifica cada foto. Adjuntar aquí. No es autorización de instalación.",
+      "dueDate": "2026-11-23",
+      "recurring": false,
+      "priority": "p2",
+      "projectId": "6hcMQpGhXWprg6m7",
+      "sectionId": "6hrm2qJ2GRMchm97",
+      "parentId": "6j4P6HFr2rfpmpj7",
+      "labels": [
+        "11th_This_Week",
+        "John",
+        "Kitchen",
+        "verification-photo"
+      ],
+      "responsibleUid": "56238243",
+      "assignedByUid": "42877258",
+      "checked": false,
+      "addedAt": "2026-11-23T02:15:27.685Z",
+      "taskId": "6j4P6JjqHqhcV6Q7",
+      "url": "https://app.todoist.com/app/task/6j4P6JjqHqhcV6Q7",
+      "rooms": [
+        "kitchen",
+        "kitchen-oven-range"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Reuse existing photos; add only missing exact assembled-cover-to-finished-ceiling gap evidence"
+      ],
+      "wikiItemsEs": [
+        "Reutilizar fotos; agregar solo evidencia faltante del espacio entre cubreducto armado y techo terminado"
+      ],
+      "governingDocs": [
+        "kitchen/CHECKLIST.md",
+        "kitchen/SPEC.md"
+      ]
     }
   },
   "verifiedTaskReadback": {
@@ -3120,5 +3287,15 @@
       "6j3j3pqfM4GC53Qf"
     ],
     "note": "PM fetched each corrected task. All remain open; November22 due dates are tracking dates, not construction releases."
+  },
+  "hoodDecisionReadback": {
+    "date": "2026-11-22",
+    "dueDate": "2026-11-23",
+    "taskIds": [
+      "6hvjQGhG62xHf437",
+      "6j4P6HFr2rfpmpj7",
+      "6j4P6JjqHqhcV6Q7"
+    ],
+    "note": "PM verified all three; sole D4 retained, options open; no installation or purchase release."
   }
 }
