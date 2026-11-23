@@ -4,7 +4,7 @@
   "project": "1231 11th Avenue Unit 4, San Francisco, CA",
   "room": "kitchen",
   "target_delivery_date": "2026-11-21",
-  "revision": "2026-11-22-r2",
+  "revision": "2026-11-23-r2",
   "status": "PLANNING_AND_MOCKUP_ONLY_ROUGH_IN_ON_HOLD",
   "governing_sources": {
     "kitchen_spec": "https://drive.google.com/file/d/1iXinIsipgqR6ak5jdWSTmbbL5netZUhS/view",
@@ -84,15 +84,15 @@
             "id": "cab-e-drawer",
             "type": "base_cabinet",
             "start_in": 36.0,
-            "end_in": 54,
-            "label_en": "18 in Drawers — Plan-Derived",
-            "label_es": "Cajones18pulg. — Derivado del plano"
+            "end_in": 54.0,
+            "label_en": "18 in Drawer Base (Nov 22 locked)",
+            "label_es": "Base Cajonera 18 pulg. (22 nov)"
           },
           {
             "id": "app-fridge",
             "type": "appliance",
-            "start_in": 60.0,
-            "end_in": 88.0,
+            "start_in": 54.0,
+            "end_in": 82.0,
             "width_actual_in": 27.5625,
             "height_in": 69.875,
             "label_en": "Haier Fridge QJS15HYRFS (freestanding, nothing above)",
@@ -101,10 +101,10 @@
           {
             "id": "east-hall-gap",
             "type": "clearance",
-            "start_in": 88.0,
+            "start_in": 82.0,
             "end_in": 96.5,
-            "label_en": "8-1/2 in Clear Pier",
-            "label_es": "Muro libre 8-1/2 pulg."
+            "label_en": "14-1/2 in Clear Pier",
+            "label_es": "Muro libre 14-1/2 pulg."
           },
           {
             "id": "east-hall-open",
@@ -138,10 +138,10 @@
             "id": "opt-upper-east",
             "status": "provisional_optional",
             "start_in": 0.0,
-            "end_in": 60.0,
+            "end_in": 54.0,
             "aff_bottom_in": 55.125,
             "aff_top_in": 95.5625,
-            "note": "Approved30in East upper; placement plan-derived. Never anchor in53–77in D04 no-screw zone."
+            "note": "30 in East adjacent upper (E-U2 locked Nov 22); never anchor in 53-77 in D04 no-screw zone"
           }
         ]
       },
@@ -162,35 +162,35 @@
             "id": "cab-s-trash",
             "type": "base_cabinet",
             "start_in": 36.0,
-            "end_in": 48,
-            "label_en": "12 in Base — Plan-Derived",
-            "label_es": "Base 12 pulg. — Derivada del plano"
+            "end_in": 48.0,
+            "label_en": "12 in Trash Pullout (Nov 22 locked)",
+            "label_es": "Basura Extraíble 12 pulg. (22 nov)"
           },
           {
             "id": "cab-s-dw",
             "type": "appliance",
-            "start_in": 48,
-            "end_in": 72,
-            "label_en": "24 in Dishwasher (Bosch SHV9PT53UC candidate)",
-            "label_es": "Lavavajillas 24 pulg."
+            "start_in": 48.0,
+            "end_in": 72.0,
+            "label_en": "24 in Finished-Front Dishwasher (model TBD)",
+            "label_es": "Lavavajillas 24 pulg. Frente Terminado (modelo por definir)"
           },
           {
             "id": "cab-s-sink",
             "type": "base_cabinet",
-            "start_in": 72,
-            "end_in": 102,
-            "center_in": 87,
+            "start_in": 72.0,
+            "end_in": 102.0,
+            "center_in": 87.0,
             "status": "hold_field_verify_6hvjQGR85r5gFjg7",
-            "label_en": "30 in Sink Base — CL87 Plan-Derived / HOLD",
-            "label_es": "Gabinete 30 pulg. — Eje87 derivado / EN ESPERA"
+            "label_en": "30 in Sink Base (C3 — CL 87 in plan-derived; verify common zero)",
+            "label_es": "Gabinete Fregadero 30 pulg. (Eje 87 pulg.; verificar en obra)"
           },
           {
             "id": "cab-s-filler",
             "type": "base_cabinet",
-            "start_in": 102,
-            "end_in": 108,
-            "label_en": "6 in End Option — Passage HOLD",
-            "label_es": "Opción extremo 6 pulg. — Paso EN ESPERA"
+            "start_in": 102.0,
+            "end_in": 108.0,
+            "label_en": "6 in Filler (12 in clear to casing)",
+            "label_es": "Relleno 6 pulg. (12 pulg. a marco)"
           },
           {
             "id": "south-door-walk",
@@ -204,7 +204,7 @@
         "wall_features_from_se_west_in": [
           {
             "id": "pie-safe-niche",
-            "status": "weather_seal_and_cover",
+            "status": "sealed_and_covered_over_2026_11_22",
             "photo_scaled_start_in": 26.0,
             "photo_scaled_end_in": 59.0,
             "magicplan_model_range_in": [
@@ -214,7 +214,7 @@
             "aff_bottom_model_in": 43.0,
             "aff_top_photo_in": 80.0,
             "measure_boundary": "to_casing_edge",
-            "note": "Weather-seal and cover former opening; field-verify closure and electrical box backing; no retained niche."
+            "note": "Owner-locked Nov 22: seal/weatherproof exterior openings and cover over recess; inspect substrate before covering."
           },
           {
             "id": "south-window",
@@ -559,11 +559,11 @@
         "space": 10,
         "id": "HVAC",
         "group": "unit_other",
-        "serves_en": "Attic Furnace (Trane S8X1A040M3PTCC) via Disconnect",
-        "serves_es": "Calefactor en Ático con Desconectador",
+        "serves_en": "Attic Furnace (Carrier/Bryant Legacy 45,000 BTU, 80% AFUE) via Disconnect",
+        "serves_es": "Calefactor en Ático (Carrier/Bryant Legacy 45,000 BTU) con Desconectador",
         "amps": 15,
         "poles": 1,
-        "breaker_type": "Standard (confirm Trane label)",
+        "breaker_type": "Standard (confirm Carrier nameplate MOP Mon Nov 23)",
         "eaton_cat": "BR115",
         "cable": "14/2 Cu NM-B",
         "route_mode": "attic",
@@ -737,14 +737,14 @@
       "space": 1,
       "wall": "east",
       "datum_ref": "north_from_se_corner",
-      "station_in": 48.0,
+      "station_in": 45.0,
       "aff_in": 44.0,
       "alt_aff_in": 41.0,
       "box_type": "1-gang new-work deep box (20A TR duplex)",
       "measure_boundary": "aff",
       "provenance": "owner-locked",
-      "crew_note_en": "Placement HELD pending revised18in East drawers, South12in base, sink72–102in /CL87 and closed former pie-safe reconciliation. Field verify.",
-      "crew_note_es": "Ubicación EN ESPERA hasta conciliar cajones Este18pulg., base Sur12pulg., fregadero72–102/eje87 y cierre de alacena anterior. Verificar en obra."
+      "crew_note_en": "Centered over locked 18 in drawer base (36-54 in), 9 in clear of fridge edge at 54 in.",
+      "crew_note_es": "Centrado sobre la cajonera de 18 pulg. (36-54 pulg.), a 9 pulg. del refrigerador."
     },
     {
       "id": "REF-1",
@@ -752,13 +752,13 @@
       "space": 4,
       "wall": "east",
       "datum_ref": "north_from_se_corner",
-      "station_in": 74.0,
+      "station_in": 68.0,
       "aff_in": 15.0,
       "box_type": "1-gang recessed/flush box (20A single TR receptacle)",
       "measure_boundary": "aff",
       "provenance": "manual-specified",
-      "crew_note_en": "Centered in 60-88 in Haier fridge zone; confirm rear cord pocket height on Haier QJS15HYRFS & whether icemaker water box is added.",
-      "crew_note_es": "Centrado en la zona de 60-88 pulg. del refrigerador Haier; confirmar altura del hueco trasero."
+      "crew_note_en": "Centered in shifted 54-82 in Haier fridge bay (QJS15HYRFS); confirm rear cord pocket height.",
+      "crew_note_es": "Centrado en la bahía del refrigerador Haier (54-82 pulg.); confirmar hueco trasero."
     },
     {
       "id": "S1",
@@ -776,8 +776,8 @@
       "box_type": "1-gang box (20A TR duplex)",
       "measure_boundary": "aff",
       "provenance": "plan-derived",
-      "crew_note_en": "Placement HELD pending revised18in East drawers, South12in base, sink72–102in /CL87 and closed former pie-safe reconciliation. Field verify.",
-      "crew_note_es": "Ubicación EN ESPERA hasta conciliar cajones Este18pulg., base Sur12pulg., fregadero72–102/eje87 y cierre de alacena anterior. Verificar en obra."
+      "crew_note_en": "Pie-safe sealed & covered over (Nov 22); 24 in keeps <=24 in reach to SE corner and <=42 in to S2.",
+      "crew_note_es": "Alacena sellada y cubierta (22 nov); a 24 pulg. mantiene alcance <=24 pulg. a esquina SE."
     },
     {
       "id": "S2",
@@ -785,7 +785,7 @@
       "space": 2,
       "wall": "south",
       "datum_ref": "west_from_se_corner",
-      "station_in": 65.0,
+      "station_in": 62.0,
       "alt_stations_in": {
         "ke_revi": 64.0,
         "ks7_r8": 66.0,
@@ -796,8 +796,8 @@
       "box_type": "1-gang (or 2-gang low-voltage divider plate w/ wireless pendant remote)",
       "measure_boundary": "aff",
       "provenance": "plan-derived",
-      "crew_note_en": "Placement HELD pending revised18in East drawers, South12in base, sink72–102in /CL87 and closed former pie-safe reconciliation. Field verify.",
-      "crew_note_es": "Ubicación EN ESPERA hasta conciliar cajones Este18pulg., base Sur12pulg., fregadero72–102/eje87 y cierre de alacena anterior. Verificar en obra."
+      "crew_note_en": "10 in east of 72 in sink edge (<=24 in counter reach) and 10-7/8 in clear of window casing (72-7/8 in).",
+      "crew_note_es": "A 10 pulg. al este del fregadero (72 pulg.) y libre del marco de ventana."
     },
     {
       "id": "DW-GD",
@@ -808,13 +808,13 @@
       ],
       "wall": "south",
       "datum_ref": "west_from_se_corner",
-      "station_in": 79.0,
+      "station_in": 76.0,
       "aff_in": 14.0,
       "box_type": "2-gang flush box inside C3 sink base (2 separate TR receptacles, separate neutrals)",
       "measure_boundary": "aff",
       "provenance": "plan-derived placement HOLD",
-      "crew_note_en": "Provisional inside72–102in sink base, CL87 derived; NEVER behind48–72in dishwasher. Separate neutrals. Field verify before fastening.",
-      "crew_note_es": "Provisional dentro de gabinete72–102pulg., eje87 derivado; NUNCA detrás de lavavajillas48–72pulg. Neutros separados. Verificar antes de fijar."
+      "crew_note_en": "Inside 72-102 in sink base, 11 in east of 87 in center drain; NEVER behind 48-72 in dishwasher. Keep separate labeled neutrals.",
+      "crew_note_es": "Dentro del gabinete del fregadero (72-102 pulg.), a 11 pulg. del desagüe en 87 pulg.; NUNCA detrás del lavavajillas (48-72 pulg.)."
     },
     {
       "id": "GD-AIR-OR-SW",
@@ -824,9 +824,9 @@
       ],
       "wall": "south",
       "datum_ref": "west_from_se_corner",
-      "station_in": 93.0,
+      "station_in": 90.0,
       "alt_stations_in": {
-        "wired_wall_sw_ke_revi": 70.0
+        "wired_wall_sw_ke_revi": 67.0
       },
       "aff_in": 36.0,
       "alt_aff_in": 39.5,
@@ -941,19 +941,19 @@
       "datum_ref": "west_from_se_corner_and_north_from_south_wall",
       "stations_from_se_in": [
         17.75,
-        53.75,
-        89.75
+        52.5,
+        87.0
       ],
       "alt_two_pendants_in": [
-        78.0,
-        102.0
+        75.0,
+        99.0
       ],
       "offset_from_south_wall_in": 14.5,
       "box_type": "ICAT / Ceiling luminaire boxes (JA8 high-efficacy on dimmer + sink remote)",
       "measure_boundary": "wall_to_wall",
       "provenance": "to_confirm_option",
-      "crew_note_en": "Lighting setout HELD until sink CL87 plan-derived and actual window center are reconciled; 3 lights vs2 pendants remains an option.",
-      "crew_note_es": "Replanteo de luces EN ESPERA hasta conciliar eje87 derivado y ventana real;3 luces o2 colgantes sigue como opción."
+      "crew_note_en": "T3 aligns with 87 in sink center (verify common zero before rough-in); 2 pendants at 75 & 99 in (±12 in).",
+      "crew_note_es": "T3 alineada con eje de 87 pulg. del fregadero; 2 colgantes a 75 y 99 pulg."
     }
   ],
   "horizontal_bore_bands_aff_in": {
