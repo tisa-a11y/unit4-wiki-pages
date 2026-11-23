@@ -1,8 +1,8 @@
 {
   "key": "kitchen-sink-north",
-  "label": "Sink & North Wall Runs",
-  "labelEn": "Sink & North Wall Runs",
-  "labelEs": "Fregadero y muro norte",
+  "label": "South Sink & North Wall Runs",
+  "labelEn": "South Sink & North Wall Runs",
+  "labelEs": "Tarja Sur y muro Norte",
   "group": "Projects",
   "parent": "kitchen",
   "aliases": [

@@ -84,7 +84,7 @@
     taskLights: "3task",    // "3task" | "2pendant"
     wallTab: "south",       // "east" | "south" | "west" | "north"
     pieStart: 26.0,         // 18..40 in from SE (width 33")
-    sinkStart: 75.0,        // 70..80 in from SE (width 30")
+    sinkStart: 72.0,        // 70..80 in from SE (width 30")
     selectedCircuit: "SA-A",
     showUnitSlots: false,
     equipOpen: false,
@@ -354,8 +354,8 @@
         '<div class="u4h-photo-card">' +
           '<img src="./assets/south-sink-wall.jpg" alt="' + esc(es ? "Foto real del muro Sur abierto" : "Real open-stud photo of South sink wall") + '">' +
           '<div class="u4h-photo-cap"><strong>' + (es ? "Foto real — Muro Sur:" : "Real photo — South Sink Wall:") + "</strong> " +
-            (es ? "S1 @ 24\" y S2 @ 65\" a " + fmtIn(cH) + ". Caja doble DW-GD DENTRO del gabinete de tarja @ 79\" (" + fmtIn(14 + d) + " alto) con neutros separados — NUNCA detrás del lavavajillas (51\"–75\")."
-                : "S1 @ 24\" & S2 @ 65\" at " + fmtIn(cH) + ". DW-GD 2-gang box goes INSIDE sink base @ 79\" (" + fmtIn(14 + d) + " high) with separate neutrals — NEVER behind 51\"–75\" dishwasher.") +
+            (es ? "S1 @ 24\" y S2 @ 65\" a " + fmtIn(cH) + ". Caja doble DW-GD DENTRO del gabinete de tarja (provisional) (" + fmtIn(14 + d) + " alto) con neutros separados — NUNCA detrás del lavavajillas (48\"–72\")."
+                : "S1 @ 24\" & S2 @ 65\" at " + fmtIn(cH) + ". DW-GD 2-gang box goes INSIDE sink base (provisional) (" + fmtIn(14 + d) + " high) with separate neutrals — NEVER behind 48\"–72\" dishwasher.") +
           "</div>" +
         "</div>" +
       "</div>" +
@@ -374,8 +374,8 @@
         '<div class="u4h-photo-card">' +
           '<img src="./assets/west-range-wall.jpeg" alt="' + esc(es ? "Foto real del muro Oeste de estufa" : "Real open-stud photo of West range wall") + '">' +
           '<div class="u4h-photo-cap"><strong>' + (es ? "Foto real — Muro Oeste:" : "Real photo — West Range Wall:") + "</strong> " +
-            (es ? "W1 @ 9\" y W2 @ 57\" a " + fmtIn(cH) + " (aros de 1\" para azulejo). RG-1 @ 33\" (" + fmtIn(3 + d) + " alto). HD-1 caja sencilla 2\"×3\" a " + fmtIn(hdLow) + "–" + fmtIn(hdHigh) + " (saliendo ~1\" — reemplaza caja 4×4 a 100\")."
-                : "W1 @ 9\" & W2 @ 57\" at " + fmtIn(cH) + " (1\" tile mud rings). RG-1 @ 33\" (" + fmtIn(3 + d) + " high). HD-1 flush 1-gang 2\"×3\" at " + fmtIn(hdLow) + "–" + fmtIn(hdHigh) + " (~1\" proud — replaces retired 4×4 @ 100\").") +
+            (es ? "W1 @ 9\" y W2 @ 57\" a " + fmtIn(cH) + " (aros de 1\" para azulejo). RG-1 @ 33\" (" + fmtIn(3 + d) + " alto). HD-1 caja sencilla 2\"×3\" a " + fmtIn(hdLow) + "–" + fmtIn(hdHigh) + " (al ras — reemplaza caja 4×4 a 100\")."
+                : "W1 @ 9\" & W2 @ 57\" at " + fmtIn(cH) + " (1\" tile mud rings). RG-1 @ 33\" (" + fmtIn(3 + d) + " high). HD-1 flush 1-gang 2\"×3\" at " + fmtIn(hdLow) + "–" + fmtIn(hdHigh) + " (flush — replaces retired 4×4 @ 100\").") +
           "</div>" +
         "</div>" +
       "</div>" +
@@ -417,7 +417,7 @@
             "<ul>" +
               "<li>12/2 Cu Romex (" + (es ? "cocina +15%" : "kitchen +15%") + "): ~" + w12 + " ft</li>" +
               "<li>14/2 Cu Romex (" + (es ? "cocina +15%" : "kitchen +15%") + "): ~" + w14 + " ft</li>" +
-              "<li>" + (es ? "Cajas: 1× sencilla 2\"×3\" (HD-1 ~1\" salida), aros de 1\" para W1/W2, 1× doble (DW-GD), 1× triple (SW-ENTRY)" : "Boxes: 1× 1-gang 2\"×3\" (HD-1 ~1\" proud), 1\" tile mud rings (W1/W2), 1× 2-gang (DW-GD), 1× 3-gang (SW-ENTRY)") + "</li>" +
+              "<li>" + (es ? "Cajas: 1× sencilla 2\"×3\" (HD-1 al ras), aros de 1\" para W1/W2, 1× doble (DW-GD), 1× triple (SW-ENTRY)" : "Boxes: 1× 1-gang 2\"×3\" (HD-1 flush), 1\" tile mud rings (W1/W2), 1× 2-gang (DW-GD), 1× 3-gang (SW-ENTRY)") + "</li>" +
             "</ul>" +
           "</div>" +
         "</div>" +
@@ -577,7 +577,7 @@
         { k: "h1", en: "1. D04 Backside (East 13\"–27-1/2\" from SE, 53\"–77\" H): ZERO screws, ZERO boxes, side-entry ON HOLD", es: "1. Respaldo D04 (Este 13\"–27-1/2\" desde SE, 53\"–77\" alto): CERO tornillos, CERO cajas, cortes laterales EN PAUSA" },
         { k: "h2", en: "2. Mon Nov 23 walkthrough: confirm 80A/#4 Cu vs 100A/#3 Cu feeder & inspect Eaton BRP20L125G onsite", es: "2. Visita lunes 23 nov: confirmar alimentador 80A/#4 vs 100A/#3 y revisar caja Eaton BRP20L125G en obra" },
         { k: "h3", en: "3. DW-GD 2-gang goes INSIDE 30\" sink base (@ 79\", 14\" H) with separate neutrals — NEVER behind dishwasher", es: "3. Caja doble DW-GD va DENTRO del gabinete de tarja (@ 79\", 14\" alto) con neutros separados — NUNCA atrás del lavavajillas" },
-        { k: "h4", en: "4. HD-1 hood is flush 1-gang 2\"×3\" (~83\"–86\" AFF, ~1\" proud) — replaces retired 4×4 @ 100\"/104\"", es: "4. Campana HD-1 usa caja sencilla 2\"×3\" (~83\"–86\" piso, ~1\" salida) — reemplaza caja 4×4 a 100\"/104\"" }
+        { k: "h4", en: "4. HD-1 hood is flush 1-gang 2\"×3\" (~83\"–86\" AFF, flush) — replaces retired 4×4 @ 100\"/104\"", es: "4. Campana HD-1 usa caja sencilla 2\"×3\" (~83\"–86\" piso, al ras) — reemplaza caja 4×4 a 100\"/104\"" }
       ];
 
       inner =
@@ -791,7 +791,7 @@
         return applyKelecView({ wall: val });
       } else if (act === "reset") {
         state.pieStart = 26.0;
-        state.sinkStart = 75.0;
+        state.sinkStart = 72.0;
         state.counterH = 44;
         state.floorDown = false;
       } else {

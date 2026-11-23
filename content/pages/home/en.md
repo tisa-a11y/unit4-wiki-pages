@@ -1,7 +1,7 @@
 # Unit 4 — Home
 
 ## Done by Monday (Fri–Sun, Nov 20–22)
-- **Attic first:** Mark the 24" × 36" finished-clear opening outside Front Door 4 and document framing and lift route. Wait for release before cutting.
+- **Attic first — priority, due Nov 22:** Finish the opening plan. Mark the 24" × 36" finished-clear opening outside Front Door 4 and document framing and lift route. Wait for release before cutting.
 - **Kitchen:** Clear the room, finish the window framing, and send labeled photos of the full L layout.
 - **Kitchen › Oven / Range Run:** Put in the wood blocking, test-hang the hood with its bottom 66"–72" from the floor (no upper cabinets), and measure the gap to the ceiling and the duct.
 - **Bathroom:** Install the original window trim before any wall tile, set the two GFCI boxes, and set out the fixtures.

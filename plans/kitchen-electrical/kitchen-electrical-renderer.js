@@ -71,7 +71,7 @@
     dining_wall_width_in: 91.5,
     pie_safe_start_in: 26.0,
     pie_safe_width_in: 33.0,
-    sink_base_start_in: 75.0,
+    sink_base_start_in: 72.0,
     sink_base_width_in: 30.0,
     waste_pct: 15,
     existing_original_trim: {
@@ -100,16 +100,16 @@
         severity: 'HIGH',
         title_en: 'HD-1 Direct Hardwire: 1-Gang 2"×3" (~83"–86") Replaces 4×4 @ 100"',
         title_es: 'HD-1 Conexión Directa: Sencilla 2"×3" (~83"–86") Reemplaza 4×4 a 100"',
-        en: 'Zephyr Savona uses direct hardwire via flush 1-gang 2"×3" box set ~1" proud (for 1/2" HardieBacker + tile) at C/L 33" ± 2-1/4", ~83"–86" above finished floor (+t bare subfloor). Verify exact knockout side on hood downstairs. NO 4"×4" box at 100"/104".',
-        es: 'Campana Zephyr lleva conexión directa en caja sencilla 2"×3" saliendo ~1" (para HardieBacker 1/2" + azulejo) a eje 33" ± 2-1/4", ~83"–86" sobre piso terminado (+t subpiso). Confirmar lado del orificio abajo. NO caja 4"×4" a 100"/104".'
+        en: 'Zephyr Savona uses direct hardwire via flush 1-gang 2"×3" box flush to finished surface (follow actual OEM constraints) at C/L 33" ± 2-1/4", ~83"–86" above finished floor (+t bare subfloor). Verify exact knockout side on hood downstairs. NO 4"×4" box at 100"/104".',
+        es: 'Campana Zephyr lleva conexión directa en caja sencilla 2"×3" al ras del acabado (seguir montaje real del fabricante) a eje 33" ± 2-1/4", ~83"–86" sobre piso terminado (+t subpiso). Confirmar lado del orificio abajo. NO caja 4"×4" a 100"/104".'
       },
       {
         id: 'hold-south-sink',
         severity: 'MEDIUM',
-        title_en: 'South Sink Station (75"–105" vs 72"–102") & Former Pie-Safe Closure',
-        title_es: 'Posición Fregadero Sur (75"–105" vs 72"–102") y Cierre de Alacena Anterior',
-        en: 'Verify South sink base station (75"–105" vs taped 72"–102") and former pie-safe closure (~26"–59", measure on site). Weather-seal and cover; recheck box backing and clearances before fastening S1, S2, and DW-GD. Keep DW-GD inside sink base with separate neutrals — NEVER behind 51"–75" dishwasher.',
-        es: 'Confirmar gabinete de fregadero Sur (75"–105" vs cinta 72"–102") y cierre de alacena anterior (~26"–59", medir en obra). Sellar contra intemperie y cubrir; revisar respaldo y claros de cajas antes de fijar S1, S2 y DW-GD. Mantener DW-GD dentro del fregadero con neutros separados — NUNCA detrás del lavavajillas.'
+        title_en: 'South Sink Station (72"–102" / CL 87" (plan-derived)) & Former Pie-Safe Closure',
+        title_es: 'Posición Fregadero Sur (72"–102" / CL 87" (plan-derived)) y Cierre de Alacena Anterior',
+        en: 'Electrical placement HELD. Verify South sink base station (72"–102" / CL 87" (plan-derived)) and former pie-safe closure (~26"–59", measure on site). Weather-seal and cover; recheck box backing and clearances before fastening S1, S2, and DW-GD. Keep DW-GD inside sink base with separate neutrals — NEVER behind 48"–72" dishwasher.',
+        es: 'Ubicación eléctrica EN ESPERA. Confirmar gabinete de fregadero Sur (72"–102" / eje 87" (derivado del plano)) y cierre de alacena anterior (~26"–59", medir en obra). Sellar contra intemperie y cubrir; revisar respaldo y claros de cajas antes de fijar S1, S2 y DW-GD. Mantener DW-GD dentro del fregadero con neutros separados — NUNCA detrás del lavavajillas.'
       }
     ],
     field_overrides: [],
@@ -196,10 +196,10 @@
       photo_callouts_south: [
         '<li class="callout-alert"><strong>D04 Backside (Left of Photo, East Wall):</strong> Dining subpanel sits behind 1/2" drywall at 53"–77" above finished floor — NEVER drive screws or mount boxes in that band.</li>',
         '<li><strong>Former Pie-Safe:</strong> Weather-seal and cover. S1 (24") and S2 (65") remain provisional; recheck backing, box locations and clearances at the closed wall before fastening.</li>',
-        '<li><strong>DW-GD Inside Sink Base (79", 14" high):</strong> 2-gang box inside 30" sink cabinet with <strong>separate neutrals</strong> — NEVER behind the 24" dishwasher bay (51"–75").</li>'
+        '<li><strong>DW-GD Inside Sink Base (provisional, 14" high):</strong> 2-gang box inside 30" sink cabinet with <strong>separate neutrals</strong> — NEVER behind the 24" dishwasher bay (48"–72").</li>'
       ],
       photo_callouts_west: [
-        '<li class="callout-alert"><strong>HD-1 Direct Hardwire (Zephyr Manual p. 3):</strong> Flush 1-gang 2"×3" box set ~1" proud at C/L 33" ± 2-1/4", ~83"–86" above finished floor (+t off bare subfloor). NO 4"×4" box at 100"/104".</li>',
+        '<li class="callout-alert"><strong>HD-1 Direct Hardwire (Zephyr Manual p. 3):</strong> Flush 1-gang 2"×3" box at C/L 33" ± 2-1/4", ~83"–86" above finished floor (+t off bare subfloor). NO 4"×4" box at 100"/104".</li>',
         '<li><strong>1/2" Drywall &amp; Zero Stud Shims:</strong> 1/2" drywall (0.50") meets 1/2" HardieBacker (0.42") directly on studs (~1/16" skim only). Set W1 (9") &amp; W2 (57") with ~1" tile mud rings.</li>',
         '<li><strong>Low Rear Pocket (RG-1 @ 33", 3" high):</strong> Single 15A receptacle beside 1/2" gas shutoff inside 9/16"–4-15/16" pocket. Owned Viking has low 1" island trim only.</li>'
       ],
@@ -353,10 +353,10 @@
       photo_callouts_south: [
         '<li class="callout-alert"><strong>Respaldo D04 (Izq. de Foto, Muro Este):</strong> El tablero del comedor queda detrás de la tablaroca 1/2" de 53"–77" sobre piso terminado — NUNCA meter tornillos ni cajas ahí.</li>',
         '<li><strong>Alacena anterior:</strong> Sellar contra intemperie y cubrir. S1 (24") y S2 (65") siguen provisionales; revisar respaldo, ubicación y claros de cajas con el muro cerrado antes de fijarlas.</li>',
-        '<li><strong>DW-GD Dentro del Fregadero (79", 14" alto):</strong> Caja doble dentro del gabinete de 30" con <strong>neutros separados</strong> — NUNCA detrás del lavavajillas (51"–75").</li>'
+        '<li><strong>DW-GD Dentro del Fregadero (79", 14" alto):</strong> Caja doble dentro del gabinete de 30" con <strong>neutros separados</strong> — NUNCA detrás del lavavajillas (48"–72").</li>'
       ],
       photo_callouts_west: [
-        '<li class="callout-alert"><strong>HD-1 Conexión Directa (Manual Zephyr p. 3):</strong> Caja sencilla 2"×3" saliendo ~1" a eje 33" ± 2-1/4", ~83"–86" sobre piso terminado (+t desde subpiso). NO caja 4"×4" a 100"/104".</li>',
+        '<li class="callout-alert"><strong>HD-1 Conexión Directa (Manual Zephyr p. 3):</strong> Caja sencilla 2"×3" al ras a eje 33" ± 2-1/4", ~83"–86" sobre piso terminado (+t desde subpiso). NO caja 4"×4" a 100"/104".</li>',
         '<li><strong>Tablaroca 1/2" y Cero Calzas:</strong> Tablaroca 1/2" (0.50") une con HardieBacker 1/2" (0.42") directo a madera (solo ~1/16" pasta). W1 (9") y W2 (57") con aros ~1" para azulejo.</li>',
         '<li><strong>Franja Baja Estufa (RG-1 @ 33", 3" alto):</strong> Contacto sencillo 15A junto a llave gas 1/2" dentro de 9/16"–4-15/16". Viking confirmada con borde trasero bajo 1".</li>'
       ],
@@ -527,7 +527,7 @@
   /* ── Live Device Coordinates & 24" Counter Reach Engine ── */
   function getLiveDevices() {
     const hCounter = Number(state.counter_outlet_height_in) || 44.0;
-    const sinkStart = Number(state.sink_base_start_in) || 75.0;
+    const sinkStart = Number(state.sink_base_start_in) || 72.0;
     const dwGdX = Number((sinkStart + 4.0).toFixed(2));
     const swSinkX = Number((sinkStart - 5.0).toFixed(2));
     const isOptB = state.sink_control_mode === 'option_b_wired_2gang';
@@ -538,12 +538,12 @@
       { id: 'REF-1', ckt: 'REF', space: 4, wall: 'east', x: 0, y: 74, z: 15, station: 74, gauge: '12/2', boundary: 'above_finished_floor', box_en: '1-gang flush box (20A single outlet)', box_es: 'Caja sencilla empotrada (contacto sencillo 20A)', note_en: 'Centered in 60"–88" Haier fridge bay; verify rear cord pocket.', note_es: 'Centrado en claro 60"–88" del refrigerador Haier; verificar hueco trasero.' },
       { id: 'S1', ckt: 'SA-B', space: 2, wall: 'south', x: 24, y: 0, z: hCounter, station: 24, gauge: '12/2', boundary: 'above_finished_floor', box_en: '1-gang box (20A duplex)', box_es: 'Caja sencilla (contacto 20A)', note_en: 'Provisional station; weather-seal and cover former pie-safe, then verify box backing and counter clearance on site.', note_es: 'Posición provisional; sellar contra intemperie y cubrir la alacena anterior; verificar respaldo y claro sobre cubierta en obra.' },
       { id: 'S2', ckt: 'SA-B', space: 2, wall: 'south', x: 65, y: 0, z: hCounter, station: 65, gauge: '12/2', boundary: 'above_finished_floor', box_en: isOptB ? '1-gang box (20A duplex)' : '1-gang (or 2-gang w/ wireless light remote)', box_es: isOptB ? 'Caja sencilla (contacto 20A)' : 'Caja sencilla (o doble con control inalámbrico)', note_en: 'Provisional station near former opening and South window casing (72-7/8"); verify after weather-sealing and covering.', note_es: 'Posición provisional junto al hueco anterior y chambrana Sur (72-7/8"); verificar después de sellar y cubrir.' },
-      { id: 'DW-GD', ckt: 'DW + GD', space: 5, spaces: [5, 6], wall: 'south', x: dwGdX, y: 0, z: 14, station: dwGdX, gauge: '14/2', boundary: 'above_finished_floor', box_en: '2-gang box inside sink base (2 separate circuits · separate neutrals)', box_es: 'Caja doble dentro del fregadero (2 circuitos · neutros separados)', note_en: 'Inside 30" sink base, NEVER behind 24" dishwasher (51"–75"). Keep Space 5 & Space 6 neutrals separate and clearly labeled.', note_es: 'Dentro del gabinete de fregadero 30", NUNCA detrás del lavavajillas (51"–75"). Mantener neutros de Espacios 5 y 6 separados y etiquetados.' },
+      { id: 'DW-GD', ckt: 'DW + GD', space: 5, spaces: [5, 6], wall: 'south', x: dwGdX, y: 0, z: 14, station: dwGdX, gauge: '14/2', boundary: 'above_finished_floor', box_en: '2-gang box inside sink base (2 separate circuits · separate neutrals)', box_es: 'Caja doble dentro del fregadero (2 circuitos · neutros separados)', note_en: 'Inside 30" sink base, NEVER behind 24" dishwasher (48"–72"). Keep Space 5 & Space 6 neutrals separate and clearly labeled.', note_es: 'Dentro del gabinete de fregadero 30", NUNCA detrás del lavavajillas (48"–72"). Mantener neutros de Espacios 5 y 6 separados y etiquetados.' },
       { id: 'GD-AIR-OR-SW', ckt: isOptB ? 'GD + LT' : 'GD', space: 6, spaces: isOptB ? [6, 9] : [6], wall: 'south', x: isOptB ? swSinkX : (sinkStart + 18), y: 0, z: isOptB ? 39.5 : 36, station: isOptB ? swSinkX : (sinkStart + 18), gauge: isOptB ? '14/3' : '14/2', boundary: 'above_finished_floor', box_en: isOptB ? 'Wired 2-gang wall switch box @ 70" (Disposal + 3-Way Task Lights)' : 'Countertop sink-deck air button beside faucet (zero wall switch box)', box_es: isOptB ? 'Caja doble cableada en muro a 70" (Triturador + Luces 3 vías)' : 'Botón de aire en cubierta junto a la llave (sin caja en pared)', note_en: isOptB ? 'Option B active: adds wired 2-gang box at 70" and 14/3 3-way traveler to entry switch.' : 'Option A active: clean splash wall using sink-deck air button + wireless light remote at S2.', note_es: isOptB ? 'Opción B activa: agrega caja doble a 70" y cable 14/3 de 3 vías a la entrada.' : 'Opción A activa: muro limpio usando botón de aire en cubierta + control inalámbrico en S2.' },
       { id: 'W1', ckt: 'SA-C', space: 3, wall: 'west', x: 115.5, y: 69, z: hCounter, station: 9, gauge: '12/2', boundary: 'above_finished_floor', box_en: '1-gang box + ~1" tile mud ring (20A duplex)', box_es: 'Caja sencilla + aro ~1" azulejo (contacto 20A)', note_en: 'Centered over left 18" base cabinet; ~1" proud for 1/2" HardieBacker + tile (no stud shims).', note_es: 'Centrado sobre gabinete izquierdo 18"; ~1" salida para HardieBacker 1/2" + azulejo (sin calzas).' },
       { id: 'W2', ckt: 'SA-C', space: 3, wall: 'west', x: 115.5, y: 117, z: hCounter, station: 57, gauge: '12/2', boundary: 'above_finished_floor', box_en: '1-gang box + ~1" tile mud ring (20A duplex)', box_es: 'Caja sencilla + aro ~1" azulejo (contacto 20A)', note_en: 'Centered over right 18" base cabinet; ~1" proud for 1/2" HardieBacker + tile (no stud shims).', note_es: 'Centrado sobre gabinete derecho 18"; ~1" salida para HardieBacker 1/2" + azulejo (sin calzas).' },
       { id: 'RG-1', ckt: 'RG', space: 7, wall: 'west', x: 115.5, y: 93, z: 3, station: 33, gauge: '14/2', boundary: 'above_finished_floor', box_en: '1-gang single 15A receptacle (low rear Viking pocket)', box_es: 'Caja sencilla contacto 15A (franja baja trasera Viking)', note_en: 'Inside 9/16"–4-15/16" low rear pocket beside 1/2" gas shutoff (<=2" poke-out). Owned Viking has low 1" island trim.', note_es: 'Dentro de franja baja 9/16"–4-15/16" junto a llave gas 1/2" (<=2" salida). Estufa Viking confirmada con borde bajo 1".' },
-      { id: 'HD-1', ckt: 'HD', space: 8, wall: 'west', x: 115.5, y: 95.25, z: 84.5, station: 35.25, gauge: '14/2', boundary: 'above_finished_floor', box_en: 'Flush 1-gang 2"×3" box set ~1" proud (direct hardwire into Zephyr hood)', box_es: 'Caja sencilla 2"×3" saliendo ~1" (conexión directa a campana Zephyr)', note_en: 'Centered at 33" ± 2-1/4", ~83"–86" above finished floor (+t bare subfloor) inside 8-5/8" chimney shroud. Replaces retired 4"×4" box at 100"/104".', note_es: 'A eje 33" ± 2-1/4", ~83"–86" sobre piso terminado (+t subpiso) dentro del cubre-ducto 8-5/8". Reemplaza caja 4"×4" a 100"/104".' },
+      { id: 'HD-1', ckt: 'HD', space: 8, wall: 'west', x: 115.5, y: 95.25, z: 84.5, station: 35.25, gauge: '14/2', boundary: 'above_finished_floor', box_en: 'Flush 1-gang 2"×3" box (direct hardwire into Zephyr hood)', box_es: 'Caja sencilla 2"×3" al ras (conexión directa a campana Zephyr)', note_en: 'Centered at 33" ± 2-1/4", ~83"–86" above finished floor (+t bare subfloor) inside 8-5/8" chimney shroud. Replaces retired 4"×4" box at 100"/104".', note_es: 'A eje 33" ± 2-1/4", ~83"–86" sobre piso terminado (+t subpiso) dentro del cubre-ducto 8-5/8". Reemplaza caja 4"×4" a 100"/104".' },
       { id: 'SW-ENTRY', ckt: 'LT', space: 9, wall: 'north', x: 6, y: 126.25, z: 48, station: 6, gauge: '14/2', boundary: 'above_finished_floor', box_en: '3-gang switch box (Main Dimmer | Sink Lights Dimmer | Under-Cab / Spare)', box_es: 'Caja triple de apagadores (Luz Principal | Fregadero | Bajo Gabinete / Reserva)', note_en: '6" west of NE hallway opening on right side entering kitchen; clear of 29-1/2" × 79" hall opening.', note_es: 'A 6" al oeste de esquina NE entrando del pasillo; libre del vano de 29-1/2" × 79".' },
       { id: 'L1-MAIN', ckt: 'LT', space: 9, wall: 'ceiling', x: 58, y: 75, z: 121.5, station: 58, gauge: '14/2', boundary: 'wall_to_wall', box_en: 'Ceiling main light box (high-efficiency dimmer)', box_es: 'Caja luz principal de techo (con atenuador)', note_en: 'Centered over open kitchen work floor (58" W of East wall, 75" N of South wall).', note_es: 'Centrada en el piso libre de cocina (58" desde muro Este, 75" desde muro Sur).' }
     ];
@@ -551,7 +551,7 @@
   }
 
   function evaluateCounterReach() {
-    const sinkStart = Number(state.sink_base_start_in) || 75.0;
+    const sinkStart = Number(state.sink_base_start_in) || 72.0;
     const sinkEnd = sinkStart + (Number(state.sink_base_width_in) || 30.0);
     const pieStart = Number(state.pie_safe_start_in) || 26.0;
     const pieEnd = pieStart + (Number(state.pie_safe_width_in) || 33.0);
@@ -591,7 +591,7 @@
 
   function computeTakeoff() {
     const hC = Number(state.counter_outlet_height_in) || 44.0;
-    const sinkStart = Number(state.sink_base_start_in) || 75.0;
+    const sinkStart = Number(state.sink_base_start_in) || 72.0;
     const dwX = sinkStart + 4.0;
     const swX = sinkStart - 5.0;
     const inWall = state.south_routing_mode === 'in_wall_bored';
@@ -658,7 +658,7 @@
     };
     const boxes = {
       one_gang_boxes: 8,
-      hood_2x3_box_1in_proud: 1,
+      hood_flush_2x3_box: 1,
       west_1in_tile_mud_rings: 2,
       two_gang_boxes: optB ? 2 : 1,
       three_gang_entry_box: 1,
@@ -953,8 +953,8 @@
 
     /* South Wall: 0-112 base cabinets (depth 24") */
     el('rect', { x: px(112), y: py(24), width: 112 * S, height: 24 * S, fill: '#e6efe9', stroke: '#2f4f42', 'stroke-width': 1.3 }, svg);
-    /* Dishwasher 51-75 */
-    el('rect', { x: px(75), y: py(24), width: 24 * S, height: 24 * S, fill: '#f1f5f9', stroke: '#475569', 'stroke-width': 1.2, 'stroke-dasharray': '4,3' }, svg);
+    /* Dishwasher 48-72 */
+    el('rect', { x: px(72), y: py(24), width: 24 * S, height: 24 * S, fill: '#f1f5f9', stroke: '#475569', 'stroke-width': 1.2, 'stroke-dasharray': '4,3' }, svg);
     /* Sink Base (draggable synced!) */
     el('rect', { x: px(sinkE), y: py(24), width: (sinkE - sinkS) * S, height: 24 * S, fill: '#dbeafe', stroke: '#15539e', 'stroke-width': 1.5 }, svg);
 
@@ -1224,16 +1224,16 @@
     /* Base Cabinets (36" counter height) */
     const sinkS = state.sink_base_start_in;
     const sinkE = sinkS + state.sink_base_width_in;
-    /* 0-36 Corner, 36-51 Trash, 51-75 DW, Sink Base, Filler */
+    /* 0-36 Corner, 36-48 Base, 48-72 DW, Sink Base, Filler */
     el('rect', { x: px(0), y: py(36), width: 36 * S, height: 36 * S, fill: '#e6efe9', stroke: '#2f4f42', 'stroke-width': 1.4 }, svg);
     txt(px(18), py(18), lang === 'es' ? 'ESQ. 36"' : 'CORNER 36"', { 'text-anchor': 'middle', 'font-size': 9, 'font-weight': 700, fill: '#2f4f42' }, svg);
-    el('rect', { x: px(36), y: py(36), width: 15 * S, height: 36 * S, fill: '#e6efe9', stroke: '#2f4f42', 'stroke-width': 1.4 }, svg);
-    txt(px(43.5), py(18), '15"', { 'text-anchor': 'middle', 'font-size': 8.5, 'font-weight': 700, fill: '#2f4f42' }, svg);
+    el('rect', { x: px(36), y: py(36), width: 12 * S, height: 36 * S, fill: '#e6efe9', stroke: '#2f4f42', 'stroke-width': 1.4 }, svg);
+    txt(px(42), py(18), '12"', { 'text-anchor': 'middle', 'font-size': 8.5, 'font-weight': 700, fill: '#2f4f42' }, svg);
 
-    /* Dishwasher Bay 51"-75" (NEVER put DW-GD here!) */
-    el('rect', { x: px(51), y: py(36), width: 24 * S, height: 36 * S, fill: '#fef2f2', stroke: '#dc2626', 'stroke-width': 1.4, 'stroke-dasharray': '5,3' }, svg);
-    txt(px(63), py(22), lang === 'es' ? 'LAVAVAJILLAS 24"' : 'DISHWASHER 24"', { 'text-anchor': 'middle', 'font-size': 8.8, 'font-weight': 800, fill: '#991b1b' }, svg);
-    txt(px(63), py(10), lang === 'es' ? 'SIN CAJAS ATRÁS' : 'NO BOX BEHIND DW', { 'text-anchor': 'middle', 'font-size': 7.8, 'font-weight': 800, fill: '#dc2626' }, svg);
+    /* Dishwasher Bay 48"-72" (NEVER put DW-GD here!) */
+    el('rect', { x: px(48), y: py(36), width: 24 * S, height: 36 * S, fill: '#fef2f2', stroke: '#dc2626', 'stroke-width': 1.4, 'stroke-dasharray': '5,3' }, svg);
+    txt(px(60), py(22), lang === 'es' ? 'LAVAVAJILLAS 24"' : 'DISHWASHER 24"', { 'text-anchor': 'middle', 'font-size': 8.8, 'font-weight': 800, fill: '#991b1b' }, svg);
+    txt(px(60), py(10), lang === 'es' ? 'SIN CAJAS ATRÁS' : 'NO BOX BEHIND DW', { 'text-anchor': 'middle', 'font-size': 7.8, 'font-weight': 800, fill: '#dc2626' }, svg);
 
     /* Draggable 30" Sink Base */
     const sinkG = el('g', { style: 'cursor:ew-resize;' }, svg);
@@ -1347,7 +1347,7 @@
     el('rect', { x: 48, y: 782, width: 690, height: 132, rx: 6, fill: '#f8fafc', stroke: '#cbd5e1', 'stroke-width': 1.2 }, svg);
     txt(62, 804, lang === 'es' ? 'REGLAS DE OBRA MURO SUR (FREGADERO Y CIERRE):' : 'SOUTH WALL FIELD RULES (SINK, DISHWASHER & CLOSURE):', { 'font-size': 10.2, 'font-weight': 800, fill: '#15539e' }, svg);
     txt(62, 824, lang === 'es' ? `• Opción Control Activa: ${state.sink_control_mode === 'option_b_wired_2gang' ? 'Opción B — Caja doble cableada a 70" (+30.3 pies 14/3)' : 'Opción A — Botón de aire en cubierta + control inalámbrico en S2 (0 pies 14/3)'}` : `• Active Sink Control: ${state.sink_control_mode === 'option_b_wired_2gang' ? 'Option B — Wired 2-Gang Switch Box @ 70" (+30.3 ft 14/3 traveler)' : 'Option A — Sink-Deck Air Button + Wireless Remote at S2 (0 ft 14/3)'}`, { 'font-size': 9.3, fill: '#10202b', 'font-weight': 700 }, svg);
-    txt(62, 844, lang === 'es' ? `• DW-GD (Caja doble a ${fracIn(dwX)}, 14" piso): Dentro del gabinete del fregadero; NUNCA detrás del lavavajillas (51"–75"). Neutros Esp. 5 y 6 separados.` : `• DW-GD (2-gang @ ${fracIn(dwX)}, 14" above floor): Inside sink base; NEVER behind dishwasher (51"–75"). Keep Space 5 & Space 6 neutrals separate.`, { 'font-size': 9.1, fill: '#1e293b' }, svg);
+    txt(62, 844, lang === 'es' ? `• DW-GD (Caja doble a ${fracIn(dwX)}, 14" piso): Dentro del gabinete del fregadero; NUNCA detrás del lavavajillas (48"–72"). Neutros Esp. 5 y 6 separados.` : `• DW-GD (2-gang @ ${fracIn(dwX)}, 14" above floor): Inside sink base; NEVER behind dishwasher (48"–72"). Keep Space 5 & Space 6 neutrals separate.`, { 'font-size': 9.1, fill: '#1e293b' }, svg);
     txt(62, 864, lang === 'es' ? `• Contactos S1 (24") y S2 (65") a ${heightDualLabel(state.counter_outlet_height_in)} — Franjas en muro: 30" / 26" / 24" / 20" (ahorra ~115 pies de cable).` : `• S1 (24") & S2 (65") at ${heightDualLabel(state.counter_outlet_height_in)} — In-wall bore bands: 30" / 26" / 24" / 20" (saves ~115 ft cable).`, { 'font-size': 9.1, fill: '#1e293b' }, svg);
     txt(62, 884, lang === 'es' ? `• Subpiso actual: ${tVal > 0 ? 'Desnudo (+t = ' + fracIn(tVal) + ' sumado entre paréntesis)' : 'Piso terminado instalado (+0")'} · Confirmar medidas en obra.` : `• Current Floor Datum: ${tVal > 0 ? 'Bare subfloor (+t = ' + fracIn(tVal) + ' shown in parentheses)' : 'Finished floor down (+0")'} · Measure & verify on site.`, { 'font-size': 9.1, fill: '#92400e', 'font-weight': 700 }, svg);
     txt(62, 904, lang === 'es' ? '• Alacena anterior: SELLAR CONTRA INTEMPERIE Y CUBRIR. S1/S2 provisionales; verificar respaldo y claros en obra.' : '• Former pie-safe: WEATHER-SEAL AND COVER. S1/S2 are provisional; verify backing and clearances on site.', { 'font-size': 9.1, fill: '#92400e', 'font-weight': 700 }, svg);
@@ -1390,8 +1390,8 @@
       /* KITCHEN FACE: Corner Base 0-36, Drawer 36-60, Haier Fridge 60-88, Hall Opening 96.5-126 */
       el('rect', { x: px(0), y: py(36), width: 36 * S, height: 36 * S, fill: '#e6efe9', stroke: '#2f4f42', 'stroke-width': 1.4 }, svg);
       txt(px(18), py(18), lang === 'es' ? 'ESQ. 36"' : 'CORNER 36"', { 'text-anchor': 'middle', 'font-size': 9.2, 'font-weight': 700, fill: '#2f4f42' }, svg);
-      el('rect', { x: px(36), y: py(36), width: 24 * S, height: 36 * S, fill: '#e6efe9', stroke: '#2f4f42', 'stroke-width': 1.4 }, svg);
-      txt(px(48), py(18), lang === 'es' ? 'CAJONES 24"' : 'DRAWERS 24"', { 'text-anchor': 'middle', 'font-size': 9, 'font-weight': 700, fill: '#2f4f42' }, svg);
+      el('rect', { x: px(36), y: py(36), width: 18 * S, height: 36 * S, fill: '#e6efe9', stroke: '#2f4f42', 'stroke-width': 1.4 }, svg);
+      txt(px(45), py(18), lang === 'es' ? 'CAJONES 18"' : 'DRAWERS 18"', { 'text-anchor': 'middle', 'font-size': 9, 'font-weight': 700, fill: '#2f4f42' }, svg);
 
       /* Optional Dashed East Uppers (0-60, 55.125-95.5625) */
       el('rect', { x: px(0), y: py(95.5625), width: 60 * S, height: (95.5625 - 55.125) * S, fill: 'none', stroke: '#64748b', 'stroke-width': 1.3, 'stroke-dasharray': '5,4' }, svg);
@@ -1586,7 +1586,7 @@
     txt(rx + 14, 248, lang === 'es' ? 'DETALLES FIJOS MURO OESTE (2026-11-20):' : 'LOCKED WEST WALL ELECTRICAL DETAILS:', { 'font-size': 10.5, 'font-weight': 800, fill: '#15539e' }, svg);
     const lines = lang === 'es' ? [
       '1. HD-1 (Espacio 8 · 15A AFCI + Bloqueo BRLW1):',
-      '   Caja sencilla 2"×3" saliendo ~1" para HardieBacker + azulejo.',
+      '   Caja sencilla 2"×3" al ras para HardieBacker + azulejo.',
       '   Ubicación: Eje 33" ± 2-1/4", ~83"–86" piso (+t subpiso).',
       '   Conexión directa a caja superior Zephyr (NO 4"×4" a 100").',
       '2. W1 (9") y W2 (57") (Espacio 3 · 20A Doble Función):',
@@ -1600,7 +1600,7 @@
       '5. SIN Gabinetes Altos en Muro Oeste (Bloqueado).'
     ] : [
       '1. HD-1 (Space 8 · 15A AFCI + Lock-Off BRLW1):',
-      '   Flush 1-gang 2"×3" box set ~1" proud for backer + tile.',
+      '   Flush 1-gang 2"×3" box for backer + tile.',
       '   Position: C/L 33" ± 2-1/4", ~83"–86" floor (+t subfloor).',
       '   Direct hardwire into Zephyr top box (NO 4"×4" at 100").',
       '2. W1 (9") & W2 (57") (Space 3 · 20A Dual-Function):',
@@ -1785,13 +1785,13 @@
       { y: 256, col: '#1d4ed8', title: '14/2 Cu NM-B (15A: DW, GD, RG, HD, LT)', big: `${takeoff.nm_b_14_2.gross_ft} pies (+${takeoff.waste_pct}%)`, sub: `Manhattan Neto: ${takeoff.nm_b_14_2.net_ft} pies (incl. colas 18")` },
       { y: 326, col: '#6d28d9', title: '14/3 Cu NM-B (Escalera 3 vías apagador fregadero)', big: `${takeoff.nm_b_14_3.gross_ft} pies`, sub: state.sink_control_mode === 'option_b_wired_2gang' ? `Opción B Cableada @ 70": ${takeoff.nm_b_14_3.net_ft} pies neto` : 'Opción A Botón Aire + Control Inalámbrico (0 pies)' },
       { y: 396, col: '#2f4f42', title: 'Pastillas Eaton BR Cocina (Espacios 1–9)', big: `${takeoff.breakers.BRN120DF}× BRN120DF · ${takeoff.breakers.BRN115DF}× BRN115DF · ${takeoff.breakers.BRN115AF}× BRN115AF`, sub: `Más 1× Bloqueo BRLW1 (HD Esp. 8)${takeoff.breakers.deadfront_gfci_15a ? ' + 1× GFCI Frente Muerto' : ''}` },
-      { y: 466, col: '#334155', title: 'Cajas Cocina y Aros ~1" Azulejo (Cero Precios)', big: `${takeoff.boxes.one_gang_boxes}× 1G · 1× HD-1 (2"×3") · ${takeoff.boxes.two_gang_boxes}× 2G · 1× 3G · ${takeoff.boxes.ceiling_boxes}× Techo`, sub: 'Incluye 2× aros ~1" azulejo (W1/W2) + caja HD-1 saliente ~1"' }
+      { y: 466, col: '#334155', title: 'Cajas Cocina y Aros ~1" Azulejo (Cero Precios)', big: `${takeoff.boxes.one_gang_boxes}× 1G · 1× HD-1 (2"×3") · ${takeoff.boxes.two_gang_boxes}× 2G · 1× 3G · ${takeoff.boxes.ceiling_boxes}× Techo`, sub: 'Incluye 2× aros ~1" azulejo (W1/W2) + caja HD-1 al ras' }
     ] : [
       { y: 186, col: '#b45309', title: '12/2 Cu NM-B (20A: SA-A, SA-B, SA-C, REF)', big: `${takeoff.nm_b_12_2.gross_ft} ft (+${takeoff.waste_pct}%)`, sub: `Net Manhattan: ${takeoff.nm_b_12_2.net_ft} ft (incl. 18" box tails)` },
       { y: 256, col: '#1d4ed8', title: '14/2 Cu NM-B (15A: DW, GD, RG, HD, LT)', big: `${takeoff.nm_b_14_2.gross_ft} ft (+${takeoff.waste_pct}%)`, sub: `Net Manhattan: ${takeoff.nm_b_14_2.net_ft} ft (incl. 18" box tails)` },
       { y: 326, col: '#6d28d9', title: '14/3 Cu NM-B (3-Way Sink Switch Traveler)', big: `${takeoff.nm_b_14_3.gross_ft} ft`, sub: state.sink_control_mode === 'option_b_wired_2gang' ? `Option B Wired @ 70": ${takeoff.nm_b_14_3.net_ft} ft net` : 'Option A Air Button + Wireless Remote (0 ft needed)' },
       { y: 396, col: '#2f4f42', title: 'Eaton BR Kitchen Breakers (Spaces 1–9)', big: `${takeoff.breakers.BRN120DF}× BRN120DF · ${takeoff.breakers.BRN115DF}× BRN115DF · ${takeoff.breakers.BRN115AF}× BRN115AF`, sub: `Plus 1× BRLW1 Lock-Off (HD Space 8)${takeoff.breakers.deadfront_gfci_15a ? ' + 1× Dead-Front GFCI' : ''}` },
-      { y: 466, col: '#334155', title: 'Kitchen Boxes & 1" Tile Mud Rings (Zero Prices)', big: `${takeoff.boxes.one_gang_boxes}× 1G · 1× HD-1 (2"×3") · ${takeoff.boxes.two_gang_boxes}× 2G · 1× 3G · ${takeoff.boxes.ceiling_boxes}× Ceil`, sub: 'Includes 2× ~1" tile mud rings (W1/W2) + ~1" proud HD-1 box' }
+      { y: 466, col: '#334155', title: 'Kitchen Boxes & 1" Tile Mud Rings (Zero Prices)', big: `${takeoff.boxes.one_gang_boxes}× 1G · 1× HD-1 (2"×3") · ${takeoff.boxes.two_gang_boxes}× 2G · 1× 3G · ${takeoff.boxes.ceiling_boxes}× Ceil`, sub: 'Includes 2× ~1" tile mud rings (W1/W2) + flush HD-1 box' }
     ];
     cards.forEach((c) => {
       el('rect', { x: rx + 14, y: c.y, width: 404, height: 58, rx: 5, fill: '#ffffff', stroke: '#cbd5e1', 'stroke-width': 1.2 }, svg);
@@ -1813,14 +1813,14 @@
       '• Recorrido Lunes 23 Nov: Confirmar alimentador 80A/#4 Cu vs 100A/#3 Cu y revisar caja física Eaton BRP20L125G + tapa.',
       '• Cortes laterales D04 EN ESPERA: Salir solo hacia arriba al ático o debajo de la zona prohibida de 53"–77" (NUNCA por atrás).',
       '• Circuitos no-cocina (Espacios 11–13): Cajas + tubo vacío ENT solamente — NO jalar cable antes de liberación.',
-      '• Circuito HD (Espacio 8): Bloqueo BRLW1 obligatorio + caja sencilla 2"×3" (~83"–86" piso, ~1" saliente para azulejo).',
-      '• Espacios 5 y 6 (DW + GD): Neutros estrictamente separados y etiquetados dentro del gabinete del fregadero (75"–105").'
+      '• Circuito HD (Espacio 8): Bloqueo BRLW1 obligatorio + caja sencilla 2"×3" (~83"–86" piso, al ras del acabado).',
+      '• Espacios 5 y 6 (DW + GD): Neutros estrictamente separados y etiquetados dentro del gabinete del fregadero (72"–102").'
     ] : [
       '• Mon Nov 23 Walkthrough: Reconcile 80A/#4 Cu vs 100A/#3 Cu feeder & inspect onsite Eaton BRP20L125G box + flush cover.',
       '• D04 Side-Entry Notches ON HOLD: Route exits vertically through top header to attic or approved bands — NEVER through back.',
       '• Non-Kitchen Circuits (Spaces 11–13): Approved boxes + empty ENT tubing only — NO wire pull before release.',
-      '• Circuit HD (Space 8): BRLW1 handle lock-off required + flush 1-gang 2"×3" box (~83"–86" above floor, ~1" proud for tile).',
-      '• Spaces 5 & 6 (DW + GD): Strictly separate labeled neutrals inside sink base (75"–105") — NEVER behind dishwasher.'
+      '• Circuit HD (Space 8): BRLW1 handle lock-off required + flush 1-gang 2"×3" box (~83"–86" above floor, flush to finished surface).',
+      '• Spaces 5 & 6 (DW + GD): Strictly separate labeled neutrals inside sink base (72"–102") — NEVER behind dishwasher.'
     ];
     holdLines.forEach((ln, i) => {
       txt(64, 794 + i * 30, ln, { 'font-size': 9.4, 'font-weight': 600, fill: '#7f1d1d' }, svg);

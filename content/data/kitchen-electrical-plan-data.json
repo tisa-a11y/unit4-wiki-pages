@@ -4,7 +4,7 @@
   "project": "1231 11th Avenue Unit 4, San Francisco, CA",
   "room": "kitchen",
   "target_delivery_date": "2026-11-21",
-  "revision": "2026-11-20-r1",
+  "revision": "2026-11-22-r2",
   "status": "PLANNING_AND_MOCKUP_ONLY_ROUGH_IN_ON_HOLD",
   "governing_sources": {
     "kitchen_spec": "https://drive.google.com/file/d/1iXinIsipgqR6ak5jdWSTmbbL5netZUhS/view",
@@ -72,11 +72,48 @@
         "measure_boundary": "wall_to_wall",
         "provenance": "plan-derived (field cross-check 125.0)",
         "zones_from_se_north_in": [
-          { "id": "cab-e-corner", "type": "base_cabinet", "start_in": 0.0, "end_in": 36.0, "label_en": "36x36 Corner Base", "label_es": "Base Esquinera 36x36" },
-          { "id": "cab-e-drawer", "type": "base_cabinet", "start_in": 36.0, "end_in": 60.0, "label_en": "24 in Drawer Base", "label_es": "Base Cajonera 24 pulg." },
-          { "id": "app-fridge", "type": "appliance", "start_in": 60.0, "end_in": 88.0, "width_actual_in": 27.5625, "height_in": 69.875, "label_en": "Haier Fridge QJS15HYRFS (freestanding, nothing above)", "label_es": "Refrigerador Haier (libre arriba)" },
-          { "id": "east-hall-gap", "type": "clearance", "start_in": 88.0, "end_in": 96.5, "label_en": "8-1/2 in Clear Pier", "label_es": "Muro libre 8-1/2 pulg." },
-          { "id": "east-hall-open", "type": "opening", "start_in": 96.5, "end_in": 126.0, "label_en": "Hall Opening (29-1/2 in)", "label_es": "Vano Pasillo (29-1/2 pulg.)" }
+          {
+            "id": "cab-e-corner",
+            "type": "base_cabinet",
+            "start_in": 0.0,
+            "end_in": 36.0,
+            "label_en": "36x36 Corner Base",
+            "label_es": "Base Esquinera 36x36"
+          },
+          {
+            "id": "cab-e-drawer",
+            "type": "base_cabinet",
+            "start_in": 36.0,
+            "end_in": 54,
+            "label_en": "18 in Drawers — Plan-Derived",
+            "label_es": "Cajones18pulg. — Derivado del plano"
+          },
+          {
+            "id": "app-fridge",
+            "type": "appliance",
+            "start_in": 60.0,
+            "end_in": 88.0,
+            "width_actual_in": 27.5625,
+            "height_in": 69.875,
+            "label_en": "Haier Fridge QJS15HYRFS (freestanding, nothing above)",
+            "label_es": "Refrigerador Haier (libre arriba)"
+          },
+          {
+            "id": "east-hall-gap",
+            "type": "clearance",
+            "start_in": 88.0,
+            "end_in": 96.5,
+            "label_en": "8-1/2 in Clear Pier",
+            "label_es": "Muro libre 8-1/2 pulg."
+          },
+          {
+            "id": "east-hall-open",
+            "type": "opening",
+            "start_in": 96.5,
+            "end_in": 126.0,
+            "label_en": "Hall Opening (29-1/2 in)",
+            "label_es": "Vano Pasillo (29-1/2 pulg.)"
+          }
         ],
         "exclusion_zones": [
           {
@@ -86,7 +123,10 @@
             "s_from_se_start_in": 13.0,
             "s_from_se_end_in": 27.5,
             "panel_cl_from_se_model_in": 20.25,
-            "infill_rough_est_in": [6.0, 38.0],
+            "infill_rough_est_in": [
+              6.0,
+              38.0
+            ],
             "aff_bottom_in": 53.0,
             "aff_top_in": 77.0,
             "provenance": "owner-locked (F-03 / electrical SPEC)",
@@ -101,7 +141,7 @@
             "end_in": 60.0,
             "aff_bottom_in": 55.125,
             "aff_top_in": 95.5625,
-            "note": "Dashed optional 36 + 24 corner upper; if added, never anchor in 53-77 in D04 no-screw zone"
+            "note": "Approved30in East upper; placement plan-derived. Never anchor in53–77in D04 no-screw zone."
           }
         ]
       },
@@ -110,24 +150,71 @@
         "measure_boundary": "wall_to_wall",
         "provenance": "plan-derived (field cross-check 146.625)",
         "zones_from_se_west_in": [
-          { "id": "cab-s-corner", "type": "base_cabinet", "start_in": 0.0, "end_in": 36.0, "label_en": "36x36 Corner Base", "label_es": "Base Esquinera 36x36" },
-          { "id": "cab-s-trash", "type": "base_cabinet", "start_in": 36.0, "end_in": 51.0, "label_en": "15 in Trash Pullout", "label_es": "Basura Extraíble 15 pulg." },
-          { "id": "cab-s-dw", "type": "appliance", "start_in": 51.0, "end_in": 75.0, "label_en": "24 in Dishwasher (Bosch SHV9PT53UC candidate)", "label_es": "Lavavajillas 24 pulg." },
-          { "id": "cab-s-sink", "type": "base_cabinet", "start_in": 75.0, "end_in": 105.0, "center_in": 90.0, "status": "hold_field_verify_6hvjQGR85r5gFjg7", "label_en": "30 in Sink Base (C3 — CL 90 in on window)", "label_es": "Gabinete Fregadero 30 pulg. (Eje 90 pulg.)" },
-          { "id": "cab-s-filler", "type": "base_cabinet", "start_in": 105.0, "end_in": 111.9375, "label_en": "6-15/16 in Pullout / Filler", "label_es": "Relleno / Extraíble 6-15/16 pulg." },
-          { "id": "south-door-walk", "type": "clearance", "start_in": 111.9375, "end_in": 147.0, "label_en": "Rear Door Landing & Door (25-7/8 x 78-5/8 in)", "label_es": "Paso y Puerta Trasera (25-7/8 x 78-5/8 pulg.)" }
+          {
+            "id": "cab-s-corner",
+            "type": "base_cabinet",
+            "start_in": 0.0,
+            "end_in": 36.0,
+            "label_en": "36x36 Corner Base",
+            "label_es": "Base Esquinera 36x36"
+          },
+          {
+            "id": "cab-s-trash",
+            "type": "base_cabinet",
+            "start_in": 36.0,
+            "end_in": 48,
+            "label_en": "12 in Base — Plan-Derived",
+            "label_es": "Base 12 pulg. — Derivada del plano"
+          },
+          {
+            "id": "cab-s-dw",
+            "type": "appliance",
+            "start_in": 48,
+            "end_in": 72,
+            "label_en": "24 in Dishwasher (Bosch SHV9PT53UC candidate)",
+            "label_es": "Lavavajillas 24 pulg."
+          },
+          {
+            "id": "cab-s-sink",
+            "type": "base_cabinet",
+            "start_in": 72,
+            "end_in": 102,
+            "center_in": 87,
+            "status": "hold_field_verify_6hvjQGR85r5gFjg7",
+            "label_en": "30 in Sink Base — CL87 Plan-Derived / HOLD",
+            "label_es": "Gabinete 30 pulg. — Eje87 derivado / EN ESPERA"
+          },
+          {
+            "id": "cab-s-filler",
+            "type": "base_cabinet",
+            "start_in": 102,
+            "end_in": 108,
+            "label_en": "6 in End Option — Passage HOLD",
+            "label_es": "Opción extremo 6 pulg. — Paso EN ESPERA"
+          },
+          {
+            "id": "south-door-walk",
+            "type": "clearance",
+            "start_in": 111.9375,
+            "end_in": 147.0,
+            "label_en": "Rear Door Landing & Door (25-7/8 x 78-5/8 in)",
+            "label_es": "Paso y Puerta Trasera (25-7/8 x 78-5/8 pulg.)"
+          }
         ],
         "wall_features_from_se_west_in": [
           {
             "id": "pie-safe-niche",
-            "status": "provisional_tbd_tisa",
+            "status": "weather_seal_and_cover",
             "photo_scaled_start_in": 26.0,
             "photo_scaled_end_in": 59.0,
-            "magicplan_model_range_in": [28.0625, 60.0625],
+            "magicplan_model_range_in": [
+              28.0625,
+              60.0625
+            ],
             "aff_bottom_model_in": 43.0,
             "aff_top_photo_in": 80.0,
             "measure_boundary": "to_casing_edge",
-            "note": "Measure on site & lock new pie-safe size; never place standard-height 44 in outlet inside recessed pie-safe opening"
+            "note": "Weather-seal and cover former opening; field-verify closure and electrical box backing; no retained niche."
           },
           {
             "id": "south-window",
@@ -156,21 +243,55 @@
         "no_upper_cabinets_locked": true,
         "full_height_tile_locked": true,
         "zones_from_south_step_north_in": [
-          { "id": "cab-w-left", "type": "base_cabinet", "start_in": 0.0, "end_in": 18.0, "label_en": "18 in Base Left of Range", "label_es": "Base 18 pulg. Izq. Estufa" },
-          { "id": "app-range", "type": "appliance", "start_in": 18.0, "end_in": 48.0, "center_in": 33.0, "label_en": "30 in Viking Gas Range VGCC5304BSS (low 1 in island trim confirmed)", "label_es": "Estufa Viking 30 pulg. (borde trasero bajo 1 pulg. confirmado)" },
-          { "id": "cab-w-right", "type": "base_cabinet", "start_in": 48.0, "end_in": 66.0, "label_en": "18 in Base Right of Range", "label_es": "Base 18 pulg. Der. Estufa" }
+          {
+            "id": "cab-w-left",
+            "type": "base_cabinet",
+            "start_in": 0.0,
+            "end_in": 18.0,
+            "label_en": "18 in Base Left of Range",
+            "label_es": "Base 18 pulg. Izq. Estufa"
+          },
+          {
+            "id": "app-range",
+            "type": "appliance",
+            "start_in": 18.0,
+            "end_in": 48.0,
+            "center_in": 33.0,
+            "label_en": "30 in Viking Gas Range VGCC5304BSS (low 1 in island trim confirmed)",
+            "label_es": "Estufa Viking 30 pulg. (borde trasero bajo 1 pulg. confirmado)"
+          },
+          {
+            "id": "cab-w-right",
+            "type": "base_cabinet",
+            "start_in": 48.0,
+            "end_in": 66.0,
+            "label_en": "18 in Base Right of Range",
+            "label_es": "Base 18 pulg. Der. Estufa"
+          }
         ],
         "hood_and_chase": {
           "center_from_south_step_in": 33.0,
           "hood_model": "Zephyr Savona ZSA-E30AS (30 in W x 19.5 in D)",
-          "hood_bottom_target_aff_in": [67.0, 68.0],
-          "viking_allowed_hood_aff_in": [66.0, 72.0],
+          "hood_bottom_target_aff_in": [
+            67.0,
+            68.0
+          ],
+          "viking_allowed_hood_aff_in": [
+            66.0,
+            72.0
+          ],
           "hood_canopy_top_at_67_5_aff_in": 82.0,
           "chimney_shroud_clear_w_in": 8.625,
           "chimney_shroud_clear_d_in": 7.5,
           "duct_dia_in": 6.0,
-          "blocking_lower_aff_in": [68.0, 86.0],
-          "blocking_upper_aff_in": [104.0, 121.5]
+          "blocking_lower_aff_in": [
+            68.0,
+            86.0
+          ],
+          "blocking_upper_aff_in": [
+            104.0,
+            121.5
+          ]
         }
       }
     },
@@ -185,8 +306,18 @@
     "counter_outlet_height_mode": {
       "default": "44_aff_ke_revi",
       "options": {
-        "44_aff_ke_revi": { "aff_in": 44.0, "above_counter_in": 8.0, "label_en": "44 in above floor (8 in above counter — KE Rev I)", "label_es": "44 pulg. sobre piso (8 pulg. sobre cubierta)" },
-        "41_aff_ks7_r8": { "aff_in": 41.0, "above_counter_in": 5.0, "label_en": "41 in above floor (5 in above counter — K-S7 proposal)", "label_es": "41 pulg. sobre piso (5 pulg. sobre cubierta)" }
+        "44_aff_ke_revi": {
+          "aff_in": 44.0,
+          "above_counter_in": 8.0,
+          "label_en": "44 in above floor (8 in above counter — KE Rev I)",
+          "label_es": "44 pulg. sobre piso (8 pulg. sobre cubierta)"
+        },
+        "41_aff_ks7_r8": {
+          "aff_in": 41.0,
+          "above_counter_in": 5.0,
+          "label_en": "41 in above floor (5 in above counter — K-S7 proposal)",
+          "label_es": "41 pulg. sobre piso (5 pulg. sobre cubierta)"
+        }
       }
     },
     "sink_control_mode": {
@@ -211,17 +342,24 @@
       "options": {
         "three_task_lights_36in": {
           "count": 3,
-          "stations_from_se_in": [17.75, 53.75, 89.75],
+          "stations_from_se_in": [
+            17.75,
+            53.75,
+            89.75
+          ],
           "offset_from_south_wall_in": 14.5,
-          "label_en": "3 Task Lights @ 17-3/4, 53-3/4, 89-3/4 in (T3 centered on sink)",
-          "label_es": "3 Luces de Tarea a 17-3/4, 53-3/4, 89-3/4 pulg. (T3 al centro del fregadero)"
+          "label_en": "3 Task Lights @ 17-3/4, 53-3/4, 89-3/4 in (positions provisional — sink CL87 / window alignment HOLD)",
+          "label_es": "3 Luces de Tarea a 17-3/4, 53-3/4, 89-3/4 pulg. (posiciones provisionales — eje87/ventana EN ESPERA)"
         },
         "two_pendants_sink": {
           "count": 2,
-          "stations_from_se_in": [78.0, 102.0],
+          "stations_from_se_in": [
+            78.0,
+            102.0
+          ],
           "offset_from_south_wall_in": 15.0,
-          "label_en": "2 Pendants @ 78 and 102 in (±12 in from sink center)",
-          "label_es": "2 Colgantes a 78 y 102 pulg. (±12 pulg. del eje del fregadero)"
+          "label_en": "2 Pendants @ 78 and 102 in (historical spacing — revised sink CL87 / alignment HOLD)",
+          "label_es": "2 Colgantes a 78 y 102 pulg. (separación anterior — eje87/alineación EN ESPERA)"
         }
       }
     },
@@ -256,39 +394,321 @@
     "id": "D04",
     "catalog_can": "Eaton BRP20L125G (125A Main-Lug-Only, 20 Full-Size Spaces)",
     "catalog_cover": "Eaton BRPX2A20L1F (Flush Cover 22 H x 15.3 W x 1 D in)",
-    "can_dimensions_in": { "height": 21.0, "width": 14.31, "depth": 3.88 },
+    "can_dimensions_in": {
+      "height": 21.0,
+      "width": 14.31,
+      "depth": 3.88
+    },
     "stud_bay_clear_in": 14.5,
     "faces_room": "Dining Room (Wall D04)",
     "dining_centerline_formula": "x = W/4 + 1 in north from dining window casing edge (65 in AFF target on F-02; verify vs 70 in AFF note)",
     "kitchen_backside_station_from_se_model_in": 20.25,
-    "kitchen_no_screw_band_aff_in": [53.0, 77.0],
-    "dining_clear_working_space_in": { "width": 30.0, "depth": 36.0, "height": 78.0 },
+    "kitchen_no_screw_band_aff_in": [
+      53.0,
+      77.0
+    ],
+    "dining_clear_working_space_in": {
+      "width": 30.0,
+      "depth": 36.0,
+      "height": 78.0
+    },
     "planning_gates_project_planning_only": [
       "Mon Nov 23 HVAC/Electrical Walkthrough (2-4 PM PT): Reconcile signed NEXT #5153-3 80A/#4 Cu feeder vs E20-R1 100A/#3 Cu THWN-2 owner target.",
       "Hold 6hvRcQ4XC9mr56g7: Side-entry notches on D04 on HOLD; route exits vertically through top header to attic or approved in-wall stud bands — NEVER through panel back.",
       "Hold 6hvjQ8qJXqR8Cfj7: Do not pull interior kitchen wire or close drywall until rough-in layout and trade release are confirmed."
     ],
     "slots_1_to_20": [
-      { "space": 1, "id": "SA-A", "group": "kitchen", "serves_en": "East Counter Outlets (E1, E2)", "serves_es": "Contactos Cubierta Este (E1, E2)", "amps": 20, "poles": 1, "breaker_type": "Dual-Function (AFCI+GFCI)", "eaton_cat": "BRN120DF", "cable": "12/2 Cu NM-B", "route_mode": "in_wall_east_50in_band", "net_ft_ke_revi": 10.5, "allowance_ft_e20": 45.0 },
-      { "space": 2, "id": "SA-B", "group": "kitchen", "serves_en": "South Counter Outlets (S1, S2)", "serves_es": "Contactos Cubierta Sur (S1, S2)", "amps": 20, "poles": 1, "breaker_type": "Dual-Function (AFCI+GFCI)", "eaton_cat": "BRN120DF", "cable": "12/2 Cu NM-B", "route_mode": "in_wall_south_30in_band", "net_ft_ke_revi": 16.0, "allowance_ft_e20": 65.0 },
-      { "space": 3, "id": "SA-C", "group": "kitchen", "serves_en": "West Range-Wall Counter Outlets (W1, W2)", "serves_es": "Contactos Cubierta Oeste (W1, W2)", "amps": 20, "poles": 1, "breaker_type": "Dual-Function (AFCI+GFCI)", "eaton_cat": "BRN120DF", "cable": "12/2 Cu NM-B", "route_mode": "attic_to_west_50in_band", "net_ft_ke_revi": 39.0, "allowance_ft_e20": 85.0 },
-      { "space": 4, "id": "REF", "group": "kitchen", "serves_en": "Haier Refrigerator (Single Outlet)", "serves_es": "Refrigerador Haier (Contacto Sencillo)", "amps": 20, "poles": 1, "breaker_type": "Dual-Function (AFCI+GFCI)", "eaton_cat": "BRN120DF", "cable": "12/2 Cu NM-B", "route_mode": "in_wall_east_52_5in_band", "net_ft_ke_revi": 10.1, "allowance_ft_e20": 35.0 },
-      { "space": 5, "id": "DW", "group": "kitchen", "serves_en": "24 in Dishwasher (Sink-Base 2-Gang, Left)", "serves_es": "Lavavajillas 24 pulg. (Caja Doble Bajo Fregadero)", "amps": 15, "poles": 1, "breaker_type": "Dual-Function (AFCI+GFCI)", "eaton_cat": "BRN115DF", "cable": "14/2 Cu NM-B", "route_mode": "in_wall_south_24in_band", "net_ft_ke_revi": 13.6, "allowance_ft_e20": 25.0 },
-      { "space": 6, "id": "GD", "group": "kitchen", "serves_en": "Garbage Disposal (Sink-Base 2-Gang, Right)", "serves_es": "Triturador de Basura (Caja Doble Bajo Fregadero)", "amps": 15, "poles": 1, "breaker_type": "Dual-Function (AFCI+GFCI)", "eaton_cat": "BRN115DF", "cable": "14/2 Cu NM-B", "route_mode": "in_wall_south_26in_band", "net_ft_ke_revi": 17.5, "allowance_ft_e20": 35.0 },
-      { "space": 7, "id": "RG", "group": "kitchen", "serves_en": "Viking 30 in Gas Range Igniter/Light", "serves_es": "Estufa de Gas Viking 30 pulg.", "amps": 15, "poles": 1, "breaker_type": "Dual-Function (or AFCI + Dead-Front GFCI per K-E03)", "eaton_cat": "BRN115DF", "cable": "14/2 Cu NM-B", "route_mode": "attic_to_west_low_zone", "net_ft_ke_revi": 34.8, "allowance_ft_e20": 45.0 },
-      { "space": 8, "id": "HD", "group": "kitchen", "serves_en": "Zephyr Savona Hood (Direct Hardwire @ 83-86 in + Lock-Off)", "serves_es": "Campana Zephyr (Conexión Directa a 83-86 pulg. + Bloqueo)", "amps": 15, "poles": 1, "breaker_type": "AFCI + Breaker Handle Lock-Off", "eaton_cat": "BRN115AF + BRLW1", "cable": "14/2 Cu NM-B", "route_mode": "attic_to_west_84_5in_1gang", "net_ft_ke_revi": 24.6, "allowance_ft_e20": 50.0, "updated_2026_11_20": true },
-      { "space": 9, "id": "LT", "group": "kitchen", "serves_en": "Kitchen Main Light + South Task Lights + Opt. Under-Cab", "serves_es": "Luz Principal + Luces sobre Fregadero + Bajo Gabinete Opc.", "amps": 15, "poles": 1, "breaker_type": "AFCI", "eaton_cat": "BRN115AF", "cable": "14/2 Cu NM-B (+ 14/3 only if wired 3-way)", "route_mode": "attic_to_north_entry_and_ceiling", "net_ft_14_2_ke_revi": 69.3, "net_ft_14_3_optional": 30.3, "allowance_ft_e20": 65.0 },
-      { "space": 10, "id": "HVAC", "group": "unit_other", "serves_en": "Attic Furnace (Trane S8X1A040M3PTCC) via Disconnect", "serves_es": "Calefactor en Ático con Desconectador", "amps": 15, "poles": 1, "breaker_type": "Standard (confirm Trane label)", "eaton_cat": "BR115", "cable": "14/2 Cu NM-B", "route_mode": "attic", "net_ft_ew2": 31.2 },
-      { "space": 11, "id": "LIV", "group": "unit_other", "serves_en": "Living Outlets L1-L6 + Hall H1 (ENT hold check)", "serves_es": "Contactos Sala L1-L6 + Pasillo H1", "amps": 20, "poles": 1, "breaker_type": "AFCI", "eaton_cat": "BRN120AF", "cable": "12/2 Cu NM-B (hold 6hvRcQ7Gmh3fG5m7)", "route_mode": "attic_jb_liv", "net_ft_ew2": 196.5 },
-      { "space": 12, "id": "DIN", "group": "unit_other", "serves_en": "Dining Outlets D1-D4 (no D5 on D04; D6 pocket hold)", "serves_es": "Contactos Comedor D1-D4", "amps": 20, "poles": 1, "breaker_type": "AFCI", "eaton_cat": "BRN120AF", "cable": "12/2 Cu NM-B (hold 6hvRcQ7Gmh3fG5m7)", "route_mode": "attic_jb_din", "net_ft_ew2": 147.0 },
-      { "space": 13, "id": "BED", "group": "unit_other", "serves_en": "Bedroom Outlets B1-B5 + Closet LV Switch", "serves_es": "Contactos Recámara B1-B5 + Luz Clóset", "amps": 20, "poles": 1, "breaker_type": "AFCI", "eaton_cat": "BRN120AF", "cable": "12/2 Cu NM-B (hold 6hvRcQ7Gmh3fG5m7)", "route_mode": "attic_jb_bed", "net_ft_ew2": 149.9 },
-      { "space": 14, "id": "BATH-R", "group": "unit_other", "serves_en": "Bathroom Outlets V1 (Vanity) + T1 (Toilet Bidet)", "serves_es": "Contactos Baño V1 (Lavabo) + T1 (Inodoro)", "amps": 20, "poles": 1, "breaker_type": "GFCI / Dual-Function", "eaton_cat": "BRN120GF", "cable": "12/2 Cu NM-B", "route_mode": "attic_jb_br", "net_ft_ew2": 64.4 },
-      { "space": 15, "id": "BATH-L", "group": "unit_other", "serves_en": "Bathroom Ceiling Light, Vanity Light & Humidity Fan", "serves_es": "Luces y Extractor de Humedad de Baño", "amps": 15, "poles": 1, "breaker_type": "AFCI / Standard", "eaton_cat": "BRN115AF", "cable": "14/2 Cu NM-B", "route_mode": "attic_jb_bl", "net_ft_ew2": 91.0 },
-      { "space": 16, "id": "LAUN-W", "group": "unit_other", "serves_en": "Laundry Closet Washer Receptacle (2-Gang Left)", "serves_es": "Contacto Lavadora (Caja Doble Izq.)", "amps": 20, "poles": 1, "breaker_type": "Dual-Function", "eaton_cat": "BRN120DF", "cable": "12/2 Cu NM-B", "route_mode": "attic_direct", "net_ft_ew2": 45.5 },
-      { "space": 17, "id": "LTG", "group": "unit_other", "serves_en": "Whole-Unit Ceiling Lights + Interconnected Smoke/CO Alarms", "serves_es": "Luces Generales + Detectores Humo/CO", "amps": 15, "poles": 1, "breaker_type": "AFCI", "eaton_cat": "BRN115AF", "cable": "14/2 + 14/3 Cu NM-B", "route_mode": "attic_jb_lt", "net_ft_ew2": 179.9 },
-      { "space": 18, "id": "LAUN-D", "group": "unit_other", "serves_en": "Laundry Closet Gas Dryer 120V Receptacle (2-Gang Right)", "serves_es": "Contacto Secadora de Gas 120V (Caja Doble Der.)", "amps": 15, "poles": 1, "breaker_type": "Dual-Function", "eaton_cat": "BRN115DF", "cable": "14/2 Cu NM-B", "route_mode": "attic_direct", "net_ft_ew2": 45.5 },
-      { "space": 19, "id": "SPARE", "group": "spare", "serves_en": "Open Spare Space (Reserved for future load)", "serves_es": "Espacio Libre de Reserva", "amps": 0, "poles": 1, "breaker_type": "Blank / Spare", "eaton_cat": "Filler", "cable": "None", "route_mode": "none", "net_ft_ew2": 0.0 },
-      { "space": 20, "id": "ATTIC", "group": "unit_other", "serves_en": "Attic Service Outlet (<=25 ft of Furnace) + Hatch Switched Light", "serves_es": "Contacto de Servicio en Ático + Luz con Interruptor en Escotilla", "amps": 15, "poles": 1, "breaker_type": "GFCI / Dual-Function", "eaton_cat": "BRN115DF", "cable": "14/2 Cu NM-B", "route_mode": "attic_direct", "net_ft_ew2": 39.2 }
+      {
+        "space": 1,
+        "id": "SA-A",
+        "group": "kitchen",
+        "serves_en": "East Counter Outlets (E1, E2)",
+        "serves_es": "Contactos Cubierta Este (E1, E2)",
+        "amps": 20,
+        "poles": 1,
+        "breaker_type": "Dual-Function (AFCI+GFCI)",
+        "eaton_cat": "BRN120DF",
+        "cable": "12/2 Cu NM-B",
+        "route_mode": "in_wall_east_50in_band",
+        "net_ft_ke_revi": 10.5,
+        "allowance_ft_e20": 45.0
+      },
+      {
+        "space": 2,
+        "id": "SA-B",
+        "group": "kitchen",
+        "serves_en": "South Counter Outlets (S1, S2)",
+        "serves_es": "Contactos Cubierta Sur (S1, S2)",
+        "amps": 20,
+        "poles": 1,
+        "breaker_type": "Dual-Function (AFCI+GFCI)",
+        "eaton_cat": "BRN120DF",
+        "cable": "12/2 Cu NM-B",
+        "route_mode": "in_wall_south_30in_band",
+        "net_ft_ke_revi": 16.0,
+        "allowance_ft_e20": 65.0
+      },
+      {
+        "space": 3,
+        "id": "SA-C",
+        "group": "kitchen",
+        "serves_en": "West Range-Wall Counter Outlets (W1, W2)",
+        "serves_es": "Contactos Cubierta Oeste (W1, W2)",
+        "amps": 20,
+        "poles": 1,
+        "breaker_type": "Dual-Function (AFCI+GFCI)",
+        "eaton_cat": "BRN120DF",
+        "cable": "12/2 Cu NM-B",
+        "route_mode": "attic_to_west_50in_band",
+        "net_ft_ke_revi": 39.0,
+        "allowance_ft_e20": 85.0
+      },
+      {
+        "space": 4,
+        "id": "REF",
+        "group": "kitchen",
+        "serves_en": "Haier Refrigerator (Single Outlet)",
+        "serves_es": "Refrigerador Haier (Contacto Sencillo)",
+        "amps": 20,
+        "poles": 1,
+        "breaker_type": "Dual-Function (AFCI+GFCI)",
+        "eaton_cat": "BRN120DF",
+        "cable": "12/2 Cu NM-B",
+        "route_mode": "in_wall_east_52_5in_band",
+        "net_ft_ke_revi": 10.1,
+        "allowance_ft_e20": 35.0
+      },
+      {
+        "space": 5,
+        "id": "DW",
+        "group": "kitchen",
+        "serves_en": "24 in Dishwasher (Sink-Base 2-Gang, Left)",
+        "serves_es": "Lavavajillas 24 pulg. (Caja Doble Bajo Fregadero)",
+        "amps": 15,
+        "poles": 1,
+        "breaker_type": "Dual-Function (AFCI+GFCI)",
+        "eaton_cat": "BRN115DF",
+        "cable": "14/2 Cu NM-B",
+        "route_mode": "in_wall_south_24in_band",
+        "net_ft_ke_revi": 13.6,
+        "allowance_ft_e20": 25.0
+      },
+      {
+        "space": 6,
+        "id": "GD",
+        "group": "kitchen",
+        "serves_en": "Garbage Disposal (Sink-Base 2-Gang, Right)",
+        "serves_es": "Triturador de Basura (Caja Doble Bajo Fregadero)",
+        "amps": 15,
+        "poles": 1,
+        "breaker_type": "Dual-Function (AFCI+GFCI)",
+        "eaton_cat": "BRN115DF",
+        "cable": "14/2 Cu NM-B",
+        "route_mode": "in_wall_south_26in_band",
+        "net_ft_ke_revi": 17.5,
+        "allowance_ft_e20": 35.0
+      },
+      {
+        "space": 7,
+        "id": "RG",
+        "group": "kitchen",
+        "serves_en": "Viking 30 in Gas Range Igniter/Light",
+        "serves_es": "Estufa de Gas Viking 30 pulg.",
+        "amps": 15,
+        "poles": 1,
+        "breaker_type": "Dual-Function (or AFCI + Dead-Front GFCI per K-E03)",
+        "eaton_cat": "BRN115DF",
+        "cable": "14/2 Cu NM-B",
+        "route_mode": "attic_to_west_low_zone",
+        "net_ft_ke_revi": 34.8,
+        "allowance_ft_e20": 45.0
+      },
+      {
+        "space": 8,
+        "id": "HD",
+        "group": "kitchen",
+        "serves_en": "Zephyr Savona Hood (Direct Hardwire @ 83-86 in + Lock-Off)",
+        "serves_es": "Campana Zephyr (Conexión Directa a 83-86 pulg. + Bloqueo)",
+        "amps": 15,
+        "poles": 1,
+        "breaker_type": "AFCI + Breaker Handle Lock-Off",
+        "eaton_cat": "BRN115AF + BRLW1",
+        "cable": "14/2 Cu NM-B",
+        "route_mode": "attic_to_west_84_5in_1gang",
+        "net_ft_ke_revi": 24.6,
+        "allowance_ft_e20": 50.0,
+        "updated_2026_11_20": true
+      },
+      {
+        "space": 9,
+        "id": "LT",
+        "group": "kitchen",
+        "serves_en": "Kitchen Main Light + South Task Lights + Opt. Under-Cab",
+        "serves_es": "Luz Principal + Luces sobre Fregadero + Bajo Gabinete Opc.",
+        "amps": 15,
+        "poles": 1,
+        "breaker_type": "AFCI",
+        "eaton_cat": "BRN115AF",
+        "cable": "14/2 Cu NM-B (+ 14/3 only if wired 3-way)",
+        "route_mode": "attic_to_north_entry_and_ceiling",
+        "net_ft_14_2_ke_revi": 69.3,
+        "net_ft_14_3_optional": 30.3,
+        "allowance_ft_e20": 65.0
+      },
+      {
+        "space": 10,
+        "id": "HVAC",
+        "group": "unit_other",
+        "serves_en": "Attic Furnace (Trane S8X1A040M3PTCC) via Disconnect",
+        "serves_es": "Calefactor en Ático con Desconectador",
+        "amps": 15,
+        "poles": 1,
+        "breaker_type": "Standard (confirm Trane label)",
+        "eaton_cat": "BR115",
+        "cable": "14/2 Cu NM-B",
+        "route_mode": "attic",
+        "net_ft_ew2": 31.2
+      },
+      {
+        "space": 11,
+        "id": "LIV",
+        "group": "unit_other",
+        "serves_en": "Living Outlets L1-L6 + Hall H1 (ENT hold check)",
+        "serves_es": "Contactos Sala L1-L6 + Pasillo H1",
+        "amps": 20,
+        "poles": 1,
+        "breaker_type": "AFCI",
+        "eaton_cat": "BRN120AF",
+        "cable": "12/2 Cu NM-B (hold 6hvRcQ7Gmh3fG5m7)",
+        "route_mode": "attic_jb_liv",
+        "net_ft_ew2": 196.5
+      },
+      {
+        "space": 12,
+        "id": "DIN",
+        "group": "unit_other",
+        "serves_en": "Dining Outlets D1-D4 (no D5 on D04; D6 pocket hold)",
+        "serves_es": "Contactos Comedor D1-D4",
+        "amps": 20,
+        "poles": 1,
+        "breaker_type": "AFCI",
+        "eaton_cat": "BRN120AF",
+        "cable": "12/2 Cu NM-B (hold 6hvRcQ7Gmh3fG5m7)",
+        "route_mode": "attic_jb_din",
+        "net_ft_ew2": 147.0
+      },
+      {
+        "space": 13,
+        "id": "BED",
+        "group": "unit_other",
+        "serves_en": "Bedroom Outlets B1-B5 + Closet LV Switch",
+        "serves_es": "Contactos Recámara B1-B5 + Luz Clóset",
+        "amps": 20,
+        "poles": 1,
+        "breaker_type": "AFCI",
+        "eaton_cat": "BRN120AF",
+        "cable": "12/2 Cu NM-B (hold 6hvRcQ7Gmh3fG5m7)",
+        "route_mode": "attic_jb_bed",
+        "net_ft_ew2": 149.9
+      },
+      {
+        "space": 14,
+        "id": "BATH-R",
+        "group": "unit_other",
+        "serves_en": "Bathroom Outlets V1 (Vanity) + T1 (Toilet Bidet)",
+        "serves_es": "Contactos Baño V1 (Lavabo) + T1 (Inodoro)",
+        "amps": 20,
+        "poles": 1,
+        "breaker_type": "GFCI / Dual-Function",
+        "eaton_cat": "BRN120GF",
+        "cable": "12/2 Cu NM-B",
+        "route_mode": "attic_jb_br",
+        "net_ft_ew2": 64.4
+      },
+      {
+        "space": 15,
+        "id": "BATH-L",
+        "group": "unit_other",
+        "serves_en": "Bathroom Ceiling Light, Vanity Light & Humidity Fan",
+        "serves_es": "Luces y Extractor de Humedad de Baño",
+        "amps": 15,
+        "poles": 1,
+        "breaker_type": "AFCI / Standard",
+        "eaton_cat": "BRN115AF",
+        "cable": "14/2 Cu NM-B",
+        "route_mode": "attic_jb_bl",
+        "net_ft_ew2": 91.0
+      },
+      {
+        "space": 16,
+        "id": "LAUN-W",
+        "group": "unit_other",
+        "serves_en": "Laundry Closet Washer Receptacle (2-Gang Left)",
+        "serves_es": "Contacto Lavadora (Caja Doble Izq.)",
+        "amps": 20,
+        "poles": 1,
+        "breaker_type": "Dual-Function",
+        "eaton_cat": "BRN120DF",
+        "cable": "12/2 Cu NM-B",
+        "route_mode": "attic_direct",
+        "net_ft_ew2": 45.5
+      },
+      {
+        "space": 17,
+        "id": "LTG",
+        "group": "unit_other",
+        "serves_en": "Whole-Unit Ceiling Lights + Interconnected Smoke/CO Alarms",
+        "serves_es": "Luces Generales + Detectores Humo/CO",
+        "amps": 15,
+        "poles": 1,
+        "breaker_type": "AFCI",
+        "eaton_cat": "BRN115AF",
+        "cable": "14/2 + 14/3 Cu NM-B",
+        "route_mode": "attic_jb_lt",
+        "net_ft_ew2": 179.9
+      },
+      {
+        "space": 18,
+        "id": "LAUN-D",
+        "group": "unit_other",
+        "serves_en": "Laundry Closet Gas Dryer 120V Receptacle (2-Gang Right)",
+        "serves_es": "Contacto Secadora de Gas 120V (Caja Doble Der.)",
+        "amps": 15,
+        "poles": 1,
+        "breaker_type": "Dual-Function",
+        "eaton_cat": "BRN115DF",
+        "cable": "14/2 Cu NM-B",
+        "route_mode": "attic_direct",
+        "net_ft_ew2": 45.5
+      },
+      {
+        "space": 19,
+        "id": "SPARE",
+        "group": "spare",
+        "serves_en": "Open Spare Space (Reserved for future load)",
+        "serves_es": "Espacio Libre de Reserva",
+        "amps": 0,
+        "poles": 1,
+        "breaker_type": "Blank / Spare",
+        "eaton_cat": "Filler",
+        "cable": "None",
+        "route_mode": "none",
+        "net_ft_ew2": 0.0
+      },
+      {
+        "space": 20,
+        "id": "ATTIC",
+        "group": "unit_other",
+        "serves_en": "Attic Service Outlet (<=25 ft of Furnace) + Hatch Switched Light",
+        "serves_es": "Contacto de Servicio en Ático + Luz con Interruptor en Escotilla",
+        "amps": 15,
+        "poles": 1,
+        "breaker_type": "GFCI / Dual-Function",
+        "eaton_cat": "BRN115DF",
+        "cable": "14/2 Cu NM-B",
+        "route_mode": "attic_direct",
+        "net_ft_ew2": 39.2
+      }
     ]
   },
   "kitchen_devices": [
@@ -299,7 +719,10 @@
       "wall": "east",
       "datum_ref": "north_from_se_corner",
       "station_in": 10.0,
-      "alt_stations_in": { "ke_revi": 6.0, "ks7_internal": 12.0 },
+      "alt_stations_in": {
+        "ke_revi": 6.0,
+        "ks7_internal": 12.0
+      },
       "aff_in": 44.0,
       "alt_aff_in": 41.0,
       "box_type": "1-gang new-work deep box (20A TR duplex)",
@@ -320,8 +743,8 @@
       "box_type": "1-gang new-work deep box (20A TR duplex)",
       "measure_boundary": "aff",
       "provenance": "owner-locked",
-      "crew_note_en": "Covers 24 in drawer base and SE counter run (12 in to fridge edge at 60 in).",
-      "crew_note_es": "Cubre la cajonera de 24 pulg. (a 12 pulg. del borde del refrigerador)."
+      "crew_note_en": "Placement HELD pending revised18in East drawers, South12in base, sink72–102in /CL87 and closed former pie-safe reconciliation. Field verify.",
+      "crew_note_es": "Ubicación EN ESPERA hasta conciliar cajones Este18pulg., base Sur12pulg., fregadero72–102/eje87 y cierre de alacena anterior. Verificar en obra."
     },
     {
       "id": "REF-1",
@@ -344,14 +767,17 @@
       "wall": "south",
       "datum_ref": "west_from_se_corner",
       "station_in": 24.0,
-      "alt_stations_in": { "ks7_r8": 18.0, "internal_r1_under_niche": 36.0 },
+      "alt_stations_in": {
+        "ks7_r8": 18.0,
+        "internal_r1_under_niche": 36.0
+      },
       "aff_in": 44.0,
       "alt_aff_in": 41.0,
       "box_type": "1-gang box (20A TR duplex)",
       "measure_boundary": "aff",
       "provenance": "plan-derived",
-      "crew_note_en": "Keep east (left) of pie-safe opening (~26-59 in) so outlet sits at full counter height, never cramped under pie-safe.",
-      "crew_note_es": "Colocar a la izquierda de la alacena empotrada (~26-59 pulg.), nunca debajo de ella."
+      "crew_note_en": "Placement HELD pending revised18in East drawers, South12in base, sink72–102in /CL87 and closed former pie-safe reconciliation. Field verify.",
+      "crew_note_es": "Ubicación EN ESPERA hasta conciliar cajones Este18pulg., base Sur12pulg., fregadero72–102/eje87 y cierre de alacena anterior. Verificar en obra."
     },
     {
       "id": "S2",
@@ -360,37 +786,48 @@
       "wall": "south",
       "datum_ref": "west_from_se_corner",
       "station_in": 65.0,
-      "alt_stations_in": { "ke_revi": 64.0, "ks7_r8": 66.0, "internal_r1": 66.5 },
+      "alt_stations_in": {
+        "ke_revi": 64.0,
+        "ks7_r8": 66.0,
+        "internal_r1": 66.5
+      },
       "aff_in": 44.0,
       "alt_aff_in": 41.0,
       "box_type": "1-gang (or 2-gang low-voltage divider plate w/ wireless pendant remote)",
       "measure_boundary": "aff",
       "provenance": "plan-derived",
-      "crew_note_en": "Fits in pier between pie-safe (~59 in) and window casing (72-7/8 in); satisfies 24 in counter reach to sink edge at 75 in.",
-      "crew_note_es": "Entre la alacena (~59 pulg.) y la ventana (72-7/8 pulg.); incluye control inalámbrico de luces si se elige."
+      "crew_note_en": "Placement HELD pending revised18in East drawers, South12in base, sink72–102in /CL87 and closed former pie-safe reconciliation. Field verify.",
+      "crew_note_es": "Ubicación EN ESPERA hasta conciliar cajones Este18pulg., base Sur12pulg., fregadero72–102/eje87 y cierre de alacena anterior. Verificar en obra."
     },
     {
       "id": "DW-GD",
       "circuit": "DW + GD",
-      "space": [5, 6],
+      "space": [
+        5,
+        6
+      ],
       "wall": "south",
       "datum_ref": "west_from_se_corner",
       "station_in": 79.0,
       "aff_in": 14.0,
       "box_type": "2-gang flush box inside C3 sink base (2 separate TR receptacles, separate neutrals)",
       "measure_boundary": "aff",
-      "provenance": "owner-locked",
-      "crew_note_en": "Inside 75-105 in sink base, 11 in east of 90 in center drain; NEVER behind dishwasher (51-75 in). Keep Circuit 5 and Circuit 6 neutrals separate and label both.",
-      "crew_note_es": "Dentro del gabinete del fregadero (75-105 pulg.), separado del desagüe central en 90 pulg.; NUNCA detrás del lavavajillas. Neutros separados y etiquetados."
+      "provenance": "plan-derived placement HOLD",
+      "crew_note_en": "Provisional inside72–102in sink base, CL87 derived; NEVER behind48–72in dishwasher. Separate neutrals. Field verify before fastening.",
+      "crew_note_es": "Provisional dentro de gabinete72–102pulg., eje87 derivado; NUNCA detrás de lavavajillas48–72pulg. Neutros separados. Verificar antes de fijar."
     },
     {
       "id": "GD-AIR-OR-SW",
       "circuit": "GD (+ LT if wired)",
-      "space": [6],
+      "space": [
+        6
+      ],
       "wall": "south",
       "datum_ref": "west_from_se_corner",
       "station_in": 93.0,
-      "alt_stations_in": { "wired_wall_sw_ke_revi": 70.0 },
+      "alt_stations_in": {
+        "wired_wall_sw_ke_revi": 70.0
+      },
       "aff_in": 36.0,
       "alt_aff_in": 39.5,
       "box_type": "Countertop air-switch button beside faucet (default) OR wired 2-gang wall box @ 70 in",
@@ -437,7 +874,10 @@
       "datum_ref": "north_from_south_step_corner",
       "station_in": 33.0,
       "aff_in": 3.0,
-      "allowed_aff_band_in": [0.5625, 4.9375],
+      "allowed_aff_band_in": [
+        0.5625,
+        4.9375
+      ],
       "box_type": "1-gang single 15A TR receptacle (horizontal/low in Viking rear pocket)",
       "measure_boundary": "aff",
       "provenance": "manual-specified",
@@ -454,13 +894,16 @@
       "offset_from_hood_cl_in": 2.25,
       "hood_cl_in": 33.0,
       "aff_in": 84.5,
-      "allowed_aff_band_in": [83.0, 86.0],
-      "box_type": "Flush 1-gang 2x3 in box set ~1 in proud (direct hardwire into Zephyr top wiring box)",
+      "allowed_aff_band_in": [
+        83.0,
+        86.0
+      ],
+      "box_type": "Flush 1-gang 2x3 in box (direct hardwire into Zephyr top wiring box)",
       "measure_boundary": "aff",
       "provenance": "owner-locked (kitchen/SPEC.md 2026-11-20 02:48 PT)",
       "supersedes": "Supersedes K-S7 100 in box, KE-04 104 in box, and Nov 19 4x4 offset box at 100 in",
-      "crew_note_en": "2026-11-20 UPDATE: Set 1-gang 2x3 in box ~1 in proud right above hood canopy (~83-86 in above finished floor, 2-1/4 in left or right of 33 in C/L to match owned hood knockout downstairs) inside 8-5/8 in chimney cover. Do NOT use a 4x4 box at 100 in.",
-      "crew_note_es": "ACTUALIZACIÓN 20-NOV: Caja sencilla 2x3 pulg. sobresaliendo ~1 pulg. justo arriba de la campana (~83-86 pulg., a 2-1/4 pulg. del eje 33 pulg. según el orificio real de la campana abajo) dentro del cubre-ducto de 8-5/8 pulg. NO usar caja 4x4 a 100 pulg."
+      "crew_note_en": "HD-1 flush one-gang ~83–86in AFF; Viking1-inch island trim only. Match actual OEM knockout/mounting constraints; old4x4/mud-ring104in instructions retired.",
+      "crew_note_es": "HD-1 caja sencilla al ras ~83–86pulg. sobre piso terminado; solo remate Viking de1pulg. Seguir orificio y montaje reales del fabricante; caja4x4/aro a104pulg. retirados."
     },
     {
       "id": "SW-ENTRY",
@@ -496,20 +939,40 @@
       "space": 9,
       "wall": "ceiling",
       "datum_ref": "west_from_se_corner_and_north_from_south_wall",
-      "stations_from_se_in": [17.75, 53.75, 89.75],
-      "alt_two_pendants_in": [78.0, 102.0],
+      "stations_from_se_in": [
+        17.75,
+        53.75,
+        89.75
+      ],
+      "alt_two_pendants_in": [
+        78.0,
+        102.0
+      ],
       "offset_from_south_wall_in": 14.5,
       "box_type": "ICAT / Ceiling luminaire boxes (JA8 high-efficacy on dimmer + sink remote)",
       "measure_boundary": "wall_to_wall",
       "provenance": "to_confirm_option",
-      "crew_note_en": "T3 aligns with 90 in sink/window center; toggle 3 equal-spaced fixtures vs 2 pendants over sink.",
-      "crew_note_es": "T3 alineada con el eje de 90 pulg. del fregadero/ventana; alternar 3 luminarias vs 2 colgantes."
+      "crew_note_en": "Lighting setout HELD until sink CL87 plan-derived and actual window center are reconciled; 3 lights vs2 pendants remains an option.",
+      "crew_note_es": "Replanteo de luces EN ESPERA hasta conciliar eje87 derivado y ventana real;3 luces o2 colgantes sigue como opción."
     }
   ],
   "horizontal_bore_bands_aff_in": {
-    "east_wall": { "sa_a_band_in": 50.0, "ref_band_in": 52.5, "warning": "Check clearance below D04 sill block (54-3/8 in AFF) and never enter 53-77 in D04 can bay" },
-    "south_wall": { "sa_b_band_in": 30.0, "gd_feed_band_in": 26.0, "dw_band_in": 24.0, "gd_switched_band_in": 20.0, "note": "Hidden behind 36 in base cabinets; keep centered in studs or add 1/16 in steel nail plates where <1-1/4 in from stud face" },
-    "west_wall": { "sa_c_band_in": 50.0, "note": "Keep clear of 68-86 in and 104-121.5 in hood solid blocking bands and 8-10 in center 6 in duct chase" }
+    "east_wall": {
+      "sa_a_band_in": 50.0,
+      "ref_band_in": 52.5,
+      "warning": "Check clearance below D04 sill block (54-3/8 in AFF) and never enter 53-77 in D04 can bay"
+    },
+    "south_wall": {
+      "sa_b_band_in": 30.0,
+      "gd_feed_band_in": 26.0,
+      "dw_band_in": 24.0,
+      "gd_switched_band_in": 20.0,
+      "note": "Hidden behind 36 in base cabinets; keep centered in studs or add 1/16 in steel nail plates where <1-1/4 in from stud face"
+    },
+    "west_wall": {
+      "sa_c_band_in": 50.0,
+      "note": "Keep clear of 68-86 in and 104-121.5 in hood solid blocking bands and 8-10 in center 6 in duct chase"
+    }
   },
   "material_takeoff_baseline_zero_prices": {
     "policy_banner": "Gross Proposed Qty — Verify On-Hand Stock Before Ordering (Zero Prices / Crew Safe)",
@@ -518,19 +981,32 @@
     "tail_allowance_per_box_end_in": 18,
     "kitchen_only_cables": {
       "nm_b_12_2_cu_yellow": {
-        "circuits": ["SA-A", "SA-B", "SA-C", "REF"],
+        "circuits": [
+          "SA-A",
+          "SA-B",
+          "SA-C",
+          "REF"
+        ],
         "net_ft": 75.6,
         "gross_15pct_ft": 87.0,
         "gross_20pct_ft": 91.0
       },
       "nm_b_14_2_cu_white": {
-        "circuits": ["DW", "GD", "RG", "HD (updated 84.5 in)", "LT"],
+        "circuits": [
+          "DW",
+          "GD",
+          "RG",
+          "HD (updated 84.5 in)",
+          "LT"
+        ],
         "net_ft": 159.8,
         "gross_15pct_ft": 184.0,
         "gross_20pct_ft": 192.0
       },
       "nm_b_14_3_cu": {
-        "circuits": ["LT 3-way traveler (0 ft with wireless remote; 30.3 ft with wired sink switch)"],
+        "circuits": [
+          "LT 3-way traveler (0 ft with wireless remote; 30.3 ft with wired sink switch)"
+        ],
         "net_ft_default_wireless": 0.0,
         "net_ft_wired_option": 30.3,
         "gross_15pct_wired_ft": 35.0
@@ -542,7 +1018,7 @@
       "single_appliance_tr_15a_range": 1,
       "sink_base_duplex_tr_15a_dw_gd": 2,
       "one_gang_wall_boxes": 8,
-      "one_gang_hood_2x3_box_with_1in_mud_ring": 1,
+      "one_gang_hood_flush_2x3_box": 1,
       "west_wall_1in_tile_mud_rings_w1_w2": 2,
       "two_gang_sink_base_box": 1,
       "three_gang_entry_switch_box": 1,
@@ -555,5 +1031,30 @@
         "breaker_handle_lockoff_hd": 1
       }
     }
+  },
+  "owner_update_2026_11_22": {
+    "status": "PLANNING_AND_MOCKUP_ONLY_ROUGH_IN_ON_HOLD",
+    "south_sequence_in": {
+      "corner": [
+        0,
+        36
+      ],
+      "base_12": [
+        36,
+        48
+      ],
+      "dishwasher": [
+        48,
+        72
+      ],
+      "sink": [
+        72,
+        102
+      ],
+      "sink_center": 87
+    },
+    "basis": "Plan-derived from approved 36+12+24; common SE zero, window/casing and passage require field verification. Electrical placement HELD; old 51–75 / 75–105 / CL90 are historical only.",
+    "pie_safe": "Weather-seal and cover; no preserved niche or shelves.",
+    "hood": "Viking 1-inch island trim only; HD-1 flush 1-gang approximately83–86in AFF; follow OEM and field constraints."
   }
 }

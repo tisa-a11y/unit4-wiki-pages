@@ -1,5 +1,7 @@
 # Calefacción (HVAC)
 
+El acceso permanente elegido es la **escotilla de 24" × 36" libres terminados en el descanso común afuera de la Puerta Principal 4**. Siguen pendientes el trazo exacto, las vigas, los apoyos y la protección contra incendios del plafón; no se autoriza cortar ni comprar el kit de madera. El acceso temporal por el clóset de la recámara es aparte: dejarlo abierto hasta tener el cable de bajo voltaje y la escotilla permanente. Reparar la gotera y verificar el secado antes de cerrar.
+
 ## Lo que instala NEXT HVAC (solo calefactor y clima)
 - **Plano interactivo:** Abrir el [Plano Interactivo de Calefacción y Ductos](./plans/hvac-layout/index.html?lang=es) o ver [Acceso al ático](#attic-access).
 - **Calefactor:** calefactor de gas en el ático. Gabinete de 33.25" × 14.19" × 29". Entra por la escotilla de 24" × 36".

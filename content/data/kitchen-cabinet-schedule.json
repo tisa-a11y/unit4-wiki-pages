@@ -520,10 +520,10 @@
     {
       "id": "clash-south-sink-station",
       "severity": "HIGH",
-      "title_en": "South Sink Base 75\"–105\" vs. Taped 72\"–102\"",
-      "title_es": "Tarja Sur 75\"–105\" vs. Cinta 72\"–102\"",
-      "en": "Prior layout places 30\" sink base at 75\"–105\" (CL 90\" under window) vs. site photos showing 72\"–102\" (CL 87\"). Hold sink plumbing relocation until common SE tape zero reconciles Friday.",
-      "es": "El trazo previo ubica la tarja de 30\" en 75\"–105\" (eje 90\" bajo ventana) vs. fotos con cinta en 72\"–102\" (eje 87\"). Detener plomería hasta conciliar origen SE el viernes.",
+      "title_en": "South Sink: Derived 72–102 / CL 87",
+      "title_es": "Tarja Sur: Derivada 72–102 / eje 87",
+      "en": "Selected 12-inch base gives DW 48–72, sink 72–102/CL 87 from SE. Verify common zero, window, casing and passage before plumbing. Old 75–105/CL 90 is retired, not setout.",
+      "es": "Base 12 elegida: lavavajillas 48–72, tarja 72–102/eje 87 desde SE. Verificar origen, ventana, chambrana y paso antes de plomería.75–105/eje 90 es histórico, no trazo.",
       "owner_update_20261122": "12-inch base explains the prior3-inch station difference arithmetically; common zero/window/casing still unverified. Do not hold settled base width for re-selection."
     },
     {
@@ -537,18 +537,18 @@
     {
       "id": "clash-east-d04-subpanel",
       "severity": "HIGH",
-      "title_en": "East Wall D04 Subpanel Infill Hold (No Screws 53\"–77\")",
-      "title_es": "Espera Relleno Subpanel D04 Muro Este (Sin Tornillos 53\"–77\")",
-      "en": "Dining-side subpanel D04 sits behind East SE corner (est. 6\"–38\" from SE). Side-entry framing hold active — never route behind panel or drive cabinet screws in 53\"–77\" zone.",
-      "es": "El subpanel D04 está detrás del muro Este cerca de esquina SE (aprox. 6\"–38\"). Espera activa de entrada lateral — nunca abrir por atrás ni meter tornillos en 53\"–77\"."
+      "title_en": "East Wall D 04 Subpanel Infill Hold (No Screws 53\"–77\")",
+      "title_es": "Espera Relleno Subpanel D 04 Muro Este (Sin Tornillos 53\"–77\")",
+      "en": "Dining-side subpanel D 04 sits behind East SE corner (est. 6\"–38\" from SE). Side-entry framing hold active — never route behind panel or drive cabinet screws in 53\"–77\" zone.",
+      "es": "El subpanel D 04 está detrás del muro Este cerca de esquina SE (aprox. 6\"–38\"). Espera activa de entrada lateral — nunca abrir por atrás ni meter tornillos en 53\"–77\"."
     },
     {
       "id": "clash-west-alcove-and-chase",
       "severity": "MEDIUM",
       "title_en": "West Wall: Dedicated Hood Duct Chase (>= 6\") & 1-Gang Direct Hardwire",
       "title_es": "Muro Oeste: Ducto Exclusivo Campana (>= 6\") y Caja Sencilla 2\"×3\"",
-      "en": "Existing left-chase duct IS dedicated to kitchen hood exhaust (nothing else connected — verify >= 6\" diameter; NEXT HVAC Mon is furnace/heating ONLY, do NOT route hood exhaust to NEXT HVAC). Zephyr ZSA-E30AS Manual p. 3 is direct hardwire via 1-gang 2\"×3\" box (~83\"–86\" above finished floor, C/L ± 2-1/4\", ~1\" proud for 1/2\" HardieBacker + tile inside 8-5/8\"×7-1/2\" casing — replacing conflicting 4×4 box at 100\").",
-      "es": "El ducto en el cajón izquierdo ES exclusivo de la campana (nada más conectado — verificar >= 6\"; NEXT HVAC el lunes es SOLO calefacción, NO conectar campana a NEXT HVAC). El manual Zephyr ZSA-E30AS p. 3 indica cableado directo en caja sencilla 2\"×3\" (~83\"–86\" sobre piso terminado, eje ± 2-1/4\", ~1\" salida para HardieBacker 1/2\" + azulejo dentro del cubreducto 8-5/8\"×7-1/2\" — reemplaza caja 4×4 a 100\")."
+      "en": "Hood-only chase: verify duct≥6 in. NEXT is heating only. Nov 20 R 2: HD-1 flush one-gang 83–86 in AFF; verify OEM/field mounting. Viking 1 in island trim only. Old 4×4/mud-ring/104 in instructions retired.",
+      "es": "Ducto exclusivo campana: verificar≥6 pulg. NEXT solo calefacción. R 2: HD-1 sencilla al ras 83–86 pulg sobre piso; verificar montaje/manual. Viking solo remate 1 pulg.4×4/anillo/104 pulg retirados."
     }
   ],
   "field_overrides": [],

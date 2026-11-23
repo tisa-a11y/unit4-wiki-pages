@@ -87,9 +87,9 @@
       { id: 'W-F1', wall: 'West', type: 'Filler', order: 4, label_en: 'North Corner Scribe Strip', label_es: 'Tira de Ajuste Esquina Norte', station_start_in: 66, width_in: 0.25, depth_in: 24, height_in: 34.5, measure_boundary: 'wall_to_wall', status: 'Verify on Site', editable_width: true, note_en: 'Closes 66" run cleanly to 66-1/4" wall.', note_es: 'Cierra tramo de 66" al muro de 66-1/4".' },
       { id: 'W-U0', wall: 'West', type: 'Wall Upper', order: 5, label_en: 'NO Wall Upper Cabinets on West Range Wall', label_es: 'SIN Gabinetes Altos en Muro Oeste', station_start_in: 0, width_in: 0, depth_in: 0, height_in: 0, measure_boundary: 'wall_to_wall', status: 'Locked', editable_width: false, note_en: 'Locked open for full-height statement tile up to 121-1/2" ceiling.', note_es: 'Bloqueado libre para azulejo hasta el techo de 121-1/2".' },
       { id: 'S-B1', wall: 'South', type: 'Base', order: 1, label_en: 'Shared SE L-Corner Base (Coupled w/ East)', label_es: 'Esquinero en L Sureste (Acoplado con Este)', station_start_in: 0, width_in: 36, depth_in: 24, height_in: 34.5, measure_boundary: 'wall_to_wall', status: 'Verify on Site', editable_width: true, coupled_id: 'E-B1', note_en: 'Shared 36"×36" SE corner base; edits update East wall return automatically.', note_es: 'Esquinero compartido 36"×36" SE; cambios actualizan el muro Este.' },
-      { id: 'S-B2', wall: 'South', type: 'Base', order: 2, label_en: 'Trash Pull-Out Base Cabinet', label_es: 'Gabinete Extraíble de Basura', station_start_in: 36, width_in: 12, depth_in: 24, height_in: 34.5, measure_boundary: 'wall_to_wall', status: 'Verify on Site', editable_width: true, note_en: '36"–51" from SE zero corner beside dishwasher.', note_es: '36"–51" desde esquina SE junto a lavavajillas.' },
-      { id: 'S-A1', wall: 'South', type: 'Appliance Bay', order: 3, label_en: '24" Dishwasher Bay (Panel-Ready)', label_es: 'Claro Lavavajillas 24" (Panelable)', station_start_in: 48, width_in: 24, depth_in: 24, height_in: 34.5, measure_boundary: 'clear_between_casings', status: 'Verify on Site', editable_width: true, note_en: '51"–75" from SE corner (supply & drain inside sink base).', note_es: '51"–75" desde esquina SE (agua y drenaje en tarja).' },
-      { id: 'S-B3', wall: 'South', type: 'Base', order: 4, label_en: '30" Sink Base (Hold: 75–105 vs 72–102)', label_es: 'Gabinete Tarja 30" (75–105 vs 72–102)', station_start_in: 72, width_in: 30, depth_in: 24, height_in: 34.5, measure_boundary: 'wall_to_wall', status: 'Verify on Site', editable_width: true, note_en: 'Centered under South window (90" vs 89-3/4"). Hold plumbing move until tape clash reconciles Friday.', note_es: 'Centrado bajo ventana Sur. Detener plomería hasta conciliar cinta el viernes.' },
+      { id: 'S-B2', wall: 'South', type: 'Base', order: 2, label_en: 'Trash Pull-Out Base Cabinet', label_es: 'Gabinete Extraíble de Basura', station_start_in: 36, width_in: 12, depth_in: 24, height_in: 34.5, measure_boundary: 'wall_to_wall', status: 'Verify on Site', editable_width: true, note_en: '36–48 inches derived from SE zero beside dishwasher.', note_es: '36–48 pulgadas derivadas desde SE junto a lavavajillas.' },
+      { id: 'S-A1', wall: 'South', type: 'Appliance Bay', order: 3, label_en: '24" Dishwasher Bay (Panel-Ready)', label_es: 'Claro Lavavajillas 24" (Panelable)', station_start_in: 48, width_in: 24, depth_in: 24, height_in: 34.5, measure_boundary: 'clear_between_casings', status: 'Verify on Site', editable_width: true, note_en: '48–72 inches derived from SE zero; verify on site (supply & drain in sink base).', note_es: '48–72 pulgadas derivadas desde SE; verificar en obra (agua/drenaje en tarja).' },
+      { id: 'S-B3', wall: 'South', type: 'Base', order: 4, label_en: '30-inch Sink Base (72–102 derived; verify)', label_es: 'Gabinete Tarja30 (72–102 derivadas; verificar)', station_start_in: 72, width_in: 30, depth_in: 24, height_in: 34.5, measure_boundary: 'wall_to_wall', status: 'Verify on Site', editable_width: true, note_en: 'Plan-derived72–102, center87. Verify common SE zero/window/casing/passage before plumbing.', note_es: 'Centrado bajo ventana Sur. Detener plomería hasta conciliar cinta el viernes.' },
       { id: 'S-F1', wall: 'South', type: 'Filler', order: 5, label_en: 'South End Pull-Out / Filler (6" vs 12" Option)', label_es: 'Relleno / Extraíble Sur (Opción 6" vs 12")', station_start_in: 102, width_in: 6, depth_in: 24, height_in: 34.5, measure_boundary: 'to_casing_edge', status: 'Open Option', editable_width: true, note_en: 'Toggle 6" vs 12" to check rear door casing (114"/115") & narrowest clear walkway with overhang.', note_es: 'Alterna 6" vs 12" para verificar chambrana (114"/115") y paso libre mínimo con vuelo.' },
       { id: 'S-U1', wall: 'South', type: 'Wall Closure', order: 6, label_en: 'Weatherproof and cover former pie-safe', label_es: 'Sellar y tapar el nicho de la antigua alacena', station_start_in: 26, width_in: null, depth_in: null, height_in: null, provisional_width_in: 33, provisional_height_in: 44, bottom_aff_in: 36, measure_boundary: 'rough_opening', status: 'Verify on Site', editable_width: true, note_en: 'Verify on Friday mockup / measure on site. Existing opening approx 26"–59" from SE, top approx 80".', note_es: 'Verificar en maqueta viernes / medir en obra. Abertura aprox 26"–59" desde SE, altura ~80".' },
       { id: 'S-U2', wall: 'South', type: 'Wall Upper', order: 7, label_en: 'Optional South Flanking Wall Upper (TBD)', label_es: 'Gabinete Alto Opcional Sur (Por Definir)', station_start_in: 0, width_in: null, depth_in: 12, height_in: null, provisional_width_in: 24, provisional_height_in: 40.4375, bottom_aff_in: 55.125, measure_boundary: 'to_casing_edge', status: 'Open Option', editable_width: true, note_en: 'Verify on Friday mockup / measure on site.', note_es: 'Verificar en maqueta viernes / medir en obra.' },
@@ -112,34 +112,34 @@
       {
         id: 'clash-south-sink-station',
         severity: 'HIGH',
-        title_en: 'South Sink Base 75"–105" vs. Taped 72"–102"',
-        title_es: 'Tarja Sur 75"–105" vs. Cinta 72"–102"',
-        en: 'Prior layout places 30" sink base at 75"–105" (CL 90" under window) vs. site photos showing 72"–102" (CL 87"). Hold sink plumbing move until common SE tape zero reconciles Friday.',
-        es: 'El trazo previo ubica la tarja de 30" en 75"–105" (eje 90" bajo ventana) vs. fotos con cinta en 72"–102" (eje 87"). Detener plomería hasta conciliar origen SE el viernes.'
+        title_en: "South Sink: Derived 72–102 / CL 87",
+        title_es: "Tarja Sur: Derivada 72–102 / eje 87",
+        en: "Selected 12-inch base gives DW 48–72, sink 72–102/CL 87 from SE. Verify common zero, window, casing and passage before plumbing. Old 75–105/CL 90 is retired, not setout.",
+        es: "Base 12 elegida: lavavajillas 48–72, tarja 72–102/eje 87 desde SE. Verificar origen, ventana, chambrana y paso antes de plomería.75–105/eje 90 es histórico, no trazo."
       },
       {
         id: 'clash-south-casing-114-115',
         severity: 'HIGH',
-        title_en: 'Rear Door Casing Span 114" vs. 115" & 6" vs. 12" Option',
-        title_es: 'Claro a Chambrana 114" vs. 115" y Opción 6" vs. 12"',
-        en: 'Usable South span to rear door casing reads 114" in field photos vs. 115" in scan. Adding a 12" box + 1" overhang collides with casing unless sink shifts or 6" filler/pullout stays.',
-        es: 'El claro útil Sur hasta la chambrana marca 114" en fotos vs. 115" en escaneo. Un gabinete de 12" + 1" de vuelo choca con la chambrana si no se mantiene 6".'
+        title_en: "Rear Door Casing Span 114\" vs. 115\" & 6\" vs. 12\" Option",
+        title_es: "Claro a Chambrana 114\" vs. 115\" y Opción 6\" vs. 12\"",
+        en: "Usable South span to rear door casing reads 114\" in field photos vs. 115\" in room scan (casings omitted). Adding a 12\" box + 1\" overhang collides with casing unless sink shifts or 6\" filler/pullout is kept.",
+        es: "El claro útil al Sur hasta la chambrana marca 114\" en fotos vs. 115\" en escaneo (sin chambranas). Un gabinete de 12\" + 1\" de vuelo choca con la chambrana si no se recorre la tarja o se mantiene 6\"."
       },
       {
         id: 'clash-east-d04-subpanel',
         severity: 'HIGH',
-        title_en: 'East Wall D04 Subpanel Infill Hold (No Screws 53"–77")',
-        title_es: 'Espera Subpanel D04 Muro Este (Sin Tornillos 53"–77")',
-        en: 'Dining-side subpanel D04 sits behind East SE corner (est. 6"–38" from SE). Side-entry framing hold active — never route behind panel or drive cabinet screws in 53"–77" zone.',
-        es: 'El subpanel D04 está detrás del muro Este cerca de esquina SE (aprox. 6"–38"). Espera activa de entrada lateral — sin tornillos en 53"–77".'
+        title_en: "East Wall D 04 Subpanel Infill Hold (No Screws 53\"–77\")",
+        title_es: "Espera Relleno Subpanel D 04 Muro Este (Sin Tornillos 53\"–77\")",
+        en: "Dining-side subpanel D 04 sits behind East SE corner (est. 6\"–38\" from SE). Side-entry framing hold active — never route behind panel or drive cabinet screws in 53\"–77\" zone.",
+        es: "El subpanel D 04 está detrás del muro Este cerca de esquina SE (aprox. 6\"–38\"). Espera activa de entrada lateral — nunca abrir por atrás ni meter tornillos en 53\"–77\"."
       },
       {
         id: 'clash-west-alcove-and-chase',
         severity: 'MEDIUM',
-        title_en: 'West Wall: Dedicated Hood Duct Chase (>= 6") & 1-Gang Direct Hardwire',
-        title_es: 'Muro Oeste: Ducto Exclusivo Campana (>= 6") y Caja Sencilla 2"×3"',
-        en: 'Existing left-chase duct IS dedicated to kitchen hood exhaust (nothing else connected; verify >= 6"). NEXT HVAC Mon is furnace/heating ONLY — do NOT route hood exhaust to NEXT HVAC. Zephyr ZSA-E30AS Manual p. 3 is direct hardwire via 1-gang 2"×3" box (~83"–86" above finished floor, C/L ± 2-1/4", ~1" proud for 1/2" HardieBacker + tile inside 8-5/8"×7-1/2" casing; replaces 4×4 box at 100").',
-        es: 'El ducto izq. ES exclusivo de la campana (nada más conectado; verificar >= 6"). NEXT HVAC el lunes es SOLO calefacción — NO conectar campana ahí. Zephyr ZSA-E30AS Manual p. 3 es cableado directo en caja sencilla 2"×3" (~83"–86" piso term., eje ± 2-1/4", ~1" salida p/ HardieBacker 1/2" + azulejo en cubreducto 8-5/8"×7-1/2"; reemplaza caja 4×4 a 100").'
+        title_en: "West Wall: Dedicated Hood Duct Chase (>= 6\") & 1-Gang Direct Hardwire",
+        title_es: "Muro Oeste: Ducto Exclusivo Campana (>= 6\") y Caja Sencilla 2\"×3\"",
+        en: "Hood-only chase: verify duct≥6 in. NEXT is heating only. Nov 20 R 2: HD-1 flush one-gang 83–86 in AFF; verify OEM/field mounting. Viking 1 in island trim only. Old 4×4/mud-ring/104 in instructions retired.",
+        es: "Ducto exclusivo campana: verificar≥6 pulg. NEXT solo calefacción. R 2: HD-1 sencilla al ras 83–86 pulg sobre piso; verificar montaje/manual. Viking solo remate 1 pulg.4×4/anillo/104 pulg retirados."
       }
     ],
     field_overrides: [],
@@ -158,7 +158,7 @@
       btn_circle_off: 'Drawing Active…',
       btn_export_svg: 'Export SVG',
       btn_download_pdf: 'Download / Print PDF',
-      hold_html: '<strong>LAYOUT STAGING HOLD — VERIFY ON FRIDAY MOCKUP PHOTOS:</strong> Reconcile South sink station (<strong>75"–105"</strong> vs. taped <strong>72"–102"</strong>), rear door casing span (<strong>114"</strong> vs. <strong>115"</strong>), <strong>6" vs. 12"</strong> passage width, and East <strong>D04</strong> subpanel side-entry hold before relocating sink plumbing, ordering cabinets/stone, or closing drywall.',
+      hold_html: '<strong>LAYOUT STAGING HOLD — VERIFY ON FRIDAY MOCKUP PHOTOS:</strong> Verify plan-derived South sink <strong>72–102 inches (center87)</strong> and dishwasher <strong>48–72</strong> from common SE zero, rear door casing span (<strong>114"</strong> vs. <strong>115"</strong>), <strong>6" vs. 12"</strong> passage width, and East <strong>D04</strong> subpanel side-entry hold before relocating sink plumbing, ordering cabinets/stone, or closing drywall.',
       conflict_text: 'A newer revision was saved on Tailnet by another editor (HTTP 409). Reload the latest plan and re-apply your change.',
       btn_reload: 'Reload Latest Plan',
       view_titles: {
@@ -177,7 +177,7 @@
       btn_opt_6: '6" Filler / Pull-Out',
       btn_opt_12: '12" Cabinet Option',
       lbl_sink_basis: 'Sink Station:',
-      btn_sink_75: '75"–105" (CL 90" Window)',
+      btn_sink_75: 'Historical only: 75–105 / CL90',
       btn_sink_72: '72"–102" (Site Tape CL 87")',
       btn_reset: 'Reset Baseline',
       circle_bar_hint: 'Draw a circle around any spot on the drawing (touch or mouse) to attach a callout note.',
@@ -190,7 +190,7 @@
       photo_right: 'REAR DOOR (SW) →',
       photo_callouts: [
         '<li class="callout-alert"><strong>Existing Recessed Pie-Safe (~26"–59" from SE):</strong> Blue tape marks 36" counter line. Final width &amp; depth are <strong>Verify on Friday mockup / measure on site</strong>.</li>',
-        '<li><strong>South Window &amp; Sink Stubs:</strong> Reconcile 75"–105" (CL 90") vs. taped 72"–102" (CL 87") before moving drain/water lines.</li>',
+        '<li><strong>South Window &amp; Sink Stubs:</strong> Verify plan-derived sink72–102 (center87) against common SE zero, window and casing before moving plumbing.</li>',
         '<li><strong>Rear Door Casing (Right):</strong> Verify 114" vs. 115" usable span and test 6" vs. 12" box with 1" countertop overhang.</li>'
       ],
       concept_disclaimer_html: '<strong>Site Photo vs. Concept:</strong> Above photo is the real South kitchen wall. Any separate 3D L-layout concept renders in Drive are <em>Concept reference only — not to scale</em>; always mark out from this true-scale floor plan.',
@@ -267,7 +267,7 @@
       btn_circle_off: 'Dibujo Activo…',
       btn_export_svg: 'Exportar SVG',
       btn_download_pdf: 'Descargar / Imprimir PDF',
-      hold_html: '<strong>ESPERA DE TRAZO — VERIFICAR CON FOTOS DEL VIERNES:</strong> Conciliar posición de tarja Sur (<strong>75"–105"</strong> vs. cinta <strong>72"–102"</strong>), claro a chambrana trasera (<strong>114"</strong> vs. <strong>115"</strong>), paso libre <strong>6" vs. 12"</strong> y subpanel Este <strong>D04</strong> antes de mover plomería, pedir gabinetes/piedra o cerrar tablaroca.',
+      hold_html: '<strong>ESPERA DE TRAZO — VERIFICAR CON FOTOS DEL VIERNES:</strong> Verificar tarja Sur derivada <strong>72–102 pulgadas (eje87)</strong> y lavavajillas <strong>48–72</strong> desde origen SE común, claro a chambrana trasera (<strong>114"</strong> vs. <strong>115"</strong>), paso libre <strong>6" vs. 12"</strong> y subpanel Este <strong>D04</strong> antes de mover plomería, pedir gabinetes/piedra o cerrar tablaroca.',
       conflict_text: 'Otro editor guardó una revisión más reciente en Tailnet (HTTP 409). Recarga el plano más reciente y vuelve a aplicar tu cambio.',
       btn_reload: 'Recargar Plano Actual',
       view_titles: {
@@ -286,7 +286,7 @@
       btn_opt_6: 'Relleno / Extraíble 6"',
       btn_opt_12: 'Opción Gabinete 12"',
       lbl_sink_basis: 'Posición Tarja:',
-      btn_sink_75: '75"–105" (Eje 90" Ventana)',
+      btn_sink_75: 'Solo histórico: 75–105 / eje90',
       btn_sink_72: '72"–102" (Cinta Obra Eje 87")',
       btn_reset: 'Restaurar Base',
       circle_bar_hint: 'Dibuja un círculo sobre cualquier punto del plano (dedo o ratón) para adjuntar un comentario.',
@@ -299,7 +299,7 @@
       photo_right: 'PUERTA TRASERA (SO) →',
       photo_callouts: [
         '<li class="callout-alert"><strong>Alacena Empotrada Existente (~26"–59" de SE):</strong> La cinta azul marca cubierta a 36". Ancho y fondo: <strong>Verificar en maqueta viernes / medir en obra</strong>.</li>',
-        '<li><strong>Ventana Sur y Salidas de Tarja:</strong> Conciliar 75"–105" (eje 90") vs. cinta 72"–102" (eje 87") antes de mover plomería.</li>',
+        '<li><strong>Ventana Sur y Salidas de Tarja:</strong> Verificar tarja derivada72–102 (eje87), origen SE, ventana y chambrana antes de mover plomería.</li>',
         '<li><strong>Chambrana Puerta Trasera (Der.):</strong> Confirmar 114" vs. 115" y probar 6" vs. 12" con vuelo de cubierta de 1".</li>'
       ],
       concept_disclaimer_html: '<strong>Foto de Obra vs. Concepto:</strong> La foto superior es el muro Sur real. Cualquier render 3D en Drive es <em>Referencia de concepto — no a escala</em>; marca siempre con esta planta a escala real.',
@@ -1086,7 +1086,7 @@
       <!-- Holds & Attached Comments Box -->
       <rect x="536" y="514" width="360" height="340" rx="4" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.1"/>
       <text x="548" y="534" font-size="8.6" font-weight="700" fill="#991b1b">${isEs ? 'ESPERAS ACTIVAS Y COMENTARIOS ADJUNTOS' : 'ACTIVE HOLDS & ATTACHED CALLOUTS'}</text>
-      <text x="548" y="554" font-size="7.4" fill="#7f1d1d">• ${isEs ? 'Tarja Sur: conciliar 75"–105" vs 72"–102" antes de plomería.' : 'South Sink: reconcile 75"–105" vs 72"–102" before plumbing.'}</text>
+      <text x="548" y="554" font-size="7.4" fill="#7f1d1d">• ${isEs ? 'Tarja72–102 / eje87 derivados: verificar en obra antes de plomería.' : 'Sink72–102 / center87 plan-derived: verify on site before plumbing.'}</text>
       <text x="548" y="570" font-size="7.4" fill="#7f1d1d">• ${isEs ? 'Subpanel D04 (Este SE): sin tornillos 53"–77"; espera lateral.' : 'D04 Subpanel (East SE): no screws 53"–77"; side-entry hold.'}</text>
       <text x="548" y="586" font-size="7.3" fill="#7f1d1d">• ${isEs ? 'Ducto izq. Oeste es exclusivo campana (>= 6"); NEXT HVAC = solo calefacción.' : 'West left-chase duct = hood ONLY (>= 6"); NEXT HVAC = furnace ONLY.'}</text>
       <text x="548" y="602" font-size="7.3" fill="#7f1d1d">• ${isEs ? 'Zephyr: caja sencilla 2"×3" (~83"–86", eje ±2-1/4", ~1" salida; no 4×4 a 100").' : 'Zephyr: 1-gang 2"×3" box (~83"–86", C/L ±2-1/4", ~1" proud; no 4×4 at 100").'}</text>
@@ -1369,7 +1369,7 @@
           <td><span class="pill pill-neutral">${esc(currentLang === 'es' ? ({Base:'Gabinete bajo','Wall Upper':'Gabinete alto','Appliance Bay':'Hueco de aparato',Filler:'Relleno','Wall Closure':'Cierre de muro'}[c.type] || c.type) : c.type)}</span></td>
           <td>${esc(stTxt)}</td>
           <td>${sizeCell}</td>
-          <td><span class="boundary-tag">${esc(currentLang === 'es' ? 'entre muros' : 'wall to wall')}</span></td>
+          <td><span class="boundary-tag">${esc(currentLang === 'es' ? ({wall_to_wall:'entre muros',clear_between_casings:'claro entre marcos',rough_opening:'hueco de obra',aff:'piso terminado'}[c.measure_boundary] || c.measure_boundary) : ({wall_to_wall:'wall to wall',clear_between_casings:'clear between casings',rough_opening:'rough opening',aff:'finished floor'}[c.measure_boundary] || c.measure_boundary))}</span></td>
           <td><span class="pill ${statusCls}">${esc(c.status.startsWith('Owner Width Locked') ? (currentLang === 'es' ? 'Ancho fijo*' : 'Width locked*') : c.status.startsWith('Seal and Cover') ? (currentLang === 'es' ? 'Sellar y tapar' : 'Seal & cover') : currentLang === 'es' ? ({Locked:'Confirmado','Open Option':'Opción abierta','Verify on Site':'Medir en obra'}[c.status] || c.status) : c.status)}</span></td>
         </tr>`;
     }).join('');
