@@ -2328,6 +2328,183 @@ nav.rail .subdocs a[aria-current="page"]::before {
   background-color: var(--panel);
 }
 /* U4_SIDEBAR_INTERACTIVE_ICON_END */
+
+/* U4_SIDEBAR_POLISH_V1_CSS_START */
+/* 1. Calm tinted active pill + crisp 2.5px left accent bar */
+nav.rail a {
+  padding: 5px 10px !important;
+  font-size: 13.5px !important;
+  border-radius: 6px !important;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+nav.rail a[aria-current="page"] {
+  background: var(--accent-soft) !important;
+  color: var(--accent) !important;
+  font-weight: 600 !important;
+  box-shadow: inset 2.5px 0 0 var(--accent) !important;
+}
+nav.rail .subdocs a[aria-current="page"]::before {
+  background-color: var(--accent) !important;
+}
+
+/* 2. Subtle section dividers & collapsible group chevron */
+nav.rail .grp {
+  margin: 14px 0 5px !important;
+  padding-top: 11px !important;
+  border-top: 1px solid var(--line);
+}
+nav.rail .brand + .u4-sb-search-wrap + .grp,
+nav.rail .brand + .grp {
+  border-top: 0 !important;
+  padding-top: 0 !important;
+  margin-top: 12px !important;
+}
+nav.rail .grp.u4-grp-toggle {
+  cursor: pointer;
+  user-select: none;
+  justify-content: space-between;
+}
+nav.rail .grp.u4-grp-toggle::after {
+  content: "";
+  margin-left: auto;
+  width: 5px;
+  height: 5px;
+  border-right: 1.5px solid var(--muted);
+  border-bottom: 1.5px solid var(--muted);
+  transform: rotate(45deg);
+  transition: transform 140ms ease;
+}
+nav.rail .grp.u4-grp-toggle[aria-expanded="false"]::after {
+  transform: rotate(-45deg);
+}
+nav.rail a.u4-sb-hidden,
+nav.rail .subdocs a.u4-sb-boilerplate {
+  display: none !important;
+}
+nav.rail .subdocs {
+  margin: 2px 0 6px 10px !important;
+  border-left: 1.5px solid var(--line) !important;
+  padding-left: 8px !important;
+}
+nav.rail .subdocs a {
+  font-size: 12.5px !important;
+  color: var(--muted) !important;
+  padding: 4px 8px !important;
+}
+nav.rail .subdocs a:hover,
+nav.rail .subdocs a[aria-current="page"] {
+  color: var(--accent) !important;
+}
+
+/* 3. Brand row with desktop collapse icon & quick-jump filter */
+nav.rail .brand {
+  position: relative;
+  padding-right: 30px;
+}
+#u4SbCollapseBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+#u4SbCollapseBtn:hover {
+  background: var(--bg);
+  color: var(--fg);
+}
+#u4SbExpandBtn {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 45;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--fg);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+#u4SbExpandBtn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.u4-sb-search-wrap {
+  margin: 12px 0 4px;
+  position: relative;
+}
+#u4SbFilter {
+  width: 100%;
+  height: 30px;
+  padding: 0 26px 0 9px;
+  border-radius: 7px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--fg);
+  font: 12.5px/1 var(--body);
+  outline: none;
+}
+#u4SbFilter:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-soft);
+}
+.u4-sb-kbd {
+  position: absolute;
+  right: 7px;
+  top: 50%;
+  transform: translateY(-50%);
+  font: 600 10.5px/1 var(--mono);
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 2px 4px;
+  pointer-events: none;
+}
+
+/* 4. Desktop sidebar collapse state */
+@media (min-width: 761px) {
+  body.u4-rail-collapsed .wrap {
+    grid-template-columns: 0 minmax(0, 1fr) !important;
+  }
+  body.u4-rail-collapsed nav.rail {
+    width: 0 !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    border-right: 0 !important;
+    overflow: hidden !important;
+  }
+  body.u4-rail-collapsed #u4SbExpandBtn {
+    display: inline-flex !important;
+  }
+  body.u4-rail-collapsed main {
+    padding-left: 58px !important;
+  }
+  body.u4-rail-collapsed .u4-pin-fab {
+    left: 16px !important;
+  }
+}
+@media (max-width: 760px) {
+  #u4SbCollapseBtn,
+  #u4SbExpandBtn {
+    display: none !important;
+  }
+  #u4SbFilter {
+    font-size: 16px;
+    height: 36px;
+  }
+}
+/* U4_SIDEBAR_POLISH_V1_CSS_END */
 </style>
 
 <section id="agent-brief" class="sr-only" aria-label="Agent brief"># START HERE — Unit 4 remodel, 1231 11th Ave (San Francisco)<br><br>**This is the only start-here file.** Every person and agent opening this folder reads this first, fully, before acting.<br>Updated 2026-11-05 17:45 PT by Claude (Tisa&#x27;s account, cloud session). The same text is the wiki&#x27;s &quot;For AI agents: read first&quot; section.<br><br>## 0. Where to work — Google Drive is the single source of truth<br>- **Unit 4 folder (work here):** https://drive.google.com/drive/folders/1NnUfcuJfnzcjJz3XRvDQDhfvtMkrlSOr (`1231-11th-avenue/unit-4-renovation`)<br>- **Whole-building parent:** https://drive.google.com/drive/folders/1StmWHtnrDQlpd1CbUUfUEOI1vg-jHn29 (`1231-11th-avenue`)<br>- Everyone — Tisa&#x27;s Claude, John&#x27;s Claude, Dibble, any other agent — reads and writes through this Drive folder. (It is backed by Tisa&#x27;s Mini and syncs automatically; you never need the Mini path.)<br>- Every Unit 4 document now lives here, including copies of everything from the old locations (section 3). If you can&#x27;t find something, look in the room folder&#x27;s `from-remodel-hub/`, `from-unit4-bath-folder/` or `from-my-drive/` subfolder before assuming it&#x27;s missing.<br>- Older start-here, AGENTS and CLAUDE files were retired 2026-11-05 to `continuity/_superseded/start-here-history/` — don&#x27;t follow them.<br><br>---<br><br>## 1. Who and what<br>- **Tisa** owns the project and makes and locks every decision. **John** is lead carpenter on site. **Ervin, Joel, Alex** are crew (Spanish speakers).<br>- **Wiki** — https://tisa-a11y.github.io/unit4-wiki-pages/ — the shared picture: roadmap, one spec per project, open decisions, documents (PDFs preview in the page). It reads the `.md` files in this folder.<br>- **Todoist** board `Full 1231 11th Avenue Remodel` (id ). The wiki is its spine: every card traces to a spec, a locked decision or captured input.<br>- **Magicplan** MASTER plan is the geometry source: https://cloud.magicplan.app/plan/abb2d2c6-aa1c-4a88-a57e-1260847b6410<br>- **Your job:** keep the project moving with as little effort from Tisa and John as possible. Answer from the specs, capture what they tell you, file it, keep wiki and Todoist in step.<br><br>## 2. Read in this order<br>1. `STATUS-NOW.md` — what&#x27;s locked, what&#x27;s blocking, what&#x27;s next on site. Answer &quot;what&#x27;s up?&quot; from here first.<br>2. `continuity/ROADMAP.md` — sequence and phases.<br>3. `&lt;room&gt;/SPEC.md` for the area you&#x27;re working on.<br>4. `continuity/CURRENT-DECISIONS.md` and `continuity/KNOWN-GAPS.md` only if you need the history.<br><br>## 3. Folder map<br>| Folder | Holds |<br>|---|---|<br>| `kitchen/` `bathroom/` `electrical/` `laundry/` `bedroom/` `living-dining/` `hallway/` `paint-floors/` `hvac/` | One per room or trade; each has `SPEC.md` (governs) plus dated drawings and packages. |<br>| `interior-design/` | Wall treatment, trim, outlet and finish plans (dated revision folders). |<br>| `general/` | Whole-unit items; `from-remodel-hub/` = imported old crew-hub files. |<br>| `sprint/` | Current sprint plan and session agendas. |<br>| `continuity/` | Roadmap, decisions log, known gaps, labor ballpark, history and source snapshots. |<br>| `work-control/` | Agent index, Todoist runbook (dated snapshot), `wiki-source/` (wiki build files). |<br>| `to-triage/` | Drop box for any input (notes, photos, voice memos, session minutes). Claude routes it and moves it to `to-triage/_done/`. |<br>| `sessions/` | One folder per working session: minutes (and transcript when available). |<br>| `_to_delete/` | Marked for removal; only Tisa empties it. |<br><br>Outside this folder: `../building/` (common areas, backyard, alley; `building/earlier-renovations-not-unit-4…/` holds older renovation docs that are **not** Unit 4 — don&#x27;t use them for Unit 4), `../GOOGLE-DOCS-INDEX.md`, and the separate private folder `1231-11th-avenue-private` (leases, costs, payroll, bids — **never share with crew**).<br><br>**Old locations — still readable for history, never the place to work:** Drive &quot;1231 11th Ave - Unit 4 Remodel&quot; (old crew hub, folders 01–12), Drive &quot;11th Ave Unit 4 Bath&quot;. Everything in them was copied here on 2026-11-04/05. If an old file and a file here disagree, the room&#x27;s `SPEC.md` governs.<br><br>## 4. Which version is the latest<br>1. Names carry date and revision: `YYYY-MM-DD_U4_&lt;room or trade&gt;_&lt;what&gt;_R#` (issued drawings may use `RevA`, `RevB`), then `_EN` or `_ES`. English and Spanish are always separate files.<br>2. The latest lives in the topic folder. A replaced file moves, name unchanged, to that folder&#x27;s `_superseded/` (or `history/`). Nothing is deleted.<br>3. If a folder still has more than one live iteration, its `CURRENT.md` names the one that governs.<br>4. `from-remodel-hub/`, `from-unit4-bath-folder/`, `from-my-drive/` are copies imported 2026-11-04 so no mockup or image is lost; they&#x27;re being reconciled. Until then the room&#x27;s `SPEC.md` and the dated files outside them govern.<br><br>## 5. Golden rule: John never has to enter anything himself<br>When John or Tisa tells you something — a task, a measurement, a problem, a question, a decision needed — capture it for them in their words and file it (section 7). Don&#x27;t send them to a form. Confirm back in one line what you filed and where.<br><br>## 6. What each kind of agent can do<br>| You are… | You can |<br>|---|---|<br>| **Claude on Tisa&#x27;s claude.ai account** (this Project, Cowork, Claude Code) | Everything: wiki data via the ArtifactData tool (URL above), republish the wiki via the Artifact tool, edit files here, Todoist via the connector (connected 2026-11-03). |<br>| **John&#x27;s Claude** (claude.ai cloud, often voice on John&#x27;s iPhone) | Read the wiki link, this Drive folder and the Todoist board. Its Drive connector can **create** files but can&#x27;t overwrite existing ones, so it writes session minutes and notes to `to-triage/` as `YYYY-MM-DD_HHMM_session_&lt;topic&gt;.md` with an author line (which Claude, which device, cloud or local). Tisa&#x27;s Claude routes them into the wiki, specs, STATUS-NOW and Todoist. |<br>| **Any other agent** (Dibble, Codex, Gemini, Antigravity) | Read and edit the files here (section 8 rules), update `STATUS-NOW.md`, drop input in `to-triage/`. Access comes from this Drive folder being shared with John&#x27;s Google account as Editor. |<br>| **Any agent with a browser** | Open the wiki and help John use it on his phone. |<br><br>**Dropping input (non-Claude agents):** `to-triage/YYYY-MM-DD_HHMM_&lt;who&gt;_&lt;short&gt;.md`<br>```<br>type: task | fact | decision | note<br>project: kitchen | bathroom | electrical | laundry | bedroom | living-dining | hallway | paint-floors | hvac | general<br>from: &lt;agent&gt; on behalf of &lt;John/Tisa&gt;<br>---<br>&lt;their words&gt;<br>```<br>**Claude capture:** write to the wiki&#x27;s `inbox` collection `{type, project, section, title, details, raw, source:&quot;agent&quot;, from, createdAt, status:&quot;queued&quot;}`, then route it in the same turn.<br><br>## 7. Routing — where each thing goes<br>| Came in | Do this |<br>|---|---|<br>| **Task** | Look for an existing card first (comment rather than duplicate). Create it in the project&#x27;s section — Kitchen / Cocina · Bathroom / Baño · Electrical / Electricidad · Laundry / Lavandería · Walls, Molding &amp; Paint · General &amp; HVAC (bedroom, living-dining, hallway, HVAC, building) · New Tasks (need triage) · Backlog · On Hold or Blocked. Re-check section names live before writing. Plain title; description = State / Trade / Next physical action / Governing source (link to SPEC.md). **Unassigned** unless Tisa names someone. |<br>| **Site fact** | Add to the project&#x27;s SPEC.md with date and &quot;(John, field)&quot;. Comment on the card if it changes one. |<br>| **Decision needed** | Add a wiki `decisions` doc (`status: open`, priority 1 blocking / 2 next / 3 later). Only Tisa locks. |<br>| **Locked decision** (`synced: false`) | Update SPEC.md (mark LOCKED), matching cards, the Spanish crew edition, `STATUS-NOW.md`; set `synced: true`. |<br>| **Field report / session notes** | File facts as above; next steps → unassigned cards; open items → decisions; mark `recorded`. |<br><br>Wiki and cards disagree → the wiki wins (never the reverse without Tisa). Any change you make → update `STATUS-NOW.md` in the same pass.<br><br>## 8. Rules that always hold<br>- Tisa&#x27;s direction is locked; anything an AI produces is a suggestion until she locks it.<br>- Nothing is sent, signed, ordered, paid or scheduled without Tisa&#x27;s approval.<br>- Magicplan and existing drawings first. Never ask John to re-measure what&#x27;s recorded; ask only for the specific missing number.<br>- Crew-facing documents: English first, then a **separate** Spanish edition. Never mix languages. Replies to Tisa in English.<br>- Edit an existing spec rather than making a new file beside it (new files break wiki links).<br>- Superseded files go to `_superseded`; never delete. No credentials in any file here.<br>- **Wiki and Drive mirror each other** (Tisa, 2026-11-06): every wiki page and document list matches a folder in `1231 11th Avenue Unit 4`, and each document sits under the same room in both. When you add or move a document or folder in Drive, update the wiki in the same pass, and the reverse. Example: the Laundry Closet is its own project, so its documents live in `laundry/`, not `electrical/`.<br>- **Spanish for the wiki lives only in the wiki's own text** (Tisa, 2026-11-06): the English/Español toggle. Never create Spanish copies of the .md files in Drive. Crew plans keep their existing English and Spanish PDFs.<br>- **Work record (Beads):** canonical ledger `/Users/tisavo/Work/Projects/1231-11th-avenue/unit-4-renovation` on the MacBook Pro (`.beads/embeddeddolt`, main issue `tisa-wi0.6`). Run `bd where` before writing; never initialize a duplicate ledger; keep existing issue IDs. Agents that can&#x27;t reach it (cloud sessions) record state in `STATUS-NOW.md` and say Beads is pending. Last check from a cloud session (2026-11-05): not reachable, status unverified.<br>- Every session&#x27;s minutes say the date, who attended and which Claude wrote them (account, device, cloud or local).<br>- Say plainly what you verified vs. only wrote. Trust the source file over another agent&#x27;s summary.<br><br>## 9. Maintaining the wiki (Claude only)<br>Source: `work-control/wiki-source/` (template updated 2026-11-05 to include the live Home page and collapsible document lists) — `wiki_template.html`, `build_wiki.py` (embeds the specs and document lists), `brief.py` (embeds this file as the agent brief), `drive_docs.json`, `pdf_blobs.json`. Rebuild, then publish to the same artifact URL. Collections: `decisions` (Tisa/admin write), `decisionNotes`, `reports`, `sessionNotes`, `inbox`.<br><br>## 10. More detail, if needed<br>- Routing detail and history: `work-control/2026-11-03_U4_AgentWork_Index_R2.md`<br>- Todoist runbook (11/2 snapshot, has known errors): `work-control/TODOIST-PROJECT-MANAGER-RUNBOOK.md`<br>- Kitchen governing revision: `kitchen/CURRENT.md`<br></section>
@@ -12402,6 +12579,247 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   }
 })();
 /* U4-R7-ENHANCER-END */
+
+/* U4_SIDEBAR_POLISH_V1_JS_START */
+(function(){
+  if (window.__U4_SIDEBAR_POLISH_V1__) return;
+  window.__U4_SIDEBAR_POLISH_V1__ = true;
+
+  var ICON_SIDEBAR = '<svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1.8" y="2.4" width="12.4" height="11.2" rx="2"/><line x1="5.8" y1="2.4" x2="5.8" y2="13.6"/></svg>';
+  var plansCollapsed = false;
+
+  function isEs() {
+    var l = (document.documentElement && document.documentElement.lang) || "";
+    return l.toLowerCase().indexOf("es") === 0;
+  }
+
+  function cleanSubItems(rail) {
+    if (!rail) return;
+    var subLinks = rail.querySelectorAll(".subdocs a");
+    for (var i = 0; i < subLinks.length; i++) {
+      var a = subLinks[i];
+      var raw = String(a.textContent || "").trim();
+      var cleaned = raw.replace(/^[·•\-\s]+/, "").trim();
+      var isBoiler = /^(checklist|lista de trabajo|renders\s*&\s*mockups|vistas conceptuales|reference photos|fotos de referencia)$/i.test(cleaned);
+      a.classList.toggle("u4-sb-boilerplate", isBoiler);
+      if (!isBoiler && a.firstChild && a.firstChild.nodeType === 3) {
+        a.firstChild.nodeValue = a.firstChild.nodeValue.replace(/^\s*[·•]\s*/, "");
+      }
+    }
+  }
+
+  function collapseInactiveRooms(rail) {
+    if (!rail) return;
+    var filterInp = document.getElementById("u4SbFilter");
+    if (filterInp && filterInp.value.trim()) return;
+    var active = rail.querySelector('a[aria-current="page"]');
+    var activeBox = active ? active.closest(".subdocs") : null;
+    var activeKey = active ? (active.getAttribute("data-key") || (activeBox && activeBox.getAttribute("data-for")) || "") : "";
+    var boxes = rail.querySelectorAll(".subdocs");
+    for (var i = 0; i < boxes.length; i++) {
+      var box = boxes[i];
+      var owner = box.getAttribute("data-for") || "";
+      var hasVisible = Boolean(box.querySelector("a:not(.u4-sb-boilerplate):not(.u4-sb-hidden)"));
+      var keepOpen = hasVisible && (owner === activeKey || box === activeBox);
+      box.hidden = !keepOpen;
+      if (owner) {
+        var parentA = rail.querySelector('a[data-key="' + owner + '"]');
+        if (parentA) parentA.setAttribute("aria-expanded", keepOpen ? "true" : "false");
+      }
+    }
+  }
+
+  function getInteractivePlanLinks(grp) {
+    var list = [];
+    var n = grp ? grp.nextElementSibling : null;
+    while (n && !n.classList.contains("grp")) {
+      if (n.tagName === "A") list.push(n);
+      n = n.nextElementSibling;
+    }
+    return list;
+  }
+
+  function wireInteractivePlansToggle(rail) {
+    var grps = rail.querySelectorAll(".grp");
+    for (var i = 0; i < grps.length; i++) {
+      var g = grps[i];
+      var next = g.nextElementSibling;
+      if (!next || next.tagName !== "A") continue;
+      var href = next.getAttribute("href") || "";
+      if (href.indexOf("#plan:") !== 0 && href.indexOf("plans/") === -1) continue;
+      if (g.dataset.u4ToggleWired) break;
+      g.dataset.u4ToggleWired = "1";
+      g.classList.add("u4-grp-toggle");
+      g.setAttribute("role", "button");
+      g.setAttribute("tabindex", "0");
+      g.setAttribute("aria-expanded", "true");
+      var applyPlanCollapse = function(grpEl) {
+        var links = getInteractivePlanLinks(grpEl);
+        grpEl.setAttribute("aria-expanded", plansCollapsed ? "false" : "true");
+        for (var j = 0; j < links.length; j++) {
+          links[j].classList.toggle("u4-sb-hidden", plansCollapsed);
+        }
+      };
+      g.addEventListener("click", function() {
+        plansCollapsed = !plansCollapsed;
+        applyPlanCollapse(this);
+      });
+      g.addEventListener("keydown", function(ev) {
+        if (ev.key === "Enter" || ev.key === " ") {
+          ev.preventDefault();
+          plansCollapsed = !plansCollapsed;
+          applyPlanCollapse(this);
+        }
+      });
+      break;
+    }
+  }
+
+  function applyFilter(rail, rawQuery) {
+    var q = String(rawQuery || "").trim().toLowerCase();
+    var links = rail.querySelectorAll("a");
+    var grps = rail.querySelectorAll(".grp");
+    if (!q) {
+      for (var i = 0; i < links.length; i++) {
+        if (!links[i].closest(".brand")) links[i].classList.remove("u4-sb-hidden");
+      }
+      for (var g = 0; g < grps.length; g++) {
+        grps[g].hidden = false;
+        if (grps[g].classList.contains("u4-grp-toggle") && plansCollapsed) {
+          var pLinks = getInteractivePlanLinks(grps[g]);
+          for (var p = 0; p < pLinks.length; p++) pLinks[p].classList.add("u4-sb-hidden");
+        }
+      }
+      collapseInactiveRooms(rail);
+      return;
+    }
+    var boxes = rail.querySelectorAll(".subdocs");
+    for (var b = 0; b < boxes.length; b++) boxes[b].hidden = false;
+    for (var k = 0; k < links.length; k++) {
+      var a = links[k];
+      if (a.closest(".brand") || a.classList.contains("u4-sb-boilerplate")) continue;
+      var hay = (a.textContent + " " + (a.getAttribute("href") || "")).toLowerCase();
+      a.classList.toggle("u4-sb-hidden", hay.indexOf(q) === -1);
+    }
+    for (var m = 0; m < boxes.length; m++) {
+      var anyVis = Boolean(boxes[m].querySelector("a:not(.u4-sb-hidden):not(.u4-sb-boilerplate)"));
+      boxes[m].hidden = !anyVis;
+    }
+  }
+
+  function syncLabels() {
+    var es = isEs();
+    var inp = document.getElementById("u4SbFilter");
+    if (inp) inp.placeholder = es ? "Ir a cuarto o plano…" : "Jump to room or plan…";
+    var cBtn = document.getElementById("u4SbCollapseBtn");
+    if (cBtn) {
+      var cLbl = es ? "Ocultar barra lateral ([)" : "Hide sidebar ([)";
+      cBtn.title = cLbl;
+      cBtn.setAttribute("aria-label", cLbl);
+    }
+    var eBtn = document.getElementById("u4SbExpandBtn");
+    if (eBtn) {
+      var eLbl = es ? "Mostrar barra lateral ([)" : "Show sidebar ([)";
+      eBtn.title = eLbl;
+      eBtn.setAttribute("aria-label", eLbl);
+    }
+  }
+
+  function toggleSidebarCollapse() {
+    document.body.classList.toggle("u4-rail-collapsed");
+  }
+
+  function initSidebarUx() {
+    var rail = document.getElementById("rail");
+    if (!rail) return;
+
+    var brand = rail.querySelector(".brand");
+    if (brand && !document.getElementById("u4SbCollapseBtn")) {
+      var cBtn = document.createElement("button");
+      cBtn.type = "button";
+      cBtn.id = "u4SbCollapseBtn";
+      cBtn.innerHTML = ICON_SIDEBAR;
+      cBtn.addEventListener("click", toggleSidebarCollapse);
+      brand.appendChild(cBtn);
+    }
+    if (!document.getElementById("u4SbExpandBtn")) {
+      var eBtn = document.createElement("button");
+      eBtn.type = "button";
+      eBtn.id = "u4SbExpandBtn";
+      eBtn.innerHTML = ICON_SIDEBAR;
+      eBtn.addEventListener("click", toggleSidebarCollapse);
+      document.body.appendChild(eBtn);
+    }
+    if (brand && !document.getElementById("u4SbFilter")) {
+      var wrap = document.createElement("div");
+      wrap.className = "u4-sb-search-wrap";
+      wrap.innerHTML = '<input id="u4SbFilter" type="search" autocomplete="off" spellcheck="false" aria-label="Filter navigation"><span class="u4-sb-kbd" aria-hidden="true">/</span>';
+      brand.insertAdjacentElement("afterend", wrap);
+      var inp = document.getElementById("u4SbFilter");
+      inp.addEventListener("input", function() { applyFilter(rail, inp.value); });
+      inp.addEventListener("keydown", function(ev) {
+        if (ev.key === "Escape") {
+          inp.value = "";
+          applyFilter(rail, "");
+          inp.blur();
+        } else if (ev.key === "Enter") {
+          var first = rail.querySelector("a:not(.u4-sb-hidden):not(.u4-sb-boilerplate):not(.homelink):not(.agentlink)");
+          if (first) {
+            ev.preventDefault();
+            first.click();
+            inp.value = "";
+            applyFilter(rail, "");
+            inp.blur();
+          }
+        }
+      });
+    }
+
+    cleanSubItems(rail);
+    wireInteractivePlansToggle(rail);
+    collapseInactiveRooms(rail);
+    syncLabels();
+
+    window.addEventListener("hashchange", function() {
+      setTimeout(function() {
+        cleanSubItems(rail);
+        wireInteractivePlansToggle(rail);
+        collapseInactiveRooms(rail);
+      }, 60);
+    });
+    window.addEventListener("u4:lang-change", function() {
+      setTimeout(function() {
+        cleanSubItems(rail);
+        syncLabels();
+      }, 60);
+    });
+    document.addEventListener("keydown", function(ev) {
+      if (!ev || ev.metaKey || ev.ctrlKey || ev.altKey) return;
+      var el = ev.target || document.activeElement;
+      var tag = el ? String(el.tagName || "").toUpperCase() : "";
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || (el && el.isContentEditable)) return;
+      if (ev.key === "/") {
+        var f = document.getElementById("u4SbFilter");
+        if (f) {
+          ev.preventDefault();
+          if (document.body.classList.contains("u4-rail-collapsed")) toggleSidebarCollapse();
+          f.focus();
+          f.select();
+        }
+      } else if (ev.key === "[") {
+        ev.preventDefault();
+        toggleSidebarCollapse();
+      }
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function() { setTimeout(initSidebarUx, 80); }, { once: true });
+  } else {
+    setTimeout(initSidebarUx, 80);
+  }
+})();
+/* U4_SIDEBAR_POLISH_V1_JS_END */
 </script>
 
   
