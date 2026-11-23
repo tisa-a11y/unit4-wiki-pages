@@ -160,8 +160,8 @@
           roomKey: (window.U4PLAN && window.U4PLAN.roomKey) || planId,
           document_id: (window.U4PLAN && window.U4PLAN.documentId) || planId,
           pdf_page: (window.U4PLAN && window.U4PLAN.pdfPage) || 1,
-          x_pct: typeof xPct === "number" ? xPct : null,
-          y_pct: typeof yPct === "number" ? yPct : null,
+          x_pct: typeof pin.xPct === "number" ? pin.xPct : null,
+          y_pct: typeof pin.yPct === "number" ? pin.yPct : null,
           edit_kind: "pin_correction",
           summary: "[PIN " + locTag + "] " + note,
           details: "Pinned visual correction on " + locTag + "\nURL: " + window.location.href + "\nNote: " + note,
@@ -289,7 +289,10 @@
 
         var dockAfter = targetEl.closest(".u4h-photo-grid") || targetEl;
         if (dockAfter && dockAfter.parentNode) {
-          dockAfter.parentNode.insertBefore(popEl, dockAfter.nextSibling);
+          var dDisp = "";
+          try { dDisp = getComputedStyle(dockAfter.parentNode).display || ""; } catch (_) {}
+          if (dDisp.indexOf("grid") >= 0) dockAfter = dockAfter.parentNode;
+          if (dockAfter.parentNode) dockAfter.parentNode.insertBefore(popEl, dockAfter.nextSibling);
         }
       }
 
@@ -420,6 +423,11 @@
     // Insert cleanly right before the first visual target (or inside the card right above SVG/photo)
     var first = targets[0];
     var anchor = first.closest(".u4h-photo-grid") || first;
+    if (anchor && anchor.parentNode && anchor.parentNode !== host) {
+      var pDisp = "";
+      try { pDisp = getComputedStyle(anchor.parentNode).display || ""; } catch (_) {}
+      if (pDisp.indexOf("grid") >= 0) anchor = anchor.parentNode;
+    }
     if (anchor && anchor.parentNode) {
       anchor.parentNode.insertBefore(bar, anchor);
     }
