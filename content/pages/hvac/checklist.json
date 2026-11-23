@@ -3,28 +3,28 @@
   "steps": [
     {
       "done": true,
-      "en": "NEXT HVAC's work is defined; hatch size settled at 24\" × 36\"",
-      "es": "Trabajo de NEXT HVAC definido; escotilla definida en 24\" × 36\""
+      "en": "Settled permanent hatch spot & two-plan split: 24\"×36\" clear opening outside Front Door 4 (unconditioned landing, no lid batts/dam) + horizontal sidewall exhaust basis (zero flat-roof cuts)",
+      "es": "Sitio de escotilla y 2 planos definidos: 24\"×36\" libres afuera de Puerta 4 (descanso no acondicionado, sin fibra/dique) + salida lateral horizontal (cero cortes en techo plano)"
     },
     {
       "done": false,
-      "en": "Before NEXT: keep the bedroom closet ceiling open, frame the panel wall, fix roof leaks",
-      "es": "Antes de NEXT: dejar abierto el techo del clóset, enmarcar el muro del tablero y reparar goteras"
+      "en": "Mon Nov 23 (2:00–4:00 p.m.) walkthrough with Serge & Alex: confirm furnace spot, South vs. West sidewall exhaust clearance, vibration mounts, Door 4 markout & D04 80A/100A subpanel tie-in",
+      "es": "Recorrido lun 23 nov (2:00–4:00 p.m.) con Serge y Alex: confirmar sitio del calefactor, salida lateral Sur vs. Oeste, bases antivibración, trazo Puerta 4 y conexión D04 80A/100A"
     },
     {
       "done": false,
-      "en": "Mon Nov 23, 2–4 p.m. walkthrough: confirm furnace spot, vent, hatch and panel feeder",
-      "es": "Visita lun 23 nov, 2–4 p.m.: confirmar lugar del calefactor, tiro, escotilla y alimentador"
+      "en": "Before NEXT starts: keep NW bedroom-closet opening & D04 wall open, verify flat-roof leak repair is dry, and keep ozone machine off/unplugged during placement",
+      "es": "Antes de NEXT: mantener abiertos clóset NO y muro D04, verificar seca la gotera del techo plano y dejar apagado/desconectado el generador de ozono"
     },
     {
       "done": false,
-      "en": "After opening-plan release and roof-leak/drying gates, coordinate the outside-Door4 hatch, walkway, platform, light and outlet; NEXT installs furnace and heating ducts",
-      "es": "Tras liberar plan de abertura y cumplir reparación/secado de goteras, coordinar escotilla afuera de Puerta4, pasarela, plataforma, luz y contacto; NEXT instala calefactor y ductos de calefacción"
+      "en": "Crew attic prep (after sign-off): build 24\"×36\" Door 4 hatch (uninsulated 3/4\" lid + foam gasket), 15.8 ft walkway, 30\"×30\" platform, switched LED light & 120V GFCI outlet within 25 ft",
+      "es": "Preparación en ático (tras visto bueno): armar escotilla 24\"×36\" (tapa 3/4\" sin aislante + empaque), pasillo 15.8 pies, plataforma 30\"×30\", luz LED y contacto GFCI 120V ≤ 25 pies"
     },
     {
       "done": false,
-      "en": "After NEXT: inspections, close the closet ceiling, paint",
-      "es": "Después de NEXT: inspecciones, cerrar el techo del clóset y pintar"
+      "en": "After NEXT install & HERS/City sign-off: close NW bedroom-closet ceiling (after thermostat cable + permanent hatch) and patch/paint ceilings & D04",
+      "es": "Tras instalación NEXT y pruebas HERS/Ciudad: cerrar techo del clóset NO (tras cable de termostato + escotilla) y resanar/pintar plafones y D04"
     }
   ],
   "items": [

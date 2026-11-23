@@ -12,7 +12,7 @@
   <a class="u4-plan-launch-card" href="#plan:attic-hatch">
     <span class="u4-plan-launch-kicker">Interactive Plan 1 · Carpentry &amp; Framing</span>
     <strong class="u4-plan-launch-title">Attic Hatch, Wood Walkway &amp; Platform</strong>
-    <span class="u4-plan-launch-desc">24&quot; &times; 36&quot; clear opening outside Front Door 4, ceiling framing hold, insulated air-sealed lid &amp; 15.8 ft wood walkway.</span>
+    <span class="u4-plan-launch-desc">24&quot; &times; 36&quot; clear opening outside Front Door 4 (unconditioned landing — no lid batts or dam), framing hold &amp; 15.8 ft walkway.</span>
     <span class="u4-plan-launch-cta">Open Attic Hatch Plan &rarr;</span>
   </a>
 </div>
@@ -35,9 +35,9 @@
       <div class="u4-phase-badge is-crew">Our Crew Carpentry &amp; Finish Scope</div>
       <h3>Our Crew Builds Access &amp; Repairs Finishes (In Order)</h3>
       <ol>
-        <li><strong>Before NEXT starts:</strong> Keep the bedroom-closet ceiling opening (<a href="https://app.todoist.com/app/task/6j3j3pXFrFWhH2w7" target="_blank" rel="noopener">task</a>) and <code>D04</code> subpanel wall (<a href="https://app.todoist.com/app/task/6hvRcQ4XC9mr56g7" target="_blank" rel="noopener">task</a>) open; repair and dry-check the flat-roof leak; keep the ozone machine off and unplugged (<a href="https://app.todoist.com/app/task/6j4MQwqCqp24hX57" target="_blank" rel="noopener">task</a>).</li>
-        <li><strong>Coordinate with NEXT (after Monday sign-off):</strong> Build the permanent <code>24&quot; &times; 36&quot;</code> clear hatch outside Front Door 4 (<a href="https://app.todoist.com/app/task/6j3Rf8FVhMVQ7vQf" target="_blank" rel="noopener">task</a>), the <code>15.8 ft</code> continuous <code>24&quot;</code> wood walkway (<a href="https://app.todoist.com/app/task/6j3RvWq3q6RRFXf7" target="_blank" rel="noopener">task</a>), the level <code>30&quot; &times; 30&quot;</code> wood service platform (<a href="https://app.todoist.com/app/task/6j3j3pqfM4GC53Qf" target="_blank" rel="noopener">task</a>), the <code>120V</code> GFCI outlet within <code>25 ft</code> (<a href="https://app.todoist.com/app/task/6j3RvWhHcpMmCjP7" target="_blank" rel="noopener">task</a>), and the permanent switched LED attic light (<a href="https://app.todoist.com/app/task/6hvjQJgpw2W5VcQf" target="_blank" rel="noopener">task</a>).</li>
-        <li><strong>After testing:</strong> Close the bedroom-closet ceiling only after both the low-voltage thermostat cable and permanent hatch are complete (<a href="https://app.todoist.com/app/task/6j3Rf89g8M6hPPx7" target="_blank" rel="noopener">task</a>), then patch and paint ceilings and <code>D04</code> (<a href="https://app.todoist.com/app/task/6hvj3CgXpVqrJgvf" target="_blank" rel="noopener">task</a>).</li>
+        <li><strong>Before NEXT starts:</strong> Keep the NW bedroom-closet ceiling opening (<code>X=315.4&quot;&ndash;352.0&quot;, Y=5.4&quot;&ndash;88.0&quot;</code>, <a href="https://app.todoist.com/app/task/6j3j3pXFrFWhH2w7" target="_blank" rel="noopener">task</a>) and <code>D04</code> subpanel wall (<a href="https://app.todoist.com/app/task/6hvRcQ4XC9mr56g7" target="_blank" rel="noopener">task</a>) open; repair and dry-check the flat-roof leak; keep the ozone machine off and unplugged (<a href="https://app.todoist.com/app/task/6j4MQwqCqp24hX57" target="_blank" rel="noopener">task</a>).</li>
+        <li><strong>Coordinate with NEXT (after Monday sign-off):</strong> Build the permanent <code>24&quot; &times; 36&quot;</code> clear hatch on the unconditioned landing outside Front Door 4 (snug <code>3/4&quot;</code> plywood lid + foam dust gasket, no lid batts or dam; <a href="https://app.todoist.com/app/task/6j3Rf8FVhMVQ7vQf" target="_blank" rel="noopener">task</a>), the <code>15.8 ft</code> continuous <code>24&quot;</code> wood walkway (<a href="https://app.todoist.com/app/task/6j3RvWq3q6RRFXf7" target="_blank" rel="noopener">task</a>), the level <code>30&quot; &times; 30&quot;</code> wood service platform (<a href="https://app.todoist.com/app/task/6j3j3pqfM4GC53Qf" target="_blank" rel="noopener">task</a>), the <code>120V</code> GFCI outlet within <code>25 ft</code> (<a href="https://app.todoist.com/app/task/6j3RvWhHcpMmCjP7" target="_blank" rel="noopener">task</a>), and the permanent switched LED attic light (<a href="https://app.todoist.com/app/task/6hvjQJgpw2W5VcQf" target="_blank" rel="noopener">task</a>).</li>
+        <li><strong>After testing:</strong> Close the NW bedroom-closet ceiling only after both the low-voltage thermostat cable and permanent hatch are complete (<a href="https://app.todoist.com/app/task/6j3Rf89g8M6hPPx7" target="_blank" rel="noopener">task</a>), then patch and paint ceilings and <code>D04</code> (<a href="https://app.todoist.com/app/task/6hvj3CgXpVqrJgvf" target="_blank" rel="noopener">task</a>).</li>
       </ol>
     </div>
   </div>
@@ -62,13 +62,13 @@
     <a class="u4-plan-launch-card" href="#attic-access">
       <span class="u4-plan-launch-kicker">Related Wiki Room Page</span>
       <strong class="u4-plan-launch-title">Attic Access, Walkway &amp; Service Platform</strong>
-      <span class="u4-plan-launch-desc">Five carpentry &amp; air-sealing rules, lumber sheet counts, Edwardian trim protection, and crew checklist.</span>
+      <span class="u4-plan-launch-desc">Carpentry &amp; dust-gasket rules, lumber sheet counts, Edwardian trim protection, and crew checklist.</span>
       <span class="u4-plan-launch-cta">Go to Attic Access Page &rarr;</span>
     </a>
     <a class="u4-plan-launch-card is-primary" href="#plan:attic-hatch">
       <span class="u4-plan-launch-kicker">Interactive Plan 1</span>
       <strong class="u4-plan-launch-title">Attic Hatch, Wood Walkway &amp; Platform</strong>
-      <span class="u4-plan-launch-desc">True-scale walkway map, Door 4 ceiling framing checks, insulated lid cross-section &amp; pre-cut gates.</span>
+      <span class="u4-plan-launch-desc">True-scale walkway map (pinned NW bedroom closet), Door 4 ceiling framing checks, uninsulated lid section &amp; pre-cut gates.</span>
       <span class="u4-plan-launch-cta">Launch Interactive Plan 1 &rarr;</span>
     </a>
   </div>
@@ -78,7 +78,7 @@
   <summary>Field dimensions &amp; lumber notes</summary>
   <ul>
     <li><strong>Furnace fit (<code>33.25&quot; &times; 14.19&quot; &times; 29&quot;</code>):</strong> Passes end-first (<code>14.19&quot; &times; 29&quot;</code>) through the full <code>24&quot; &times; 36&quot;</code> clear opening. Avoid nominal <code>24&quot;&times;36&quot;</code> metal doors whose frame shrinks clear passage below <code>24&quot; &times; 36&quot;</code>.</li>
-    <li><strong>Walkway &amp; platform lumber:</strong> At <code>66&quot;</code> flat-roof attic height, the <code>24&quot;</code> continuous walkway stays <code>20 ft</code> or shorter (<code>15.8 ft</code> to Southwest Dining). Use <code>3</code> sheets of <code>23/32&quot;</code> OSB or <code>3/4&quot;</code> structural plywood for the walkway (<code>1</code> strip per sheet; never <code>3/8&quot;</code> plywood) plus <code>1</code> sheet for the <code>30&quot; &times; 30&quot;</code> service platform and <code>4</code>-sided insulation dam.</li>
-    <li><strong>Interactive plans:</strong> Open <a href="#plan:attic-hatch">Plan 1: Attic Hatch, Wood Walkway &amp; Platform</a> for framing and air-sealing, or <a href="#plan:hvac-layout">Plan 2: Heating System &mdash; Furnace, Ducts &amp; Sidewall Exhaust</a> for room ductwork and sidewall exhaust.</li>
+    <li><strong>Walkway &amp; platform lumber:</strong> At <code>66&quot;</code> flat-roof attic height, the <code>24&quot;</code> continuous walkway stays <code>20 ft</code> or shorter (<code>15.8 ft</code> to Southwest Dining). Use <code>3</code> sheets of <code>23/32&quot;</code> OSB or <code>3/4&quot;</code> structural plywood for the walkway (<code>1</code> strip per sheet; never <code>3/8&quot;</code> plywood) plus <code>1</code> sheet for the <code>30&quot; &times; 30&quot;</code> service platform and hatch lid (no insulation dam or lid batts needed above the unconditioned Door 4 stair landing).</li>
+    <li><strong>Interactive plans:</strong> Open <a href="#plan:attic-hatch">Plan 1: Attic Hatch, Wood Walkway &amp; Platform</a> for framing and lid details, or <a href="#plan:hvac-layout">Plan 2: Heating System &mdash; Furnace, Ducts &amp; Sidewall Exhaust</a> for room ductwork and sidewall exhaust.</li>
   </ul>
 </details>

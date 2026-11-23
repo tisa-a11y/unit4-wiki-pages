@@ -3,33 +3,33 @@
   "steps": [
     {
       "done": true,
-      "en": "Hatch location on common landing outside Front Door 4 and 24\" × 36\" finished-clear size are settled",
-      "es": "Ya se definieron el descanso común afuera de la puerta 4 y los 24\" × 36\" libres terminados"
+      "en": "Permanent spot & uninsulated-lid basis set: 24\"×36\" finished-clear hatch on unconditioned landing outside Front Door 4 (lid insulation & perimeter dam retired) + pinned NW bedroom-closet location (X=315.4\"–352.0\", Y=5.4\"–88.0\")",
+      "es": "Sitio permanente y base sin aislante definidos: escotilla de 24\"×36\" libres en descanso no acondicionado afuera de Puerta 4 (fibra y dique retirados) + clóset NO corregido (X=315.4\"–352.0\", Y=5.4\"–88.0\")"
     },
     {
       "done": false,
-      "en": "Complete the opening plan first: exact common-landing markout outside Front Door 4, offsets, joists/support, ceiling assembly/fire protection and lift-route photos; size remains 24×36 inches finished clear",
-      "es": "Completar primero el plan de abertura: trazo exacto en descanso común afuera de Puerta4, distancias, vigas/apoyos, techo/protección contra fuego y fotos de maniobra; siguen24×36 pulgadas libres terminadas"
+      "en": "Walkthrough check (Mon Nov 23, 2–4 p.m.): Confirm Door 4 markout offsets, ceiling fire-rating, joist bay spacing & open NW bedroom-closet passage before cutting",
+      "es": "Revisión en sitio (lun 23 nov, 2–4 p.m.): Confirmar trazo afuera de Puerta 4, cortafuego, separación de vigas y paso en clóset NO antes de cortar"
     },
     {
       "done": false,
-      "en": "After plan release, build the selected 24×36-inch finished-clear hatch assembly; no ceiling cut or wood-kit purchase before framing/fire gates pass",
-      "es": "Tras liberar el plan, construir ensamble elegido de24×36 pulgadas libres terminadas; no cortar techo ni comprar kit de madera antes de verificar estructura/fuego"
+      "en": "Confirm flat-roof leak repair is dry, then build 24\"×36\" clear hatch with snug 3/4\" plywood lid, 1/2\"×1/8\" foam dust gasket & 4 latches outside clear (or listed 24\"×36\" clear fire door if fire-rated)",
+      "es": "Confirmar seca la gotera del techo plano y armar escotilla de 24\"×36\" libres con tapa de triplay 3/4\", empaque de espuma 1/2\"×1/8\" y 4 broches fuera del claro (o puerta cortafuego listada de 24\"×36\" libres si aplica)"
     },
     {
       "done": false,
-      "en": "Build the 24\" walkway (20 ft max)",
-      "es": "Construir la pasarela de 24\" (máx. 20 pies)"
+      "en": "Install continuous 24\" wood walkway (15.8 ft = 3 sheets of 23/32\" OSB or 3/4\" structural plywood; never 3/8\")",
+      "es": "Instalar pasillo continuo de 24\" (15.8 pies = 3 hojas de OSB 23/32\" o triplay estructural 3/4\"; nunca 3/8\")"
     },
     {
       "done": false,
-      "en": "Build the 30\" × 30\" platform; wire the light, switch and outlet",
-      "es": "Construir la plataforma de 30\" × 30\"; cablear luz, apagador y contacto"
+      "en": "Build level 30\"×30\" North service platform (1 sheet) + permanent switched enclosed LED light & 120V GFCI outlet within 25 ft",
+      "es": "Construir plataforma Norte de 30\"×30\" (1 hoja) + lámpara LED cerrada con apagador y contacto GFCI 120V a ≤ 25 pies"
     },
     {
       "done": false,
-      "en": "Close the bedroom closet ceiling only after the cable and the hatch are in",
-      "es": "Cerrar el techo del clóset solo cuando estén el cable y la escotilla"
+      "en": "Close NW bedroom-closet ceiling only after thermostat cable, furnace passage & permanent Door 4 hatch are finished",
+      "es": "Cerrar techo del clóset NO solo cuando estén listos el cable de termostato, el paso del equipo y la escotilla permanente"
     }
   ],
   "items": [
@@ -48,8 +48,8 @@
     {
       "id": "attic-access-r7-03",
       "done": false,
-      "en": "Confirm flat-roof leak repair is dry, then build 24\"×36\" clear hatch, 4-sided dam, foam weatherstrip & unfaced batts",
-      "es": "Confirmar seca la gotera del techo plano y armar escotilla 24\"×36\" libres, dique en 4 lados, empaque y colchonetas"
+      "en": "Confirm flat-roof leak repair is dry, then build 24\"×36\" clear hatch, 1x2 gasket ledger (no lid batts or dam), foam weatherstrip & unfaced batts",
+      "es": "Confirmar seca la gotera del techo plano y armar escotilla 24\"×36\" libres, 1x2 gasket ledger (no lid batts or dam), empaque y colchonetas"
     },
     {
       "id": "attic-access-r7-04",

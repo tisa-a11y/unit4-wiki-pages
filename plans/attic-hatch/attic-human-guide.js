@@ -1,20 +1,20 @@
 /* ============================================================================
-   Plan 1: Attic Hatch, Wood Walkway & Service Platform (R7 Dark-Mode & UI Polish)
-   4 Focused Carpentry & Enclosure Views:
-     1. Walkway Map (24"×36" clear hatch outside Door 4 + draggable 30"×30" platform)
+   Plan 1: Attic Hatch, Wood Walkway & Service Platform (R8 Pin & Uninsulated Lid)
+   4 Focused Carpentry Views:
+     1. Walkway Map (24"×36" hatch outside Door 4 + pinned NW Bedroom Closet + draggable 30"×30" platform)
      2. Door 4 Framing (full-width framing SVG + uncropped upright Door 4 landing photo)
-     3. Lid & Air Seal (cross-section SVG + air-seal rules + Equipment & Supplies drawer)
+     3. Lid & Lumber (uninsulated 3/4" plywood lid + foam dust gasket + walkway/platform lumber)
      4. Pre-Cut Checks (interactive crew pre-cut hold checklist)
-   Zero Ductwork Clutter · Zero Walkthrough Tab · Zero Prices · EN / MX-ES
+   Zero Lid Batts/Dam · Pinned NW Closet (X=315.4–352.0, Y=5.4–88.0) · Zero Prices · EN / MX-ES
    ============================================================================ */
 (function () {
   "use strict";
 
   var STEPS = [
-    { id: "map", en: "1. Walkway Map", es: "1. Mapa y Pasillo" },
-    { id: "framing", en: "2. Door 4 Framing", es: "2. Marco Puerta 4" },
-    { id: "seal", en: "3. Lid & Air Seal", es: "3. Tapa y Sellado" },
-    { id: "checks", en: "4. Pre-Cut Checks", es: "4. Candados de Corte" }
+    { id: "map",     en: "1. Walkway Map",     es: "1. Mapa y Pasillo" },
+    { id: "framing", en: "2. Door 4 Framing",  es: "2. Marco Puerta 4" },
+    { id: "seal",    en: "3. Lid & Lumber",    es: "3. Tapa y Madera" },
+    { id: "checks",  en: "4. Pre-Cut Checks",  es: "4. Candados de Corte" }
   ];
 
   var SC = 0.86;
@@ -53,7 +53,10 @@
   };
 
   function isEs() {
-    return window.U4PlanNav ? window.U4PlanNav.getLang() === "es" : false;
+    if (window.U4PlanNav && typeof window.U4PlanNav.getLang === "function") {
+      return window.U4PlanNav.getLang() === "es";
+    }
+    return String(document.documentElement.lang || "").toLowerCase().indexOf("es") === 0;
   }
 
   function esc(s) {
@@ -76,17 +79,17 @@
     if (fPos.x >= 162 && fPos.x <= 192 && platEdgeY >= hatchMidY) {
       pts = [
         { x: hatchEastX, y: hatchMidY },
-        { x: fPos.x, y: hatchMidY },
-        { x: fPos.x, y: platEdgeY }
+        { x: fPos.x,     y: hatchMidY },
+        { x: fPos.x,     y: platEdgeY }
       ];
     } else {
       var entryX = 170;
       pts = [
         { x: hatchEastX, y: hatchMidY },
-        { x: entryX, y: hatchMidY },
-        { x: entryX, y: hallSpineY },
-        { x: fPos.x, y: hallSpineY },
-        { x: fPos.x, y: platEdgeY }
+        { x: entryX,     y: hatchMidY },
+        { x: entryX,     y: hallSpineY },
+        { x: fPos.x,     y: hallSpineY },
+        { x: fPos.x,     y: platEdgeY }
       ];
     }
 
@@ -126,37 +129,37 @@
       { col: "#1f5f7a", lbl: es ? 'Escotilla 24"×36" (Afuera Puerta 4)' : '24"×36" Clear Hatch (Outside Door 4)' },
       { col: "#d99b52", lbl: es ? 'Pasillo Continuo Madera 24"' : '24" Continuous Wood Walkway' },
       { col: "#2f6b3f", lbl: es ? 'Plataforma Servicio 30"×30"' : '30"×30" Wood Service Platform' },
-      { col: "#9a5b06", lbl: es ? "Clóset Temp. (Mantener Abierto)" : "Temp. Closet Opening (Keep Open)" }
+      { col: "#9a5b06", lbl: es ? "Clóset NO Temp. (Mantener Abierto)" : "NW Temp. Closet (Keep Open)" }
     ];
     return '<div class="u4h-legend-row">' +
       items.map(function (it) {
         return '<span class="u4h-legend-chip"><span class="u4h-legend-dot" style="background:' + it.col + '"></span>' + esc(it.lbl) + "</span>";
       }).join("") +
-    "</div>";
+      "</div>";
   }
 
   function renderEquipDrawer(m, es) {
     var rows = es
       ? [
           m.walkSheets + ' hojas 4×8 de OSB estructural 23/32" o triplay CDX 3/4" para el pasillo de 24" (1 tira por hoja; nunca triplay 3/8").',
-          '1 hoja 4×8 adicional de triplay 3/4" para la plataforma nivelada de 30" × 30" (lado Norte) y el dique de 4 lados (+2").',
-          'Tiras limpias de 1×2 + empaque continuo de espuma cerrada de 1/2" × 1/8" + cordón de respaldo de 3/8" y sellador.',
-          '2 colchonetas de fibra de vidrio sin papel + 3 lazos sueltos de alambre calibre 16 + broches fuera del claro de 24" × 36".',
+          '1 hoja 4×8 adicional de triplay 3/4" para la plataforma nivelada de 30" × 30" (lado Norte) y la tapa removible (sin fibra ni dique sobre el descanso no acondicionado).',
+          'Tiras limpias de 1×2 + empaque continuo de espuma cerrada de 1/2" × 1/8" + cordón de respaldo de 3/8" y sellador en el marco fijo.',
+          '4 broches de compresión montados fuera del claro libre de 24" × 36" (o puerta cortafuego listada de 24" × 36" libres si aplica).',
           '1 lámpara LED cerrada permanente con apagador junto a la escotilla + 1 contacto GFCI 120V a ≤ 25 pies del calefactor.'
         ]
       : [
           m.walkSheets + ' sheets (4×8) of 23/32" rated OSB or 3/4" structural plywood for the 24" walkway (1 strip per sheet; never 3/8" ply).',
-          '1 additional 4×8 sheet of 3/4" plywood for the level 30" × 30" North service platform and 4-sided insulation dam (+2").',
-          'Clean 1×2 ledger strips + continuous 1/2" × 1/8" closed-cell foam gasket + 3/8" backer rod and caulk for fixed outer frame.',
-          '2 unfaced fiberglass batts + 3 loose 16-gauge wire loops + compression latches mounted outside the 24" × 36" clear opening.',
+          '1 additional 4×8 sheet of 3/4" plywood for the level 30" × 30" North service platform and removable lid (no lid batts or dam above unconditioned Door 4 landing).',
+          'Clean 1×2 ledger strips + continuous 1/2" × 1/8" closed-cell foam dust gasket + 3/8" backer rod and caulk for fixed outer frame.',
+          '4 compression latches mounted outside the 24" × 36" clear opening (or listed 24" × 36" clear fire door if ceiling is fire-rated).',
           '1 permanent switched enclosed LED utility light near hatch + 1 line-side 120V GFCI outlet within 25 ft of furnace.'
         ];
     return '<details class="u4h-equip-wrap">' +
-      '<summary class="u4h-equip-btn"><span>' + (es ? "Equipo y suministros (Carpintería y Sellado)" : "Equipment & Supplies (Carpentry & Air Seal)") + '</span><span>▾</span></summary>' +
+      '<summary class="u4h-equip-btn"><span>' + (es ? "Equipo y suministros (Carpintería y Tapa)" : "Equipment & Supplies (Carpentry & Lid)") + '</span><span>▾</span></summary>' +
       '<div class="u4h-equip-body"><ul class="u4h-info-list">' +
-        rows.map(function (r) { return "<li>" + esc(r) + "</li>"; }).join("") +
+      rows.map(function (r) { return "<li>" + esc(r) + "</li>"; }).join("") +
       "</ul></div>" +
-    "</details>";
+      "</details>";
   }
 
   function renderCarpentryMapSvg(m, es) {
@@ -170,8 +173,10 @@
     var pS = +(30 * SC).toFixed(1);
     var walkCol = m.walkPass ? "#2f6b3f" : "#a8281c";
     var walkFill = m.walkPass ? "#e4f0e6" : "#f9e6e4";
+    var clX = px(315.4), clY = py(5.4), clW = +(36.6 * SC).toFixed(1), clH = +(82.6 * SC).toFixed(1);
+    var clMidX = +(clX + clW / 2).toFixed(1);
 
-    return '<svg id="atticWalkwaySvg" viewBox="0 0 516 344" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + esc(es ? "Mapa a escala de escotilla 24x36 afuera de Puerta 4, pasillo de madera de 24 pulgadas y plataforma de 30x30" : "True-scale map of 24x36 hatch outside Door 4, 24-inch wood walkway and 30x30 service platform") + '" style="touch-action:none">' +
+    return '<svg id="atticWalkwaySvg" viewBox="0 0 516 344" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + esc(es ? "Mapa a escala de escotilla 24x36 afuera de Puerta 4, clóset NO temporal, pasillo de madera de 24 pulgadas y plataforma de 30x30" : "True-scale map of 24x36 hatch outside Door 4, pinned NW bedroom closet, 24-inch wood walkway and 30x30 service platform") + '" style="touch-action:none">' +
       '<text x="14" y="18" font-size="8.4" font-weight="800" fill="#1f5f7a">' +
         (es ? 'PLANTA DE ÁTICO A ESCALA · ESCOTILLA 24"×36" (PUERTA 4) + PASILLO 24" + PLATAFORMA 30"×30"'
             : 'TRUE-SCALE ATTIC MAP · 24"×36" HATCH (OUTSIDE DOOR 4) + 24" WALKWAY + 30"×30" PLATFORM') + "</text>" +
@@ -199,11 +204,14 @@
       '<rect x="' + px(279.1) + '" y="' + py(5.4) + '" width="' + +(36.3 * SC).toFixed(1) + '" height="' + +(82.6 * SC).toFixed(1) + '" fill="#fbfcfb" stroke="#8a969b" stroke-width="1.2"/>' +
       '<text x="' + px(297.2) + '" y="' + py(47) + '" text-anchor="middle" font-size="6.0" font-weight="700" fill="#5d686d">' + (es ? "Lav." : "Laundry") + "</text>" +
 
-      '<path d="M ' + px(315.4) + " " + py(0) + " L " + px(437.5) + " " + py(0) + " L " + px(474) + " " + py(34) + " L " + px(474) + " " + py(96) + " L " + px(437.5) + " " + py(136) + " L " + px(352) + " " + py(136) + " L " + px(352) + " " + py(88) + " L " + px(315.4) + " " + py(88) + ' Z" fill="#fbfcfb" stroke="#8a969b" stroke-width="1.2"/>' +
-      '<text x="' + px(398) + '" y="' + py(54) + '" text-anchor="middle" font-size="8.0" font-weight="700" fill="#5d686d">' + (es ? "Recámara" : "Bedroom") + "</text>" +
+      /* Reconciled NW Bedroom Closet niche (X=315.4..352.0, Y=5.4..88.0 — pin 61.6%, 22.3%) */
+      '<rect x="' + clX + '" y="' + clY + '" width="' + clW + '" height="' + clH + '" rx="2.5" fill="#fdf6e7" stroke="#9a5b06" stroke-width="1.5" stroke-dasharray="4 2"/>' +
+      '<text x="' + clMidX + '" y="' + (clY + 26).toFixed(1) + '" text-anchor="middle" font-size="5.5" font-weight="800" fill="#9a5b06">' + (es ? "Clóset" : "Temp.") + "</text>" +
+      '<text x="' + clMidX + '" y="' + (clY + 34).toFixed(1) + '" text-anchor="middle" font-size="5.5" font-weight="800" fill="#9a5b06">' + (es ? "temp." : "Closet") + "</text>" +
+      '<text x="' + clMidX + '" y="' + (clY + 42).toFixed(1) + '" text-anchor="middle" font-size="5.2" font-weight="700" fill="#9a5b06">' + (es ? "(Abierto)" : "(Open)") + "</text>" +
 
-      '<rect x="' + px(355) + '" y="' + py(94) + '" width="58" height="17" rx="3" fill="#fdf6e7" stroke="#9a5b06" stroke-width="1.1" stroke-dasharray="3 2"/>' +
-      '<text x="' + (px(355) + 29) + '" y="' + (py(94) + 11) + '" text-anchor="middle" font-size="5.6" font-weight="800" fill="#9a5b06">' + (es ? "Clóset temp. (Abierto)" : "Temp. Closet (Open)") + "</text>" +
+      '<path d="M ' + px(352) + " " + py(0) + " L " + px(437.5) + " " + py(0) + " L " + px(474) + " " + py(34) + " L " + px(474) + " " + py(96) + " L " + px(437.5) + " " + py(136) + " L " + px(352) + " " + py(136) + ' Z" fill="#fbfcfb" stroke="#8a969b" stroke-width="1.2"/>' +
+      '<text x="' + px(410) + '" y="' + py(66) + '" text-anchor="middle" font-size="8.0" font-weight="700" fill="#5d686d">' + (es ? "Recámara" : "Bedroom") + "</text>" +
 
       '<rect x="' + px(147) + '" y="' + py(142) + '" width="' + +(146.7 * SC).toFixed(1) + '" height="' + +(155.75 * SC).toFixed(1) + '" fill="#fbfcfb" stroke="#8a969b" stroke-width="1.2"/>' +
       '<text x="' + px(246) + '" y="' + py(166) + '" text-anchor="middle" font-size="8.0" font-weight="700" fill="#5d686d">' + (es ? "Comedor" : "Dining Room") + "</text>" +
@@ -234,8 +242,8 @@
 
       '<rect id="atticWalkPill" x="14" y="313" width="488" height="21" rx="5" fill="' + walkFill + '" stroke="' + walkCol + '" stroke-width="1.1"/>' +
       '<text id="atticWalkPillTxt" x="258" y="326.5" text-anchor="middle" font-size="7.2" font-weight="800" fill="' + walkCol + '">' +
-        (es ? 'Pasillo continuo 24": ' + m.walkFt + ' pies (máx. 20 pies) · ' + m.walkSheets + ' hojas pasillo + 1 hoja plataforma y dique'
-            : 'Continuous 24" wood walkway: ' + m.walkFt + ' ft (20 ft max) · ' + m.walkSheets + ' walkway sheets + 1 sheet platform & dam') +
+        (es ? 'Pasillo continuo 24": ' + m.walkFt + ' pies (máx. 20 pies) · ' + m.walkSheets + ' hojas pasillo + 1 hoja plataforma 30"×30"'
+            : 'Continuous 24" wood walkway: ' + m.walkFt + ' ft (20 ft max) · ' + m.walkSheets + ' walkway sheets + 1 sheet 30"×30" platform') +
       "</text>" +
     "</svg>";
   }
@@ -280,25 +288,35 @@
   }
 
   function renderAirSealSvg(es) {
-    return '<svg viewBox="0 0 470 214" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + esc(es ? "Corte de tapa aislada de triplay de 3/4, empaque de espuma y dique de 4 lados" : "Cross-section of 3/4 plywood insulated lid, foam weatherstrip and 4-sided dam") + '">' +
-      '<text x="235" y="17" text-anchor="middle" font-size="8.6" font-weight="800" fill="#1f5f7a">' +
-        (es ? 'CORTE DE ESCOTILLA: TAPA DE TRIPLAY 3/4", EMPAQUE Y DIQUE DE 4 LADOS' : 'HATCH SECTION: 3/4" PLYWOOD LID, FOAM GASKET & 4-SIDED DAM') + "</text>" +
-      '<rect x="24" y="88" width="92" height="54" fill="#f7ecd9" stroke="#9a5b06" stroke-width="1" stroke-dasharray="3 2"/>' +
-      '<rect x="354" y="88" width="92" height="54" fill="#f7ecd9" stroke="#9a5b06" stroke-width="1" stroke-dasharray="3 2"/>' +
-      '<text x="70" y="118" text-anchor="middle" font-size="7.3" font-weight="700" fill="#9a5b06">' + (es ? "Aislante del ático" : "Attic insulation") + "</text>" +
-      '<rect x="116" y="56" width="11" height="98" fill="#d9a86c" stroke="#7c4d12" stroke-width="1.4"/>' +
-      '<rect x="343" y="56" width="11" height="98" fill="#d9a86c" stroke="#7c4d12" stroke-width="1.4"/>' +
-      '<text x="360" y="70" font-size="7.4" font-weight="800" fill="#7c4d12">' + (es ? 'Dique +2" (4 lados)' : '4-sided dam (+2")') + "</text>" +
-      '<rect x="136" y="74" width="198" height="44" rx="4" fill="#fce7f3" stroke="#be185d" stroke-width="1.4"/>' +
-      '<text x="235" y="100" text-anchor="middle" font-size="7.9" font-weight="800" fill="#9d174d">' + (es ? "2 colchonetas sin papel + 3 lazos alambre cal. 16" : "2 unfaced fiberglass batts + 3 loose 16-ga wire loops") + "</text>" +
-      '<rect x="132" y="122" width="206" height="16" fill="#e3eef2" stroke="#1f5f7a" stroke-width="1.8"/>' +
-      '<text x="235" y="133" text-anchor="middle" font-size="7.6" font-weight="800" fill="#1f5f7a">' + (es ? 'Tapa triplay 3/4" (dejar junta SIN sellador)' : '3/4" plywood lid (leave removable seam UNCAULKED)') + "</text>" +
-      '<rect x="127" y="138" width="22" height="10" fill="#2f6b3f"/>' +
-      '<rect x="321" y="138" width="22" height="10" fill="#2f6b3f"/>' +
-      '<line x1="24" y1="154" x2="127" y2="154" stroke="#1d2326" stroke-width="2.3"/>' +
-      '<line x1="343" y1="154" x2="446" y2="154" stroke="#1d2326" stroke-width="2.3"/>' +
-      '<text x="235" y="175" text-anchor="middle" font-size="7.8" font-weight="800" fill="#2f6b3f">' + (es ? 'Empaque espuma 1/2"×1/8" sobre tiras 1×2 · Cordón 3/8" + sellador en marco fijo' : '1/2"×1/8" closed-cell foam gasket on 1×2 strips · Caulk fixed outer frame') + "</text>" +
-      '<text x="235" y="196" text-anchor="middle" font-size="7.4" font-weight="600" fill="#5d686d">' + (es ? "Confirmar seca la reparación del techo plano antes de colocar el aislante" : "Confirm flat-roof leak repair is completely dry before placing insulation") + "</text>" +
+    return '<svg viewBox="0 0 470 204" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + esc(es ? "Corte de tapa de triplay de 3/4 sin aislante, empaque guardapolvo de espuma y broches fuera del claro" : "Cross-section of uninsulated 3/4 plywood lid, closed-cell foam dust gasket and latches outside clear opening") + '">' +
+      '<text x="235" y="17" text-anchor="middle" font-size="8.4" font-weight="800" fill="#1f5f7a">' +
+        (es ? 'CORTE DE ESCOTILLA (DESCANSO NO ACONDICIONADO): TAPA 3/4" + EMPAQUE (SIN FIBRA NI DIQUE)'
+            : 'UNCONDITIONED LANDING HATCH: SNUG 3/4" PLYWOOD LID + FOAM GASKET (NO BATTS OR DAM)') + "</text>" +
+      '<rect x="30" y="54" width="410" height="44" rx="5" fill="#f4f5f3" stroke="#98a4a8" stroke-width="1.1" stroke-dasharray="4 3"/>' +
+      '<text x="235" y="74" text-anchor="middle" font-size="7.8" font-weight="800" fill="#1f5f7a">' +
+        (es ? "Ático sobre descanso común no acondicionado afuera de Puerta Principal 4"
+            : "Attic above unconditioned common stair landing outside Front Door 4") + "</text>" +
+      '<text x="235" y="88" text-anchor="middle" font-size="7.1" font-weight="700" fill="#5d686d">' +
+        (es ? "Cero aislante en tapa · Cero alambres/armellas · Cero dique perimetral (Código Energía CA §160.1(a))"
+            : "Zero lid insulation · Zero wire loops/screw eyes · Zero perimeter dam (2025 CA Energy Code §160.1(a))") + "</text>" +
+      '<rect x="114" y="106" width="13" height="46" fill="#d9a86c" stroke="#7c4d12" stroke-width="1.4"/>' +
+      '<rect x="343" y="106" width="13" height="46" fill="#d9a86c" stroke="#7c4d12" stroke-width="1.4"/>' +
+      '<rect x="132" y="116" width="206" height="18" rx="2" fill="#e3eef2" stroke="#1f5f7a" stroke-width="1.9"/>' +
+      '<text x="235" y="128" text-anchor="middle" font-size="7.6" font-weight="800" fill="#1f5f7a">' +
+        (es ? 'Tapa triplay 3/4" ajustada (dejar junta SIN sellador · probar 2 veces)'
+            : 'Snug 3/4" plywood lid (leave removable seam UNCAULKED · test twice)') + "</text>" +
+      '<rect x="127" y="134" width="22" height="10" fill="#2f6b3f"/>' +
+      '<rect x="321" y="134" width="22" height="10" fill="#2f6b3f"/>' +
+      '<rect x="94" y="140" width="18" height="9" rx="2" fill="#1d2326"/>' +
+      '<rect x="358" y="140" width="18" height="9" rx="2" fill="#1d2326"/>' +
+      '<line x1="24" y1="152" x2="127" y2="152" stroke="#1d2326" stroke-width="2.3"/>' +
+      '<line x1="343" y1="152" x2="446" y2="152" stroke="#1d2326" stroke-width="2.3"/>' +
+      '<text x="235" y="172" text-anchor="middle" font-size="7.7" font-weight="800" fill="#2f6b3f">' +
+        (es ? 'Empaque espuma cerrada 1/2"×1/8" sobre tiras 1×2 · 4 broches fuera del claro 24"×36"'
+            : '1/2"×1/8" closed-cell foam dust gasket on 1×2 strips · 4 latches outside 24"×36" clear') + "</text>" +
+      '<text x="235" y="191" text-anchor="middle" font-size="7.2" font-weight="600" fill="#5d686d">' +
+        (es ? "Si el descanso requiere plafón cortafuego: instalar puerta cortafuego listada con 24\"×36\" libres reales"
+            : "If landing ceiling is fire-rated: use listed fire-rated access door preserving full 24\"×36\" clear") + "</text>" +
     "</svg>";
   }
 
@@ -345,8 +363,8 @@
       if (ptxt) {
         ptxt.setAttribute("fill", walkCol);
         ptxt.textContent = es
-          ? 'Pasillo continuo 24": ' + m.walkFt + " pies (máx. 20 pies) · " + m.walkSheets + " hojas pasillo + 1 hoja plataforma y dique"
-          : 'Continuous 24" wood walkway: ' + m.walkFt + " ft (20 ft max) · " + m.walkSheets + " walkway sheets + 1 sheet platform & dam";
+          ? 'Pasillo continuo 24": ' + m.walkFt + ' pies (máx. 20 pies) · ' + m.walkSheets + ' hojas pasillo + 1 hoja plataforma 30"×30"'
+          : 'Continuous 24" wood walkway: ' + m.walkFt + ' ft (20 ft max) · ' + m.walkSheets + ' walkway sheets + 1 sheet 30"×30" platform';
       }
 
       var kpiLen = document.getElementById("atticKpiLen");
@@ -405,8 +423,8 @@
     if (holdEl) {
       holdEl.className = "u4h-hold-strip";
       holdEl.innerHTML = es
-        ? '<strong>CANDADO ANTES DE CORTAR PLAFÓN:</strong> Ubicación elegida afuera de <strong>Puerta Principal 4</strong> (<code>24" × 36"</code> libres terminadas). No cortar plafón hasta verificar vigas y clasificación cortafuego. ¿Buscas ductos y salida lateral? <a href="../hvac-layout/index.html">2. Calefactor, Ductos y Salida &rarr;</a>'
-        : '<strong>HOLD CEILING CUTS UNTIL VERIFIED:</strong> Permanent spot is outside <strong>Front Door 4</strong> (<code>24" × 36"</code> finished clear). Confirm ceiling fire-rating &amp; joist bay before cutting. Need ductwork &amp; exhaust? <a href="../hvac-layout/index.html">2. Furnace, Ducts &amp; Exhaust &rarr;</a>';
+        ? '<strong>CANDADO ANTES DE CORTAR PLAFÓN:</strong> Ubicación elegida afuera de <strong>Puerta Principal 4</strong> (<code>24" × 36"</code> libres terminadas, descanso común no acondicionado — sin fibra ni dique). No cortar hasta verificar vigas y cortafuego. ¿Ductos y salida lateral? <a href="../hvac-layout/index.html">2. Calefactor, Ductos y Salida &rarr;</a>'
+        : '<strong>HOLD CEILING CUTS UNTIL VERIFIED:</strong> Permanent spot is outside <strong>Front Door 4</strong> (<code>24" × 36"</code> finished clear on unconditioned landing — no lid batts or dam). Confirm fire-rating &amp; joist bay before cutting. Need ductwork &amp; exhaust? <a href="../hvac-layout/index.html">2. Furnace, Ducts &amp; Exhaust &rarr;</a>';
     }
 
     var stepPills = '<div class="u4h-steps" role="tablist">' +
@@ -414,7 +432,7 @@
         var act = s.id === state.step;
         return '<button type="button" class="u4h-step-btn' + (act ? " is-active" : "") + '" data-step="' + s.id + '" role="tab" aria-selected="' + (act ? "true" : "false") + '">' + esc(es ? s.es : s.en) + "</button>";
       }).join("") +
-    "</div>";
+      "</div>";
 
     var titleEn = "Attic Hatch, Wood Walkway & Service Platform";
     var titleEs = "Escotilla del Ático, Pasillo de Madera y Plataforma";
@@ -435,7 +453,7 @@
           '<div class="u4h-kpi">' +
             '<div class="u4h-kpi-lbl">' + (es ? "Claro Libre Permanente" : "Finished Clear Opening") + "</div>" +
             '<div class="u4h-kpi-val is-info">24" × 36"</div>' +
-            '<div class="u4h-kpi-sub">' + (es ? "Descanso afuera de Puerta 4" : "Landing outside Front Door 4") + "</div>" +
+            '<div class="u4h-kpi-sub">' + (es ? "Descanso afuera Puerta 4 (sin fibra)" : "Unconditioned Door 4 landing") + "</div>" +
           "</div>" +
           '<div class="u4h-kpi">' +
             '<div class="u4h-kpi-lbl">' + (es ? 'Pasillo Madera 24"' : '24" Wood Walkway') + "</div>" +
@@ -445,7 +463,7 @@
           '<div class="u4h-kpi">' +
             '<div class="u4h-kpi-lbl">' + (es ? 'OSB 23/32" o Triplay 3/4"' : '23/32" OSB or 3/4" Plywood') + "</div>" +
             '<div id="atticKpiSheets" class="u4h-kpi-val is-ok">' + m.totalSheets + (es ? " hojas 4×8 total" : " sheets 4×8 total") + "</div>" +
-            '<div class="u4h-kpi-sub">' + m.walkSheets + (es ? " pasillo + 1 plataforma/dique" : " walkway + 1 platform/dam") + "</div>" +
+            '<div class="u4h-kpi-sub">' + m.walkSheets + (es ? " pasillo + 1 plataforma/tapa" : " walkway + 1 platform/lid") + "</div>" +
           "</div>" +
         "</div>" +
         renderMapLegend(es) +
@@ -467,8 +485,8 @@
     } else if (state.step === "framing") {
       titleEn = 'Door 4 Landing Framing & 24" × 36" Clear Opening';
       titleEs = 'Marco en Descanso de Puerta 4 y Claro Libre de 24" × 36"';
-      subEn = "24\" × 36\" is finished clear (not rough cut) — verify ceiling fire-rating and joist bay before cutting";
-      subEs = "24\" × 36\" es paso libre terminado (no corte rústico) — verificar cortafuego y vigas antes de cortar";
+      subEn = '24" × 36" is finished clear (not rough cut) — verify ceiling fire-rating and joist bay before cutting';
+      subEs = '24" × 36" es paso libre terminado (no corte rústico) — verificar cortafuego y vigas antes de cortar';
 
       var fCls = (state.ceilingType === "non_rated" && state.joistBay === "27.5") ? "is-pass" : "is-warn";
       var fTxt = state.ceilingType === "fire_rated"
@@ -516,30 +534,30 @@
         "</div>";
 
     } else if (state.step === "seal") {
-      titleEn = "Insulated Lid, Air Seal & Crew Lumber List";
-      titleEs = "Tapa Aislada, Sellado de Aire y Lista de Madera";
-      subEn = "4-sided insulation dam, closed-cell foam gasket, walkway decking, and attic service light & GFCI";
-      subEs = "Dique de 4 lados, empaque de espuma cerrada, madera de pasillo y plataforma, luz LED y GFCI";
+      titleEn = 'Uninsulated 3/4" Lid, Foam Gasket & Crew Lumber List';
+      titleEs = 'Tapa de 3/4" Sin Aislante, Empaque y Lista de Madera';
+      subEn = "Unconditioned common landing outside Door 4 — zero lid insulation or perimeter dam; dust-sealed lid, walkway decking, LED light & GFCI";
+      subEs = "Descanso común no acondicionado afuera de Puerta 4 — sin aislante ni dique; tapa con empaque, madera de pasillo, luz LED y GFCI";
 
       inner =
         '<div class="u4h-svg-wrap">' + renderAirSealSvg(es) + "</div>" +
         '<div class="u4h-two-col">' +
           '<div class="u4h-info-box" style="margin:0">' +
-            '<div class="u4h-info-title">' + (es ? "Sellado y Tapa Aislada" : "Lid & Air-Sealing Rules") + "</div>" +
+            '<div class="u4h-info-title">' + (es ? "Tapa de 3/4\" y Empaque Guardapolvo" : 'Uninsulated 3/4" Lid & Gasket Rules') + "</div>" +
             '<ul class="u4h-info-list">' +
-              "<li>" + (es ? 'Sellar el marco fijo exterior con cordón de respaldo de 3/8" y sellador.' : 'Caulk fixed outer frame perimeter using 3/8" backer rod.') + "</li>" +
-              "<li>" + (es ? 'Empaque continuo de espuma cerrada de 1/2" × 1/8" sobre tiras limpias de 1×2.' : 'Continuous 1/2" × 1/8" closed-cell foam gasket on clean 1×2 ledger strips.') + "</li>" +
-              "<li>" + (es ? 'Dejar la junta de la tapa removible SIN sellador (probar abrir y cerrar 2 veces).' : 'Leave removable 3/4" plywood lid seam UNCAULKED (test-open twice).') + "</li>" +
-              "<li>" + (es ? '2 colchonetas sin papel sujetas a la tapa con 3 lazos sueltos de alambre cal. 16 + dique en 4 lados (+2").' : '2 unfaced fiberglass batts held to lid back with 3 loose 16-ga wire loops + 4-sided dam (+2" above fill).') + "</li>" +
+              "<li>" + (es ? "Descanso común no acondicionado afuera de Puerta 4: NO instalar aislante en tapa, alambres, armellas ni dique perimetral." : "Unconditioned common landing outside Door 4: NO lid insulation, wire loops, screw eyes, or perimeter dam.") + "</li>" +
+              "<li>" + (es ? 'Sellar el marco fijo exterior con cordón de respaldo de 3/8" y sellador pintable.' : 'Caulk fixed outer frame perimeter using 3/8" backer rod and paintable sealant.') + "</li>" +
+              "<li>" + (es ? 'Empaque continuo de espuma cerrada de 1/2" × 1/8" sobre tiras limpias de 1×2 + dejar junta de tapa SIN sellador (probar abrir 2 veces).' : 'Continuous 1/2" × 1/8" closed-cell foam gasket on clean 1×2 ledger strips + leave removable 3/4" lid seam UNCAULKED (test-open twice).') + "</li>" +
+              "<li>" + (es ? 'Montar 4 broches de compresión fuera del claro de 24" × 36" (o puerta cortafuego listada de 24" × 36" libres si aplica).' : 'Mount 4 compression latches outside the 24" × 36" clear opening (or listed 24" × 36" clear fire door if ceiling is fire-rated).') + "</li>" +
             "</ul>" +
           "</div>" +
           '<div class="u4h-info-box" style="margin:0">' +
             '<div class="u4h-info-title">' + (es ? "Madera y Eléctrico en Ático" : "Walkway Lumber & Attic Electrical") + "</div>" +
             '<ul class="u4h-info-list">' +
               "<li>" + m.walkSheets + (es ? ' hojas 4×8 de OSB 23/32" o triplay estructural 3/4" para el pasillo de 24" (' + m.walkFt + ' pies; nunca usar 3/8").' : ' sheets 4×8 of 23/32" OSB or 3/4" structural plywood for the 24" walkway (' + m.walkFt + ' ft; never 3/8").') + "</li>" +
-              "<li>" + (es ? '1 hoja 4×8 adicional para la plataforma nivelada de 30" × 30" (lado Norte) y el dique de 4 lados.' : '1 additional 4×8 sheet for the level 30" × 30" North service platform and 4-sided dam.') + "</li>" +
+              "<li>" + (es ? '1 hoja 4×8 adicional para la plataforma nivelada de 30" × 30" (lado Norte) y la tapa removible.' : '1 additional 4×8 sheet for the level 30" × 30" North service platform and removable hatch lid.') + "</li>" +
               "<li>" + (es ? "1 lámpara LED cerrada permanente con apagador junto a la escotilla + 1 contacto GFCI 120V a ≤ 25 pies." : "1 permanent switched enclosed LED light near hatch + 1 line-side 120V GFCI outlet within 25 ft.") + "</li>" +
-              "<li>" + (es ? "Mantener abierta la abertura temporal del clóset de recámara hasta terminar el cable de termostato y la escotilla." : "Keep temporary bedroom-closet opening open until both thermostat cable and permanent hatch are finished.") + "</li>" +
+              "<li>" + (es ? "Mantener abierta la abertura temporal del clóset NO de recámara hasta terminar el cable de termostato y la escotilla." : "Keep temporary NW bedroom-closet opening open until both thermostat cable and permanent hatch are finished.") + "</li>" +
             "</ul>" +
           "</div>" +
         "</div>" +
@@ -568,10 +586,10 @@
         },
         {
           id: "roof_dry",
-          tEn: "3. Verify flat-roof leak repair is completely dry before placing batts or loose fill",
-          tEs: "3. Verificar completamente seca la reparación de gotera en techo plano antes de aislar",
-          dEn: "Moisture check roof framing above hallway/landing before installing fiberglass insulation.",
-          dEs: "Revisar humedad en vigas superiores antes de colocar fibra de vidrio o aislante."
+          tEn: "3. Verify flat-roof leak repair is completely dry before closing ceilings",
+          tEs: "3. Verificar completamente seca la reparación de gotera en techo plano antes de cerrar plafones",
+          dEn: "Moisture check roof framing above landing/hallway and NW bedroom closet before final enclosure.",
+          dEs: "Revisar humedad en vigas superiores sobre descanso/pasillo y clóset NO antes de cerrar."
         },
         {
           id: "trim_safe",
@@ -582,10 +600,10 @@
         },
         {
           id: "temp_closet",
-          tEn: "5. Keep temporary bedroom-closet ceiling opening OPEN until final sign-off",
-          tEs: "5. Mantener ABIERTA la abertura temporal del clóset de recámara hasta el cierre",
-          dEn: "Close bedroom-closet ceiling only after thermostat wire pull and permanent Door 4 hatch are complete.",
-          dEs: "Cerrar el techo del clóset solo cuando estén terminados el cable de termostato y la escotilla permanente."
+          tEn: "5. Keep temporary NW bedroom-closet ceiling opening OPEN until final sign-off",
+          tEs: "5. Mantener ABIERTA la abertura temporal del clóset NO de recámara hasta el cierre",
+          dEn: "Close NW bedroom-closet ceiling (X=315.4–352.0, Y=5.4–88.0) only after thermostat wire pull and permanent Door 4 hatch are complete.",
+          dEs: "Cerrar el techo del clóset NO (X=315.4–352.0, Y=5.4–88.0) solo cuando estén terminados el cable de termostato y la escotilla permanente."
         }
       ];
 
@@ -715,11 +733,13 @@
         step: state.step,
         wall: "attic_carpentry",
         hatchSpot: "door4",
+        lidInsulation: "none_unconditioned_landing",
+        tempClosetNicheIn: { xMin: 315.4, xMax: 352.0, yMin: 5.4, yMax: 88.0 },
         ceilingType: state.ceilingType,
         joistBay: state.joistBay,
         walkFt: m.walkFt,
         totalSheets: m.totalSheets,
-        summary: "Plan 1 Attic Hatch & Walkway: view=" + state.step + ", spot=door4 (24x36 clear), walkway=" + m.walkFt + "ft (" + m.totalSheets + " sheets total), fireGate=" + state.ceilingType + "."
+        summary: "Plan 1 Attic Hatch & Walkway: view=" + state.step + ", spot=door4 (24x36 clear, uninsulated lid), nwCloset=(315.4..352, 5.4..88), walkway=" + m.walkFt + "ft (" + m.totalSheets + " sheets total), fireGate=" + state.ceilingType + "."
       };
     }
   };
@@ -742,14 +762,24 @@
         titleEs: "Escotilla del Ático, Pasillo de Madera y Plataforma",
         getContext: function () {
           var m = computeWalkway(state.furnacePos);
-          return "Plan1=attic-hatch, View=" + state.step + ", Hatch=Outside Front Door 4 (24x36in finished clear), Walkway=" + m.walkFt + "ft (" + m.walkSheets + " walkway sheets + 1 platform/dam sheet), FireGate=" + state.ceilingType + ", JoistBay=" + state.joistBay + ".";
+          return "Plan1=attic-hatch, View=" + state.step + ", Hatch=Outside Front Door 4 (24x36in finished clear on unconditioned landing, uninsulated 3/4 plywood lid + foam gasket, zero batts/dam), NWTempCloset=(315.4..352.0, 5.4..88.0), Walkway=" + m.walkFt + "ft (" + m.walkSheets + " walkway sheets + 1 platform/lid sheet), FireGate=" + state.ceilingType + ", JoistBay=" + state.joistBay + ".";
         },
         quickPrompts: function (lang) {
           return lang === "es"
-            ? ["¿Cómo sellamos la tapa de 24×36 sin pegar la junta?", "¿Cuántas hojas de OSB/triplay lleva el pasillo y plataforma?", "¿Qué cambia si el plafón del descanso requiere puerta cortafuego?"]
-            : ["How do we air-seal the 24×36 hatch lid so it still lifts cleanly?", "How many 4×8 sheets of OSB or 3/4 plywood are needed?", "What changes if the landing ceiling requires a fire-rated hatch door?"];
+            ? ["¿Cómo sellamos la tapa de 24×36 con empaque sin pegar la junta?", "¿Cuántas hojas de OSB/triplay lleva el pasillo y plataforma?", "¿Qué cambia si el plafón del descanso requiere puerta cortafuego?"]
+            : ["How do we gasket the uninsulated 24×36 lid so it lifts cleanly?", "How many 4×8 sheets of OSB or 3/4 plywood are needed?", "What changes if the landing ceiling requires a fire-rated hatch door?"];
         }
       });
+    }
+    var lastLang = isEs() ? "es" : "en";
+    if (window.MutationObserver) {
+      new MutationObserver(function () {
+        var curLang = isEs() ? "es" : "en";
+        if (curLang !== lastLang) {
+          lastLang = curLang;
+          render();
+        }
+      }).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
     }
     syncUrl();
     render();

@@ -3,28 +3,28 @@
   "steps": [
     {
       "done": true,
-      "en": "Range and hood are on site; crew guide and wall plan posted",
-      "es": "Estufa y campana en obra; guía y plan del muro publicados"
+      "en": "Zephyr Savona ZSA-E30AS hood & Viking VGCC5304BSS range on site; initial West-wall hood blocking installed and whole hood temporarily mock-hung, secured, and raised by John (Nov 22 field report; earlier 9\" chimney gap retired as historical)",
+      "es": "Campana Zephyr Savona ZSA-E30AS y estufa Viking VGCC5304BSS en obra; refuerzo inicial en muro Oeste instalado y campana completa presentada, asegurada y subida temporalmente por John (reporte 22 nov; brecha anterior de 9\" descartada como histórica)"
     },
     {
       "done": false,
-      "en": "Install wood backing in both bands (68\"–86\" and 104\"–121-1/2\")",
-      "es": "Colocar refuerzos de madera en las dos franjas (68\"–86\" y 104\"–121-1/2\")"
+      "en": "Verify raised mock-hang datums & missing gap photo: measure & photograph current assembled-cover-to-finished-ceiling gap (unknown after raising whole hood), actual hood-bottom-to-subfloor height + floor buildup t (H_subfloor = H_AFF + t vs. Viking 66\"–72\" AFF; verbal ~74\" subfloor recall unverified), flush 1-gang HD-1 (~83\"–86\" AFF), and dedicated 6\" rigid duct diameter",
+      "es": "Verificar alturas de la campana subida y foto faltante: medir y fotografiar brecha actual de cubredueto armado a plafón terminado (desconocida tras subir la campana), altura real a subpiso + espesor de piso t (H_subpiso = H_NPT + t vs. Viking 66\"–72\" NPT; ~74\" verbal no verificado), caja HD-1 (~83\"–86\" NPT) y ducto rígido dedicado de 6\""
     },
     {
       "done": false,
-      "en": "Test-hang the hood at 66\"–72\" and measure the ceiling gap and the duct",
-      "es": "Colgar la campana de prueba a 66\"–72\" y medir el hueco al techo y el ducto"
+      "en": "Select 1 of 4 chimney / ceiling-gap options (due Mon Nov 23): compare Z1C-00SA extension, custom removable stainless cover, small cream ceiling box, or cream curved arch with exposed stainless hood; hold final HD-1 hardwire, 6\" duct tie-in, and wall close-in until verified and approved",
+      "es": "Elegir 1 de 4 opciones de chimenea / llegada a plafón (lunes 23 nov): extensión Z1C-00SA, funda inox removible a medida, cajillo crema pequeño o arco curvo crema con campana expuesta; mantener en pausa conexión final HD-1, ducto de 6\" y cierre de muro"
     },
     {
       "done": false,
-      "en": "Verify the hood circuit and gas shutoff against the current hood electrical plan: flush one-gang HD-1 about 83–86 inches AFF; retain mounting and electrical placement holds",
-      "es": "Verificar circuito de campana y llave de gas con el plano eléctrico vigente de campana: HD-1 de caja sencilla al ras, aprox. 83–86 pulgadas sobre piso terminado; conservar verificaciones de montaje e instalaciones"
+      "en": "Install 1/2\" HardieBacker 500 + approved range-wall statement tile to ceiling (121-1/2\") with zero metal/Schluter edge trim (silicone-only North 90° corner; zero-metal South return)",
+      "es": "Instalar HardieBacker 500 de 1/2\" + azulejo aprobado hasta el plafón (121-1/2\") con cero perfiles metálicos/Schluter (silicón en esquina Norte 90°; remate sin metal al Sur)"
     },
     {
       "done": false,
-      "en": "Tile to the ceiling, Viking 1-inch island trim only, final hood and range connection after field checks",
-      "es": "Azulejo hasta el techo, solo remate Viking de isla de 1 pulgada y conexión final de campana/estufa después de verificaciones"
+      "en": "Complete Viking 30\" gas hookup (1\" low island trim only), final HD-1 120V hardwire & dedicated 6\" vertical exhaust test after close-in release",
+      "es": "Completar conexión de gas Viking 30\" (solo moldura baja de 1\"), conexión eléctrica final HD-1 120V y prueba de ducto vertical de 6\" tras liberar cierre"
     }
   ]
 }

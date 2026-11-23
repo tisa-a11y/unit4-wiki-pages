@@ -141,8 +141,8 @@
     "fixed_frame_seal": "3/8\" backer rod + paintable sealant",
     "ledge_weatherstrip": "Continuous 1/2\" x 1/8\" closed-cell on 1x2 ledges (clean of paint/caulk)",
     "lid_seam": "Uncaulked operable perimeter seam (test-open twice)",
-    "lid_insulation": "2 unfaced R-matched batts (12-5/8\" x 37-1/4\") + 3 loose 16-ga wire loops + 6 screw eyes (<= 1/2\" shank)",
-    "insulation_dam": "4-sided plywood dam standing 2\" above loose-fill insulation",
+    "lid_insulation": "2 unfaced R-matched batts (12-5/8\" x 37-1/4\") + 3 loose compression latches outside clear + 6 screw eyes (<= 1/2\" shank)",
+    "insulation_dam": "1x2 gasket ledger standing 2\" above loose-fill insulation",
     "lid_finish": "Proposed ~1-1/2\" recessed 3/4\" ply lid (PENDING OWNER OK) + compression latches outside 24\"x36\" clear",
     "temp_bedroom_closet_hold": "KEEP OPEN until LV switch cable AND permanent 24\"x36\" hatch exist",
     "roof_leak_gate": "Active flat-roof/attic water leak must be resolved before enclosing work",
@@ -185,6 +185,39 @@
       "rx": 0.03,
       "ry": 0.03,
       "note": "Reconciled: SW Dining platform & HVAC location (X=174\", Y=258\"; 15.8 ft 24\" pathway)"
+    }
+  ],
+  "revision": "rev-20261123-attic-r8",
+  "updated_at": "2026-11-23T06:49:43.086Z",
+  "lid_insulation": "NONE (unconditioned common stair landing outside Front Door 4 per 2025 CA Energy Code §160.1(a); Tisa 2026-11-23)",
+  "insulation_dam": "NONE",
+  "lid_spec_en": "Snug 3/4\" plywood lid + continuous 1/2\"×1/8\" closed-cell foam dust gasket on clean 1×2 ledger strips + 4 compression latches outside 24\"×36\" clear (uncaulked seam; listed 24\"×36\" clear fire door if fire-rated)",
+  "lid_spec_es": "Tapa ajustada de triplay de 3/4\" + empaque continuo de espuma cerrada de 1/2\"×1/8\" sobre tiras 1×2 + 4 broches fuera del claro de 24\"×36\" (junta sin sellador; puerta cortafuego listada de 24\"×36\" libres si aplica)",
+  "walkway_sheets_4x8": 3,
+  "platform_sheets_4x8": 1,
+  "temp_bedroom_closet_opening": {
+    "room": "Bedroom NW Closet",
+    "x_min_in": 315.4,
+    "x_max_in": 352.0,
+    "y_min_in": 5.4,
+    "y_max_in": 88.0,
+    "svg_pin_pct": {
+      "xPct": 61.6,
+      "yPct": 22.3
+    },
+    "todoist_open_id": "6j3j3pXFrFWhH2w7",
+    "todoist_close_id": "6j3Rf89g8M6hPPx7",
+    "rule": "Keep open until both low-voltage thermostat cable and permanent 24x36 Door 4 hatch are complete."
+  },
+  "resolved_field_pins": [
+    {
+      "pin_id": "u4-auto-1795416583079",
+      "recorded_at": "2026-11-22T22:49:43-08:00",
+      "map_index": 0,
+      "cx": 0.616,
+      "cy": 0.223,
+      "note": "The Closet is here, not where the \"temp closet\" is marked on this page",
+      "resolution": "Moved Temp. Closet (Open) from misplaced (355, 94) to NW Bedroom Closet niche (X=315.4..352.0, Y=5.4..88.0)."
     }
   ]
 }

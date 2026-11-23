@@ -12,7 +12,7 @@
   <a class="u4-plan-launch-card" href="#plan:attic-hatch">
     <span class="u4-plan-launch-kicker">Plano Interactivo 1 · Carpintería y Marco</span>
     <strong class="u4-plan-launch-title">Escotilla del Ático, Pasillo de Madera y Plataforma</strong>
-    <span class="u4-plan-launch-desc">Abertura libre de 24&quot; &times; 36&quot; afuera de Puerta 4, revisión de vigas y cortafuego, tapa aislada y pasillo de 15.8 pies.</span>
+    <span class="u4-plan-launch-desc">Abertura libre de 24&quot; &times; 36&quot; afuera de Puerta 4 (descanso no acondicionado — sin fibra ni dique), vigas y pasillo de 15.8 pies.</span>
     <span class="u4-plan-launch-cta">Abrir Plano de Escotilla &rarr;</span>
   </a>
 </div>
@@ -35,8 +35,8 @@
       <div class="u4-phase-badge is-crew">Alcance de Nuestra Cuadrilla (En Orden)</div>
       <h3>Nuestra Cuadrilla Construye el Acceso y Resana Acabados</h3>
       <ol>
-        <li><strong>Antes de que inicie NEXT:</strong> Mantener abiertos el techo del clóset de recámara (<a href="https://app.todoist.com/app/task/6j3j3pXFrFWhH2w7" target="_blank" rel="noopener">tarea</a>) y el muro <code>D04</code> del subpanel (<a href="https://app.todoist.com/app/task/6hvRcQ4XC9mr56g7" target="_blank" rel="noopener">tarea</a>); reparar y verificar seca la gotera del techo plano; dejar apagado y desconectado el generador de ozono (<a href="https://app.todoist.com/app/task/6j4MQwqCqp24hX57" target="_blank" rel="noopener">tarea</a>).</li>
-        <li><strong>Coordinado con NEXT (tras visto bueno del lunes):</strong> Construir la escotilla permanente de <code>24&quot; &times; 36&quot;</code> libres afuera de Puerta Principal 4 (<a href="https://app.todoist.com/app/task/6j3Rf8FVhMVQ7vQf" target="_blank" rel="noopener">tarea</a>), el pasillo continuo de madera de <code>24&quot;</code> de <code>15.8 pies</code> (<a href="https://app.todoist.com/app/task/6j3RvWq3q6RRFXf7" target="_blank" rel="noopener">tarea</a>), la plataforma nivelada de madera de <code>30&quot; &times; 30&quot;</code> (<a href="https://app.todoist.com/app/task/6j3j3pqfM4GC53Qf" target="_blank" rel="noopener">tarea</a>), el contacto GFCI <code>120V</code> a <code>&le; 25 pies</code> (<a href="https://app.todoist.com/app/task/6j3RvWhHcpMmCjP7" target="_blank" rel="noopener">tarea</a>) y la luz LED con apagador en el ático (<a href="https://app.todoist.com/app/task/6hvjQJgpw2W5VcQf" target="_blank" rel="noopener">tarea</a>).</li>
+        <li><strong>Antes de que inicie NEXT:</strong> Mantener abiertos el techo del clóset NO de recámara (<code>X=315.4&quot;&ndash;352.0&quot;, Y=5.4&quot;&ndash;88.0&quot;</code>, <a href="https://app.todoist.com/app/task/6j3j3pXFrFWhH2w7" target="_blank" rel="noopener">tarea</a>) y el muro <code>D04</code> del subpanel (<a href="https://app.todoist.com/app/task/6hvRcQ4XC9mr56g7" target="_blank" rel="noopener">tarea</a>); reparar y verificar seca la gotera del techo plano; dejar apagado y desconectado el generador de ozono (<a href="https://app.todoist.com/app/task/6j4MQwqCqp24hX57" target="_blank" rel="noopener">tarea</a>).</li>
+        <li><strong>Coordinado con NEXT (tras visto bueno del lunes):</strong> Construir la escotilla permanente de <code>24&quot; &times; 36&quot;</code> libres afuera de Puerta Principal 4 (tapa de triplay <code>3/4&quot;</code> + empaque de espuma, sin fibra ni dique; <a href="https://app.todoist.com/app/task/6j3Rf8FVhMVQ7vQf" target="_blank" rel="noopener">tarea</a>), el pasillo continuo de madera de <code>24&quot;</code> de <code>15.8 pies</code> (<a href="https://app.todoist.com/app/task/6j3RvWq3q6RRFXf7" target="_blank" rel="noopener">tarea</a>), la plataforma nivelada de madera de <code>30&quot; &times; 30&quot;</code> (<a href="https://app.todoist.com/app/task/6j3j3pqfM4GC53Qf" target="_blank" rel="noopener">tarea</a>), el contacto GFCI <code>120V</code> a <code>&le; 25 pies</code> (<a href="https://app.todoist.com/app/task/6j3RvWhHcpMmCjP7" target="_blank" rel="noopener">tarea</a>) y la luz LED con apagador en el ático (<a href="https://app.todoist.com/app/task/6hvjQJgpw2W5VcQf" target="_blank" rel="noopener">tarea</a>).</li>
         <li><strong>Después de las pruebas:</strong> Cerrar el techo del clóset solo cuando estén listos el cable de bajo voltaje y la escotilla permanente (<a href="https://app.todoist.com/app/task/6j3Rf89g8M6hPPx7" target="_blank" rel="noopener">tarea</a>), y resanar y pintar plafones y <code>D04</code> (<a href="https://app.todoist.com/app/task/6hvj3CgXpVqrJgvf" target="_blank" rel="noopener">tarea</a>).</li>
       </ol>
     </div>
@@ -62,13 +62,13 @@
     <a class="u4-plan-launch-card" href="#attic-access">
       <span class="u4-plan-launch-kicker">Página Relacionada</span>
       <strong class="u4-plan-launch-title">Acceso al Ático, Pasillo y Plataforma</strong>
-      <span class="u4-plan-launch-desc">Cinco reglas de carpintería y sellado, conteo de hojas de madera, protección de molduras y lista de tareas.</span>
+      <span class="u4-plan-launch-desc">Reglas de carpintería y empaque guardapolvo, hojas de madera, protección de molduras y lista de tareas.</span>
       <span class="u4-plan-launch-cta">Ir a Acceso al Ático &rarr;</span>
     </a>
     <a class="u4-plan-launch-card is-primary" href="#plan:attic-hatch">
       <span class="u4-plan-launch-kicker">Plano Interactivo 1</span>
       <strong class="u4-plan-launch-title">Escotilla del Ático, Pasillo de Madera y Plataforma</strong>
-      <span class="u4-plan-launch-desc">Mapa a escala del pasillo, revisión de vigas en Puerta 4, corte de tapa aislada y candados previos al corte.</span>
+      <span class="u4-plan-launch-desc">Mapa a escala del pasillo (clóset NO corregido), vigas en Puerta 4, corte de tapa sin aislante y candados previos.</span>
       <span class="u4-plan-launch-cta">Abrir Plano Interactivo 1 &rarr;</span>
     </a>
   </div>
@@ -78,7 +78,7 @@
   <summary>Medidas de campo y notas de madera</summary>
   <ul>
     <li><strong>Paso del equipo (<code>33.25&quot; &times; 14.19&quot; &times; 29&quot;</code>):</strong> Sube de punta (<code>14.19&quot; &times; 29&quot;</code>) por el claro libre completo de <code>24&quot; &times; 36&quot;</code>. Evitar puertas metálicas nominales de <code>24&quot;&times;36&quot;</code> cuyo marco reduzca el paso libre.</li>
-    <li><strong>Madera de pasillo y plataforma:</strong> Con <code>66&quot;</code> de altura bajo techo plano, el pasillo continuo de <code>24&quot;</code> mide <code>20 pies</code> o menos (<code>15.8 pies</code> a Comedor Suroeste). Usar <code>3</code> hojas de OSB <code>23/32&quot;</code> o triplay estructural <code>3/4&quot;</code> para el pasillo (<code>1</code> tira por hoja; nunca triplay <code>3/8&quot;</code>) más <code>1</code> hoja para la plataforma de <code>30&quot; &times; 30&quot;</code> y el dique de <code>4</code> lados.</li>
-    <li><strong>Planos interactivos:</strong> Abrir <a href="#plan:attic-hatch">Plano 1: Escotilla del Ático, Pasillo y Plataforma</a> para marco y sellado, o <a href="#plan:hvac-layout">Plano 2: Sistema de Calefacción &mdash; Calefactor, Ductos y Salida Lateral</a> para ductos y salida lateral.</li>
+    <li><strong>Madera de pasillo y plataforma:</strong> Con <code>66&quot;</code> de altura bajo techo plano, el pasillo continuo de <code>24&quot;</code> mide <code>20 pies</code> o menos (<code>15.8 pies</code> a Comedor Suroeste). Usar <code>3</code> hojas de OSB <code>23/32&quot;</code> o triplay estructural <code>3/4&quot;</code> para el pasillo (<code>1</code> tira por hoja; nunca triplay <code>3/8&quot;</code>) más <code>1</code> hoja para la plataforma de <code>30&quot; &times; 30&quot;</code> y la tapa (sin fibra ni dique sobre el descanso común no acondicionado).</li>
+    <li><strong>Planos interactivos:</strong> Abrir <a href="#plan:attic-hatch">Plano 1: Escotilla del Ático, Pasillo y Plataforma</a> para marco y tapa, o <a href="#plan:hvac-layout">Plano 2: Sistema de Calefacción &mdash; Calefactor, Ductos y Salida Lateral</a> para ductos y salida lateral.</li>
   </ul>
 </details>

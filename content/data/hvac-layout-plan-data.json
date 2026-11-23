@@ -174,7 +174,8 @@
       ],
       "platform_side": "north (X=174.0, Y=228.5)",
       "position_state": "RECONCILED_PIN_VERIFY_MON_NOV23",
-      "vibration_pads_tbd_with_next": true,},
+      "vibration_pads_tbd_with_next": true
+    },
     "walkway_route": {
       "label_en": "Continuous 24\" Solid Wood Walkway (30\" Clear Passage, 2025 CMC 304.4)",
       "placement_state": "RECONCILED_ORTHOGONAL_15_8_FT_PASS",
@@ -300,5 +301,40 @@
       "ry": 0.03,
       "note": "Flat roof (66\" cavity, zero roof penetrations) — exhaust exits horizontally out sidewall per 2025 SFMC 802.8"
     }
-  ]
+  ],
+  "revision": "rev-20261123-hvac-r8",
+  "updated_at": "2026-11-23T06:49:43.086Z",
+  "vibration_pads_tbd_with_next": true,
+  "temp_bedroom_closet_niche_in": {
+    "x_min": 315.4,
+    "x_max": 352.0,
+    "y_min": 5.4,
+    "y_max": 88.0
+  },
+  "default_nodes_in": {
+    "f1": {
+      "x": 174,
+      "y": 258
+    },
+    "r1": {
+      "x": 248,
+      "y": 114
+    },
+    "s1": {
+      "x": 168,
+      "y": 126
+    },
+    "s2": {
+      "x": 312,
+      "y": 212
+    },
+    "s3": {
+      "x": 406,
+      "y": 82
+    },
+    "jd1": {
+      "x": 352,
+      "y": 112
+    }
+  }
 }

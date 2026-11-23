@@ -26,8 +26,8 @@
     r1: { x: 248, y: 114 },
     s1: { x: 168, y: 126 },
     s2: { x: 312, y: 212 },
-    s3: { x: 386, y: 116 },
-    jd1: { x: 334, y: 80 }
+    s3: { x: 406, y: 82 },
+    jd1: { x: 352, y: 112 }
   };
 
   function cloneDefaults() {
@@ -506,8 +506,10 @@
       '<rect x="' + px(279.1) + '" y="' + py(5.4) + '" width="' + +(36.3 * SC).toFixed(1) + '" height="' + +(82.6 * SC).toFixed(1) + '" fill="#fbfcfb" stroke="#8a969b" stroke-width="1.3"/>' +
       '<text x="' + px(297.2) + '" y="' + py(46) + '" text-anchor="middle" font-size="6.0" font-weight="700" fill="#5d686d">' + (es ? "Lav." : "Laundry") + "</text>" +
 
-      '<path d="M ' + px(315.4) + " " + py(0) + " L " + px(437.5) + " " + py(0) + " L " + px(474) + " " + py(34) + " L " + px(474) + " " + py(96) + " L " + px(437.5) + " " + py(136) + " L " + px(352) + " " + py(136) + " L " + px(352) + " " + py(88) + " L " + px(315.4) + " " + py(88) + ' Z" fill="#fbfcfb" stroke="#8a969b" stroke-width="1.3"/>' +
-      '<text x="' + px(398) + '" y="' + py(52) + '" text-anchor="middle" font-size="8.2" font-weight="700" fill="#5d686d">' + (es ? "Recámara" : "Bedroom") + "</text>" +
+      '<rect x="' + px(315.4) + '" y="' + py(5.4) + '" width="' + +(36.6 * SC).toFixed(1) + '" height="' + +(82.6 * SC).toFixed(1) + '" rx="2" fill="#fdf6e7" stroke="#9a5b06" stroke-width="1.2" stroke-dasharray="3 2"/>' +
+      '<text x="' + px(333.7) + '" y="' + py(47) + '" text-anchor="middle" font-size="5.6" font-weight="800" fill="#9a5b06">' + (es ? "Clóset" : "Closet") + "</text>" +
+      '<path d="M ' + px(352) + " " + py(0) + " L " + px(437.5) + " " + py(0) + " L " + px(474) + " " + py(34) + " L " + px(474) + " " + py(96) + " L " + px(437.5) + " " + py(136) + " L " + px(352) + " " + py(136) + ' Z" fill="#fbfcfb" stroke="#8a969b" stroke-width="1.3"/>' +
+      '<text x="' + px(410) + '" y="' + py(52) + '" text-anchor="middle" font-size="8.2" font-weight="700" fill="#5d686d">' + (es ? "Recámara" : "Bedroom") + "</text>" +
 
       '<rect x="' + px(147) + '" y="' + py(142) + '" width="' + +(146.7 * SC).toFixed(1) + '" height="' + +(155.75 * SC).toFixed(1) + '" fill="#fbfcfb" stroke="#8a969b" stroke-width="1.3"/>' +
       '<text x="' + px(242) + '" y="' + py(166) + '" text-anchor="middle" font-size="8.0" font-weight="700" fill="#5d686d">' + (es ? "Comedor" : "Dining") + "</text>" +
@@ -626,8 +628,8 @@
       r1: { minX: 156, maxX: 380, minY: 68, maxY: 266 },
       s1: { minX: 54, maxX: 310, minY: 72, maxY: 272 },
       s2: { minX: 160, maxX: 468, minY: 148, maxY: 278 },
-      s3: { minX: 318, maxX: 454, minY: 24, maxY: 132 },
-      jd1: { minX: 280, maxX: 400, minY: 54, maxY: 134 }
+      s3: { minX: 356, maxX: 454, minY: 24, maxY: 132 },
+      jd1: { minX: 316, maxX: 400, minY: 84, maxY: 134 }
     };
     var initPos = {};
     Object.keys(state.nodes).forEach(function (k) {
