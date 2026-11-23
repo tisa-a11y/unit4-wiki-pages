@@ -42,8 +42,8 @@
       "items": [
         {
           "done": true,
-          "en": "Core appliances & 30\" sink on hand; old pie-safe cleared for built-in shelving",
-          "es": "Electrodomésticos principales y tarja de 30\" en obra; nicho pie-safe despejado",
+          "en": "Core appliances and 30\" sink on hand",
+          "es": "Electrodomésticos principales y tarja de 30\" en obra",
           "todoistTaskIds": [],
           "checklistPath": "kitchen/CHECKLIST.md"
         },
@@ -70,8 +70,8 @@
         },
         {
           "done": false,
-          "en": "Drywall close-in, Essex Green base cabinets, pie-safe shelves, countertops, range-wall tile & matte floor",
-          "es": "Cierre con tablaroca, gabinetes bajos Essex Green, repisas pie-safe, cubiertas, azulejo y piso mate",
+          "en": "Drywall close-in, Essex Green base cabinets, countertops, range-wall tile & matte floor",
+          "es": "Cierre con tablaroca, gabinetes bajos Essex Green, cubiertas, azulejo y piso mate",
           "todoistTaskIds": [],
           "checklistPath": "kitchen/CHECKLIST.md"
         },
@@ -139,8 +139,8 @@
       "items": [
         {
           "done": true,
-          "en": "30\" sink & counter-depth Haier refrigerator on hand; pie-safe recess cleared for open shelves",
-          "es": "Fregadero de 30\" y refrigerador Haier en obra; nicho pie-safe despejado para repisas abiertas",
+          "en": "30\" sink and Haier refrigerator on hand",
+          "es": "Fregadero de 30\" y refrigerador Haier en obra",
           "todoistTaskIds": [],
           "checklistPath": "kitchen/CHECKLIST.md"
         },
@@ -153,22 +153,22 @@
         },
         {
           "done": false,
-          "en": "Pie-safe shelf framing & exterior weather-sealing, plus North-wall 3-gang switch & D04 subpanel bay framing",
-          "es": "Enmarcar repisas pie-safe y sellado exterior, más caja de 3 apagadores en muro norte y vano de subpanel D04",
+          "en": "Inspect, weatherproof and cover the former pie-safe recess, plus North-wall 3-gang switch & D04 subpanel bay framing",
+          "es": "Revisar, sellar y tapar el nicho de la alacena anterior, más caja de 3 apagadores en muro norte y vano de subpanel D04",
           "todoistTaskIds": [],
           "checklistPath": "kitchen/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Sink & dishwasher plumbing rough-in and South/East countertop & appliance circuits (outlets beside pie-safe)",
-          "es": "Plomería en bruto de fregadero/lavavajillas y circuitos de cubierta en muros sur y este (contactos fuera del pie-safe)",
+          "en": "Sink & dishwasher plumbing rough-in and South/East countertop & appliance circuits",
+          "es": "Plomería en bruto de fregadero/lavavajillas y circuitos de cubierta en muros sur y este",
           "todoistTaskIds": [],
           "checklistPath": "kitchen/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Install South & East base cabinets, pie-safe shelves, countertops, sink/faucet/dishwasher & Haier refrigerator",
-          "es": "Instalar gabinetes bajos sur y este, repisas pie-safe, cubiertas, fregadero/llave/lavavajillas y refrigerador Haier",
+          "en": "Install South & East base cabinets, countertops, sink/faucet/dishwasher & Haier refrigerator",
+          "es": "Instalar gabinetes bajos sur y este, cubiertas, fregadero/llave/lavavajillas y refrigerador Haier",
           "todoistTaskIds": [],
           "checklistPath": "kitchen/CHECKLIST.md"
         }
@@ -243,8 +243,8 @@
         },
         {
           "done": false,
-          "en": "Phase 1 — Before NEXT (Our Crew): Keep bedroom-closet ceiling open, photograph hallway hatch site, frame D04 bay & fix roof leaks",
-          "es": "Fase 1 — Antes de NEXT (Cuadrilla): Mantener abierto techo de clóset, fotografiar sitio de escotilla, enmarcar D04 y reparar goteras",
+          "en": "Phase 1 — Before NEXT (Our Crew): Keep bedroom-closet ceiling open, photograph the hatch markout outside Front Door 4 and resolve roof leaks",
+          "es": "Fase 1 — Antes de NEXT (Cuadrilla): Mantener abierto techo de clóset, fotografiar el trazo afuera de la puerta 4 y resolver goteras",
           "todoistTaskIds": [],
           "checklistPath": "hvac/CHECKLIST.md"
         },
@@ -257,8 +257,8 @@
         },
         {
           "done": false,
-          "en": "Phase 2 — With NEXT: Build 24\"×36\" hatch, walkway, 30\"×30\" platform & attic light/GFCI (#attic-access); NEXT installs furnace, ducts & subpanel",
-          "es": "Fase 2 — Con NEXT: Construir escotilla 24\"×36\", pasarela, plataforma 30\"×30\" y luz/GFCI (#attic-access); NEXT instala caldera, ductos y subpanel",
+          "en": "Phase 2 — With NEXT: Build 24\"×36\" hatch, walkway, 30\"×30\" platform & attic light/GFCI (#attic-access); NEXT installs the furnace and heating ducts",
+          "es": "Fase 2 — Con NEXT: Construir escotilla 24\"×36\", pasarela, plataforma 30\"×30\" y luz/GFCI (#attic-access); NEXT instala el calefactor y sus ductos",
           "todoistTaskIds": [],
           "checklistPath": "hvac/CHECKLIST.md"
         },
@@ -281,14 +281,14 @@
       "items": [
         {
           "done": true,
-          "en": "Settled basis: 24\"×36\" FINISHED CLEAR hallway hatch, 33.25\"×14.19\"×29\" furnace envelope, and 66\" attic height (≤ 20 ft walkway)",
+          "en": "Settled basis: 24\"×36\" FINISHED CLEAR hatch outside Front Door 4, 33.25\"×14.19\"×29\" furnace envelope, and 66\" attic height (≤ 20 ft walkway)",
           "es": "Base confirmada: escotilla de 24\"×36\" LIBRES TERMINADAS, caldera de 33.25\"×14.19\"×29\" y altura de 66\" (pasarela ≤ 20 pies)",
           "todoistTaskIds": [],
           "checklistPath": "attic/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Verify temporary bedroom-closet opening & daylight check of hallway hatch site, ceiling fire-rating & joist bay B width",
+          "en": "Verify temporary bedroom-closet opening & daylight check of hatch site outside Front Door 4, ceiling fire-rating & joist bay B width",
           "es": "Verificar abertura temporal del clóset y revisar con luz de día el sitio de escotilla, resistencia al fuego y ancho B de viguetas",
           "todoistTaskIds": [],
           "checklistPath": "attic/CHECKLIST.md"
@@ -316,8 +316,8 @@
         },
         {
           "done": false,
-          "en": "Close temporary bedroom-closet ceiling only after low-voltage switch cable, furnace passage & permanent hallway hatch are complete",
-          "es": "Cerrar techo temporal del clóset solo tras completar cable de bajo voltaje, paso de caldera y escotilla permanente del pasillo",
+          "en": "Close temporary bedroom-closet ceiling only after low-voltage switch cable, furnace passage & permanent hatch outside Front Door 4 are complete",
+          "es": "Cerrar techo temporal del clóset solo tras completar cable de bajo voltaje, paso de caldera y escotilla permanente afuera de la puerta 4",
           "todoistTaskIds": [],
           "checklistPath": "attic/CHECKLIST.md"
         }
@@ -425,7 +425,7 @@
       "title": "Bedroom",
       "esTitle": "Recámara",
       "driveChecklistId": "1X2EqyKgqqZQCieUrfEE44Zp1XecrJ3ae",
-      "note": "Bedroom & closet niche sequence (5 milestones). Keep closet ceiling open as temporary attic access until LV cable and permanent 24\"×36\" hallway hatch exist.",
+      "note": "Bedroom & closet niche sequence (5 milestones). Keep closet ceiling open as temporary attic access until LV cable and permanent 24\"×36\" hatch outside Front Door 4 exists.",
       "noteEs": "Secuencia de recámara y clóset (5 hitos). Mantener abierto el techo del clóset hasta instalar cable LV y escotilla permanente 24\"×36\".",
       "items": [
         {
@@ -458,7 +458,7 @@
         },
         {
           "done": false,
-          "en": "Close temporary closet ceiling (after permanent hallway hatch exists), install closet rod, prime & paint room",
+          "en": "Close temporary closet ceiling (after permanent hatch outside Front Door 4 existss), install closet rod, prime & paint room",
           "es": "Cerrar techo del clóset (tras escotilla permanente), colocar barra, fondear y pintar recámara",
           "todoistTaskIds": [],
           "checklistPath": "bedroom/CHECKLIST.md"
@@ -521,20 +521,20 @@
         {
           "done": true,
           "en": "Permanent hallway attic hatch sized at 24\"×36\" FINISHED CLEAR opening (#attic-access); Murphy door assigned to Laundry (#laundry)",
-          "es": "Escotilla permanente del pasillo definida en 24\"×36\" LIBRES TERMINADAS (#attic-access); puerta Murphy en Lavandería (#laundry)",
+          "es": "Escotilla permanente afuera de la puerta 4 definida en 24\"×36\" LIBRES TERMINADAS (#attic-access); puerta Murphy en Lavandería (#laundry)",
           "todoistTaskIds": [],
           "checklistPath": "hallway/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Daylight site verification, ceiling fire-rating check & joist bay B confirmation for 24\"×36\" hallway hatch (#attic-access)",
+          "en": "Daylight site verification, ceiling fire-rating check & joist bay B confirmation for 24\"×36\" hatch outside Front Door 4 (#attic-access)",
           "es": "Verificación con luz de día, revisión contra fuego del techo y confirmación del claro B para escotilla 24\"×36\" (#attic-access)",
           "todoistTaskIds": [],
           "checklistPath": "hallway/CHECKLIST.md"
         },
         {
           "done": false,
-          "en": "Frame permanent 24\"×36\" finished-clear hallway hatch, air-sealed enclosure & entrance light switch",
+          "en": "Frame permanent 24\"×36\" finished-clear hatch outside Front Door 4, air-sealed enclosure & entrance light switch",
           "es": "Construir escotilla permanente 24\"×36\" libres terminadas, envolvente sellada y apagador de entrada",
           "todoistTaskIds": [],
           "checklistPath": "hallway/CHECKLIST.md"
@@ -1566,7 +1566,7 @@
       "doneInWiki": false,
       "wikiItemsEn": [
         "Select the exact dishwasher, faucet and disposal before final cabinet and hookup details",
-        "Build and install level base cabinets, the dishwasher bay and retained pie-safe shelves"
+        "Build and install level base cabinets and the dishwasher bay"
       ],
       "wikiItemsEs": [
         "Elegir lavavajillas, mezcladora y triturador exactos antes de cerrar detalles de gabinetes y conexiones",
@@ -2275,10 +2275,10 @@
       "dueDate": "2026-11-20",
       "responsibleUid": "56238243",
       "wikiItemsEn": [
-        "Clear kitchen, finish window sill/framing & stage full-L floor/wall layout"
+        "Stage and verify the full revised L layout on site."
       ],
       "wikiItemsEs": [
-        "Despejar cocina, terminar marco/repisa de ventana y trazo completo en L"
+        "Marcar y verificar en obra la L completa actualizada."
       ],
       "governingDocs": [
         "kitchen/CHECKLIST.md",
@@ -2296,10 +2296,10 @@
       "dueDate": "2026-11-20",
       "responsibleUid": "56238243",
       "wikiItemsEn": [
-        "Capture labeled full-L mockup verification photos (Friday Nov 20 P1)"
+        "Take labeled photos proving both runs, swings, casing and narrowest passage."
       ],
       "wikiItemsEs": [
-        "Tomar fotos rotuladas del trazo completo en L"
+        "Tomar fotos rotuladas de ambos tramos, giros, moldura y paso más angosto."
       ],
       "governingDocs": [
         "kitchen/CHECKLIST.md",
@@ -2339,10 +2339,10 @@
       "dueDate": "2026-11-20",
       "responsibleUid": "56238243",
       "wikiItemsEn": [
-        "Daylight 24x36 hallway hatch 4 labeled photos + safe interior roof leak check (Friday Nov 20 P1)"
+        "Mark exact 24 × 36 in. finished-clear hatch outside Front Door 4 and verify framing and ceiling assembly."
       ],
       "wikiItemsEs": [
-        "Fotos de luz de día de escotilla 24x36 y revisión interior segura de goteras"
+        "Trazar 24 × 36 pulg. libres afuera de la puerta 4 y verificar vigas y techo."
       ],
       "governingDocs": [
         "attic/CHECKLIST.md",
@@ -2411,6 +2411,142 @@
       "governingDocs": [
         "bathroom/CHECKLIST.md",
         "bathroom/SPEC.md"
+      ]
+    },
+    "6j3RXQ9G4fWRC8F7": {
+      "taskId": "6j3RXQ9G4fWRC8F7",
+      "url": "https://app.todoist.com/app/task/6j3RXQ9G4fWRC8F7",
+      "rooms": [
+        "kitchen-sink-north"
+      ],
+      "governingDocs": [
+        "kitchen/SPEC.md"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Weatherproof and cover the old pie-safe recess after inspection and photos."
+      ],
+      "wikiItemsEs": [
+        "Sellar contra lluvia y tapar el nicho de la antigua alacena tras inspección y fotos."
+      ]
+    },
+    "6j3Rf8FVhMVQ7vQf": {
+      "taskId": "6j3Rf8FVhMVQ7vQf",
+      "url": "https://app.todoist.com/app/task/6j3Rf8FVhMVQ7vQf",
+      "rooms": [
+        "attic-access"
+      ],
+      "governingDocs": [
+        "attic/SPEC.md"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Build the permanent 24 × 36 in. clear hatch after markout and release."
+      ],
+      "wikiItemsEs": [
+        "Construir la escotilla de 24 × 36 pulg. libres después del trazo y autorización."
+      ]
+    },
+    "6j3RvWrhQMw5F5Wf": {
+      "taskId": "6j3RvWrhQMw5F5Wf",
+      "url": "https://app.todoist.com/app/task/6j3RvWrhQMw5F5Wf",
+      "rooms": [
+        "attic-access"
+      ],
+      "governingDocs": [
+        "attic/SPEC.md"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Photograph Door 4 landing markout, framing and passage."
+      ],
+      "wikiItemsEs": [
+        "Fotografiar el trazo, vigas y paso en el descanso de la puerta 4."
+      ]
+    },
+    "6j3RvWjGMmMgpG37": {
+      "taskId": "6j3RvWjGMmMgpG37",
+      "url": "https://app.todoist.com/app/task/6j3RvWjGMmMgpG37",
+      "rooms": [
+        "kitchen-sink-north"
+      ],
+      "governingDocs": [
+        "kitchen/SPEC.md"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Photograph full kitchen layout, both runs and corner."
+      ],
+      "wikiItemsEs": [
+        "Fotografiar la cocina completa, ambos tramos y la esquina."
+      ]
+    },
+    "6hvjQGR85r5gFjg7": {
+      "taskId": "6hvjQGR85r5gFjg7",
+      "url": "https://app.todoist.com/app/task/6hvjQGR85r5gFjg7",
+      "rooms": [
+        "kitchen-sink-north"
+      ],
+      "governingDocs": [
+        "kitchen/SPEC.md"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Check calculated sink setout and hold drain move pending verification."
+      ],
+      "wikiItemsEs": [
+        "Verificar el trazo calculado de la tarja y esperar antes de mover el drenaje."
+      ]
+    },
+    "6j3RXQ7g9JPfHx77": {
+      "taskId": "6j3RXQ7g9JPfHx77",
+      "url": "https://app.todoist.com/app/task/6j3RXQ7g9JPfHx77",
+      "rooms": [
+        "kitchen"
+      ],
+      "governingDocs": [
+        "kitchen/SPEC.md"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Review full layout before electrical work."
+      ],
+      "wikiItemsEs": [
+        "Revisar el trazo completo antes del trabajo eléctrico."
+      ]
+    },
+    "6j4MQwqCqp24hX57": {
+      "taskId": "6j4MQwqCqp24hX57",
+      "url": "https://app.todoist.com/app/task/6j4MQwqCqp24hX57",
+      "rooms": [
+        "attic-access"
+      ],
+      "governingDocs": [
+        "attic/SPEC.md"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Place ozone machine in attic, off and unplugged."
+      ],
+      "wikiItemsEs": [
+        "Colocar la máquina de ozono en el ático, apagada y desconectada."
+      ]
+    },
+    "6j4MR6M49xmMGgf7": {
+      "taskId": "6j4MR6M49xmMGgf7",
+      "url": "https://app.todoist.com/app/task/6j4MR6M49xmMGgf7",
+      "rooms": [
+        "attic-access"
+      ],
+      "governingDocs": [
+        "attic/SPEC.md"
+      ],
+      "doneInWiki": false,
+      "wikiItemsEn": [
+        "Photograph ozone machine placement, off and unplugged."
+      ],
+      "wikiItemsEs": [
+        "Fotografiar la máquina de ozono colocada, apagada y desconectada."
       ]
     }
   }

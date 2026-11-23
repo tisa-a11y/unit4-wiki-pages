@@ -23,47 +23,47 @@
   },
   {
     "title": "2026-11-20_U4_attic_hatch-interactive_R1_EN.pdf",
-    "titleEn": "Printable permanent attic hatch plan · English",
-    "titleEs": "Plano imprimible de escotilla del ático · inglés",
+    "titleEn": "Printable permanent attic hatch plan · English (older reference)",
+    "titleEs": "Plano imprimible de escotilla del ático · inglés (referencia anterior)",
     "id": "2026-11-20_U4_attic_hatch-interactive_R1_EN",
     "path": "True-scale attic hatch & walkway sheet (English)",
     "date": "2026-11-20",
     "lang": "en",
     "pairId": "attic-hatch-printable",
-    "pin": true
+    "history": true
   },
   {
     "title": "2026-11-20_U4_attic_hatch-interactive_R1_ES.pdf",
-    "titleEn": "Printable permanent attic hatch plan · Spanish",
-    "titleEs": "Plano imprimible de escotilla del ático · español",
+    "titleEn": "Printable permanent attic hatch plan · Spanish (older reference)",
+    "titleEs": "Plano imprimible de escotilla del ático · español (referencia anterior)",
     "id": "2026-11-20_U4_attic_hatch-interactive_R1_ES",
     "path": "Plano imprimible de escotilla y pasarela en ático (español)",
     "date": "2026-11-20",
     "lang": "es",
     "pairId": "attic-hatch-printable",
-    "pin": true
+    "history": true
   },
   {
     "title": "2026-11-19_Attic-Hatch-Practical-Guide_R5_EN.pdf",
-    "titleEn": "Attic hatch practical guide · English",
-    "titleEs": "Guía práctica de la escotilla del ático · inglés",
+    "titleEn": "Attic hatch practical guide · English (older reference)",
+    "titleEs": "Guía práctica de la escotilla del ático · inglés (referencia anterior)",
     "id": "2026-11-19_Attic-hatch-practical-guide_R5_EN",
     "path": "Location, materials, cuts, sealing (English)",
     "date": "2026-11-19",
     "lang": "en",
     "pairId": "attic-hatch-r5",
-    "pin": true
+    "history": true
   },
   {
     "title": "2026-11-19_Attic-Hatch-Practical-Guide_R5_ES.pdf",
-    "titleEn": "Attic hatch practical guide · Spanish",
-    "titleEs": "Guía práctica de la escotilla del ático · español",
+    "titleEn": "Attic hatch practical guide · Spanish (older reference)",
+    "titleEs": "Guía práctica de la escotilla del ático · español (referencia anterior)",
     "id": "2026-11-19_Attic-hatch-practical-guide_R5_ES",
     "path": "Ubicación, materiales, cortes y sellado (español)",
     "date": "2026-11-19",
     "lang": "es",
     "pairId": "attic-hatch-r5",
-    "pin": true
+    "history": true
   },
   {
     "title": "Attic Opening Plan & Step Checklist.html",

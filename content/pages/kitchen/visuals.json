@@ -1,9 +1,45 @@
 {
   "en": "Pictures",
   "es": "Imágenes",
-  "noteEn": "For reference only. Use the measurements in the drawings under Documents.",
-  "noteEs": "Solo de referencia. Usar las medidas de los planos en Documentos.",
+  "noteEn": "John’s site photos and sketches from Nov 21. Verify dimensions and passage on site before cutting or ordering.",
+  "noteEs": "Fotos de obra y croquis de John del 21 de noviembre. Verificar medidas y paso libre en obra antes de cortar o pedir material.",
   "items": [
+    {
+      "img": "./wiki-images/kitchen-john-nov21-6104.jpg",
+      "href": "./wiki-images/kitchen-john-nov21-6104.jpg",
+      "en": "South wall framing and plumbing. Inspect exposed materials before covering.",
+      "es": "Bastidor y plomería del muro Sur. Revisar los materiales expuestos antes de cubrirlos."
+    },
+    {
+      "img": "./wiki-images/kitchen-john-nov21-6099.jpg",
+      "href": "./wiki-images/kitchen-john-nov21-6099.jpg",
+      "en": "Latest notebook sketch with the 12\", 18\" and 30\" cabinet widths.",
+      "es": "Último croquis de libreta con gabinetes de 12\", 18\" y 30\"."
+    },
+    {
+      "img": "./wiki-images/kitchen-john-nov21-6103.jpg",
+      "href": "./wiki-images/kitchen-john-nov21-6103.jpg",
+      "en": "Cabinet layout drawn over a site photo for illustration.",
+      "es": "Trazo ilustrativo de gabinetes dibujado sobre una foto de obra."
+    },
+    {
+      "img": "./wiki-images/kitchen-john-nov21-6105.jpg",
+      "href": "./wiki-images/kitchen-john-nov21-6105.jpg",
+      "en": "South window framing and plumbing rough-in.",
+      "es": "Bastidor de la ventana Sur e instalación preliminar de plomería."
+    },
+    {
+      "img": "./wiki-images/kitchen-john-nov21-6098.jpg",
+      "href": "./wiki-images/kitchen-john-nov21-6098.jpg",
+      "en": "Earlier notebook sketch for comparison.",
+      "es": "Croquis anterior de libreta para comparar."
+    },
+    {
+      "img": "./wiki-images/kitchen-john-nov21-6096.jpg",
+      "href": "./wiki-images/kitchen-john-nov21-6096.jpg",
+      "en": "Earlier notebook layout notes for comparison.",
+      "es": "Apuntes anteriores del trazo en libreta para comparar."
+    },
     {
       "img": "./wiki-images/2026-11-18_U4_kitchen_overhead-concept_R2.jpg",
       "href": "./wiki-images/2026-11-18_U4_kitchen_overhead-concept_R2.jpg",
@@ -31,5 +67,6 @@
       "en": "Measured floor plan",
       "es": "Plano con medidas"
     }
-  ]
+  ],
+  "lead": 0
 }

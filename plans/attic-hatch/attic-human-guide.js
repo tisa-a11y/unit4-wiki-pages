@@ -386,10 +386,10 @@
 
   function locationToggleRowHtml(es) {
     return '<div class="u4h-ctrl-row">' +
-      '<span class="u4h-ctrl-lbl">' + (es ? "Ubicación de la escotilla:" : "Candidate hatch spot:") + "</span>" +
+      '<span class="u4h-ctrl-lbl">' + (es ? "Ubicación de la escotilla:" : "Hatch location:") + "</span>" +
       '<div class="u4h-pill-group">' +
         '<button type="button" id="attLocDoor4Btn" class="u4h-pill' + (state.location === "door4" ? " is-active" : "") + '" data-loc="door4">' + (es ? "Afuera de Puerta Principal 4 (Descanso)" : "Outside Front Door 4 (Landing)") + "</button>" +
-        '<button type="button" id="attLocHallBtn" class="u4h-pill' + (state.location === "hall" ? " is-active" : "") + '" data-loc="hall">' + (es ? "Pasillo Interior Unidad 4" : "Interior Unit 4 Hallway") + "</button>" +
+        '<button type="button" id="attLocHallBtn" class="u4h-pill' + (state.location === "hall" ? " is-active" : "") + '" data-loc="hall">' + (es ? "Pasillo interior (referencia anterior)" : "Interior hallway (earlier reference)") + "</button>" +
       "</div>" +
     "</div>";
   }
@@ -405,8 +405,8 @@
     if (holdEl) {
       holdEl.className = "u4h-hold-strip is-danger";
       holdEl.innerHTML = es
-        ? "<strong>NO CORTAR EL TECHO TODAVÍA:</strong> Confirmar ubicación (descanso exterior Puerta 4 vs pasillo interior), clasificación cortafuego, ancho entre vigas B y reparar la gotera activa del techo antes de cortar o comprar madera. Mantener abierta la abertura temporal del clóset."
-        : "<strong>DO NOT CUT CEILING YET:</strong> Confirm exact spot (exterior Door 4 landing vs interior hall), ceiling fire-rating, joist bay width B, and fix the active roof leak before cutting or buying wood. Keep the temporary bedroom closet opening OPEN.";
+        ? "<strong>NO CORTAR EL TECHO TODAVÍA:</strong> El descanso común afuera de la puerta 4 es la ubicación aprobada. Confirmar trazo, sistema de techo, protección contra incendio y refuerzo. Reparar la gotera antes de cortar o comprar madera. Mantener abierta la abertura temporal del clóset."
+        : "<strong>DO NOT CUT CEILING YET:</strong> The common landing outside Front Door 4 is approved. Confirm exact markout, ceiling assembly, fire protection and framing. Repair the roof leak before cutting or buying wood. Keep the temporary bedroom closet opening OPEN.";
     }
 
     var stepPills = '<div class="u4h-steps" role="tablist">' +
@@ -538,7 +538,7 @@
 
       var gates = [
         { k: "g1", en: "1. Active roof / attic water leak repaired", es: "1. Gotera activa del techo reparada" },
-        { k: "g2", en: "2. Final hatch spot approved by Tisa (exterior Door 4 landing vs interior hall)", es: "2. Ubicación final aprobada por Tisa (descanso exterior Puerta 4 vs pasillo interior)" },
+        { k: "g2", en: "2. Markout and fixed-edge offsets verified on the common landing outside Front Door 4", es: "2. Trazo y distancias a bordes fijos verificados en el descanso común afuera de la puerta 4" },
         { k: "g3", en: "3. Ceiling fire-rating verified (DIY wood kit vs listed fire-rated assembly)", es: "3. Clasificación cortafuego verificada (madera vs tapa cortafuego certificada)" },
         { k: "g4", en: "4. Joist bay width B + overhead wires/pipes measured on site", es: "4. Claro entre vigas B y cables/tubería arriba medidos en obra" },
         { k: "g5", en: "5. Temp bedroom closet hole stays OPEN until LV cable + permanent hatch exist", es: "5. Abertura temporal en clóset recámara sigue ABIERTA hasta tener cable LV + escotilla" }

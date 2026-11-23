@@ -15,10 +15,18 @@
   "status": "PLANNING_HOLD_ZERO_CUTS_UNTIL_GATES_PASS",
   "orientation": {
     "north_angle_deg": 0,
-    "candidate_location": "UNCONFIRMED_INTERIOR_HALL_VS_DOOR4_LANDING",
+    "candidate_location": "DOOR4_LANDING",
     "proposed_hatch_axis": "36in_along_hall_x_24in_across",
-    "wall_offset_1_in": { "value": null, "measure_boundary": "wall_to_wall", "verified": "MEASURE_ON_SITE" },
-    "wall_offset_2_in": { "value": null, "measure_boundary": "wall_to_wall", "verified": "MEASURE_ON_SITE" }
+    "wall_offset_1_in": {
+      "value": null,
+      "measure_boundary": "wall_to_wall",
+      "verified": "MEASURE_ON_SITE"
+    },
+    "wall_offset_2_in": {
+      "value": null,
+      "measure_boundary": "wall_to_wall",
+      "verified": "MEASURE_ON_SITE"
+    }
   },
   "equipment_basis": {
     "furnace": {
@@ -26,7 +34,10 @@
       "height_in": 33.25,
       "width_in": 14.19,
       "depth_in": 29.0,
-      "pass_end_first_in": [14.19, 29.0],
+      "pass_end_first_in": [
+        14.19,
+        29.0
+      ],
       "source": "NEXT HVAC signed scope + Serge Nov 2 email"
     }
   },
@@ -90,7 +101,10 @@
       "date": "2026-11-19"
     },
     "service_platform_in": {
-      "value": [30.0, 30.0],
+      "value": [
+        30.0,
+        30.0
+      ],
       "measure_boundary": "clear_between_casings",
       "verified": "LOCKED",
       "source": "CMC 304.4.3 (NO vibration pads from John; NEXT handles install)",
@@ -118,8 +132,8 @@
     {
       "id": "clash-attic-location",
       "severity": "HIGH",
-      "en": "Candidate location (Door 4 landing vs. interior hallway) and ceiling fire-rating status are UNVERIFIED. Never auto-resolve; zero ceiling cuts or wood-kit purchases until verified.",
-      "es": "Ubicación candidata (descanso Puerta 4 vs. pasillo interior) y clasificación cortafuego del plafón SIN VERIFICAR. Cero cortes ni compra de madera hasta confirmar."
+      "en": "The common landing outside Front Door 4 is selected. Confirm exact markout, joist bay, framing and ceiling assembly before cutting or buying the hatch kit.",
+      "es": "Se eligió el descanso común afuera de la puerta 4. Confirmar trazo exacto, claro y refuerzo entre vigas, y sistema del techo antes de cortar o comprar el kit."
     },
     {
       "id": "clash-attic-joist-bay",

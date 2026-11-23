@@ -6,8 +6,8 @@
   "title_en": "Kitchen Floor Plan & Cabinet Schedule",
   "title_es": "Planta de Cocina y Lista de Gabinetes",
   "governing_spec": "kitchen/SPEC.md",
-  "base_rev": "rev-20261120-kitchen-fp-001",
-  "status": "LAYOUT_STAGING_HOLD_PENDING_FRIDAY_MOCKUP_PHOTOS",
+  "base_rev": "rev-20261122-owner-widths",
+  "status": "OWNER_WIDTHS_LOCKED_FIELD_ENDPOINTS_UNVERIFIED",
   "room_geometry": {
     "source": "Magicplan MASTER plan abb2d2c6 + kitchen/SPEC.md",
     "south_width_in": 147.0,
@@ -83,7 +83,7 @@
   },
   "options": {
     "south_end_option": "6in_filler_pullout",
-    "south_sink_basis": "nov2_75_105",
+    "south_sink_basis": "nov22_owner_widths_derived_72_102",
     "east_optional_uppers": true,
     "west_left_chase_width_in": null
   },
@@ -257,15 +257,16 @@
       "order": 2,
       "label_en": "Trash Pull-Out Base Cabinet",
       "label_es": "Gabinete Bajo Extraíble para Basura",
-      "station_start_in": 36.0,
-      "width_in": 15.0,
+      "station_start_in": 36,
+      "width_in": 12,
       "depth_in": 24.0,
       "height_in": 34.5,
       "measure_boundary": "wall_to_wall",
-      "status": "Verify on Site",
+      "status": "Owner Width Locked; Position to Verify",
       "editable_width": true,
-      "note_en": "36\"–51\" from SE zero corner beside dishwasher.",
-      "note_es": "36\"–51\" desde esquina SE junto al lavavajillas."
+      "note_en": "November 22 derived station 36–48 inches from retained SE zero. Use Tisa’s updated Magicplan; common zero/casing endpoints still need field evidence.",
+      "note_es": "Posición calculada el 22 de noviembre: 36–48 pulgadas desde el cero SE conservado. Usar Magicplan actualizado por Tisa; falta comprobar cero y extremos de chambranas.",
+      "prior_station_start_in": 36.0
     },
     {
       "id": "S-A1",
@@ -274,32 +275,34 @@
       "order": 3,
       "label_en": "24\" Dishwasher Bay (Panel-Ready)",
       "label_es": "Claro Lavavajillas 24\" (Panelable)",
-      "station_start_in": 51.0,
-      "width_in": 24.0,
+      "station_start_in": 48,
+      "width_in": 24,
       "depth_in": 24.0,
       "height_in": 34.5,
       "measure_boundary": "clear_between_casings",
       "status": "Verify on Site",
       "editable_width": true,
-      "note_en": "51\"–75\" from SE zero corner (drain & supply inside adjacent sink base).",
-      "note_es": "51\"–75\" desde esquina SE (drenaje y agua dentro del gabinete de tarja)."
+      "note_en": "48\"–72\" calculated from the SE corner. Dishwasher drain and supply run inside the adjacent sink base.",
+      "note_es": "48\"–72\" calculadas desde la esquina SE. El desagüe y el suministro del lavavajillas van dentro del gabinete de tarja contiguo.",
+      "prior_station_start_in": 51.0
     },
     {
       "id": "S-B3",
       "wall": "South",
       "type": "Base",
       "order": 4,
-      "label_en": "30\" Sink Base (C3 Hold — Verify 75–105 vs 72–102)",
-      "label_es": "Gabinete de Tarja 30\" (Verificar 75–105 vs 72–102)",
-      "station_start_in": 75.0,
-      "width_in": 30.0,
+      "label_en": "30-inch Sink Base (derived 72–102; confirm field endpoints)",
+      "label_es": "Gabinete de tarja de 30 pulgadas (72–102 calculado; verificar extremos)",
+      "station_start_in": 72,
+      "width_in": 30,
       "depth_in": 24.0,
       "height_in": 34.5,
       "measure_boundary": "wall_to_wall",
       "status": "Verify on Site",
       "editable_width": true,
-      "note_en": "Centered at 90\" under South window (89-3/4\"). Hold sink plumbing move until 72–102 vs 75–105 tape clash reconciles Friday.",
-      "note_es": "Centrado a 90\" bajo ventana Sur (89-3/4\"). Detener plomería hasta conciliar cinta 72–102 vs 75–105 el viernes."
+      "note_en": "November 22 derived station 72–102 inches from retained SE zero. Use Tisa’s updated Magicplan; common zero/casing endpoints still need field evidence.",
+      "note_es": "Posición calculada el 22 de noviembre: 72–102 pulgadas desde el cero SE conservado. Usar Magicplan actualizado por Tisa; falta comprobar cero y extremos de chambranas.",
+      "prior_station_start_in": 75.0
     },
     {
       "id": "S-F1",
@@ -308,23 +311,24 @@
       "order": 5,
       "label_en": "South End Pull-Out / Filler (6\" vs 12\" Open Option)",
       "label_es": "Relleno / Extraíble Final Sur (Opción 6\" vs 12\")",
-      "station_start_in": 105.0,
-      "width_in": 6.0,
+      "station_start_in": 102,
+      "width_in": 6,
       "depth_in": 24.0,
       "height_in": 34.5,
       "measure_boundary": "to_casing_edge",
       "status": "Open Option",
       "editable_width": true,
-      "note_en": "Toggle 6\" filler/pullout vs 12\" cabinet to check rear door casing clash (114\"/115\") & narrowest clear walkway with countertop overhang.",
-      "note_es": "Alterna 6\" vs 12\" para revisar choque con chambrana (114\"/115\") y paso libre mínimo con vuelo de cubierta."
+      "note_en": "November 22 derived station 102–108 inches from retained SE zero. Use Tisa’s updated Magicplan; common zero/casing endpoints still need field evidence.",
+      "note_es": "Posición calculada el 22 de noviembre: 102–108 pulgadas desde el cero SE conservado. Usar Magicplan actualizado por Tisa; falta comprobar cero y extremos de chambranas.",
+      "prior_station_start_in": 105.0
     },
     {
       "id": "S-U1",
       "wall": "South",
-      "type": "Wall Upper",
+      "type": "Wall Closure",
       "order": 6,
-      "label_en": "Existing Recessed Pie-Safe Shelving (Size TBD)",
-      "label_es": "Alacena Empotrada Existente (Tamaño Por Definir)",
+      "label_en": "Former Pie-Safe — Weather-Seal and Cover",
+      "label_es": "Pie-safe anterior — Impermeabilizar, sellar y cubrir",
       "station_start_in": 26.0,
       "width_in": null,
       "depth_in": null,
@@ -333,10 +337,11 @@
       "provisional_height_in": 44.0,
       "bottom_aff_in": 36.0,
       "measure_boundary": "rough_opening",
-      "status": "Verify on Site",
-      "editable_width": true,
-      "note_en": "Verify on Friday mockup / measure on site. Existing rough opening approx 26\"–59\" from SE, top approx 80\"; shrink & weather-seal pending owner review.",
-      "note_es": "Verificar en maqueta viernes / medir en obra. Abertura aprox 26\"–59\" desde SE, altura aprox 80\"; reducción y sellado pendientes de aprobación."
+      "status": "Seal and Cover — Owner Locked",
+      "editable_width": false,
+      "note_en": "No retained recess/open shelves. Verify substrate and exterior weatherproof closure before covering; coordinates describe the existing recess only.",
+      "note_es": "Sin nicho conservado ni repisas. Verificar sustrato y cierre contra lluvia antes de cubrir; coordenadas solo describen el nicho existente.",
+      "preserve": false
     },
     {
       "id": "S-U2",
@@ -355,8 +360,8 @@
       "measure_boundary": "to_casing_edge",
       "status": "Open Option",
       "editable_width": true,
-      "note_en": "Verify on Friday mockup / measure on site. Confirm whether corner upper wraps onto South wall beside pie-safe.",
-      "note_es": "Verificar en maqueta viernes / medir en obra. Confirmar si el gabinete alto esquinero da vuelta al muro Sur."
+      "note_en": "Verify field fit for optional South upper against the sealed and covered wall.",
+      "note_es": "Verificar en obra si cabe el gabinete alto opcional frente al muro sellado y tapado."
     },
     {
       "id": "E-B1",
@@ -381,17 +386,18 @@
       "wall": "East",
       "type": "Base",
       "order": 2,
-      "label_en": "East Drawer Base Cabinet (24\")",
-      "label_es": "Gabinete Bajo de Cajones Este (24\")",
-      "station_start_in": 36.0,
-      "width_in": 24.0,
+      "label_en": "East Drawer Base Cabinet (18 inches)",
+      "label_es": "Gabinete bajo de cajones Este (18 pulgadas)",
+      "station_start_in": 36,
+      "width_in": 18,
       "depth_in": 24.0,
       "height_in": 34.5,
       "measure_boundary": "wall_to_wall",
-      "status": "Verify on Site",
+      "status": "Owner Width Locked; Position to Verify",
       "editable_width": true,
-      "note_en": "36\"–60\" North from SE corner between corner box and refrigerator.",
-      "note_es": "36\"–60\" al Norte desde esquina SE entre esquinero y refrigerador."
+      "note_en": "November 22 derived station 36–54 inches from retained SE zero. Use Tisa’s updated Magicplan; common zero/casing endpoints still need field evidence.",
+      "note_es": "Posición calculada el 22 de noviembre: 36–54 pulgadas desde el cero SE conservado. Usar Magicplan actualizado por Tisa; falta comprobar cero y extremos de chambranas.",
+      "prior_station_start_in": 36.0
     },
     {
       "id": "E-A1",
@@ -400,15 +406,16 @@
       "order": 3,
       "label_en": "Haier Counter-Depth Fridge Bay (QJS15HYRFS)",
       "label_es": "Claro Refrigerador Haier (QJS15HYRFS)",
-      "station_start_in": 60.0,
-      "width_in": 28.0,
+      "station_start_in": 54,
+      "width_in": 28,
       "depth_in": 28.5625,
       "height_in": 69.875,
       "measure_boundary": "clear_between_casings",
       "status": "Locked",
       "editable_width": true,
-      "note_en": "60\"–88\" North from SE. Unit is 27-9/16\" W × 26-9/16\" D + 2\" rear gap. Freestanding — NOTHING above fridge.",
-      "note_es": "60\"–88\" al Norte desde SE. Equipo mide 27-9/16\" ancho × 26-9/16\" prof. + 2\" atrás. Independiente — NADA arriba."
+      "note_en": "54\"–82\" calculated north from SE corner. Refrigerator is 27-9/16\" wide × 26-9/16\" deep. Leave 2\" behind it and open space above.",
+      "note_es": "54\"–82\" calculadas al norte desde la esquina SE. El refrigerador mide 27-9/16\" de ancho × 26-9/16\" de fondo. Dejar 2\" libres detrás y espacio libre arriba.",
+      "prior_station_start_in": 60.0
     },
     {
       "id": "E-U1",
@@ -433,18 +440,19 @@
       "wall": "East",
       "type": "Wall Upper",
       "order": 5,
-      "label_en": "Optional East Adjacent Wall Upper (36\")",
-      "label_es": "Gabinete Alto Opcional Este (36\")",
-      "station_start_in": 24.0,
-      "width_in": 36.0,
+      "label_en": "East Adjacent Wall Upper (30 inches)",
+      "label_es": "Alacena contigua Este (30 pulgadas)",
+      "station_start_in": 24,
+      "width_in": 30,
       "depth_in": 12.0,
       "height_in": 40.4375,
       "bottom_aff_in": 55.125,
       "measure_boundary": "wall_to_wall",
-      "status": "Open Option",
+      "status": "Owner Width Locked; Position to Verify",
       "editable_width": true,
-      "note_en": "Verify on Friday mockup / measure on site. Stops at 60\" — nothing above Haier refrigerator.",
-      "note_es": "Verificar en maqueta viernes / medir en obra. Termina a 60\" — nada sobre el refrigerador Haier."
+      "note_en": "November 22 derived station 24–54 inches from retained SE zero. Use Tisa’s updated Magicplan; common zero/casing endpoints still need field evidence.",
+      "note_es": "Posición calculada el 22 de noviembre: 24–54 pulgadas desde el cero SE conservado. Usar Magicplan actualizado por Tisa; falta comprobar cero y extremos de chambranas.",
+      "prior_station_start_in": 24.0
     },
     {
       "id": "E-U0",
@@ -453,15 +461,16 @@
       "order": 6,
       "label_en": "NO Cabinet Above Refrigerator (Locked)",
       "label_es": "SIN Gabinete Sobre Refrigerador (Bloqueado)",
-      "station_start_in": 60.0,
-      "width_in": 0.0,
+      "station_start_in": 54,
+      "width_in": 0,
       "depth_in": 0.0,
       "height_in": 0.0,
       "measure_boundary": "clear_between_casings",
       "status": "Locked",
       "editable_width": false,
-      "note_en": "Owner locked: freestanding Haier refrigerator with open space above.",
-      "note_es": "Decisión fija: refrigerador Haier independiente con espacio libre arriba."
+      "note_en": "November 22 derived station 54–54 inches from retained SE zero. Use Tisa’s updated Magicplan; common zero/casing endpoints still need field evidence.",
+      "note_es": "Posición calculada el 22 de noviembre: 54–54 pulgadas desde el cero SE conservado. Usar Magicplan actualizado por Tisa; falta comprobar cero y extremos de chambranas.",
+      "prior_station_start_in": 60.0
     },
     {
       "id": "N-B0",
@@ -514,7 +523,8 @@
       "title_en": "South Sink Base 75\"–105\" vs. Taped 72\"–102\"",
       "title_es": "Tarja Sur 75\"–105\" vs. Cinta 72\"–102\"",
       "en": "Prior layout places 30\" sink base at 75\"–105\" (CL 90\" under window) vs. site photos showing 72\"–102\" (CL 87\"). Hold sink plumbing relocation until common SE tape zero reconciles Friday.",
-      "es": "El trazo previo ubica la tarja de 30\" en 75\"–105\" (eje 90\" bajo ventana) vs. fotos con cinta en 72\"–102\" (eje 87\"). Detener plomería hasta conciliar origen SE el viernes."
+      "es": "El trazo previo ubica la tarja de 30\" en 75\"–105\" (eje 90\" bajo ventana) vs. fotos con cinta en 72\"–102\" (eje 87\"). Detener plomería hasta conciliar origen SE el viernes.",
+      "owner_update_20261122": "12-inch base explains the prior3-inch station difference arithmetically; common zero/window/casing still unverified. Do not hold settled base width for re-selection."
     },
     {
       "id": "clash-south-casing-114-115",
@@ -542,5 +552,16 @@
     }
   ],
   "field_overrides": [],
-  "pins": []
+  "pins": [],
+  "owner_update": {
+    "date": "2026-11-22",
+    "magicplan": "Already updated by Tisa (owner report); no assistant plan edit performed",
+    "width_changes": {
+      "S-B2": "15 to 12",
+      "E-B2": "24 to 18",
+      "E-U2": "36 to 30"
+    },
+    "pie_safe": "Weather-seal and cover over; do not preserve or install shelves",
+    "station_basis": "Derived sequential setout from retained SE zero and corner widths, not independently measured. Check current Magicplan and actual casing/window endpoints."
+  }
 }

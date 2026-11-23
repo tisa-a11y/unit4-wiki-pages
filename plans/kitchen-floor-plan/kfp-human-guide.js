@@ -16,7 +16,7 @@
   var state = {
     step: "floor",
     southEnd: "6",       // "6" (6" filler/pullout) or "12" (12" cabinet option)
-    sinkBasis: "window", // "window" (75-105 CL 90) or "tape" (72-102 CL 87)
+    sinkBasis: "tape",   // Current calculated setout; window is the earlier comparison
     floorDown: false,    // false = bare subfloor (+3/4"), true = finished floor down
     floorAdd: 0.75,
     wallTab: "south",    // "south" | "east" | "west"
@@ -51,7 +51,7 @@
     var endW = state.southEnd === "12" ? 12 : 6;
     var sinkStart = state.sinkBasis === "tape" ? 72 : 75;
     var sinkEnd = sinkStart + 30;
-    var trashW = state.sinkBasis === "tape" ? 12 : 15;
+    var trashW = 12;
     var dwStart = 36 + trashW;
     var endStart = sinkEnd;
     var southCabTotal = endStart + endW;
@@ -82,16 +82,16 @@
         noteEs: "Esquinero 36\" × 36\" desde esquina SE (0\"). Sostiene cubiertas Sur y Este." },
       { id: "S-B2", wall: "South", start: 36, w: trashW, d: 24, status: "verify",
         en: "Trash Pull-Out Cabinet (" + trashW + "\")", es: "Gabinete Extraíble de Basura (" + trashW + "\")",
-        noteEn: state.sinkBasis === "tape" ? "Adjusts to 12\" if sink stays on 72\"–102\" site tape marks." : "15\" pull-out when sink centers on South window (75\"–105\").",
-        noteEs: state.sinkBasis === "tape" ? "Queda de 12\" si la tarja sigue en 72\"–102\" (cinta en obra)." : "Extraíble de 15\" cuando la tarja se centra bajo la ventana (75\"–105\")." },
+        noteEn: "12\" width confirmed. Check the common zero on site before setting cabinets.",
+        noteEs: "Ancho de 12\" confirmado. Verificar en obra el punto cero antes de colocar gabinetes." },
       { id: "S-A1", wall: "South", start: dwStart, w: 24, d: 24, status: "verify",
         en: "24\" Panel-Ready Dishwasher Bay", es: "Claro Lavavajillas 24\" (Panelable)",
         noteEn: "Sits directly right of sink base; water supply & drain route into sink cabinet.",
         noteEs: "Va justo a la derecha de la tarja; agua y drenaje entran al gabinete de tarja." },
       { id: "S-B3", wall: "South", start: sinkStart, w: 30, d: 24, status: "hold",
         en: "30\" Sink Base (" + sinkStart + "\"–" + sinkEnd + "\" from SE)", es: "Gabinete de Tarja 30\" (" + sinkStart + "\"–" + sinkEnd + "\" desde SE)",
-        noteEn: "HOLD plumbing move until Friday tape check confirms 75\"–105\" (window center) vs 72\"–102\" (site tape).",
-        noteEs: "PAUSA en plomería hasta verificar con cinta el viernes: 75\"–105\" (centro ventana) vs 72\"–102\" (cinta)." },
+        noteEn: "Verify the common zero, window center and rear-door casing before moving plumbing.",
+        noteEs: "Verificar el punto cero, el eje de la ventana y la moldura de la puerta antes de mover plomería." },
       { id: "S-F1", wall: "South", start: endStart, w: endW, d: 24, status: casingPass114 ? "verify" : "hold",
         en: endW === 6 ? "6\" End Filler / Spice Pull-Out" : "12\" End Cabinet (Test Option)",
         es: endW === 6 ? "Relleno / Especiero Final 6\"" : "Gabinete Final 12\" (Opción de Prueba)",
@@ -101,22 +101,22 @@
         noteEs: casingPass114
           ? "Termina en " + southWithOverhang + "\" con 1\" de vuelo — libra chambrana de puerta trasera (114\")."
           : "Termina en " + southWithOverhang + "\" con 1\" de vuelo — ¡CHOCA con chambrana (114\")! Usa 6\" o verifica cinta." },
-      { id: "S-U1", wall: "South", start: 26, w: 33, d: 12, status: "verify",
-        en: "Existing Recessed Pie-Safe (~26\"–59\" from SE)", es: "Alacena Empotrada Existente (~26\"–59\" desde SE)",
-        noteEn: "Verify exact width & depth on Friday mockup before deciding final trim/weather-seal.",
-        noteEs: "Medir ancho y fondo exactos el viernes antes de cerrar moldura y sellado." },
       { id: "E-B1", wall: "East", start: 0, w: 36, d: 24, status: "hold",
         en: "East Corner Return (D04 Subpanel Behind Wall)", es: "Retorno Esquinero Este (Subpanel D04 Atrás)",
         noteEn: "STOP: Subpanel D04 sits behind wall 6\"–38\" from SE. NO screws 53\"–77\" off finished floor!",
         noteEs: "ALTO: Subpanel D04 está atrás entre 6\"–38\" desde SE. ¡CERO tornillos entre 53\" y 77\" de altura!" },
-      { id: "E-B2", wall: "East", start: 36, w: 24, d: 24, status: "verify",
-        en: "24\" East Drawer Base Cabinet", es: "Gabinete Bajo de Cajones Este (24\")",
-        noteEn: "36\"–60\" North from SE corner between corner cabinet and fridge.",
-        noteEs: "36\"–60\" al Norte desde esquina SE entre esquinero y refrigerador." },
-      { id: "E-A1", wall: "East", start: 60, w: 28, d: 28.5, status: "locked",
+      { id: "E-B2", wall: "East", start: 36, w: 18, d: 24, status: "locked",
+        en: "18\" East Drawer Base Cabinet", es: "Gabinete Bajo de Cajones Este (18\")",
+        noteEn: "36\"–54\" calculated north from SE corner. Verify door and drawer swing on site.",
+        noteEs: "36\"–54\" calculadas al norte desde la esquina SE. Verificar en obra el giro de puerta y cajones." },
+      { id: "E-U2", wall: "East", start: 24, w: 30, d: 12, status: "locked",
+        en: '30" upper beside refrigerator', es: 'Gabinete alto de 30" junto al refrigerador',
+        noteEn: '24"–54" calculated north from SE corner. Verify backing and panel clearance.',
+        noteEs: '24"–54" calculadas al norte desde la esquina SE. Verificar refuerzo y paso al tablero.' },
+      { id: "E-A1", wall: "East", start: 54, w: 28, d: 28.5, status: "locked",
         en: "Haier Counter-Depth Fridge Bay (28\" Wide)", es: "Espacio Refrigerador Haier (28\" Ancho)",
-        noteEn: "60\"–88\" North from SE. Fridge is 27-9/16\" W × 26-9/16\" D + 2\" rear gap. NOTHING above fridge (locked).",
-        noteEs: "60\"–88\" al Norte desde SE. Mide 27-9/16\" × 26-9/16\" + 2\" atrás. NADA arriba del refrigerador (fijo)." }
+        noteEn: "54\"–82\" calculated north from SE. Fridge is 27-9/16\" W × 26-9/16\" D + 2\" rear gap. NOTHING above fridge (locked).",
+        noteEs: "54\"–82\" calculadas al norte desde SE. Mide 27-9/16\" × 26-9/16\" + 2\" atrás. NADA arriba del refrigerador (fijo)." }
     ];
 
     return {
@@ -250,13 +250,13 @@
 
         // EAST WALL CABINETS (measuring North from SE corner ySouth)
         '<g class="kfp-hit" data-cab="E-A1" style="cursor:pointer">' +
-          '<rect x="' + (xEast - 28.5 * S).toFixed(1) + '" y="' + (ySouth - 88 * S).toFixed(1) + '" width="' + (28.5 * S).toFixed(1) + '" height="' + (28 * S).toFixed(1) + '" fill="' + appColor + '" stroke="' + selStroke("E-A1", "#184E77") + '" stroke-width="' + selWidth("E-A1") + '"/>' +
-          '<text x="' + (xEast - 14.25 * S).toFixed(1) + '" y="' + (ySouth - 74.5 * S).toFixed(1) + '" text-anchor="middle" font-size="8.4" font-weight="800" fill="#184E77">' + (es ? "REFRI HAIER" : "HAIER FRIDGE") + "</text>" +
-          '<text x="' + (xEast - 14.25 * S).toFixed(1) + '" y="' + (ySouth - 68.5 * S).toFixed(1) + '" text-anchor="middle" font-size="6.9" font-weight="700" fill="#485563">28" ' + (es ? "libre" : "bay") + "</text>" +
+          '<rect x="' + (xEast - 28.5 * S).toFixed(1) + '" y="' + (ySouth - 82 * S).toFixed(1) + '" width="' + (28.5 * S).toFixed(1) + '" height="' + (28 * S).toFixed(1) + '" fill="' + appColor + '" stroke="' + selStroke("E-A1", "#184E77") + '" stroke-width="' + selWidth("E-A1") + '"/>' +
+          '<text x="' + (xEast - 14.25 * S).toFixed(1) + '" y="' + (ySouth - 68.5 * S).toFixed(1) + '" text-anchor="middle" font-size="8.4" font-weight="800" fill="#184E77">' + (es ? "REFRI HAIER" : "HAIER FRIDGE") + "</text>" +
+          '<text x="' + (xEast - 14.25 * S).toFixed(1) + '" y="' + (ySouth - 62.5 * S).toFixed(1) + '" text-anchor="middle" font-size="6.9" font-weight="700" fill="#485563">28" ' + (es ? "libre" : "bay") + "</text>" +
         "</g>" +
         '<g class="kfp-hit" data-cab="E-B2" style="cursor:pointer">' +
-          '<rect x="' + (xEast - 24 * S).toFixed(1) + '" y="' + (ySouth - 60 * S).toFixed(1) + '" width="' + (24 * S).toFixed(1) + '" height="' + (24 * S).toFixed(1) + '" fill="' + cabColor + '" stroke="' + selStroke("E-B2", "#2D4A3E") + '" stroke-width="' + selWidth("E-B2") + '"/>' +
-          '<text x="' + (xEast - 12 * S).toFixed(1) + '" y="' + (ySouth - 47 * S).toFixed(1) + '" text-anchor="middle" font-size="8.2" font-weight="800" fill="#131A22">24" ' + (es ? "Caj." : "Drw") + "</text>" +
+          '<rect x="' + (xEast - 24 * S).toFixed(1) + '" y="' + (ySouth - 54 * S).toFixed(1) + '" width="' + (24 * S).toFixed(1) + '" height="' + (18 * S).toFixed(1) + '" fill="' + cabColor + '" stroke="' + selStroke("E-B2", "#2D4A3E") + '" stroke-width="' + selWidth("E-B2") + '"/>' +
+          '<text x="' + (xEast - 12 * S).toFixed(1) + '" y="' + (ySouth - 45 * S).toFixed(1) + '" text-anchor="middle" font-size="8.2" font-weight="800" fill="#131A22">18" ' + (es ? "Caj." : "Drw") + "</text>" +
         "</g>" +
 
         // SHARED SE CORNER (36x36 L-Corner) + D04 No-Screw Warning Stripe on East Wall
@@ -408,22 +408,24 @@
         // SE 36" Corner Base (0-36)
         '<rect x="40" y="160" width="144" height="54" fill="#EEF4F0" stroke="#2D4A3E" stroke-width="1.5"/>' +
         '<text x="112" y="190" text-anchor="middle" font-size="9" font-weight="800" fill="#131A22">SE Corner 36"</text>' +
-        // 24" Drawer Base (36-60)
-        '<rect x="184" y="160" width="96" height="54" fill="#EEF4F0" stroke="#2D4A3E" stroke-width="1.5"/>' +
-        '<text x="232" y="190" text-anchor="middle" font-size="9" font-weight="800" fill="#131A22">24" ' + (es ? "Cajones" : "Drawers") + "</text>" +
-        // Haier Fridge (60-88, ~70" tall)
-        '<rect x="280" y="108" width="112" height="106" fill="#E6F0F8" stroke="#184E77" stroke-width="1.8"/>' +
-        '<text x="336" y="156" text-anchor="middle" font-size="9.5" font-weight="800" fill="#184E77">HAIER 28"</text>' +
-        '<text x="336" y="170" text-anchor="middle" font-size="7.6" fill="#485563">69-7/8" H</text>' +
+        // 18" Drawer Base (36-54)
+        '<rect x="184" y="160" width="72" height="54" fill="#EEF4F0" stroke="#2D4A3E" stroke-width="1.5"/>' +
+        '<text x="220" y="190" text-anchor="middle" font-size="9" font-weight="800" fill="#131A22">18" ' + (es ? "Cajones" : "Drawers") + "</text>" +
+        // Haier Fridge (54-82, ~70" tall)
+        '<rect x="256" y="108" width="112" height="106" fill="#E6F0F8" stroke="#184E77" stroke-width="1.8"/>' +
+        '<text x="312" y="156" text-anchor="middle" font-size="9.5" font-weight="800" fill="#184E77">HAIER 28"</text>' +
+        '<text x="312" y="170" text-anchor="middle" font-size="7.6" fill="#485563">69-7/8" H</text>' +
+        '<rect x="136" y="64" width="120" height="71" fill="#EEF4F0" stroke="#2D4A3E" stroke-width="1.5"/>' +
+        '<text x="196" y="101" text-anchor="middle" font-size="8.4" font-weight="800" fill="#131A22">' + (es ? 'ALTO 30"' : '30" UPPER') + "</text>" +
         // Nothing above fridge badge
-        '<rect x="284" y="56" width="104" height="36" rx="6" fill="#E5F4EC" stroke="#1B6B46" stroke-width="1.2" stroke-dasharray="4 2"/>' +
-        '<text x="336" y="72" text-anchor="middle" font-size="8" font-weight="800" fill="#1B6B46">' + (es ? "NADA ARRIBA" : "NOTHING ABOVE") + "</text>" +
-        '<text x="336" y="83" text-anchor="middle" font-size="7" fill="#1B6B46">' + (es ? "(Decisión fija)" : "(Owner locked)") + "</text>" +
+        '<rect x="260" y="56" width="104" height="36" rx="6" fill="#E5F4EC" stroke="#1B6B46" stroke-width="1.2" stroke-dasharray="4 2"/>' +
+        '<text x="312" y="72" text-anchor="middle" font-size="8" font-weight="800" fill="#1B6B46">' + (es ? "NADA ARRIBA" : "NOTHING ABOVE") + "</text>" +
+        '<text x="312" y="83" text-anchor="middle" font-size="7" fill="#1B6B46">' + (es ? "(Decisión fija)" : "(Owner locked)") + "</text>" +
         // Counter height & zero labels
         '<text x="40" y="232" font-size="8.2" font-weight="800" fill="#184E77">0" (SE)</text>' +
         '<text x="184" y="232" text-anchor="middle" font-size="8" fill="#485563">36"</text>' +
-        '<text x="280" y="232" text-anchor="middle" font-size="8" fill="#485563">60"</text>' +
-        '<text x="392" y="232" text-anchor="end" font-size="8.2" font-weight="800" fill="#184E77">88" (' + (es ? "Pasillo" : "Hall") + ")</text>" +
+        '<text x="256" y="232" text-anchor="middle" font-size="8" fill="#485563">54"</text>' +
+        '<text x="368" y="232" text-anchor="end" font-size="8.2" font-weight="800" fill="#184E77">82" (' + (es ? "calculadas" : "calculated") + ")</text>" +
         '<text x="418" y="164" text-anchor="end" font-size="7.5" font-weight="700" fill="#485563">' + fmtIn(ctrH) + "</text>" +
       "</svg>";
     }
@@ -439,7 +441,7 @@
       '<line x1="32" y1="216" x2="432" y2="216" stroke="#131A22" stroke-width="2.2"/>' +
       // Existing Recessed Pie-Safe (~26" to 59")
       '<rect x="' + (x0 + 26 * Sx).toFixed(1) + '" y="94" width="' + (33 * Sx).toFixed(1) + '" height="66" fill="#FDF2E4" stroke="#A15206" stroke-width="1.4" stroke-dasharray="4 3"/>' +
-      '<text x="' + (x0 + 42.5 * Sx).toFixed(1) + '" y="122" text-anchor="middle" font-size="8.2" font-weight="800" fill="#A15206">' + (es ? "ALACENA EXISTENTE" : "EXISTING PIE-SAFE") + "</text>" +
+      '<text x="' + (x0 + 42.5 * Sx).toFixed(1) + '" y="122" text-anchor="middle" font-size="8.2" font-weight="800" fill="#A15206">' + (es ? "SELLAR Y TAPAR NICHO" : "SEAL AND COVER RECESS") + "</text>" +
       '<text x="' + (x0 + 42.5 * Sx).toFixed(1) + '" y="135" text-anchor="middle" font-size="7.2" fill="#A15206">~26"–59" (' + (es ? "medir" : "measure") + ")</text>" +
       // South Window (72.87" to 106.68")
       '<rect x="' + (x0 + 72.87 * Sx).toFixed(1) + '" y="62" width="' + (33.81 * Sx).toFixed(1) + '" height="86" fill="#E6F0F8" stroke="#184E77" stroke-width="1.6"/>' +
@@ -571,10 +573,10 @@
             "</div>" +
           "</div>" +
           '<div class="u4h-ctrl-row">' +
-            '<span class="u4h-ctrl-lbl">' + (es ? "Posición de tarja Sur (verificar):" : "South sink spot (verify Friday):") + "</span>" +
+            '<span class="u4h-ctrl-lbl">' + (es ? "Posición de tarja Sur (verificar en obra):" : "South sink setout (verify on site):") + "</span>" +
             '<div class="u4h-pill-group">' +
-              '<button type="button" class="u4h-pill' + (state.sinkBasis === "window" ? " is-active" : "") + '" data-sink="window">' + (es ? '75"–105" (Centro Ventana)' : '75"–105" (Window Center)') + "</button>" +
-              '<button type="button" class="u4h-pill' + (state.sinkBasis === "tape" ? " is-active" : "") + '" data-sink="tape">' + (es ? '72"–102" (Cinta en Obra)' : '72"–102" (Site Tape)') + "</button>" +
+              '<button type="button" class="u4h-pill' + (state.sinkBasis === "window" ? " is-active" : "") + '" data-sink="window">' + (es ? '75"–105" (comparación anterior)' : '75"–105" (earlier comparison)') + "</button>" +
+              '<button type="button" class="u4h-pill' + (state.sinkBasis === "tape" ? " is-active" : "") + '" data-sink="tape">' + (es ? '72"–102" (trazo calculado)' : '72"–102" (calculated setout)') + "</button>" +
             "</div>" +
           "</div>" +
           '<div class="u4h-ctrl-row">' +
@@ -604,7 +606,7 @@
     } else if (state.step === "walls") {
       titleEn = "Elevation by Wall & Site Photo";
       titleEs = "Elevación por Muro y Foto Real";
-      subEn = "Switch walls to check window center, pie-safe opening, and D04 electrical no-screw zone";
+      subEn = "Switch walls to check window center, former pie-safe closure and D04 electrical no-screw zone";
       subEs = "Cambia de muro para ver ventana, alacena existente y zona sin tornillos del subpanel D04";
 
       inner =
@@ -626,7 +628,7 @@
                 '<img src="./assets/kitchen-south-wall.jpg" alt="' + esc(es ? "Foto real del muro Sur de cocina" : "Real photo of South kitchen sink and pie-safe wall") + '">' +
                 '<div class="u4h-photo-cap"><strong>' + (es ? "Foto real — Muro Sur:" : "Real site photo — South Wall:") + "</strong> " +
                   (es ? "La cinta azul marca línea de cubierta a 36\". Alacena empotrada existente a la izquierda (~26\"–59\" desde SE); ventana y puerta trasera a la derecha."
-                      : "Blue tape marks 36\" counter height. Existing recessed pie-safe sits left (~26\"–59\" from SE); sink window and rear door on right.") +
+                      : "Blue tape marks 36\" counter height. Weatherproof and cover the former recess at left after inspection. Sink window and rear door are on the right.") +
                 "</div>" +
               "</div>" +
             "</div>"
@@ -724,7 +726,7 @@
         },
         {
           k: "c3",
-          en: "3. Existing Recessed Pie-Safe Width & Depth (~26\"–59\" from SE)",
+          en: "3. Weatherproofing and closure of the former recess (~26\"–59\" from SE)",
           es: "3. Ancho y Fondo de Alacena Empotrada Existente (~26\"–59\" desde SE)",
           dEn: "Confirm exact rough opening width, depth, and whether upper cabinet wraps into SE corner beside it.",
           dEs: "Confirma ancho y fondo exactos de la abertura y si el gabinete alto esquinero da vuelta junto a ella."
@@ -916,7 +918,7 @@
         state.selectedId = String(val);
       } else if (act === "reset") {
         state.southEnd = "6";
-        state.sinkBasis = "window";
+        state.sinkBasis = "tape";
         state.floorDown = false;
         state.step = "floor";
         state.wallTab = "south";

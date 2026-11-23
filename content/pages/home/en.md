@@ -1,10 +1,10 @@
 # Unit 4 — Home
 
 ## Done by Monday (Fri–Sun, Nov 20–22)
+- **Attic first:** Mark the 24" × 36" finished-clear opening outside Front Door 4 and document framing and lift route. Wait for release before cutting.
 - **Kitchen:** Clear the room, finish the window framing, and send labeled photos of the full L layout.
 - **Kitchen › Oven / Range Run:** Put in the wood blocking, test-hang the hood with its bottom 66"–72" from the floor (no upper cabinets), and measure the gap to the ceiling and the duct.
 - **Bathroom:** Install the original window trim before any wall tile, set the two GFCI boxes, and set out the fixtures.
-- **HVAC › Attic Access:** Take 4 daylight photos of the hatch spot (24" × 36"), measure the open bedroom closet, and look for leaks from inside only.
 - **Weekend carpentry:** Finish framing and blocking before Monday's drywall delivery.
 
 ## Next Week (Starting Mon, Nov 23)

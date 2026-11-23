@@ -1,78 +1,14 @@
 {
   "en": "Attic hatch guide",
   "es": "Guía de la escotilla del ático",
-  "noteEn": "Tap a page to open the guide.",
-  "noteEs": "Toca una página para abrir la guía.",
+  "noteEn": "Use the interactive plan below for current instructions.",
+  "noteEs": "Consulta el plano interactivo abajo para las indicaciones actuales.",
   "items": [
     {
-      "img": "./wiki-docs/attic-hatch-r5/assets/EN-page-1.png",
-      "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-1.png",
-      "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p1",
-      "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p1",
-      "en": "1. Clear opening, 24\" × 36\"",
-      "es": "1. Paso libre de 24\" × 36\""
-    },
-    {
-      "img": "./wiki-docs/attic-hatch-r5/assets/EN-page-2.png",
-      "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-2.png",
-      "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p2",
-      "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p2",
-      "en": "2. Location and 4 photos",
-      "es": "2. Ubicación y 4 fotos"
-    },
-    {
-      "img": "./wiki-docs/attic-hatch-r5/assets/EN-page-3.png",
-      "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-3.png",
-      "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p3",
-      "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p3",
-      "en": "3. Materials",
-      "es": "3. Materiales"
-    },
-    {
-      "img": "./wiki-docs/attic-hatch-r5/assets/EN-page-4.png",
-      "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-4.png",
-      "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p4",
-      "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p4",
-      "en": "4. Cut list",
-      "es": "4. Lista de cortes"
-    },
-    {
-      "img": "./wiki-docs/attic-hatch-r5/assets/EN-page-5.png",
-      "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-5.png",
-      "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p5",
-      "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p5",
-      "en": "5. Check between the joists",
-      "es": "5. Revisar entre las vigas"
-    },
-    {
-      "img": "./wiki-docs/attic-hatch-r5/assets/EN-page-6.png",
-      "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-6.png",
-      "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p6",
-      "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p6",
-      "en": "6. Seal and insulate",
-      "es": "6. Sellar y aislar"
-    },
-    {
-      "img": "./wiki-docs/attic-hatch-r5/assets/EN-page-7.png",
-      "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-7.png",
-      "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p7",
-      "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p7",
-      "en": "7. Walkway and outlet",
-      "es": "7. Pasarela y contacto"
-    },
-    {
-      "img": "./wiki-docs/attic-hatch-r5/assets/EN-page-8.png",
-      "imgEs": "./wiki-docs/attic-hatch-r5/assets/ES-page-8.png",
-      "href": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p8",
-      "hrefEs": "#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p8",
-      "en": "8. Final checks",
-      "es": "8. Revisión final"
-    },
-    {
-      "img": "./wiki-docs/attic-hatch-r5/assets/John-original-landing-photo.jpg",
-      "href": "./wiki-docs/attic-hatch-r5/assets/John-original-landing-photo.jpg",
-      "en": "John's photo of the hatch spot",
-      "es": "Foto de John del lugar de la escotilla"
+      "img": "./plans/attic-hatch/assets/attic-hatch-candidate.jpg",
+      "href": "./plans/attic-hatch/assets/attic-hatch-candidate.jpg",
+      "en": "Common stair landing outside Front Door 4. Exact opening still to be marked.",
+      "es": "Descanso común afuera de la puerta 4. Falta trazar la abertura exacta."
     }
   ],
   "lead": 8

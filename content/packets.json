@@ -266,10 +266,10 @@
   {
     "key": "attic-hatch-guide",
     "room": "attic-access",
-    "titleEn": "Attic hatch guide",
-    "titleEs": "Guía de la escotilla del ático",
-    "noteEn": "8 pages: location, materials, cuts, sealing.",
-    "noteEs": "8 páginas: ubicación, materiales, cortes, sellado.",
+    "titleEn": "Earlier attic hatch guide (reference)",
+    "titleEs": "Guía anterior de la escotilla (referencia)",
+    "noteEn": "Current location and work holds are in Attic Access.",
+    "noteEs": "La ubicación y las pausas vigentes están en Acceso al ático.",
     "docEn": "2026-11-19_Attic-hatch-practical-guide_R5_EN",
     "docEs": "2026-11-19_Attic-hatch-practical-guide_R5_ES",
     "aliases": [
@@ -277,7 +277,8 @@
       "hatch guide",
       "r5",
       "escotilla"
-    ]
+    ],
+    "inMenu": false
   },
   {
     "key": "attic-opening-plan",

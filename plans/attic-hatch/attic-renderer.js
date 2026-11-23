@@ -46,7 +46,7 @@
     status: 'PLANNING_HOLD_ZERO_CUTS_UNTIL_GATES_PASS',
     orientation: {
       north_angle_deg: 0,
-      candidate_location: 'UNCONFIRMED_INTERIOR_HALL_VS_DOOR4_LANDING',
+      candidate_location: 'DOOR4_LANDING',
       proposed_hatch_axis: '36in_along_hall_x_24in_across',
       wall_offset_1_in: { value: null, measure_boundary: 'wall_to_wall', verified: 'MEASURE_ON_SITE' },
       wall_offset_2_in: { value: null, measure_boundary: 'wall_to_wall', verified: 'MEASURE_ON_SITE' }
@@ -183,7 +183,7 @@
         severity: 'HIGH',
         title_en: 'Candidate Spot & Ceiling Fire Rating Unverified',
         title_es: 'Ubicación y Clasificación Cortafuego Sin Verificar',
-        en: 'Candidate location (Door 4 landing vs. interior hallway) and ceiling fire-rating status are UNVERIFIED. Never auto-resolve; zero ceiling cuts or wood-kit purchases until verified.',
+        en: 'The common landing outside Front Door 4 is selected. Hold ceiling cuts and hatch kit until markout, fire protection and support have been verified.',
         es: 'Ubicación candidata (descanso Puerta 4 vs. pasillo interior) y clasificación cortafuego del plafón SIN VERIFICAR. Cero cortes ni compra de madera hasta confirmar.'
       },
       {
@@ -211,7 +211,7 @@
       btn_circle_off: 'Drawing Active…',
       btn_export_svg: 'Export SVG',
       btn_download_pdf: 'Download / Print PDF',
-      hold_html: '<strong>WORKING PLANNING DRAFT — ZERO CEILING CUTS HOLD:</strong> Location (Door 4 landing vs. interior hall), ceiling fire-rating status, and joist bay width <strong>B</strong> are unverified. <strong>ZERO</strong> ceiling cuts, <strong>ZERO</strong> wood-kit purchases, and keep the temporary bedroom closet opening <strong>OPEN</strong> until all gates pass and the active roof leak is repaired.',
+      hold_html: '<strong>WORKING PLANNING DRAFT — ZERO CEILING CUTS HOLD:</strong> The common landing outside Front Door 4 is selected. Verify the exact markout, ceiling fire protection and joist bay width <strong>B</strong>. <strong>ZERO</strong> ceiling cuts, <strong>ZERO</strong> wood-kit purchases, and keep the temporary bedroom closet opening <strong>OPEN</strong> until all gates pass and the active roof leak is repaired.',
       conflict_text: 'A newer revision was saved on Tailnet by another editor (HTTP 409). Reload the latest plan and re-apply your change.',
       btn_reload: 'Reload Latest Plan',
       svg_title_plan: 'True-to-Scale Attic Hatch & Walkway Plan (24" × 36" Clear)',
@@ -231,7 +231,7 @@
       photo_mid: 'CANDIDATE CEILING (HOLD)',
       photo_right: 'Door 4 Entry →',
       photo_callouts: [
-        '<li class="callout-alert"><strong>Unconfirmed Spot &amp; Fire Rating:</strong> Confirm whether hatch belongs on Door 4 landing or inside Unit 4 hallway AND whether this ceiling is fire-rated before cutting.</li>',
+        '<li class="callout-alert"><strong>Common landing outside Front Door 4:</strong> Confirm the exact markout, framing and fire protection before cutting.</li>',
         '<li><strong>Ceiling Light Fixture:</strong> Keep landing light; add entrance-switched enclosed LED utility light inside attic.</li>',
         '<li><strong>Original 103" High Picture Rail:</strong> Visible original Edwardian moulding along walls — preserve intact, keep separate from hatch trim.</li>',
         '<li><strong>Stair Railing Clearance:</strong> Verify ladder setup and lid swing clear stairs, Door 4 swing, and original door/window casings.</li>'
@@ -274,8 +274,8 @@
       lbl_lid_finish: 'Recessed Lid Finish Status (~1-1/2" recessed 3/4" ply lid)',
       loc_opts: [
         'UNCONFIRMED — Door 4 Landing vs. Interior Hall',
-        'Confirmed — Inside Unit 4 Interior Hallway',
-        'Confirmed — Door 4 Landing (Verify Fire Rating)'
+        'Interior hallway — earlier reference',
+        'Common landing outside Front Door 4'
       ],
       fire_opts: [
         'UNVERIFIED HOLD — Do NOT cut ceiling or buy wood kit yet',

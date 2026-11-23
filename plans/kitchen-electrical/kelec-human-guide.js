@@ -436,8 +436,8 @@
     if (holdEl) {
       holdEl.className = "u4h-hold-strip is-danger";
       holdEl.innerHTML = es
-        ? "<strong>PAUSA DE INSTALACIÓN ELÉCTRICA:</strong> Confirmar alimentador D04 (80A vs 100A), cortes laterales EN PAUSA y revisión de caja Eaton BRP20L125G el lunes 23 nov antes de jalar cable o cerrar tablaroca."
-        : "<strong>ROUGH-IN ON HOLD:</strong> Confirm D04 feeder (80A vs 100A), side-entry hold, and onsite Eaton BRP20L125G inspection on Mon Nov 23 before pulling kitchen wire or closing drywall.";
+        ? "<strong>PAUSA DE INSTALACIÓN ELÉCTRICA:</strong> Confirmar alimentador D04 (80A vs 100A), cortes laterales EN PAUSA y revisión de caja Eaton BRP20L125G el lunes 23 nov antes de jalar cable o cerrar tablaroca. El muro Sur muestra el bastidor existente como referencia. Sellar contra lluvia y tapar el nicho anterior, y volver a revisar las cajas en obra."
+        : "<strong>ROUGH-IN ON HOLD:</strong> Confirm D04 feeder (80A vs 100A), side-entry hold, and onsite Eaton BRP20L125G inspection on Mon Nov 23 before pulling kitchen wire or closing drywall. The South elevation shows existing framing for reference. Weatherproof and cover the former recess and recheck box locations on site.";
     }
 
     var stepPills = '<div class="u4h-steps" role="tablist">' +

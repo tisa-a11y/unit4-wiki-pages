@@ -23,25 +23,25 @@
   },
   {
     "title": "2026-11-20_U4_kitchen_floor-plan-interactive_R1_EN.pdf",
-    "titleEn": "Printable kitchen floor plan & cabinet schedule · English",
-    "titleEs": "Plano imprimible de cocina completa y gabinetes · inglés",
+    "titleEn": "Printable kitchen floor plan & cabinet schedule · English (older reference)",
+    "titleEs": "Plano imprimible de cocina completa y gabinetes · inglés (referencia anterior)",
     "id": "2026-11-20_U4_kitchen_floor-plan-interactive_R1_EN",
     "path": "Printable full kitchen floor plan and cabinet takeoff (English)",
     "date": "2026-11-20",
     "lang": "en",
     "pairId": "kitchen-floor-plan-printable",
-    "pin": true
+    "history": true
   },
   {
     "title": "2026-11-20_U4_kitchen_floor-plan-interactive_R1_ES.pdf",
-    "titleEn": "Printable kitchen floor plan & cabinet schedule · Spanish",
-    "titleEs": "Plano imprimible de cocina completa y gabinetes · español",
+    "titleEn": "Printable kitchen floor plan & cabinet schedule · Spanish (older reference)",
+    "titleEs": "Plano imprimible de cocina completa y gabinetes · español (referencia anterior)",
     "id": "2026-11-20_U4_kitchen_floor-plan-interactive_R1_ES",
     "path": "Plano imprimible de cocina completa y lista de materiales (español)",
     "date": "2026-11-20",
     "lang": "es",
     "pairId": "kitchen-floor-plan-printable",
-    "pin": true
+    "history": true
   },
   {
     "title": "Interactive-Kitchen-Electrical-D04_EN.html",
@@ -67,25 +67,25 @@
   },
   {
     "title": "2026-11-20_U4_kitchen_electrical-d04-interactive_R1_EN.pdf",
-    "titleEn": "Printable kitchen electrical and panel D04 plan · English",
-    "titleEs": "Plano imprimible eléctrico de cocina y tablero D04 · inglés",
+    "titleEn": "Printable kitchen electrical and panel D04 plan · English (older reference)",
+    "titleEs": "Plano imprimible eléctrico de cocina y tablero D04 · inglés (referencia anterior)",
     "id": "2026-11-20_U4_kitchen_electrical-d04-interactive_R1_EN",
     "path": "Printable 2-page kitchen electrical & D04 plan (English)",
     "date": "2026-11-20",
     "lang": "en",
     "pairId": "kitchen-electrical-printable",
-    "pin": true
+    "history": true
   },
   {
     "title": "2026-11-20_U4_kitchen_electrical-d04-interactive_R1_ES.pdf",
-    "titleEn": "Printable kitchen electrical and panel D04 plan · Spanish",
-    "titleEs": "Plano imprimible eléctrico de cocina y tablero D04 · español",
+    "titleEn": "Printable kitchen electrical and panel D04 plan · Spanish (older reference)",
+    "titleEs": "Plano imprimible eléctrico de cocina y tablero D04 · español (referencia anterior)",
     "id": "2026-11-20_U4_kitchen_electrical-d04-interactive_R1_ES",
     "path": "Plano imprimible eléctrico de cocina y tablero D04 (español)",
     "date": "2026-11-20",
     "lang": "es",
     "pairId": "kitchen-electrical-printable",
-    "pin": true
+    "history": true
   },
   {
     "title": "2026-11-02_U4_Kitchen_Master-Plan_R2_EN.html",

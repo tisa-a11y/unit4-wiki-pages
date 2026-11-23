@@ -2,8 +2,8 @@
   {
     "kEn": "South wall",
     "kEs": "Muro Sur",
-    "vEn": "Corner 0\"–36\" · Trash 36\"–51\" · Dishwasher 51\"–75\"",
-    "vEs": "Esquina 0\"–36\" · Basura 36\"–51\" · Lavavajillas 51\"–75\""
+    "vEn": "36\" corner · 12\" trash pull-out · 24\" dishwasher",
+    "vEs": "Esquinero de 36\" · extraíble de basura de 12\" · lavavajillas de 24\""
   },
   {
     "kEn": "Sink",
@@ -18,9 +18,9 @@
     "vEs": "Haier · espacio de 28\" · 2\" atrás"
   },
   {
-    "kEn": "Pie-safe",
-    "kEs": "Pie-safe",
-    "vEn": "Open shelves · outlets beside, never under",
-    "vEs": "Repisas abiertas · contactos a un lado, nunca debajo"
+    "kEn": "Former pie-safe",
+    "kEs": "Antigua alacena",
+    "vEn": "Weatherproof and cover after inspection",
+    "vEs": "Sellar contra lluvia y tapar tras inspección"
   }
 ]

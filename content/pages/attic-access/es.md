@@ -1,14 +1,16 @@
 # Acceso al ático
 
 ## Concepto
-Escotilla permanente en el techo del pasillo, 24" × 36" libres. En el ático: pasarela de madera, plataforma nivelada junto al calefactor, luz y contacto. Abrir el [Plano Interactivo de Escotilla Permanente](./plans/attic-hatch/index.html?lang=es) o revisar el [Plano de Calefacción y Ductos](./plans/hvac-layout/index.html?lang=es).
+La primera prioridad es trazar la escotilla permanente en el descanso de la escalera común afuera de la puerta principal 4, al oeste del pasillo. La abertura terminada tendrá 24" × 36" libres. En el ático: pasarela de madera, plataforma nivelada junto al calefactor, luz y contacto. Abrir el [Plano Interactivo de Escotilla Permanente](./plans/attic-hatch/index.html?lang=es) o revisar el [Plano de Calefacción y Ductos](./plans/hvac-layout/index.html?lang=es).
 
 ## Cinco reglas antes de cortar
-1. **Revisar primero el techo.** No cortar hasta revisar si va contra fuego y medir entre las vigas.
+1. **Trazar la abertura y documentar la ruta.** John marca el rectángulo libre terminado y las distancias a bordes fijos. Fotografiar las vigas, el claro, los cables y tuberías arriba, y la maniobra de subida y giro. Esperar la aprobación del sistema de techo, protección contra incendio y refuerzo antes de cortar.
 2. **Sellar y aislar la escotilla.** Seguir la guía de la escotilla del ático.
 3. **Mantener libre el paso.** Nada invade el paso de 24" × 36".
 4. **Dejar abierto el techo del clóset de la recámara** hasta que esté el cable del apagador y exista la escotilla.
 5. **Primero reparar goteras.** No cerrar nada mientras el techo gotee.
+
+**Equipo de ozono:** Falta colocarlo en el ático. Mantenerlo apagado y desconectado al colocarlo.
 
 ## Pasarela, plataforma y corriente
 - **Pasarela:** 24" de ancho, 20 pies como máximo. OSB de 23/32" o triplay de 3/4". Nunca de 3/8".

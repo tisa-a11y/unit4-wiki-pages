@@ -3,8 +3,8 @@
   "steps": [
     {
       "done": true,
-      "en": "Sink and refrigerator are on site; pie-safe recess cleared",
-      "es": "Tarja y refrigerador en obra; hueco del pie-safe despejado"
+      "en": "Sink and refrigerator are on site",
+      "es": "Tarja y refrigerador en obra"
     },
     {
       "done": false,
@@ -13,8 +13,8 @@
     },
     {
       "done": false,
-      "en": "Frame the pie-safe shelves, the light-switch box and the panel wall",
-      "es": "Enmarcar las repisas pie-safe, la caja de apagadores y el muro del tablero"
+      "en": "Weatherproof and cover the old pie-safe recess after inspection and photos. Frame the switch box and panel wall when released.",
+      "es": "Sellar contra lluvia y tapar el nicho de la antigua alacena después de inspección y fotos. Enmarcar la caja y el muro del tablero con aprobación."
     },
     {
       "done": false,
@@ -23,8 +23,8 @@
     },
     {
       "done": false,
-      "en": "Install cabinets, pie-safe shelves, sink, dishwasher and refrigerator",
-      "es": "Instalar gabinetes, repisas pie-safe, tarja, lavavajillas y refrigerador"
+      "en": "Install cabinets, sink, dishwasher and refrigerator",
+      "es": "Instalar gabinetes, tarja, lavavajillas y refrigerador"
     }
   ]
 }
