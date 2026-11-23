@@ -531,8 +531,8 @@
         menuHtml +
       "</div>" +
       '<div class="u4h-nav-right">' +
-        '<button type="button" id="u4hLangBtn" class="u4h-lang-btn" aria-label="' + (es ? "Switch to English" : "Cambiar a español") + '">' + (es ? "English (EN)" : "Español (MX)") + "</button>" +
-        '<button type="button" id="u4hThemeBtn" class="u4h-mini-btn">' + (state.theme === "dark" ? (es ? "☀ Claro" : "☀ Light") : (es ? "☾ Oscuro" : "☾ Dark")) + "</button>" +
+        '<button type="button" id="u4hLangBtn" class="u4h-lang-btn u4h-seg-switch" role="switch" aria-checked="' + (es ? "true" : "false") + '" aria-label="' + (es ? "Switch to English" : "Cambiar a español") + '"><span class="u4-seg-thumb" aria-hidden="true"></span><span class="u4-seg-opt is-a">EN</span><span class="u4-seg-opt is-b">ES</span></button>' +
+        '<button type="button" id="u4hThemeBtn" class="u4h-mini-btn u4h-seg-switch" role="switch" aria-checked="' + (state.theme === "dark" ? "true" : "false") + '" aria-label="' + (state.theme === "dark" ? (es ? "Cambiar a modo claro" : "Switch to light mode") : (es ? "Cambiar a modo oscuro" : "Switch to dark mode")) + '"><span class="u4-seg-thumb" aria-hidden="true"></span><span class="u4-seg-opt is-a"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1.5v1.6M8 12.9v1.6M1.5 8h1.6M12.9 8h1.6M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M12.6 3.4l-1.1 1.1M4.5 11.5l-1.1 1.1"/></svg></span><span class="u4-seg-opt is-b"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.2 9.9A5.4 5.4 0 0 1 6.1 2.8a5.5 5.5 0 1 0 7.1 7.1Z"/></svg></span></button>' +
         '<button type="button" id="u4hPdfBtn" class="u4h-mini-btn primary">' + (es ? "Imprimir / PDF" : "Print / PDF") + "</button>" +
       "</div>";
 

@@ -23,34 +23,49 @@ small{color:var(--mut)}
 
 /* U4_UNIFIED_ES_EN_TOGGLE_DOC_START */
 .u4-doc-langbar{display:flex;justify-content:flex-end;align-items:center;margin:10px 0 6px}
-.u4-lang-pill,#langBtn.u4-lang-pill{
-  padding:5px 12px !important;
-  min-height:34px !important;
-  border-radius:999px !important;
-  border:1px solid var(--u4-accent,#1f5f7a) !important;
-  background:var(--u4-accent,#1f5f7a) !important;
-  color:var(--u4-panel,#ffffff) !important;
-  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace !important;
-  font-size:12px !important;
-  font-weight:600 !important;
-  line-height:1.2 !important;
-  display:inline-flex !important;
+.u4-seg-switch,.u4-lang-pill,#langBtn.u4-lang-pill{
+  position:relative !important;
+  display:inline-grid !important;
+  grid-template-columns:1fr 1fr !important;
   align-items:center !important;
-  justify-content:center !important;
-  white-space:nowrap !important;
-  cursor:pointer;
+  padding:2px !important;
+  min-height:32px !important;
+  height:32px !important;
+  min-width:68px !important;
+  border-radius:999px !important;
+  border:1px solid var(--u4-line,#d9dedc) !important;
+  background:var(--u4-bg,#f4f5f3) !important;
+  color:var(--u4-muted,#5d686d) !important;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace !important;
+  font-size:11.5px !important;
+  font-weight:700 !important;
+  letter-spacing:0.04em !important;
+  line-height:1 !important;
+  cursor:pointer !important;
   text-decoration:none !important;
-  box-sizing:border-box;
+  box-sizing:border-box !important;
 }
-.u4-lang-pill:hover,#langBtn.u4-lang-pill:hover{filter:brightness(0.92)}
+.u4-seg-switch .u4-seg-thumb{
+  position:absolute;top:2px;left:2px;width:calc(50% - 2px);height:calc(100% - 4px);
+  border-radius:999px;background:var(--u4-accent,#1f5f7a);
+  transition:transform 180ms cubic-bezier(0.22,0.9,0.32,1);pointer-events:none;z-index:0;
+}
+.u4-seg-switch[aria-checked="true"] .u4-seg-thumb{transform:translateX(100%)}
+.u4-seg-switch .u4-seg-opt{
+  position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;
+  height:100%;padding:0 7px;color:var(--u4-muted,#5d686d);
+}
+.u4-seg-switch[aria-checked="false"] .u4-seg-opt.is-a,
+.u4-seg-switch:not([aria-checked="true"]) .u4-seg-opt.is-a,
+.u4-seg-switch[aria-checked="true"] .u4-seg-opt.is-b{color:var(--u4-panel,#ffffff)}
 @media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){--u4-accent:#7cc0dc;--u4-panel:#1b2124}
+  :root:not([data-theme="light"]){--u4-accent:#7cc0dc;--u4-panel:#1b2124;--u4-bg:#121618;--u4-line:#2b3438;--u4-muted:#9aa7ad}
 }
-:root[data-theme="dark"]{--u4-accent:#7cc0dc;--u4-panel:#1b2124}
-@media print{.u4-doc-langbar,.u4-lang-pill{display:none !important}}
+:root[data-theme="dark"]{--u4-accent:#7cc0dc;--u4-panel:#1b2124;--u4-bg:#121618;--u4-line:#2b3438;--u4-muted:#9aa7ad}
+@media print{.u4-doc-langbar,.u4-seg-switch{display:none !important}}
 /* U4_UNIFIED_ES_EN_TOGGLE_DOC_END */
 </style></head><body><main>
-<div class="u4-doc-langbar"><a class="u4-lang-pill" href="2026-11-02_U4_Kitchen_Master-Plan_R2_EN.html" aria-label="Cambiar a inglés">English (EN)</a></div>
+<div class="u4-doc-langbar"><a class="u4-seg-switch u4-lang-pill" href="2026-11-02_U4_Kitchen_Master-Plan_R2_EN.html" role="switch" aria-checked="true" aria-label="Switch to English"><span class="u4-seg-thumb" aria-hidden="true"></span><span class="u4-seg-opt is-a">EN</span><span class="u4-seg-opt is-b">ES</span></a></div>
 <h1>Cocina de la Unidad 4 — Plan maestro R2</h1>
 <p class="sub">1231 11th Ave, Unidad 4 · 2 nov 2026 (R2, noche) · Edición en español (la edición en inglés es un archivo aparte y es la que rige) · Solo para revisión: no autoriza compras, cortes ni asignaciones.</p>
 
