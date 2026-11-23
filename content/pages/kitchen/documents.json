@@ -153,23 +153,25 @@
   },
   {
     "title": "Unit4-Kitchen-RevC-EN.pdf",
-    "titleEn": "Kitchen drawings from Nov 2 (PDF) · English",
-    "titleEs": "Planos de cocina del 2 de nov (PDF) · inglés",
+    "titleEn": "Kitchen drawings from Nov 2 (PDF) · English (older reference)",
+    "titleEs": "Planos de cocina del 2 de nov (PDF) · inglés (referencia anterior)",
     "id": "1zmfZZ_oTx2etOEbVycFGW18r1zcrUSWK",
     "path": "outputs/rev-c-2026-11-02/Unit4-Kitchen-RevC-EN.pdf",
     "date": "2026-11-02",
     "lang": "en",
-    "pairId": "kitchen-revc-pdf"
+    "pairId": "kitchen-revc-pdf",
+    "history": true
   },
   {
     "title": "Unit4-Kitchen-RevC-ES.pdf",
-    "titleEn": "Kitchen drawings from Nov 2 (PDF) · Spanish",
-    "titleEs": "Planos de cocina del 2 de nov (PDF) · español",
+    "titleEn": "Kitchen drawings from Nov 2 (PDF) · Spanish (older reference)",
+    "titleEs": "Planos de cocina del 2 de nov (PDF) · español (referencia anterior)",
     "id": "18qyXoGk8oypKXmWD-SYG-EPIFgWN5VJD",
     "path": "outputs/rev-c-2026-11-02/Unit4-Kitchen-RevC-ES.pdf",
     "date": "2026-11-02",
     "lang": "es",
-    "pairId": "kitchen-revc-pdf"
+    "pairId": "kitchen-revc-pdf",
+    "history": true
   },
   {
     "title": "Kitchen-RevC-EN.html",

@@ -45,24 +45,26 @@
   },
   {
     "title": "2026-11-20_U4_hvac_layout-interactive_R1_EN.pdf",
-    "titleEn": "Printable attic furnace and ducts layout · English",
-    "titleEs": "Plano imprimible de calefacción y ductos · inglés",
+    "titleEn": "Printable attic furnace and ducts layout · English (older reference)",
+    "titleEs": "Plano imprimible de calefacción y ductos · inglés (referencia anterior)",
     "id": "2026-11-20_U4_hvac_layout-interactive_R1_EN",
     "path": "Mon Nov 23 walkthrough sheet + live takeoff (English)",
     "date": "2026-11-20",
     "lang": "en",
     "pairId": "hvac-layout-printable",
-    "pin": true
+    "pin": true,
+    "history": true
   },
   {
     "title": "2026-11-20_U4_hvac_layout-interactive_R1_ES.pdf",
-    "titleEn": "Printable attic furnace and ducts layout · Spanish",
-    "titleEs": "Plano imprimible de calefacción y ductos · español",
+    "titleEn": "Printable attic furnace and ducts layout · Spanish (older reference)",
+    "titleEs": "Plano imprimible de calefacción y ductos · español (referencia anterior)",
     "id": "2026-11-20_U4_hvac_layout-interactive_R1_ES",
     "path": "Hoja de recorrido 23 nov + materiales en vivo (español)",
     "date": "2026-11-20",
     "lang": "es",
     "pairId": "hvac-layout-printable",
-    "pin": true
+    "pin": true,
+    "history": true
   }
 ]

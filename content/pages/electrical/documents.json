@@ -89,31 +89,34 @@
   },
   {
     "title": "2026-11-02_U4_Electrical_Whole-Unit-Wiring-Plan_R1.pdf",
-    "titleEn": "Whole-unit wiring plan",
-    "titleEs": "Plan de cableado de toda la unidad",
+    "titleEn": "Whole-unit wiring plan (older reference)",
+    "titleEs": "Plan de cableado de toda la unidad (referencia anterior)",
     "id": "1VazWlSTKbc76vCkSMUp4s69SOoEctq95",
     "path": "2026-11-02-whole-unit-wiring-R1/2026-11-02_U4_Electrical_Whole-Unit-Wiring-Plan_R1.pdf",
     "date": "2026-11-02",
-    "lang": "en"
+    "lang": "en",
+    "history": true
   },
   {
     "title": "2026-11-02_U4_Kitchen-D04_Doorway-Infill-Framing_R1.pdf",
-    "titleEn": "Panel wall framing plan · English",
-    "titleEs": "Plan de enmarcado del muro del tablero · inglés",
+    "titleEn": "Panel wall framing plan · English (older reference)",
+    "titleEs": "Plan de enmarcado del muro del tablero · inglés (referencia anterior)",
     "id": "17_Qe5LTY6OOIiv4-KeQnA79FIm_M2yjO",
     "path": "doorway-infill-framing-2026-11-02-R1/2026-11-02_U4_Kitchen-D04_Doorway-Infill-Framing_R1.pdf",
     "date": "2026-11-02",
     "lang": "en",
-    "pairId": "kitchen-d04-infill-r1"
+    "pairId": "kitchen-d04-infill-r1",
+    "history": true
   },
   {
     "title": "2026-11-02_U4_Kitchen-D04_Doorway-Infill-Framing_R1_ES.pdf",
-    "titleEn": "Panel wall framing plan · Spanish",
-    "titleEs": "Plan de enmarcado del muro del tablero · español",
+    "titleEn": "Panel wall framing plan · Spanish (older reference)",
+    "titleEs": "Plan de enmarcado del muro del tablero · español (referencia anterior)",
     "id": "1GsVm7VrFU897ax3yAxypfW5lowapbZKB",
     "path": "doorway-infill-framing-2026-11-02-R1/2026-11-02_U4_Kitchen-D04_Doorway-Infill-Framing_R1_ES.pdf",
     "date": "2026-11-02",
     "lang": "es",
-    "pairId": "kitchen-d04-infill-r1"
+    "pairId": "kitchen-d04-infill-r1",
+    "history": true
   }
 ]
