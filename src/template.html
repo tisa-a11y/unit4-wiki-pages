@@ -2962,11 +2962,14 @@ async function submitPinCorrection(m){
     });
     const data = await resp.json().catch(() => ({}));
     if (!resp.ok || data.ok === false) throw new Error(data.error || ("HTTP " + resp.status));
-    m.sent = true;
     u4PinState.sending = false;
-    u4PinState.statusMsg = t("pinSentOk");
-    u4PinState.statusKind = "ok";
+    u4PinState.markers = [];
+    u4PinState.activeId = null;
+    u4PinState.armed = false;
+    window.__u4PinArmed = false;
+    u4PinState.statusMsg = "";
     renderPinsOnSurface();
+    if (typeof showToast === "function") showToast(LANG === "es" ? "Corrección enviada — aplicando y publicando..." : "Correction sent — applying & pushing...");
   } catch (err) {
     u4PinState.sending = false;
     u4PinState.statusMsg = t("pinSentErr") + (err && err.message ? (" (" + err.message + ")") : "");

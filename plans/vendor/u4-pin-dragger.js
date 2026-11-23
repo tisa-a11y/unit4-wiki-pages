@@ -143,7 +143,7 @@
     if (pin.intent === "ask") {
       if (window.U4LiveAi && typeof window.U4LiveAi.open === "function") {
         window.U4LiveAi.open(note, locTag);
-        pin.status = es ? "Abierto en Guía IA ✓" : "Sent to AI Helper ✓";
+        state.pinsByKey = {}; state.selectedPinId = null; state.armed = false;
         renderAllLayers();
       }
       return;
@@ -170,7 +170,11 @@
         })
       });
       if (!res.ok) throw new Error("HTTP " + res.status);
-      pin.status = es ? "✓ Corrección registrada para PM / Tisa" : "✓ Correction logged for PM / Tisa";
+      var resData = {}; try { resData = await res.json(); } catch (_) {}
+      state.pinsByKey = {}; state.selectedPinId = null; state.armed = false;
+      renderAllLayers();
+      u4ShowEphemeralToast(resData.jobId, es);
+      return;
     } catch (_) {
       if (window.U4LiveAi && typeof window.U4LiveAi.openNote === "function") {
         window.U4LiveAi.openNote("[PIN " + locTag + "] " + note);
@@ -178,6 +182,40 @@
       pin.status = es ? "Abierto en nota local (revisar conexión)" : "Opened in local note drawer";
     }
     renderAllLayers();
+  }
+
+
+  function u4ShowEphemeralToast(jobId, es) {
+    var el = document.getElementById("u4PinAutoToast");
+    if (!el) {
+      el = document.createElement("div");
+      el.id = "u4PinAutoToast";
+      el.style.cssText = "position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:99999;background:#1d2b24;color:#f4f5f3;padding:10px 16px;border-radius:8px;font:500 13px/1.4 'IBM Plex Sans',sans-serif;border:1px solid #355444;max-width:92vw;text-align:center;";
+      document.body.appendChild(el);
+    }
+    el.textContent = es ? "Corrección enviada — aplicando y publicando..." : "Correction sent — applying & pushing...";
+    el.style.display = "block";
+    if (!jobId) { setTimeout(function () { el.style.display = "none"; }, 4500); return; }
+    var tries = 0;
+    var poll = setInterval(async function () {
+      tries++;
+      try {
+        var r = await fetch("https://mac-mini.tailcf4007.ts.net/api/unit4/pin-jobs/" + encodeURIComponent(jobId));
+        if (r.ok) {
+          var j = await r.json();
+          if (j.status === "pushed") {
+            el.textContent = es ? ("✓ Aplicado y publicado: " + (j.summaryEs || "")) : ("✓ Applied & pushed: " + (j.summaryEn || ""));
+            clearInterval(poll);
+            setTimeout(function () { el.style.display = "none"; }, 6500);
+          } else if (j.status === "held" || j.status === "error") {
+            el.textContent = es ? "En revisión (to-triage)" : ("Held for review: " + (j.reason || j.error || ""));
+            clearInterval(poll);
+            setTimeout(function () { el.style.display = "none"; }, 6500);
+          }
+        }
+      } catch (_) {}
+      if (tries > 40) { clearInterval(poll); el.style.display = "none"; }
+    }, 2000);
   }
 
   function renderAllLayers() {
