@@ -28,7 +28,7 @@
     title_en: 'Unit 4 HVAC & Ductwork — Attic What-If Layout',
     title_es: 'Calefacción y Ductos Unidad 4 — Plano Interactivo en Ático',
     governing_spec: 'hvac/SPEC.md',
-    base_rev: 'rev-20261120-hvac-001',
+    base_rev: 'rev-20261122-hvac-r3',
     status: 'PLANNING_SANDBOX_MON_NOV23_WALKTHROUGH',
     orientation: {
       north_angle_deg: 0,
@@ -36,31 +36,31 @@
       unit_floorplan_overlay: 'Unit 4 MASTER (8 rooms, 121-1/2" ceiling, 66" attic height)'
     },
     dimensions: {
-      furnace_x_in: { value: 198, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
-      furnace_y_in: { value: 262, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
+      furnace_x_in: { value: 174, measure_boundary: 'wall_to_wall', verified: 'VERIFY_ON_SITE' },
+      furnace_y_in: { value: 258, measure_boundary: 'wall_to_wall', verified: 'VERIFY_ON_SITE' },
       hatch_x_in: { value: 112, measure_boundary: 'clear_between_casings', verified: 'MEASURE_ON_SITE' },
       hatch_y_in: { value: 74, measure_boundary: 'clear_between_casings', verified: 'MEASURE_ON_SITE' },
       attic_height_in: { value: 66.0, measure_boundary: 'wall_to_wall', verified: 'FIELD_VERIFIED' },
-      flue_clearance_in: { value: 1.5, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
-      supply1_x_in: { value: 168, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
-      supply1_y_in: { value: 126, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
-      supply2_x_in: { value: 312, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
-      supply2_y_in: { value: 212, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
-      supply3_x_in: { value: 368, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
-      supply3_y_in: { value: 112, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
-      return1_x_in: { value: 248, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
-      return1_y_in: { value: 114, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
-      jump1_x_in: { value: 334, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
-      jump1_y_in: { value: 88, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
-      flue_x_in: { value: 198, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
-      flue_y_in: { value: 292, measure_boundary: 'wall_to_wall', verified: 'PROPOSED_REV_P2_MON_NOV23' },
-      gfci_x_in: { value: 184, measure_boundary: 'subfloor', verified: 'PROPOSED_REV_P2_MON_NOV23' },
-      gfci_y_in: { value: 232, measure_boundary: 'subfloor', verified: 'PROPOSED_REV_P2_MON_NOV23' }
+      flue_clearance_in: { value: 1.5, measure_boundary: 'wall_to_wall', verified: 'VERIFY_ON_SITE' },
+      supply1_x_in: { value: 168, measure_boundary: 'wall_to_wall', verified: 'VERIFY_ON_SITE' },
+      supply1_y_in: { value: 126, measure_boundary: 'wall_to_wall', verified: 'VERIFY_ON_SITE' },
+      supply2_x_in: { value: 312, measure_boundary: 'wall_to_wall', verified: 'VERIFY_ON_SITE' },
+      supply2_y_in: { value: 212, measure_boundary: 'wall_to_wall', verified: 'VERIFY_ON_SITE' },
+      supply3_x_in: { value: 386, measure_boundary: 'wall_to_wall', verified: 'VERIFY_ON_SITE' },
+      supply3_y_in: { value: 116, measure_boundary: 'wall_to_wall', verified: 'VERIFY_ON_SITE' },
+      return1_x_in: { value: 248, measure_boundary: 'wall_to_wall', verified: 'VERIFY_ON_SITE' },
+      return1_y_in: { value: 114, measure_boundary: 'wall_to_wall', verified: 'VERIFY_ON_SITE' },
+      jump1_x_in: { value: 334, measure_boundary: 'wall_to_wall', verified: 'VERIFY_ON_SITE' },
+      jump1_y_in: { value: 80, measure_boundary: 'wall_to_wall', verified: 'VERIFY_ON_SITE' },
+      flue_x_in: { value: 174, measure_boundary: 'wall_to_wall', verified: 'VERIFY_ON_SITE' },
+      flue_y_in: { value: 297, measure_boundary: 'wall_to_wall', verified: 'VERIFY_ON_SITE' },
+      gfci_x_in: { value: 160, measure_boundary: 'subfloor', verified: 'VERIFY_ON_SITE' },
+      gfci_y_in: { value: 228.5, measure_boundary: 'subfloor', verified: 'VERIFY_ON_SITE' }
     },
     options: {
       platform_side: 'north',
       hatch_orientation: 'ns',
-      roof_route: 'existing_jack',
+      roof_route: 'sidewall_power_venter_south',
       gfci_mode: 'at_platform',
       walkway_material: 'osb_23_32',
       waste_pct: 10
@@ -70,6 +70,12 @@
       baseline_es: 'Zoclos de madera originales, moldura alta, marcos de Puerta 4 y corona del pasillo se conservan intactos.'
     },
     flagged_clashes: [
+      {
+        id: 'clash-hvac-sidewall-vent-code',
+        severity: 'HIGH',
+        en: 'Flat Roof + Sidewall Exit Gate: 80% AFUE Category I furnace CANNOT gravity-vent horizontally out a sidewall (Carrier II810SA-05 p. 22). Require listed Sidewall Power Venter (2025 SFMC 802.8 >= 4 ft from interior lot line, >= 1/4"/ft pitch) OR 95%+ Cat IV PVC direct-vent / heat pump; reroute to West rear-yard wall if South setback < 4 ft.',
+        es: 'Techo Plano + Salida Lateral: Equipo 80% AFUE Cat I NO puede salir horizontal sin extractor mecánico listado (Carrier II810SA-05 p. 22) o cambio a 95%+ PVC directo / bomba de calor; cumplir >= 4 ft a colindancia (SFMC 802.8) o salir por muro Oeste.'
+      },
       {
         id: 'clash-hvac-hatch-fire-offsets',
         severity: 'HIGH',
@@ -110,11 +116,11 @@
       lyr_furnace: 'Furnace & Platform',
       lyr_walkway: 'Walkway & Hatch',
       lyr_ducts: '3 Supply · 1 Return · 1 Jump',
-      lyr_mep: 'Type B Flue & GFCI',
+      lyr_mep: 'Sidewall Flue & GFCI',
       lyr_trim: 'Original Trim & Clashes',
       tab_all: 'All Coupled Views',
       tab_plan: 'Attic Floor Plan',
-      tab_section: 'Attic Vertical Section (66" Height)',
+      tab_section: 'Flat-Roof Section (66" Cavity + Sidewall Exit)',
       photo_title: 'Candidate Access & Floor Plan Reference',
       photo_badge: 'VERIFY MON NOV 23',
       clashes_title: 'Clashes, Clearance Flags & Mon Nov 23 Checks',
@@ -150,11 +156,11 @@
       lyr_furnace: 'Equipo y Plataforma',
       lyr_walkway: 'Pasillo y Escotilla',
       lyr_ducts: '3 Inyección · 1 Retorno · 1 Paso',
-      lyr_mep: 'Escape Tipo B y GFCI',
+      lyr_mep: 'Escape Lateral y GFCI',
       lyr_trim: 'Molduras Originales y Choques',
       tab_all: 'Todas las Vistas Acopladas',
       tab_plan: 'Planta del Ático',
-      tab_section: 'Corte Vertical (Altura 66")',
+      tab_section: 'Corte Techo Plano (66" + Salida Lateral)',
       photo_title: 'Foto de Puerta 4 y Planta de Referencia',
       photo_badge: 'VERIFICAR LUNES 23 NOV',
       clashes_title: 'Choques, Claros y Puntos del Lunes 23 Nov',
@@ -259,32 +265,30 @@
     state.dimensions[key] = {
       value: Number(val),
       measure_boundary: boundary || prev.measure_boundary || 'wall_to_wall',
-      verified: verified || prev.verified || 'FIELD_UPDATE_PENDING_EOD'
+      verified: verified || prev.verified || 'PENDING_EOD_REVIEW'
     };
   }
 
   /* ── Engineering Calculators ──────────────────────────────────────── */
   function computeGeometryMetrics() {
-    const fx = dim('furnace_x_in', 285);
-    const fy = dim('furnace_y_in', 162);
-    const hx = dim('hatch_x_in', 177);
-    const hy = dim('hatch_y_in', 56);
+    const fx = dim('furnace_x_in', 174);
+    const fy = dim('furnace_y_in', 258);
+    const hx = dim('hatch_x_in', 112);
+    const hy = dim('hatch_y_in', 74);
     const atticH = dim('attic_height_in', 66.0);
     const flueClear = dim('flue_clearance_in', 1.5);
-    const side = (state.options && state.options.platform_side) || 'south';
+    const side = (state.options && state.options.platform_side) || 'north';
     const hatchDir = (state.options && state.options.hatch_orientation) || 'ns';
-    const roofRoute = (state.options && state.options.roof_route) || 'existing_jack';
+    const roofRoute = (state.options && state.options.roof_route) || 'sidewall_power_venter_south';
     const gfciMode = (state.options && state.options.gfci_mode) || 'at_platform';
 
-    /* Furnace footprint when laid horizontally in attic: 33.25" long × 29" wide (height 14.19" vertical or 33.25" upright).
-       Wait: carrier cabinet is 33.25" H x 14.19" W x 29" D -> horizontal airflow occupies ~33.25" E-W x 29" N-S (passing end-first 14.19" x 29"). */
     const furnW = 33.25;
     const furnD = 29.0;
 
-    /* Platform 30" x 30" attaches cleanly to chosen service side */
+    /* Platform 30" x 30" attaches cleanly to chosen service side (North default -> X=174", Y=228.5") */
     let px = fx;
-    let py = fy + furnD / 2 + 15;
-    if (side === 'north') { px = fx; py = fy - furnD / 2 - 15; }
+    let py = fy - furnD / 2 - 15;
+    if (side === 'south') { px = fx; py = fy + furnD / 2 + 15; }
     else if (side === 'east') { px = fx + furnW / 2 + 15; py = fy; }
     else if (side === 'west') { px = fx - furnW / 2 - 15; py = fy; }
 
@@ -292,20 +296,25 @@
     const hatchW = hatchDir === 'ns' ? 24 : 36;
     const hatchH = hatchDir === 'ns' ? 36 : 24;
 
-    /* Staggered L-shaped walkway path from exterior Door 4 landing hatch -> east across Door 4 into Hallway -> north/south to F1 platform */
+    /* Wall-respecting orthogonal 24" continuous walkway (identical to human-first coupled planner: 189.5" = 15.8 ft at SW Dining!) */
     const startX = hx + hatchW / 2;
     const startY = hy;
-    const entryX = 166;
     const midY = 108;
     const endX = px;
-    const endY = py <= midY ? py + 15 : py - 15;
-    const waypoints = [
-      { x: startX, y: startY },
-      { x: entryX, y: startY },
-      { x: entryX, y: midY },
-      { x: endX, y: midY },
-      { x: endX, y: endY }
-    ];
+    const endY = py <= midY ? Math.min(fy - 14.5, py + 15) : py - 15;
+    const waypoints = endX <= 205
+      ? [
+          { x: startX, y: startY },
+          { x: endX, y: startY },
+          { x: endX, y: endY }
+        ]
+      : [
+          { x: startX, y: startY },
+          { x: 166, y: startY },
+          { x: 166, y: midY },
+          { x: endX, y: midY },
+          { x: endX, y: endY }
+        ];
     let walkIn = 0;
     for (let i = 1; i < waypoints.length; i++) {
       walkIn += Math.abs(waypoints[i].x - waypoints[i - 1].x) + Math.abs(waypoints[i].y - waypoints[i - 1].y);
@@ -314,20 +323,21 @@
     const maxWalkFt = atticH < 72 ? 20.0 : 50.0;
     const walkPass = walkFt <= maxWalkFt;
 
-    /* Saw-kerf rule: 1 true 24" strip per 4x8 (8 ft) sheet */
-    const sawKerfSheets = Math.max(1, Math.ceil(walkFt / 7.5));
+    /* Saw-kerf rule: 1 true 24" strip per 4x8 sheet (<=7ft: 1, <=14ft: 2, <=20ft: 3, >20ft: ceil(ft/7)) */
+    const sawKerfSheets = walkFt <= 7 ? 1 : (walkFt <= 14 ? 2 : (walkFt <= 20 ? 3 : Math.ceil(walkFt / 7)));
 
     /* GFCI point + max 25 ft check */
-    let gx = gfciMode === 'at_platform' ? px - 14 : dim('gfci_x_in', 268);
-    let gy = gfciMode === 'at_platform' ? py : dim('gfci_y_in', 196);
+    let gx = gfciMode === 'at_platform' ? px - 14 : dim('gfci_x_in', 160);
+    let gy = gfciMode === 'at_platform' ? py : dim('gfci_y_in', 228.5);
     const gfciFt = Number((Math.hypot(gx - fx, gy - fy) / 12).toFixed(1));
     const gfciPass = gfciFt <= 25.0;
 
-    /* Type B flue clearance >= 1.0" */
-    const flueX = dim('flue_x_in', 295);
-    const flueY = dim('flue_y_in', 145);
+    /* Horizontal Sidewall Flue Exit (South wall Y=297" or West rear-yard wall X=0" if South lot setback < 4 ft; ZERO roof penetrations) */
+    const flueX = roofRoute === 'sidewall_power_venter_west' ? 2 : dim('flue_x_in', fx);
+    const flueY = roofRoute === 'sidewall_power_venter_west' ? fy : dim('flue_y_in', 297);
     const flueDistIn = Math.hypot(flueX - fx, flueY - fy);
-    const flueClearPass = flueClear >= 1.0;
+    const flueRiseIn = Number(((flueDistIn / 12) * 0.25).toFixed(2));
+    const flueClearPass = flueClear >= 1.0 && roofRoute !== 'gravity_unassisted_blocked';
 
     /* Supply, Return, Jump duct endpoints */
     const s1 = { x: dim('supply1_x_in', 405), y: dim('supply1_y_in', 225) };
@@ -374,7 +384,7 @@
       atticH, maxWalkFt,
       waypoints, walkFt, walkPass, sawKerfSheets,
       gx, gy, gfciFt, gfciPass, gfciMode,
-      flueX, flueY, flueDistIn, flueClear, flueClearPass, roofRoute,
+      flueX, flueY, flueDistIn, flueRiseIn, flueClear, flueClearPass, roofRoute,
       s1, s2, s3, r1, jd, s1Ft, s2Ft, s3Ft, r1Ft, jdFt, totalSupplyFt,
       hatchClashes
     };
@@ -720,26 +730,31 @@
         (es ? 'CHOQUE EN ESCOTILLA: ' : 'HATCH / ROUTE CLASH: ') + m.hatchClashes.join(', ');
     }
 
-    /* ── PANEL 2: COUPLED ATTIC VERTICAL SECTION (66" Height, scaleX === scaleY = 2.6 px/in) ── */
+    /* ── PANEL 2: COUPLED FLAT-ROOF ATTIC SECTION (66" Clear Cavity · ZERO Roof Penetrations · Sidewall Exit) ── */
     const ssc = 2.6;
     const secTopY = 644;
     svgEl('rect', { x: 16, y: secTopY, width: 888, height: 452, rx: 6, fill: '#ffffff', stroke: '#cbd5e1', 'stroke-width': 1.5 }, svg);
     svgEl('rect', { x: 16, y: secTopY, width: 888, height: 28, rx: 6, fill: '#f3f7f4' }, svg);
-    svgEl('text', { x: 30, y: secTopY + 18, 'font-size': 12, 'font-weight': 800, fill: '#2f4f42' }, svg).textContent =
-      es ? 'CORTE VERTICAL ACOPLADO DEL ÁTICO (ALTURA 66" · ESCALA UNIFORME) · ← OESTE (Puerta 4) | ESTE →'
-         : 'COUPLED ATTIC VERTICAL SECTION (66" RIDGE HEIGHT · UNIFORM SCALE) · ← WEST (Door 4) | EAST →';
+    svgEl('text', { x: 30, y: secTopY + 18, 'font-size': 11.4, 'font-weight': 800, fill: '#2f4f42' }, svg).textContent =
+      es ? 'CORTE VERTICAL TECHO PLANO (CAVIDAD 66" · CERO PENETRACIONES EN TECHO · SALIDA LATERAL SFMC §802.8)'
+         : 'COUPLED FLAT-ROOF ATTIC SECTION (66" CLEAR CAVITY · ZERO ROOF PENETRATIONS · SIDEWALL EXIT SFMC §802.8)';
 
     const joistY = 928;
-    const ridgeY = joistY - m.atticH * ssc; /* exact 66" above attic deck */
-    const roomFloorY = joistY + 104;        /* hallway zone below ceiling joists */
+    const ridgeY = joistY - m.atticH * ssc; /* exact 66" flat roof soffit above attic deck */
+    const roomFloorY = joistY + 104;        /* living zone below ceiling joists */
 
-    /* Roof rafters enclosing 66" height proportionally */
-    svgEl('polygon', {
-      points: `80,${joistY} 460,${ridgeY} 840,${joistY}`,
-      fill: '#f8fafc',
-      stroke: '#334155',
-      'stroke-width': 3
+    /* Flat / low-slope roof assembly enclosing 66" clear attic cavity proportionally */
+    svgEl('rect', {
+      x: 80, y: ridgeY, width: 760, height: joistY - ridgeY,
+      fill: '#f8fafc', stroke: '#334155', 'stroke-width': 2.5
     }, svg);
+    svgEl('rect', {
+      x: 74, y: ridgeY - 12, width: 772, height: 12,
+      fill: '#cbd5e1', stroke: '#1e293b', 'stroke-width': 2.0
+    }, svg);
+    svgEl('text', { x: 260, y: ridgeY - 18, 'text-anchor': 'middle', 'font-size': 9.2, 'font-weight': 800, fill: '#991b1b' }, svg).textContent =
+      es ? 'TECHO PLANO EXISTENTE · CERO PENETRACIONES NUEVAS (GOTERA EN PAUSA)'
+         : 'EXISTING FLAT ROOF DECK · ZERO NEW ROOF PENETRATIONS (ACTIVE LEAK HOLD)';
 
     /* Ceiling Joists & Insulation zone */
     svgEl('rect', { x: 80, y: joistY, width: 760, height: 18, fill: '#fde68a', stroke: '#92400e', 'stroke-width': 1.5 }, svg);
@@ -799,33 +814,41 @@
     svgEl('text', { x: secFurnX + furnWidthPx / 2, y: joistY - furnHeightPx / 2 + 4, 'text-anchor': 'middle', 'font-size': 8, 'font-weight': 700, fill: '#7dd3fc' }, svg).textContent = '33.25" H';
     svgEl('text', { x: secFurnX + furnWidthPx / 2, y: joistY - furnHeightPx / 2 + 15, 'text-anchor': 'middle', 'font-size': 8, 'font-weight': 700, fill: '#7dd3fc' }, svg).textContent = '× 29" D';
 
-    /* Type B Flue Vent rising with >= 1" clearance halo */
-    const flueSecX = secFurnX + furnWidthPx * 0.72;
-    const flueRoofY = ridgeY + Math.abs(flueSecX - 460) * ((joistY - ridgeY) / 380);
+    /* Horizontal Sidewall Exhaust Vent (>= 1/4"/ft upward pitch out exterior wall · Power Venter or 95%+ PVC) */
+    const flueStartX = secFurnX + furnWidthPx;
+    const flueStartY = joistY - 4 - furnHeightPx * 0.72;
+    const flueWallX = 840;
+    const flueEndY = flueStartY - 14;
+    svgEl('line', {
+      x1: flueStartX, y1: flueStartY,
+      x2: flueWallX + 16, y2: flueEndY,
+      stroke: m.flueClearPass ? '#fed7aa' : '#fecaca',
+      'stroke-width': 14,
+      'stroke-linecap': 'round'
+    }, svg);
+    svgEl('line', {
+      x1: flueStartX, y1: flueStartY,
+      x2: flueWallX + 18, y2: flueEndY,
+      stroke: m.flueClearPass ? '#ea580c' : '#dc2626',
+      'stroke-width': 5,
+      'stroke-linecap': 'round'
+    }, svg);
     svgEl('rect', {
-      x: flueSecX - 10,
-      y: flueRoofY - 26,
-      width: 20,
-      height: (joistY - 4 - furnHeightPx) - (flueRoofY - 26),
+      x: flueWallX - 6, y: flueEndY - 9, width: 24, height: 18, rx: 3,
       fill: m.flueClearPass ? '#fff7ed' : '#fef2f2',
       stroke: m.flueClearPass ? '#ea580c' : '#dc2626',
-      'stroke-width': 1.5,
-      'stroke-dasharray': '3,2'
-    }, svg);
-    svgEl('rect', {
-      x: flueSecX - 4,
-      y: flueRoofY - 28,
-      width: 8,
-      height: (joistY - 4 - furnHeightPx) - (flueRoofY - 28),
-      fill: '#64748b'
+      'stroke-width': 2
     }, svg);
     svgEl('text', {
-      x: flueSecX + 16,
-      y: flueRoofY + 12,
-      'font-size': 9,
+      x: flueWallX - 10,
+      y: flueEndY - 14,
+      'text-anchor': 'end',
+      'font-size': 8.6,
       'font-weight': 800,
       fill: m.flueClearPass ? '#9a3412' : '#b91c1c'
-    }, svg).textContent = `Type B (${fmtIn(m.flueClear)} clear)`;
+    }, svg).textContent = es
+      ? `Salida Lateral >=1/4"/pie · Tiro Mecánico / PVC 95%+ · SFMC §802.8 >=4 ft colindancia (${fmtIn(m.flueClear)} claro)`
+      : `Sidewall Exit >=1/4"/ft · Listed Power Venter / 95%+ PVC · SFMC §802.8 >=4 ft lot line (${fmtIn(m.flueClear)} clear)`;
 
     /* GFCI Service Outlet on Section */
     svgEl('rect', {
@@ -943,8 +966,8 @@
       }
       const pair = map[dragTarget];
       if (pair) {
-        setDim(pair[0], pos.x, 'FIELD_UPDATE_PENDING_EOD');
-        setDim(pair[1], pos.y, 'FIELD_UPDATE_PENDING_EOD');
+        setDim(pair[0], pos.x, 'PENDING_EOD_REVIEW');
+        setDim(pair[1], pos.y, 'PENDING_EOD_REVIEW');
         hasUnsyncedLocalEdits = true;
         syncFormFromState();
         renderAll();
@@ -1015,6 +1038,14 @@
           severity: 'HIGH',
           en: `Hatch / Duct Clearance Clash: ${m.hatchClashes.join(', ')} crosses the 24"×36" finished clear attic hatch opening.`,
           es: `Cruce en escotilla 24"×36": ${m.hatchClashes.join(', ')} invade la abertura libre.`
+        });
+      }
+      if (m.roofRoute === 'gravity_unassisted_blocked') {
+        allClashes.unshift({
+          id: 'live-gravity-sidewall-blocked',
+          severity: 'HIGH',
+          en: 'CODE STOP (Carrier II810SA-05 p. 22 & 2025 SFMC §802.8): 80% AFUE Category I furnace CANNOT gravity-vent horizontally out a sidewall without a listed mechanical power venter or 95%+ PVC direct-vent SKU.',
+          es: 'ALTO DE CÓDIGO (Carrier II810SA-05 p. 22 y SFMC §802.8): Calefactor 80% Cat I NO puede salir horizontal sin extractor mecánico listado o equipo 95%+ PVC.'
         });
       }
       if (!m.gfciPass) {
@@ -1343,7 +1374,7 @@
         dims[key] = {
           value: v,
           measure_boundary: bndId ? (document.getElementById(bndId)?.value || 'wall_to_wall') : 'clear_between_casings',
-          verified: 'FIELD_UPDATE_PENDING_EOD'
+          verified: 'PENDING_EOD_REVIEW'
         };
       }
     });
@@ -1394,7 +1425,7 @@
     }
     const clearMatch = s.match(/(?:flue|escape)\s*(\d+(?:\.\d+)?)/i);
     if (clearMatch) {
-      out.dimensions = { flue_clearance_in: { value: Number(clearMatch[1]), measure_boundary: 'wall_to_wall', verified: 'FIELD_UPDATE_PENDING_EOD' } };
+      out.dimensions = { flue_clearance_in: { value: Number(clearMatch[1]), measure_boundary: 'wall_to_wall', verified: 'PENDING_EOD_REVIEW' } };
     }
     return Object.keys(out).length ? out : null;
   }

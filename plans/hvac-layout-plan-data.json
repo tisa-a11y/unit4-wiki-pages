@@ -3,83 +3,303 @@
   "project": "1231 11th Avenue Unit 4, San Francisco, CA",
   "room_id": "hvac",
   "element_id": "HVAC-ATTIC-LAYOUT-01",
-  "title_en": "Interactive Attic HVAC, Ductwork, Intake/Exhaust & Walkway Layout",
-  "title_es": "Plano Interactivo de Calefacción (HVAC), Ductos, Retorno/Extracción y Pasillo en Ático",
+  "title_en": "Interactive Attic HVAC, 24\" Pathway, Flat-Roof & Sidewall Vent Layout (R3 Reconciled)",
+  "title_es": "Plano Interactivo de HVAC, Pasillo 24\", Techo Plano y Escape Lateral en Ático (R3 Conciliado)",
   "governing_spec": "hvac/SPEC.md",
   "companion_docs": [
     "attic/SPEC.md",
     "hvac/ATTIC-OPENING-PLAN.md",
+    "hvac/COMBINED-ATTIC-HVAC-INTERACTIVE-PLAN-SPEC.md",
     "attic/attic-hatch-plan-data.json"
   ],
-  "base_rev": "rev-20261120-hvac-001",
+  "base_rev": "rev-20261122-hvac-r3",
   "status": "PLANNING_SANDBOX_MON_NOV23_WALKTHROUGH",
   "orientation": {
     "north_angle_deg": 0,
     "compass_required": true,
-    "unit_floorplan_overlay": "Unit 4 MASTER (8 rooms, 121-1/2\" ceiling, 66\" attic height)"
+    "roof_geometry": "FLAT_LOW_SLOPE_ROOF_66IN_CAVITY_ZERO_ROOF_PENETRATIONS",
+    "unit_floorplan_overlay": "Unit 4 MASTER (8 rooms, 121-1/2\" ceiling, 66\" flat-roof attic cavity)"
+  },
+  "dimensions": {
+    "furnace_x_in": {
+      "value": 174.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "VERIFY_ON_SITE"
+    },
+    "furnace_y_in": {
+      "value": 258.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "VERIFY_ON_SITE"
+    },
+    "hatch_x_in": {
+      "value": 112.0,
+      "measure_boundary": "clear_between_casings",
+      "verified": "MEASURE_ON_SITE"
+    },
+    "hatch_y_in": {
+      "value": 74.0,
+      "measure_boundary": "clear_between_casings",
+      "verified": "MEASURE_ON_SITE"
+    },
+    "attic_height_in": {
+      "value": 66.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "FIELD_VERIFIED"
+    },
+    "walkway_run_length_ft": {
+      "value": 15.8,
+      "measure_boundary": "wall_to_wall",
+      "verified": "VERIFY_ON_SITE"
+    },
+    "flue_clearance_in": {
+      "value": 1.5,
+      "measure_boundary": "wall_to_wall",
+      "verified": "VERIFY_ON_SITE"
+    },
+    "flue_slope_in_per_ft": {
+      "value": 0.25,
+      "measure_boundary": "wall_to_wall",
+      "verified": "LOCKED"
+    },
+    "lot_line_clearance_ft": {
+      "value": 4.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "MEASURE_ON_SITE"
+    },
+    "supply1_x_in": {
+      "value": 168.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "VERIFY_ON_SITE"
+    },
+    "supply1_y_in": {
+      "value": 126.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "VERIFY_ON_SITE"
+    },
+    "supply2_x_in": {
+      "value": 298.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "VERIFY_ON_SITE"
+    },
+    "supply2_y_in": {
+      "value": 212.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "VERIFY_ON_SITE"
+    },
+    "supply3_x_in": {
+      "value": 298.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "VERIFY_ON_SITE"
+    },
+    "supply3_y_in": {
+      "value": 116.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "VERIFY_ON_SITE"
+    },
+    "return1_x_in": {
+      "value": 248.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "VERIFY_ON_SITE"
+    },
+    "return1_y_in": {
+      "value": 114.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "VERIFY_ON_SITE"
+    },
+    "jump1_x_in": {
+      "value": 298.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "VERIFY_ON_SITE"
+    },
+    "jump1_y_in": {
+      "value": 80.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "VERIFY_ON_SITE"
+    },
+    "flue_x_in": {
+      "value": 174.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "VERIFY_ON_SITE"
+    },
+    "flue_y_in": {
+      "value": 297.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "VERIFY_ON_SITE"
+    },
+    "gfci_x_in": {
+      "value": 160.0,
+      "measure_boundary": "subfloor",
+      "verified": "VERIFY_ON_SITE"
+    },
+    "gfci_y_in": {
+      "value": 228.5,
+      "measure_boundary": "subfloor",
+      "verified": "VERIFY_ON_SITE"
+    }
+  },
+  "options": {
+    "platform_side": "north",
+    "hatch_orientation": "ns",
+    "roof_route": "sidewall_power_venter_south",
+    "gfci_mode": "at_platform",
+    "walkway_material": "osb_23_32",
+    "waste_pct": 10
   },
   "movable_nodes": {
     "attic_hatch": {
-      "label_en": "Permanent Attic Hatch (24\" × 36\" Finished Clear)",
-      "location": "Right outside front door (Door 4 landing)",
-      "locked_clear_in": [24.0, 36.0],
+      "label_en": "Permanent Attic Hatch (24\" x 36\" Finished Clear)",
+      "location": "Right outside front door (Door 4 landing, X=112\", Y=74\")",
+      "locked_clear_in": [
+        24.0,
+        36.0
+      ],
       "fire_rating_gate": "UNVERIFIED_HOLD",
       "exact_offsets": "MEASURE_ON_SITE"
     },
     "furnace_unit": {
-      "label_en": "Attic Gas Furnace (Carrier/Bryant Legacy 45k BTU, 80% AFUE, Low NOx)",
-      "cabinet_in": { "height": 33.25, "width": 14.19, "depth": 29.0 },
-      "service_platform_in": [30.0, 30.0],
-      "position_state": "DRAGGABLE_PROPOSED_VERIFY_MON_NOV23",
+      "label_en": "Attic Gas Furnace (Carrier/Bryant Legacy 45k BTU, 80% AFUE, Low NOx — or 95%+ Cat IV PVC / Heat Pump)",
+      "cabinet_in": {
+        "height": 33.25,
+        "width": 14.19,
+        "depth": 29.0
+      },
+      "reconciled_position_in": {
+        "x": 174.0,
+        "y": 258.0,
+        "zone": "South-West Dining Room"
+      },
+      "service_platform_in": [
+        30.0,
+        30.0
+      ],
+      "platform_side": "north (X=174.0, Y=228.5)",
+      "position_state": "RECONCILED_PIN_VERIFY_MON_NOV23",
       "vibration_pads_by_john": false
     },
     "walkway_route": {
-      "label_en": "Continuous 24\" Solid Wood Walkway (30\" Clear Passage)",
-      "placement_state": "TBD_TRACE_ON_FLOORPLAN",
+      "label_en": "Continuous 24\" Solid Wood Walkway (30\" Clear Passage, 2025 CMC 304.4)",
+      "placement_state": "RECONCILED_ORTHOGONAL_15_8_FT_PASS",
       "attic_height_in": 66.0,
+      "reconciled_run_ft": 15.8,
       "max_run_ft": 20.0,
-      "material_options": ["23/32\" rated OSB (cheapest compliant)", "3/4\" structural plywood", "2x lumber (NEVER 3/8\" ply)"],
-      "saw_kerf_rule": "1 true 24\" strip per 4x8 sheet (<=7ft: 1, 7-14ft: 2, 14-20ft: 3)"
+      "sheets_4x8": 3,
+      "material_options": [
+        "23/32\" rated OSB (cheapest compliant)",
+        "3/4\" structural plywood",
+        "2x lumber (NEVER 3/8\" ply)"
+      ],
+      "saw_kerf_rule": "1 true 24\" strip per 4x8 sheet (<=7ft: 1, 7-14ft: 2, 14-20ft: 3) -> 3 walkway sheets + 1 platform/dam sheet"
     },
     "ducts": {
       "supply_ducts": [
-        { "id": "supply-1", "target_room": "Living Room", "boot_position": "DRAGGABLE_VERIFY_MON_NOV23" },
-        { "id": "supply-2", "target_room": "Dining Room / Kitchen Zone", "boot_position": "DRAGGABLE_VERIFY_MON_NOV23" },
-        { "id": "supply-3", "target_room": "Bedroom", "boot_position": "DRAGGABLE_VERIFY_MON_NOV23" }
+        {
+          "id": "supply-1",
+          "target_room": "Kitchen / Hall Threshold (S1)",
+          "boot_in": [
+            168,
+            126
+          ],
+          "boot_position": "DRAGGABLE_VERIFY_MON_NOV23"
+        },
+        {
+          "id": "supply-2",
+          "target_room": "Living Room Entry (S2)",
+          "boot_in": [
+            312,
+            212
+          ],
+          "boot_position": "DRAGGABLE_VERIFY_MON_NOV23"
+        },
+        {
+          "id": "supply-3",
+          "target_room": "Bedroom SW Entry (S3)",
+          "boot_in": [
+            386,
+            116
+          ],
+          "boot_position": "DRAGGABLE_VERIFY_MON_NOV23"
+        }
       ],
       "return_intake": {
         "id": "return-1",
-        "label_en": "Return Air Intake + Filter Box",
+        "label_en": "Central Hall Return Air Intake + Filter Grille (R1)",
+        "boot_in": [
+          248,
+          114
+        ],
         "position": "DRAGGABLE_VERIFY_MON_NOV23"
       },
       "jump_duct": {
         "id": "jump-1",
-        "label_en": "Pressure-Relief Jump Duct",
+        "label_en": "Acoustic Jump Duct Bedroom-to-Hall (JD-1)",
+        "boot_in": [
+          334,
+          80
+        ],
         "position": "DRAGGABLE_VERIFY_MON_NOV23"
       },
       "exhaust_flue": {
         "id": "flue-1",
-        "type": "Type B double-wall gas exhaust vent",
+        "type": "Horizontal Exterior Sidewall Exhaust (ZERO flat-roof penetrations; Option A Listed Mechanical Draft Sidewall Power Venter per Carrier II810SA-05 p. 22 & 2025 SFMC 802.8, OR Option B 95%+ AFUE Cat IV Sealed PVC Direct-Vent / Heat Pump)",
         "min_clearance_to_combustibles_in": 1.0,
-        "roof_penetration_goal": "Minimize new roof penetrations — confirm existing roof jack route Mon Nov 23"
+        "min_upward_pitch_in_per_ft": 0.25,
+        "strap_max_spacing_ft": 5.0,
+        "sfmc_802_8_property_line_min_ft": 4.0,
+        "forced_air_inlet_clearance_rule": ">= 3 ft above any forced air inlet within 10 ft (2025 SFMC 802.8)",
+        "window_door_clearance_rule": ">= 4 ft below/horizontally or >= 1 ft above operable windows/doors (CMC 802.8.2; 9-12\" if <=50k BTU direct-vent)",
+        "roof_penetration_goal": "FLAT ROOF — ZERO NEW ROOF PENETRATIONS ALLOWED (reroute to West rear-yard wall X=0\" if South lot-line setback < 4 ft)"
       }
-    },
-    "electrical_service": {
-      "attic_light": "Entrance-switched enclosed LED utility light (retain landing light)",
-      "gfci_outlet": {
-        "max_distance_from_furnace_ft": 25.0,
-        "wiring_rule": "Live on line side independent of furnace disconnect (ideally at 30\"×30\" platform)"
-      },
-      "disconnect": "Dedicated furnace circuit + disconnecting means in sight of furnace"
     }
   },
-  "live_what_if_checks": [
-    "Moving furnace recalculates walkway run L from outside-Door-4 hatch and flags FAIL if L > 20 ft (at 66\" attic height)",
-    "Moving furnace recalculates 4x8 OSB/plywood sheet count (1 true 24\" strip per sheet)",
-    "Moving furnace checks 120V GFCI distance <= 25 ft and rotates 30\"×30\" service platform on service side",
-    "Moving furnace or registers recalculates all 3 supply runs, 1 return intake, 1 jump duct, and flags crossings over hatch bay or walkway",
-    "Moving furnace updates Type B exhaust flue path to existing roof penetration and checks >= 1\" combustible clearance"
+  "flagged_clashes": [
+    {
+      "id": "clash-hvac-sidewall-vent-code",
+      "severity": "HIGH",
+      "en": "Flat Roof + Sidewall Exit Gate (Pin u4-auto-1795396857428): 80% AFUE Category I furnace CANNOT gravity-vent horizontally out a sidewall (Carrier II810SA-05 p. 22). Serge must include a listed Sidewall Power Venter (2025 SFMC 802.8: >= 4 ft from interior lot line, >= 1/4\"/ft pitch) OR switch to 95%+ PVC direct-vent / heat pump; use West rear-yard wall if South setback < 4 ft.",
+      "es": "Techo Plano + Salida Lateral (Pin u4-auto-1795396857428): Un equipo 80% AFUE Categoría I NO puede salir horizontal sin tiro mecánico listado (Carrier II810SA-05 p. 22) o cambio a 95%+ PVC directo / bomba de calor; respetar >= 4 ft a colindancia (SFMC 802.8) o salir por muro Oeste al patio trasero."
+    },
+    {
+      "id": "clash-hvac-hatch-fire-offsets",
+      "severity": "HIGH",
+      "en": "Door 4 landing hatch offsets and ceiling fire-rating check remain MEASURE ON SITE before any ceiling cut or wood purchase (15.8 ft <= 20.0 ft 24\" OSB pathway to SW Dining F1).",
+      "es": "Las medidas exactas de la escotilla en Puerta 4 y la revisión contra fuego del techo siguen pendientes de MEDIR EN OBRA antes de cortar (pasillo 24\" de 15.8 ft <= 20.0 ft hacia F1 en Comedor SO)."
+    },
+    {
+      "id": "clash-hvac-feeder-80v100",
+      "severity": "HIGH",
+      "en": "Electrical reconciliation required Mon Nov 23: NEXT scope includes 80A (#4 copper) feeder + 125A 20-space panel vs. earlier 100A / onsite panel box note; keep Kitchen West 6\" Savona hood duct separate.",
+      "es": "Confirmar el lunes 23 nov con Serge y Alex: propuesta NEXT trae alimentador 80A (#4 cobre) y tablero 125A frente a nota previa de 100A; ducto de campana 6\" de cocina va separado."
+    },
+    {
+      "id": "clash-hvac-roof-leaks",
+      "severity": "MEDIUM",
+      "en": "Active flat-roof/attic leak repair must be confirmed dry before sealing or insulating around attic hatch and ductwork.",
+      "es": "Confirmar reparación completa de goteras en techo plano y ático antes de sellar o aislar alrededor de ductos y escotilla."
+    }
   ],
   "field_overrides": [],
-  "pins": []
+  "pins": [
+    {
+      "id": "u4-auto-1795396710261",
+      "author": "Tisa",
+      "timestamp": "2026-11-22T17:18:30-08:00",
+      "intent": "propose_edit",
+      "cx": 0.353,
+      "cy": 0.779,
+      "rx": 0.03,
+      "ry": 0.03,
+      "note": "Reconciled SW Dining platform & furnace location (X=174\", Y=258\"; 15.8 ft <= 20 ft 24\" pathway)"
+    },
+    {
+      "id": "u4-auto-1795396857428",
+      "author": "Tisa",
+      "timestamp": "2026-11-22T17:20:57-08:00",
+      "intent": "flag_problem",
+      "cx": 0.208,
+      "cy": 0.241,
+      "rx": 0.03,
+      "ry": 0.03,
+      "note": "Flat roof (66\" cavity, zero roof penetrations) — exhaust exits horizontally out sidewall per 2025 SFMC 802.8"
+    }
+  ]
 }

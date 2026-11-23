@@ -243,10 +243,10 @@
                 <span class="boundary-tag">subfloor</span>
               </label>
               <select id="sel-platform-side">
-                <option value="south">South (Facing Hallway)</option>
-                <option value="north">North (Facing Attic Peak)</option>
-                <option value="east">East (Toward Bedroom)</option>
-                <option value="west">West (Toward Door 4 Hatch)</option>
+                <option value="north">North Service Face (Reconciled SW Dining — 15.8 ft Path)</option>
+                <option value="south">South Service Face</option>
+                <option value="east">East Service Face (Toward Living/Bedroom)</option>
+                <option value="west">West Service Face (Toward Kitchen Wall)</option>
               </select>
             </div>
 
@@ -274,7 +274,7 @@
 
             <div class="field-group">
               <label class="field-label-row" for="inp-attic-h">
-                <span data-i18n="lbl_attic_h">Confirmed Attic Ridge Height (in)</span>
+                <span data-i18n="lbl_attic_h">Confirmed Flat-Roof Attic Height (in)</span>
                 <span class="boundary-tag">wall_to_wall</span>
               </label>
               <div class="field-input-row">
@@ -297,11 +297,13 @@
 
             <div class="field-group">
               <label class="field-label-row" for="sel-roof-route">
-                <span data-i18n="lbl_roof_route">Exhaust Roof Vent Strategy</span>
+                <span data-i18n="lbl_roof_route">Flat-Roof Sidewall Exhaust Strategy (SFMC §802.8)</span>
               </label>
               <select id="sel-roof-route">
-                <option value="existing_jack">Reuse Existing Roof Jack (Minimize Roof Cuts)</option>
-                <option value="new_jack_mon_tbd">New Roof Jack Penetration (Requires Owner + Mon Check)</option>
+                <option value="sidewall_power_venter_south">Option A1: Listed Sidewall Power Venter — South Wall (Verify &ge;4 ft Lot Line)</option>
+                <option value="sidewall_power_venter_west">Option A2: Listed Sidewall Power Venter — West Rear-Yard Wall (&ge;4 ft Clear)</option>
+                <option value="cat4_pvc_sidewall">Option B: Switch to 95%+ AFUE Sealed PVC Direct-Vent / Heat Pump</option>
+                <option value="gravity_unassisted_blocked">Unassisted 80% Gravity Horizontal Sidewall (PROHIBITED — Test FAIL)</option>
               </select>
             </div>
 

@@ -39,13 +39,13 @@ PLAN_REGISTRY = {
     },
     "attic-hatch": {
         "html": "plans/attic-hatch/index.html",
-        "en_name": "2026-11-22_U4_attic_hatch_R2_EN.pdf",
-        "es_name": "2026-11-22_U4_attic_hatch_R2_ES.pdf",
+        "en_name": "2026-11-22_U4_attic_hatch_R3_EN.pdf",
+        "es_name": "2026-11-22_U4_attic_hatch_R3_ES.pdf",
     },
     "hvac-layout": {
         "html": "plans/hvac-layout/index.html",
-        "en_name": "2026-11-22_U4_hvac_layout_R2_EN.pdf",
-        "es_name": "2026-11-22_U4_hvac_layout_R2_ES.pdf",
+        "en_name": "2026-11-22_U4_hvac_layout_R3_EN.pdf",
+        "es_name": "2026-11-22_U4_hvac_layout_R3_ES.pdf",
     },
     "murphy-door": {
         "html": "plans/murphy-door/index.html",

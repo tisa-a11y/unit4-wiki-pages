@@ -42,7 +42,7 @@
     title_en: 'Permanent Attic Access Hatch, Walkway & Enclosure (24" × 36" Finished Clear)',
     title_es: 'Escotilla Permanente de Ático, Pasillo y Sellado (24" × 36" Libre Terminado)',
     governing_spec: 'attic/SPEC.md',
-    base_rev: 'rev-20261120-attic-001',
+    base_rev: 'rev-20261122-attic-r3',
     status: 'PLANNING_HOLD_ZERO_CUTS_UNTIL_GATES_PASS',
     orientation: {
       north_angle_deg: 0,
@@ -105,12 +105,12 @@
         date: '2026-11-19'
       },
       walkway_run_length_ft: {
-        value: null,
+        value: 15.8,
         measure_boundary: 'wall_to_wall',
-        verified: 'MEASURE_ON_SITE',
+        verified: 'VERIFY_ON_SITE',
         max_allowed_ft: 20.0,
-        saw_kerf_rule: '1 true 24" strip per 4x8 sheet (<=7ft: 1 sheet, 7-14ft: 2 sheets, 14-20ft: 3 sheets)',
-        source: 'Attic walkway max 20 ft at 66" headroom',
+        saw_kerf_rule: '1 true 24" strip per 4x8 sheet (<=7ft: 1 sheet, 7-14ft: 2 sheets, 14-20ft: 3 sheets) -> 3 sheets for 15.8 ft SW Dining route',
+        source: 'Reconciled SW Dining F1 (X=174", Y=258") -> 15.8 ft <= 20.0 ft cap (CMC 304.4)',
         date: '2026-11-19'
       },
       walkway_min_width_in: {
@@ -825,9 +825,12 @@
       <text x="736" y="33" font-size="8.8" text-anchor="middle" font-weight="700" fill="${gateColor}">${esc(gateBanner)}</text>
       <text x="736" y="47" font-size="7.4" text-anchor="middle" fill="#334155">${esc(stamp)}</text>
 
-      <!-- Attic Envelope & Roof Slope (66" confirmed headroom above joists) -->
-      <polygon points="${sx(0).toFixed(1)},${yAtticFloor.toFixed(1)} ${sx(wallSpan / 2).toFixed(1)},${yAtticPeak.toFixed(1)} ${sx(wallSpan).toFixed(1)},${yAtticFloor.toFixed(1)}"
-               fill="#f8fafc" stroke="#10202b" stroke-width="2.0"/>
+      <!-- Flat / Low-Slope Roof Deck over 66" Clear Attic Cavity (ZERO Roof Penetrations) -->
+      <rect x="${sx(0).toFixed(1)}" y="${yAtticPeak.toFixed(1)}" width="${(wallSpan * pxPerIn).toFixed(1)}" height="${(yAtticFloor - yAtticPeak).toFixed(1)}"
+            fill="#f8fafc" stroke="#10202b" stroke-width="2.0"/>
+      <rect x="${sx(0).toFixed(1)}" y="${(yAtticPeak - 9).toFixed(1)}" width="${(wallSpan * pxPerIn).toFixed(1)}" height="9"
+            fill="#cbd5e1" stroke="#10202b" stroke-width="1.6"/>
+      <text x="${sx(wallSpan / 2).toFixed(1)}" y="${(yAtticPeak + 14).toFixed(1)}" font-size="7.6" text-anchor="middle" font-weight="700" fill="#15539e">${isEs ? 'TECHO PLANO (66" LIBRES · CERO PENETRACIONES EN TECHO)' : 'FLAT / LOW-SLOPE ROOF DECK (66" CAVITY · ZERO ROOF PENETRATIONS)'}</text>
 
       <!-- Loose-fill Attic Insulation (left & right of 4-sided plywood dam) -->
       <rect x="${sx(4).toFixed(1)}" y="${(yAtticFloor - 11 * pxPerIn).toFixed(1)}" width="${((cutStartIn - 4) * pxPerIn).toFixed(1)}" height="${(11 * pxPerIn).toFixed(1)}" fill="url(#insulHatch)" stroke="#d97706" stroke-width="0.9"/>
@@ -857,9 +860,12 @@
             fill="#e2e8f0" stroke="#10202b" stroke-width="1.7"/>
       <text x="${sx(platXIn + 16.5).toFixed(1)}" y="${(yAtticFloor - 19 * pxPerIn).toFixed(1)}" font-size="7.4" text-anchor="middle" font-weight="700" fill="#10202b">CARRIER / BRYANT</text>
       <text x="${sx(platXIn + 16.5).toFixed(1)}" y="${(yAtticFloor - 14 * pxPerIn).toFixed(1)}" font-size="6.8" text-anchor="middle" fill="#334155">33-1/4" H × 29" D</text>
-      <!-- Type B Flue Vent -->
-      <rect x="${sx(platXIn + 14).toFixed(1)}" y="${(yAtticPeak + 14).toFixed(1)}" width="${(4 * pxPerIn).toFixed(1)}" height="${(yAtticFloor - (1.5 + furnH) * pxPerIn - (yAtticPeak + 14)).toFixed(1)}" fill="#e0f2fe" stroke="#0369a1" stroke-width="1.2"/>
-      <text x="${sx(platXIn + 20).toFixed(1)}" y="${(yAtticPeak + 36).toFixed(1)}" font-size="6.8" font-weight="700" fill="#0369a1">&ge; 1" Type B</text>
+      <!-- Horizontal Sidewall Exhaust (Power Venter or 95%+ PVC Direct-Vent, >=1/4"/ft pitch out exterior wall) -->
+      <line x1="${sx(platXIn + 26).toFixed(1)}" y1="${(yAtticFloor - (furnH - 4) * pxPerIn).toFixed(1)}"
+            x2="${sx(wallSpan).toFixed(1)}" y2="${(yAtticFloor - (furnH + 3) * pxPerIn).toFixed(1)}"
+            stroke="#c2410c" stroke-width="4.5" stroke-linecap="round"/>
+      <circle cx="${sx(wallSpan).toFixed(1)}" cy="${(yAtticFloor - (furnH + 3) * pxPerIn).toFixed(1)}" r="4.5" fill="#fff7ed" stroke="#c2410c" stroke-width="1.8"/>
+      <text x="${(sx(wallSpan) - 4).toFixed(1)}" y="${(yAtticFloor - (furnH + 7) * pxPerIn).toFixed(1)}" font-size="6.5" text-anchor="end" font-weight="700" fill="#9a3412">${isEs ? 'Salida Lateral >=1/4"/pie (SFMC 802.8 >=4ft)' : 'Sidewall Exit >=1/4"/ft (SFMC 802.8 >=4ft)'}</text>
 
       <!-- 66" Confirmed Attic Headroom Dimension (< 6 ft -> 20 ft walkway cap) -->
       <line x1="${(sx(0) - 24).toFixed(1)}" y1="${yAtticFloor.toFixed(1)}" x2="${(sx(0) - 24).toFixed(1)}" y2="${yAtticPeak.toFixed(1)}" stroke="#b91c1c" stroke-width="1.5"/>
@@ -1316,7 +1322,7 @@
       const clampedFt = Math.max(1, Math.min(25, Math.round(rawFt * 2) / 2));
       if (state.dimensions.walkway_run_length_ft.value !== clampedFt) {
         state.dimensions.walkway_run_length_ft.value = clampedFt;
-        state.dimensions.walkway_run_length_ft.verified = 'FIELD_UPDATE_PENDING_EOD';
+        state.dimensions.walkway_run_length_ft.verified = 'PENDING_EOD_REVIEW';
         hasUnsyncedLocalEdits = true;
         syncFormFromState();
         renderAll();
@@ -1860,11 +1866,11 @@
     const dimensions = {};
     const jB = numOrNull('inp-joist-b');
     if (jB !== state.dimensions.joist_bay_width_b_in.value) {
-      dimensions.joist_bay_width_b_in = { value: jB, measure_boundary: 'rough_opening', verified: jB === null ? 'MEASURE_ON_SITE' : 'FIELD_UPDATE_PENDING_EOD' };
+      dimensions.joist_bay_width_b_in = { value: jB, measure_boundary: 'rough_opening', verified: jB === null ? 'MEASURE_ON_SITE' : 'PENDING_EOD_REVIEW' };
     }
     const wL = numOrNull('inp-walkway-l');
     if (wL !== state.dimensions.walkway_run_length_ft.value) {
-      dimensions.walkway_run_length_ft = { value: wL, measure_boundary: 'wall_to_wall', verified: wL === null ? 'MEASURE_ON_SITE' : 'FIELD_UPDATE_PENDING_EOD' };
+      dimensions.walkway_run_length_ft = { value: wL, measure_boundary: 'wall_to_wall', verified: wL === null ? 'MEASURE_ON_SITE' : 'PENDING_EOD_REVIEW' };
     }
     if (Object.keys(dimensions).length) patch.dimensions = dimensions;
 
@@ -1873,11 +1879,11 @@
     if (loc && loc !== state.orientation.candidate_location) orientation.candidate_location = loc;
     const o1 = numOrNull('inp-offset-1');
     if (o1 !== state.orientation.wall_offset_1_in.value) {
-      orientation.wall_offset_1_in = { value: o1, measure_boundary: 'wall_to_wall', verified: o1 === null ? 'MEASURE_ON_SITE' : 'FIELD_UPDATE_PENDING_EOD' };
+      orientation.wall_offset_1_in = { value: o1, measure_boundary: 'wall_to_wall', verified: o1 === null ? 'MEASURE_ON_SITE' : 'PENDING_EOD_REVIEW' };
     }
     const o2 = numOrNull('inp-offset-2');
     if (o2 !== state.orientation.wall_offset_2_in.value) {
-      orientation.wall_offset_2_in = { value: o2, measure_boundary: 'wall_to_wall', verified: o2 === null ? 'MEASURE_ON_SITE' : 'FIELD_UPDATE_PENDING_EOD' };
+      orientation.wall_offset_2_in = { value: o2, measure_boundary: 'wall_to_wall', verified: o2 === null ? 'MEASURE_ON_SITE' : 'PENDING_EOD_REVIEW' };
     }
     if (Object.keys(orientation).length) patch.orientation = orientation;
 
@@ -2066,7 +2072,7 @@
       const v = Number(joistMatch[1]);
       if (v >= 10 && v <= 48) {
         patch.dimensions = patch.dimensions || {};
-        patch.dimensions.joist_bay_width_b_in = { value: v, measure_boundary: 'rough_opening', verified: 'FIELD_UPDATE_PENDING_EOD' };
+        patch.dimensions.joist_bay_width_b_in = { value: v, measure_boundary: 'rough_opening', verified: 'PENDING_EOD_REVIEW' };
       }
     }
 
@@ -2075,7 +2081,7 @@
       const v = Number(walkMatch[1]);
       if (v >= 0 && v <= 25) {
         patch.dimensions = patch.dimensions || {};
-        patch.dimensions.walkway_run_length_ft = { value: v, measure_boundary: 'wall_to_wall', verified: 'FIELD_UPDATE_PENDING_EOD' };
+        patch.dimensions.walkway_run_length_ft = { value: v, measure_boundary: 'wall_to_wall', verified: 'PENDING_EOD_REVIEW' };
       }
     }
 
@@ -2353,7 +2359,7 @@
       const v = Number(e.target.value);
       if (Number.isFinite(v)) {
         applyPatchToLocalState({
-          dimensions: { walkway_run_length_ft: { value: v, measure_boundary: 'wall_to_wall', verified: 'FIELD_UPDATE_PENDING_EOD' } }
+          dimensions: { walkway_run_length_ft: { value: v, measure_boundary: 'wall_to_wall', verified: 'PENDING_EOD_REVIEW' } }
         });
       }
     });
@@ -2366,7 +2372,7 @@
         const val = raw === '' ? null : Number(raw);
         if (val === null && !allowNull) return;
         const next = {};
-        next[key] = { value: val !== null && Number.isFinite(val) ? val : null, verified: val === null ? 'MEASURE_ON_SITE' : 'FIELD_UPDATE_PENDING_EOD' };
+        next[key] = { value: val !== null && Number.isFinite(val) ? val : null, verified: val === null ? 'MEASURE_ON_SITE' : 'PENDING_EOD_REVIEW' };
         applyPatchToLocalState({ existing_original_trim: next });
       });
     };
@@ -2408,19 +2414,19 @@
 
     /* Quick field test presets */
     document.getElementById('preset-b-275')?.addEventListener('click', () => {
-      applyPatchToLocalState({ dimensions: { joist_bay_width_b_in: { value: 27.5, verified: 'FIELD_UPDATE_PENDING_EOD' } } });
+      applyPatchToLocalState({ dimensions: { joist_bay_width_b_in: { value: 27.5, verified: 'PENDING_EOD_REVIEW' } } });
     });
     document.getElementById('preset-b-30')?.addEventListener('click', () => {
-      applyPatchToLocalState({ dimensions: { joist_bay_width_b_in: { value: 30.0, verified: 'FIELD_UPDATE_PENDING_EOD' } } });
+      applyPatchToLocalState({ dimensions: { joist_bay_width_b_in: { value: 30.0, verified: 'PENDING_EOD_REVIEW' } } });
     });
     document.getElementById('preset-b-22')?.addEventListener('click', () => {
-      applyPatchToLocalState({ dimensions: { joist_bay_width_b_in: { value: 22.0, verified: 'FIELD_UPDATE_PENDING_EOD' } } });
+      applyPatchToLocalState({ dimensions: { joist_bay_width_b_in: { value: 22.0, verified: 'PENDING_EOD_REVIEW' } } });
     });
     document.getElementById('preset-l-12')?.addEventListener('click', () => {
-      applyPatchToLocalState({ dimensions: { walkway_run_length_ft: { value: 12.0, verified: 'FIELD_UPDATE_PENDING_EOD' } } });
+      applyPatchToLocalState({ dimensions: { walkway_run_length_ft: { value: 12.0, verified: 'PENDING_EOD_REVIEW' } } });
     });
     document.getElementById('preset-l-22')?.addEventListener('click', () => {
-      applyPatchToLocalState({ dimensions: { walkway_run_length_ft: { value: 22.0, verified: 'FIELD_UPDATE_PENDING_EOD' } } });
+      applyPatchToLocalState({ dimensions: { walkway_run_length_ft: { value: 22.0, verified: 'PENDING_EOD_REVIEW' } } });
     });
     document.getElementById('btn-reset-baseline')?.addEventListener('click', () => {
       state = deepClone(BASELINE_ATTIC_DATA);
