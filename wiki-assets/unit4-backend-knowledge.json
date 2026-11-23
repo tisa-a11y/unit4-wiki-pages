@@ -1,6 +1,6 @@
 {
   "schema": "unit4-multiformat-backend-knowledge-v4-r8",
-  "generatedAt": "2026-11-23T10:38:40+00:00",
+  "generatedAt": "2026-11-23T10:58:13+00:00",
   "note": "Unit 4 R8 backend knowledge index across all 16 room/subpage keys, Nov 20 governing SPEC.md and CHECKLIST.md files, 4 standalone Zephyr hood sheets, 4 interactive parametric SVG plan JSON models (kitchen-west-ks4, attic-hatch, hvac-layout, murphy-door), and modular content/ + :8791 + :8444 architecture (strictly scrubbed of all financial figures and restricted data).",
   "allowedRooms": [
     "home",
