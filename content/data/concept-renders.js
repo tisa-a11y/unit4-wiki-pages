@@ -23,15 +23,16 @@
         deferred: false
       },
       {
-        id: "1iqFU246kyPgvR05zKM9gIsX8BTG8rwpT",
+        id: "2026-11-23_U4_floor-plan-proof_EN",
         room: "kitchen",
-        titleEn: "Kitchen Measured Elevation & Cabinet Layout Preview (Nov 19 — Note: Attic Hatch #5 Superseded)",
-        titleEs: "Vista previa de distribución de gabinetes de cocina (19 nov — Nota: Escotilla #5 reemplazada)",
-        statusEn: "Note on callout #5: Ignore the Nov 19 hallway hatch marker — attic hatch is OUTSIDE Front Door 4 on the common stair landing. Use Interactive Kitchen Floor Plan & Attic Hatch Plan.",
-        statusEs: "Nota sobre globo #5: Ignora la marca de escotilla dentro del pasillo (19 nov) — la escotilla va FUERA de la Puerta 4 en el descanso de escaleras. Usa el Plano Interactivo.",
-        driveUrl: "https://drive.google.com/file/d/1iqFU246kyPgvR05zKM9gIsX8BTG8rwpT/view",
-        thumbUrl: "https://drive.google.com/thumbnail?id=1iqFU246kyPgvR05zKM9gIsX8BTG8rwpT&sz=w1200",
-        deferred: true
+        titleEn: "Unit 4 Current Floor Plan & Layout Summary (Nov 23)",
+        titleEs: "Plano de planta y resumen vigente — Unidad 4 (23 nov)",
+        statusEn: "Updated Nov 23: Attic hatch moved outside Front Door 4 on common landing, pie-safe sealed & covered, finished-front dishwasher, drywall postponed, compass rose added.",
+        statusEs: "Actualizado 23 nov: Escotilla del ático fuera de Puerta 4 en descanso común, pie-safe sellado y cubierto, lavavajillas frente terminado, tablaroca pospuesta y brújula N/S/E/O.",
+        driveUrl: "./wiki-images/2026-11-23_U4_floor-plan-proof_EN.png",
+        thumbUrl: "./wiki-images/2026-11-23_U4_floor-plan-proof_EN.png",
+        thumbUrlEs: "./wiki-images/2026-11-23_U4_floor-plan-proof_ES.png",
+        deferred: false
       }
     ],
     bedroom: [

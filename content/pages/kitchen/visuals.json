@@ -47,13 +47,13 @@
       "es": "Cocina desde arriba"
     },
     {
-      "img": "https://drive.google.com/thumbnail?id=1iqFU246kyPgvR05zKM9gIsX8BTG8rwpT&sz=w1200",
-      "imgEs": "https://drive.google.com/thumbnail?id=1Kk2cEiqrQ5ikAyIqXUTMQdmNASxv6H21&sz=w1200",
-      "href": "https://drive.google.com/file/d/1iqFU246kyPgvR05zKM9gIsX8BTG8rwpT/view",
-      "hrefEs": "https://drive.google.com/file/d/1Kk2cEiqrQ5ikAyIqXUTMQdmNASxv6H21/view",
-      "en": "Floor plan (Nov 19 — ignore hatch #5; hatch is outside Front Door 4)",
-      "es": "Plano de planta (19 nov — ignorar escotilla #5; va fuera de Puerta 4)",
-      "deferred": true
+      "img": "./wiki-images/2026-11-23_U4_floor-plan-proof_EN.png",
+      "imgEs": "./wiki-images/2026-11-23_U4_floor-plan-proof_ES.png",
+      "href": "./wiki-images/2026-11-23_U4_floor-plan-proof_EN.png",
+      "hrefEs": "./wiki-images/2026-11-23_U4_floor-plan-proof_ES.png",
+      "en": "Unit 4 Floor Plan & Layout Summary (Nov 23 — Hatch outside Door 4, pie-safe sealed)",
+      "es": "Plano de planta vigente — Unidad 4 (23 nov — Escotilla fuera de Puerta 4, pie-safe sellado)",
+      "deferred": false
     },
     {
       "img": "https://drive.google.com/thumbnail?id=1w9awRXL9sBPAxwZrjaIBKKY39nmloIOF&sz=w1200",
