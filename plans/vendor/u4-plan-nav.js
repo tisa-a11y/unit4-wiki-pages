@@ -90,11 +90,11 @@
   }
 
   function readPref(key) {
-    try { return window.localStorage.getItem(key); } catch (_) { return null; }
+    return null;
   }
 
   function writePref(key, val) {
-    try { window.localStorage.setItem(key, val); } catch (_) {}
+
   }
 
   function resolveInitialLang(urlParams) {
@@ -531,7 +531,7 @@
         menuHtml +
       "</div>" +
       '<div class="u4h-nav-right">' +
-        '<button type="button" id="u4hLangBtn" class="u4h-lang-btn">' + (es ? "English (EN)" : "Español (MX)") + "</button>" +
+        '<button type="button" id="u4hLangBtn" class="u4h-lang-btn" aria-label="' + (es ? "Switch to English" : "Cambiar a español") + '">' + (es ? "English" : "Español") + "</button>" +
         '<button type="button" id="u4hThemeBtn" class="u4h-mini-btn">' + (state.theme === "dark" ? (es ? "☀ Claro" : "☀ Light") : (es ? "☾ Oscuro" : "☾ Dark")) + "</button>" +
         '<button type="button" id="u4hPdfBtn" class="u4h-mini-btn primary">' + (es ? "Imprimir / PDF" : "Print / PDF") + "</button>" +
       "</div>";

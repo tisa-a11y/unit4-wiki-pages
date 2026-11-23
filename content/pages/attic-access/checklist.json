@@ -34,37 +34,37 @@
   ],
   "items": [
     {
-      "id": "attic-access-r6-01",
+      "id": "attic-access-r7-01",
       "done": true,
       "en": "Spot & size set: 24\"×36\" clear hatch outside Front Door 4 + 15.8 ft continuous 24\" wood walkway",
       "es": "Sitio y medida listos: escotilla de 24\"×36\" libres afuera de Puerta 4 + pasillo continuo de 24\" de 15.8 pies"
     },
     {
-      "id": "attic-access-r6-02",
+      "id": "attic-access-r7-02",
       "done": false,
       "en": "Walkthrough check: Confirm Door 4 markout, ceiling fire-rating, joist spacing & open bedroom-closet ceiling before cutting",
       "es": "Revisión en sitio: Confirmar trazo afuera de Puerta 4, cortafuego, vigas y clóset abierto antes de cortar"
     },
     {
-      "id": "attic-access-r6-03",
+      "id": "attic-access-r7-03",
       "done": false,
       "en": "Confirm flat-roof leak repair is dry, then build 24\"×36\" clear hatch, 4-sided dam, foam weatherstrip & unfaced batts",
       "es": "Confirmar seca la gotera del techo plano y armar escotilla 24\"×36\" libres, dique en 4 lados, empaque y colchonetas"
     },
     {
-      "id": "attic-access-r6-04",
+      "id": "attic-access-r7-04",
       "done": false,
       "en": "Install continuous 24\" wood walkway (15.8 ft = 3 sheets of 23/32\" OSB or 3/4\" structural plywood; never 3/8\")",
       "es": "Instalar pasillo continuo de 24\" (15.8 pies = 3 hojas de OSB 23/32\" o triplay estructural 3/4\"; nunca 3/8\")"
     },
     {
-      "id": "attic-access-r6-05",
+      "id": "attic-access-r7-05",
       "done": false,
       "en": "Build level 30\"×30\" North service platform (1 sheet) + switched enclosed LED light & 120V GFCI outlet within 25 ft",
       "es": "Construir plataforma Norte de 30\"×30\" (1 hoja) + luz LED cerrada con apagador y contacto GFCI 120V a ≤ 25 pies"
     },
     {
-      "id": "attic-access-r6-06",
+      "id": "attic-access-r7-06",
       "done": false,
       "en": "Close bedroom-closet ceiling only after thermostat cable, furnace passage & permanent hatch are finished",
       "es": "Cerrar techo del clóset solo cuando estén listos el cable de termostato, el paso del equipo y la escotilla"

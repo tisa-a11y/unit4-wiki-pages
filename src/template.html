@@ -1,5 +1,4 @@
 <!doctype html><html><head>
-  <script id="u4-r6-plan-alias">(function(){function norm(){var h=window.location.hash||"";if(h.indexOf("#plan:attic-hvac")===0){var isHatch=h.indexOf("step=hatch")>=0||h.indexOf("step=framing")>=0||h.indexOf("step=seal")>=0;window.location.replace(isHatch?"#plan:attic-hatch":"#plan:hvac-layout");}}norm();window.addEventListener('hashchange',norm);})();</script>
   <meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Unit 4 Wiki · 1231 11th Ave</title><meta property="og:type" content="website"><meta property="og:site_name" content="1231 11th Ave · Remodel"><meta property="og:title" content="Unit 4 Wiki — Plans &amp; Planos (EN / ES)"><meta property="og:description" content="Weekly priorities, room checklists, PDF plans, and bilingual AI Helper for the 1231 11th Ave Unit 4 remodel."><meta property="og:url" content="https://tisa-a11y.github.io/unit4-wiki-pages/"><meta property="og:image" content="https://tisa-a11y.github.io/unit4-wiki-pages/wiki-images/unit4-og-card.jpg"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Unit 4 Wiki — 1231 11th Ave Remodel"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Unit 4 Wiki — Plans &amp; Planos (EN / ES)"><meta name="twitter:image" content="https://tisa-a11y.github.io/unit4-wiki-pages/wiki-images/unit4-og-card.jpg"><meta name="apple-mobile-web-app-title" content="Unit 4 Wiki"><link rel="apple-touch-icon" sizes="180x180" href="https://tisa-a11y.github.io/unit4-wiki-pages/wiki-images/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="512x512" href="./wiki-images/unit4-icon-512.png"><link rel="icon" type="image/png" sizes="32x32" href="./wiki-images/favicon-32.png"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
 /* v10 Smart Dynamic Co-Pilot + Magicplan Viewer + Direct Tisa Notify + PM & Trade Consultant */
 .u4-mp-wrap{background:var(--paper,#fff);border:1px solid var(--line,#d8d2c7);border-radius:14px;padding:16px;margin:12px 0 20px}
@@ -65,7 +64,251 @@
   #u4AiFloatingDock{position:fixed!important;right:12px!important;bottom:calc(env(safe-area-inset-bottom,0px) + 14px)!important;top:auto!important;z-index:92!important;margin-left:0!important}
   #u4AiFloatingDock .u4-ai-pointer{display:none!important}
 }
-</style></head><body>
+</style>  <style id="u4-r7-wiki-styles">
+/* Top-of-page Interactive Plans Launch Cards & NEXT vs. Crew Phase Grid */
+.u4-plan-launch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+  margin: 14px 0 18px;
+}
+.u4-plan-launch-card {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 13px 15px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(31, 95, 122, 0.34);
+  background: rgba(31, 95, 122, 0.06);
+  color: inherit !important;
+  text-decoration: none !important;
+  transition: transform 0.12s ease, border-color 0.12s ease, background-color 0.12s ease;
+}
+.u4-plan-launch-card.is-primary {
+  border-color: #1f5f7a;
+  background: rgba(31, 95, 122, 0.11);
+}
+.u4-plan-launch-card:hover {
+  transform: translateY(-1px);
+  border-color: #1f5f7a;
+  background: rgba(31, 95, 122, 0.15);
+}
+.u4-plan-launch-kicker {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #1f5f7a;
+}
+.u4-plan-launch-title {
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+.u4-plan-launch-desc {
+  font-size: 12.5px;
+  line-height: 1.42;
+  opacity: 0.88;
+}
+.u4-plan-launch-cta {
+  margin-top: 4px;
+  font-size: 12.5px;
+  font-weight: 800;
+  color: #1f5f7a;
+}
+.u4-sec-block {
+  margin: 18px 0;
+}
+.u4-sec-lead {
+  margin: 4px 0 12px;
+  font-size: 13.5px;
+  opacity: 0.9;
+}
+.u4-phase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+  margin: 10px 0 12px;
+}
+.u4-phase-card {
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1.25px solid rgba(128, 142, 148, 0.34);
+  background: rgba(128, 142, 148, 0.06);
+}
+.u4-phase-card h3 {
+  margin: 6px 0 8px !important;
+  font-size: 15px !important;
+}
+.u4-phase-card ul,
+.u4-phase-card ol {
+  margin: 0;
+  padding-left: 19px;
+}
+.u4-phase-card li {
+  margin-bottom: 7px;
+  line-height: 1.45;
+}
+.u4-phase-badge {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.u4-phase-badge.is-next {
+  background: #e3eef2;
+  color: #16495f;
+}
+.u4-phase-badge.is-crew {
+  background: #e4f0e6;
+  color: #1f512c;
+}
+.u4-sec-inline-plans {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.u4-inline-plan-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 12px;
+  border-radius: 7px;
+  font-size: 12.5px;
+  font-weight: 800;
+  text-decoration: none !important;
+  background: #1f5f7a;
+  color: #ffffff !important;
+}
+.u4-inline-plan-pill.is-alt {
+  background: transparent;
+  color: #1f5f7a !important;
+  border: 1.5px solid #1f5f7a;
+}
+/* Sidebar Interactive Plans Group */
+#u4-rail-plans-grp {
+  margin: 8px 0 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(128, 142, 148, 0.22);
+}
+.u4-rail-plan-link {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  font-weight: 600;
+}
+.u4-rail-plan-tag {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: rgba(31, 95, 122, 0.14);
+  color: #1f5f7a;
+  flex-shrink: 0;
+}
+/* Home Quick-Launch Strip */
+#u4-home-plans-strip {
+  margin: 12px 0 16px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(31, 95, 122, 0.34);
+  background: rgba(31, 95, 122, 0.07);
+}
+.u4-home-plans-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 9px;
+}
+.u4-home-plans-title {
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #1f5f7a;
+}
+.u4-home-plans-chips {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 8px;
+}
+.u4-home-plan-chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 11px;
+  border-radius: 7px;
+  border: 1px solid rgba(31, 95, 122, 0.3);
+  background: rgba(255, 255, 255, 0.72);
+  color: inherit !important;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-decoration: none !important;
+}
+.u4-home-plan-chip:hover {
+  border-color: #1f5f7a;
+}
+/* Dark Theme Overrides */
+html[data-theme="dark"] .u4-plan-launch-card {
+  border-color: rgba(124, 192, 220, 0.35);
+  background: rgba(124, 192, 220, 0.08);
+}
+html[data-theme="dark"] .u4-plan-launch-card.is-primary {
+  border-color: #7cc0dc;
+  background: rgba(124, 192, 220, 0.14);
+}
+html[data-theme="dark"] .u4-plan-launch-card:hover {
+  border-color: #9ad3ea;
+  background: rgba(124, 192, 220, 0.2);
+}
+html[data-theme="dark"] .u4-plan-launch-kicker,
+html[data-theme="dark"] .u4-plan-launch-cta,
+html[data-theme="dark"] .u4-home-plans-title {
+  color: #8fd0ec;
+}
+html[data-theme="dark"] .u4-phase-card {
+  border-color: rgba(148, 163, 184, 0.26);
+  background: rgba(30, 38, 43, 0.78);
+}
+html[data-theme="dark"] .u4-phase-badge.is-next {
+  background: rgba(124, 192, 220, 0.2);
+  color: #9ad3ea;
+}
+html[data-theme="dark"] .u4-phase-badge.is-crew {
+  background: rgba(116, 198, 138, 0.2);
+  color: #95dfa9;
+}
+html[data-theme="dark"] .u4-inline-plan-pill {
+  background: #7cc0dc;
+  color: #0d181d !important;
+}
+html[data-theme="dark"] .u4-inline-plan-pill.is-alt {
+  background: transparent;
+  color: #8fd0ec !important;
+  border-color: #7cc0dc;
+}
+html[data-theme="dark"] .u4-rail-plan-tag {
+  background: rgba(124, 192, 220, 0.18);
+  color: #8fd0ec;
+}
+html[data-theme="dark"] #u4-home-plans-strip {
+  border-color: rgba(124, 192, 220, 0.32);
+  background: rgba(124, 192, 220, 0.08);
+}
+html[data-theme="dark"] .u4-home-plan-chip {
+  background: rgba(24, 31, 35, 0.88);
+  border-color: rgba(124, 192, 220, 0.28);
+}
+</style>
+</head><body>
 <meta name="description" content="Agent brief: shared home of the 1231 11th Ave Unit 4 remodel so Tisa (owner, locks decisions) and John (lead carpenter) work from one current picture; the spine of the Todoist board — every card traces to a wiki spec or decision; agents file every note into specs, Todoist and decisions. Read #agent-brief (= unit-4-renovation/START-HERE.md).">
 <!--
 AGENT BRIEF — read before doing anything with this page.
@@ -10681,6 +10924,341 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   };
 })();
 /* U4_GEMINI_LIVE_AND_UNIFIED_TRIAGE_R5_END */
+
+/* U4-R7-ENHANCER-START */
+(function(){function norm(){var h=window.location.hash||"";if(h.indexOf("#plan:attic-hvac")===0){var isHatch=h.indexOf("step=hatch")>=0||h.indexOf("step=framing")>=0||h.indexOf("step=seal")>=0;window.location.replace(isHatch?"#plan:attic-hatch":"#plan:hvac-layout");}}norm();window.addEventListener('hashchange',norm);})();
+/* u4-r7-ui-enhancer */
+(function () {
+  "use strict";
+
+  var SIDEBAR_PLANS = [
+    { id: "kitchen-floor-plan", en: "Kitchen Floor Plan & Cabinets", es: "Cocina: Planta y Gabinetes", tagEn: "Plan", tagEs: "Plano" },
+    { id: "kitchen-west-ks4", en: "Kitchen Range & Hood Wall", es: "Cocina: Estufa y Campana", tagEn: "Plan", tagEs: "Plano" },
+    { id: "kitchen-electrical", en: "Kitchen Electrical & D04", es: "Cocina: Eléctrico y D04", tagEn: "Plan", tagEs: "Plano" },
+    { id: "attic-hatch", en: "Attic Hatch & Wood Walkway", es: "Escotilla y Pasillo Ático", tagEn: "Plan 1", tagEs: "Plano 1" },
+    { id: "hvac-layout", en: "Heating: Furnace & Ducts", es: "Calefactor, Ductos y Salida", tagEn: "Plan 2", tagEs: "Plano 2" },
+    { id: "murphy-door", en: "Murphy Bookcase Door", es: "Puerta Librero Murphy", tagEn: "Plan", tagEs: "Plano" }
+  ];
+
+  function getLang() {
+    var hl = (document.documentElement.getAttribute("lang") || "").toLowerCase();
+    if (hl.indexOf("es") === 0) return "es";
+    try {
+      var q = new URLSearchParams(window.location.search || "").get("lang") || "";
+      if (q.toLowerCase().indexOf("es") === 0) return "es";
+    } catch (_) {}
+    return "en";
+  }
+
+  function activePlanFromHash() {
+    var h = String(window.location.hash || "");
+    if (h.indexOf("#plan:") !== 0) return "";
+    var raw = h.slice(6).split("?")[0].split("/")[0].trim();
+    if (raw === "attic-hvac") return "hvac-layout";
+    return raw;
+  }
+
+  var syncingRail = false;
+  function injectSidebarAndJumpPlans() {
+    if (syncingRail) return;
+    syncingRail = true;
+    try {
+      var es = getLang() === "es";
+      var curPlan = activePlanFromHash();
+      var rail = document.getElementById("rail");
+      if (rail) {
+        var existing = document.getElementById("u4-rail-plans-grp");
+        if (existing) existing.remove();
+
+        var grpWrap = document.createElement("div");
+        grpWrap.id = "u4-rail-plans-grp";
+
+        var hdr = document.createElement("div");
+        hdr.className = "grp";
+        hdr.textContent = es ? "Planos interactivos" : "Interactive Plans";
+        grpWrap.appendChild(hdr);
+
+        SIDEBAR_PLANS.forEach(function (p) {
+          var row = document.createElement("div");
+          row.className = "rail-item-row";
+          var a = document.createElement("a");
+          a.href = "#plan:" + p.id;
+          a.className = "rail-room-link u4-rail-plan-link" + (curPlan === p.id ? " active" : "");
+          if (curPlan === p.id) a.setAttribute("aria-current", "page");
+          var spanLbl = document.createElement("span");
+          spanLbl.textContent = es ? p.es : p.en;
+          var spanTag = document.createElement("span");
+          spanTag.className = "u4-rail-plan-tag";
+          spanTag.textContent = es ? p.tagEs : p.tagEn;
+          a.appendChild(spanLbl);
+          a.appendChild(spanTag);
+          row.appendChild(a);
+          grpWrap.appendChild(row);
+        });
+
+        var grps = rail.querySelectorAll(".grp");
+        var projectsGrp = null;
+        for (var i = 0; i < grps.length; i++) {
+          var gt = (grps[i].textContent || "").trim().toLowerCase();
+          if (gt.indexOf("project") >= 0 || gt.indexOf("proyecto") >= 0) {
+            projectsGrp = grps[i];
+            break;
+          }
+        }
+        if (projectsGrp && projectsGrp.parentNode) {
+          projectsGrp.parentNode.insertBefore(grpWrap, projectsGrp);
+        } else {
+          rail.appendChild(grpWrap);
+        }
+      }
+
+      var jump = document.getElementById("jump");
+      if (jump) {
+        var oldOptGrp = document.getElementById("u4-jump-plans-grp");
+        if (oldOptGrp) oldOptGrp.remove();
+        var og = document.createElement("optgroup");
+        og.id = "u4-jump-plans-grp";
+        og.label = es ? "Planos interactivos" : "Interactive Plans";
+        SIDEBAR_PLANS.forEach(function (p) {
+          var opt = document.createElement("option");
+          opt.value = "#plan:" + p.id;
+          opt.textContent = (es ? "Plano: " : "Plan: ") + (es ? p.es : p.en);
+          if (curPlan === p.id) opt.selected = true;
+          og.appendChild(opt);
+        });
+        jump.appendChild(og);
+        if (!jump.dataset.u4PlanHooked) {
+          jump.dataset.u4PlanHooked = "1";
+          jump.addEventListener("change", function () {
+            var v = String(jump.value || "");
+            if (v.indexOf("#plan:") === 0) window.location.hash = v;
+          });
+        }
+      }
+    } finally {
+      syncingRail = false;
+    }
+  }
+
+  function injectHomeQuickPlans() {
+    var h = String(window.location.hash || "#home");
+    var isHome = (h === "" || h === "#" || h === "#home" || h.indexOf("#home/") === 0);
+    var existing = document.getElementById("u4-home-plans-strip");
+    if (!isHome) {
+      if (existing) existing.remove();
+      return;
+    }
+    var pageHost = document.getElementById("md") || document.getElementById("page") || document.querySelector("main article, main");
+    if (!pageHost || activePlanFromHash()) return;
+    if (existing && pageHost.contains(existing)) return;
+    if (existing) existing.remove();
+
+    var es = getLang() === "es";
+    var strip = document.createElement("section");
+    strip.id = "u4-home-plans-strip";
+    strip.innerHTML =
+      '<div class="u4-home-plans-head">' +
+        '<span class="u4-home-plans-title">' + (es ? "Planos Interactivos — Acceso Rápido" : "Interactive Plans — Quick Launch") + "</span>" +
+      "</div>" +
+      '<div class="u4-home-plans-chips">' +
+        SIDEBAR_PLANS.map(function (p) {
+          return '<a class="u4-home-plan-chip" href="#plan:' + p.id + '"><span>' + (es ? p.es : p.en) + '</span><span>&rarr;</span></a>';
+        }).join("") +
+      "</div>";
+
+    var firstHeading = pageHost.querySelector("h1");
+    if (firstHeading && firstHeading.nextSibling) {
+      firstHeading.parentNode.insertBefore(strip, firstHeading.nextSibling);
+    } else {
+      pageHost.insertBefore(strip, pageHost.firstChild);
+    }
+  }
+
+  var HVAC_SUMMARY_FALLBACK_EN =
+    '<div class="u4-plan-launch-grid">' +
+      '<a class="u4-plan-launch-card is-primary" href="#plan:hvac-layout">' +
+        '<span class="u4-plan-launch-kicker">Interactive Plan 2 · Heating &amp; Airflow</span>' +
+        '<strong class="u4-plan-launch-title">Heating System: Furnace, Ducts &amp; Sidewall Exhaust</strong>' +
+        '<span class="u4-plan-launch-desc">Drag the furnace or room registers to test supply runs, central return &amp; horizontal sidewall exhaust (zero roof cuts).</span>' +
+        '<span class="u4-plan-launch-cta">Open Heating &amp; Ducts Plan &rarr;</span>' +
+      '</a>' +
+      '<a class="u4-plan-launch-card" href="#plan:attic-hatch">' +
+        '<span class="u4-plan-launch-kicker">Interactive Plan 1 · Carpentry &amp; Framing</span>' +
+        '<strong class="u4-plan-launch-title">Attic Hatch, Wood Walkway &amp; Platform</strong>' +
+        '<span class="u4-plan-launch-desc">24&quot; &times; 36&quot; clear opening outside Front Door 4, ceiling framing hold, insulated air-sealed lid &amp; 15.8 ft wood walkway.</span>' +
+        '<span class="u4-plan-launch-cta">Open Attic Hatch Plan &rarr;</span>' +
+      '</a>' +
+    '</div>' +
+    '<section id="sec-hvac-summary" class="u4-sec-block">' +
+      '<h2>NEXT vs. Our Crew — Who Owns Each Phase</h2>' +
+      '<p class="u4-sec-lead">Clear scope split between NEXT (mechanical &amp; main feeder) and our crew (attic carpentry, service electrical &amp; finish patching).</p>' +
+      '<div class="u4-phase-grid">' +
+        '<div class="u4-phase-card">' +
+          '<div class="u4-phase-badge is-next">NEXT Mechanical &amp; Feeder Scope</div>' +
+          '<h3>NEXT Installs &amp; Tests the Heating System</h3>' +
+          '<ul>' +
+            '<li><strong>Furnace, thermostat &amp; heating ducts:</strong> Supplies and installs the horizontal attic gas furnace, wall thermostat, and insulated heating ducts (<code>3</code> room supply runs, <code>1</code> central hallway return, and <code>1</code> bedroom air-transfer duct).</li>' +
+            '<li><strong>Horizontal sidewall exhaust:</strong> Routes the furnace exhaust horizontally out an exterior sidewall (<strong>zero flat-roof cuts</strong>).</li>' +
+            '<li><strong>Exterior power feeder &amp; subpanel (<code>D04</code>):</strong> Runs the new exterior feeder from the main building service to the Unit 4 subpanel at <code>D04</code> and lands the panel connections (<strong><code>80</code>-amp feed to Unit 4</strong> with a <strong>conditional <code>100</code>-amp main breaker</strong> if existing service supports it).</li>' +
+            '<li><strong>Permits, HERS test &amp; City inspections:</strong> Pulls NEXT&apos;s mechanical and electrical permits and completes HERS testing and City sign-offs.</li>' +
+          '</ul>' +
+        '</div>' +
+        '<div class="u4-phase-card">' +
+          '<div class="u4-phase-badge is-crew">Our Crew Carpentry &amp; Finish Scope</div>' +
+          '<h3>Our Crew Builds Access &amp; Repairs Finishes (In Order)</h3>' +
+          '<ol>' +
+            '<li><strong>Before NEXT starts:</strong> Keep the bedroom-closet ceiling opening (<a href="https://app.todoist.com/app/task/6j3j3pXFrFWhH2w7" target="_blank" rel="noopener">task</a>) and <code>D04</code> subpanel wall (<a href="https://app.todoist.com/app/task/6hvRcQ4XC9mr56g7" target="_blank" rel="noopener">task</a>) open; repair and dry-check the flat-roof leak; keep the ozone machine off and unplugged (<a href="https://app.todoist.com/app/task/6j4MQwqCqp24hX57" target="_blank" rel="noopener">task</a>).</li>' +
+            '<li><strong>Coordinate with NEXT (after Monday sign-off):</strong> Build the permanent <code>24&quot; &times; 36&quot;</code> clear hatch outside Front Door 4 (<a href="https://app.todoist.com/app/task/6j3Rf8FVhMVQ7vQf" target="_blank" rel="noopener">task</a>), the <code>15.8 ft</code> continuous <code>24&quot;</code> wood walkway (<a href="https://app.todoist.com/app/task/6j3RvWq3q6RRFXf7" target="_blank" rel="noopener">task</a>), the level <code>30&quot; &times; 30&quot;</code> wood service platform (<a href="https://app.todoist.com/app/task/6j3j3pqfM4GC53Qf" target="_blank" rel="noopener">task</a>), the <code>120V</code> GFCI outlet within <code>25 ft</code> (<a href="https://app.todoist.com/app/task/6j3RvWhHcpMmCjP7" target="_blank" rel="noopener">task</a>), and the permanent switched LED attic light (<a href="https://app.todoist.com/app/task/6hvjQJgpw2W5VcQf" target="_blank" rel="noopener">task</a>).</li>' +
+            '<li><strong>After testing:</strong> Close the bedroom-closet ceiling only after both the low-voltage thermostat cable and permanent hatch are complete (<a href="https://app.todoist.com/app/task/6j3Rf89g8M6hPPx7" target="_blank" rel="noopener">task</a>), then patch and paint ceilings and <code>D04</code> (<a href="https://app.todoist.com/app/task/6hvj3CgXpVqrJgvf" target="_blank" rel="noopener">task</a>).</li>' +
+          '</ol>' +
+        '</div>' +
+      '</div>' +
+    '</section>';
+
+  var HVAC_SUMMARY_FALLBACK_ES =
+    '<div class="u4-plan-launch-grid">' +
+      '<a class="u4-plan-launch-card is-primary" href="#plan:hvac-layout">' +
+        '<span class="u4-plan-launch-kicker">Plano Interactivo 2 · Calefacción y Ductos</span>' +
+        '<strong class="u4-plan-launch-title">Sistema de Calefacción: Calefactor, Ductos y Salida Lateral</strong>' +
+        '<span class="u4-plan-launch-desc">Arrastra el calefactor o las rejillas por cuarto para revisar ductos, retorno central y salida lateral (cero cortes en techo).</span>' +
+        '<span class="u4-plan-launch-cta">Abrir Plano de Calefacción &rarr;</span>' +
+      '</a>' +
+      '<a class="u4-plan-launch-card" href="#plan:attic-hatch">' +
+        '<span class="u4-plan-launch-kicker">Plano Interactivo 1 · Carpintería y Marco</span>' +
+        '<strong class="u4-plan-launch-title">Escotilla del Ático, Pasillo de Madera y Plataforma</strong>' +
+        '<span class="u4-plan-launch-desc">Abertura libre de 24&quot; &times; 36&quot; afuera de Puerta 4, revisión de vigas y cortafuego, tapa aislada y pasillo de 15.8 pies.</span>' +
+        '<span class="u4-plan-launch-cta">Abrir Plano de Escotilla &rarr;</span>' +
+      '</a>' +
+    '</div>' +
+    '<section id="sec-hvac-summary" class="u4-sec-block">' +
+      '<h2>NEXT vs. Nuestra Cuadrilla — Quién Hace Cada Fase</h2>' +
+      '<p class="u4-sec-lead">División clara entre NEXT (equipo mecánico y alimentador exterior) y nuestra cuadrilla (acceso al ático, eléctrico de servicio y resanes).</p>' +
+      '<div class="u4-phase-grid">' +
+        '<div class="u4-phase-card">' +
+          '<div class="u4-phase-badge is-next">Alcance Mecánico y Alimentador (NEXT)</div>' +
+          '<h3>NEXT Instala y Prueba el Sistema de Calefacción</h3>' +
+          '<ul>' +
+            '<li><strong>Calefactor, termostato y ductos:</strong> Suministra e instala el calefactor horizontal de gas en el ático, el termostato de pared y los ductos aislados (<code>3</code> inyecciones por cuarto, <code>1</code> retorno central en pasillo y <code>1</code> ducto de transferencia en recámara).</li>' +
+            '<li><strong>Salida lateral horizontal:</strong> Saca el escape del calefactor horizontalmente por muro exterior (<strong>cero cortes en el techo plano</strong>).</li>' +
+            '<li><strong>Alimentador exterior y subpanel (<code>D04</code>):</strong> Corre la línea exterior nueva desde el servicio principal hasta el subpanel de Unidad 4 en <code>D04</code> y realiza las conexiones (<strong>alimentación de <code>80A</code> a Unidad 4</strong> con <strong>interruptor principal condicional de <code>100A</code></strong> si el servicio existente lo permite).</li>' +
+            '<li><strong>Permisos, prueba HERS e inspecciones:</strong> Tramita los permisos mecánicos y eléctricos de NEXT y completa la prueba HERS e inspecciones municipales.</li>' +
+          '</ul>' +
+        '</div>' +
+        '<div class="u4-phase-card">' +
+          '<div class="u4-phase-badge is-crew">Alcance de Nuestra Cuadrilla (En Orden)</div>' +
+          '<h3>Nuestra Cuadrilla Construye el Acceso y Resana Acabados</h3>' +
+          '<ol>' +
+            '<li><strong>Antes de que inicie NEXT:</strong> Mantener abiertos el techo del clóset de recámara (<a href="https://app.todoist.com/app/task/6j3j3pXFrFWhH2w7" target="_blank" rel="noopener">tarea</a>) y el muro <code>D04</code> del subpanel (<a href="https://app.todoist.com/app/task/6hvRcQ4XC9mr56g7" target="_blank" rel="noopener">tarea</a>); reparar y verificar seca la gotera del techo plano; dejar apagado y desconectado el generador de ozono (<a href="https://app.todoist.com/app/task/6j4MQwqCqp24hX57" target="_blank" rel="noopener">tarea</a>).</li>' +
+            '<li><strong>Coordinado con NEXT (tras visto bueno del lunes):</strong> Construir la escotilla permanente de <code>24&quot; &times; 36&quot;</code> libres afuera de Puerta Principal 4 (<a href="https://app.todoist.com/app/task/6j3Rf8FVhMVQ7vQf" target="_blank" rel="noopener">tarea</a>), el pasillo continuo de madera de <code>24&quot;</code> de <code>15.8 pies</code> (<a href="https://app.todoist.com/app/task/6j3RvWq3q6RRFXf7" target="_blank" rel="noopener">tarea</a>), la plataforma nivelada de madera de <code>30&quot; &times; 30&quot;</code> (<a href="https://app.todoist.com/app/task/6j3j3pqfM4GC53Qf" target="_blank" rel="noopener">tarea</a>), el contacto GFCI <code>120V</code> a <code>&le; 25 pies</code> (<a href="https://app.todoist.com/app/task/6j3RvWhHcpMmCjP7" target="_blank" rel="noopener">tarea</a>) y la luz LED con apagador en el ático (<a href="https://app.todoist.com/app/task/6hvjQJgpw2W5VcQf" target="_blank" rel="noopener">tarea</a>).</li>' +
+            '<li><strong>Después de las pruebas:</strong> Cerrar el techo del clóset solo cuando estén listos el cable de bajo voltaje y la escotilla permanente (<a href="https://app.todoist.com/app/task/6j3Rf89g8M6hPPx7" target="_blank" rel="noopener">tarea</a>), y resanar y pintar plafones y <code>D04</code> (<a href="https://app.todoist.com/app/task/6hvj3CgXpVqrJgvf" target="_blank" rel="noopener">tarea</a>).</li>' +
+          '</ol>' +
+        '</div>' +
+      '</div>' +
+    '</section>';
+
+  function unhideChain(el) {
+    var cur = el;
+    while (cur && cur !== document.body) {
+      if (cur.hasAttribute && cur.hasAttribute("hidden")) cur.removeAttribute("hidden");
+      if (cur.style && cur.style.display === "none") cur.style.display = "";
+      if (cur.classList) cur.classList.remove("is-hidden", "u4-sub-hidden", "hidden");
+      cur = cur.parentElement;
+    }
+  }
+
+  function ensureSubsectionVisible() {
+    var h = String(window.location.hash || "");
+    var existingFallback = document.getElementById("u4-r7-hvac-summary-mount");
+    if (!h || h.indexOf("#plan:") === 0 || h.indexOf("/") < 0) {
+      if (existingFallback) existingFallback.remove();
+      return;
+    }
+    var parts = h.slice(1).split("/");
+    if (parts.length < 2) return;
+    var room = parts[0].trim();
+    var subId = parts[1].split("?")[0].trim();
+    if (!subId) return;
+
+    if (room !== "hvac" || subId !== "sec-hvac-summary") {
+      if (existingFallback) existingFallback.remove();
+    }
+
+    var target = document.getElementById(subId);
+    if (!target && room === "hvac" && subId === "sec-hvac-summary") {
+      var pg = document.querySelector(".u4-phase-grid");
+      if (pg && pg.parentElement) {
+        pg.parentElement.id = "sec-hvac-summary";
+        target = pg.parentElement;
+      }
+    }
+
+    if (target) {
+      unhideChain(target);
+      if (target.tagName && target.tagName.toLowerCase() === "details") target.open = true;
+      target.querySelectorAll("[hidden]").forEach(function (el) { el.removeAttribute("hidden"); });
+      var launchNear = document.querySelector(".u4-plan-launch-grid");
+      if (launchNear) unhideChain(launchNear);
+    }
+
+    if (room === "hvac" && subId === "sec-hvac-summary") {
+      var visibleNow = target && target.offsetHeight > 24 && (target.textContent || "").trim().length > 80;
+      if (!visibleNow) {
+        var host = document.getElementById("md") || document.getElementById("page") || document.querySelector("main article, main");
+        if (host) {
+          unhideChain(host);
+          var mount = existingFallback || document.createElement("div");
+          mount.id = "u4-r7-hvac-summary-mount";
+          mount.innerHTML = getLang() === "es" ? HVAC_SUMMARY_FALLBACK_ES : HVAC_SUMMARY_FALLBACK_EN;
+          if (!mount.parentElement) host.insertBefore(mount, host.firstChild);
+        }
+      } else if (existingFallback && target !== existingFallback && !existingFallback.contains(target)) {
+        existingFallback.remove();
+      }
+    }
+  }
+
+  function refreshAll() {
+    injectSidebarAndJumpPlans();
+    injectHomeQuickPlans();
+    ensureSubsectionVisible();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function () {
+      refreshAll();
+      setTimeout(refreshAll, 80);
+      setTimeout(refreshAll, 260);
+    });
+  } else {
+    refreshAll();
+    setTimeout(refreshAll, 80);
+    setTimeout(refreshAll, 260);
+  }
+
+  window.addEventListener("hashchange", function () {
+    setTimeout(refreshAll, 20);
+    setTimeout(refreshAll, 140);
+  });
+
+  var railEl = document.getElementById("rail");
+  if (railEl && window.MutationObserver) {
+    var obs = new MutationObserver(function () {
+      if (!document.getElementById("u4-rail-plans-grp")) {
+        injectSidebarAndJumpPlans();
+      }
+    });
+    obs.observe(railEl, { childList: true });
+  }
+
+  var docObs = window.MutationObserver ? new MutationObserver(function () {
+    injectSidebarAndJumpPlans();
+    ensureSubsectionVisible();
+  }) : null;
+  if (docObs) {
+    docObs.observe(document.documentElement, { attributes: true, attributeFilter: ["lang", "data-theme"] });
+  }
+})();
+/* U4-R7-ENHANCER-END */
 </script>
 
   

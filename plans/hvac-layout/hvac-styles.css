@@ -56,7 +56,7 @@ body {
   max-width: 100%;
 }
 
-a {
+#blueprint-sheet-shell a {
   color: var(--blueprint);
 }
 

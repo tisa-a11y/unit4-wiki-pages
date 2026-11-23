@@ -1,7 +1,7 @@
 /* ============================================================================
-   Plan 2: Heating System — Furnace, Ducts & Sidewall Exhaust
+   Plan 2: Heating System — Furnace, Ducts & Sidewall Exhaust (R7 Dark-Mode Polish)
    Focused mechanical & airflow plan:
-     View 1: Furnace & Room Duct Map (color legend + plain-English draggable registers)
+     View 1: Furnace & Room Duct Map (dark/light dot legend + plain-English draggable registers)
      View 2: 66" Flat-Roof Cavity & Horizontal Sidewall Exhaust (zero roof cuts)
    Zero Walkthrough Tab · Heating System Only · Zero Vibration-Pad Assumptions · EN / MX-ES
    ============================================================================ */
@@ -365,8 +365,8 @@
       return {
         cls: "is-fail",
         txt: es
-          ? "✗ Un ducto o equipo cruza la escotilla de 24\"×36\" — muévelo fuera del acceso."
-          : "✗ A duct or furnace blocks the 24\" × 36\" attic hatch — drag it clear of the opening."
+          ? '✗ Un ducto o equipo cruza la escotilla de 24"×36" — muévelo fuera del acceso.'
+          : '✗ A duct or furnace blocks the 24" × 36" attic hatch — drag it clear of the opening.'
       };
     }
     if (m.flue.gravityIllegal) {
@@ -427,18 +427,39 @@
 
   function renderColorLegendHtml(es) {
     var items = [
-      { bg: "#1d2326", tx: "#ffffff", lbl: es ? "Calefactor (45k BTU)" : "Furnace (45k BTU)" },
-      { bg: "#1f5f7a", tx: "#ffffff", lbl: es ? "Aire Caliente (3 cuartos)" : "Warm Air Supply (3 rooms)" },
-      { bg: "#0f766e", tx: "#ffffff", lbl: es ? "Retorno en Pasillo" : "Hall Return Air" },
-      { bg: "#6d28d9", tx: "#ffffff", lbl: es ? "Paso Aire Recámara" : "Bedroom Air Transfer" },
-      { bg: "#fef3c7", tx: "#92400e", bd: "#b45309", lbl: es ? "Salida Lateral en Muro" : "Sidewall Exhaust" }
+      { col: "#1d2326", lbl: es ? "Calefactor (45k BTU)" : "Furnace (45k BTU)" },
+      { col: "#1f5f7a", lbl: es ? "Aire Caliente (3 cuartos)" : "Warm Air Supply (3 rooms)" },
+      { col: "#0f766e", lbl: es ? "Retorno en Pasillo" : "Hall Return Air" },
+      { col: "#6d28d9", lbl: es ? "Paso Aire Recámara" : "Bedroom Air Transfer" },
+      { col: "#d97706", lbl: es ? "Salida Lateral en Muro" : "Sidewall Exhaust" }
     ];
-    return '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;align-items:center">' +
+    return '<div class="u4h-legend-row">' +
       items.map(function (it) {
-        var border = it.bd ? "1px solid " + it.bd : "1px solid transparent";
-        return '<span style="display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border-radius:999px;font-size:11.5px;font-weight:700;background:' + it.bg + ";color:" + it.tx + ";border:" + border + '">' + esc(it.lbl) + "</span>";
+        return '<span class="u4h-legend-chip"><span class="u4h-legend-dot" style="background:' + it.col + '"></span>' + esc(it.lbl) + "</span>";
       }).join("") +
     "</div>";
+  }
+
+  function renderHvacEquipDrawer(es) {
+    var rows = es
+      ? [
+          "NEXT suministra e instala: calefactor horizontal en ático, termostato de pared, plenos y ductos aislados (3 inyecciones, 1 retorno central, 1 transferencia).",
+          "NEXT suministra e instala: salida lateral horizontal por muro exterior (cero cortes en el techo plano) + alimentador exterior hacia el subpanel D04.",
+          'Nuestra cuadrilla construye: escotilla de 24" × 36" libres afuera de Puerta 4, pasillo continuo de 24" (15.8 pies) y plataforma nivelada de 30" × 30".',
+          "Nuestra cuadrilla instala: contacto GFCI 120V a ≤ 25 pies + lámpara LED cerrada permanente con apagador junto a la escotilla."
+        ]
+      : [
+          "NEXT supplies & installs: horizontal attic gas furnace, wall thermostat, plenums & insulated ducts (3 room supplies, 1 hall return, 1 bedroom transfer).",
+          "NEXT supplies & installs: horizontal sidewall exhaust out exterior wall (zero flat-roof cuts) + exterior feeder to Unit 4 subpanel at D04.",
+          'Our crew builds: 24" × 36" clear hatch outside Front Door 4, 15.8 ft continuous 24" wood walkway & level 30" × 30" service platform.',
+          "Our crew installs: line-side 120V GFCI outlet within 25 ft + permanent switched enclosed LED light near hatch."
+        ];
+    return '<details class="u4h-equip-wrap">' +
+      '<summary class="u4h-equip-btn"><span>' + (es ? "Equipo y suministros (NEXT vs. Cuadrilla)" : "Equipment & Supplies (NEXT vs. Crew)") + '</span><span>▾</span></summary>' +
+      '<div class="u4h-equip-body"><ul class="u4h-info-list">' +
+        rows.map(function (r) { return "<li>" + esc(r) + "</li>"; }).join("") +
+      "</ul></div>" +
+    "</details>";
   }
 
   function renderDuctMapSvg(m, es) {
@@ -499,7 +520,7 @@
 
       '<path id="hvacWalkRef" d="' + m.walk.d + '" fill="none" stroke="#cbd5e1" stroke-width="' + +(24 * SC).toFixed(1) + '" stroke-linejoin="round" opacity="0.32"/>' +
       '<rect id="hvacHatchRef" x="' + px(HATCH_DOOR4.x - HATCH_DOOR4.w / 2) + '" y="' + py(HATCH_DOOR4.y - HATCH_DOOR4.h / 2) + '" width="' + +(HATCH_DOOR4.w * SC).toFixed(1) + '" height="' + +(HATCH_DOOR4.h * SC).toFixed(1) + '" rx="2" fill="' + (m.hatchBlocked ? "#f9e6e4" : "#f8fafc") + '" stroke="' + (m.hatchBlocked ? "#a8281c" : "#94a3b8") + '" stroke-width="1.4" stroke-dasharray="3 2"/>' +
-      '<text x="' + px(HATCH_DOOR4.x) + '" y="' + (py(HATCH_DOOR4.y) + 2) + '" text-anchor="middle" font-size="5.2" font-weight="700" fill="#64748b">' + (es ? "Escotilla" : "Hatch") + "</text>" +
+      '<text x="' + (px(HATCH_DOOR4.x - HATCH_DOOR4.w / 2) - 4).toFixed(1) + '" y="' + (py(HATCH_DOOR4.y) + 2) + '" text-anchor="end" font-size="5.6" font-weight="700" fill="#64748b">' + (es ? "Escotilla" : "Hatch") + "</text>" +
 
       '<g id="hvacDynamicDuctsLayer">' + buildDynamicDuctsSvg(m, es) + "</g>" +
 
@@ -531,8 +552,8 @@
         '<rect x="' + retBoxX.toFixed(1) + '" y="' + (f1y - 8).toFixed(1) + '" width="' + retPlenW + '" height="16" rx="2" fill="#ccfbf1" stroke="#0f766e" stroke-width="1.3"/>' +
         '<rect x="' + supBoxX.toFixed(1) + '" y="' + (f1y - 8.5).toFixed(1) + '" width="' + supPlenW + '" height="17" rx="2" fill="#e3eef2" stroke="#1f5f7a" stroke-width="1.4"/>' +
         '<rect class="u4-drag-grip" x="' + (f1x - fW / 2).toFixed(1) + '" y="' + (f1y - fH / 2).toFixed(1) + '" width="' + fW + '" height="' + fH + '" rx="3.5" fill="#1d2326" stroke="#7cc0dc" stroke-width="1.8"/>' +
-        '<text x="' + f1x + '" y="' + (f1y - 1.5) + '" text-anchor="middle" font-size="5.8" font-weight="800" fill="#ffffff" pointer-events="none">' + (es ? "Calefactor" : "Furnace") + "</text>" +
-        '<text x="' + f1x + '" y="' + (f1y + 7.0) + '" text-anchor="middle" font-size="5.2" font-weight="700" fill="#7cc0dc" pointer-events="none">45k BTU ' + (dir > 0 ? "→" : "←") + "</text>" +
+        '<text x="' + f1x + '" y="' + (f1y - 1.5) + '" text-anchor="middle" font-size="5.6" font-weight="800" fill="#ffffff" pointer-events="none">' + (es ? "Calefactor" : "Furnace") + "</text>" +
+        '<text x="' + f1x + '" y="' + (f1y + 6.8) + '" text-anchor="middle" font-size="5.0" font-weight="700" fill="#7cc0dc" pointer-events="none">45k ' + (dir > 0 ? "→" : "←") + "</text>" +
       "</g>" +
 
       '<rect id="hvacSvgPill" x="14" y="303" width="472" height="20" rx="5" fill="#f4f5f3" stroke="#98a4a8" stroke-width="1"/>' +
@@ -714,8 +735,8 @@
     if (holdEl) {
       holdEl.className = "u4h-hold-strip";
       holdEl.innerHTML = es
-        ? "<strong>Plano 2 de 2 — Sistema de Calefacción, Ductos y Salida Lateral:</strong> Cero cortes en el techo plano. ¿Buscas las medidas de la escotilla de <code>24\" × 36\"</code> y el pasillo de madera? Abre <a href=\"../attic-hatch/index.html\">1. Escotilla y Pasillo →</a>"
-        : "<strong>Plan 2 of 2 — Heating System, Room Ducts &amp; Sidewall Exhaust:</strong> Zero flat-roof penetrations. Need framing &amp; lumber for the <code>24\" × 36\"</code> hatch and wood walkway? Switch to <a href=\"../attic-hatch/index.html\">1. Hatch &amp; Wood Walkway →</a>";
+        ? '<strong>Plano 2 de 2 — Sistema de Calefacción, Ductos y Salida Lateral:</strong> Cero cortes en el techo plano. ¿Buscas las medidas de la escotilla de <code>24" × 36"</code> y el pasillo de madera? <a href="../attic-hatch/index.html">1. Escotilla y Pasillo &rarr;</a>'
+        : '<strong>Plan 2 of 2 — Heating System, Room Ducts &amp; Sidewall Exhaust:</strong> Zero flat-roof penetrations. Need framing &amp; lumber for the <code>24" × 36"</code> hatch and wood walkway? <a href="../attic-hatch/index.html">1. Hatch &amp; Wood Walkway &rarr;</a>';
     }
 
     var stepPills = '<div class="u4h-steps" role="tablist">' +
@@ -755,6 +776,7 @@
         "</div>" +
         renderColorLegendHtml(es) +
         '<div class="u4h-svg-wrap">' + renderDuctMapSvg(m, es) + "</div>" +
+        '<div class="u4h-svg-hint">' + (es ? "Consejo: Arrastra el calefactor o cualquier rejilla por cuarto para probar largos de ducto y holguras." : "Tip: Drag the furnace or any room register on the map to test duct lengths & clearances.") + "</div>" +
         '<div id="hvacStatusBanner" class="u4h-status ' + stObj.cls + '">' + esc(stObj.txt) + "</div>" +
         '<div class="u4h-controls">' +
           '<div class="u4h-ctrl-row">' +
@@ -781,11 +803,12 @@
               '<button type="button" class="u4h-pill' + (state.dischargeDir === "left" ? " is-active" : "") + '" data-ddir="left">' + (es ? "← Inyección al Oeste" : "← Supply West") + "</button>" +
             "</div>" +
           "</div>" +
-        "</div>";
+        "</div>" +
+        renderHvacEquipDrawer(es);
 
     } else {
-      titleEn = "66\" Flat-Roof Cavity & Horizontal Sidewall Exhaust";
-      titleEs = "Ático de Techo Plano (66\") y Salida Lateral Horizontal";
+      titleEn = '66" Flat-Roof Cavity & Horizontal Sidewall Exhaust';
+      titleEs = 'Ático de Techo Plano (66") y Salida Lateral Horizontal';
       subEn = "Why the flat roof stays uncut — compare horizontal sidewall exhaust options and property-line clearance";
       subEs = "Por qué el techo plano no se corta — compara las opciones de salida lateral y distancia a colindancia";
       var secObj = computeStatus(m, es);
@@ -809,7 +832,8 @@
             "</div>" +
           "</div>" +
         "</div>" +
-        '<div class="u4h-status ' + secObj.cls + '">' + esc(secObj.txt) + "</div>";
+        '<div class="u4h-status ' + secObj.cls + '">' + esc(secObj.txt) + "</div>" +
+        renderHvacEquipDrawer(es);
     }
 
     var pager = '<div class="u4h-pager">' +
