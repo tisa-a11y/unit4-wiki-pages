@@ -510,6 +510,22 @@
     var bodyHost = document.getElementById("u4hBody");
     if (!bodyHost) return;
     injectToolbarIfNeeded();
+    /* U4_PIN_LANG_OBSERVER */
+    function syncPinBarLanguage() {
+      var esNow = isEs();
+      document.querySelectorAll(".u4-pin-bar").forEach(function (bar) {
+        var chip = bar.querySelector(".u4-pin-chip");
+        if (chip) chip.textContent = esNow ? "⊕ Arrastrar / Tocar punto" : "⊕ Drag / Tap to Pin Spot";
+        var hint = bar.querySelector(".u4-pin-hint");
+        if (hint) hint.textContent = esNow
+          ? "Señala cualquier punto en un dibujo o foto para preguntar a la IA o reportar un ajuste"
+          : "Pin any spot on a drawing or photo to ask AI or flag a correction";
+      });
+    }
+    if (!state.langObserver && typeof MutationObserver === "function") {
+      state.langObserver = new MutationObserver(syncPinBarLanguage);
+      state.langObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
+    }
     if (!state.observer && typeof MutationObserver === "function") {
       state.observer = new MutationObserver(function () {
         if (!document.getElementById("u4PinBar")) {

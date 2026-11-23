@@ -4233,6 +4233,8 @@ function setLang(l, fromStorage){
     try { window.U4GeminiLiveAssistant.onUiLanguageChanged(LANG); } catch(e){}
   }
   if (typeof show==="function" && document.getElementById("doc")) show(location.hash.slice(1) || "home");
+  if (typeof window.__u4R7RefreshAll === "function") { try { window.__u4R7RefreshAll(); } catch(e){} }
+  try { window.dispatchEvent(new CustomEvent("u4:lang-change", { detail: { lang: LANG } })); } catch(e){}
 }
 if (typeof window !== "undefined" && !window.__u4StorageSyncBound) {
   window.__u4StorageSyncBound = true;
@@ -11342,12 +11344,14 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     }
     var pageHost = document.getElementById("doc") || document.querySelector("main article");
     if (!pageHost || activePlanFromHash()) return;
-    if (existing && pageHost.contains(existing)) return;
+    var curLang = getLang();
+    if (existing && pageHost.contains(existing) && existing.dataset.lang === curLang) return;
     if (existing) existing.remove();
 
     var es = getLang() === "es";
     var strip = document.createElement("section");
     strip.id = "u4-home-plans-strip";
+    strip.dataset.lang = getLang();
     strip.innerHTML =
       '<div class="u4-home-plans-head">' +
         '<span class="u4-home-plans-title">' + (es ? "Planos Interactivos — Acceso Rápido" : "Interactive Plans — Quick Launch") + "</span>" +
@@ -11493,13 +11497,16 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     }
 
     if (room === "hvac" && subId === "sec-hvac-summary") {
-      var visibleNow = target && target.offsetHeight > 24 && (target.textContent || "").trim().length > 80;
+      var curLangHvac = getLang();
+      var fallbackLangMismatch = !!(existingFallback && existingFallback.dataset.lang !== curLangHvac);
+      var visibleNow = !fallbackLangMismatch && target && target.offsetHeight > 24 && (target.textContent || "").trim().length > 80;
       if (!visibleNow) {
         var host = document.getElementById("doc") || document.querySelector("main article");
         if (host) {
           unhideChain(host);
           var mount = existingFallback || document.createElement("div");
           mount.id = "u4-r7-hvac-summary-mount";
+          mount.dataset.lang = curLangHvac;
           mount.innerHTML = getLang() === "es" ? HVAC_SUMMARY_FALLBACK_ES : HVAC_SUMMARY_FALLBACK_EN;
           if (!mount.parentElement) {
             var hdrAnchor = host.querySelector(".u4-subnav-bar") || host.querySelector("h1");
@@ -11549,9 +11556,9 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     obs.observe(railEl, { childList: true });
   }
 
+  window.__u4R7RefreshAll = refreshAll;
   var docObs = window.MutationObserver ? new MutationObserver(function () {
-    injectSidebarAndJumpPlans();
-    ensureSubsectionVisible();
+    refreshAll();
   }) : null;
   if (docObs) {
     docObs.observe(document.documentElement, { attributes: true, attributeFilter: ["lang", "data-theme"] });
