@@ -917,7 +917,11 @@
       state.open = true;
       syncUi();
       var log = document.getElementById("u4LaiLog");
-      /* clean empty start without robotic welcome bubble */
+      if (log && !log.children.length) {
+        appendMsg("ai", isEs()
+          ? "¡Hola! Pregúntame sobre este plano o toca Voz para hablar manos libres."
+          : "Hi! Ask me anything about this plan or tap Voice for hands-free help.");
+      }
       if (!state.liveActive && !state.liveConnecting) {
         setStatus(isEs() ? "Listo · Toca Voz para hablar en vivo." : "Ready · Tap Voice to talk live.");
       }

@@ -1970,34 +1970,133 @@ nav.rail .rail-toggle:focus-visible {
 }
 /* U4_VOICE_UI_POLISH_END */
 
-/* U4_MODERN_CHAT_UI_V2_CSS_START */
-/* Hide floating launcher pill whenever dialog is open or live minibar is shown */
-#u4AiFloatingDock[data-open="true"] {
+/* U4_MODERN_CHAT_PURE_CSS_START */
+:root {
+  --u4-ico-wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Cline x1='4' y1='8' x2='4' y2='12'/%3E%3Cline x1='7' y1='5.5' x2='7' y2='14.5'/%3E%3Cline x1='10' y1='3.5' x2='10' y2='16.5'/%3E%3Cline x1='13' y1='6' x2='13' y2='14'/%3E%3Cline x1='16' y1='8' x2='16' y2='12'/%3E%3C/svg%3E");
+  --u4-ico-stop: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect x='5.5' y='5.5' width='9' height='9' rx='2.2' fill='black'/%3E%3C/svg%3E");
+  --u4-ico-mic-on: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='black' stroke-width='1.85' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='7' y='2.5' width='6' height='9.5' rx='3'/%3E%3Cpath d='M4.5 9.5a5.5 5.5 0 0 0 11 0'/%3E%3Cline x1='10' y1='15' x2='10' y2='17.8'/%3E%3C/svg%3E");
+  --u4-ico-mic-off: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='black' stroke-width='1.85' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='3' y1='3' x2='17' y2='17'/%3E%3Cpath d='M13 8.8V5.5a3 3 0 0 0-5.2-2'/%3E%3Cpath d='M7 7.2V9a3 3 0 0 0 5.1 2.1'/%3E%3Cpath d='M4.5 9.5a5.5 5.5 0 0 0 9.4 3.9'/%3E%3Cline x1='10' y1='15' x2='10' y2='17.8'/%3E%3C/svg%3E");
+  --u4-ico-expand: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5 10 7.5 15 12.5'/%3E%3C/svg%3E");
+}
+
+/* Hide launcher pill when dialog is open */
+#u4AiFloatingDock[data-open="true"],
+body:has(#u4VoiceChatDialog:not([hidden])) #u4AiFloatingDock {
   display: none !important;
 }
-#u4AiFloatingDock #u4AiQuickMuteBtn {
+
+/* Symbol-only circular mute & voice buttons (zero text, zero JS observer) */
+#u4VoiceChatDialog #waVoiceMuteBtn,
+#u4AiFloatingDock #u4AiQuickMuteBtn,
+#u4VoiceChatDialog #waVoiceMicPill,
+#u4VoiceMinBar .u4-minbar-btn {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  outline: none !important;
+  box-shadow: none !important;
   width: 32px !important;
   height: 32px !important;
+  min-height: 32px !important;
   padding: 0 !important;
   border-radius: 999px !important;
-  border: 1px solid var(--line) !important;
-  background: var(--bg) !important;
-  color: var(--fg) !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  color: transparent !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  box-shadow: none !important;
+  cursor: pointer !important;
 }
+#u4VoiceChatDialog #waVoiceMuteBtn[hidden],
 #u4AiFloatingDock #u4AiQuickMuteBtn[hidden] {
   display: none !important;
 }
-#u4AiFloatingDock #u4AiQuickMuteBtn.is-muted {
+#u4VoiceChatDialog #waVoiceMuteBtn > *,
+#u4AiFloatingDock #u4AiQuickMuteBtn > *,
+#u4VoiceChatDialog #waVoiceMicPill > *,
+#u4VoiceMinBar .u4-minbar-btn > * {
+  display: none !important;
+}
+#u4VoiceChatDialog #waVoiceMuteBtn,
+#u4AiFloatingDock #u4AiQuickMuteBtn,
+#u4VoiceMinBar .u4-minbar-btn:first-of-type {
+  background: var(--bg) !important;
+  border: 1px solid var(--line) !important;
+}
+#u4VoiceChatDialog #waVoiceMuteBtn::before,
+#u4AiFloatingDock #u4AiQuickMuteBtn::before,
+#u4VoiceMinBar .u4-minbar-btn:first-of-type::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  display: block;
+  background-color: var(--fg);
+  -webkit-mask: var(--u4-ico-mic-on) center / 16px 16px no-repeat;
+  mask: var(--u4-ico-mic-on) center / 16px 16px no-repeat;
+}
+#u4VoiceChatDialog #waVoiceMuteBtn.is-muted,
+#u4VoiceChatDialog #waVoiceMuteBtn[aria-pressed="true"],
+#u4AiFloatingDock #u4AiQuickMuteBtn.is-muted,
+#u4AiFloatingDock #u4AiQuickMuteBtn[aria-pressed="true"],
+#u4VoiceMinBar .u4-minbar-btn:first-of-type[aria-pressed="true"] {
   background: rgba(239, 68, 68, 0.16) !important;
-  border-color: rgba(239, 68, 68, 0.45) !important;
-  color: #ef4444 !important;
+  border-color: rgba(239, 68, 68, 0.48) !important;
+}
+#u4VoiceChatDialog #waVoiceMuteBtn.is-muted::before,
+#u4VoiceChatDialog #waVoiceMuteBtn[aria-pressed="true"]::before,
+#u4AiFloatingDock #u4AiQuickMuteBtn.is-muted::before,
+#u4AiFloatingDock #u4AiQuickMuteBtn[aria-pressed="true"]::before,
+#u4VoiceMinBar .u4-minbar-btn:first-of-type[aria-pressed="true"]::before {
+  background-color: #ef4444 !important;
+  -webkit-mask-image: var(--u4-ico-mic-off) !important;
+  mask-image: var(--u4-ico-mic-off) !important;
 }
 
-/* Compact bottom-right popover: auto-height when empty so it never blocks the plan */
+#u4VoiceChatDialog #waVoiceMicPill {
+  background: var(--accent) !important;
+  border: 0 !important;
+}
+#u4VoiceChatDialog #waVoiceMicPill::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  display: block;
+  background-color: var(--panel);
+  -webkit-mask: var(--u4-ico-wave) center / 16px 16px no-repeat;
+  mask: var(--u4-ico-wave) center / 16px 16px no-repeat;
+}
+#u4VoiceChatDialog #waVoiceMicPill.is-end,
+#u4VoiceChatDialog #waVoiceMicPill[aria-pressed="true"],
+#u4VoiceMinBar .u4-minbar-btn:last-of-type {
+  background: #dc2626 !important;
+  border: 0 !important;
+}
+#u4VoiceChatDialog #waVoiceMicPill.is-end::before,
+#u4VoiceChatDialog #waVoiceMicPill[aria-pressed="true"]::before,
+#u4VoiceMinBar .u4-minbar-btn:last-of-type::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  display: block;
+  background-color: #ffffff !important;
+  -webkit-mask: var(--u4-ico-stop) center / 14px 14px no-repeat !important;
+  mask: var(--u4-ico-stop) center / 14px 14px no-repeat !important;
+}
+#u4VoiceMinBar .u4-minbar-btn:nth-of-type(2) {
+  background: var(--bg) !important;
+  border: 1px solid var(--line) !important;
+}
+#u4VoiceMinBar .u4-minbar-btn:nth-of-type(2)::before {
+  content: "";
+  width: 15px;
+  height: 15px;
+  display: block;
+  background-color: var(--fg);
+  -webkit-mask: var(--u4-ico-expand) center / 15px 15px no-repeat;
+  mask: var(--u4-ico-expand) center / 15px 15px no-repeat;
+}
+
+/* Compact bottom-right popover: auto-height when empty */
 #u4VoiceChatDialog.u4-voice-dialog {
   top: auto !important;
   bottom: 16px !important;
@@ -2016,8 +2115,6 @@ nav.rail .rail-toggle:focus-visible {
 #u4VoiceChatDialog.u4-voice-dialog[hidden] {
   display: none !important;
 }
-
-/* Clean, flat header with symbol-only circular controls */
 #u4VoiceChatDialog .u4-vd-head {
   padding: 9px 10px 9px 14px !important;
   min-height: 46px !important;
@@ -2027,104 +2124,29 @@ nav.rail .rail-toggle:focus-visible {
 }
 #u4VoiceChatDialog:not([data-live="on"]):not([data-live="muted"]):not([data-live="connecting"]) .u4-vd-dot,
 #u4VoiceChatDialog:not([data-live="on"]):not([data-live="muted"]):not([data-live="connecting"]) .u4-vd-state,
-#u4VoiceChatDialog:not([data-live="on"]):not([data-live="muted"]):not([data-live="connecting"]) .u4-rms-meter {
+#u4VoiceChatDialog:not([data-live="on"]):not([data-live="muted"]):not([data-live="connecting"]) .u4-rms-meter,
+#u4VoiceChatDialog[data-live="off"] #waVoiceStatus {
   display: none !important;
 }
 #u4VoiceChatDialog .u4-vd-title {
   font-size: 13.5px !important;
   font-weight: 600 !important;
-  letter-spacing: -0.01em !important;
 }
-#u4VoiceChatDialog .u4-vd-controls {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 6px !important;
-}
-#u4VoiceChatDialog #waVoiceMuteBtn,
-#u4VoiceChatDialog #waVoiceMicPill,
-#u4VoiceChatDialog #u4VdMinBtn,
-#u4VoiceChatDialog #u4VdClearBtn {
-  appearance: none !important;
-  -webkit-appearance: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-  width: 32px !important;
-  height: 32px !important;
-  min-height: 32px !important;
-  padding: 0 !important;
-  border-radius: 999px !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  cursor: pointer !important;
-  transition: background-color 140ms ease, color 140ms ease, border-color 140ms ease, transform 120ms ease !important;
-}
-#u4VoiceChatDialog #waVoiceMuteBtn[hidden],
-#u4VoiceChatDialog #u4VdClearBtn[hidden] {
-  display: none !important;
-}
-#u4VoiceChatDialog #waVoiceMuteBtn {
-  background: var(--bg) !important;
-  border: 1px solid var(--line) !important;
-  color: var(--fg) !important;
-}
-#u4VoiceChatDialog #waVoiceMuteBtn:hover {
-  border-color: var(--accent) !important;
-  color: var(--accent) !important;
-}
-#u4VoiceChatDialog #waVoiceMuteBtn.is-muted,
-#u4VoiceChatDialog #waVoiceMuteBtn[aria-pressed="true"] {
-  background: rgba(239, 68, 68, 0.16) !important;
-  border-color: rgba(239, 68, 68, 0.48) !important;
-  color: #ef4444 !important;
-}
-#u4VoiceChatDialog #waVoiceMicPill {
-  background: var(--accent) !important;
-  border: 0 !important;
-  color: var(--panel) !important;
-}
-#u4VoiceChatDialog #waVoiceMicPill:hover {
-  filter: brightness(1.06);
-}
-#u4VoiceChatDialog #waVoiceMicPill.is-end,
-#u4VoiceChatDialog #waVoiceMicPill[aria-pressed="true"] {
-  background: #dc2626 !important;
-  border: 0 !important;
-  color: #ffffff !important;
-}
-#u4VoiceChatDialog #u4VdMinBtn,
-#u4VoiceChatDialog #u4VdClearBtn {
+#u4VoiceChatDialog #u4VdMinBtn {
   width: 30px !important;
   height: 30px !important;
-  min-height: 30px !important;
   border: 0 !important;
   background: transparent !important;
   color: var(--muted) !important;
+  box-shadow: none !important;
 }
-#u4VoiceChatDialog #u4VdMinBtn:hover,
-#u4VoiceChatDialog #u4VdClearBtn:hover {
+#u4VoiceChatDialog #u4VdMinBtn:hover {
   background: var(--bg) !important;
   color: var(--fg) !important;
 }
-#u4VoiceChatDialog button:focus-visible {
-  outline: 2px solid var(--accent) !important;
-  outline-offset: 2px !important;
-}
 
-/* Hide redundant idle status strip; show only when connecting, muted, or alerting */
-#u4VoiceChatDialog #waVoiceStatus.u4-vd-sub {
-  font-size: 11.5px !important;
-  padding: 5px 14px !important;
-  background: var(--bg) !important;
-  border-bottom: 1px solid var(--line) !important;
-}
-#u4VoiceChatDialog[data-live="off"]:not([data-status-alert="true"]) #waVoiceStatus {
-  display: none !important;
-}
-
-/* Collapse empty transcript completely; clean role-free bubbles once active */
-#u4VoiceChatDialog #u4VoiceChatTranscript:empty,
-#u4VoiceChatDialog[data-has-turns="false"] #u4VoiceChatTranscript {
+/* Collapse empty transcript; clean role-free bubbles */
+#u4VoiceChatDialog #u4VoiceChatTranscript:empty {
   display: none !important;
   padding: 0 !important;
   min-height: 0 !important;
@@ -2138,9 +2160,6 @@ nav.rail .rail-toggle:focus-visible {
 }
 #u4VoiceChatDialog .u4-chat-role {
   display: none !important;
-}
-#u4VoiceChatDialog .u4-chat-turn {
-  max-width: 88% !important;
 }
 #u4VoiceChatDialog .u4-chat-turn.is-user .u4-chat-bubble {
   border-radius: 16px 16px 4px 16px !important;
@@ -2157,19 +2176,15 @@ nav.rail .rail-toggle:focus-visible {
   border: 1px solid var(--line) !important;
 }
 
-/* Contextual chips collapse once user starts chatting */
+/* Contextual chips collapse once user sends a message */
 #u4VoiceChatDialog .u4-vd-foot {
   border-top: 0 !important;
   background: var(--panel) !important;
   padding: 8px 10px 10px !important;
   gap: 8px !important;
 }
-#u4VoiceChatDialog[data-has-user="true"] #u4AiNudges {
+#u4VoiceChatDialog:has(.u4-chat-turn.is-user) #u4AiNudges {
   display: none !important;
-}
-#u4VoiceChatDialog .u4-vd-chips {
-  gap: 6px !important;
-  padding: 0 2px !important;
 }
 #u4VoiceChatDialog .u4-nudge-chip {
   background: transparent !important;
@@ -2178,7 +2193,6 @@ nav.rail .rail-toggle:focus-visible {
   font-size: 12px !important;
   padding: 5px 10px !important;
   border-radius: 999px !important;
-  transition: border-color 140ms ease, color 140ms ease, background-color 140ms ease !important;
 }
 #u4VoiceChatDialog .u4-nudge-chip:hover {
   border-color: var(--accent) !important;
@@ -2186,7 +2200,7 @@ nav.rail .rail-toggle:focus-visible {
   background: var(--bg) !important;
 }
 
-/* Unified 2-deck composer card (ChatGPT / Claude / Gemini pattern) */
+/* Unified 2-deck composer card */
 #u4VoiceChatDialog #u4VdAskForm.u4-vd-ask-row {
   display: flex !important;
   flex-wrap: wrap !important;
@@ -2196,7 +2210,6 @@ nav.rail .rail-toggle:focus-visible {
   border-radius: 16px !important;
   border: 1px solid var(--line) !important;
   background: var(--bg) !important;
-  transition: border-color 150ms ease, box-shadow 150ms ease !important;
 }
 #u4VoiceChatDialog #u4VdAskForm.u4-vd-ask-row:focus-within {
   border-color: var(--accent) !important;
@@ -2248,26 +2261,6 @@ nav.rail .rail-toggle:focus-visible {
   box-shadow: none !important;
 }
 
-/* Symbol-only compact minimized live voice pill */
-#u4VoiceMinBar.u4-voice-minbar {
-  height: 44px !important;
-  padding: 0 8px 0 12px !important;
-  gap: 6px !important;
-  border-radius: 999px !important;
-  background: var(--panel) !important;
-  border: 1px solid var(--line) !important;
-}
-#u4VoiceMinBar .u4-minbar-btn {
-  width: 32px !important;
-  height: 32px !important;
-  min-height: 32px !important;
-  padding: 0 !important;
-  border-radius: 999px !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
 @media (max-width: 600px) {
   #u4VoiceChatDialog.u4-voice-dialog {
     left: 10px !important;
@@ -2279,13 +2272,8 @@ nav.rail .rail-toggle:focus-visible {
   #u4VoiceChatDialog #u4VdAskInput.u4-vd-ask-inp {
     font-size: 16px !important;
   }
-  #u4VoiceChatDialog .u4-vd-cam-mini,
-  #u4VoiceChatDialog .u4-vd-ask-send {
-    width: 34px !important;
-    height: 34px !important;
-  }
 }
-/* U4_MODERN_CHAT_UI_V2_CSS_END */
+/* U4_MODERN_CHAT_PURE_CSS_END */
 </style>
 
 <section id="agent-brief" class="sr-only" aria-label="Agent brief"># START HERE — Unit 4 remodel, 1231 11th Ave (San Francisco)<br><br>**This is the only start-here file.** Every person and agent opening this folder reads this first, fully, before acting.<br>Updated 2026-11-05 17:45 PT by Claude (Tisa&#x27;s account, cloud session). The same text is the wiki&#x27;s &quot;For AI agents: read first&quot; section.<br><br>## 0. Where to work — Google Drive is the single source of truth<br>- **Unit 4 folder (work here):** https://drive.google.com/drive/folders/1NnUfcuJfnzcjJz3XRvDQDhfvtMkrlSOr (`1231-11th-avenue/unit-4-renovation`)<br>- **Whole-building parent:** https://drive.google.com/drive/folders/1StmWHtnrDQlpd1CbUUfUEOI1vg-jHn29 (`1231-11th-avenue`)<br>- Everyone — Tisa&#x27;s Claude, John&#x27;s Claude, Dibble, any other agent — reads and writes through this Drive folder. (It is backed by Tisa&#x27;s Mini and syncs automatically; you never need the Mini path.)<br>- Every Unit 4 document now lives here, including copies of everything from the old locations (section 3). If you can&#x27;t find something, look in the room folder&#x27;s `from-remodel-hub/`, `from-unit4-bath-folder/` or `from-my-drive/` subfolder before assuming it&#x27;s missing.<br>- Older start-here, AGENTS and CLAUDE files were retired 2026-11-05 to `continuity/_superseded/start-here-history/` — don&#x27;t follow them.<br><br>---<br><br>## 1. Who and what<br>- **Tisa** owns the project and makes and locks every decision. **John** is lead carpenter on site. **Ervin, Joel, Alex** are crew (Spanish speakers).<br>- **Wiki** — https://tisa-a11y.github.io/unit4-wiki-pages/ — the shared picture: roadmap, one spec per project, open decisions, documents (PDFs preview in the page). It reads the `.md` files in this folder.<br>- **Todoist** board `Full 1231 11th Avenue Remodel` (id ). The wiki is its spine: every card traces to a spec, a locked decision or captured input.<br>- **Magicplan** MASTER plan is the geometry source: https://cloud.magicplan.app/plan/abb2d2c6-aa1c-4a88-a57e-1260847b6410<br>- **Your job:** keep the project moving with as little effort from Tisa and John as possible. Answer from the specs, capture what they tell you, file it, keep wiki and Todoist in step.<br><br>## 2. Read in this order<br>1. `STATUS-NOW.md` — what&#x27;s locked, what&#x27;s blocking, what&#x27;s next on site. Answer &quot;what&#x27;s up?&quot; from here first.<br>2. `continuity/ROADMAP.md` — sequence and phases.<br>3. `&lt;room&gt;/SPEC.md` for the area you&#x27;re working on.<br>4. `continuity/CURRENT-DECISIONS.md` and `continuity/KNOWN-GAPS.md` only if you need the history.<br><br>## 3. Folder map<br>| Folder | Holds |<br>|---|---|<br>| `kitchen/` `bathroom/` `electrical/` `laundry/` `bedroom/` `living-dining/` `hallway/` `paint-floors/` `hvac/` | One per room or trade; each has `SPEC.md` (governs) plus dated drawings and packages. |<br>| `interior-design/` | Wall treatment, trim, outlet and finish plans (dated revision folders). |<br>| `general/` | Whole-unit items; `from-remodel-hub/` = imported old crew-hub files. |<br>| `sprint/` | Current sprint plan and session agendas. |<br>| `continuity/` | Roadmap, decisions log, known gaps, labor ballpark, history and source snapshots. |<br>| `work-control/` | Agent index, Todoist runbook (dated snapshot), `wiki-source/` (wiki build files). |<br>| `to-triage/` | Drop box for any input (notes, photos, voice memos, session minutes). Claude routes it and moves it to `to-triage/_done/`. |<br>| `sessions/` | One folder per working session: minutes (and transcript when available). |<br>| `_to_delete/` | Marked for removal; only Tisa empties it. |<br><br>Outside this folder: `../building/` (common areas, backyard, alley; `building/earlier-renovations-not-unit-4…/` holds older renovation docs that are **not** Unit 4 — don&#x27;t use them for Unit 4), `../GOOGLE-DOCS-INDEX.md`, and the separate private folder `1231-11th-avenue-private` (leases, costs, payroll, bids — **never share with crew**).<br><br>**Old locations — still readable for history, never the place to work:** Drive &quot;1231 11th Ave - Unit 4 Remodel&quot; (old crew hub, folders 01–12), Drive &quot;11th Ave Unit 4 Bath&quot;. Everything in them was copied here on 2026-11-04/05. If an old file and a file here disagree, the room&#x27;s `SPEC.md` governs.<br><br>## 4. Which version is the latest<br>1. Names carry date and revision: `YYYY-MM-DD_U4_&lt;room or trade&gt;_&lt;what&gt;_R#` (issued drawings may use `RevA`, `RevB`), then `_EN` or `_ES`. English and Spanish are always separate files.<br>2. The latest lives in the topic folder. A replaced file moves, name unchanged, to that folder&#x27;s `_superseded/` (or `history/`). Nothing is deleted.<br>3. If a folder still has more than one live iteration, its `CURRENT.md` names the one that governs.<br>4. `from-remodel-hub/`, `from-unit4-bath-folder/`, `from-my-drive/` are copies imported 2026-11-04 so no mockup or image is lost; they&#x27;re being reconciled. Until then the room&#x27;s `SPEC.md` and the dated files outside them govern.<br><br>## 5. Golden rule: John never has to enter anything himself<br>When John or Tisa tells you something — a task, a measurement, a problem, a question, a decision needed — capture it for them in their words and file it (section 7). Don&#x27;t send them to a form. Confirm back in one line what you filed and where.<br><br>## 6. What each kind of agent can do<br>| You are… | You can |<br>|---|---|<br>| **Claude on Tisa&#x27;s claude.ai account** (this Project, Cowork, Claude Code) | Everything: wiki data via the ArtifactData tool (URL above), republish the wiki via the Artifact tool, edit files here, Todoist via the connector (connected 2026-11-03). |<br>| **John&#x27;s Claude** (claude.ai cloud, often voice on John&#x27;s iPhone) | Read the wiki link, this Drive folder and the Todoist board. Its Drive connector can **create** files but can&#x27;t overwrite existing ones, so it writes session minutes and notes to `to-triage/` as `YYYY-MM-DD_HHMM_session_&lt;topic&gt;.md` with an author line (which Claude, which device, cloud or local). Tisa&#x27;s Claude routes them into the wiki, specs, STATUS-NOW and Todoist. |<br>| **Any other agent** (Dibble, Codex, Gemini, Antigravity) | Read and edit the files here (section 8 rules), update `STATUS-NOW.md`, drop input in `to-triage/`. Access comes from this Drive folder being shared with John&#x27;s Google account as Editor. |<br>| **Any agent with a browser** | Open the wiki and help John use it on his phone. |<br><br>**Dropping input (non-Claude agents):** `to-triage/YYYY-MM-DD_HHMM_&lt;who&gt;_&lt;short&gt;.md`<br>```<br>type: task | fact | decision | note<br>project: kitchen | bathroom | electrical | laundry | bedroom | living-dining | hallway | paint-floors | hvac | general<br>from: &lt;agent&gt; on behalf of &lt;John/Tisa&gt;<br>---<br>&lt;their words&gt;<br>```<br>**Claude capture:** write to the wiki&#x27;s `inbox` collection `{type, project, section, title, details, raw, source:&quot;agent&quot;, from, createdAt, status:&quot;queued&quot;}`, then route it in the same turn.<br><br>## 7. Routing — where each thing goes<br>| Came in | Do this |<br>|---|---|<br>| **Task** | Look for an existing card first (comment rather than duplicate). Create it in the project&#x27;s section — Kitchen / Cocina · Bathroom / Baño · Electrical / Electricidad · Laundry / Lavandería · Walls, Molding &amp; Paint · General &amp; HVAC (bedroom, living-dining, hallway, HVAC, building) · New Tasks (need triage) · Backlog · On Hold or Blocked. Re-check section names live before writing. Plain title; description = State / Trade / Next physical action / Governing source (link to SPEC.md). **Unassigned** unless Tisa names someone. |<br>| **Site fact** | Add to the project&#x27;s SPEC.md with date and &quot;(John, field)&quot;. Comment on the card if it changes one. |<br>| **Decision needed** | Add a wiki `decisions` doc (`status: open`, priority 1 blocking / 2 next / 3 later). Only Tisa locks. |<br>| **Locked decision** (`synced: false`) | Update SPEC.md (mark LOCKED), matching cards, the Spanish crew edition, `STATUS-NOW.md`; set `synced: true`. |<br>| **Field report / session notes** | File facts as above; next steps → unassigned cards; open items → decisions; mark `recorded`. |<br><br>Wiki and cards disagree → the wiki wins (never the reverse without Tisa). Any change you make → update `STATUS-NOW.md` in the same pass.<br><br>## 8. Rules that always hold<br>- Tisa&#x27;s direction is locked; anything an AI produces is a suggestion until she locks it.<br>- Nothing is sent, signed, ordered, paid or scheduled without Tisa&#x27;s approval.<br>- Magicplan and existing drawings first. Never ask John to re-measure what&#x27;s recorded; ask only for the specific missing number.<br>- Crew-facing documents: English first, then a **separate** Spanish edition. Never mix languages. Replies to Tisa in English.<br>- Edit an existing spec rather than making a new file beside it (new files break wiki links).<br>- Superseded files go to `_superseded`; never delete. No credentials in any file here.<br>- **Wiki and Drive mirror each other** (Tisa, 2026-11-06): every wiki page and document list matches a folder in `1231 11th Avenue Unit 4`, and each document sits under the same room in both. When you add or move a document or folder in Drive, update the wiki in the same pass, and the reverse. Example: the Laundry Closet is its own project, so its documents live in `laundry/`, not `electrical/`.<br>- **Spanish for the wiki lives only in the wiki's own text** (Tisa, 2026-11-06): the English/Español toggle. Never create Spanish copies of the .md files in Drive. Crew plans keep their existing English and Spanish PDFs.<br>- **Work record (Beads):** canonical ledger `/Users/tisavo/Work/Projects/1231-11th-avenue/unit-4-renovation` on the MacBook Pro (`.beads/embeddeddolt`, main issue `tisa-wi0.6`). Run `bd where` before writing; never initialize a duplicate ledger; keep existing issue IDs. Agents that can&#x27;t reach it (cloud sessions) record state in `STATUS-NOW.md` and say Beads is pending. Last check from a cloud session (2026-11-05): not reachable, status unverified.<br>- Every session&#x27;s minutes say the date, who attended and which Claude wrote them (account, device, cloud or local).<br>- Say plainly what you verified vs. only wrote. Trust the source file over another agent&#x27;s summary.<br><br>## 9. Maintaining the wiki (Claude only)<br>Source: `work-control/wiki-source/` (template updated 2026-11-05 to include the live Home page and collapsible document lists) — `wiki_template.html`, `build_wiki.py` (embeds the specs and document lists), `brief.py` (embeds this file as the agent brief), `drive_docs.json`, `pdf_blobs.json`. Rebuild, then publish to the same artifact URL. Collections: `decisions` (Tisa/admin write), `decisionNotes`, `reports`, `sessionNotes`, `inbox`.<br><br>## 10. More detail, if needed<br>- Routing detail and history: `work-control/2026-11-03_U4_AgentWork_Index_R2.md`<br>- Todoist runbook (11/2 snapshot, has known errors): `work-control/TODOIST-PROJECT-MANAGER-RUNBOOK.md`<br>- Kitchen governing revision: `kitchen/CURRENT.md`<br></section>
@@ -8915,7 +8903,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     sawOutputTranscriptInTurn: false
   };
 
-  function ensureChatDialogHasWelcome() {
+  function ensureChatDialogHasWelcome() { return;
     var log = document.getElementById("u4VoiceChatTranscript");
     if (!log || log.children.length > 0) return;
     var es = currentUiLang() === "es";
@@ -8923,7 +8911,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       "ai",
       es
         ? "\u00a1Hola! Soy el asistente de voz de Unidad 4. Dime a qu\u00e9 cuarto o plano PDF quieres ir, o preg\u00fantame cualquier medida o pendiente."
-        : "Hi! I'm the Unit 4 AI Helper. Tell me what room or PDF plan to open, or ask about any spec, measurement, or open task."
+        : ""
     );
   }
 
@@ -12117,162 +12105,6 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   }
 })();
 /* U4-R7-ENHANCER-END */
-
-/* U4_MODERN_CHAT_UI_V2_JS_START */
-(function(){
-  if (window.__U4_MODERN_CHAT_UI_V2__) return;
-  window.__U4_MODERN_CHAT_UI_V2__ = true;
-
-  var ICONS = {
-    micOn: '<svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2.5" width="6" height="9.5" rx="3"/><path d="M4.5 9.5a5.5 5.5 0 0 0 11 0"/><line x1="10" y1="15" x2="10" y2="17.8"/></svg>',
-    micOff: '<svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="3" x2="17" y2="17"/><path d="M13 8.8V5.5a3 3 0 0 0-5.2-2"/><path d="M7 7.2V9a3 3 0 0 0 5.1 2.1"/><path d="M4.5 9.5a5.5 5.5 0 0 0 9.4 3.9"/><line x1="10" y1="15" x2="10" y2="17.8"/></svg>',
-    voiceWave: '<svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="8" x2="4" y2="12"/><line x1="7" y1="5.5" x2="7" y2="14.5"/><line x1="10" y1="3.5" x2="10" y2="16.5"/><line x1="13" y1="6" x2="13" y2="14"/><line x1="16" y1="8.2" x2="16" y2="11.8"/></svg>',
-    voiceStop: '<svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true"><rect x="5.5" y="5.5" width="9" height="9" rx="2.2" fill="currentColor"/></svg>',
-    expand: '<svg viewBox="0 0 20 20" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 10 7.5 15 12.5"/></svg>',
-    reset: '<svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10a5.5 5.5 0 1 0 1.6-3.9L4.5 7.8"/><path d="M4.5 4.2v3.6h3.6"/></svg>'
-  };
-
-  var syncing = false;
-
-  function isEsUi() {
-    var hl = (document.documentElement && document.documentElement.lang) || "";
-    return hl.toLowerCase().indexOf("es") === 0;
-  }
-
-  function setIconOnly(btn, svg, label) {
-    if (!btn) return;
-    if (btn.getAttribute("data-u4-icon-sig") !== svg) {
-      btn.innerHTML = svg;
-      btn.setAttribute("data-u4-icon-sig", svg);
-    }
-    if (label) {
-      btn.setAttribute("aria-label", label);
-      btn.setAttribute("title", label);
-    }
-  }
-
-  function stripFillerWelcome(log) {
-    if (!log) return;
-    Array.prototype.slice.call(log.children).forEach(function(node) {
-      var t = String(node.textContent || "").trim();
-      if (/^(AI Helper|Asistente IA)?\s*(Hi!\s*I'm the Unit 4 AI Helper|¡Hola!\s*Soy el asistente)/i.test(t)) {
-        if (node.parentNode) node.parentNode.removeChild(node);
-      }
-    });
-  }
-
-  function syncModernAiChrome() {
-    if (syncing) return;
-    syncing = true;
-    try {
-      var es = isEsUi();
-      var dlg = document.getElementById("u4VoiceChatDialog");
-      var log = document.getElementById("u4VoiceChatTranscript");
-      var dock = document.getElementById("u4AiFloatingDock");
-      if (!dlg) return;
-
-      stripFillerWelcome(log);
-
-      var turns = log ? log.children.length : 0;
-      var hasUser = Boolean(log && log.querySelector(".is-user"));
-      dlg.setAttribute("data-has-turns", turns > 0 ? "true" : "false");
-      dlg.setAttribute("data-has-user", hasUser ? "true" : "false");
-
-      if (dock) {
-        dock.setAttribute("data-open", dlg.hidden ? "false" : "true");
-      }
-
-      var liveMode = dlg.getAttribute("data-live") || "off";
-      var isMuted = liveMode === "muted";
-      var isRunning = liveMode === "on" || liveMode === "muted" || liveMode === "connecting";
-
-      var ctrls = dlg.querySelector(".u4-vd-controls");
-      var clearBtn = document.getElementById("u4VdClearBtn");
-      if (ctrls && !clearBtn) {
-        clearBtn = document.createElement("button");
-        clearBtn.type = "button";
-        clearBtn.id = "u4VdClearBtn";
-        clearBtn.className = "u4-vd-icon-btn";
-        clearBtn.addEventListener("click", function(ev) {
-          if (ev && ev.preventDefault) ev.preventDefault();
-          if (log) log.innerHTML = "";
-          syncModernAiChrome();
-        });
-        ctrls.insertBefore(clearBtn, ctrls.firstChild);
-      }
-      if (clearBtn) {
-        clearBtn.hidden = turns === 0;
-        setIconOnly(clearBtn, ICONS.reset, es ? "Limpiar chat" : "Clear chat");
-      }
-
-      var muteLbl = isMuted
-        ? (es ? "Activar micrófono (M)" : "Unmute microphone (M)")
-        : (es ? "Silenciar micrófono (M)" : "Mute microphone (M)");
-      setIconOnly(document.getElementById("waVoiceMuteBtn"), isMuted ? ICONS.micOff : ICONS.micOn, muteLbl);
-      setIconOnly(document.getElementById("u4AiQuickMuteBtn"), isMuted ? ICONS.micOff : ICONS.micOn, muteLbl);
-
-      var micPill = document.getElementById("waVoiceMicPill");
-      var voiceLbl = isRunning
-        ? (es ? "Terminar voz en vivo" : "End live voice")
-        : (es ? "Iniciar voz en vivo" : "Start live voice");
-      setIconOnly(micPill, isRunning ? ICONS.voiceStop : ICONS.voiceWave, voiceLbl);
-
-      var minBar = document.getElementById("u4VoiceMinBar");
-      if (minBar) {
-        var mbBtns = minBar.querySelectorAll("button");
-        for (var i = 0; i < mbBtns.length; i++) {
-          var b = mbBtns[i];
-          var idOrCls = (b.id + " " + b.className + " " + (b.getAttribute("aria-label") || "")).toLowerCase();
-          if (idOrCls.indexOf("mute") !== -1 || b.hasAttribute("aria-pressed") && i === 0) {
-            setIconOnly(b, isMuted ? ICONS.micOff : ICONS.micOn, muteLbl);
-          } else if (idOrCls.indexOf("end") !== -1 || idOrCls.indexOf("stop") !== -1 || i === mbBtns.length - 1) {
-            setIconOnly(b, ICONS.voiceStop, es ? "Terminar voz en vivo" : "End live voice");
-          } else {
-            setIconOnly(b, ICONS.expand, es ? "Abrir chat" : "Open chat");
-          }
-        }
-      }
-
-      var statusEl = document.getElementById("waVoiceStatus");
-      if (statusEl) {
-        var stTxt = String(statusEl.textContent || "").trim();
-        var isAlert = /unavailable|interrupted|blocked|permission|error|interrumpida|disponible|permiso/i.test(stTxt);
-        dlg.setAttribute("data-status-alert", isAlert ? "true" : "false");
-      }
-
-      var inp = document.getElementById("u4VdAskInput");
-      if (inp) {
-        var curPh = String(inp.getAttribute("placeholder") || "");
-        if (!curPh || /navigate|navegar/i.test(curPh)) {
-          inp.setAttribute("placeholder", es ? "Pregunta sobre este plano..." : "Ask about this plan...");
-        }
-      }
-    } finally {
-      syncing = false;
-    }
-  }
-
-  function bootModernAiUi() {
-    syncModernAiChrome();
-    var dlg = document.getElementById("u4VoiceChatDialog");
-    var log = document.getElementById("u4VoiceChatTranscript");
-    var dock = document.getElementById("u4AiFloatingDock");
-    var minBar = document.getElementById("u4VoiceMinBar");
-    var obs = new MutationObserver(function() { syncModernAiChrome(); });
-    if (dlg) obs.observe(dlg, { attributes: true, subtree: true, attributeFilter: ["hidden", "data-live", "aria-pressed", "class"] });
-    if (log) obs.observe(log, { childList: true });
-    if (dock) obs.observe(dock, { attributes: true, subtree: true, attributeFilter: ["data-live", "data-open", "class", "hidden"] });
-    if (minBar) obs.observe(minBar, { attributes: true, childList: true, subtree: true });
-    if (document.documentElement) obs.observe(document.documentElement, { attributes: true, attributeFilter: ["lang", "data-theme"] });
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", bootModernAiUi, { once: true });
-  } else {
-    setTimeout(bootModernAiUi, 0);
-  }
-})();
-/* U4_MODERN_CHAT_UI_V2_JS_END */
 </script>
 
   
