@@ -48,7 +48,9 @@
     stagedPhoto: null,
     noteMode: false,
     streamBubble: null,
-    streamRole: ""
+    streamRole: "",
+    resumptionHandle: "",
+    reconnecting: false
   };
 
   function isEs() {
@@ -310,6 +312,7 @@
   function toggleMute() {
     if (!state.liveActive) return;
     state.muted = !state.muted;
+    if (state.micStream) state.micStream.getAudioTracks().forEach(function (t) { t.enabled = !state.muted; });
     if (state.muted) {
       stopAudioPlayback();
       updateRmsBars(0);
@@ -372,7 +375,7 @@
       }
     }
 
-    var proc = ctx.createScriptProcessor(2048, 1, 1);
+    var proc = ctx.createScriptProcessor(1024, 1, 1);
     state.captureNode = proc;
     proc.onaudioprocess = function (aev) {
       sendChunk(aev.inputBuffer.getChannelData(0));
@@ -432,33 +435,91 @@
         } else {
           respObj = { ok: false, error: "snapshot_unavailable" };
         }
-      } else if (name === "search_project_knowledge") {
+      } else if (name === "query_wiki_and_backend_knowledge" || name === "search_project_knowledge") {
         var q = args.query || args.q || "";
         var r = args.room || cfg.room;
-        var ctl = new AbortController();
-        var t = setTimeout(function () { ctl.abort(); }, 1200);
-        try {
-          var kRes = await fetch(KNOWLEDGE_URL + "?q=" + encodeURIComponent(q) + "&room=" + encodeURIComponent(r) + "&limit=3", { signal: ctl.signal });
-          clearTimeout(t);
-          respObj = kRes.ok ? await kRes.json() : { ok: false, status: kRes.status };
-        } catch (ke) {
-          clearTimeout(t);
-          respObj = { ok: false, fallback: buildSingleLangContext(), error: String(ke) };
+        var scScope = args.scope || "all";
+        var kRes = await fetch(KNOWLEDGE_URL + "?q=" + encodeURIComponent(q) + "&room=" + encodeURIComponent(r) + "&scope=" + encodeURIComponent(scScope));
+        if (kRes.ok) {
+          var kJson = await kRes.json();
+          var kHits = ((kJson && kJson.results) || []).slice(0, 4).map(function (it) {
+            return { id: it.id, room: it.room, title: it.title, excerpt: String(it.excerpt || "").slice(0, 900) };
+          });
+          respObj = { ok: true, count: kHits.length, results: kHits };
+        } else {
+          respObj = { ok: false, fallback: buildSingleLangContext() };
         }
-      } else if (name === "log_field_note") {
-        var iRes = await fetch(INTAKE_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            room: args.room || cfg.room,
-            edit_kind: "field_note",
-            summary: args.summary || ("[" + cfg.planId + "] Field note"),
-            details: args.details || buildSingleLangContext(),
-            source_page: window.location.pathname,
-            ui_language: state.lang
-          })
+      } else if (name === "query_todoist_cards") {
+        var tdRes = await fetch(BACKEND_ORIGIN + "/api/unit4/todoist");
+        var tdJson = tdRes.ok ? await tdRes.json() : {};
+        var wantRoom = String(args.room || cfg.room || "all").toLowerCase();
+        var kw = String(args.query || "").toLowerCase();
+        var cards = [];
+        ((tdJson && tdJson.rooms) || []).forEach(function (rm) {
+          if (wantRoom !== "all" && String(rm.key || "").toLowerCase() !== wantRoom) return;
+          ((rm && rm.items) || []).forEach(function (it) {
+            if (args.status === "open" && it.done) return;
+            if (args.status === "done" && !it.done) return;
+            var txt = isEs() ? (it.es || it.en) : it.en;
+            if (kw && String(txt).toLowerCase().indexOf(kw) < 0) return;
+            cards.push({ room: rm.key, done: !!it.done, text: txt });
+          });
         });
-        respObj = { ok: iRes.ok, status: iRes.status };
+        respObj = { ok: true, count: cards.length, items: cards.slice(0, 12) };
+      } else if (name === "get_pm_standup_brief") {
+        var sbRes = await fetch(BACKEND_ORIGIN + "/api/unit4/pm-standup");
+        var sb = sbRes.ok ? await sbRes.json() : {};
+        respObj = { ok: sbRes.ok, statusNowExcerpt: String(sb.statusNowExcerpt || "").slice(0, 2400), roomChecklistSummary: sb.roomChecklistSummary || [] };
+      } else if (name === "show_room_renders") {
+        var rrRes = await fetch(BACKEND_ORIGIN + "/api/unit4/renders?room=" + encodeURIComponent(args.room || cfg.room || "all"));
+        var rr = rrRes.ok ? await rrRes.json() : {};
+        var renList = (rr && rr.renders) || [];
+        renList.slice(0, 3).forEach(function (ren) { appendSnapshotCard(ren.thumbUrl || ren.driveUrl, isEs() ? ren.titleEs : ren.titleEn); });
+        respObj = { ok: rrRes.ok, count: renList.length };
+      } else if (name === "set_language") {
+        var nl = String(args.language || "en").toLowerCase().indexOf("es") === 0 ? "es" : "en";
+        state.lang = nl;
+        syncUi();
+        respObj = { ok: true, language: nl };
+      } else if (name === "navigate_room") {
+        var dr = String(args.room || "home");
+        setTimeout(function () { window.location.href = "../../#" + encodeURIComponent(dr); }, 250);
+        respObj = { ok: true, navigatingToRoom: dr };
+      } else if (name === "read_active_document" || name === "focus_section" || name === "open_document" || name === "go_to_document_page") {
+        var mEl = document.querySelector("main") || document.body;
+        respObj = { ok: true, context: buildSingleLangContext(), screenText: String((mEl && mEl.innerText) || "").replace(/\s+/g, " ").slice(0, 2000) };
+      } else if (name === "fill_draft_note") {
+        state.noteMode = true;
+        syncUi();
+        var dIn = document.getElementById("u4LaiInput");
+        if (dIn) dIn.value = String(args.text || "");
+        respObj = { ok: true, draftFilled: true, nextStep: "Read back in 1 short sentence and confirm before submitting." };
+      } else if (name === "submit_voice_memo" || name === "propose_wiki_or_plan_edit" || name === "log_field_note") {
+        if (name !== "log_field_note" && !args.spoken_confirmation) {
+          state.noteMode = true;
+          syncUi();
+          var pIn = document.getElementById("u4LaiInput");
+          if (pIn) pIn.value = String(args.verbatim_request || args.text || args.new_value || "");
+          respObj = { ok: false, needsConfirmation: true, message: "Read back room, item, value, and boundary first." };
+        } else {
+          var pb = {
+            room: args.room || cfg.room,
+            edit_kind: args.edit_kind || (name === "propose_wiki_or_plan_edit" ? "plan_correction" : "field_note"),
+            target_item: args.target_item || args.item || "",
+            new_value: args.new_value || args.measurement || "",
+            measure_boundary: args.measure_boundary || args.datum || "n_a",
+            verbatim_request: args.verbatim_request || args.text || args.summary || "",
+            text: args.text || args.verbatim_request || args.summary || "",
+            language: args.language || state.lang,
+            spoken_confirmation: true
+          };
+          if (state.stagedPhoto && state.stagedPhoto.dataUrl) {
+            pb.photo = { name: state.stagedPhoto.name || "site-photo.jpg", type: state.stagedPhoto.mime || "image/jpeg", data: state.stagedPhoto.dataUrl };
+          }
+          var iRes = await fetch(INTAKE_URL + "/voice-memo", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(pb) });
+          if (iRes.ok) { clearStagedPhoto(); state.noteMode = false; syncUi(); }
+          respObj = { ok: iRes.ok, status: iRes.status };
+        }
       } else {
         respObj = { ok: true, context: buildSingleLangContext() };
       }
@@ -529,6 +590,8 @@
         var setupPayload = tokData.setup ? Object.assign({}, tokData.setup) : { model: tokData.model || "models/gemini-3.8-live" };
         setupPayload.inputAudioTranscription = setupPayload.inputAudioTranscription || {};
         setupPayload.outputAudioTranscription = setupPayload.outputAudioTranscription || {};
+        setupPayload.contextWindowCompression = setupPayload.contextWindowCompression || { slidingWindow: {} };
+        setupPayload.sessionResumption = state.resumptionHandle ? { handle: state.resumptionHandle } : (setupPayload.sessionResumption || {});
         ws.send(JSON.stringify({ setup: setupPayload }));
       };
 
@@ -563,6 +626,8 @@
           return;
         }
 
+        if (msg.sessionResumptionUpdate && msg.sessionResumptionUpdate.resumable && msg.sessionResumptionUpdate.newHandle) state.resumptionHandle = String(msg.sessionResumptionUpdate.newHandle);
+        if (msg.goAway && state.liveActive && !state.reconnecting) { state.reconnecting = true; setTimeout(function () { state.reconnecting = false; startVoiceSession(''); }, 150); return; }
         /* Full Wave G msg.toolCall handler! */
         if (msg.toolCall && Array.isArray(msg.toolCall.functionCalls)) {
           var responses = [];
@@ -605,7 +670,7 @@
               }
             });
           }
-          if (sc.turnComplete) {
+          if (sc.turnComplete || sc.generationComplete) {
             state.streamBubble = null;
             state.streamRole = "";
           }
@@ -649,6 +714,7 @@
         ui_language: state.lang
       };
       if (state.stagedPhoto && state.stagedPhoto.dataUrl) {
+        payload.photo = { name: state.stagedPhoto.name || "site-photo.jpg", type: state.stagedPhoto.mime || "image/jpeg", data: state.stagedPhoto.dataUrl };
         payload.photo_data_url = state.stagedPhoto.dataUrl;
         payload.photo_filename = state.stagedPhoto.name || "site-photo.jpg";
       }
@@ -915,6 +981,17 @@
       handleUserText(q);
     });
 
+    /* U4_M_KEY_AND_LANG */
+    document.addEventListener('keydown', function (e) {
+      if (!state.liveActive || e.metaKey || e.ctrlKey || e.altKey) return;
+      var tg = e.target;
+      if (tg && (tg.tagName === 'INPUT' || tg.tagName === 'TEXTAREA' || tg.isContentEditable)) return;
+      if (e.key === 'm' || e.key === 'M') { e.preventDefault(); toggleMute(); }
+    });
+    window.addEventListener('u4:lang-change', function () {
+      var dl = String(document.documentElement.lang || '').toLowerCase().indexOf('es') === 0 ? 'es' : 'en';
+      if (dl !== state.lang) { state.lang = dl; syncUi(); }
+    });
     syncUi();
   }
 
