@@ -157,6 +157,11 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           room: planId,
+          roomKey: (window.U4PLAN && window.U4PLAN.roomKey) || planId,
+          document_id: (window.U4PLAN && window.U4PLAN.documentId) || planId,
+          pdf_page: (window.U4PLAN && window.U4PLAN.pdfPage) || 1,
+          x_pct: typeof xPct === "number" ? xPct : null,
+          y_pct: typeof yPct === "number" ? yPct : null,
           edit_kind: "pin_correction",
           summary: "[PIN " + locTag + "] " + note,
           details: "Pinned visual correction on " + locTag + "\nURL: " + window.location.href + "\nNote: " + note,

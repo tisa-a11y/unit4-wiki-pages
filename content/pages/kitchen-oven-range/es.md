@@ -1,6 +1,6 @@
 # Tramo de estufa y campana
 
-**Decisión abierta — 23 de noviembre:** Tisa y John revisarán extensión original Savona, cubierta inoxidable a medida, cajillo pequeño crema o arco crema con campana inoxidable visible y repisas opcionales. Falta medir el espacio exacto; ninguna opción está aprobada. [Decisión y revisión de John](https://app.todoist.com/app/task/6hvjQGhG62xHf437). Arco R1 y tutorial R2 son solo propuestas.
+**Decisión abierta — 23 de noviembre:** Tisa y John revisarán extensión original Savona, cubierta inoxidable a medida, cajillo pequeño crema o arco crema con campana inoxidable visible y repisas opcionales. Falta medir el espacio exacto; ninguna opción está aprobada. [Decisión y revisión de John](https://app.todoist.com/app/task/6hvjQGhG62xHf437). Arco y tutorial son solo propuestas.
 
 ## Concepto
 Muro Oeste. Estufa de gas Viking de 30", campana Zephyr de 30" arriba, azulejo hasta el techo.

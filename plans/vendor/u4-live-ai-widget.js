@@ -345,7 +345,7 @@
           "    const ch = inputs[0] && inputs[0][0];" +
           "    if (!ch) return true;" +
           "    this._buf.push(new Float32Array(ch)); this._len += ch.length;" +
-          "    if (this._len >= 2048){" +
+          "    if (this._len >= 1024){" +
           "      const out = new Float32Array(this._len); let off = 0;" +
           "      for (const b of this._buf){ out.set(b, off); off += b.length; }" +
           "      this._buf = []; this._len = 0;" +
@@ -575,8 +575,17 @@
           return;
         }
 
+        if (msg.sessionResumptionUpdate && msg.sessionResumptionUpdate.newHandle) {
+          state.sessionResumptionHandle = msg.sessionResumptionUpdate.newHandle;
+        }
+        if (msg.goAway) {
+          state.goAwayTimeLeft = msg.goAway.timeLeft || null;
+        }
         if (msg.serverContent) {
           var sc = msg.serverContent;
+          if (sc.generationComplete) {
+            state.streamBubble = null;
+          }
           if (sc.interrupted) {
             stopAudioPlayback();
             state.streamBubble = null;

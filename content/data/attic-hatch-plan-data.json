@@ -3,20 +3,42 @@
   "project": "1231 11th Avenue Unit 4, San Francisco, CA",
   "room_id": "attic",
   "element_id": "ATTIC-HATCH-01",
-  "title_en": "Permanent Attic Access Hatch, Walkway & Enclosure (24\" × 36\" Finished Clear)",
-  "title_es": "Escotilla Permanente de Ático, Pasillo y Sellado (24\" × 36\" Libre Terminado)",
+  "title_en": "Permanent Attic Access Hatch, 24\" Pathway & Flat-Roof Enclosure (R3 Reconciled)",
+  "title_es": "Escotilla Permanente de Ático, Pasillo 24\" y Techo Plano (R3 Conciliado)",
   "governing_spec": "attic/SPEC.md",
   "companion_docs": [
+    "hvac/SPEC.md",
     "hvac/ATTIC-OPENING-PLAN.md",
+    "hvac/COMBINED-ATTIC-HVAC-INTERACTIVE-PLAN-SPEC.md",
     "wiki-docs/attic-hatch-r5/Attic-hatch-practical-guide_R5_EN.pdf",
     "wiki-docs/attic-hatch-r5/Attic-hatch-practical-guide_R5_ES.pdf"
   ],
-  "base_rev": "rev-20261120-attic-001",
+  "base_rev": "rev-20261122-attic-r3",
   "status": "PLANNING_HOLD_ZERO_CUTS_UNTIL_GATES_PASS",
   "orientation": {
     "north_angle_deg": 0,
     "candidate_location": "DOOR4_LANDING",
     "proposed_hatch_axis": "36in_along_hall_x_24in_across",
+    "hatch_center_x_in": {
+      "value": 112.0,
+      "measure_boundary": "clear_between_casings",
+      "verified": "MEASURE_ON_SITE"
+    },
+    "hatch_center_y_in": {
+      "value": 74.0,
+      "measure_boundary": "clear_between_casings",
+      "verified": "MEASURE_ON_SITE"
+    },
+    "reconciled_furnace_x_in": {
+      "value": 174.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "VERIFY_ON_SITE"
+    },
+    "reconciled_furnace_y_in": {
+      "value": 258.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "VERIFY_ON_SITE"
+    },
     "wall_offset_1_in": {
       "value": null,
       "measure_boundary": "wall_to_wall",
@@ -30,7 +52,7 @@
   },
   "equipment_basis": {
     "furnace": {
-      "model": "Carrier/Bryant Legacy 45k BTU, 80% AFUE, Low NOx (exact SKU confirm Mon Nov 23)",
+      "model": "Carrier/Bryant Legacy 45k BTU, 80% AFUE, Low NOx (or 95%+ PVC Direct-Vent / Heat Pump per Mon Nov 23 sidewall check)",
       "height_in": 33.25,
       "width_in": 14.19,
       "depth_in": 29.0,
@@ -38,7 +60,8 @@
         14.19,
         29.0
       ],
-      "source": "NEXT HVAC signed scope + Serge Nov 2 email"
+      "reconciled_zone": "South-West Dining Room (X=174\", Y=258\"; North 30\"x30\" platform at X=174\", Y=228.5\")",
+      "source": "NEXT HVAC scope + Tisa Pin u4-auto-1795396710261 (2026-11-22)"
     }
   },
   "dimensions": {
@@ -46,7 +69,7 @@
       "value": 24.0,
       "measure_boundary": "clear_between_casings",
       "verified": "LOCKED_NEVER_SHRINK",
-      "source": "attic/SPEC.md (Tisa locked 24\" × 36\" finished clear; 36\"×36\" withdrawn)",
+      "source": "attic/SPEC.md (Tisa locked 24\" x 36\" finished clear; 36\"x36\" withdrawn)",
       "date": "2026-11-19"
     },
     "finished_clear_length_in": {
@@ -81,24 +104,24 @@
       "value": 66.0,
       "measure_boundary": "aff",
       "verified": "CONFIRMED",
-      "source": "hvac/ATTIC-OPENING-PLAN.md (66\" < 6 ft caps walkway run at <= 20 ft per CMC 304.4)",
-      "date": "2026-11-19"
+      "source": "Flat / low-slope roof cavity (66\" < 6 ft caps continuous 24\" walkway at <= 20.0 ft per 2025 CMC 304.4.1; zero gable ridge)",
+      "date": "2026-11-22"
     },
     "walkway_run_length_ft": {
-      "value": null,
+      "value": 15.8,
       "measure_boundary": "wall_to_wall",
-      "verified": "MEASURE_ON_SITE",
+      "verified": "VERIFY_ON_SITE",
       "max_allowed_ft": 20.0,
-      "saw_kerf_rule": "1 true 24\" strip per 4x8 sheet (<=7ft: 1 sheet, 7-14ft: 2 sheets, 14-20ft: 3 sheets)",
-      "source": "CMC 304.4 + R5 p. 7",
-      "date": "2026-11-19"
+      "saw_kerf_rule": "1 true 24\" strip per 4x8 sheet (<=7ft: 1 sheet, 7-14ft: 2 sheets, 14-20ft: 3 sheets) -> 3 walkway sheets + 1 platform/dam sheet = 4 net 4x8 sheets",
+      "source": "Reconciled orthogonal route from Door 4 hatch East edge (124\",74\") -> (174\",74\") -> North 30\"x30\" platform edge (174\",213.5\") = 189.5\" = 15.8 ft <= 20.0 ft (2025 CMC 304.4)",
+      "date": "2026-11-22"
     },
     "walkway_min_width_in": {
       "value": 24.0,
       "measure_boundary": "clear_between_casings",
       "verified": "LOCKED",
-      "source": "CMC 304.4 (30\" unobstructed passage clearance)",
-      "date": "2026-11-19"
+      "source": "2025 CMC 304.4.2 (24\" continuous solid flooring + 30\" unobstructed passage clearance; never 3/8\" plywood)",
+      "date": "2026-11-22"
     },
     "service_platform_in": {
       "value": [
@@ -107,41 +130,61 @@
       ],
       "measure_boundary": "clear_between_casings",
       "verified": "LOCKED",
-      "source": "CMC 304.4.3 (confirm vibration mount requirements w/ NEXT; NEXT handles install)",
-      "date": "2026-11-19"
+      "source": "2025 CMC 304.4.3 (North service face of F1 in SW Dining; confirm whether furnace needs vibration pads isolation)",
+      "date": "2026-11-22"
     }
   },
   "enclosure_rules": {
+    "roof_geometry": "FLAT_LOW_SLOPE_ROOF_ZERO_NEW_PENETRATIONS",
+    "sidewall_exhaust_rule": "Horizontal sidewall exhaust only (>= 1/4\"/ft upward pitch; 80% Cat I requires listed power venter per Carrier II810SA-05 p. 22 & 2025 SFMC 802.8 >= 4 ft from interior lot line, or 95%+ Cat IV PVC direct-vent / heat pump)",
     "fire_rating_gate": "UNVERIFIED_HOLD",
     "fixed_frame_seal": "3/8\" backer rod + paintable sealant",
-    "ledge_weatherstrip": "Continuous 1/2\" × 1/8\" closed-cell on 1×2 ledges (clean of paint/caulk)",
+    "ledge_weatherstrip": "Continuous 1/2\" x 1/8\" closed-cell on 1x2 ledges (clean of paint/caulk)",
     "lid_seam": "Uncaulked operable perimeter seam (test-open twice)",
-    "lid_insulation": "2 unfaced R-matched batts (12-5/8\" × 37-1/4\") + 3 loose 16-ga wire loops + 6 screw eyes (<= 1/2\" shank)",
+    "lid_insulation": "2 unfaced R-matched batts (12-5/8\" x 37-1/4\") + 3 loose 16-ga wire loops + 6 screw eyes (<= 1/2\" shank)",
     "insulation_dam": "4-sided plywood dam standing 2\" above loose-fill insulation",
-    "lid_finish": "Proposed ~1-1/2\" recessed 3/4\" ply lid (PENDING OWNER OK) + compression latches outside 24\"×36\" clear",
-    "temp_bedroom_closet_hold": "KEEP OPEN until LV switch cable AND permanent 24\"×36\" hatch exist",
-    "roof_leak_gate": "Active roof/attic water leak must be resolved before enclosing work",
+    "lid_finish": "Proposed ~1-1/2\" recessed 3/4\" ply lid (PENDING OWNER OK) + compression latches outside 24\"x36\" clear",
+    "temp_bedroom_closet_hold": "KEEP OPEN until LV switch cable AND permanent 24\"x36\" hatch exist",
+    "roof_leak_gate": "Active flat-roof/attic water leak must be resolved before enclosing work",
     "b_vent_clearance_min_in": 1.0
   },
   "electrical_rules": {
-    "light": "Entrance-switched enclosed LED utility light (retain landing light)",
-    "gfci_outlet": "120V GFCI within 25 ft of furnace (ideally at 30\"×30\" platform), wired live on line side independent of furnace disconnect",
+    "light": "Entrance-switched enclosed LED utility light (retain landing light; 2025 CMC 304.4.4)",
+    "gfci_outlet": "120V GFCI within 25 ft of furnace (at 30\"x30\" North platform, 1.6 ft from F1), wired live on line side independent of furnace disconnect (CEC 210.63)",
     "furnace_disconnect": "Dedicated furnace circuit + disconnect in sight"
   },
   "flagged_clashes": [
     {
       "id": "clash-attic-location",
       "severity": "HIGH",
-      "en": "The common landing outside Front Door 4 is selected. Confirm exact markout, joist bay, framing and ceiling assembly before cutting or buying the hatch kit.",
-      "es": "Se eligió el descanso común afuera de la puerta 4. Confirmar trazo exacto, claro y refuerzo entre vigas, y sistema del techo antes de cortar o comprar el kit."
+      "en": "The common landing outside Front Door 4 is selected and reconciled with F1 in SW Dining (X=174\", Y=258\"; 15.8 ft <= 20.0 ft 24\" pathway). Confirm exact markout, joist bay B, framing, and fire-rating before cutting.",
+      "es": "Se eligió el descanso común afuera de Puerta 4 conciliado con F1 en Comedor SO (X=174\", Y=258\"; pasillo 24\" de 15.8 ft <= 20.0 ft). Confirmar trazo exacto, claro entre vigas B y resistencia al fuego antes de cortar."
+    },
+    {
+      "id": "clash-attic-flat-roof-sidewall",
+      "severity": "HIGH",
+      "en": "Unit 4 has a flat roof (66\" clear attic cavity) with an active leak hold: ZERO new roof penetrations. Furnace flue must exit horizontally out exterior sidewall per 2025 SFMC 802.8 (>= 4 ft from interior lot line).",
+      "es": "Unidad 4 tiene techo plano (66\" libres en ático) con gotera activa en pausa: CERO penetraciones en techo. El escape debe salir horizontal por muro exterior según SFMC 802.8 (>= 4 ft de colindancia)."
     },
     {
       "id": "clash-attic-joist-bay",
       "severity": "HIGH",
-      "en": "Joist bay width B and overhead framing/wires/pipes are MEASURE ON SITE. Never shrink 24\" × 36\" finished clear.",
-      "es": "Ancho de claro entre vigas B e instalaciones arriba: MEDIR EN OBRA. Nunca reducir el libre terminado de 24\" × 36\"."
+      "en": "Joist bay width B and overhead framing/wires/pipes are MEASURE ON SITE. Never shrink 24\" x 36\" finished clear.",
+      "es": "Ancho de claro entre vigas B e instalaciones arriba: MEDIR EN OBRA. Nunca reducir el libre terminado de 24\" x 36\"."
     }
   ],
   "field_overrides": [],
-  "pins": []
+  "pins": [
+    {
+      "id": "u4-auto-1795396710261",
+      "author": "Tisa",
+      "timestamp": "2026-11-22T17:18:30-08:00",
+      "intent": "propose_edit",
+      "cx": 0.353,
+      "cy": 0.779,
+      "rx": 0.03,
+      "ry": 0.03,
+      "note": "Reconciled: SW Dining platform & HVAC location (X=174\", Y=258\"; 15.8 ft 24\" pathway)"
+    }
+  ]
 }
