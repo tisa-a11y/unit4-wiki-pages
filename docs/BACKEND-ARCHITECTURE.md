@@ -76,7 +76,7 @@ flowchart TD
 - **Deployed Script (Mac mini):** `/Users/tisavo/.local/share/unit4-intake/mini_unit4_live_server.py`
 - **Canonical SMB Source:** `work-control/unit4-gemini-live-mini-r5/mini_unit4_live_server.py`
 - **Knowledge Compiler:** `work-control/unit4-gemini-live-mini-r5/build_r8_knowledge.py`
-- **Unit Test Suite:** `work-control/unit4-gemini-live-mini-r5/test_voice_r8_server.py` (`5/5` tests `OK`)
+- **Unit Test Suite:** `work-control/unit4-gemini-live-mini-r5/test_voice_r8_server.py` (`8/8` tests `OK`)
 - **Public Funnel Base URL:** `https://mac-mini.tailcf4007.ts.net/api/unit4`
 
 ### 2.1 HTTP Endpoints & Wire Schemas on `:8791`
@@ -84,33 +84,40 @@ flowchart TD
 | Method & Path | Auth Header | Purpose | Request / Query Schema | Response Contract |
 |---|---|---|---|---|
 | `OPTIONS /api/unit4/*` | None | CORS & Private Network Access preflight | `Origin`, `Access-Control-Request-Method`, `Access-Control-Request-Private-Network: true` | HTTP `204 No Content` with `Access-Control-Allow-Origin`, `Access-Control-Allow-Methods`, `Access-Control-Allow-Headers`, and `Access-Control-Allow-Private-Network: true` |
-| `GET /api/unit4/healthz` | None (or `X-Unit4-Key`) | Service health, R8 capabilities & counts | None | HTTP `200 OK`: `{"ok": true, "release": "r8-voice-15tools-knowledge-plan-edits", "allowedRoomsCount": 16, "voiceToolsCount": 15, "knowledgeRecordCount": 37, "interactivePlansCount": 6}` |
+| `GET /api/unit4/healthz` | None (or `X-Unit4-Key`) | Service health, R9 capabilities & counts | None | HTTP `200 OK`: `{"ok": true, "version": "r9-voice-18tools-persistent-live-ai", "galleryEndpoint": "/api/unit4/gallery", "galleryUploadEndpoint": "/api/unit4/gallery/upload", "allowedGalleries": ["renders", "references"], "allowedRooms": [...], "voiceTools": [...18 tools...]}` |
+| `POST /api/unit4/voice-token` | None | Mint single-use Gemini Live ephemeral token (`<450ms` direct cached-model fast path) | JSON body: `{"uiLanguage": "en\|es"}` | HTTP `200 OK`: `{"ok": true, "token": "auth_tokens/...", "model": "models/gemini-3.8-live", "uiLanguage": "en\|es", "setup": {"realtimeInputConfig": {"automaticActivityDetection": {"startOfSpeechSensitivity": "START_SENSITIVITY_HIGH", "endOfSpeechSensitivity": "END_SENSITIVITY_HIGH", "prefixPaddingMs": 100, "silenceDurationMs": 450}}, "systemInstruction": {...}, "tools": [...18 tools...]}, "wsUrl": "wss://..."}` |
 | `GET /api/unit4/knowledge` | `X-Unit4-Key` | Search scrubbed project knowledge & interactive plan directory | Query params: `q` (search string), `room` (optional room slug), `scope` (`all`, `specs`, `checklists`, `interactive_plans`, `architecture`, `triage`), `format` (`all`, `md`, `json`, `html`, `pdf`), `limit` (1–50) | HTTP `200 OK`: `{"ok": true, "schema": "unit4-knowledge-query-v1", "count": 2, "totalMatched": 2, "results": [...], "interactivePlans": {...}, "allowedRooms": [...]}` (strictly `0` currency symbols, `0` secrets) |
 | `POST /api/unit4/wiki-intake/voice-memo` (also `/api/unit4/intake`) | `X-Unit4-Key` | Field notes, voice memos, multi-photo/camera capture & structured `proposed_edit` intake | JSON body: `{"room": "<slug>", "author": "<name>", "note": "<text>", "transcript": "<text>", "photo": {"name": "...", "type": "image/jpeg", "size": 12345, "data": "data:image/...;base64,..."} or "<data-url>", "photos": [...], "proposed_edit": {"target_type": "interactive_plan|room_spec|checklist", "plan_id": "...", "element_id": "...", "proposed_value": "...", "measure_boundary": "..."}}` | HTTP `200 OK`: `{"ok": true, "submission_id": "u4-...", "room": "...", "triage_markdown_path": "...", "saved_photos": [...], "interactive_plan_hint": {...}}` |
 | `POST /api/unit4/product-lookup` | `X-Unit4-Key` | Tile & material lookup by name, HTTPS URL, or live camera photo with matching trim & zero-metal validation | JSON body: `{"mode": "query_search|url_search|camera_vision", "query": "...", "url": "https://...", "image_data_url": "data:image/...", "room": "kitchen-oven-range", "check_matching_trim_parts": true, "include_retail_estimate": false}` | HTTP `200 OK`: `{"ok": true, "mode": "...", "products": [{"name": "...", "nominal_size_in": "...", "actual_size_in": "...", "thickness_in": "...", "material": "...", "edge_profile_options": [...], "matching_trim_parts": [...], "recommended_trim_options": [...], "retail_estimate": null}], "zero_metal_trim_guidance": "..."}` |
-| `POST /api/unit4/gemini-live/session` & `/api/unit4/voice-turn` | `X-Unit4-Key` | Bidirectional Gemini Live 3.1 Flash voice session & tool execution | Audio PCM/WebM chunks or text turn + active room context | Live audio/transcript stream + executed tool results across 15 declared voice tools |
+| `GET /api/unit4/gallery` | None | Fetch per-room dual galleries (`renders` = Rendered Images & Mockups, `references` = Reference Photos) | Query params: `room=<room_key>` (one of 16 `ALLOWED_ROOMS` or `all`), optional `gallery=renders\|references` | HTTP `200 OK`: `{"ok": true, "schema": "unit4-room-gallery-v2-dual", "room": "...", "galleryFilter": "all", "allowedGalleries": ["renders", "references"], "rendersCount": 1, "referencesCount": 1, "count": 2, "renders": [...], "references": [...], "items": [...], "photos": [...], "conceptRenders": [...]}` (`400` on invalid room or gallery key) |
+| `POST /api/unit4/gallery/upload` | None | Upload an image to a room's `renders` or `references` gallery on Drive-synced SMB storage without touching locked `.md` specs | Supports `application/json` (`{"room": "<room_key>", "gallery": "renders\|references", "caption": "...", "author": "...", "filename": "...", "image_base64": "data:image/...;base64,..."}`) or `multipart/form-data` (`room`, `gallery`, `caption`, `author`, file `file`/`image`/`photo`) | Validates `room` in `ALLOWED_ROOMS`, `gallery` in `{"renders", "references"}`, magic-byte MIME (`image/jpeg`, `image/png`, `image/webp`, `image/gif`, `image/heic`), max `15 MB`, scrubs currency/private strings, writes `<Unit 4 Root>/room-gallery/<room>/<gallery>/<filename>` + atomic in-place `gallery-manifest.json`, returns HTTP `200 OK` with `item`, `renders`, `references` |
+| `GET /api/unit4/gallery/file/<room_key>/<gallery>/<filename>` (and `/file/<room_key>/<filename>`) | None | Serve binary gallery image with traversal guard & PNA/CORP headers | URL path segments `<room_key>`, `<gallery>` (`renders\|references`), `<filename>` (`^[A-Za-z0-9][A-Za-z0-9._-]{0,120}`) | HTTP `200 OK` binary image with `Content-Type`, `Cache-Control: public, max-age=3600`, `X-Content-Type-Options: nosniff`, `Cross-Origin-Resource-Policy: cross-origin`, `Access-Control-Allow-Origin`, `Access-Control-Allow-Private-Network: true` (`400` on traversal/invalid key, `404` if missing) |
+| `POST /api/unit4/gemini-live/session` & `/api/unit4/voice-turn` | `X-Unit4-Key` | Bidirectional Gemini Live 3.8 Live voice session & tool execution | Audio PCM/WebM chunks or text turn + active room context | Live audio/transcript stream + executed tool results across 18 declared R9 voice tools |
 
 ### 2.2 All 16 Allowlisted Rooms (`ALLOWED_ROOMS`)
 
-`home`, `roadmap`, `decisions`, `kitchen`, `kitchen-oven-range`, `bathroom`, `electrical`, `laundry`, `bedroom`, `living-dining`, `hallway`, `paint-floors`, `hvac`, `attic-access`, `permits`, `agents`.
+`home`, `roadmap`, `decisions`, `kitchen`, `kitchen-oven-range`, `kitchen-sink-north`, `bathroom`, `electrical`, `laundry`, `bedroom`, `living-dining`, `hallway`, `paint-floors`, `hvac`, `attic-access`, `agents`.
 
-### 2.3 All 15 Voice Agent Tools (`VOICE_TOOLS_DECLARATION`)
+### 2.3 All 18 Voice Agent R9 Tools (`VOICE_TOOLS_DECLARATION`)
 
-1. `navigate_to_room` — Switch active wiki room or interactive plan view.
-2. `scroll_to_section` — Scroll human view to a named section or heading.
-3. `highlight_spec_item` — Highlight a specific dimension, checklist item, or callout.
-4. `open_pdf_sheet` — Open an official EN or Mexican Spanish (`ES`) 1-page or 2-page PDF drawing.
-5. `switch_language` — Toggle between English (`EN`) and Mexican Spanish (`Español (MX)`).
-6. `capture_field_note` — Log a timestamped field observation into SQLite WAL and `to-triage/`.
-7. `capture_site_measurement` — Log a field measurement with explicit `measure_boundary` (`wall_to_wall`, `to_outer_casing`, `clear_between_casings`, `aff`, `subfloor`).
-8. `flag_blocker_or_question` — Flag an open site question or trade conflict for PM triage.
-9. `check_room_status` — Read current room progress and open holds from `STATUS-NOW.md` and room `SPEC.md`.
-10. `check_appliance_clearance` — Cross-check Viking range, Zephyr hood, Bosch dishwasher, or Sharp Drawer clearances.
-11. `check_code_requirement` — Query San Francisco / 2025 California code rules (NEC, CPC, CMC, CRC, TCNA).
-12. `request_photo_attachment` — Prompt the user's browser to attach a photo or trigger the device camera (`#u4PhotoTriggerBtn` / `#u4CameraTriggerBtn`).
-13. `summarize_shift_checklist` — Read out active room checklist items and verification photo gates.
-14. `query_wiki_and_backend_knowledge` — Search all compiled records (`START-HERE.md`, room `SPEC.md`s, `CHECKLIST.md`s, JSON plan data, PDFs, frontend style guide, and backend runbooks).
-15. `propose_wiki_or_plan_edit` — Capture a structured edit proposal (`target_type`, `plan_id`, `element_id`, `field_key`, `proposed_value`, `measure_boundary`, `reason`) into `to-triage/` with an automatic `:8444` interactive-plan routing hint.
+1. `query_todoist_cards` — Search and filter Unit 4 Todoist cards and synchronized wiki checklist/spec items by room, keyword, card ID, or status (`all`, `open`, `done`).
+2. `navigate_room` — Open an approved Unit 4 room or overview page and return its governing spec, checklist, and document list.
+3. `focus_section` — Scroll to and focus a section heading inside the current room page.
+4. `open_document` — Open an approved crew PDF drawing or plan in the in-page viewer (optionally at a specific page).
+5. `go_to_document_page` — Scroll the currently open in-page PDF document to a specific 1-based page number.
+6. `read_active_document` — Read the full governing spec, checklist, or extracted PDF page text currently open on screen.
+7. `set_language` — Switch the wiki UI chrome between English (`en`) and Mexican Spanish (`es`) without clearing drafts.
+8. `fill_draft_note` — Populate a visible draft note in the room Field Reports form or Quick-Post panel verbatim in the speaker's language.
+9. `submit_voice_memo` — Route a confirmed note verbatim into Google Drive `to-triage/` after mandatory 2-step readback confirmation.
+10. `show_room_renders` — Display clickable Unit 4 concept renders / visual mockups in chat and on the room page.
+11. `get_pm_standup_brief` — Fetch the live Unit 4 Project Manager standup brief from Mac mini (`STATUS-NOW.md` excerpt, Pass 1 new `to-triage/` items, Pass 2 `_deferred/` items, and room checklist counts).
+12. `load_pm_skill` — Load a Unit 4 Project Manager or trade specialist `SKILL.md` playbook by slug from the synced Unit 4 workspace.
+13. `apply_pm_action` — Stage a new unapproved task strictly in Todoist `New Tasks (need triage)` (`6hvgpr6jg95wPchf`) with a `to-triage/` audit receipt (`X-Unit4-PM-Pin` required).
+14. `query_wiki_and_backend_knowledge` — Search all compiled records (`START-HERE.md`, room `SPEC.md`s, `CHECKLIST.md`s, 6 JSON plan models, PDFs, frontend style guide, and backend runbooks).
+15. `propose_wiki_or_plan_edit` — Capture a structured edit proposal (`room`, `edit_kind`, `target_item`, `new_value`, `old_value`, `measure_boundary`, `author`, `verbatim_request`, `spoken_confirmation`) into `to-triage/` with an automatic `:8444` interactive-plan routing hint.
+16. `show_plan_view` — Open or switch to one of the 6 interactive plans (`kitchen-floor-plan`, `kitchen-west-ks4`, `kitchen-electrical`, `attic-hatch`, `hvac-layout`, `murphy-door`) and/or switch its active wall elevation (`south`, `east`, `west`, `north`, `plan`, `all`), `step` number, or `zoom` level.
+17. `update_plan_state` — Live-edit or adjust a dimension, slider, option toggle, or movable node (`action`, `target`, `value`) on the currently active interactive plan in real time.
+18. `capture_screen_snapshot` — Take a live visual screenshot / snapshot (`target`, `label`) of the currently visible interactive plan, SVG drawing, PDF page, or room view so it appears in the conversation and the Live AI can inspect what is on screen.
 
 ### 2.4 Product Lookup SSRF Protection & Zero-Metal Edge Rule
 
