@@ -1,19 +1,11 @@
-# Acceso al ático
+# Acceso al Ático y Pasillo
 
-## Concepto
-La primera prioridad es trazar la escotilla permanente en el descanso de la escalera común afuera de la puerta principal 4, al oeste del pasillo. La abertura terminada tendrá 24" × 36" libres. En el ático: pasarela de madera, plataforma nivelada junto al calefactor, luz y contacto. Abrir el [Plano Interactivo de Escotilla Permanente](./plans/attic-hatch/index.html?lang=es) o revisar el [Plano de Calefacción y Ductos](./plans/hvac-layout/index.html?lang=es).
+> **Esperar al recorrido del lunes 23 de noviembre (2:00–4:00 p.m.):** El sitio elegido es el descanso común afuera de la **Puerta Principal 4** (`24" × 36"` libres). Solo fotografiar el trazo — **no cortar el plafón todavía**. [**Abrir Plano Interactivo de Ático y HVAC →**](#plan:attic-hvac) · [← Resumen de Calefacción y Subpanel](#hvac)
 
-## Cinco reglas antes de cortar
-1. **Trazar la abertura y documentar la ruta.** John marca el rectángulo libre terminado y las distancias a bordes fijos. Fotografiar las vigas, el claro, los cables y tuberías arriba, y la maniobra de subida y giro. Esperar la aprobación del sistema de techo, protección contra incendio y refuerzo antes de cortar.
-2. **Sellar y aislar la escotilla.** Seguir la guía de la escotilla del ático.
-3. **Mantener libre el paso.** Nada invade el paso de 24" × 36".
-4. **Dejar abierto el techo del clóset de la recámara** hasta que esté el cable del apagador y exista la escotilla.
-5. **Primero reparar goteras.** No cerrar nada mientras el techo gotee.
+<h2 id="sec-attic-notes">Cinco Reglas de Construcción (Al Liberarse)</h2>
 
-**Equipo de ozono:** Falta colocarlo en el ático. Mantenerlo apagado y desconectado al colocarlo.
-
-## Pasarela, plataforma y corriente
-- **Pasarela:** 24" de ancho, 20 pies como máximo. OSB de 23/32" o triplay de 3/4". Nunca de 3/8".
-- **Plataforma:** nivelada, 30" × 30", del lado de servicio del calefactor.
-- **Luz:** LED con apagador en la escotilla.
-- **Contacto:** GFCI de 120V a no más de 25 pies. Sigue con corriente cuando el calefactor está apagado.
+1. **Cortafuego y vigas primero:** Si el descanso común requiere escotilla cortafuego, pedir una puerta cortafuego listada que deje **`24" × 36"` libres reales** en vez del kit de madera (no usar puertas nominales `24"×36"` que reduzcan el claro).
+2. **Sello de aire y tapa aislada:** Sellar el marco fijo con cordón de `3/8"`; pegar empaque continuo de espuma de `1/2" × 1/8"` sobre tiras `1×2` limpias; dejar la junta de la tapa **sin sellador** (probar abrir dos veces); sujetar `2` colchonetas de fibra sin papel con `3` lazos sueltos de alambre calibre `16`.
+3. **Dique en 4 lados y broches fuera del claro:** Armar un dique de triplay en `4` lados `2"` arriba del aislante suelto y montar los broches **fuera** del paso libre de `24" × 36"`.
+4. **Pasillo y plataforma de `30" × 30"`:** Atornillar un pasillo continuo de `24"` (`15.8 pies`, `3` hojas de OSB `23/32"` o triplay `3/4"` — nunca `3/8"`) hasta la plataforma Norte nivelada de `30" × 30"` (`1` hoja; NEXT incluye las gomas antivibración).
+5. **Dejar abierto el clóset de recámara:** Mantener abierta la abertura temporal del clóset hasta terminar tanto el cable de bajo voltaje como la escotilla permanente de `24" × 36"` ([tarea](https://app.todoist.com/app/task/6j3Rf89g8M6hPPx7)), y verificar seca la gotera del techo plano antes de aislar.

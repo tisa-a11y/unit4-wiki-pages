@@ -31,5 +31,43 @@
       "en": "Close the bedroom closet ceiling only after the cable and the hatch are in",
       "es": "Cerrar el techo del clóset solo cuando estén el cable y la escotilla"
     }
+  ],
+  "items": [
+    {
+      "id": "attic-access-r5-01",
+      "done": true,
+      "en": "Spot & size set: 24\"×36\" clear hatch outside Front Door 4 + 15.8 ft wood walkway",
+      "es": "Sitio y medida listos: escotilla de 24\"×36\" libres afuera de Puerta 4 + pasillo de 15.8 pies"
+    },
+    {
+      "id": "attic-access-r5-02",
+      "done": false,
+      "en": "Monday, Nov 23: Confirm Door 4 markout, ceiling fire-rating, joist spacing & open bedroom-closet ceiling (no cuts yet)",
+      "es": "Lunes 23 nov: Confirmar trazo afuera de Puerta 4, cortafuego, vigas y clóset abierto (sin cortar todavía)"
+    },
+    {
+      "id": "attic-access-r5-03",
+      "done": false,
+      "en": "Confirm flat-roof leak repair is dry, then build 24\"×36\" clear hatch, 4-sided dam, weatherstrip & unfaced batts",
+      "es": "Confirmar seca la gotera del techo plano y armar escotilla 24\"×36\" libres, dique en 4 lados, empaque y colchonetas"
+    },
+    {
+      "id": "attic-access-r5-04",
+      "done": false,
+      "en": "Install continuous 24\" wood walkway (15.8 ft = 3 sheets of 23/32\" OSB or 3/4\" plywood; never 3/8\")",
+      "es": "Instalar pasillo continuo de 24\" (15.8 pies = 3 hojas de OSB 23/32\" o triplay 3/4\"; nunca 3/8\")"
+    },
+    {
+      "id": "attic-access-r5-05",
+      "done": false,
+      "en": "Build level 30\"×30\" North platform (NEXT supplies pads) + switched LED light & 120V GFCI within 25 ft",
+      "es": "Construir plataforma Norte de 30\"×30\" (NEXT incluye gomas) + luz LED con apagador y GFCI 120V a ≤25 pies"
+    },
+    {
+      "id": "attic-access-r5-06",
+      "done": false,
+      "en": "Close bedroom-closet ceiling only after low-voltage cable, furnace passage & permanent hatch are finished",
+      "es": "Cerrar techo del clóset solo cuando estén listos el cable de bajo voltaje, el paso del equipo y la escotilla"
+    }
   ]
 }

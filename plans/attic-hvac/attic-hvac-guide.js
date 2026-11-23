@@ -1,21 +1,23 @@
 /* ============================================================================
-   Attic Furnace, 24" Pathway & Reactive Manual D Ducts — Unified Guide (R3)
-   Reconciled w/ Tisa Pins u4-auto-1795396710261 (SW Dining F1 + 30"×30" Platform)
-   & u4-auto-1795396857428 (Flat Roof + Sidewall Exhaust Exit + 2025 SFMC §802.8)
-   True-Scale Unit 4 Map · All 6 Nodes 2D Draggable · Cross-Plan Sync w/ Attic Hatch
-   Zero External CDNs · Zero Prices · Zero Backend Clutter · EN / MX-ES
+   Attic Hatch, Walkway, Furnace & Ducts — Streamlined Unified Plan
+   One calm Classic Old Wiki 4-step guide:
+     1. Floor Plan & Ducts (draggable F1/ducts + clickable 24"x36" Door 4 hatch)
+     2. 24"x36" Hatch & Seals (side-by-side landing photo + framing & seal diagram)
+     3. Flat Roof & Sidewall Vent (66" flat cavity + sidewall exit check)
+     4. Monday Walkthrough (NEXT vs. Crew phases + 4 Monday Nov 23 questions)
+   Zero External CDNs · Zero Prices · Zero Code Soup · EN / MX-ES
    ============================================================================ */
 (function () {
   "use strict";
 
   var STEPS = [
-    { id: "layout", en: "1. Unified Floor Plan, 24\" Path & Ducts", es: "1. Planta Unificada, Pasillo 24\" y Ductos" },
-    { id: "hatch", en: "2. 24\"×36\" Hatch & 5 Seals", es: "2. Escotilla 24\"×36\" y 5 Sellos" },
-    { id: "section", en: "3. Flat Roof & Sidewall Vent Code", es: "3. Techo Plano y Salida Lateral" },
-    { id: "walkthrough", en: "4. Mon Nov 23 & Hold Gates", es: "4. Visita Lunes 23 y Candados" }
+    { id: "layout", en: "1. Floor Plan & Ducts", es: "1. Planta y Ductos" },
+    { id: "hatch", en: "2. 24\"×36\" Hatch & Seals", es: "2. Escotilla y Sellos" },
+    { id: "section", en: "3. Flat Roof & Sidewall Vent", es: "3. Techo Plano y Salida" },
+    { id: "walkthrough", en: "4. Monday Walkthrough", es: "4. Visita del Lunes" }
   ];
 
-  // Uniform true-scale Unit 4 floor plan geometry (inches, N=0..298", W=0..508")
+  // Uniform true-scale Unit 4 floor plan geometry (inches, N=0..298", W=0..508", scaleX === scaleY = 0.86 px/in)
   var SC = 0.86;
   var OX = 24;
   var OY = 38;
@@ -23,25 +25,24 @@
   function py(yIn) { return +(OY + yIn * SC).toFixed(1); }
 
   var HATCH_DOOR4_IN = { x: 112, y: 74, w: 24, h: 36 };
-  var HATCH_HALL_IN  = { x: 204, y: 108, w: 36, h: 24 };
+  var HATCH_HALL_IN = { x: 204, y: 108, w: 36, h: 24 };
 
-  // Reconciled R3 Defaults (Tisa Pin u4-auto-1795396710261 -> F1 at X=174", Y=258" in SW Dining!)
   var RECONCILED_DEFAULTS = {
-    f1:  { x: 174, y: 258 }, // Reconciled SW Dining spot (30"x30" North platform at X=174, Y=228.5; 15.8 ft 24" pathway!)
-    r1:  { x: 248, y: 114 }, // Central Hall ceiling return (accessible filter)
-    s1:  { x: 168, y: 126 }, // Hall ceiling at Kitchen threshold
-    s2:  { x: 312, y: 212 }, // Living-room side at midpoint of Dining/Living pocket opening
-    s3:  { x: 386, y: 116 }, // Bedroom SW corner by Bedroom entry (cleanly separated from JD-1)
-    jd1: { x: 334, y: 80 }   // Short independent acoustic jump duct across Bedroom-to-Hall wall
+    f1: { x: 174, y: 258 },
+    r1: { x: 248, y: 114 },
+    s1: { x: 168, y: 126 },
+    s2: { x: 312, y: 212 },
+    s3: { x: 386, y: 116 },
+    jd1: { x: 334, y: 80 }
   };
 
   function cloneDefaults() {
     return {
-      f1:  { x: RECONCILED_DEFAULTS.f1.x,  y: RECONCILED_DEFAULTS.f1.y },
-      r1:  { x: RECONCILED_DEFAULTS.r1.x,  y: RECONCILED_DEFAULTS.r1.y },
-      s1:  { x: RECONCILED_DEFAULTS.s1.x,  y: RECONCILED_DEFAULTS.s1.y },
-      s2:  { x: RECONCILED_DEFAULTS.s2.x,  y: RECONCILED_DEFAULTS.s2.y },
-      s3:  { x: RECONCILED_DEFAULTS.s3.x,  y: RECONCILED_DEFAULTS.s3.y },
+      f1: { x: RECONCILED_DEFAULTS.f1.x, y: RECONCILED_DEFAULTS.f1.y },
+      r1: { x: RECONCILED_DEFAULTS.r1.x, y: RECONCILED_DEFAULTS.r1.y },
+      s1: { x: RECONCILED_DEFAULTS.s1.x, y: RECONCILED_DEFAULTS.s1.y },
+      s2: { x: RECONCILED_DEFAULTS.s2.x, y: RECONCILED_DEFAULTS.s2.y },
+      s3: { x: RECONCILED_DEFAULTS.s3.x, y: RECONCILED_DEFAULTS.s3.y },
       jd1: { x: RECONCILED_DEFAULTS.jd1.x, y: RECONCILED_DEFAULTS.jd1.y }
     };
   }
@@ -53,21 +54,35 @@
   if (isFinite(bFx) && bFx >= 160 && bFx <= 430) bootNodes.f1.x = Math.round(bFx);
   if (isFinite(bFy) && bFy >= 108 && bFy <= 274) bootNodes.f1.y = Math.round(bFy);
 
+  function resolveInitialStep(raw) {
+    var s = String(raw || "").toLowerCase().trim();
+    var map = {
+      "1": "layout", "plan": "layout", "attic": "layout", "ducts": "layout", "walkway": "layout", "pathway": "layout",
+      "2": "hatch", "hatch": "hatch", "spot": "hatch", "framing": "hatch", "seal": "hatch", "lid": "hatch",
+      "3": "section", "section": "section", "vent": "section", "roof": "section", "sidewall": "section", "height": "section",
+      "4": "walkthrough", "walkthrough": "walkthrough", "mon": "walkthrough", "monday": "walkthrough", "gates": "walkthrough", "checklist": "walkthrough"
+    };
+    return map[s] || "layout";
+  }
+
   var state = {
-    step: "layout",
+    step: resolveInitialStep(bootParams.get("step")),
     nodes: bootNodes,
     hatchLocation: (bootParams.get("loc") || "").toLowerCase() === "hall" ? "hall" : "door4",
-    dischargeDir: "right",          // "right" (Supply East -> / Return West <-) | "left" (Supply West <- / Return East ->)
-    ductMode: "trunk",              // "trunk" (Trunk & Branch — Manual D Rec.) | "radial" (Extended Plenum / Radial Wye)
-    ventMode: bootParams.get("vent") || "power_venter", // "power_venter" | "cat4_pvc" | "gravity_unassisted"
-    exitWall: bootParams.get("ewall") || "south",       // "south" (Verify >=4 ft SF lot line!) | "west" (Rear yard >=4 ft clear)
-    southLotSetbackFt: "unknown",   // "unknown" | "gte4" | "lt4"
+    fireRating: "unknown",
+    joistBay: "unknown",
+    dischargeDir: "right",
+    ductMode: "trunk",
+    ventMode: bootParams.get("vent") || "power_venter",
+    exitWall: bootParams.get("ewall") || "south",
+    southLotSetbackFt: "unknown",
     gfciOffsetFt: 3,
     flueClearIn: 1.5,
     activePreset: (bootNodes.f1.x === 174 && bootNodes.f1.y === 258) ? "reconciled" : "custom",
+    moreOptsOpen: false,
     dragActive: false,
     equipOpen: false,
-    qChecks: { q1: false, q2: false, q3: false, q4: false, q5: false, q6: false, q7: false }
+    qChecks: { q1: false, q2: false, q3: false, q4: false }
   };
 
   function isEs() {
@@ -140,7 +155,6 @@
     return out.join(" ");
   }
 
-  // Wall-respecting orthogonal 24" continuous walkway (identical to attic-human-guide.js!)
   function computeWalkwayPoints(f1) {
     var hatch = activeHatchBox();
     var platCenterY = f1.y - 29.5;
@@ -152,35 +166,35 @@
       if (Math.abs(f1.x - hatch.x) <= 18) {
         return [
           { x: hatch.x, y: hatch.y + hatch.h / 2 },
-          { x: f1.x,    y: hatch.y + hatch.h / 2 },
-          { x: f1.x,    y: platEdgeY }
+          { x: f1.x, y: hatch.y + hatch.h / 2 },
+          { x: f1.x, y: platEdgeY }
         ];
       }
       var turnX = f1.x >= hEast ? f1.x : Math.max(166, f1.x);
       var startX = f1.x >= hatch.x ? hEast : (hatch.x - hatch.w / 2);
       return [
         { x: startX, y: hallSpineY },
-        { x: turnX,  y: hallSpineY },
-        { x: turnX,  y: platEdgeY }
+        { x: turnX, y: hallSpineY },
+        { x: turnX, y: platEdgeY }
       ];
     }
 
-    var hatchEastX = hatch.x + hatch.w / 2; // 124"
-    var hatchMidY = hatch.y;                // 74"
+    var hatchEastX = hatch.x + hatch.w / 2;
+    var hatchMidY = hatch.y;
     if (f1.x >= 162 && f1.x <= 192 && platEdgeY >= hatchMidY) {
       return [
         { x: hatchEastX, y: hatchMidY },
-        { x: f1.x,       y: hatchMidY },
-        { x: f1.x,       y: platEdgeY }
+        { x: f1.x, y: hatchMidY },
+        { x: f1.x, y: platEdgeY }
       ];
     }
     var entryX = 170;
     return [
       { x: hatchEastX, y: hatchMidY },
-      { x: entryX,     y: hatchMidY },
-      { x: entryX,     y: hallSpineY },
-      { x: f1.x,       y: hallSpineY },
-      { x: f1.x,       y: platEdgeY }
+      { x: entryX, y: hatchMidY },
+      { x: entryX, y: hallSpineY },
+      { x: f1.x, y: hallSpineY },
+      { x: f1.x, y: platEdgeY }
     ];
   }
 
@@ -190,20 +204,16 @@
     }).join("");
   }
 
-  // Reactive Horizontal Sidewall Flue Route (Flat Roof -> Exit Out Sidewall + Code & Slope Check!)
   function computeSidewallFlue(f1) {
     var effectiveWall = (state.exitWall === "south" && state.southLotSetbackFt === "lt4") ? "west" : state.exitWall;
     var pts;
     if (effectiveWall === "west") {
-      // Route West above Kitchen/Dining ceiling cavity to West Rear-Yard Exterior Wall (avoiding Kitchen 6" hood chase at X=0..32, Y=155..190)
       if (f1.y >= 236) {
-        // South of Kitchen South wall (Y=234) -> Dining West exterior wall IS exposed to rear yard at X=147", Y=236..296"!
         pts = [
           { x: f1.x, y: f1.y + 8 },
-          { x: 147,  y: Math.max(246, Math.min(288, f1.y + 8)) }
+          { x: 147, y: Math.max(246, Math.min(288, f1.y + 8)) }
         ];
       } else {
-        // Route West across North Kitchen attic bay (Y=122", well North of Range Hood chase Y=171") to X=31.5" rear yard wall
         var safeY = Math.min(132, Math.max(114, f1.y));
         pts = [
           { x: f1.x, y: f1.y },
@@ -212,7 +222,6 @@
         ];
       }
     } else {
-      // Route straight South to South Exterior Wall (Y = 297.75")
       pts = [
         { x: f1.x, y: f1.y + 14.5 },
         { x: f1.x, y: 297.75 }
@@ -221,13 +230,9 @@
 
     var runIn = pathLenIn(pts);
     var runFt = +(Math.max(12, runIn) / 12).toFixed(1);
-    var minRiseIn = +(runFt * 0.25).toFixed(2); // >= 1/4" per linear ft upward pitch (Carrier II810SA-05 p. 22)
-    var straps = Math.max(1, Math.ceil(runFt / 5)); // Rigid metal straps <= 5 ft o.c.
-    // Inside 66" flat-roof attic: horizontal furnace is 14.19" high on 1.5" deck (~16" top), leaving ~50" vertical space for 1/4"/ft rise!
-    var headroomOk = (16 + minRiseIn + 8) <= 66;
+    var minRiseIn = +(runFt * 0.25).toFixed(2);
     var gravityIllegal = state.ventMode === "gravity_unassisted";
     var southLotBlocked = state.exitWall === "south" && state.southLotSetbackFt === "lt4";
-    var southLotUnverified = state.exitWall === "south" && state.southLotSetbackFt === "unknown";
 
     return {
       effectiveWall: effectiveWall,
@@ -236,15 +241,11 @@
       termPt: pts[pts.length - 1],
       runFt: runFt,
       minRiseIn: minRiseIn,
-      straps: straps,
-      headroomOk: headroomOk,
       gravityIllegal: gravityIllegal,
-      southLotBlocked: southLotBlocked,
-      southLotUnverified: southLotUnverified
+      southLotBlocked: southLotBlocked
     };
   }
 
-  // ── ACCA MANUAL D + CARRIER/BRYANT HORIZONTAL REACTIVE DUCTWORK ROUTING ──
   function computeReactiveDucts() {
     var n = state.nodes;
     var f1 = n.f1;
@@ -253,14 +254,14 @@
     var cabHalfW = 16.625;
     var plenumLen = 24;
     var supFlange = { x: f1.x + dir * cabHalfW, y: f1.y };
-    var supEnd    = { x: f1.x + dir * (cabHalfW + plenumLen), y: f1.y };
+    var supEnd = { x: f1.x + dir * (cabHalfW + plenumLen), y: f1.y };
     var retFlange = { x: f1.x - dir * cabHalfW, y: f1.y };
-    var retEnd    = { x: f1.x - dir * (cabHalfW + 12), y: f1.y };
+    var retEnd = { x: f1.x - dir * (cabHalfW + 12), y: f1.y };
 
     var vents = [
-      { id: "s1", name: "SA-1", pt: n.s1 },
-      { id: "s2", name: "SA-2", pt: n.s2 },
-      { id: "s3", name: "SA-3", pt: n.s3 }
+      { id: "s1", name: "S1", pt: n.s1 },
+      { id: "s2", name: "S2", pt: n.s2 },
+      { id: "s3", name: "S3", pt: n.s3 }
     ];
 
     var trunkSegs = [];
@@ -285,22 +286,14 @@
         };
         var pts = [collarPt, wyeExit, midPt, v.pt];
         var dStr = "M " + px(collarPt.x) + " " + py(collarPt.y) +
-          " L " + px(wyeExit.x) + " " + py(wyeExit.y) +
-          " Q " + px(midPt.x) + " " + py(midPt.y) + " " + px(v.pt.x) + " " + py(v.pt.y);
+                   " L " + px(wyeExit.x) + " " + py(wyeExit.y) +
+                   " Q " + px(midPt.x) + " " + py(midPt.y) + " " + px(v.pt.x) + " " + py(v.pt.y);
         var ang = Math.atan2(wyeExit.y - collarPt.y, wyeExit.x - collarPt.x) * 180 / Math.PI;
         branches.push({
-          id: v.id,
-          name: v.name,
-          d: dStr,
-          pts: pts,
-          ft: +(pathLenIn(pts) / 12).toFixed(1),
+          id: v.id, name: v.name, d: dStr, pts: pts, ft: +(pathLenIn(pts) / 12).toFixed(1),
           takeoff: collarPt,
-          damperPt: {
-            x: collarPt.x + (wyeExit.x - collarPt.x) * 0.72,
-            y: collarPt.y + (wyeExit.y - collarPt.y) * 0.72
-          },
-          damperAngle: ang,
-          isSideTakeoff: false
+          damperPt: { x: collarPt.x + (wyeExit.x - collarPt.x) * 0.72, y: collarPt.y + (wyeExit.y - collarPt.y) * 0.72 },
+          damperAngle: ang
         });
       });
     } else {
@@ -311,11 +304,7 @@
         if (along < -22) behind.push(v);
         else forward.push(v);
       });
-
-      if (forward.length === 0) {
-        forward = behind.slice();
-        behind = [];
-      }
+      if (forward.length === 0) { forward = behind.slice(); behind = []; }
 
       var avgY = forward.reduce(function (acc, v) { return acc + v.pt.y; }, 0) / forward.length;
       var trunkY = Math.max(96, Math.min(252, Math.round(avgY)));
@@ -337,9 +326,7 @@
       }
 
       var firstX = forward[0].pt.x;
-      var elbowX = supEnd.x + dir * 16;
-      if ((firstX - supEnd.x) * dir < 0) elbowX = supEnd.x + dir * 10;
-
+      var elbowX = supEnd.x + dir * ((firstX - supEnd.x) * dir < 0 ? 10 : 16);
       var takeoffs = [];
       var handled = {};
 
@@ -359,8 +346,7 @@
         } else {
           var dy1 = v.pt.y - trunkY;
           var lead = Math.min(28, Math.max(10, Math.abs(dy1) * 0.42));
-          var tkX1 = v.pt.x - dir * lead;
-          takeoffs.push({ tkPt: { x: tkX1, y: trunkY }, weight: 1, vent: v });
+          takeoffs.push({ tkPt: { x: v.pt.x - dir * lead, y: trunkY }, weight: 1, vent: v });
         }
       });
 
@@ -388,11 +374,7 @@
         var tk = takeoffs[ti];
         if (ti > 0) {
           var segPts = [curPt, tk.tkPt];
-          trunkSegs.push({
-            pts: segPts,
-            d: smoothCornerPath(segPts, 10),
-            strokeW: remWeight >= 2 ? 5.6 : 3.8
-          });
+          trunkSegs.push({ pts: segPts, d: smoothCornerPath(segPts, 10), strokeW: remWeight >= 2 ? 5.6 : 3.8 });
           curPt = tk.tkPt;
         }
         remWeight -= tk.weight;
@@ -404,13 +386,13 @@
             var ctrl = { x: (tk.wyeHub.x + cv.pt.x) / 2, y: tk.wyeHub.y };
             var bPts = [tk.tkPt, tk.wyeHub, cv.pt];
             var dStr = "M " + px(tk.wyeHub.x) + " " + py(tk.wyeHub.y) +
-              " Q " + px(ctrl.x) + " " + py(ctrl.y) + " " + px(cv.pt.x) + " " + py(cv.pt.y);
+                       " Q " + px(ctrl.x) + " " + py(ctrl.y) + " " + px(cv.pt.x) + " " + py(cv.pt.y);
             var ang = Math.atan2(cv.pt.y - tk.wyeHub.y, cv.pt.x - tk.wyeHub.x) * 180 / Math.PI;
             var dmp = { x: tk.wyeHub.x + (cv.pt.x - tk.wyeHub.x) * 0.34, y: tk.wyeHub.y + (cv.pt.y - tk.wyeHub.y) * 0.34 };
             var runIn = pathLenIn(prePts) + distIn(firstTk, tk.tkPt) + distIn(tk.tkPt, tk.wyeHub) + distIn(tk.wyeHub, cv.pt);
             branches.push({
               id: cv.id, name: cv.name, d: dStr, pts: bPts, ft: +(runIn / 12).toFixed(1),
-              takeoff: tk.wyeHub, damperPt: dmp, damperAngle: ang, isSideTakeoff: false
+              takeoff: tk.wyeHub, damperPt: dmp, damperAngle: ang
             });
           });
         } else {
@@ -421,13 +403,13 @@
             y: tk.tkPt.y + dySign2 * Math.min(16, Math.abs(sv.pt.y - tk.tkPt.y) * 0.45 + 4)
           };
           var dStr2 = "M " + px(tk.tkPt.x) + " " + py(tk.tkPt.y) +
-            " Q " + px(wyeStub.x) + " " + py(wyeStub.y) + " " + px(sv.pt.x) + " " + py(sv.pt.y);
+                      " Q " + px(wyeStub.x) + " " + py(wyeStub.y) + " " + px(sv.pt.x) + " " + py(sv.pt.y);
           var ang2 = Math.atan2(wyeStub.y - tk.tkPt.y, wyeStub.x - tk.tkPt.x) * 180 / Math.PI;
           var dmp2 = { x: tk.tkPt.x + (wyeStub.x - tk.tkPt.x) * 0.7, y: tk.tkPt.y + (wyeStub.y - tk.tkPt.y) * 0.7 };
           var runIn2 = pathLenIn(prePts) + distIn(firstTk, tk.tkPt) + distIn(tk.tkPt, wyeStub) + distIn(wyeStub, sv.pt);
           branches.push({
             id: sv.id, name: sv.name, d: dStr2, pts: [tk.tkPt, wyeStub, sv.pt], ft: +(runIn2 / 12).toFixed(1),
-            takeoff: tk.tkPt, damperPt: dmp2, damperAngle: ang2, isSideTakeoff: false
+            takeoff: tk.tkPt, damperPt: dmp2, damperAngle: ang2
           });
         }
       }
@@ -439,18 +421,16 @@
         var bend1 = { x: sideTk.x + dir * 10, y: sideTk.y + sideSign * 14 };
         var bend2 = { x: bv.pt.x, y: sweepY };
         var bPts = [sideTk, bend1, bend2, bv.pt];
-        var dStrB = smoothCornerPath(bPts, 16);
         var angB = Math.atan2(bend1.y - sideTk.y, bend1.x - sideTk.x) * 180 / Math.PI;
         branches.push({
-          id: bv.id, name: bv.name, d: dStrB, pts: bPts, ft: +((14 + pathLenIn(bPts)) / 12).toFixed(1),
+          id: bv.id, name: bv.name, d: smoothCornerPath(bPts, 16), pts: bPts, ft: +((14 + pathLenIn(bPts)) / 12).toFixed(1),
           takeoff: sideTk,
           damperPt: { x: sideTk.x + (bend1.x - sideTk.x) * 0.75, y: sideTk.y + (bend1.y - sideTk.y) * 0.75 },
-          damperAngle: angB, isSideTakeoff: true
+          damperAngle: angB
         });
       });
     }
 
-    // Sealed Return RA-1: clean sweep around Kitchen/Dining wall (x>=152) from R1 to Return End!
     var retClearX = Math.max(152, retEnd.x - dir * 8);
     var retMidY = Math.abs(n.r1.y - retEnd.y) > 25 ? Math.min(184, (n.r1.y + retEnd.y) / 2) : retEnd.y;
     var retPts = [retFlange, retEnd, { x: retClearX, y: retEnd.y }, { x: retClearX, y: retMidY }, { x: n.r1.x, y: retMidY }, n.r1];
@@ -460,65 +440,20 @@
     var ra1D = smoothCornerPath(retPts, 16);
     var ra1Ft = +(pathLenIn(retPts) / 12).toFixed(1);
 
-    var alerts = [];
-    var shortCircuitPairs = [];
     var flue = computeSidewallFlue(f1);
-
-    // Sidewall Venting Code & OEM Alerts (Carrier II810SA-05 p.22 + 2025 SFMC §802.8)
-    if (flue.gravityIllegal) {
-      alerts.push({
-        sev: "fail",
-        en: "CODE & OEM FAIL (Carrier Manual II810SA-05 p. 22 / CMC 802.6): 80% AFUE Category I furnaces CANNOT vent horizontally out a sidewall by gravity! Select Option A (Listed Sidewall Power Venter) or Option B (95%+ PVC Direct-Vent / Heat Pump).",
-        es: "FALLA DE CÓDIGO Y MANUAL (Carrier II810SA-05 p. 22 / CMC 802.6): ¡Un equipo 80% AFUE Categoría I NO puede salir horizontal por gravedad en muro lateral! Usa Opción A (Extractor Mecánico Listado) u Opción B (95%+ PVC / Bomba de Calor)."
-      });
-    } else if (flue.southLotBlocked) {
-      alerts.push({
-        sev: "warn",
-        en: "SFMC §802.8 Auto-Rerouted to West Rear-Yard Wall: South wall < 4 ft from property line cannot host mechanical draft termination — V1 automatically routed West to Rear-Yard exterior wall (" + flue.runFt + " ft, +" + flue.minRiseIn + "\" pitch).",
-        es: "SFMC §802.8 Re-ruteado al Muro Oeste (Patio): Muro Sur a < 4 pies de colindancia no permite descarga mecánica — V1 re-ruteado automático al muro Oeste del patio (" + flue.runFt + " pies, +" + flue.minRiseIn + "\" pendiente)."
-      });
-    } else if (flue.southLotUnverified && state.ventMode === "power_venter") {
-      alerts.push({
-        sev: "warn",
-        en: "Mon Nov 23 SFMC §802.8 Check: Verify South wall has ≥ 4 ft (1219 mm) clearance to South property line & ≥ 4 ft horiz/below (or ≥ 1 ft above) windows. If < 4 ft, switch Exit Wall to West Rear Yard!",
-        es: "Revisión Lunes 23 (SFMC §802.8): Confirmar ≥ 4 pies (1219 mm) libres a colindancia Sur y ventanas. Si hay < 4 pies en colindancia Sur, cambiar salida al Muro Oeste (Patio Trasero)."
-      });
-    }
-
+    var shortCircuitPairs = [];
     var jdB = { x: n.jd1.x + 12, y: n.jd1.y - 4 };
     var jdH = { x: n.jd1.x - 12, y: n.jd1.y + 6 };
+
     vents.forEach(function (v) {
       var dRet = distIn(v.pt, n.r1);
-      if (dRet < 48) {
-        shortCircuitPairs.push({ a: v.pt, b: n.r1, ft: +(dRet / 12).toFixed(1), label: v.name + "↔R1" });
-        alerts.push({
-          sev: "fail",
-          en: "Short-circuit risk: " + v.name + " is only " + (dRet / 12).toFixed(1) + " ft from R1 Return (< 4 ft) — move supply & return farther apart.",
-          es: "Riesgo de cortocircuito: " + v.name + " está a solo " + (dRet / 12).toFixed(1) + " pies de R1 Retorno (< 4 pies)."
-        });
-      }
+      if (dRet < 48) shortCircuitPairs.push({ a: v.pt, b: n.r1, ft: +(dRet / 12).toFixed(1), label: v.name + "-R1" });
       var dJd = Math.min(distIn(v.pt, jdB), distIn(v.pt, jdH));
-      if (dJd < 42) {
-        shortCircuitPairs.push({ a: v.pt, b: n.jd1, ft: +(dJd / 12).toFixed(1), label: v.name + "↔JD-1" });
-        alerts.push({
-          sev: "warn",
-          en: "Short-circuit check: " + v.name + " is only " + (dJd / 12).toFixed(1) + " ft from JD-1 Jump Duct (< 3.5 ft).",
-          es: "Revisar cortocircuito: " + v.name + " está a solo " + (dJd / 12).toFixed(1) + " pies del Jump Duct JD-1."
-        });
-      }
+      if (dJd < 42) shortCircuitPairs.push({ a: v.pt, b: n.jd1, ft: +(dJd / 12).toFixed(1), label: v.name + "-JD1" });
     });
 
     var byId = {};
-    branches.forEach(function (b) {
-      byId[b.id] = b;
-      if (b.ft > 25.0) {
-        alerts.push({
-          sev: "warn",
-          en: "Long branch (" + b.name + " ≈ " + b.ft + " ft > 25 ft): check Manual D static pressure & consider upsizing branch duct.",
-          es: "Ramal largo (" + b.name + " ≈ " + b.ft + " pies > 25 pies): revisar presión estática Manual D."
-        });
-      }
-    });
+    branches.forEach(function (b) { byId[b.id] = b; });
 
     var hBox = activeHatchBox();
     var hatchRect = { x: hBox.x - hBox.w / 2, y: hBox.y - hBox.h / 2, w: hBox.w, h: hBox.h };
@@ -526,18 +461,10 @@
       trunkSegs.some(function (ts) { return polyHitsRect(ts.pts, hatchRect); }) ||
       branches.some(function (b) { return polyHitsRect(b.pts, hatchRect); }) ||
       polyHitsRect(retPts, hatchRect);
-    if (hatchBlocked) {
-      alerts.push({
-        sev: "fail",
-        en: "Hatch conflict: F1 or ductwork crosses the 24\"×36\" Attic Hatch — reroute clear of access opening!",
-        es: "Conflicto con escotilla: F1 o ductos cruzan la escotilla 24\"×36\" — liberar acceso."
-      });
-    }
 
     return {
-      dir: dir, supFlange: supFlange, supEnd: supEnd, retFlange: retFlange, retEnd: retEnd,
-      trunkSegs: trunkSegs, branches: branches, byId: byId, ra1D: ra1D, ra1Ft: ra1Ft,
-      flue: flue, alerts: alerts, shortCircuitPairs: shortCircuitPairs, hatchBlocked: hatchBlocked
+      dir: dir, trunkSegs: trunkSegs, branches: branches, byId: byId, ra1D: ra1D, ra1Ft: ra1Ft,
+      flue: flue, shortCircuitPairs: shortCircuitPairs, hatchBlocked: hatchBlocked
     };
   }
 
@@ -558,19 +485,52 @@
       sa1Ft: ducts.byId.s1 ? ducts.byId.s1.ft : 0,
       sa2Ft: ducts.byId.s2 ? ducts.byId.s2.ft : 0,
       sa3Ft: ducts.byId.s3 ? ducts.byId.s3.ft : 0,
-      ra1Ft: ducts.ra1Ft,
-      gfciPass: state.gfciOffsetFt <= 25,
-      fluePass: state.flueClearIn >= 1.0 && !ducts.flue.gravityIllegal
+      ra1Ft: ducts.ra1Ft
     };
   }
 
-  function syncedAtticHref() {
-    var base = window.U4PlanNav ? window.U4PlanNav.planUrl("attic-hatch") : "../attic-hatch/index.html";
-    var sep = base.indexOf("?") >= 0 ? "&" : "?";
-    return base + sep + "fx=" + Math.round(state.nodes.f1.x) + "&fy=" + Math.round(state.nodes.f1.y) +
-      "&loc=" + encodeURIComponent(state.hatchLocation) +
-      "&vent=" + encodeURIComponent(state.ventMode) +
-      "&ewall=" + encodeURIComponent(state.exitWall);
+  function computeSingleStatus(m, es) {
+    if (!m.walkPass) {
+      return {
+        cls: "is-fail",
+        txt: es
+          ? "✗ Pasillo demasiado largo (" + m.walkFt + " pies > 20 pies máx. con 66\" de altura) — acerca F1 hacia Comedor SO."
+          : "✗ Walkway over 20 ft limit (" + m.walkFt + " ft at 66\" attic height) — move F1 closer toward SW Dining."
+      };
+    }
+    if (m.ducts.hatchBlocked) {
+      return {
+        cls: "is-fail",
+        txt: es
+          ? "✗ Conflicto con la escotilla de 24\"×36\" — mueve el equipo o ducto fuera del acceso."
+          : "✗ Blocks the 24\"×36\" attic hatch — move furnace or duct clear of the opening."
+      };
+    }
+    if (m.flue.gravityIllegal) {
+      return {
+        cls: "is-fail",
+        txt: es
+          ? "✗ Salida horizontal sin extractor no permitida — elige Extractor Lateral (Opción A) o PVC 95%+ (Opción B)."
+          : "✗ Unassisted horizontal gravity vent not allowed — pick Listed Power Venter (Option A) or 95%+ PVC (Option B)."
+      };
+    }
+    if (m.ducts.shortCircuitPairs.length > 0) {
+      return {
+        cls: "is-warn",
+        txt: es
+          ? "⚠ Rejilla de inyección muy cerca del retorno (< 4 pies) — sepáralas en el plano."
+          : "⚠ Supply boot is within 4 ft of return/jump duct — drag vents slightly farther apart."
+      };
+    }
+    var wallTxt = m.flue.effectiveWall === "west"
+      ? (es ? "Muro Oeste patio (≥4 pies libres)" : "West rear-yard wall (≥4 ft clear)")
+      : (es ? "Muro Sur (confirmar ≥4 pies a colindancia el lunes)" : "South wall (confirm ≥4 ft to lot line Monday)");
+    return {
+      cls: "is-pass",
+      txt: es
+        ? "✓ Cumple: Escotilla 24\"×36\" en Puerta 4 · Pasillo 24\" de " + m.walkFt + " pies (" + m.sheets + " hojas) · Salida lateral por " + wallTxt + "."
+        : "✓ Clear: 24\"×36\" Door 4 hatch · " + m.walkFt + " ft walkway (" + m.sheets + " sheets) · Sidewall vent out " + wallTxt + "."
+    };
   }
 
   function syncBlueprintHiddenState() {
@@ -579,9 +539,19 @@
       var inpFy = document.getElementById("inp-furnace-y");
       if (inpFx) { inpFx.value = String(Math.round(state.nodes.f1.x)); inpFx.dispatchEvent(new Event("change", { bubbles: true })); }
       if (inpFy) { inpFy.value = String(Math.round(state.nodes.f1.y)); inpFy.dispatchEvent(new Event("change", { bubbles: true })); }
+      var selRoute = document.getElementById("sel-roof-route");
+      if (selRoute) {
+        selRoute.value = state.ventMode === "gravity_unassisted"
+          ? "gravity_unassisted_blocked"
+          : (state.ventMode === "cat4_pvc"
+            ? "cat4_pvc_sidewall"
+            : (state.exitWall === "west" ? "sidewall_power_venter_west" : "sidewall_power_venter_south"));
+        selRoute.dispatchEvent(new Event("change", { bubbles: true }));
+      }
     } catch (_) {}
     try {
       var next = new URLSearchParams(window.location.search || "");
+      next.set("step", state.step);
       next.set("fx", String(Math.round(state.nodes.f1.x)));
       next.set("fy", String(Math.round(state.nodes.f1.y)));
       next.set("loc", state.hatchLocation);
@@ -589,16 +559,6 @@
       next.set("ewall", state.exitWall);
       window.history.replaceState(null, "", "?" + next.toString() + (window.location.hash || ""));
     } catch (_) {}
-    if (window.U4PlanNav && typeof window.U4PlanNav.postToParent === "function") {
-      window.U4PlanNav.postToParent({
-        type: "u4:attic-hvac-sync",
-        sourcePlan: "hvac-layout",
-        f1: { x: Math.round(state.nodes.f1.x), y: Math.round(state.nodes.f1.y) },
-        location: state.hatchLocation,
-        ventMode: state.ventMode,
-        exitWall: state.exitWall
-      });
-    }
   }
 
   function buildDynamicDuctsLayerHtml(m) {
@@ -606,43 +566,29 @@
     var fl = d.flue;
     var parts = [];
 
-    // 1. Tapered Rigid Main Supply Trunk Spine
     d.trunkSegs.forEach(function (ts) {
-      parts.push('<path d="' + ts.d + '" fill="none" stroke="#1f5f7a" stroke-width="' + ts.strokeW + '" stroke-linecap="round" stroke-linejoin="round" opacity="0.28"/>');
+      parts.push('<path d="' + ts.d + '" fill="none" stroke="#1f5f7a" stroke-width="' + ts.strokeW + '" stroke-linecap="round" stroke-linejoin="round" opacity="0.26"/>');
       parts.push('<path d="' + ts.d + '" fill="none" stroke="#1f5f7a" stroke-width="' + Math.max(2.2, +(ts.strokeW * 0.42).toFixed(1)) + '" stroke-linecap="round" stroke-linejoin="round"/>');
     });
 
-    // 2. 45-deg Swept Wye Takeoffs + Accessible Balancing Dampers
     d.branches.forEach(function (b) {
       var bCol = b.ft > 25 ? "#9a5b06" : "#1f5f7a";
       parts.push('<path d="' + b.d + '" fill="none" stroke="' + bCol + '" stroke-width="2.2" stroke-linecap="round"/>');
-      parts.push('<circle cx="' + px(b.takeoff.x) + '" cy="' + py(b.takeoff.y) + '" r="2.7" fill="#ffffff" stroke="' + bCol + '" stroke-width="1.4"/>');
-      var dx = px(b.damperPt.x), dy = py(b.damperPt.y);
-      parts.push(
-        '<g transform="translate(' + dx + ',' + dy + ') rotate(' + Math.round(b.damperAngle) + ')">' +
-          '<circle r="3.4" fill="#ffffff" stroke="#2f6b3f" stroke-width="1.2"/>' +
-          '<line x1="-2.4" y1="-2.4" x2="2.4" y2="2.4" stroke="#2f6b3f" stroke-width="1.3"/>' +
-        "</g>"
-      );
+      parts.push('<circle cx="' + px(b.takeoff.x) + '" cy="' + py(b.takeoff.y) + '" r="2.6" fill="#ffffff" stroke="' + bCol + '" stroke-width="1.3"/>');
     });
 
-    // 3. Sealed Negative-Pressure Return RA-1
-    parts.push('<path d="' + d.ra1D + '" fill="none" stroke="#0f766e" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.20"/>');
-    parts.push('<path d="' + d.ra1D + '" fill="none" stroke="#0f766e" stroke-width="2.1" stroke-dasharray="5 3" stroke-linecap="round" stroke-linejoin="round"/>');
+    parts.push('<path d="' + d.ra1D + '" fill="none" stroke="#0f766e" stroke-width="5.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.18"/>');
+    parts.push('<path d="' + d.ra1D + '" fill="none" stroke="#0f766e" stroke-width="2.0" stroke-dasharray="5 3" stroke-linecap="round" stroke-linejoin="round"/>');
 
-    // 4. Reactive Horizontal Sidewall Flue Exit V1 (Flat Roof -> Sidewall Termination!)
     var flCol = fl.gravityIllegal ? "#a8281c" : (state.ventMode === "cat4_pvc" ? "#1f5f7a" : "#9a5b06");
-    parts.push('<path d="' + fl.dStr + '" fill="none" stroke="' + flCol + '" stroke-width="3.2" stroke-dasharray="4 2"/>');
+    parts.push('<path d="' + fl.dStr + '" fill="none" stroke="' + flCol + '" stroke-width="3.0" stroke-dasharray="4 2"/>');
     var tx = px(fl.termPt.x), ty = py(fl.termPt.y);
-    parts.push('<rect x="' + (tx - 15).toFixed(1) + '" y="' + (ty - 6.5).toFixed(1) + '" width="30" height="13" rx="3" fill="' + (fl.gravityIllegal ? "#f9e6e4" : "#f7ecd9") + '" stroke="' + flCol + '" stroke-width="1.5"/>');
-    parts.push('<text x="' + tx + '" y="' + (ty + 2.4).toFixed(1) + '" text-anchor="middle" font-size="5.6" font-weight="800" fill="' + flCol + '">' +
-      (fl.gravityIllegal ? "V1 FAIL" : (state.ventMode === "cat4_pvc" ? "V1 PVC" : "V1 PWR")) + "</text>");
+    parts.push('<rect x="' + (tx - 16).toFixed(1) + '" y="' + (ty - 6.5).toFixed(1) + '" width="32" height="13" rx="3" fill="' + (fl.gravityIllegal ? "#f9e6e4" : "#f7ecd9") + '" stroke="' + flCol + '" stroke-width="1.4"/>');
+    parts.push('<text x="' + tx + '" y="' + (ty + 2.3).toFixed(1) + '" text-anchor="middle" font-size="5.5" font-weight="800" fill="' + flCol + '">' +
+      (fl.gravityIllegal ? "VENT X" : (state.ventMode === "cat4_pvc" ? "PVC OUT" : "VENT OUT")) + "</text>");
 
-    // 5. Short-Circuit Warning Connectors
     d.shortCircuitPairs.forEach(function (sc) {
       parts.push('<line x1="' + px(sc.a.x) + '" y1="' + py(sc.a.y) + '" x2="' + px(sc.b.x) + '" y2="' + py(sc.b.y) + '" stroke="#a8281c" stroke-width="1.8" stroke-dasharray="2 2"/>');
-      parts.push('<circle cx="' + ((px(sc.a.x) + px(sc.b.x)) / 2).toFixed(1) + '" cy="' + ((py(sc.a.y) + py(sc.b.y)) / 2).toFixed(1) + '" r="5" fill="#f9e6e4" stroke="#a8281c" stroke-width="1.2"/>');
-      parts.push('<text x="' + ((px(sc.a.x) + px(sc.b.x)) / 2).toFixed(1) + '" y="' + ((py(sc.a.y) + py(sc.b.y)) / 2 + 2.3).toFixed(1) + '" text-anchor="middle" font-size="6.4" font-weight="800" fill="#a8281c">!</text>');
     });
 
     return parts.join("");
@@ -669,137 +615,157 @@
     var supBoxX = dir > 0 ? (f1x + fW / 2) : (f1x - fW / 2 - supPlenW);
     var retBoxX = dir > 0 ? (f1x - fW / 2 - retPlenW) : (f1x + fW / 2);
 
-    return '<svg id="hvacHumanSvg" viewBox="0 0 500 344" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + esc(es ? "Plano integrado de ático, pasillo 24 pulgadas, calefacción F1, ductos Manual D y salida lateral" : "Unified attic hatch, 24-inch pathway, SW Dining F1 furnace, Manual D ducts and sidewall exit") + '" style="touch-action:none">' +
-      '<text x="14" y="17" font-size="8.2" font-weight="800" fill="#1f5f7a">' +
-        (es ? "PLANO INTEGRADO ÁTICO + HVAC (TECHO PLANO · SALIDA LATERAL) · ← OESTE | NORTE ↑ | ESTE →"
-            : "UNIFIED ATTIC + HVAC (FLAT ROOF · SIDEWALL EXIT) · ← WEST (Door 4) | NORTH ↑ | EAST →") + "</text>" +
-      '<g transform="translate(476,22)">' +
-        '<circle r="15" fill="#f4f5f3" stroke="#98a4a8" stroke-width="1"/>' +
-        '<polygon points="0,-11 -3.2,-4 3.2,-4" fill="#a8281c"/>' +
-        '<text x="0" y="-12.2" text-anchor="middle" font-size="6.4" font-weight="800" fill="#a8281c">N</text>' +
-        '<text x="0" y="12.5" text-anchor="middle" font-size="5.5" font-weight="700" fill="#5d686d">S</text>' +
-        '<text x="10.5" y="2.2" text-anchor="middle" font-size="5.5" font-weight="700" fill="#5d686d">E</text>' +
-        '<text x="-10.5" y="2.2" text-anchor="middle" font-size="5.5" font-weight="700" fill="#5d686d">' + (es ? "O" : "W") + "</text>" +
+    return '<svg id="hvacHumanSvg" viewBox="0 0 500 332" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + esc(es ? "Plano interactivo unificado de escotilla, pasillo, calefactor y ductos" : "Unified interactive floor plan of hatch, walkway, furnace and ducts") + '" style="touch-action:none">' +
+      '<text x="14" y="17" font-size="8.0" font-weight="800" fill="#1f5f7a">' +
+        (es ? "PLANTA DEL ÁTICO · ESCOTILLA + PASILLO 24\" + EQUIPO Y DUCTOS · ← OESTE | NORTE ↑ | ESTE →"
+            : "ATTIC FLOOR PLAN · HATCH + 24\" WALKWAY + FURNACE & DUCTS · ← WEST | NORTH ↑ | EAST →") + "</text>" +
+      '<g transform="translate(476,21)">' +
+        '<circle r="14" fill="#f4f5f3" stroke="#98a4a8" stroke-width="1"/>' +
+        '<polygon points="0,-10 -3,-3.5 3,-3.5" fill="#a8281c"/>' +
+        '<text x="0" y="-11" text-anchor="middle" font-size="6.2" font-weight="800" fill="#a8281c">N</text>' +
+        '<text x="0" y="11.8" text-anchor="middle" font-size="5.4" font-weight="700" fill="#5d686d">S</text>' +
+        '<text x="9.8" y="2" text-anchor="middle" font-size="5.4" font-weight="700" fill="#5d686d">E</text>' +
+        '<text x="-9.8" y="2" text-anchor="middle" font-size="5.4" font-weight="700" fill="#5d686d">' + (es ? "O" : "W") + "</text>" +
       "</g>" +
 
-      // Outside Front Door 4 Landing (West of x=147")
-      '<rect x="' + px(72) + '" y="' + py(38) + '" width="' + +(75 * SC).toFixed(1) + '" height="' + +(70 * SC).toFixed(1) + '" fill="#f7ecd9" fill-opacity="0.48" stroke="#9a5b06" stroke-width="1.3" stroke-dasharray="4 3"/>' +
-      '<line x1="' + px(78) + '" y1="' + py(44) + '" x2="' + px(78) + '" y2="' + py(102) + '" stroke="#9a5b06" stroke-width="0.9" opacity="0.6"/>' +
-      '<line x1="' + px(84) + '" y1="' + py(44) + '" x2="' + px(84) + '" y2="' + py(102) + '" stroke="#9a5b06" stroke-width="0.9" opacity="0.6"/>' +
-      '<line x1="' + px(90) + '" y1="' + py(44) + '" x2="' + px(90) + '" y2="' + py(102) + '" stroke="#9a5b06" stroke-width="0.9" opacity="0.6"/>' +
-      '<text x="' + px(112) + '" y="' + py(48) + '" text-anchor="middle" font-size="5.3" font-weight="800" fill="#9a5b06">' + (es ? "AFUERA PTA 4" : "OUTSIDE DOOR 4") + "</text>" +
+      '<rect x="' + px(72) + '" y="' + py(38) + '" width="' + +(75 * SC).toFixed(1) + '" height="' + +(70 * SC).toFixed(1) + '" fill="#f7ecd9" fill-opacity="0.45" stroke="#9a5b06" stroke-width="1.2" stroke-dasharray="4 3"/>' +
+      '<text x="' + px(110) + '" y="' + py(48) + '" text-anchor="middle" font-size="5.3" font-weight="800" fill="#9a5b06">' + (es ? "DESCANSO PTA 4" : "DOOR 4 LANDING") + "</text>" +
 
-      // Kitchen (SW) + Dedicated 6" Hood Chase marker
-      '<path d="M ' + px(31.5) + " " + py(108) + " L " + px(147) + " " + py(108) + " L " + px(147) + " " + py(234) + " L " + px(0) + " " + py(234) + " L " + px(0) + " " + py(174) + " L " + px(31.5) + " " + py(174) + ' Z" fill="#fbfcfb" stroke="#5d686d" stroke-width="1.5"/>' +
-      '<rect x="' + px(32) + '" y="' + py(162) + '" width="22" height="12" rx="2" fill="#f7ecd9" stroke="#9a5b06" stroke-width="0.9"/>' +
-      '<text x="' + (px(32) + 11) + '" y="' + (py(162) + 8) + '" text-anchor="middle" font-size="4.9" font-weight="800" fill="#9a5b06">6"HD</text>' +
+      '<path d="M ' + px(31.5) + " " + py(108) + " L " + px(147) + " " + py(108) + " L " + px(147) + " " + py(234) + " L " + px(0) + " " + py(234) + " L " + px(0) + " " + py(174) + " L " + px(31.5) + " " + py(174) + ' Z" fill="#fbfcfb" stroke="#5d686d" stroke-width="1.4"/>' +
       '<text x="' + px(88) + '" y="' + py(166) + '" text-anchor="middle" font-size="8" font-weight="700" fill="#5d686d">' + (es ? "Cocina" : "Kitchen") + "</text>" +
-      '<text x="' + px(88) + '" y="' + py(178) + '" text-anchor="middle" font-size="6.1" fill="#9a5b06">' + (es ? "(Campana aparte)" : "(Hood separate)") + "</text>" +
+      '<text x="' + px(88) + '" y="' + py(178) + '" text-anchor="middle" font-size="6.0" fill="#9a5b06">' + (es ? "(Campana 6\" aparte)" : "(6\" hood separate)") + "</text>" +
+      '<text x="' + px(70) + '" y="' + py(254) + '" text-anchor="middle" font-size="5.8" font-weight="700" fill="#2f6b3f">' + (es ? "← Patio Oeste" : "← West Rear Yard") + "</text>" +
 
-      // West Rear-Yard Setback Label (for Sidewall Exit Option)
-      '<text x="' + px(70) + '" y="' + py(256) + '" text-anchor="middle" font-size="5.8" font-weight="700" fill="#2f6b3f">' +
-        (es ? "← Patio Trasero Oeste (≥4' libre)" : "← West Rear Yard (≥4' clear)") + "</text>" +
-
-      // Hallway + Door 4 Foyer
-      '<path d="M ' + px(147) + " " + py(58) + " L " + px(207) + " " + py(58) + " L " + px(207) + " " + py(88) + " L " + px(352) + " " + py(88) + " L " + px(352) + " " + py(142) + " L " + px(147) + " " + py(142) + ' Z" fill="#f4f5f3" stroke="#5d686d" stroke-width="1.4"/>' +
-      '<line x1="' + px(160) + '" y1="' + py(58) + '" x2="' + px(194) + '" y2="' + py(58) + '" stroke="#1f5f7a" stroke-width="3.2"/>' +
-      '<line x1="' + px(147) + '" y1="' + py(68) + '" x2="' + px(147) + '" y2="' + py(100) + '" stroke="#f4f5f3" stroke-width="3.2"/>' +
-      '<line x1="' + px(147) + '" y1="' + py(68) + '" x2="' + px(177) + '" y2="' + py(68) + '" stroke="#1f5f7a" stroke-width="2.1"/>' +
-      '<path d="M ' + px(177) + " " + py(68) + " A " + +(30 * SC).toFixed(1) + " " + +(30 * SC).toFixed(1) + " 0 0 1 " + px(147) + " " + py(98) + '" fill="none" stroke="#1f5f7a" stroke-width="1.2" stroke-dasharray="3 2"/>' +
-      '<text x="' + px(164) + '" y="' + py(85) + '" font-size="6.1" font-weight="800" fill="#1f5f7a">' + (es ? "Pta 4→" : "Front 4→") + "</text>" +
+      '<path d="M ' + px(147) + " " + py(58) + " L " + px(207) + " " + py(58) + " L " + px(207) + " " + py(88) + " L " + px(352) + " " + py(88) + " L " + px(352) + " " + py(142) + " L " + px(147) + " " + py(142) + ' Z" fill="#f4f5f3" stroke="#5d686d" stroke-width="1.3"/>' +
       '<text x="' + px(216) + '" y="' + py(137) + '" text-anchor="middle" font-size="7" font-weight="700" fill="#5d686d">' + (es ? "Pasillo" : "Hall") + "</text>" +
 
-      // Bath, Laundry, Bedroom
-      '<rect x="' + px(207) + '" y="' + py(0) + '" width="' + +(72.1 * SC).toFixed(1) + '" height="' + +(88 * SC).toFixed(1) + '" fill="#fbfcfb" stroke="#5d686d" stroke-width="1.5"/>' +
-      '<text x="' + px(243) + '" y="' + py(44) + '" text-anchor="middle" font-size="7.4" font-weight="700" fill="#5d686d">' + (es ? "Baño" : "Bath") + "</text>" +
-      '<rect x="' + px(279.1) + '" y="' + py(5.4) + '" width="' + +(36.3 * SC).toFixed(1) + '" height="' + +(82.6 * SC).toFixed(1) + '" fill="#fbfcfb" stroke="#5d686d" stroke-width="1.5"/>' +
-      '<text x="' + px(297.2) + '" y="' + py(46) + '" text-anchor="middle" font-size="6.2" font-weight="700" fill="#5d686d">' + (es ? "Lav." : "Ldry") + "</text>" +
-      '<path d="M ' + px(315.4) + " " + py(0) + " L " + px(437.5) + " " + py(0) + " L " + px(474) + " " + py(34) + " L " + px(474) + " " + py(96) + " L " + px(437.5) + " " + py(136) + " L " + px(352) + " " + py(136) + " L " + px(352) + " " + py(88) + " L " + px(315.4) + " " + py(88) + ' Z" fill="#fbfcfb" stroke="#5d686d" stroke-width="1.5"/>' +
+      '<rect x="' + px(207) + '" y="' + py(0) + '" width="' + +(72.1 * SC).toFixed(1) + '" height="' + +(88 * SC).toFixed(1) + '" fill="#fbfcfb" stroke="#5d686d" stroke-width="1.4"/>' +
+      '<text x="' + px(243) + '" y="' + py(44) + '" text-anchor="middle" font-size="7.2" font-weight="700" fill="#5d686d">' + (es ? "Baño" : "Bath") + "</text>" +
+      '<rect x="' + px(279.1) + '" y="' + py(5.4) + '" width="' + +(36.3 * SC).toFixed(1) + '" height="' + +(82.6 * SC).toFixed(1) + '" fill="#fbfcfb" stroke="#5d686d" stroke-width="1.4"/>' +
+      '<text x="' + px(297.2) + '" y="' + py(46) + '" text-anchor="middle" font-size="6.0" font-weight="700" fill="#5d686d">' + (es ? "Lav." : "Ldry") + "</text>" +
+      '<path d="M ' + px(315.4) + " " + py(0) + " L " + px(437.5) + " " + py(0) + " L " + px(474) + " " + py(34) + " L " + px(474) + " " + py(96) + " L " + px(437.5) + " " + py(136) + " L " + px(352) + " " + py(136) + " L " + px(352) + " " + py(88) + " L " + px(315.4) + " " + py(88) + ' Z" fill="#fbfcfb" stroke="#5d686d" stroke-width="1.4"/>' +
       '<text x="' + px(396) + '" y="' + py(52) + '" text-anchor="middle" font-size="8" font-weight="700" fill="#5d686d">' + (es ? "Recámara" : "Bedroom") + "</text>" +
 
-      // Dining Room & Living Room South
-      '<rect x="' + px(147) + '" y="' + py(142) + '" width="' + +(146.7 * SC).toFixed(1) + '" height="' + +(155.75 * SC).toFixed(1) + '" fill="#fbfcfb" stroke="#5d686d" stroke-width="1.5"/>' +
+      '<rect x="' + px(147) + '" y="' + py(142) + '" width="' + +(146.7 * SC).toFixed(1) + '" height="' + +(155.75 * SC).toFixed(1) + '" fill="#fbfcfb" stroke="#5d686d" stroke-width="1.4"/>' +
       '<text x="' + px(236) + '" y="' + py(166) + '" text-anchor="middle" font-size="7.8" font-weight="700" fill="#5d686d">' + (es ? "Comedor" : "Dining") + "</text>" +
-      '<path d="M ' + px(293.7) + " " + py(142) + " L " + px(473.5) + " " + py(142) + " L " + px(508) + " " + py(178) + " L " + px(508) + " " + py(258) + " L " + px(473.5) + " " + py(297.75) + " L " + px(293.7) + " " + py(297.75) + ' Z" fill="#fbfcfb" stroke="#5d686d" stroke-width="1.5"/>' +
-      '<line x1="' + px(293.7) + '" y1="' + py(178) + '" x2="' + px(293.7) + '" y2="' + py(246) + '" stroke="#fbfcfb" stroke-width="3.2"/>' +
-      '<line x1="' + px(293.7) + '" y1="' + py(178) + '" x2="' + px(293.7) + '" y2="' + py(246) + '" stroke="#98a4a8" stroke-width="1" stroke-dasharray="3 2"/>' +
+      '<path d="M ' + px(293.7) + " " + py(142) + " L " + px(473.5) + " " + py(142) + " L " + px(508) + " " + py(178) + " L " + px(508) + " " + py(258) + " L " + px(473.5) + " " + py(297.75) + " L " + px(293.7) + " " + py(297.75) + ' Z" fill="#fbfcfb" stroke="#5d686d" stroke-width="1.4"/>' +
       '<text x="' + px(400) + '" y="' + py(222) + '" text-anchor="middle" font-size="8" font-weight="700" fill="#5d686d">' + (es ? "Sala" : "Living Room") + "</text>" +
 
-      // MEP Landmarks: E1/P Subpanel & G1 Gas Riser
-      '<rect x="' + (px(147) + 2) + '" y="' + (py(206) - 6) + '" width="22" height="12" rx="2" fill="#ecedea" stroke="#5d686d" stroke-width="0.9"/>' +
-      '<text x="' + (px(147) + 13) + '" y="' + (py(206) + 2.5) + '" text-anchor="middle" font-size="5.6" font-weight="700" fill="#5d686d">E1/P</text>' +
-      '<rect x="' + (px(384) - 18) + '" y="' + (py(290) - 6) + '" width="36" height="11" rx="2" fill="#f7ecd9" stroke="#9a5b06" stroke-width="0.9"/>' +
-      '<text x="' + px(384) + '" y="' + (py(290) + 2) + '" text-anchor="middle" font-size="5.6" font-weight="700" fill="#9a5b06">G1 Gas</text>' +
+      '<rect x="' + (px(147) + 2) + '" y="' + (py(206) - 6) + '" width="24" height="12" rx="2" fill="#ecedea" stroke="#5d686d" stroke-width="0.9"/>' +
+      '<text x="' + (px(147) + 14) + '" y="' + (py(206) + 2.5) + '" text-anchor="middle" font-size="5.5" font-weight="700" fill="#5d686d">D04</text>' +
 
-      // Active 24"x36" Attic Hatch
-      '<rect id="hvacHatchRect" x="' + px(hBox.x - hBox.w / 2) + '" y="' + py(hBox.y - hBox.h / 2) + '" width="' + +(hBox.w * SC).toFixed(1) + '" height="' + +(hBox.h * SC).toFixed(1) + '" rx="2" fill="' + (m.ducts.hatchBlocked ? "#f9e6e4" : "#f7ecd9") + '" stroke="' + (m.ducts.hatchBlocked ? "#a8281c" : "#9a5b06") + '" stroke-width="1.8" stroke-dasharray="4 2"/>' +
-      '<text x="' + px(hBox.x) + '" y="' + (py(hBox.y) - 2) + '" text-anchor="middle" font-size="6.1" font-weight="800" fill="' + (m.ducts.hatchBlocked ? "#a8281c" : "#9a5b06") + '">24"×36"</text>' +
-      '<text x="' + px(hBox.x) + '" y="' + (py(hBox.y) + 6) + '" text-anchor="middle" font-size="5.3" font-weight="700" fill="' + (m.ducts.hatchBlocked ? "#a8281c" : "#9a5b06") + '">' + (es ? "Escotilla" : "Hatch") + "</text>" +
+      // Clickable 24"x36" Attic Hatch (jumps directly to Step 2 Hatch & Seals!)
+      '<g id="hvacHatchJump" style="cursor:pointer" role="button" tabindex="0" aria-label="' + esc(es ? "Abrir detalles de escotilla 24x36" : "Inspect 24x36 attic hatch details") + '">' +
+        '<rect id="hvacHatchRect" x="' + px(hBox.x - hBox.w / 2) + '" y="' + py(hBox.y - hBox.h / 2) + '" width="' + +(hBox.w * SC).toFixed(1) + '" height="' + +(hBox.h * SC).toFixed(1) + '" rx="2.5" fill="' + (m.ducts.hatchBlocked ? "#f9e6e4" : "#f7ecd9") + '" stroke="' + (m.ducts.hatchBlocked ? "#a8281c" : "#9a5b06") + '" stroke-width="2.0" stroke-dasharray="4 2"/>' +
+        '<text x="' + px(hBox.x) + '" y="' + (py(hBox.y) - 2) + '" text-anchor="middle" font-size="6.1" font-weight="800" fill="' + (m.ducts.hatchBlocked ? "#a8281c" : "#9a5b06") + '">24"×36"</text>' +
+        '<text x="' + px(hBox.x) + '" y="' + (py(hBox.y) + 6) + '" text-anchor="middle" font-size="5.2" font-weight="700" fill="' + (m.ducts.hatchBlocked ? "#a8281c" : "#9a5b06") + '">' + (es ? "Escotilla ↗" : "Hatch ↗") + "</text>" +
+      "</g>" +
 
-      // 30" Unobstructed Passage Halo + 24" Solid Continuous Walkway (CMC 304.4)
-      '<path id="hvacWalkHalo" d="' + m.walkD + '" fill="none" stroke="' + walkCol + '" stroke-width="' + +(30 * SC).toFixed(1) + '" stroke-linejoin="round" opacity="0.12"/>' +
-      '<path id="hvacWalkBg" d="' + m.walkD + '" fill="none" stroke="' + walkCol + '" stroke-width="' + +(24 * SC).toFixed(1) + '" stroke-linejoin="round" opacity="0.26"/>' +
+      '<path id="hvacWalkHalo" d="' + m.walkD + '" fill="none" stroke="' + walkCol + '" stroke-width="' + +(30 * SC).toFixed(1) + '" stroke-linejoin="round" opacity="0.11"/>' +
+      '<path id="hvacWalkBg" d="' + m.walkD + '" fill="none" stroke="' + walkCol + '" stroke-width="' + +(24 * SC).toFixed(1) + '" stroke-linejoin="round" opacity="0.25"/>' +
       '<path id="hvacWalkLn" d="' + m.walkD + '" fill="none" stroke="' + walkCol + '" stroke-width="1.9" stroke-dasharray="4 3"/>' +
 
-      // Dynamic Manual D Ducts + Sidewall Flue Layer
       '<g id="hvacDynamicDuctsLayer">' + buildDynamicDuctsLayerHtml(m) + "</g>" +
 
-      // DRAGGABLE SUPPLY VENTS S1, S2, S3
-      '<g id="hvacDragS1" class="u4-drag-move" data-node="s1" tabindex="0" role="application" aria-label="Drag S1 kitchen threshold supply" transform="translate(0, 0)">' +
-        '<rect class="u4-drag-grip" x="' + (s1x - 24) + '" y="' + (s1y - 8) + '" width="48" height="16" rx="4" fill="#1f5f7a" stroke="#ffffff" stroke-width="1.2"/>' +
-        '<text x="' + s1x + '" y="' + (s1y + 2.6) + '" text-anchor="middle" font-size="6.6" font-weight="800" fill="#ffffff" pointer-events="none">' + (es ? "S1 Coc." : "S1 Kit") + "</text>" +
+      '<g id="hvacDragS1" class="u4-drag-move" data-node="s1" tabindex="0" role="application" aria-label="Drag S1 supply" transform="translate(0, 0)">' +
+        '<rect class="u4-drag-grip" x="' + (s1x - 23) + '" y="' + (s1y - 8) + '" width="46" height="16" rx="4" fill="#1f5f7a" stroke="#ffffff" stroke-width="1.2"/>' +
+        '<text x="' + s1x + '" y="' + (s1y + 2.5) + '" text-anchor="middle" font-size="6.4" font-weight="800" fill="#ffffff" pointer-events="none">' + (es ? "S1 Coc." : "S1 Kit") + "</text>" +
       "</g>" +
-      '<g id="hvacDragS2" class="u4-drag-move" data-node="s2" tabindex="0" role="application" aria-label="Drag S2 living/dining pocket supply" transform="translate(0, 0)">' +
-        '<rect class="u4-drag-grip" x="' + (s2x - 24) + '" y="' + (s2y - 8) + '" width="48" height="16" rx="4" fill="#1f5f7a" stroke="#ffffff" stroke-width="1.2"/>' +
-        '<text x="' + s2x + '" y="' + (s2y + 2.6) + '" text-anchor="middle" font-size="6.6" font-weight="800" fill="#ffffff" pointer-events="none">' + (es ? "S2 Sala" : "S2 Liv") + "</text>" +
+      '<g id="hvacDragS2" class="u4-drag-move" data-node="s2" tabindex="0" role="application" aria-label="Drag S2 supply" transform="translate(0, 0)">' +
+        '<rect class="u4-drag-grip" x="' + (s2x - 23) + '" y="' + (s2y - 8) + '" width="46" height="16" rx="4" fill="#1f5f7a" stroke="#ffffff" stroke-width="1.2"/>' +
+        '<text x="' + s2x + '" y="' + (s2y + 2.5) + '" text-anchor="middle" font-size="6.4" font-weight="800" fill="#ffffff" pointer-events="none">' + (es ? "S2 Sala" : "S2 Liv") + "</text>" +
       "</g>" +
-      '<g id="hvacDragS3" class="u4-drag-move" data-node="s3" tabindex="0" role="application" aria-label="Drag S3 bedroom SW supply" transform="translate(0, 0)">' +
-        '<rect class="u4-drag-grip" x="' + (s3x - 25) + '" y="' + (s3y - 8) + '" width="50" height="16" rx="4" fill="#1f5f7a" stroke="#ffffff" stroke-width="1.2"/>' +
-        '<text x="' + s3x + '" y="' + (s3y + 2.6) + '" text-anchor="middle" font-size="6.6" font-weight="800" fill="#ffffff" pointer-events="none">' + (es ? "S3 Rec." : "S3 Bed") + "</text>" +
-      "</g>" +
-
-      // DRAGGABLE RETURN R1
-      '<g id="hvacDragR1" class="u4-drag-move" data-node="r1" tabindex="0" role="application" aria-label="Drag R1 hall return" transform="translate(0, 0)">' +
-        '<rect class="u4-drag-grip" x="' + (r1x - 26) + '" y="' + (r1y - 8) + '" width="52" height="16" rx="4" fill="#0f766e" stroke="#ffffff" stroke-width="1.2"/>' +
-        '<text x="' + r1x + '" y="' + (r1y + 2.6) + '" text-anchor="middle" font-size="6.6" font-weight="800" fill="#ffffff" pointer-events="none">' + (es ? "R1 Ret." : "R1 Ret") + "</text>" +
+      '<g id="hvacDragS3" class="u4-drag-move" data-node="s3" tabindex="0" role="application" aria-label="Drag S3 supply" transform="translate(0, 0)">' +
+        '<rect class="u4-drag-grip" x="' + (s3x - 24) + '" y="' + (s3y - 8) + '" width="48" height="16" rx="4" fill="#1f5f7a" stroke="#ffffff" stroke-width="1.2"/>' +
+        '<text x="' + s3x + '" y="' + (s3y + 2.5) + '" text-anchor="middle" font-size="6.4" font-weight="800" fill="#ffffff" pointer-events="none">' + (es ? "S3 Rec." : "S3 Bed") + "</text>" +
       "</g>" +
 
-      // DRAGGABLE JUMP DUCT JD-1
-      '<g id="hvacDragJD1" class="u4-drag-move" data-node="jd1" tabindex="0" role="application" aria-label="Drag JD-1 bedroom-hall acoustic jump duct" transform="translate(0, 0)">' +
-        '<path d="M ' + (jdx - 13) + " " + (jdy + 7) + " C " + (jdx - 14) + " " + (jdy - 14) + ", " + (jdx + 14) + " " + (jdy - 16) + ", " + (jdx + 13) + " " + (jdy - 3) + '" fill="none" stroke="#6d28d9" stroke-width="2.6" stroke-dasharray="3 2"/>' +
-        '<circle cx="' + (jdx - 13) + '" cy="' + (jdy + 7) + '" r="3.2" fill="#ede9fe" stroke="#6d28d9" stroke-width="1.2"/>' +
-        '<circle cx="' + (jdx + 13) + '" cy="' + (jdy - 3) + '" r="3.2" fill="#ede9fe" stroke="#6d28d9" stroke-width="1.2"/>' +
-        '<rect class="u4-drag-grip" x="' + (jdx - 19) + '" y="' + (jdy - 9) + '" width="38" height="13" rx="3.5" fill="#6d28d9" stroke="#ffffff" stroke-width="1.1"/>' +
-        '<text x="' + jdx + '" y="' + (jdy + 0) + '" text-anchor="middle" font-size="5.9" font-weight="800" fill="#ffffff" pointer-events="none">JD-1</text>' +
+      '<g id="hvacDragR1" class="u4-drag-move" data-node="r1" tabindex="0" role="application" aria-label="Drag R1 return" transform="translate(0, 0)">' +
+        '<rect class="u4-drag-grip" x="' + (r1x - 25) + '" y="' + (r1y - 8) + '" width="50" height="16" rx="4" fill="#0f766e" stroke="#ffffff" stroke-width="1.2"/>' +
+        '<text x="' + r1x + '" y="' + (r1y + 2.5) + '" text-anchor="middle" font-size="6.4" font-weight="800" fill="#ffffff" pointer-events="none">' + (es ? "R1 Ret." : "R1 Ret") + "</text>" +
       "</g>" +
 
-      // DRAGGABLE HORIZONTAL FURNACE F1 + NORTH 30"x30" PLATFORM (Reconciled SW Dining X=174", Y=258")
-      '<g id="hvacDragFurnace" class="u4-drag-move" data-node="f1" tabindex="0" role="application" aria-label="Drag F1 horizontal furnace and 30x30 platform" transform="translate(0, 0)">' +
-        '<rect x="' + (f1x - pS / 2).toFixed(1) + '" y="' + (f1y - fH / 2 - pS).toFixed(1) + '" width="' + pS + '" height="' + pS + '" rx="3" fill="#e4f0e6" stroke="#2f6b3f" stroke-width="1.6" stroke-dasharray="3 2"/>' +
-        '<text x="' + f1x + '" y="' + (f1y - fH / 2 - pS / 2 + 2.5).toFixed(1) + '" text-anchor="middle" font-size="5.9" font-weight="800" fill="#2f6b3f" pointer-events="none">30"×30" N</text>' +
-        '<rect x="' + retBoxX.toFixed(1) + '" y="' + (f1y - 8).toFixed(1) + '" width="' + retPlenW + '" height="16" rx="2" fill="#ccfbf1" stroke="#0f766e" stroke-width="1.4"/>' +
-        '<text x="' + (retBoxX + retPlenW / 2).toFixed(1) + '" y="' + (f1y + 2.2).toFixed(1) + '" text-anchor="middle" font-size="4.9" font-weight="800" fill="#0f766e" pointer-events="none">RET</text>' +
-        '<rect x="' + supBoxX.toFixed(1) + '" y="' + (f1y - 8.5).toFixed(1) + '" width="' + supPlenW + '" height="17" rx="2" fill="#e3eef2" stroke="#1f5f7a" stroke-width="1.5"/>' +
-        '<text x="' + (supBoxX + supPlenW / 2).toFixed(1) + '" y="' + (f1y + 2.2).toFixed(1) + '" text-anchor="middle" font-size="5.3" font-weight="800" fill="#1f5f7a" pointer-events="none">SUP</text>' +
+      '<g id="hvacDragJD1" class="u4-drag-move" data-node="jd1" tabindex="0" role="application" aria-label="Drag JD-1 jump duct" transform="translate(0, 0)">' +
+        '<rect class="u4-drag-grip" x="' + (jdx - 19) + '" y="' + (jdy - 8) + '" width="38" height="14" rx="3.5" fill="#6d28d9" stroke="#ffffff" stroke-width="1.1"/>' +
+        '<text x="' + jdx + '" y="' + (jdy + 1.5) + '" text-anchor="middle" font-size="5.9" font-weight="800" fill="#ffffff" pointer-events="none">JD-1</text>' +
+      "</g>" +
+
+      '<g id="hvacDragFurnace" class="u4-drag-move" data-node="f1" tabindex="0" role="application" aria-label="Drag F1 furnace and 30x30 platform" transform="translate(0, 0)">' +
+        '<rect x="' + (f1x - pS / 2).toFixed(1) + '" y="' + (f1y - fH / 2 - pS).toFixed(1) + '" width="' + pS + '" height="' + pS + '" rx="3" fill="#e4f0e6" stroke="#2f6b3f" stroke-width="1.5" stroke-dasharray="3 2"/>' +
+        '<text x="' + f1x + '" y="' + (f1y - fH / 2 - pS / 2 + 2.5).toFixed(1) + '" text-anchor="middle" font-size="5.8" font-weight="800" fill="#2f6b3f" pointer-events="none">30"×30"</text>' +
+        '<rect x="' + retBoxX.toFixed(1) + '" y="' + (f1y - 8).toFixed(1) + '" width="' + retPlenW + '" height="16" rx="2" fill="#ccfbf1" stroke="#0f766e" stroke-width="1.3"/>' +
+        '<rect x="' + supBoxX.toFixed(1) + '" y="' + (f1y - 8.5).toFixed(1) + '" width="' + supPlenW + '" height="17" rx="2" fill="#e3eef2" stroke="#1f5f7a" stroke-width="1.4"/>' +
         '<rect class="u4-drag-grip" x="' + (f1x - fW / 2).toFixed(1) + '" y="' + (f1y - fH / 2).toFixed(1) + '" width="' + fW + '" height="' + fH + '" rx="3.5" fill="#1d2326" stroke="#7cc0dc" stroke-width="1.8"/>' +
-        '<text x="' + f1x + '" y="' + (f1y - 2) + '" text-anchor="middle" font-size="6.4" font-weight="800" fill="#ffffff" pointer-events="none">F1 ' + (dir > 0 ? "→" : "←") + "</text>" +
-        '<text x="' + f1x + '" y="' + (f1y + 7.2) + '" text-anchor="middle" font-size="5.5" font-weight="700" fill="#7cc0dc" pointer-events="none">45k BTU</text>' +
+        '<text x="' + f1x + '" y="' + (f1y - 1.5) + '" text-anchor="middle" font-size="6.4" font-weight="800" fill="#ffffff" pointer-events="none">F1 ' + (dir > 0 ? "→" : "←") + "</text>" +
+        '<text x="' + f1x + '" y="' + (f1y + 7.2) + '" text-anchor="middle" font-size="5.4" font-weight="700" fill="#7cc0dc" pointer-events="none">45k BTU</text>' +
       "</g>" +
 
-      // Bottom Live Summary Bar
       '<rect id="hvacSvgPill" x="14" y="303" width="472" height="20" rx="5" fill="' + walkFill + '" stroke="' + walkCol + '" stroke-width="1"/>' +
-      '<text id="hvacSvgPillTxt" x="250" y="316" text-anchor="middle" font-size="7.1" font-weight="700" fill="' + walkCol + '">' +
-        (es ? "Pasillo 24\": " + m.walkFt + "'/20' (" + (m.walkPass ? "PASA ✓" : "EXCEDE ✗") + " · " + m.sheets + " hojas) · V1 Lat: " + m.flue.runFt + "' (+" + m.flue.minRiseIn + "\") · SA " + m.sa1Ft + "/" + m.sa2Ft + "/" + m.sa3Ft + "' · RA1 " + m.ra1Ft + "'"
-            : "24\" Path: " + m.walkFt + "'/20' (" + (m.walkPass ? "PASS ✓" : "OVER ✗") + " · " + m.sheets + " shts) · Sidewall V1: " + m.flue.runFt + "' (+" + m.flue.minRiseIn + "\" rise) · SA " + m.sa1Ft + "/" + m.sa2Ft + "/" + m.sa3Ft + "' · RA1 " + m.ra1Ft + "'") +
-      "</text>" +
-      '<text x="250" y="335" text-anchor="middle" font-size="6.2" font-weight="600" fill="#5d686d">' +
-        (es ? 'Techo plano (cero cortes en techo) · Salida lateral exige extractor listado (SFMC §802.8 ≥4\' a colindancia) o 95%+ PVC'
-            : 'Flat roof (zero roof cuts) · Sidewall exit requires listed power venter (SFMC §802.8 ≥4\' lot line) or 95%+ PVC direct-vent') +
+      '<text id="hvacSvgPillTxt" x="250" y="316" text-anchor="middle" font-size="7.0" font-weight="700" fill="' + walkCol + '">' +
+        (es ? "Pasillo 24\": " + m.walkFt + "' / 20' máx. (" + m.sheets + " hojas) · Salida lateral: " + m.flue.runFt + "' · Ductos " + m.sa1Ft + "/" + m.sa2Ft + "/" + m.sa3Ft + "'"
+            : "24\" Walkway: " + m.walkFt + "' / 20' max (" + m.sheets + " sheets) · Sidewall vent: " + m.flue.runFt + "' · Ducts " + m.sa1Ft + "/" + m.sa2Ft + "/" + m.sa3Ft + "'") +
       "</text>" +
     "</svg>";
   }
 
-  // Step 2 SVG: TRUE FLAT-ROOF VERTICAL SECTION + HORIZONTAL SIDEWALL FLUE EXIT (Fixes Pin u4-auto-1795396857428!)
+  function renderHatchFramingSvg(es) {
+    var bayVal = state.joistBay === "unknown" ? null : parseFloat(state.joistBay);
+    var bayOk = bayVal === 27.5;
+    var bayNarrow = bayVal != null && bayVal < 27.5;
+    var bayWide = bayVal != null && bayVal > 27.5;
+    var frameStroke = state.fireRating === "yes" ? "#a8281c" : (bayOk ? "#2f6b3f" : "#9a5b06");
+    var frameLabel = state.fireRating === "yes"
+      ? (es ? "PUERTA CORTAFUEGO LISTADA (24\"×36\" LIBRES)" : "LISTED FIRE-RATED DOOR (24\"×36\" CLEAR)")
+      : (es ? 'Corte madera: 27-1/2" × 39-1/2" (en espera)' : 'Wood-kit rough cut: 27-1/2" × 39-1/2" (on hold)');
+    var bayLabel = bayVal == null
+      ? (es ? "Separación de vigas B: medir el lunes 23" : "Joist spacing B: measure Monday Nov 23")
+      : (es ? 'Vigas B = ' + bayVal + '"' : 'Joist spacing B = ' + bayVal + '"');
+
+    return '<svg viewBox="0 0 480 268" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + esc(es ? "Diagrama de escotilla 24x36 afuera de Puerta 4" : "24x36 Door 4 hatch framing and furnace fit diagram") + '">' +
+      '<text x="14" y="18" font-size="8.8" font-weight="800" fill="#1f5f7a">' +
+        (es ? 'ESCOTILLA 24" × 36" LIBRES · AFUERA DE PUERTA 4' : '24" × 36" CLEAR HATCH · OUTSIDE FRONT DOOR 4') + "</text>" +
+      '<rect x="34" y="34" width="412" height="186" rx="6" fill="#fbfcfb" stroke="#c5ccc9" stroke-width="1.3"/>' +
+      '<line x1="34" y1="62" x2="446" y2="62" stroke="#d9a86c" stroke-width="6" stroke-dasharray="10 4" opacity="0.55"/>' +
+      '<line x1="34" y1="190" x2="446" y2="190" stroke="#d9a86c" stroke-width="6" stroke-dasharray="10 4" opacity="0.55"/>' +
+      '<text x="42" y="49" font-size="7" font-weight="700" fill="#5d686d">' + (es ? "← Escaleras (Oeste)" : "← Stairs (West)") + "</text>" +
+      '<text x="438" y="49" text-anchor="end" font-size="7" font-weight="800" fill="#1f5f7a">' + (es ? "Puerta 4 → (abre al Este)" : "Front Door 4 → (swings East)") + "</text>" +
+      '<rect x="114" y="56" width="252" height="140" fill="#f7ecd9" fill-opacity="0.45" stroke="' + frameStroke + '" stroke-width="2" stroke-dasharray="6 4"/>' +
+      '<text x="240" y="68" text-anchor="middle" font-size="7.3" font-weight="800" fill="' + frameStroke + '">' + esc(frameLabel) + "</text>" +
+      '<rect x="130" y="76" width="220" height="106" fill="#e3eef2" stroke="#1f5f7a" stroke-width="2.3"/>' +
+      '<rect x="152" y="95" width="176" height="68" rx="4" fill="#e4f0e6" stroke="#2f6b3f" stroke-width="2"/>' +
+      '<text x="240" y="118" text-anchor="middle" font-size="8.8" font-weight="800" fill="#2f6b3f">' + (es ? "CALEFACTOR SUBE DE PUNTA ✓" : "FURNACE END-FIRST FIT ✓") + "</text>" +
+      '<text x="240" y="132" text-anchor="middle" font-size="7.8" font-weight="700" fill="#1d2326">14-3/16" × 29" (45k BTU)</text>' +
+      '<text x="240" y="146" text-anchor="middle" font-size="7.2" font-weight="700" fill="#2f6b3f">' + (es ? '+9-3/4" y +7" libres de margen' : '+9-3/4" & +7" clearance to spare') + "</text>" +
+      '<text x="240" y="210" text-anchor="middle" font-size="8.2" font-weight="800" fill="#1f5f7a">' + (es ? '24" × 36" LIBRES REALES · NO REDUCIR' : '24" × 36" FINISHED CLEAR · DO NOT SHRINK') + "</text>" +
+      '<text x="240" y="246" text-anchor="middle" font-size="8.0" font-weight="800" fill="' + (bayNarrow ? "#a8281c" : (bayOk ? "#2f6b3f" : "#9a5b06")) + '">' +
+        esc(bayLabel + (bayOk ? (es ? " — Calza exacto" : " — Exact fit") : bayWide ? (es ? " — Agregar respaldo lateral" : " — Add solid side backing") : bayNarrow ? (es ? " — Requiere cabezal" : " — Needs header framing") : "")) +
+      "</text>" +
+    "</svg>";
+  }
+
+  function renderAirSealSvg(es) {
+    return '<svg viewBox="0 0 460 206" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + esc(es ? "Corte de tapa sellada, colchonetas y dique" : "Cross-section of insulated lid, weatherstrip and dam") + '">' +
+      '<text x="230" y="16" text-anchor="middle" font-size="8.6" font-weight="800" fill="#1f5f7a">' +
+        (es ? "CORTE DE ESCOTILLA: TAPA AISLADA, EMPAQUE Y DIQUE DE 4 LADOS" : "HATCH SECTION: INSULATED LID, WEATHERSTRIP & 4-SIDED DAM") + "</text>" +
+      '<rect x="24" y="84" width="90" height="54" fill="#f7ecd9" stroke="#9a5b06" stroke-width="1" stroke-dasharray="3 2"/>' +
+      '<rect x="346" y="84" width="90" height="54" fill="#f7ecd9" stroke="#9a5b06" stroke-width="1" stroke-dasharray="3 2"/>' +
+      '<text x="69" y="115" text-anchor="middle" font-size="7.3" font-weight="700" fill="#9a5b06">' + (es ? "Aislante suelto" : "Loose insulation") + "</text>" +
+      '<rect x="114" y="54" width="10" height="98" fill="#d9a86c" stroke="#7c4d12" stroke-width="1.4"/>' +
+      '<rect x="336" y="54" width="10" height="98" fill="#d9a86c" stroke="#7c4d12" stroke-width="1.4"/>' +
+      '<text x="352" y="68" font-size="7.4" font-weight="800" fill="#7c4d12">' + (es ? 'Dique +2" (4 lados)' : '4-sided dam (+2")') + "</text>" +
+      '<rect x="134" y="72" width="192" height="44" rx="4" fill="#fce7f3" stroke="#be185d" stroke-width="1.4"/>' +
+      '<text x="230" y="98" text-anchor="middle" font-size="7.9" font-weight="800" fill="#9d174d">' + (es ? "2 colchonetas sin papel + 3 lazos cal. 16" : "2 unfaced batts + 3 loose wire loops") + "</text>" +
+      '<rect x="130" y="120" width="200" height="16" fill="#e3eef2" stroke="#1f5f7a" stroke-width="1.8"/>' +
+      '<text x="230" y="131" text-anchor="middle" font-size="7.6" font-weight="800" fill="#1f5f7a">' + (es ? 'Tapa triplay 3/4" (junta SIN sellador)' : '3/4" plywood lid (keep seam UNCAULKED)') + "</text>" +
+      '<rect x="124" y="136" width="22" height="10" fill="#2f6b3f"/>' +
+      '<rect x="314" y="136" width="22" height="10" fill="#2f6b3f"/>' +
+      '<line x1="24" y1="152" x2="124" y2="152" stroke="#1d2326" stroke-width="2.3"/>' +
+      '<line x1="336" y1="152" x2="436" y2="152" stroke="#1d2326" stroke-width="2.3"/>' +
+      '<text x="230" y="172" text-anchor="middle" font-size="7.8" font-weight="800" fill="#2f6b3f">' + (es ? 'Empaque 1/2"×1/8" en tiras 1×2 · Broches FUERA de 24"×36"' : '1/2"×1/8" foam strip on 1×2 ledges · Latches OUTSIDE 24"×36"') + "</text>" +
+      '<text x="230" y="192" text-anchor="middle" font-size="7.4" font-weight="600" fill="#5d686d">' + (es ? "Verificar seca la gotera del techo plano antes de aislar" : "Confirm flat-roof leak repair is dry before placing insulation") + "</text>" +
+    "</svg>";
+  }
+
   function renderSectionSvg(m, es) {
     var fl = m.flue;
     var isFail = fl.gravityIllegal;
@@ -807,78 +773,50 @@
     var ventStroke = isFail ? "#a8281c" : (isPvc ? "#1f5f7a" : "#9a5b06");
     var ventFill = isFail ? "#f9e6e4" : (isPvc ? "#e3eef2" : "#f7ecd9");
     var wallLbl = fl.effectiveWall === "west"
-      ? (es ? "MURO EXTERIOR OESTE (PATIO ≥4')" : "WEST REAR-YARD WALL (≥4' CLEAR)")
-      : (es ? "MURO EXTERIOR SUR (VERIFICAR ≥4' COLINDANCIA)" : "SOUTH EXTERIOR WALL (VERIFY ≥4' LOT LINE)");
+      ? (es ? "SALIDA MURO OESTE (PATIO TRASERO ≥4' LIBRE)" : "WEST REAR-YARD WALL EXIT (≥4' CLEAR)")
+      : (es ? "SALIDA MURO SUR (MEDIR ≥4' A COLINDANCIA)" : "SOUTH EXTERIOR WALL EXIT (CHECK ≥4' LOT LINE)");
 
-    return '<svg viewBox="0 0 470 232" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + esc(es ? "Corte vertical de techo plano 66 pulgadas con salida lateral de gases según SFMC 802.8" : "Flat-roof 66-inch vertical section with sidewall flue exit per SFMC 802.8") + '">' +
-      '<text x="235" y="16" text-anchor="middle" font-size="9.0" font-weight="800" fill="#1f5f7a">' +
-        (es ? 'CORTE DE TECHO PLANO (66" LIBRE) + SALIDA HORIZONTAL EN MURO LATERAL'
-            : 'FLAT-ROOF ATTIC SECTION (66" CLEAR) + SIDEWALL EXHAUST EXIT') + "</text>" +
-
-      // FLAT / LOW-SLOPE ROOF ASSEMBLY (Zero Pitched Ridge!)
-      '<rect x="28" y="26" width="380" height="9" fill="#475569" stroke="#1d2326" stroke-width="1.4"/>' +
-      '<rect x="28" y="35" width="380" height="12" fill="#e2e8f0" stroke="#475569" stroke-width="1.1"/>' +
-      '<text x="218" y="32.8" text-anchor="middle" font-size="6.4" font-weight="800" fill="#ffffff">' +
-        (es ? "MEMBRANA DE TECHO PLANO · CERO PENETRACIONES NUEVAS EN TECHO (GOTERA EN REPARACIÓN)"
-            : "FLAT ROOF MEMBRANE · ZERO NEW ROOF PENETRATIONS (ACTIVE LEAK HOLD)") + "</text>" +
-
-      // Attic Side Walls (Left = Exterior Sidewall Exit; Right = Interior Attic)
-      '<rect x="28" y="47" width="12" height="127" fill="#cbd5e1" stroke="#1d2326" stroke-width="1.5"/>' +
-      '<rect x="40" y="47" width="368" height="127" fill="#fbfcfb" stroke="#98a4a8" stroke-width="1"/>' +
-
-      // Ceiling Joists & Floor Deck at Y=174
-      '<rect x="28" y="174" width="380" height="12" fill="#fde68a" stroke="#7c4d12" stroke-width="1.4"/>' +
-      '<text x="286" y="182.5" text-anchor="middle" font-size="6.6" font-weight="700" fill="#7c4d12">' +
-        (es ? 'Vigas de plafón + Pasillo continuo 24" (OSB 23/32" · ' + m.walkFt + ' pies ≤ 20 pies)'
-            : 'Ceiling joists + Continuous 24" OSB pathway (' + m.walkFt + ' ft ≤ 20 ft cap)') + "</text>" +
-
-      // 66" Confirmed Clear Attic Height Callout (Right side)
-      '<line x1="378" y1="47" x2="378" y2="174" stroke="#1f5f7a" stroke-width="1.5" stroke-dasharray="3 2"/>' +
-      '<rect x="318" y="98" width="118" height="20" rx="4" fill="#e3eef2" stroke="#1f5f7a" stroke-width="1"/>' +
-      '<text x="377" y="111" text-anchor="middle" font-size="7.6" font-weight="800" fill="#1f5f7a">' +
-        (es ? '66" (5\'-6") libre plano' : '66" (5\'-6") flat cavity') + "</text>" +
-
-      // 24"x36" Hatch & Continuous 24" Pathway on Right -> 30"x30" Platform + Horizontal F1 Cabinet (14.19" high laid horizontally!)
-      '<rect x="320" y="172" width="46" height="15" fill="#e3eef2" stroke="#1f5f7a" stroke-width="1.5" stroke-dasharray="3 2"/>' +
-      '<text x="343" y="198" text-anchor="middle" font-size="6.8" font-weight="800" fill="#1f5f7a">' + (es ? 'Escotilla 24"×36"' : '24"×36" Hatch') + "</text>" +
-
-      // 30"x30" Solid Platform + Horizontal Carrier/Bryant F1 (14-3/16" H horizontal profile x 29" D)
-      '<rect x="176" y="167" width="112" height="7" fill="#2f6b3f"/>' +
-      '<rect x="192" y="133" width="84" height="34" rx="3" fill="#1d2326" stroke="#7cc0dc" stroke-width="1.6"/>' +
-      '<text x="234" y="148" text-anchor="middle" font-size="7.6" font-weight="800" fill="#ffffff">F1 · 45k BTU</text>' +
-      '<text x="234" y="159" text-anchor="middle" font-size="6.5" font-weight="700" fill="#7cc0dc">' + (es ? 'Horizontal 14-3/16" alto' : 'Horizontal 14-3/16" H') + "</text>" +
-
-      // SLOPED HORIZONTAL FLUE EXITING OUT EXTERIOR SIDEWALL (Left X=28, sloping UP >= 1/4" per ft toward exterior!)
-      '<path d="M 192 144 L 166 122 L 22 106" fill="none" stroke="' + ventStroke + '" stroke-width="7" stroke-linecap="round" opacity="0.28"/>' +
-      '<path d="M 192 144 L 166 122 L 22 106" fill="none" stroke="' + ventStroke + '" stroke-width="2.4" stroke-linecap="round"/>' +
-      // Metal support straps <= 5 ft o.c. from flat roof joists
-      '<line x1="94" y1="47" x2="94" y2="114" stroke="#5d686d" stroke-width="1.2" stroke-dasharray="2 2"/>' +
-      '<line x1="152" y1="47" x2="152" y2="120" stroke="#5d686d" stroke-width="1.2" stroke-dasharray="2 2"/>' +
-
-      // Exterior Sidewall Termination Hood / Power Venter Box on Left Exterior Face (X=10..28, Y=95..118)
-      '<rect x="8" y="94" width="22" height="24" rx="3" fill="' + ventFill + '" stroke="' + ventStroke + '" stroke-width="1.8"/>' +
-      '<text x="19" y="109" text-anchor="middle" font-size="6.8" font-weight="800" fill="' + ventStroke + '">' +
-        (isFail ? "✗" : (isPvc ? "PVC" : "FAN")) + "</text>" +
-
-      // Flue Pitch & Code Callout Box inside Attic
-      '<rect x="50" y="56" width="246" height="44" rx="4" fill="' + ventFill + '" stroke="' + ventStroke + '" stroke-width="1.2"/>' +
-      '<text x="58" y="69" font-size="7.2" font-weight="800" fill="' + ventStroke + '">' + esc(wallLbl) + "</text>" +
-      '<text x="58" y="80" font-size="6.7" font-weight="700" fill="#1d2326">' +
+    return '<svg viewBox="0 0 470 226" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + esc(es ? "Corte vertical del ático de techo plano de 66 pulgadas con salida lateral" : "66-inch flat-roof attic cross-section with sidewall exhaust") + '">' +
+      '<text x="235" y="16" text-anchor="middle" font-size="8.8" font-weight="800" fill="#1f5f7a">' +
+        (es ? 'TECHO PLANO (66" LIBRES) · CERO CORTES EN TECHO · SALIDA LATERAL'
+            : 'FLAT ROOF (66" CLEAR) · ZERO ROOF CUTS · SIDEWALL VENT EXIT') + "</text>" +
+      '<rect x="28" y="26" width="380" height="10" fill="#475569" stroke="#1d2326" stroke-width="1.3"/>' +
+      '<rect x="28" y="36" width="380" height="11" fill="#e2e8f0" stroke="#475569" stroke-width="1.0"/>' +
+      '<text x="218" y="33.5" text-anchor="middle" font-size="6.4" font-weight="800" fill="#ffffff">' +
+        (es ? "TECHO PLANO EXISTENTE · NO CORTAR EL TECHO" : "EXISTING FLAT ROOF · DO NOT CUT ROOF") + "</text>" +
+      '<rect x="28" y="47" width="12" height="125" fill="#cbd5e1" stroke="#1d2326" stroke-width="1.4"/>' +
+      '<rect x="40" y="47" width="368" height="125" fill="#fbfcfb" stroke="#98a4a8" stroke-width="1"/>' +
+      '<rect x="28" y="172" width="380" height="12" fill="#fde68a" stroke="#7c4d12" stroke-width="1.3"/>' +
+      '<text x="286" y="180.5" text-anchor="middle" font-size="6.6" font-weight="700" fill="#7c4d12">' +
+        (es ? 'Pasillo continuo 24" (' + m.walkFt + " pies ≤ 20 pies)" : 'Continuous 24" wood walkway (' + m.walkFt + " ft ≤ 20 ft max)") + "</text>" +
+      '<line x1="378" y1="47" x2="378" y2="172" stroke="#1f5f7a" stroke-width="1.4" stroke-dasharray="3 2"/>' +
+      '<rect x="322" y="98" width="112" height="20" rx="4" fill="#e3eef2" stroke="#1f5f7a" stroke-width="1"/>' +
+      '<text x="378" y="111" text-anchor="middle" font-size="7.5" font-weight="800" fill="#1f5f7a">' + (es ? '66" (5\'-6") alto' : '66" (5\'-6") height') + "</text>" +
+      '<rect x="320" y="170" width="46" height="15" fill="#e3eef2" stroke="#1f5f7a" stroke-width="1.4" stroke-dasharray="3 2"/>' +
+      '<text x="343" y="196" text-anchor="middle" font-size="6.8" font-weight="800" fill="#1f5f7a">' + (es ? 'Escotilla 24"×36"' : '24"×36" Hatch') + "</text>" +
+      '<rect x="176" y="165" width="112" height="7" fill="#2f6b3f"/>' +
+      '<rect x="192" y="131" width="84" height="34" rx="3" fill="#1d2326" stroke="#7cc0dc" stroke-width="1.6"/>' +
+      '<text x="234" y="147" text-anchor="middle" font-size="7.6" font-weight="800" fill="#ffffff">F1 · 45k BTU</text>' +
+      '<text x="234" y="158" text-anchor="middle" font-size="6.4" font-weight="700" fill="#7cc0dc">' + (es ? 'Horizontal 14-3/16"' : 'Horizontal 14-3/16"') + "</text>" +
+      '<path d="M 192 142 L 166 120 L 22 104" fill="none" stroke="' + ventStroke + '" stroke-width="6.5" stroke-linecap="round" opacity="0.26"/>' +
+      '<path d="M 192 142 L 166 120 L 22 104" fill="none" stroke="' + ventStroke + '" stroke-width="2.4" stroke-linecap="round"/>' +
+      '<rect x="8" y="92" width="22" height="24" rx="3" fill="' + ventFill + '" stroke="' + ventStroke + '" stroke-width="1.7"/>' +
+      '<text x="19" y="107" text-anchor="middle" font-size="6.6" font-weight="800" fill="' + ventStroke + '">' + (isFail ? "X" : (isPvc ? "PVC" : "FAN")) + "</text>" +
+      '<rect x="50" y="55" width="248" height="42" rx="4" fill="' + ventFill + '" stroke="' + ventStroke + '" stroke-width="1.2"/>' +
+      '<text x="58" y="68" font-size="7.1" font-weight="800" fill="' + ventStroke + '">' + esc(wallLbl) + "</text>" +
+      '<text x="58" y="80" font-size="6.6" font-weight="700" fill="#1d2326">' +
         esc(isFail
-          ? (es ? "PROHIBIDO: 80% AFUE NO puede salir horizontal sin extractor (Manual p.22)" : "PROHIBITED: 80% AFUE cannot gravity-vent out sidewall (Manual p.22)")
+          ? (es ? "No permitido: 80% no sale horizontal sin extractor" : "Not allowed: 80% unit cannot gravity-vent sideways")
           : isPvc
-            ? (es ? 'Opción B: 95%+ AFUE Categoría IV PVC sellado + drenaje condensado' : 'Option B: 95%+ AFUE Cat IV sealed PVC sidewall + condensate trap')
-            : (es ? 'Opción A: Extractor lateral listado + pendiente ≥1/4"/pie (' + fl.runFt + "' → +" + fl.minRiseIn + '")' : 'Option A: Listed power venter + ≥1/4"/ft upward slope (' + fl.runFt + "' → +" + fl.minRiseIn + '")')) +
+            ? (es ? "Opción B: PVC sellado 95%+ o bomba de calor" : "Option B: 95%+ sealed PVC direct-vent or heat pump")
+            : (es ? 'Opción A: Extractor lateral + pendiente ≥1/4"/pie (' + fl.runFt + "')" : 'Option A: Listed power venter + ≥1/4"/ft slope (' + fl.runFt + "')")) +
       "</text>" +
-      '<text x="58" y="92" font-size="6.4" font-weight="700" fill="#5d686d">' +
-        (es ? 'SFMC §802.8: ≥4\' a colindancia · ≥4\' horiz/abajo (o ≥1\' arriba) de ventanas · soportes ≤5\''
-            : '2025 SFMC §802.8: ≥4\' lot line · ≥4\' horiz/below (or ≥1\' above) windows · straps ≤5\'') +
+      '<text x="58" y="91" font-size="6.3" font-weight="600" fill="#5d686d">' +
+        (es ? "Mínimo 4 pies a colindancia y ventanas · soportes cada ≤5 pies" : "Keep ≥4 ft from property line & windows · strap every ≤5 ft") +
       "</text>" +
-
-      // Bottom Caption
-      '<text x="235" y="218" text-anchor="middle" font-size="7.5" font-weight="700" fill="#2f6b3f">' +
-        (es ? 'Plataforma sólida 30"×30" Norte + GFCI 120V (≤25\') + Luz LED con apagador · SIN gomas de John (las trae NEXT)'
-            : 'Solid 30"×30" North platform + live 120V GFCI (≤25\') + switched LED light · NO pads from John (NEXT supplies)') +
+      '<text x="235" y="214" text-anchor="middle" font-size="7.3" font-weight="700" fill="#2f6b3f">' +
+        (es ? 'Plataforma Norte 30"×30" + GFCI 120V (≤25\') + Luz con apagador · NEXT incluye gomas'
+            : '30"×30" North platform + 120V GFCI (≤25\') + switched light · NEXT supplies pads') +
       "</text>" +
     "</svg>";
   }
@@ -886,24 +824,23 @@
   function renderEquip(m, es) {
     return '<div class="u4h-equip-wrap">' +
       '<button type="button" id="hvacEquipBtn" class="u4h-equip-toggle" aria-expanded="' + (state.equipOpen ? "true" : "false") + '">' +
-        (es ? "🔧 Equipo, código y suministros " : "🔧 Code Requirements & Scope Split ") + (state.equipOpen ? "▴" : "▾") +
+        (es ? "\uD83D\uDD27 Equipo y suministros " : "\uD83D\uDD27 Equipment & Supplies ") + (state.equipOpen ? "▴" : "▾") +
       "</button>" +
       '<div id="hvacEquipBody" class="u4h-equip-body"' + (state.equipOpen ? "" : " hidden") + ">" +
         '<div class="u4h-equip-grid">' +
           '<div class="u4h-equip-col">' +
-            "<h4>" + (es ? "Alcance de John / Cuadrilla (CMC 304.4)" : "John / Crew Scope (2025 CMC 304.4)") + "</h4>" +
+            "<h4>" + (es ? "Alcance de Nuestra Cuadrilla" : "Our Crew Materials") + "</h4>" +
             "<ul>" +
-              "<li>" + m.sheets + (es ? ' hojas 4×8 OSB 23/32" o triplay 3/4" para pasillo continuo 24" (' + m.walkFt + " pies ≤ 20 pies; paso libre 30\"; NUNCA 3/8\")" : ' sheets 4×8 of 23/32" OSB or 3/4" ply for continuous 24" pathway (' + m.walkFt + " ft ≤ 20 ft cap; 30\" clear; NEVER 3/8\")") + "</li>" +
-              "<li>" + (es ? 'Plataforma nivelada 30"×30" frente Norte en Comedor SO (SIN gomas antivibración — las trae NEXT)' : 'Level 30"×30" solid North platform in SW Dining (do NOT buy vibration pads — NEXT supplies)') + "</li>" +
-              "<li>" + (es ? "Luz LED cerrada con apagador al acceso + GFCI 120V en lado línea (≤25 pies) + reparar gotera techo plano" : "Entrance-switched enclosed LED light + line-side 120V GFCI (≤25 ft) + repair active flat-roof leak") + "</li>" +
+              "<li>" + m.sheets + (es ? ' hojas 4×8 de OSB 23/32" o triplay 3/4" para pasillo 24" (' + m.walkFt + ' pies; nunca 3/8")' : ' sheets 4×8 of 23/32" OSB or 3/4" ply for 24" walkway (' + m.walkFt + ' ft; never 3/8")') + "</li>" +
+              "<li>" + (es ? '1 hoja 4×8 para plataforma 30"×30" + dique de 4 lados (no comprar gomas antivibración)' : '1 sheet 4×8 for 30"×30" platform + 4-sided dam (do not buy vibration pads)') + "</li>" +
+              "<li>" + (es ? "1 luz LED cerrada con apagador + 1 contacto GFCI 120V (≤25 pies)" : "1 switched enclosed LED light + 1 line-side 120V GFCI outlet (≤25 ft)") + "</li>" +
             "</ul>" +
           "</div>" +
           '<div class="u4h-equip-col">' +
-            "<h4>" + (es ? "Alcance NEXT HVAC (Calefacción y Salida Lateral)" : "NEXT HVAC Scope (Heating & Sidewall Vent)") + "</h4>" +
+            "<h4>" + (es ? "Alcance de NEXT" : "NEXT Scope") + "</h4>" +
             "<ul>" +
-              "<li>" + (es ? "Opción A: Carrier/Bryant 45k BTU 80% AFUE + extractor lateral mecánico listado (NFPA 54 §12.4.3 / SFMC §802.8 ≥4 pies colindancia)" : "Option A: Carrier/Bryant 45k BTU 80% AFUE + listed sidewall power venter (NFPA 54 §12.4.3 / SFMC §802.8 ≥4 ft lot line)") + "</li>" +
-              "<li>" + (es ? "Opción B (confirmar lun 23): Cambiar a 95%+ AFUE Categoría IV PVC lateral o bomba de calor ductada (cero humo)" : "Option B (confirm Mon Nov 23): Switch to 95%+ AFUE Cat IV PVC sidewall furnace or ducted heat-pump air handler") + "</li>" +
-              "<li><strong>" + (es ? "NO incluye campana de cocina:" : "Does NOT include kitchen range hood:") + "</strong> " + (es ? "la campana Savona usa su propio ducto dedicado de 6\"." : "Zephyr Savona hood uses its own dedicated 6\" duct.") + "</li>" +
+              "<li>" + (es ? "Calefactor horizontal, termostato, ductos aislados, salida lateral y soportes antivibración" : "Horizontal furnace, thermostat, insulated ducts, sidewall vent & vibration isolation") + "</li>" +
+              "<li>" + (es ? "Alimentación exterior al subpanel D04, permisos, prueba HERS e inspecciones" : "Exterior power run to D04 subpanel, permits, HERS test & City inspections") + "</li>" +
             "</ul>" +
           "</div>" +
         "</div>" +
@@ -911,33 +848,37 @@
     "</div>";
   }
 
-  function buildAlertsHtml(m, es) {
-    var list = m.ducts.alerts || [];
-    if (!list.length) {
-      return '<div class="u4h-status is-pass" style="margin-bottom:10px">' +
-        (es ? "✓ Ruta y código limpios: pasillo 24\" cumple ≤20 pies, salida lateral listada con ≥4 pies a colindancia, sin cortocircuitos y escotilla libre."
-            : "✓ Routing & code clear: 24\" pathway ≤20 ft, listed sidewall exit w/ ≥4 ft lot-line clearance, zero short-circuits, and Door 4 hatch clear.") +
-      "</div>";
-    }
-    return list.map(function (a) {
-      return '<div class="u4h-status ' + (a.sev === "fail" ? "is-fail" : "is-warn") + '" style="margin-bottom:8px">' +
-        esc(es ? a.es : a.en) +
-      "</div>";
-    }).join("");
-  }
-
   function wireAllNodeDrags() {
     var svg = document.getElementById("hvacHumanSvg");
     if (!svg) return;
     var es = isEs();
 
+    var hatchJump = document.getElementById("hvacHatchJump");
+    if (hatchJump) {
+      hatchJump.addEventListener("click", function () {
+        state.step = "hatch";
+        syncBlueprintHiddenState();
+        render();
+        window.scrollTo(0, 0);
+      });
+      hatchJump.addEventListener("keydown", function (ev) {
+        if (ev.key === "Enter" || ev.key === " ") {
+          ev.preventDefault();
+          state.step = "hatch";
+          syncBlueprintHiddenState();
+          render();
+          window.scrollTo(0, 0);
+        }
+      });
+    }
+
     var BOUNDS = {
-      f1:  { minX: 162, maxX: 430, minY: 118, maxY: 274 },
-      r1:  { minX: 156, maxX: 380, minY: 68,  maxY: 266 },
-      s1:  { minX: 54,  maxX: 310, minY: 72,  maxY: 272 },
-      s2:  { minX: 160, maxX: 468, minY: 148, maxY: 278 },
-      s3:  { minX: 318, maxX: 454, minY: 24,  maxY: 132 },
-      jd1: { minX: 280, maxX: 400, minY: 54,  maxY: 134 }
+      f1: { minX: 162, maxX: 430, minY: 118, maxY: 274 },
+      r1: { minX: 156, maxX: 380, minY: 68, maxY: 266 },
+      s1: { minX: 54, maxX: 310, minY: 72, maxY: 272 },
+      s2: { minX: 160, maxX: 468, minY: 148, maxY: 278 },
+      s3: { minX: 318, maxX: 454, minY: 24, maxY: 132 },
+      jd1: { minX: 280, maxX: 400, minY: 54, maxY: 134 }
     };
 
     var initPos = {};
@@ -977,8 +918,8 @@
       var bg = document.getElementById("hvacWalkBg");
       var ln = document.getElementById("hvacWalkLn");
       if (halo) { halo.setAttribute("d", m.walkD); halo.setAttribute("stroke", walkCol); }
-      if (bg)   { bg.setAttribute("d", m.walkD);   bg.setAttribute("stroke", walkCol); }
-      if (ln)   { ln.setAttribute("d", m.walkD);   ln.setAttribute("stroke", walkCol); }
+      if (bg) { bg.setAttribute("d", m.walkD); bg.setAttribute("stroke", walkCol); }
+      if (ln) { ln.setAttribute("d", m.walkD); ln.setAttribute("stroke", walkCol); }
 
       var pill = document.getElementById("hvacSvgPill");
       var ptxt = document.getElementById("hvacSvgPillTxt");
@@ -986,8 +927,8 @@
       if (ptxt) {
         ptxt.setAttribute("fill", walkCol);
         ptxt.textContent = es
-          ? "Pasillo 24\": " + m.walkFt + "'/20' (" + (m.walkPass ? "PASA ✓" : "EXCEDE ✗") + " · " + m.sheets + " hojas) · V1 Lat: " + m.flue.runFt + "' (+" + m.flue.minRiseIn + "\") · SA " + m.sa1Ft + "/" + m.sa2Ft + "/" + m.sa3Ft + "' · RA1 " + m.ra1Ft + "'"
-          : "24\" Path: " + m.walkFt + "'/20' (" + (m.walkPass ? "PASS ✓" : "OVER ✗") + " · " + m.sheets + " shts) · Sidewall V1: " + m.flue.runFt + "' (+" + m.flue.minRiseIn + "\" rise) · SA " + m.sa1Ft + "/" + m.sa2Ft + "/" + m.sa3Ft + "' · RA1 " + m.ra1Ft + "'";
+          ? "Pasillo 24\": " + m.walkFt + "' / 20' máx. (" + m.sheets + " hojas) · Salida lateral: " + m.flue.runFt + "' · Ductos " + m.sa1Ft + "/" + m.sa2Ft + "/" + m.sa3Ft + "'"
+          : "24\" Walkway: " + m.walkFt + "' / 20' max (" + m.sheets + " sheets) · Sidewall vent: " + m.flue.runFt + "' · Ducts " + m.sa1Ft + "/" + m.sa2Ft + "/" + m.sa3Ft + "'";
       }
 
       var kpiWalk = document.getElementById("hvacKpiWalkVal");
@@ -996,33 +937,16 @@
         kpiWalk.textContent = m.walkFt + (es ? " pies / 20" : " ft / 20 ft");
       }
       var kpiSheets = document.getElementById("hvacKpiSheetsSub");
-      if (kpiSheets) kpiSheets.textContent = m.sheets + (es ? " hojas 4×8 (30\" libre)" : " shts 4×8 (30\" clear)");
+      if (kpiSheets) kpiSheets.textContent = m.sheets + (es ? " hojas 4×8 · 30\" paso" : " sheets 4×8 · 30\" clear");
       var kpiRuns = document.getElementById("hvacKpiRunsVal");
-      if (kpiRuns) kpiRuns.textContent = "SA " + m.sa1Ft + "/" + m.sa2Ft + "/" + m.sa3Ft + "'";
-      var kpiRunsSub = document.getElementById("hvacKpiRunsSub");
-      if (kpiRunsSub) kpiRunsSub.textContent = "RA1 " + m.ra1Ft + "' · F1 (" + state.nodes.f1.x + "\"," + state.nodes.f1.y + "\")";
-      var kpiVent = document.getElementById("hvacKpiVentSub");
-      if (kpiVent) kpiVent.textContent = "V1 " + m.flue.runFt + "' (+" + m.flue.minRiseIn + "\" pitch)";
-
-      var alertHost = document.getElementById("hvacAlertsHost");
-      if (alertHost) alertHost.innerHTML = buildAlertsHtml(m, es);
+      if (kpiRuns) kpiRuns.textContent = m.sa1Ft + " / " + m.sa2Ft + " / " + m.sa3Ft + "'";
 
       var st = document.getElementById("hvacStatusBanner");
       if (st) {
-        var allOk = m.walkPass && !m.flue.gravityIllegal;
-        st.className = "u4h-status " + (allOk ? "is-pass" : "is-fail");
-        st.textContent = !m.walkPass
-          ? (es ? "✗ PASILLO EXCEDE 20 PIES (" + m.walkFt + " pies) — Con 66\" de altura libre (CMC 304.4.1), acerca F1 hacia Comedor SO."
-                : "✗ PATHWAY OVER 20 FT CAP (" + m.walkFt + " ft) — At 66\" flat-roof attic height (CMC 304.4.1), move F1 closer toward SW Dining.")
-          : m.flue.gravityIllegal
-            ? (es ? "✗ SALIDA LATERAL POR GRAVEDAD PROHIBIDA — Selecciona Extractor Lateral Listado (Opción A) o 95%+ PVC (Opción B)."
-                  : "✗ UNASSISTED GRAVITY SIDEWALL VENT PROHIBITED — Select Listed Power Venter (Option A) or 95%+ PVC Direct-Vent (Option B).")
-            : (es ? "✓ PASA — Pasillo 24\": " + m.walkFt + " pies (≤20 pies, " + m.sheets + " hojas 4×8) · Salida lateral V1: " + m.flue.runFt + " pies (+" + m.flue.minRiseIn + "\" pendiente ≥1/4\"/pie)."
-                  : "✓ PASS — 24\" Pathway: " + m.walkFt + " ft (≤20 ft cap, " + m.sheets + " sheets 4×8) · Sidewall V1: " + m.flue.runFt + " ft (+" + m.flue.minRiseIn + "\" rise at ≥1/4\"/ft).");
+        var sObj = computeSingleStatus(m, es);
+        st.className = "u4h-status " + sObj.cls;
+        st.textContent = sObj.txt;
       }
-
-      var syncLnk = document.getElementById("hvacOpenSyncedAtticLink");
-      if (syncLnk) syncLnk.setAttribute("href", syncedAtticHref());
     }
 
     svg.querySelectorAll("[data-node]").forEach(function (handle) {
@@ -1041,7 +965,7 @@
           if (!state.dragActive || e.pointerId !== pid) return;
           var rect = svg.getBoundingClientRect();
           var svgX = ((e.clientX - rect.left) / (rect.width || 500)) * 500;
-          var svgY = ((e.clientY - rect.top) / (rect.height || 344)) * 344;
+          var svgY = ((e.clientY - rect.top) / (rect.height || 332)) * 332;
           updateDomInPlace(nodeKey, (svgX - OX) / SC, (svgY - OY) / SC);
         }
         function finish(e) {
@@ -1065,67 +989,135 @@
         var step = 6;
         var cur = state.nodes[nodeKey];
         if (!cur) return;
-        if (ev.key === "ArrowLeft")  { ev.preventDefault(); updateDomInPlace(nodeKey, cur.x - step, cur.y); syncBlueprintHiddenState(); }
+        if (ev.key === "ArrowLeft") { ev.preventDefault(); updateDomInPlace(nodeKey, cur.x - step, cur.y); syncBlueprintHiddenState(); }
         if (ev.key === "ArrowRight") { ev.preventDefault(); updateDomInPlace(nodeKey, cur.x + step, cur.y); syncBlueprintHiddenState(); }
-        if (ev.key === "ArrowUp")    { ev.preventDefault(); updateDomInPlace(nodeKey, cur.x, cur.y - step); syncBlueprintHiddenState(); }
-        if (ev.key === "ArrowDown")  { ev.preventDefault(); updateDomInPlace(nodeKey, cur.x, cur.y + step); syncBlueprintHiddenState(); }
+        if (ev.key === "ArrowUp") { ev.preventDefault(); updateDomInPlace(nodeKey, cur.x, cur.y - step); syncBlueprintHiddenState(); }
+        if (ev.key === "ArrowDown") { ev.preventDefault(); updateDomInPlace(nodeKey, cur.x, cur.y + step); syncBlueprintHiddenState(); }
       });
     });
   }
 
-  function ventControlsHtml(es) {
-    return '<div class="u4h-ctrl-row">' +
-        '<span class="u4h-ctrl-lbl">' + (es ? "Salida lateral de gases (Techo plano):" : "Sidewall flue mode (Flat roof):") + "</span>" +
-        '<div class="u4h-pill-group">' +
-          '<button type="button" class="u4h-pill' + (state.ventMode === "power_venter" ? " is-active" : "") + '" data-vmode="power_venter">' + (es ? "Opción A: 80% + Extractor Lateral Listado" : "Option A: 80% + Listed Power Venter") + "</button>" +
-          '<button type="button" class="u4h-pill' + (state.ventMode === "cat4_pvc" ? " is-active" : "") + '" data-vmode="cat4_pvc">' + (es ? "Opción B: 95%+ PVC Tiro Directo / Bomba Calor" : "Option B: 95%+ PVC Direct-Vent / Heat Pump") + "</button>" +
-          '<button type="button" class="u4h-pill' + (state.ventMode === "gravity_unassisted" ? " is-active" : "") + '" data-vmode="gravity_unassisted">' + (es ? "80% Sin Extractor (FALLA CÓDIGO)" : "Unassisted 80% Gravity (CODE FAIL)") + "</button>" +
+  function renderHatchStep(m, es) {
+    var statusCls = state.fireRating === "yes" || state.joistBay === "14.5" || state.joistBay === "22.5"
+      ? "is-fail"
+      : (state.fireRating === "no" && state.joistBay === "27.5" ? "is-pass" : "is-warn");
+    var statusText = state.fireRating === "yes"
+      ? (es ? "Alto: Si el descanso requiere cortafuego, pedir puerta cortafuego listada con 24\"×36\" libres reales (no armar el kit de madera ni usar puertas nominales que reduzcan el claro)."
+            : "Stop: If the landing ceiling is fire-rated, order a listed fire-rated door with a full 24\"×36\" clear opening (do not build the wood kit or use nominal doors that shrink the opening).")
+      : state.joistBay === "14.5" || state.joistBay === "22.5"
+        ? (es ? "Requiere cabezal: Un espacio de " + state.joistBay + "\" es menor a 27-1/2\" — armar cabezal estructural sin reducir 24\"×36\" libres."
+              : "Header needed: A " + state.joistBay + "\" bay is narrower than 27-1/2\" — plan a header rather than shrinking the 24\"×36\" clear opening.")
+        : state.fireRating === "no" && state.joistBay === "27.5"
+          ? (es ? "✓ Calza directo: Plafón estándar y vigas a 27-1/2\". Fotografiar trazo y confirmar seca la gotera antes de cortar."
+                : "✓ Direct fit: Standard ceiling + 27-1/2\" bay. Photograph markout and confirm roof leak repair is dry before cutting.")
+          : (es ? "Confirmar el lunes 23 nov afuera de Puerta 4: trazo de 24\"×36\" libres, si requiere cortafuego y separación de vigas B (sin cortar todavía)."
+                : "Confirm Monday Nov 23 outside Front Door 4: exact 24\"×36\" clear markout, fire-rating, and joist spacing B (no cuts yet).");
+
+    return (
+      '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;align-items:start;margin-bottom:12px">' +
+        '<div class="u4h-photo-card" style="margin:0">' +
+          '<img src="./assets/attic-hatch-candidate.jpg" alt="' + esc(es ? "Plafón del descanso afuera de Puerta Principal 4" : "Common landing ceiling outside Front Door 4") + '" style="height:224px;object-fit:cover">' +
+          '<div class="u4h-photo-cap"><strong>' + (es ? "Descanso afuera de Puerta 4:" : "Outside Front Door 4:") + "</strong> " +
+            (es ? "Proteger la lámpara y moldura original. Conecta directo al pasillo de " + m.walkFt + " pies."
+                : "Protect the existing light and trim. Connects directly to the " + m.walkFt + " ft walkway.") +
+          "</div>" +
+        "</div>" +
+        '<div class="u4h-svg-wrap" style="margin:0">' + renderHatchFramingSvg(es) + "</div>" +
+      "</div>" +
+      '<div class="u4h-controls">' +
+        '<div class="u4h-ctrl-row">' +
+          '<span class="u4h-ctrl-lbl">' + (es ? "1. ¿El descanso requiere cortafuego?" : "1. Fire-rated ceiling required?") + "</span>" +
+          '<div class="u4h-pill-group">' +
+            '<button type="button" class="u4h-pill' + (state.fireRating === "unknown" ? " is-active" : "") + '" data-fire="unknown">' + (es ? "Revisar lunes" : "Check Monday") + "</button>" +
+            '<button type="button" class="u4h-pill' + (state.fireRating === "no" ? " is-active" : "") + '" data-fire="no">' + (es ? "No (estándar)" : "No (standard)") + "</button>" +
+            '<button type="button" class="u4h-pill' + (state.fireRating === "yes" ? " is-active" : "") + '" data-fire="yes">' + (es ? "Sí (cortafuego)" : "Yes (fire-rated)") + "</button>" +
+          "</div>" +
+        "</div>" +
+        '<div class="u4h-ctrl-row">' +
+          '<span class="u4h-ctrl-lbl">' + (es ? "2. Separación entre vigas (B):" : "2. Joist spacing (B):") + "</span>" +
+          '<div class="u4h-pill-group">' +
+            [["unknown", es ? "Por medir" : "To measure"], ["14.5", '14-1/2"'], ["22.5", '22-1/2"'], ["27.5", '27-1/2"'], ["30", '> 27-1/2"']].map(function (opt) {
+              return '<button type="button" class="u4h-pill' + (state.joistBay === opt[0] ? " is-active" : "") + '" data-bay="' + opt[0] + '">' + opt[1] + "</button>";
+            }).join("") +
+          "</div>" +
         "</div>" +
       "</div>" +
-      '<div class="u4h-ctrl-row">' +
-        '<span class="u4h-ctrl-lbl">' + (es ? "Muro exterior de descarga (SFMC §802.8 ≥4'):" : "Sidewall exit face (SFMC §802.8 ≥4' lot line):") + "</span>" +
-        '<div class="u4h-pill-group">' +
-          '<button type="button" class="u4h-pill' + (state.exitWall === "south" ? " is-active" : "") + '" data-ewall="south">' + (es ? "Muro Sur (Confirmar ≥4' colindancia)" : "South Wall (Verify ≥4' Lot Line)") + "</button>" +
-          '<button type="button" class="u4h-pill' + (state.exitWall === "west" ? " is-active" : "") + '" data-ewall="west">' + (es ? "Muro Oeste Patio Trasero (≥4' libre)" : "West Rear-Yard Wall (≥4' Clear)") + "</button>" +
-        "</div>" +
-      "</div>";
+      '<div class="u4h-status ' + statusCls + '">' + esc(statusText) + "</div>" +
+      '<div class="u4h-svg-wrap">' + renderAirSealSvg(es) + "</div>" +
+      '<div class="u4h-info-box">' +
+        '<div class="u4h-info-title">' + (es ? "Cinco Reglas de Armado y Sellado" : "Five Hatch & Walkway Rules") + "</div>" +
+        '<ul class="u4h-info-list">' +
+          "<li>" + (es ? "Mantener las 24\" × 36\" libres reales (broches montados por fuera del claro)." : "Keep the full 24\" × 36\" clear opening (mount latches outside the clear passage).") + "</li>" +
+          "<li>" + (es ? "Sellar marco fijo con cordón de 3/8\"; empaque 1/2\"×1/8\" en apoyos 1×2; dejar junta de tapa sin sellador." : "Caulk fixed frame w/ 3/8\" rod; put 1/2\"×1/8\" foam strip on 1×2 ledges; leave lid seam uncaulked.") + "</li>" +
+          "<li>" + (es ? "Sujetar 2 colchonetas sin papel a la tapa con 3 lazos de alambre cal. 16 + dique de 2\" en 4 lados." : "Hold 2 unfaced batts on the lid with 3 wire loops + build a 4-sided dam 2\" above loose fill.") + "</li>" +
+          "<li>" + (es ? "Pasillo de 24\" en OSB 23/32\" o triplay 3/4\" (nunca 3/8\"); plataforma Norte 30\"×30\" sin comprar gomas." : "Use 23/32\" OSB or 3/4\" plywood for the 24\" walkway (never 3/8\"); crew buys zero vibration pads.") + "</li>" +
+          "<li>" + (es ? "No cerrar el techo del clóset de recámara hasta tener el cable de bajo voltaje y la escotilla lista." : "Keep the bedroom-closet ceiling open until both the low-voltage cable and permanent hatch are finished.") + "</li>" +
+        "</ul>" +
+      "</div>"
+    );
   }
 
+  function renderWalkthroughStep(m, es) {
+    var qs = [
+      {
+        k: "q1",
+        en: "1. Hatch & site readiness: Confirm exact 24\"×36\" clear markout outside Front Door 4, joist spacing, ceiling fire-rating, carry turn onto the " + m.walkFt + " ft walkway, and pre-start site checklist (photo markout only — no cuts yet).",
+        es: "1. Escotilla y sitio listo: Confirmar trazo exacto de 24\"×36\" libres afuera de Puerta 4, separación de vigas, cortafuego del plafón, giro hacia el pasillo de " + m.walkFt + " pies y lista previa (solo foto — sin cortar)."
+      },
+      {
+        k: "q2",
+        en: "2. Sidewall vent route (flat roof — zero roof cuts): Measure whether the South wall has at least 4 ft to the property line (or route out the West rear-yard wall) and confirm Option A (listed power venter) vs. Option B (95%+ sealed PVC / heat pump).",
+        es: "2. Salida lateral (techo plano — cero cortes en techo): Medir si el muro Sur tiene al menos 4 pies a la colindancia (o salir por el muro Oeste al patio) y confirmar Opción A (extractor listado) vs. Opción B (PVC 95%+ / bomba de calor)."
+      },
+      {
+        k: "q3",
+        en: "3. Panel & power run (D04): Inspect the Eaton 125A subpanel John mounted at D04 and confirm bottom vs. side wire entry. Signed NEXT scope includes an 80-amp feed to Unit 4 + conditional 100-amp main breaker if service supports it — get electrician sign-off before wiring or closing D04.",
+        es: "3. Subpanel y línea (D04): Revisar el subpanel Eaton 125A montado por John en D04 y confirmar entrada inferior vs. lateral. El alcance firmado de NEXT incluye línea de 80A + principal condicional de 100A — pedir visto bueno del electricista antes de cablear o cerrar D04."
+      },
+      {
+        k: "q4",
+        en: "4. Attic light connection: Our crew installs the permanent switched enclosed LED attic light — agree with NEXT's electrician who lands the final wire connection and when.",
+        es: "4. Conexión de luz en ático: Nuestra cuadrilla instala la lámpara LED cerrada con apagador — acordar con el electricista de NEXT quién hace la conexión eléctrica final y cuándo."
+      }
+    ];
 
-  function renderHatchStep(m, es) {
-    var hatchLabel = state.hatchLocation === "hall"
-      ? (es ? "Pasillo Interior (Referencia)" : "Interior Hallway (Reference)")
-      : (es ? "Descanso Puerta 4 Exterior (Seleccionado)" : "Exterior Door 4 Landing (Selected)");
     return (
-      '<div class="u4h-grid-2" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px">' +
+      '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px;margin-bottom:14px">' +
         '<div class="u4h-info-box" style="margin:0">' +
-          '<div class="u4h-info-title">' + (es ? 'Escotilla Fija 24" × 36" Libre Terminado y Paso Calefactor' : 'Locked 24" × 36" Finished-Clear Hatch & Furnace Pass') + '</div>' +
-          '<p style="margin:6px 0 10px;font-size:0.9rem">' + (es
-            ? 'Ubicación activa: <strong>' + esc(hatchLabel) + '</strong>. El calefactor Carrier/Bryant 45k BTU (<strong>33.25" × 14.19" × 29"</strong>) sube de punta (<strong>14.19" × 29"</strong>) con +9.81" y +7.00" de margen total.'
-            : 'Active spot: <strong>' + esc(hatchLabel) + '</strong>. The Carrier/Bryant 45k BTU furnace (<strong>33.25" × 14.19" × 29"</strong>) passes end-first (<strong>14.19" × 29"</strong>) with +9.81" across and +7.00" along total margin.') + '</p>' +
-          '<svg viewBox="0 0 420 216" width="100%" style="background:#fbfcfa;border:1px solid #cbd5e1;border-radius:6px">' +
-            '<rect x="26" y="22" width="368" height="172" rx="4" fill="#f8fafc" stroke="#475569" stroke-width="1.5" stroke-dasharray="5,3"/>' +
-            '<text x="210" y="16" text-anchor="middle" font-size="9.2" font-weight="700" fill="#475569">' + (es ? 'Corte propuesto kit madera: 27-1/2" × 39-1/2" (PAUSA hasta verificar fuego y vigas B)' : 'Proposed wood-kit cut: 27-1/2" × 39-1/2" (HOLD until fire rating & joist bay B verified)') + '</text>' +
-            '<rect x="58" y="38" width="304" height="140" rx="3" fill="#e8f1fb" stroke="#1f5f7a" stroke-width="2.5"/>' +
-            '<text x="210" y="56" text-anchor="middle" font-size="10.2" font-weight="800" fill="#1f5f7a">' + (es ? '24" × 36" LIBRE TERMINADO (NUNCA REDUCIR)' : '24" × 36" FINISHED CLEAR (LOCKED — NEVER SHRINK)') + '</text>' +
-            '<rect x="98" y="68" width="224" height="88" rx="3" fill="#e4f0e6" stroke="#2f6b3f" stroke-width="2"/>' +
-            '<text x="210" y="106" text-anchor="middle" font-size="10.2" font-weight="800" fill="#2f6b3f">' + (es ? 'PASO DE PUNTA CALEFACTOR: 14.19" × 29.0" (CUMPLE)' : 'FURNACE END-FIRST PASS: 14.19" × 29.0" (PASS)') + '</text>' +
-            '<text x="210" y="124" text-anchor="middle" font-size="8.8" font-weight="700" fill="#1d2326">' + (es ? 'Broches de compresión y tiras 1×2 quedan 100% FUERA del claro 24"×36"' : 'Compression latches & 1×2 ledges stay 100% OUTSIDE 24"×36" clear') + '</text>' +
-            '<circle cx="48" cy="76" r="4.5" fill="#9a5b06"/><circle cx="48" cy="140" r="4.5" fill="#9a5b06"/>' +
-            '<circle cx="372" cy="76" r="4.5" fill="#9a5b06"/><circle cx="372" cy="140" r="4.5" fill="#9a5b06"/>' +
-          '</svg>' +
-        '</div>' +
-        '<div class="u4h-info-box" style="margin:0">' +
-          '<div class="u4h-info-title">' + (es ? '5 Reglas Obligatorias de Sellado y Candados' : '5 Mandatory Hatch Enclosure & Hold Rules') + '</div>' +
+          '<div class="u4h-info-title">' + (es ? "NEXT Instala y Prueba" : "NEXT Installs & Tests") + "</div>" +
           '<ul class="u4h-info-list">' +
-            '<li><strong>' + (es ? '1. Revisión cortafuego y claro B primero:' : '1. Ceiling fire-rating & joist bay B check first:') + '</strong> ' + (es ? 'Si el descanso requiere ensamble listado contra fuego, NO aplica el kit de madera de 27-1/2"×39-1/2".' : 'If Door 4 landing requires a listed fire-rated assembly, the 27-1/2"×39-1/2" wood kit does NOT apply.') + '</li>' +
-            '<li><strong>' + (es ? '2. Sello continuo y 2 colchonetas:' : '2. Continuous air-seal & 2 unfaced batts:') + '</strong> ' + (es ? 'Cordón respaldo 3/8" + sellador en marco fijo; burlete 1/2"×1/8" en tiras 1×2; junta operable SIN sellador; 2 colchonetas sin papel + 3 lazos alambre cal. 16 + armellas <=1/2".' : '3/8" backer rod + paintable sealant at fixed frame; 1/2"×1/8" closed-cell weatherstrip on 1×2 ledges; uncaulked operable seam; 2 unfaced batts + 3 loose 16-ga wire loops + <=1/2" screw eyes.') + '</li>' +
-            '<li><strong>' + (es ? '3. Presa de madera de 4 lados + Pasillo acoplado:' : '3. 4-sided plywood dam + Coupled pathway:') + '</strong> ' + (es ? 'Sobresale 2" arriba del aislante suelto; pasillo acoplado hacia F1 = <strong>' + m.walkFt + ' pies (' + m.sheets + ' hojas pasillo + 1 plataforma/presa)</strong>.' : 'Stands 2" above loose-fill insulation; coupled 24" pathway to F1 = <strong>' + m.walkFt + ' ft (' + m.sheets + ' walkway sheets + 1 platform/dam sheet)</strong>.') + '</li>' +
-            '<li><strong>' + (es ? '4. Clóset temporal de recámara ABIERTO:' : '4. Keep temporary bedroom closet OPEN:') + '</strong> ' + (es ? 'No cerrar hasta correr cable LV del apagador Y tener lista la escotilla permanente 24"×36".' : 'Never close until BOTH the LV switch cable is run AND the permanent 24"×36" hatch exists.') + '</li>' +
-            '<li><strong>' + (es ? '5. Techo plano sin goteras antes de aislar:' : '5. Flat-roof leak repair before insulating:') + '</strong> ' + (es ? 'Confirmar goteras reparadas y secas antes de cerrar/aislar; conservar moldura Edwardian de 103" y zoclos de 9-1/2".' : 'Confirm active flat-roof leak repair is dry before enclosing/insulating; preserve original 103" picture rail & 9-1/2" baseboards.') + '</li>' +
-          '</ul>' +
-        '</div>' +
-      '</div>'
+            "<li>" + (es ? "Calefactor horizontal, termostato y ductos aislados (campana 6\" de cocina aparte)." : "Horizontal furnace, thermostat & insulated ducts (Kitchen 6\" hood stays separate).") + "</li>" +
+            "<li>" + (es ? "Salida lateral en muro exterior (cero cortes en techo plano) + gomas antivibración." : "Horizontal sidewall exhaust (zero flat-roof cuts) + furnace vibration pads.") + "</li>" +
+            "<li>" + (es ? "Línea eléctrica del tablero principal al subpanel D04, permisos, HERS e inspecciones." : "Main-to-D04 subpanel power run, permits, HERS test & City inspections.") + "</li>" +
+          "</ul>" +
+        "</div>" +
+        '<div class="u4h-info-box" style="margin:0">' +
+          '<div class="u4h-info-title">' + (es ? "Nuestra Cuadrilla (En Orden)" : "Our Crew (In Order)") + "</div>" +
+          '<ul class="u4h-info-list">' +
+            "<li><strong>" + (es ? "1. Antes:" : "1. Before:") + "</strong> " + (es ? "Dejar abiertos clóset y D04, secar gotera del techo plano y desconectar ozono." : "Keep bedroom closet & D04 open, fix flat-roof leak, keep ozone unplugged.") + "</li>" +
+            "<li><strong>" + (es ? "2. Coordinado:" : "2. Coordinate:") + "</strong> " + (es ? 'Escotilla 24"×36" en Puerta 4, pasillo 24" (' + m.walkFt + ' pies), plataforma 30"×30", GFCI y luz.' : '24"×36" Door 4 hatch, 24" walkway (' + m.walkFt + ' ft), 30"×30" platform, GFCI & light.') + "</li>" +
+            "<li><strong>" + (es ? "3. Después:" : "3. After:") + "</strong> " + (es ? "Cerrar clóset (tras cable LV + escotilla) y resanar/pintar plafones y D04." : "Close bedroom closet (after LV cable + hatch) and patch/paint ceilings & D04.") + "</li>" +
+          "</ul>" +
+        "</div>" +
+      "</div>" +
+      '<div class="u4h-info-title" style="margin:2px 0 8px;font-weight:800;color:var(--accent)">' +
+        (es ? "Cuatro Respuestas para el Lunes 23 Nov (2:00–4:00 p.m. · Serge y Alex)" : "Four Answers Needed Monday, Nov 23 (2:00–4:00 p.m. · Serge & Alex)") +
+      "</div>" +
+      '<div class="u4h-item-list">' +
+        qs.map(function (q) {
+          var done = !!state.qChecks[q.k];
+          return '<div class="u4h-item-card' + (done ? " is-selected" : "") + '">' +
+            '<label style="display:flex;gap:10px;align-items:flex-start;flex:1;cursor:pointer">' +
+              '<input type="checkbox" data-q="' + q.k + '"' + (done ? " checked" : "") + ' style="width:17px;height:17px;margin-top:2px;accent-color:var(--accent)">' +
+              '<span class="u4h-item-name" style="font-size:13.5px;line-height:1.45;font-weight:600">' + esc(es ? q.es : q.en) + "</span>" +
+            "</label>" +
+          "</div>";
+        }).join("") +
+      "</div>" +
+      '<div class="u4h-cta-row">' +
+        '<button type="button" class="u4h-action-btn" id="hvacLogBtn">' + (es ? "\uD83D\uDCDD Guardar notas de la visita" : "\uD83D\uDCDD Save Monday walkthrough notes") + "</button>" +
+      "</div>" +
+      renderEquip(m, es)
     );
   }
 
@@ -1141,8 +1133,8 @@
     if (holdEl) {
       holdEl.className = "u4h-hold-strip";
       holdEl.innerHTML = es
-        ? "<strong>PLANO INTEGRADO R3 (RECONCILIADO CON ÁTICO) — LUNES 23 NOV (2–4 PM SERGE Y ALEX):</strong> Techo plano (cero cortes en techo). Plataforma F1 reconciliada en Comedor SO (pasillo 24\" = 15.8' ≤ 20'). Salida lateral exige extractor listado (SFMC §802.8 ≥4' a colindancia) o equipo 95%+ PVC / bomba de calor."
-        : "<strong>UNIFIED R3 PLAN (RECONCILED W/ ATTIC HATCH) — MON NOV 23 (2–4 PM SERGE &amp; ALEX):</strong> Flat roof (zero roof cuts). F1 + 30\"×30\" platform reconciled in SW Dining (24\" pathway = 15.8' ≤ 20' cap). Sidewall exit requires listed power venter (SFMC §802.8 ≥4' lot line) or 95%+ PVC / heat pump.";
+        ? "<strong>Visita de planeación · Lunes 23 nov (2:00–4:00 p.m. con Serge y Alex):</strong> No cortar plafones, no cortar el techo plano ni meter cable al subpanel todavía."
+        : "<strong>Planning visit · Monday, Nov 23 (2:00–4:00 p.m. with Serge &amp; Alex):</strong> Do not cut ceilings, cut the flat roof, or pull subpanel wire yet.";
     }
 
     var stepPills = '<div class="u4h-steps" role="tablist">' +
@@ -1152,158 +1144,121 @@
       }).join("") +
     "</div>";
 
-    var titleEn = "Unified Attic Hatch, 24\" Pathway, F1 & Reactive Manual D Ducts";
-    var titleEs = "Plano Integrado: Escotilla, Pasillo 24\", F1 y Ductos Manual D";
-    var subEn = "Reconciled SW Dining F1 (X=174\", Y=258\") — drag any node to update the 24\" pathway, Manual D ducts & sidewall flue live";
-    var subEs = "F1 reconciliado en Comedor SO (X=174\", Y=258\") — arrastra cualquier nodo para recalcular pasillo 24\", ductos y salida lateral";
+    var titleEn = "Attic Hatch, Walkway, Furnace & Ducts";
+    var titleEs = "Escotilla, Pasillo, Calefacción y Ductos";
+    var subEn = "Drag the furnace or vents to test layout, or tap the 24\"×36\" Door 4 hatch to inspect framing & seals";
+    var subEs = "Arrastra el calefactor o ductos para probar el trazo, o toca la escotilla 24\"×36\" para ver el marco y sellos";
     var inner = "";
 
     if (state.step === "layout") {
-      var ventOk = !m.flue.gravityIllegal;
-      var allOk = m.walkPass && ventOk;
-
+      var stObj = computeSingleStatus(m, es);
       inner =
         '<div class="u4h-kpi-grid">' +
+          '<div class="u4h-kpi" style="cursor:pointer" id="hvacKpiHatchCard">' +
+            '<div class="u4h-kpi-lbl">' + (es ? "Escotilla (Tocar)" : "Attic Hatch (Tap)") + "</div>" +
+            '<div class="u4h-kpi-val is-info">24" × 36"</div>' +
+            '<div class="u4h-kpi-sub">' + (es ? (state.hatchLocation === "door4" ? "Afuera de Puerta 4 ↗" : "Pasillo interior ↗") : (state.hatchLocation === "door4" ? "Outside Door 4 ↗" : "Interior hall ↗")) + "</div>" +
+          "</div>" +
           '<div class="u4h-kpi">' +
-            '<div class="u4h-kpi-lbl">' + (es ? "Pasillo 24\" (CMC 304.4)" : "24\" Pathway (CMC 304.4)") + "</div>" +
+            '<div class="u4h-kpi-lbl">' + (es ? "Pasillo 24\" Madera" : "24\" Wood Walkway") + "</div>" +
             '<div id="hvacKpiWalkVal" class="u4h-kpi-val ' + (m.walkPass ? "is-ok" : "is-fail") + '">' + m.walkFt + (es ? " pies / 20" : " ft / 20 ft") + "</div>" +
-            '<div id="hvacKpiSheetsSub" class="u4h-kpi-sub">' + m.sheets + (es ? " hojas 4×8 (30\" libre)" : " shts 4×8 (30\" clear)") + "</div>" +
+            '<div id="hvacKpiSheetsSub" class="u4h-kpi-sub">' + m.sheets + (es ? " hojas 4×8 · 30\" paso" : " sheets 4×8 · 30\" clear") + "</div>" +
           "</div>" +
           '<div class="u4h-kpi">' +
-            '<div class="u4h-kpi-lbl">' + (es ? "Ramales Manual D" : "Manual D Duct Runs") + "</div>" +
-            '<div id="hvacKpiRunsVal" class="u4h-kpi-val is-info">SA ' + m.sa1Ft + "/" + m.sa2Ft + "/" + m.sa3Ft + "'</div>" +
-            '<div id="hvacKpiRunsSub" class="u4h-kpi-sub">RA1 ' + m.ra1Ft + "' · F1 (" + state.nodes.f1.x + "\"," + state.nodes.f1.y + "\")</div>" +
+            '<div class="u4h-kpi-lbl">' + (es ? "Ductos y Salida" : "Ducts & Sidewall Vent") + "</div>" +
+            '<div id="hvacKpiRunsVal" class="u4h-kpi-val ' + (m.flue.gravityIllegal ? "is-fail" : "is-ok") + '">' + m.sa1Ft + " / " + m.sa2Ft + " / " + m.sa3Ft + "'</div>" +
+            '<div class="u4h-kpi-sub">' + (es ? "Cero cortes en techo" : "Zero flat-roof cuts") + "</div>" +
           "</div>" +
-          '<div class="u4h-kpi">' +
-            '<div class="u4h-kpi-lbl">' + (es ? "Techo Plano · Salida Lat." : "Flat Roof · Sidewall Exit") + "</div>" +
-            '<div class="u4h-kpi-val ' + (ventOk ? "is-ok" : "is-fail") + '">' +
-              (m.flue.gravityIllegal ? (es ? "FALLA CÓDIGO" : "CODE FAIL") : (state.ventMode === "cat4_pvc" ? "95%+ PVC" : (es ? "Extractor ≥4'" : "Pwr Vent ≥4'"))) +
-            "</div>" +
-            '<div id="hvacKpiVentSub" class="u4h-kpi-sub">V1 ' + m.flue.runFt + "' (+" + m.flue.minRiseIn + "\" pitch)</div>" +
-          "</div>" +
-        "</div>" +
-        '<div class="u4h-svg-hint">' +
-          "<span>" + (es ? "✋ Arrastra F1, S1, S2, S3, R1 o JD-1: el pasillo 24\", la troncal Manual D y el escape lateral V1 se recalculan en vivo:" : "✋ Drag F1, S1, S2, S3, R1, or JD-1 — 24\" pathway, Manual D trunk/wyes & sidewall flue V1 dynamically reroute live:") + "</span>" +
         "</div>" +
         '<div class="u4h-svg-wrap">' + renderAtticPlanSvg(m, es) + "</div>" +
+        '<div id="hvacStatusBanner" class="u4h-status ' + stObj.cls + '">' + esc(stObj.txt) + "</div>" +
         '<div class="u4h-controls">' +
-          ventControlsHtml(es) +
           '<div class="u4h-ctrl-row">' +
-            '<span class="u4h-ctrl-lbl">' + (es ? "Modo de ductos y descarga F1:" : "Duct layout & F1 discharge:") + "</span>" +
+            '<span class="u4h-ctrl-lbl">' + (es ? "Ubicación del calefactor:" : "Furnace spot:") + "</span>" +
             '<div class="u4h-pill-group">' +
-              '<button type="button" class="u4h-pill' + (state.ductMode === "trunk" ? " is-active" : "") + '" data-dmode="trunk">' + (es ? "Troncal Manual D" : "Trunk & Branch (Manual D)") + "</button>" +
-              '<button type="button" class="u4h-pill' + (state.ductMode === "radial" ? " is-active" : "") + '" data-dmode="radial">' + (es ? "Radial Wye" : "Radial Wye") + "</button>" +
-              '<button type="button" class="u4h-pill' + (state.dischargeDir === "right" ? " is-active" : "") + '" data-ddir="right">' + (es ? "Descarga Este →" : "Discharge East →") + "</button>" +
-              '<button type="button" class="u4h-pill' + (state.dischargeDir === "left" ? " is-active" : "") + '" data-ddir="left">' + (es ? "← Descarga Oeste" : "← Discharge West") + "</button>" +
+              '<button type="button" class="u4h-pill' + (state.activePreset === "reconciled" ? " is-active" : "") + '" data-preset="reconciled">' + (es ? "Comedor SO · 15.8' (Base)" : "SW Dining · 15.8' (Recommended)") + "</button>" +
+              '<button type="button" class="u4h-pill' + (state.activePreset === "close" ? " is-active" : "") + '" data-preset="close">' + (es ? "Comedor NO · 10.6'" : "NW Dining · 10.6'") + "</button>" +
+              '<button type="button" class="u4h-pill' + (state.activePreset === "far" ? " is-active" : "") + '" data-preset="far">' + (es ? "Sala Este · >20'" : "East Living · >20'") + "</button>" +
             "</div>" +
           "</div>" +
           '<div class="u4h-ctrl-row">' +
-            '<span class="u4h-ctrl-lbl">' + (es ? "Posiciones de prueba F1:" : "F1 position presets:") + "</span>" +
+            '<span class="u4h-ctrl-lbl">' + (es ? "Muro de salida lateral:" : "Sidewall vent exit:") + "</span>" +
             '<div class="u4h-pill-group">' +
-              '<button type="button" class="u4h-pill' + (state.activePreset === "reconciled" ? " is-active" : "") + '" data-preset="reconciled">' + (es ? "↺ Comedor SO Reconciliado (15.8')" : "↺ Reconciled SW Dining (15.8')") + "</button>" +
-              '<button type="button" class="u4h-pill' + (state.activePreset === "close" ? " is-active" : "") + '" data-preset="close">' + (es ? "Comedor NO (~10.6')" : "NW Dining (~10.6')") + "</button>" +
-              '<button type="button" class="u4h-pill' + (state.activePreset === "far" ? " is-active" : "") + '" data-preset="far">' + (es ? "Sala Este (>20' · Falla)" : "Far East (>20' · Fails)") + "</button>" +
+              '<button type="button" class="u4h-pill' + (state.exitWall === "south" ? " is-active" : "") + '" data-ewall="south">' + (es ? "Muro Sur (revisar ≥4')" : "South Wall (check ≥4')") + "</button>" +
+              '<button type="button" class="u4h-pill' + (state.exitWall === "west" ? " is-active" : "") + '" data-ewall="west">' + (es ? "Patio Oeste (≥4' libre)" : "West Rear Yard (≥4' clear)") + "</button>" +
             "</div>" +
           "</div>" +
-        "</div>" +
-        '<div id="hvacAlertsHost">' + buildAlertsHtml(m, es) + "</div>" +
-        '<div id="hvacStatusBanner" class="u4h-status ' + (allOk ? "is-pass" : "is-fail") + '">' +
-          (!m.walkPass
-            ? (es ? "✗ PASILLO EXCEDE 20 PIES (" + m.walkFt + " pies) — Con 66\" de altura libre (CMC 304.4.1), acerca F1 hacia Comedor SO."
-                  : "✗ PATHWAY OVER 20 FT CAP (" + m.walkFt + " ft) — At 66\" flat-roof attic height (CMC 304.4.1), move F1 closer toward SW Dining.")
-            : m.flue.gravityIllegal
-              ? (es ? "✗ SALIDA LATERAL POR GRAVEDAD PROHIBIDA — Selecciona Extractor Lateral Listado (Opción A) o 95%+ PVC (Opción B)."
-                    : "✗ UNASSISTED GRAVITY SIDEWALL VENT PROHIBITED — Select Listed Power Venter (Option A) or 95%+ PVC Direct-Vent (Option B).")
-              : (es ? "✓ PASA — Pasillo 24\": " + m.walkFt + " pies (≤20 pies, " + m.sheets + " hojas 4×8) · Salida lateral V1: " + m.flue.runFt + " pies (+" + m.flue.minRiseIn + "\" pendiente ≥1/4\"/pie)."
-                    : "✓ PASS — 24\" Pathway: " + m.walkFt + " ft (≤20 ft cap, " + m.sheets + " sheets 4×8) · Sidewall V1: " + m.flue.runFt + " ft (+" + m.flue.minRiseIn + "\" rise at ≥1/4\"/ft).")) +
-        "</div>" +
-        '<div class="u4h-info-box">' +
-          '<div class="u4h-info-title">' + (es ? "Requisitos de Código: 2025 CMC / SFMC + Manual Carrier/Bryant + Manual D" : "Code & OEM Requirements: 2025 CMC / SFMC + Carrier Manual + ACCA Manual D") + "</div>" +
-          '<ul class="u4h-info-list">' +
-            "<li><strong>" + (es ? "Pasillo 24\" y Plataforma 30\"×30\" (CMC 304.4):" : "24\" Pathway & 30\"×30\" Platform (2025 CMC 304.4):") + "</strong> " + (es ? "Con 66\" (<6 pies) bajo el techo plano, el pasillo continuo sólido de ≥24\" (OSB 23/32\" o triplay 3/4\", nunca 3/8\") con 30\" libres NO puede exceder 20 pies (actual: " + m.walkFt + " pies en Comedor SO). Incluye plataforma nivelada 30\"×30\", luz LED con apagador al acceso y GFCI 120V en lado línea ≤25 pies (CEC 210.63)." : "At 66\" (<6 ft) flat-roof cavity height, continuous ≥24\" solid wood flooring (23/32\" OSB or 3/4\" ply, never 3/8\") with 30\" clear passage is capped at ≤20 ft (reconciled SW Dining = " + m.walkFt + " ft). Requires level 30\"×30\" service platform, entrance-switched LED light (CMC 304.4.4), and line-side 120V GFCI ≤25 ft (CEC 210.63).") + "</li>" +
-            "<li><strong>" + (es ? "Techo Plano y Salida Lateral (Manual II810SA-05 p.22 + SFMC §802.8):" : "Flat Roof & Sidewall Exit (Carrier Manual II810SA-05 p.22 + 2025 SFMC §802.8):") + "</strong> " + (es ? "Cero penetraciones nuevas en techo plano. Un calefactor 80% AFUE Categoría I NO está aprobado para salida horizontal por gravedad; requiere Opción A (extractor mecánico lateral listado enclavado a la válvula de gas, pendiente ≥1/4\"/pie, ≥4 pies a línea de propiedad interior excepto vía pública, ≥3 pies sobre tomas de aire a <10 pies, ≥4 pies horiz/abajo o ≥1 pie arriba de ventanas) u Opción B (equipo 95%+ Categoría IV PVC sellado o bomba de calor)." : "Zero new flat-roof penetrations. An 80% AFUE Category I furnace is NOT approved for unassisted gravity sidewall venting; sidewall exit requires Option A (listed mechanical draft sidewall power venter interlocked to gas valve, ≥1/4\"/ft upward slope, ≥4 ft from interior property line except public way per SFMC §802.8, ≥3 ft above forced-air inlets within 10 ft, ≥4 ft horiz/below or ≥1 ft above operable windows/doors) OR Option B (95%+ AFUE Cat IV sealed PVC direct-vent / ducted heat pump).") + "</li>" +
-          "</ul>" +
-        "</div>" +
-        '<div class="u4h-cta-row" style="margin-top:10px">' +
-          '<a id="hvacOpenSyncedAtticLink" class="u4h-nav-link" href="' + esc(syncedAtticHref()) + '">' +
-            (es ? "← Ver Plano de Escotilla y Sellado (Posición F1 Sincronizada)" : "← Open Synced Attic Hatch & Enclosure Plan") +
-          "</a>" +
+          '<details id="hvacMoreOpts"' + (state.moreOptsOpen ? " open" : "") + ' style="border-top:1px solid var(--line);padding-top:8px">' +
+            '<summary style="cursor:pointer;font-size:12.5px;font-weight:600;color:var(--accent)">' + (es ? "Más opciones de ductos, escotilla y extractor" : "More duct, hatch & vent options") + "</summary>" +
+            '<div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">' +
+              '<div class="u4h-ctrl-row">' +
+                '<span class="u4h-ctrl-lbl">' + (es ? "Tipo de salida lateral:" : "Vent system:") + "</span>" +
+                '<div class="u4h-pill-group">' +
+                  '<button type="button" class="u4h-pill' + (state.ventMode === "power_venter" ? " is-active" : "") + '" data-vmode="power_venter">' + (es ? "Opción A: Extractor listado" : "Option A: Power venter") + "</button>" +
+                  '<button type="button" class="u4h-pill' + (state.ventMode === "cat4_pvc" ? " is-active" : "") + '" data-vmode="cat4_pvc">' + (es ? "Opción B: PVC 95%+ / Bomba" : "Option B: 95%+ PVC / Heat pump") + "</button>" +
+                "</div>" +
+              "</div>" +
+              '<div class="u4h-ctrl-row">' +
+                '<span class="u4h-ctrl-lbl">' + (es ? "Trazado de ductos:" : "Duct style & discharge:") + "</span>" +
+                '<div class="u4h-pill-group">' +
+                  '<button type="button" class="u4h-pill' + (state.ductMode === "trunk" ? " is-active" : "") + '" data-dmode="trunk">' + (es ? "Troncal" : "Trunk & branch") + "</button>" +
+                  '<button type="button" class="u4h-pill' + (state.ductMode === "radial" ? " is-active" : "") + '" data-dmode="radial">Radial</button>' +
+                  '<button type="button" class="u4h-pill' + (state.dischargeDir === "right" ? " is-active" : "") + '" data-ddir="right">' + (es ? "Salida Este →" : "Supply East →") + "</button>" +
+                  '<button type="button" class="u4h-pill' + (state.dischargeDir === "left" ? " is-active" : "") + '" data-ddir="left">' + (es ? "← Salida Oeste" : "← Supply West") + "</button>" +
+                "</div>" +
+              "</div>" +
+              '<div class="u4h-ctrl-row">' +
+                '<span class="u4h-ctrl-lbl">' + (es ? "Sitio de escotilla:" : "Hatch spot:") + "</span>" +
+                '<div class="u4h-pill-group">' +
+                  '<button type="button" class="u4h-pill' + (state.hatchLocation === "door4" ? " is-active" : "") + '" data-loc="door4">' + (es ? "Afuera de Puerta 4 (Elegido)" : "Outside Door 4 (Selected)") + "</button>" +
+                  '<button type="button" class="u4h-pill' + (state.hatchLocation === "hall" ? " is-active" : "") + '" data-loc="hall">' + (es ? "Pasillo interior (Ref.)" : "Interior hall (Ref.)") + "</button>" +
+                "</div>" +
+              "</div>" +
+            "</div>" +
+          "</details>" +
         "</div>";
 
     } else if (state.step === "hatch") {
-      titleEn = "Locked 24\" × 36\" Hatch Framing & 5 Enclosure Seals";
-      titleEs = "Escotilla Fija 24\" × 36\" y 5 Reglas de Sellado";
-      subEn = "Coupled live with SW Dining F1 (" + state.nodes.f1.x + "\"," + state.nodes.f1.y + "\") -> " + m.walkFt + " ft 24\" OSB pathway (" + m.sheets + " walkway sheets + 1 platform/dam)";
-      subEs = "Acoplada en vivo con F1 (" + state.nodes.f1.x + "\"," + state.nodes.f1.y + "\") -> pasillo 24\" de " + m.walkFt + " pies (" + m.sheets + " hojas + 1 plataforma/presa)";
+      titleEn = "24\" × 36\" Clear Hatch, Framing & Seals";
+      titleEs = "Escotilla 24\" × 36\" Libre, Marco y Sellos";
+      subEn = "Common stair landing outside Front Door 4 — connected to the " + m.walkFt + " ft 24\" wood walkway";
+      subEs = "Descanso común afuera de Puerta Principal 4 — conectada al pasillo de 24\" de " + m.walkFt + " pies";
       inner = renderHatchStep(m, es);
-    } else if (state.step === "section") {
-      titleEn = "Flat-Roof 66\" Cavity & Sidewall Exhaust Code Check";
-      titleEs = "Cavidad de Techo Plano (66\") y Código de Salida Lateral";
-      subEn = "Replaces old pitched ridge diagram — test SFMC §802.8 4-ft lot-line setback & power-venter vs. 95%+ PVC options";
-      subEs = "Reemplaza el antiguo techo inclinado — verifica retiro ≥4 pies a colindancia (SFMC §802.8) y opciones de venteo";
 
+    } else if (state.step === "section") {
+      titleEn = "66\" Flat-Roof Attic & Sidewall Vent";
+      titleEs = "Ático de Techo Plano (66\") y Salida Lateral";
+      subEn = "Zero roof cuts — compare sidewall vent options and check the 4-ft South property-line clearance";
+      subEs = "Cero cortes en techo plano — compara opciones de salida lateral y revisa los 4 pies a la colindancia Sur";
+      var secStatus = computeSingleStatus(m, es);
       inner =
         '<div class="u4h-svg-wrap">' + renderSectionSvg(m, es) + "</div>" +
         '<div class="u4h-controls">' +
-          ventControlsHtml(es) +
           '<div class="u4h-ctrl-row">' +
-            '<span class="u4h-ctrl-lbl">' + (es ? "Retiro medido Muro Sur a colindancia:" : "South wall setback to lot line:") + "</span>" +
+            '<span class="u4h-ctrl-lbl">' + (es ? "Opción de salida lateral:" : "Sidewall vent option:") + "</span>" +
             '<div class="u4h-pill-group">' +
-              '<button type="button" class="u4h-pill' + (state.southLotSetbackFt === "unknown" ? " is-active" : "") + '" data-lot="unknown">' + (es ? "Medir Lun 23 (Pendiente)" : "Measure Mon Nov 23 (TBD)") + "</button>" +
-              '<button type="button" class="u4h-pill' + (state.southLotSetbackFt === "gte4" ? " is-active" : "") + '" data-lot="gte4">' + (es ? "≥ 4 pies libres (Pasa Sur)" : "≥ 4 ft clear (South OK)") + "</button>" +
-              '<button type="button" class="u4h-pill' + (state.southLotSetbackFt === "lt4" ? " is-active" : "") + '" data-lot="lt4">' + (es ? "< 4 pies (Re-rutea al Oeste)" : "< 4 ft (Auto-routes West)") + "</button>" +
+              '<button type="button" class="u4h-pill' + (state.ventMode === "power_venter" ? " is-active" : "") + '" data-vmode="power_venter">' + (es ? "Opción A: 80% + Extractor listado" : "Option A: 80% + Power venter") + "</button>" +
+              '<button type="button" class="u4h-pill' + (state.ventMode === "cat4_pvc" ? " is-active" : "") + '" data-vmode="cat4_pvc">' + (es ? "Opción B: PVC 95%+ / Bomba calor" : "Option B: 95%+ PVC / Heat pump") + "</button>" +
+              '<button type="button" class="u4h-pill' + (state.ventMode === "gravity_unassisted" ? " is-active" : "") + '" data-vmode="gravity_unassisted">' + (es ? "Sin extractor (No permitido)" : "No venter (Not allowed)") + "</button>" +
+            "</div>" +
+          "</div>" +
+          '<div class="u4h-ctrl-row">' +
+            '<span class="u4h-ctrl-lbl">' + (es ? "Distancia del muro Sur a colindancia:" : "South wall distance to property line:") + "</span>" +
+            '<div class="u4h-pill-group">' +
+              '<button type="button" class="u4h-pill' + (state.southLotSetbackFt === "unknown" ? " is-active" : "") + '" data-lot="unknown">' + (es ? "Medir lunes 23" : "Measure Monday") + "</button>" +
+              '<button type="button" class="u4h-pill' + (state.southLotSetbackFt === "gte4" ? " is-active" : "") + '" data-lot="gte4">' + (es ? "≥ 4 pies (Muro Sur OK)" : "≥ 4 ft (South OK)") + "</button>" +
+              '<button type="button" class="u4h-pill' + (state.southLotSetbackFt === "lt4" ? " is-active" : "") + '" data-lot="lt4">' + (es ? "< 4 pies (Salir al Oeste)" : "< 4 ft (Route West)") + "</button>" +
             "</div>" +
           "</div>" +
         "</div>" +
-        '<div id="hvacAlertsHost">' + buildAlertsHtml(m, es) + "</div>" +
-        '<div class="u4h-photo-grid">' +
-          '<div class="u4h-photo-card">' +
-            '<img src="./assets/attic-hatch-candidate.jpg" alt="' + esc(es ? "Foto real descanso exterior afuera de Puerta Principal 4" : "Real exterior landing ceiling photo outside Front Door 4") + '">' +
-            '<div class="u4h-photo-cap"><strong>' + (es ? "Acceso aprobado — Afuera de Puerta Principal 4:" : "Approved access — Outside Front Door 4:") + "</strong> " +
-              (es ? 'Escotilla 24"×36" libre terminado en el descanso común deja pasar el gabinete 14-3/16"×29" de punta hacia la ruta de 15.8 pies.' : 'Locked 24"×36" clear hatch on the common landing passes the 14-3/16"×29" furnace end-first onto the 15.8 ft 24" pathway.') +
-            "</div>" +
-          "</div>" +
-          '<div class="u4h-photo-card">' +
-            '<img src="./assets/unit4-floorplan-proof.png" alt="' + esc(es ? "Planta de referencia Unidad 4" : "Unit 4 reference floor plan") + '">' +
-            '<div class="u4h-photo-cap"><strong>' + (es ? "Planta completa Unidad 4:" : "Unit 4 full floor plan:") + "</strong> " +
-              (es ? "Referencia de los 8 espacios debajo de la cavidad plana de 66\"." : "Reference of all 8 spaces beneath the 66\" flat-roof attic cavity.") +
-            "</div>" +
-          "</div>" +
-        "</div>";
+        '<div class="u4h-status ' + secStatus.cls + '">' + esc(secStatus.txt) + "</div>";
 
     } else {
-      titleEn = "Mon Nov 23 Walkthrough & Code Signoff (Serge & Alex)";
-      titleEs = "Visita Lunes 23 Nov y Validación de Código (Serge y Alex)";
-      subEn = "Lock equipment venting option, SW Dining platform & electrical subpanel reconciliation before any cuts";
-      subEs = "Confirmar opción de salida lateral, plataforma en Comedor SO y subpanel antes de cualquier corte";
-
-      var qs = [
-        { k: "q1", en: "1. Lock reconciled SW Dining spot (X=174\", Y=258\") w/ 30\"×30\" North platform & 15.8 ft continuous 24\" pathway (≤20 ft CMC 304.4.1)", es: "1. Confirmar ubicación reconciliada en Comedor SO (X=174\", Y=258\") con plataforma 30\"×30\" Norte y pasillo 24\" de 15.8 pies (≤20 pies)" },
-        { k: "q2", en: "2. Flat roof = ZERO new roof penetrations: choose Option A (80% AFUE + listed sidewall power venter) OR Option B (95%+ PVC direct-vent / heat pump)", es: "2. Techo plano = CERO penetraciones en techo: elegir Opción A (80% + extractor lateral listado) u Opción B (95%+ PVC / bomba de calor)" },
-        { k: "q3", en: "3. Measure 2025 SFMC §802.8 clearances: ≥4 ft from interior property line (South wall vs West rear-yard wall) & window/inlet offsets", es: "3. Medir retiros SFMC §802.8: ≥4 pies a colindancia interior (Muro Sur vs Muro Oeste patio trasero) y distancia a ventanas" },
-        { k: "q4", en: "4. Confirm ≥1/4\"/ft upward flue slope, straps ≤5 ft o.c., ≥24\" rigid supply plenum & 1\" clearance first 36\"", es: "4. Confirmar pendiente ≥1/4\"/pie en escape, soportes ≤5 pies, pleno rígido ≥24\" y 1\" libre en primeros 36\"" },
-        { k: "q5", en: "5. Review Manual D trunk sizing, 45° wyes, balancing dampers & S1/S2/S3/R1/JD-1 positions (keep Kitchen 6\" hood separate)", es: "5. Revisar cálculo Manual D, derivaciones 45°, compuertas y S1/S2/S3/R1/JD-1 (campana 6\" de cocina totalmente separada)" },
-        { k: "q6", en: "6. Confirm 24\"×36\" hatch markout & ceiling fire-rating outside Front Door 4 + repair active flat-roof leak first", es: "6. Confirmar trazo de escotilla 24\"×36\" y cortafuego afuera de Puerta 4 + reparar gotera activa del techo plano" },
-        { k: "q7", en: "7. Reconcile NEXT 80A (#4 Cu) feeder + 125A subpanel vs earlier 100A/onsite Eaton box + line-side 120V GFCI ≤25 ft", es: "7. Reconciliar alimentador NEXT 80A (#4 Cu) + subpanel 125A vs nota de 100A/caja Eaton en obra + GFCI 120V ≤25 pies" }
-      ];
-
-      inner =
-        '<div class="u4h-item-list">' +
-          qs.map(function (q) {
-            var done = !!state.qChecks[q.k];
-            return '<div class="u4h-item-card' + (done ? " is-selected" : "") + '">' +
-              '<label style="display:flex;gap:10px;align-items:center;flex:1;cursor:pointer">' +
-                '<input type="checkbox" data-q="' + q.k + '"' + (done ? " checked" : "") + ' style="width:17px;height:17px;accent-color:var(--accent)">' +
-                '<span class="u4h-item-name" style="font-size:13.5px">' + esc(es ? q.es : q.en) + "</span>" +
-              "</label>" +
-            "</div>";
-          }).join("") +
-        "</div>" +
-        '<div class="u4h-cta-row">' +
-          '<button type="button" class="u4h-action-btn" id="hvacLogBtn">' + (es ? "📝 Guardar acuerdos de la visita" : "📝 Log walkthrough decisions") + "</button>" +
-          '<a class="u4h-nav-link" href="' + esc(syncedAtticHref()) + '">' + (es ? "Abrir Escotilla Ático (Sincronizada) →" : "Open Synced Attic Hatch Plan →") + "</a>" +
-        "</div>" +
-        renderEquip(m, es);
+      titleEn = "Phase Split & Monday Walkthrough";
+      titleEs = "Fases de Trabajo y Visita del Lunes";
+      subEn = "Who owns each phase (NEXT vs. our crew) and the 4 items Monday needs to resolve";
+      subEs = "Quién hace cada fase (NEXT vs. nuestra cuadrilla) y los 4 puntos a resolver el lunes";
+      inner = renderWalkthroughStep(m, es);
     }
 
     var pager = '<div class="u4h-pager">' +
@@ -1319,15 +1274,39 @@
             '<div class="u4h-title">' + esc(es ? titleEs : titleEn) + "</div>" +
             '<div class="u4h-sub">' + esc(es ? subEs : subEn) + "</div>" +
           "</div>" +
-          '<span class="u4h-compass">Flat Roof · CMC 304.4</span>' +
+          '<span class="u4h-compass">24"×36" · 66" Attic</span>' +
         "</div>" +
         stepPills +
         inner +
         pager +
       "</div>";
 
+    var kpiHatch = document.getElementById("hvacKpiHatchCard");
+    if (kpiHatch) {
+      kpiHatch.addEventListener("click", function () {
+        state.step = "hatch";
+        syncBlueprintHiddenState();
+        render();
+        window.scrollTo(0, 0);
+      });
+    }
+
+    var moreDet = document.getElementById("hvacMoreOpts");
+    if (moreDet) {
+      moreDet.addEventListener("toggle", function () { state.moreOptsOpen = moreDet.open; });
+    }
+
     host.querySelectorAll("[data-step]").forEach(function (b) {
-      b.addEventListener("click", function () { state.step = b.getAttribute("data-step"); render(); window.scrollTo(0, 0); });
+      b.addEventListener("click", function () { state.step = b.getAttribute("data-step"); syncBlueprintHiddenState(); render(); window.scrollTo(0, 0); });
+    });
+    host.querySelectorAll("[data-loc]").forEach(function (b) {
+      b.addEventListener("click", function () { state.hatchLocation = b.getAttribute("data-loc"); syncBlueprintHiddenState(); render(); });
+    });
+    host.querySelectorAll("[data-fire]").forEach(function (b) {
+      b.addEventListener("click", function () { state.fireRating = b.getAttribute("data-fire"); render(); });
+    });
+    host.querySelectorAll("[data-bay]").forEach(function (b) {
+      b.addEventListener("click", function () { state.joistBay = b.getAttribute("data-bay"); render(); });
     });
     host.querySelectorAll("[data-vmode]").forEach(function (b) {
       b.addEventListener("click", function () { state.ventMode = b.getAttribute("data-vmode"); syncBlueprintHiddenState(); render(); });
@@ -1369,53 +1348,47 @@
     if (eqBtn) eqBtn.addEventListener("click", function () { state.equipOpen = !state.equipOpen; render(); });
     var logBtn = document.getElementById("hvacLogBtn");
     if (logBtn) logBtn.addEventListener("click", function () {
-      if (window.U4LiveAi) window.U4LiveAi.openNote("HVAC + Attic Unified R3 walkthrough notes (F1=" + state.nodes.f1.x + "x" + state.nodes.f1.y + "in, walkway=" + m.walkFt + "ft, ventMode=" + state.ventMode + ", exitWall=" + m.flue.effectiveWall + ", SA=" + m.sa1Ft + "/" + m.sa2Ft + "/" + m.sa3Ft + "ft): ");
+      if (window.U4LiveAi) {
+        window.U4LiveAi.openNote(
+          "Monday Nov 23 Attic + HVAC walkthrough notes — Hatch=" + state.hatchLocation +
+          " (fire=" + state.fireRating + ", joist=" + state.joistBay +
+          "), F1=(" + state.nodes.f1.x + "x" + state.nodes.f1.y + "in, walkway=" + m.walkFt +
+          "ft), Vent=" + state.ventMode + " (" + m.flue.effectiveWall + " wall), D04 panel & attic light: "
+        );
+      }
     });
     var pBtn = document.getElementById("hvacPrevBtn");
     var nBtn = document.getElementById("hvacNextBtn");
-    if (pBtn) pBtn.addEventListener("click", function () { if (idx > 0) { state.step = STEPS[idx - 1].id; render(); window.scrollTo(0, 0); } });
-    if (nBtn) nBtn.addEventListener("click", function () { if (idx < STEPS.length - 1) { state.step = STEPS[idx + 1].id; render(); window.scrollTo(0, 0); } });
-
-    document.querySelectorAll('[data-plan-id="attic-hatch"]').forEach(function (a) {
-      a.setAttribute("href", syncedAtticHref());
-    });
+    if (pBtn) pBtn.addEventListener("click", function () { if (idx > 0) { state.step = STEPS[idx - 1].id; syncBlueprintHiddenState(); render(); window.scrollTo(0, 0); } });
+    if (nBtn) nBtn.addEventListener("click", function () { if (idx < STEPS.length - 1) { state.step = STEPS[idx + 1].id; syncBlueprintHiddenState(); render(); window.scrollTo(0, 0); } });
 
     if (state.step === "layout") wireAllNodeDrags();
 
+    if (window.U4ZoomPan && typeof window.U4ZoomPan.refresh === "function") {
+      try { window.U4ZoomPan.refresh(); } catch (_) {}
+    }
+    if (window.U4PinDragger && typeof window.U4PinDragger.refresh === "function") {
+      try { window.U4PinDragger.refresh(); } catch (_) {}
+    }
     if (window.U4PlanNav && typeof window.U4PlanNav.reportPlanContext === "function") {
       window.U4PlanNav.reportPlanContext();
     }
   }
 
-  window.addEventListener("message", function (ev) {
-    var msg = ev && ev.data;
-    if (!msg || msg.type !== "u4:attic-hvac-sync" || msg.sourcePlan === "hvac-layout") return;
-    if (msg.f1 && isFinite(msg.f1.x) && isFinite(msg.f1.y)) {
-      state.nodes.f1 = { x: Math.round(msg.f1.x), y: Math.round(msg.f1.y) };
-    }
-    if (msg.location === "hall" || msg.location === "door4") state.hatchLocation = msg.location;
-    if (msg.ventMode) state.ventMode = msg.ventMode;
-    if (msg.exitWall) state.exitWall = msg.exitWall;
-    render();
-  });
-
   function applyHvacView(args) {
     args = args || {};
     var changed = false;
-    var stepRaw = args.step;
-    if (stepRaw != null && stepRaw !== "") {
-      var n = Number(stepRaw);
-      if (isFinite(n) && n >= 1 && n <= STEPS.length) {
-        state.step = STEPS[n - 1].id;
+    if (args.step != null && args.step !== "") {
+      var nextStep = resolveInitialStep(args.step);
+      if (STEPS.some(function (x) { return x.id === nextStep; })) {
+        state.step = nextStep;
         changed = true;
-      } else {
-        var s = String(stepRaw).toLowerCase().trim();
-        var map = { plan: "layout", attic: "layout", ducts: "layout", height: "section", vent: "section", roof: "section", sidewall: "section", clearance: "section", mon: "walkthrough", checklist: "walkthrough" };
-        var id = map[s] || s;
-        if (STEPS.some(function (x) { return x.id === id; })) { state.step = id; changed = true; }
       }
     }
-    if (changed) render();
+    if (changed) {
+      syncBlueprintHiddenState();
+      render();
+    }
     return changed;
   }
 
@@ -1432,6 +1405,12 @@
         state.ventMode = sv.indexOf("pvc") >= 0 || sv.indexOf("95") >= 0 ? "cat4_pvc" : (sv.indexOf("grav") >= 0 ? "gravity_unassisted" : "power_venter");
       } else if (act === "exit_wall" || act === "sidewall") {
         state.exitWall = String(val || "").toLowerCase().indexOf("west") >= 0 ? "west" : "south";
+      } else if (act === "hatch_location" || act === "location" || act === "spot") {
+        state.hatchLocation = String(val || "").toLowerCase().indexOf("hall") >= 0 ? "hall" : "door4";
+      } else if (act === "fire_rating") {
+        state.fireRating = String(val || "unknown");
+      } else if (act === "joist_bay") {
+        state.joistBay = String(val || "unknown");
       } else if (act === "discharge" || act === "discharge_dir") {
         state.dischargeDir = String(val).toLowerCase().indexOf("left") >= 0 || String(val).toLowerCase().indexOf("west") >= 0 ? "left" : "right";
       } else if (act === "preset" || act === "furnace_preset") {
@@ -1447,14 +1426,17 @@
           state.dischargeDir = "right";
           state.activePreset = "reconciled";
         }
-      } else if (act === "move_node" || state.nodes[act]) {
-        var nk = state.nodes[act] ? act : String(args.target || "").toLowerCase();
+      } else if (act === "move_node" || act === "move_f1" || state.nodes[act]) {
+        var nk = act === "move_f1" ? "f1" : (state.nodes[act] ? act : String(args.target || "").toLowerCase());
         if (!state.nodes[nk]) return false;
         var pos = (val && typeof val === "object") ? val : args;
         if (pos.x != null && isFinite(Number(pos.x))) state.nodes[nk].x = Math.max(90, Math.min(440, Number(pos.x)));
         if (pos.y != null && isFinite(Number(pos.y))) state.nodes[nk].y = Math.max(40, Math.min(274, Number(pos.y)));
       } else if (act === "reset") {
         state.nodes = cloneDefaults();
+        state.hatchLocation = "door4";
+        state.fireRating = "unknown";
+        state.joistBay = "unknown";
         state.ductMode = "trunk";
         state.dischargeDir = "right";
         state.ventMode = "power_venter";
@@ -1470,9 +1452,12 @@
     getState: function () {
       var m = computeMetrics();
       return {
-        planId: "hvac-layout",
+        planId: "attic-hvac",
         step: state.step,
         wall: "attic_plan",
+        hatchLocation: state.hatchLocation,
+        fireRating: state.fireRating,
+        joistBay: state.joistBay,
         roofGeometry: "flat_roof_66in_cavity",
         ventMode: state.ventMode,
         exitWall: m.flue.effectiveWall,
@@ -1482,7 +1467,7 @@
         sheets: m.sheets,
         runs: { sa1: m.sa1Ft, sa2: m.sa2Ft, sa3: m.sa3Ft, ra1: m.ra1Ft, v1Sidewall: m.flue.runFt },
         nodes: state.nodes,
-        summary: "Unified Attic + HVAC R3: step=" + state.step + ", F1=(" + state.nodes.f1.x + "in," + state.nodes.f1.y + "in SW Dining), 24in pathway=" + m.walkFt + "ft (" + m.sheets + " sheets), flatRoof=66in, sidewallVent=" + state.ventMode + " (" + m.flue.effectiveWall + " wall, " + m.flue.runFt + "ft, +" + m.flue.minRiseIn + "in rise)."
+        summary: "Unified Attic + HVAC: step=" + state.step + ", hatch=" + state.hatchLocation + " (24x36in clear), F1=(" + state.nodes.f1.x + "in," + state.nodes.f1.y + "in), walkway=" + m.walkFt + "ft (" + m.sheets + " sheets), vent=" + state.ventMode + " (" + m.flue.effectiveWall + " wall)."
       };
     }
   };
@@ -1490,7 +1475,7 @@
   function boot() {
     if (window.U4PlanNav) {
       window.U4PlanNav.init({
-        planId: "hvac-layout",
+        planId: "attic-hvac",
         headerEl: document.getElementById("u4hTopbar"),
         onLangChange: function () { render(); if (window.U4LiveAi) window.U4LiveAi.refreshPrompts(); }
       });
@@ -1499,18 +1484,18 @@
     }
     if (window.U4LiveAi) {
       window.U4LiveAi.init({
-        planId: "hvac-layout",
+        planId: "attic-hvac",
         room: "hvac",
-        titleEn: "Unified Attic Furnace, 24\" Pathway & Sidewall Vent",
-        titleEs: "Calefacción, Pasillo 24\" y Salida Lateral Integrados",
+        titleEn: "Attic Hatch, Walkway, Furnace & Ducts",
+        titleEs: "Escotilla, Pasillo, Calefacción y Ductos",
         getContext: function () {
           var m = computeMetrics();
-          return "Step=" + state.step + ", ReconciledF1=(" + state.nodes.f1.x + "in," + state.nodes.f1.y + "in SW Dining), Hatch=Outside Front Door 4 (24x36in clear), 24inPathway=" + m.walkFt + "ft (<=20ft cap at 66in flat roof, " + m.sheets + " sheets), FlatRoof=zero new penetrations, SidewallVent=" + state.ventMode + " via " + m.flue.effectiveWall + " wall (" + m.flue.runFt + "ft, +" + m.flue.minRiseIn + "in rise; SFMC 802.8 requires >=4ft from interior property line), EstRuns=SA1 " + m.sa1Ft + "ft/SA2 " + m.sa2Ft + "ft/SA3 " + m.sa3Ft + "ft/RA1 " + m.ra1Ft + "ft.";
+          return "UnifiedPlan=attic-hvac, Step=" + state.step + ", Hatch=Outside Front Door 4 (24x36in clear, fire=" + state.fireRating + ", joistBay=" + state.joistBay + "), F1=(" + state.nodes.f1.x + "in," + state.nodes.f1.y + "in SW Dining), 24inWalkway=" + m.walkFt + "ft (" + m.sheets + " sheets), SidewallVent=" + state.ventMode + " (" + m.flue.effectiveWall + " wall), D04Subpanel=80A feed + conditional 100A main breaker, SwitchedAtticLight=crew scope (confirm tie-in w/ NEXT electrician).";
         },
         quickPrompts: function (lang) {
           return lang === "es"
-            ? ["¿Qué exige SFMC §802.8 para salir por el muro lateral?", "¿Por qué un equipo 80% AFUE ocupa extractor lateral?", "¿Cuánto mide el pasillo de 24\" hasta F1 en Comedor SO?"]
-            : ["What does 2025 SFMC §802.8 require for sidewall venting?", "Why does an 80% AFUE furnace need a sidewall power venter?", "How long is the 24\" pathway to SW Dining F1?"];
+            ? ["¿Quién hace cada fase entre NEXT y nuestra cuadrilla?", "¿Qué 4 puntos resolvemos el lunes 23?", "¿Cómo armamos la escotilla de 24×36 y el pasillo?"]
+            : ["Who owns each phase between NEXT and our crew?", "What 4 items need answers on Monday Nov 23?", "How do we frame and seal the 24×36 hatch and walkway?"];
         }
       });
     }

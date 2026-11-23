@@ -1,11 +1,14 @@
 /* ============================================================================
    Unit 4 Interactive Plans — Unified Top Bar, Sibling Switcher, Print Bridge
-   & Wave G Persistent Shell Iframe Bridge (Auto-Wrap + postMessage + Snapshot)
-   Global App-Wide EN/ES & Dark/Light Sync (u4_lang / u4_theme + ?lang=/?theme=)
-   Classic Old Wiki Chrome · Zero External CDNs · Escape-Safe Popover
+   & Persistent Shell Iframe Bridge (Single Unified Attic + HVAC Plan)
    ============================================================================ */
 (function () {
   "use strict";
+
+  var LEGACY_PLAN_ALIASES = {
+    "attic-hatch": "attic-hvac",
+    "hvac-layout": "attic-hvac"
+  };
 
   var ALL_PLANS = [
     {
@@ -45,27 +48,15 @@
       group: "kitchen"
     },
     {
-      id: "attic-hatch",
-      rel: "../attic-hatch/index.html",
-      roomHash: "attic-access",
-      roomEn: "Attic",
-      roomEs: "Ático",
-      shortEn: "Attic Hatch",
-      shortEs: "Escotilla Ático",
-      labelEn: "Permanent Attic Hatch & Walkway",
-      labelEs: "Escotilla Permanente del Ático y Pasillo",
-      group: "attic-hvac"
-    },
-    {
-      id: "hvac-layout",
-      rel: "../hvac-layout/index.html",
+      id: "attic-hvac",
+      rel: "../attic-hvac/index.html",
       roomHash: "hvac",
-      roomEn: "HVAC",
-      roomEs: "Calefacción",
-      shortEn: "Furnace & Ducts",
-      shortEs: "Calefacción y Ductos",
-      labelEn: "Attic Furnace & Ductwork Layout",
-      labelEs: "Calefacción y Ductos en Ático",
+      roomEn: "HVAC & Attic",
+      roomEs: "HVAC y Ático",
+      shortEn: "Attic & HVAC Plan",
+      shortEs: "Plano Ático y HVAC",
+      labelEn: "Attic Hatch, Walkway, Furnace & Ducts",
+      labelEs: "Escotilla, Pasillo, Calefacción y Ductos",
       group: "attic-hvac"
     },
     {
@@ -81,6 +72,11 @@
       group: "laundry"
     }
   ];
+
+  function normalizePlanId(id) {
+    var clean = String(id || "").trim();
+    return LEGACY_PLAN_ALIASES[clean] || clean;
+  }
 
   function readPref(key) {
     try { return window.localStorage.getItem(key); } catch (_) { return null; }
@@ -120,6 +116,9 @@
 
   function detectPlanIdFromPath() {
     var path = String(window.location.pathname || "");
+    if (path.indexOf("/attic-hvac/") >= 0 || path.indexOf("/attic-hatch/") >= 0 || path.indexOf("/hvac-layout/") >= 0) {
+      return "attic-hvac";
+    }
     for (var i = 0; i < ALL_PLANS.length; i++) {
       if (path.indexOf("/" + ALL_PLANS[i].id + "/") >= 0) return ALL_PLANS[i].id;
     }
@@ -134,9 +133,6 @@
   try { isTopLevel = (window.self === window.top); } catch (_) { isTopLevel = false; }
   var isEmbedded = !isTopLevel || params.has("embedded");
 
-  /* Wave G: Auto-wrap direct top-level plan visits into persistent index.html#plan:<planId> shell
-     so Live AI voice/chat & transcript persist unbroken across the entire Unit 4 site.
-     Preserves ?print=1, ?standalone=1, #view=blueprint, file:// local SMB opens, and iframes! */
   if (
     isTopLevel &&
     !params.has("print") &&
@@ -171,7 +167,6 @@
     ctxTimer: null
   };
 
-  /* Apply immediately on script execution to prevent light/dark flash */
   document.documentElement.lang = state.lang;
   document.documentElement.setAttribute("data-theme", state.theme);
   if (isEmbedded) {
@@ -186,14 +181,22 @@
   }
 
   function getPlanMeta(id) {
+    var norm = normalizePlanId(id);
     for (var i = 0; i < ALL_PLANS.length; i++) {
-      if (ALL_PLANS[i].id === id) return ALL_PLANS[i];
+      if (ALL_PLANS[i].id === norm) return ALL_PLANS[i];
     }
     return ALL_PLANS[0];
   }
 
   function matchPlanIdFromHref(href) {
     if (!href) return null;
+    if (
+      href.indexOf("/attic-hatch/") >= 0 || href.indexOf("attic-hatch/index.html") >= 0 ||
+      href.indexOf("/hvac-layout/") >= 0 || href.indexOf("hvac-layout/index.html") >= 0 ||
+      href.indexOf("/attic-hvac/") >= 0 || href.indexOf("attic-hvac/index.html") >= 0
+    ) {
+      return "attic-hvac";
+    }
     for (var i = 0; i < ALL_PLANS.length; i++) {
       if (href.indexOf("/" + ALL_PLANS[i].id + "/") >= 0 || href.indexOf(ALL_PLANS[i].id + "/index.html") >= 0) {
         return ALL_PLANS[i].id;
@@ -211,9 +214,11 @@
   }
 
   function planUrl(id) {
-    var m = getPlanMeta(id);
+    var norm = normalizePlanId(id);
+    var m = getPlanMeta(norm);
+    var stepArg = id === "attic-hatch" ? "&step=hatch" : "";
     var suffix = params.has("standalone") ? "&standalone=1" : (params.has("embedded") ? "&embedded=1" : "");
-    return m.rel + "?lang=" + state.lang + "&theme=" + state.theme + suffix;
+    return m.rel + "?lang=" + state.lang + "&theme=" + state.theme + stepArg + suffix;
   }
 
   function wikiBackUrl() {
@@ -267,18 +272,12 @@
     setTimeout(function () {
       var btnPdf = document.getElementById("btn-download-pdf");
       if (btnPdf && window.U4KS4_PDF && typeof window.U4KS4_PDF.exportPdf === "function") {
-        try {
-          btnPdf.click();
-        } catch (_) {
-          window.print();
-        }
+        try { btnPdf.click(); } catch (_) { window.print(); }
       } else {
         window.print();
       }
       setTimeout(function () {
-        if (prev === "human" && params.get("print") !== "1") {
-          setMode("human");
-        }
+        if (prev === "human" && params.get("print") !== "1") setMode("human");
       }, 900);
     }, 120);
   }
@@ -376,9 +375,7 @@
     var svgEl = null;
     var imgEl = null;
 
-    if (targetPref === "photo") {
-      imgEl = root.querySelector(".u4h-photo-card img");
-    }
+    if (targetPref === "photo") imgEl = root.querySelector(".u4h-photo-card img");
     if (!imgEl) {
       var svgs = root.querySelectorAll(".u4h-svg-wrap svg, .ks4-svg-wrap svg, svg");
       for (var i = 0; i < svgs.length; i++) {
@@ -409,15 +406,8 @@
         ctx.fillText(String(full.summary || errNote || "Unit 4 Interactive Plan").slice(0, 96), 32, 118);
         var dataUrl = c.toDataURL("image/jpeg", 0.85);
         resolve({
-          dataUrl: dataUrl,
-          base64: dataUrl.split(",")[1] || "",
-          mimeType: "image/jpeg",
-          width: c.width,
-          height: c.height,
-          planId: full.planId,
-          step: full.step || "",
-          wall: full.wall || "",
-          label: label
+          dataUrl: dataUrl, base64: dataUrl.split(",")[1] || "", mimeType: "image/jpeg",
+          width: c.width, height: c.height, planId: full.planId, step: full.step || "", wall: full.wall || "", label: label
         });
       }
 
@@ -434,9 +424,7 @@
           clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
           clone.setAttribute("width", String(outW));
           clone.setAttribute("height", String(outH));
-          if (!clone.getAttribute("viewBox")) {
-            clone.setAttribute("viewBox", "0 0 " + vbW + " " + vbH);
-          }
+          if (!clone.getAttribute("viewBox")) clone.setAttribute("viewBox", "0 0 " + vbW + " " + vbH);
           var styleEl = document.createElementNS("http://www.w3.org/2000/svg", "style");
           styleEl.textContent = "text{font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,Arial,sans-serif;}";
           clone.insertBefore(styleEl, clone.firstChild);
@@ -456,27 +444,15 @@
               drawPinOverlaysOnCanvas(ctx, hostEl, outW, outH);
               var dataUrl = canvas.toDataURL("image/jpeg", 0.86);
               resolve({
-                dataUrl: dataUrl,
-                base64: dataUrl.split(",")[1] || "",
-                mimeType: "image/jpeg",
-                width: outW,
-                height: outH,
-                planId: full.planId,
-                step: full.step || "",
-                wall: full.wall || "",
-                label: label
+                dataUrl: dataUrl, base64: dataUrl.split(",")[1] || "", mimeType: "image/jpeg",
+                width: outW, height: outH, planId: full.planId, step: full.step || "", wall: full.wall || "", label: label
               });
-            } catch (e) {
-              fallbackCanvas(String(e));
-            }
+            } catch (e) { fallbackCanvas(String(e)); }
           };
           img.onerror = function () { fallbackCanvas("svg_render_error"); };
           img.src = svgDataUrl;
           return;
-        } catch (e) {
-          fallbackCanvas(String(e));
-          return;
-        }
+        } catch (e) { fallbackCanvas(String(e)); return; }
       }
 
       if (imgEl && imgEl.complete && imgEl.naturalWidth > 0) {
@@ -495,21 +471,11 @@
           drawPinOverlaysOnCanvas(ctx2, photoHost, pw, ph);
           var d2 = c2.toDataURL("image/jpeg", 0.86);
           resolve({
-            dataUrl: d2,
-            base64: d2.split(",")[1] || "",
-            mimeType: "image/jpeg",
-            width: pw,
-            height: ph,
-            planId: full.planId,
-            step: full.step || "",
-            wall: full.wall || "",
-            label: label
+            dataUrl: d2, base64: d2.split(",")[1] || "", mimeType: "image/jpeg",
+            width: pw, height: ph, planId: full.planId, step: full.step || "", wall: full.wall || "", label: label
           });
           return;
-        } catch (e) {
-          fallbackCanvas(String(e));
-          return;
-        }
+        } catch (e) { fallbackCanvas(String(e)); return; }
       }
 
       fallbackCanvas("no_visual_element");
@@ -531,7 +497,7 @@
           return '<a class="u4h-seg-item' + (active ? " is-active" : "") + '" data-plan-id="' + s.id + '" href="' + esc(planUrl(s.id)) + '"' + (active ? ' aria-current="page"' : "") + '>' +
             esc(es ? s.shortEs : s.shortEn) + '</a>';
         }).join("") +
-        "</div>";
+      "</div>";
     }
 
     var menuHtml = '<div class="u4h-plans-menu">' +
@@ -572,7 +538,7 @@
     if (isEmbedded) {
       host.querySelectorAll("[data-plan-id]").forEach(function (a) {
         a.addEventListener("click", function (ev) {
-          var targetId = a.getAttribute("data-plan-id");
+          var targetId = normalizePlanId(a.getAttribute("data-plan-id"));
           if (!targetId) return;
           ev.preventDefault();
           closeAllPlansMenu(false);
@@ -618,7 +584,6 @@
     document.getElementById("u4hPdfBtn").addEventListener("click", triggerPrintPdf);
   }
 
-  /* Intercept in-body cross-plan links (e.g. "Open Range Wall ->") when embedded in persistent shell */
   document.addEventListener("click", function (ev) {
     if (state.menuOpen) {
       var pop = document.getElementById("u4hAllPlansPop");
@@ -651,7 +616,6 @@
     }
   });
 
-  /* Parent -> Child Persistent Shell Bridge (u4:set-pref & u4:plan-cmd) */
   window.addEventListener("message", async function (ev) {
     var msg = ev && ev.data;
     if (!msg || typeof msg !== "object" || typeof msg.type !== "string") return;
@@ -753,7 +717,7 @@
     ALL_PLANS: ALL_PLANS,
     init: function (opts) {
       opts = opts || {};
-      if (opts.planId) state.planId = opts.planId;
+      if (opts.planId) state.planId = normalizePlanId(opts.planId);
       if (opts.headerEl) state.headerEl = opts.headerEl;
       if (opts.onLangChange) state.onLangChange = opts.onLangChange;
       if (opts.onThemeChange) state.onThemeChange = opts.onThemeChange;
@@ -769,12 +733,9 @@
         if (state.mode !== "blueprint") setMode("blueprint");
       });
       window.addEventListener("afterprint", function () {
-        if (params.get("print") !== "1" && window.location.hash !== "#view=blueprint") {
-          setMode("human");
-        }
+        if (params.get("print") !== "1" && window.location.hash !== "#view=blueprint") setMode("human");
       });
 
-      // Notify parent persistent shell once initial plan render completes
       reportPlanContext();
     },
     getLang: function () { return state.lang; },

@@ -1,0 +1,15 @@
+{
+  "en": "Attic hatch guide",
+  "es": "Guía de la escotilla del ático",
+  "noteEn": "Use the interactive plan below for current instructions.",
+  "noteEs": "Consulta el plano interactivo abajo para las indicaciones actuales.",
+  "items": [
+    {
+      "img": "./plans/attic-hatch/assets/attic-hatch-candidate.jpg",
+      "href": "./plans/attic-hatch/assets/attic-hatch-candidate.jpg",
+      "en": "Common stair landing outside Front Door 4. Exact opening still to be marked.",
+      "es": "Descanso común afuera de la puerta 4. Falta trazar la abertura exacta."
+    }
+  ],
+  "lead": 8
+}

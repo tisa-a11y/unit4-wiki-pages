@@ -26,5 +26,37 @@
       "en": "After NEXT: inspections, close the closet ceiling, paint",
       "es": "Después de NEXT: inspecciones, cerrar el techo del clóset y pintar"
     }
+  ],
+  "items": [
+    {
+      "id": "hvac-r5-01",
+      "done": true,
+      "en": "Phase split set: NEXT installs furnace, ducts, sidewall vent & subpanel feeder; our crew builds access & repairs finishes",
+      "es": "Fases definidas: NEXT instala calefactor, ductos, salida lateral y línea al subpanel; nuestra cuadrilla hace el acceso y resanes"
+    },
+    {
+      "id": "hvac-r5-02",
+      "done": false,
+      "en": "Before NEXT: Keep bedroom-closet ceiling & D04 wall open, repair flat-roof leak, and keep ozone machine unplugged",
+      "es": "Antes de NEXT: Dejar abiertos el clóset de recámara y el muro D04, reparar la gotera del techo plano y desconectar ozono"
+    },
+    {
+      "id": "hvac-r5-03",
+      "done": false,
+      "en": "Monday, Nov 23 (2:00–4:00 p.m. · Serge & Alex): Resolve Door 4 hatch markout, sidewall vent, D04 panel entry/amps & attic light connection",
+      "es": "Lunes 23 nov (2:00–4:00 p.m. · Serge y Alex): Resolver trazo en Puerta 4, salida lateral, entrada/amperaje D04 y conexión de luz"
+    },
+    {
+      "id": "hvac-r5-04",
+      "done": false,
+      "en": "Coordinate w/ NEXT: Build 24\"×36\" Door 4 hatch, 15.8 ft walkway, 30\"×30\" platform, GFCI & light; NEXT installs system & feeder",
+      "es": "Coordinado con NEXT: Armar escotilla 24\"×36\", pasillo 15.8 pies, plataforma 30\"×30\", GFCI y luz; NEXT instala sistema y línea"
+    },
+    {
+      "id": "hvac-r5-05",
+      "done": false,
+      "en": "After testing: Pass HERS & City inspections, close bedroom-closet ceiling (after LV cable + hatch), and patch/paint finishes",
+      "es": "Después de pruebas: Aprobar HERS e inspecciones, cerrar techo del clóset (tras cable LV + escotilla) y resanar/pintar"
+    }
   ]
 }

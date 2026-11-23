@@ -681,7 +681,7 @@
 
     /* Type B Flue & 120V GFCI layer */
     if (layers.mep) {
-      /* Flue path + roof jack */
+      /* Sidewall flue exit (zero roof cuts) */
       svgEl('line', {
         x1: px(m.fx), y1: py(m.fy),
         x2: px(m.flueX), y2: py(m.flueY),
@@ -1185,7 +1185,7 @@
           `X=${fmtIn(m.flueX)}, Y=${fmtIn(m.flueY)}`,
           `${fmtIn(m.flueClear)} ${es ? 'claro' : 'clearance'}`,
           m.flueClearPass ? (es ? 'CUMPLE (≥ 1")' : 'PASS (≥ 1")') : (es ? 'FALLA (< 1"!)' : 'FAIL (< 1"!)'),
-          'wall_to_wall · roof jack',
+          'wall_to_wall · sidewall exit (zero roof cuts)',
           !m.flueClearPass ? 'row-fail' : ''
         ],
         [
@@ -1246,7 +1246,7 @@
     const setVal = (id, val) => { const e = document.getElementById(id); if (e && val !== undefined) e.value = String(val); };
     setVal('sel-platform-side', opts.platform_side || 'south');
     setVal('sel-hatch-dir', opts.hatch_orientation || 'ns');
-    setVal('sel-roof-route', opts.roof_route || 'existing_jack');
+    setVal('sel-roof-route', opts.roof_route || 'sidewall_power_venter_south');
     setVal('sel-gfci-mode', opts.gfci_mode || 'at_platform');
     setVal('inp-waste-pct', opts.waste_pct ?? 10);
     setVal('sel-walkway-mat', opts.walkway_material || 'osb_23_32');
@@ -1381,7 +1381,7 @@
     const opts = {
       platform_side: document.getElementById('sel-platform-side')?.value || 'south',
       hatch_orientation: document.getElementById('sel-hatch-dir')?.value || 'ns',
-      roof_route: document.getElementById('sel-roof-route')?.value || 'existing_jack',
+      roof_route: document.getElementById('sel-roof-route')?.value || 'sidewall_power_venter_south',
       gfci_mode: document.getElementById('sel-gfci-mode')?.value || 'at_platform',
       walkway_material: document.getElementById('sel-walkway-mat')?.value || 'osb_23_32',
       waste_pct: Number(document.getElementById('inp-waste-pct')?.value ?? 10)
@@ -2021,7 +2021,7 @@
 
   /* ── Unified Public Integration Contract (window.U4PLAN) ────────────── */
   window.U4PLAN = {
-    planId: 'hvac-layout',
+    planId: 'attic-hvac',
     getSvgElement() { return document.getElementById('hvac-svg'); },
     getState() { return deepClone(state); },
     getLang() { return currentLang; },

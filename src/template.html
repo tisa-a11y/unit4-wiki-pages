@@ -1465,10 +1465,10 @@ const KITCHEN_HOSTED_LINKS = {
   "2026-11-20_Kitchen-Vent-Hood-Wall-Interactive_ES": "./plans/kitchen-west-ks4/index.html?lang=es",
   "2026-11-20_Kitchen-Floor-Plan-Interactive_EN": "./plans/kitchen-floor-plan/index.html?lang=en",
   "2026-11-20_Kitchen-Floor-Plan-Interactive_ES": "./plans/kitchen-floor-plan/index.html?lang=es",
-  "2026-11-20_Attic-Hatch-Interactive_EN": "./plans/attic-hatch/index.html?lang=en",
-  "2026-11-20_Attic-Hatch-Interactive_ES": "./plans/attic-hatch/index.html?lang=es",
-  "2026-11-20_HVAC-Layout-Interactive_EN": "./plans/hvac-layout/index.html?lang=en",
-  "2026-11-20_HVAC-Layout-Interactive_ES": "./plans/hvac-layout/index.html?lang=es",
+  "2026-11-20_Attic-Hatch-Interactive_EN": "./plans/attic-hvac/index.html?step=hatch?lang=en",
+  "2026-11-20_Attic-Hatch-Interactive_ES": "./plans/attic-hvac/index.html?step=hatch?lang=es",
+  "2026-11-20_HVAC-Layout-Interactive_EN": "./plans/attic-hvac/index.html?lang=en",
+  "2026-11-20_HVAC-Layout-Interactive_ES": "./plans/attic-hvac/index.html?lang=es",
   "2026-11-20_Murphy-Door-Interactive_EN": "./plans/murphy-door/index.html?lang=en",
   "2026-11-20_Murphy-Door-Interactive_ES": "./plans/murphy-door/index.html?lang=es",
   "2026-11-20_Kitchen-Electrical-Interactive_EN": "./plans/kitchen-electrical/index.html?lang=en",
@@ -6102,27 +6102,16 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       status: "live",
       aliases: ["kitchen-floor-plan","kitchen floor plan","full kitchen plan","cabinet schedule","plano de cocina interactivo","lista de gabinetes"]
     },
-    "attic-hatch": {
-      id: "attic-hatch",
-      room: "attic-access",
-      url: "./plans/attic-hatch/index.html",
-      docIdEn: "2026-11-20_Attic-Hatch-Interactive_EN",
-      docIdEs: "2026-11-20_Attic-Hatch-Interactive_ES",
-      titleEn: "Permanent attic hatch interactive plan",
-      titleEs: "Plano interactivo de la escotilla permanente del ático",
-      status: "live",
-      aliases: ["attic-hatch","interactive attic","attic hatch interactive","escotilla interactiva"]
-    },
-    "hvac-layout": {
-      id: "hvac-layout",
+    "attic-hvac": {
+      id: "attic-hvac",
       room: "hvac",
-      url: "./plans/hvac-layout/index.html",
+      url: "./plans/attic-hvac/index.html",
       docIdEn: "2026-11-20_HVAC-Layout-Interactive_EN",
       docIdEs: "2026-11-20_HVAC-Layout-Interactive_ES",
       titleEn: "Attic furnace and ducts interactive layout",
       titleEs: "Plano interactivo de calefacción y ductos en ático",
       status: "live",
-      aliases: ["hvac-layout","interactive hvac","hvac what-if","ductwork layout","attic furnace","plano interactivo clima"]
+      aliases: ["attic-hvac","interactive hvac","hvac what-if","ductwork layout","attic furnace","plano interactivo clima"]
     },
     "murphy-door": {
       id: "murphy-door",
@@ -10678,4 +10667,5 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
 /* U4_GEMINI_LIVE_AND_UNIFIED_TRIAGE_R5_END */
 </script>
 
+  <script id="u4-r5-plan-alias">(function(){function norm(){var h=window.location.hash||"";if(h.indexOf("#plan:attic-hatch")===0){var q=h.indexOf("?")>=0?h.slice(h.indexOf("?")):"?step=hatch";window.location.replace("#plan:attic-hvac"+q);}else if(h.indexOf("#plan:hvac-layout")===0){var q2=h.indexOf("?")>=0?h.slice(h.indexOf("?")):"";window.location.replace("#plan:attic-hvac"+q2);}}norm();window.addEventListener('hashchange',norm);})();</script>
 </body></html>
