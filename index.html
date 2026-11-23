@@ -2278,59 +2278,14 @@ body:has(#u4VoiceChatDialog:not([hidden])) #u4AiFloatingDock {
 }
 /* U4_MODERN_CHAT_PURE_CSS_END */
 
-/* U4_SIDEBAR_INTERACTIVE_ICON_START */
+
+
+/* U4_SIDEBAR_POLISH_V1_CSS_START */
 :root {
   --u4-ico-interactive: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.55' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7.2 7.2 13.6 9.5l-2.7.9-.9 2.7-2.8-5.9Z'/%3E%3Cpath d='M7.2 2.2V4M2.2 7.2H4M3.6 3.6l1.3 1.3M10.4 4l-1.1 1.1M4 10.4l1.1-1.1'/%3E%3C/svg%3E");
 }
-/* Show icon ONCE on the INTERACTIVE PLANS group heading (never repeated on all 6 rows underneath) */
-nav.rail .grp:has(+ a[href^="#plan:"]),
-nav.rail .grp:has(+ a[href^="plans/"]),
-nav.rail .grp:has(+ a[href*="/plans/"]),
-nav.rail .grp:has(+ a[data-plan]) {
-  display: flex !important;
-  align-items: center !important;
-  gap: 6px !important;
-}
-nav.rail .grp:has(+ a[href^="#plan:"])::before,
-nav.rail .grp:has(+ a[href^="plans/"])::before,
-nav.rail .grp:has(+ a[href*="/plans/"])::before,
-nav.rail .grp:has(+ a[data-plan])::before {
-  content: "";
-  width: 12px;
-  height: 12px;
-  flex: none;
-  background-color: var(--accent);
-  -webkit-mask: var(--u4-ico-interactive) center / 12px 12px no-repeat;
-  mask: var(--u4-ico-interactive) center / 12px 12px no-repeat;
-}
-/* Show individual icon ONLY when an interactive plan appears mixed with static PDFs in room subdocs */
-nav.rail .subdocs a[href^="#plan:"],
-nav.rail .subdocs a[href^="plans/"],
-nav.rail .subdocs a[href*="/plans/"],
-nav.rail .subdocs a[data-plan] {
-  display: flex !important;
-  align-items: center !important;
-  gap: 6px !important;
-}
-nav.rail .subdocs a[href^="#plan:"]::before,
-nav.rail .subdocs a[href^="plans/"]::before,
-nav.rail .subdocs a[href*="/plans/"]::before,
-nav.rail .subdocs a[data-plan]::before {
-  content: "";
-  width: 13px;
-  height: 13px;
-  flex: none;
-  background-color: var(--accent);
-  -webkit-mask: var(--u4-ico-interactive) center / 13px 13px no-repeat;
-  mask: var(--u4-ico-interactive) center / 13px 13px no-repeat;
-}
-nav.rail .subdocs a[aria-current="page"]::before {
-  background-color: var(--panel);
-}
-/* U4_SIDEBAR_INTERACTIVE_ICON_END */
 
-/* U4_SIDEBAR_POLISH_V1_CSS_START */
-/* 1. Calm tinted active pill + crisp 2.5px left accent bar */
+/* Calm tinted active pill + subtle section dividers */
 nav.rail a {
   padding: 5px 10px !important;
   font-size: 13.5px !important;
@@ -2343,166 +2298,49 @@ nav.rail a[aria-current="page"] {
   font-weight: 600 !important;
   box-shadow: inset 2.5px 0 0 var(--accent) !important;
 }
-nav.rail .subdocs a[aria-current="page"]::before {
-  background-color: var(--accent) !important;
-}
-
-/* 2. Subtle section dividers & collapsible group chevron */
 nav.rail .grp {
   margin: 14px 0 5px !important;
   padding-top: 11px !important;
   border-top: 1px solid var(--line);
 }
-nav.rail .brand + .u4-sb-search-wrap + .grp,
 nav.rail .brand + .grp {
   border-top: 0 !important;
   padding-top: 0 !important;
-  margin-top: 12px !important;
+  margin-top: 14px !important;
 }
-nav.rail .grp.u4-grp-toggle {
-  cursor: pointer;
-  user-select: none;
-  justify-content: space-between;
+
+/* ONE crisp interactive pointer-click symbol on all sidebar Interactive Plans links */
+nav.rail a[href*="#plan:"],
+nav.rail a[href*="plans/"],
+nav.rail a[data-plan],
+nav.rail a[data-plan-id],
+nav.rail a.u4-r7-plan-link,
+nav.rail a.u4-plan-link {
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px !important;
 }
-nav.rail .grp.u4-grp-toggle::after {
+nav.rail a[href*="#plan:"]::before,
+nav.rail a[href*="plans/"]::before,
+nav.rail a[data-plan]::before,
+nav.rail a[data-plan-id]::before,
+nav.rail a.u4-r7-plan-link::before,
+nav.rail a.u4-plan-link::before {
   content: "";
-  margin-left: auto;
-  width: 5px;
-  height: 5px;
-  border-right: 1.5px solid var(--muted);
-  border-bottom: 1.5px solid var(--muted);
-  transform: rotate(45deg);
-  transition: transform 140ms ease;
+  width: 14px;
+  height: 14px;
+  flex: none;
+  background-color: var(--accent);
+  -webkit-mask: var(--u4-ico-interactive) center / 14px 14px no-repeat;
+  mask: var(--u4-ico-interactive) center / 14px 14px no-repeat;
 }
-nav.rail .grp.u4-grp-toggle[aria-expanded="false"]::after {
-  transform: rotate(-45deg);
+/* Never double-stack an icon on subdocs cards that already render their own icon/badge */
+nav.rail .subdocs a[href*="#plan:"]::before,
+nav.rail .subdocs a[href*="plans/"]::before {
+  display: inline-block;
 }
-nav.rail a.u4-sb-hidden,
-nav.rail .subdocs a.u4-sb-boilerplate {
-  display: none !important;
-}
-nav.rail .subdocs {
-  margin: 2px 0 6px 10px !important;
-  border-left: 1.5px solid var(--line) !important;
-  padding-left: 8px !important;
-}
-nav.rail .subdocs a {
-  font-size: 12.5px !important;
-  color: var(--muted) !important;
-  padding: 4px 8px !important;
-}
-nav.rail .subdocs a:hover,
-nav.rail .subdocs a[aria-current="page"] {
-  color: var(--accent) !important;
-}
-
-/* 3. Brand row with desktop collapse icon & quick-jump filter */
-nav.rail .brand {
-  position: relative;
-  padding-right: 30px;
-}
-#u4SbCollapseBtn {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 26px;
-  height: 26px;
-  border-radius: 6px;
-  border: 0;
-  background: transparent;
-  color: var(--muted);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-#u4SbCollapseBtn:hover {
-  background: var(--bg);
-  color: var(--fg);
-}
-#u4SbExpandBtn {
-  position: fixed;
-  top: 14px;
-  left: 14px;
-  z-index: 45;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  border: 1px solid var(--line);
-  background: var(--panel);
-  color: var(--fg);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-#u4SbExpandBtn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-.u4-sb-search-wrap {
-  margin: 12px 0 4px;
-  position: relative;
-}
-#u4SbFilter {
-  width: 100%;
-  height: 30px;
-  padding: 0 26px 0 9px;
-  border-radius: 7px;
-  border: 1px solid var(--line);
-  background: var(--bg);
-  color: var(--fg);
-  font: 12.5px/1 var(--body);
-  outline: none;
-}
-#u4SbFilter:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 2px var(--accent-soft);
-}
-.u4-sb-kbd {
-  position: absolute;
-  right: 7px;
-  top: 50%;
-  transform: translateY(-50%);
-  font: 600 10.5px/1 var(--mono);
-  color: var(--muted);
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  padding: 2px 4px;
-  pointer-events: none;
-}
-
-/* 4. Desktop sidebar collapse state */
-@media (min-width: 761px) {
-  body.u4-rail-collapsed .wrap {
-    grid-template-columns: 0 minmax(0, 1fr) !important;
-  }
-  body.u4-rail-collapsed nav.rail {
-    width: 0 !important;
-    min-width: 0 !important;
-    padding: 0 !important;
-    border-right: 0 !important;
-    overflow: hidden !important;
-  }
-  body.u4-rail-collapsed #u4SbExpandBtn {
-    display: inline-flex !important;
-  }
-  body.u4-rail-collapsed main {
-    padding-left: 58px !important;
-  }
-  body.u4-rail-collapsed .u4-pin-fab {
-    left: 16px !important;
-  }
-}
-@media (max-width: 760px) {
-  #u4SbCollapseBtn,
-  #u4SbExpandBtn {
-    display: none !important;
-  }
-  #u4SbFilter {
-    font-size: 16px;
-    height: 36px;
-  }
+nav.rail a[aria-current="page"]::before {
+  background-color: var(--accent) !important;
 }
 /* U4_SIDEBAR_POLISH_V1_CSS_END */
 </style>
@@ -4994,7 +4832,7 @@ function appendRailRoomNode(p, isChildSubpage){
           if (!isPdf(d) && !isInt && !docHref(d).startsWith("#")) { da.target = "_blank"; da.rel = "noopener"; }
           const dl = docLabel(d).t;
           da.title = dl;
-          da.innerHTML = '<span class="rail-doc-label">' + (isPdf(d) ? "📄 " : (isInt ? "🧭 " : "↗ ")) + dl.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])) + '</span>' + (isInt ? interactivePillHtml("is-mini") : "");
+          da.innerHTML = '<span class="rail-doc-label">' + (isPdf(d) ? "📄 " : (isInt ? "" : "↗ ")) + dl.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])) + '</span>' + (isInt ? interactivePillHtml("is-mini") : "");
           dList.appendChild(da);
         });
         dBtn.addEventListener("click", function(ev){
@@ -12580,246 +12418,6 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
 })();
 /* U4-R7-ENHANCER-END */
 
-/* U4_SIDEBAR_POLISH_V1_JS_START */
-(function(){
-  if (window.__U4_SIDEBAR_POLISH_V1__) return;
-  window.__U4_SIDEBAR_POLISH_V1__ = true;
-
-  var ICON_SIDEBAR = '<svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1.8" y="2.4" width="12.4" height="11.2" rx="2"/><line x1="5.8" y1="2.4" x2="5.8" y2="13.6"/></svg>';
-  var plansCollapsed = false;
-
-  function isEs() {
-    var l = (document.documentElement && document.documentElement.lang) || "";
-    return l.toLowerCase().indexOf("es") === 0;
-  }
-
-  function cleanSubItems(rail) {
-    if (!rail) return;
-    var subLinks = rail.querySelectorAll(".subdocs a");
-    for (var i = 0; i < subLinks.length; i++) {
-      var a = subLinks[i];
-      var raw = String(a.textContent || "").trim();
-      var cleaned = raw.replace(/^[·•\-\s]+/, "").trim();
-      var isBoiler = /^(checklist|lista de trabajo|renders\s*&\s*mockups|vistas conceptuales|reference photos|fotos de referencia)$/i.test(cleaned);
-      a.classList.toggle("u4-sb-boilerplate", isBoiler);
-      if (!isBoiler && a.firstChild && a.firstChild.nodeType === 3) {
-        a.firstChild.nodeValue = a.firstChild.nodeValue.replace(/^\s*[·•]\s*/, "");
-      }
-    }
-  }
-
-  function collapseInactiveRooms(rail) {
-    if (!rail) return;
-    var filterInp = document.getElementById("u4SbFilter");
-    if (filterInp && filterInp.value.trim()) return;
-    var active = rail.querySelector('a[aria-current="page"]');
-    var activeBox = active ? active.closest(".subdocs") : null;
-    var activeKey = active ? (active.getAttribute("data-key") || (activeBox && activeBox.getAttribute("data-for")) || "") : "";
-    var boxes = rail.querySelectorAll(".subdocs");
-    for (var i = 0; i < boxes.length; i++) {
-      var box = boxes[i];
-      var owner = box.getAttribute("data-for") || "";
-      var hasVisible = Boolean(box.querySelector("a:not(.u4-sb-boilerplate):not(.u4-sb-hidden)"));
-      var keepOpen = hasVisible && (owner === activeKey || box === activeBox);
-      box.hidden = !keepOpen;
-      if (owner) {
-        var parentA = rail.querySelector('a[data-key="' + owner + '"]');
-        if (parentA) parentA.setAttribute("aria-expanded", keepOpen ? "true" : "false");
-      }
-    }
-  }
-
-  function getInteractivePlanLinks(grp) {
-    var list = [];
-    var n = grp ? grp.nextElementSibling : null;
-    while (n && !n.classList.contains("grp")) {
-      if (n.tagName === "A") list.push(n);
-      n = n.nextElementSibling;
-    }
-    return list;
-  }
-
-  function wireInteractivePlansToggle(rail) {
-    var grps = rail.querySelectorAll(".grp");
-    for (var i = 0; i < grps.length; i++) {
-      var g = grps[i];
-      var next = g.nextElementSibling;
-      if (!next || next.tagName !== "A") continue;
-      var href = next.getAttribute("href") || "";
-      if (href.indexOf("#plan:") !== 0 && href.indexOf("plans/") === -1) continue;
-      if (g.dataset.u4ToggleWired) break;
-      g.dataset.u4ToggleWired = "1";
-      g.classList.add("u4-grp-toggle");
-      g.setAttribute("role", "button");
-      g.setAttribute("tabindex", "0");
-      g.setAttribute("aria-expanded", "true");
-      var applyPlanCollapse = function(grpEl) {
-        var links = getInteractivePlanLinks(grpEl);
-        grpEl.setAttribute("aria-expanded", plansCollapsed ? "false" : "true");
-        for (var j = 0; j < links.length; j++) {
-          links[j].classList.toggle("u4-sb-hidden", plansCollapsed);
-        }
-      };
-      g.addEventListener("click", function() {
-        plansCollapsed = !plansCollapsed;
-        applyPlanCollapse(this);
-      });
-      g.addEventListener("keydown", function(ev) {
-        if (ev.key === "Enter" || ev.key === " ") {
-          ev.preventDefault();
-          plansCollapsed = !plansCollapsed;
-          applyPlanCollapse(this);
-        }
-      });
-      break;
-    }
-  }
-
-  function applyFilter(rail, rawQuery) {
-    var q = String(rawQuery || "").trim().toLowerCase();
-    var links = rail.querySelectorAll("a");
-    var grps = rail.querySelectorAll(".grp");
-    if (!q) {
-      for (var i = 0; i < links.length; i++) {
-        if (!links[i].closest(".brand")) links[i].classList.remove("u4-sb-hidden");
-      }
-      for (var g = 0; g < grps.length; g++) {
-        grps[g].hidden = false;
-        if (grps[g].classList.contains("u4-grp-toggle") && plansCollapsed) {
-          var pLinks = getInteractivePlanLinks(grps[g]);
-          for (var p = 0; p < pLinks.length; p++) pLinks[p].classList.add("u4-sb-hidden");
-        }
-      }
-      collapseInactiveRooms(rail);
-      return;
-    }
-    var boxes = rail.querySelectorAll(".subdocs");
-    for (var b = 0; b < boxes.length; b++) boxes[b].hidden = false;
-    for (var k = 0; k < links.length; k++) {
-      var a = links[k];
-      if (a.closest(".brand") || a.classList.contains("u4-sb-boilerplate")) continue;
-      var hay = (a.textContent + " " + (a.getAttribute("href") || "")).toLowerCase();
-      a.classList.toggle("u4-sb-hidden", hay.indexOf(q) === -1);
-    }
-    for (var m = 0; m < boxes.length; m++) {
-      var anyVis = Boolean(boxes[m].querySelector("a:not(.u4-sb-hidden):not(.u4-sb-boilerplate)"));
-      boxes[m].hidden = !anyVis;
-    }
-  }
-
-  function syncLabels() {
-    var es = isEs();
-    var inp = document.getElementById("u4SbFilter");
-    if (inp) inp.placeholder = es ? "Ir a cuarto o plano…" : "Jump to room or plan…";
-    var cBtn = document.getElementById("u4SbCollapseBtn");
-    if (cBtn) {
-      var cLbl = es ? "Ocultar barra lateral ([)" : "Hide sidebar ([)";
-      cBtn.title = cLbl;
-      cBtn.setAttribute("aria-label", cLbl);
-    }
-    var eBtn = document.getElementById("u4SbExpandBtn");
-    if (eBtn) {
-      var eLbl = es ? "Mostrar barra lateral ([)" : "Show sidebar ([)";
-      eBtn.title = eLbl;
-      eBtn.setAttribute("aria-label", eLbl);
-    }
-  }
-
-  function toggleSidebarCollapse() {
-    document.body.classList.toggle("u4-rail-collapsed");
-  }
-
-  function initSidebarUx() {
-    var rail = document.getElementById("rail");
-    if (!rail) return;
-
-    var brand = rail.querySelector(".brand");
-    if (brand && !document.getElementById("u4SbCollapseBtn")) {
-      var cBtn = document.createElement("button");
-      cBtn.type = "button";
-      cBtn.id = "u4SbCollapseBtn";
-      cBtn.innerHTML = ICON_SIDEBAR;
-      cBtn.addEventListener("click", toggleSidebarCollapse);
-      brand.appendChild(cBtn);
-    }
-    if (!document.getElementById("u4SbExpandBtn")) {
-      var eBtn = document.createElement("button");
-      eBtn.type = "button";
-      eBtn.id = "u4SbExpandBtn";
-      eBtn.innerHTML = ICON_SIDEBAR;
-      eBtn.addEventListener("click", toggleSidebarCollapse);
-      document.body.appendChild(eBtn);
-    }
-    if (brand && !document.getElementById("u4SbFilter")) {
-      var wrap = document.createElement("div");
-      wrap.className = "u4-sb-search-wrap";
-      wrap.innerHTML = '<input id="u4SbFilter" type="search" autocomplete="off" spellcheck="false" aria-label="Filter navigation"><span class="u4-sb-kbd" aria-hidden="true">/</span>';
-      brand.insertAdjacentElement("afterend", wrap);
-      var inp = document.getElementById("u4SbFilter");
-      inp.addEventListener("input", function() { applyFilter(rail, inp.value); });
-      inp.addEventListener("keydown", function(ev) {
-        if (ev.key === "Escape") {
-          inp.value = "";
-          applyFilter(rail, "");
-          inp.blur();
-        } else if (ev.key === "Enter") {
-          var first = rail.querySelector("a:not(.u4-sb-hidden):not(.u4-sb-boilerplate):not(.homelink):not(.agentlink)");
-          if (first) {
-            ev.preventDefault();
-            first.click();
-            inp.value = "";
-            applyFilter(rail, "");
-            inp.blur();
-          }
-        }
-      });
-    }
-
-    cleanSubItems(rail);
-    wireInteractivePlansToggle(rail);
-    collapseInactiveRooms(rail);
-    syncLabels();
-
-    window.addEventListener("hashchange", function() {
-      setTimeout(function() {
-        cleanSubItems(rail);
-        wireInteractivePlansToggle(rail);
-        collapseInactiveRooms(rail);
-      }, 60);
-    });
-    window.addEventListener("u4:lang-change", function() {
-      setTimeout(function() {
-        cleanSubItems(rail);
-        syncLabels();
-      }, 60);
-    });
-    document.addEventListener("keydown", function(ev) {
-      if (!ev || ev.metaKey || ev.ctrlKey || ev.altKey) return;
-      var el = ev.target || document.activeElement;
-      var tag = el ? String(el.tagName || "").toUpperCase() : "";
-      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || (el && el.isContentEditable)) return;
-      if (ev.key === "/") {
-        var f = document.getElementById("u4SbFilter");
-        if (f) {
-          ev.preventDefault();
-          if (document.body.classList.contains("u4-rail-collapsed")) toggleSidebarCollapse();
-          f.focus();
-          f.select();
-        }
-      } else if (ev.key === "[") {
-        ev.preventDefault();
-        toggleSidebarCollapse();
-      }
-    });
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function() { setTimeout(initSidebarUx, 80); }, { once: true });
-  } else {
-    setTimeout(initSidebarUx, 80);
-  }
-})();
-/* U4_SIDEBAR_POLISH_V1_JS_END */
 </script>
 
   
