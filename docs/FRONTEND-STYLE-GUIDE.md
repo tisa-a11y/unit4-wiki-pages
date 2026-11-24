@@ -129,6 +129,7 @@ Per Tisa (`2026-11-20`: *"Make the interactive images zoomable"*), every interac
 - **1:1 Coordinate & Pin Lock:** `<svg>` / `<img>` + `.u4-pin-layer` live inside `.u4-zoom-stage` (`transform: translate3d(tx, ty, 0) scale(z)` with `--u4-inv-scale` keeping pin badges crisp); all fixture drag handlers and pin drops compute coordinates from live transformed `getBoundingClientRect()` so dragging & pinning remain 1:1 accurate at `100%`, `200%`, and `300%` zoom. Hidden cleanly on `@media print` and `body.u4-mode-blueprint`.
 
 
+
 ---
 
 ## 9. Canonical Interactive Symbol, Calm Sidebar, Compact Switches & Modern AI Helper UI (Locked 2026-11-23)
