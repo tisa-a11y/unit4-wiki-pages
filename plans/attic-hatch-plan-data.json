@@ -14,7 +14,7 @@
     "wiki-docs/attic-hatch-r5/Attic-hatch-practical-guide_R5_ES.pdf"
   ],
   "base_rev": "rev-20261122-attic-r3",
-  "status": "PLANNING_HOLD_ZERO_CUTS_UNTIL_GATES_PASS",
+  "status": "PLANNING_VISIT_RESCHEDULE_REQUESTED_HOLD_ALL_CUTS",
   "orientation": {
     "north_angle_deg": 0,
     "candidate_location": "DOOR4_LANDING",
@@ -112,7 +112,7 @@
       "measure_boundary": "wall_to_wall",
       "verified": "VERIFY_ON_SITE",
       "max_allowed_ft": 20.0,
-      "saw_kerf_rule": "1 true 24\" strip per 4x8 sheet (<=7ft: 1 sheet, 7-14ft: 2 sheets, 14-20ft: 3 sheets) -> 3 walkway sheets + 1 platform/dam sheet = 4 net 4x8 sheets",
+      "saw_kerf_rule": "1 true 24\" strip per 4x8 sheet (<=7ft: 1 sheet, 7-14ft: 2 sheets, 14-20ft: 3 sheets) -> 3 walkway sheets + 1 platform/lid sheet = 4 net 4x8 sheets",
       "source": "Reconciled orthogonal route from Door 4 hatch East edge (124\",74\") -> (174\",74\") -> North 30\"x30\" platform edge (174\",213.5\") = 189.5\" = 15.8 ft <= 20.0 ft (2025 CMC 304.4)",
       "date": "2026-11-22"
     },
@@ -187,8 +187,8 @@
       "note": "Reconciled: SW Dining platform & HVAC location (X=174\", Y=258\"; 15.8 ft 24\" pathway)"
     }
   ],
-  "revision": "rev-20261123-attic-r8",
-  "updated_at": "2026-11-23T06:49:43.086Z",
+  "revision": "rev-20261123-attic-r9",
+  "updated_at": "2026-11-23T18:07:02.360Z",
   "lid_insulation": "NONE (unconditioned common stair landing outside Front Door 4 per 2025 CA Energy Code §160.1(a); Tisa 2026-11-23)",
   "insulation_dam": "NONE",
   "lid_spec_en": "Snug 3/4\" plywood lid + continuous 1/2\"×1/8\" closed-cell foam dust gasket on clean 1×2 ledger strips + 4 compression latches outside 24\"×36\" clear (uncaulked seam; listed 24\"×36\" clear fire door if fire-rated)",
@@ -219,5 +219,6 @@
       "note": "The Closet is here, not where the \"temp closet\" is marked on this page",
       "resolution": "Moved Temp. Closet (Open) from misplaced (355, 94) to NW Bedroom Closet niche (X=315.4..352.0, Y=5.4..88.0)."
     }
-  ]
+  ],
+  "planning_visit_status": "Reschedule requested (original slot Mon, Nov. 23, 2–4 p.m. PT; NEXT has not confirmed cancellation or a replacement time; planning only, not inspection or installation)"
 }

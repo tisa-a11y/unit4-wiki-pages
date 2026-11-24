@@ -3,28 +3,43 @@
   "steps": [
     {
       "done": true,
-      "en": "Rough-in done, gas box moved, WashTower ordered (Dec 1)",
-      "es": "Instalaciones listas, caja de gas movida, WashTower pedida (1 dic)"
+      "en": "Rough-in & gas-box corrections completed and reconciled (Nov 11/19; open-wall verification photos still required before closing walls)",
+      "es": "Instalaciones ocultas y ajuste de caja de gas completados y conciliados (11/19 nov; faltan fotos de muro abierto antes de cerrar)"
+    },
+    {
+      "done": true,
+      "en": "Sole planning appliance locked: ordered LG WKG101HVA stacked gas WashTower (27\" W × 74-3/8\" H × 30-3/8\" D, 55\" depth w/ door open + 4\" rear; legacy Samsung retired) + Middle Doorway B Murphy location locked + duplicate primer card merged",
+      "es": "Equipo único definido: torre a gas LG WKG101HVA pedida (27\" × 74-3/8\" × 30-3/8\", 55\" con puerta abierta + 4\" atrás; Samsung descartado) + ubicación en Puerta Central B + tarjeta duplicada de primer fusionada"
     },
     {
       "done": false,
-      "en": "Check the outlet opening and photograph the open wall before closing it",
-      "es": "Revisar la abertura del contacto y fotografiar el muro abierto antes de cerrarlo"
+      "en": "Prepare East/Right-wall laundry outlet opening at 38\" AFF for Rev R4/R5 Circuit #14 (1× 20A · 12/2 duplex serving both 120V cords, GFCI reset at Panel; confirm box datum & cord reach before cutting)",
+      "es": "Preparar abertura de contacto en muro Este/derecho a 38\" NPT para Circuito #14 Rev R4/R5 (1× contacto doble 20A · 12/2 para ambas clavijas 120V, GFCI en Tablero; confirmar referencia y alcance de cables antes de cortar)"
     },
     {
       "done": false,
-      "en": "Drywall, primer, baseboard and paint",
-      "es": "Tablaroca, sellador, zoclo y pintura"
+      "en": "Photograph ceiling & open-wall rough-in before closing walls, install remaining baseboard, and sand/prime/finish-paint closet walls & ceiling ahead of Dec 1 delivery",
+      "es": "Fotografiar plafón y muros abiertos antes de cerrar, instalar zoclo faltante y lijar/fondear/pintar muros y plafón del clóset antes de la entrega del 1 dic"
     },
     {
       "done": false,
-      "en": "Measure the opening; build and hang the bookcase door",
-      "es": "Medir el vano; fabricar y colgar la puerta librero"
+      "en": "Complete 9-point B7–B15 inside-jamb measurements of Middle Doorway B (never Bathroom Door A 27-1/4\"×79-3/8\") & full-size cardboard dual-door swing mockup: verify move-in, service access & full swing with BOTH bookcase door and LG WashTower doors open (55\" open-door depth + 4\" rear)",
+      "es": "Completar 9 medidas interiores B7–B15 de Puerta Central B (nunca Puerta A del Baño 27-1/4\"×79-3/8\") y plantilla de cartón de giro doble: verificar entrada, servicio y giro completo con AMBAS puertas abiertas (55\" fondo puerta LG abierta + 4\" atrás)"
     },
     {
       "done": false,
-      "en": "Receive the WashTower Dec 1, connect and test",
-      "es": "Recibir la WashTower el 1 dic, conectar y probar"
+      "en": "Hold bookcase back & grille cuts until qualified reviewer confirms unobstructed high/low openings with bookcase closed & normally loaded using grille RATED FREE/OPEN AREA (not outside frame size): LG ≥ 48 sq in. at ≥ 6 ft AFF + ≥ 24 sq in. at ≤ 1 ft AFF vs. 2025 CMC §504.4.1 100 sq in. makeup air (separate from exterior dryer exhaust)",
+      "es": "Pausar cortes de respaldo y rejillas hasta que el revisor calificado confirme aberturas alta/baja sin obstrucción con el librero cerrado y cargado usando ÁREA LIBRE EFECTIVA de rejilla (no marco exterior): LG ≥ 48 sq in. a ≥ 6 pies NPT + ≥ 24 sq in. a ≤ 1 pie NPT vs. CMC 2025 §504.4.1 100 sq in. (independiente del ducto exterior de secadora)"
+    },
+    {
+      "done": false,
+      "en": "Receive LG WKG101HVA on Tue, Dec 1 (delivery only — verify rating plate on arrival), MOVE WashTower into closet BEFORE hanging Murphy bookcase door, and complete licensed gas/vent/water/power hookup & leak test",
+      "es": "Recibir LG WKG101HVA el mar 1 dic (solo entrega — verificar placa de datos al llegar), METER la torre al clóset ANTES de colgar la puerta librero Murphy y completar conexión autorizada de gas/ducto/agua/luz y prueba de fugas"
+    },
+    {
+      "done": false,
+      "en": "Fabricate, hang & finish the Murphy bookcase door (Chantilly Lace OC-65, Sugatsune ML-ZN80-BL push latch, mandatory inside emergency release ~40\" AFF, original hallway crown/casings untouched) AFTER WashTower is inside closet",
+      "es": "Fabricar, colgar y detallar la puerta librero Murphy (Chantilly Lace OC-65, seguro Sugatsune ML-ZN80-BL, manija interior de emergencia ~40\" NPT y molduras originales intactas) DESPUÉS de meter la torre al clóset"
     }
   ]
 }

@@ -13,7 +13,7 @@
     "attic/attic-hatch-plan-data.json"
   ],
   "base_rev": "rev-20261122-hvac-r3",
-  "status": "PLANNING_SANDBOX_MON_NOV23_WALKTHROUGH",
+  "status": "PLANNING_VISIT_RESCHEDULE_REQUESTED",
   "orientation": {
     "north_angle_deg": 0,
     "compass_required": true,
@@ -188,7 +188,7 @@
         "3/4\" structural plywood",
         "2x lumber (NEVER 3/8\" ply)"
       ],
-      "saw_kerf_rule": "1 true 24\" strip per 4x8 sheet (<=7ft: 1, 7-14ft: 2, 14-20ft: 3) -> 3 walkway sheets + 1 platform/dam sheet"
+      "saw_kerf_rule": "1 true 24\" strip per 4x8 sheet (<=7ft: 1, 7-14ft: 2, 14-20ft: 3) -> 3 walkway sheets + 1 platform/lid sheet"
     },
     "ducts": {
       "supply_ducts": [
@@ -302,8 +302,8 @@
       "note": "Flat roof (66\" cavity, zero roof penetrations) — exhaust exits horizontally out sidewall per 2025 SFMC 802.8"
     }
   ],
-  "revision": "rev-20261123-hvac-r8",
-  "updated_at": "2026-11-23T06:49:43.086Z",
+  "revision": "rev-20261123-hvac-r9",
+  "updated_at": "2026-11-23T18:07:02.360Z",
   "vibration_pads_tbd_with_next": true,
   "temp_bedroom_closet_niche_in": {
     "x_min": 315.4,
@@ -336,5 +336,6 @@
       "x": 352,
       "y": 112
     }
-  }
+  },
+  "planning_visit_status": "Reschedule requested (original slot Mon, Nov. 23, 2–4 p.m. PT; NEXT has not confirmed cancellation or a replacement time; planning attic access & heating/electrical fit with Serge & Alex, not inspection or installation)"
 }

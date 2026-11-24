@@ -1,6 +1,6 @@
 # Heating, Attic Access & Subpanel
 
-> **Monday, Nov 23 (2:00–4:00 p.m.) planning visit with Serge (NEXT) & Alex:** Planning walkthrough only — do not cut ceilings, cut the flat roof, or pull subpanel wire yet.
+> **Planning visit: reschedule requested.** The original slot was Monday, Nov. 23, 2–4 p.m. PT. NEXT has not confirmed cancellation or a replacement time. The next visit with Serge and Alex is to plan attic access and check how the heating and electrical work will fit. It is not an inspection or installation — do not cut ceilings, cut the flat roof, or pull subpanel wire yet.
 
 <div class="u4-plan-launch-grid">
   <a class="u4-plan-launch-card is-primary" href="#plan:hvac-layout">
@@ -18,26 +18,26 @@
 </div>
 
 <section id="sec-hvac-summary" class="u4-sec-block">
-  <h2>NEXT vs. Our Crew — Who Owns Each Phase</h2>
-  <p class="u4-sec-lead">Clear scope split between NEXT (mechanical &amp; main feeder) and our crew (attic carpentry, service electrical &amp; finish patching).</p>
+  <h2>NEXT vs. Our Crew (VPS) — Who Owns Each Phase</h2>
+  <p class="u4-sec-lead">Clear scope split between NEXT (furnace, heating ducts, exterior feeder &amp; permits) and our crew (attic carpentry, service electrical &amp; finish patching).</p>
   <div class="u4-phase-grid">
     <div class="u4-phase-card">
       <div class="u4-phase-badge is-next">NEXT Mechanical &amp; Feeder Scope</div>
       <h3>NEXT Installs &amp; Tests the Heating System</h3>
       <ul>
-        <li><strong>Furnace, thermostat &amp; heating ducts:</strong> Supplies and installs the horizontal attic gas furnace, wall thermostat, and insulated heating ducts (<code>3</code> room supply runs, <code>1</code> central hallway return, and <code>1</code> bedroom air-transfer duct).</li>
+        <li><strong>Furnace, thermostat &amp; heating ducts:</strong> Supplies, installs, and tests the horizontal attic gas furnace, wall thermostat, and insulated heating ducts (<code>3</code> room supply runs, <code>1</code> central hallway return, and <code>1</code> bedroom jump/transfer duct).</li>
         <li><strong>Horizontal sidewall exhaust:</strong> Routes the furnace exhaust horizontally out an exterior sidewall (<strong>zero flat-roof cuts</strong>).</li>
         <li><strong>Exterior power feeder &amp; subpanel (<code>D04</code>):</strong> Runs the new exterior feeder from the main building service to the Unit 4 subpanel at <code>D04</code> and lands the panel connections (<strong><code>80</code>-amp feed to Unit 4</strong> with a <strong>conditional <code>100</code>-amp main breaker</strong> if existing service supports it).</li>
         <li><strong>Permits, HERS test &amp; City inspections:</strong> Pulls NEXT&apos;s mechanical and electrical permits and completes HERS testing and City sign-offs.</li>
       </ul>
     </div>
     <div class="u4-phase-card">
-      <div class="u4-phase-badge is-crew">Our Crew Carpentry &amp; Finish Scope</div>
-      <h3>Our Crew Builds Access &amp; Repairs Finishes (In Order)</h3>
+      <div class="u4-phase-badge is-crew">Our Crew (VPS) Scope — In 3 Phases</div>
+      <h3>What Our Crew Does Before, With &amp; After NEXT</h3>
       <ol>
-        <li><strong>Before NEXT starts:</strong> Keep the NW bedroom-closet ceiling opening (<code>X=315.4&quot;&ndash;352.0&quot;, Y=5.4&quot;&ndash;88.0&quot;</code>, <a href="https://app.todoist.com/app/task/6j3j3pXFrFWhH2w7" target="_blank" rel="noopener">task</a>) and <code>D04</code> subpanel wall (<a href="https://app.todoist.com/app/task/6hvRcQ4XC9mr56g7" target="_blank" rel="noopener">task</a>) open; repair and dry-check the flat-roof leak; keep the ozone machine off and unplugged (<a href="https://app.todoist.com/app/task/6j4MQwqCqp24hX57" target="_blank" rel="noopener">task</a>).</li>
-        <li><strong>Coordinate with NEXT (after Monday sign-off):</strong> Build the permanent <code>24&quot; &times; 36&quot;</code> clear hatch on the unconditioned landing outside Front Door 4 (snug <code>3/4&quot;</code> plywood lid + foam dust gasket, no lid batts or dam; <a href="https://app.todoist.com/app/task/6j3Rf8FVhMVQ7vQf" target="_blank" rel="noopener">task</a>), the <code>15.8 ft</code> continuous <code>24&quot;</code> wood walkway (<a href="https://app.todoist.com/app/task/6j3RvWq3q6RRFXf7" target="_blank" rel="noopener">task</a>), the level <code>30&quot; &times; 30&quot;</code> wood service platform (<a href="https://app.todoist.com/app/task/6j3j3pqfM4GC53Qf" target="_blank" rel="noopener">task</a>), the <code>120V</code> GFCI outlet within <code>25 ft</code> (<a href="https://app.todoist.com/app/task/6j3RvWhHcpMmCjP7" target="_blank" rel="noopener">task</a>), and the permanent switched LED attic light (<a href="https://app.todoist.com/app/task/6hvjQJgpw2W5VcQf" target="_blank" rel="noopener">task</a>).</li>
-        <li><strong>After testing:</strong> Close the NW bedroom-closet ceiling only after both the low-voltage thermostat cable and permanent hatch are complete (<a href="https://app.todoist.com/app/task/6j3Rf89g8M6hPPx7" target="_blank" rel="noopener">task</a>), then patch and paint ceilings and <code>D04</code> (<a href="https://app.todoist.com/app/task/6hvj3CgXpVqrJgvf" target="_blank" rel="noopener">task</a>).</li>
+        <li><strong>Before NEXT starts:</strong> Keep the temporary NW bedroom-closet ceiling opening (<code>X=315.4&quot;&ndash;352.0&quot;, Y=5.4&quot;&ndash;88.0&quot;</code>, <a href="https://app.todoist.com/app/task/6j3j3pXFrFWhH2w7" target="_blank" rel="noopener">task</a>) open; keep the <code>D04</code> subpanel wall prepared and open (<a href="https://app.todoist.com/app/task/6hvRcQ4XC9mr56g7" target="_blank" rel="noopener">task</a>); clear room/hallway obstructions; repair and dry-check the flat-roof leak; keep the ozone machine off and unplugged (<a href="https://app.todoist.com/app/task/6j4MQwqCqp24hX57" target="_blank" rel="noopener">task</a>).</li>
+        <li><strong>Coordinate with NEXT (after walkthrough sign-off):</strong> Build the permanent <code>24&quot; &times; 36&quot;</code> clear hatch outside Front Door 4 on the unconditioned stair landing (snug <code>3/4&quot;</code> plywood lid + foam dust gasket, no lid batts or dam; <a href="https://app.todoist.com/app/task/6j3Rf8FVhMVQ7vQf" target="_blank" rel="noopener">task</a>), the <code>15.8 ft</code> continuous <code>24&quot;</code> wood walkway (<a href="https://app.todoist.com/app/task/6j3RvWq3q6RRFXf7" target="_blank" rel="noopener">task</a>), the level <code>30&quot; &times; 30&quot;</code> wood service platform (<a href="https://app.todoist.com/app/task/6j3j3pqfM4GC53Qf" target="_blank" rel="noopener">task</a>; NEXT to confirm any equipment-specific vibration/mounting hardware before anyone buys or installs pads), the <code>120V</code> GFCI outlet within <code>25 ft</code> (<a href="https://app.todoist.com/app/task/6j3RvWhHcpMmCjP7" target="_blank" rel="noopener">task</a>), and the permanent switched LED attic light (<a href="https://app.todoist.com/app/task/6hvjQJgpw2W5VcQf" target="_blank" rel="noopener">task</a> &mdash; agree with NEXT&apos;s electrician who makes the wiring connection).</li>
+        <li><strong>After installation:</strong> Patch, finish, and paint ceiling openings and the <code>D04</code> panel wall (<a href="https://app.todoist.com/app/task/6hvj3CgXpVqrJgvf" target="_blank" rel="noopener">task</a>), closing the temporary NW bedroom-closet ceiling only after both the low-voltage thermostat cable and permanent hatch are ready (<a href="https://app.todoist.com/app/task/6j3Rf89g8M6hPPx7" target="_blank" rel="noopener">task</a>).</li>
       </ol>
     </div>
   </div>
@@ -47,14 +47,13 @@
   </div>
 </section>
 
-## What Monday, Nov 23 Needs to Resolve
+## Leave the Rescheduled Planning Visit With These 3 Answers
 
-| Walkthrough Item | Confirm on Monday, Nov 23 (2:00–4:00 p.m. with Serge & Alex) |
+| Walkthrough Item | Confirm With Serge & Alex During the Rescheduled Planning Visit |
 | :--- | :--- |
-| **1. Hatch, platform, vibration pads & site readiness** | Confirm the exact `24" × 36"` clear markout outside Front Door 4, joist spacing, whether the landing ceiling needs a fire-rated hatch door, the `15.8 ft` walkway and `30" × 30"` platform spot, **whether the horizontal furnace needs vibration pads or isolation mounts (and if so, who supplies them)**, and pre-start site prep. Photograph the markout — **do not cut yet** ([task](https://app.todoist.com/app/task/6j3RvWmJ329qPCc7)). |
-| **2. Sidewall exhaust route** | Zero flat-roof cuts; measure whether the South wall has at least `4 ft` to the property line (or route out the West rear-yard wall) and confirm listed sidewall power venter vs. `95%+` sealed PVC / heat pump. |
-| **3. Subpanel & power run (`D04`)** | Confirm whether NEXT uses the Eaton `125A` panel John mounted at `D04`, bottom vs. side wire entry, and electrician sign-off on the **80-amp feed + conditional 100-amp main breaker** before wiring or closing `D04`. |
-| **4. Attic light connection** | Our crew installs the permanent switched LED attic light — agree with NEXT's electrician who makes the final wire connection and when. |
+| **1. Attic access** | Confirm the exact `24" × 36"` clear hatch markout outside Front Door 4, joist framing, ceiling fire-rating/protection requirements, and how the furnace (`14.19" × 29"` end-first) and ducts will move into the attic. **Photograph the markout — do not cut yet** ([task](https://app.todoist.com/app/task/6j3RvWmJ329qPCc7)). |
+| **2. Panel (`D04`)** | Confirm whether NEXT can use the Eaton `125A` panel box John mounted at `D04`, where the exterior feeder enters, and get electrician sign-off on the **80-amp feed + conditional 100-amp main breaker** before wiring or closing the wall ([task](https://app.todoist.com/app/task/6hvRcQ4XC9mr56g7)). |
+| **3. Attic light, exhaust & sequence** | Confirm who wires and connects the permanent switched LED attic light and when, confirm horizontal sidewall exhaust clearance (`>= 4 ft` to lot line on South vs. West rear-yard wall, zero flat-roof cuts), confirm whether the horizontal furnace needs any equipment-specific vibration/mounting hardware before anyone buys pads, and list which attic/wall preps must finish before NEXT starts. |
 
 <section id="sec-subpages" class="u4-sec-block">
   <h2>Attic Access &amp; Interactive Plans</h2>
@@ -78,7 +77,7 @@
   <summary>Field dimensions &amp; lumber notes</summary>
   <ul>
     <li><strong>Furnace fit (<code>33.25&quot; &times; 14.19&quot; &times; 29&quot;</code>):</strong> Passes end-first (<code>14.19&quot; &times; 29&quot;</code>) through the full <code>24&quot; &times; 36&quot;</code> clear opening. Avoid nominal <code>24&quot;&times;36&quot;</code> metal doors whose frame shrinks clear passage below <code>24&quot; &times; 36&quot;</code>.</li>
-    <li><strong>Walkway &amp; platform lumber:</strong> At <code>66&quot;</code> flat-roof attic height, the <code>24&quot;</code> continuous walkway stays <code>20 ft</code> or shorter (<code>15.8 ft</code> to Southwest Dining). Use <code>3</code> sheets of <code>23/32&quot;</code> OSB or <code>3/4&quot;</code> structural plywood for the walkway (<code>1</code> strip per sheet; never <code>3/8&quot;</code> plywood) plus <code>1</code> sheet for the <code>30&quot; &times; 30&quot;</code> service platform and hatch lid (no insulation dam or lid batts needed above the unconditioned Door 4 stair landing).</li>
+    <li><strong>Walkway &amp; platform lumber:</strong> At <code>66&quot;</code> flat-roof attic height, the <code>24&quot;</code> continuous walkway stays <code>20 ft</code> or shorter (<code>15.8 ft</code> to Southwest Dining). Use <code>3</code> sheets of <code>23/32&quot;</code> OSB or <code>3/4&quot;</code> structural plywood for the walkway (<code>1</code> strip per sheet; never <code>3/8&quot;</code> plywood) plus <code>1</code> sheet for the level <code>30&quot; &times; 30&quot;</code> service platform and hatch lid (no insulation dam or lid batts needed above the unconditioned Door 4 stair landing).</li>
     <li><strong>Interactive plans:</strong> Open <a href="#plan:attic-hatch">Plan 1: Attic Hatch, Wood Walkway &amp; Platform</a> for framing and lid details, or <a href="#plan:hvac-layout">Plan 2: Heating System &mdash; Furnace, Ducts &amp; Sidewall Exhaust</a> for room ductwork and sidewall exhaust.</li>
   </ul>
 </details>

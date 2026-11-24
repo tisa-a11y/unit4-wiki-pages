@@ -673,8 +673,8 @@
     if (holdEl) {
       holdEl.className = "u4h-hold-strip is-danger";
       holdEl.innerHTML = es
-        ? "<strong>NO CORTAR MADERA NI PERFORAR TODAVÍA:</strong> Completa las 9 medidas por dentro de las jambas de la <strong>Puerta Central B</strong> (NUNCA usar medidas de Puerta A del Baño 27-1/4\" × 79-3/8\"), mide las bisagras reales del kit y aprueba la plantilla de cartón."
-        : "<strong>DO NOT CUT WOOD OR DRILL PIVOTS YET:</strong> Enter all 9 inside-jamb measurements of <strong>Middle Doorway B</strong> (NEVER use Bathroom Doorway A: 27-1/4\" × 79-3/8\"), measure actual kit hinge thickness, and pass the cardboard swing mockup.";
+        ? "<strong>NO CORTAR MADERA NI PERFORAR TODAVÍA:</strong> Completa las 9 medidas interiores de la <strong>Puerta Central B</strong> (NUNCA Puerta A del Baño 27-1/4\" × 79-3/8\"), aprueba giro doble (55\" puerta LG abierta), pausa cortes de respaldo/rejillas hasta validar área libre y <strong>mete la LG WashTower ANTES de colgar la puerta</strong>."
+        : "<strong>DO NOT CUT WOOD OR DRILL PIVOTS YET:</strong> Enter all 9 inside-jamb measurements of <strong>Middle Doorway B</strong> (NEVER Bathroom Door A: 27-1/4\" × 79-3/8\"), pass the dual-door swing mockup (LG 55\" open-door depth), hold back/grille cuts for rated free-area review, and <strong>move LG WashTower into closet BEFORE hanging door</strong>.";
     }
 
     var stepPills = '<div class="u4h-steps" role="tablist">' +
@@ -772,22 +772,23 @@
           '<ul class="u4h-info-list">' +
             "<li>" + (es ? "Los planos antiguos suponían puerta corrediza de baño dentro del muro A–B. Esa corrediza fue pospuesta — revisa el bastidor real del muro A–B en obra antes de colocar refuerzos para el pivote izquierdo." : "Older drawings assumed a sliding bathroom pocket door inside Wall A–B. That pocket door was deferred — verify actual Wall A–B studs on site before anchoring left pivot blocking.") + "</li>" +
             "<li>" + (es ? "El librero pivota a la izquierda abriendo hacia el pasillo: presiona el borde derecho hacia adentro para liberar el seguro y jala hacia afuera." : "Left-pivot out-swing into hallway: press the right edge inward to release the push latch, then pull outward.") + "</li>" +
+          "<li><strong>" + (es ? "Giro doble (55\" puerta abierta) y orden obligatorio:" : "Dual-door swing (55\" open depth) & mandatory sequence:") + "</strong> " + (es ? "En la maqueta verifica acceso y giro con AMBAS puertas abiertas (LG WKG101HVA mide 55\" de fondo con puerta abierta + 4\" atrás = 59\" dentro del clóset de 82-5/8\"). METER la LG WashTower al clóset ANTES de colgar la puerta librero Murphy." : "During mockup verify move-in, service access & full swing with BOTH bookcase door and LG WKG101HVA doors open (55\" depth with door open + 4\" rear = 59\" inside 82-5/8\" closet). MOVE LG WashTower into closet BEFORE hanging Murphy bookcase door.") + "</li>" +
           "</ul>" +
         "</div>";
 
     } else if (state.step === "vents") {
       titleEn = "LG Gas WashTower Vents & Safety Release";
       titleEs = "Ventilación LG WashTower (Gas) y Apertura Interior";
-      subEn = "Required airflow and inside escape release for the stacked gas laundry unit (delivery Tue Dec 1)";
-      subEs = "Flujo de aire y manija interior obligatorios para el centro de lavado de gas (entrega mar 1 dic)";
+      subEn = "HOLD back & grille cuts until rated free-area review passes (LG WKG101HVA delivery Tue Dec 1 — delivery only, verify rating plate)";
+      subEs = "PAUSAR cortes de respaldo y rejillas hasta validar área libre real (entrega LG mar 1 dic — solo entrega, revisar placa)";
 
       inner =
         '<div class="u4h-svg-wrap">' + renderVentsSvg(es) + "</div>" +
         '<div class="u4h-info-box">' +
           '<div class="u4h-info-title">' + (es ? "Requisitos de seguridad y equipo" : "Appliance & Code Requirements") + "</div>" +
           '<ul class="u4h-info-list">' +
-            "<li><strong>LG WKG101HVA:</strong> 27\" W × 30-3/8\" D × 74-3/8\" H (" + (es ? 'mín. 1" lados, 4" atrás' : 'min 1" sides, 4" rear clearance') + ").</li>" +
-            "<li><strong>" + (es ? "Ventilación obligatoria:" : "Mandatory combustion/dryer airflow:") + "</strong> " + (es ? '≥ 48 sq in neto arriba (≥ 72" alto) + ≥ 24 sq in neto abajo (≤ 12" alto), total ≥ 100 sq in neto.' : '≥ 48 sq in net upper (≥ 72" high) + ≥ 24 sq in net lower (≤ 12" high), total ≥ 100 sq in net.') + "</li>" +
+            "<li><strong>LG WKG101HVA:</strong> 27\" W × 30-3/8\" D × 74-3/8\" H (" + (es ? '55" fondo con puerta abierta, mín. 1" lados, 4" atrás; referencia Samsung retirada; revisar placa el mar 1 dic' : '55" depth w/ door open, min 1" sides, 4" rear; legacy Samsung retired; verify rating plate on Tue Dec 1 delivery') + ").</li>" +
+            "<li><strong>" + (es ? "Ventilación obligatoria:" : "Mandatory combustion/dryer airflow:") + "</strong> " + (es ? 'PAUSAR corte de respaldo/rejillas hasta confirmar con librero cerrado y cargado usando ÁREA LIBRE EFECTIVA de rejilla (no marco exterior): LG ≥ 48 sq in arriba (≥ 6 pies / 72" NPT) + ≥ 24 sq in abajo (≤ 1 pie / 12" NPT); CMC 2025 §504.4.1 exige 100 sq in netos (independiente del ducto exterior de secadora).' : 'HOLD bookcase back & grille cuts until reviewer confirms unobstructed openings with bookcase closed & loaded using RATED FREE/OPEN GRILLE AREA (not outside frame size): LG ≥ 48 sq in upper (≥ 6 ft / 72" AFF) + ≥ 24 sq in lower (≤ 1 ft / 12" AFF); 2025 CMC §504.4.1 requires 100 sq in net makeup air (separate from exterior dryer exhaust).') + "</li>" +
             "<li><strong>" + (es ? "Manija interior:" : "Inside release:") + "</strong> " + (es ? "Obligatoria para poder abrir desde adentro del clóset en cualquier momento." : "Required so nobody can ever get trapped inside the laundry closet.") + "</li>" +
           "</ul>" +
         "</div>";
@@ -902,7 +903,7 @@
       var val = args.value;
       if (act === "depth" || act === "bookcase_depth") {
         var ds = String(val);
-        if (ds === "8.25" || ds === "9.5" || ds === "10.5") state.depthOpt = ds;
+        if (ds === "8.25" || ds === "9.0625") state.depthOpt = ds;
         else return false;
         render();
         return true;

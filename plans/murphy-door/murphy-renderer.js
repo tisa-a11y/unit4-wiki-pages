@@ -29,7 +29,7 @@
     title_en: 'Unit 4 Murphy Bookcase Door — Hallway Doorway B',
     title_es: 'Puerta Librero Murphy — Puerta Central B del Pasillo',
     governing_spec: 'laundry/SPEC.md',
-    base_rev: 'rev-20261120-murphy-001',
+    base_rev: 'rev-20261123-murphy-r9',
     status: 'HOLD_UNTIL_9_POINT_FIELD_MEASUREMENTS',
     orientation: {
       north_angle_deg: 0,
@@ -73,7 +73,13 @@
         es: 'Revisión muro A–B: la puerta corrediza de baño del 19 nov quedó EN PAUSA por puerta abatible. Verificar bastidor real del muro A–B antes de atornillar pivote.'
       },
       {
-        id: 'clash-murphy-unmeasured',
+        id: 'clash-murphy-precut-sequence',
+      severity: 'HIGH',
+      en: 'Nov 23 Pre-Cut & Sequence Gate: LG WKG101HVA (55" depth w/ door open + 4" rear; Samsung retired). Hold back/grille cuts until rated free-area makeup air is confirmed (LG ≥48 @ ≥72" + ≥24 @ ≤12" vs 2025 CMC §504.4.1 100 sq in), and MOVE WashTower into closet BEFORE hanging Murphy door.',
+      es: 'Candado 23 nov: LG WKG101HVA (55" con puerta abierta + 4" atrás; Samsung descartado). Pausar cortes de respaldo/rejillas hasta validar área libre efectiva (≥48 @ ≥72" + ≥24 @ ≤12" vs CMC 2025 §504.4.1 100 sq in) y METER la torre al clóset ANTES de colgar la puerta Murphy.'
+    },
+    {
+      id: 'clash-murphy-unmeasured',
         severity: 'HIGH',
         en: 'All 9 Doorway B inside-jamb readings and kit hinge stacks stay UNMEASURED. Zero cutting or drilling until measured and full-size cardboard swing mockup passes.',
         es: 'Las 9 medidas del vano B y grosor de bisagras siguen SIN MEDIR. Cero cortes ni barrenos hasta medir y aprobar la plantilla de cartón a tamaño real.'
@@ -1009,7 +1015,7 @@
   }
 
   function computeRevisionStamp() {
-    const rev = state.base_rev || 'rev-20261120-murphy-001';
+    const rev = state.base_rev || 'rev-20261123-murphy-r9';
     if (hasUnsyncedLocalEdits) return `${rev} · ${I18N[currentLang].local_preview}`;
     if (lastSavedRevId) return `${rev} · ${I18N[currentLang].pending_eod} (${lastSavedRevId})`;
     return `${rev} · ${I18N[currentLang].synced_label}`;
