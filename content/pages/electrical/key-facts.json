@@ -1,26 +1,26 @@
 [
   {
-    "kEn": "Panel location",
-    "kEs": "Lugar del tablero",
-    "vEn": "Dining-room wall (D04)",
-    "vEs": "Muro del comedor (D04)"
-  },
-  {
     "kEn": "Panel",
-    "kEs": "Tablero",
-    "vEn": "Eaton, on site",
-    "vEs": "Eaton, en obra"
+    "kEs": "Panel",
+    "vEn": "Eaton 20-space · Dining East face (X=147\")",
+    "vEs": "Eaton 20 espacios · Cara Este Comedor (X=147\")"
   },
   {
-    "kEn": "Panel wall",
-    "kEs": "Muro del tablero",
-    "vEn": "Do not close it yet",
-    "vEs": "No cerrarlo todavía"
+    "kEn": "Active circuits",
+    "kEs": "Circuitos activos",
+    "vEn": "16 active (#1–#16) + 4 open spares (#17–#20)",
+    "vEs": "16 activos (#1–#16) + 4 reservas (#17–#20)"
   },
   {
-    "kEn": "Closed walls",
-    "kEs": "Muros cerrados",
-    "vEn": "Boxes + empty conduit · no wire yet",
-    "vEs": "Cajas + tubo vacío · sin cable todavía"
+    "kEn": "Working sheets",
+    "kEs": "Planos vigentes",
+    "vEn": "Rev R5 · Module 1 (Kitchen) & Module 2 (Unit)",
+    "vEs": "Rev R5 · Módulo 1 (Cocina) y Módulo 2 (Unidad)"
+  },
+  {
+    "kEn": "Active holds",
+    "kEs": "Pausas activas",
+    "vEn": "Panel feeder/notch · South CL · #10/#11 gauge",
+    "vEs": "Alimentador Panel · Eje Sur · Calibre #10/#11"
   }
 ]

@@ -44,6 +44,50 @@
     "pin": true
   },
   {
+    "title": "2026-11-23_U4_Module1_Kitchen-Electrical_R5_EN.pdf",
+    "titleEn": "Official Electrical Sheets — Module 1: Kitchen (E-00A to E-14, Rev R5) · English",
+    "titleEs": "Hojas Eléctricas Oficiales — Módulo 1: Cocina (E-00A a E-14, Rev R5) · inglés",
+    "id": "1Emm8uxfmx1TNmCpM6mAkHwOSThP7aZDK",
+    "path": "2026-11-23-official-electrical-plans-R5 · 6 landscape blueprint sheets (English)",
+    "date": "2026-11-23",
+    "lang": "en",
+    "pairId": "u4-elec-mod1-r5-pdf",
+    "pin": true
+  },
+  {
+    "title": "2026-11-23_U4_Module1_Kitchen-Electrical_R5_ES.pdf",
+    "titleEn": "Official Electrical Sheets — Module 1: Kitchen (E-00A to E-14, Rev R5) · Spanish",
+    "titleEs": "Hojas Eléctricas Oficiales — Módulo 1: Cocina (E-00A a E-14, Rev R5) · español",
+    "id": "1ZTNM8SjfP-j6CP1y7fG6bN1aN3ua0Tpx",
+    "path": "2026-11-23-official-electrical-plans-R5 · 6 hojas horizontales (español)",
+    "date": "2026-11-23",
+    "lang": "es",
+    "pairId": "u4-elec-mod1-r5-pdf",
+    "pin": true
+  },
+  {
+    "title": "2026-11-23_U4_Module1_Kitchen-Electrical_R5_EN.html",
+    "titleEn": "Module 1: Kitchen Electrical Blueprints (Web Page, Rev R5) · English",
+    "titleEs": "Módulo 1: Planos Eléctricos de Cocina (Página Web, Rev R5) · inglés",
+    "id": "2026-11-23_U4_Module1_Kitchen-Electrical_R5_HTML_EN",
+    "path": "wiki-docs/2026-11-23_U4_Module1_Kitchen-Electrical_R5_EN.html",
+    "date": "2026-11-23",
+    "lang": "en",
+    "pairId": "u4-elec-mod1-r5-html",
+    "pin": true
+  },
+  {
+    "title": "2026-11-23_U4_Module1_Kitchen-Electrical_R5_ES.html",
+    "titleEn": "Module 1: Kitchen Electrical Blueprints (Web Page, Rev R5) · Spanish",
+    "titleEs": "Módulo 1: Planos Eléctricos de Cocina (Página Web, Rev R5) · español",
+    "id": "2026-11-23_U4_Module1_Kitchen-Electrical_R5_HTML_ES",
+    "path": "wiki-docs/2026-11-23_U4_Module1_Kitchen-Electrical_R5_ES.html",
+    "date": "2026-11-23",
+    "lang": "es",
+    "pairId": "u4-elec-mod1-r5-html",
+    "pin": true
+  },
+  {
     "title": "Kitchen-RevC-EN.html",
     "titleEn": "Kitchen drawings from Nov 2 (web page) · English",
     "titleEs": "Planos de cocina del 2 de nov (página web) · inglés",
@@ -69,25 +113,25 @@
   },
   {
     "title": "2026-11-22_U4_kitchen_electrical_R2_EN.pdf",
-    "titleEn": "Kitchen electrical plan · English · Nov 22",
-    "titleEs": "Plano eléctrico de cocina · inglés · 22 nov",
+    "titleEn": "Kitchen electrical plan · English · Nov 22 (older reference)",
+    "titleEs": "Plano eléctrico de cocina · inglés · 22 nov (referencia anterior)",
     "id": "2026-11-22_U4_kitchen_electrical_R2_EN",
     "path": "Current Nov 22 print revision · kitchen-electrical",
     "date": "2026-11-22",
     "lang": "en",
     "pairId": "kitchen-electrical-printable-current",
-    "pin": true
+    "history": true
   },
   {
     "title": "2026-11-22_U4_kitchen_electrical_R2_ES.pdf",
-    "titleEn": "Kitchen electrical plan · Spanish · Nov 22",
-    "titleEs": "Plano eléctrico de cocina · español · 22 nov",
+    "titleEn": "Kitchen electrical plan · Spanish · Nov 22 (older reference)",
+    "titleEs": "Plano eléctrico de cocina · español · 22 nov (referencia anterior)",
     "id": "2026-11-22_U4_kitchen_electrical_R2_ES",
     "path": "Current Nov 22 print revision · kitchen-electrical",
     "date": "2026-11-22",
     "lang": "es",
     "pairId": "kitchen-electrical-printable-current",
-    "pin": true
+    "history": true
   },
   {
     "title": "2026-11-22_U4_kitchen_floor-plan_R2_EN.pdf",

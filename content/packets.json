@@ -122,14 +122,31 @@
   {
     "key": "kitchen-electrical-printable-current",
     "room": "electrical",
-    "titleEn": "Kitchen electrical plan — print",
-    "titleEs": "Plano eléctrico de cocina — imprimir",
-    "noteEn": "Nov 22 revision. Field verification holds remain.",
-    "noteEs": "Revisión del 22 de nov. Siguen las verificaciones pendientes en obra.",
-    "docEn": "2026-11-22_U4_kitchen_electrical_R2_EN",
-    "docEs": "2026-11-22_U4_kitchen_electrical_R2_ES",
+    "titleEn": "Official Electrical Plans — Module 1: Kitchen (Rev R5)",
+    "titleEs": "Planos Eléctricos Oficiales — Módulo 1: Cocina (Rev R5)",
+    "noteEn": "6 landscape sheets (E-00A to E-14): Panel #1–#20, 1:1 floor plan & all 4 walls.",
+    "noteEs": "6 hojas horizontales (E-00A a E-14): Panel #1–#20, planta 1:1 y los 4 muros.",
+    "docEn": "1Emm8uxfmx1TNmCpM6mAkHwOSThP7aZDK",
+    "docEs": "1ZTNM8SjfP-j6CP1y7fG6bN1aN3ua0Tpx",
     "aliases": [
-      "kitchen-electrical print"
+      "kitchen-electrical print",
+      "module 1 kitchen electrical",
+      "official kitchen electrical r5"
+    ]
+  },
+  {
+    "key": "whole-unit-electrical-printable-current",
+    "room": "electrical",
+    "titleEn": "Official Electrical Plans — Module 2: Whole-Unit Segments (Rev R5)",
+    "titleEs": "Planos Eléctricos Oficiales — Módulo 2: Segmentos de la Unidad (Rev R5)",
+    "noteEn": "7 landscape sheets (E-00A to E-25): Living/Dining, Bath, Laundry, Bed/Hall, Attic & Smoke/CO.",
+    "noteEs": "7 hojas horizontales (E-00A a E-25): Sala/Comedor, Baño, Lavandería, Recámara/Pasillo, Ático y Humo/CO.",
+    "docEn": "10_htwyB2y2TxyG7GW0LkpDwUm92Eo1pY",
+    "docEs": "1FO9ANRX9COVSgNkN15_ibeJdoGa35pqK",
+    "aliases": [
+      "whole-unit electrical print",
+      "module 2 electrical",
+      "official whole unit electrical r5"
     ]
   },
   {

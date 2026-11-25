@@ -22,26 +22,124 @@
     "pin": true
   },
   {
+    "title": "2026-11-23_U4_Module1_Kitchen-Electrical_R5_EN.pdf",
+    "titleEn": "Official Electrical Sheets — Module 1: Kitchen (E-00A to E-14, Rev R5) · English",
+    "titleEs": "Hojas Eléctricas Oficiales — Módulo 1: Cocina (E-00A a E-14, Rev R5) · inglés",
+    "id": "1Emm8uxfmx1TNmCpM6mAkHwOSThP7aZDK",
+    "path": "2026-11-23-official-electrical-plans-R5 · 6 landscape blueprint sheets (English)",
+    "date": "2026-11-23",
+    "lang": "en",
+    "pairId": "u4-elec-mod1-r5-pdf",
+    "pin": true
+  },
+  {
+    "title": "2026-11-23_U4_Module1_Kitchen-Electrical_R5_ES.pdf",
+    "titleEn": "Official Electrical Sheets — Module 1: Kitchen (E-00A to E-14, Rev R5) · Spanish",
+    "titleEs": "Hojas Eléctricas Oficiales — Módulo 1: Cocina (E-00A a E-14, Rev R5) · español",
+    "id": "1ZTNM8SjfP-j6CP1y7fG6bN1aN3ua0Tpx",
+    "path": "2026-11-23-official-electrical-plans-R5 · 6 hojas horizontales (español)",
+    "date": "2026-11-23",
+    "lang": "es",
+    "pairId": "u4-elec-mod1-r5-pdf",
+    "pin": true
+  },
+  {
+    "title": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_EN.pdf",
+    "titleEn": "Official Electrical Sheets — Module 2: Whole-Unit Segments E-00A to E-25 (Rev R5) · English",
+    "titleEs": "Hojas Eléctricas Oficiales — Módulo 2: Segmentos de Toda la Unidad E-00A a E-25 (Rev R5) · inglés",
+    "id": "10_htwyB2y2TxyG7GW0LkpDwUm92Eo1pY",
+    "path": "2026-11-23-official-electrical-plans-R5 · Whole-Unit Segments E-00A to E-25 (English)",
+    "date": "2026-11-23",
+    "lang": "en",
+    "pairId": "u4-elec-mod2-r5-pdf",
+    "pin": true
+  },
+  {
+    "title": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_ES.pdf",
+    "titleEn": "Official Electrical Sheets — Module 2: Whole-Unit Segments E-00A to E-25 (Rev R5) · Spanish",
+    "titleEs": "Hojas Eléctricas Oficiales — Módulo 2: Segmentos de Toda la Unidad E-00A a E-25 (Rev R5) · español",
+    "id": "1FO9ANRX9COVSgNkN15_ibeJdoGa35pqK",
+    "path": "2026-11-23-official-electrical-plans-R5 · Segmentos de Toda la Unidad E-00A a E-25 (español)",
+    "date": "2026-11-23",
+    "lang": "es",
+    "pairId": "u4-elec-mod2-r5-pdf",
+    "pin": true
+  },
+  {
+    "title": "2026-11-23_U4_Module1_Kitchen-Electrical_R5_EN.html",
+    "titleEn": "Module 1: Kitchen Electrical Blueprints (Web Page, Rev R5) · English",
+    "titleEs": "Módulo 1: Planos Eléctricos de Cocina (Página Web, Rev R5) · inglés",
+    "id": "2026-11-23_U4_Module1_Kitchen-Electrical_R5_HTML_EN",
+    "path": "wiki-docs/2026-11-23_U4_Module1_Kitchen-Electrical_R5_EN.html",
+    "date": "2026-11-23",
+    "lang": "en",
+    "pairId": "u4-elec-mod1-r5-html",
+    "pin": true
+  },
+  {
+    "title": "2026-11-23_U4_Module1_Kitchen-Electrical_R5_ES.html",
+    "titleEn": "Module 1: Kitchen Electrical Blueprints (Web Page, Rev R5) · Spanish",
+    "titleEs": "Módulo 1: Planos Eléctricos de Cocina (Página Web, Rev R5) · español",
+    "id": "2026-11-23_U4_Module1_Kitchen-Electrical_R5_HTML_ES",
+    "path": "wiki-docs/2026-11-23_U4_Module1_Kitchen-Electrical_R5_ES.html",
+    "date": "2026-11-23",
+    "lang": "es",
+    "pairId": "u4-elec-mod1-r5-html",
+    "pin": true
+  },
+  {
+    "title": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_EN.html",
+    "titleEn": "Module 2: Whole-Unit Electrical Blueprints (Web Page, Rev R5) · English",
+    "titleEs": "Módulo 2: Planos Eléctricos de Toda la Unidad (Página Web, Rev R5) · inglés",
+    "id": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_HTML_EN",
+    "path": "wiki-docs/2026-11-23_U4_Module2_Whole-Unit-Segments_R5_EN.html",
+    "date": "2026-11-23",
+    "lang": "en",
+    "pairId": "u4-elec-mod2-r5-html",
+    "pin": true
+  },
+  {
+    "title": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_ES.html",
+    "titleEn": "Module 2: Whole-Unit Electrical Blueprints (Web Page, Rev R5) · Spanish",
+    "titleEs": "Módulo 2: Planos Eléctricos de Toda la Unidad (Página Web, Rev R5) · español",
+    "id": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_HTML_ES",
+    "path": "wiki-docs/2026-11-23_U4_Module2_Whole-Unit-Segments_R5_ES.html",
+    "date": "2026-11-23",
+    "lang": "es",
+    "pairId": "u4-elec-mod2-r5-html",
+    "pin": true
+  },
+  {
+    "title": "2026-11-23_U4_Electrical_Official-Plan-and-Mappings_R5",
+    "titleEn": "Official Electrical Plan & Two-Mapping Directory (Rev R5 · Google Doc)",
+    "titleEs": "Plan Eléctrico Oficial y Directorio de Dos Mapeos (Rev R5 · Google Doc)",
+    "id": "176us6L2O7Pr82kI_zuXNnYetME4RIPl_kJyCFNuNLVs",
+    "path": "2026-11-23-official-electrical-plans-R5 (Google Doc)",
+    "date": "2026-11-23",
+    "lang": "en",
+    "pin": true
+  },
+  {
     "title": "2026-11-22_U4_kitchen_electrical_R2_EN.pdf",
-    "titleEn": "Kitchen electrical plan · English · Nov 22",
-    "titleEs": "Plano eléctrico de cocina · inglés · 22 nov",
+    "titleEn": "Kitchen electrical plan · English · Nov 22 (older reference)",
+    "titleEs": "Plano eléctrico de cocina · inglés · 22 nov (referencia anterior)",
     "id": "2026-11-22_U4_kitchen_electrical_R2_EN",
     "path": "Current Nov 22 print revision · kitchen-electrical",
     "date": "2026-11-22",
     "lang": "en",
     "pairId": "kitchen-electrical-printable-current",
-    "pin": true
+    "history": true
   },
   {
     "title": "2026-11-22_U4_kitchen_electrical_R2_ES.pdf",
-    "titleEn": "Kitchen electrical plan · Spanish · Nov 22",
-    "titleEs": "Plano eléctrico de cocina · español · 22 nov",
+    "titleEn": "Kitchen electrical plan · Spanish · Nov 22 (older reference)",
+    "titleEs": "Plano eléctrico de cocina · español · 22 nov (referencia anterior)",
     "id": "2026-11-22_U4_kitchen_electrical_R2_ES",
     "path": "Current Nov 22 print revision · kitchen-electrical",
     "date": "2026-11-22",
     "lang": "es",
     "pairId": "kitchen-electrical-printable-current",
-    "pin": true
+    "history": true
   },
   {
     "title": "2026-11-20_U4_kitchen_zephyr-savona-mock-hookup_04-hood-electrical_R2_EN.pdf",

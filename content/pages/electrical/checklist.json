@@ -3,33 +3,33 @@
   "steps": [
     {
       "done": true,
-      "en": "Eaton 20-space panel bought and on site; dining-side D04 location settled",
-      "es": "Panel Eaton de 20 espacios comprado y en obra; ubicación D04 lado comedor definida"
+      "en": "Eaton 20-space Panel on site; Rev R5 Module 1 (Kitchen) & Module 2 (Whole-Unit) working blueprints published",
+      "es": "Panel Eaton de 20 espacios en obra; planos oficiales Rev R5 Módulo 1 (Cocina) y Módulo 2 (Unidad) publicados"
     },
     {
       "done": false,
-      "en": "Frame the panel wall with side cable entry; confirm the feeder with NEXT and Alex",
-      "es": "Enmarcar el muro del tablero con entrada lateral; confirmar el alimentador con NEXT y Alex"
+      "en": "Confirm feeder (80A vs. 100A) with NEXT & hold Panel side-entry notches; keep 30\"×36\"×78\" Dining clear space and zero Kitchen back-zone screws (53\"–77\" AFF)",
+      "es": "Confirmar alimentador (80A vs. 100A) con NEXT y pausar muescas laterales en el Panel; mantener 30\"×36\"×78\" libres en Comedor y cero tornillos traseros (53\"–77\" AFF)"
     },
     {
       "done": false,
-      "en": "Bathroom GFCI circuits, attic junction box, attic light and outlet",
-      "es": "Circuitos GFCI del baño, caja de conexiones, luz y contacto del ático"
+      "en": "Kitchen rough-in (#1–#9, Sheet E-11 to E-14): verify bare-subfloor buildup (+t) & South window CL (87\" vs. 90\"), Under-Sink 2-Gang @ 14\" AFF (2 separate yokes), and Hood 1-gang @ 33\" ± 2-1/4\" N",
+      "es": "Instalación en bruto de Cocina (#1–#9, Hojas E-11 a E-14): verificar espesor de piso (+t) y eje ventana Sur (87\" vs. 90\"), Caja Doble Fregadero a 14\" AFF (2 yugos separados) y Campana a 33\" ± 2-1/4\" N"
     },
     {
       "done": false,
-      "en": "Kitchen rough-in: nine circuits, including the hood's own",
-      "es": "Instalación en bruto de la cocina: nueve circuitos, incluido el de la campana"
+      "en": "Bathroom (#13, Sheet E-23) & Laundry (#14, Sheet E-24): run 100% 12/2 Yellow from Bath J-Box including a separate Toilet drop before Tuesday tile, and 1 East-wall 20A duplex @ 38\" AFF for WashTower",
+      "es": "Baño (#13, Hoja E-23) y Lavandería (#14, Hoja E-24): tender 100% 12/2 Amarillo desde Caja Baño con bajada separada a Inodoro antes del azulejo del martes, y 1 contacto doble 20A en muro Este a 38\" AFF"
     },
     {
       "done": false,
-      "en": "Outlet boxes and empty conduit in the closed-wall rooms; closet switch cable",
-      "es": "Cajas y tubo vacío en cuartos con muros cerrados; cable del apagador en el clóset"
+      "en": "Common rooms (#10–#12, Sheets E-22 & E-24): keep non-kitchen wire pulling & D6/L6 pocket-door cavities on hold; verify every reused wire gauge (14 AWG requires 15A AFCI)",
+      "es": "Cuartos comunes (#10–#12, Hojas E-22 y E-24): mantener pausa sin jalar cable fuera de cocina y cavidades D6/L6; verificar calibre de cables reusados (14 AWG requiere 15A AFCI)"
     },
     {
       "done": false,
-      "en": "Install feeder and panel, pull wire, install devices and test",
-      "es": "Instalar alimentador y tablero, jalar cable, colocar accesorios y probar"
+      "en": "Attic & Smoke/CO (#15–#16, Sheet E-25): wire #16 on 15A AFCI-only breaker (unswitched Smoke/COs + LINE-only GFCI <=25 ft from F1), add 72\" hatch guard strips, and flag all 4 Attic J-Boxes",
+      "es": "Ático y Humo/CO (#15–#16, Hoja E-25): conectar #16 en interruptor 15A solo-AFCI (Humo/CO directos + Toma GFCI solo en LINE <=25 pies de F1), listones a 72\" de escotilla y abanderar las 4 Cajas"
     }
   ]
 }

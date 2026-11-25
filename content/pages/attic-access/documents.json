@@ -33,6 +33,28 @@
     "tier": "history"
   },
   {
+    "title": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_EN.pdf",
+    "titleEn": "Official Electrical Sheets — Module 2: Sheet E-25: Attic Light, Outlet & Smoke/CO (#15/#16) (Rev R5) · English",
+    "titleEs": "Hojas Eléctricas Oficiales — Módulo 2: Hoja E-25: Ático y Humo/CO (#15/#16) (Rev R5) · inglés",
+    "id": "10_htwyB2y2TxyG7GW0LkpDwUm92Eo1pY",
+    "path": "2026-11-23-official-electrical-plans-R5 · Sheet E-25: Attic Light, Outlet & Smoke/CO (#15/#16) (English)",
+    "date": "2026-11-23",
+    "lang": "en",
+    "pairId": "u4-elec-mod2-r5-pdf",
+    "pin": true
+  },
+  {
+    "title": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_ES.pdf",
+    "titleEn": "Official Electrical Sheets — Module 2: Sheet E-25: Attic Light, Outlet & Smoke/CO (#15/#16) (Rev R5) · Spanish",
+    "titleEs": "Hojas Eléctricas Oficiales — Módulo 2: Hoja E-25: Ático y Humo/CO (#15/#16) (Rev R5) · español",
+    "id": "1FO9ANRX9COVSgNkN15_ibeJdoGa35pqK",
+    "path": "2026-11-23-official-electrical-plans-R5 · Hoja E-25: Ático y Humo/CO (#15/#16) (español)",
+    "date": "2026-11-23",
+    "lang": "es",
+    "pairId": "u4-elec-mod2-r5-pdf",
+    "pin": true
+  },
+  {
     "title": "2026-11-22_U4_attic_hatch_R3_EN.pdf",
     "titleEn": "Permanent attic hatch plan · English · Nov 22",
     "titleEs": "Plano de escotilla permanente del ático · inglés · 22 nov",
