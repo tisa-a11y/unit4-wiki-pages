@@ -305,16 +305,17 @@
   {
     "key": "bathroom-tile",
     "room": "bathroom",
-    "titleEn": "Bathroom tile and surfaces",
-    "titleEs": "Azulejo y acabados del baño",
-    "noteEn": "Floor, walls, niches.",
-    "noteEs": "Piso, muros, nichos.",
-    "docEn": "1aYu9yWuRRFk8T5E3nQ6NDTHWpeRcrXgW",
-    "docEs": "19BYgPOC5-RoRmaj-qidSJBTcEZoXR6tR",
+    "titleEn": "Bathroom Tub & Wall Tiling Plan (rev-006)",
+    "titleEs": "Plano Interactivo de Azulejo en Baño (rev-006)",
+    "noteEn": "35\" symmetrical stops, 71-1/4\" HardieBacker top, 2\"×6\" bullnose (zero metal), 1-piece 24\"×48\" White niche backs, Mapei #77 Frost grout.",
+    "noteEs": "Topes simétricos 35\", altura 71-1/4\", bullnose 2\"×6\" (cero metal), fondos nicho 1 pieza 24\"×48\" Blanco y boquilla Mapei #77 Frost.",
+    "docEn": "./plans/bathroom-tile/index.html?v=rev006",
+    "docEs": "./plans/bathroom-tile/index.html?lang=es&v=rev006",
     "aliases": [
-      "bathroom surfaces",
-      "bathroom tile",
-      "azulejo del bano"
+      "interactive hood plan",
+      "interactive range wall",
+      "live hood plan",
+      "plano interactivo campana"
     ]
   },
   {
