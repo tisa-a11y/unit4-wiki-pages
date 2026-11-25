@@ -60,6 +60,10 @@
     lastScaleInfo: { view: "field-layout", scaleX: 2.95, scaleY: 2.95, uniform: true }
   };
 
+  function pick(en, es, ru) {
+    return state.lang === "es" ? es : (state.lang === "ru" ? (ru || en) : en);
+  }
+
   function resolveStepId(raw) {
     const val = String(raw || "").trim().toLowerCase();
     if (!val) return null;
@@ -176,11 +180,21 @@
     return `
       <div class="u4b-hold-banner no-print">
         <strong>${pick("ACTIVE PRE-TILE HOLD (NOV 24):", "PAUSA PREVIA AL AZULEJO (24 NOV):", "ПАУЗА ПЕРЕД УКЛАДКОЙ ПЛИТКИ (24 НОЯБ.):")}</strong>
-        ${pick(
-          "Alex is out this week — wall tile stays on hold until: (1) bathroom window & casing are replaced (no tile above 43″ sill), (2) oversized 20″×32″ medicine cabinet is kept off the wall for return, (3) tub faucet trim is fixed, and (4) waterproofed niche dimensions are measured on site. (35″ shower stop, #77 Frost wall grout & ceramic bullnose locked Nov 25.)",
-          "Alex no está disponible esta semana — el azulejo en muros queda en pausa hasta: (1) reemplazar ventana y marco (sin azulejo arriba de 43″), (2) retirar el botiquín grande de 20″×32″ para devolución, (3) corregir la llave de la tina y (4) medir los nichos impermeabilizados en obra. (Tope de 35″, boquilla #77 Frost y bullnose aprobados 25 nov.)",
-          "Алекс отсутствует на этой неделе — укладка настенной плитки на паузе до: (1) замены окна и наличников (без плитки выше подоконника 43″), (2) возврата шкафчика 20″×32″, (3) исправления излива ванны и (4) замера ниш после гидроизоляции. (Край 35″, затирка #77 Frost и бордюр утверждены 25 нояб.)"
-        )}
+        <p>${pick(
+          "Alex is out this week; keep wall tile on hold until he returns and all checks below are complete.",
+          "Alex no está disponible esta semana; mantener azulejo de muros en pausa hasta su regreso y completar todas las verificaciones siguientes.",
+          "Алекс отсутствует на этой неделе; настенная плитка остается на паузе до его возвращения и завершения всех проверок ниже."
+        )}</p>
+        <p>${pick(
+          "Replace the bathroom window and casing; no tile above the 43″ sill. Keep the oversized 20″×32″ medicine cabinet off the wall for return.",
+          "Reemplazar ventana y marco del baño; sin azulejo arriba de la repisa de 43″. Dejar fuera del muro el botiquín de 20″×32″ para devolución.",
+          "Заменить окно и наличники; без плитки выше подоконника 43″. Не устанавливать шкафчик 20″×32″ — подготовить к возврату."
+        )}</p>
+        <p>${pick(
+          "Fix the tub faucet trim and measure waterproofed niches on site before tile. Locked Nov 25: 35″ shower stop, #77 Frost wall grout and ceramic bullnose.",
+          "Corregir los accesorios de la llave de tina y medir nichos impermeabilizados antes del azulejo. Aprobados el 25 nov: tope de 35″, boquilla #77 Frost en muros y bullnose cerámico.",
+          "Исправить отделку крана ванны и замерить ниши после гидроизоляции до укладки. Утверждены 25 ноября: край 35″, затирка стен #77 Frost и керамический бордюр."
+        )}</p>
       </div>
       <div class="u4b-ref-strip no-print">
         <span><strong>${pick("Field Measurements & Photos:", "Medidas de campo y fotos:", "Полевые замеры и фото:")}</strong> ${pick("Open interactive wall & tub drawings:", "Abrir planos y fotos de referencia:", "Открыть чертежи и фото:")}</span>
@@ -195,6 +209,7 @@
   }
 
   function buildStep1Svg(lay, forPrint) {
+    const es = state.lang === "es";
     const S = 2.95;
     if (!forPrint) state.lastScaleInfo = { view: "field-layout", scaleX: S, scaleY: S, uniform: true };
     const xWest0 = 32;
@@ -322,6 +337,7 @@
   }
 
   function buildStep2PlumbingSvg(lay, forPrint) {
+    const es = state.lang === "es";
     const S = 3.1;
     if (!forPrint) state.lastScaleInfo = { view: "plumbing-stops", scaleX: S, scaleY: S, uniform: true };
     const yZ = (z) => +(40 + (76.0 - z) * S).toFixed(1);
@@ -416,6 +432,7 @@
   }
 
   function buildStep3NichesSvg(lay, forPrint) {
+    const es = state.lang === "es";
     const S = 3.8;
     if (!forPrint) state.lastScaleInfo = { view: "niches-trim", scaleX: S, scaleY: S, uniform: true };
     const ox = 24;
@@ -495,6 +512,7 @@
   }
 
   function renderAll() {
+    const es = state.lang === "es";
     document.documentElement.lang = state.lang;
     document.documentElement.setAttribute("data-theme", state.theme);
     const lay = computeLayout();
@@ -529,7 +547,7 @@
           </div>
 
           <div class="u4h-svg-wrap" data-u4-zoom-label="${es ? "Trazo de 3 muros" : "3-Wall Tile Layout"}">
-            ${buildStep1Svg(es, lay, false)}
+            ${buildStep1Svg(lay, false)}
           </div>
 
           <div class="u4b-ctrl-panel">
@@ -598,7 +616,7 @@
           </div>
 
           <div class="u4h-svg-wrap" data-u4-zoom-label="${es ? "Regadera y ventana" : "Shower & Window Walls"}">
-            ${buildStep2PlumbingSvg(es, lay, false)}
+            ${buildStep2PlumbingSvg(lay, false)}
           </div>
 
           <div class="u4b-grid">
@@ -638,17 +656,17 @@
           </div>
 
           <div class="u4h-svg-wrap" data-u4-zoom-label="${es ? "Nichos y bullnose" : "Niches & Ceramic Trim"}">
-            ${buildStep3NichesSvg(es, lay, false)}
+            ${buildStep3NichesSvg(lay, false)}
           </div>
 
           <div class="u4b-grid">
             <div class="u4b-box">
               <h4>${es ? "NICHO IZQUIERDO" : "LEFT NICHE"}</h4>
-              <p>${es ? "Aprox. 11″ ancho × 19″ alto. Medir profundidad real en obra." : "Approx. 11″ wide × 19″ tall. Measure actual depth on site."}</p>
+              <p>${es ? "Aprox. 11″ ancho × 19″ alto; verificar el vano terminado antes de dimensionar el fondo de una pieza." : "Approx. 11″ wide × 19″ tall; verify the finished opening before sizing the one-piece back."}</p>
             </div>
             <div class="u4b-box">
               <h4>${pick("RIGHT NICHE", "NICHO DERECHO", "ПРАВАЯ НИША")}</h4>
-              <p>${pick("Approx. 7-1/2″ wide × 14″ tall (X: ~37-1/2″→45″, bottom ~21-3/4″, top ~35-1/2″–36″). Measure depth on site.", "Aprox. 7-1/2″ ancho × 14″ alto (X: ~37-1/2″→45″, base ~21-3/4″, tope ~35-1/2″–36″). Medir profundidad en obra.", "Около 7-1/2″ × 14″ (X: ~37-1/2″→45″, низ ~21-3/4″, верх ~35-1/2″–36″). Глубину замерить на месте.")}</p>
+              <p>${pick("Approx. 7-1/2″ wide × 14″ tall; left edge ~37-1/2″ and right edge 45″ from the left wall, bottom ~21-3/4″ and top ~35-1/2″–36″ above the tub rim.", "Aprox. 7-1/2″ ancho × 14″ alto; bordes a ~37-1/2″ y 45″ del muro izquierdo, base a ~21-3/4″ y tope a ~35-1/2″–36″ sobre el borde de la tina.", "Около 7-1/2″ × 14″ (X: ~37-1/2″→45″, низ ~21-3/4″, верх ~35-1/2″–36″). Глубину замерить на месте.")}</p>
             </div>
             <div class="u4b-box">
               <h4>${es ? "ORILLAS DE CERÁMICA" : "CERAMIC BULLNOSE TRIM"}</h4>
@@ -812,6 +830,7 @@
   }
 
   function renderPrintSheets(lay) {
+    const es = state.lang === "es";
     const pr = document.getElementById("u4PrintRoot");
     if (!pr) return;
     pr.innerHTML = `

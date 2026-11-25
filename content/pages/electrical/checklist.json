@@ -13,23 +13,28 @@
     },
     {
       "done": false,
-      "en": "Kitchen rough-in (#1–#9, Sheet E-11 to E-14): verify bare-subfloor buildup (+t) & South window CL (87\" vs. 90\"), Under-Sink 2-Gang @ 14\" AFF (2 separate yokes), and Hood 1-gang @ 33\" ± 2-1/4\" N",
-      "es": "Instalación en bruto de Cocina (#1–#9, Hojas E-11 a E-14): verificar espesor de piso (+t) y eje ventana Sur (87\" vs. 90\"), Caja Doble Fregadero a 14\" AFF (2 yugos separados) y Campana a 33\" ± 2-1/4\" N"
+      "en": "Verify kitchen floor buildup (+t), South window centerline (87\" versus 90\"), under-sink 2-gang at 14\" AFF with separate yokes, and hood box at 33\" ± 2-1/4\" North (#1–#9, E-11–E-14).",
+      "es": "Verificar espesor de piso (+t), eje de ventana Sur (87\" contra 90\"), caja doble bajo tarja a 14\" NPT con yugos separados y caja de campana a 33\" ± 2-1/4\" Norte (#1–#9, E-11–E-14)."
     },
     {
       "done": false,
-      "en": "Bathroom (#13, Sheet E-23) & Laundry (#14, Sheet E-24): run 100% 12/2 Yellow from Bath J-Box including a separate Toilet drop before wall tile (tile on hold until Alex returns; pocket door retired so south stud wall allows switches), and 1 East-wall 20A duplex @ 38\" AFF for WashTower",
-      "es": "Baño (#13, Hoja E-23) y Lavandería (#14, Hoja E-24): tender 100% 12/2 Amarillo desde Caja Baño con bajada separada a Inodoro antes del azulejo de muro (en pausa hasta regreso de Alex; corrediza retirada, muro sur de postes permite apagadores), y 1 contacto doble 20A en muro Este a 38\" AFF"
+      "en": "Prepare bathroom #13 (E-23): all-yellow 12/2 from Bath J-Box, including separate toilet drop before wall tile. Keep tile on hold until Alex returns.",
+      "es": "Preparar baño #13 (E-23): todo en 12/2 amarillo desde caja de baño, con bajada separada al inodoro antes del azulejo. Mantener azulejo en pausa hasta que regrese Alex."
     },
     {
       "done": false,
-      "en": "Common rooms (#10–#12, Sheets E-22 & E-24): keep non-kitchen wire pulling on hold (bathroom pocket door retired Nov 24 — standard 28\" hinged outward-swing hallway door locked, south stud wall allows switches); verify every reused wire gauge (14 AWG requires 15A AFCI)",
-      "es": "Cuartos comunes (#10–#12, Hojas E-22 y E-24): mantener pausa sin jalar cable fuera de cocina (puerta corrediza del baño retirada el 24 nov — puerta abatible estándar de 28\" hacia el pasillo confirmada, muro sur de postes permite apagadores); verificar calibre de cables reusados (14 AWG requiere 15A AFCI)"
+      "en": "Prepare laundry #14 (E-24): one East-wall 20A duplex at 38\" AFF for both WashTower plugs; retain the non-kitchen wire-pulling hold until release.",
+      "es": "Preparar lavandería #14 (E-24): un contacto doble 20A en muro Este a 38\" NPT para ambas clavijas; mantener pausa de tendido fuera de cocina hasta liberación."
     },
     {
       "done": false,
-      "en": "Attic & Smoke/CO (#15–#16, Sheet E-25): wire #16 on 15A AFCI-only breaker (unswitched Smoke/COs + LINE-only GFCI <=25 ft from F1), add 72\" hatch guard strips, and flag all 4 Attic J-Boxes",
-      "es": "Ático y Humo/CO (#15–#16, Hoja E-25): conectar #16 en interruptor 15A solo-AFCI (Humo/CO directos + Toma GFCI solo en LINE <=25 pies de F1), listones a 72\" de escotilla y abanderar las 4 Cajas"
+      "en": "Hold non-kitchen wire pulling until owner/inspector release; verify reused wire gauges in common rooms #10–#12 (E-22/E-24). Any 14 AWG requires 15A AFCI.",
+      "es": "Pausar tendido fuera de cocina hasta liberación de propietario/inspector; verificar calibre reutilizado en cuartos comunes #10–#12 (E-22/E-24). Cualquier 14 AWG requiere 15A AFCI."
+    },
+    {
+      "done": false,
+      "en": "Wire attic #16 on 15A AFCI-only: unswitched Smoke/CO and LINE-only GFCI ≤25 ft from F1; add 72\" hatch guard strips and flag four attic junction boxes (#15–#16, E-25).",
+      "es": "Conectar #16 con 15A solo-AFCI: Humo/CO sin apagador y GFCI solo LINE ≤25 pies de F1; agregar listones protectores a 72\" de escotilla y señalar cuatro cajas del ático (#15–#16, E-25)."
     }
   ]
 }

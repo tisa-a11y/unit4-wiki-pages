@@ -478,3 +478,7 @@ html[data-theme="dark"] .u4-lai-badge {
     transition: none !important;
   }
 }
+
+@media(max-width:760px){
+  .u4-lai-dock{position:static;justify-content:flex-end;padding:8px 12px;background:var(--panel,#fff)}
+}

@@ -2,9 +2,9 @@
   {
     "id": "interactive-bathroom-tile",
     "title": "bathroom-tile.html",
-    "titleEn": "Interactive Plan — Bathroom Tub & Wall Tile (rev-010)",
-    "titleEs": "Plano Interactivo — Azulejo de Tina y Muros (rev-010)",
-    "titleRu": "Интерактивный план — Плитка ванны и стен (rev-010)",
+    "titleEn": "Interactive Plan — Bathroom Tub & Wall Tile",
+    "titleEs": "Plano Interactivo — Azulejo de Tina y Muros",
+    "titleRu": "Интерактивный план — Плитка ванны и стен",
     "path": "./plans/bathroom-tile/index.html?v=rev010",
     "pathEs": "./plans/bathroom-tile/index.html?lang=es&v=rev010",
     "pathRu": "./plans/bathroom-tile/index.html?lang=ru&v=rev010",

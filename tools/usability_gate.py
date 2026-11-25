@@ -462,11 +462,21 @@ JS_SVG_FORENSICS = r"""
 """
 
 JS_IMAGE_INTEGRITY = r"""
-() => {
+async () => {
   const issues = [];
   const imgs = Array.from(document.querySelectorAll('img'));
   for (const img of imgs) {
     if (img.closest('[hidden], #u4PrintRoot, #blueprint-sheet-shell, .u4-lb-backdrop[hidden]')) continue;
+    let hidden = false;
+    for (let node = img; node; node = node.parentElement) {
+      const style = getComputedStyle(node);
+      if (style.display === 'none' || style.visibility === 'hidden' ||
+          (node.tagName === 'DETAILS' && !node.open && !img.closest('summary'))) hidden = true;
+    }
+    if (hidden || !img.getClientRects().length) continue;
+    // Visible lazy images must finish loading before checking their dimensions.
+    img.loading = 'eager';
+    try { await img.decode(); } catch (_) { /* broken images are reported below */ }
     const cs = getComputedStyle(img);
     if (cs.display === 'none' || cs.visibility === 'hidden') continue;
     const r = img.getBoundingClientRect();
@@ -513,7 +523,7 @@ JS_OVERLAP_AND_WRAP = r"""
   }
 
   // 1. Check fixed floating controls against content cards/headings/checklist/buttons
-  const floaters = Array.from(document.querySelectorAll('.u4-pin-fab, #u4AiFloatingDock, .u4-lai-dock')).filter(el => {
+  const floaters = Array.from(document.querySelectorAll('.u4-pin-fab, .u4-pin-float-pill, #u4AiFloatingDock, .u4-lai-dock')).filter(el => {
     const cs = getComputedStyle(el);
     return cs.position === 'fixed' && visibleRect(el);
   });
@@ -1108,20 +1118,22 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
                 # Reset before each top-level step so a manual view cannot
                 # unmount the remaining tabs and silently skip their audit.
                 plan_url = p13.url
-                steps = []
+                steps = [(None, None)]
                 for attribute in ("data-step", "data-jump-sheet"):
                     values = await p13.locator("button[" + attribute + "]:visible").evaluate_all("(els, attr) => [...new Set(els.map(e => e.getAttribute(attr)))]", attribute)
                     steps.extend((attribute, value) for value in values)
                 for attribute, step in steps:
                     await p13.goto(plan_url, wait_until="domcontentloaded")
                     await p13.wait_for_timeout(200)
-                    button = p13.locator("button[" + attribute + "=" + json.dumps(step) + "]:visible").first
-                    if not await button.count():
-                        fail("gate_13_editorial_audit", "plans/" + pid + ": unreachable step " + step)
-                        continue
-                    await button.click()
-                    await p13.wait_for_timeout(150)
-                    label = "plans/" + pid + "#step=" + step
+                    label = "plans/" + pid
+                    if attribute is not None:
+                        button = p13.locator("button[" + attribute + "=" + json.dumps(step) + "]:visible").first
+                        if not await button.count():
+                            fail("gate_13_editorial_audit", "plans/" + pid + ": unreachable step " + step)
+                            continue
+                        await button.click()
+                        await p13.wait_for_timeout(150)
+                        label += "#step=" + step
                     await editorial_audit(p13, label, lang)
                     for sub_attribute in ("data-wall", "data-wtab"):
                         values = await p13.locator("button[" + sub_attribute + "]:visible").evaluate_all("(els, attr) => [...new Set(els.map(e => e.getAttribute(attr)))]", sub_attribute)

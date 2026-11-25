@@ -33,7 +33,8 @@ class EditorialDOMTests(unittest.TestCase):
           <ul><li>Check the panel gauge.<p>Keep the wall open until approval.</p></li></ul>
         </article></main>''')
         snapshot = page.evaluate(JS_EDITORIAL_BLOCKS)
-        self.assertEqual(2, len(snapshot['blocks']))
+        self.assertEqual(3, len(snapshot['blocks']))
+        self.assertEqual(['Verify the hood clearance before closing the wall.', 'Check the panel gauge.', 'Keep the wall open until approval.'], [b['text'] for b in snapshot['blocks']])
         self.assertIsNotNone(snapshot['rhythm']['details'])
         self.assertEqual([], audit_blocks(snapshot, '/fixture', 'en'))
         page.locator('summary').click()
@@ -61,6 +62,51 @@ class EditorialDOMTests(unittest.TestCase):
         snapshot = page.evaluate(JS_EDITORIAL_BLOCKS)
         self.assertEqual(1, len(snapshot['blocks']))
         self.assertEqual([], audit_blocks(snapshot, '/plan', 'en'))
+
+    def test_nested_paragraphs_have_individual_limits_and_keep_parent_text(self):
+        page = self.browser.new_page()
+        self.addCleanup(page.close)
+        paragraph = 'Verify wall ' + 'safe ' * 28
+        page.set_content('<table><tr><td>Fixture A<p>' + paragraph + '</p><p>Measure door ' + 'clear ' * 28 + '</p>Retain trim.</td></tr></table>')
+        snapshot = page.evaluate(JS_EDITORIAL_BLOCKS)
+        self.assertEqual(['Fixture A Retain trim.', paragraph.strip(), ('Measure door ' + 'clear ' * 28).strip()], [b['text'] for b in snapshot['blocks']])
+        self.assertEqual([], audit_blocks(snapshot, '/table', 'en'))
+
+    def test_nested_checklist_keeps_aggregate_limit_without_duplicate_text(self):
+        page = self.browser.new_page()
+        self.addCleanup(page.close)
+        page.set_content('<section id="sec-checklist"><ul><li>Verify wall.<p>' + 'safe ' * 18 + '</p><p>' + 'clear ' * 18 + '</p></li></ul></section>')
+        snapshot = page.evaluate(JS_EDITORIAL_BLOCKS)
+        self.assertEqual(3, len(snapshot['blocks']))
+        issues = audit_blocks(snapshot, '/checklist', 'en')
+        self.assertEqual(1, len(issues), issues)
+        self.assertIn('limit 35', issues[0]['reason'])
+        self.assertIn('safe', issues[0]['text'])
+
+    def test_table_context_separates_repeated_fixture_values(self):
+        page = self.browser.new_page()
+        self.addCleanup(page.close)
+        page.set_content('<table><tr><th>Fixture</th><th>Height</th><th>Status</th></tr><tr><td>Hood</td><td>30 inches</td><td>NEW</td></tr><tr><td>Range</td><td>30 inches</td><td>NEW</td></tr></table>')
+        snapshot = page.evaluate(JS_EDITORIAL_BLOCKS)
+        self.assertEqual([], audit_blocks(snapshot, '/table', 'en'))
+        values = [b for b in snapshot['blocks'] if b['text'] == '30 inches']
+        self.assertEqual(['Hood', 'Range'], [b['table_context']['row'] for b in values])
+        self.assertEqual(['Height', 'Height'], [b['table_context']['column'] for b in values])
+
+    def test_table_paragraph_duplicates_are_not_hidden_by_context(self):
+        page = self.browser.new_page()
+        self.addCleanup(page.close)
+        page.set_content('<table><tr><td>Hood<p>Check the kitchen wall.</p></td></tr><tr><td>Range<p>Check the kitchen wall clearance.</p></td></tr></table>')
+        issues = audit_blocks(page.evaluate(JS_EDITORIAL_BLOCKS), '/table', 'en')
+        self.assertTrue(any('Duplicate/near-duplicate (80%)' in i['reason'] for i in issues), issues)
+
+    def test_fixture_measurements_keep_heading_context(self):
+        page = self.browser.new_page()
+        self.addCleanup(page.close)
+        page.set_content('<div class="u4b-box"><h4>Tub spout</h4><p>15-1/2″ from North corner and 5-1/2″ above tub rim.</p></div><div class="u4b-box"><h4>Valve</h4><p>15-1/2″ from North corner and 27″ above tub rim.</p></div>')
+        snapshot = page.evaluate(JS_EDITORIAL_BLOCKS)
+        self.assertEqual(['Tub spout', 'Valve'], [b['fixture_context']['label'] for b in snapshot['blocks'] if b['kind'] == 'p'])
+        self.assertEqual([], audit_blocks(snapshot, '/bathroom', 'en'))
 
     def test_guide_card_title_subtitle_echo_is_inspected(self):
         page = self.browser.new_page()

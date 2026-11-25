@@ -308,6 +308,11 @@ html[data-theme="dark"] .u4-home-plan-chip {
   border-color: rgba(124, 192, 220, 0.28);
 }
 </style>
+<style>
+@media(max-width:760px){
+  main > .bar #u4AiFloatingDock.u4-ai-dock{position:static!important;inset:auto!important;margin-left:auto!important;box-shadow:none}
+}
+</style>
 </head><body>
 <meta name="description" content="Agent brief: shared home of the 1231 11th Ave Unit 4 remodel so Tisa (owner, locks decisions) and John (lead carpenter) work from one current picture; the spine of the Todoist board — every card traces to a wiki spec or decision; agents file every note into specs, Todoist and decisions. Read #agent-brief (= unit-4-renovation/START-HERE.md).">
 <!--
@@ -3242,7 +3247,7 @@ function getStaticRoomGalleryItems(roomKey){
   const crMap = (typeof U4_CONCEPT_RENDERS === "object" && U4_CONCEPT_RENDERS) ? U4_CONCEPT_RENDERS : {};
   const rawRenders = Array.isArray(crMap[roomKey]) ? crMap[roomKey] : [];
   const seenKeys = new Set();
-  const renders = rawRenders.map((it, idx) => {
+  const renders = rawRenders.filter(it => !it.lang || it.lang === LANG).map((it, idx) => {
     const thumb = (es && it.thumbUrlEs) ? it.thumbUrlEs : (it.thumbUrl || "");
     const drv = it.driveUrl || "";
     if (it.id) seenKeys.add(String(it.id).toLowerCase());
@@ -4777,24 +4782,30 @@ function crewRoom(p, srcMd){
       + '<span class="u4-crumb-sep" aria-hidden="true">›</span>'
       + '<span class="u4-crumb-cur">'+label+'</span>'
       + '</nav>'
-      + leadPictureBlock(p.key)
       + '<h1>'+label+'</h1>';
   } else {
-    h += leadPictureBlock(p.key) + '<h1>'+label+'</h1>';
+    h += '<h1>'+label+'</h1>';
   }
   h += roomSubnavBar(p);
 
-  if (p.key==="hvac") {
-    h += U4_HTML[es ? "pages/hvac/block-1.es.html" : "pages/hvac/block-1.en.html"];
-  } else {
-    if (concept) {
-      h += '<p class="u4-room-summary" id="sec-concept">'+render(concept.body.join("\n").trim()).replace(/^<p>|<\/p>\s*$/g, "")+'</p>';
+  // Keep the overview short while retaining the source's visible field holds.
+  let supporting = "";
+  if (concept) {
+    const conceptDom = document.createElement("div");
+    conceptDom.innerHTML = render(concept.body.join("\n").trim());
+    const overview = conceptDom.querySelector("p");
+    if (overview) {
+      h += '<p class="u4-room-summary" id="sec-concept">'+overview.innerHTML+'</p>';
+      overview.remove();
     }
-    h += keyFactsBlock(p.key);
+    supporting = conceptDom.innerHTML;
   }
+  h += leadPictureBlock(p.key);
+  h += keyFactsBlock(p.key);
 
   h += roomAreasBlock(p);
   h += ckBlock(p.key);
+  h += supporting;
 
   if (p.key==="kitchen") {
     h += '<div class="u4-subpage-dir" id="sec-subpages">'
@@ -4811,7 +4822,9 @@ function crewRoom(p, srcMd){
   h += visualsBlock(p.key);
   h += docsBlock(p.key);
 
-  const detail = rest.map(s=>"## "+s.h+"\n"+s.body.join("\n")).join("\n\n");
+  const active = rest.filter(s=>/^(Active Holds|Restricciones activas|Pausas activas)/i.test(s.h));
+  h += active.map(s=>render("## "+s.h+"\n"+s.body.join("\n"))).join("");
+  const detail = rest.filter(s=>!active.includes(s)).map(s=>"## "+s.h+"\n"+s.body.join("\n")).join("\n\n");
   if (detail.trim()) {
     h += '<details class="fulldet" id="sec-details"><summary>'+(p.key==="hvac"?t("techSpecsDetails"):t("fullPlanDetails"))+'</summary><div class="mdbody">'+render(detail)+'</div></details>';
   }
@@ -5474,7 +5487,29 @@ function show(key){
   if (p.key!=="home" && !isCrew) body += `<div class="src">${LANG==="es"?"Archivo fuente:":"Source file:"} ${p.path}</div>`;
   document.body.classList.toggle("is-home", p.key==="home");
   document.body.classList.toggle("is-crew", isCrew);
+  let technical = document.getElementById("roomTechnical");
+  if (!technical) {
+    technical = document.createElement("div");
+    technical.id = "roomTechnical";
+    document.getElementById("field").after(technical);
+  }
+  technical.replaceChildren();
   document.getElementById("doc").innerHTML = body;
+  if (isCrew) {
+    const sections = [...document.querySelectorAll("#doc #sec-details")];
+    if (sections.length) {
+      const combined = document.createElement("details");
+      combined.id = "sec-details";
+      combined.className = "fulldet";
+      combined.innerHTML = '<summary>'+t("techSpecsDetails")+'</summary>';
+      sections.forEach(section=>{
+        const title = section.querySelector(":scope > summary");
+        if (title) { const heading=document.createElement("h3"); heading.textContent=title.textContent; combined.append(heading); title.remove(); }
+        combined.append(...section.childNodes); section.remove();
+      });
+      technical.append(combined);
+    }
+  }
   enhanceInteractiveLinks(document.getElementById("doc"));
   enhanceZoomableInlineContent(document.getElementById("doc"));
   stampDocPinAnchors();
@@ -11558,7 +11593,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
           '<span id="u4AiStateBadge" class="u4-ai-orb-pill">OFF</span>' +
         '</button>';
 
-      document.body.appendChild(dock);
+      (document.querySelector("main > .bar") || document.body).appendChild(dock);
 
       var minBar = document.createElement("div");
       minBar.id = "u4VoiceMinBar";

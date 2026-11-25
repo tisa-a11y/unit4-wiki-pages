@@ -3,18 +3,23 @@
   "steps": [
     {
       "done": true,
-      "en": "Zephyr Savona ZSA-E30AS hood & Viking VGCC5304BSS range on site; initial West-wall hood blocking installed and whole hood temporarily mock-hung, secured, and raised by John (Nov 22 field report; earlier 9\" chimney gap retired as historical)",
-      "es": "Campana Zephyr Savona ZSA-E30AS y estufa Viking VGCC5304BSS en obra; refuerzo inicial en muro Oeste instalado y campana completa presentada, asegurada y subida temporalmente por John (reporte 22 nov; brecha anterior de 9\" descartada como histórica)"
+      "en": "Zephyr ZSA-E30AS hood and Viking VGCC5304BSS range received; initial West-wall blocking installed and hood temporarily secured and raised by John (Nov 22 report; old 9\" gap no longer current)",
+      "es": "Campana Zephyr ZSA-E30AS y estufa Viking VGCC5304BSS recibidas; refuerzo inicial Oeste instalado y campana asegurada y subida temporalmente por John (reporte 22 nov; brecha anterior de 9\" ya no vigente)"
     },
     {
       "done": false,
-      "en": "Verify raised mock-hang datums & missing gap photo: measure & photograph current assembled-cover-to-finished-ceiling gap (unknown after raising whole hood), actual hood-bottom-to-subfloor height + floor buildup t (H_subfloor = H_AFF + t vs. Viking 66\"–72\" AFF; verbal ~74\" subfloor recall unverified), flush 1-gang HD-1 (~83\"–86\" AFF), and dedicated 6\" rigid duct diameter",
-      "es": "Verificar alturas de la campana subida y foto faltante: medir y fotografiar brecha actual de cubredueto armado a plafón terminado (desconocida tras subir la campana), altura real a subpiso + espesor de piso t (H_subpiso = H_NPT + t vs. Viking 66\"–72\" NPT; ~74\" verbal no verificado), caja HD-1 (~83\"–86\" NPT) y ducto rígido dedicado de 6\""
+      "en": "Measure and photograph the raised hood’s current ceiling gap and actual subfloor height; verify floor buildup against Viking’s 66\"–72\" finished-floor height. The verbal ~74\" subfloor reading remains unverified.",
+      "es": "Medir y fotografiar brecha actual al techo y altura real desde subpiso; verificar espesor de piso frente a los 66\"–72\" NPT de Viking. La lectura verbal ~74\" sigue sin verificar."
     },
     {
       "done": false,
-      "en": "Select 1 of 4 chimney / ceiling-gap options (open decision): compare Z1C-00SA extension, custom removable stainless cover, small cream ceiling box, or cream curved arch with exposed stainless hood; hold final HD-1 hardwire, 6\" duct tie-in, and wall close-in until verified and approved",
-      "es": "Elegir 1 de 4 opciones de chimenea / llegada a plafón (decisión abierta): extensión Z1C-00SA, funda inox removible a medida, cajillo crema pequeño o arco curvo crema con campana expuesta; mantener en pausa conexión final HD-1, ducto de 6\" y cierre de muro"
+      "en": "Verify flush 1-gang HD-1 at ~83\"–86\" above finished floor and the dedicated 6\" rigid duct diameter before final connections.",
+      "es": "Verificar caja sencilla HD-1 al ras a ~83\"–86\" NPT y diámetro del ducto rígido dedicado de 6\" antes de conexiones finales."
+    },
+    {
+      "done": false,
+      "en": "Compare four chimney options: Z1C-00SA extension, removable stainless cover, small cream ceiling box, or cream arch with exposed hood. Hold final HD-1 wiring, 6\" duct connection and wall close-in pending verification and approval.",
+      "es": "Comparar cuatro opciones: extensión Z1C-00SA, cubierta inox removible, cajillo crema pequeño o arco crema con campana expuesta. Pausar conexión HD-1, ducto 6\" y cierre de muro hasta verificar y aprobar."
     },
     {
       "done": false,

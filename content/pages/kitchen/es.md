@@ -3,7 +3,7 @@
 **Decisión abierta — 23 de noviembre:** Tisa y John revisarán extensión original Savona, cubierta inoxidable a medida, cajillo pequeño crema o arco crema con campana inoxidable visible y repisas opcionales. Falta medir el espacio exacto; ninguna opción está aprobada. [Decisión y revisión de John](https://app.todoist.com/app/task/6hvjQGhG62xHf437). Arco y tutorial son solo propuestas.
 
 ## Concepto
-Cocina en L. Gabinetes bajos verde oscuro, herrajes de latón, cubiertas claras. Azulejo hasta el techo detrás de la estufa. Sin gabinetes altos junto a la campana.
+Cocina en L con gabinetes bajos verde oscuro, herrajes de latón y cubiertas claras. El azulejo llega al techo detrás de la estufa, sin gabinetes altos junto a la campana.
 
 ## Planos Interactivos y Tramos
 - **Planta completa de cocina y electricidad:** Abrir el [Plano Interactivo de Cocina Completa y Lista de Gabinetes](./plans/kitchen-floor-plan/index.html?lang=es) o el [Plano Interactivo Eléctrico de Cocina y Tablero D04](./plans/kitchen-electrical/index.html?lang=es) para revisar el trazo en L, el paso libre de 6" vs. 12", circuitos del tablero D04 y los cuatro muros juntos.
@@ -20,3 +20,6 @@ Cocina en L. Gabinetes bajos verde oscuro, herrajes de latón, cubiertas claras.
 - No fijar el gabinete de la tarja.
 - No cerrar el muro del tablero.
 - No pedir gabinetes ni cubiertas.
+
+## Trabajo de ventana
+El contramarco de cocina queda apartado sin bloquear otros trabajos; la repisa especial de John sigue por separado, sin fecha nueva.

@@ -601,9 +601,9 @@
         {
           id: "temp_closet",
           tEn: "5. Keep temporary NW bedroom-closet ceiling opening OPEN until final sign-off",
-          tEs: "5. Mantener ABIERTA la abertura temporal del clóset NO de recámara hasta el cierre",
-          dEn: "Close NW bedroom-closet ceiling (X=315.4–352.0, Y=5.4–88.0) only after thermostat wire pull and permanent Door 4 hatch are complete.",
-          dEs: "Cerrar el techo del clóset NO (X=315.4–352.0, Y=5.4–88.0) solo cuando estén terminados el cable de termostato y la escotilla permanente."
+          tEs: "5. Mantener ABIERTA la abertura del clóset noroeste de recámara hasta la autorización final",
+          dEn: "Close this ceiling only after thermostat wiring and the permanent Door 4 hatch are complete.",
+          dEs: "Cerrar solo tras terminar cable del termostato y escotilla permanente de Puerta 4."
         }
       ];
 

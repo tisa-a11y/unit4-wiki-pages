@@ -73,6 +73,7 @@
     "living-dining": [
       {
         id: "14_p0IwMO_fdulKX2_SOUd4zRZ2jcSE61",
+        lang: "en",
         room: "living-dining",
         titleEn: "Living / Dining D04 Subpanel Wall After-Moulding Mockup (EN)",
         titleEs: "Maqueta de pared D04 en sala/comedor con molduras (EN)",
@@ -84,6 +85,7 @@
       },
       {
         id: "1YzpsF3QPmC-RIEwZbNoIq6K4sjB6zRgX",
+        lang: "es",
         room: "living-dining",
         titleEn: "Living / Dining D04 Subpanel Wall After-Moulding Mockup (ES)",
         titleEs: "Maqueta de pared D04 en sala/comedor con molduras (ES)",

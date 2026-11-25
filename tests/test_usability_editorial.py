@@ -17,6 +17,9 @@ class EditorialTests(unittest.TestCase):
     def test_actionable_bilingual_and_completed_items(self):
         for text in ('Verify the hood clearance is 30 inches before closing the wall.',
                      'Verifica la campana antes de cerrar el muro.',
+                     'Measure the width, height, and depth of both niches.',
+                     'Medir ancho, alto y profundidad de ambos nichos.',
+                     'Tomar fotos de la impermeabilización antes de pegar azulejo.',
                      'Replace bathroom window and casing.',
                      'Installed 28-inch hallway door; verify hinge clearance.'):
             self.assertEqual([], self.audit(block(text, 'li', checklist=True)))
@@ -48,6 +51,51 @@ class EditorialTests(unittest.TestCase):
         b = block('Check the kitchen wall.', selector='#b')
         self.assertTrue(self.audit(a, b))
         self.assertTrue(self.audit(b, a))
+
+    def test_table_values_use_fixture_and_column_context(self):
+        def value(text, fixture, column='Height'):
+            return block(text, 'td', table_context=dict(table='#schedule', row=fixture, column=column))
+        self.assertEqual([], self.audit(value('30 inches', 'Hood'), value('30 inches', 'Range')))
+        self.assertEqual([], self.audit(value('30 inches', 'Hood', 'Minimum'), value('30 inches', 'Hood', 'Maximum')))
+        self.assertTrue(self.audit(value('30 inches', 'Hood'), value('30 inches', 'Hood')))
+        # Neither numbers nor short prose are exempt from ordinary comparison.
+        self.assertTrue(self.audit(block('30 inches'), block('30 inches')))
+
+    def test_table_instructions_still_compare_across_fixtures(self):
+        for text in ('Check the kitchen wall.', 'Check the kitchen wall clearance'):
+            a = block(text, 'td', table_context=dict(table='#t', row='Hood', column='Notes'))
+            b = block(text, 'td', table_context=dict(table='#t', row='Range', column='Notes'))
+            self.assertTrue(self.audit(a, b), text)
+
+    def test_table_status_labels_and_measurement_abbreviations_are_values(self):
+        for text, column in [('Hold: full-L', 'Status / Gate'), ('In-wall South 26"/20" (sep. N)', 'Route')]:
+            a = block(text, 'td', table_context=dict(table='#t', row='A', column=column))
+            b = block(text, 'td', table_context=dict(table='#t', row='B', column=column))
+            self.assertEqual([], self.audit(a, b), text)
+        # Actual hold instructions remain prose, even in a status column.
+        a = block('Hold the kitchen wall open.', 'td', table_context=dict(table='#t', row='A', column='Status'))
+        b = block('Hold the kitchen wall open.', 'td', table_context=dict(table='#t', row='B', column='Status'))
+        self.assertTrue(self.audit(a, b))
+
+    def test_table_prose_and_long_cells_are_not_scoped_as_values(self):
+        for kind, text in [('p', 'The cabinet is ready.'), ('td', 'This is a full instructional description of the kitchen cabinet installation sequence for review')]:
+            a = block(text, kind, table_context=dict(table='#t', row='A', column='Notes'))
+            b = block(text, kind, table_context=dict(table='#t', row='B', column='Notes'))
+            self.assertTrue(self.audit(a, b))
+
+    def test_distinct_fixtures_with_different_measurements_are_not_duplicate(self):
+        a = block('15-1/2″ from North corner and 5-1/2″ above tub rim.', fixture_context={'label': 'Tub spout'})
+        b = block('15-1/2″ from North corner and 27″ above tub rim.', fixture_context={'label': 'Valve'})
+        self.assertEqual([], self.audit(a, b))
+        # Without identified fixture context, a changed number alone is not an exemption.
+        self.assertTrue(self.audit(dict(a, fixture_context=None), dict(b, fixture_context=None)))
+        self.assertTrue(self.audit(a, dict(b, text=a['text'])))
+        self.assertTrue(self.audit(a, dict(b, fixture_context=a['fixture_context'])))
+
+    def test_measurement_context_does_not_hide_copied_sentence(self):
+        a = block('Check the height at 30 inches. Verify wall clearance before closing the kitchen wall.', fixture_context={'label': 'Hood'})
+        b = block('Check the height at 40 inches. Verify wall clearance before closing the kitchen wall.', fixture_context={'label': 'Range'})
+        self.assertTrue(any('Verify wall clearance' in f['reason'] for f in self.audit(a, b)))
 
     def test_title_echo(self):
         self.assertTrue(self.audit(block('Kitchen layout', 'h1'), block('Kitchen layout', selector='#subtitle')))

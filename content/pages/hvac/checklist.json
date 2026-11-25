@@ -8,18 +8,28 @@
     },
     {
       "done": false,
-      "en": "Rescheduled NEXT planning visit (Serge & Alex): leave with answers on (1) Door 4 24\"×36\" markout/fire-rating/carry route (photo only — no cuts yet), (2) mounted Eaton D04 panel & 80A feed + conditional 100A main breaker sign-off, and (3) switched attic light wiring, sidewall exhaust clearance & whether furnace needs any specific mounting hardware",
-      "es": "Visita de planeación reprogramada con NEXT (Serge y Alex): resolver (1) trazo 24\"×36\" en Puerta 4, cortafuego y ruta (solo foto — sin cortar), (2) gabinete Eaton D04 y línea 80A + principal condicional 100A, y (3) conexión de luz en ático, salida lateral y si el calefactor requiere herraje de montaje específico"
+      "en": "Confirm Door 4 markout, fire rating and equipment route with Serge and Alex at NEXT’s planning visit; photograph the 24\"×36\" opening without cutting.",
+      "es": "Confirmar con Serge y Alex de NEXT el trazo en Puerta 4, cortafuego y ruta del equipo; fotografiar el claro 24\"×36\" sin cortar."
     },
     {
       "done": false,
-      "en": "Before NEXT starts (VPS): keep temporary NW bedroom-closet access & D04 panel wall open, clear room/hall obstructions, verify flat-roof leak repair is dry, and keep ozone machine off/unplugged",
-      "es": "Antes de NEXT (VPS): mantener abiertos clóset NO y muro D04, despejar estorbos, verificar seca la gotera del techo plano y dejar apagado/desconectado el generador de ozono"
+      "en": "Confirm Eaton D04 acceptance, 80A feeder and conditional 100A main breaker with NEXT’s electrician before wiring; resolve sidewall exhaust clearance and furnace mounting hardware before buying pads.",
+      "es": "Confirmar con electricista NEXT gabinete Eaton D04, alimentador 80A y principal condicional 100A antes de cablear; resolver claro de salida lateral y herrajes del calefactor antes de comprar bases."
     },
     {
       "done": false,
-      "en": "Coordinate with NEXT (VPS, after walkthrough sign-off): build 24\"×36\" Door 4 hatch (uninsulated 3/4\" lid + foam gasket), 15.8 ft walkway, 30\"×30\" platform, 120V GFCI outlet within 25 ft & permanent switched LED attic light (agree with NEXT electrician who wires connection)",
-      "es": "Coordinado con NEXT (VPS, tras visto bueno): armar escotilla 24\"×36\" (tapa 3/4\" sin aislante + empaque), pasillo 15.8 pies, plataforma 30\"×30\", contacto GFCI 120V ≤ 25 pies y lámpara LED permanente con apagador (acordar conexión con electricista NEXT)"
+      "en": "Keep temporary NW bedroom-closet access and D04 wall open; clear rooms/hall, verify the roof-leak repair is dry, and leave the ozone machine off and unplugged before NEXT starts.",
+      "es": "Mantener abiertos acceso temporal del clóset NO y muro D04; despejar cuartos/pasillo, verificar seca la reparación de gotera y dejar el generador de ozono apagado y desconectado antes de NEXT."
+    },
+    {
+      "done": false,
+      "en": "Build after NEXT’s walkthrough sign-off: 24\"×36\" Door 4 hatch with uninsulated 3/4\" lid and foam gasket, 15.8 ft walkway, and 30\"×30\" platform.",
+      "es": "Construir tras visto bueno de NEXT: escotilla 24\"×36\" en Puerta 4 con tapa 3/4\" sin aislante y empaque, pasillo de 15.8 pies y plataforma 30\"×30\"."
+    },
+    {
+      "done": false,
+      "en": "Agree with NEXT’s electrician who connects the permanent switched LED attic light; coordinate installation of that light and a 120V GFCI outlet within 25 ft after walkthrough approval.",
+      "es": "Acordar con electricista NEXT quién conecta la lámpara LED permanente con apagador; coordinar su instalación y contacto GFCI 120V a ≤25 pies tras aprobar el recorrido."
     },
     {
       "done": false,

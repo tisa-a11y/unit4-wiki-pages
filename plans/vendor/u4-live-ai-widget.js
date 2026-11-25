@@ -911,7 +911,7 @@
         "</div>" +
       "</aside>";
 
-    document.body.appendChild(root);
+    document.body.prepend(root);
 
     function openDialog() {
       state.open = true;

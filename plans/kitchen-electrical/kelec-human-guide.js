@@ -585,7 +585,7 @@
           '<rect x="478" y="176" width="30" height="14" rx="2" fill="#CCFBF1" stroke="#0D9488" stroke-width="1.4"/>' +
           '<text x="493" y="185.5" text-anchor="middle" font-size="6.4" font-weight="800" fill="#0F766E">ENT</text>' +
           '<text x="46" y="252" font-size="7.4" font-weight="700" fill="#4A5568">' +
-            (es ? "NEC 210.52(A): máximo 12 pies entre contactos · ENT separado >= 6\" de potencia (en pausa 6hvRcQ7Gmh3fG5m7)." : "NEC 210.52(A): <= 12 ft receptacle spacing · Keep ENT >= 6\" from power (hold 6hvRcQ7Gmh3fG5m7).") +
+            (es ? "NEC 210.52(A): máximo 12 pies entre contactos · ENT separado >= 6\" de potencia (en pausa)." : "NEC 210.52(A): <= 12 ft receptacle spacing · Keep ENT >= 6\" from power (hold).") +
           '</text>' +
         '</svg>' +
       '</div>';
@@ -613,7 +613,7 @@
             '<text x="' + pt[1] + '" y="208.5" text-anchor="middle" font-size="6.5" font-weight="800" fill="#92400E">' + pt[0] + '</text>';
         }).join("") +
         '<text x="46" y="252" font-size="7.4" font-weight="700" fill="#4A5568">' +
-          (es ? "Sp 11 (20A AFCI) · Sp 17 (14/3 Humo/CO pasillo y sala) · Verificar candado ENT 6hvRcQ7Gmh3fG5m7 antes de cablear." : "Sp 11 (20A AFCI) · Sp 17 (14/3 Smoke/CO hall &amp; living) · Verify ENT hold 6hvRcQ7Gmh3fG5m7 before pulling.") +
+          (es ? "Sp 11 (20A AFCI) · Sp 17 (14/3 Humo/CO pasillo y sala) · Verificar candado ENT antes de cablear." : "Sp 11 (20A AFCI) · Sp 17 (14/3 Smoke/CO hall &amp; living) · Verify ENT hold before pulling.") +
         '</text>' +
       '</svg>' +
     '</div>';
@@ -934,7 +934,7 @@
     if (holdEl) {
       holdEl.className = "u4h-hold-strip is-danger";
       holdEl.innerHTML = es
-        ? "<strong>PAUSA DE INSTALACIÓN ELÉCTRICA:</strong> Confirmar alimentador D04 (80A vs 100A), cortes laterales EN PAUSA y revisión de caja Eaton BRP20L125G en la visita reprogramada con NEXT antes de jalar cable o cerrar tablaroca. El muro Sur muestra el bastidor existente como referencia. Sellar contra lluvia y tapar el nicho anterior, y volver a revisar las cajas en obra."
+        ? "<strong>PAUSA DE INSTALACIÓN ELÉCTRICA:</strong> Confirmar alimentador D04 (80A vs 100A), cortes laterales EN PAUSA y revisión de caja Eaton BRP20L125G en la visita reprogramada con NEXT antes de jalar cable o cerrar tablaroca. Muro Sur: bastidor existente de referencia. Sellar contra lluvia, tapar el nicho anterior y revisar las cajas en obra."
         : "<strong>ROUGH-IN ON HOLD:</strong> Confirm D04 feeder (80A vs 100A), side-entry hold, and onsite Eaton BRP20L125G inspection during the rescheduled NEXT walkthrough before pulling kitchen wire or closing drywall. The South elevation shows existing framing for reference. Weatherproof and cover the former recess and recheck box locations on site.";
     }
 
@@ -1120,7 +1120,7 @@
             '<li><strong>' + (es ? "Subida vertical D04 y sellado cortafuego:" : "Vertical D04 riser chase &amp; firestopping:") + '</strong> ' + (es ? "Todos los circuitos al ático salen por la parte superior de D04 a través de la doble solera sellada con espuma cortafuego (nunca por la espalda)." : "All attic homeruns exit D04 vertically through firestopped double top plates — never through the panel back; side-entry notches stay on hold.") + '</li>' +
             '<li><strong>' + (es ? "Troncales por costado de viga (NEC 320.23):" : "Side-of-joist attic trunks (NEC 320.23):") + '</strong> ' + (es ? "El cable Romex corre paralelo a vigas (>=1-1/4\" del borde) con listones protectores dentro de 6 pies de Puerta 4 y nunca bajo el pasillo OSB." : "NM-B runs along the side of joists (>=1-1/4\" from edges), uses 1×2/2×2 guard strips within 6 ft of Door 4 hatch, and never traps under OSB walkway.") + '</li>' +
             '<li><strong>' + (es ? "Bucle interconectado 14/3 Humo/CO (Sp 17):" : "Hardwired 14/3 Smoke/CO interconnect (Sp 17):") + '</strong> ' + (es ? "Conecta Sala, Pasillo y Recámara en techo con hilo rojo viajero." : "Links Living, Hallway, and Bedroom ceiling alarms via dedicated 14/3 red interconnect conductor.") + '</li>' +
-            '<li><strong>' + (es ? "Separación baja tensión ENT (>=6\"):" : "Low-voltage ENT separation (>=6\"):") + '</strong> ' + (es ? "Tubería azul ENT corre separada >=6\" de cables 120V o cruza estrictamente a 90° (en pausa 6hvRcQ7Gmh3fG5m7)." : "Blue ENT Smurf tube maintains >=6\" parallel clearance from 120V NM-B or crosses strictly at 90° (hold 6hvRcQ7Gmh3fG5m7).") + '</li>' +
+            '<li><strong>' + (es ? "Separación baja tensión ENT (>=6\"):" : "Low-voltage ENT separation (>=6\"):") + '</strong> ' + (es ? "Tubería azul ENT corre separada >=6\" de cables 120V o cruza estrictamente a 90° (en pausa)." : "Blue ENT Smurf tube maintains >=6\" parallel clearance from 120V NM-B or crosses strictly at 90° (hold).") + '</li>' +
           '</ul>' +
         '</div>';
 
