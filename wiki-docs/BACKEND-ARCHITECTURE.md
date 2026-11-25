@@ -107,4 +107,5 @@ See companion architecture brief [`docs/PILOT-TO-PRODUCT-ARCHITECTURE.md`](./PIL
 
 Every interactive plan module under `plans/<module>/` (including `plans/bathroom-tile/`, `plans/kitchen-west-ks4/`, `plans/kitchen-electrical/`, `plans/attic-hatch/`, `plans/hvac-layout/`, and `plans/murphy-door/`) requires **both**:
 1. Static module assets (`index.html`, styles, JS renderer, `assets/`, and `<room>-plan-data.json` synced to `plans/` and `content/data/`).
-2. Explicit links inside the room's bilingual wiki pages (`content/pages/<room>/en.md` and `content/pages/<room>/es.md`) pointing to `./plans/<module>/` before running `tools/build.py` — otherwise `index.html` will not surface the module on the room page.
+2. Plan registration in `content/packets.json` (resolving `#plan:<module>` -> `./plans/<module>/index.html`) AND `src/template.html` (`SIDEBAR_PLANS` array for left rail, jump dropdown, and Home strip).
+3. A Classic Old Wiki launch card (`<a class="u4-plan-launch-card is-primary" href="#plan:<module>">`) inside `content/pages/<room>/en.md` and `es.md` before running `tools/build.py`, verified by asserting `<module>` exists in compiled `index.html`.

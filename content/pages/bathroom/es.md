@@ -1,8 +1,15 @@
 # Baño
 
-<div class="callout" style="border-left:4px solid #1f5f7a;background:#f4f8fa;padding:12px 14px;border-radius:8px;margin:12px 0">
-  <strong>Plano Interactivo de Azulejo en Baño (rev-20261124-bath-005):</strong> <a href="./plans/bathroom-tile/" target="_blank" rel="noopener">Abrir Plano Interactivo (Escala 1:1 · ES/EN · Cortes y Pasos Calculados)</a> — Topes simétricos a 35", altura 71-1/4" HardieBacker, bullnose 2"×6" (cero metal), fondos de nicho en 1 pieza 24"×48" Blanco y boquilla Mapei #77 Frost.
+<div class="u4-plan-launch-grid">
+  <a class="u4-plan-launch-card is-primary" href="#plan:bathroom-tile">
+    <span class="u4-plan-launch-kicker">Plano Interactivo &middot; Tina y Muros de Azulejo (rev-005)</span>
+    <strong class="u4-plan-launch-title">Plano Interactivo de Azulejo en Ba&ntilde;o (Escala 1:1 &middot; Cortes y Pasos Calculados)</strong>
+    <span class="u4-plan-launch-desc">Topes sim&eacute;tricos a 35&quot;, altura 71-1/4&quot; HardieBacker, bullnose 2&quot;&times;6&quot; (cero metal), fondos de nicho 1 pieza 24&quot;&times;48&quot; Blanco y boquilla Mapei #77 Frost.</span>
+    <span class="u4-plan-launch-cta">Abrir Plano de Azulejo en Ba&ntilde;o &rarr;</span>
+  </a>
 </div>
+
+
 
 ## Concepto
 Piso de azulejo tipo mármol, azulejo blanco tipo metro en muros, accesorios color bronce, tina de empotrar.

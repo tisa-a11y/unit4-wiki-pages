@@ -1,8 +1,15 @@
 # Bathroom
 
-<div class="callout" style="border-left:4px solid #1f5f7a;background:#f4f8fa;padding:12px 14px;border-radius:8px;margin:12px 0">
-  <strong>Interactive Bathroom Tub &amp; Wall Tiling Plan (rev-20261124-bath-005):</strong> <a href="./plans/bathroom-tile/" target="_blank" rel="noopener">Open Interactive Plan (1:1 Scale · EN/ES · Calculated Cuts &amp; Steps)</a> — 35" East/West symmetrical stops, 71-1/4" HardieBacker top, 2"×6" bullnose (zero metal), 1-piece 24"×48" White porcelain niche backs, and Mapei #77 Frost grout.
+<div class="u4-plan-launch-grid">
+  <a class="u4-plan-launch-card is-primary" href="#plan:bathroom-tile">
+    <span class="u4-plan-launch-kicker">Interactive Plan &middot; Tub Alcove &amp; Wall Tile (rev-005)</span>
+    <strong class="u4-plan-launch-title">Bathroom Tub &amp; Wall Tiling Plan (1:1 Scale &middot; Calculated Cuts &amp; Steps)</strong>
+    <span class="u4-plan-launch-desc">35&quot; East/West stops, 71-1/4&quot; HardieBacker top, 2&quot;&times;6&quot; zero-metal bullnose, 1-piece 24&quot;&times;48&quot; Glossy White niche backs &amp; Mapei #77 Frost grout.</span>
+    <span class="u4-plan-launch-cta">Open Bathroom Tiling Plan &rarr;</span>
+  </a>
 </div>
+
+
 
 ## Concept
 Marble-look floor tile, white subway wall tile, bronze fixtures, drop-in tub.
