@@ -26,5 +26,5 @@ Nuevo **Panel** Eaton de 20 espacios (`BRP20L125G`) en el muro compartido Cocina
 
 ## Pausas Activas Antes de Fijar Cajas o Jalar Cable
 - **Pausa de Panel y Alimentador:** Confirmar alimentador NEXT `80A/#4` vs. `100A/#3` y pausar muescas laterales en el muro del `Panel` antes de cerrar.
-- **Pausa Fuera de Cocina:** `SFEC 362.10` restringe `ENT` en muros de madera mientras `SFEC 334.10(2)` permite `NM-B` oculto; mantener pausa sin jalar cable fuera de cocina hasta liberación, mantener cavidades `~33"` de puertas corredizas (`D6/L6`) sin cajas, y dejar abierto el techo del clóset temporal NO de Recámara hasta terminar cable y marco de escotilla.
+- **Pausa Fuera de Cocina:** `SFEC 362.10` restringe `ENT` en muros de madera mientras `SFEC 334.10(2)` permite `NM-B` oculto; mantener pausa sin jalar cable fuera de cocina hasta liberación (puerta corrediza del baño retirada el 24 nov por puerta abatible de 28" hacia el pasillo; el muro sur de postes permite apagadores), y dejar abierto el techo del clóset temporal NO de Recámara hasta terminar cable y marco de escotilla.
 - **Ventana Sur y Subpiso Descubierto:** Verificar en obra el eje de la ventana Sur (`87"` vs. `90"` O de SE) y el espesor de piso terminado `+t` (`H_subpiso = H_AFF + t`, est. `3/4"`) antes de fijar cajas.

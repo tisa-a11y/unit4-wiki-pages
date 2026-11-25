@@ -2744,7 +2744,8 @@ function isLocalHtmlDoc(d){
   return Boolean(h && h.indexOf("./wiki-docs/") === 0 && /\.html(?:[?#]|$)/i.test(h));
 }
 function docHref(d){
-  var h = KITCHEN_HOSTED_LINKS[d.id] || (isPdf(d) ? "#doc:"+d.id : docUrl(d));
+  var hosted = KITCHEN_HOSTED_LINKS[d.id];
+  var h = (hosted && hosted.indexOf("./wiki-docs/") === 0) ? ("#doc:" + d.id) : (hosted || (isPdf(d) ? "#doc:"+d.id : docUrl(d)));
   if (h && h.indexOf("./plans/") === 0) return planUrlToHash(h) || withPlanParams(h);
   if (h && h.indexOf("./wiki-docs/") === 0 && /\.html(?:[?#]|$)/i.test(h)) return "#doc:" + d.id;
   return withPlanParams(h);
@@ -3077,7 +3078,7 @@ function getStaticRoomGalleryItems(roomKey){
   const rawRenders = Array.isArray(crMap[roomKey]) ? crMap[roomKey] : [];
   const seenKeys = new Set();
   const renders = rawRenders.map((it, idx) => {
-    const thumb = it.thumbUrl || "";
+    const thumb = (es && it.thumbUrlEs) ? it.thumbUrlEs : (it.thumbUrl || "");
     const drv = it.driveUrl || "";
     if (it.id) seenKeys.add(String(it.id).toLowerCase());
     [thumb, drv].forEach(u => { const k = u4GalExtractKey(u); if (k) seenKeys.add(k); });
@@ -4380,6 +4381,16 @@ function mountUniversalPinUi(){
       if (m) m.note = ev.target.value;
     }
   });
+  document.addEventListener("keydown", ev => {
+    if (ev.key === "Enter" && !ev.shiftKey && ev.target && ev.target.id === "u4PinInput") {
+      ev.preventDefault();
+      const m = u4PinState.selectedId ? u4PinFindById(u4PinState.selectedId) : null;
+      if (m) {
+        m.note = ev.target.value;
+        submitPinCorrection(m);
+      }
+    }
+  });
   window.addEventListener("resize", positionActivePinSteer);
 }
 function ensureGalleryDelegation(){
@@ -4579,7 +4590,9 @@ function docsBlock(key){
     const inPrevTag = inPrevIds.has(d.id) ? ' <span class="u4-in-prev-tag">'+esc(t("inPreviews"))+'</span>' : '';
     const isInt = isInteractiveDoc(d);
     const baseAttr = isInt ? ' data-u4-plan-base="'+esc(KITCHEN_HOSTED_LINKS[d.id])+'"' : '';
-    return '<li><a'+(isInt?' class="is-interactive"':'')+' href="'+docHref(d)+'"'+baseAttr+((isPdf(d)||isInt||docHref(d).startsWith("#"))?'':' target="_blank" rel="noopener"')+'><span class="u4-doc-title">'+esc(L.t)+'</span>'+(isInt?interactivePillHtml():'')+'</a> <span class="k'+(isInt?' k-interactive':'')+'">'+docKind(d)+(L.date?' · '+niceDate(L.date):'')+'</span>'+(d.review?' <span class="k">'+esc(t("awaitingReview"))+'</span>':'')+enOnlyBadge+inPrevTag+'</li>';
+    const dh = docHref(d);
+    const isLocalDoc = isPdf(d) || isInt || dh.startsWith("#") || dh.startsWith("./wiki-docs/") || dh.startsWith("./plans/");
+    return '<li><a'+(isInt?' class="is-interactive"':'')+' href="'+dh+'"'+baseAttr+(isLocalDoc?'':' target="_blank" rel="noopener"')+'><span class="u4-doc-title">'+esc(L.t)+'</span>'+(isInt?interactivePillHtml():'')+'</a> <span class="k'+(isInt?' k-interactive':'')+'">'+docKind(d)+(L.date?' · '+niceDate(L.date):'')+'</span>'+(d.review?' <span class="k">'+esc(t("awaitingReview"))+'</span>':'')+enOnlyBadge+inPrevTag+'</li>';
   }).join("");
   const history=archived.length?'<details><summary>'+esc(t("historyHeading"))+' ('+archived.length+')</summary><ul>'+rows(archived)+'</ul></details>':"";
   return '<section class="docs" id="sec-docs"><h2>'+esc(t("documentsHeading"))+' ('+active.length+')</h2>'+prevStrip+'<ul>'+rows(active)+'</ul>'+history+'</section>';
@@ -4765,7 +4778,8 @@ function appendRailRoomNode(p, isChildSubpage){
           da.href = docHref(d);
           if (isInt) da.dataset.u4PlanBase = KITCHEN_HOSTED_LINKS[d.id];
           da.dataset.doc = d.id;
-          if (!isPdf(d) && !isInt && !docHref(d).startsWith("#")) { da.target = "_blank"; da.rel = "noopener"; }
+          const dh = docHref(d);
+          if (!isPdf(d) && !isInt && !dh.startsWith("#") && !dh.startsWith("./wiki-docs/") && !dh.startsWith("./plans/")) { da.target = "_blank"; da.rel = "noopener"; }
           const dl = docLabel(d).t;
           da.title = dl;
           da.innerHTML = '<span class="rail-doc-label">' + (isPdf(d) ? "📄 " : (isInt ? "" : "↗ ")) + dl.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])) + '</span>' + (isInt ? interactivePillHtml("is-mini") : "");

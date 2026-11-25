@@ -1188,7 +1188,7 @@ html[data-theme="dark"] .u4h-svg-wrap {
     -webkit-overflow-scrolling: touch;
   }
   .u4h-seg-item {
-    min-height: 34px;
+    min-height: 36px;
     display: inline-flex;
     align-items: center;
     justify-content: center;

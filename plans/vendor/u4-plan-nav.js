@@ -603,6 +603,10 @@
     });
 
     document.getElementById("u4hPdfBtn").addEventListener("click", triggerPrintPdf);
+    var actSeg = host.querySelector("div.u4h-seg-switch .u4h-seg-item.is-active");
+    if (actSeg && typeof actSeg.scrollIntoView === "function") {
+      try { actSeg.scrollIntoView({ inline: "nearest", block: "nearest" }); } catch (_) {}
+    }
   }
 
   document.addEventListener("click", function (ev) {

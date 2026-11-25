@@ -169,7 +169,7 @@ html[data-theme="dark"] .u4h-svg-wrap {
 .u4b-pill.active {
   background: var(--accent, #1f5f7a);
   border-color: var(--accent, #1f5f7a);
-  color: #ffffff;
+  color: var(--panel, #ffffff);
 }
 .u4b-status {
   margin-top: 8px;
