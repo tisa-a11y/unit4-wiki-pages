@@ -4,37 +4,38 @@
     {
       "done": true,
       "en": "Eaton 20-space Panel on site; Rev R5 Module 1 (Kitchen) & Module 2 (Whole-Unit) working blueprints published",
-      "es": "Panel Eaton de 20 espacios en obra; planos oficiales Rev R5 Módulo 1 (Cocina) y Módulo 2 (Unidad) publicados"
+      "es": "Panel Eaton de 20 espacios en obra; planos oficiales Rev R5 Módulo 1 (Cocina) y Módulo 2 (Unidad) publicados",
+      "ru": "20-модульный щиток Eaton на объекте; опубликованы официальные рабочие чертежи Rev R5: Модуль 1 (Кухня) и Модуль 2 (Вся квартира)"
     },
     {
       "done": false,
       "en": "Confirm feeder (80A vs. 100A) with NEXT & hold Panel side-entry notches; keep 30\"×36\"×78\" Dining clear space and zero Kitchen back-zone screws (53\"–77\" AFF)",
-      "es": "Confirmar alimentador (80A vs. 100A) con NEXT y pausar muescas laterales en el Panel; mantener 30\"×36\"×78\" libres en Comedor y cero tornillos traseros (53\"–77\" AFF)"
+      "es": "Confirmar alimentador (80A vs. 100A) con NEXT y pausar muescas laterales en el Panel; mantener 30\"×36\"×78\" libres en Comedor y cero tornillos traseros (53\"–77\" AFF)",
+      "ru": "Подтвердить сечение ввода (80 А или 100 А) с NEXT и держать на паузе боковые вырезы у щитка; сохранить свободную зону 30\"×36\"×78\" в столовой и ноль саморезов в тыльной зоне со стороны кухни (53\"–77\" от пола)"
     },
     {
       "done": false,
-      "en": "Verify kitchen floor buildup (+t), South window centerline (87\" versus 90\"), under-sink 2-gang at 14\" AFF with separate yokes, and hood box at 33\" ± 2-1/4\" North (#1–#9, E-11–E-14).",
-      "es": "Verificar espesor de piso (+t), eje de ventana Sur (87\" contra 90\"), caja doble bajo tarja a 14\" NPT con yugos separados y caja de campana a 33\" ± 2-1/4\" Norte (#1–#9, E-11–E-14)."
+      "en": "Kitchen rough-in (#1–#9, Sheet E-11 to E-14): verify bare-subfloor buildup (+t) & South window CL (87\" vs. 90\"), Under-Sink 2-Gang @ 14\" AFF (2 separate yokes), and Hood 1-gang @ 33\" ± 2-1/4\" N",
+      "es": "Instalación en bruto de Cocina (#1–#9, Hojas E-11 a E-14): verificar espesor de piso (+t) y eje ventana Sur (87\" vs. 90\"), Caja Doble Fregadero a 14\" AFF (2 yugos separados) y Campana a 33\" ± 2-1/4\" N",
+      "ru": "Черновая разводка кухни (#1–#9, листы E-11 – E-14): проверить припуск чистового пола от голого чернового основания (+t) и ось южного окна (87\" или 90\"), двойную коробку под мойкой на 14\" от пола (2 раздельных суппорта / механизма (yoke)) и коробку вытяжки на 33\" ± 2-1/4\" С"
     },
     {
       "done": false,
-      "en": "Prepare bathroom #13 (E-23): all-yellow 12/2 from Bath J-Box, including separate toilet drop before wall tile. Keep tile on hold until Alex returns.",
-      "es": "Preparar baño #13 (E-23): todo en 12/2 amarillo desde caja de baño, con bajada separada al inodoro antes del azulejo. Mantener azulejo en pausa hasta que regrese Alex."
+      "en": "Bathroom (#13, Sheet E-23) & Laundry (#14, Sheet E-24): run 100% 12/2 Yellow from Bath J-Box including a separate Toilet drop before wall tile (tile on hold until Alex returns; pocket door retired so south stud wall allows switches), and 1 East-wall 20A duplex @ 38\" AFF for WashTower",
+      "es": "Baño (#13, Hoja E-23) y Lavandería (#14, Hoja E-24): tender 100% 12/2 Amarillo desde Caja Baño con bajada separada a Inodoro antes del azulejo de muro (en pausa hasta regreso de Alex; corrediza retirada, muro sur de postes permite apagadores), y 1 contacto doble 20A en muro Este a 38\" AFF",
+      "ru": "Ванная (#13, лист E-23) и прачечная (#14, лист E-24): проложить строго 100% жёлтый кабель 12/2 от чердачной коробки ванной, включая отдельный спуск к унитазу до настенной плитки (плитка на паузе до возвращения Алекса; кассетная дверь отменена — южная стена из стоек допускает выключатели), и 1 двойную розетку 20 А на восточной стене прачечной на высоте 38\" от пола под LG WashTower"
     },
     {
       "done": false,
-      "en": "Prepare laundry #14 (E-24): one East-wall 20A duplex at 38\" AFF for both WashTower plugs; retain the non-kitchen wire-pulling hold until release.",
-      "es": "Preparar lavandería #14 (E-24): un contacto doble 20A en muro Este a 38\" NPT para ambas clavijas; mantener pausa de tendido fuera de cocina hasta liberación."
+      "en": "Common rooms (#10–#12, Sheets E-22 & E-24): keep non-kitchen wire pulling on hold (bathroom pocket door retired Nov 24 — standard 28\" hinged outward-swing hallway door locked, south stud wall allows switches); verify every reused wire gauge (14 AWG requires 15A AFCI)",
+      "es": "Cuartos comunes (#10–#12, Hojas E-22 y E-24): mantener pausa sin jalar cable fuera de cocina (puerta corrediza del baño retirada el 24 nov — puerta abatible estándar de 28\" hacia el pasillo confirmada, muro sur de postes permite apagadores); verificar calibre de cables reusados (14 AWG requiere 15A AFCI)",
+      "ru": "Жилые комнаты (#10–#12, листы E-22 и E-24): держать протяжку кабеля вне кухни на паузе (кассетная дверь ванной отменена 24 нояб. — утверждена стандартная распашная дверь 28\" наружу в коридор, южная каркасная стена допускает выключатели); проверить калибр каждого сохраняемого провода (при 14 AWG обязателен автомат 15A AFCI)"
     },
     {
       "done": false,
-      "en": "Hold non-kitchen wire pulling until owner/inspector release; verify reused wire gauges in common rooms #10–#12 (E-22/E-24). Any 14 AWG requires 15A AFCI.",
-      "es": "Pausar tendido fuera de cocina hasta liberación de propietario/inspector; verificar calibre reutilizado en cuartos comunes #10–#12 (E-22/E-24). Cualquier 14 AWG requiere 15A AFCI."
-    },
-    {
-      "done": false,
-      "en": "Wire attic #16 on 15A AFCI-only: unswitched Smoke/CO and LINE-only GFCI ≤25 ft from F1; add 72\" hatch guard strips and flag four attic junction boxes (#15–#16, E-25).",
-      "es": "Conectar #16 con 15A solo-AFCI: Humo/CO sin apagador y GFCI solo LINE ≤25 pies de F1; agregar listones protectores a 72\" de escotilla y señalar cuatro cajas del ático (#15–#16, E-25)."
+      "en": "Attic & Smoke/CO (#15–#16, Sheet E-25): wire #16 on 15A AFCI-only breaker (unswitched Smoke/COs + LINE-only GFCI <=25 ft from F1), add 72\" hatch guard strips, and flag all 4 Attic J-Boxes",
+      "es": "Ático y Humo/CO (#15–#16, Hoja E-25): conectar #16 en interruptor 15A solo-AFCI (Humo/CO directos + Toma GFCI solo en LINE <=25 pies de F1), listones a 72\" de escotilla y abanderar las 4 Cajas",
+      "ru": "Чердак и датчики дыма/CO (#15–#16, лист E-25): подключить #16 на автомат 15 А только-AFCI (неотключаемые датчики дыма/CO + розетка GFCI только через LINE <=25 футов от F1), набить защитные рейки на 72\" у люка и промаркировать все 4 чердачные коробки"
     }
   ]
 }

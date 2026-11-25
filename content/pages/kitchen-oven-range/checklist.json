@@ -3,33 +3,33 @@
   "steps": [
     {
       "done": true,
-      "en": "Zephyr ZSA-E30AS hood and Viking VGCC5304BSS range received; initial West-wall blocking installed and hood temporarily secured and raised by John (Nov 22 report; old 9\" gap no longer current)",
-      "es": "Campana Zephyr ZSA-E30AS y estufa Viking VGCC5304BSS recibidas; refuerzo inicial Oeste instalado y campana asegurada y subida temporalmente por John (reporte 22 nov; brecha anterior de 9\" ya no vigente)"
+      "en": "Zephyr Savona ZSA-E30AS hood & Viking VGCC5304BSS range on site; initial West-wall hood blocking installed and whole hood temporarily mock-hung, secured, and raised by John (Nov 22 field report; earlier 9\" chimney gap retired as historical)",
+      "es": "Campana Zephyr Savona ZSA-E30AS y estufa Viking VGCC5304BSS en obra; refuerzo inicial en muro Oeste instalado y campana completa presentada, asegurada y subida temporalmente por John (reporte 22 nov; brecha anterior de 9\" descartada como histórica)",
+      "ru": "Вытяжка Zephyr Savona ZSA-E30AS и плита Viking VGCC5304BSS на объекте; начальные закладные западной стены установлены, вытяжка временно навешена, закреплена и поднята Джоном (отчёт 22 нояб.; старый зазор 9\" снят)"
     },
     {
       "done": false,
-      "en": "Measure and photograph the raised hood’s current ceiling gap and actual subfloor height; verify floor buildup against Viking’s 66\"–72\" finished-floor height. The verbal ~74\" subfloor reading remains unverified.",
-      "es": "Medir y fotografiar brecha actual al techo y altura real desde subpiso; verificar espesor de piso frente a los 66\"–72\" NPT de Viking. La lectura verbal ~74\" sigue sin verificar."
+      "en": "Verify raised mock-hang datums & missing gap photo: measure & photograph current assembled-cover-to-finished-ceiling gap (unknown after raising whole hood), actual hood-bottom-to-subfloor height + floor buildup t (H_subfloor = H_AFF + t vs. Viking 66\"–72\" AFF; verbal ~74\" subfloor recall unverified), flush 1-gang HD-1 (~83\"–86\" AFF), and dedicated 6\" rigid duct diameter",
+      "es": "Verificar alturas de la campana subida y foto faltante: medir y fotografiar brecha actual de cubredueto armado a plafón terminado (desconocida tras subir la campana), altura real a subpiso + espesor de piso t (H_subpiso = H_NPT + t vs. Viking 66\"–72\" NPT; ~74\" verbal no verificado), caja HD-1 (~83\"–86\" NPT) y ducto rígido dedicado de 6\"",
+      "ru": "Проверить отметки поднятой примерки и недостающее фото зазора: замерить и сфотографировать текущий зазор от собранного кожуха до чистового потолка, фактическую высоту низа зонта от чернового пола + толщину пола t (H_черн = H_чист + t против нормы Viking 66\"–72\" от чистового пола; устные ~74\" не проверены), одинарную коробку HD-1 (~83\"–86\" от чистового пола) и выделенный жёсткий канал 6\""
     },
     {
       "done": false,
-      "en": "Verify flush 1-gang HD-1 at ~83\"–86\" above finished floor and the dedicated 6\" rigid duct diameter before final connections.",
-      "es": "Verificar caja sencilla HD-1 al ras a ~83\"–86\" NPT y diámetro del ducto rígido dedicado de 6\" antes de conexiones finales."
-    },
-    {
-      "done": false,
-      "en": "Compare four chimney options: Z1C-00SA extension, removable stainless cover, small cream ceiling box, or cream arch with exposed hood. Hold final HD-1 wiring, 6\" duct connection and wall close-in pending verification and approval.",
-      "es": "Comparar cuatro opciones: extensión Z1C-00SA, cubierta inox removible, cajillo crema pequeño o arco crema con campana expuesta. Pausar conexión HD-1, ducto 6\" y cierre de muro hasta verificar y aprobar."
+      "en": "Select 1 of 4 chimney / ceiling-gap options (open decision): compare Z1C-00SA extension, custom removable stainless cover, small cream ceiling box, or cream curved arch with exposed stainless hood; hold final HD-1 hardwire, 6\" duct tie-in, and wall close-in until verified and approved",
+      "es": "Elegir 1 de 4 opciones de chimenea / llegada a plafón (decisión abierta): extensión Z1C-00SA, funda inox removible a medida, cajillo crema pequeño o arco curvo crema con campana expuesta; mantener en pausa conexión final HD-1, ducto de 6\" y cierre de muro",
+      "ru": "Выбрать 1 из 4 вариантов короба / примыкания к потолку (открытое решение): сравнить штатный удлинитель Z1C-00SA, съёмный кожух из нержавейки на заказ, малый кремовый потолочный короб или кремовую арку с открытой стальной вытяжкой; держать на паузе чистовое подключение HD-1, врезку воздуховода 6\" и зашивку стены до проверки и утверждения"
     },
     {
       "done": false,
       "en": "Install 1/2\" HardieBacker 500 + approved range-wall statement tile to ceiling (121-1/2\") with zero metal/Schluter edge trim (silicone-only North 90° corner; zero-metal South return)",
-      "es": "Instalar HardieBacker 500 de 1/2\" + azulejo aprobado hasta el plafón (121-1/2\") con cero perfiles metálicos/Schluter (silicón en esquina Norte 90°; remate sin metal al Sur)"
+      "es": "Instalar HardieBacker 500 de 1/2\" + azulejo aprobado hasta el plafón (121-1/2\") con cero perfiles metálicos/Schluter (silicón en esquina Norte 90°; remate sin metal al Sur)",
+      "ru": "Смонтировать плиту HardieBacker 500 1/2\" и утверждённую акцентную плитку до потолка (121-1/2\") без металлических профилей/Schluter (северный внутренний угол 90° — только силикон; южный торец — без металла)"
     },
     {
       "done": false,
       "en": "Complete Viking 30\" gas hookup (1\" low island trim only), final HD-1 120V hardwire & dedicated 6\" vertical exhaust test after close-in release",
-      "es": "Completar conexión de gas Viking 30\" (solo moldura baja de 1\"), conexión eléctrica final HD-1 120V y prueba de ducto vertical de 6\" tras liberar cierre"
+      "es": "Completar conexión de gas Viking 30\" (solo moldura baja de 1\"), conexión eléctrica final HD-1 120V y prueba de ducto vertical de 6\" tras liberar cierre",
+      "ru": "Выполнить чистовое подключение газа к плите Viking 30\" (только низкая планка 1\" island trim), питание HD-1 120 В и испытание вертикальной вытяжки 6\" после разрешения на зашивку"
     }
   ]
 }

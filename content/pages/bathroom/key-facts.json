@@ -3,24 +3,32 @@
     "kEn": "Room size",
     "kEs": "Medidas",
     "vEn": "72-1/8\" × 82-1/8\" (back wall 69-5/16\" field note)",
-    "vEs": "72-1/8\" × 82-1/8\" (muro fondo 69-5/16\" nota de campo)"
+    "vEs": "72-1/8\" × 82-1/8\" (muro fondo 69-5/16\" nota de campo)",
+    "kRu": "Размеры",
+    "vRu": "72-1/8\" × 82-1/8\" (задняя стена 69-5/16\" по замеру)"
   },
   {
     "kEn": "Door (locked Nov 24)",
     "kEs": "Puerta (fija 24 nov)",
     "vEn": "28\" outward-swing hallway door · pocket door retired",
-    "vEs": "Puerta abatible 28\" hacia pasillo · corrediza retirada"
+    "vEs": "Puerta abatible 28\" hacia pasillo · corrediza retirada",
+    "kRu": "Дверь (утв. 24 нояб.)",
+    "vRu": "Распашная 28\" наружу в коридор · кассетная отменена"
   },
   {
     "kEn": "Wall tile & window",
     "kEs": "Azulejo y ventana",
     "vEn": "American Olean Ice White 0025 (hold until Alex returns) · replace window/casing first",
-    "vEs": "American Olean Ice White 0025 (pausa hasta Alex) · cambiar ventana y marco primero"
+    "vEs": "American Olean Ice White 0025 (pausa hasta Alex) · cambiar ventana y marco primero",
+    "kRu": "Плитка и окно",
+    "vRu": "American Olean Ice White 0025 (пауза до Алекса) · сначала замена окна/наличника"
   },
   {
     "kEn": "Floor & fixtures",
     "kEs": "Piso y accesorios",
     "vEn": "Warm Gray grout next · bronze · 10\" toilet · return oversized medicine cabinet",
-    "vEs": "Sigue boquilla Warm Gray · bronce · inodoro 10\" · devolver botiquín grande"
+    "vEs": "Sigue boquilla Warm Gray · bronce · inodoro 10\" · devolver botiquín grande",
+    "kRu": "Пол и сантехника",
+    "vRu": "Затирка Warm Gray · бронза · унитаз 10\" · сдать крупный шкафчик"
   }
 ]

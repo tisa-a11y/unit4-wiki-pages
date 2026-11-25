@@ -1107,3 +1107,7 @@ html[data-theme="dark"] .calc-mat-btn:not(.open) {
     transition: none !important;
   }
 }
+
+/* U4_KS4_RU_3WAY_START */
+.u4h-nav-right { gap: 6px; flex-wrap: nowrap; }
+/* U4_KS4_RU_3WAY_END */

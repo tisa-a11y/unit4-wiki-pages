@@ -36,10 +36,10 @@
   };
 
   const STEPS = [
-    { id: "field-layout", num: 1, en: "Wall Tile Layout", es: "Trazo de Muros" },
-    { id: "plumbing-stops", num: 2, en: "Shower & Window Walls", es: "Regadera y Ventana" },
-    { id: "niches-trim", num: 3, en: "Niches & Ceramic Trim", es: "Nichos y Orillas" },
-    { id: "crew-steps", num: 4, en: "Pre-Tile Checks & Materials", es: "Verificaciones y Materiales" }
+    { id: "field-layout", num: 1, en: "Wall Tile Layout", es: "Trazo de Muros", ru: "Раскладка плитки стен" },
+    { id: "plumbing-stops", num: 2, en: "Shower & Window Walls", es: "Regadera y Ventana", ru: "Стены душа и окна" },
+    { id: "niches-trim", num: 3, en: "Niches & Ceramic Trim", es: "Nichos y Orillas", ru: "Ниши и керамический бордюр" },
+    { id: "crew-steps", num: 4, en: "Pre-Tile Checks & Materials", es: "Verificaciones y Materiales", ru: "Проверки и материалы" }
   ];
 
   const state = {
@@ -59,6 +59,13 @@
     },
     lastScaleInfo: { view: "field-layout", scaleX: 2.95, scaleY: 2.95, uniform: true }
   };
+
+  function normLang(raw) {
+    const s = String(raw || "").trim().toLowerCase();
+    if (s === "ru" || s.indexOf("ru-") === 0) return "ru";
+    if (s === "es" || s.indexOf("es-") === 0) return "es";
+    return "en";
+  }
 
   function pick(en, es, ru) {
     return state.lang === "es" ? (es || en) : state.lang === "ru" ? (ru || en) : en;
@@ -239,7 +246,7 @@
 
     return `
       <svg viewBox="0 0 680 392" xmlns="http://www.w3.org/2000/svg" role="img"
-           aria-label="${es ? "Vista de los 3 muros de la tina y planta de orientación del baño" : "3-wall tub tile layout and bathroom orientation plan"}">
+           aria-label="${pick("3-wall tub tile layout and bathroom orientation plan", "Vista de los 3 muros de la tina y planta de orientación del baño", "Развёртка плитки 3 стен ванны и план ориентации")}">
         <defs>
           <pattern id="noTileH1" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
             <line x1="0" y1="0" x2="0" y2="8" stroke="#9A5B06" stroke-width="1.1" opacity="0.32"/>
@@ -247,16 +254,16 @@
         </defs>
 
         <text x="16" y="18" font-size="9.5" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#1F5F7A">
-          ${es ? "VISTA DE LOS 3 MUROS DE TINA (ESCALA REAL)" : "3-WALL TUB TILE LAYOUT (TO SCALE)"}
+          ${pick("3-WALL TUB TILE LAYOUT (TO SCALE)", "VISTA DE LOS 3 MUROS DE TINA (ESCALA REAL)", "РАСКЛАДКА ПЛИТКИ 3 СТЕН ВАННЫ (В МАСШТАБЕ)")}
         </text>
         <text x="16" y="31" font-size="7.6" fill="#5D686D">
-          ${es ? "Muro Oeste Ventana (Izq.)  |  Muro Norte Fondo (69-5/16″)  |  Muro Este Regadera (Der.)" : "West Window Wall (Left)  |  North Back Wall (69-5/16″)  |  East Shower Wall (Right)"}
+          ${pick("West Window Wall (Left)  |  North Back Wall (69-5/16″)  |  East Shower Wall (Right)", "Muro Oeste Ventana (Izq.)  |  Muro Norte Fondo (69-5/16″)  |  Muro Este Regadera (Der.)", "Западная стена с окном (слева)  |  Северная стена (69-5/16″)  |  Восточная стена душа (справа)")}
         </text>
 
         <rect x="${xWest0}" y="${yTopCap}" width="${(xEastEnd - xWest0).toFixed(1)}" height="${(yFloor - yTopCap).toFixed(1)}" fill="#F4F5F3" stroke="#C5CCC9"/>
         <rect x="${(xNW - 35 * S).toFixed(1)}" y="${yTopCap}" width="${(35 * S).toFixed(1)}" height="${(ySill - yTopCap).toFixed(1)}" fill="url(#noTileH1)" stroke="#9A5B06" stroke-dasharray="4 3"/>
-        <text x="${(xNW - 17.5 * S).toFixed(1)}" y="${((yTopCap + ySill) / 2 - 3).toFixed(1)}" text-anchor="middle" font-size="7.2" font-weight="700" fill="#8F5305">${es ? "ARRIBA DE REPISA 43″" : "ABOVE 43″ SILL"}</text>
-        <text x="${(xNW - 17.5 * S).toFixed(1)}" y="${((yTopCap + ySill) / 2 + 10).toFixed(1)}" text-anchor="middle" font-size="6.8" fill="#8F5305">${es ? "(SIN AZULEJO)" : "(NO WALL TILE)"}</text>
+        <text x="${(xNW - 17.5 * S).toFixed(1)}" y="${((yTopCap + ySill) / 2 - 3).toFixed(1)}" text-anchor="middle" font-size="7.2" font-weight="700" fill="#8F5305">${pick("ABOVE 43″ SILL", "ARRIBA DE REPISA 43″", "ВЫШЕ ПОДОКОННИКА 43″")}</text>
+        <text x="${(xNW - 17.5 * S).toFixed(1)}" y="${((yTopCap + ySill) / 2 + 10).toFixed(1)}" text-anchor="middle" font-size="6.8" fill="#8F5305">${pick("(NO WALL TILE)", "(SIN AZULEJO)", "(БЕЗ ПЛИТКИ)")}</text>
 
       <rect x="${xNW}" y="${yCapBot}" width="${(SEED.backerWidthIn * S).toFixed(1)}" height="${(yTub - yCapBot).toFixed(1)}" fill="#FFFFFF" stroke="#8C99A0"/>
       <rect x="${xNE}" y="${yCapBot}" width="${(eField * S).toFixed(1)}" height="${(yTub - yCapBot).toFixed(1)}" fill="#FFFFFF" stroke="#8C99A0"/>
@@ -281,15 +288,15 @@
       <line x1="${(xNW - 35 * S).toFixed(1)}" y1="${yLaser}" x2="${(xNE + (eField + 2) * S).toFixed(1)}" y2="${yLaser}" stroke="#C92A2A" stroke-width="1.4" stroke-dasharray="6 3"/>
 
         <line x1="20" y1="${yFloor}" x2="${(xEastEnd + 10).toFixed(1)}" y2="${yFloor}" stroke="#1D2326" stroke-width="1.6"/>
-        <text x="${(xNW - 17.5 * S).toFixed(1)}" y="${(yFloor + 14).toFixed(1)}" text-anchor="middle" font-size="7.4" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#2F6B3F">${es ? "35″ OESTE" : "35″ WEST"}</text>
-        <text x="${xCenter}" y="${(yFloor + 14).toFixed(1)}" text-anchor="middle" font-size="7.4" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#1F5F7A">${es ? "69-5/16″ NORTE" : "69-5/16″ NORTH"}</text>
-        <text x="${(xNE + 17.5 * S).toFixed(1)}" y="${(yFloor + 14).toFixed(1)}" text-anchor="middle" font-size="7.4" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#2F6B3F">${es ? "35″ ESTE" : "35″ EAST"}</text>
+        <text x="${(xNW - 17.5 * S).toFixed(1)}" y="${(yFloor + 14).toFixed(1)}" text-anchor="middle" font-size="7.4" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#2F6B3F">${pick("35″ WEST", "35″ OESTE", "35″ ЗАПАД")}</text>
+        <text x="${xCenter}" y="${(yFloor + 14).toFixed(1)}" text-anchor="middle" font-size="7.4" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#1F5F7A">${pick("69-5/16″ NORTH", "69-5/16″ NORTE", "69-5/16″ СЕВЕР")}</text>
+        <text x="${(xNE + 17.5 * S).toFixed(1)}" y="${(yFloor + 14).toFixed(1)}" text-anchor="middle" font-size="7.4" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#2F6B3F">${pick("35″ EAST", "35″ ESTE", "35″ ВОСТОК")}</text>
         <text x="${(xNW - 35 * S - 4).toFixed(1)}" y="${((ySill + yFloor) / 2).toFixed(1)}" text-anchor="end" font-size="7.6" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#2F6B3F">43″</text>
         <text x="${(xNE + 35 * S + 4).toFixed(1)}" y="${((yTopCap + yTub) / 2).toFixed(1)}" font-size="7.4" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#1F5F7A">71-1/4″</text>
 
         <rect x="498" y="10" width="172" height="372" rx="6" fill="#F8FAF9" stroke="#C5CCC9"/>
         <text x="584" y="27" text-anchor="middle" font-size="8.2" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#1F5F7A">
-          ${es ? "ORIENTACIÓN" : "KEY PLAN"}
+          ${pick("KEY PLAN", "ORIENTACIÓN", "СХЕМА ПЛАНА")}
         </text>
         <g transform="translate(584, 52)">
           <circle cx="0" cy="0" r="13" fill="#FFFFFF" stroke="#8C99A0" stroke-width="1"/>
@@ -311,7 +318,7 @@
         <line x1="${doorX}" y1="${(kpY + kpD).toFixed(1)}" x2="${(+doorX + doorW).toFixed(1)}" y2="${(kpY + kpD).toFixed(1)}" stroke="#FFFFFF" stroke-width="3"/>
         <line x1="${doorX}" y1="${(kpY + kpD).toFixed(1)}" x2="${doorX}" y2="${(kpY + kpD + doorW * 0.72).toFixed(1)}" stroke="#2F6B3F" stroke-width="2"/>
         <path d="M ${doorX} ${(kpY + kpD + doorW * 0.72).toFixed(1)} A ${(doorW * 0.72).toFixed(1)} ${(doorW * 0.72).toFixed(1)} 0 0 0 ${(+doorX + doorW * 0.72).toFixed(1)} ${(kpY + kpD).toFixed(1)}" fill="none" stroke="#2F6B3F" stroke-width="1.2" stroke-dasharray="3 2"/>
-        <text x="584" y="${(kpY + kpD + 56).toFixed(1)}" text-anchor="middle" font-size="7" font-weight="700" fill="#2F6B3F">${es ? "Puerta 28″ (al pasillo)" : "28″ Door (to hall)"}</text>
+        <text x="584" y="${(kpY + kpD + 56).toFixed(1)}" text-anchor="middle" font-size="7" font-weight="700" fill="#2F6B3F">${pick("28″ Door (to hall)", "Puerta 28″ (al pasillo)", "Дверь 28″ (в коридор)")}</text>
         <text x="584" y="${(kpY + kpD + 74).toFixed(1)}" text-anchor="middle" font-size="6.6" font-family="IBM Plex Mono, monospace" fill="#5D686D">72-1/8″ × 82-1/8″</text>
       </svg>
     `;
@@ -357,7 +364,7 @@
         <circle cx="${cx}" cy="${cy}" r="${r}" fill="#F2D492" stroke="#9A5B06" stroke-width="1.4"/>
         <rect x="${(ex0 + 39 * S).toFixed(1)}" y="${(cy - 9).toFixed(1)}" width="152" height="18" rx="4" fill="#FFF8EB" stroke="#9A5B06" stroke-width="0.9"/>
         <text x="${(ex0 + 39 * S + 6).toFixed(1)}" y="${(cy + 3).toFixed(1)}" font-size="7.1" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#7A4404">
-          ${es ? p.es : p.en} (${fmtFrac(p.z)} ${es ? "arriba" : "up"})
+          ${pick(p.en, p.es, p.ru)} (${fmtFrac(p.z)} ${pick("up", "arriba", "вверх")})
         </text>
       `;
     }).join("");
@@ -372,10 +379,10 @@
       </defs>
 
         <text x="${ex0}" y="18" font-size="9.2" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#1F5F7A">
-          ${es ? "MURO ESTE (REGADERA) · TOPE 35″" : "EAST SHOWER WALL · 35″ EDGE"}
+          ${pick("EAST SHOWER WALL · 35″ EDGE", "MURO ESTE (REGADERA) · TOPE 35″", "ВОСТОЧНАЯ СТЕНА (ДУШ) · КРАЙ 35″")}
         </text>
         <text x="${ex0}" y="31" font-size="7.5" fill="#5D686D">
-          ${es ? "Salidas a 15-1/2″ del rincón · Libra agua del inodoro (~38″)" : "Pipes 15-1/2″ from North corner · Clears toilet water line (~38″)"}
+          ${pick("Pipes 15-1/2″ from North corner · Clears toilet water line (~38″)", "Salidas a 15-1/2″ del rincón · Libra agua del inodoro (~38″)", "Выводы в 15-1/2″ от угла · Не задевает подводку унитаза (~38″)")}
         </text>
 
       <rect x="${ex0}" y="${yTopCap}" width="${(40 * S).toFixed(1)}" height="${(yFloor - yTopCap).toFixed(1)}" fill="#F4F5F3" stroke="#C5CCC9"/>
@@ -392,21 +399,21 @@
       <text x="${(ex0 + 17.5 * S).toFixed(1)}" y="${(yFloor + 14).toFixed(1)}" text-anchor="middle" font-size="7.4" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#2F6B3F">${lay.totalEastIn}″</text>
 
         <text x="${wxStop}" y="18" font-size="9.2" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#1F5F7A">
-          ${es ? "MURO OESTE (VENTANA) · REPISA 43″" : "WEST WINDOW WALL · 43″ SILL"}
+          ${pick("WEST WINDOW WALL · 43″ SILL", "MURO OESTE (VENTANA) · REPISA 43″", "ЗАПАДНАЯ СТЕНА (ОКНО) · ПОДОКОННИК 43″")}
         </text>
         <text x="${wxStop}" y="31" font-size="7.5" fill="#5D686D">
-          ${es ? "Azulejo solo debajo de 43″ · Sin azulejo arriba" : "Tile below 43″ sill only · No tile above sill"}
+          ${pick("Tile below 43″ sill only · No tile above sill", "Azulejo solo debajo de 43″ · Sin azulejo arriba", "Плитка только ниже 43″ · Выше подоконника без плитки")}
         </text>
         <rect x="${wxStop}" y="${yTopCap}" width="${(35 * S).toFixed(1)}" height="${(ySill - yTopCap).toFixed(1)}" fill="url(#noTileH2)" stroke="#9A5B06" stroke-dasharray="4 3"/>
-        <text x="${((wxStop + wxCorner) / 2).toFixed(1)}" y="${((yTopCap + ySill) / 2 - 3).toFixed(1)}" text-anchor="middle" font-size="7.6" font-weight="700" fill="#8F5305">${es ? "ARRIBA DE REPISA 43″" : "ABOVE 43″ SILL"}</text>
-        <text x="${((wxStop + wxCorner) / 2).toFixed(1)}" y="${((yTopCap + ySill) / 2 + 10).toFixed(1)}" text-anchor="middle" font-size="7" fill="#8F5305">${es ? "(SIN AZULEJO)" : "(NO WALL TILE)"}</text>
+        <text x="${((wxStop + wxCorner) / 2).toFixed(1)}" y="${((yTopCap + ySill) / 2 - 3).toFixed(1)}" text-anchor="middle" font-size="7.6" font-weight="700" fill="#8F5305">${pick("ABOVE 43″ SILL", "ARRIBA DE REPISA 43″", "ВЫШЕ ПОДОКОННИКА 43″")}</text>
+        <text x="${((wxStop + wxCorner) / 2).toFixed(1)}" y="${((yTopCap + ySill) / 2 + 10).toFixed(1)}" text-anchor="middle" font-size="7" fill="#8F5305">${pick("(NO WALL TILE)", "(SIN AZULEJO)", "(БЕЗ ПЛИТКИ)")}</text>
         <rect x="${wxApron}" y="${ySill}" width="${(33 * S).toFixed(1)}" height="${(yTub - ySill).toFixed(1)}" fill="#FFFFFF" stroke="#8C99A0"/>
         ${wGrid}
         <rect x="${wxStop}" y="${ySill}" width="${(2 * S).toFixed(1)}" height="${(yFloor - ySill).toFixed(1)}" fill="#D6ECF8" stroke="#1F5F7A"/>
         <rect x="${wxStop - 2}" y="${ySill - 4}" width="${(35 * S + 2).toFixed(1)}" height="4.2" fill="#C99E67" stroke="#6E471B"/>
         <rect x="${wxApron}" y="${yTub}" width="${(33 * S).toFixed(1)}" height="${(22 * S).toFixed(1)}" fill="#E7ECEF" stroke="#5D686D" stroke-width="1.2"/>
         <line x1="${wxStop - 6}" y1="${yFloor}" x2="${wxCorner + 6}" y2="${yFloor}" stroke="#1D2326" stroke-width="1.6"/>
-        <text x="${((wxStop + wxCorner) / 2).toFixed(1)}" y="${(yFloor + 14).toFixed(1)}" text-anchor="middle" font-size="7.8" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#2F6B3F">${es ? "35″ HASTA REPISA" : "35″ TO SILL TIP"}</text>
+        <text x="${((wxStop + wxCorner) / 2).toFixed(1)}" y="${(yFloor + 14).toFixed(1)}" text-anchor="middle" font-size="7.8" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#2F6B3F">${pick("35″ TO SILL TIP", "35″ HASTA REPISA", "35″ ДО КРАЯ ПОДОКОННИКА")}</text>
         <text x="${wxStop - 5}" y="${((ySill + yFloor) / 2).toFixed(1)}" text-anchor="end" font-size="7.8" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#2F6B3F">43″</text>
       </svg>
     `;
@@ -428,37 +435,37 @@
 
     return `
       <svg viewBox="0 0 650 286" xmlns="http://www.w3.org/2000/svg" role="img"
-           aria-label="${es ? "Nichos en muro de fondo y corte lateral con bullnose cerámico" : "Back wall niches and ceramic bullnose side section"}">
+           aria-label="${pick("Back wall niches and ceramic bullnose side section", "Nichos en muro de fondo y corte lateral con bullnose cerámico", "Ниши на задней стене и боковой разрез с керамическим бордюром")}">
         <text x="20" y="20" font-size="9.5" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#1F5F7A">
-          ${es ? "1. NICHOS EN MURO NORTE (FONDO)" : "1. NORTH BACK WALL NICHES"}
+          ${pick("1. NORTH BACK WALL NICHES", "1. NICHOS EN MURO NORTE (FONDO)", "1. НИШИ НА СЕВЕРНОЙ СТЕНЕ")}
         </text>
         <text x="20" y="33" font-size="7.6" fill="#9A5B06" font-weight="600">
-          ${es ? "Medidas aproximadas — medir nichos impermeabilizados antes de cortar" : "Approximate sizes — measure waterproofed openings before cutting"}
+          ${pick("Approximate sizes — measure waterproofed openings before cutting", "Medidas aproximadas — medir nichos impermeabilizados antes de cortar", "Размеры ориентировочные — замерить ниши после гидроизоляции перед резкой")}
         </text>
 
         <rect x="${ox}" y="${oy}" width="${wallW}" height="${wallH}" fill="#FFFFFF" stroke="#8C99A0" stroke-width="1.2"/>
         <rect x="${lgX}" y="${lgY}" width="${(SEED.largeNiche.w * S).toFixed(1)}" height="${(SEED.largeNiche.h * S).toFixed(1)}" fill="#F6FAFC" stroke="#9A5B06" stroke-width="1.8" stroke-dasharray="5 3"/>
-        <text x="${(lgX + SEED.largeNiche.w * S / 2).toFixed(1)}" y="${(lgY + 26).toFixed(1)}" text-anchor="middle" font-size="7.4" font-weight="700" fill="#1F5F7A">${es ? "NICHO IZQ." : "LEFT NICHE"}</text>
+        <text x="${(lgX + SEED.largeNiche.w * S / 2).toFixed(1)}" y="${(lgY + 26).toFixed(1)}" text-anchor="middle" font-size="7.4" font-weight="700" fill="#1F5F7A">${pick("LEFT NICHE", "NICHO IZQ.", "ЛЕВАЯ НИША")}</text>
         <text x="${(lgX + SEED.largeNiche.w * S / 2).toFixed(1)}" y="${(lgY + 40).toFixed(1)}" text-anchor="middle" font-size="7.2" font-family="IBM Plex Mono, monospace" fill="#1D2326">~11″×19″</text>
 
         <rect x="${smX}" y="${smY}" width="${(SEED.smallNiche.w * S).toFixed(1)}" height="${(SEED.smallNiche.h * S).toFixed(1)}" fill="#F6FAFC" stroke="#9A5B06" stroke-width="1.8" stroke-dasharray="5 3"/>
-        <text x="${(smX + SEED.smallNiche.w * S / 2).toFixed(1)}" y="${(smY + 21).toFixed(1)}" text-anchor="middle" font-size="7" font-weight="700" fill="#1F5F7A">${es ? "DER." : "RIGHT"}</text>
+        <text x="${(smX + SEED.smallNiche.w * S / 2).toFixed(1)}" y="${(smY + 21).toFixed(1)}" text-anchor="middle" font-size="7" font-weight="700" fill="#1F5F7A">${pick("RIGHT", "DER.", "ПРАВАЯ")}</text>
         <text x="${(smX + SEED.smallNiche.w * S / 2).toFixed(1)}" y="${(smY + 35).toFixed(1)}" text-anchor="middle" font-size="6.8" font-family="IBM Plex Mono, monospace" fill="#1D2326">~7.5″×14″</text>
 
         <line x1="${ox}" y1="${lgY}" x2="${(ox + wallW).toFixed(1)}" y2="${lgY}" stroke="#2F6B3F" stroke-width="1" stroke-dasharray="4 2"/>
-        <text x="${(ox + wallW - 4).toFixed(1)}" y="${(lgY - 6).toFixed(1)}" text-anchor="end" font-size="7" font-weight="700" fill="#2F6B3F">${es ? "Misma altura superior (~36″)" : "Same top height (~36″)"}</text>
+        <text x="${(ox + wallW - 4).toFixed(1)}" y="${(lgY - 6).toFixed(1)}" text-anchor="end" font-size="7" font-weight="700" fill="#2F6B3F">${pick("Same top height (~36″)", "Misma altura superior (~36″)", "Единый верхний уровень (~36″)")}</text>
 
-        <text x="${ox}" y="${(oy + wallH + 15).toFixed(1)}" font-size="7.4" fill="#5D686D">${es ? "← Oeste (Ventana)" : "← West (Window)"}</text>
-        <text x="${(ox + wallW).toFixed(1)}" y="${(oy + wallH + 15).toFixed(1)}" text-anchor="end" font-size="7.4" fill="#5D686D">${es ? "Este (Regadera) →" : "East (Shower) →"}</text>
-        <text x="${ox}" y="${(oy + wallH + 31).toFixed(1)}" font-size="7.4" fill="#1D2326">${es ? "Elegir primero el azulejo/placa del fondo; pegarlo antes de cortar los costados." : "Choose niche back tile first; set back panel before cutting side returns."}</text>
-        <text x="${ox}" y="${(oy + wallH + 45).toFixed(1)}" font-size="7.2" fill="#9A5B06">${es ? "Vanos ya medidos (~11″×19″ y ~7-1/2″×14″); costados se ajustan al fondo elegido." : "Openings recorded (~11″×19″ & ~7-1/2″×14″); side strips fit after setting back."}</text>
+        <text x="${ox}" y="${(oy + wallH + 15).toFixed(1)}" font-size="7.4" fill="#5D686D">${pick("← West (Window)", "← Oeste (Ventana)", "← Запад (окно)")}</text>
+        <text x="${(ox + wallW).toFixed(1)}" y="${(oy + wallH + 15).toFixed(1)}" text-anchor="end" font-size="7.4" fill="#5D686D">${pick("East (Shower) →", "Este (Regadera) →", "Восток (душ) →")}</text>
+        <text x="${ox}" y="${(oy + wallH + 31).toFixed(1)}" font-size="7.4" fill="#1D2326">${pick("Choose niche back tile first; set back panel before cutting side returns.", "Elegir primero el azulejo/placa del fondo; pegarlo antes de cortar los costados.", "Сначала выбрать плитку задней стенки ниши и уложить её до подрезки боковин.")}</text>
+        <text x="${ox}" y="${(oy + wallH + 45).toFixed(1)}" font-size="7.2" fill="#9A5B06">${pick("Openings recorded (~11″×19″ & ~7-1/2″×14″); side strips fit after setting back.", "Vanos ya medidos (~11″×19″ y ~7-1/2″×14″); costados se ajustan al fondo elegido.", "Проёмы замерены (~11″×19″ и ~7-1/2″×14″); боковины подгоняются после укладки фона.")}</text>
 
         <rect x="312" y="10" width="326" height="264" rx="6" fill="#F8FAF9" stroke="#C5CCC9"/>
         <text x="324" y="27" font-size="9" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#1F5F7A">
-          ${es ? "2. CORTE LATERAL DEL NICHO" : "2. HOW TILE MEETS THE NICHE"}
+          ${pick("2. HOW TILE MEETS THE NICHE", "2. CORTE LATERAL DEL NICHO", "2. УЗЕЛ ПРИМЫКАНИЯ НИШИ")}
         </text>
         <text x="324" y="40" font-size="7.2" fill="#5D686D">
-          ${es ? "Esquema de armado (pegar fondo elegido y luego ajustar costados)" : "Side cutaway (set chosen back first, then fit side strips)"}
+          ${pick("Side cutaway (set chosen back first, then fit side strips)", "Esquema de armado (pegar fondo elegido y luego ajustar costados)", "Боковой разрез (сначала задняя стенка, затем боковые откосы)")}
         </text>
 
       <rect x="326" y="54" width="18" height="194" fill="#EFE6D8" stroke="#A6947D"/>
@@ -479,15 +486,15 @@
       <circle cx="359" cy="97" r="3" fill="#2F6B3F"/>
       <circle cx="359" cy="198" r="3" fill="#2F6B3F"/>
 
-        <text x="442" y="68" font-size="7.4" font-weight="700" fill="#1D2326">${es ? "Azulejo 3″×6″ en muro" : "3″×6″ wall tile"}</text>
-        <text x="442" y="86" font-size="7.4" font-weight="700" fill="#1F5F7A">${es ? "Bullnose cerámico 2″×6″" : "2″×6″ ceramic bullnose"}</text>
-        <text x="442" y="114" font-size="7.4" font-weight="700" fill="#C92A2A">① ${es ? "Impermeabilizar todo" : "Waterproof entire niche"}</text>
-        <text x="442" y="138" font-size="7.4" font-weight="700" fill="#1F5F7A">② ${es ? "Pegar fondo elegido primero" : "Set chosen back tile first"}</text>
-        <text x="442" y="152" font-size="6.8" fill="#5D686D">${es ? "Los cantos quedan ocultos" : "Cut edges stay hidden"}</text>
-        <text x="442" y="176" font-size="7.4" font-weight="700" fill="#2F6B3F">③ ${es ? "Repisa con caída hacia tina" : "Slope bottom sill to tub"}</text>
-        <text x="442" y="200" font-size="7.4" font-weight="700" fill="#1F5F7A">④ ${es ? "Colocar retornos al frente" : "Set side/top pieces in front"}</text>
-        <text x="442" y="214" font-size="6.8" fill="#2F6B3F">${es ? "Sellar esquinas con silicón" : "Seal corners with silicone"}</text>
-        <text x="442" y="242" font-size="7" font-weight="700" fill="#9A5B06">${es ? "Costados se cortan tras pegar fondo" : "Cut side strips after setting back"}</text>
+        <text x="442" y="68" font-size="7.4" font-weight="700" fill="#1D2326">${pick("3″×6″ wall tile", "Azulejo 3″×6″ en muro", "Настенная плитка 3″×6″")}</text>
+        <text x="442" y="86" font-size="7.4" font-weight="700" fill="#1F5F7A">${pick("2″×6″ ceramic bullnose", "Bullnose cerámico 2″×6″", "Керамический бордюр 2″×6″")}</text>
+        <text x="442" y="114" font-size="7.4" font-weight="700" fill="#C92A2A">① ${pick("Waterproof entire niche", "Impermeabilizar todo", "Гидроизолировать всю нишу")}</text>
+        <text x="442" y="138" font-size="7.4" font-weight="700" fill="#1F5F7A">② ${pick("Set chosen back tile first", "Pegar fondo elegido primero", "Уложить заднюю стенку первой")}</text>
+        <text x="442" y="152" font-size="6.8" fill="#5D686D">${pick("Cut edges stay hidden", "Los cantos quedan ocultos", "Резаные кромки скрыты")}</text>
+        <text x="442" y="176" font-size="7.4" font-weight="700" fill="#2F6B3F">③ ${pick("Slope bottom sill to tub", "Repisa con caída hacia tina", "Уклон полки в сторону ванны")}</text>
+        <text x="442" y="200" font-size="7.4" font-weight="700" fill="#1F5F7A">④ ${pick("Set side/top pieces in front", "Colocar retornos al frente", "Установить боковые и верхние откосы")}</text>
+        <text x="442" y="214" font-size="6.8" fill="#2F6B3F">${pick("Seal corners with silicone", "Sellar esquinas con silicón", "Герметизировать углы силиконом")}</text>
+        <text x="442" y="242" font-size="7" font-weight="700" fill="#9A5B06">${pick("Cut side strips after setting back", "Costados se cortan tras pegar fondo", "Подрезать боковины после фона")}</text>
       </svg>
     `;
   }
@@ -503,7 +510,7 @@
 
     const stepBar = document.getElementById("u4hStepBar");
     if (stepBar) {
-      stepBar.setAttribute("aria-label", es ? "Pasos del plano" : "Plan steps");
+      stepBar.setAttribute("aria-label", pick("Plan steps", "Pasos del plano", "Этапы плана"));
       stepBar.innerHTML = STEPS.map((s) => `
         <button type="button" class="u4b-step-btn ${s.id === state.step ? "active" : ""}" data-step="${s.id}">
           <span class="u4b-step-num">${s.num}</span>
@@ -521,13 +528,13 @@
         <section class="u4b-card">
           <div class="u4b-head">
             <div>
-              <h1 class="u4b-title">${es ? "Paso 1 — Trazo de Azulejo en los 3 Muros" : "Step 1 — 3-Wall Tile Layout & Pattern"}</h1>
-              <p class="u4b-sub">${es ? "American Olean 0025 Ice White 3″×6″ con bullnose cerámico del mismo color · Topes a 35″ en ambos costados" : "American Olean 0025 Ice White 3″×6″ with matching ceramic bullnose trim · 35″ symmetrical edges"}</p>
+              <h1 class="u4b-title">${pick("Step 1 — 3-Wall Tile Layout & Pattern", "Paso 1 — Trazo de Azulejo en los 3 Muros", "Шаг 1 — Раскладка плитки на 3 стенах")}</h1>
+              <p class="u4b-sub">${pick("American Olean 0025 Ice White 3″×6″ with matching ceramic bullnose trim · 35″ symmetrical edges", "American Olean 0025 Ice White 3″×6″ con bullnose cerámico del mismo color · Topes a 35″ en ambos costados", "American Olean 0025 Ice White 3″×6″ с керамическим бордюром в тон · Симметричные края 35″")}</p>
             </div>
             <span class="u4b-badge">${pick("SCALE DRAWING", "DIBUJO A ESCALA", "В МАСШТАБЕ")}</span>
           </div>
 
-          <div class="u4h-svg-wrap" data-u4-zoom-label="${es ? "Trazo de 3 muros" : "3-Wall Tile Layout"}">
+          <div class="u4h-svg-wrap" data-u4-zoom-label="${pick("3-Wall Tile Layout", "Trazo de 3 muros", "Раскладка 3 стен")}">
             ${buildStep1Svg(lay, false)}
           </div>
 
@@ -571,16 +578,16 @@
 
           <div class="u4b-grid">
             <div class="u4b-box">
-              <h4>${es ? "MURO NORTE DE FONDO (69-5/16″)" : "NORTH BACK WALL (69-5/16″)"}</h4>
-              <p>${es ? `La fila 1 inicia con ${fmtFrac(lay.nRows[0].firstCut)} a la izquierda y termina con ${fmtFrac(lay.nRows[0].lastCut)} a la derecha.` : `Row 1 starts with ${fmtFrac(lay.nRows[0].firstCut)} on the left and ends with ${fmtFrac(lay.nRows[0].lastCut)} on the right.`}</p>
+              <h4>${pick("NORTH BACK WALL (69-5/16″)", "MURO NORTE DE FONDO (69-5/16″)", "СЕВЕРНАЯ ЗАДНЯЯ СТЕНА (69-5/16″)")}</h4>
+              <p>${pick(`Row 1 starts with ${fmtFrac(lay.nRows[0].firstCut)} on the left and ends with ${fmtFrac(lay.nRows[0].lastCut)} on the right.`, `La fila 1 inicia con ${fmtFrac(lay.nRows[0].firstCut)} a la izquierda y termina con ${fmtFrac(lay.nRows[0].lastCut)} a la derecha.`, `1-й ряд начинается с ${fmtFrac(lay.nRows[0].firstCut)} слева и заканчивается ${fmtFrac(lay.nRows[0].lastCut)} справа.`)}</p>
             </div>
             <div class="u4b-box">
-              <h4>${es ? "COSTADOS SIMÉTRICOS (35″)" : "SYMMETRICAL SIDE STOPS (35″)"}</h4>
-              <p>${es ? "33″ de azulejo + 2″ de bullnose cerámico vertical bajando junto a la piedra hasta el piso." : "33″ of field tile plus a 2″ vertical ceramic bullnose dropping beside the stone apron to the floor."}</p>
+              <h4>${pick("SYMMETRICAL SIDE STOPS (35″)", "COSTADOS SIMÉTRICOS (35″)", "СИММЕТРИЧНЫЕ БОКОВЫЕ КРАЯ (35″)")}</h4>
+              <p>${pick("33″ of field tile plus a 2″ vertical ceramic bullnose dropping beside the stone apron to the floor.", "33″ de azulejo + 2″ de bullnose cerámico vertical bajando junto a la piedra hasta el piso.", "33″ основной плитки плюс вертикальный керамический бордюр 2″ вдоль каменного экрана ванны до пола.")}</p>
             </div>
             <div class="u4b-box">
-              <h4>${es ? "MURO OESTE (BAJO REPISA 43″)" : "WEST WALL (BELOW 43″ SILL)"}</h4>
-              <p>${es ? "Azulejo únicamente debajo de la repisa de 43″ (21″ sobre la tina) hasta el borde a 35″; sin azulejo arriba de la repisa." : "Tile only below the 43″ sill (21″ above tub rim) out to the 35″ vertical bullnose edge; no tile above the sill."}</p>
+              <h4>${pick("WEST WALL (BELOW 43″ SILL)", "MURO OESTE (BAJO REPISA 43″)", "ЗАПАДНАЯ СТЕНА (НИЖЕ ПОДОКОННИКА 43″)")}</h4>
+              <p>${pick("Tile only below the 43″ sill (21″ above tub rim) out to the 35″ vertical bullnose edge; no tile above the sill.", "Azulejo únicamente debajo de la repisa de 43″ (21″ sobre la tina) hasta el borde a 35″; sin azulejo arriba de la repisa.", "Плитка только ниже подоконника 43″ (21″ над бортом ванны) до вертикального бордюра на 35″; выше подоконника плитка не укладывается.")}</p>
             </div>
           </div>
         </section>
@@ -590,37 +597,37 @@
         <section class="u4b-card">
           <div class="u4b-head">
             <div>
-              <h1 class="u4b-title">${es ? "Paso 2 — Muro de Regadera y Muro de Ventana" : "Step 2 — Shower Wall & Window Wall"}</h1>
-              <p class="u4b-sub">${es ? "Perforaciones de plomería a 15-1/2″ del rincón · En ventana, azulejo solo debajo de la repisa de 43″" : "Shower pipes sit 15-1/2″ from the North corner · Window wall is tiled below the 43″ sill only"}</p>
+              <h1 class="u4b-title">${pick("Step 2 — Shower Wall & Window Wall", "Paso 2 — Muro de Regadera y Muro de Ventana", "Шаг 2 — Стена душа и стена окна")}</h1>
+              <p class="u4b-sub">${pick("Shower pipes sit 15-1/2″ from the North corner · Window wall is tiled below the 43″ sill only", "Perforaciones de plomería a 15-1/2″ del rincón · En ventana, azulejo solo debajo de la repisa de 43″", "Выводы сантехники в 15-1/2″ от северного угла · Стена окна облицовывается только ниже подоконника 43″")}</p>
             </div>
             <span class="u4b-badge">${pick("35″ STOP LOCKED", "TOPE 35″ FIJADO", "КРАЙ 35″ УТВЕРЖДЁН")}</span>
           </div>
 
-          <div class="u4h-svg-wrap" data-u4-zoom-label="${es ? "Regadera y ventana" : "Shower & Window Walls"}">
+          <div class="u4h-svg-wrap" data-u4-zoom-label="${pick("Shower & Window Walls", "Regadera y ventana", "Стены душа и окна")}">
             ${buildStep2PlumbingSvg(lay, false)}
           </div>
 
           <div class="u4b-grid">
             ${lay.plumbingHits.map((p) => `
               <div class="u4b-box">
-                <h4>${es ? p.es.toUpperCase() : p.en.toUpperCase()}</h4>
-                <p>${es ? `A 15-1/2″ del rincón norte y ${fmtFrac(p.z)} arriba de la tina.` : `15-1/2″ from North corner and ${fmtFrac(p.z)} above tub rim.`}</p>
+                <h4>${pick(p.en, p.es, p.ru).toUpperCase()}</h4>
+                <p>${pick(`15-1/2″ from North corner and ${fmtFrac(p.z)} above tub rim.`, `A 15-1/2″ del rincón norte y ${fmtFrac(p.z)} arriba de la tina.`, `В 15-1/2″ от северного угла и на ${fmtFrac(p.z)} выше борта ванны.`)}</p>
               </div>
             `).join("")}
           </div>
 
           <div class="u4b-photos">
             <figure class="u4h-photo-card">
-              <img src="./assets/IMG_5474.jpg" alt="${es ? "Plomería en muro de regadera" : "Shower wall plumbing"}">
-              <figcaption><strong>${es ? "Muro de regadera:" : "Shower wall:"}</strong> ${es ? "Válvula Delta, regadera y toma de agua del inodoro (~38″) fuera del tope a 35″." : "Delta valve, shower head, and toilet water line (~38″) staying clear of the 35″ tile edge."}</figcaption>
+              <img src="./assets/IMG_5474.jpg" alt="${pick("Shower wall plumbing", "Plomería en muro de regadera", "Сантехника на стене душа")}">
+              <figcaption><strong>${pick("Shower wall:", "Muro de regadera:", "Стена душа:")}</strong> ${pick("Delta valve, shower head, and toilet water line (~38″) staying clear of the 35″ tile edge.", "Válvula Delta, regadera y toma de agua del inodoro (~38″) fuera del tope a 35″.", "Смеситель Delta, вывод душа и подводка унитаза (~38″) за пределами края плитки 35″.")}</figcaption>
             </figure>
             <figure class="u4h-photo-card">
-              <img src="./assets/IMG_5488.jpg" alt="${es ? "Frente de piedra de la tina" : "Stone tub apron depth"}">
-              <figcaption><strong>${es ? "Piedra de la tina (~33″):" : "Stone tub apron (~33″):"}</strong> ${es ? "El bullnose vertical de 2″ remata de 33″ a 35″ hasta el piso." : "The 2″ vertical ceramic bullnose finishes cleanly from 33″ to 35″ down to the floor."}</figcaption>
+              <img src="./assets/IMG_5488.jpg" alt="${pick("Stone tub apron depth", "Frente de piedra de la tina", "Каменный экран ванны")}">
+              <figcaption><strong>${pick("Stone tub apron (~33″):", "Piedra de la tina (~33″):", "Экран ванны (~33″):")}</strong> ${pick("The 2″ vertical ceramic bullnose finishes cleanly from 33″ to 35″ down to the floor.", "El bullnose vertical de 2″ remata de 33″ a 35″ hasta el piso.", "Вертикальный керамический бордюр 2″ аккуратно закрывает участок с 33″ до 35″ до пола.")}</figcaption>
             </figure>
             <figure class="u4h-photo-card">
-              <img src="./assets/IMG_5491.jpg" alt="${es ? "Muro de ventana bajo repisa" : "Window wall below sill"}">
-              <figcaption><strong>${es ? "Límite en repisa (43″):" : "43″ sill tile stop:"}</strong> ${es ? "El azulejo termina debajo de la repisa de 43″; sin azulejo en la zona superior." : "Wall tile stops below the 43″ sill; no wall tile in the upper window area."}</figcaption>
+              <img src="./assets/IMG_5491.jpg" alt="${pick("Window wall below sill", "Muro de ventana bajo repisa", "Стена окна ниже подоконника")}">
+              <figcaption><strong>${pick("43″ sill tile stop:", "Límite en repisa (43″):", "Остановка у подоконника 43″:")}</strong> ${pick("Wall tile stops below the 43″ sill; no wall tile in the upper window area.", "El azulejo termina debajo de la repisa de 43″; sin azulejo en la zona superior.", "Плитка заканчивается под подоконником 43″; верхняя зона окна без плитки.")}</figcaption>
             </figure>
           </div>
         </section>
@@ -636,130 +643,130 @@
             <span class="u4b-badge open">${pick("BACK TILE TBD", "FONDO POR ELEGIR", "ВЫБОР ФОНА НИШИ")}</span>
           </div>
 
-          <div class="u4h-svg-wrap" data-u4-zoom-label="${es ? "Nichos y bullnose" : "Niches & Ceramic Trim"}">
+          <div class="u4h-svg-wrap" data-u4-zoom-label="${pick("Niches & Ceramic Trim", "Nichos y bullnose", "Ниши и керамический бордюр")}">
             ${buildStep3NichesSvg(lay, false)}
           </div>
 
           <div class="u4b-grid">
             <div class="u4b-box">
-              <h4>${es ? "NICHO IZQUIERDO" : "LEFT NICHE"}</h4>
-              <p>${es ? "Aprox. 11″ ancho × 19″ alto (19″–30″ desde esquina izq.; 17″–36″ sobre tina). Pegar fondo elegido primero y luego cortar laterales." : "Approx. 11″ wide × 19″ tall (19″–30″ from left corner; 17″–36″ above tub rim). Set chosen back first, then cut side strips."}</p>
+              <h4>${pick("LEFT NICHE", "NICHO IZQUIERDO", "ЛЕВАЯ НИША")}</h4>
+              <p>${pick("Approx. 11″ wide × 19″ tall (19″–30″ from left corner; 17″–36″ above tub rim). Set chosen back first, then cut side strips.", "Aprox. 11″ ancho × 19″ alto (19″–30″ desde esquina izq.; 17″–36″ sobre tina). Pegar fondo elegido primero y luego cortar laterales.", "Около 11″ × 19″ (19″–30″ от левого угла; 17″–36″ над бортом ванны). Сначала уложите заднюю плитку, затем подрежьте боковины.")}</p>
             </div>
             <div class="u4b-box">
               <h4>${pick("RIGHT NICHE", "NICHO DERECHO", "ПРАВАЯ НИША")}</h4>
               <p>${pick("Approx. 7-1/2″ wide × 14″ tall (X: ~37-1/2″→45″, bottom ~21-3/4″, top ~35-1/2″–36″). Set chosen back first, then cut side strips.", "Aprox. 7-1/2″ ancho × 14″ alto (X: ~37-1/2″→45″, base ~21-3/4″, tope ~35-1/2″–36″). Pegar fondo elegido primero y luego cortar laterales.", "Около 7-1/2″ × 14″ (X: ~37-1/2″→45″, низ ~21-3/4″, верх ~35-1/2″–36″). Сначала уложите заднюю плитку, затем подрежьте боковины.")}</p>
             </div>
             <div class="u4b-box">
-              <h4>${es ? "ORILLAS DE CERÁMICA" : "CERAMIC BULLNOSE TRIM"}</h4>
-              <p>${es ? "Rematar bordes expuestos con bullnose cerámico brillante 2″×6″ y esquinas 2″×2″ Ice White." : "Finish every exposed edge with matching 2″×6″ glossy Ice White ceramic bullnose and 2″×2″ corners."}</p>
+              <h4>${pick("CERAMIC BULLNOSE TRIM", "ORILLAS DE CERÁMICA", "КЕРАМИЧЕСКИЙ БОРДЮР")}</h4>
+              <p>${pick("Finish every exposed edge with matching 2″×6″ glossy Ice White ceramic bullnose and 2″×2″ corners.", "Rematar bordes expuestos con bullnose cerámico brillante 2″×6″ y esquinas 2″×2″ Ice White.", "Оформить все открытые кромки глянцевым керамическим бордюром 2″×6″ и уголками 2″×2″ Ice White.")}</p>
             </div>
           </div>
 
           <div class="u4b-photos">
             <figure class="u4h-photo-card">
-              <a href="../../wiki-images/bathroom-tub-surround-measurements-${es ? "es" : "en"}.svg"><img src="../../wiki-images/bathroom-tub-surround-measurements-${es ? "es" : "en"}.svg" alt="${es ? "Foto de referencia con medidas del contorno de tina y nichos" : "Tub surround reference photo with recorded niche measurements"}"></a>
-              <figcaption><strong>${es ? "Medidas registradas:" : "Recorded measurements:"}</strong> ${es ? " Muro de 69-5/16″ y ambos nichos (~11″×19″ y ~7-1/2″×14″) — toca para ampliar." : " 69-5/16″ wall and both niches (~11″×19″ & ~7-1/2″×14″) — click to enlarge."}</figcaption>
+              <a href="../../wiki-images/bathroom-tub-surround-measurements-${es ? "es" : "en"}.svg"><img src="../../wiki-images/bathroom-tub-surround-measurements-${es ? "es" : "en"}.svg" alt="${pick("Tub surround reference photo with recorded niche measurements", "Foto de referencia con medidas del contorno de tina y nichos", "Справочное фото зоны ванны с замерами ниш")}"></a>
+              <figcaption><strong>${pick("Recorded measurements:", "Medidas registradas:", "Записанные замеры:")}</strong> ${pick(" 69-5/16″ wall and both niches (~11″×19″ & ~7-1/2″×14″) — click to enlarge.", " Muro de 69-5/16″ y ambos nichos (~11″×19″ y ~7-1/2″×14″) — toca para ampliar.", " Стена 69-5/16″ и обе ниши (~11″×19″ и ~7-1/2″×14″) — нажмите для увеличения.")}</figcaption>
             </figure>
             <figure class="u4h-photo-card">
-              <img src="./assets/IMG_5493.jpg" alt="${es ? "Etiqueta de caja American Olean Ice White" : "American Olean Ice White 3x6 tile box label"}">
-              <figcaption><strong>${es ? "Azulejo en obra:" : "Wall tile on hand:"}</strong> ${es ? "American Olean 0025 Ice White 3″×6″ (tono 55501, 12.5 ft² por caja)." : "American Olean 0025 Ice White 3″×6″ (shade 55501, 12.5 sq ft per box)."}</figcaption>
+              <img src="./assets/IMG_5493.jpg" alt="${pick("American Olean Ice White 3x6 tile box label", "Etiqueta de caja American Olean Ice White", "Этикетка коробки плитки American Olean Ice White")}">
+              <figcaption><strong>${pick("Wall tile on hand:", "Azulejo en obra:", "Плитка на объекте:")}</strong> ${pick("American Olean 0025 Ice White 3″×6″ (shade 55501, 12.5 sq ft per box).", "American Olean 0025 Ice White 3″×6″ (tono 55501, 12.5 ft² por caja).", "American Olean 0025 Ice White 3″×6″ (тон 55501, 12.5 кв. фута в коробке).")}</figcaption>
             </figure>
           </div>
         </section>
       `;
     } else {
-      const refHref = (wall, view) => `../bathroom-measurements/index.html?wall=${wall}&view=${view}&lang=${es ? "es" : "en"}&theme=${state.theme}`;
+      const refHref = (wall, view) => `../bathroom-measurements/index.html?wall=${wall}&view=${view}&lang=${state.lang}&theme=${state.theme}`;
       const preTileChecks = [
-        ["waterproofPhoto", "Take photos of finished waterproofing before setting tile.", "Tomar fotos de la impermeabilización terminada antes de pegar azulejo."],
-        ["nicheBackTile", "Confirm niche back tile selection before tiling niches (set backs first, then cut side returns).", "Confirmar el azulejo de fondo de ambos nichos antes de forrarlos (pegar fondo primero y cortar laterales después)."],
-        ["valveDepth", "Check Delta shower valve depth against finished tile plane.", "Revisar la profundidad de la válvula Delta respecto al paño final del azulejo."]
+        ["waterproofPhoto", "Take photos of finished waterproofing before setting tile.", "Tomar fotos de la impermeabilización terminada antes de pegar azulejo.", "Сфотографировать готовую гидроизоляцию перед укладкой плитки."],
+        ["nicheBackTile", "Confirm niche back tile selection before tiling niches (set backs first, then cut side returns).", "Confirmar el azulejo de fondo de ambos nichos antes de forrarlos (pegar fondo primero y cortar laterales después).", "Согласовать плитку задней стенки обеих ниш до облицовки (сначала уложить фон, затем подрезать боковины)."],
+        ["valveDepth", "Check Delta shower valve depth against finished tile plane.", "Revisar la profundidad de la válvula Delta respecto al paño final del azulejo.", "Проверить глубину посадки смесителя Delta относительно чистовой плоскости плитки."]
       ];
       cardHtml = `
         <section class="u4b-card">
           <div class="u4b-head">
             <div>
-              <h1 class="u4b-title">${es ? "Paso 4 — Verificaciones Previas y Materiales" : "Step 4 — Pre-Tile Checks & Materials"}</h1>
-              <p class="u4b-sub">${es ? "Tres verificaciones antes de pegar azulejo, tabla de materiales y planos de referencia de muros y tina" : "Three pre-tile checks before setting tile, material takeoff, and wall/tub reference renderings"}</p>
+              <h1 class="u4b-title">${pick("Step 4 — Pre-Tile Checks & Materials", "Paso 4 — Verificaciones Previas y Materiales", "Шаг 4 — Проверки перед укладкой и материалы")}</h1>
+              <p class="u4b-sub">${pick("Three pre-tile checks before setting tile, material takeoff, and wall/tub reference renderings", "Tres verificaciones antes de pegar azulejo, tabla de materiales y planos de referencia de muros y tina", "Три проверки перед укладкой плитки, ведомость материалов и справочные схемы стен и ванны")}</p>
             </div>
-            <span class="u4b-badge">${es ? "VERIFICACIONES Y MATERIALES" : "CHECKS & MATERIALS"}</span>
+            <span class="u4b-badge">${pick("CHECKS & MATERIALS", "VERIFICACIONES Y MATERIALES", "ПРОВЕРКИ И МАТЕРИАЛЫ")}</span>
           </div>
 
           <div class="u4b-ref-hero">
             <figure class="u4h-photo-card">
-              <img src="./assets/IMG_5493.jpg" alt="${es ? "Caja American Olean 0025 Ice White en obra" : "American Olean 0025 Ice White 3x6 box on site"}">
-              <figcaption><strong>${es ? "Azulejo en obra:" : "Tile on hand:"}</strong> American Olean 0025 Ice White 3″×6″ · ${es ? "Tono 55501 (12.5 ft² / 100 pzas)" : "Shade 55501 (12.5 sq ft / 100 pcs)"}</figcaption>
+              <img src="./assets/IMG_5493.jpg" alt="${pick("American Olean 0025 Ice White 3x6 box on site", "Caja American Olean 0025 Ice White en obra", "Коробка плитки American Olean 0025 Ice White на объекте")}">
+              <figcaption><strong>${pick("Tile on hand:", "Azulejo en obra:", "Плитка в наличии:")}</strong> American Olean 0025 Ice White 3″×6″ · ${pick("Shade 55501 (12.5 sq ft / 100 pcs)", "Tono 55501 (12.5 ft² / 100 pzas)", "Тон 55501 (12.5 кв. фута / 100 шт.)")}</figcaption>
             </figure>
             <div class="u4b-ref-links-card">
               <div>
-                <h3 class="u4b-ref-heading">${es ? "Planos de Referencia: Muros, Tina y Cuarto" : "Wall, Tub & Room Reference Renderings"}</h3>
-                <p class="u4b-ref-note">${es ? "Abre las vistas a escala y sobre foto para consultar medidas de cada muro:" : "Open the scale drawings and annotated site-photo views for each wall:"}</p>
+                <h3 class="u4b-ref-heading">${pick("Wall, Tub & Room Reference Renderings", "Planos de Referencia: Muros, Tina y Cuarto", "Справочные схемы: стены, ванна и комната")}</h3>
+                <p class="u4b-ref-note">${pick("Open the scale drawings and annotated site-photo views for each wall:", "Abre las vistas a escala y sobre foto para consultar medidas de cada muro:", "Откройте масштабные чертежи и размеченные фото для каждой стены:")}</p>
               </div>
               <div class="u4b-ref-grid">
                 <a class="u4b-ref-pill" href="${refHref("room", "flat")}">
-                  <strong>${es ? "Planta del Baño Completo →" : "Whole Room Floor Plan →"}</strong>
-                  <span>${es ? "72-1/8″ × 82-1/8″ · Tina, lavabo, inodoro y puerta 28″" : "72-1/8″ × 82-1/8″ · Tub, sink, toilet & 28″ door"}</span>
+                  <strong>${pick("Whole Room Floor Plan →", "Planta del Baño Completo →", "План всей ванной →")}</strong>
+                  <span>${pick("72-1/8″ × 82-1/8″ · Tub, sink, toilet & 28″ door", "72-1/8″ × 82-1/8″ · Tina, lavabo, inodoro y puerta 28″", "72-1/8″ × 82-1/8″ · Ванна, раковина, унитаз и дверь 28″")}</span>
                 </a>
                 <a class="u4b-ref-pill" href="${refHref("tub", "photo")}">
-                  <strong>${es ? "Muro de Fondo y Nichos →" : "Tub Back Wall & Niches →"}</strong>
-                  <span>${es ? "69-5/16″ ancho · Foto anotada y dibujo" : "69-5/16″ span · Annotated photo & flat drawing"}</span>
+                  <strong>${pick("Tub Back Wall & Niches →", "Muro de Fondo y Nichos →", "Задняя стена ванны и ниши →")}</strong>
+                  <span>${pick("69-5/16″ span · Annotated photo & flat drawing", "69-5/16″ ancho · Foto anotada y dibujo", "Ширина 69-5/16″ · Размеченное фото и чертёж")}</span>
                 </a>
                 <a class="u4b-ref-pill" href="${refHref("tub-profile", "flat")}">
-                  <strong>${es ? "Perfil y Altura de Tina →" : "Tub Height & Outer Depth →"}</strong>
-                  <span>${es ? "22″ altura desde piso actual · ~33″ frente" : "22″ height from floor · ~33″ outer front"}</span>
+                  <strong>${pick("Tub Height & Outer Depth →", "Perfil y Altura de Tina →", "Профиль и высота ванны →")}</strong>
+                  <span>${pick("22″ height from floor · ~33″ outer front", "22″ altura desde piso actual · ~33″ frente", "Высота 22″ от пола · ~33″ внешний край")}</span>
                 </a>
                 <a class="u4b-ref-pill" href="${refHref("west", "photo")}">
-                  <strong>${es ? "Muro Oeste de Ventana →" : "West Window Wall →"}</strong>
-                  <span>${es ? "Tramo hasta repisa · Fotos de obra" : "Span to window sill · Site photos"}</span>
+                  <strong>${pick("West Window Wall →", "Muro Oeste de Ventana →", "Западная стена с окном →")}</strong>
+                  <span>${pick("Span to window sill · Site photos", "Tramo hasta repisa · Fotos de obra", "Участок до подоконника · Фото с объекта")}</span>
                 </a>
               </div>
             </div>
           </div>
 
-          <h2 class="u4b-sec-label">${es ? "Verificaciones antes de pegar azulejo" : "Pre-tile checks"}</h2>
+          <h2 class="u4b-sec-label">${pick("Pre-tile checks", "Verificaciones antes de pegar azulejo", "Проверки перед укладкой плитки")}</h2>
           <div class="u4b-checks">
-            ${preTileChecks.map(([k, enT, esT]) => `
+            ${preTileChecks.map(([k, enT, esT, ruT]) => `
               <label class="u4b-check ${state.checks[k] ? "is-done" : ""}">
                 <input type="checkbox" data-chk="${k}" ${state.checks[k] ? "checked" : ""}>
-                <span>${es ? esT : enT}</span>
+                <span>${pick(enT, esT, ruT)}</span>
               </label>
             `).join("")}
           </div>
 
-          <h2 class="u4b-sec-label">${es ? "Materiales y cantidades" : "Materials & quantities"}</h2>
+          <h2 class="u4b-sec-label">${pick("Materials & quantities", "Materiales y cantidades", "Материалы и количество")}</h2>
           <div class="u4b-table-wrap">
             <table class="u4b-table">
               <thead>
                 <tr>
-                  <th>${es ? "Material" : "Material"}</th>
-                  <th>${es ? "Modelo / Código" : "Product / Part Number"}</th>
-                  <th>${es ? "Cantidad estimada" : "Estimated Quantity"}</th>
+                  <th>${pick("Material", "Material", "Материал")}</th>
+                  <th>${pick("Product / Part Number", "Modelo / Código", "Модель / Артикул")}</th>
+                  <th>${pick("Estimated Quantity", "Cantidad estimada", "Расчётное количество")}</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td><strong>${es ? "Azulejo Blanco 3″×6″ (en obra)" : "Ice White 3″×6″ Wall Tile (on hand)"}</strong><br><span style="font-size:12px;color:var(--muted)">${es ? `~${lay.takeoff.tileAreaSqft} ft² de muro (+${state.wastePct}% cortes)` : `~${lay.takeoff.tileAreaSqft} sq ft tiled area (+${state.wastePct}% cuts)`}</span></td>
-                  <td class="u4b-mono">American Olean 0025 36MOD1P4<br>(${es ? "Tono 55501" : "Shade 55501"})</td>
-                  <td class="u4b-mono"><strong>${lay.takeoff.cartons} ${es ? "cajas" : "boxes"}</strong><br>(${es ? "restar cajas ya en obra" : "subtract boxes on site"})</td>
+                  <td><strong>${pick("Ice White 3″×6″ Wall Tile (on hand)", "Azulejo Blanco 3″×6″ (en obra)", "Белая плитка 3″×6″ Ice White (в наличии)")}</strong><br><span style="font-size:12px;color:var(--muted)">${pick(`~${lay.takeoff.tileAreaSqft} sq ft tiled area (+${state.wastePct}% cuts)`, `~${lay.takeoff.tileAreaSqft} ft² de muro (+${state.wastePct}% cortes)`, `~${lay.takeoff.tileAreaSqft} кв. фут облицовки (+${state.wastePct}% запас)`)}</span></td>
+                  <td class="u4b-mono">American Olean 0025 36MOD1P4<br>(${pick("Shade 55501", "Tono 55501", "Тон 55501")})</td>
+                  <td class="u4b-mono"><strong>${lay.takeoff.cartons} ${pick("boxes", "cajas", "кор.")}</strong><br>(${pick("subtract boxes on site", "restar cajas ya en obra", "вычесть коробки на объекте")})</td>
                 </tr>
                 <tr>
-                  <td><strong>${es ? "Bullnose Cerámico 2″×6″" : "Matching 2″×6″ Ceramic Bullnose"}</strong></td>
-                  <td class="u4b-mono">American Olean 0025S42691P4<br>(${es ? "Ice White Brillante" : "Ice White Glossy"})</td>
-                  <td class="u4b-mono"><strong>${lay.takeoff.bullnosePcs} ${es ? "piezas" : "pieces"}</strong></td>
+                  <td><strong>${pick("Matching 2″×6″ Ceramic Bullnose", "Bullnose Cerámico 2″×6″", "Керамический бордюр 2″×6″")}</strong></td>
+                  <td class="u4b-mono">American Olean 0025S42691P4<br>(${pick("Ice White Glossy", "Ice White Brillante", "Ice White глянцевый")})</td>
+                  <td class="u4b-mono"><strong>${lay.takeoff.bullnosePcs} ${pick("pieces", "piezas", "шт.")}</strong></td>
                 </tr>
                 <tr>
-                  <td><strong>${es ? "Esquinas Bullnose 2″×2″" : "Matching 2″×2″ Bullnose Corners"}</strong></td>
-                  <td class="u4b-mono">American Olean 0025SN42691P2<br>(${es ? "Ice White Brillante" : "Ice White Glossy"})</td>
-                  <td class="u4b-mono"><strong>${lay.takeoff.cornerPcs} ${es ? "piezas" : "pieces"}</strong></td>
+                  <td><strong>${pick("Matching 2″×2″ Bullnose Corners", "Esquinas Bullnose 2″×2″", "Уголки бордюра 2″×2″")}</strong></td>
+                  <td class="u4b-mono">American Olean 0025SN42691P2<br>(${pick("Ice White Glossy", "Ice White Brillante", "Ice White глянцевый")})</td>
+                  <td class="u4b-mono"><strong>${lay.takeoff.cornerPcs} ${pick("pieces", "piezas", "шт.")}</strong></td>
                 </tr>
                 <tr>
-                  <td><strong>${es ? "Azulejo / Placa de Fondo de Nichos" : "Niche Back Tile / Slab"}</strong></td>
-                  <td class="u4b-mono">${es ? "Por elegir — definir material de fondo primero" : "TBD — choose niche back tile/slab first"}</td>
-                  <td class="u4b-mono"><strong>${es ? "Pegar fondo primero; cortar costados después" : "Set backs first, then cut side returns"}</strong></td>
+                  <td><strong>${pick("Niche Back Tile / Slab", "Azulejo / Placa de Fondo de Nichos", "Плитка / панель задней стенки ниш")}</strong></td>
+                  <td class="u4b-mono">${pick("TBD — choose niche back tile/slab first", "Por elegir — definir material de fondo primero", "Уточняется — сначала выбрать материал фона")}</td>
+                  <td class="u4b-mono"><strong>${pick("Set backs first, then cut side returns", "Pegar fondo primero; cortar costados después", "Сначала уложить фон, затем боковины")}</strong></td>
                 </tr>
                 <tr>
-                  <td><strong>${es ? "Boquilla y Silicón 100%" : "Wall Grout & Matching Silicone"}</strong></td>
+                  <td><strong>${pick("Wall Grout & Matching Silicone", "Boquilla y Silicón 100%", "Затирка и силикон 100% в тон")}</strong></td>
                   <td class="u4b-mono">Mapei Ultracolor Plus FA #77 Frost<br>+ Mapesil T Plus #77 Frost</td>
-                  <td class="u4b-mono"><strong>1 ${es ? "saco 10 lb" : "10-lb bag"} + 3 ${es ? "tubos" : "tubes"}</strong></td>
+                  <td class="u4b-mono"><strong>1 ${pick("10-lb bag", "saco 10 lb", "мешок 10 фнт")} + 3 ${pick("tubes", "tubos", "тубы")}</strong></td>
                 </tr>
               </tbody>
             </table>
@@ -769,10 +776,10 @@
             <summary>${pick("Tools & Supplies", "Herramientas y suministros", "Инструменты и расходники")}</summary>
             <div class="u4b-details-body">
               <ul class="u4b-supply-list">
-                <li>${es ? "Cortadora húmeda con disco continuo de diamante y almohadilla manual de pulido" : "Wet tile saw with continuous-rim diamond blade and diamond hand polishing pad"}</li>
-                <li>${es ? "Nivel láser de líneas cruzadas, separadores en T de 1/16″ y cuñas de nivelación" : "Cross-line laser level, 1/16″ T-spacers, and tile leveling wedges"}</li>
-                <li>${es ? "Llana dentada de 1/4″×1/4″ (azulejo 3″×6″) y llana de 1/4″×3/8″ (fondos lisos de nicho)" : "1/4″×1/4″ notched trowel (3″×6″ wall tile) and 1/4″×3/8″ trowel (solid niche backs)"}</li>
-                <li>${es ? "Brocas de diamante para salida de tina, válvula Delta (4-1/2″) y brazo de regadera" : "Diamond hole saws for tub spout, Delta shower valve (4-1/2″), and shower arm"}</li>
+                <li>${pick("Wet tile saw with continuous-rim diamond blade and diamond hand polishing pad", "Cortadora húmeda con disco continuo de diamante y almohadilla manual de pulido", "Мокрый плиткорез со сплошным алмазным диском и алмазный притир")}</li>
+                <li>${pick("Cross-line laser level, 1/16″ T-spacers, and tile leveling wedges", "Nivel láser de líneas cruzadas, separadores en T de 1/16″ y cuñas de nivelación", "Лазерный нивелир, Т-образные крестики 1/16″ и клинья СВП")}</li>
+                <li>${pick("1/4″×1/4″ notched trowel (3″×6″ wall tile) and 1/4″×3/8″ trowel (solid niche backs)", "Llana dentada de 1/4″×1/4″ (azulejo 3″×6″) y llana de 1/4″×3/8″ (fondos lisos de nicho)", "Зубчатый шпатель 1/4″×1/4″ (плитка 3″×6″) и 1/4″×3/8″ (цельный фон ниш)")}</li>
+                <li>${pick("Diamond hole saws for tub spout, Delta shower valve (4-1/2″), and shower arm", "Brocas de diamante para salida de tina, válvula Delta (4-1/2″) y brazo de regadera", "Алмазные коронки для излива ванны, смесителя Delta (4-1/2″) и вывода душа")}</li>
               </ul>
             </div>
           </details>
@@ -781,16 +788,16 @@
     }
 
     const prevControl = prevS
-      ? `<button type="button" class="u4h-pager-btn u4b-pager-btn" id="u4Prev">← ${es ? prevS.es : prevS.en}</button>`
+      ? `<button type="button" class="u4h-pager-btn u4b-pager-btn" id="u4Prev">← ${pick(prevS.en, prevS.es, prevS.ru)}</button>`
       : `<span class="u4b-pager-spacer" aria-hidden="true"></span>`;
     const nextControl = nextS
-      ? `<button type="button" class="u4h-pager-btn is-next u4b-pager-btn" id="u4Next">${es ? nextS.es : nextS.en} →</button>`
+      ? `<button type="button" class="u4h-pager-btn is-next u4b-pager-btn" id="u4Next">${pick(nextS.en, nextS.es, nextS.ru)} →</button>`
       : `<span class="u4b-pager-spacer" aria-hidden="true"></span>`;
 
     const pager = `
       <div class="u4h-pager u4b-pager no-print">
         ${prevControl}
-        <span class="u4h-pager-count u4b-pager-meta">${es ? `Paso ${stepIdx + 1} de ${STEPS.length}` : `Step ${stepIdx + 1} of ${STEPS.length}`}</span>
+        <span class="u4h-pager-count u4b-pager-meta">${pick(`Step ${stepIdx + 1} of ${STEPS.length}`, `Paso ${stepIdx + 1} de ${STEPS.length}`, `Шаг ${stepIdx + 1} из ${STEPS.length}`)}</span>
         ${nextControl}
       </div>
     `;
@@ -817,25 +824,25 @@
     pr.innerHTML = `
       <section class="u4-print-page">
         <div class="u4-print-head">
-          <h2>${es ? "UNIT 4 BAÑO — TRAZO DE AZULEJO 3 MUROS (PÁG. 1/2)" : "UNIT 4 BATHROOM — 3-WALL TILE LAYOUT (PAGE 1/2)"}</h2>
-          <span>${es ? "Topes 35″ · Alto 71-1/4″ · Repisa 43″" : "35″ Side Edges · 71-1/4″ Top · 43″ Sill Stop"}</span>
+          <h2>${pick("UNIT 4 BATHROOM — 3-WALL TILE LAYOUT (PAGE 1/2)", "UNIT 4 BAÑO — TRAZO DE AZULEJO 3 MUROS (PÁG. 1/2)", "КВ. 4 ВАННАЯ — РАСКЛАДКА ПЛИТКИ 3 СТЕН (СТР. 1/2)")}</h2>
+          <span>${pick("35″ Side Edges · 71-1/4″ Top · 43″ Sill Stop", "Topes 35″ · Alto 71-1/4″ · Repisa 43″", "Боковые края 35″ · Верх 71-1/4″ · Подоконник 43″")}</span>
         </div>
         ${buildStep1Svg(lay, true)}
         <div style="margin-top:8px">${buildStep2PlumbingSvg(lay, true)}</div>
         <div class="u4-print-foot">
           <span>American Olean 0025 Ice White 3″×6″ · Matching 2″×6″ Ceramic Bullnose · Mapei #77 Frost</span>
-          <span>1231 11th Ave Unit 4 · ${es ? "Pág. 1 de 2" : "Page 1 of 2"}</span>
+          <span>1231 11th Ave Unit 4 · ${pick("Page 1 of 2", "Pág. 1 de 2", "Стр. 1 из 2")}</span>
         </div>
       </section>
       <section class="u4-print-page">
         <div class="u4-print-head">
-          <h2>${es ? "UNIT 4 BAÑO — NICHOS Y MATERIALES (PÁG. 2/2)" : "UNIT 4 BATHROOM — NICHES & MATERIALS (PAGE 2/2)"}</h2>
-          <span>${es ? "Elegir Fondo de Nicho Primero · Cortar Costados Después" : "Choose Niche Back Tile First · Cut Side Strips After"}</span>
+          <h2>${pick("UNIT 4 BATHROOM — NICHES & MATERIALS (PAGE 2/2)", "UNIT 4 BAÑO — NICHOS Y MATERIALES (PÁG. 2/2)", "КВ. 4 ВАННАЯ — НИШИ И МАТЕРИАЛЫ (СТР. 2/2)")}</h2>
+          <span>${pick("Choose Niche Back Tile First · Cut Side Strips After", "Elegir Fondo de Nicho Primero · Cortar Costados Después", "Сначала выбрать фон ниш · Затем подрезать боковины")}</span>
         </div>
         ${buildStep3NichesSvg(lay, true)}
         <div class="u4-print-foot">
-          <span>${es ? `Estimado (+${state.wastePct}%): ${lay.takeoff.cartons} cajas 3″×6″ · ${lay.takeoff.bullnosePcs} bullnose 2″×6″ · 10 esq. 2″×2″ · Mapei #77 Frost` : `Est. (+${state.wastePct}%): ${lay.takeoff.cartons} boxes 3″×6″ · ${lay.takeoff.bullnosePcs} bullnose 2″×6″ · 10 corners 2″×2″ · Mapei #77 Frost`}</span>
-          <span>1231 11th Ave Unit 4 · ${es ? "Pág. 2 de 2" : "Page 2 of 2"}</span>
+          <span>${pick(`Est. (+${state.wastePct}%): ${lay.takeoff.cartons} boxes 3″×6″ · ${lay.takeoff.bullnosePcs} bullnose 2″×6″ · 10 corners 2″×2″ · Mapei #77 Frost`, `Estimado (+${state.wastePct}%): ${lay.takeoff.cartons} cajas 3″×6″ · ${lay.takeoff.bullnosePcs} bullnose 2″×6″ · 10 esq. 2″×2″ · Mapei #77 Frost`, `Расчёт (+${state.wastePct}%): ${lay.takeoff.cartons} кор. 3″×6″ · ${lay.takeoff.bullnosePcs} бордюр 2″×6″ · 10 углов 2″×2″ · Mapei #77 Frost`)}</span>
+          <span>1231 11th Ave Unit 4 · ${pick("Page 2 of 2", "Pág. 2 de 2", "Стр. 2 из 2")}</span>
         </div>
       </section>
     `;
@@ -905,7 +912,7 @@
       documentId: "bathroom-tile",
       rev: SEED.rev,
       getLang: () => state.lang,
-      setLang: (l) => { state.lang = l === "es" ? "es" : "en"; renderAll(); },
+      setLang: (l) => { state.lang = normLang(l); renderAll(); },
       getScaleInfo: () => state.lastScaleInfo,
       render: renderAll
     };
@@ -927,7 +934,7 @@
       state.lang = normLang(window.U4PlanNav.getLang());
       state.theme = window.U4PlanNav.getTheme() === "dark" ? "dark" : "light";
     } else {
-      state.lang = p.get("lang") === "es" ? "es" : "en";
+      state.lang = normLang(p.get("lang"));
       state.theme = p.get("theme") === "dark" ? "dark" : "light";
     }
     if (window.U4LiveAi && typeof window.U4LiveAi.init === "function") {
@@ -936,10 +943,13 @@
         room: "bathroom",
         titleEn: "Bathroom Tub & Wall Tile",
         titleEs: "Baño: Azulejo y Nichos",
+        titleRu: "Ванная: Плитка стен и ниши",
         getContext: () => "Step=" + state.step + ", Pattern=" + state.pattern + ", Grout=" + fmtFrac(state.groutIn),
-        quickPrompts: (lang) => lang === "es"
-          ? ["¿Dónde termina el azulejo en los costados?", "¿Qué verificaciones van antes de pegar azulejo?", "¿Cuántas cajas de azulejo se estiman?"]
-          : ["Where does the wall tile stop on the sides?", "What checks happen before setting tile?", "How many boxes of wall tile are estimated?"]
+        quickPrompts: (lang) => normLang(lang) === "ru"
+          ? ["Где заканчивается плитка на боковых стенах?", "Какие проверки нужны перед укладкой плитки?", "Сколько коробок плитки рассчитано?"]
+          : (normLang(lang) === "es"
+            ? ["¿Dónde termina el azulejo en los costados?", "¿Qué verificaciones van antes de pegar azulejo?", "¿Cuántas cajas de azulejo se estiman?"]
+            : ["Where does the wall tile stop on the sides?", "What checks happen before setting tile?", "How many boxes of wall tile are estimated?"])
       });
     }
     renderAll();

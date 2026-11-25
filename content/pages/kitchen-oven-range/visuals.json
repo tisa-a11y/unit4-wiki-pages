@@ -8,13 +8,17 @@
       "img": "./wiki-images/kitchen-west-alcove-arch-concept.jpg",
       "href": "./wiki-images/kitchen-west-alcove-arch-concept.jpg",
       "en": "Range wall and hood",
-      "es": "Muro de la estufa y campana"
+      "es": "Muro de la estufa y campana",
+      "ru": "Западная стена плиты и вытяжки"
     },
     {
       "img": "./wiki-images/kitchen-magicplan-9ed1811d0317467ea1ef90f03911772c.jpg",
       "href": "./wiki-images/kitchen-magicplan-9ed1811d0317467ea1ef90f03911772c.jpg",
       "en": "Range wall in 3D",
-      "es": "Muro de la estufa en 3D"
+      "es": "Muro de la estufa en 3D",
+      "ru": "Стена плиты и вытяжки в 3D"
     }
-  ]
+  ],
+  "ru": "Изображения",
+  "noteRu": "Только для справки. Точные размеры указаны в рабочей инструкции."
 }

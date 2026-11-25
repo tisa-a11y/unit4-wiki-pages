@@ -3,24 +3,32 @@
     "kEn": "Bathroom floor",
     "kEs": "Piso del baño",
     "vEn": "Calacatta Gem 12×24 · Warm Gray grout",
-    "vEs": "Calacatta Gem 12×24 · boquilla Warm Gray"
+    "vEs": "Calacatta Gem 12×24 · boquilla Warm Gray",
+    "kRu": "Пол в ванной",
+    "vRu": "Calacatta Gem 12×24 · затирка Warm Gray"
   },
   {
     "kEn": "Kitchen floor",
     "kEs": "Piso de la cocina",
     "vEn": "Matte tile · confirm about 3/4\" thickness",
-    "vEs": "Azulejo mate · confirmar aprox. 3/4\" de espesor"
+    "vEs": "Azulejo mate · confirmar aprox. 3/4\" de espesor",
+    "kRu": "Пол на кухне",
+    "vRu": "Матовая плитка · подтвердить толщину ~3/4\""
   },
   {
     "kEn": "Bedroom floor",
     "kEs": "Piso de la recámara",
     "vEn": "Patch the missing hardwood",
-    "vEs": "Reparar la duela que falta"
+    "vEs": "Reparar la duela que falta",
+    "kRu": "Пол в спальне",
+    "vRu": "Восстановить недостающий паркет"
   },
   {
     "kEn": "Paint",
     "kEs": "Pintura",
     "vEn": "After drywall",
-    "vEs": "Después de la tablaroca"
+    "vEs": "Después de la tablaroca",
+    "kRu": "Покраска",
+    "vRu": "После монтажа гипсокартона"
   }
 ]

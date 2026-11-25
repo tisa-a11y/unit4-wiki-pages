@@ -4,27 +4,32 @@
     {
       "done": true,
       "en": "Panel location chosen: dining wall, upper-left frame",
-      "es": "Lugar del tablero elegido: muro del comedor, marco superior izquierdo"
+      "es": "Lugar del tablero elegido: muro del comedor, marco superior izquierdo",
+      "ru": "Место электрощитка выбрано: стена столовой, верхняя левая рамка молдинга"
     },
     {
       "done": false,
       "en": "Frame the old doorway and the panel space with side cable entry",
-      "es": "Enmarcar la puerta antigua y el espacio del tablero con entrada lateral"
+      "es": "Enmarcar la puerta antigua y el espacio del tablero con entrada lateral",
+      "ru": "Собрать каркас в старом дверном проёме и нишу щитка с боковым вводом кабеля"
     },
     {
       "done": false,
       "en": "Outlet boxes and empty conduit, clear of the pocket doors",
-      "es": "Instalar cajas de contacto y tubo vacío lejos de las puertas corredizas"
+      "es": "Cajas de contacto y tubo vacío, lejos de las puertas corredizas",
+      "ru": "Установить подрозетники и пустые каналы вне карманов раздвижных дверей"
     },
     {
       "done": false,
       "en": "Lay out the moulding frames with tape and install",
-      "es": "Trazar los marcos de moldura con cinta e instalar"
+      "es": "Trazar los marcos de moldura con cinta e instalar",
+      "ru": "Разметить рамки молдингов лентой на стенах и смонтировать профили"
     },
     {
       "done": false,
       "en": "Finish hutch and fireplace trim, primer and paint",
-      "es": "Terminar molduras del trinchador y la chimenea, sellador y pintura"
+      "es": "Terminar molduras del trinchador y la chimenea, sellador y pintura",
+      "ru": "Завершить столярный декор буфета и камина, загрунтовать и покрасить"
     }
   ]
 }

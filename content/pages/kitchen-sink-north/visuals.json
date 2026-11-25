@@ -8,50 +8,60 @@
       "img": "./wiki-images/kitchen-john-nov21-6104.jpg",
       "href": "./wiki-images/kitchen-john-nov21-6104.jpg",
       "en": "South wall framing and plumbing. Inspect exposed materials before covering.",
-      "es": "Bastidor y plomería del muro Sur. Revisar los materiales expuestos antes de cubrirlos."
+      "es": "Bastidor y plomería del muro Sur. Revisar los materiales expuestos antes de cubrirlos.",
+      "ru": "Каркас и сантехника южной стены. Осмотреть открытые конструкции перед зашивкой."
     },
     {
       "img": "./wiki-images/kitchen-john-nov21-6099.jpg",
       "href": "./wiki-images/kitchen-john-nov21-6099.jpg",
       "en": "Latest notebook sketch with the 12\", 18\" and 30\" cabinet widths.",
-      "es": "Último croquis de libreta con gabinetes de 12\", 18\" y 30\"."
+      "es": "Último croquis de libreta con gabinetes de 12\", 18\" y 30\".",
+      "ru": "Актуальный эскиз из блокнота с шириной шкафов 12\", 18\" и 30\"."
     },
     {
       "img": "./wiki-images/kitchen-john-nov21-6103.jpg",
       "href": "./wiki-images/kitchen-john-nov21-6103.jpg",
       "en": "Cabinet layout drawn over a site photo for illustration.",
-      "es": "Trazo ilustrativo de gabinetes dibujado sobre una foto de obra."
+      "es": "Trazo ilustrativo de gabinetes dibujado sobre una foto de obra.",
+      "ru": "Иллюстративная разметка шкафов поверх фотографии с объекта."
     },
     {
       "img": "./wiki-images/kitchen-john-nov21-6105.jpg",
       "href": "./wiki-images/kitchen-john-nov21-6105.jpg",
       "en": "South window framing and plumbing rough-in.",
-      "es": "Bastidor de la ventana Sur e instalación preliminar de plomería."
+      "es": "Bastidor de la ventana Sur e instalación preliminar de plomería.",
+      "ru": "Каркас южного окна и черновая разводка сантехники."
     },
     {
       "img": "./wiki-images/kitchen-john-nov21-6098.jpg",
       "href": "./wiki-images/kitchen-john-nov21-6098.jpg",
       "en": "Earlier notebook sketch for comparison.",
-      "es": "Croquis anterior de libreta para comparar."
+      "es": "Croquis anterior de libreta para comparar.",
+      "ru": "Прежний эскиз из блокнота для сравнения."
     },
     {
       "img": "./wiki-images/kitchen-john-nov21-6096.jpg",
       "href": "./wiki-images/kitchen-john-nov21-6096.jpg",
       "en": "Earlier notebook layout notes for comparison.",
-      "es": "Apuntes anteriores del trazo en libreta para comparar."
+      "es": "Apuntes anteriores del trazo en libreta para comparar.",
+      "ru": "Прежние заметки по планировке из блокнота для сравнения."
     },
     {
       "img": "./wiki-images/kitchen-magicplan-dedb66d9b37f5023a2b650b6ebff20dc.jpg",
       "href": "./wiki-images/kitchen-magicplan-dedb66d9b37f5023a2b650b6ebff20dc.jpg",
       "en": "Refrigerator wall and sink under the window",
-      "es": "Muro del refrigerador y tarja bajo la ventana"
+      "es": "Muro del refrigerador y tarja bajo la ventana",
+      "ru": "Стена холодильника и мойка под окном"
     },
     {
       "img": "./wiki-images/2026-11-18_U4_kitchen_overhead-concept_R2.jpg",
       "href": "./wiki-images/2026-11-18_U4_kitchen_overhead-concept_R2.jpg",
       "en": "Full L from above",
-      "es": "La L completa desde arriba"
+      "es": "La L completa desde arriba",
+      "ru": "Вид всей Г-образной кухни сверху"
     }
   ],
-  "lead": 0
+  "lead": 0,
+  "ru": "Изображения",
+  "noteRu": "Фото с площадки и эскизы Джона от 21 ноября. Проверьте размеры и проход на месте перед резкой или заказом материалов."
 }

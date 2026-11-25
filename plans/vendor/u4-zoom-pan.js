@@ -1,11 +1,12 @@
 /* ============================================================================
    Unit 4 Interactive Plans — Smooth Zoom & Pan Engine
-   Auto-mounts onto .u4h-svg-wrap, .ks4-svg-wrap & .u4h-photo-card across all 6 plans
+   Auto-mounts onto .u4h-svg-wrap, .ks4-svg-wrap & .u4h-photo-card across all 7 plans
    - Classic old-wiki [ − | 100% | + ] bar (100% to 300%, click % to reset)
    - Ctrl/⌘ + Wheel zoom around cursor (normal vertical scroll untouched!)
    - 2-Finger touch pinch-to-zoom around midpoint
    - Drag-to-pan ONLY when scale > 1× AND not armed for pin drop / dragging fixture
    - Keeps U4PinDragger pins & KS4 SVG marks locked 1:1 inside .u4-zoom-stage
+   - Full EN | ES | RU localization
    ============================================================================ */
 (function () {
   "use strict";
@@ -21,6 +22,8 @@
     "[data-mark-id]",
     "[data-resize-id]",
     "[data-r4-pt]",
+    "[data-inspect]",
+    ".u4-svg-clickable",
     ".mark-group",
     ".u4-pin-dot",
     ".u4-pin-pop",
@@ -40,7 +43,7 @@
   var observers = [];
 
   function getActiveStepKey() {
-    var btn = document.querySelector(".u4h-step-btn.is-active, .u4g-step-btn.is-active, .step-tab.active");
+    var btn = document.querySelector(".u4h-step-btn.is-active, .u4g-step-btn.is-active, .u4-step-tab.active, .step-tab.active");
     if (btn) return btn.getAttribute("data-step") || btn.textContent.trim().slice(0, 18);
     return "s0";
   }
@@ -56,11 +59,23 @@
     return clamp(n, MIN_ZOOM, MAX_ZOOM);
   }
 
-  function isEs() {
-    if (window.U4PlanNav && typeof window.U4PlanNav.getLang === "function") {
-      return window.U4PlanNav.getLang() === "es";
-    }
-    return document.documentElement.lang === "es";
+  function getLang() {
+    var raw = (window.U4PlanNav && typeof window.U4PlanNav.getLang === "function")
+      ? window.U4PlanNav.getLang()
+      : (document.documentElement.lang || "en");
+    var s = String(raw || "").trim().toLowerCase();
+    if (s === "ru" || s.indexOf("ru-") === 0) return "ru";
+    if (s === "es" || s.indexOf("es-") === 0) return "es";
+    return "en";
+  }
+
+  function isEs() { return getLang() === "es"; }
+  function isRu() { return getLang() === "ru"; }
+
+  function L(en, es, ru) {
+    if (isRu()) return ru != null ? ru : en;
+    if (isEs()) return es != null ? es : en;
+    return en;
   }
 
   function clamp(v, lo, hi) {
@@ -84,7 +99,12 @@
     var stepKey = getActiveStepKey();
     var storeKey = hostEl.id ? (stepKey + "#" + hostEl.id) : (stepKey + ":" + (isPhoto ? "p" : "s") + ":" + (idx || 0));
     var prevSaved = savedByKey[storeKey] || null;
-    var es = isEs();
+
+    var ctrlAria = L("Zoom controls", "Controles de zoom", "Управление масштабом");
+    var outAria = L("Zoom out", "Alejar", "Уменьшить масштаб");
+    var resetAria = L("Reset zoom to 100%", "Restablecer zoom a 100%", "Сбросить масштаб до 100%");
+    var resetTitle = L("Reset to 100%", "Restablecer a 100%", "Сбросить до 100%");
+    var inAria = L("Zoom in", "Acercar", "Увеличить масштаб");
 
     // Create slim classic old-wiki zoom toolbar right above the visual frame
     var bar = document.createElement("div");
@@ -93,13 +113,13 @@
     bar.innerHTML =
       '<span class="u4-zoom-hint">' +
         (isPhoto
-          ? (es ? "🔍 Zoom en foto (pellizca o Ctrl+rueda)" : "🔍 Photo zoom (pinch or Ctrl+scroll)")
-          : (es ? "🔍 Acercar plano (pellizca o Ctrl+rueda)" : "🔍 Zoom plan (pinch or Ctrl+scroll)")) +
+          ? L("🔍 Photo zoom (pinch or Ctrl+scroll)", "🔍 Zoom en foto (pellizca o Ctrl+rueda)", "🔍 Масштаб фото (щипок или Ctrl+колесо)")
+          : L("🔍 Zoom plan (pinch or Ctrl+scroll)", "🔍 Acercar plano (pellizca o Ctrl+rueda)", "🔍 Масштаб плана (щипок или Ctrl+колесо)")) +
       "</span>" +
-      '<div class="u4-zoom-ctrl" role="group" aria-label="' + (es ? "Controles de zoom" : "Zoom controls") + '">' +
-        '<button type="button" class="u4-zoom-btn" data-u4-zoom="out" aria-label="' + (es ? "Alejar" : "Zoom out") + '" title="' + (es ? "Alejar" : "Zoom out") + '" disabled>&minus;</button>' +
-        '<button type="button" class="u4-zoom-btn u4-zoom-pct" data-u4-zoom="reset" aria-label="' + (es ? "Restablecer zoom a 100%" : "Reset zoom to 100%") + '" title="' + (es ? "Restablecer a 100%" : "Reset to 100%") + '">100%</button>' +
-        '<button type="button" class="u4-zoom-btn" data-u4-zoom="in" aria-label="' + (es ? "Acercar" : "Zoom in") + '" title="' + (es ? "Acercar" : "Zoom in") + '">+</button>' +
+      '<div class="u4-zoom-ctrl" role="group" aria-label="' + ctrlAria + '">' +
+        '<button type="button" class="u4-zoom-btn" data-u4-zoom="out" aria-label="' + outAria + '" title="' + outAria + '" disabled>&minus;</button>' +
+        '<button type="button" class="u4-zoom-btn u4-zoom-pct" data-u4-zoom="reset" aria-label="' + resetAria + '" title="' + resetTitle + '">100%</button>' +
+        '<button type="button" class="u4-zoom-btn" data-u4-zoom="in" aria-label="' + inAria + '" title="' + inAria + '">+</button>' +
       "</div>";
 
     var viewport = document.createElement("div");
@@ -121,6 +141,7 @@
       stage.appendChild(existingPinLayer);
     }
 
+    var ctrlGroup = bar.querySelector(".u4-zoom-ctrl");
     var btnOut = bar.querySelector('[data-u4-zoom="out"]');
     var btnReset = bar.querySelector('[data-u4-zoom="reset"]');
     var btnIn = bar.querySelector('[data-u4-zoom="in"]');
@@ -182,15 +203,16 @@
       if (btnOut) btnOut.disabled = zState.scale <= MIN_ZOOM + 0.01;
       if (btnIn) btnIn.disabled = zState.scale >= MAX_ZOOM - 0.01;
       if (hintEl) {
-        var esNow = isEs();
         if (zoomed) {
-          hintEl.textContent = esNow
-            ? "✋ Arrastra el fondo para mover · toca " + pct + "% para restablecer"
-            : "✋ Drag background to pan · click " + pct + "% to reset";
+          hintEl.textContent = L(
+            "✋ Drag background to pan · click " + pct + "% to reset",
+            "✋ Arrastra el fondo para mover · toca " + pct + "% para restablecer",
+            "✋ Тяните фон для сдвига · нажмите " + pct + "% для сброса"
+          );
         } else {
           hintEl.textContent = isPhoto
-            ? (esNow ? "🔍 Zoom en foto (pellizca o Ctrl+rueda)" : "🔍 Photo zoom (pinch or Ctrl+scroll)")
-            : (esNow ? "🔍 Acercar plano (pellizca o Ctrl+rueda)" : "🔍 Zoom plan (pinch or Ctrl+scroll)");
+            ? L("🔍 Photo zoom (pinch or Ctrl+scroll)", "🔍 Zoom en foto (pellizca o Ctrl+rueda)", "🔍 Масштаб фото (щипок или Ctrl+колесо)")
+            : L("🔍 Zoom plan (pinch or Ctrl+scroll)", "🔍 Acercar plano (pellizca o Ctrl+rueda)", "🔍 Масштаб плана (щипок или Ctrl+колесо)");
         }
       }
     }
@@ -253,7 +275,6 @@
       if (ev.pointerType === "touch") {
         zState.activePtrs.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
         if (zState.activePtrs.size === 2) {
-          // Cancel single-finger pan and enter 2-finger pinch mode
           zState.panPtrId = null;
           viewport.classList.remove("is-panning");
           var pts = Array.from(zState.activePtrs.values());
@@ -338,10 +359,15 @@
       setZoom: function (z) { setZoomAt(z); },
       reset: function () { setZoomAt(1); },
       refreshLabels: function () {
-        var esNow = isEs();
-        if (btnOut) { btnOut.setAttribute("aria-label", esNow ? "Alejar" : "Zoom out"); btnOut.title = esNow ? "Alejar" : "Zoom out"; }
-        if (btnReset) { btnReset.setAttribute("aria-label", esNow ? "Restablecer zoom a 100%" : "Reset zoom to 100%"); btnReset.title = esNow ? "Restablecer a 100%" : "Reset to 100%"; }
-        if (btnIn) { btnIn.setAttribute("aria-label", esNow ? "Acercar" : "Zoom in"); btnIn.title = esNow ? "Acercar" : "Zoom in"; }
+        var oLbl = L("Zoom out", "Alejar", "Уменьшить масштаб");
+        var rAria = L("Reset zoom to 100%", "Restablecer zoom a 100%", "Сбросить масштаб до 100%");
+        var rTitle = L("Reset to 100%", "Restablecer a 100%", "Сбросить до 100%");
+        var iLbl = L("Zoom in", "Acercar", "Увеличить масштаб");
+        var gLbl = L("Zoom controls", "Controles de zoom", "Управление масштабом");
+        if (ctrlGroup) ctrlGroup.setAttribute("aria-label", gLbl);
+        if (btnOut) { btnOut.setAttribute("aria-label", oLbl); btnOut.title = oLbl; }
+        if (btnReset) { btnReset.setAttribute("aria-label", rAria); btnReset.title = rTitle; }
+        if (btnIn) { btnIn.setAttribute("aria-label", iLbl); btnIn.title = iLbl; }
         applyTransform();
       },
       getState: function () { return { scale: zState.scale, tx: zState.tx, ty: zState.ty }; },
@@ -404,10 +430,12 @@
       langObs.observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
       observers.push(langObs);
     }
+    window.addEventListener("u4:lang-change", refreshAllLabels);
   }
 
   window.U4ZoomPan = {
     attach: attachAll,
+    refreshLabels: refreshAllLabels,
     setZoom: function (hostEl, z) {
       var inst = instances.get(hostEl);
       if (!inst) return;

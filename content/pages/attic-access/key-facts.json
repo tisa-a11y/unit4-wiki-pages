@@ -3,24 +3,32 @@
     "kEn": "Hatch",
     "kEs": "Escotilla",
     "vEn": "24\" × 36\" finished clear · common landing outside Front Door 4",
-    "vEs": "24\" × 36\" libres terminados · descanso común afuera de Puerta Principal 4"
+    "vEs": "24\" × 36\" libres terminados · descanso común afuera de Puerta Principal 4",
+    "kRu": "Люк",
+    "vRu": "Чистый световой проём 24\" × 36\" · общая площадка у двери №4"
   },
   {
     "kEn": "Walkway",
     "kEs": "Pasarela",
     "vEn": "24\" wide · 20 ft max · 23/32\" OSB or 3/4\" plywood",
-    "vEs": "24\" de ancho · máx. 20 pies · OSB 23/32\" o triplay 3/4\""
+    "vEs": "24\" de ancho · máx. 20 pies · OSB 23/32\" o triplay 3/4\"",
+    "kRu": "Настил",
+    "vRu": "Ширина 24\" · макс. 20 футов · OSB 23/32\" или фанера 3/4\""
   },
   {
     "kEn": "Platform",
     "kEs": "Plataforma",
     "vEn": "30\" × 30\", level",
-    "vEs": "30\" × 30\", nivelada"
+    "vEs": "30\" × 30\", nivelada",
+    "kRu": "Площадка",
+    "vRu": "30\" × 30\", по уровню"
   },
   {
     "kEn": "Light and power",
     "kEs": "Luz y corriente",
     "vEn": "LED light + switch · live outlet within 25 ft",
-    "vEs": "Luz LED + apagador · contacto con corriente a 25 pies"
+    "vEs": "Luz LED + apagador · contacto con corriente a 25 pies",
+    "kRu": "Свет и питание",
+    "vRu": "LED-светильник с выключателем · розетка до 25 футов"
   }
 ]

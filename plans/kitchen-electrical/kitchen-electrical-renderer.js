@@ -448,7 +448,22 @@
   const voiceOrigin = resolveOrigin(params.get('voice_api'), DEFAULT_VOICE_ORIGIN);
 
   let state = clone(DEFAULT_STATE);
-  let lang = params.get('lang') === 'es' ? 'es' : 'en';
+  if (typeof I18N === 'object' && I18N && I18N.en && !I18N.ru) {
+    I18N.ru = Object.assign({}, I18N.en, {
+      btn_lang: 'Русский (RU)',
+      measure_on_site: 'ЗАМЕРИТЬ НА МЕСТЕ',
+      verify_friday: 'ПРОВЕРИТЬ НА МЕСТЕ',
+      local_preview: 'Локальный просмотр',
+      pending_eod: 'Ожидает проверки',
+      synced_label: 'Синхронизировано',
+      off_tailnet: 'Вне Tailnet (локальный режим)',
+      sketch_none: 'Нет отметки',
+      sketch_ready: 'Отметка готова',
+      btn_dictate: 'Голосовой ввод'
+    });
+  }
+  const _initLangRaw = String(params.get('lang') || '').toLowerCase();
+  let lang = _initLangRaw.startsWith('ru') ? 'ru' : (_initLangRaw.startsWith('es') ? 'es' : 'en');
   let activeView = ['floor', 'south', 'east', 'west', 'north', 'panel'].includes(params.get('view'))
     ? params.get('view') : 'floor';
   let selectedCircuit = null; /* null = all, or circuit id e.g. 'SA-B', 'HD' */
@@ -2032,7 +2047,7 @@
 
   /* ── Apply I18N & Active Control States ── */
   function syncChromeUi(reach) {
-    document.documentElement.lang = lang === 'es' ? 'es-MX' : 'en';
+    document.documentElement.lang = (window.U4PlanNav && typeof window.U4PlanNav.getLang === 'function') ? window.U4PlanNav.getLang() : (lang === 'ru' ? 'ru' : (lang === 'es' ? 'es-MX' : 'en'));
     document.title = t('doc_title');
     if ($('hdr-title')) $('hdr-title').textContent = t('hdr_title');
     if ($('hdr-sub')) $('hdr-sub').textContent = t('hdr_sub');
@@ -2872,7 +2887,7 @@
     },
     getLang: () => lang,
     setLang: (l) => {
-      if (l === 'en' || l === 'es') {
+      if (l === 'en' || l === 'es' || l === 'ru') {
         lang = l;
         render();
       }

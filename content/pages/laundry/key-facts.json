@@ -3,24 +3,32 @@
     "kEn": "Washer/dryer",
     "kEs": "Lavadora/secadora",
     "vEn": "LG WashTower · arrives Dec 1",
-    "vEs": "LG WashTower · llega el 1 dic"
+    "vEs": "LG WashTower · llega el 1 dic",
+    "kRu": "Стирка/сушка",
+    "vRu": "Колонна LG WashTower · доставка Пн, 14 дек. (10:00–14:00 PT)"
   },
   {
     "kEn": "Door",
     "kEs": "Puerta",
     "vEn": "Five-panel bookcase door",
-    "vEs": "Puerta librero de cinco paneles"
+    "vEs": "Puerta librero de cinco paneles",
+    "kRu": "Дверь",
+    "vRu": "Пятисекционная потайная дверь-стеллаж"
   },
   {
     "kEn": "Gas box",
     "kEs": "Caja de gas",
     "vEn": "Moved by Ervin, Nov 11",
-    "vEs": "Movida por Ervin, 11 nov"
+    "vEs": "Movida por Ervin, 11 nov",
+    "kRu": "Газовый узел",
+    "vRu": "Перенесён Эрвином 11 нояб."
   },
   {
     "kEn": "Next",
     "kEs": "Sigue",
     "vEn": "Outlet check + open-wall photos",
-    "vEs": "Revisar contacto + fotos del muro abierto"
+    "vEs": "Revisar contacto + fotos del muro abierto",
+    "kRu": "Далее",
+    "vRu": "Проверка розетки + фото открытых стен"
   }
 ]

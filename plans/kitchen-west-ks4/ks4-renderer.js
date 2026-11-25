@@ -646,7 +646,22 @@
 
   /* ── Runtime State (strictly in-memory, ZERO browser web storage) ── */
   const params = new URLSearchParams(window.location.search);
-  let currentLang = (params.get('lang') || '').toLowerCase() === 'es' ? 'es' : 'en';
+  if (typeof I18N === 'object' && I18N && I18N.en && !I18N.ru) {
+    I18N.ru = Object.assign({}, I18N.en, {
+      btn_lang: 'Русский (RU)',
+      measure_on_site: 'ЗАМЕРИТЬ НА МЕСТЕ',
+      verify_friday: 'ПРОВЕРИТЬ НА МЕСТЕ',
+      local_preview: 'Локальный просмотр',
+      pending_eod: 'Ожидает проверки',
+      synced_label: 'Синхронизировано',
+      off_tailnet: 'Вне Tailnet (локальный режим)',
+      sketch_none: 'Нет отметки',
+      sketch_ready: 'Отметка готова',
+      btn_dictate: 'Голосовой ввод'
+    });
+  }
+  const _initLangRaw = String(params.get('lang') || '').toLowerCase();
+  let currentLang = _initLangRaw.startsWith('ru') ? 'ru' : (_initLangRaw.startsWith('es') ? 'es' : 'en');
   let activeView = (params.get('view') || '').toLowerCase() === 'coupled' ? 'coupled' : 'elevation';
   let datumMode = 'both'; // 'both' | 'subfloor' | 'aff'
   let state = deepClone(BASELINE_KS4_DATA);
@@ -2452,7 +2467,7 @@
 
   function applyUiLanguage() {
     const tr = I18N[currentLang];
-    document.documentElement.lang = currentLang;
+    document.documentElement.lang = (window.U4PlanNav && typeof window.U4PlanNav.getLang === 'function') ? window.U4PlanNav.getLang() : currentLang;
     document.title = tr.doc_title;
 
     const setText = (id, text) => {
@@ -4410,7 +4425,7 @@
       }
     },
     setLang(lang) {
-      if (lang === 'en' || lang === 'es') {
+      if (lang === 'en' || lang === 'es' || lang === 'ru') {
         currentLang = lang;
         renderAll();
       }
@@ -4431,7 +4446,7 @@
     const backEl = document.getElementById('link-back-room');
     const fpTop = document.getElementById('link-full-floorplan-top');
     const fpMid = document.getElementById('link-full-floorplan');
-    const langQ = `?lang=${currentLang === 'es' ? 'es' : 'en'}`;
+    const langQ = `?lang=${currentLang}`;
     const backHref = isWikiPlans ? '../../#kitchen-oven-range' : '../../index.html#kitchen-oven-range';
     const fpHref = (isWikiPlans ? '../kitchen-floor-plan/index.html' : '../floor-plan-pilot/index.html') + langQ;
     if (backEl) backEl.href = backHref;

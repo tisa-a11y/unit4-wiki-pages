@@ -3,24 +3,32 @@
     "kEn": "Walls",
     "kEs": "Muros",
     "vEn": "A North · B East (no frames) · C South · D West",
-    "vEs": "A Norte · B Este (sin marcos) · C Sur · D Oeste"
+    "vEs": "A Norte · B Este (sin marcos) · C Sur · D Oeste",
+    "kRu": "Стены",
+    "vRu": "A Север · B Восток (без рамок) · C Юг · D Запад"
   },
   {
     "kEn": "Trim lines",
     "kEs": "Líneas de moldura",
     "vEn": "9-1/2\" baseboard · 99\" high trim",
-    "vEs": "Zoclo de 9-1/2\" · moldura alta a 99\""
+    "vEs": "Zoclo de 9-1/2\" · moldura alta a 99\"",
+    "kRu": "Линии декора",
+    "vRu": "Плинтус 9-1/2\" · верхний молдинг 99\""
   },
   {
     "kEn": "Closet ceiling",
     "kEs": "Techo del clóset",
     "vEn": "Keep open until the cable and hatch are in",
-    "vEs": "Dejar abierto hasta tener cable y escotilla"
+    "vEs": "Dejar abierto hasta tener cable y escotilla",
+    "kRu": "Потолок шкафа",
+    "vRu": "Держать открытым до прокладки кабеля и монтажа люка"
   },
   {
     "kEn": "Floor",
     "kEs": "Piso",
     "vEn": "Patch the missing hardwood",
-    "vEs": "Reparar la duela que falta"
+    "vEs": "Reparar la duela que falta",
+    "kRu": "Пол",
+    "vRu": "Восстановить недостающий паркет"
   }
 ]

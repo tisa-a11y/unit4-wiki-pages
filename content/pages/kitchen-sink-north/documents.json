@@ -8,7 +8,8 @@
     "date": "2026-11-23",
     "lang": "en",
     "pairId": "u4-elec-mod1-r5-pdf",
-    "pin": true
+    "pin": true,
+    "titleRu": "Официальные электросхемы — Модуль 1: Кухня (E-00A – E-14, Rev R5) · английский"
   },
   {
     "title": "2026-11-23_U4_Module1_Kitchen-Electrical_R5_ES.pdf",
@@ -18,6 +19,19 @@
     "path": "2026-11-23-official-electrical-plans-R5 · 6 hojas horizontales (español)",
     "date": "2026-11-23",
     "lang": "es",
+    "pairId": "u4-elec-mod1-r5-pdf",
+    "pin": true,
+    "titleRu": "Официальные электросхемы — Модуль 1: Кухня (E-00A – E-14, Rev R5) · испанский"
+  },
+  {
+    "title": "2026-11-23_U4_Module1_Kitchen-Electrical_R5_RU.pdf",
+    "titleEn": "Official Electrical Sheets — Module 1: Kitchen (E-00A to E-14, Rev R5) · Russian",
+    "titleEs": "Hojas Eléctricas Oficiales — Módulo 1: Cocina (E-00A a E-14, Rev R5) · ruso",
+    "titleRu": "Официальные электросхемы — Модуль 1: Кухня (E-00A – E-14, Rev R5) · русский",
+    "id": "2026-11-23_U4_Module1_Kitchen-Electrical_R5_RU",
+    "path": "wiki-pdfs/2026-11-23_U4_Module1_Kitchen-Electrical_R5_RU.pdf",
+    "date": "2026-11-23",
+    "lang": "ru",
     "pairId": "u4-elec-mod1-r5-pdf",
     "pin": true
   },
@@ -30,7 +44,8 @@
     "date": "2026-11-23",
     "lang": "en",
     "pairId": "u4-elec-mod1-r5-html",
-    "pin": true
+    "pin": true,
+    "titleRu": "Модуль 1: Электросхемы кухни (веб-чертежи, Rev R5) · английский"
   },
   {
     "title": "2026-11-23_U4_Module1_Kitchen-Electrical_R5_ES.html",
@@ -41,6 +56,19 @@
     "date": "2026-11-23",
     "lang": "es",
     "pairId": "u4-elec-mod1-r5-html",
+    "pin": true,
+    "titleRu": "Модуль 1: Электросхемы кухни (веб-чертежи, Rev R5) · испанский"
+  },
+  {
+    "title": "2026-11-23_U4_Module1_Kitchen-Electrical_R5_RU.html",
+    "titleEn": "Module 1: Kitchen Electrical Blueprints (Web Page, Rev R5) · Russian",
+    "titleEs": "Módulo 1: Planos Eléctricos de Cocina (Página Web, Rev R5) · ruso",
+    "titleRu": "Модуль 1: Электросхемы кухни (веб-чертежи, Rev R5) · русский",
+    "id": "2026-11-23_U4_Module1_Kitchen-Electrical_R5_HTML_RU",
+    "path": "wiki-docs/2026-11-23_U4_Module1_Kitchen-Electrical_R5_RU.html",
+    "date": "2026-11-23",
+    "lang": "ru",
+    "pairId": "u4-elec-mod1-r5-html",
     "pin": true
   },
   {
@@ -50,7 +78,8 @@
     "id": "1dB6h6MFYhcv15b2-xqiIwf6sqkjDzuj1",
     "path": "to-scale-sheets-2026-11-02-R1/2026-11-02_U4_Kitchen_ToScale-Sheets_R8.pdf",
     "date": "2026-11-02",
-    "lang": "en"
+    "lang": "en",
+    "titleRu": "Масштабные чертежи кухни"
   },
   {
     "title": "2026-11-02_U4_Kitchen_Electrical-Working-Drawings_KE01-05_RevI-EN.pdf",
@@ -61,7 +90,8 @@
     "date": "2026-11-02",
     "lang": "en",
     "pairId": "kitchen-ke01-05",
-    "history": true
+    "history": true,
+    "titleRu": "Электрочертежи кухни · английский (архивная версия)"
   },
   {
     "title": "2026-11-02_U4_Kitchen_Electrical-Working-Drawings_KE01-05_RevB-ES.pdf",
@@ -72,7 +102,8 @@
     "date": "2026-11-02",
     "lang": "es",
     "pairId": "kitchen-ke01-05",
-    "history": true
+    "history": true,
+    "titleRu": "Электрочертежи кухни · испанский (архивная версия)"
   },
   {
     "title": "2026-11-02_U4_Kitchen-D04_Doorway-Infill-Framing_R1.pdf",
@@ -82,7 +113,8 @@
     "path": "doorway-infill-framing-2026-11-02-R1/2026-11-02_U4_Kitchen-D04_Doorway-Infill-Framing_R1.pdf",
     "date": "2026-11-02",
     "lang": "en",
-    "pairId": "kitchen-d04-infill-r1"
+    "pairId": "kitchen-d04-infill-r1",
+    "titleRu": "Схема каркаса стены щитка (D04)"
   },
   {
     "title": "2026-11-02_U4_Kitchen-D04_Doorway-Infill-Framing_R1_ES.pdf",
@@ -92,6 +124,7 @@
     "path": "doorway-infill-framing-2026-11-02-R1/2026-11-02_U4_Kitchen-D04_Doorway-Infill-Framing_R1_ES.pdf",
     "date": "2026-11-02",
     "lang": "es",
-    "pairId": "kitchen-d04-infill-r1"
+    "pairId": "kitchen-d04-infill-r1",
+    "titleRu": "Схема каркаса стены щитка (D04) · испанский"
   }
 ]

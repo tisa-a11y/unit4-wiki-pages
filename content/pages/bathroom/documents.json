@@ -31,7 +31,8 @@
     "date": "2026-11-23",
     "lang": "en",
     "pairId": "u4-elec-mod2-r5-pdf",
-    "pin": true
+    "pin": true,
+    "titleRu": "Официальные электросхемы — Модуль 2, лист E-23: Ванная (#13 · 12/2, Rev R5) · английский"
   },
   {
     "title": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_ES.pdf",
@@ -42,7 +43,8 @@
     "date": "2026-11-23",
     "lang": "es",
     "pairId": "u4-elec-mod2-r5-pdf",
-    "pin": true
+    "pin": true,
+    "titleRu": "Официальные электросхемы — Модуль 2, лист E-23: Ванная (#13 · 12/2, Rev R5) · испанский"
   },
   {
     "title": "Unit 4 Bathroom - Plan for John - English.pdf",
@@ -54,7 +56,8 @@
     "lang": "en",
     "pairId": "bathroom-plan-for-john",
     "pin": false,
-    "history": true
+    "history": true,
+    "titleRu": "Рабочий план ванной для Джона · английский"
   },
   {
     "title": "Bano Unidad 4 - Plan para John - Espanol.pdf",
@@ -66,7 +69,8 @@
     "lang": "es",
     "pairId": "bathroom-plan-for-john",
     "pin": false,
-    "history": true
+    "history": true,
+    "titleRu": "Рабочий план ванной для Джона · испанский"
   },
   {
     "title": "Unit4-Bathroom-Surfaces-R1-EN.pdf",
@@ -76,7 +80,8 @@
     "path": "2026-10-29-surfaces-R1/outputs/Unit4-Bathroom-Surfaces-R1-EN.pdf",
     "date": "2026-10-29",
     "lang": "en",
-    "pairId": "bathroom-surfaces-r1"
+    "pairId": "bathroom-surfaces-r1",
+    "titleRu": "Плитка и отделка поверхностей ванной · английский"
   },
   {
     "title": "Unit4-Bathroom-Surfaces-R1-ES.pdf",
@@ -86,7 +91,8 @@
     "path": "2026-10-29-surfaces-R1/outputs/Unit4-Bathroom-Surfaces-R1-ES.pdf",
     "date": "2026-10-29",
     "lang": "es",
-    "pairId": "bathroom-surfaces-r1"
+    "pairId": "bathroom-surfaces-r1",
+    "titleRu": "Плитка и отделка поверхностей ванной · испанский"
   },
   {
     "title": "Unit4-Bathroom-Blocking-BW-R1-EN.pdf",
@@ -96,7 +102,8 @@
     "path": "2026-10-30-blocking-R1/outputs/Unit4-Bathroom-Blocking-BW-R1-EN.pdf",
     "date": "2026-10-30",
     "lang": "en",
-    "pairId": "bathroom-blocking-r1"
+    "pairId": "bathroom-blocking-r1",
+    "titleRu": "Деревянные закладные ванной (рабочий лист) · английский"
   },
   {
     "title": "Unit4-Bathroom-Blocking-BW-R1-ES.pdf",
@@ -106,6 +113,7 @@
     "path": "2026-10-30-blocking-R1/outputs/Unit4-Bathroom-Blocking-BW-R1-ES.pdf",
     "date": "2026-10-30",
     "lang": "es",
-    "pairId": "bathroom-blocking-r1"
+    "pairId": "bathroom-blocking-r1",
+    "titleRu": "Деревянные закладные ванной (рабочий лист) · испанский"
   }
 ]

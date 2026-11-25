@@ -3,24 +3,32 @@
     "kEn": "Panel wall",
     "kEs": "Muro del tablero",
     "vEn": "D04, dining side · no outlet by the door swing",
-    "vEs": "D04, lado del comedor · sin contacto junto a la puerta"
+    "vEs": "D04, lado del comedor · sin contacto junto a la puerta",
+    "kRu": "Стена щитка",
+    "vRu": "D04, со стороны столовой · без розетки у двери"
   },
   {
     "kEn": "Wall labels",
     "kEs": "Nombres de muros",
     "vEn": "Dining D01–D04 · Living L01–L06",
-    "vEs": "Comedor D01–D04 · Sala L01–L06"
+    "vEs": "Comedor D01–D04 · Sala L01–L06",
+    "kRu": "Маркировка стен",
+    "vRu": "Столовая D01–D04 · Гостиная L01–L06"
   },
   {
     "kEn": "Outlets",
     "kEs": "Contactos",
     "vEn": "Empty conduit · clear of pocket doors",
-    "vEs": "Tubo vacío · lejos de puertas corredizas"
+    "vEs": "Tubo vacío · lejos de puertas corredizas",
+    "kRu": "Розетки",
+    "vRu": "Пустые каналы · не заходить в карманы дверей"
   },
   {
     "kEn": "Wait",
     "kEs": "Esperar",
     "vEn": "No wire · no moulding cuts",
-    "vEs": "Sin cable · sin cortar molduras"
+    "vEs": "Sin cable · sin cortar molduras",
+    "kRu": "На паузе",
+    "vRu": "Без протяжки провода · без резки молдингов"
   }
 ]

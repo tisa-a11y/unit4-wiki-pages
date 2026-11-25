@@ -1,6 +1,6 @@
 /* ============================================================================
    Unit 4 Interactive Plans — Unified Top Bar, Sibling Switcher, Print Bridge
-   & Persistent Shell Iframe Bridge (Two Distinct Attic & HVAC Plans)
+   & Persistent Shell Iframe Bridge (All 7 Interactive Room Plans · EN | ES | RU)
    ============================================================================ */
 (function () {
   "use strict";
@@ -11,15 +11,33 @@
 
   var ALL_PLANS = [
     {
+      id: "bathroom-tile",
+      rel: "../bathroom-tile/index.html",
+      roomHash: "bathroom",
+      roomEn: "Bathroom",
+      roomEs: "Baño",
+      roomRu: "Ванная",
+      shortEn: "Bathroom Wall Tile",
+      shortEs: "Baño: Azulejo",
+      shortRu: "Плитка ванной и ниши",
+      labelEn: "Bathroom Tub & Wall Tile Plan",
+      labelEs: "Baño: Plano de Azulejo y Nichos",
+      labelRu: "Плитка ванной и ниши",
+      group: "bathroom"
+    },
+    {
       id: "kitchen-west-ks4",
       rel: "../kitchen-west-ks4/index.html",
       roomHash: "kitchen-oven-range",
       roomEn: "Kitchen",
       roomEs: "Cocina",
+      roomRu: "Кухня",
       shortEn: "Range & Hood Wall",
       shortEs: "Estufa y Campana",
+      shortRu: "Плита и вытяжка",
       labelEn: "Kitchen West Range & Hood Wall",
       labelEs: "Cocina: Muro de Estufa y Campana",
+      labelRu: "Кухня: Западная стена плиты и вытяжки",
       group: "kitchen"
     },
     {
@@ -28,10 +46,13 @@
       roomHash: "kitchen",
       roomEn: "Kitchen",
       roomEs: "Cocina",
+      roomRu: "Кухня",
       shortEn: "Floor Plan & Cabinets",
       shortEs: "Planta y Gabinetes",
+      shortRu: "План и шкафы",
       labelEn: "Kitchen Floor Plan & Cabinet Schedule",
       labelEs: "Cocina: Planta y Lista de Gabinetes",
+      labelRu: "Кухня: План этажа и раскладка шкафов",
       group: "kitchen"
     },
     {
@@ -40,10 +61,13 @@
       roomHash: "electrical",
       roomEn: "Kitchen / Elec",
       roomEs: "Cocina / Eléc.",
+      roomRu: "Кухня / Электр.",
       shortEn: "Kitchen Electrical",
       shortEs: "Eléctrico Cocina",
+      shortRu: "Электрика кухни",
       labelEn: "Kitchen Electrical & Subpanel D04",
       labelEs: "Cocina: Eléctrico y Subpanel D04",
+      labelRu: "Кухня: Электрика и подщит D04",
       group: "kitchen"
     },
     {
@@ -52,10 +76,13 @@
       roomHash: "attic-access",
       roomEn: "Attic Access",
       roomEs: "Acceso Ático",
+      roomRu: "Люк на чердак",
       shortEn: "1. Hatch & Wood Walkway",
       shortEs: "1. Escotilla y Pasillo",
+      shortRu: "1. Люк и мостки",
       labelEn: "Attic Hatch, Wood Walkway & Platform",
       labelEs: "Escotilla del Ático, Pasillo de Madera y Plataforma",
+      labelRu: "Чердачный люк, деревянные мостки и площадка",
       group: "attic-hvac"
     },
     {
@@ -64,10 +91,13 @@
       roomHash: "hvac",
       roomEn: "Heating / HVAC",
       roomEs: "Calefacción",
+      roomRu: "Отопление HVAC",
       shortEn: "2. Furnace, Ducts & Exhaust",
       shortEs: "2. Calefactor, Ductos y Salida",
+      shortRu: "2. Печь и воздуховоды",
       labelEn: "Heating System: Furnace, Ducts & Sidewall Exhaust",
       labelEs: "Sistema de Calefacción: Calefactor, Ductos y Salida Lateral",
+      labelRu: "Система отопления: Печь, воздуховоды и боковой выброс",
       group: "attic-hvac"
     },
     {
@@ -76,24 +106,14 @@
       roomHash: "laundry",
       roomEn: "Laundry Closet",
       roomEs: "Lavandería",
+      roomRu: "Прачечная",
       shortEn: "Murphy Bookcase Door",
       shortEs: "Puerta Librero Murphy",
+      shortRu: "Шкаф-дверь Murphy",
       labelEn: "Murphy Bookcase Door (Hallway B)",
       labelEs: "Puerta Librero Murphy (Pasillo B)",
+      labelRu: "Потайная шкаф-дверь Murphy (Коридор B)",
       group: "laundry"
-    },
-    {
-      id: "bathroom-tile",
-      rel: "../bathroom-tile/index.html",
-      roomHash: "bathroom",
-      roomEn: "Bathroom",
-      roomEs: "Baño",
-      shortEn: "Wall Tile",
-      shortEs: "Azulejo",
-      labelEn: "Bathroom Tub & Wall Tile Plan",
-      labelEs: "Baño: Plano de Azulejo y Nichos",
-      labelRu: "Ванная: раскладка плитки и ниши",
-      group: "bathroom"
     },
     {
       id: "bathroom-measurements",
@@ -118,23 +138,32 @@
     return LEGACY_PLAN_ALIASES[clean] || clean;
   }
 
+  function normLang(raw) {
+    var s = String(raw || "").trim().toLowerCase();
+    if (s === "ru" || s.indexOf("ru-") === 0) return "ru";
+    if (s === "es" || s.indexOf("es-") === 0) return "es";
+    return "en";
+  }
+
   function readPref(key) {
-    return null;
+    if (key !== "u4_lang" && key !== "u4_theme") return null;
+    try { return window.localStorage.getItem(key); } catch (_) { return null; }
   }
 
   function writePref(key, val) {
-
+    if (key !== "u4_lang" && key !== "u4_theme") return;
+    try { window.localStorage.setItem(key, String(val)); } catch (_) {}
   }
 
   function resolveInitialLang(urlParams) {
     var q = (urlParams.get("lang") || "").toLowerCase();
-    if (q === "es" || q.indexOf("es-") === 0 || q === "en" || q.indexOf("en-") === 0) {
-      var norm = q.indexOf("es") === 0 ? "es" : "en";
+    if (q === "ru" || q.indexOf("ru-") === 0 || q === "es" || q.indexOf("es-") === 0 || q === "en" || q.indexOf("en-") === 0) {
+      var norm = normLang(q);
       writePref("u4_lang", norm);
       return norm;
     }
     var stored = (readPref("u4_lang") || "").toLowerCase();
-    if (stored === "es" || stored === "en") return stored;
+    if (stored === "ru" || stored === "es" || stored === "en") return stored;
     return "en";
   }
 
@@ -275,9 +304,19 @@
     } catch (_) {}
   }
 
+  function dispatchLangEvent() {
+    try {
+      window.dispatchEvent(new CustomEvent("u4:lang-change", { detail: { lang: state.lang } }));
+    } catch (_) {}
+  }
+
   function applyThemeAndLang() {
     document.documentElement.lang = state.lang;
     document.documentElement.setAttribute("data-theme", state.theme);
+    var curMeta = getPlanMeta(state.planId);
+    if (curMeta) {
+      document.title = (state.lang === "ru" ? (curMeta.labelRu || curMeta.labelEn) : (state.lang === "es" ? curMeta.labelEs : curMeta.labelEn)) + " — Unit 4";
+    }
     if (window.U4LiveAi && typeof window.U4LiveAi.setLang === "function") {
       window.U4LiveAi.setLang(state.lang);
     }
@@ -288,6 +327,7 @@
         }
       } catch (_) {}
     }
+    dispatchLangEvent();
   }
 
   function setMode(mode) {
@@ -298,8 +338,16 @@
     if (bpShell) bpShell.hidden = state.mode !== "blueprint";
     var retLbl = document.getElementById("u4gBpReturnLabel");
     var retBtn = document.getElementById("u4gBpReturnBtn");
-    if (retLbl) retLbl.textContent = state.lang === "es" ? "Viendo plano técnico de impresión" : "Viewing Technical Print Blueprint";
-    if (retBtn) retBtn.textContent = state.lang === "es" ? "← Volver a la guía interactiva" : "← Back to Interactive Guide";
+    if (retLbl) {
+      retLbl.textContent = state.lang === "ru"
+        ? "Просмотр технического чертежа для печати"
+        : (state.lang === "es" ? "Viendo plano técnico de impresión" : "Viewing Technical Print Blueprint");
+    }
+    if (retBtn) {
+      retBtn.textContent = state.lang === "ru"
+        ? "← Назад к интерактивному плану"
+        : (state.lang === "es" ? "← Volver a la guía interactiva" : "← Back to Interactive Guide");
+    }
     if (state.mode === "blueprint" && window.U4PLAN && typeof window.U4PLAN.render === "function") {
       try { window.U4PLAN.render(); } catch (_) {}
     }
@@ -344,7 +392,7 @@
     return Object.assign({
       planId: state.planId,
       room: cur.roomHash,
-      title: state.lang === "es" ? cur.labelEs : cur.labelEn,
+      title: state.lang === "ru" ? (cur.labelRu || cur.labelEn) : (state.lang === "es" ? cur.labelEs : cur.labelEn),
       lang: state.lang,
       theme: state.theme,
       zoom: Math.round(zoom * 100) + "%",
@@ -521,49 +569,78 @@
     });
   }
 
+  function commitNavLang(nextL, focusCode) {
+    var cleanL = normLang(nextL);
+    if (cleanL === state.lang && !focusCode) return;
+    state.lang = cleanL;
+    writePref("u4_lang", state.lang);
+    syncUrlSearchParams();
+    applyThemeAndLang();
+    renderHeader();
+    if (typeof state.onLangChange === "function") state.onLangChange(state.lang);
+    postToParent({ type: "u4:sync-pref", lang: state.lang, theme: state.theme });
+    reportPlanContext();
+    if (focusCode) {
+      var nextBtn = document.querySelector('#u4hLangBtn [data-lang="' + focusCode + '"]');
+      if (nextBtn && nextBtn.focus) nextBtn.focus();
+    }
+  }
+
   function renderHeader() {
     var host = state.headerEl;
     if (!host) return;
-    var es = state.lang === "es";
+    var es = state.lang === "es", ru = state.lang === "ru";
     var cur = getPlanMeta(state.planId);
-    var siblings = ALL_PLANS.filter(function (p) { return !p.retired && p.group === cur.group; });
+    var siblings = ALL_PLANS.filter(function (p) { return p.group === cur.group; });
 
     var segHtml = "";
     if (siblings.length > 1) {
-      segHtml = '<div class="u4h-seg-switch" role="navigation" aria-label="' + (es ? "Planos relacionados" : "Related plans") + '">' +
+      segHtml = '<div class="u4h-seg-switch" role="navigation" aria-label="' + (ru ? "Связанные планы" : (es ? "Planos relacionados" : "Related plans")) + '">' +
         siblings.map(function (s) {
           var active = s.id === cur.id;
           return '<a class="u4h-seg-item' + (active ? " is-active" : "") + '" data-plan-id="' + s.id + '" href="' + esc(planUrl(s.id)) + '"' + (active ? ' aria-current="page"' : "") + '>' +
-            esc(es ? s.shortEs : s.shortEn) + '</a>';
+            esc(ru ? (s.shortRu || s.shortEn) : (es ? s.shortEs : s.shortEn)) + '</a>';
         }).join("") +
       "</div>";
     }
 
     var menuHtml = '<div class="u4h-plans-menu">' +
       '<button type="button" id="u4hAllPlansBtn" class="u4h-plans-btn" aria-expanded="' + (state.menuOpen ? "true" : "false") + '" aria-controls="u4hAllPlansPop">' +
-        (es ? "Todos los planos ▾" : "All Plans ▾") +
+        (ru ? "Все планы ▾" : (es ? "Todos los planos ▾" : "All Plans ▾")) +
       "</button>" +
       '<div id="u4hAllPlansPop" class="u4h-plans-pop"' + (state.menuOpen ? "" : " hidden") + ">" +
-        ALL_PLANS.filter(function (p) { return !p.retired; }).map(function (p) {
+        ALL_PLANS.map(function (p) {
           var isCur = p.id === cur.id;
           return '<a href="' + esc(planUrl(p.id)) + '" data-plan-id="' + p.id + '" class="' + (isCur ? "is-current" : "") + '">' +
-            '<span>' + (isCur ? "✓ " : "") + esc(es ? p.labelEs : p.labelEn) + "</span>" +
-            '<span class="u4h-pop-room">' + esc(es ? p.roomEs : p.roomEn) + "</span>" +
+            '<span>' + (isCur ? "✓ " : "") + esc(ru ? (p.labelRu || p.labelEn) : (es ? p.labelEs : p.labelEn)) + "</span>" +
+            '<span class="u4h-pop-room">' + esc(ru ? (p.roomRu || p.roomEn) : (es ? p.roomEs : p.roomEn)) + "</span>" +
           "</a>";
         }).join("") +
       "</div>" +
     "</div>";
 
+    var backTxt = ru ? ("Назад: " + (cur.roomRu || cur.roomEn)) : (es ? ("Volver a " + cur.roomEs) : ("Back to " + cur.roomEn));
+    var langAria = ru ? "Язык" : (es ? "Idioma" : "Language");
+    var themeAria = state.theme === "dark"
+      ? (ru ? "Включить светлую тему" : (es ? "Cambiar a modo claro" : "Switch to light mode"))
+      : (ru ? "Включить тёмную тему" : (es ? "Cambiar a modo oscuro" : "Switch to dark mode"));
+    var pdfAria = ru ? "Печать или сохранить PDF" : (es ? "Imprimir o guardar PDF" : "Print or save PDF");
+
     host.innerHTML =
       '<div class="u4h-nav-left">' +
-        '<a class="u4h-nav-link" id="u4hBackLink" href="' + esc(wikiBackUrl()) + '">&larr; ' + esc(es ? ("Volver a " + cur.roomEs) : ("Back to " + cur.roomEn)) + "</a>" +
+        '<a class="u4h-nav-link" id="u4hBackLink" href="' + esc(wikiBackUrl()) + '">&larr; ' + esc(backTxt) + "</a>" +
         segHtml +
         menuHtml +
       "</div>" +
       '<div class="u4h-nav-right">' +
-        '<button type="button" id="u4hLangBtn" class="u4h-lang-btn u4h-seg-switch" role="switch" aria-checked="' + (es ? "true" : "false") + '" aria-label="' + (es ? "Switch to English" : "Cambiar a español") + '"><span class="u4-seg-thumb" aria-hidden="true"></span><span class="u4-seg-opt is-a">EN</span><span class="u4-seg-opt is-b">ES</span></button>' +
-        '<button type="button" id="u4hThemeBtn" class="u4h-mini-btn u4h-seg-switch" role="switch" aria-checked="' + (state.theme === "dark" ? "true" : "false") + '" aria-label="' + (state.theme === "dark" ? (es ? "Cambiar a modo claro" : "Switch to light mode") : (es ? "Cambiar a modo oscuro" : "Switch to dark mode")) + '"><span class="u4-seg-thumb" aria-hidden="true"></span><span class="u4-seg-opt is-a"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1.5v1.6M8 12.9v1.6M1.5 8h1.6M12.9 8h1.6M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M12.6 3.4l-1.1 1.1M4.5 11.5l-1.1 1.1"/></svg></span><span class="u4-seg-opt is-b"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.2 9.9A5.4 5.4 0 0 1 6.1 2.8a5.5 5.5 0 1 0 7.1 7.1Z"/></svg></span></button>' +
-        '<button type="button" id="u4hPdfBtn" class="u4h-mini-btn primary u4h-pdf-compact" aria-label="' + (es ? "Imprimir o guardar PDF" : "Print or save PDF") + '"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6V2.5h8V6M4 11.5H2.5v-4a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v4H12"/><rect x="4" y="9.5" width="8" height="4" rx="0.5"/></svg><span>PDF</span></button>' +
+        '<div id="u4hLangBtn" class="u4h-lang-btn u4-lang-seg" role="radiogroup" aria-label="' + langAria + '" data-lang="' + state.lang + '">' +
+          '<span class="u4-seg-thumb" aria-hidden="true"></span>' +
+          '<button type="button" class="u4-seg-opt' + (state.lang === "en" ? " is-active" : "") + '" role="radio" data-lang="en" aria-checked="' + (state.lang === "en" ? "true" : "false") + '" tabindex="' + (state.lang === "en" ? "0" : "-1") + '">EN</button>' +
+          '<button type="button" class="u4-seg-opt' + (state.lang === "es" ? " is-active" : "") + '" role="radio" data-lang="es" aria-checked="' + (state.lang === "es" ? "true" : "false") + '" tabindex="' + (state.lang === "es" ? "0" : "-1") + '">ES</button>' +
+          '<button type="button" class="u4-seg-opt' + (state.lang === "ru" ? " is-active" : "") + '" role="radio" data-lang="ru" aria-checked="' + (state.lang === "ru" ? "true" : "false") + '" tabindex="' + (state.lang === "ru" ? "0" : "-1") + '">RU</button>' +
+        '</div>' +
+        '<button type="button" id="u4hThemeBtn" class="u4h-mini-btn u4h-bin-switch" role="switch" aria-checked="' + (state.theme === "dark" ? "true" : "false") + '" aria-label="' + themeAria + '"><span class="u4-seg-thumb" aria-hidden="true"></span><span class="u4-seg-opt is-a"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1.5v1.6M8 12.9v1.6M1.5 8h1.6M12.9 8h1.6M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M12.6 3.4l-1.1 1.1M4.5 11.5l-1.1 1.1"/></svg></span><span class="u4-seg-opt is-b"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.2 9.9A5.4 5.4 0 0 1 6.1 2.8a5.5 5.5 0 1 0 7.1 7.1Z"/></svg></span></button>' +
+        '<button type="button" id="u4hPdfBtn" class="u4h-mini-btn primary u4h-pdf-compact" aria-label="' + pdfAria + '"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6V2.5h8V6M4 11.5H2.5v-4a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v4H12"/><rect x="4" y="9.5" width="8" height="4" rx="0.5"/></svg><span>PDF</span></button>' +
       "</div>";
 
     var backLink = document.getElementById("u4hBackLink");
@@ -599,16 +676,32 @@
       });
     }
 
-    document.getElementById("u4hLangBtn").addEventListener("click", function () {
-      state.lang = state.lang === "en" ? "es" : "en";
-      writePref("u4_lang", state.lang);
-      syncUrlSearchParams();
-      applyThemeAndLang();
-      renderHeader();
-      if (typeof state.onLangChange === "function") state.onLangChange(state.lang);
-      postToParent({ type: "u4:sync-pref", lang: state.lang, theme: state.theme });
-      reportPlanContext();
-    });
+    var langHost = document.getElementById("u4hLangBtn");
+    if (langHost) {
+      langHost.addEventListener("click", function (ev) {
+        var opt = ev.target && ev.target.closest ? ev.target.closest("[data-lang]") : null;
+        if (opt && langHost.contains(opt)) {
+          commitNavLang(opt.getAttribute("data-lang"), "");
+          return;
+        }
+        var order = ["en", "es", "ru"];
+        var idx = order.indexOf(normLang(state.lang));
+        commitNavLang(order[(idx + 1) % order.length], "");
+      });
+      langHost.addEventListener("keydown", function (ev) {
+        var order = ["en", "es", "ru"];
+        var idx = order.indexOf(normLang(state.lang));
+        var nextIdx = -1;
+        if (ev.key === "ArrowRight" || ev.key === "ArrowDown") nextIdx = (idx + 1) % order.length;
+        else if (ev.key === "ArrowLeft" || ev.key === "ArrowUp") nextIdx = (idx + order.length - 1) % order.length;
+        else if (ev.key === "Home") nextIdx = 0;
+        else if (ev.key === "End") nextIdx = order.length - 1;
+        if (nextIdx >= 0) {
+          ev.preventDefault();
+          commitNavLang(order[nextIdx], order[nextIdx]);
+        }
+      });
+    }
 
     document.getElementById("u4hThemeBtn").addEventListener("click", function () {
       state.theme = state.theme === "dark" ? "light" : "dark";
@@ -642,7 +735,7 @@
     var targetPlan = matchPlanIdFromHref(href);
     if (targetPlan) {
       ev.preventDefault();
-      var qIdx = href.indexOf("?"); var hSp = new URLSearchParams(qIdx >= 0 ? href.slice(qIdx + 1).split("#")[0] : ""); postToParent({ type: "u4:nav-plan", planId: targetPlan, wall: hSp.get("wall") || "", view: hSp.get("view") || "", step: hSp.get("step") || "", zoom: hSp.get("zoom") || "" });
+      postToParent({ type: "u4:nav-plan", planId: targetPlan });
       return;
     }
     if (href.indexOf("../../index.html") === 0) {
@@ -666,7 +759,7 @@
     if (msg.type === "u4:set-pref") {
       var langChanged = false;
       var themeChanged = false;
-      if ((msg.lang === "en" || msg.lang === "es") && msg.lang !== state.lang) {
+      if ((msg.lang === "en" || msg.lang === "es" || msg.lang === "ru") && msg.lang !== state.lang) {
         state.lang = msg.lang;
         writePref("u4_lang", state.lang);
         langChanged = true;
@@ -721,6 +814,12 @@
           return;
         }
 
+        if (cmd === "set_language") {
+          commitNavLang(args.language || args.lang || "en", "");
+          postToParent({ type: "u4:plan-cmd-result", id: reqId, ok: true, cmd: cmd, result: getFullPlanState() });
+          return;
+        }
+
         if (cmd === "get_plan_state") {
           postToParent({ type: "u4:plan-cmd-result", id: reqId, ok: true, cmd: cmd, result: getFullPlanState() });
           return;
@@ -741,7 +840,7 @@
 
   window.addEventListener("storage", function (ev) {
     if (!ev || !ev.key) return;
-    if (ev.key === "u4_lang" && (ev.newValue === "en" || ev.newValue === "es") && ev.newValue !== state.lang) {
+    if (ev.key === "u4_lang" && (ev.newValue === "en" || ev.newValue === "es" || ev.newValue === "ru") && ev.newValue !== state.lang) {
       state.lang = ev.newValue;
       syncUrlSearchParams();
       applyThemeAndLang();
@@ -782,6 +881,7 @@
       reportPlanContext();
     },
     getLang: function () { return state.lang; },
+    setLang: function (nextL) { commitNavLang(nextL, ""); },
     getTheme: function () { return state.theme; },
     getPlanId: function () { return state.planId; },
     isEmbedded: function () { return isEmbedded; },

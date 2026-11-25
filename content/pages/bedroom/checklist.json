@@ -4,27 +4,32 @@
     {
       "done": true,
       "en": "Wall names set; moulding packet drafted",
-      "es": "Nombres de muros definidos; paquete de molduras en borrador"
+      "es": "Nombres de muros definidos; paquete de molduras en borrador",
+      "ru": "Обозначения стен утверждены; подготовлен черновик пакета раскладки молдингов"
     },
     {
       "done": false,
       "en": "Check the closet opening for the furnace; run the switch cable to the attic",
-      "es": "Revisar el paso del calefactor por el clóset; subir el cable del apagador al ático"
+      "es": "Revisar el paso del calefactor por el clóset; subir el cable del apagador al ático",
+      "ru": "Проверить проём шкафа для подъёма печи; вывести кабель выключателя на чердак"
     },
     {
       "done": false,
       "en": "Outlet boxes and empty conduit; patch the hardwood floor",
-      "es": "Cajas de contacto y tubo vacío; reparar la duela"
+      "es": "Cajas de contacto y tubo vacío; reparar la duela",
+      "ru": "Установить подрозетники и пустые трубки; отремонтировать недостающий паркет"
     },
     {
       "done": false,
       "en": "Lay out the moulding frames with tape and install",
-      "es": "Trazar los marcos de moldura con cinta e instalar"
+      "es": "Trazar los marcos de moldura con cinta e instalar",
+      "ru": "Разметить рамки молдингов малярной лентой на стенах и выполнить монтаж"
     },
     {
       "done": false,
       "en": "Close the closet ceiling after the hatch exists; rod, primer and paint",
-      "es": "Cerrar el techo del clóset cuando exista la escotilla; tubo, sellador y pintura"
+      "es": "Cerrar el techo del clóset cuando exista la escotilla; tubo, sellador y pintura",
+      "ru": "Зашить потолок шкафа после готовности чердачного люка; установить штангу, загрунтовать и покрасить"
     }
   ]
 }

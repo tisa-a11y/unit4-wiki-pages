@@ -8,7 +8,8 @@
     "date": "2026-11-23",
     "lang": "en",
     "pairId": "u4-elec-mod2-r5-pdf",
-    "pin": true
+    "pin": true,
+    "titleRu": "Официальные электросхемы — Модуль 2, лист E-22: Гостиная и столовая (#10/#12, Rev R5) · английский"
   },
   {
     "title": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_ES.pdf",
@@ -18,6 +19,19 @@
     "path": "2026-11-23-official-electrical-plans-R5 · Hoja E-22: Sala y Comedor (#10/#12) (español)",
     "date": "2026-11-23",
     "lang": "es",
+    "pairId": "u4-elec-mod2-r5-pdf",
+    "pin": true,
+    "titleRu": "Официальные электросхемы — Модуль 2, лист E-22: Гостиная и столовая (#10/#12, Rev R5) · испанский"
+  },
+  {
+    "title": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_RU.pdf",
+    "titleEn": "Official Electrical Sheets — Module 2: Sheet E-22: Living & Dining (#10/#12) (Rev R5) · Russian",
+    "titleEs": "Hojas Eléctricas Oficiales — Módulo 2: Hoja E-22: Sala y Comedor (#10/#12) (Rev R5) · ruso",
+    "titleRu": "Официальные электросхемы — Модуль 2, лист E-22: Гостиная и столовая (#10/#12) (Rev R5) · русский",
+    "id": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_RU",
+    "path": "wiki-pdfs/2026-11-23_U4_Module2_Whole-Unit-Segments_R5_RU.pdf",
+    "date": "2026-11-23",
+    "lang": "ru",
     "pairId": "u4-elec-mod2-r5-pdf",
     "pin": true
   },
@@ -29,7 +43,8 @@
     "path": "living-dining/from-remodel-hub/Unit 4 — Living Room & Dining Room — Wall Treatments and Paint Scheme — Review R2.pdf",
     "date": "2026-11-10",
     "lang": "en",
-    "review": true
+    "review": true,
+    "titleRu": "Стены и покраска гостиной и столовой (на проверку)"
   },
   {
     "title": "2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_EN.pdf",
@@ -40,7 +55,8 @@
     "date": "2026-11-10",
     "lang": "en",
     "pairId": "molding-opt-a-revb",
-    "review": true
+    "review": true,
+    "titleRu": "Вариант молдингов без среднего горизонтального профиля (на проверку) · английский"
   },
   {
     "title": "2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_ES.pdf",
@@ -51,7 +67,8 @@
     "date": "2026-11-10",
     "lang": "es",
     "pairId": "molding-opt-a-revb",
-    "review": true
+    "review": true,
+    "titleRu": "Вариант молдингов без среднего горизонтального профиля (на проверку) · испанский"
   },
   {
     "title": "2026-11-02_U4_Whole-Unit_Walls-Trim-Outlets-Plan_R1.pdf",
@@ -61,7 +78,8 @@
     "path": "2026-11-02-walls-trim-outlets-R1/2026-11-02_U4_Whole-Unit_Walls-Trim-Outlets-Plan_R1.pdf",
     "date": "2026-11-02",
     "lang": "en",
-    "pairId": "whole-unit-walls-r1"
+    "pairId": "whole-unit-walls-r1",
+    "titleRu": "Стены, молдинги и розетки (рабочий план) · английский"
   },
   {
     "title": "2026-11-02_U4_Unidad_Muros-Molduras-Contactos_R1_ES.pdf",
@@ -71,6 +89,7 @@
     "path": "2026-11-02-walls-trim-outlets-R1/2026-11-02_U4_Unidad_Muros-Molduras-Contactos_R1_ES.pdf",
     "date": "2026-11-02",
     "lang": "es",
-    "pairId": "whole-unit-walls-r1"
+    "pairId": "whole-unit-walls-r1",
+    "titleRu": "Стены, молдинги и розетки (рабочий план) · испанский"
   }
 ]

@@ -12,27 +12,33 @@
       "en": "Tub Surround measurements",
       "es": "Medidas del contorno de la tina",
       "showInReferences": true,
-      "uncropped": true
+      "uncropped": true,
+      "ru": "Замеры зоны ванны и ниш"
     },
     {
       "img": "./wiki-images/bathroom-warm-brass-concept.jpg",
       "href": "./wiki-images/bathroom-warm-brass-concept.jpg",
       "en": "Bathroom look",
-      "es": "Aspecto del baño"
+      "es": "Aspecto del baño",
+      "ru": "Общий вид ванной в тёплой бронзе"
     },
     {
       "img": "./wiki-images/bathroom-pocket-door-mockup-v2-retired.jpg",
       "href": "./wiki-images/bathroom-pocket-door-mockup-v2-retired.jpg",
       "en": "Pocket door idea (RETIRED Nov 24 — outward-swing hallway door locked)",
       "es": "Idea de puerta corrediza (RETIRADA 24 nov — puerta abatible hacia el pasillo confirmada)",
-      "retired": true
+      "retired": true,
+      "ru": "Идея кассетной двери (ОТМЕНЕНА 24 нояб. — утверждена распашная дверь наружу в коридор)"
     },
     {
       "img": "./wiki-images/bathroom-tub-surround-source.jpg",
       "href": "./wiki-images/bathroom-tub-surround-source.jpg",
       "en": "Original tub surround photo — without arrows",
-      "es": "Foto original del contorno de la tina — sin flechas"
+      "es": "Foto original del contorno de la tina — sin flechas",
+      "ru": "Исходное фото зоны ванны — без размерных стрелок"
     }
   ],
-  "lead": 1
+  "lead": 1,
+  "ru": "Изображения",
+  "noteRu": "Замеры зоны ванны: полное фото с размерами стены, ниш и ванны. Приблизительные размеры отмечены ≈; откройте фото для увеличения."
 }

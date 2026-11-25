@@ -3,24 +3,32 @@
     "kEn": "Attic hatch",
     "kEs": "Escotilla del ático",
     "vEn": "24\" × 36\" clear",
-    "vEs": "24\" × 36\" libres"
+    "vEs": "24\" × 36\" libres",
+    "kRu": "Чердачный люк",
+    "vRu": "Чистый световой проём 24\" × 36\""
   },
   {
     "kEn": "Laundry door",
     "kEs": "Puerta de lavandería",
     "vEn": "Trim only · door details on Laundry",
-    "vEs": "Solo moldura · detalles en Lavandería"
+    "vEs": "Solo moldura · detalles en Lavandería",
+    "kRu": "Дверь прачечной",
+    "vRu": "Только наличник · сама дверь в разделе «Прачечная»"
   },
   {
     "kEn": "Mouldings",
     "kEs": "Molduras",
     "vEn": "On every hallway wall",
-    "vEs": "En todos los muros del pasillo"
+    "vEs": "En todos los muros del pasillo",
+    "kRu": "Молдинги",
+    "vRu": "На всех стенах коридора"
   },
   {
     "kEn": "Next",
     "kEs": "Sigue",
     "vEn": "4 daylight photos + fire-rating check",
-    "vEs": "4 fotos de día + revisión contra fuego"
+    "vEs": "4 fotos de día + revisión contra fuego",
+    "kRu": "Далее",
+    "vRu": "4 дневных фото + проверка огнестойкости потолка"
   }
 ]

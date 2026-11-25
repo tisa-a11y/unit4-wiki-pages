@@ -64,6 +64,165 @@
   #u4AiFloatingDock{position:fixed!important;right:12px!important;bottom:calc(env(safe-area-inset-bottom,0px) + 14px)!important;top:auto!important;z-index:92!important;margin-left:0!important}
   #u4AiFloatingDock .u4-ai-pointer{display:none!important}
 }
+
+/* U4_PAGEWIDE_WIKI_PIN_CSS_START */
+body.is-home .u4-pin-fab,
+.u4-pin-fab {
+  display: inline-flex !important;
+  left: auto !important;
+  right: 16px !important;
+  bottom: 72px !important;
+  z-index: 95 !important;
+  touch-action: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+}
+@media (max-width: 640px) {
+  body.is-home .u4-pin-fab,
+  .u4-pin-fab {
+    right: 12px !important;
+    bottom: 68px !important;
+  }
+}
+main.u4-page-pin-armed,
+main.u4-page-pin-armed * {
+  cursor: crosshair !important;
+}
+#doc, #roomTechnical {
+  position: relative;
+}
+.u4-iframe-pin-shield {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: transparent;
+  display: none;
+  cursor: crosshair;
+}
+.u4-iframe-pin-shield.is-active {
+  display: block;
+}
+.u4-wpin-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 38;
+}
+.u4-wpin-highlight {
+  outline: 2px dashed var(--crimson, #a8281c) !important;
+  outline-offset: 3px !important;
+  border-radius: 4px;
+}
+.u4-wpin-dot {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 2px solid var(--crimson, #a8281c);
+  background: rgba(168, 40, 28, 0.18);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  cursor: pointer;
+  z-index: 39;
+}
+.u4-wpin-dot span {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--crimson, #a8281c);
+  color: #ffffff;
+  font-family: var(--mono, monospace);
+  font-size: 10px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.u4-wpin-pop {
+  position: relative;
+  z-index: 42;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 8px 0 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1.5px solid var(--accent, #1f5f7a);
+  background: var(--panel, #ffffff);
+  color: var(--fg, #1d2326);
+  box-shadow: 0 4px 14px rgba(18, 22, 24, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.u4-wpin-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-family: var(--mono, monospace);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent, #1f5f7a);
+}
+.u4-wpin-ctx {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: calc(100% - 70px);
+}
+.u4-wpin-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.u4-wpin-row input {
+  flex: 1 1 180px;
+  min-width: 0;
+  height: 34px;
+  padding: 0 10px;
+  border-radius: 6px;
+  border: 1px solid var(--line, #d9dedc);
+  background: var(--bg, #f4f5f3);
+  color: var(--fg, #1d2326);
+  font-family: inherit;
+  font-size: 13.5px;
+}
+.u4-wpin-btn {
+  min-height: 32px;
+  padding: 4px 11px;
+  border-radius: 6px;
+  border: 1px solid var(--line, #d9dedc);
+  background: var(--bg, #f4f5f3);
+  color: var(--fg, #1d2326);
+  font-family: var(--mono, monospace);
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.u4-wpin-btn.is-primary {
+  background: var(--accent, #1f5f7a);
+  border-color: var(--accent, #1f5f7a);
+  color: var(--panel, #ffffff);
+}
+html[data-theme="dark"] .u4-wpin-btn.is-primary {
+  color: #0d181d;
+}
+.u4-wpin-status {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--lock, #2f6b3f);
+}
+.u4-wpin-status.is-err {
+  color: var(--crimson, #a8281c);
+}
+@media print {
+  .u4-pin-fab, .u4-wpin-layer, .u4-wpin-pop, .u4-iframe-pin-shield { display: none !important; }
+}
+/* U4_PAGEWIDE_WIKI_PIN_CSS_END */
 </style>  <style id="u4-r7-wiki-styles">
 /* Top-of-page Interactive Plans Launch Cards & NEXT vs. Crew Phase Grid */
 .u4-plan-launch-grid {
@@ -306,11 +465,6 @@ html[data-theme="dark"] #u4-home-plans-strip {
 html[data-theme="dark"] .u4-home-plan-chip {
   background: rgba(24, 31, 35, 0.88);
   border-color: rgba(124, 192, 220, 0.28);
-}
-</style>
-<style>
-@media(max-width:760px){
-  main > .bar #u4AiFloatingDock.u4-ai-dock{position:static!important;inset:auto!important;margin-left:auto!important;box-shadow:none}
 }
 </style>
 </head><body>
@@ -1334,7 +1488,7 @@ body.u4-lb-open .u4-pin-fab{display:none!important}
 .u4-pin-ghost::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--crimson,#b42318)}
 .u4-pin-arm-banner{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 60px);transform:translateX(-50%);z-index:265;padding:6px 12px;border-radius:8px;border:1px solid var(--crimson,#b42318);background:var(--panel);color:var(--fg);font:600 12px/1.3 var(--mono);white-space:nowrap;max-width:calc(100vw - 24px);overflow:hidden;text-overflow:ellipsis}
 .u4-pin-arm-banner[hidden]{display:none!important}
-body.u4-pin-armed #doc,body.u4-pin-armed #roomTechnical,body.u4-pin-armed .u4-lb-stage,body.u4-pin-armed .u4-pdf-page-box{cursor:crosshair}
+body.u4-pin-armed #doc,body.u4-pin-armed .u4-lb-stage,body.u4-pin-armed .u4-pdf-page-box{cursor:crosshair}
 
 .u4-pin-marker{position:absolute;transform:translate(-50%,-50%);pointer-events:auto;cursor:grab;width:28px;height:28px;border-radius:50%;border:2px dashed var(--crimson,#b42318);background:rgba(180,35,24,.14);display:inline-flex;align-items:center;justify-content:center;padding:0;touch-action:none;z-index:18}
 .u4-pin-marker.is-selected{border-style:solid;border-color:var(--accent);background:rgba(31,95,122,.16)}
@@ -1531,9 +1685,88 @@ main > .bar button.u4-seg-switch:hover,
 }
 @media (prefers-reduced-motion: reduce) {
   .u4-seg-switch .u4-seg-thumb,
-  .u4-seg-switch .u4-seg-opt {
+  .u4-seg-switch .u4-seg-opt,
+  .u4-lang-seg .u4-lang-thumb,
+  .u4-lang-seg .u4-lang-opt {
     transition: none !important;
   }
+}
+
+/* 3-Way Segmented Language Radiogroup (EN | ES | RU) — Direct 1-Tap Selection, WCAG 2.2 AAA */
+.u4-lang-seg {
+  position: relative !important;
+  display: inline-grid !important;
+  grid-template-columns: repeat(3, minmax(29px, 1fr)) !important;
+  align-items: center !important;
+  padding: 2px !important;
+  min-height: 32px !important;
+  height: 32px !important;
+  min-width: 94px !important;
+  border-radius: 999px !important;
+  border: 1px solid var(--line) !important;
+  background: var(--bg) !important;
+  font-family: var(--mono) !important;
+  box-sizing: border-box !important;
+  gap: 0 !important;
+  vertical-align: middle;
+  transition: border-color 160ms ease;
+}
+.u4-lang-seg:hover {
+  border-color: var(--accent) !important;
+}
+.u4-lang-seg .u4-lang-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: calc((100% - 4px) / 3);
+  height: calc(100% - 4px);
+  border-radius: 999px;
+  background: var(--accent);
+  transition: transform 170ms cubic-bezier(0.22, 0.9, 0.32, 1);
+  pointer-events: none;
+  z-index: 0;
+}
+.u4-lang-seg[data-lang="en"] .u4-lang-thumb { transform: translateX(0%); }
+.u4-lang-seg[data-lang="es"] .u4-lang-thumb { transform: translateX(100%); }
+.u4-lang-seg[data-lang="ru"] .u4-lang-thumb { transform: translateX(200%); }
+.u4-lang-seg .u4-lang-opt {
+  position: relative;
+  z-index: 1;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0 !important;
+  background: transparent !important;
+  margin: 0 !important;
+  padding: 0 5px !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  border-radius: 999px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+  line-height: 1 !important;
+  color: var(--muted) !important;
+  cursor: pointer;
+  user-select: none;
+  transition: color 150ms ease;
+}
+.u4-lang-seg .u4-lang-opt:hover:not([aria-checked="true"]) {
+  color: var(--fg) !important;
+}
+.u4-lang-seg .u4-lang-opt[aria-checked="true"] {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .u4-lang-seg .u4-lang-opt[aria-checked="true"] {
+  color: #0d181d !important;
+  font-weight: 800 !important;
+}
+.u4-lang-seg .u4-lang-opt:focus-visible {
+  outline: 2px solid var(--accent) !important;
+  outline-offset: 2px !important;
 }
 
 /* Clean Top Bar: Back on left, compact switches aligned top-right (matches Interactive Plans) */
@@ -1575,7 +1808,12 @@ main > .bar #backBtn:hover {
   .mobile button.u4-seg-switch {
     min-height: 36px !important;
     height: 36px !important;
-    min-width: 68px !important;
+    min-width: 64px !important;
+  }
+  .mobile .u4-lang-seg {
+    min-height: 36px !important;
+    height: 36px !important;
+    min-width: 96px !important;
   }
   main > .bar #langBtn,
   main > .bar #themeBtn {
@@ -2357,169 +2595,10 @@ nav.rail a[aria-current="page"]::before {
   background-color: var(--accent) !important;
 }
 /* U4_SIDEBAR_POLISH_V1_CSS_END */
-
-/* U4_PAGEWIDE_WIKI_PIN_CSS_START */
-body.is-home .u4-pin-fab,
-.u4-pin-fab {
-  display: inline-flex !important;
-  left: auto !important;
-  right: 16px !important;
-  bottom: 72px !important;
-  z-index: 95 !important;
-  touch-action: none !important;
-  user-select: none !important;
-  -webkit-user-select: none !important;
-}
-@media (max-width: 640px) {
-  body.is-home .u4-pin-fab,
-  .u4-pin-fab {
-    right: 12px !important;
-    bottom: 68px !important;
-  }
-}
-main.u4-page-pin-armed,
-main.u4-page-pin-armed * {
-  cursor: crosshair !important;
-}
-#doc, #roomTechnical {
-  position: relative;
-}
-.u4-iframe-pin-shield {
-  position: fixed;
-  inset: 0;
-  z-index: 90;
-  background: transparent;
-  display: none;
-  cursor: crosshair;
-}
-.u4-iframe-pin-shield.is-active {
-  display: block;
-}
-.u4-wpin-layer {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 38;
-}
-.u4-wpin-highlight {
-  outline: 2px dashed var(--crimson, #a8281c) !important;
-  outline-offset: 3px !important;
-  border-radius: 4px;
-}
-.u4-wpin-dot {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  border: 2px solid var(--crimson, #a8281c);
-  background: rgba(168, 40, 28, 0.18);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: auto;
-  cursor: pointer;
-  z-index: 39;
-}
-.u4-wpin-dot span {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--crimson, #a8281c);
-  color: #ffffff;
-  font-family: var(--mono, monospace);
-  font-size: 10px;
-  font-weight: 800;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-.u4-wpin-pop {
-  position: relative;
-  z-index: 42;
-  width: 100%;
-  box-sizing: border-box;
-  margin: 8px 0 12px;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1.5px solid var(--accent, #1f5f7a);
-  background: var(--panel, #ffffff);
-  color: var(--fg, #1d2326);
-  box-shadow: 0 4px 14px rgba(18, 22, 24, 0.12);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.u4-wpin-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  font-family: var(--mono, monospace);
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--accent, #1f5f7a);
-}
-.u4-wpin-ctx {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: calc(100% - 70px);
-}
-.u4-wpin-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-.u4-wpin-row input {
-  flex: 1 1 180px;
-  min-width: 0;
-  height: 34px;
-  padding: 0 10px;
-  border-radius: 6px;
-  border: 1px solid var(--line, #d9dedc);
-  background: var(--bg, #f4f5f3);
-  color: var(--fg, #1d2326);
-  font-family: inherit;
-  font-size: 13.5px;
-}
-.u4-wpin-btn {
-  min-height: 32px;
-  padding: 4px 11px;
-  border-radius: 6px;
-  border: 1px solid var(--line, #d9dedc);
-  background: var(--bg, #f4f5f3);
-  color: var(--fg, #1d2326);
-  font-family: var(--mono, monospace);
-  font-size: 11.5px;
-  font-weight: 700;
-  cursor: pointer;
-}
-.u4-wpin-btn.is-primary {
-  background: var(--accent, #1f5f7a);
-  border-color: var(--accent, #1f5f7a);
-  color: var(--panel, #ffffff);
-}
-html[data-theme="dark"] .u4-wpin-btn.is-primary {
-  color: #0d181d;
-}
-.u4-wpin-status {
-  font-size: 11.5px;
-  font-weight: 600;
-  color: var(--lock, #2f6b3f);
-}
-.u4-wpin-status.is-err {
-  color: var(--crimson, #a8281c);
-}
-@media print {
-  .u4-pin-fab, .u4-wpin-layer, .u4-wpin-pop, .u4-iframe-pin-shield { display: none !important; }
-}
-/* U4_PAGEWIDE_WIKI_PIN_CSS_END */
 </style>
 
 <section id="agent-brief" class="sr-only" aria-label="Agent brief"># START HERE — Unit 4 remodel, 1231 11th Ave (San Francisco)<br><br>**This is the only start-here file.** Every person and agent opening this folder reads this first, fully, before acting.<br>Updated 2026-11-05 17:45 PT by Claude (Tisa&#x27;s account, cloud session). The same text is the wiki&#x27;s &quot;For AI agents: read first&quot; section.<br><br>## 0. Where to work — Google Drive is the single source of truth<br>- **Unit 4 folder (work here):** https://drive.google.com/drive/folders/1NnUfcuJfnzcjJz3XRvDQDhfvtMkrlSOr (`1231-11th-avenue/unit-4-renovation`)<br>- **Whole-building parent:** https://drive.google.com/drive/folders/1StmWHtnrDQlpd1CbUUfUEOI1vg-jHn29 (`1231-11th-avenue`)<br>- Everyone — Tisa&#x27;s Claude, John&#x27;s Claude, Dibble, any other agent — reads and writes through this Drive folder. (It is backed by Tisa&#x27;s Mini and syncs automatically; you never need the Mini path.)<br>- Every Unit 4 document now lives here, including copies of everything from the old locations (section 3). If you can&#x27;t find something, look in the room folder&#x27;s `from-remodel-hub/`, `from-unit4-bath-folder/` or `from-my-drive/` subfolder before assuming it&#x27;s missing.<br>- Older start-here, AGENTS and CLAUDE files were retired 2026-11-05 to `continuity/_superseded/start-here-history/` — don&#x27;t follow them.<br><br>---<br><br>## 1. Who and what<br>- **Tisa** owns the project and makes and locks every decision. **John** is lead carpenter on site. **Ervin, Joel, Alex** are crew (Spanish speakers).<br>- **Wiki** — https://tisa-a11y.github.io/unit4-wiki-pages/ — the shared picture: roadmap, one spec per project, open decisions, documents (PDFs preview in the page). It reads the `.md` files in this folder.<br>- **Todoist** board `Full 1231 11th Avenue Remodel` (id ). The wiki is its spine: every card traces to a spec, a locked decision or captured input.<br>- **Magicplan** MASTER plan is the geometry source: https://cloud.magicplan.app/plan/abb2d2c6-aa1c-4a88-a57e-1260847b6410<br>- **Your job:** keep the project moving with as little effort from Tisa and John as possible. Answer from the specs, capture what they tell you, file it, keep wiki and Todoist in step.<br><br>## 2. Read in this order<br>1. `STATUS-NOW.md` — what&#x27;s locked, what&#x27;s blocking, what&#x27;s next on site. Answer &quot;what&#x27;s up?&quot; from here first.<br>2. `continuity/ROADMAP.md` — sequence and phases.<br>3. `&lt;room&gt;/SPEC.md` for the area you&#x27;re working on.<br>4. `continuity/CURRENT-DECISIONS.md` and `continuity/KNOWN-GAPS.md` only if you need the history.<br><br>## 3. Folder map<br>| Folder | Holds |<br>|---|---|<br>| `kitchen/` `bathroom/` `electrical/` `laundry/` `bedroom/` `living-dining/` `hallway/` `paint-floors/` `hvac/` | One per room or trade; each has `SPEC.md` (governs) plus dated drawings and packages. |<br>| `interior-design/` | Wall treatment, trim, outlet and finish plans (dated revision folders). |<br>| `general/` | Whole-unit items; `from-remodel-hub/` = imported old crew-hub files. |<br>| `sprint/` | Current sprint plan and session agendas. |<br>| `continuity/` | Roadmap, decisions log, known gaps, labor ballpark, history and source snapshots. |<br>| `work-control/` | Agent index, Todoist runbook (dated snapshot), `wiki-source/` (wiki build files). |<br>| `to-triage/` | Drop box for any input (notes, photos, voice memos, session minutes). Claude routes it and moves it to `to-triage/_done/`. |<br>| `sessions/` | One folder per working session: minutes (and transcript when available). |<br>| `_to_delete/` | Marked for removal; only Tisa empties it. |<br><br>Outside this folder: `../building/` (common areas, backyard, alley; `building/earlier-renovations-not-unit-4…/` holds older renovation docs that are **not** Unit 4 — don&#x27;t use them for Unit 4), `../GOOGLE-DOCS-INDEX.md`, and the separate private folder `1231-11th-avenue-private` (leases, costs, payroll, bids — **never share with crew**).<br><br>**Old locations — still readable for history, never the place to work:** Drive &quot;1231 11th Ave - Unit 4 Remodel&quot; (old crew hub, folders 01–12), Drive &quot;11th Ave Unit 4 Bath&quot;. Everything in them was copied here on 2026-11-04/05. If an old file and a file here disagree, the room&#x27;s `SPEC.md` governs.<br><br>## 4. Which version is the latest<br>1. Names carry date and revision: `YYYY-MM-DD_U4_&lt;room or trade&gt;_&lt;what&gt;_R#` (issued drawings may use `RevA`, `RevB`), then `_EN` or `_ES`. English and Spanish are always separate files.<br>2. The latest lives in the topic folder. A replaced file moves, name unchanged, to that folder&#x27;s `_superseded/` (or `history/`). Nothing is deleted.<br>3. If a folder still has more than one live iteration, its `CURRENT.md` names the one that governs.<br>4. `from-remodel-hub/`, `from-unit4-bath-folder/`, `from-my-drive/` are copies imported 2026-11-04 so no mockup or image is lost; they&#x27;re being reconciled. Until then the room&#x27;s `SPEC.md` and the dated files outside them govern.<br><br>## 5. Golden rule: John never has to enter anything himself<br>When John or Tisa tells you something — a task, a measurement, a problem, a question, a decision needed — capture it for them in their words and file it (section 7). Don&#x27;t send them to a form. Confirm back in one line what you filed and where.<br><br>## 6. What each kind of agent can do<br>| You are… | You can |<br>|---|---|<br>| **Claude on Tisa&#x27;s claude.ai account** (this Project, Cowork, Claude Code) | Everything: wiki data via the ArtifactData tool (URL above), republish the wiki via the Artifact tool, edit files here, Todoist via the connector (connected 2026-11-03). |<br>| **John&#x27;s Claude** (claude.ai cloud, often voice on John&#x27;s iPhone) | Read the wiki link, this Drive folder and the Todoist board. Its Drive connector can **create** files but can&#x27;t overwrite existing ones, so it writes session minutes and notes to `to-triage/` as `YYYY-MM-DD_HHMM_session_&lt;topic&gt;.md` with an author line (which Claude, which device, cloud or local). Tisa&#x27;s Claude routes them into the wiki, specs, STATUS-NOW and Todoist. |<br>| **Any other agent** (Dibble, Codex, Gemini, Antigravity) | Read and edit the files here (section 8 rules), update `STATUS-NOW.md`, drop input in `to-triage/`. Access comes from this Drive folder being shared with John&#x27;s Google account as Editor. |<br>| **Any agent with a browser** | Open the wiki and help John use it on his phone. |<br><br>**Dropping input (non-Claude agents):** `to-triage/YYYY-MM-DD_HHMM_&lt;who&gt;_&lt;short&gt;.md`<br>```<br>type: task | fact | decision | note<br>project: kitchen | bathroom | electrical | laundry | bedroom | living-dining | hallway | paint-floors | hvac | general<br>from: &lt;agent&gt; on behalf of &lt;John/Tisa&gt;<br>---<br>&lt;their words&gt;<br>```<br>**Claude capture:** write to the wiki&#x27;s `inbox` collection `{type, project, section, title, details, raw, source:&quot;agent&quot;, from, createdAt, status:&quot;queued&quot;}`, then route it in the same turn.<br><br>## 7. Routing — where each thing goes<br>| Came in | Do this |<br>|---|---|<br>| **Task** | Look for an existing card first (comment rather than duplicate). Create it in the project&#x27;s section — Kitchen / Cocina · Bathroom / Baño · Electrical / Electricidad · Laundry / Lavandería · Walls, Molding &amp; Paint · General &amp; HVAC (bedroom, living-dining, hallway, HVAC, building) · New Tasks (need triage) · Backlog · On Hold or Blocked. Re-check section names live before writing. Plain title; description = State / Trade / Next physical action / Governing source (link to SPEC.md). **Unassigned** unless Tisa names someone. |<br>| **Site fact** | Add to the project&#x27;s SPEC.md with date and &quot;(John, field)&quot;. Comment on the card if it changes one. |<br>| **Decision needed** | Add a wiki `decisions` doc (`status: open`, priority 1 blocking / 2 next / 3 later). Only Tisa locks. |<br>| **Locked decision** (`synced: false`) | Update SPEC.md (mark LOCKED), matching cards, the Spanish crew edition, `STATUS-NOW.md`; set `synced: true`. |<br>| **Field report / session notes** | File facts as above; next steps → unassigned cards; open items → decisions; mark `recorded`. |<br><br>Wiki and cards disagree → the wiki wins (never the reverse without Tisa). Any change you make → update `STATUS-NOW.md` in the same pass.<br><br>## 8. Rules that always hold<br>- Tisa&#x27;s direction is locked; anything an AI produces is a suggestion until she locks it.<br>- Nothing is sent, signed, ordered, paid or scheduled without Tisa&#x27;s approval.<br>- Magicplan and existing drawings first. Never ask John to re-measure what&#x27;s recorded; ask only for the specific missing number.<br>- Crew-facing documents: English first, then a **separate** Spanish edition. Never mix languages. Replies to Tisa in English.<br>- Edit an existing spec rather than making a new file beside it (new files break wiki links).<br>- Superseded files go to `_superseded`; never delete. No credentials in any file here.<br>- **Wiki and Drive mirror each other** (Tisa, 2026-11-06): every wiki page and document list matches a folder in `1231 11th Avenue Unit 4`, and each document sits under the same room in both. When you add or move a document or folder in Drive, update the wiki in the same pass, and the reverse. Example: the Laundry Closet is its own project, so its documents live in `laundry/`, not `electrical/`.<br>- **Spanish for the wiki lives only in the wiki's own text** (Tisa, 2026-11-06): the English/Español toggle. Never create Spanish copies of the .md files in Drive. Crew plans keep their existing English and Spanish PDFs.<br>- **Work record (Beads):** canonical ledger `/Users/tisavo/Work/Projects/1231-11th-avenue/unit-4-renovation` on the MacBook Pro (`.beads/embeddeddolt`, main issue `tisa-wi0.6`). Run `bd where` before writing; never initialize a duplicate ledger; keep existing issue IDs. Agents that can&#x27;t reach it (cloud sessions) record state in `STATUS-NOW.md` and say Beads is pending. Last check from a cloud session (2026-11-05): not reachable, status unverified.<br>- Every session&#x27;s minutes say the date, who attended and which Claude wrote them (account, device, cloud or local).<br>- Say plainly what you verified vs. only wrote. Trust the source file over another agent&#x27;s summary.<br><br>## 9. Maintaining the wiki (Claude only)<br>Source: `work-control/wiki-source/` (template updated 2026-11-05 to include the live Home page and collapsible document lists) — `wiki_template.html`, `build_wiki.py` (embeds the specs and document lists), `brief.py` (embeds this file as the agent brief), `drive_docs.json`, `pdf_blobs.json`. Rebuild, then publish to the same artifact URL. Collections: `decisions` (Tisa/admin write), `decisionNotes`, `reports`, `sessionNotes`, `inbox`.<br><br>## 10. More detail, if needed<br>- Routing detail and history: `work-control/2026-11-03_U4_AgentWork_Index_R2.md`<br>- Todoist runbook (11/2 snapshot, has known errors): `work-control/TODOIST-PROJECT-MANAGER-RUNBOOK.md`<br>- Kitchen governing revision: `kitchen/CURRENT.md`<br></section>
-<div class="mobile"><div class="brand"><a class="homelink" href="#home">Unit 4</a></div><button type="button" class="small langbtn u4-seg-switch" id="mobileLangBtn" role="switch" aria-checked="false" aria-label="Switch to Spanish"><span class="u4-seg-thumb" aria-hidden="true"></span><span class="u4-seg-opt is-a">EN</span><span class="u4-seg-opt is-b">ES</span></button><button type="button" class="small themebtn u4-seg-switch" id="mobileThemeBtn" role="switch" aria-checked="false" aria-label="Switch to dark mode"><span class="u4-seg-thumb" aria-hidden="true"></span><span class="u4-seg-opt is-a"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1.5v1.6M8 12.9v1.6M1.5 8h1.6M12.9 8h1.6M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M12.6 3.4l-1.1 1.1M4.5 11.5l-1.1 1.1"/></svg></span><span class="u4-seg-opt is-b"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.2 9.9A5.4 5.4 0 0 1 6.1 2.8a5.5 5.5 0 1 0 7.1 7.1Z"/></svg></span></button><button type="button" id="menuBtn" class="menubtn" aria-controls="rail" aria-expanded="false">☰ Menu</button><label for="jump" class="sr-only">Go to page</label><select id="jump" aria-label="Go to page"></select></div><div id="railShade" class="shade" hidden></div>
+<div class="mobile"><div class="brand"><a class="homelink" href="#home">Unit 4</a></div><div class="langbtn u4-lang-seg" id="mobileLangBtn" role="radiogroup" aria-label="Language" data-lang="en"><span class="u4-lang-thumb" aria-hidden="true"></span><button type="button" class="u4-lang-opt" role="radio" data-lang="en" aria-checked="true" tabindex="0" aria-label="English (EN)">EN</button><button type="button" class="u4-lang-opt" role="radio" data-lang="es" aria-checked="false" tabindex="-1" aria-label="Español (ES)">ES</button><button type="button" class="u4-lang-opt" role="radio" data-lang="ru" aria-checked="false" tabindex="-1" aria-label="Русский (RU)">RU</button></div><button type="button" class="small themebtn u4-seg-switch" id="mobileThemeBtn" role="switch" aria-checked="false" aria-label="Switch to dark mode"><span class="u4-seg-thumb" aria-hidden="true"></span><span class="u4-seg-opt is-a"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1.5v1.6M8 12.9v1.6M1.5 8h1.6M12.9 8h1.6M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M12.6 3.4l-1.1 1.1M4.5 11.5l-1.1 1.1"/></svg></span><span class="u4-seg-opt is-b"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.2 9.9A5.4 5.4 0 0 1 6.1 2.8a5.5 5.5 0 1 0 7.1 7.1Z"/></svg></span></button><button type="button" id="menuBtn" class="menubtn" aria-controls="rail" aria-expanded="false">☰ Menu</button><label for="jump" class="sr-only">Go to page</label><select id="jump" aria-label="Go to page"></select></div><div id="railShade" class="shade" hidden></div>
 <button id="qpBtn" class="qp-fab" type="button" aria-haspopup="dialog" aria-controls="qpPanel">Send a note</button>
 <div id="qpPanel" class="qp-panel" role="dialog" aria-modal="false" aria-labelledby="qpTitle" hidden>
   <div class="qp-head"><h2 id="qpTitle">Send a note</h2><button type="button" id="qpClose" class="btn ghost" aria-label="Close">Close</button></div>
@@ -2533,7 +2612,7 @@ html[data-theme="dark"] .u4-wpin-btn.is-primary {
     <div class="brand"><a class="homelink" href="#home">Unit 4 Wiki</a><small>1231 11th Ave · Remodel</small></div>
   </nav>
   <main>
-    <div class="bar"><button type="button" class="small" id="backBtn" hidden>← Back</button><button type="button" class="small langbtn u4-seg-switch" id="langBtn" role="switch" aria-checked="false" aria-label="Switch to Spanish"><span class="u4-seg-thumb" aria-hidden="true"></span><span class="u4-seg-opt is-a">EN</span><span class="u4-seg-opt is-b">ES</span></button><button type="button" class="small themebtn u4-seg-switch" id="themeBtn" role="switch" aria-checked="false" aria-label="Switch to dark mode"><span class="u4-seg-thumb" aria-hidden="true"></span><span class="u4-seg-opt is-a"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1.5v1.6M8 12.9v1.6M1.5 8h1.6M12.9 8h1.6M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M12.6 3.4l-1.1 1.1M4.5 11.5l-1.1 1.1"/></svg></span><span class="u4-seg-opt is-b"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.2 9.9A5.4 5.4 0 0 1 6.1 2.8a5.5 5.5 0 1 0 7.1 7.1Z"/></svg></span></button><span class="chip" id="status"><span class="dot"></span><span id="statusText">Saved copy · Nov 19, 2026</span></span><button class="small" id="refresh" hidden>Load latest from Drive</button><span class="u4-build-stamp" id="u4BuildStamp" title="Live build version">Build 2026-11-19 · r3f-usability</span><span id="path"></span></div>
+    <div class="bar"><button type="button" class="small" id="backBtn" hidden>← Back</button><div class="langbtn u4-lang-seg" id="langBtn" role="radiogroup" aria-label="Language" data-lang="en"><span class="u4-lang-thumb" aria-hidden="true"></span><button type="button" class="u4-lang-opt" role="radio" data-lang="en" aria-checked="true" tabindex="0" aria-label="English (EN)">EN</button><button type="button" class="u4-lang-opt" role="radio" data-lang="es" aria-checked="false" tabindex="-1" aria-label="Español (ES)">ES</button><button type="button" class="u4-lang-opt" role="radio" data-lang="ru" aria-checked="false" tabindex="-1" aria-label="Русский (RU)">RU</button></div><button type="button" class="small themebtn u4-seg-switch" id="themeBtn" role="switch" aria-checked="false" aria-label="Switch to dark mode"><span class="u4-seg-thumb" aria-hidden="true"></span><span class="u4-seg-opt is-a"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1.5v1.6M8 12.9v1.6M1.5 8h1.6M12.9 8h1.6M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M12.6 3.4l-1.1 1.1M4.5 11.5l-1.1 1.1"/></svg></span><span class="u4-seg-opt is-b"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.2 9.9A5.4 5.4 0 0 1 6.1 2.8a5.5 5.5 0 1 0 7.1 7.1Z"/></svg></span></button><span class="chip" id="status"><span class="dot"></span><span id="statusText">Saved copy · Nov 19, 2026</span></span><button class="small" id="refresh" hidden>Load latest from Drive</button><span class="u4-build-stamp" id="u4BuildStamp" title="Live build version">Build 2026-11-19 · r3f-usability</span><span id="path"></span></div>
     <article id="doc"></article>
     <section class="field u4-simple-field" id="field" hidden>
       <h2 id="u4FieldHeading">Field note</h2>
@@ -2594,11 +2673,19 @@ const HOURS = @@U4:JSON:data/labor-hours.json@@;
 const SNAP = "Nov 19, 2026";
 const live = {};
 let mcp = null, current = null, unwatch = null;
+function normU4Lang(raw){
+  var s = String(raw || "").trim().toLowerCase();
+  if (s === "ru" || s.indexOf("ru-") === 0 || s === "russian" || s === "русский") return "ru";
+  if (s === "es" || s.indexOf("es-") === 0 || s === "spanish" || s === "español" || s === "espanol") return "es";
+  return "en";
+}
 var LANG = (function(){
   try {
-    var qp = (new URLSearchParams(location.search || "").get("lang") || "").toLowerCase();
-    var val = (qp === "es" || qp === "en") ? qp : ((localStorage.getItem("u4_lang") || localStorage.getItem("u4lang")) === "es" ? "es" : "en");
-    if (qp === "es" || qp === "en") { try { localStorage.setItem("u4_lang", val); } catch(e){} }
+    var qpRaw = (new URLSearchParams(location.search || "").get("lang") || "").trim().toLowerCase();
+    var hasQp = (qpRaw === "en" || qpRaw === "es" || qpRaw === "ru" || qpRaw.indexOf("en-") === 0 || qpRaw.indexOf("es-") === 0 || qpRaw.indexOf("ru-") === 0);
+    var saved = localStorage.getItem("u4_lang") || localStorage.getItem("u4lang") || "en";
+    var val = hasQp ? normU4Lang(qpRaw) : normU4Lang(saved);
+    if (hasQp) { try { localStorage.setItem("u4_lang", val); } catch(e){} }
     document.documentElement.lang = val;
     return val;
   } catch(e){ return "en"; }
@@ -2618,7 +2705,7 @@ const UI = {
   en: {
     unitTitle: "Unit 4 Wiki", unitMobileTitle: "Unit 4", unitSub: "1231 11th Ave · Remodel",
     menuBtn: "☰ Menu", backBtn: "← Back", backShort: "Back", closeBtn: "Close",
-    langToggleLabel: "Español (MX)", langToggleAria: "Switch to Spanish",
+    langToggleLabel: "Español (MX)", langToggleAria: "Switch to Spanish", langGroupAria: "Language",
     themeToDarkLabel: "☾ Dark", themeToDarkAria: "Switch to dark mode",
     themeToLightLabel: "☀ Light", themeToLightAria: "Switch to light mode",
     interactiveBadge: "INTERACTIVE",
@@ -2688,7 +2775,7 @@ const UI = {
   es: {
     unitTitle: "Wiki Unidad 4", unitMobileTitle: "Unidad 4", unitSub: "1231 11th Ave · Remodelación",
     menuBtn: "☰ Menú", backBtn: "← Atrás", backShort: "Atrás", closeBtn: "Cerrar",
-    langToggleLabel: "English (EN)", langToggleAria: "Cambiar a inglés",
+    langToggleLabel: "English (EN)", langToggleAria: "Cambiar a inglés", langGroupAria: "Idioma",
     themeToDarkLabel: "☾ Oscuro", themeToDarkAria: "Cambiar a modo oscuro",
     themeToLightLabel: "☀ Claro", themeToLightAria: "Cambiar a modo claro",
     interactiveBadge: "INTERACTIVO",
@@ -2754,10 +2841,80 @@ const UI = {
     dictateAria: "Dictar nota por voz", sendBtn: "Enviar", sendNoteFab: "Enviar una nota",
     allFieldReportsLink: "Todos los reportes → Planificación", openDecisionsLink: "Decisiones abiertas → Planificación",
     noFieldReportsYet: "Todavía no hay reportes de obra."
+  },
+  ru: {
+    unitTitle: "Вики Кв. 4", unitMobileTitle: "Кв. 4", unitSub: "1231 11th Ave · Ремонт",
+    menuBtn: "☰ Меню", backBtn: "← Назад", backShort: "Назад", closeBtn: "Закрыть",
+    langToggleLabel: "Русский (RU)", langToggleAria: "Выбор языка (EN, ES, RU)", langGroupAria: "Язык",
+    themeToDarkLabel: "☾ Тёмная", themeToDarkAria: "Включить тёмную тему",
+    themeToLightLabel: "☀ Светлая", themeToLightAria: "Включить светлую тему",
+    interactiveBadge: "ИНТЕРАКТИВНЫЙ",
+    rendersHeading: "Рендеры и макеты",
+    rendersNote: "Концептуальные рендеры и макеты — приоритет всегда за размерами в SPEC помещения",
+    rendersAddBtn: "+ Добавить рендер / макет",
+    rendersSubmitBtn: "Загрузить рендер",
+    rendersEmpty: "Рендеров и макетов пока нет — нажмите «+ Добавить рендер / макет» или «📷 Сделать фото».",
+    referencesHeading: "Справочные фото с объекта",
+    referencesNoteFallback: "Фотографии с площадки, узлы и загруженные фото бригады",
+    referencesAddBtn: "+ Добавить фото с объекта",
+    referencesSubmitBtn: "Загрузить фото",
+    referencesEmpty: "Справочных фото пока нет — нажмите «+ Добавить фото с объекта» или «📷 Сделать фото».",
+    galUploading: "Загрузка…",
+    galUploaded: "Фото загружено и сохранено для этого помещения.",
+    galCaptionPlaceholder: "Краткая подпись (необязательно)…",
+    galFromLabel: "От:",
+    galCancelBtn: "Отмена",
+    galRetryBtn: "Повторить",
+    galOfflineWarn: "Нет связи с живой галереей на Mac mini. Статические фото доступны. В Chrome/iPhone с Tailscale разрешите доступ к локальной сети.",
+    galTagUploaded: "Загружено",
+    galTagCurated: "Эталон",
+    galTagDeferred: "Отложено",
+    galTagRetired: "ОТМЕНЕНО",
+    lbOpenDoc: "Открыть оригинал / документ ↗",
+    lbPrevAria: "Предыдущее фото",
+    lbNextAria: "Следующее фото",
+    pinPillIdle: "⊕ Отметить точку",
+    pinPillArmed: "✕ Нажмите точку",
+    pinArmBanner: "Нажмите любую точку на странице, фото или PDF · Esc — отмена",
+    pinPlaceholder: "Задайте вопрос или укажите правку для этого места…",
+    pinAskAiBtn: "Спросить ИИ",
+    pinSendCorrBtn: "Отправить правку",
+    pinSending: "Отправка…",
+    pinSentOk: "Правка отправлена в to-triage.",
+    pinSentErr: "Не удалось связаться с Mac mini — проверьте локальную сеть.",
+    pinNeedNote: "Сначала напишите или надиктуйте заметку для этой точки.",
+    pinPromptDefault: "Проверь это место и объясни, какие требования здесь действуют.",
+    pinMoved: "Метка перемещена.",
+    pinMicAria: "Надиктовать голосом",
+    zoomOutAria: "Отдалить",
+    zoomInAria: "Приблизить",
+    zoomResetAria: "Сбросить масштаб до 100%",
+    zoomDiagramLbl: "Масштаб схемы",
+    grpOverview: "Обзор", grpPreviews: "Просмотр PDF", grpProjects: "Проекты",
+    previewsEmpty: "Нажмите любой PDF, чтобы закрепить его здесь", clearAll: "Очистить", inPreviews: "В просмотре",
+    openPreviewsLbl: "Открытые PDF:", previewTabsLbl: "Просмотр:",
+    savedCopy: "Сохранённая копия · 19 нояб. 2026", latestFromDrive: "Актуально из Drive", checkingDrive: "проверка Drive…",
+    loadLatestDrive: "Обновить из Drive", docPreview: "Просмотр документа", sharedDecList: "Общий список решений",
+    agentBrief: "Памятка для агентов", openInDrive: "Открыть в Google Drive", openFullPage: "На весь экран",
+    loadingDoc: "Загрузка документа…", drivePreviewHint: "Предпросмотр из Google Drive. Если пусто — нажмите «Открыть в Google Drive».",
+    roomsAndProjects: "Помещения", whereThingsLive: "Ссылки проекта", scaleRemainingWork: "Остаток работ (ориентировочно)",
+    scaleRemainingDesc: "Примерная оценка оставшихся трудозатрат. Всего около ",
+    checklistTitle: "Чек-лист работ", doneWord: "готово", todoWord: "осталось", stepsWord: "этапов",
+    docSingular: "док.", docPlural: "док.", documentsHeading: "Документы", historyHeading: "Архив",
+    awaitingReview: "На проверке", originalTag: "Закреплено", englishOnlyTag: "Только EN",
+    fullPlanDetails: "Подробнее", techSpecsDetails: "Подробнее",
+    subnavOverviewTab: "Обзор", fieldNoteHeading: "Заметка с площадки", fromYourName: "От кого (имя)",
+    fromPlaceholder: "Выберите имя ниже или введите…", aboutTopic: "Тема",
+    fieldPlaceholder: "Напишите заметку или нажмите микрофон справа для диктовки…", addPhotoBtn: "📎 Прикрепить фото",
+    takePhotoBtn: "📷 Сделать фото",
+    photoEncourage: "Прикладывайте фото везде, где это возможно", removePhotoAria: "Удалить фото",
+    dictateAria: "Надиктовать заметку голосом", sendBtn: "Отправить", sendNoteFab: "Заметка",
+    allFieldReportsLink: "Все полевые отчёты → Планирование проекта", openDecisionsLink: "Открытые решения → Планирование проекта",
+    noFieldReportsYet: "Полевых отчётов пока нет."
   }
 };
-function t(k){ const dict = (LANG==="es" ? UI.es : UI.en); return dict[k] || UI.en[k] || k; }
-function pageLabel(p){ if (!p) return ""; return LANG==="es" ? (p.labelEs || p.labelEn || p.label) : (p.labelEn || p.label); }
+function t(k){ const dict = (LANG==="ru" ? UI.ru : (LANG==="es" ? UI.es : UI.en)); return dict[k] || UI.en[k] || k; }
+function pageLabel(p){ if (!p) return ""; if (LANG==="ru") return p.labelRu || p.labelEn || p.label; return LANG==="es" ? (p.labelEs || p.labelEn || p.label) : (p.labelEn || p.label); }
 function groupLabel(g){ if (g==="Overview") return t("grpOverview"); if (g==="Projects") return t("grpProjects"); return g; }
 
 const DOCS = @@U4:PERPAGE:DOCS@@;
@@ -2786,14 +2943,24 @@ const KITCHEN_HOSTED_LINKS = {
   "2026-11-20_Murphy-Door-Interactive_ES": "./plans/murphy-door/index.html?lang=es",
   "2026-11-20_Kitchen-Electrical-Interactive_EN": "./plans/kitchen-electrical/index.html?lang=en",
   "2026-11-20_Kitchen-Electrical-Interactive_ES": "./plans/kitchen-electrical/index.html?lang=es",
-  "2026-11-24_Bathroom-Tile-Interactive_EN": "./plans/bathroom-tile/index.html?lang=en",
-  "2026-11-24_Bathroom-Tile-Interactive_ES": "./plans/bathroom-tile/index.html?lang=es",
   "2026-11-24_Bathroom-Measurements-Interactive_EN": "./plans/bathroom-measurements/index.html?wall=room&view=flat&lang=en",
   "2026-11-24_Bathroom-Measurements-Interactive_ES": "./plans/bathroom-measurements/index.html?wall=room&view=flat&lang=es",
+  "2026-11-24_Bathroom-Measurements-Interactive_RU": "./plans/bathroom-measurements/index.html?wall=room&view=flat&lang=ru",
   "2026-11-23_U4_Module1_Kitchen-Electrical_R5_HTML_EN": "./wiki-docs/2026-11-23_U4_Module1_Kitchen-Electrical_R5_EN.html",
   "2026-11-23_U4_Module1_Kitchen-Electrical_R5_HTML_ES": "./wiki-docs/2026-11-23_U4_Module1_Kitchen-Electrical_R5_ES.html",
+  "2026-11-20_Kitchen-Vent-Hood-Wall-Interactive_RU": "./plans/kitchen-west-ks4/index.html?lang=ru",
+  "2026-11-20_Kitchen-Floor-Plan-Interactive_RU": "./plans/kitchen-floor-plan/index.html?lang=ru",
+  "2026-11-20_Attic-Hatch-Interactive_RU": "./plans/attic-hatch/index.html?lang=ru",
+  "2026-11-20_HVAC-Layout-Interactive_RU": "./plans/hvac-layout/index.html?lang=ru",
+  "2026-11-20_Murphy-Door-Interactive_RU": "./plans/murphy-door/index.html?lang=ru",
+  "2026-11-20_Kitchen-Electrical-Interactive_RU": "./plans/kitchen-electrical/index.html?lang=ru",
+  "2026-11-23_U4_Module1_Kitchen-Electrical_R5_HTML_RU": "./wiki-docs/2026-11-23_U4_Module1_Kitchen-Electrical_R5_RU.html",
   "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_HTML_EN": "./wiki-docs/2026-11-23_U4_Module2_Whole-Unit-Segments_R5_EN.html",
-  "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_HTML_ES": "./wiki-docs/2026-11-23_U4_Module2_Whole-Unit-Segments_R5_ES.html"
+  "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_HTML_ES": "./wiki-docs/2026-11-23_U4_Module2_Whole-Unit-Segments_R5_ES.html",
+  "2026-11-24_Bathroom-Tile-Interactive_EN": "./plans/bathroom-tile/index.html?lang=en",
+  "2026-11-24_Bathroom-Tile-Interactive_ES": "./plans/bathroom-tile/index.html?lang=es",
+  "2026-11-24_Bathroom-Tile-Interactive_RU": "./plans/bathroom-tile/index.html?lang=ru",
+  "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_HTML_RU": "./wiki-docs/2026-11-23_U4_Module2_Whole-Unit-Segments_R5_RU.html"
 };
 
 function isDocVisibleInLang(d, list, lang){
@@ -2801,26 +2968,38 @@ function isDocVisibleInLang(d, list, lang){
   const dl = d.docLang || d.lang || "both";
   if (dl === "both") return true;
   if (l === "en") return dl === "en";
-  if (dl === "es") return true;
-  if (dl === "en") {
-    if (!d.pairId) return true;
-    return !(list || []).some(x => x !== d && x.pairId === d.pairId && (x.docLang || x.lang) === "es");
+  if (l === "es") {
+    if (dl === "es") return true;
+    if (dl === "en") {
+      if (!d.pairId) return true;
+      return !(list || []).some(x => x !== d && x.pairId === d.pairId && (x.docLang || x.lang) === "es");
+    }
+    return false;
   }
-  return true;
+  if (l === "ru") {
+    if (dl === "ru") return true;
+    if (dl === "en") {
+      if (!d.pairId) return true;
+      return !(list || []).some(x => x !== d && x.pairId === d.pairId && (x.docLang || x.lang) === "ru");
+    }
+    return false;
+  }
+  return dl === "en";
 }
 
-const MON_EN=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"], MON_ES=["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+const MON_EN=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"], MON_ES=["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"], MON_RU=["янв.","февр.","марта","апр.","мая","июня","июля","авг.","сент.","окт.","нояб.","дек."];
 function niceDate(iso){
   const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(iso||"");
   if (!m) return "";
+  if (LANG==="ru") return (+m[3])+" "+MON_RU[+m[2]-1];
   return LANG==="es" ? (+m[3])+" "+MON_ES[+m[2]-1] : MON_EN[+m[2]-1]+" "+(+m[3]);
 }
 function docLabel(d){
-  let rawTitle = (LANG==="es" && d.titleEs) ? d.titleEs : (d.titleEn || d.title || "");
+  let rawTitle = (LANG==="ru" && d.titleRu) ? d.titleRu : ((LANG==="es" && d.titleEs) ? d.titleEs : (d.titleEn || d.title || ""));
   let s = rawTitle.replace(/\.(pdf|html|md|png|jpe?g|xlsx|docx|csv)$/i,"");
   const m = (d.title||"").match(/^(\d{4}-\d{2}-\d{2})_?/);
   let date = d.date || (m?m[1]:"") || DOC_DATES[d.id] || "";
-  if (!d.titleEn && !d.titleEs) {
+  if (!d.titleEn && !d.titleEs && !d.titleRu) {
     s = s.replace(/^\d{4}-\d{2}-\d{2}_?/,"").replace(/^U4_/,"").replace(/_/g," ").replace(/-/g," ").replace(/\s+/g," ").trim();
   }
   return {t:s, date:date};
@@ -2849,7 +3028,7 @@ function enhanceInteractiveLinks(rootEl){
     }
   });
 }
-function docKind(d){ if (isInteractiveDoc(d)) return LANG==="es" ? "Plano interactivo" : "Interactive plan"; if (isPdf(d)) return "pdf"; if ((d.title||"").indexOf(".")<0) return "doc"; const e=(d.title.split(".").pop()||"").toLowerCase(); return e==="jpeg"?"jpg":e; }
+function docKind(d){ if (isInteractiveDoc(d)) return LANG==="ru" ? "Интерактивный план" : (LANG==="es" ? "Plano interactivo" : "Interactive plan"); if (isPdf(d)) return "pdf"; if ((d.title||"").indexOf(".")<0) return "doc"; const e=(d.title.split(".").pop()||"").toLowerCase(); return e==="jpeg"?"jpg":e; }
 function docUrl(d){ return "https://drive.google.com/file/d/"+d.id+"/view"; }
 function isPdf(d){ return Boolean(d && (/\.pdf$/i.test(d.title||"") || (typeof PDF_BLOBS==="object" && PDF_BLOBS && PDF_BLOBS[d.id]))); }
 function currentWikiTheme(){
@@ -2905,7 +3084,7 @@ function withPlanParams(href){
   var qIdx = base.indexOf("?");
   var path = qIdx >= 0 ? base.slice(0, qIdx) : base;
   var sp = new URLSearchParams(qIdx >= 0 ? base.slice(qIdx + 1) : "");
-  sp.set("lang", LANG === "es" ? "es" : "en");
+  sp.set("lang", normU4Lang(LANG));
   sp.set("theme", currentWikiTheme());
   return path + "?" + sp.toString() + hash;
 }
@@ -3010,40 +3189,42 @@ window.removeFromPreviews = removeFromPreviews;
 window.clearAllPreviews = clearAllPreviews;
 
 const LINKS = [
-  ["Magicplan MASTER","Plano maestro Magicplan","Measurements & layout","Medidas y distribución","https://cloud.magicplan.app/plan/abb2d2c6-aa1c-4a88-a57e-1260847b6410"],
-  ["Unit 4 Google Drive","Google Drive Unidad 4","Specs & drawings","Especificaciones y planos","https://drive.google.com/drive/folders/1NnUfcuJfnzcjJz3XRvDQDhfvtMkrlSOr"],
-  ["Todoist Board","Tablero Todoist","Active tasks & photos","Tareas y fotos","https://app.todoist.com/app/project/6hcMQpGhXWprg6m7"]
+  ["Magicplan MASTER","Plano maestro Magicplan","Мастер-план Magicplan","Measurements & layout","Medidas y distribución","Замеры и планировка","https://cloud.magicplan.app/plan/abb2d2c6-aa1c-4a88-a57e-1260847b6410"],
+  ["Unit 4 Google Drive","Google Drive Unidad 4","Google Диск — Квартира 4","Specs & drawings","Especificaciones y planos","Спецификации и чертежи","https://drive.google.com/drive/folders/1NnUfcuJfnzcjJz3XRvDQDhfvtMkrlSOr"],
+  ["Todoist Board","Tablero Todoist","Доска Todoist","Active tasks & photos","Tareas y fotos","Активные задачи и фото","https://app.todoist.com/app/project/6hcMQpGhXWprg6m7"]
 ];
 
 function unescapeDrive(s){ return s.replace(/\\([\\`*_{}\[\]()#+\-.!|>~<=])/g,"$1"); }
 function render(md){
   let html = DOMPurify.sanitize(marked.parse(String(md||""), {gfm:true}));
   html = html.replace(/<table>/g,'<div class="tbl"><table>').replace(/<\/table>/g,'</table></div>');
-  const lockWord = LANG==="es" ? "DECIDIDO" : "LOCKED";
-  const openWord = LANG==="es" ? "PENDIENTE" : "OPEN";
+  const lockWord = LANG==="ru" ? "УТВЕРЖДЕНО" : (LANG==="es" ? "DECIDIDO" : "LOCKED");
+  const openWord = LANG==="ru" ? "ОТКРЫТО" : (LANG==="es" ? "PENDIENTE" : "OPEN");
   html = html.replace(/✅/g,'<span class="lock">'+lockWord+'</span>').replace(/❓/g,'<span class="open">'+openWord+'</span>');
   return html;
 }
 function hoursBlock(){
-  const es = LANG==="es";
+  const es = LANG==="es", ru = LANG==="ru";
   const max = Math.max(...HOURS.map(h=>h[3]));
   const tot = HOURS.reduce((a,h)=>[a[0]+h[1],a[1]+h[2],a[2]+h[3]],[0,0,0]);
   const roomNameMapEs = {"Kitchen":"Cocina","Bathroom":"Baño","Paint & Floors":"Pintura y pisos","Electrical":"Electricidad","Living & Dining":"Sala y comedor","Bedroom":"Recámara","Hallway":"Pasillo","Laundry":"Lavandería","General":"General","HVAC (our side)":"HVAC (nuestro lado)"};
+  const roomNameMapRu = {"Kitchen":"Кухня","Bathroom":"Ванная","Paint & Floors":"Покраска и полы","Electrical":"Электрика","Living & Dining":"Гостиная и столовая","Bedroom":"Спальня","Hallway":"Коридор","Laundry":"Прачечная","General":"Общие работы","HVAC (our side)":"Отопление HVAC (наша часть)"};
+  const hUnit = ru ? "ч" : "h";
   let rows = HOURS.map(([p,lo,li,hi])=>{
-    const lbl = es ? (roomNameMapEs[p]||p) : p;
-    return `<div class="hrow"><span>${lbl}</span><div class="track" aria-label="${lbl}: ${lo} - ${hi} h"><div class="range" style="left:${lo/max*100}%;width:${(hi-lo)/max*100}%"></div><div class="likely" style="left:calc(${li/max*100}% - 1px)"></div></div><span class="num">${li} h</span></div>`;
+    const lbl = ru ? (roomNameMapRu[p]||p) : (es ? (roomNameMapEs[p]||p) : p);
+    return `<div class="hrow"><span>${lbl}</span><div class="track" aria-label="${lbl}: ${lo} - ${hi} ${hUnit}"><div class="range" style="left:${lo/max*100}%;width:${(hi-lo)/max*100}%"></div><div class="likely" style="left:calc(${li/max*100}% - 1px)"></div></div><span class="num">${li} ${hUnit}</span></div>`;
   }).join("");
-  return `<h2>${t("scaleRemainingWork")}</h2><p>${t("scaleRemainingDesc")}<b>${Math.round(tot[1])} h</b> (${Math.round(tot[0])}–${Math.round(tot[2])} h).</p><div class="hours">${rows}</div>`;
+  return `<h2>${t("scaleRemainingWork")}</h2><p>${t("scaleRemainingDesc")}<b>${Math.round(tot[1])} ${hUnit}</b> (${Math.round(tot[0])}–${Math.round(tot[2])} ${hUnit}).</p><div class="hours">${rows}</div>`;
 }
 // Home is the menu on phones: one list of rooms, their subrooms and their instruction packets.
 function homeMenuBlock(){
-  const es = LANG==="es";
+  const es = LANG==="es", ru = LANG==="ru";
   const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const prog = k => { const it=(CHECKLISTS[k]&&CHECKLISTS[k].items)||[]; return it.length ? '<span class="u4-hm-prog">'+it.filter(x=>x[0]).length+'/'+it.length+'</span>' : ''; };
   const packets = (k, deep) => packetsFor(k).map(pk=>{
     const isInt = Boolean(packetHostedPlanUrl(pk));
     const cls = 'u4-hm-packet'+(deep?' is-deep':'')+(isInt?' is-interactive':'');
-    const baseAttr = isInt ? ' data-u4-plan-base="'+esc(KITCHEN_HOSTED_LINKS[packetDocId(pk)])+'"' : '';
+    const baseAttr = isInt ? ' data-u4-plan-base="'+esc(KITCHEN_HOSTED_LINKS[packetDocId(pk)] || packetDocId(pk))+'"' : '';
     const inner = isInt ? '<span class="u4-hm-text"><span class="u4-hm-title">'+esc(packetTitle(pk))+'</span></span>'+interactivePillHtml("is-compact") : esc(packetTitle(pk));
     return '<a class="'+cls+'" href="'+esc(packetHref(pk))+'"'+baseAttr+'>'+inner+'</a>';
   }).join("");
@@ -3051,28 +3232,32 @@ function homeMenuBlock(){
   const tops = PAGES.filter(x=>x.group==="Projects" && !x.parent);
   const groups = tops.map(p=>'<div class="u4-hm-group">'+room(p,false)+PAGES.filter(c=>c.parent===p.key).map(c=>room(c,true)).join("")+packets(p.key,false)+'</div>').join("");
   const plan = PAGES.filter(x=>x.key==="roadmap"||x.key==="decisions").map(p=>'<a href="#'+p.key+'">'+esc(pageLabel(p))+'</a>').join(" · ");
-  return '<nav class="u4-home-menu" aria-label="'+(es?"Cuartos y guías":"Rooms and guides")+'"><h2>'+(es?"Cuartos y guías":"Rooms and guides")+'</h2>'+groups
-    + (plan?'<p class="u4-hm-plan">'+(es?"Planeación: ":"Planning: ")+plan+'</p>':'')+'</nav>';
+  const rgHeading = ru ? "Помещения и инструкции" : (es ? "Cuartos y guías" : "Rooms and guides");
+  const plPrefix = ru ? "Планирование: " : (es ? "Planeación: " : "Planning: ");
+  return '<nav class="u4-home-menu" aria-label="'+rgHeading+'"><h2>'+rgHeading+'</h2>'+groups
+    + (plan?'<p class="u4-hm-plan">'+plPrefix+plan+'</p>':'')+'</nav>';
 }
 // A room's subrooms and guides, listed the same way Home lists rooms (one pattern everywhere).
 function roomAreasBlock(p){
   const kids = PAGES.filter(c=>c.parent===p.key);
   const own = packetsFor(p.key);
   if (!kids.length && !own.length) return "";
-  const es = LANG==="es";
+  const es = LANG==="es", ru = LANG==="ru";
   const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const prog = k => { const it=(CHECKLISTS[k]&&CHECKLISTS[k].items)||[]; return it.length ? '<span class="u4-hm-prog">'+it.filter(x=>x[0]).length+'/'+it.length+'</span>' : ''; };
   const pkt = (pk, deep) => {
     const isInt = Boolean(packetHostedPlanUrl(pk));
     const cls = 'u4-hm-packet'+(deep?' is-deep':'')+(isInt?' is-interactive':'');
-    const baseAttr = isInt ? ' data-u4-plan-base="'+esc(KITCHEN_HOSTED_LINKS[packetDocId(pk)])+'"' : '';
+    const baseAttr = isInt ? ' data-u4-plan-base="'+esc(KITCHEN_HOSTED_LINKS[packetDocId(pk)] || packetDocId(pk))+'"' : '';
     const txt = '<span class="u4-hm-text"><span class="u4-hm-title">'+esc(packetTitle(pk))+'</span>'+(packetNote(pk)?'<span class="u4-hm-note">'+esc(packetNote(pk))+'</span>':'')+'</span>';
     return '<a class="'+cls+'" href="'+esc(packetHref(pk))+'"'+baseAttr+'>'+(isInt ? txt+interactivePillHtml("is-compact") : esc(packetTitle(pk))+(packetNote(pk)?'<span class="u4-hm-note">'+esc(packetNote(pk))+'</span>':''))+'</a>';
   };
   let rows = "";
   kids.forEach(c=>{ rows += '<a class="u4-hm-room is-area" href="#'+c.key+'"><span>'+esc(pageLabel(c))+'</span>'+prog(c.key)+'</a>' + packetsFor(c.key).map(pk=>pkt(pk,true)).join(""); });
   rows += own.map(pk=>pkt(pk,false)).join("");
-  return '<nav class="u4-room-areas" id="sec-packets" aria-label="'+(es?"En este cuarto":"In this room")+'"><h2>'+(kids.length?(es?"Áreas y guías":"Areas and guides"):(es?"Guías":"Guides"))+'</h2><div class="u4-hm-group">'+rows+'</div></nav>';
+  const ariaRoom = ru ? "В этом помещении" : (es ? "En este cuarto" : "In this room");
+  const headTxt = kids.length ? (ru ? "Зоны и инструкции" : (es ? "Áreas y guías" : "Areas and guides")) : (ru ? "Инструкции" : (es ? "Guías" : "Guides"));
+  return '<nav class="u4-room-areas" id="sec-packets" aria-label="'+ariaRoom+'"><h2>'+headTxt+'</h2><div class="u4-hm-group">'+rows+'</div></nav>';
 }
 function roomsBlock(){
   const es = LANG==="es";
@@ -3097,13 +3282,15 @@ function roomsBlock(){
   }).join("")}</div>`;
 }
 function linksBlock(){
-  const es = LANG==="es";
-  return `<h2>${t("whereThingsLive")}</h2><div class="links">${LINKS.map(([tEn,tEs,dEn,dEs,u])=>`<a href="${u}" target="_blank" rel="noopener"><b>${es?tEs:tEn}</b><span>${es?dEs:dEn}</span></a>`).join("")}</div>`;
+  const es = LANG==="es", ru = LANG==="ru";
+  return `<h2>${t("whereThingsLive")}</h2><div class="links">${LINKS.map(([tEn,tEs,tRu,dEn,dEs,dRu,u])=>`<a href="${u}" target="_blank" rel="noopener"><b>${ru?tRu:(es?tEs:tEn)}</b><span>${ru?dRu:(es?dEs:dEn)}</span></a>`).join("")}</div>`;
 }
-function goalsBlock(){ return U4_HTML[LANG==="es" ? "pages/home/this-week.es.html" : "pages/home/this-week.en.html"]; }
-function aboutBlock(){ return U4_HTML[LANG==="es" ? "pages/home/about.es.html" : "pages/home/about.en.html"]; }
+function goalsBlock(){ return U4_HTML[LANG==="ru" ? "pages/home/this-week.ru.html" : (LANG==="es" ? "pages/home/this-week.es.html" : "pages/home/this-week.en.html")]; }
+function aboutBlock(){ return U4_HTML[LANG==="ru" ? "pages/home/about.ru.html" : (LANG==="es" ? "pages/home/about.es.html" : "pages/home/about.en.html")]; }
 function homeHeader(){
-  return '<header class="home-head"><div class="home-title" role="heading" aria-level="1">'+(LANG==="es"?"Wiki Unidad 4":"Unit 4 Wiki")+'</div><div class="home-sub">1231 11th Avenue · '+(LANG==="es"?"Remodelación":"Remodel")+'</div></header>';
+  const titleTxt = LANG==="ru" ? "Вики Квартиры 4" : (LANG==="es" ? "Wiki Unidad 4" : "Unit 4 Wiki");
+  const subTxt = LANG==="ru" ? "Реконструкция" : (LANG==="es" ? "Remodelación" : "Remodel");
+  return '<header class="home-head"><div class="home-title" role="heading" aria-level="1">'+titleTxt+'</div><div class="home-sub">1231 11th Avenue · '+subTxt+'</div></header>';
 }
 
 var repAllDocs = [], repAllUnsub = null;
@@ -3115,7 +3302,7 @@ function renderAllReports(doc, h){
   repAllDocs.forEach(d=>{
     const r = d.data()||{}; const div = document.createElement("div"); div.className = "rep";
     const meta = document.createElement("div"); meta.className = "meta";
-    [[label(r.project),"tag"],[r.kind||"Note","tag"],[r.item||"",""],[fmtTime(r.createdAt),""],[r.status==="recorded"?(LANG==="es"?"Registrado":"Recorded"):(LANG==="es"?"Nuevo":"New"), r.status==="recorded"?"tag done":"tag"]].forEach(([s,c])=>{ if(!s) return; const sp=document.createElement("span"); if(c) sp.className=c; sp.textContent=s; meta.appendChild(sp); });
+    [[label(r.project),"tag"],[r.kind||"Note","tag"],[r.item||"",""],[fmtTime(r.createdAt),""],[r.status==="recorded"?(LANG==="ru"?"Записано":(LANG==="es"?"Registrado":"Recorded")):(LANG==="ru"?"Новое":(LANG==="es"?"Nuevo":"New")), r.status==="recorded"?"tag done":"tag"]].forEach(([s,c])=>{ if(!s) return; const sp=document.createElement("span"); if(c) sp.className=c; sp.textContent=s; meta.appendChild(sp); });
     div.appendChild(meta);
     if (r.text){ const tx=document.createElement("div"); tx.className="txt"; tx.textContent=r.text; div.appendChild(tx); }
     if (r.audio && /^[a-f0-9]{32}$/.test(r.audio)){ const au=document.createElement("audio"); au.controls=true; au.preload="none"; au.src="/_blob/"+r.audio; au.style.maxWidth="100%"; div.appendChild(au); }
@@ -3145,8 +3332,9 @@ function ckWatchRoom(key){
 function formatChecklistText(rawText, escFn){
   let html = escFn(rawText);
   const es = (typeof LANG !== "undefined" && LANG === "es");
+  const ru = (typeof LANG !== "undefined" && LANG === "ru");
   html = html.replace(/(https?:\/\/[^\s<)]+|\.\/wiki-docs\/attic-opening-plan\.html)/g, function(url){
-    if (url.indexOf("attic-opening-plan.html") !== -1) return '<a href="./wiki-docs/attic-opening-plan.html">'+(es ? "Plan de Apertura al Ático (EN/ES)" : "Attic Opening Plan (EN/ES)")+'</a>';
+    if (url.indexOf("attic-opening-plan.html") !== -1) return '<a href="./wiki-docs/attic-opening-plan.html">'+(ru ? "План проёма на чердак" : (es ? "Plan de Apertura al Ático (EN/ES)" : "Attic Opening Plan (EN/ES)"))+'</a>';
     return '<a href="'+url+'" target="_blank" rel="noopener">'+url+'</a>';
   });
   html = html.split(/(<a\b[^>]*>.*?<\/a>)/g).map(function(part, idx){
@@ -3161,22 +3349,35 @@ function formatChecklistText(rawText, escFn){
 }
 function ckBlock(key){
   const c=CHECKLISTS[key]; if (!c) return "";
-  const es = LANG==="es"; const esc=s=>String(s).replace(/[&<>"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
+  const es = LANG==="es", ru = LANG==="ru"; const esc=s=>String(s).replace(/[&<>"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
   const base = c.items || [];
   const src = ckLive[key] || base.map(i=>[i[0], i[1]]);
-  const rows = src.map(([d,tTxt])=>{ const hit=base.find(b=>b[1]===tTxt); return [d, es && hit ? hit[2] : tTxt]; });
+  const rows = src.map(([d,tTxt])=>{
+    const hit = base.find(b=>b[1]===tTxt);
+    if (!hit) return [d, tTxt, ""];
+    const stObj = (hit.length > 4 && hit[4] && typeof hit[4] === "object") ? hit[4] : null;
+    const stTxt = stObj ? (ru ? (stObj.statusRu || stObj.statusEn || "") : (es ? (stObj.statusEs || stObj.statusEn || "") : (stObj.statusEn || ""))) : "";
+    if (ru) return [d, hit[3] || hit[1] || tTxt, stTxt];
+    if (es) return [d, hit[2] || hit[1] || tTxt, stTxt];
+    return [d, tTxt, stTxt];
+  });
+  const topNote = ru ? (c.statusRu || c.noteRu || c.statusEn || c.noteEn || "") : (es ? (c.statusEs || c.noteEs || c.statusEn || c.noteEn || "") : (c.statusEn || c.noteEn || ""));
+  const topNoteHtml = topNote ? '<p class="ck-note">'+formatChecklistText(topNote, esc)+'</p>' : '';
   const done = rows.filter(r=>r[0]).length;
-  return '<section class="ck" id="sec-checklist"><h2>'+t("checklistTitle")+' <span class="ck-n">'+done+' / '+rows.length+' '+t("doneWord")+'</span></h2><ul>'
-    + rows.map(([d,tTxt])=>'<li class="'+(d?"is-done":"")+'"><span class="chk'+(d?"":" todo")+'" aria-label="'+(d?t("doneWord"):t("todoWord"))+'">'+(d?"✓":"")+'</span><span>'+formatChecklistText(tTxt, esc)+'</span></li>').join("")
+  return '<section class="ck" id="sec-checklist"><h2>'+t("checklistTitle")+' <span class="ck-n">'+done+' / '+rows.length+' '+t("doneWord")+'</span></h2>'+topNoteHtml+'<ul>'
+    + rows.map(([d,tTxt,stTxt])=>'<li class="'+(d?"is-done":"")+'"><span class="chk'+(d?"":" todo")+'" aria-label="'+(d?t("doneWord"):t("todoWord"))+'">'+(d?"✓":"")+'</span><span>'+formatChecklistText(tTxt, esc)+(stTxt?' <em class="ck-st">('+esc(stTxt)+')</em>':'')+'</span></li>').join("")
     + '</ul></section>';
 }
 
 function keyFactsBlock(key){
   const list = ROOM_KEY_FACTS[key]; if (!list || !list.length) return "";
-  const es = LANG==="es";
+  const es = LANG==="es", ru = LANG==="ru";
   const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   return '<div class="u4-facts-strip" id="sec-facts">'
-    + list.map(f => '<div class="u4-fact-card"><span class="u4-fact-k">'+esc(es?f.kEs:f.kEn)+'</span><span class="u4-fact-v">'+esc(es?f.vEs:f.vEn)+'</span></div>').join("")
+    + list.map(f => {
+        const st = ru ? (f.statusRu || f.statusEn || "") : (es ? (f.statusEs || f.statusEn || "") : (f.statusEn || ""));
+        return '<div class="u4-fact-card"><span class="u4-fact-k">'+esc(ru?(f.kRu||f.kEn):(es?f.kEs:f.kEn))+'</span><span class="u4-fact-v">'+esc(ru?(f.vRu||f.vEn):(es?f.vEs:f.vEn))+(st?' · '+esc(st):'')+'</span></div>';
+      }).join("")
     + '</div>';
 }
 
@@ -3187,9 +3388,10 @@ function leadPictureIndex(key){
 }
 function leadPictureBlock(key){
   const i = leadPictureIndex(key); if (i<0) return "";
-  const es = LANG==="es"; const it = UNIFIED_VISUALS[key].items[i];
+  const es = LANG==="es", ru = LANG==="ru"; const it = UNIFIED_VISUALS[key].items[i];
   const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-  const src = (es && it.imgEs) ? it.imgEs : it.img; const cap = es ? it.es : it.en;
+  const src = (ru && it.imgRu) ? it.imgRu : ((es && it.imgEs) ? it.imgEs : it.img);
+  const cap = ru ? (it.ru || it.en) : (es ? it.es : it.en);
   return '<figure class="u4-lead-pic'+(it.uncropped ? ' u4-lead-pic--uncropped' : '')+'"><img src="'+esc(src)+'" alt="'+esc(cap)+'"><figcaption>'+esc(cap)+'</figcaption></figure>';
 }
 function u4GalEsc(s){ return String(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
@@ -3216,7 +3418,7 @@ function u4GalFormatDate(ts){
   if (!ts) return "";
   try {
     const d = typeof ts === "number" ? new Date(ts < 1e12 ? ts * 1000 : ts) : new Date(ts);
-    if (!isNaN(d.getTime())) return d.toLocaleDateString(LANG==="es" ? "es-MX" : "en-US", { month:"short", day:"numeric" });
+    if (!isNaN(d.getTime())) return d.toLocaleDateString(LANG==="ru" ? "ru-RU" : (LANG==="es" ? "es-MX" : "en-US"), { month:"short", day:"numeric" });
   } catch(e){}
   return String(ts).slice(0, 16);
 }
@@ -3225,7 +3427,7 @@ function u4GalNormalizeLiveItem(it, fallbackKind){
   const g = String(it.gallery || it.gallery_type || it.galleryType || fallbackKind || "references").toLowerCase() === "renders" ? "renders" : "references";
   const imgUrl = u4GalResolveUrl(it.url || it.file_url || it.fileUrl || it.thumbUrl || it.img || "");
   if (!imgUrl) return null;
-  const cap = String(it.caption || it.title || it.filename || it.name || (LANG==="es"?"Foto de obra":"Site photo")).trim();
+  const cap = String(it.caption || it.title || it.filename || it.name || (LANG==="ru"?"Фото объекта":(LANG==="es"?"Foto de obra":"Site photo"))).trim();
   const author = String(it.author || it.from || "").trim();
   const dateTxt = u4GalFormatDate(it.uploaded_at || it.created_at || it.createdAt || it.ts);
   return {
@@ -3243,12 +3445,12 @@ function u4GalNormalizeLiveItem(it, fallbackKind){
   };
 }
 function getStaticRoomGalleryItems(roomKey){
-  const es = LANG === "es";
+  const es = LANG === "es", ru = LANG === "ru";
   const crMap = (typeof U4_CONCEPT_RENDERS === "object" && U4_CONCEPT_RENDERS) ? U4_CONCEPT_RENDERS : {};
   const rawRenders = Array.isArray(crMap[roomKey]) ? crMap[roomKey] : [];
   const seenKeys = new Set();
-  const renders = rawRenders.filter(it => !it.lang || it.lang === LANG).map((it, idx) => {
-    const thumb = (es && it.thumbUrlEs) ? it.thumbUrlEs : (it.thumbUrl || "");
+  const renders = rawRenders.map((it, idx) => {
+    const thumb = (ru && it.thumbUrlRu) ? it.thumbUrlRu : ((es && it.thumbUrlEs) ? it.thumbUrlEs : (it.thumbUrl || ""));
     const drv = it.driveUrl || "";
     if (it.id) seenKeys.add(String(it.id).toLowerCase());
     [thumb, drv].forEach(u => { const k = u4GalExtractKey(u); if (k) seenKeys.add(k); });
@@ -3257,8 +3459,8 @@ function getStaticRoomGalleryItems(roomKey){
       gallery: "renders",
       thumbUrl: thumb,
       fullUrl: thumb || drv,
-      title: es ? (it.titleEs || it.titleEn || "") : (it.titleEn || it.titleEs || ""),
-      note: es ? (it.statusEs || it.statusEn || "") : (it.statusEn || it.statusEs || ""),
+      title: ru ? (it.titleRu || it.titleEn || "") : (es ? (it.titleEs || it.titleEn || "") : (it.titleEn || it.titleEs || "")),
+      note: ru ? (it.statusRu || it.statusEn || "") : (es ? (it.statusEs || it.statusEn || "") : (it.statusEn || it.statusEs || "")),
       href: drv,
       deferred: Boolean(it.deferred),
       retired: Boolean(it.retired),
@@ -3327,7 +3529,7 @@ function renderSingleGallerySection(roomKey, kind){
   const v0 = UNIFIED_VISUALS[roomKey];
   const secId = isRenders ? "sec-renders" : "sec-visuals";
   const heading = isRenders ? t("rendersHeading") : t("referencesHeading");
-  const note = isRenders ? t("rendersNote") : ((v0 && (LANG==="es" ? v0.noteEs : v0.noteEn)) || t("referencesNoteFallback"));
+  const note = isRenders ? t("rendersNote") : ((v0 && (LANG==="ru" ? (v0.noteRu || v0.noteEn) : (LANG==="es" ? v0.noteEs : v0.noteEn))) || t("referencesNoteFallback"));
   const addLbl = isRenders ? t("rendersAddBtn") : t("referencesAddBtn");
   const submitLbl = isRenders ? t("rendersSubmitBtn") : t("referencesSubmitBtn");
   const emptyMsg = isRenders ? t("rendersEmpty") : t("referencesEmpty");
@@ -3979,19 +4181,18 @@ function u4Snippet(txt, maxLen){
   return clean.length > (maxLen || 46) ? clean.slice(0, (maxLen || 46) - 1) + "…" : clean;
 }
 function stampDocPinAnchors(){
-  const roots = [document.getElementById("doc"), document.getElementById("roomTechnical")].filter(Boolean);
+  const docEl = document.getElementById("doc");
+  if (!docEl) return;
   const sel = "figure.u4-lead-pic, section.u4-gal-sec, section.ck li, section.ck, section.docs li, section.docs, .u4-hvac-col, .u4-hvac-facts, .u4-qa-card, .u4-fact-card, details.fulldet, .u4-home-sec, .goals, .tbl";
   let idx = 0;
-  roots.forEach(docEl => {
   docEl.querySelectorAll(sel).forEach(el => {
     if (el.closest(".u4-zoom-inline, .viewer")) return;
     idx++;
     el.setAttribute("data-u4-pin-anchor", "anchor-" + idx);
     el.classList.add("u4-pin-host");
   });
-  docEl.setAttribute("data-u4-pin-anchor", docEl.id === "doc" ? "doc-root" : "technical-root");
+  docEl.setAttribute("data-u4-pin-anchor", "doc-root");
   docEl.classList.add("u4-pin-host");
-  });
 }
 function resolvePinDropTarget(clientX, clientY){
   const el = document.elementFromPoint(clientX, clientY);
@@ -4070,7 +4271,7 @@ function resolvePinDropTarget(clientX, clientY){
     };
   }
 
-  const docEl = el.closest("#doc, #roomTechnical");
+  const docEl = el.closest("#doc");
   if (docEl) {
     stampDocPinAnchors();
     const anchor = el.closest("[data-u4-pin-anchor]") || docEl;
@@ -4501,7 +4702,7 @@ function mountUniversalPinUi(){
         if (window.U4GeminiLiveAssistant && typeof window.U4GeminiLiveAssistant.askSpot === "function") {
           window.U4GeminiLiveAssistant.askSpot(promptTxt, ev);
         }
-        u4PinState.statusMsg = LANG === "es" ? "Abierto en Asistente de IA." : "Sent to AI Helper.";
+        u4PinState.statusMsg = LANG === "ru" ? "Отправлено ИИ-помощнику." : (LANG === "es" ? "Abierto en Asistente de IA." : "Sent to AI Helper.");
         u4PinState.statusKind = "ok";
         renderActivePinSteer();
       } else if (ev.target.closest("[data-u4-ps-send]") && m) {
@@ -4510,14 +4711,14 @@ function mountUniversalPinUi(){
         const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
         const micBtn = steer.querySelector("[data-u4-ps-mic]");
         if (!SR) {
-          u4PinState.statusMsg = LANG === "es" ? "Dictado no disponible en este navegador." : "Voice dictation unavailable in this browser.";
+          u4PinState.statusMsg = LANG === "ru" ? "Голосовой ввод недоступен в этом браузере." : (LANG === "es" ? "Dictado no disponible en este navegador." : "Voice dictation unavailable in this browser.");
           u4PinState.statusKind = "err";
           renderActivePinSteer();
           return;
         }
         if (pinRecog) { try { pinRecog.stop(); } catch(e){} pinRecog = null; if (micBtn) micBtn.classList.remove("is-rec"); return; }
         pinRecog = new SR();
-        pinRecog.lang = LANG === "es" ? "es-MX" : "en-US";
+        pinRecog.lang = LANG === "ru" ? "ru-RU" : (LANG === "es" ? "es-MX" : "en-US");
         pinRecog.interimResults = false;
         if (micBtn) micBtn.classList.add("is-rec");
         pinRecog.onresult = re => {
@@ -4575,7 +4776,7 @@ function ensureGalleryDelegation(){
       openGalleryLightbox([{ fullUrl: leadImg.currentSrc || leadImg.src, thumbUrl: leadImg.src, title: cap, note: "" }], 0, current ? pageLabel(current) : "");
       return;
     }
-    const mdImg = ev.target && ev.target.closest ? ev.target.closest("#doc .mdbody img, #roomTechnical .mdbody img") : null;
+    const mdImg = ev.target && ev.target.closest ? ev.target.closest("#doc .mdbody img") : null;
     if (mdImg && !mdImg.closest("a")) {
       const fig = mdImg.closest("figure");
       const cap = mdImg.alt || (fig && fig.querySelector("figcaption") && fig.querySelector("figcaption").textContent) || (current ? pageLabel(current) : "");
@@ -4667,24 +4868,24 @@ function getRoomSubsections(key){
   if (key === "home" || key === "roadmap" || key === "decisions") return [];
   const list = [];
   if (key === "hvac") {
-    list.push({id:"sec-hvac-summary", en:"NEXT vs. Crew", es:"NEXT y cuadrilla"});
+    list.push({id:"sec-hvac-summary", en:"NEXT vs. Crew", es:"NEXT y cuadrilla", ru:"NEXT и бригада"});
   }
   if (CHECKLISTS[key]) {
-    list.push({id:"sec-checklist", en:"Checklist", es:"Lista de trabajo"});
+    list.push({id:"sec-checklist", en:"Checklist", es:"Lista de trabajo", ru:"Чек-лист работ"});
   }
   const pg = PAGES.find(x=>x.key===key);
   if (pg && pg.group==="Projects") {
-    list.push({id:"sec-renders", en:"Renders & Mockups", es:"Renders y maquetas"});
-    list.push({id:"sec-visuals", en:"Reference Photos", es:"Fotos de referencia"});
+    list.push({id:"sec-renders", en:"Renders & Mockups", es:"Renders y maquetas", ru:"Рендеры и макеты"});
+    list.push({id:"sec-visuals", en:"Reference Photos", es:"Fotos de referencia", ru:"Фото объекта"});
   } else if (UNIFIED_VISUALS[key]) {
-    list.push({id:"sec-visuals", en:"Reference Photos", es:"Fotos de referencia"});
+    list.push({id:"sec-visuals", en:"Reference Photos", es:"Fotos de referencia", ru:"Фото объекта"});
   }
   const activeDocs = (DOCS[key]||[]).filter(d=>!d.history && isDocVisibleInLang(d, (DOCS[key]||[]).filter(x=>!x.history), LANG));
   if (activeDocs.length) {
-    list.push({id:"sec-docs", en:"Documents ("+activeDocs.length+")", es:"Documentos ("+activeDocs.length+")", isDocsGroup:true, docs:activeDocs});
+    list.push({id:"sec-docs", en:"Documents ("+activeDocs.length+")", es:"Documentos ("+activeDocs.length+")", ru:"Документы ("+activeDocs.length+")", isDocsGroup:true, docs:activeDocs});
   }
-  list.push({id:"sec-details", en:"Full Specs", es:"Especificaciones"});
-  list.push({id:"field", en:"Field Note", es:"Nota de obra"});
+  list.push({id:"sec-details", en:"Full Specs", es:"Especificaciones", ru:"Спецификации"});
+  list.push({id:"field", en:"Field Note", es:"Nota de obra", ru:"Заметка с объекта"});
   return list;
 }
 
@@ -4696,13 +4897,13 @@ function packetByKey(raw){
   return PACKETS.find(x=>x.key===k) || PACKETS.find(x=>(x.aliases||[]).some(a=>String(a).toLowerCase()===k)) || null;
 }
 window.packetByKey = packetByKey;
-function packetTitle(pk){ return LANG==="es" ? pk.titleEs : pk.titleEn; }
-function packetNote(pk){ return LANG==="es" ? (pk.noteEs||"") : (pk.noteEn||""); }
-function packetDocId(pk){ return LANG==="es" ? (pk.docEs||pk.docEn) : (pk.docEn||pk.docEs); }
+function packetTitle(pk){ if (LANG==="ru") return pk.titleRu || pk.titleEn; return LANG==="es" ? pk.titleEs : pk.titleEn; }
+function packetNote(pk){ if (LANG==="ru") return pk.noteRu || pk.noteEn || ""; return LANG==="es" ? (pk.noteEs||"") : (pk.noteEn||""); }
+function packetDocId(pk){ if (LANG==="ru") return pk.docRu || pk.docEn || pk.docEs; return LANG==="es" ? (pk.docEs||pk.docEn) : (pk.docEn||pk.docEs); }
 function packetHostedPlanUrl(pk){
   if (!pk) return null;
   const id = packetDocId(pk);
-  const hosted = id ? (KITCHEN_HOSTED_LINKS[id] || (id.indexOf("./plans/") === 0 ? id : null)) : null;
+  const hosted = id ? (KITCHEN_HOSTED_LINKS[id] || (String(id).indexOf("./plans/") === 0 ? String(id) : null)) : null;
   return (hosted && hosted.indexOf("./plans/") === 0) ? withPlanParams(hosted) : null;
 }
 function packetHref(pk){
@@ -4712,11 +4913,11 @@ function packetHref(pk){
 function packetsFor(roomKey){ return PACKETS.filter(x=>x.room===roomKey && x.inMenu!==false); }
 function packetCardsBlock(list, showRoom){
   if (!list.length) return "";
-  const es = LANG==="es";
+  const es = LANG==="es", ru = LANG==="ru";
   const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-  return '<section class="u4-packets" id="sec-packets"><h2>'+(es?"Guías":"Guides")+'</h2><div class="u4-packet-list">'
+  return '<section class="u4-packets" id="sec-packets"><h2>'+(ru?"Инструкции":(es?"Guías":"Guides"))+'</h2><div class="u4-packet-list">'
     + list.map(pk=>{ const room = showRoom ? PAGES.find(x=>x.key===pk.room) : null; const isInt = Boolean(packetHostedPlanUrl(pk));
-        const baseAttr = isInt ? ' data-u4-plan-base="'+esc(KITCHEN_HOSTED_LINKS[packetDocId(pk)])+'"' : '';
+        const baseAttr = isInt ? ' data-u4-plan-base="'+esc(KITCHEN_HOSTED_LINKS[packetDocId(pk)] || packetDocId(pk))+'"' : '';
         return '<a class="u4-packet'+(isInt?' is-interactive':'')+'" href="'+esc(packetHref(pk))+'"'+baseAttr+'>'
           + (room?'<span class="u4-packet-room">'+esc(pageLabel(room))+'</span>':'')
           + '<span class="u4-packet-t"><span>'+esc(packetTitle(pk))+'</span>'+(isInt?interactivePillHtml():'')+'</span>'
@@ -4728,7 +4929,7 @@ function markActivePacket(key){
   const j=document.getElementById("jump"); if (j && key) { try{ j.value=key; }catch(e){} }
 }
 function roomSubnavBar(p){
-  const es = LANG==="es";
+  const es = LANG==="es", ru = LANG==="ru";
   const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const familyKey = p.parent || ((PAGES.some(x=>x.parent===p.key)) ? p.key : null);
   if (!familyKey) return "";
@@ -4737,7 +4938,7 @@ function roomSubnavBar(p){
   if (!parentPage || !children.length) return "";
   const items = [{key: parentPage.key, label: pageLabel(parentPage) + " — " + t("subnavOverviewTab")}]
     .concat(children.map(c => ({key: c.key, label: "↳ " + pageLabel(c)})));
-  return '<div class="u4-subnav-bar"><div class="u4-subpage-tabs" role="navigation" aria-label="'+(es?"Subcuartos":"Subrooms")+'">'
+  return '<div class="u4-subnav-bar"><div class="u4-subpage-tabs" role="navigation" aria-label="'+(ru?"Подзоны":(es?"Subcuartos":"Subrooms"))+'">'
     + items.map(it => '<a class="u4-subpage-tab" href="#'+it.key+'"'+(it.key===p.key?' aria-current="page"':'')+'>'+esc(it.label)+'</a>').join("")
     + '</div></div>';
 }
@@ -4757,7 +4958,7 @@ function docsBlock(key){
   const rows=ds=>ds.map(d=>{
     const L=docLabel(d);
     const dl = d.docLang || d.lang || "both";
-    const enOnlyBadge = (LANG==="es" && dl==="en") ? ' <span class="k">'+esc(t("englishOnlyTag"))+'</span>' : '';
+    const enOnlyBadge = (LANG!=="en" && dl==="en") ? ' <span class="k">'+esc(t("englishOnlyTag"))+'</span>' : '';
     const inPrevTag = inPrevIds.has(d.id) ? ' <span class="u4-in-prev-tag">'+esc(t("inPreviews"))+'</span>' : '';
     const isInt = isInteractiveDoc(d);
     const baseAttr = isInt ? ' data-u4-plan-base="'+esc(KITCHEN_HOSTED_LINKS[d.id])+'"' : '';
@@ -4770,8 +4971,8 @@ function docsBlock(key){
 }
 
 function crewRoom(p, srcMd){
-  const es = LANG==="es"; const {secs} = crewSplit(srcMd);
-  const concept = secs.find(s=>/^(Concept|Concepto)\b/i.test(s.h));
+  const es = LANG==="es", ru = LANG==="ru"; const {secs} = crewSplit(srcMd);
+  const concept = secs.find(s=>/^(Concept|Concepto|Концепция)\b/i.test(s.h));
   const rest = secs.filter(s=>s!==concept && s.h);
   const label = pageLabel(p);
   let h = "";
@@ -4783,49 +4984,41 @@ function crewRoom(p, srcMd){
       + '<span class="u4-crumb-sep" aria-hidden="true">›</span>'
       + '<span class="u4-crumb-cur">'+label+'</span>'
       + '</nav>'
+      + leadPictureBlock(p.key)
       + '<h1>'+label+'</h1>';
   } else {
-    h += '<h1>'+label+'</h1>';
+    h += leadPictureBlock(p.key) + '<h1>'+label+'</h1>';
   }
   h += roomSubnavBar(p);
 
-  // Keep the overview short while retaining the source's visible field holds.
-  let supporting = "";
-  if (concept) {
-    const conceptDom = document.createElement("div");
-    conceptDom.innerHTML = render(concept.body.join("\n").trim());
-    const overview = conceptDom.querySelector(":scope > p");
-    if (overview) {
-      h += '<p class="u4-room-summary" id="sec-concept">'+overview.innerHTML+'</p>';
-      overview.remove();
+  if (p.key==="hvac") {
+    h += U4_HTML[ru ? "pages/hvac/block-1.ru.html" : (es ? "pages/hvac/block-1.es.html" : "pages/hvac/block-1.en.html")];
+  } else {
+    if (concept) {
+      h += '<p class="u4-room-summary" id="sec-concept">'+render(concept.body.join("\n").trim()).replace(/^<p>|<\/p>\s*$/g, "")+'</p>';
     }
-    supporting = conceptDom.innerHTML;
+    h += keyFactsBlock(p.key);
   }
-  h += leadPictureBlock(p.key);
-  h += keyFactsBlock(p.key);
 
   h += roomAreasBlock(p);
   h += ckBlock(p.key);
-  h += supporting;
 
   if (p.key==="kitchen") {
     h += '<div class="u4-subpage-dir" id="sec-subpages">'
-      + '<a class="u4-subpage-row" href="#kitchen-oven-range"><div><span class="u4-subpage-row-title">'+(es?"Cocina › Tramo de estufa y campana":"Kitchen › Oven / Range Run")+'</span><span class="u4-subpage-row-desc">'+(es?"Estufa Viking 30&quot;, campana Zephyr (66&quot;–72&quot; alto), caja directa, plano interactivo y 4 láminas de prueba.":"Viking 30&quot; range, Zephyr hood (66&quot;–72&quot; height), direct hardwire box, interactive plan &amp; 4 test-hang sheets.")+'</span></div><span class="u4-subpage-row-arrow" aria-hidden="true">→</span></a>'
-      + '<a class="u4-subpage-row" href="#kitchen-sink-north"><div><span class="u4-subpage-row-title">'+(es?"Cocina › Fregadero y muro norte":"Kitchen › Sink &amp; North Wall Runs")+'</span><span class="u4-subpage-row-desc">'+(es?"Tramo sur (0&quot;–115&quot;), repisas pie-safe, retorno este Haier y muro norte D04.":"South run (0&quot;–115&quot;), pie-safe shelves, East Haier return &amp; North D04 wall.")+'</span></div><span class="u4-subpage-row-arrow" aria-hidden="true">→</span></a>'
+      + '<a class="u4-subpage-row" href="#kitchen-oven-range"><div><span class="u4-subpage-row-title">'+(ru?"Кухня › Зона плиты и вытяжки":(es?"Cocina › Tramo de estufa y campana":"Kitchen › Oven / Range Run"))+'</span><span class="u4-subpage-row-desc">'+(ru?"Плита Viking 30&quot;, вытяжка Zephyr (высота 66&quot;–72&quot;), коробка прямого ввода, интерактивный план и 4 проверочных листа.":(es?"Estufa Viking 30&quot;, campana Zephyr (66&quot;–72&quot; alto), caja directa, plano interactivo y 4 láminas de prueba.":"Viking 30&quot; range, Zephyr hood (66&quot;–72&quot; height), direct hardwire box, interactive plan &amp; 4 test-hang sheets."))+'</span></div><span class="u4-subpage-row-arrow" aria-hidden="true">→</span></a>'
+      + '<a class="u4-subpage-row" href="#kitchen-sink-north"><div><span class="u4-subpage-row-title">'+(ru?"Кухня › Мойка и северная стена":(es?"Cocina › Fregadero y muro norte":"Kitchen › Sink &amp; North Wall Runs"))+'</span><span class="u4-subpage-row-desc">'+(ru?"Южный ряд (0&quot;–115&quot;), полки pie-safe, восточный поворот Haier и северная стена D04.":(es?"Tramo sur (0&quot;–115&quot;), repisas pie-safe, retorno este Haier y muro norte D04.":"South run (0&quot;–115&quot;), pie-safe shelves, East Haier return &amp; North D04 wall."))+'</span></div><span class="u4-subpage-row-arrow" aria-hidden="true">→</span></a>'
       + '</div>';
   }
   if (p.key==="hvac") {
     h += '<div class="u4-subpage-dir" id="sec-subpages">'
-      + '<a class="u4-subpage-row" href="#attic-access"><div><span class="u4-subpage-row-title">'+(es?"HVAC › Acceso al ático":"HVAC › Attic Access")+'</span><span class="u4-subpage-row-desc">'+(es?"Escotilla 24&quot;×36&quot; libre, 5 reglas de envolvente, pasarela, plano interactivo y guía práctica.":"24&quot;×36&quot; clear hatch, 5 enclosure rules, walkway, interactive hatch plan &amp; practical guide.")+'</span></div><span class="u4-subpage-row-arrow" aria-hidden="true">→</span></a>'
+      + '<a class="u4-subpage-row" href="#attic-access"><div><span class="u4-subpage-row-title">'+(ru?"Отопление HVAC › Люк на чердак":(es?"HVAC › Acceso al ático":"HVAC › Attic Access"))+'</span><span class="u4-subpage-row-desc">'+(ru?"Чистый световой проём люка 24&quot;×36&quot;, 5 правил контура, мостки, интерактивный план люка и памятка.":(es?"Escotilla 24&quot;×36&quot; libre, 5 reglas de envolvente, pasarela, plano interactivo y guía práctica.":"24&quot;×36&quot; clear hatch, 5 enclosure rules, walkway, interactive hatch plan &amp; practical guide."))+'</span></div><span class="u4-subpage-row-arrow" aria-hidden="true">→</span></a>'
       + '</div>';
   }
 
   h += visualsBlock(p.key);
   h += docsBlock(p.key);
 
-  const active = rest.filter(s=>/^(Active Holds|Restricciones activas|Pausas activas)/i.test(s.h));
-  h += active.map(s=>render("## "+s.h+"\n"+s.body.join("\n"))).join("");
-  const detail = rest.filter(s=>!active.includes(s)).map(s=>"## "+s.h+"\n"+s.body.join("\n")).join("\n\n");
+  const detail = rest.map(s=>"## "+s.h+"\n"+s.body.join("\n")).join("\n\n");
   if (detail.trim()) {
     h += '<details class="fulldet" id="sec-details"><summary>'+(p.key==="hvac"?t("techSpecsDetails"):t("fullPlanDetails"))+'</summary><div class="mdbody">'+render(detail)+'</div></details>';
   }
@@ -4876,7 +5069,7 @@ function resolvePageKey(rawKey){
 window.resolvePageKey = resolvePageKey;
 
 function appendRailRoomNode(p, isChildSubpage){
-  const es = LANG==="es";
+  const es = LANG==="es", ru = LANG==="ru";
   const row = document.createElement("div");
   row.className = "rail-item-row" + (isChildSubpage ? " is-child-row" : "");
   const a = document.createElement("a");
@@ -4903,7 +5096,7 @@ function appendRailRoomNode(p, isChildSubpage){
     btn.className = "rail-toggle";
     btn.dataset.toggleFor = p.key;
     btn.setAttribute("aria-expanded", "false");
-    btn.setAttribute("aria-label", (es ? "Subcategorías de " : "Subcategories for ") + lbl);
+    btn.setAttribute("aria-label", (ru ? "Разделы: " : (es ? "Subcategorías de " : "Subcategories for ")) + lbl);
     btn.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>';
     btn.addEventListener("click", function(ev){
       ev.preventDefault();
@@ -4934,7 +5127,7 @@ function appendRailRoomNode(p, isChildSubpage){
         sa.href = "#" + p.key + "/" + s.id;
         sa.dataset.room = p.key;
         sa.dataset.sec = s.id;
-        sa.textContent = "· " + (es ? s.es : s.en);
+        sa.textContent = "· " + (ru ? (s.ru || s.en) : (es ? s.es : s.en));
         dRow.appendChild(sa);
 
         const dBtn = document.createElement("button");
@@ -4942,7 +5135,7 @@ function appendRailRoomNode(p, isChildSubpage){
         dBtn.className = "rail-toggle";
         const dOpen = docTreeExpanded.has(p.key) || (subActive === p.key);
         dBtn.setAttribute("aria-expanded", dOpen ? "true" : "false");
-        dBtn.setAttribute("aria-label", (es ? "Ver documentos de " : "Toggle documents for ") + lbl);
+        dBtn.setAttribute("aria-label", (ru ? "Показать документы: " : (es ? "Ver documentos de " : "Toggle documents for ")) + lbl);
         dBtn.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>';
         dRow.appendChild(dBtn);
         wrap.appendChild(dRow);
@@ -4981,7 +5174,7 @@ function appendRailRoomNode(p, isChildSubpage){
         sa.href = "#" + p.key + "/" + s.id;
         sa.dataset.room = p.key;
         sa.dataset.sec = s.id;
-        sa.textContent = "· " + (es ? s.es : s.en);
+        sa.textContent = "· " + (ru ? (s.ru || s.en) : (es ? s.es : s.en));
         subBox.appendChild(sa);
       }
     });
@@ -4991,7 +5184,7 @@ function appendRailRoomNode(p, isChildSubpage){
 
 function renderNav(){
   if (!rail || !jump) return;
-  const es = LANG==="es";
+  const es = LANG==="es", ru = LANG==="ru";
   const activeHash = location.hash.slice(1);
   const activeDocId = activeHash.startsWith("doc:") ? activeHash.slice(4).split(":p")[0] : null;
   rail.innerHTML = '<div class="brand"><a class="homelink" href="#home">'+t("unitTitle")+'</a><small>'+t("unitSub")+'</small></div>';
@@ -5052,7 +5245,7 @@ function renderNav(){
       getRoomSubsections(p.key).forEach(s => {
         const so = document.createElement("option");
         so.value = p.key + "/" + s.id;
-        so.textContent = "  · " + (es ? s.es : s.en);
+        so.textContent = "  · " + (ru ? (s.ru || s.en) : (es ? s.es : s.en));
         jump.appendChild(so);
       });
     }
@@ -5065,7 +5258,7 @@ function renderNav(){
         getRoomSubsections(cp.key).forEach(s => {
           const so = document.createElement("option");
           so.value = cp.key + "/" + s.id;
-          so.textContent = "    · " + (es ? s.es : s.en);
+          so.textContent = "    · " + (ru ? (s.ru || s.en) : (es ? s.es : s.en));
           jump.appendChild(so);
         });
       }
@@ -5112,11 +5305,18 @@ function syncChromeLabels(){
   if (mBtn) mBtn.textContent = t("menuBtn");
   const bBtn = document.getElementById("backBtn");
   if (bBtn) bBtn.textContent = t("backBtn");
+  const curLangNorm = normU4Lang(LANG);
   ["langBtn", "mobileLangBtn"].forEach(function(id) {
     const lBtn = document.getElementById(id);
     if (lBtn) {
-      lBtn.setAttribute("aria-checked", LANG === "es" ? "true" : "false");
-      lBtn.setAttribute("aria-label", t("langToggleAria"));
+      lBtn.setAttribute("data-lang", curLangNorm);
+      lBtn.setAttribute("aria-label", t("langGroupAria"));
+      lBtn.querySelectorAll("[data-lang]").forEach(function(opt) {
+        const active = opt.getAttribute("data-lang") === curLangNorm;
+        opt.classList.toggle("is-active", active);
+        opt.setAttribute("aria-checked", active ? "true" : "false");
+        opt.setAttribute("tabindex", active ? "0" : "-1");
+      });
     }
   });
   ["themeBtn", "mobileThemeBtn"].forEach(function(id) {
@@ -5166,7 +5366,7 @@ function syncUrlSearchParams(){
   try {
     if (typeof history !== "undefined" && history.replaceState) {
       const sp = new URLSearchParams(location.search || "");
-      sp.set("lang", LANG === "es" ? "es" : "en");
+      sp.set("lang", normU4Lang(LANG));
       sp.set("theme", THEME === "dark" ? "dark" : "light");
       history.replaceState(null, "", location.pathname + "?" + sp.toString() + location.hash);
     }
@@ -5176,7 +5376,7 @@ function syncPlanFramePrefs(){
   try {
     var sh = document.getElementById("u4PlanShell");
     var fr = document.getElementById("u4PlanFrame");
-    var langNorm = LANG === "es" ? "es" : "en";
+    var langNorm = normU4Lang(LANG);
     var themeNorm = currentWikiTheme();
     if (sh && !sh.hidden && fr && fr.contentWindow) {
       try {
@@ -5198,12 +5398,15 @@ function setTheme(next, fromStorage){
   enhanceInteractiveLinks(document);
   syncPlanFramePrefs();
 }
+function applyLang(l, fromStorage){ return setLang(l, fromStorage); }
+window.applyLang = applyLang;
 function setLang(l, fromStorage){
   var prevLang = LANG;
-  LANG = l==="es" ? "es" : "en";
+  LANG = normU4Lang(l);
   if (!fromStorage) { try{ localStorage.setItem("u4_lang", LANG); }catch(e){} }
   document.documentElement.lang = LANG;
   document.body.classList.toggle("lang-es", LANG==="es");
+  document.body.classList.toggle("lang-ru", LANG==="ru");
   syncUrlSearchParams();
   syncChromeLabels();
   renderNav();
@@ -5222,7 +5425,7 @@ if (typeof window !== "undefined" && !window.__u4StorageSyncBound) {
     if (ev.key === "u4_theme" && (ev.newValue === "dark" || ev.newValue === "light") && ev.newValue !== THEME) {
       setTheme(ev.newValue, true);
     }
-    if (ev.key === "u4_lang" && (ev.newValue === "en" || ev.newValue === "es") && ev.newValue !== LANG) {
+    if (ev.key === "u4_lang" && (ev.newValue === "en" || ev.newValue === "es" || ev.newValue === "ru") && ev.newValue !== LANG) {
       setLang(ev.newValue, true);
     }
   });
@@ -5253,7 +5456,7 @@ async function renderPdf(url, id, targetPage){
     const pdf=await lib.getDocument({url:url}).promise;
     if (tok!==pdfTok) return;
     const hint = document.getElementById("u4PdfPageHint");
-    const pgLabel = pdf.numPages + " " + (LANG==="es" ? (pdf.numPages===1?"página":"páginas") : ("page"+(pdf.numPages>1?"s":"")));
+    const pgLabel = pdf.numPages + " " + (LANG==="ru" ? "стр." : (LANG==="es" ? (pdf.numPages===1?"página":"páginas") : ("page"+(pdf.numPages>1?"s":""))));
     if (hint) hint.textContent = pgLabel;
     box.innerHTML="";
     const vpEl = document.getElementById("u4PdfZoomViewport");
@@ -5262,7 +5465,7 @@ async function renderPdf(url, id, targetPage){
       if (tok!==pdfTok) return;
       const page=await pdf.getPage(n); const v1=page.getViewport({scale:1}); const scale=W/v1.width; const vp=page.getViewport({scale:scale*dpr});
       const card=document.createElement("div"); card.className="u4-pdf-page-card";
-      const lbl=document.createElement("div"); lbl.className="u4-pdf-page-lbl"; lbl.textContent=(LANG==="es"?"Página ":"Page ")+n+" / "+pdf.numPages;
+      const lbl=document.createElement("div"); lbl.className="u4-pdf-page-lbl"; lbl.textContent=(LANG==="ru"?"Страница ":(LANG==="es"?"Página ":"Page "))+n+" / "+pdf.numPages;
       const pbox=document.createElement("div"); pbox.className="u4-pdf-page-box u4-pin-host"; pbox.dataset.pageNumber=String(n); pbox.dataset.docId=String(id||"");
       const c=document.createElement("canvas"); c.width=Math.floor(vp.width); c.height=Math.floor(vp.height); c.style.width=Math.floor(vp.width/dpr)+"px"; c.className="pdfpage"; c.dataset.pageNumber=String(n);
       const layer=document.createElement("div"); layer.className="u4-pin-layer";
@@ -5301,19 +5504,17 @@ function closePlanShell(){
 }
 
 function openPlanShell(planSpec){
-  document.getElementById("roomTechnical")?.replaceChildren();
   if (!planSpec || !planSpec.planId) return false;
   var sh = document.getElementById("u4PlanShell");
   var fr = document.getElementById("u4PlanFrame");
   if (!sh || !fr) return false;
   var pid = planSpec.planId;
   var sp = new URLSearchParams();
-  sp.set("lang", LANG === "es" ? "es" : "en");
+  sp.set("lang", normU4Lang(LANG));
   sp.set("theme", currentWikiTheme());
   sp.set("embedded", "1");
   if (planSpec.step) sp.set("step", String(planSpec.step));
   if (planSpec.wall) sp.set("wall", String(planSpec.wall));
-  if (planSpec.view) sp.set("view", String(planSpec.view));
   if (planSpec.zoom) sp.set("zoom", String(planSpec.zoom));
   var targetSrc = "./plans/" + encodeURIComponent(pid) + "/index.html?" + sp.toString();
   var samePlanLoaded = (!sh.hidden && fr.dataset.planId === pid && fr.getAttribute("src") && fr.getAttribute("src") !== "about:blank");
@@ -5344,7 +5545,6 @@ function openPlanShell(planSpec){
 }
 
 function show(key){
-  document.getElementById("roomTechnical")?.replaceChildren();
   const __planRoute = parsePlanHash(key);
   if (__planRoute){
     pdfTok++;
@@ -5409,7 +5609,7 @@ function show(key){
     document.getElementById("field").hidden=true;
     const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
     const hostedWithPrefs = (hosted && hosted.indexOf("./wiki-docs/") === 0 && /\.html(?:[?#]|$)/i.test(hosted))
-      ? (hosted + (hosted.indexOf("?") >= 0 ? "&" : "?") + "lang=" + encodeURIComponent(LANG === "es" ? "es" : "en") + "&theme=" + encodeURIComponent(currentWikiTheme()))
+      ? (hosted + (hosted.indexOf("?") >= 0 ? "&" : "?") + "lang=" + encodeURIComponent(LANG === "ru" ? "ru" : (LANG === "es" ? "es" : "en")) + "&theme=" + encodeURIComponent(currentWikiTheme()))
       : hosted;
     const driveBtn=(/^2026-/.test(id)||hosted)?'':'<a class="btn ghost" href="'+docUrl(d)+'" target="_blank" rel="noopener">'+esc(t("openInDrive"))+'</a>';
     const hostedBtn=hostedWithPrefs?'<a class="btn ghost" href="'+esc(hostedWithPrefs)+'">'+esc(t("openFullPage"))+'</a>':'';
@@ -5478,7 +5678,7 @@ function show(key){
   syncSubs(p.key, targetSectionId);
   if (p.key==="decisions"){ document.getElementById("field").hidden=true; setStatus("", t("sharedDecList"), false); renderDecisions(); wireDecisions(); return; }
   const l = live[p.key];
-  const srcMd = (LANG==="es" ? (p.mdEs || p.md) : (l ? l.md : p.md));
+  const srcMd = (LANG==="ru" ? (p.mdRu || p.md) : (LANG==="es" ? (p.mdEs || p.md) : (l ? l.md : p.md)));
   let body = '<div class="mdbody">' + render(srcMd) + '</div>';
   if (p.key==="roadmap") body += hoursBlock() + linksBlock();
   if (p.key==="home") {
@@ -5487,34 +5687,12 @@ function show(key){
   }
   const isCrew = p.group==="Projects";
   if (isCrew) { body = crewRoom(p, srcMd); ckWatchRoom(p.key); }
-  if (p.key!=="home" && !isCrew) body += `<div class="src">${LANG==="es"?"Archivo fuente:":"Source file:"} ${p.path}</div>`;
+  if (p.key!=="home" && !isCrew) body += `<div class="src">${LANG==="ru"?"Исходный файл:":(LANG==="es"?"Archivo fuente:":"Source file:")} ${p.path}</div>`;
   document.body.classList.toggle("is-home", p.key==="home");
   document.body.classList.toggle("is-crew", isCrew);
-  let technical = document.getElementById("roomTechnical");
-  if (!technical) {
-    technical = document.createElement("div");
-    technical.id = "roomTechnical";
-    document.getElementById("field").after(technical);
-  }
-  technical.replaceChildren();
   document.getElementById("doc").innerHTML = body;
-  if (isCrew) {
-    const sections = [...document.querySelectorAll("#doc #sec-details")];
-    if (sections.length) {
-      const combined = document.createElement("details");
-      combined.id = "sec-details";
-      combined.className = "fulldet";
-      combined.innerHTML = '<summary>'+t("techSpecsDetails")+'</summary>';
-      sections.forEach(section=>{
-        const title = section.querySelector(":scope > summary");
-        if (title) { const heading=document.createElement("h3"); heading.textContent=title.textContent; combined.append(heading); title.remove(); }
-        combined.append(...section.childNodes); section.remove();
-      });
-      technical.append(combined);
-    }
-  }
-  enhanceInteractiveLinks(document.querySelector("main"));
-  enhanceZoomableInlineContent(document.querySelector("main"));
+  enhanceInteractiveLinks(document.getElementById("doc"));
+  enhanceZoomableInlineContent(document.getElementById("doc"));
   stampDocPinAnchors();
   mountUniversalPinUi();
   renderPinsOnSurface();
@@ -5733,7 +5911,9 @@ function computeSubmissionId(prefix, parts) {
 
 function detectNoteLanguage(rawText, fallbackUiLang) {
   const s = String(rawText || "");
-  if (!s.trim()) return fallbackUiLang === "es" ? "es" : "en";
+  const fb = normU4Lang(fallbackUiLang);
+  if (!s.trim()) return fb;
+  if (/[\u0400-\u04FF]/.test(s)) return "ru";
   if (/[áéíóúñ¿¡]/i.test(s)) return "es";
   const esMatches = s.match(/\b(el|la|los|las|de|del|en|con|para|por|que|se|un|una|al|pulgadas|pared|muro|baño|cocina|lavandería|puerta|ventana|piso|techo|medida|falta|verificar|instalar|tubería|cable|contacto|caja|estufa|fregadero|inodoro|tina|azulejo|moldura|gabinete|clóset|pasillo|recámara|dormitorio)\b/gi);
   const enMatches = s.match(/\b(the|and|with|for|from|this|that|wall|floor|ceiling|door|window|kitchen|bathroom|laundry|outlet|pipe|wire|inch|inches|need|needs|check|install|framing|drywall|tile|cabinet|sink|toilet|tub|panel)\b/gi);
@@ -5741,7 +5921,7 @@ function detectNoteLanguage(rawText, fallbackUiLang) {
   const enCount = enMatches ? enMatches.length : 0;
   if (esCount > enCount) return "es";
   if (enCount > esCount) return "en";
-  return fallbackUiLang === "es" ? "es" : "en";
+  return fb;
 }
 
 function mapKindToCanonicalNoteType(kindOrSource, hasAudio, hasMeas) {
@@ -5809,7 +5989,7 @@ async function readFileAsAttachmentDescriptor(fileObj, defaultMime) {
 
 function buildWorkerNoteBackendEnvelope(opts) {
   const o = opts || {};
-  const uiLang = (typeof LANG !== "undefined" && LANG === "es") ? "es" : "en";
+  const uiLang = normU4Lang(typeof LANG !== "undefined" ? LANG : "en");
   const rawText = String(o.raw ?? o.text ?? o.details ?? "");
   const effectiveTextForLang = rawText || String(o.topic || "") || String(o.agreed || "") || String(o.summary || "") || String(o.transcript || "");
   const noteLang = o.language && (o.language === "es" || o.language === "en")
@@ -6245,7 +6425,7 @@ async function drawReports(docs){
       }
     });
   }
-  if (!combinedDocs.length){ list.innerHTML='<div class="msg">'+(LANG==="es"?"Todavía no hay notas de obra para este cuarto.":"No field notes yet for this room.")+'</div>'; return; }
+  if (!combinedDocs.length){ list.innerHTML='<div class="msg">'+(LANG==="ru"?"Для этого помещения пока нет заметок с объекта.":(LANG==="es"?"Todavía no hay notas de obra para este cuarto.":"No field notes yet for this room."))+'</div>'; return; }
   let names={};
   if (user && user.profiles){ try{ const ids=[...new Set(combinedDocs.map(d=>d.data().author).filter(Boolean))]; names=await user.profiles(ids); }catch(e){} }
   list.innerHTML="";
@@ -6295,7 +6475,7 @@ function wireReports(p){
     return;
   }
   if (repUnsub) repUnsub();
-  document.getElementById("repList").innerHTML='<div class="msg">'+(LANG==="es"?"Cargando notas…":"Loading reports…")+'</div>';
+  document.getElementById("repList").innerHTML='<div class="msg">'+(LANG==="ru"?"Загрузка заметок…":(LANG==="es"?"Cargando notas…":"Loading reports…"))+'</div>';
   clearTimeout(repTimer);
   repTimer=setTimeout(()=>{ const l=document.getElementById("repList"); if (l.textContent.includes("Loading")||l.textContent.includes("Cargando")) drawReports(getRoomReportDocs(p.key)); },10000);
   repUnsub = db.collection("reports").where("project","==",p.key).orderBy("createdAt","desc").limit(60).onSnapshot(snap=>{
@@ -6322,7 +6502,7 @@ document.getElementById("repForm").addEventListener("submit", async ev=>{
   const file=window.__u4SelectedPhotoFile || (photoInput && photoInput.files && photoInput.files[0]) || (camPhotoInput && camPhotoInput.files && camPhotoInput.files[0]) || null;
   if (!cleanText && !file){
     msg.className="msg err";
-    msg.textContent=(LANG==="es")?"Escribe o dicta una nota, o agrega una foto primero.":"Write or dictate a note, or add a photo first.";
+    msg.textContent=(LANG==="ru")?"Сначала напишите или надиктуйте заметку либо добавьте фото.":((LANG==="es")?"Escribe o dicta una nota, o agrega una foto primero.":"Write or dictate a note, or add a photo first.");
     return;
   }
   const text = (whoVal && cleanText && cleanText.indexOf("[From:") !== 0)
@@ -6330,7 +6510,7 @@ document.getElementById("repForm").addEventListener("submit", async ev=>{
     : (cleanText || (whoVal ? ("[From: " + whoVal + "] (Photo)") : "(Photo)"));
   const itemVal = (document.getElementById("repItem") && document.getElementById("repItem").value) || "General";
   const kindVal = "Note";
-  send.disabled=true; msg.className="msg"; msg.textContent=(LANG==="es")?"Enviando…":"Sending…";
+  send.disabled=true; msg.className="msg"; msg.textContent=(LANG==="ru")?"Отправка…":((LANG==="es")?"Enviando…":"Sending…");
 
   let photoAssetId=null;
   let photoDesc=null;
@@ -6338,7 +6518,7 @@ document.getElementById("repForm").addEventListener("submit", async ev=>{
     if (file) {
       photoDesc = await readFileAsAttachmentDescriptor(file, "image/jpeg");
       if (assets && typeof assets.upload === "function") {
-        msg.textContent=(LANG==="es")?"Subiendo foto…":"Uploading photo…";
+        msg.textContent=(LANG==="ru")?"Загрузка фото…":((LANG==="es")?"Subiendo foto…":"Uploading photo…");
         const up=await assets.upload(file.file || file);
         photoAssetId=up && up.id ? up.id : null;
       }
@@ -6468,7 +6648,7 @@ document.getElementById("repForm").addEventListener("submit", async ev=>{
   msg.dataset.keep="1";
   msg.textContent = triageRes.configured
     ? formatTriageSuccessMessage(triageRes, triageRes.submissionId)
-    : ((LANG==="es") ? "Enviado. Aparece abajo." : "Sent. It's listed below.");
+    : ((LANG==="ru") ? "Отправлено. Отображается ниже." : ((LANG==="es") ? "Enviado. Aparece abajo." : "Sent. It's listed below."));
   await drawReports([]);
   send.disabled=false;
 });
@@ -6483,9 +6663,18 @@ if (window.claude && claude.use){
 // ---------- decisions (db + to-triage intake outside & inside Claude) ----------
 var PRI = {1:"Blocking work", 2:"Next up", 3:"Later"};
 var PRI_ES = {1:"Bloquea avance", 2:"Siguiente paso", 3:"Más adelante"};
+var PRI_RU = {1:"Блокирует работы", 2:"Следующий шаг", 3:"Позже"};
 function decAgendaHTML(open){
-  const es = LANG==="es";
+  const es = LANG==="es", ru = LANG==="ru";
   const p1=open.filter(d=>d.priority===1).length, p2=open.filter(d=>d.priority===2).length;
+  if (ru) {
+    return `<div class="agenda"><div class="k">Повестка встречи · около 60 минут</div><ol>
+    <li><span class="t">5 мин</span> — Что изменилось: новые заметки с объекта и обновления спецификаций.</li>
+    <li><span class="t">25 мин</span> — Решения, блокирующие работы (открыто: ${p1}). Утвердить каждое или указать недостающий замер.</li>
+    <li><span class="t">15 мин</span> — Следующие решения, где важен осмотр Джона на объекте (открыто: ${p2}).</li>
+    <li><span class="t">10 мин</span> — Вопросы и замечания Джона из полевых отчётов.</li>
+    <li><span class="t">5 мин</span> — Подтвердить план работ бригады на эту неделю.</li></ol></div>`;
+  }
   if (es) {
     return `<div class="agenda"><div class="k">Agenda de la sesión · unos 60 minutos</div><ol>
     <li><span class="t">5 min</span> — Qué cambió: reportes de obra nuevos y cambios a las especificaciones.</li>
@@ -6517,11 +6706,13 @@ function renderDecisions(){
   const owner = isOwnerFlag;
   const combinedSessCount = (Array.isArray(sessDocs) ? sessDocs.length : 0) || (Array.isArray(localSessionDocs) ? localSessionDocs.length : 0);
   const combinedRepCount = (Array.isArray(repAllDocs) ? repAllDocs.length : 0) || (Array.isArray(localAllReportDocs) ? localAllReportDocs.length : 0);
-  const es = LANG==="es";
-  let h = es
-    ? '<h1>Planificación del proyecto</h1><p>Aquí vive todo lo que está en revisión o coordinación: decisiones pendientes, preguntas de obra, notas de sesiones y reportes de campo. Solo Tisa cierra decisiones.</p>'
-    : '<h1>Project Planning</h1><p>Everything still being worked out lives here: decisions to make, questions, discussions and session notes, and field reports from site. Only Tisa locks decisions.</p>';
-  h+=`<div class="dtabs" role="group" aria-label="${es?"Filtro":"Filter"}"><button data-f="agenda" aria-pressed="${decFilter==="agenda"}">${es?"Próxima sesión":"Next session"} (${open.filter(d=>d.priority<=2).length})</button><button data-f="all" aria-pressed="${decFilter==="all"}">${es?"Todas":"All"} (${all.length})</button><button data-f="locked" aria-pressed="${decFilter==="locked"}">${es?"Decididas":"Locked"} (${locked.length})</button><button data-f="call" aria-pressed="${decFilter==="call"}">${es?"Procesar llamada":"Process a call"}</button><button data-f="notes" aria-pressed="${decFilter==="notes"}">${es?"Notas de sesión":"Session notes"} (${combinedSessCount})</button><button data-f="reports" aria-pressed="${decFilter==="reports"}">${es?"Reportes de obra":"Field reports"} (${combinedRepCount})</button></div>`;
+  const es = LANG==="es", ru = LANG==="ru";
+  let h = ru
+    ? '<h1>Планирование проекта</h1><p>Здесь собраны все текущие вопросы координации: открытые решения, вопросы с площадки, заметки встреч и полевые отчёты. Решения утверждает только Тиса.</p>'
+    : (es
+      ? '<h1>Planificación del proyecto</h1><p>Aquí vive todo lo que está en revisión o coordinación: decisiones pendientes, preguntas de obra, notas de sesiones y reportes de campo. Solo Tisa cierra decisiones.</p>'
+      : '<h1>Project Planning</h1><p>Everything still being worked out lives here: decisions to make, questions, discussions and session notes, and field reports from site. Only Tisa locks decisions.</p>');
+  h+=`<div class="dtabs" role="group" aria-label="${ru?"Фильтр":(es?"Filtro":"Filter")}"><button data-f="agenda" aria-pressed="${decFilter==="agenda"}">${ru?"Следующая встреча":(es?"Próxima sesión":"Next session")} (${open.filter(d=>d.priority<=2).length})</button><button data-f="all" aria-pressed="${decFilter==="all"}">${ru?"Все":(es?"Todas":"All")} (${all.length})</button><button data-f="locked" aria-pressed="${decFilter==="locked"}">${ru?"Утверждённые":(es?"Decididas":"Locked")} (${locked.length})</button><button data-f="call" aria-pressed="${decFilter==="call"}">${ru?"Разбор звонка":(es?"Procesar llamada":"Process a call")}</button><button data-f="notes" aria-pressed="${decFilter==="notes"}">${ru?"Заметки встреч":(es?"Notas de sesión":"Session notes")} (${combinedSessCount})</button><button data-f="reports" aria-pressed="${decFilter==="reports"}">${ru?"Отчёты с объекта":(es?"Reportes de obra":"Field reports")} (${combinedRepCount})</button></div>`;
   if (decFilter==="call"){ doc.innerHTML=h; renderCall(doc, open); doc.querySelectorAll(".dtabs button").forEach(b=>b.onclick=()=>{ location.hash = b.dataset.f==="agenda" ? "decisions" : "decisions:"+b.dataset.f; }); return; }
   if (decFilter==="reports"){ renderAllReports(doc, h); doc.querySelectorAll(".dtabs button").forEach(b=>b.onclick=()=>{ location.hash = b.dataset.f==="agenda" ? "decisions" : "decisions:"+b.dataset.f; }); return; }
   if (decFilter==="notes"){ doc.innerHTML=h; renderSessionNotes(doc); doc.querySelectorAll(".dtabs button").forEach(b=>b.onclick=()=>{ location.hash = b.dataset.f==="agenda" ? "decisions" : "decisions:"+b.dataset.f; }); return; }
@@ -6530,9 +6721,9 @@ function renderDecisions(){
   (Array.isArray(noteDocs) ? noteDocs : []).concat(Array.isArray(localDecisionNoteDocs) ? localDecisionNoteDocs : []).forEach(n=>{ const r=(n && typeof n.data==="function") ? (n.data()||{}) : (n||{}); (notesBy[r.decision]=notesBy[r.decision]||[]).push(r); });
   // Next-session view: one heading per group, so each question sits with the meeting or reason it belongs to.
   const DEC_GROUPS = [
-    ["blocking", "Blocking work now", "Detiene trabajo ahora"],
-    ["hvac", "Questions for the NEXT HVAC walkthrough", "Preguntas para la visita de HVAC con NEXT"],
-    ["next", "Next up", "Lo que sigue"]
+    ["blocking", "Blocking work now", "Detiene trabajo ahora", "Блокирует работы сейчас"],
+    ["hvac", "Questions for the NEXT HVAC walkthrough", "Preguntas para la visita de HVAC con NEXT", "Вопросы к обходу по HVAC с NEXT"],
+    ["next", "Next up", "Lo que sigue", "Следующие шаги"]
   ];
   const decGroupOf = d => d.group || (d.priority===1 ? "blocking" : "next");
   const grouped = decFilter==="agenda";
@@ -6543,15 +6734,16 @@ function renderDecisions(){
       lastGroup = decGroupOf(d);
       const g = DEC_GROUPS.find(x=>x[0]===lastGroup);
       const n = showList.filter(x=>decGroupOf(x)===lastGroup).length;
-      const hd = document.createElement("h2"); hd.className = "dec-group"; hd.textContent = (es?g[2]:g[1]) + " (" + n + ")"; doc.appendChild(hd);
+      const hd = document.createElement("h2"); hd.className = "dec-group"; hd.textContent = (ru?g[3]:(es?g[2]:g[1])) + " (" + n + ")"; doc.appendChild(hd);
     }
     const c=document.createElement("div"); c.className="dec"+(d.status==="locked"?" locked":d.priority===1?" p1":"");
     const page=PAGES.find(x=>x.key===d.project);
-    const priLabel = grouped ? "" : (d.status==="locked" ? (es?"DECIDIDO":"LOCKED") : ((es?PRI_ES[d.priority]:PRI[d.priority])||""));
-    c.innerHTML=`<div class="meta">${priLabel?`<span>${priLabel}</span>`:""}${page?`<a href="#${page.key}">${pageLabel(page)}</a>`:""}</div>`;
-    const h3=document.createElement("h3"); h3.textContent=(es && d.questionEs) ? d.questionEs : (d.question||""); c.appendChild(h3);
-    [[es?"Por qué importa":"Why it matters", (es&&d.whyEs)?d.whyEs:d.why],[es?"Opciones en revisión":"Options on the table", (es&&d.optionsEs)?d.optionsEs:d.options],[es?"Lo que aporta John en obra":"What John can bring", (es&&d.johnInputEs)?d.johnInputEs:d.johnInput]].forEach(([k,v])=>{ if(!v)return; const w=document.createElement("div"); const kk=document.createElement("div"); kk.className="k"; kk.textContent=k; const vv=document.createElement("div"); vv.textContent=v; w.append(kk,vv); c.appendChild(w); });
-    if (d.status==="locked"){ const o=document.createElement("div"); o.className="out"; o.textContent="Decision: "+(d.outcome||""); c.appendChild(o); }
+    const priLabel = grouped ? "" : (d.status==="locked" ? (ru?"УТВЕРЖДЕНО":(es?"DECIDIDO":"LOCKED")) : ((ru?PRI_RU[d.priority]:(es?PRI_ES[d.priority]:PRI[d.priority]))||""));
+    const stNote = ru ? (d.statusRu || d.statusEn || "") : (es ? (d.statusEs || d.statusEn || "") : (d.statusEn || ""));
+    c.innerHTML=`<div class="meta">${priLabel?`<span>${priLabel}</span>`:""}${stNote?`<span>${stNote}</span>`:""}${page?`<a href="#${page.key}">${pageLabel(page)}</a>`:""}</div>`;
+    const h3=document.createElement("h3"); h3.textContent=(ru && d.questionRu) ? d.questionRu : ((es && d.questionEs) ? d.questionEs : (d.question||"")); c.appendChild(h3);
+    [[ru?"Почему это важно":(es?"Por qué importa":"Why it matters"), (ru&&d.whyRu)?d.whyRu:((es&&d.whyEs)?d.whyEs:d.why)],[ru?"Варианты на рассмотрении":(es?"Opciones en revisión":"Options on the table"), (ru&&d.optionsRu)?d.optionsRu:((es&&d.optionsEs)?d.optionsEs:d.options)],[ru?"Что проверяет Джон на объекте":(es?"Lo que aporta John en obra":"What John can bring"), (ru&&d.johnInputRu)?d.johnInputRu:((es&&d.johnInputEs)?d.johnInputEs:d.johnInput)]].forEach(([k,v])=>{ if(!v)return; const w=document.createElement("div"); const kk=document.createElement("div"); kk.className="k"; kk.textContent=k; const vv=document.createElement("div"); vv.textContent=v; w.append(kk,vv); c.appendChild(w); });
+    if (d.status==="locked"){ const o=document.createElement("div"); o.className="out"; o.textContent=(ru?"Решение: ":(es?"Decisión: ":"Decision: "))+((ru&&d.outcomeRu)?d.outcomeRu:((es&&d.outcomeEs)?d.outcomeEs:(d.outcome||""))); c.appendChild(o); }
     const ns=(notesBy[d.id]||[]).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
     if (ns.length){ const nw=document.createElement("div"); nw.className="notes"; ns.forEach(n=>{ const e=document.createElement("div"); e.className="note"; const b=document.createElement("b"); b.textContent=fmtTime(n.createdAt); e.append(b, document.createTextNode(n.text||"")); nw.appendChild(e); }); c.appendChild(nw); }
     const ta=document.createElement("textarea"); ta.id="note-"+d.id; ta.maxLength=1500; ta.placeholder="Add a note, a site fact or a question"; ta.setAttribute("aria-label","Note for "+d.id);
@@ -7379,7 +7571,7 @@ window.toggleVoiceCompanionSession = toggleVoiceCompanionSession;
       const tokResp = await fetch(window.U4_VOICE_TOKEN_ENDPOINT || U4_DEFAULT_VOICE_TOKEN_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ room: (current && current.key) || "home", uiLanguage: LANG === "es" ? "es" : "en" })
+        body: JSON.stringify({ room: (current && current.key) || "home", uiLanguage: normU4Lang(LANG) })
       });
       const tokData = await tokResp.json().catch(() => null);
       if (!tokResp.ok || !tokData || !tokData.wsUrl) throw new Error((tokData && tokData.error) || ("Token HTTP " + tokResp.status));
@@ -7450,13 +7642,40 @@ window.toggleVoiceCompanionSession = toggleVoiceCompanionSession;
 show(location.hash.slice(1) || "home");
 ["langBtn", "mobileLangBtn"].forEach(function(id) {
   var _b = document.getElementById(id);
-  if (_b) _b.addEventListener("click", ()=>setLang(LANG==="es" ? "en" : "es"));
+  if (!_b) return;
+  _b.addEventListener("click", function(ev) {
+    var opt = ev.target && ev.target.closest ? ev.target.closest("[data-lang]") : null;
+    if (opt && _b.contains(opt)) {
+      var nextL = normU4Lang(opt.getAttribute("data-lang"));
+      if (nextL !== LANG) setLang(nextL);
+      return;
+    }
+    var order = ["en", "es", "ru"];
+    var idx = order.indexOf(normU4Lang(LANG));
+    setLang(order[(idx + 1) % order.length]);
+  });
+  _b.addEventListener("keydown", function(ev) {
+    var order = ["en", "es", "ru"];
+    var idx = order.indexOf(normU4Lang(LANG));
+    var nextIdx = -1;
+    if (ev.key === "ArrowRight" || ev.key === "ArrowDown") nextIdx = (idx + 1) % order.length;
+    else if (ev.key === "ArrowLeft" || ev.key === "ArrowUp") nextIdx = (idx + order.length - 1) % order.length;
+    else if (ev.key === "Home") nextIdx = 0;
+    else if (ev.key === "End") nextIdx = order.length - 1;
+    if (nextIdx >= 0) {
+      ev.preventDefault();
+      var nextLang = order[nextIdx];
+      setLang(nextLang);
+      var targetBtn = _b.querySelector('[data-lang="' + nextLang + '"]');
+      if (targetBtn && targetBtn.focus) targetBtn.focus();
+    }
+  });
 });
 ["themeBtn", "mobileThemeBtn"].forEach(function(id) {
   var _tb = document.getElementById(id);
   if (_tb) _tb.addEventListener("click", ()=>setTheme(THEME==="dark" ? "light" : "dark"));
 });
-if (LANG==="es") setLang("es"); else document.documentElement.lang="en";
+if (LANG==="es" || LANG==="ru") setLang(LANG); else { document.documentElement.lang="en"; syncChromeLabels(); }
 
 // live Drive reads light up when available
 if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwatch=null; show(current.key); } }).catch(()=>{});
@@ -7512,10 +7731,12 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       url: "./plans/kitchen-west-ks4/index.html",
       docIdEn: "2026-11-20_Kitchen-Vent-Hood-Wall-Interactive_EN",
       docIdEs: "2026-11-20_Kitchen-Vent-Hood-Wall-Interactive_ES",
+      docIdRu: "2026-11-20_Kitchen-Vent-Hood-Wall-Interactive_RU",
       titleEn: "Interactive range and hood wall plan",
       titleEs: "Plano interactivo del muro de estufa y campana",
+      titleRu: "Интерактивный план стены плиты и вытяжки",
       status: "live",
-      aliases: ["kitchen-west-ks4","ks4","k-s4","vent hood wall","hood wall","interactive hood plan","interactive range wall","live hood plan","plano interactivo campana","muro de campana"]
+      aliases: ["kitchen-west-ks4","ks4","k-s4","vent hood wall","hood wall","interactive hood plan","interactive range wall","live hood plan","plano interactivo campana","muro de campana","плита и вытяжка"]
     },
     "kitchen-floor-plan": {
       id: "kitchen-floor-plan",
@@ -7523,10 +7744,12 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       url: "./plans/kitchen-floor-plan/index.html",
       docIdEn: "2026-11-20_Kitchen-Floor-Plan-Interactive_EN",
       docIdEs: "2026-11-20_Kitchen-Floor-Plan-Interactive_ES",
+      docIdRu: "2026-11-20_Kitchen-Floor-Plan-Interactive_RU",
       titleEn: "Interactive full kitchen floor plan and cabinet schedule",
       titleEs: "Plano interactivo de cocina completa y lista de gabinetes",
+      titleRu: "Интерактивный план всей кухни и спецификация шкафов",
       status: "live",
-      aliases: ["kitchen-floor-plan","kitchen floor plan","full kitchen plan","cabinet schedule","plano de cocina interactivo","lista de gabinetes"]
+      aliases: ["kitchen-floor-plan","kitchen floor plan","full kitchen plan","cabinet schedule","plano de cocina interactivo","lista de gabinetes","план кухни"]
     },
     "attic-hatch": {
       id: "attic-hatch",
@@ -7534,10 +7757,12 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       url: "./plans/attic-hatch/index.html",
       docIdEn: "2026-11-20_Attic-Hatch-Interactive_EN",
       docIdEs: "2026-11-20_Attic-Hatch-Interactive_ES",
+      docIdRu: "2026-11-20_Attic-Hatch-Interactive_RU",
       titleEn: "Permanent attic hatch interactive plan",
       titleEs: "Plano interactivo de escotilla permanente del ático",
+      titleRu: "Интерактивный план чердачного люка и настила",
       status: "live",
-      aliases: ["attic-hatch","permanent attic hatch","escotilla interactiva","escotilla del atico"]
+      aliases: ["attic-hatch","permanent attic hatch","escotilla interactiva","escotilla del atico","люк и мостки","чердачный люк"]
     },
     "hvac-layout": {
       id: "hvac-layout",
@@ -7545,10 +7770,12 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       url: "./plans/hvac-layout/index.html",
       docIdEn: "2026-11-20_HVAC-Layout-Interactive_EN",
       docIdEs: "2026-11-20_HVAC-Layout-Interactive_ES",
+      docIdRu: "2026-11-20_HVAC-Layout-Interactive_RU",
       titleEn: "Attic furnace and ducts interactive layout",
       titleEs: "Plano interactivo de calefacción y ductos en ático",
+      titleRu: "Интерактивный план печи и воздуховодов",
       status: "live",
-      aliases: ["hvac-layout","interactive hvac","hvac what-if","ductwork layout","attic furnace","plano interactivo clima"]
+      aliases: ["hvac-layout","interactive hvac","hvac what-if","ductwork layout","attic furnace","plano interactivo clima","печь и воздуховоды"]
     },
     "murphy-door": {
       id: "murphy-door",
@@ -7556,32 +7783,38 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       url: "./plans/murphy-door/index.html",
       docIdEn: "2026-11-20_Murphy-Door-Interactive_EN",
       docIdEs: "2026-11-20_Murphy-Door-Interactive_ES",
+      docIdRu: "2026-11-20_Murphy-Door-Interactive_RU",
       titleEn: "Murphy bookcase door interactive plan",
       titleEs: "Plano interactivo de la puerta librero Murphy",
+      titleRu: "Интерактивный план потайной двери-стеллажа Murphy",
       status: "live",
-      aliases: ["murphy-door","interactive murphy","interactive bookcase door","puerta librero interactiva"]
+      aliases: ["murphy-door","interactive murphy","interactive bookcase door","puerta librero interactiva","шкаф-дверь murphy","дверь murphy"]
     },
-        "kitchen-electrical": {
+    "kitchen-electrical": {
       id: "kitchen-electrical",
       room: "electrical",
       url: "./plans/kitchen-electrical/index.html",
       docIdEn: "2026-11-20_Kitchen-Electrical-Interactive_EN",
       docIdEs: "2026-11-20_Kitchen-Electrical-Interactive_ES",
+      docIdRu: "2026-11-20_Kitchen-Electrical-Interactive_RU",
       titleEn: "Kitchen electrical and subpanel D04 interactive plan",
       titleEs: "Plano interactivo eléctrico de cocina y subpanel D04",
+      titleRu: "Интерактивный план электрики кухни и щитка D04",
       status: "live",
-      aliases: ["kitchen-electrical","electrical plan","subpanel d04","kitchen circuits","plano electrico cocina","subpanel d04"]
+      aliases: ["kitchen-electrical","electrical plan","subpanel d04","kitchen circuits","plano electrico cocina","subpanel d04","электрика кухни"]
     },
     "bathroom-tile": {
       id: "bathroom-tile",
       room: "bathroom",
       url: "./plans/bathroom-tile/index.html",
-      docIdEn: "bathroom-tile",
-      docIdEs: "bathroom-tile",
+      docIdEn: "2026-11-24_Bathroom-Tile-Interactive_EN",
+      docIdEs: "2026-11-24_Bathroom-Tile-Interactive_ES",
+      docIdRu: "2026-11-24_Bathroom-Tile-Interactive_RU",
       titleEn: "Bathroom Tub & Wall Tile Plan",
       titleEs: "Baño: Plano de Azulejo y Nichos",
+      titleRu: "Плитка ванной и ниши",
       status: "live",
-      aliases: ["bathroom-tile","bathroom wall tile","tub tile","azulejo de bano","plano de azulejo"]
+      aliases: ["bathroom-tile","bathroom wall tile","tub tile","azulejo de bano","plano de azulejo","плитка ванной","плитка ванной и ниши"]
     }
   };
 
@@ -7630,15 +7863,15 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   }
 
   function interactivePlanHintForRoom(roomKey, lang) {
-    var l = (lang === "es") ? "es" : "en";
+    var l = (lang === "ru") ? "ru" : ((lang === "es") ? "es" : "en");
     var ids = Object.keys(INTERACTIVE_PLAN_MODULES);
     for (var i = 0; i < ids.length; i++) {
       var mod = INTERACTIVE_PLAN_MODULES[ids[i]];
-      if (mod.room === roomKey || (roomKey === "kitchen" && mod.id === "kitchen-west-ks4")) {
+      if (mod.room === roomKey || (roomKey === "kitchen" && mod.id === "kitchen-floor-plan")) {
         return {
           planId: mod.id,
           url: mod.url + "?lang=" + l,
-          title: l === "es" ? mod.titleEs : mod.titleEn,
+          title: l === "ru" ? (mod.titleRu || mod.titleEn) : (l === "es" ? mod.titleEs : mod.titleEn),
           status: mod.status
         };
       }
@@ -7685,7 +7918,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   var SVG_MIC_MUTED = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="2.5" y1="2.5" x2="17.5" y2="17.5"/><path d="M13 8.8V5.5a3 3 0 0 0-5.2-2"/><path d="M7 7.2V9a3 3 0 0 0 5.1 2.1"/><path d="M4.5 9.5a5.5 5.5 0 0 0 9.4 3.9"/><line x1="10" y1="15" x2="10" y2="18"/><line x1="7" y1="18" x2="13" y2="18"/></svg>';
 
   function currentUiLang() {
-    try { return (typeof LANG !== "undefined" && LANG === "es") ? "es" : "en"; }
+    try { return (typeof LANG !== "undefined" && (LANG === "es" || LANG === "ru")) ? LANG : "en"; }
     catch (e) { return "en"; }
   }
 
@@ -8604,14 +8837,15 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       return;
     }
 
-    var es = currentUiLang() === "es";
+    var curUiL = currentUiLang();
+    var es = curUiL === "es", ru = curUiL === "ru";
     var SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (typeof SpeechRec === "function") {
       try {
         var recognition = new SpeechRec();
         recognition.continuous = true;
         recognition.interimResults = true;
-        recognition.lang = es ? "es-MX" : "en-US";
+        recognition.lang = ru ? "ru-RU" : (es ? "es-MX" : "en-US");
 
         noteVoiceState.active = true;
         noteVoiceState.mode = mode;
@@ -8623,7 +8857,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         updateNoteVoiceButtons();
         setNoteVoiceFeedback(
           mode,
-          es ? "Escuchando… tus palabras aparecen arriba mientras hablas." : "Listening… your words appear above as you speak.",
+          ru ? "Слушаю… ваши слова появляются выше по мере речи." : (es ? "Escuchando… tus palabras aparecen arriba mientras hablas." : "Listening… your words appear above as you speak."),
           false
         );
 
@@ -9425,13 +9659,14 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     if (view.kind === "doc") return;
     var items = getConceptRendersForRoom(view.room);
     if (!items.length) return;
-    var es = currentUiLang() === "es";
+    var curUi = currentUiLang();
+    var es = curUi === "es", ru = curUi === "ru";
     var sec = document.createElement("section");
     sec.id = "u4RoomConceptRenders";
     sec.className = "u4-renders-gallery";
     var cardsHtml = items.map(function(it) {
-      var title = es ? it.titleEs : it.titleEn;
-      var status = es ? it.statusEs : it.statusEn;
+      var title = ru ? (it.titleRu || it.titleEn || "") : (es ? (it.titleEs || it.titleEn || "") : (it.titleEn || it.titleEs || ""));
+      var status = ru ? (it.statusRu || it.statusEn || "") : (es ? (it.statusEs || it.statusEn || "") : (it.statusEn || it.statusEs || ""));
       return (
         '<a class="u4-render-card' + (it.deferred ? ' is-deferred' : '') + '" href="' + escapeAttrHtml(it.driveUrl) + '" target="_blank" rel="noopener noreferrer">' +
           '<img class="u4-render-thumb" loading="lazy" src="' + escapeAttrHtml(it.thumbUrl) + '" alt="' + escapeAttrHtml(title) + '">' +
@@ -9444,9 +9679,9 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     }).join("");
     sec.innerHTML =
       '<div class="u4-renders-head">' +
-        '<h3>' + (es ? "Vistas conceptuales (Renders)" : "Concept Renders") + '</h3>' +
+        '<h3>' + (ru ? "Концептуальные рендеры" : (es ? "Vistas conceptuales (Renders)" : "Concept Renders")) + '</h3>' +
         '<span class="u4-renders-note">' +
-          (es ? "Referencia visual \u2014 las medidas de SPEC/PDF mandan" : "Visual reference \u2014 governing SPEC/PDF dimensions rule") +
+          (ru ? "Визуальный ориентир \u2014 приоритет за размерами SPEC/PDF" : (es ? "Referencia visual \u2014 las medidas de SPEC/PDF mandan" : "Visual reference \u2014 governing SPEC/PDF dimensions rule")) +
         '</span>' +
       '</div>' +
       '<div class="u4-renders-grid">' + cardsHtml + '</div>';
@@ -9464,7 +9699,8 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   function appendChatRenderLinks(items, roomLabel) {
     var log = document.getElementById("u4VdTranscript");
     if (!log || !items || !items.length) return;
-    var es = currentUiLang() === "es";
+    var curUi = currentUiLang();
+    var es = curUi === "es", ru = curUi === "ru";
     var wrap = document.createElement("div");
     wrap.className = "u4-chat-renders";
     items.forEach(function(it) {
@@ -9473,8 +9709,8 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       a.href = it.driveUrl;
       a.target = "_blank";
       a.rel = "noopener noreferrer";
-      var t = es ? it.titleEs : it.titleEn;
-      var s = es ? it.statusEs : it.statusEn;
+      var t = ru ? (it.titleRu || it.titleEn || "") : (es ? (it.titleEs || it.titleEn || "") : (it.titleEn || it.titleEs || ""));
+      var s = ru ? (it.statusRu || it.statusEn || "") : (es ? (it.statusEs || it.statusEn || "") : (it.statusEn || it.statusEs || ""));
       a.textContent = "\uD83D\uDDBC\uFE0F " + t + " \u2014 " + s + " \u2197";
       wrap.appendChild(a);
     });
@@ -9767,8 +10003,9 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     },
 
     set_language: async function(args) {
-      var lang = String((args && (args.language || args.lang)) || "").toLowerCase();
-      if (lang !== "en" && lang !== "es") return { ok: false, code: "INVALID_LANGUAGE", validOptions: ["en", "es"] };
+      var rawL = String((args && (args.language || args.lang)) || "").toLowerCase().trim();
+      var lang = rawL.indexOf("ru") === 0 ? "ru" : (rawL.indexOf("es") === 0 ? "es" : (rawL.indexOf("en") === 0 ? "en" : rawL));
+      if (lang !== "en" && lang !== "es" && lang !== "ru") return { ok: false, code: "INVALID_LANGUAGE", validOptions: ["en", "es", "ru"] };
       var savedRep = document.getElementById("repText") ? document.getElementById("repText").value : null;
       var savedIn = document.getElementById("inText") ? document.getElementById("inText").value : null;
       if (typeof setLang === "function") setLang(lang);
@@ -10361,7 +10598,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         if (typeof show === "function") show(rKey);
         pushLiveContextIfChanged();
       } else if (typ === "u4:nav-plan") {
-        var ph = planUrlToHash(d.planId || d.href, { step: d.step, wall: d.wall, view: d.view, zoom: d.zoom });
+        var ph = planUrlToHash(d.planId || d.href, { step: d.step, wall: d.wall, zoom: d.zoom });
         if (ph) {
           location.hash = ph;
           if (typeof show === "function") show(ph.slice(1));
@@ -11574,7 +11811,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
           '<span id="u4AiStateBadge" class="u4-ai-orb-pill">OFF</span>' +
         '</button>';
 
-      (document.querySelector("main > .bar") || document.body).appendChild(dock);
+      document.body.appendChild(dock);
 
       var minBar = document.createElement("div");
       minBar.id = "u4VoiceMinBar";
@@ -12032,20 +12269,25 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       });
     }
 
+    function onAnyUiLangSync() {
+      setTimeout(function() {
+        syncQpChromeLabels();
+        populateOrganizedAboutSelect(activeRoomKey());
+        syncFloatingAiUi();
+        updateNoteVoiceButtons();
+        refreshDialogSuggestions();
+        try { mountRoomConceptRendersGallery(); } catch (e) {}
+      }, 40);
+    }
+    if (!window.__u4CleanLangCustomBound) {
+      window.__u4CleanLangCustomBound = true;
+      window.addEventListener("u4:lang-change", onAnyUiLangSync);
+    }
     ["langBtn", "mobileLangBtn"].forEach(function(_lid) {
       var langBtn = document.getElementById(_lid);
       if (langBtn && !langBtn.__u4CleanLangBound) {
         langBtn.__u4CleanLangBound = true;
-        langBtn.addEventListener("click", function() {
-        setTimeout(function() {
-          syncQpChromeLabels();
-          populateOrganizedAboutSelect(activeRoomKey());
-          syncFloatingAiUi();
-          updateNoteVoiceButtons();
-          refreshDialogSuggestions();
-          try { mountRoomConceptRendersGallery(); } catch (e) {}
-          }, 50);
-        });
+        langBtn.addEventListener("click", onAnyUiLangSync);
       }
     });
 
@@ -12123,21 +12365,23 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   "use strict";
 
   var SIDEBAR_PLANS = [
-    { id: "kitchen-floor-plan", en: "Kitchen Floor Plan", es: "Cocina: Planta", tagEn: "→", tagEs: "→" },
-    { id: "kitchen-west-ks4", en: "Range & Hood Wall", es: "Estufa y Campana", tagEn: "→", tagEs: "→" },
-    { id: "kitchen-electrical", en: "Kitchen Electrical", es: "Cocina: Eléctrico", tagEn: "→", tagEs: "→" },
-    { id: "attic-hatch", en: "Attic Hatch & Walkway", es: "Escotilla y Pasillo", tagEn: "1", tagEs: "1" },
-    { id: "hvac-layout", en: "Heating & Ducts", es: "Calefactor y Ductos", tagEn: "2", tagEs: "2" },
-    { id: "murphy-door", en: "Murphy Bookcase Door", es: "Puerta Murphy", tagEn: "→", tagEs: "→" },
-    { id: "bathroom-tile", en: "Bathroom Tub & Wall Tile", es: "Baño: Azulejo y Nichos", tagEn: "Plan", tagEs: "Plano" }
+    { id: "kitchen-floor-plan", en: "Kitchen Floor Plan", es: "Cocina: Planta", ru: "Кухня: План этажа", tagEn: "→", tagEs: "→", tagRu: "→" },
+    { id: "kitchen-west-ks4", en: "Range & Hood Wall", es: "Estufa y Campana", ru: "Плита и вытяжка", tagEn: "→", tagEs: "→", tagRu: "→" },
+    { id: "kitchen-electrical", en: "Kitchen Electrical", es: "Cocina: Eléctrico", ru: "Кухня: Электрика", tagEn: "→", tagEs: "→", tagRu: "→" },
+    { id: "attic-hatch", en: "Attic Hatch & Walkway", es: "Escotilla y Pasillo", ru: "Люк и мостки", tagEn: "1", tagEs: "1", tagRu: "1" },
+    { id: "hvac-layout", en: "Heating & Ducts", es: "Calefactor y Ductos", ru: "Печь и воздуховоды", tagEn: "2", tagEs: "2", tagRu: "2" },
+    { id: "murphy-door", en: "Murphy Bookcase Door", es: "Puerta Murphy", ru: "Шкаф-дверь Murphy", tagEn: "→", tagEs: "→", tagRu: "→" },
+    { id: "bathroom-tile", en: "Bathroom Tub & Wall Tile", es: "Baño: Azulejo y Nichos", ru: "Плитка ванной и ниши", tagEn: "Plan", tagEs: "Plano", tagRu: "План" }
   ];
 
   function getLang() {
     var hl = (document.documentElement.getAttribute("lang") || "").toLowerCase();
+    if (hl.indexOf("ru") === 0) return "ru";
     if (hl.indexOf("es") === 0) return "es";
     try {
-      var q = new URLSearchParams(window.location.search || "").get("lang") || "";
-      if (q.toLowerCase().indexOf("es") === 0) return "es";
+      var q = (new URLSearchParams(window.location.search || "").get("lang") || "").toLowerCase();
+      if (q.indexOf("ru") === 0) return "ru";
+      if (q.indexOf("es") === 0) return "es";
     } catch (_) {}
     return "en";
   }
@@ -12155,7 +12399,8 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     if (syncingRail) return;
     syncingRail = true;
     try {
-      var es = getLang() === "es";
+      var curL = getLang();
+      var es = curL === "es", ru = curL === "ru";
       var curPlan = activePlanFromHash();
       var rail = document.getElementById("rail");
       if (rail) {
@@ -12167,7 +12412,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
 
         var hdr = document.createElement("div");
         hdr.className = "grp";
-        hdr.textContent = es ? "Planos interactivos" : "Interactive Plans";
+        hdr.textContent = ru ? "Интерактивные планы" : (es ? "Planos interactivos" : "Interactive Plans");
         grpWrap.appendChild(hdr);
 
         SIDEBAR_PLANS.forEach(function (p) {
@@ -12178,10 +12423,10 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
           a.className = "rail-room-link u4-rail-plan-link" + (curPlan === p.id ? " active" : "");
           if (curPlan === p.id) a.setAttribute("aria-current", "page");
           var spanLbl = document.createElement("span");
-          spanLbl.textContent = es ? p.es : p.en;
+          spanLbl.textContent = ru ? (p.ru || p.en) : (es ? p.es : p.en);
           var spanTag = document.createElement("span");
           spanTag.className = "u4-rail-plan-tag";
-          spanTag.textContent = es ? p.tagEs : p.tagEn;
+          spanTag.textContent = ru ? (p.tagRu || p.tagEn) : (es ? p.tagEs : p.tagEn);
           a.appendChild(spanLbl);
           a.appendChild(spanTag);
           row.appendChild(a);
@@ -12192,7 +12437,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         var projectsGrp = null;
         for (var i = 0; i < grps.length; i++) {
           var gt = (grps[i].textContent || "").trim().toLowerCase();
-          if (gt.indexOf("project") >= 0 || gt.indexOf("proyecto") >= 0) {
+          if (gt.indexOf("project") >= 0 || gt.indexOf("proyecto") >= 0 || gt.indexOf("проект") >= 0) {
             projectsGrp = grps[i];
             break;
           }
@@ -12210,11 +12455,11 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         if (oldOptGrp) oldOptGrp.remove();
         var og = document.createElement("optgroup");
         og.id = "u4-jump-plans-grp";
-        og.label = es ? "Planos interactivos" : "Interactive Plans";
+        og.label = ru ? "Интерактивные планы" : (es ? "Planos interactivos" : "Interactive Plans");
         SIDEBAR_PLANS.forEach(function (p) {
           var opt = document.createElement("option");
           opt.value = "#plan:" + p.id;
-          opt.textContent = (es ? "Plano: " : "Plan: ") + (es ? p.es : p.en);
+          opt.textContent = (ru ? "План: " : (es ? "Plano: " : "Plan: ")) + (ru ? (p.ru || p.en) : (es ? p.es : p.en));
           if (curPlan === p.id) opt.selected = true;
           og.appendChild(opt);
         });
@@ -12246,17 +12491,17 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     if (existing && pageHost.contains(existing) && existing.dataset.lang === curLang) return;
     if (existing) existing.remove();
 
-    var es = getLang() === "es";
+    var es = curLang === "es", ru = curLang === "ru";
     var strip = document.createElement("section");
     strip.id = "u4-home-plans-strip";
-    strip.dataset.lang = getLang();
+    strip.dataset.lang = curLang;
     strip.innerHTML =
       '<div class="u4-home-plans-head">' +
-        '<span class="u4-home-plans-title">' + (es ? "Planos Interactivos — Acceso Rápido" : "Interactive Plans — Quick Launch") + "</span>" +
+        '<span class="u4-home-plans-title">' + (ru ? "Интерактивные планы — Быстрый запуск" : (es ? "Planos Interactivos — Acceso Rápido" : "Interactive Plans — Quick Launch")) + "</span>" +
       "</div>" +
       '<div class="u4-home-plans-chips">' +
         SIDEBAR_PLANS.map(function (p) {
-          return '<a class="u4-home-plan-chip" href="#plan:' + p.id + '"><span>' + (es ? p.es : p.en) + '</span><span>&rarr;</span></a>';
+          return '<a class="u4-home-plan-chip" href="#plan:' + p.id + '"><span>' + (ru ? (p.ru || p.en) : (es ? p.es : p.en)) + '</span><span>&rarr;</span></a>';
         }).join("") +
       "</div>";
 
@@ -12350,6 +12595,47 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       '</div>' +
     '</section>';
 
+  var HVAC_SUMMARY_FALLBACK_RU =
+    '<div class="u4-plan-launch-grid">' +
+      '<a class="u4-plan-launch-card is-primary" href="#plan:hvac-layout">' +
+        '<span class="u4-plan-launch-kicker">Интерактивный план 2 · Отопление и воздуховоды</span>' +
+        '<strong class="u4-plan-launch-title">Система отопления: Печь, воздуховоды и боковой выброс</strong>' +
+        '<span class="u4-plan-launch-desc">Передвигайте печь и решётки по комнатам для проверки подающих трасс, центрального возврата и горизонтального выброса в стену (ноль вырезов в крыше).</span>' +
+        '<span class="u4-plan-launch-cta">Открыть план отопления &rarr;</span>' +
+      '</a>' +
+      '<a class="u4-plan-launch-card" href="#plan:attic-hatch">' +
+        '<span class="u4-plan-launch-kicker">Интерактивный план 1 · Столярка и каркас</span>' +
+        '<strong class="u4-plan-launch-title">Чердачный люк, деревянные мостки и площадка</strong>' +
+        '<span class="u4-plan-launch-desc">Чистый световой проём 24&quot; &times; 36&quot; у входной двери №4, пауза до проверки балок, крышка с уплотнителем и мостки 15,8 фута.</span>' +
+        '<span class="u4-plan-launch-cta">Открыть план чердачного люка &rarr;</span>' +
+      '</a>' +
+    '</div>' +
+    '<section id="sec-hvac-summary" class="u4-sec-block">' +
+      '<h2>NEXT и наша бригада — Разделение этапов работ</h2>' +
+      '<p class="u4-sec-lead">Чёткое разделение ответственности между подрядчиком NEXT (механика и наружный ввод) и нашей бригадой (чердачный доступ, сервисная электрика и чистовая отделка).</p>' +
+      '<div class="u4-phase-grid">' +
+        '<div class="u4-phase-card">' +
+          '<div class="u4-phase-badge is-next">Объём работ NEXT (механика и ввод)</div>' +
+          '<h3>NEXT монтирует и испытывает систему отопления</h3>' +
+          '<ul>' +
+            '<li><strong>Печь, термостат и воздуховоды:</strong> Поставляет и монтирует горизонтальную газовую печь на чердаке, настенный термостат и утеплённые воздуховоды (<code>3</code> подачи в комнаты, <code>1</code> центральный возврат в коридоре и <code>1</code> переточный канал спальни).</li>' +
+            '<li><strong>Горизонтальный выброс через стену:</strong> Выводит дымоход горизонтально через наружную стену (<strong>ноль проходок через плоскую кровлю</strong>).</li>' +
+            '<li><strong>Наружный силовой ввод и подщит (<code>D04</code>):</strong> Прокладывает новый наружный фидер от главного щита здания к подщиту квартиры 4 на стене <code>D04</code> (<strong>ввод <code>80А</code></strong> с условным <strong>главным автоматом <code>100А</code></strong> при достаточном резерве).</li>' +
+            '<li><strong>Разрешения, тест HERS и городские инспекции:</strong> Оформляет механическое и электротехническое разрешения NEXT и сдаёт тест HERS и инспекции города.</li>' +
+          '</ul>' +
+        '</div>' +
+        '<div class="u4-phase-card">' +
+          '<div class="u4-phase-badge is-crew">Объём работ нашей бригады (по порядку)</div>' +
+          '<h3>Наша бригада готовит доступ и восстанавливает отделку</h3>' +
+          '<ol>' +
+            '<li><strong>До выхода NEXT:</strong> Оставить открытыми потолок шкафа спальни (<a href="https://app.todoist.com/app/task/6j3j3pXFrFWhH2w7" target="_blank" rel="noopener">задача</a>) и стену <code>D04</code> подщита (<a href="https://app.todoist.com/app/task/6hvRcQ4XC9mr56g7" target="_blank" rel="noopener">задача</a>); устранить протечку плоской крыши; держать озонатор выключенным (<a href="https://app.todoist.com/app/task/6j4MQwqCqp24hX57" target="_blank" rel="noopener">задача</a>).</li>' +
+            '<li><strong>Совместно с NEXT (после согласования):</strong> Собрать постоянный люк <code>24&quot; &times; 36&quot;</code> у входной двери 4 (<a href="https://app.todoist.com/app/task/6j3Rf8FVhMVQ7vQf" target="_blank" rel="noopener">задача</a>), сплошные мостки шириной <code>24&quot;</code> длиной <code>15,8 фута</code> (<a href="https://app.todoist.com/app/task/6j3RvWq3q6RRFXf7" target="_blank" rel="noopener">задача</a>), ровную площадку <code>30&quot; &times; 30&quot;</code> (<a href="https://app.todoist.com/app/task/6j3j3pqfM4GC53Qf" target="_blank" rel="noopener">задача</a>), розетку <code>120В</code> GFCI не далее <code>25 футов</code> (<a href="https://app.todoist.com/app/task/6j3RvWhHcpMmCjP7" target="_blank" rel="noopener">задача</a>) и чердачный светильник с выключателем (<a href="https://app.todoist.com/app/task/6hvjQJgpw2W5VcQf" target="_blank" rel="noopener">задача</a>).</li>' +
+            '<li><strong>После испытаний:</strong> Зашить потолок шкафа спальни только после протяжки низковольтного кабеля термостата и готовности люка (<a href="https://app.todoist.com/app/task/6j3Rf89g8M6hPPx7" target="_blank" rel="noopener">задача</a>), затем зашпаклевать и покрасить потолки и стену <code>D04</code> (<a href="https://app.todoist.com/app/task/6hvj3CgXpVqrJgvf" target="_blank" rel="noopener">задача</a>).</li>' +
+          '</ol>' +
+        '</div>' +
+      '</div>' +
+    '</section>';
+
   function unhideChain(el) {
     var cur = el;
     while (cur && cur !== document.body) {
@@ -12405,7 +12691,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
           var mount = existingFallback || document.createElement("div");
           mount.id = "u4-r7-hvac-summary-mount";
           mount.dataset.lang = curLangHvac;
-          mount.innerHTML = getLang() === "es" ? HVAC_SUMMARY_FALLBACK_ES : HVAC_SUMMARY_FALLBACK_EN;
+          mount.innerHTML = curLangHvac === "ru" ? HVAC_SUMMARY_FALLBACK_RU : (curLangHvac === "es" ? HVAC_SUMMARY_FALLBACK_ES : HVAC_SUMMARY_FALLBACK_EN);
           if (!mount.parentElement) {
             var hdrAnchor = host.querySelector(".u4-subnav-bar") || host.querySelector("h1");
             if (hdrAnchor && hdrAnchor.parentNode === host) {
@@ -12939,6 +13225,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   }
 })();
 /* U4_PAGEWIDE_WIKI_PIN_JS_END */
+
 </script>
 
   

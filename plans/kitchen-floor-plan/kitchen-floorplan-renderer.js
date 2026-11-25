@@ -369,7 +369,22 @@
 
   /* ── Runtime State (Strictly in-memory, ZERO browser web storage) ── */
   const params = new URLSearchParams(window.location.search);
-  let currentLang = (params.get('lang') || '').toLowerCase() === 'es' ? 'es' : 'en';
+  if (typeof I18N === 'object' && I18N && I18N.en && !I18N.ru) {
+    I18N.ru = Object.assign({}, I18N.en, {
+      btn_lang: 'Русский (RU)',
+      measure_on_site: 'ЗАМЕРИТЬ НА МЕСТЕ',
+      verify_friday: 'ПРОВЕРИТЬ НА МЕСТЕ',
+      local_preview: 'Локальный просмотр',
+      pending_eod: 'Ожидает проверки',
+      synced_label: 'Синхронизировано',
+      off_tailnet: 'Вне Tailnet (локальный режим)',
+      sketch_none: 'Нет отметки',
+      sketch_ready: 'Отметка готова',
+      btn_dictate: 'Голосовой ввод'
+    });
+  }
+  const _initLangRaw = String(params.get('lang') || '').toLowerCase();
+  let currentLang = _initLangRaw.startsWith('ru') ? 'ru' : (_initLangRaw.startsWith('es') ? 'es' : 'en');
   const rawView = (params.get('view') || '').toLowerCase();
   let activeView = ['floor', 'west', 'south', 'east', 'north'].includes(rawView) ? rawView : 'floor';
   let wallFilter = 'ALL';
@@ -1692,7 +1707,7 @@
 
   function applyUiLanguage() {
     const tr = I18N[currentLang];
-    document.documentElement.lang = currentLang;
+    document.documentElement.lang = (window.U4PlanNav && typeof window.U4PlanNav.getLang === 'function') ? window.U4PlanNav.getLang() : currentLang;
     document.title = tr.doc_title;
     const setText = (id, t) => { const el = document.getElementById(id); if (el) el.textContent = t; };
     const setHtml = (id, h) => { const el = document.getElementById(id); if (el) el.innerHTML = h; };
@@ -2965,7 +2980,7 @@
     },
     runProductLookup(payload) { return runProductLookup(payload || {}); },
     getLang() { return currentLang; },
-    setLang(l) { if (l === 'en' || l === 'es') { currentLang = l; renderAll(); } },
+    setLang(l) { if (l === 'en' || l === 'es' || l === 'ru') { currentLang = l; renderAll(); } },
     getRevisionStamp() { return computeRevisionStamp(); },
     getAnnotationDataUrl() {
       const canvas = document.getElementById('kitchen-fp-sketch-canvas');

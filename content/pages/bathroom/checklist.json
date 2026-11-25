@@ -3,38 +3,39 @@
   "steps": [
     {
       "done": true,
-      "en": "Plumbing rough-in, fan duct, tub test, floor tile laid, HardieBacker, niches, marble tub surround & window sill complete",
-      "es": "Plomería, ducto de extractor, prueba de tina, piso colocado, HardieBacker, nichos, mármol de tina y repisa listos"
+      "en": "Plumbing rough-in, fan duct, tub leak test and floor membrane done",
+      "es": "Plomería en bruto, ducto del extractor, prueba de la tina y membrana de piso listos",
+      "ru": "Черновая сантехника, канал вытяжки, проверка ванны на протечки и гидроизоляция пола выполнены"
     },
     {
       "done": true,
-      "en": "Pocket door permanently retired; locked 28\"×1-3/8\" outward-swing hallway door and Ice White 3\"×6\" tile with 35\" side stops & matching ceramic bullnose",
-      "es": "Puerta corrediza retirada; definidos puerta abatible de 28\"×1-3/8\" al pasillo y azulejo Ice White 3\"×6\" con topes a 35\" y bullnose cerámico"
+      "en": "Floor tile laid (not grouted); HardieBoard, niches, towel-bar blocking & marble tub surround installed; window sill made",
+      "es": "Piso instalado (sin boquilla); HardieBoard, nichos, refuerzo de toallero y mármol de tina instalados; alféizar de ventana listo",
+      "ru": "Напольная плитка уложена (без затирки); смонтированы HardieBoard, ниши, закладные под полотенцесушитель и мраморное обрамление ванны; изготовлен подоконник"
     },
     {
       "done": false,
-      "en": "Replace bathroom window and casing before setting wall tile (wall tile stops below the 43\" sill; no tile in window-casing area)",
-      "es": "Reemplazar ventana y marco del baño antes del azulejo de muro (el azulejo llega solo debajo de la repisa de 43\"; sin azulejo en el marco)"
+      "en": "Replace bathroom window and casing (zero tile in casing area) before wall tile; finish rough-in electrical boxes and separate toilet drop",
+      "es": "Reemplazar ventana y marco del baño (cero azulejo en el área del marco) antes del azulejo; terminar cajas eléctricas y bajada separada al inodoro",
+      "ru": "Заменить окно и наличник в ванной (без плитки в зоне оконного наличника) до укладки настенной плитки; завершить подрозетники и отдельный спуск кабеля к унитазу"
     },
     {
       "done": false,
-      "en": "Keep the oversized 20\"×32\" medicine cabinet off the wall for return (replacement surface-mounted cabinet TBD)",
-      "es": "Dejar fuera el botiquín grande de 20\"×32\" para devolución (botiquín sobrepuesto de reemplazo por elegir)"
+      "en": "Check toilet flange, grout floor (Warm Gray), and set American Olean Ice White 0025 wall tile (on hold until Alex returns)",
+      "es": "Revisar brida del inodoro, emboquillar piso (Warm Gray) y colocar azulejo American Olean Ice White 0025 (en pausa hasta regreso de Alex)",
+      "ru": "Проверить фланец унитаза, затереть пол (Warm Gray) и уложить настенную плитку American Olean Ice White 0025 (на паузе до возвращения Алекса)"
     },
     {
       "done": false,
-      "en": "Frame bathroom entry for a 28\" × 1-3/8\" hinged door swinging outward into the hallway (verify swing & clearance first); finish GFCI boxes, separate toilet 12/2 drop & attic junction box",
-      "es": "Preparar entrada para puerta abatible de 28\" × 1-3/8\" abriendo hacia el pasillo (verificar giro y espacio libre); terminar cajas GFCI, bajada 12/2 al inodoro y caja en ático"
+      "en": "Attic junction box, close ceiling, prime, paint, and hang outward-swing 28\" hallway door (pocket door retired)",
+      "es": "Caja de conexiones en el ático, cerrar techo, sellar, pintar y colgar puerta abatible de 28\" hacia el pasillo (corrediza retirada)",
+      "ru": "Расключить чердачную коробку, зашить потолок, загрунтовать, покрасить и навесить распашную дверь 28\" наружу в коридор (кассетная дверь отменена)"
     },
     {
       "done": false,
-      "en": "Check toilet flange, grout floor (Warm Gray), and set Ice White 0025 wall tile & niches once Alex returns (waterproofing photos, niche back tile choice & valve depth checks first)",
-      "es": "Revisar brida del inodoro, emboquillar piso (Warm Gray) y colocar azulejo Ice White 0025 y nichos al regreso de Alex (fotos de impermeabilización, elección de fondo de nichos y válvula primero)"
-    },
-    {
-      "done": false,
-      "en": "Close ceiling, prime, paint, hang the 28\" outward-swing hallway door, and install sink, 10\" toilet, bronze trim, glass screen, replacement cabinet & lights",
-      "es": "Cerrar techo, sellar, pintar, colgar puerta abatible de 28\" al pasillo e instalar lavabo, inodoro de 10\", accesorios de bronce, vidrio, botiquín nuevo y luces"
+      "en": "Return oversized medicine cabinet; install sink, toilet, bronze trim, glass, replacement cabinet and lights",
+      "es": "Devolver botiquín grande; instalar lavabo, inodoro, accesorios de bronce, vidrio, botiquín de reemplazo y luces",
+      "ru": "Сдать крупногабаритный зеркальный шкафчик; установить раковину, унитаз, бронзовую фурнитуру, стеклянную шторку, новый шкафчик и светильники"
     }
   ]
 }

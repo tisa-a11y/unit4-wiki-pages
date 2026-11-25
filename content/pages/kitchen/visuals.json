@@ -8,43 +8,50 @@
       "img": "./wiki-images/kitchen-john-nov21-6104.jpg",
       "href": "./wiki-images/kitchen-john-nov21-6104.jpg",
       "en": "South wall framing and plumbing. Inspect exposed materials before covering.",
-      "es": "Bastidor y plomería del muro Sur. Revisar los materiales expuestos antes de cubrirlos."
+      "es": "Bastidor y plomería del muro Sur. Revisar los materiales expuestos antes de cubrirlos.",
+      "ru": "Каркас и сантехника южной стены. Осмотреть открытые конструкции перед зашивкой."
     },
     {
       "img": "./wiki-images/kitchen-john-nov21-6099.jpg",
       "href": "./wiki-images/kitchen-john-nov21-6099.jpg",
       "en": "Latest notebook sketch with the 12\", 18\" and 30\" cabinet widths.",
-      "es": "Último croquis de libreta con gabinetes de 12\", 18\" y 30\"."
+      "es": "Último croquis de libreta con gabinetes de 12\", 18\" y 30\".",
+      "ru": "Актуальный эскиз из блокнота с шириной шкафов 12\", 18\" и 30\"."
     },
     {
       "img": "./wiki-images/kitchen-john-nov21-6103.jpg",
       "href": "./wiki-images/kitchen-john-nov21-6103.jpg",
       "en": "Cabinet layout drawn over a site photo for illustration.",
-      "es": "Trazo ilustrativo de gabinetes dibujado sobre una foto de obra."
+      "es": "Trazo ilustrativo de gabinetes dibujado sobre una foto de obra.",
+      "ru": "Иллюстративная разметка шкафов поверх фотографии с объекта."
     },
     {
       "img": "./wiki-images/kitchen-john-nov21-6105.jpg",
       "href": "./wiki-images/kitchen-john-nov21-6105.jpg",
       "en": "South window framing and plumbing rough-in.",
-      "es": "Bastidor de la ventana Sur e instalación preliminar de plomería."
+      "es": "Bastidor de la ventana Sur e instalación preliminar de plomería.",
+      "ru": "Каркас южного окна и черновая разводка сантехники."
     },
     {
       "img": "./wiki-images/kitchen-john-nov21-6098.jpg",
       "href": "./wiki-images/kitchen-john-nov21-6098.jpg",
       "en": "Earlier notebook sketch for comparison.",
-      "es": "Croquis anterior de libreta para comparar."
+      "es": "Croquis anterior de libreta para comparar.",
+      "ru": "Прежний эскиз из блокнота для сравнения."
     },
     {
       "img": "./wiki-images/kitchen-john-nov21-6096.jpg",
       "href": "./wiki-images/kitchen-john-nov21-6096.jpg",
       "en": "Earlier notebook layout notes for comparison.",
-      "es": "Apuntes anteriores del trazo en libreta para comparar."
+      "es": "Apuntes anteriores del trazo en libreta para comparar.",
+      "ru": "Прежние заметки по планировке из блокнота для сравнения."
     },
     {
       "img": "./wiki-images/2026-11-18_U4_kitchen_overhead-concept_R2.jpg",
       "href": "./wiki-images/2026-11-18_U4_kitchen_overhead-concept_R2.jpg",
       "en": "Kitchen from above",
-      "es": "Cocina desde arriba"
+      "es": "Cocina desde arriba",
+      "ru": "Вид кухни сверху"
     },
     {
       "img": "./wiki-images/2026-11-23_U4_floor-plan-proof_EN.png",
@@ -53,20 +60,25 @@
       "hrefEs": "./wiki-images/2026-11-23_U4_floor-plan-proof_ES.png",
       "en": "Unit 4 Floor Plan & Layout Summary (Nov 23 — Hatch outside Door 4, pie-safe sealed)",
       "es": "Plano de planta vigente — Unidad 4 (23 nov — Escotilla fuera de Puerta 4, pie-safe sellado)",
-      "deferred": false
+      "deferred": false,
+      "ru": "Поэтажный план и сводка квартиры 4 (23 нояб. — люк снаружи у двери №4, ниша pie-safe зашита)"
     },
     {
       "img": "./wiki-images/kitchen-west-alcove-arch-concept.jpg",
       "href": "./wiki-images/kitchen-west-alcove-arch-concept.jpg",
       "en": "Range wall",
-      "es": "Muro de la estufa"
+      "es": "Muro de la estufa",
+      "ru": "Западная стена плиты и вытяжки"
     },
     {
       "img": "./wiki-images/kitchen-magicplan-7bb82437fa09d031aa98d36ccdf6860e.jpg",
       "href": "./wiki-images/kitchen-magicplan-7bb82437fa09d031aa98d36ccdf6860e.jpg",
       "en": "Measured floor plan",
-      "es": "Plano con medidas"
+      "es": "Plano con medidas",
+      "ru": "Обмерный план кухни"
     }
   ],
-  "lead": 0
+  "lead": 0,
+  "ru": "Изображения",
+  "noteRu": "Фото с площадки и эскизы Джона от 21 ноября. Проверьте размеры и проход на месте перед резкой или заказом материалов."
 }

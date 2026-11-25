@@ -23,7 +23,7 @@
 
 ## 2. Canonical Classic Old Wiki Design Tokens (Master Visual Language — Zero CDNs)
 
-All main wiki components AND all 6 interactive plans MUST use the **Classic Old Wiki** palette, typography, and flat `1px solid var(--line)` `8px` cards (`src/template.html:175–230`, `plans/vendor/u4-human-guide-shell.css`, `plans/kitchen-west-ks4/ks4-5step-guide.css`, `plans/vendor/u4-live-ai-widget.css`, `plans/vendor/u4-pin-dragger.css`):
+All main wiki components AND all 7 interactive plans MUST use the **Classic Old Wiki** palette, typography, and flat `1px solid var(--line)` `8px` cards (`src/template.html:175–230`, `plans/vendor/u4-human-guide-shell.css`, `plans/kitchen-west-ks4/ks4-5step-guide.css`, `plans/vendor/u4-live-ai-widget.css`, `plans/vendor/u4-pin-dragger.css`):
 
 ```css
 :root {
@@ -72,7 +72,7 @@ All main wiki components AND all 6 interactive plans MUST use the **Classic Old 
 
 ## 3. Global App-Wide `EN/ES` & `Dark/Light` Sync Contract (`[P1-U1]` + `[P2-U8]`)
 
-Both the main wiki (`src/template.html`) AND all 6 interactive plans (`plans/vendor/u4-plan-nav.js` + `ks4-5step-guide.js`) share ONE identical preference sync contract:
+Both the main wiki (`src/template.html`) AND all 7 interactive plans (`plans/vendor/u4-plan-nav.js` + `ks4-5step-guide.js`) share ONE identical preference sync contract:
 1. **Shared `localStorage` Keys (wrapped in safe `try/catch`):** `u4_lang` (`"en" | "es"`) and `u4_theme` (`"light" | "dark"`). *(Only UI language & theme preference keys belong in `localStorage` — NEVER store plan data, offline edit queues, credentials, or prices in web storage.)*
 2. **Load Precedence:** URL `?lang=` / `?theme=` (if valid, persist to `localStorage`) → `localStorage` (`u4_lang` / `u4_theme`) → fallback (`"en"`, and `prefers-color-scheme: dark` for theme).
 3. **Immediate DOM Application:** Set `document.documentElement.lang` AND explicit `document.documentElement.setAttribute("data-theme", theme)` (`"light"` or `"dark"`) immediately on load before paint.
@@ -88,7 +88,7 @@ Both the main wiki (`src/template.html`) AND all 6 interactive plans (`plans/ven
 3. **Zero Backend Plumbing Visible to Humans (Blocking QA Gate):** Never show `Tailnet Live`, `Off-tailnet`, `EOD Review`, `measure_boundary`, raw snake_case tags, `rev-2026...` stamps, `Download JSON`, or engineering override forms on default human screens.
 4. **Equipment & Supplies Naming (Tisa, 2026-11-20 05:31 PT):** Always label the collapsed per-step tool/supply drawer **`🔧 Equipment & Supplies ▾`** (EN) / **`🔧 Equipo y suministros ▾`** (ES).
 5. **Strict Input Bounds Validation (`[P1-U5]`):** Calculators (such as Murphy Door 9-point `b7`–`b15`) MUST validate plausible architectural bounds (e.g., `18"–48"` W, `60"–96"` H, `60"–110"` Diag, `2"–12"` Jamb) and hold cut size at `— × —` with a clear EN/ES warning rather than ever displaying negative cut dimensions.
-6. **Live AI Chat & Voice Widget on Every Page (`plans/vendor/u4-live-ai-widget.{css,js}`):** Mounted on main wiki and all 6 interactive plans (hidden on print), wired to Mac mini `:8791` (`/api/unit4/voice-token`, `/knowledge`, `/wiki-intake`) with 1-tap Mute/Unmute and graceful Chrome 142+ Local Network Access (`LNA`) fallback.
+6. **Live AI Chat & Voice Widget on Every Page (`plans/vendor/u4-live-ai-widget.{css,js}`):** Mounted on main wiki and all 7 interactive plans (hidden on print), wired to Mac mini `:8791` (`/api/unit4/voice-token`, `/knowledge`, `/wiki-intake`) with 1-tap Mute/Unmute and graceful Chrome 142+ Local Network Access (`LNA`) fallback.
 
 ---
 
@@ -120,7 +120,7 @@ Users MUST have a consistent drag-or-tap spot marker tool on **every interactive
 
 ## 7. Smooth Zoom & Pan on Interactive Drawings & Reference Photos (`plans/vendor/u4-zoom-pan.{css,js}` — Wave F)
 
-Per Tisa (`2026-11-20`: *"Make the interactive images zoomable"*), every interactive SVG drawing (`.u4h-svg-wrap`, KS4 `.ks4-svg-wrap`) and every reference photo (`.u4h-photo-card`) across all 6 interactive plans MUST support smooth zoom & pan without disrupting normal scrolling, fixture dragging, or pin accuracy:
+Per Tisa (`2026-11-20`: *"Make the interactive images zoomable"*), every interactive SVG drawing (`.u4h-svg-wrap`, KS4 `.ks4-svg-wrap`) and every reference photo (`.u4h-photo-card`) across all 7 interactive plans MUST support smooth zoom & pan without disrupting normal scrolling, fixture dragging, or pin accuracy:
 - **Classic Old-Wiki Controls (`.u4-zoom-bar no-print`):** Slim flat toolbar directly above `.u4-zoom-viewport` (never overlapping compass roses, titles, or photo subjects) with **`−`** | **`100%`** (click to reset) | **`+`** (`100%`–`300%`), EN/ES localized labels synced to `u4_lang`, and dark/light parity.
 - **Gestures & Scroll Discipline:**
   - `Ctrl` / `⌘` + Mouse Wheel (including macOS trackpad pinch) zooms smoothly around cursor focal point (`100%`–`300%`). Plain wheel without `Ctrl`/`⌘` NEVER intercepts normal vertical page scrolling.
@@ -136,6 +136,13 @@ Per Tisa (`2026-11-20`: *"Make the interactive images zoomable"*), every interac
 
 - **Canonical Interactive Plan Symbol (Zero Double Icons):** Use ONE monochrome inline-SVG pointer-click icon (`14×14`, `var(--accent)`) consistently across all sidebar `INTERACTIVE PLANS` links and interactive plan items inside room `Documents (...)` sub-lists. Strip legacy compass (`🧭`) and lightning (`⚡`) emojis so items never double-stack symbols or collide with Electrical.
 - **Calm Sidebar Hierarchy (No Extra Filter Clutter):** Style active sidebar links with a soft tinted pill (`var(--accent-soft)` background, `var(--accent)` text, `inset 2.5px 0 0 var(--accent)` left bar) and subtle `1px solid var(--line)` group dividers between `OVERVIEW`, `INTERACTIVE PLANS`, and `PROJECTS`. Do NOT add a sidebar "Jump to" search filter or extra accordion JS that fights the native room tree.
-- **Compact Sliding Top-Bar Switches:** Use compact sliding segmented `EN | ES` and inline-SVG Sun/Moon switches across the main wiki, mobile header, all 6 interactive plans, and standalone docs.
+- **Compact Sliding Top-Bar Switches:** Use compact sliding segmented `EN | ES` and inline-SVG Sun/Moon switches across the main wiki, mobile header, all 7 interactive plans, and standalone docs.
 - **Modern AI Helper Popover (`#u4VoiceChatDialog`):** Compact bottom-right auto-height card (`height: auto`, collapses empty transcript so it never blocks drawings), symbol-only `32×32` circular voice (waveform / stop square) and mute (mic / slashed-mic, `M` shortcut) controls across dialog header, floating dock, and live minibar, hidden redundant `#waVoiceStatus` banners during idle/live/muted states (and hidden flatlined RMS dots when muted), zero robotic welcome bubble or repeated sender labels, and a unified 2-deck composer card.
 - **Pure-CSS & Script Syntax Gate:** Prefer pure CSS (`:empty`, `:has()`, `[aria-pressed]`, SVG masks) over `MutationObserver` for UI state styling (never call `setAttribute` unconditionally inside an attribute-watching `MutationObserver` on the same subtree), and always run `node --check` on extracted inline `<script>` blocks in `index.html` before pushing to `main`.
+
+
+## 3-Language UI/UX Standard (`EN | ES | RU`)
+- **3-Way Segmented Control (`.u4-lang-seg`):** Direct 1-tap `role="radiogroup"` pill with three `role="radio"` buttons (`EN`, `ES`, `RU`), `170ms` sliding accent thumb (`width: calc((100% - 4px) / 3)` at `translateX(0% | 100% | 200%)`), roving `tabindex`, and `ArrowLeft`/`ArrowRight`/`Home`/`End` keyboard support.
+- **Active Ink Contrast:** `#ffffff` on `#1f5f7a` in Light mode (`6.8:1` AA+) and `#0d181d` on `#7cc0dc` in Dark mode (`10.4:1` AAA).
+- **Decoupled Utility Switches:** `.u4h-seg-switch` is reserved for multi-plan sibling navigation tabs; `.u4h-bin-switch` styles the binary Sun/Moon theme switch; `.u4-lang-seg` styles the 3-way language control.
+- **Typography & Persistence:** `IBM Plex Sans` and `IBM Plex Mono` load Latin + Cyrillic glyph subsets seamlessly. `localStorage` persists strictly `u4_lang` (`"en" | "es" | "ru"`) and `u4_theme` (`"light" | "dark"`), synced via `?lang=` query parameter and `u4:set-pref`/`u4:sync-pref` `postMessage`.

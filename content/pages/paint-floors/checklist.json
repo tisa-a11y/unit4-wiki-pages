@@ -4,27 +4,32 @@
     {
       "done": true,
       "en": "Bathroom floor tile laid; Warm Gray grout chosen",
-      "es": "Azulejo del piso del baño colocado; boquilla Warm Gray elegida"
+      "es": "Azulejo del piso del baño colocado; boquilla Warm Gray elegida",
+      "ru": "Напольная плитка в ванной уложена; выбрана затирка Warm Gray"
     },
     {
       "done": false,
       "en": "Confirm kitchen floor thickness; patch the bedroom hardwood",
-      "es": "Confirmar espesor del piso de la cocina; reparar la duela de la recámara"
+      "es": "Confirmar espesor del piso de la cocina; reparar la duela de la recámara",
+      "ru": "Подтвердить толщину пирога пола кухни; восстановить паркет в спальне"
     },
     {
       "done": false,
       "en": "Place the moulding order; lay out frames with tape",
-      "es": "Hacer el pedido de molduras; trazar marcos con cinta"
+      "es": "Hacer el pedido de molduras; trazar marcos con cinta",
+      "ru": "Оформить заказ на молдинги; выполнить разметку рамок лентой на стенах"
     },
     {
       "done": false,
       "en": "Kitchen floor tile, door transitions and floor protection",
-      "es": "Instalar azulejo del piso de cocina y transiciones en puertas; proteger los pisos"
+      "es": "Azulejo del piso de la cocina, transiciones en puertas y protección de pisos",
+      "ru": "Уложить напольную плитку на кухне, дверные порожки и укрыть чистовые полы защитой"
     },
     {
       "done": false,
       "en": "Prime and paint rooms, trim and kitchen cabinets",
-      "es": "Sellar y pintar cuartos, molduras y gabinetes de cocina"
+      "es": "Sellar y pintar cuartos, molduras y gabinetes de cocina",
+      "ru": "Загрунтовать и покрасить жилые комнаты, столярный декор и кухонные шкафы"
     }
   ]
 }

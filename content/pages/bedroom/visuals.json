@@ -8,25 +8,31 @@
       "img": "./wiki-images/bedroom-no-rail-concept-r1.jpg",
       "href": "./wiki-images/bedroom-no-rail-concept-r1.jpg",
       "en": "Wall panels without chair rail",
-      "es": "Paneles de muro sin guardasilla"
+      "es": "Paneles de muro sin guardasilla",
+      "ru": "Настенные рамки без среднего горизонтального молдинга"
     },
     {
       "img": "./wiki-images/bedroom-moulding-furnished-revB.jpg",
       "href": "./wiki-images/bedroom-moulding-furnished-revB.jpg",
       "en": "Room with furniture",
-      "es": "Cuarto con muebles"
+      "es": "Cuarto con muebles",
+      "ru": "Спальня с расстановкой мебели"
     },
     {
       "img": "./wiki-images/bedroom-r2-wall-a.jpg",
       "href": "./wiki-images/bedroom-r2-wall-a.jpg",
       "en": "Wall A, North (headboard)",
-      "es": "Muro A, Norte (cabecera)"
+      "es": "Muro A, Norte (cabecera)",
+      "ru": "Стена A, Северная (изголовье кровати)"
     },
     {
       "img": "./wiki-images/bedroom-r2-wall-c.jpg",
       "href": "./wiki-images/bedroom-r2-wall-c.jpg",
       "en": "Wall C, South",
-      "es": "Muro C, Sur"
+      "es": "Muro C, Sur",
+      "ru": "Стена C, Южная"
     }
-  ]
+  ],
+  "ru": "Изображения",
+  "noteRu": "Молдинги пока не резать. После допуска разметить рамки малярной лентой от оси каждой стены."
 }

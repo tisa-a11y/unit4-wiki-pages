@@ -198,7 +198,22 @@
   const INTAKE_ORIGIN = (params.get('intake_api') || LIVE_INTAKE_ORIGIN).replace(/\/+$/, '');
 
   let state = deepClone(BASELINE_HVAC_DATA);
-  let currentLang = params.get('lang') === 'es' ? 'es' : 'en';
+  if (typeof I18N === 'object' && I18N && I18N.en && !I18N.ru) {
+    I18N.ru = Object.assign({}, I18N.en, {
+      btn_lang: 'Русский (RU)',
+      measure_on_site: 'ЗАМЕРИТЬ НА МЕСТЕ',
+      verify_friday: 'ПРОВЕРИТЬ НА МЕСТЕ',
+      local_preview: 'Локальный просмотр',
+      pending_eod: 'Ожидает проверки',
+      synced_label: 'Синхронизировано',
+      off_tailnet: 'Вне Tailnet (локальный режим)',
+      sketch_none: 'Нет отметки',
+      sketch_ready: 'Отметка готова',
+      btn_dictate: 'Голосовой ввод'
+    });
+  }
+  const _initLangRaw = String(params.get('lang') || '').toLowerCase();
+  let currentLang = _initLangRaw.startsWith('ru') ? 'ru' : (_initLangRaw.startsWith('es') ? 'es' : 'en');
   let activeView = 'all';
   let layers = { furnace: true, walkway: true, ducts: true, mep: true, trim: true };
   let tailnetState = { checked: false, verified: false, user: null, pendingEod: [] };
@@ -1254,7 +1269,7 @@
 
   function applyLocalization() {
     const t = I18N[currentLang];
-    document.documentElement.lang = currentLang === 'es' ? 'es-MX' : 'en';
+    document.documentElement.lang = (window.U4PlanNav && typeof window.U4PlanNav.getLang === 'function') ? window.U4PlanNav.getLang() : (currentLang === 'ru' ? 'ru' : (currentLang === 'es' ? 'es-MX' : 'en'));
     const setTxt = (id, s) => { const el = document.getElementById(id); if (el) el.textContent = s; };
     setTxt('hdr-title', t.hdr_title);
     setTxt('hdr-sub', t.hdr_sub);
@@ -2035,7 +2050,7 @@
       try { return cvs.toDataURL('image/png'); } catch (_) { return null; }
     },
     setLang(lang) {
-      if (lang === 'en' || lang === 'es') {
+      if (lang === 'en' || lang === 'es' || lang === 'ru') {
         currentLang = lang;
         document.querySelectorAll('.boundary-select').forEach((s) => { s.innerHTML = ''; });
         syncFormFromState();

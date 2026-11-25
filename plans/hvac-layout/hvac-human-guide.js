@@ -2,15 +2,15 @@
    Plan 2: Heating System — Furnace, Ducts & Sidewall Exhaust (R7 Dark-Mode Polish)
    Focused mechanical & airflow plan:
      View 1: Furnace & Room Duct Map (dark/light dot legend + plain-English draggable registers)
-     View 2: 66" Flat-Roof Cavity & Horizontal Sidewall Exhaust (zero roof cuts)
-   Zero Walkthrough Tab · Heating System Only · Zero Vibration-Pad Assumptions · EN / MX-ES
+     View 2: 66" Flat-Roof Cavity, Horizontal Sidewall Exhaust & BayREN Rebate Gate (zero roof cuts)
+   Zero Walkthrough Tab · Heating System Only · Zero Vibration-Pad Assumptions · EN / MX-ES / RU
    ============================================================================ */
 (function () {
   "use strict";
 
   var STEPS = [
-    { id: "ducts", en: "1. Furnace & Room Duct Map", es: "1. Mapa de Calefactor y Ductos" },
-    { id: "exhaust", en: "2. Flat Roof & Sidewall Exhaust", es: "2. Techo Plano y Salida Lateral" }
+    { id: "ducts", en: "1. Furnace & Room Duct Map", es: "1. Mapa de Calefactor y Ductos", ru: "1. Карта печи и воздуховодов" },
+    { id: "exhaust", en: "2. Flat Roof & Sidewall Exhaust", es: "2. Techo Plano y Salida Lateral", ru: "2. Плоская крыша и боковой выброс" }
   ];
 
   var SC = 0.86;
@@ -66,8 +66,21 @@
     dragActive: false
   };
 
-  function isEs() {
-    return window.U4PlanNav ? window.U4PlanNav.getLang() === "es" : false;
+  function getLang() {
+    if (window.U4PlanNav && typeof window.U4PlanNav.getLang === "function") {
+      var l = window.U4PlanNav.getLang();
+      if (l === "ru" || l === "es") return l;
+      return "en";
+    }
+    var hl = String(document.documentElement.lang || "").toLowerCase();
+    if (hl.indexOf("ru") === 0) return "ru";
+    if (hl.indexOf("es") === 0) return "es";
+    return "en";
+  }
+
+  function L(en, es, ru) {
+    var l = getLang();
+    return l === "ru" ? ru : (l === "es" ? es : en);
   }
 
   function esc(s) {
@@ -352,51 +365,61 @@
     } catch (_) {}
   }
 
-  function computeStatus(m, es) {
+  function computeStatus(m) {
     if (!m.walk.walkPass) {
       return {
         cls: "is-fail",
-        txt: es
-          ? "✗ El calefactor queda a más de 20 pies de la escotilla (" + m.walk.walkFt + " pies) — acércalo hacia Comedor Suroeste."
-          : "✗ Furnace is more than 20 ft from the Door 4 hatch (" + m.walk.walkFt + " ft) — move it closer toward Southwest Dining."
+        txt: L(
+          "✗ Furnace is more than 20 ft from the Door 4 hatch (" + m.walk.walkFt + " ft) — move it closer toward Southwest Dining.",
+          "✗ El calefactor queda a más de 20 pies de la escotilla (" + m.walk.walkFt + " pies) — acércalo hacia Comedor Suroeste.",
+          "✗ Печь расположена дальше 20 футов от люка двери 4 (" + m.walk.walkFt + " фут.) — сдвиньте её ближе к юго-западу столовой."
+        )
       };
     }
     if (m.hatchBlocked) {
       return {
         cls: "is-fail",
-        txt: es
-          ? '✗ Un ducto o equipo cruza la escotilla de 24"×36" — muévelo fuera del acceso.'
-          : '✗ A duct or furnace blocks the 24" × 36" attic hatch — drag it clear of the opening.'
+        txt: L(
+          '✗ A duct or furnace blocks the 24" × 36" attic hatch — drag it clear of the opening.',
+          '✗ Un ducto o equipo cruza la escotilla de 24"×36" — muévelo fuera del acceso.',
+          '✗ Воздуховод или печь перекрывает чердачный люк 24"×36" — отодвиньте трассу от проёма.'
+        )
       };
     }
     if (m.flue.gravityIllegal) {
       return {
         cls: "is-fail",
-        txt: es
-          ? "✗ Salida horizontal por gravedad sin extractor no permitida — elige Extractor Lateral (Opción A) o PVC 95%+ (Opción B)."
-          : "✗ Unassisted horizontal gravity exhaust is not permitted — select Listed Power Venter (Option A) or 95%+ Sealed PVC (Option B)."
+        txt: L(
+          "✗ Unassisted horizontal gravity exhaust is not permitted — select Listed Power Venter (Option A) or 95%+ Sealed PVC (Option B).",
+          "✗ Salida horizontal por gravedad sin extractor no permitida — elige Extractor Lateral (Opción A) o PVC 95%+ (Opción B).",
+          "✗ Горизонтальный самотёчный дымоход без дымососа запрещён — выберите боковой дымосос (Вариант А) или герметичный ПВХ 95%+ (Вариант Б)."
+        )
       };
     }
     if (m.shortCircuitPairs.length > 0) {
       return {
         cls: "is-warn",
-        txt: es
-          ? "⚠ Rejilla de aire caliente a menos de 4 pies del retorno o transferencia — sepáralas para no recircular aire."
-          : "⚠ Warm supply register is within 4 ft of the Hall Return or Bedroom Transfer — drag them slightly apart."
+        txt: L(
+          "⚠ Warm supply register is within 4 ft of the Hall Return or Bedroom Transfer — drag them slightly apart.",
+          "⚠ Rejilla de aire caliente a menos de 4 pies del retorno o transferencia — sepáralas para no recircular aire.",
+          "⚠ Приточная решётка ближе 4 футов от обратки коридора или перетока спальни — разведите их во избежание закольцовки воздуха."
+        )
       };
     }
     var wallTxt = m.flue.effectiveWall === "west"
-      ? (es ? "muro Oeste al patio trasero (≥ 4 pies libres)" : "West rear-yard wall (≥ 4 ft clear)")
-      : (es ? "muro Sur exterior (verificar ≥ 4 pies a colindancia)" : "South exterior wall (verify ≥ 4 ft to property line)");
+      ? L("West rear-yard wall (≥ 4 ft clear)", "muro Oeste al patio trasero (≥ 4 pies libres)", "западную стену во двор (≥ 4 фут. отступа)")
+      : L("South exterior wall (verify ≥ 4 ft to property line)", "muro Sur exterior (verificar ≥ 4 pies a colindancia)", "южную наружную стену (сверить ≥ 4 фут. до границы участка)");
     return {
       cls: "is-pass",
-      txt: es
-        ? "✓ Trazado limpio: 3 inyecciones balanceadas (" + m.sa1Ft + "' / " + m.sa2Ft + "' / " + m.sa3Ft + "') · Retorno central " + m.ra1Ft + "' · Salida lateral por " + wallTxt + " (cero cortes en techo)."
-        : "✓ Clean layout: 3 supply runs (" + m.sa1Ft + "' / " + m.sa2Ft + "' / " + m.sa3Ft + "') · Hall Return " + m.ra1Ft + "' · Horizontal exhaust out " + wallTxt + " (zero roof cuts)."
+      txt: L(
+        "✓ Clean layout: 3 supply runs (" + m.sa1Ft + "' / " + m.sa2Ft + "' / " + m.sa3Ft + "') · Hall Return " + m.ra1Ft + "' · Horizontal exhaust out " + wallTxt + " (zero roof cuts).",
+        "✓ Trazado limpio: 3 inyecciones balanceadas (" + m.sa1Ft + "' / " + m.sa2Ft + "' / " + m.sa3Ft + "') · Retorno central " + m.ra1Ft + "' · Salida lateral por " + wallTxt + " (cero cortes en techo).",
+        "✓ Чистая трассировка: 3 приточные ветки (" + m.sa1Ft + "' / " + m.sa2Ft + "' / " + m.sa3Ft + "') · Обратка коридора " + m.ra1Ft + "' · Боковой выброс через " + wallTxt + " (ноль проходок кровли)."
+      )
     };
   }
 
-  function buildDynamicDuctsSvg(m, es) {
+  function buildDynamicDuctsSvg(m) {
     var parts = [];
     m.trunkSegs.forEach(function (ts) {
       parts.push('<path d="' + ts.d + '" fill="none" stroke="#1f5f7a" stroke-width="' + ts.strokeW + '" stroke-linecap="round" stroke-linejoin="round" opacity="0.26"/>');
@@ -414,10 +437,10 @@
     parts.push('<path d="' + m.flue.dStr + '" fill="none" stroke="' + flCol + '" stroke-width="3.2" stroke-dasharray="4 2"/>');
     var tx = px(m.flue.termPt.x), ty = py(m.flue.termPt.y);
     var exhaustLbl = m.flue.gravityIllegal
-      ? (es ? "No válido" : "Blocked")
-      : (es ? "Salida Muro" : "Wall Exhaust");
-    parts.push('<rect x="' + (tx - 24).toFixed(1) + '" y="' + (ty - 7.5).toFixed(1) + '" width="48" height="15" rx="3.5" fill="' + (m.flue.gravityIllegal ? "#f9e6e4" : "#fef3c7") + '" stroke="' + flCol + '" stroke-width="1.4"/>');
-    parts.push('<text x="' + tx + '" y="' + (ty + 2.4).toFixed(1) + '" text-anchor="middle" font-size="5.6" font-weight="800" fill="' + flCol + '">' + esc(exhaustLbl) + "</text>");
+      ? L("Blocked", "No válido", "Запрещено")
+      : L("Wall Exhaust", "Salida Muro", "Выброс в стену");
+    parts.push('<rect x="' + (tx - 26).toFixed(1) + '" y="' + (ty - 7.5).toFixed(1) + '" width="52" height="15" rx="3.5" fill="' + (m.flue.gravityIllegal ? "#f9e6e4" : "#fef3c7") + '" stroke="' + flCol + '" stroke-width="1.4"/>');
+    parts.push('<text x="' + tx + '" y="' + (ty + 2.4).toFixed(1) + '" text-anchor="middle" font-size="5.4" font-weight="800" fill="' + flCol + '">' + esc(exhaustLbl) + "</text>");
 
     m.shortCircuitPairs.forEach(function (sc) {
       parts.push('<line x1="' + px(sc.a.x) + '" y1="' + py(sc.a.y) + '" x2="' + px(sc.b.x) + '" y2="' + py(sc.b.y) + '" stroke="#a8281c" stroke-width="1.9" stroke-dasharray="2 2"/>');
@@ -425,13 +448,13 @@
     return parts.join("");
   }
 
-  function renderColorLegendHtml(es) {
+  function renderColorLegendHtml() {
     var items = [
-      { col: "#1d2326", lbl: es ? "Calefactor (45k BTU)" : "Furnace (45k BTU)" },
-      { col: "#1f5f7a", lbl: es ? "Aire Caliente (3 cuartos)" : "Warm Air Supply (3 rooms)" },
-      { col: "#0f766e", lbl: es ? "Retorno en Pasillo" : "Hall Return Air" },
-      { col: "#6d28d9", lbl: es ? "Paso Aire Recámara" : "Bedroom Air Transfer" },
-      { col: "#d97706", lbl: es ? "Salida Lateral en Muro" : "Sidewall Exhaust" }
+      { col: "#1d2326", lbl: L("Furnace (45k BTU)", "Calefactor (45k BTU)", "Печь (45k BTU)") },
+      { col: "#1f5f7a", lbl: L("Warm Air Supply (3 rooms)", "Aire Caliente (3 cuartos)", "Тёплый приток (3 комнаты)") },
+      { col: "#0f766e", lbl: L("Hall Return Air", "Retorno en Pasillo", "Обратка в коридоре") },
+      { col: "#6d28d9", lbl: L("Bedroom Air Transfer", "Paso Aire Recámara", "Переточная решётка спальни") },
+      { col: "#d97706", lbl: L("Sidewall Exhaust", "Salida Lateral en Muro", "Боковой выброс в стену") }
     ];
     return '<div class="u4h-legend-row">' +
       items.map(function (it) {
@@ -440,29 +463,46 @@
     "</div>";
   }
 
-  function renderHvacEquipDrawer(es) {
-    var rows = es
-      ? [
-          "NEXT suministra e instala: calefactor horizontal en ático, termostato de pared, plenos y ductos aislados (3 inyecciones, 1 retorno central, 1 transferencia).",
-          "NEXT suministra e instala: salida lateral horizontal por muro exterior (cero cortes en el techo plano) + alimentador exterior hacia el subpanel D04.",
-          'Nuestra cuadrilla construye: escotilla de 24" × 36" libres afuera de Puerta 4, pasillo continuo de 24" (15.8 pies) y plataforma nivelada de 30" × 30".',
-          "Nuestra cuadrilla instala: contacto GFCI 120V a ≤ 25 pies + lámpara LED cerrada permanente con apagador junto a la escotilla."
-        ]
-      : [
-          "NEXT supplies & installs: horizontal attic gas furnace, wall thermostat, plenums & insulated ducts (3 room supplies, 1 hall return, 1 bedroom transfer).",
-          "NEXT supplies & installs: horizontal sidewall exhaust out exterior wall (zero flat-roof cuts) + exterior feeder to Unit 4 subpanel at D04.",
-          'Our crew builds: 24" × 36" clear hatch outside Front Door 4, 15.8 ft continuous 24" wood walkway & level 30" × 30" service platform.',
-          "Our crew installs: line-side 120V GFCI outlet within 25 ft + permanent switched enclosed LED light near hatch."
-        ];
+  function renderHvacEquipDrawer() {
+    var rows = [
+      L(
+        "NEXT supplies & installs: horizontal attic gas furnace, wall thermostat, plenums & insulated ducts (3 room supplies, 1 hall return, 1 bedroom transfer).",
+        "NEXT suministra e instala: calefactor horizontal en ático, termostato de pared, plenos y ductos aislados (3 inyecciones, 1 retorno central, 1 transferencia).",
+        "Подрядчик NEXT поставляет и монтирует: горизонтальную чердачную печь, настенный термостат, пленумы и утеплённые воздуховоды (3 притока, 1 обратка в коридоре, 1 переток спальни)."
+      ),
+      L(
+        "NEXT supplies & installs: horizontal sidewall exhaust out exterior wall (zero flat-roof cuts) + exterior feeder to Unit 4 subpanel at D04.",
+        "NEXT suministra e instala: salida lateral horizontal por muro exterior (cero cortes en el techo plano) + alimentador exterior hacia el subpanel D04.",
+        "Подрядчик NEXT поставляет и монтирует: горизонтальный боковой дымоотвод через наружную стену (ноль проходок плоской кровли) + линию питания к подщиту D04."
+      ),
+      L(
+        'Our crew builds: 24" × 36" clear hatch outside Front Door 4, 15.8 ft continuous 24" wood walkway & level 30" × 30" service platform.',
+        'Nuestra cuadrilla construye: escotilla de 24" × 36" libres afuera de Puerta 4, pasillo continuo de 24" (15.8 pies) y plataforma nivelada de 30" × 30".',
+        'Наша бригада собирает: чистовой люк 24" × 36" снаружи у двери 4, сплошные деревянные мостки 24" (15.8 фут.) и ровную сервисную площадку 30" × 30".'
+      ),
+      L(
+        "Our crew installs: line-side 120V GFCI outlet within 25 ft + permanent switched enclosed LED light near hatch.",
+        "Nuestra cuadrilla instala: contacto GFCI 120V a ≤ 25 pies + lámpara LED cerrada permanente con apagador junto a la escotilla.",
+        "Наша бригада монтирует: сервисную розетку GFCI 120В не далее 25 футов + стационарный закрытый LED-светильник с выключателем у люка."
+      )
+    ];
     return '<details class="u4h-equip-wrap">' +
-      '<summary class="u4h-equip-btn"><span>' + (es ? "Equipo y suministros (NEXT vs. Cuadrilla)" : "Equipment & Supplies (NEXT vs. Crew)") + '</span><span>▾</span></summary>' +
+      '<summary class="u4h-equip-btn"><span>' + L("Equipment & Supplies (NEXT vs. Crew)", "Equipo y suministros (NEXT vs. Cuadrilla)", "Оборудование и материалы (Подрядчик NEXT и наша бригада)") + '</span><span>▾</span></summary>' +
       '<div class="u4h-equip-body"><ul class="u4h-info-list">' +
         rows.map(function (r) { return "<li>" + esc(r) + "</li>"; }).join("") +
       "</ul></div>" +
     "</details>";
   }
 
-  function renderDuctMapSvg(m, es) {
+  function svgPillSummary(m) {
+    return L(
+      "Supply runs: Kitchen " + m.sa1Ft + "' · Living " + m.sa2Ft + "' · Bedroom " + m.sa3Ft + "' | Return: " + m.ra1Ft + "' | Sidewall exhaust: " + m.flue.runFt + "'",
+      "Inyecciones: Cocina " + m.sa1Ft + "' · Sala " + m.sa2Ft + "' · Recámara " + m.sa3Ft + "' | Retorno: " + m.ra1Ft + "' | Salida lateral: " + m.flue.runFt + "'",
+      "Приток: Кухня " + m.sa1Ft + "' · Гостиная " + m.sa2Ft + "' · Спальня " + m.sa3Ft + "' | Обратка: " + m.ra1Ft + "' | Боковой выброс: " + m.flue.runFt + "'"
+    );
+  }
+
+  function renderDuctMapSvg(m) {
     var n = state.nodes;
     var f1x = px(n.f1.x), f1y = py(n.f1.y);
     var r1x = px(n.r1.x), r1y = py(n.r1.y);
@@ -480,141 +520,149 @@
     var supBoxX = dir > 0 ? (f1x + fW / 2) : (f1x - fW / 2 - supPlenW);
     var retBoxX = dir > 0 ? (f1x - fW / 2 - retPlenW) : (f1x + fW / 2);
 
-    return '<svg id="hvacDuctMapSvg" viewBox="0 0 500 332" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + esc(es ? "Mapa interactivo de calefactor, ductos por cuarto y salida lateral" : "Interactive map of furnace, room supply and return ducts, and sidewall exhaust") + '" style="touch-action:none">' +
-      '<text x="14" y="17" font-size="8.2" font-weight="800" fill="#1f5f7a">' +
-        (es ? "MAPA DE CALEFACCIÓN Y DUCTOS · ARRASTRA EL CALEFACTOR O LAS REJILLAS POR CUARTO"
-            : "HEATING & DUCTWORK MAP · DRAG FURNACE OR ROOM REGISTERS TO TEST ROUTING") + "</text>" +
+    return '<svg id="hvacDuctMapSvg" viewBox="0 0 500 332" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + esc(L("Interactive map of furnace, room supply and return ducts, and sidewall exhaust", "Mapa interactivo de calefactor, ductos por cuarto y salida lateral", "Интерактивная карта печи, комнатных воздуховодов и бокового выброса")) + '" style="touch-action:none">' +
+      '<text x="14" y="17" font-size="8.0" font-weight="800" fill="#1f5f7a">' +
+        L(
+          "HEATING & DUCTWORK MAP · DRAG FURNACE OR ROOM REGISTERS TO TEST ROUTING",
+          "MAPA DE CALEFACCIÓN Y DUCTOS · ARRASTRA EL CALEFACTOR O LAS REJILLAS POR CUARTO",
+          "СХЕМА ОТОПЛЕНИЯ И ВОЗДУХОВОДОВ · ПЕРЕТАЩИТЕ ПЕЧЬ ИЛИ РЕШЁТКИ ДЛЯ ПРОВЕРКИ ТРАСС"
+        ) + "</text>" +
       '<g transform="translate(476,21)">' +
         '<circle r="14" fill="#f4f5f3" stroke="#98a4a8" stroke-width="1"/>' +
         '<polygon points="0,-10 -3,-3.5 3,-3.5" fill="#a8281c"/>' +
-        '<text x="0" y="-11" text-anchor="middle" font-size="6.2" font-weight="800" fill="#a8281c">N</text>' +
-        '<text x="0" y="11.8" text-anchor="middle" font-size="5.4" font-weight="700" fill="#5d686d">S</text>' +
-        '<text x="9.8" y="2" text-anchor="middle" font-size="5.4" font-weight="700" fill="#5d686d">E</text>' +
-        '<text x="-9.8" y="2" text-anchor="middle" font-size="5.4" font-weight="700" fill="#5d686d">' + (es ? "O" : "W") + "</text>" +
+        '<text x="0" y="-11" text-anchor="middle" font-size="6.2" font-weight="800" fill="#a8281c">' + L("N", "N", "С") + '</text>' +
+        '<text x="0" y="11.8" text-anchor="middle" font-size="5.4" font-weight="700" fill="#5d686d">' + L("S", "S", "Ю") + '</text>' +
+        '<text x="9.8" y="2" text-anchor="middle" font-size="5.4" font-weight="700" fill="#5d686d">' + L("E", "E", "В") + '</text>' +
+        '<text x="-9.8" y="2" text-anchor="middle" font-size="5.4" font-weight="700" fill="#5d686d">' + L("W", "O", "З") + "</text>" +
       "</g>" +
 
       '<path d="M ' + px(31.5) + " " + py(108) + " L " + px(147) + " " + py(108) + " L " + px(147) + " " + py(234) + " L " + px(0) + " " + py(234) + " L " + px(0) + " " + py(174) + " L " + px(31.5) + " " + py(174) + ' Z" fill="#fbfcfb" stroke="#8a969b" stroke-width="1.3"/>' +
-      '<text x="' + px(88) + '" y="' + py(174) + '" text-anchor="middle" font-size="8.2" font-weight="700" fill="#5d686d">' + (es ? "Cocina" : "Kitchen") + "</text>" +
-      '<text x="' + px(70) + '" y="' + py(254) + '" text-anchor="middle" font-size="5.8" font-weight="700" fill="#2f6b3f">' + (es ? "← Patio Oeste" : "← West Rear Yard") + "</text>" +
+      '<text x="' + px(88) + '" y="' + py(174) + '" text-anchor="middle" font-size="8.2" font-weight="700" fill="#5d686d">' + L("Kitchen", "Cocina", "Кухня") + "</text>" +
+      '<text x="' + px(70) + '" y="' + py(254) + '" text-anchor="middle" font-size="5.8" font-weight="700" fill="#2f6b3f">' + L("← West Rear Yard", "← Patio Oeste", "← Западный двор") + "</text>" +
 
       '<path d="M ' + px(147) + " " + py(58) + " L " + px(207) + " " + py(58) + " L " + px(207) + " " + py(88) + " L " + px(352) + " " + py(88) + " L " + px(352) + " " + py(142) + " L " + px(147) + " " + py(142) + ' Z" fill="#f4f5f3" stroke="#8a969b" stroke-width="1.2"/>' +
-      '<text x="' + px(214) + '" y="' + py(137) + '" text-anchor="middle" font-size="7.0" font-weight="700" fill="#5d686d">' + (es ? "Pasillo" : "Hallway") + "</text>" +
+      '<text x="' + px(214) + '" y="' + py(137) + '" text-anchor="middle" font-size="7.0" font-weight="700" fill="#5d686d">' + L("Hallway", "Pasillo", "Коридор") + "</text>" +
 
       '<rect x="' + px(207) + '" y="' + py(0) + '" width="' + +(72.1 * SC).toFixed(1) + '" height="' + +(88 * SC).toFixed(1) + '" fill="#fbfcfb" stroke="#8a969b" stroke-width="1.3"/>' +
-      '<text x="' + px(243) + '" y="' + py(44) + '" text-anchor="middle" font-size="7.2" font-weight="700" fill="#5d686d">' + (es ? "Baño" : "Bathroom") + "</text>" +
+      '<text x="' + px(243) + '" y="' + py(44) + '" text-anchor="middle" font-size="7.2" font-weight="700" fill="#5d686d">' + L("Bathroom", "Baño", "Ванная") + "</text>" +
 
       '<rect x="' + px(279.1) + '" y="' + py(5.4) + '" width="' + +(36.3 * SC).toFixed(1) + '" height="' + +(82.6 * SC).toFixed(1) + '" fill="#fbfcfb" stroke="#8a969b" stroke-width="1.3"/>' +
-      '<text x="' + px(297.2) + '" y="' + py(46) + '" text-anchor="middle" font-size="6.0" font-weight="700" fill="#5d686d">' + (es ? "Lav." : "Laundry") + "</text>" +
+      '<text x="' + px(297.2) + '" y="' + py(46) + '" text-anchor="middle" font-size="6.0" font-weight="700" fill="#5d686d">' + L("Laundry", "Lav.", "Прач.") + "</text>" +
 
       '<rect x="' + px(315.4) + '" y="' + py(5.4) + '" width="' + +(36.6 * SC).toFixed(1) + '" height="' + +(82.6 * SC).toFixed(1) + '" rx="2" fill="#fdf6e7" stroke="#9a5b06" stroke-width="1.2" stroke-dasharray="3 2"/>' +
-      '<text x="' + px(333.7) + '" y="' + py(47) + '" text-anchor="middle" font-size="5.6" font-weight="800" fill="#9a5b06">' + (es ? "Clóset" : "Closet") + "</text>" +
+      '<text x="' + px(333.7) + '" y="' + py(47) + '" text-anchor="middle" font-size="5.6" font-weight="800" fill="#9a5b06">' + L("Closet", "Clóset", "Шкаф") + "</text>" +
       '<path d="M ' + px(352) + " " + py(0) + " L " + px(437.5) + " " + py(0) + " L " + px(474) + " " + py(34) + " L " + px(474) + " " + py(96) + " L " + px(437.5) + " " + py(136) + " L " + px(352) + " " + py(136) + ' Z" fill="#fbfcfb" stroke="#8a969b" stroke-width="1.3"/>' +
-      '<text x="' + px(410) + '" y="' + py(52) + '" text-anchor="middle" font-size="8.2" font-weight="700" fill="#5d686d">' + (es ? "Recámara" : "Bedroom") + "</text>" +
+      '<text x="' + px(410) + '" y="' + py(52) + '" text-anchor="middle" font-size="8.2" font-weight="700" fill="#5d686d">' + L("Bedroom", "Recámara", "Спальня") + "</text>" +
 
       '<rect x="' + px(147) + '" y="' + py(142) + '" width="' + +(146.7 * SC).toFixed(1) + '" height="' + +(155.75 * SC).toFixed(1) + '" fill="#fbfcfb" stroke="#8a969b" stroke-width="1.3"/>' +
-      '<text x="' + px(242) + '" y="' + py(166) + '" text-anchor="middle" font-size="8.0" font-weight="700" fill="#5d686d">' + (es ? "Comedor" : "Dining") + "</text>" +
+      '<text x="' + px(242) + '" y="' + py(166) + '" text-anchor="middle" font-size="8.0" font-weight="700" fill="#5d686d">' + L("Dining", "Comedor", "Столовая") + "</text>" +
 
       '<path d="M ' + px(293.7) + " " + py(142) + " L " + px(473.5) + " " + py(142) + " L " + px(508) + " " + py(178) + " L " + px(508) + " " + py(258) + " L " + px(473.5) + " " + py(297.75) + " L " + px(293.7) + " " + py(297.75) + ' Z" fill="#fbfcfb" stroke="#8a969b" stroke-width="1.3"/>' +
-      '<text x="' + px(400) + '" y="' + py(222) + '" text-anchor="middle" font-size="8.2" font-weight="700" fill="#5d686d">' + (es ? "Sala" : "Living Room") + "</text>" +
+      '<text x="' + px(400) + '" y="' + py(222) + '" text-anchor="middle" font-size="8.2" font-weight="700" fill="#5d686d">' + L("Living Room", "Sala", "Гостиная") + "</text>" +
 
       '<rect x="' + (px(147) + 2) + '" y="' + (py(206) - 6) + '" width="34" height="12" rx="2" fill="#ecedea" stroke="#5d686d" stroke-width="0.9"/>' +
-      '<text x="' + (px(147) + 19) + '" y="' + (py(206) + 2.5) + '" text-anchor="middle" font-size="5.2" font-weight="700" fill="#5d686d">' + (es ? "Panel D04" : "Panel D04") + "</text>" +
+      '<text x="' + (px(147) + 19) + '" y="' + (py(206) + 2.5) + '" text-anchor="middle" font-size="5.2" font-weight="700" fill="#5d686d">' + L("Panel D04", "Panel D04", "Щит D04") + "</text>" +
 
       '<path id="hvacWalkRef" d="' + m.walk.d + '" fill="none" stroke="#cbd5e1" stroke-width="' + +(24 * SC).toFixed(1) + '" stroke-linejoin="round" opacity="0.32"/>' +
       '<rect id="hvacHatchRef" x="' + px(HATCH_DOOR4.x - HATCH_DOOR4.w / 2) + '" y="' + py(HATCH_DOOR4.y - HATCH_DOOR4.h / 2) + '" width="' + +(HATCH_DOOR4.w * SC).toFixed(1) + '" height="' + +(HATCH_DOOR4.h * SC).toFixed(1) + '" rx="2" fill="' + (m.hatchBlocked ? "#f9e6e4" : "#f8fafc") + '" stroke="' + (m.hatchBlocked ? "#a8281c" : "#94a3b8") + '" stroke-width="1.4" stroke-dasharray="3 2"/>' +
-      '<text x="' + (px(HATCH_DOOR4.x - HATCH_DOOR4.w / 2) - 4).toFixed(1) + '" y="' + (py(HATCH_DOOR4.y) + 2) + '" text-anchor="end" font-size="5.6" font-weight="700" fill="#64748b">' + (es ? "Escotilla" : "Hatch") + "</text>" +
+      '<text x="' + (px(HATCH_DOOR4.x - HATCH_DOOR4.w / 2) - 4).toFixed(1) + '" y="' + (py(HATCH_DOOR4.y) + 2) + '" text-anchor="end" font-size="5.6" font-weight="700" fill="#64748b">' + L("Hatch", "Escotilla", "Люк") + "</text>" +
 
-      '<g id="hvacDynamicDuctsLayer">' + buildDynamicDuctsSvg(m, es) + "</g>" +
+      '<g id="hvacDynamicDuctsLayer">' + buildDynamicDuctsSvg(m) + "</g>" +
 
-      '<g class="u4-drag-move" data-node="s1" tabindex="0" role="application" aria-label="Drag Kitchen Warm Supply" transform="translate(0, 0)">' +
-        '<rect class="u4-drag-grip" x="' + (s1x - 32) + '" y="' + (s1y - 8.5) + '" width="64" height="17" rx="4.5" fill="#1f5f7a" stroke="#ffffff" stroke-width="1.2"/>' +
-        '<text x="' + s1x + '" y="' + (s1y + 2.5) + '" text-anchor="middle" font-size="6.0" font-weight="800" fill="#ffffff" pointer-events="none">' + (es ? "Iny. Cocina" : "Kitchen Supply") + "</text>" +
+      '<g class="u4-drag-move" data-node="s1" tabindex="0" role="application" aria-label="' + esc(L("Drag Kitchen Warm Supply", "Arrastrar inyección cocina", "Перетащить приточную решётку кухни")) + '" transform="translate(0, 0)">' +
+        '<rect class="u4-drag-grip" x="' + (s1x - 34) + '" y="' + (s1y - 8.5) + '" width="68" height="17" rx="4.5" fill="#1f5f7a" stroke="#ffffff" stroke-width="1.2"/>' +
+        '<text x="' + s1x + '" y="' + (s1y + 2.5) + '" text-anchor="middle" font-size="5.8" font-weight="800" fill="#ffffff" pointer-events="none">' + L("Kitchen Supply", "Iny. Cocina", "Приток кухня") + "</text>" +
       "</g>" +
-      '<g class="u4-drag-move" data-node="s2" tabindex="0" role="application" aria-label="Drag Living Room Warm Supply" transform="translate(0, 0)">' +
-        '<rect class="u4-drag-grip" x="' + (s2x - 31) + '" y="' + (s2y - 8.5) + '" width="62" height="17" rx="4.5" fill="#1f5f7a" stroke="#ffffff" stroke-width="1.2"/>' +
-        '<text x="' + s2x + '" y="' + (s2y + 2.5) + '" text-anchor="middle" font-size="6.0" font-weight="800" fill="#ffffff" pointer-events="none">' + (es ? "Iny. Sala" : "Living Supply") + "</text>" +
+      '<g class="u4-drag-move" data-node="s2" tabindex="0" role="application" aria-label="' + esc(L("Drag Living Room Warm Supply", "Arrastrar inyección sala", "Перетащить приточную решётку гостиной")) + '" transform="translate(0, 0)">' +
+        '<rect class="u4-drag-grip" x="' + (s2x - 36) + '" y="' + (s2y - 8.5) + '" width="72" height="17" rx="4.5" fill="#1f5f7a" stroke="#ffffff" stroke-width="1.2"/>' +
+        '<text x="' + s2x + '" y="' + (s2y + 2.5) + '" text-anchor="middle" font-size="5.8" font-weight="800" fill="#ffffff" pointer-events="none">' + L("Living Supply", "Iny. Sala", "Приток гостиная") + "</text>" +
       "</g>" +
-      '<g class="u4-drag-move" data-node="s3" tabindex="0" role="application" aria-label="Drag Bedroom Warm Supply" transform="translate(0, 0)">' +
-        '<rect class="u4-drag-grip" x="' + (s3x - 34) + '" y="' + (s3y - 8.5) + '" width="68" height="17" rx="4.5" fill="#1f5f7a" stroke="#ffffff" stroke-width="1.2"/>' +
-        '<text x="' + s3x + '" y="' + (s3y + 2.5) + '" text-anchor="middle" font-size="6.0" font-weight="800" fill="#ffffff" pointer-events="none">' + (es ? "Iny. Recámara" : "Bedroom Supply") + "</text>" +
-      "</g>" +
-
-      '<g class="u4-drag-move" data-node="r1" tabindex="0" role="application" aria-label="Drag Central Hall Return" transform="translate(0, 0)">' +
-        '<rect class="u4-drag-grip" x="' + (r1x - 29) + '" y="' + (r1y - 8.5) + '" width="58" height="17" rx="4.5" fill="#0f766e" stroke="#ffffff" stroke-width="1.2"/>' +
-        '<text x="' + r1x + '" y="' + (r1y + 2.5) + '" text-anchor="middle" font-size="6.0" font-weight="800" fill="#ffffff" pointer-events="none">' + (es ? "Retorno Pasillo" : "Hall Return") + "</text>" +
+      '<g class="u4-drag-move" data-node="s3" tabindex="0" role="application" aria-label="' + esc(L("Drag Bedroom Warm Supply", "Arrastrar inyección recámara", "Перетащить приточную решётку спальни")) + '" transform="translate(0, 0)">' +
+        '<rect class="u4-drag-grip" x="' + (s3x - 36) + '" y="' + (s3y - 8.5) + '" width="72" height="17" rx="4.5" fill="#1f5f7a" stroke="#ffffff" stroke-width="1.2"/>' +
+        '<text x="' + s3x + '" y="' + (s3y + 2.5) + '" text-anchor="middle" font-size="5.8" font-weight="800" fill="#ffffff" pointer-events="none">' + L("Bedroom Supply", "Iny. Recámara", "Приток спальня") + "</text>" +
       "</g>" +
 
-      '<g class="u4-drag-move" data-node="jd1" tabindex="0" role="application" aria-label="Drag Bedroom Air Transfer" transform="translate(0, 0)">' +
-        '<rect class="u4-drag-grip" x="' + (jdx - 28) + '" y="' + (jdy - 8) + '" width="56" height="15.5" rx="4" fill="#6d28d9" stroke="#ffffff" stroke-width="1.1"/>' +
-        '<text x="' + jdx + '" y="' + (jdy + 2) + '" text-anchor="middle" font-size="5.6" font-weight="800" fill="#ffffff" pointer-events="none">' + (es ? "Paso de Aire" : "Air Transfer") + "</text>" +
+      '<g class="u4-drag-move" data-node="r1" tabindex="0" role="application" aria-label="' + esc(L("Drag Central Hall Return", "Arrastrar retorno pasillo", "Перетащить обратку в коридоре")) + '" transform="translate(0, 0)">' +
+        '<rect class="u4-drag-grip" x="' + (r1x - 34) + '" y="' + (r1y - 8.5) + '" width="68" height="17" rx="4.5" fill="#0f766e" stroke="#ffffff" stroke-width="1.2"/>' +
+        '<text x="' + r1x + '" y="' + (r1y + 2.5) + '" text-anchor="middle" font-size="5.8" font-weight="800" fill="#ffffff" pointer-events="none">' + L("Hall Return", "Retorno Pasillo", "Обратка коридор") + "</text>" +
       "</g>" +
 
-      '<g class="u4-drag-move" data-node="f1" tabindex="0" role="application" aria-label="Drag Horizontal Furnace" transform="translate(0, 0)">' +
+      '<g class="u4-drag-move" data-node="jd1" tabindex="0" role="application" aria-label="' + esc(L("Drag Bedroom Air Transfer", "Arrastrar paso de aire", "Перетащить переточную решётку спальни")) + '" transform="translate(0, 0)">' +
+        '<rect class="u4-drag-grip" x="' + (jdx - 31) + '" y="' + (jdy - 8) + '" width="62" height="15.5" rx="4" fill="#6d28d9" stroke="#ffffff" stroke-width="1.1"/>' +
+        '<text x="' + jdx + '" y="' + (jdy + 2) + '" text-anchor="middle" font-size="5.5" font-weight="800" fill="#ffffff" pointer-events="none">' + L("Air Transfer", "Paso de Aire", "Переток спальни") + "</text>" +
+      "</g>" +
+
+      '<g class="u4-drag-move" data-node="f1" tabindex="0" role="application" aria-label="' + esc(L("Drag Horizontal Furnace", "Arrastrar calefactor horizontal", "Перетащить горизонтальную печь")) + '" transform="translate(0, 0)">' +
         '<rect x="' + (f1x - pS / 2).toFixed(1) + '" y="' + (f1y - fH / 2 - pS).toFixed(1) + '" width="' + pS + '" height="' + pS + '" rx="3" fill="#e4f0e6" fill-opacity="0.55" stroke="#2f6b3f" stroke-width="1.2" stroke-dasharray="3 2"/>' +
         '<rect x="' + retBoxX.toFixed(1) + '" y="' + (f1y - 8).toFixed(1) + '" width="' + retPlenW + '" height="16" rx="2" fill="#ccfbf1" stroke="#0f766e" stroke-width="1.3"/>' +
         '<rect x="' + supBoxX.toFixed(1) + '" y="' + (f1y - 8.5).toFixed(1) + '" width="' + supPlenW + '" height="17" rx="2" fill="#e3eef2" stroke="#1f5f7a" stroke-width="1.4"/>' +
         '<rect class="u4-drag-grip" x="' + (f1x - fW / 2).toFixed(1) + '" y="' + (f1y - fH / 2).toFixed(1) + '" width="' + fW + '" height="' + fH + '" rx="3.5" fill="#1d2326" stroke="#7cc0dc" stroke-width="1.8"/>' +
-        '<text x="' + f1x + '" y="' + (f1y - 1.5) + '" text-anchor="middle" font-size="5.6" font-weight="800" fill="#ffffff" pointer-events="none">' + (es ? "Calefactor" : "Furnace") + "</text>" +
+        '<text x="' + f1x + '" y="' + (f1y - 1.5) + '" text-anchor="middle" font-size="5.6" font-weight="800" fill="#ffffff" pointer-events="none">' + L("Furnace", "Calefactor", "Печь") + "</text>" +
         '<text x="' + f1x + '" y="' + (f1y + 6.8) + '" text-anchor="middle" font-size="5.0" font-weight="700" fill="#7cc0dc" pointer-events="none">45k ' + (dir > 0 ? "→" : "←") + "</text>" +
       "</g>" +
 
       '<rect id="hvacSvgPill" x="14" y="303" width="472" height="20" rx="5" fill="#f4f5f3" stroke="#98a4a8" stroke-width="1"/>' +
-      '<text id="hvacSvgPillTxt" x="250" y="316" text-anchor="middle" font-size="7.0" font-weight="700" fill="#1d2326">' +
-        (es ? "Inyecciones: Cocina " + m.sa1Ft + "' · Sala " + m.sa2Ft + "' · Recámara " + m.sa3Ft + "' | Retorno: " + m.ra1Ft + "' | Salida lateral: " + m.flue.runFt + "'"
-            : "Supply runs: Kitchen " + m.sa1Ft + "' · Living " + m.sa2Ft + "' · Bedroom " + m.sa3Ft + "' | Return: " + m.ra1Ft + "' | Sidewall exhaust: " + m.flue.runFt + "'") +
+      '<text id="hvacSvgPillTxt" x="250" y="316" text-anchor="middle" font-size="6.8" font-weight="700" fill="#1d2326">' +
+        esc(svgPillSummary(m)) +
       "</text>" +
     "</svg>";
   }
 
-  function renderSidewallExhaustSvg(m, es) {
+  function renderSidewallExhaustSvg(m) {
     var fl = m.flue;
     var isFail = fl.gravityIllegal;
     var isPvc = state.ventMode === "cat4_pvc";
     var ventStroke = isFail ? "#a8281c" : (isPvc ? "#1f5f7a" : "#b45309");
     var ventFill = isFail ? "#f9e6e4" : (isPvc ? "#e3eef2" : "#fef3c7");
     var wallLbl = fl.effectiveWall === "west"
-      ? (es ? "SALIDA POR MURO OESTE AL PATIO TRASERO (≥ 4 PIES LIBRES)" : "WEST REAR-YARD SIDEWALL EXIT (≥ 4 FT CLEAR)")
-      : (es ? "SALIDA POR MURO SUR EXTERIOR (VERIFICAR ≥ 4 PIES A COLINDANCIA)" : "SOUTH EXTERIOR SIDEWALL EXIT (VERIFY ≥ 4 FT TO PROPERTY LINE)");
+      ? L("WEST REAR-YARD SIDEWALL EXIT (≥ 4 FT CLEAR)", "SALIDA POR MURO OESTE AL PATIO TRASERO (≥ 4 PIES LIBRES)", "ВЫБРОС В ЗАПАДНУЮ СТЕНУ ВО ДВОР (≥ 4 ФУТ. ОТСТУПА)")
+      : L("SOUTH EXTERIOR SIDEWALL EXIT (VERIFY ≥ 4 FT TO PROPERTY LINE)", "SALIDA POR MURO SUR EXTERIOR (VERIFICAR ≥ 4 PIES A COLINDANCIA)", "ВЫБРОС В ЮЖНУЮ СТЕНУ (СВЕРИТЬ ≥ 4 ФУТ. ДО ГРАНИЦЫ УЧАСТКА)");
 
-    return '<svg viewBox="0 0 470 226" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + esc(es ? "Corte vertical del ático de techo plano de 66 pulgadas con salida lateral horizontal" : "66-inch flat-roof attic cross-section showing horizontal sidewall exhaust") + '">' +
-      '<text x="235" y="16" text-anchor="middle" font-size="8.6" font-weight="800" fill="#1f5f7a">' +
-        (es ? 'ÁTICO DE TECHO PLANO (66" LIBRES) · CERO CORTES EN TECHO · SALIDA LATERAL'
-            : '66" FLAT-ROOF ATTIC · ZERO ROOF PENETRATIONS · HORIZONTAL SIDEWALL EXHAUST') + "</text>" +
+    return '<svg viewBox="0 0 470 226" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + esc(L("66-inch flat-roof attic cross-section showing horizontal sidewall exhaust", "Corte vertical del ático de techo plano de 66 pulgadas con salida lateral horizontal", "Разрез чердака с плоской крышей высотой 66 дюймов и горизонтальным боковым дымоотводом")) + '">' +
+      '<text x="235" y="16" text-anchor="middle" font-size="8.2" font-weight="800" fill="#1f5f7a">' +
+        L(
+          '66" FLAT-ROOF ATTIC · ZERO ROOF PENETRATIONS · HORIZONTAL SIDEWALL EXHAUST',
+          'ÁTICO DE TECHO PLANO (66" LIBRES) · CERO CORTES EN TECHO · SALIDA LATERAL',
+          'ЧЕРДАК С ПЛОСКОЙ КРЫШЕЙ (66" В СВЕТУ) · НОЛЬ ПРОХОДОК КРОВЛИ · БОКОВОЙ ВЫБРОС'
+        ) + "</text>" +
       '<rect x="28" y="26" width="380" height="10" fill="#475569" stroke="#1d2326" stroke-width="1.3"/>' +
       '<rect x="28" y="36" width="380" height="11" fill="#e2e8f0" stroke="#475569" stroke-width="1.0"/>' +
-      '<text x="218" y="33.5" text-anchor="middle" font-size="6.4" font-weight="800" fill="#ffffff">' +
-        (es ? "MEMBRANA DE TECHO PLANO EXISTENTE · NO CORTAR EL TECHO" : "EXISTING FLAT ROOF MEMBRANE · DO NOT CUT ROOF") + "</text>" +
+      '<text x="218" y="33.5" text-anchor="middle" font-size="6.2" font-weight="800" fill="#ffffff">' +
+        L("EXISTING FLAT ROOF MEMBRANE · DO NOT CUT ROOF", "MEMBRANA DE TECHO PLANO EXISTENTE · NO CORTAR EL TECHO", "СУЩЕСТВУЮЩАЯ МЕМБРАНА ПЛОСКОЙ КРОВЛИ · КРЫШУ НЕ РЕЗАТЬ") + "</text>" +
       '<rect x="28" y="47" width="12" height="125" fill="#cbd5e1" stroke="#1d2326" stroke-width="1.4"/>' +
       '<rect x="40" y="47" width="368" height="125" fill="#fbfcfb" stroke="#98a4a8" stroke-width="1"/>' +
       '<rect x="28" y="172" width="380" height="12" fill="#fde68a" stroke="#7c4d12" stroke-width="1.3"/>' +
-      '<text x="286" y="180.5" text-anchor="middle" font-size="6.5" font-weight="700" fill="#7c4d12">' +
-        (es ? 'Vigas de plafón + pasillo de madera de 24" (' + m.walk.walkFt + " pies)" : 'Ceiling joists + 24" wood walkway (' + m.walk.walkFt + " ft)") + "</text>" +
+      '<text x="286" y="180.5" text-anchor="middle" font-size="6.4" font-weight="700" fill="#7c4d12">' +
+        L('Ceiling joists + 24" wood walkway (' + m.walk.walkFt + " ft)", 'Vigas de plafón + pasillo de madera de 24" (' + m.walk.walkFt + " pies)", 'Балки потолка + деревянные мостки 24" (' + m.walk.walkFt + " фут.)") + "</text>" +
       '<line x1="378" y1="47" x2="378" y2="172" stroke="#1f5f7a" stroke-width="1.4" stroke-dasharray="3 2"/>' +
       '<rect x="322" y="98" width="112" height="20" rx="4" fill="#e3eef2" stroke="#1f5f7a" stroke-width="1"/>' +
-      '<text x="378" y="111" text-anchor="middle" font-size="7.4" font-weight="800" fill="#1f5f7a">' + (es ? '66" (5\'-6") libres' : '66" (5\'-6") clear') + "</text>" +
+      '<text x="378" y="111" text-anchor="middle" font-size="7.2" font-weight="800" fill="#1f5f7a">' + L('66" (5\'-6") clear', '66" (5\'-6") libres', '66" (5\'-6") в свету') + "</text>" +
       '<rect x="176" y="165" width="112" height="7" fill="#2f6b3f"/>' +
       '<rect x="192" y="131" width="84" height="34" rx="3" fill="#1d2326" stroke="#7cc0dc" stroke-width="1.6"/>' +
-      '<text x="234" y="147" text-anchor="middle" font-size="7.4" font-weight="800" fill="#ffffff">' + (es ? "Calefactor 45k" : "Furnace 45k") + "</text>" +
-      '<text x="234" y="158" text-anchor="middle" font-size="6.2" font-weight="700" fill="#7cc0dc">' + (es ? 'Horizontal 14-3/16"' : 'Horizontal 14-3/16"') + "</text>" +
+      '<text x="234" y="147" text-anchor="middle" font-size="7.2" font-weight="800" fill="#ffffff">' + L("Furnace 45k", "Calefactor 45k", "Печь 45k") + "</text>" +
+      '<text x="234" y="158" text-anchor="middle" font-size="6.0" font-weight="700" fill="#7cc0dc">' + L('Horizontal 14-3/16"', 'Horizontal 14-3/16"', 'Горизонт. 14-3/16"') + "</text>" +
       '<path d="M 192 142 L 166 120 L 22 104" fill="none" stroke="' + ventStroke + '" stroke-width="6.5" stroke-linecap="round" opacity="0.26"/>' +
       '<path d="M 192 142 L 166 120 L 22 104" fill="none" stroke="' + ventStroke + '" stroke-width="2.4" stroke-linecap="round"/>' +
       '<rect x="6" y="92" width="24" height="24" rx="3" fill="' + ventFill + '" stroke="' + ventStroke + '" stroke-width="1.7"/>' +
-      '<text x="18" y="107" text-anchor="middle" font-size="6.2" font-weight="800" fill="' + ventStroke + '">' + (isFail ? "NO" : (isPvc ? "PVC" : "FAN")) + "</text>" +
-      '<rect x="50" y="55" width="256" height="42" rx="4" fill="' + ventFill + '" stroke="' + ventStroke + '" stroke-width="1.2"/>' +
-      '<text x="58" y="68" font-size="6.9" font-weight="800" fill="' + ventStroke + '">' + esc(wallLbl) + "</text>" +
-      '<text x="58" y="80" font-size="6.5" font-weight="700" fill="#1d2326">' +
+      '<text x="18" y="107" text-anchor="middle" font-size="5.8" font-weight="800" fill="' + ventStroke + '">' + (isFail ? L("NO", "NO", "НЕТ") : (isPvc ? L("PVC", "PVC", "ПВХ") : L("FAN", "FAN", "ВЕНТ"))) + "</text>" +
+      '<rect x="50" y="55" width="262" height="42" rx="4" fill="' + ventFill + '" stroke="' + ventStroke + '" stroke-width="1.2"/>' +
+      '<text x="58" y="68" font-size="6.4" font-weight="800" fill="' + ventStroke + '">' + esc(wallLbl) + "</text>" +
+      '<text x="58" y="80" font-size="6.3" font-weight="700" fill="#1d2326">' +
         esc(isFail
-          ? (es ? "No permitido: equipo 80% no puede salir horizontal sin extractor" : "Not permitted: 80% furnace cannot gravity-vent horizontally")
+          ? L("Not permitted: 80% furnace cannot gravity-vent horizontally", "No permitido: equipo 80% no puede salir horizontal sin extractor", "Запрещено: печь 80% нельзя выводить горизонтально без дымососа")
           : isPvc
-            ? (es ? "Opción B: PVC sellado 95%+ (o bomba de calor sin chimenea)" : "Option B: 95%+ sealed PVC direct-vent (or ducted heat pump)")
-            : (es ? 'Opción A: Extractor lateral listado + pendiente ≥1/4"/pie (' + fl.runFt + "')" : 'Option A: Listed sidewall power venter + ≥1/4"/ft slope (' + fl.runFt + "')")) +
+            ? L("Option B: 95%+ sealed PVC direct-vent (or ducted heat pump)", "Opción B: PVC sellado 95%+ (o bomba de calor sin chimenea)", "Вариант Б: герметичный ПВХ 95%+ (или канальный тепловой насос)")
+            : L('Option A: Listed sidewall power venter + ≥1/4"/ft slope (' + fl.runFt + "')", 'Opción A: Extractor lateral listado + pendiente ≥1/4"/pie (' + fl.runFt + "')", 'Вариант А: серт. боковой дымосос + уклон ≥1/4"/фут (' + fl.runFt + "')")) +
       "</text>" +
-      '<text x="58" y="91" font-size="6.2" font-weight="600" fill="#5d686d">' +
-        (es ? "Mantener ≥ 4 pies a colindancia y ventanas · sujetar cada ≤ 5 pies" : "Maintain ≥ 4 ft from property line & windows · strap every ≤ 5 ft") +
+      '<text x="58" y="91" font-size="6.0" font-weight="600" fill="#5d686d">' +
+        L("Maintain ≥ 4 ft from property line & windows · strap every ≤ 5 ft", "Mantener ≥ 4 pies a colindancia y ventanas · sujetar cada ≤ 5 pies", "Отступ ≥ 4 фут. от границы и окон · хомуты через каждые ≤ 5 фут.") +
       "</text>" +
-      '<text x="235" y="213" text-anchor="middle" font-size="7.2" font-weight="700" fill="#2f6b3f">' +
-        (es ? 'Plataforma de servicio Norte 30" × 30" + contacto GFCI 120V (≤ 25 pies) + luz LED con apagador'
-            : '30" × 30" North service platform + 120V GFCI outlet (≤ 25 ft) + switched LED light') +
+      '<text x="235" y="213" text-anchor="middle" font-size="7.0" font-weight="700" fill="#2f6b3f">' +
+        L(
+          '30" × 30" North service platform + 120V GFCI outlet (≤ 25 ft) + switched LED light',
+          'Plataforma de servicio Norte 30" × 30" + contacto GFCI 120V (≤ 25 pies) + luz LED con apagador',
+          'Сервисная площадка 30" × 30" с севера + розетка GFCI 120В (≤ 25 фут.) + закрытый свет LED'
+        ) +
       "</text>" +
     "</svg>";
   }
@@ -622,7 +670,6 @@
   function wireDuctMapDrags() {
     var svg = document.getElementById("hvacDuctMapSvg");
     if (!svg) return;
-    var es = isEs();
     var BOUNDS = {
       f1: { minX: 162, maxX: 430, minY: 118, maxY: 274 },
       r1: { minX: 156, maxX: 380, minY: 68, maxY: 266 },
@@ -653,7 +700,7 @@
 
       var m = computeDucts();
       var ductLayer = document.getElementById("hvacDynamicDuctsLayer");
-      if (ductLayer) ductLayer.innerHTML = buildDynamicDuctsSvg(m, es);
+      if (ductLayer) ductLayer.innerHTML = buildDynamicDuctsSvg(m);
       var walkRef = document.getElementById("hvacWalkRef");
       if (walkRef) walkRef.setAttribute("d", m.walk.d);
       var hatchRef = document.getElementById("hvacHatchRef");
@@ -663,25 +710,22 @@
       }
 
       var ptxt = document.getElementById("hvacSvgPillTxt");
-      if (ptxt) {
-        ptxt.textContent = es
-          ? "Inyecciones: Cocina " + m.sa1Ft + "' · Sala " + m.sa2Ft + "' · Recámara " + m.sa3Ft + "' | Retorno: " + m.ra1Ft + "' | Salida lateral: " + m.flue.runFt + "'"
-          : "Supply runs: Kitchen " + m.sa1Ft + "' · Living " + m.sa2Ft + "' · Bedroom " + m.sa3Ft + "' | Return: " + m.ra1Ft + "' | Sidewall exhaust: " + m.flue.runFt + "'";
-      }
+      if (ptxt) ptxt.textContent = svgPillSummary(m);
 
       var kpiSup = document.getElementById("hvacKpiSupply");
       if (kpiSup) kpiSup.textContent = m.sa1Ft + "' · " + m.sa2Ft + "' · " + m.sa3Ft + "'";
       var kpiRet = document.getElementById("hvacKpiReturn");
-      if (kpiRet) kpiRet.textContent = m.ra1Ft + (es ? " pies" : " ft");
+      if (kpiRet) kpiRet.textContent = m.ra1Ft + L(" ft", " pies", " фут.");
       var kpiExh = document.getElementById("hvacKpiExhaust");
       if (kpiExh) {
         kpiExh.className = "u4h-kpi-val " + (m.walk.walkPass && !m.flue.gravityIllegal ? "is-ok" : "is-fail");
-        kpiExh.textContent = m.flue.runFt + (es ? " pies (" + (m.flue.effectiveWall === "west" ? "Oeste" : "Sur") + ")" : " ft (" + (m.flue.effectiveWall === "west" ? "West" : "South") + ")");
+        var wDir = m.flue.effectiveWall === "west" ? L("West", "Oeste", "Запад") : L("South", "Sur", "Юг");
+        kpiExh.textContent = m.flue.runFt + L(" ft", " pies", " фут.") + " (" + wDir + ")";
       }
 
       var st = document.getElementById("hvacStatusBanner");
       if (st) {
-        var sObj = computeStatus(m, es);
+        var sObj = computeStatus(m);
         st.className = "u4h-status " + sObj.cls;
         st.textContent = sObj.txt;
       }
@@ -729,129 +773,145 @@
     var host = document.getElementById("u4hBody");
     var holdEl = document.getElementById("u4hHoldStrip");
     if (!host) return;
-    var es = isEs();
     var m = computeDucts();
     var idx = STEPS.findIndex(function (s) { return s.id === state.step; });
     if (idx < 0) idx = 0;
+    var hatchHref = (window.U4PlanNav && typeof window.U4PlanNav.planUrl === "function")
+      ? window.U4PlanNav.planUrl("attic-hatch")
+      : "../attic-hatch/index.html";
 
     if (holdEl) {
       holdEl.className = "u4h-hold-strip";
-      holdEl.innerHTML = es
-        ? '<strong>Plano 2 de 2 — Sistema de Calefacción, Ductos y Salida Lateral:</strong> Cero cortes en el techo plano. ¿Buscas las medidas de la escotilla de <code>24" × 36"</code> y el pasillo de madera? <a href="../attic-hatch/index.html">1. Escotilla y Pasillo &rarr;</a>'
-        : '<strong>Plan 2 of 2 — Heating System, Room Ducts &amp; Sidewall Exhaust:</strong> Zero flat-roof penetrations. Need framing &amp; lumber for the <code>24" × 36"</code> hatch and wood walkway? <a href="../attic-hatch/index.html">1. Hatch &amp; Wood Walkway &rarr;</a>';
+      holdEl.innerHTML = L(
+        '<strong>Plan 2 of 2 — Heating System, Room Ducts &amp; Sidewall Exhaust:</strong> Zero flat-roof penetrations; hold equipment purchase/start until written BayREN rebate reservation is confirmed. Need framing &amp; lumber for the <code>24" × 36"</code> hatch and wood walkway? <a href="' + esc(hatchHref) + '">1. Hatch &amp; Wood Walkway &rarr;</a>',
+        '<strong>Plano 2 de 2 — Sistema de Calefacción, Ductos y Salida Lateral:</strong> Cero cortes en el techo plano; no comprar equipo antes de confirmar reserva escrita de reembolso BayREN. ¿Buscas la escotilla de <code>24" × 36"</code> y el pasillo de madera? <a href="' + esc(hatchHref) + '">1. Escotilla y Pasillo &rarr;</a>',
+        '<strong>План 2 из 2 — Отопление, воздуховоды и боковой выброс:</strong> Ноль проходок плоской кровли; не закупать оборудование и не начинать монтаж до письменной брони субсидии BayREN. Размеры люка <code>24" × 36"</code> и мостков: <a href="' + esc(hatchHref) + '">1. Люк и мостки &rarr;</a>'
+      );
     }
 
     var stepPills = '<div class="u4h-steps" role="tablist">' +
       STEPS.map(function (s) {
         var act = s.id === state.step;
-        return '<button type="button" class="u4h-step-btn' + (act ? " is-active" : "") + '" data-step="' + s.id + '" role="tab" aria-selected="' + (act ? "true" : "false") + '">' + esc(es ? s.es : s.en) + "</button>";
+        return '<button type="button" class="u4h-step-btn' + (act ? " is-active" : "") + '" data-step="' + s.id + '" role="tab" aria-selected="' + (act ? "true" : "false") + '">' + esc(L(s.en, s.es, s.ru)) + "</button>";
       }).join("") +
     "</div>";
 
-    var titleEn = "Heating System: Furnace, Ducts & Sidewall Exhaust";
-    var titleEs = "Sistema de Calefacción: Calefactor, Ductos y Salida Lateral";
-    var subEn = "Drag the furnace or any room register to explore duct routing, airflow balance, and sidewall exhaust";
-    var subEs = "Arrastra el calefactor o cualquier rejilla para probar el trazado de ductos, balance de aire y salida lateral";
+    var titleTxt = L("Heating System: Furnace, Ducts & Sidewall Exhaust", "Sistema de Calefacción: Calefactor, Ductos y Salida Lateral", "Система отопления: Печь, воздуховоды и боковой выброс");
+    var subTxt = L(
+      "Drag the furnace or any room register to explore duct routing, airflow balance, and sidewall exhaust",
+      "Arrastra el calefactor o cualquier rejilla para probar el trazado de ductos, balance de aire y salida lateral",
+      "Перетаскивайте печь или комнатные решётки для проверки трасс воздуховодов, баланса воздуха и бокового выброса"
+    );
     var inner = "";
 
     if (state.step === "ducts") {
-      var stObj = computeStatus(m, es);
+      var stObj = computeStatus(m);
+      var wDir0 = m.flue.effectiveWall === "west" ? L("West", "Oeste", "Запад") : L("South", "Sur", "Юг");
       inner =
         '<div class="u4h-kpi-grid">' +
           '<div class="u4h-kpi">' +
-            '<div class="u4h-kpi-lbl">' + (es ? "Inyecciones (Coc · Sala · Rec)" : "Warm Supplies (Kit · Liv · Bed)") + "</div>" +
+            '<div class="u4h-kpi-lbl">' + L("Warm Supplies (Kit · Liv · Bed)", "Inyecciones (Coc · Sala · Rec)", "Приток (Кухня · Гост. · Спальня)") + "</div>" +
             '<div id="hvacKpiSupply" class="u4h-kpi-val is-info">' + m.sa1Ft + "' · " + m.sa2Ft + "' · " + m.sa3Ft + "'</div>" +
-            '<div class="u4h-kpi-sub">' + (es ? "Ductos flexibles aislados (≤ 25' ideal)" : "Insulated branches (≤ 25 ft target)") + "</div>" +
+            '<div class="u4h-kpi-sub">' + L("Insulated branches (≤ 25 ft target)", "Ductos flexibles aislados (≤ 25' ideal)", "Утеплённые ветки (цель ≤ 25 фут.)") + "</div>" +
           "</div>" +
           '<div class="u4h-kpi">' +
-            '<div class="u4h-kpi-lbl">' + (es ? "Retorno en Pasillo" : "Central Hall Return") + "</div>" +
-            '<div id="hvacKpiReturn" class="u4h-kpi-val is-ok">' + m.ra1Ft + (es ? " pies" : " ft") + "</div>" +
-            '<div class="u4h-kpi-sub">' + (es ? "+ Paso de aire en Recámara" : "+ Bedroom air-transfer grille") + "</div>" +
+            '<div class="u4h-kpi-lbl">' + L("Central Hall Return", "Retorno en Pasillo", "Обратка в коридоре") + "</div>" +
+            '<div id="hvacKpiReturn" class="u4h-kpi-val is-ok">' + m.ra1Ft + L(" ft", " pies", " фут.") + "</div>" +
+            '<div class="u4h-kpi-sub">' + L("+ Bedroom air-transfer grille", "+ Paso de aire en Recámara", "+ переточная решётка спальни") + "</div>" +
           "</div>" +
           '<div class="u4h-kpi">' +
-            '<div class="u4h-kpi-lbl">' + (es ? "Salida Lateral Horizontal" : "Sidewall Flue Exhaust") + "</div>" +
+            '<div class="u4h-kpi-lbl">' + L("Sidewall Flue Exhaust", "Salida Lateral Horizontal", "Горизонтальный боковой выброс") + "</div>" +
             '<div id="hvacKpiExhaust" class="u4h-kpi-val ' + (m.walk.walkPass && !m.flue.gravityIllegal ? "is-ok" : "is-fail") + '">' +
-              m.flue.runFt + (es ? " pies (" + (m.flue.effectiveWall === "west" ? "Oeste" : "Sur") + ")" : " ft (" + (m.flue.effectiveWall === "west" ? "West" : "South") + ")") +
+              m.flue.runFt + L(" ft", " pies", " фут.") + " (" + wDir0 + ")" +
             "</div>" +
-            '<div class="u4h-kpi-sub">' + (es ? "Cero cortes en techo plano" : "Zero flat-roof cuts") + "</div>" +
+            '<div class="u4h-kpi-sub">' + L("Zero flat-roof cuts", "Cero cortes en techo plano", "Ноль проходок плоской кровли") + "</div>" +
           "</div>" +
         "</div>" +
-        renderColorLegendHtml(es) +
-        '<div class="u4h-svg-wrap">' + renderDuctMapSvg(m, es) + "</div>" +
-        '<div class="u4h-svg-hint">' + (es ? "Consejo: Arrastra el calefactor o cualquier rejilla por cuarto para probar largos de ducto y holguras." : "Tip: Drag the furnace or any room register on the map to test duct lengths & clearances.") + "</div>" +
+        renderColorLegendHtml() +
+        '<div class="u4h-svg-wrap">' + renderDuctMapSvg(m) + "</div>" +
+        '<div class="u4h-svg-hint">' + L("Tip: Drag the furnace or any room register on the map to test duct lengths & clearances.", "Consejo: Arrastra el calefactor o cualquier rejilla por cuarto para probar largos de ducto y holguras.", "Подсказка: перетащите печь или любую комнатную решётку на схеме, чтобы проверить длину воздуховодов и отступы.") + "</div>" +
         '<div id="hvacStatusBanner" class="u4h-status ' + stObj.cls + '">' + esc(stObj.txt) + "</div>" +
         '<div class="u4h-controls">' +
           '<div class="u4h-ctrl-row">' +
-            '<span class="u4h-ctrl-lbl">' + (es ? "Ubicación del calefactor:" : "Furnace position:") + "</span>" +
+            '<span class="u4h-ctrl-lbl">' + L("Furnace position:", "Ubicación del calefactor:", "Положение печи:") + "</span>" +
             '<div class="u4h-pill-group">' +
-              '<button type="button" class="u4h-pill' + (state.activePreset === "sw_dining" ? " is-active" : "") + '" data-preset="sw_dining">' + (es ? "Comedor SO · 15.8' (Recomendado)" : "Southwest Dining · 15.8' (Recommended)") + "</button>" +
-              '<button type="button" class="u4h-pill' + (state.activePreset === "nw_dining" ? " is-active" : "") + '" data-preset="nw_dining">' + (es ? "Comedor NO · 10.6'" : "Northwest Dining · 10.6'") + "</button>" +
-              '<button type="button" class="u4h-pill" data-preset="reset_all">' + (es ? "Restablecer rejillas" : "Reset all registers") + "</button>" +
+              '<button type="button" class="u4h-pill' + (state.activePreset === "sw_dining" ? " is-active" : "") + '" data-preset="sw_dining">' + L("Southwest Dining · 15.8' (Recommended)", "Comedor SO · 15.8' (Recomendado)", "ЮЗ столовая · 15.8' (реком.)") + "</button>" +
+              '<button type="button" class="u4h-pill' + (state.activePreset === "nw_dining" ? " is-active" : "") + '" data-preset="nw_dining">' + L("Northwest Dining · 10.6'", "Comedor NO · 10.6'", "СЗ столовая · 10.6'") + "</button>" +
+              '<button type="button" class="u4h-pill" data-preset="reset_all">' + L("Reset all registers", "Restablecer rejillas", "Сбросить решётки") + "</button>" +
             "</div>" +
           "</div>" +
           '<div class="u4h-ctrl-row">' +
-            '<span class="u4h-ctrl-lbl">' + (es ? "Muro de salida lateral:" : "Sidewall exhaust wall:") + "</span>" +
+            '<span class="u4h-ctrl-lbl">' + L("Sidewall exhaust wall:", "Muro de salida lateral:", "Стена бокового выброса:") + "</span>" +
             '<div class="u4h-pill-group">' +
-              '<button type="button" class="u4h-pill' + (state.exitWall === "south" ? " is-active" : "") + '" data-ewall="south">' + (es ? "Muro Sur (verificar ≥ 4' a colindancia)" : "South Wall (verify ≥ 4' to lot line)") + "</button>" +
-              '<button type="button" class="u4h-pill' + (state.exitWall === "west" ? " is-active" : "") + '" data-ewall="west">' + (es ? "Muro Oeste al Patio (≥ 4' libre)" : "West Rear-Yard Wall (≥ 4' clear)") + "</button>" +
+              '<button type="button" class="u4h-pill' + (state.exitWall === "south" ? " is-active" : "") + '" data-ewall="south">' + L("South Wall (verify ≥ 4' to lot line)", "Muro Sur (verificar ≥ 4' a colindancia)", "Южная стена (сверить ≥ 4' до границы)") + "</button>" +
+              '<button type="button" class="u4h-pill' + (state.exitWall === "west" ? " is-active" : "") + '" data-ewall="west">' + L("West Rear-Yard Wall (≥ 4' clear)", "Muro Oeste al Patio (≥ 4' libre)", "Западная стена во двор (≥ 4' своб.)") + "</button>" +
             "</div>" +
           "</div>" +
           '<div class="u4h-ctrl-row">' +
-            '<span class="u4h-ctrl-lbl">' + (es ? "Estilo de ductos:" : "Duct trunk & airflow:") + "</span>" +
+            '<span class="u4h-ctrl-lbl">' + L("Duct trunk & airflow:", "Estilo de ductos:", "Схема воздуховодов:") + "</span>" +
             '<div class="u4h-pill-group">' +
-              '<button type="button" class="u4h-pill' + (state.ductMode === "trunk" ? " is-active" : "") + '" data-dmode="trunk">' + (es ? "Troncal y ramales" : "Trunk & branch") + "</button>" +
-              '<button type="button" class="u4h-pill' + (state.ductMode === "radial" ? " is-active" : "") + '" data-dmode="radial">' + (es ? "Pleno radial" : "Radial plenum") + "</button>" +
-              '<button type="button" class="u4h-pill' + (state.dischargeDir === "right" ? " is-active" : "") + '" data-ddir="right">' + (es ? "Inyección al Este →" : "Supply East →") + "</button>" +
-              '<button type="button" class="u4h-pill' + (state.dischargeDir === "left" ? " is-active" : "") + '" data-ddir="left">' + (es ? "← Inyección al Oeste" : "← Supply West") + "</button>" +
+              '<button type="button" class="u4h-pill' + (state.ductMode === "trunk" ? " is-active" : "") + '" data-dmode="trunk">' + L("Trunk & branch", "Troncal y ramales", "Магистраль и отводы") + "</button>" +
+              '<button type="button" class="u4h-pill' + (state.ductMode === "radial" ? " is-active" : "") + '" data-dmode="radial">' + L("Radial plenum", "Pleno radial", "Лучевой коллектор") + "</button>" +
+              '<button type="button" class="u4h-pill' + (state.dischargeDir === "right" ? " is-active" : "") + '" data-ddir="right">' + L("Supply East →", "Inyección al Este →", "Подача на Восток →") + "</button>" +
+              '<button type="button" class="u4h-pill' + (state.dischargeDir === "left" ? " is-active" : "") + '" data-ddir="left">' + L("← Supply West", "← Inyección al Oeste", "← Подача на Запад") + "</button>" +
             "</div>" +
           "</div>" +
         "</div>" +
-        renderHvacEquipDrawer(es);
+        renderHvacEquipDrawer();
 
     } else {
-      titleEn = '66" Flat-Roof Cavity & Horizontal Sidewall Exhaust';
-      titleEs = 'Ático de Techo Plano (66") y Salida Lateral Horizontal';
-      subEn = "Why the flat roof stays uncut — compare horizontal sidewall exhaust options and property-line clearance";
-      subEs = "Por qué el techo plano no se corta — compara las opciones de salida lateral y distancia a colindancia";
-      var secObj = computeStatus(m, es);
+      titleTxt = L('66" Flat-Roof Cavity & Horizontal Sidewall Exhaust', 'Ático de Techo Plano (66") y Salida Lateral Horizontal', 'Чердак под плоской крышей (66") и боковой дымоотвод');
+      subTxt = L(
+        "Why the flat roof stays uncut — compare horizontal sidewall exhaust options, property-line clearance, and BayREN gate",
+        "Por qué el techo plano no se corta — compara las opciones de salida lateral, distancia a colindancia y reserva BayREN",
+        "Почему плоская кровля остаётся без вырезов — сравнение вариантов бокового выброса, отступа от границы и условия BayREN"
+      );
+      var secObj = computeStatus(m);
       inner =
-        '<div class="u4h-svg-wrap">' + renderSidewallExhaustSvg(m, es) + "</div>" +
+        '<div class="u4h-svg-wrap">' + renderSidewallExhaustSvg(m) + "</div>" +
         '<div class="u4h-controls">' +
           '<div class="u4h-ctrl-row">' +
-            '<span class="u4h-ctrl-lbl">' + (es ? "Sistema de salida lateral:" : "Sidewall exhaust option:") + "</span>" +
+            '<span class="u4h-ctrl-lbl">' + L("Sidewall exhaust option:", "Sistema de salida lateral:", "Вариант бокового выброса:") + "</span>" +
             '<div class="u4h-pill-group">' +
-              '<button type="button" class="u4h-pill' + (state.ventMode === "power_venter" ? " is-active" : "") + '" data-vmode="power_venter">' + (es ? "Opción A: 80% + Extractor listado" : "Option A: 80% + Listed Power Venter") + "</button>" +
-              '<button type="button" class="u4h-pill' + (state.ventMode === "cat4_pvc" ? " is-active" : "") + '" data-vmode="cat4_pvc">' + (es ? "Opción B: PVC sellado 95%+ / Bomba" : "Option B: 95%+ Sealed PVC / Heat Pump") + "</button>" +
-              '<button type="button" class="u4h-pill' + (state.ventMode === "gravity_unassisted" ? " is-active" : "") + '" data-vmode="gravity_unassisted">' + (es ? "Gravedad sin extractor (No permitido)" : "Unassisted gravity (Not permitted)") + "</button>" +
+              '<button type="button" class="u4h-pill' + (state.ventMode === "power_venter" ? " is-active" : "") + '" data-vmode="power_venter">' + L("Option A: 80% + Listed Power Venter", "Opción A: 80% + Extractor listado", "Вариант А: 80% + серт. дымосос") + "</button>" +
+              '<button type="button" class="u4h-pill' + (state.ventMode === "cat4_pvc" ? " is-active" : "") + '" data-vmode="cat4_pvc">' + L("Option B: 95%+ Sealed PVC / Heat Pump", "Opción B: PVC sellado 95%+ / Bomba", "Вариант Б: ПВХ 95%+ / Тепловой насос") + "</button>" +
+              '<button type="button" class="u4h-pill' + (state.ventMode === "gravity_unassisted" ? " is-active" : "") + '" data-vmode="gravity_unassisted">' + L("Unassisted gravity (Not permitted)", "Gravedad sin extractor (No permitido)", "Самотёк без дымососа (запрещено)") + "</button>" +
             "</div>" +
           "</div>" +
           '<div class="u4h-ctrl-row">' +
-            '<span class="u4h-ctrl-lbl">' + (es ? "Distancia del muro Sur a colindancia:" : "South wall setback to property line:") + "</span>" +
+            '<span class="u4h-ctrl-lbl">' + L("South wall setback to property line:", "Distancia del muro Sur a colindancia:", "Отступ южной стены от границы участка:") + "</span>" +
             '<div class="u4h-pill-group">' +
-              '<button type="button" class="u4h-pill' + (state.southLotSetbackFt === "unknown" ? " is-active" : "") + '" data-lot="unknown">' + (es ? "Por verificar en sitio" : "Verify on site") + "</button>" +
-              '<button type="button" class="u4h-pill' + (state.southLotSetbackFt === "gte4" ? " is-active" : "") + '" data-lot="gte4">' + (es ? "≥ 4 pies (Muro Sur OK)" : "≥ 4 ft (South Wall OK)") + "</button>" +
-              '<button type="button" class="u4h-pill' + (state.southLotSetbackFt === "lt4" ? " is-active" : "") + '" data-lot="lt4">' + (es ? "< 4 pies (Salir al Patio Oeste)" : "< 4 ft (Route to West Yard)") + "</button>" +
+              '<button type="button" class="u4h-pill' + (state.southLotSetbackFt === "unknown" ? " is-active" : "") + '" data-lot="unknown">' + L("Verify on site", "Por verificar en sitio", "Сверить на объекте") + "</button>" +
+              '<button type="button" class="u4h-pill' + (state.southLotSetbackFt === "gte4" ? " is-active" : "") + '" data-lot="gte4">' + L("≥ 4 ft (South Wall OK)", "≥ 4 pies (Muro Sur OK)", "≥ 4 фут. (Южная стена ОК)") + "</button>" +
+              '<button type="button" class="u4h-pill' + (state.southLotSetbackFt === "lt4" ? " is-active" : "") + '" data-lot="lt4">' + L("< 4 ft (Route to West Yard)", "< 4 pies (Salir al Patio Oeste)", "< 4 фут. (Вывести в западный двор)") + "</button>" +
             "</div>" +
           "</div>" +
         "</div>" +
         '<div class="u4h-status ' + secObj.cls + '">' + esc(secObj.txt) + "</div>" +
-        renderHvacEquipDrawer(es);
+        '<div class="u4h-info-box">' +
+          '<div class="u4h-info-title">' + L("BayREN Rebate Reservation Gate & Roof Rule", "Candado de Reembolso BayREN y Regla de Techo", "Стоп-проверка субсидии BayREN и защиты кровли") + "</div>" +
+          '<ul class="u4h-info-list">' +
+            "<li>" + L("Confirm written BayREN program reservation BEFORE ordering equipment or starting HVAC/duct/insulation installation (early purchases disqualify rebates).", "Confirmar reserva escrita del programa BayREN ANTES de comprar equipos o iniciar instalación de HVAC, ductos o aislamiento (compras anticipadas descalifican).", "Получить письменное подтверждение брони программы BayREN ДО закупки оборудования и начала монтажа печи/теплового насоса, воздуховодов или утепления (ранняя покупка аннулирует субсидию).") + "</li>" +
+            "<li>" + L("Zero flat-roof penetrations allowed: keep existing membrane untouched and route exhaust strictly horizontally through the verified exterior wall.", "Cero penetraciones en el techo plano: mantener intacta la membrana existente y sacar gases horizontalmente por el muro exterior verificado.", "Ноль проходок через плоскую крышу: мембрану кровли не трогать, дымоотвод выводить строго горизонтально через проверенную наружную стену.") + "</li>" +
+          "</ul>" +
+        "</div>" +
+        renderHvacEquipDrawer();
     }
 
     var pager = '<div class="u4h-pager">' +
-      '<button type="button" id="hvacPrevBtn" class="u4h-pager-btn"' + (idx <= 0 ? " disabled" : "") + ">&larr; " + (es ? "Anterior" : "Prev") + "</button>" +
-      '<span class="u4h-pager-count">' + (es ? "Vista " : "View ") + (idx + 1) + (es ? " de " : " of ") + STEPS.length + "</span>" +
-      '<button type="button" id="hvacNextBtn" class="u4h-pager-btn is-next"' + (idx >= STEPS.length - 1 ? " disabled" : "") + ">" + (es ? "Siguiente" : "Next") + " &rarr;</button>" +
+      '<button type="button" id="hvacPrevBtn" class="u4h-pager-btn"' + (idx <= 0 ? " disabled" : "") + ">&larr; " + L("Prev", "Anterior", "Назад") + "</button>" +
+      '<span class="u4h-pager-count">' + L("Step ", "Paso ", "Шаг ") + (idx + 1) + L(" of ", " de ", " из ") + STEPS.length + "</span>" +
+      '<button type="button" id="hvacNextBtn" class="u4h-pager-btn is-next"' + (idx >= STEPS.length - 1 ? " disabled" : "") + ">" + L("Next", "Siguiente", "Далее") + " &rarr;</button>" +
     "</div>";
 
     host.innerHTML =
       '<div class="u4h-card u4h-animate-in">' +
         '<div class="u4h-card-head">' +
           "<div>" +
-            '<div class="u4h-title">' + esc(es ? titleEs : titleEn) + "</div>" +
-            '<div class="u4h-sub">' + esc(es ? subEs : subEn) + "</div>" +
+            '<div class="u4h-title">' + esc(titleTxt) + "</div>" +
+            '<div class="u4h-sub">' + esc(subTxt) + "</div>" +
           "</div>" +
-          '<span class="u4h-compass">' + (es ? "Plano 2 · Calefactor y Ductos" : "Plan 2 · Furnace & Ducts") + "</span>" +
+          '<span class="u4h-compass">' + L("Plan 2 · Furnace & Ducts", "Plano 2 · Calefactor y Ductos", "План 2 · Печь и воздуховоды") + "</span>" +
         "</div>" +
         stepPills +
         inner +
@@ -974,17 +1034,29 @@
       var bp = window.U4PlanNav.getBootParams ? window.U4PlanNav.getBootParams() : {};
       if (bp.step) state.step = resolveStep(bp.step);
     }
+    window.addEventListener("u4:lang-change", function () {
+      render();
+      if (window.U4LiveAi) window.U4LiveAi.refreshPrompts();
+    });
     if (window.U4LiveAi) {
       window.U4LiveAi.init({
         planId: "hvac-layout",
         room: "hvac",
         titleEn: "Heating System: Furnace, Ducts & Sidewall Exhaust",
         titleEs: "Sistema de Calefacción: Calefactor, Ductos y Salida Lateral",
+        titleRu: "Система отопления: Печь, воздуховоды и боковой выброс",
         getContext: function () {
           var m = computeDucts();
           return "Plan2=hvac-layout, View=" + state.step + ", Furnace=(" + state.nodes.f1.x + "in," + state.nodes.f1.y + "in SW Dining), Supplies=(Kitchen " + m.sa1Ft + "ft, Living " + m.sa2Ft + "ft, Bedroom " + m.sa3Ft + "ft), HallReturn=" + m.ra1Ft + "ft, SidewallExhaust=" + state.ventMode + " (" + m.flue.effectiveWall + " wall, zero flat-roof cuts).";
         },
         quickPrompts: function (lang) {
+          if (lang === "ru") {
+            return [
+              "Как разводятся тёплые воздуховоды в кухню, гостиную и спальню?",
+              "Какие есть два варианта бокового выброса без резки плоской крыши?",
+              "Почему нельзя закупать оборудование до письменной брони BayREN?"
+            ];
+          }
           return lang === "es"
             ? ["¿Cómo llegan los ductos de aire caliente a Cocina, Sala y Recámara?", "¿Cuáles son las dos opciones de salida lateral sin cortar el techo plano?", "¿Por qué debe separarse la inyección al menos 4 pies del retorno?"]
             : ["How are warm supply ducts routed to the Kitchen, Living Room, and Bedroom?", "What are the two horizontal sidewall exhaust options with zero roof cuts?", "Why keep supply registers at least 4 ft away from the Hall Return?"];

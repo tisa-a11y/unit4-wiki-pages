@@ -8,7 +8,8 @@
     "date": "2026-11-20",
     "lang": "en",
     "pairId": "hvac-layout-interactive",
-    "pin": true
+    "pin": true,
+    "titleRu": "Интерактивный план чердачной печи и воздуховодов · английский"
   },
   {
     "title": "Attic-Furnace-and-Ducts-Interactive_ES.html",
@@ -18,6 +19,19 @@
     "path": "Ubicación de calefactor, pasarela 24\", ductos y contacto GFCI (español)",
     "date": "2026-11-20",
     "lang": "es",
+    "pairId": "hvac-layout-interactive",
+    "pin": true,
+    "titleRu": "Интерактивный план чердачной печи и воздуховодов · испанский"
+  },
+  {
+    "title": "Interactive-HVAC-Layout_RU.html",
+    "titleEn": "Attic furnace and ducts layout · Russian",
+    "titleEs": "Plano interactivo de calefacción y ductos en ático · ruso",
+    "titleRu": "Интерактивный план чердачной печи и воздуховодов · русский",
+    "id": "2026-11-20_HVAC-Layout-Interactive_RU",
+    "path": "Чердачная печь, воздуховоды и боковой выхлоп (русский)",
+    "date": "2026-11-20",
+    "lang": "ru",
     "pairId": "hvac-layout-interactive",
     "pin": true
   },
@@ -30,7 +44,8 @@
     "date": "2026-11-22",
     "lang": "en",
     "pairId": "hvac-layout-printable-current",
-    "pin": true
+    "pin": true,
+    "titleRu": "План чердачной печи и воздуховодов R4 · английский · 24 нояб."
   },
   {
     "title": "2026-11-24_U4_hvac_layout_R4_ES.pdf",
@@ -41,7 +56,8 @@
     "date": "2026-11-22",
     "lang": "es",
     "pairId": "hvac-layout-printable-current",
-    "pin": true
+    "pin": true,
+    "titleRu": "План чердачной печи и воздуховодов R4 · испанский · 24 нояб."
   },
   {
     "title": "Attic hatch and walkway build guide (English)",
@@ -52,7 +68,8 @@
     "date": "2026-11-19",
     "lang": "en",
     "pairId": "attic-hatch-r5",
-    "history": true
+    "history": true,
+    "titleRu": "Руководство по сборке чердачного люка и настила (английский)"
   },
   {
     "title": "Attic hatch and walkway build guide (Spanish)",
@@ -63,7 +80,8 @@
     "date": "2026-11-19",
     "lang": "es",
     "pairId": "attic-hatch-r5",
-    "history": true
+    "history": true,
+    "titleRu": "Руководство по сборке чердачного люка и настила (испанский)"
   },
   {
     "title": "2026-11-20_U4_hvac_layout-interactive_R1_EN.pdf",
@@ -75,7 +93,8 @@
     "lang": "en",
     "pairId": "hvac-layout-printable",
     "pin": true,
-    "history": true
+    "history": true,
+    "titleRu": "Печатный план печи и воздуховодов чердака · английский (архивная версия)"
   },
   {
     "title": "2026-11-20_U4_hvac_layout-interactive_R1_ES.pdf",
@@ -87,6 +106,43 @@
     "lang": "es",
     "pairId": "hvac-layout-printable",
     "pin": true,
-    "history": true
+    "history": true,
+    "titleRu": "Печатный план печи и воздуховодов чердака · испанский (архивная версия)"
+  },
+  {
+    "title": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_EN.pdf",
+    "titleEn": "Official Electrical Sheets — Module 2: Sheet E-25: Attic Furnace & Smoke/CO (#15/#16) (Rev R5) · English",
+    "titleEs": "Hojas Eléctricas Oficiales — Módulo 2: Hoja E-25: Calefactor en Ático y Humo/CO (#15/#16) (Rev R5) · inglés",
+    "titleRu": "Официальные электросхемы — Модуль 2, лист E-25: Чердачная печь и датчики дыма/CO (#15/#16, Rev R5) · английский",
+    "id": "10_htwyB2y2TxyG7GW0LkpDwUm92Eo1pY",
+    "path": "2026-11-23-official-electrical-plans-R5 · Sheet E-25: Attic Furnace & Smoke/CO (#15/#16) (English)",
+    "date": "2026-11-23",
+    "lang": "en",
+    "pairId": "u4-elec-mod2-r5-pdf",
+    "pin": true
+  },
+  {
+    "title": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_ES.pdf",
+    "titleEn": "Official Electrical Sheets — Module 2: Sheet E-25: Attic Furnace & Smoke/CO (#15/#16) (Rev R5) · Spanish",
+    "titleEs": "Hojas Eléctricas Oficiales — Módulo 2: Hoja E-25: Calefactor en Ático y Humo/CO (#15/#16) (Rev R5) · español",
+    "titleRu": "Официальные электросхемы — Модуль 2, лист E-25: Чердачная печь и датчики дыма/CO (#15/#16, Rev R5) · испанский",
+    "id": "1FO9ANRX9COVSgNkN15_ibeJdoGa35pqK",
+    "path": "2026-11-23-official-electrical-plans-R5 · Hoja E-25: Calefactor en Ático y Humo/CO (#15/#16) (español)",
+    "date": "2026-11-23",
+    "lang": "es",
+    "pairId": "u4-elec-mod2-r5-pdf",
+    "pin": true
+  },
+  {
+    "title": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_RU.pdf",
+    "titleEn": "Official Electrical Sheets — Module 2: Sheet E-25: Attic Furnace & Smoke/CO (#15/#16) (Rev R5) · Russian",
+    "titleEs": "Hojas Eléctricas Oficiales — Módulo 2: Hoja E-25: Calefactor en Ático y Humo/CO (#15/#16) (Rev R5) · ruso",
+    "titleRu": "Официальные электросхемы — Модуль 2, лист E-25: Чердачная печь и датчики дыма/CO (#15/#16) (Rev R5) · русский",
+    "id": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_RU",
+    "path": "wiki-pdfs/2026-11-23_U4_Module2_Whole-Unit-Segments_R5_RU.pdf",
+    "date": "2026-11-23",
+    "lang": "ru",
+    "pairId": "u4-elec-mod2-r5-pdf",
+    "pin": true
   }
 ]

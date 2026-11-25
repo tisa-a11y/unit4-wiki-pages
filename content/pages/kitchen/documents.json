@@ -8,7 +8,8 @@
     "date": "2026-11-20",
     "lang": "en",
     "pairId": "kitchen-floor-plan-interactive",
-    "pin": true
+    "pin": true,
+    "titleRu": "Интерактивный план всей кухни и спецификация шкафов · английский"
   },
   {
     "title": "Interactive-Full-Kitchen-Floor-Plan_ES.html",
@@ -18,6 +19,19 @@
     "path": "Planta completa de cocina en L, 4 muros y lista de gabinetes (español)",
     "date": "2026-11-20",
     "lang": "es",
+    "pairId": "kitchen-floor-plan-interactive",
+    "pin": true,
+    "titleRu": "Интерактивный план всей кухни и спецификация шкафов · испанский"
+  },
+  {
+    "title": "Interactive-Full-Kitchen-Floor-Plan_RU.html",
+    "titleEn": "Interactive full kitchen floor plan and cabinet schedule · Russian",
+    "titleEs": "Plano interactivo de cocina completa y gabinetes · ruso",
+    "titleRu": "Интерактивный план всей кухни и спецификация шкафов · русский",
+    "id": "2026-11-20_Kitchen-Floor-Plan-Interactive_RU",
+    "path": "Полный план Г-образной кухни, 4 стены и шкафы (русский)",
+    "date": "2026-11-20",
+    "lang": "ru",
     "pairId": "kitchen-floor-plan-interactive",
     "pin": true
   },
@@ -30,7 +44,8 @@
     "date": "2026-11-20",
     "lang": "en",
     "pairId": "kitchen-electrical-interactive",
-    "pin": true
+    "pin": true,
+    "titleRu": "Интерактивный план электрики кухни и щитка D04 · английский"
   },
   {
     "title": "Interactive-Kitchen-Electrical-D04_ES.html",
@@ -40,6 +55,19 @@
     "path": "6 vistas acopladas, tablero D04 de 20 espacios y ruta de campana (español)",
     "date": "2026-11-20",
     "lang": "es",
+    "pairId": "kitchen-electrical-interactive",
+    "pin": true,
+    "titleRu": "Интерактивный план электрики кухни и щитка D04 · испанский"
+  },
+  {
+    "title": "Interactive-Kitchen-Electrical-D04_RU.html",
+    "titleEn": "Interactive kitchen electrical and panel D04 plan · Russian",
+    "titleEs": "Plano interactivo eléctrico de cocina y tablero D04 · ruso",
+    "titleRu": "Интерактивный план электрики кухни и щитка D04 · русский",
+    "id": "2026-11-20_Kitchen-Electrical-Interactive_RU",
+    "path": "6 связанных видов, 20-местный щиток D04 и трасса вытяжки (русский)",
+    "date": "2026-11-20",
+    "lang": "ru",
     "pairId": "kitchen-electrical-interactive",
     "pin": true
   },
@@ -52,7 +80,8 @@
     "date": "2026-11-23",
     "lang": "en",
     "pairId": "u4-elec-mod1-r5-pdf",
-    "pin": true
+    "pin": true,
+    "titleRu": "Официальные электросхемы — Модуль 1: Кухня (E-00A – E-14, Rev R5) · английский"
   },
   {
     "title": "2026-11-23_U4_Module1_Kitchen-Electrical_R5_ES.pdf",
@@ -62,6 +91,19 @@
     "path": "2026-11-23-official-electrical-plans-R5 · 6 hojas horizontales (español)",
     "date": "2026-11-23",
     "lang": "es",
+    "pairId": "u4-elec-mod1-r5-pdf",
+    "pin": true,
+    "titleRu": "Официальные электросхемы — Модуль 1: Кухня (E-00A – E-14, Rev R5) · испанский"
+  },
+  {
+    "title": "2026-11-23_U4_Module1_Kitchen-Electrical_R5_RU.pdf",
+    "titleEn": "Official Electrical Sheets — Module 1: Kitchen (E-00A to E-14, Rev R5) · Russian",
+    "titleEs": "Hojas Eléctricas Oficiales — Módulo 1: Cocina (E-00A a E-14, Rev R5) · ruso",
+    "titleRu": "Официальные электросхемы — Модуль 1: Кухня (E-00A – E-14, Rev R5) · русский",
+    "id": "2026-11-23_U4_Module1_Kitchen-Electrical_R5_RU",
+    "path": "wiki-pdfs/2026-11-23_U4_Module1_Kitchen-Electrical_R5_RU.pdf",
+    "date": "2026-11-23",
+    "lang": "ru",
     "pairId": "u4-elec-mod1-r5-pdf",
     "pin": true
   },
@@ -74,7 +116,8 @@
     "date": "2026-11-23",
     "lang": "en",
     "pairId": "u4-elec-mod1-r5-html",
-    "pin": true
+    "pin": true,
+    "titleRu": "Модуль 1: Электросхемы кухни (веб-чертежи, Rev R5) · английский"
   },
   {
     "title": "2026-11-23_U4_Module1_Kitchen-Electrical_R5_ES.html",
@@ -84,6 +127,19 @@
     "path": "wiki-docs/2026-11-23_U4_Module1_Kitchen-Electrical_R5_ES.html",
     "date": "2026-11-23",
     "lang": "es",
+    "pairId": "u4-elec-mod1-r5-html",
+    "pin": true,
+    "titleRu": "Модуль 1: Электросхемы кухни (веб-чертежи, Rev R5) · испанский"
+  },
+  {
+    "title": "2026-11-23_U4_Module1_Kitchen-Electrical_R5_RU.html",
+    "titleEn": "Module 1: Kitchen Electrical Blueprints (Web Page, Rev R5) · Russian",
+    "titleEs": "Módulo 1: Planos Eléctricos de Cocina (Página Web, Rev R5) · ruso",
+    "titleRu": "Модуль 1: Электросхемы кухни (веб-чертежи, Rev R5) · русский",
+    "id": "2026-11-23_U4_Module1_Kitchen-Electrical_R5_HTML_RU",
+    "path": "wiki-docs/2026-11-23_U4_Module1_Kitchen-Electrical_R5_RU.html",
+    "date": "2026-11-23",
+    "lang": "ru",
     "pairId": "u4-elec-mod1-r5-html",
     "pin": true
   },
@@ -97,7 +153,8 @@
     "lang": "en",
     "pairId": "kitchen-revc-html",
     "history": true,
-    "pin": true
+    "pin": true,
+    "titleRu": "Чертежи кухни от 2 нояб. (веб-страница) · английский"
   },
   {
     "title": "Kitchen-RevC-ES.html",
@@ -109,7 +166,8 @@
     "lang": "es",
     "pairId": "kitchen-revc-html",
     "history": true,
-    "pin": true
+    "pin": true,
+    "titleRu": "Чертежи кухни от 2 нояб. (веб-страница) · испанский"
   },
   {
     "title": "2026-11-24_U4_kitchen_electrical_R3_EN.pdf",
@@ -120,7 +178,8 @@
     "date": "2026-11-22",
     "lang": "en",
     "pairId": "kitchen-electrical-printable-current",
-    "history": true
+    "history": true,
+    "titleRu": "Электроплан кухни R3 · английский · 24 нояб. (архивная версия)"
   },
   {
     "title": "2026-11-24_U4_kitchen_electrical_R3_ES.pdf",
@@ -131,7 +190,8 @@
     "date": "2026-11-22",
     "lang": "es",
     "pairId": "kitchen-electrical-printable-current",
-    "history": true
+    "history": true,
+    "titleRu": "Электроплан кухни R3 · испанский · 24 нояб. (архивная версия)"
   },
   {
     "title": "2026-11-22_U4_kitchen_floor-plan_R2_EN.pdf",
@@ -142,7 +202,8 @@
     "date": "2026-11-22",
     "lang": "en",
     "pairId": "kitchen-floor-plan-printable-current",
-    "pin": true
+    "pin": true,
+    "titleRu": "План кухни и спецификация шкафов · английский · 22 нояб."
   },
   {
     "title": "2026-11-22_U4_kitchen_floor-plan_R2_ES.pdf",
@@ -153,7 +214,8 @@
     "date": "2026-11-22",
     "lang": "es",
     "pairId": "kitchen-floor-plan-printable-current",
-    "pin": true
+    "pin": true,
+    "titleRu": "План кухни и спецификация шкафов · испанский · 22 нояб."
   },
   {
     "title": "2026-11-20_U4_kitchen_floor-plan-interactive_R1_EN.pdf",
@@ -164,7 +226,8 @@
     "date": "2026-11-20",
     "lang": "en",
     "pairId": "kitchen-floor-plan-printable",
-    "history": true
+    "history": true,
+    "titleRu": "Печатный план кухни и спецификация шкафов · английский (архивная версия)"
   },
   {
     "title": "2026-11-20_U4_kitchen_floor-plan-interactive_R1_ES.pdf",
@@ -175,7 +238,8 @@
     "date": "2026-11-20",
     "lang": "es",
     "pairId": "kitchen-floor-plan-printable",
-    "history": true
+    "history": true,
+    "titleRu": "Печатный план кухни и спецификация шкафов · испанский (архивная версия)"
   },
   {
     "title": "2026-11-20_U4_kitchen_electrical-d04-interactive_R1_EN.pdf",
@@ -186,7 +250,8 @@
     "date": "2026-11-20",
     "lang": "en",
     "pairId": "kitchen-electrical-printable",
-    "history": true
+    "history": true,
+    "titleRu": "Печатный план электрики кухни и щитка D04 · английский (архивная версия)"
   },
   {
     "title": "2026-11-20_U4_kitchen_electrical-d04-interactive_R1_ES.pdf",
@@ -197,7 +262,8 @@
     "date": "2026-11-20",
     "lang": "es",
     "pairId": "kitchen-electrical-printable",
-    "history": true
+    "history": true,
+    "titleRu": "Печатный план электрики кухни и щитка D04 · испанский (архивная версия)"
   },
   {
     "title": "2026-11-02_U4_Kitchen_Master-Plan_R2_EN.html",
@@ -207,7 +273,8 @@
     "path": "master-plan-2026-11-02-R2/2026-11-02_U4_Kitchen_Master-Plan_R2_EN.html",
     "date": "2026-11-02",
     "lang": "en",
-    "pairId": "kitchen-master-plan-r2"
+    "pairId": "kitchen-master-plan-r2",
+    "titleRu": "План кухни от 2 нояб. (только для ознакомления) · английский"
   },
   {
     "title": "2026-11-02_U4_Kitchen_Master-Plan_R2_ES.html",
@@ -217,7 +284,8 @@
     "path": "master-plan-2026-11-02-R2/2026-11-02_U4_Kitchen_Master-Plan_R2_ES.html",
     "date": "2026-11-02",
     "lang": "es",
-    "pairId": "kitchen-master-plan-r2"
+    "pairId": "kitchen-master-plan-r2",
+    "titleRu": "План кухни от 2 нояб. (только для ознакомления) · испанский"
   },
   {
     "title": "Unit4-Kitchen-RevC-EN.pdf",
@@ -228,7 +296,8 @@
     "date": "2026-11-02",
     "lang": "en",
     "pairId": "kitchen-revc-pdf",
-    "history": true
+    "history": true,
+    "titleRu": "Чертежи кухни от 2 нояб. (PDF) · английский (архивная версия)"
   },
   {
     "title": "Unit4-Kitchen-RevC-ES.pdf",
@@ -239,6 +308,7 @@
     "date": "2026-11-02",
     "lang": "es",
     "pairId": "kitchen-revc-pdf",
-    "history": true
+    "history": true,
+    "titleRu": "Чертежи кухни от 2 нояб. (PDF) · испанский (архивная версия)"
   }
 ]

@@ -34,8 +34,13 @@
       "interactive hood plan",
       "interactive range wall",
       "live hood plan",
-      "plano interactivo campana"
-    ]
+      "plano interactivo campana",
+      "стена плиты",
+      "план вытяжки"
+    ],
+    "titleRu": "Интерактивный план стены плиты и вытяжки",
+    "noteRu": "Живое изменение размеров, отметки на схеме и скачивание актуального PDF.",
+    "docRu": "2026-11-20_Kitchen-Vent-Hood-Wall-Interactive_RU"
   },
   {
     "key": "interactive-kitchen-floor-plan",
@@ -50,8 +55,13 @@
       "kitchen floor plan",
       "full kitchen plan",
       "cabinet schedule",
-      "plano de cocina interactivo"
-    ]
+      "plano de cocina interactivo",
+      "план кухни",
+      "шкафы кухни"
+    ],
+    "titleRu": "Интерактивный план всей кухни и спецификация шкафов",
+    "noteRu": "Все 4 стены в связке, проверка прохода 6\" и 12\", ведомость тумб.",
+    "docRu": "2026-11-20_Kitchen-Floor-Plan-Interactive_RU"
   },
   {
     "key": "interactive-attic-hatch-plan",
@@ -65,8 +75,13 @@
     "aliases": [
       "attic hatch interactive",
       "permanent attic hatch",
-      "escotilla interactiva"
-    ]
+      "escotilla interactiva",
+      "люк чердака",
+      "план люка"
+    ],
+    "titleRu": "Интерактивный план постоянного чердачного люка",
+    "noteRu": "Проём 24\"×36\", направление балок, высота 66\" и расчёт настила.",
+    "docRu": "2026-11-20_Attic-Hatch-Interactive_RU"
   },
   {
     "key": "interactive-hvac-layout",
@@ -81,8 +96,13 @@
       "hvac layout",
       "attic furnace",
       "ductwork layout",
-      "plano interactivo clima"
-    ]
+      "plano interactivo clima",
+      "план отопления",
+      "воздуховоды"
+    ],
+    "titleRu": "Интерактивный план чердачной печи и воздуховодов",
+    "noteRu": "Схема к обходу 24 нояб.: печь, площадка 30\"×30\", воздуховоды и GFCI.",
+    "docRu": "2026-11-20_HVAC-Layout-Interactive_RU"
   },
   {
     "key": "interactive-murphy-door-plan",
@@ -96,8 +116,13 @@
     "aliases": [
       "murphy door interactive",
       "interactive bookcase door",
-      "puerta librero interactiva"
-    ]
+      "puerta librero interactiva",
+      "дверь стеллаж",
+      "дверь мерфи"
+    ],
+    "titleRu": "Интерактивный план потайной двери-стеллажа Murphy",
+    "noteRu": "Замер проёма по 9 точкам, поворот 90° в коридор и решётки вентиляции.",
+    "docRu": "2026-11-20_Murphy-Door-Interactive_RU"
   },
   {
     "key": "interactive-kitchen-electrical",
@@ -112,8 +137,13 @@
       "kitchen electrical plan",
       "interactive kitchen electrical",
       "d04 interactive",
-      "plano electrico cocina"
-    ]
+      "plano electrico cocina",
+      "электрика кухни",
+      "щиток d04"
+    ],
+    "titleRu": "Интерактивный план электрики кухни и щитка D04",
+    "noteRu": "6 связанных видов, автоматы D04, коробка вытяжки и длины кабелей.",
+    "docRu": "2026-11-20_Kitchen-Electrical-Interactive_RU"
   },
   {
     "key": "hvac-layout-printable-current",
@@ -126,7 +156,9 @@
     "docEs": "2026-11-22_U4_hvac_layout_R3_ES",
     "aliases": [
       "hvac-layout print"
-    ]
+    ],
+    "titleRu": "План чердачной печи и воздуховодов — для печати",
+    "noteRu": "Редакция R4 от 24 нояб. Полевые проверки остаются в силе."
   },
   {
     "key": "attic-hatch-printable-current",
@@ -139,7 +171,9 @@
     "docEs": "2026-11-22_U4_attic_hatch_R3_ES",
     "aliases": [
       "attic-hatch print"
-    ]
+    ],
+    "titleRu": "План постоянного чердачного люка — для печати",
+    "noteRu": "Редакция R4 от 24 нояб. Полевые проверки остаются в силе."
   },
   {
     "key": "kitchen-electrical-printable-current",
@@ -153,8 +187,12 @@
     "aliases": [
       "kitchen-electrical print",
       "module 1 kitchen electrical",
-      "official kitchen electrical r5"
-    ]
+      "official kitchen electrical r5",
+      "модуль 1 электрика"
+    ],
+    "titleRu": "Официальные электросхемы — Модуль 1: Кухня (Rev R5)",
+    "noteRu": "6 альбомных листов (E-00A – E-14): щиток #1–#20, план 1:1 и все 4 стены.",
+    "docRu": "2026-11-23_U4_Module1_Kitchen-Electrical_R5_RU"
   },
   {
     "key": "whole-unit-electrical-printable-current",
@@ -168,8 +206,12 @@
     "aliases": [
       "whole-unit electrical print",
       "module 2 electrical",
-      "official whole unit electrical r5"
-    ]
+      "official whole unit electrical r5",
+      "модуль 2 электрика"
+    ],
+    "titleRu": "Официальные электросхемы — Модуль 2: Вся квартира (Rev R5)",
+    "noteRu": "7 альбомных листов (E-00A – E-25): комнаты, ванная, прачечная, чердак и дым/CO.",
+    "docRu": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_RU"
   },
   {
     "key": "kitchen-floor-plan-printable-current",
@@ -182,7 +224,9 @@
     "docEs": "2026-11-22_U4_kitchen_floor-plan_R2_ES",
     "aliases": [
       "kitchen-floor-plan print"
-    ]
+    ],
+    "titleRu": "План кухни и спецификация шкафов — для печати",
+    "noteRu": "Редакция от 22 нояб. Полевые проверки остаются в силе."
   },
   {
     "key": "hood-test-hang",
@@ -200,8 +244,11 @@
       "hood mockup",
       "mock hookup",
       "campana",
-      "guia de la campana"
-    ]
+      "guia de la campana",
+      "примерка вытяжки"
+    ],
+    "titleRu": "Примерка вытяжки: обзор и проверки на месте",
+    "noteRu": "Лист 1 из 4: объём работ и действующие паузы."
   },
   {
     "key": "hood-wall-blocking",
@@ -215,8 +262,11 @@
     "aliases": [
       "hood blocking",
       "wall blocking",
-      "refuerzos campana"
-    ]
+      "refuerzos campana",
+      "закладные вытяжки"
+    ],
+    "titleRu": "Примерка вытяжки: деревянные закладные стены",
+    "noteRu": "Лист 2 из 4: оба пояса деревянных закладных."
   },
   {
     "key": "hood-vent-duct",
@@ -230,8 +280,11 @@
     "aliases": [
       "hood duct",
       "range vent",
-      "ducto campana"
-    ]
+      "ducto campana",
+      "воздуховод вытяжки"
+    ],
+    "titleRu": "Примерка вытяжки: вентиляция и жёсткий воздуховод",
+    "noteRu": "Лист 3 из 4: жёсткая труба 6 дюймов и проход у потолка."
   },
   {
     "key": "hood-dry-hang-wiring",
@@ -246,8 +299,11 @@
       "hood dry hang",
       "hood electrical",
       "hood photos",
-      "montaje campana"
-    ]
+      "montaje campana",
+      "питание вытяжки"
+    ],
+    "titleRu": "Примерка вытяжки: навеска, питание и фото",
+    "noteRu": "Лист 4 из 4: высота примерки, линия питания и 5 контрольных фото."
   },
   {
     "key": "range-wall-plan",
@@ -262,7 +318,9 @@
       "range wall",
       "west wall plan",
       "muro de la estufa"
-    ]
+    ],
+    "titleRu": "План стены плиты",
+    "noteRu": "Полный комплект чертежей западной стены."
   },
   {
     "key": "kitchen-plan",
@@ -277,7 +335,9 @@
       "kitchen master plan",
       "plan de cocina"
     ],
-    "inMenu": false
+    "inMenu": false,
+    "titleRu": "Общий план кухни",
+    "noteRu": "Планировка всей кухни."
   },
   {
     "key": "kitchen-electrical-drawings",
@@ -292,7 +352,9 @@
       "kitchen electrical",
       "electrical drawings",
       "planos electricos"
-    ]
+    ],
+    "titleRu": "Электрочертежи кухни",
+    "noteRu": "Розетки, выключатели, кабельные линии."
   },
   {
     "key": "panel-wall-framing",
@@ -308,69 +370,49 @@
       "d04 framing",
       "panel wall",
       "muro del tablero"
-    ]
+    ],
+    "titleRu": "Каркас стены электрощитка",
+    "noteRu": "Зашивка старого проёма под щиток (D04)."
   },
   {
     "key": "bathroom-plan",
     "room": "bathroom",
-    "titleEn": "Historical bathroom plan for John",
-    "titleEs": "Plan anterior del baño para John",
-    "noteEn": "October 14 edition — history only.",
-    "noteEs": "Edición del 14 de octubre — solo historial.",
+    "titleEn": "Bathroom plan",
+    "titleEs": "Plan del baño",
+    "noteEn": "The plan given to John.",
+    "noteEs": "El plan entregado a John.",
     "docEn": "1taIg19r1lPEztEDybHcrDh_H702WusVy",
     "docEs": "1NY9eaXvYK_oICJBK8FrMnkw5iCx5lVuQ",
     "aliases": [
       "bath plan",
-      "plan del bano"
+      "plan del bano",
+      "план ванной"
     ],
-    "inMenu": false
+    "titleRu": "План ванной комнаты",
+    "noteRu": "Рабочий план, переданный Джону."
   },
   {
     "key": "bathroom-tile",
     "room": "bathroom",
     "titleEn": "Bathroom Tub & Wall Tile Plan",
-    "titleEs": "Plano Interactivo de Azulejo y Nichos en Baño",
-    "noteEn": "35\" symmetrical stops, 71-1/4\" top height, matching 2\"×6\" ceramic bullnose, 1-piece white niche backs & Mapei #77 Frost.",
-    "noteEs": "Topes simétricos a 35\", altura 71-1/4\", bullnose cerámico 2\"×6\", fondos blancos de 1 pieza en nichos y boquilla Mapei #77 Frost.",
-    "docEn": "2026-11-24_Bathroom-Tile-Interactive_EN",
-    "docEs": "2026-11-24_Bathroom-Tile-Interactive_ES",
+    "titleEs": "Plano de Azulejo y Nichos en Baño",
+    "noteEn": "35\" symmetrical stops, 71-1/4\" HardieBacker top, 2\"×6\" bullnose (zero metal), 1-piece 24\"×48\" White niche backs, Mapei #77 Frost grout.",
+    "noteEs": "Topes simétricos 35\", altura 71-1/4\", bullnose 2\"×6\" (cero metal), fondos nicho 1 pieza 24\"×48\" Blanco y boquilla Mapei #77 Frost.",
+    "docEn": "./plans/bathroom-tile/index.html?v=rev008",
+    "docEs": "./plans/bathroom-tile/index.html?lang=es&v=rev008",
     "aliases": [
+      "bathroom tile",
       "bathroom tile plan",
-      "bathroom wall tile",
+      "tub wall tile",
+      "plano azulejo bano",
       "tub tile",
-      "azulejo del bano"
-    ]
-  },
-  {
-    "key": "bathroom-measurements",
-    "room": "bathroom",
-    "titleEn": "Bathroom Wall, Tub & Room Reference Renderings",
-    "titleEs": "Planos de Referencia: Muros, Tina y Cuarto",
-    "noteEn": "Whole-room floor plan (72-1/8\"×82-1/8\"), tub back wall, tub profile, and West window wall in Photo & Flat Drawing views.",
-    "noteEs": "Planta completa (72-1/8\"×82-1/8\"), muro de tina, perfil de tina y muro oeste en vistas de Foto y Dibujo a escala.",
-    "docEn": "2026-11-24_Bathroom-Measurements-Interactive_EN",
-    "docEs": "2026-11-24_Bathroom-Measurements-Interactive_ES",
-    "aliases": [
-      "bathroom measurements",
-      "bathroom renderings",
-      "tub wall renderings",
-      "medidas del bano"
+      "azulejo del bano",
+      "плитка ванной",
+      "плитка ванной и ниши"
     ],
-    "inMenu": false
-  },
-  {
-    "key": "bathroom-surfaces-r1",
-    "room": "bathroom",
-    "titleEn": "Earlier bathroom surfaces sheet (PDF)",
-    "titleEs": "Hoja anterior de superficies del baño (PDF)",
-    "noteEn": "Oct 29 reference PDF.",
-    "noteEs": "PDF de referencia del 29 oct.",
-    "docEn": "1aYu9yWuRRFk8T5E3nQ6NDTHWpeRcrXgW",
-    "docEs": "19BYgPOC5-RoRmaj-qidSJBTcEZoXR6tR",
-    "aliases": [
-      "bathroom surfaces pdf"
-    ],
-    "inMenu": false
+    "titleRu": "Плитка ванной и ниши",
+    "noteRu": "Симметричные границы 35\", верх HardieBacker 71-1/4\", керамический булноуз 2\"×6\" (без металла), цельные задние стенки ниш 24\"×48\" белые, затирка Mapei #77 Frost.",
+    "docRu": "./plans/bathroom-tile/index.html?lang=ru&v=rev008"
   },
   {
     "key": "bathroom-blocking",
@@ -385,7 +427,9 @@
       "blocking",
       "refuerzos del bano"
     ],
-    "inMenu": false
+    "inMenu": false,
+    "titleRu": "Закладные в ванной",
+    "noteRu": "Расположение деревянных закладных под аксессуары."
   },
   {
     "key": "attic-hatch-guide",
@@ -402,7 +446,9 @@
       "r5",
       "escotilla"
     ],
-    "inMenu": false
+    "inMenu": false,
+    "titleRu": "Прежняя инструкция по чердачному люку (справочно)",
+    "noteRu": "Актуальное место и паузы указаны в разделе «Люк на чердак»."
   },
   {
     "key": "attic-opening-plan",
@@ -417,7 +463,9 @@
       "attic opening",
       "attic plan",
       "abertura del atico"
-    ]
+    ],
+    "titleRu": "План и чек-лист проёма на чердак",
+    "noteRu": "Пошаговая схема."
   },
   {
     "key": "bedroom-trim-packet",
@@ -433,7 +481,9 @@
       "trim packet",
       "molduras de la recamara"
     ],
-    "inMenu": false
+    "inMenu": false,
+    "titleRu": "Пакет раскладки молдингов спальни",
+    "noteRu": "Постенные развёртки настенных рамок."
   },
   {
     "key": "bedroom-trim-method",
@@ -448,7 +498,9 @@
       "tape fit",
       "tape-fit",
       "metodo con cinta"
-    ]
+    ],
+    "titleRu": "Молдинги спальни: метод примерки малярной лентой",
+    "noteRu": "Как размечать рамки на стенах с помощью ленты."
   },
   {
     "key": "bookcase-door-drawings",
@@ -465,7 +517,9 @@
       "bookcase door",
       "puerta librero",
       "puerta murphy"
-    ]
+    ],
+    "titleRu": "Чертежи потайной двери-стеллажа",
+    "noteRu": "Скрытая дверь в нишу прачечной."
   },
   {
     "key": "walls-trim-outlets",
@@ -482,6 +536,8 @@
       "whole unit plan",
       "muros y molduras"
     ],
-    "inMenu": false
+    "inMenu": false,
+    "titleRu": "План стен, молдингов и розеток",
+    "noteRu": "По всей квартире."
   }
 ]

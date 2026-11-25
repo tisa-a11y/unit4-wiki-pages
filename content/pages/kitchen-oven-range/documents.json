@@ -8,7 +8,8 @@
     "date": "2026-11-20",
     "lang": "en",
     "pairId": "kitchen-hood-wall-interactive",
-    "pin": true
+    "pin": true,
+    "titleRu": "Интерактивный план стены плиты и вытяжки · английский"
   },
   {
     "title": "Interactive-Range-and-Hood-Wall-Plan_ES.html",
@@ -18,6 +19,19 @@
     "path": "Plano interactivo del muro de estufa y campana (español)",
     "date": "2026-11-20",
     "lang": "es",
+    "pairId": "kitchen-hood-wall-interactive",
+    "pin": true,
+    "titleRu": "Интерактивный план стены плиты и вытяжки · испанский"
+  },
+  {
+    "title": "Interactive-Range-Hood-Wall_RU.html",
+    "titleEn": "Interactive range and hood wall plan · Russian",
+    "titleEs": "Plano interactivo del muro de estufa y campana · ruso",
+    "titleRu": "Интерактивный план стены плиты и вытяжки · русский",
+    "id": "2026-11-20_Kitchen-Vent-Hood-Wall-Interactive_RU",
+    "path": "Западная стена плиты и вытяжки, 5 шагов (русский)",
+    "date": "2026-11-20",
+    "lang": "ru",
     "pairId": "kitchen-hood-wall-interactive",
     "pin": true
   },
@@ -30,7 +44,8 @@
     "date": "2026-11-20",
     "lang": "en",
     "pairId": "kitchen-hood-wall-printable",
-    "pin": true
+    "pin": true,
+    "titleRu": "Печатный план стены плиты и вытяжки · английский"
   },
   {
     "title": "2026-11-20_U4_kitchen_ks4-interactive_R1_ES.pdf",
@@ -41,7 +56,8 @@
     "date": "2026-11-20",
     "lang": "es",
     "pairId": "kitchen-hood-wall-printable",
-    "pin": true
+    "pin": true,
+    "titleRu": "Печатный план стены плиты и вытяжки · испанский"
   },
   {
     "title": "2026-11-19_U4_kitchen_zephyr-savona-mock-hookup_01-overview_R1_EN.pdf",
@@ -52,7 +68,8 @@
     "date": "2026-11-19",
     "lang": "en",
     "pairId": "zephyr-mock-sheet-01",
-    "pin": true
+    "pin": true,
+    "titleRu": "Примерка вытяжки: обзор и проверки на месте · английский"
   },
   {
     "title": "2026-11-19_U4_kitchen_zephyr-savona-mock-hookup_01-overview_R1_ES.pdf",
@@ -63,7 +80,8 @@
     "date": "2026-11-19",
     "lang": "es",
     "pairId": "zephyr-mock-sheet-01",
-    "pin": true
+    "pin": true,
+    "titleRu": "Примерка вытяжки: обзор и проверки на месте · испанский"
   },
   {
     "title": "2026-11-19_U4_kitchen_zephyr-savona-mock-hookup_02-blocking_R1_EN.pdf",
@@ -74,7 +92,8 @@
     "date": "2026-11-19",
     "lang": "en",
     "pairId": "zephyr-mock-sheet-02",
-    "pin": true
+    "pin": true,
+    "titleRu": "Примерка вытяжки: деревянные закладные стены · английский"
   },
   {
     "title": "2026-11-19_U4_kitchen_zephyr-savona-mock-hookup_02-blocking_R1_ES.pdf",
@@ -85,7 +104,8 @@
     "date": "2026-11-19",
     "lang": "es",
     "pairId": "zephyr-mock-sheet-02",
-    "pin": true
+    "pin": true,
+    "titleRu": "Примерка вытяжки: деревянные закладные стены · испанский"
   },
   {
     "title": "2026-11-19_U4_kitchen_zephyr-savona-mock-hookup_03-vent-ducting_R1_EN.pdf",
@@ -96,7 +116,8 @@
     "date": "2026-11-19",
     "lang": "en",
     "pairId": "zephyr-mock-sheet-03",
-    "pin": true
+    "pin": true,
+    "titleRu": "Примерка вытяжки: вентиляция и жёсткий воздуховод · английский"
   },
   {
     "title": "2026-11-19_U4_kitchen_zephyr-savona-mock-hookup_03-vent-ducting_R1_ES.pdf",
@@ -107,7 +128,8 @@
     "date": "2026-11-19",
     "lang": "es",
     "pairId": "zephyr-mock-sheet-03",
-    "pin": true
+    "pin": true,
+    "titleRu": "Примерка вытяжки: вентиляция и жёсткий воздуховод · испанский"
   },
   {
     "title": "2026-11-20_U4_kitchen_zephyr-savona-mock-hookup_04-hood-electrical_R2_EN.pdf",
@@ -118,7 +140,8 @@
     "date": "2026-11-20",
     "lang": "en",
     "pairId": "zephyr-mock-sheet-04-r2",
-    "pin": true
+    "pin": true,
+    "titleRu": "Примерка вытяжки: питание, навеска и фото · английский"
   },
   {
     "title": "2026-11-20_U4_kitchen_zephyr-savona-mock-hookup_04-hood-electrical_R2_ES.pdf",
@@ -129,7 +152,8 @@
     "date": "2026-11-20",
     "lang": "es",
     "pairId": "zephyr-mock-sheet-04-r2",
-    "pin": true
+    "pin": true,
+    "titleRu": "Примерка вытяжки: питание, навеска и фото · испанский"
   },
   {
     "title": "2026-11-19_U4_kitchen_range-wall-full-plan_R1_EN.pdf",
@@ -140,7 +164,8 @@
     "date": "2026-11-19",
     "lang": "en",
     "pairId": "range-wall-master-r1",
-    "pin": true
+    "pin": true,
+    "titleRu": "План стены плиты (8 листов) · английский"
   },
   {
     "title": "2026-11-19_U4_kitchen_range-wall-full-plan_R1_ES.pdf",
@@ -151,7 +176,8 @@
     "date": "2026-11-19",
     "lang": "es",
     "pairId": "range-wall-master-r1",
-    "pin": true
+    "pin": true,
+    "titleRu": "План стены плиты (8 листов) · испанский"
   },
   {
     "title": "Zephyr-Savona-ZSA-E30AS-Installation-Manual.pdf",
@@ -161,7 +187,8 @@
     "path": "Zephyr Savona OEM installation manual",
     "date": "2026-11-19",
     "lang": "en",
-    "pin": true
+    "pin": true,
+    "titleRu": "Руководство по установке вытяжки Zephyr"
   },
   {
     "title": "Zephyr-Savona-ZSA-E30AS-Spec-Sheet.pdf",
@@ -171,7 +198,8 @@
     "path": "Zephyr Savona OEM spec sheet",
     "date": "2026-11-19",
     "lang": "en",
-    "pin": true
+    "pin": true,
+    "titleRu": "Паспортные характеристики вытяжки Zephyr"
   },
   {
     "title": "2026-11-19_U4_kitchen_zephyr-savona-mock-hookup_04-hood-electrical_R1_EN.pdf",
@@ -182,7 +210,8 @@
     "date": "2026-11-19",
     "lang": "en",
     "pairId": "zephyr-mock-sheet-04",
-    "history": true
+    "history": true,
+    "titleRu": "Примерка вытяжки: питание и фото (старая версия) · английский"
   },
   {
     "title": "2026-11-19_U4_kitchen_zephyr-savona-mock-hookup_04-hood-electrical_R1_ES.pdf",
@@ -193,7 +222,8 @@
     "date": "2026-11-19",
     "lang": "es",
     "pairId": "zephyr-mock-sheet-04",
-    "history": true
+    "history": true,
+    "titleRu": "Примерка вытяжки: питание и фото (старая версия) · испанский"
   },
   {
     "title": "2026-11-19_U4_kitchen_zephyr-savona-mock-hookup-plan_R3_EN.pdf",
@@ -204,7 +234,8 @@
     "date": "2026-11-19",
     "lang": "en",
     "pairId": "zephyr-mock-r3",
-    "history": true
+    "history": true,
+    "titleRu": "Сводный гид по примерке вытяжки (старая версия) · английский"
   },
   {
     "title": "2026-11-19_U4_kitchen_zephyr-savona-mock-hookup-plan_R3_ES.pdf",
@@ -215,6 +246,7 @@
     "date": "2026-11-19",
     "lang": "es",
     "pairId": "zephyr-mock-r3",
-    "history": true
+    "history": true,
+    "titleRu": "Сводный гид по примерке вытяжки (старая версия) · испанский"
   }
 ]

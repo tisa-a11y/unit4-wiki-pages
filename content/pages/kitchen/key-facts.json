@@ -3,24 +3,32 @@
     "kEn": "Room",
     "kEs": "Cuarto",
     "vEn": "147\" × 126\" · ceiling 121-1/2\"",
-    "vEs": "147\" × 126\" · techo 121-1/2\""
+    "vEs": "147\" × 126\" · techo 121-1/2\"",
+    "kRu": "Помещение",
+    "vRu": "147\" × 126\" · потолок 121-1/2\""
   },
   {
     "kEn": "Cabinets",
     "kEs": "Gabinetes",
     "vEn": "South base 12\" · East drawers 18\" · East upper 30\" · none beside hood",
-    "vEs": "Bajo Sur 12\" · cajones Este 18\" · alto Este 30\" · ninguno junto a campana"
+    "vEs": "Bajo Sur 12\" · cajones Este 18\" · alto Este 30\" · ninguno junto a campana",
+    "kRu": "Шкафы",
+    "vRu": "Юг низ 12\" · Восток ящики 18\" · Восток верх 30\" · без шкафов у вытяжки"
   },
   {
     "kEn": "Electrical",
     "kEs": "Electricidad",
     "vEn": "9 circuits from the new panel",
-    "vEs": "9 circuitos desde el tablero nuevo"
+    "vEs": "9 circuitos desde el tablero nuevo",
+    "kRu": "Электрика",
+    "vRu": "9 линий от нового щитка"
   },
   {
     "kEn": "Wait",
     "kEs": "Esperar",
     "vEn": "Sink cabinet · closing the panel wall",
-    "vEs": "Gabinete de la tarja · cerrar el muro del tablero"
+    "vEs": "Gabinete de la tarja · cerrar el muro del tablero",
+    "kRu": "На паузе",
+    "vRu": "Тумба мойки · зашивка стены щитка"
   }
 ]

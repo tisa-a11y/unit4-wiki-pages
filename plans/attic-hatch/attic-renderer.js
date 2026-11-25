@@ -470,7 +470,22 @@
 
   /* ── Runtime State (strictly in-memory, ZERO browser web storage) ── */
   const params = new URLSearchParams(window.location.search);
-  let currentLang = (params.get('lang') || '').toLowerCase() === 'es' ? 'es' : 'en';
+  if (typeof I18N === 'object' && I18N && I18N.en && !I18N.ru) {
+    I18N.ru = Object.assign({}, I18N.en, {
+      btn_lang: 'Русский (RU)',
+      measure_on_site: 'ЗАМЕРИТЬ НА МЕСТЕ',
+      verify_friday: 'ПРОВЕРИТЬ НА МЕСТЕ',
+      local_preview: 'Локальный просмотр',
+      pending_eod: 'Ожидает проверки',
+      synced_label: 'Синхронизировано',
+      off_tailnet: 'Вне Tailnet (локальный режим)',
+      sketch_none: 'Нет отметки',
+      sketch_ready: 'Отметка готова',
+      btn_dictate: 'Голосовой ввод'
+    });
+  }
+  const _initLangRaw = String(params.get('lang') || '').toLowerCase();
+  let currentLang = _initLangRaw.startsWith('ru') ? 'ru' : (_initLangRaw.startsWith('es') ? 'es' : 'en');
   let activeView = (params.get('view') || '').toLowerCase() === 'section' ? 'section' : 'plan';
   let state = deepClone(BASELINE_ATTIC_DATA);
   let apiOrigin = resolveApiOrigin(params.get('api'), DEFAULT_API_ORIGIN);
@@ -1746,7 +1761,7 @@
 
   function applyUiLanguage() {
     const tr = I18N[currentLang];
-    document.documentElement.lang = currentLang;
+    document.documentElement.lang = (window.U4PlanNav && typeof window.U4PlanNav.getLang === 'function') ? window.U4PlanNav.getLang() : currentLang;
     document.title = tr.doc_title;
     const setText = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
     const setHtml = (id, html) => { const el = document.getElementById(id); if (el) el.innerHTML = html; };
@@ -2505,7 +2520,7 @@
       try { return canvas.toDataURL('image/png'); } catch (_) { return null; }
     },
     setLang(lang) {
-      if (lang === 'en' || lang === 'es') { currentLang = lang; renderAll(); }
+      if (lang === 'en' || lang === 'es' || lang === 'ru') { currentLang = lang; renderAll(); }
     },
     applyLocalPatch(patch) { applyPatchToLocalState(patch); },
     render() { renderAll(); }

@@ -4,27 +4,32 @@
     {
       "done": true,
       "en": "Settled permanent hatch spot & two-plan split: 24\"×36\" clear opening outside Front Door 4 (unconditioned landing, no lid batts/dam) + horizontal sidewall exhaust basis (zero flat-roof cuts)",
-      "es": "Sitio de escotilla y 2 planos definidos: 24\"×36\" libres afuera de Puerta 4 (descanso no acondicionado, sin fibra/dique) + salida lateral horizontal (cero cortes en techo plano)"
+      "es": "Sitio de escotilla y 2 planos definidos: 24\"×36\" libres afuera de Puerta 4 (descanso no acondicionado, sin fibra/dique) + salida lateral horizontal (cero cortes en techo plano)",
+      "ru": "Утверждено постоянное место люка и разделение на 2 плана: чистый световой проём 24\"×36\" перед дверью №4 (неотапливаемая площадка, без утеплителя крышки и бортика) + горизонтальный боковой выброс в стену (ноль вырезов в плоской крыше)"
     },
     {
       "done": false,
-      "en": "Confirm Door 4 framing, fire rating, route and D04 80A/conditional 100A feed with NEXT before cutting/wiring; settle exhaust clearance, light wiring and mounting hardware before buying pads.",
-      "es": "Confirmar con NEXT bastidor, cortafuego, ruta en Puerta 4 y alimentador D04 80A/principal condicional 100A antes de cortar/cablear; resolver salida lateral, conexión de luz y herrajes antes de comprar bases."
+      "en": "Rescheduled NEXT planning visit (Serge & Alex): leave with answers on (1) Door 4 24\"×36\" markout/fire-rating/carry route (photo only — no cuts yet), (2) mounted Eaton D04 panel & 80A feed + conditional 100A main breaker sign-off, and (3) switched attic light wiring, sidewall exhaust clearance & whether furnace needs any specific mounting hardware",
+      "es": "Visita de planeación reprogramada con NEXT (Serge y Alex): resolver (1) trazo 24\"×36\" en Puerta 4, cortafuego y ruta (solo foto — sin cortar), (2) gabinete Eaton D04 y línea 80A + principal condicional 100A, y (3) conexión de luz en ático, salida lateral y si el calefactor requiere herraje de montaje específico",
+      "ru": "Перенесённый плановый осмотр с NEXT (Серж и Алекс): получить ответы по (1) разметке 24\"×36\" у двери №4, огнестойкости и заносу (только фото — пока не пилить), (2) установленному щитку Eaton D04 и согласованию ввода 80 А + условного автомата 100 А, (3) подключению света чердака, отступу выхлопа и крепежу печи"
     },
     {
       "done": false,
-      "en": "Keep temporary NW bedroom-closet access and D04 wall open; clear rooms/hall, verify the roof-leak repair is dry, and leave the ozone machine off and unplugged before NEXT starts.",
-      "es": "Mantener abiertos acceso temporal del clóset NO y muro D04; despejar cuartos/pasillo, verificar seca la reparación de gotera y dejar el generador de ozono apagado y desconectado antes de NEXT."
+      "en": "Before NEXT starts (VPS): keep temporary NW bedroom-closet access & D04 panel wall open, clear room/hall obstructions, verify flat-roof leak repair is dry, and keep ozone machine off/unplugged",
+      "es": "Antes de NEXT (VPS): mantener abiertos clóset NO y muro D04, despejar estorbos, verificar seca la gotera del techo plano y dejar apagado/desconectado el generador de ozono",
+      "ru": "До захода NEXT (VPS): держать открытыми потолок СЗ шкафа спальни и стену щитка D04, освободить проходы, убедиться в сухости ремонта плоской крыши и отключить озонатор от сети"
     },
     {
       "done": false,
-      "en": "Build after NEXT’s walkthrough approval: Door 4 hatch, 15.8 ft walkway and 30\"×30\" platform; coordinate switched LED light and 120V GFCI within 25 ft with NEXT’s electrician.",
-      "es": "Construir tras aprobar recorrido con NEXT: escotilla Puerta 4, pasillo 15.8 pies y plataforma 30\"×30\"; coordinar lámpara LED con apagador y GFCI 120V a ≤25 pies con electricista NEXT."
+      "en": "Coordinate with NEXT (VPS, after walkthrough sign-off): build 24\"×36\" Door 4 hatch (uninsulated 3/4\" lid + foam gasket), 15.8 ft walkway, 30\"×30\" platform, 120V GFCI outlet within 25 ft & permanent switched LED attic light (agree with NEXT electrician who wires connection)",
+      "es": "Coordinado con NEXT (VPS, tras visto bueno): armar escotilla 24\"×36\" (tapa 3/4\" sin aislante + empaque), pasillo 15.8 pies, plataforma 30\"×30\", contacto GFCI 120V ≤ 25 pies y lámpara LED permanente con apagador (acordar conexión con electricista NEXT)",
+      "ru": "Совместно с NEXT (VPS, после отмашки на осмотре): собрать люк 24\"×36\" у двери №4 (крышка 3/4\" без минваты + уплотнитель), дорожку 15,8 фута, площадку 30\"×30\", розетку GFCI 120 В ≤ 25 футов и постоянный LED-светильник с выключателем (согласовать подключение с электриком NEXT)"
     },
     {
       "done": false,
       "en": "After NEXT installation (VPS): patch, finish & paint ceiling openings and D04 panel wall, closing temporary NW bedroom-closet ceiling only after permanent hatch & thermostat LV cable are ready",
-      "es": "Después de la instalación de NEXT (VPS): resanar, detallar y pintar plafones y muro D04, cerrando el techo temporal del clóset NO solo cuando estén listos la escotilla permanente y el cable LV"
+      "es": "Después de la instalación de NEXT (VPS): resanar, detallar y pintar plafones y muro D04, cerrando el techo temporal del clóset NO solo cuando estén listos la escotilla permanente y el cable LV",
+      "ru": "После монтажа NEXT (VPS): зашпаклевать и покрасить потолки и стену D04, закрывая временный потолок СЗ шкафа спальни только после готовности постоянного люка и кабеля термостата"
     }
   ]
 }

@@ -8,7 +8,8 @@
     "date": "2026-11-20",
     "lang": "en",
     "pairId": "attic-hatch-interactive",
-    "pin": true
+    "pin": true,
+    "titleRu": "Интерактивный план постоянного чердачного люка · английский"
   },
   {
     "title": "Permanent-Attic-Hatch-Interactive_ES.html",
@@ -18,6 +19,19 @@
     "path": "Escotilla 24\"×36\" libres, pasarela 20 pies y altura 66\" (español)",
     "date": "2026-11-20",
     "lang": "es",
+    "pairId": "attic-hatch-interactive",
+    "pin": true,
+    "titleRu": "Интерактивный план постоянного чердачного люка · испанский"
+  },
+  {
+    "title": "Interactive-Attic-Hatch_RU.html",
+    "titleEn": "Permanent attic hatch interactive plan · Russian",
+    "titleEs": "Plano interactivo de escotilla permanente del ático · ruso",
+    "titleRu": "Интерактивный план постоянного чердачного люка · русский",
+    "id": "2026-11-20_Attic-Hatch-Interactive_RU",
+    "path": "Люк 24×36 у двери №4, настил 15,8 фута и площадка (русский)",
+    "date": "2026-11-20",
+    "lang": "ru",
     "pairId": "attic-hatch-interactive",
     "pin": true
   },
@@ -30,7 +44,8 @@
     "date": "2026-11-19",
     "lang": "both",
     "pin": true,
-    "tier": "history"
+    "tier": "history",
+    "titleRu": "План и чек-лист проёма на чердак"
   },
   {
     "title": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_EN.pdf",
@@ -41,7 +56,8 @@
     "date": "2026-11-23",
     "lang": "en",
     "pairId": "u4-elec-mod2-r5-pdf",
-    "pin": true
+    "pin": true,
+    "titleRu": "Официальные электросхемы — Модуль 2, лист E-25: Чердак и датчики дыма/CO (#15/#16, Rev R5) · английский"
   },
   {
     "title": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_ES.pdf",
@@ -51,6 +67,19 @@
     "path": "2026-11-23-official-electrical-plans-R5 · Hoja E-25: Ático y Humo/CO (#15/#16) (español)",
     "date": "2026-11-23",
     "lang": "es",
+    "pairId": "u4-elec-mod2-r5-pdf",
+    "pin": true,
+    "titleRu": "Официальные электросхемы — Модуль 2, лист E-25: Чердак и датчики дыма/CO (#15/#16, Rev R5) · испанский"
+  },
+  {
+    "title": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_RU.pdf",
+    "titleEn": "Official Electrical Sheets — Module 2: Sheet E-25: Attic Light, Outlet & Smoke/CO (#15/#16) (Rev R5) · Russian",
+    "titleEs": "Hojas Eléctricas Oficiales — Módulo 2: Hoja E-25: Ático y Humo/CO (#15/#16) (Rev R5) · ruso",
+    "titleRu": "Официальные электросхемы — Модуль 2, лист E-25: Чердак и датчики дыма/CO (#15/#16) (Rev R5) · русский",
+    "id": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_RU",
+    "path": "wiki-pdfs/2026-11-23_U4_Module2_Whole-Unit-Segments_R5_RU.pdf",
+    "date": "2026-11-23",
+    "lang": "ru",
     "pairId": "u4-elec-mod2-r5-pdf",
     "pin": true
   },
@@ -63,7 +92,8 @@
     "date": "2026-11-22",
     "lang": "en",
     "pairId": "attic-hatch-printable-current",
-    "pin": true
+    "pin": true,
+    "titleRu": "План постоянного чердачного люка R4 · английский · 24 нояб."
   },
   {
     "title": "2026-11-24_U4_attic_hatch_R4_ES.pdf",
@@ -74,7 +104,8 @@
     "date": "2026-11-22",
     "lang": "es",
     "pairId": "attic-hatch-printable-current",
-    "pin": true
+    "pin": true,
+    "titleRu": "План постоянного чердачного люка R4 · испанский · 24 нояб."
   },
   {
     "title": "Attic hatch and walkway build guide (English)",
@@ -85,7 +116,8 @@
     "date": "2026-11-19",
     "lang": "en",
     "pairId": "attic-hatch-r5",
-    "history": true
+    "history": true,
+    "titleRu": "Руководство по сборке чердачного люка и настила (английский)"
   },
   {
     "title": "Attic hatch and walkway build guide (Spanish)",
@@ -96,7 +128,8 @@
     "date": "2026-11-19",
     "lang": "es",
     "pairId": "attic-hatch-r5",
-    "history": true
+    "history": true,
+    "titleRu": "Руководство по сборке чердачного люка и настила (испанский)"
   },
   {
     "title": "2026-11-20_U4_attic_hatch-interactive_R1_EN.pdf",
@@ -107,7 +140,8 @@
     "date": "2026-11-20",
     "lang": "en",
     "pairId": "attic-hatch-printable",
-    "history": true
+    "history": true,
+    "titleRu": "Печатный план постоянного люка на чердак · английский (архивная версия)"
   },
   {
     "title": "2026-11-20_U4_attic_hatch-interactive_R1_ES.pdf",
@@ -118,7 +152,8 @@
     "date": "2026-11-20",
     "lang": "es",
     "pairId": "attic-hatch-printable",
-    "history": true
+    "history": true,
+    "titleRu": "Печатный план постоянного люка на чердак · испанский (архивная версия)"
   },
   {
     "title": "2026-11-19_U4_HVAC_Attic-Hatch-Visual-Field-Guide_R3_EN.pdf",
@@ -129,7 +164,8 @@
     "date": "2026-11-19",
     "lang": "en",
     "pairId": "attic-hatch-r3",
-    "history": true
+    "history": true,
+    "titleRu": "Старая инструкция по люку (не использовать) · английский"
   },
   {
     "title": "2026-11-19_U4_HVAC_Attic-Hatch-Visual-Field-Guide_R3_ES.pdf",
@@ -140,6 +176,7 @@
     "date": "2026-11-19",
     "lang": "es",
     "pairId": "attic-hatch-r3",
-    "history": true
+    "history": true,
+    "titleRu": "Старая инструкция по люку (не использовать) · испанский"
   }
 ]

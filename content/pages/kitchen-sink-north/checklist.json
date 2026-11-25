@@ -4,27 +4,32 @@
     {
       "done": true,
       "en": "Sink and refrigerator on site; old pie-safe removed and seal/cover-over decision locked (no open shelves)",
-      "es": "Tarja y refrigerador en obra; pie-safe viejo retirado y decisión de sellar y cubrir definida (sin repisas abiertas)"
+      "es": "Tarja y refrigerador en obra; pie-safe viejo retirado y decisión de sellar y cubrir definida (sin repisas abiertas)",
+      "ru": "Мойка и холодильник на объекте; старый шкаф pie-safe демонтирован, решение о герметизации и зашивке заподлицо утверждено (без открытых полок)"
     },
     {
       "done": false,
       "en": "Finish window sill/framing and verify the South-wall common SE zero: plan-derived dishwasher 48–72 inches and sink 72–102 / center 87; verify window, casing and passage before fastening",
-      "es": "Terminar repisa/marco de ventana y verificar cero SE común en muro Sur: lavavajillas48–72 pulgadas y tarja72–102 / centro87 derivados del plano; verificar ventana, chambrana y paso antes de fijar"
+      "es": "Terminar repisa/marco de ventana y verificar cero SE común en muro Sur: lavavajillas48–72 pulgadas y tarja72–102 / centro87 derivados del plano; verificar ventana, chambrana y paso antes de fijar",
+      "ru": "Закончить подоконник/обрамление окна и проверить общий ЮВ ноль на южной стене: расчётная ниша ПММ 48–72 дюйма и мойка 72–102 / центр 87; сверить ось окна, наличник и проход до крепежа"
     },
     {
       "done": false,
       "en": "Weatherproof and cover the old pie-safe recess after inspection and photos. Frame the switch box and panel wall when released.",
-      "es": "Sellar contra lluvia y tapar el nicho de la antigua alacena después de inspección y fotos. Enmarcar la caja y el muro del tablero con aprobación."
+      "es": "Sellar contra lluvia y tapar el nicho de la antigua alacena después de inspección y fotos. Enmarcar la caja y el muro del tablero con aprobación.",
+      "ru": "Герметизировать от осадков и зашить нишу старого pie-safe после осмотра и фотофиксации. Собрать каркас под блок выключателей и стену щитка после допуска."
     },
     {
       "done": false,
       "en": "Hold sink/dishwasher plumbing and South/East counter circuit positions until revised cabinet setout is verified; retain the 6-inch end option and passage check",
-      "es": "Esperar para ubicar plomería de tarja/lavavajillas y circuitos Sur/Este hasta verificar gabinetes revisados; conservar opción final de6 pulgadas y revisión del paso"
+      "es": "Esperar para ubicar plomería de tarja/lavavajillas y circuitos Sur/Este hasta verificar gabinetes revisados; conservar opción final de6 pulgadas y revisión del paso",
+      "ru": "Держать на паузе выводы сантехники мойки/ПММ и точки розеток южной/восточной стен до проверки обновлённой расстановки тумб; сохранить вариант торцевого добора 6 дюймов и проверку прохода"
     },
     {
       "done": false,
       "en": "Install cabinets, sink, dishwasher and refrigerator",
-      "es": "Instalar gabinetes, tarja, lavavajillas y refrigerador"
+      "es": "Instalar gabinetes, tarja, lavavajillas y refrigerador",
+      "ru": "Установить кухонные тумбы, мойку, посудомоечную машину и холодильник"
     }
   ]
 }

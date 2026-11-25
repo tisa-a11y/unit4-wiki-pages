@@ -4,27 +4,32 @@
     {
       "done": true,
       "en": "Hatch size settled; laundry door handled on the Laundry page",
-      "es": "Tamaño de la escotilla definido; la puerta de lavandería se ve en Lavandería"
+      "es": "Tamaño de la escotilla definido; la puerta de lavandería se ve en Lavandería",
+      "ru": "Чистовой размер люка утверждён; конструкция двери прачечной ведётся в разделе «Прачечная»"
     },
     {
       "done": false,
-      "en": "Photograph the hatch area in daylight; verify ceiling fire rating and joist spacing before cutting.",
-      "es": "Fotografiar área de escotilla de día; verificar cortafuego del plafón y separación de vigas antes de cortar."
+      "en": "Daylight photos, fire-rating check and joist measurement",
+      "es": "Fotos de día, revisión contra fuego y medida entre vigas",
+      "ru": "Сделать дневные фото, проверить класс огнестойкости потолка и замерить шаг балок"
     },
     {
       "done": false,
       "en": "Build the hatch and its light switch",
-      "es": "Construir la escotilla y su apagador de luz"
+      "es": "Construir la escotilla y su apagador de luz",
+      "ru": "Собрать чердачный люк и установить выключатель освещения чердака"
     },
     {
       "done": false,
-      "en": "Lay out outlets, lights and wall mouldings; fit trim around the laundry door.",
-      "es": "Trazar contactos, luces y molduras de muro; ajustar moldura alrededor de puerta de lavandería."
+      "en": "Outlets, lights, moulding layout and trim around the laundry door",
+      "es": "Contactos, luces, trazo de molduras y moldura de la puerta de lavandería",
+      "ru": "Подготовить розетки, свет, разметку молдингов и наличник вокруг двери прачечной"
     },
     {
       "done": false,
       "en": "Install trim, patch, primer and paint",
-      "es": "Instalar molduras, resanar, sellador y pintura"
+      "es": "Instalar molduras, resanar, sellador y pintura",
+      "ru": "Смонтировать молдинги, зашпаклевать, загрунтовать и покрасить"
     }
   ]
 }

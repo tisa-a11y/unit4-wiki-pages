@@ -3,38 +3,45 @@
   "steps": [
     {
       "done": true,
-      "en": "Zephyr ZSA-E30AS hood and Viking VGCC5304BSS range received; initial West-wall blocking installed and hood temporarily secured and raised by John (Nov 22 report; old 9\" gap no longer current)",
-      "es": "Campana Zephyr ZSA-E30AS y estufa Viking VGCC5304BSS recibidas; refuerzo inicial Oeste instalado y campana asegurada y subida temporalmente por John (reporte 22 nov; brecha anterior de 9\" ya no vigente)"
+      "en": "Zephyr Savona ZSA-E30AS hood & Viking VGCC5304BSS range on site; initial West-wall hood blocking installed and whole hood temporarily mock-hung, secured, and raised by John (Nov 22 field report; earlier 9\" chimney gap retired as historical)",
+      "es": "Campana Zephyr Savona ZSA-E30AS y estufa Viking VGCC5304BSS en obra; refuerzo inicial en muro Oeste instalado y campana completa presentada, asegurada y subida temporalmente por John (reporte 22 nov; brecha anterior de 9\" descartada como histórica)",
+      "ru": "Вытяжка Zephyr Savona ZSA-E30AS и плита Viking VGCC5304BSS на объекте; начальные закладные на западной стене установлены, вытяжка временно примерена, закреплена и поднята Джоном (отчёт 22 нояб.; прежний зазор короба 9\" отменён как архивный)"
     },
     {
       "done": true,
       "en": "Revised cabinet widths locked in Magicplan (12\" South base, 18\" East drawers, 30\" East upper), pie-safe weatherproof cover-over approved, and dishwasher updated to finished-front",
-      "es": "Anchos de gabinetes actualizados en Magicplan (base Sur 12\", cajones Este 18\", alto Este 30\"), cierre impermeabilizado del pie-safe aprobado y lavavajillas cambiado a frente terminado"
+      "es": "Anchos de gabinetes actualizados en Magicplan (base Sur 12\", cajones Este 18\", alto Este 30\"), cierre impermeabilizado del pie-safe aprobado y lavavajillas cambiado a frente terminado",
+      "ru": "Обновлённая ширина тумб зафиксирована в Magicplan (южная база 12\", восточные ящики 18\", восточный верх 30\"), утверждена герметичная зашивка pie-safe, а посудомойка изменена на модель с готовым фасадом"
     },
     {
       "done": false,
-      "en": "Complete full-L floor/wall layout and labeled photos: SE zero corner, 102\" casing endpoint, and 6\" versus 12\" clear passage including overhang. Window casing is not a blocker.",
-      "es": "Completar trazo en L y fotos etiquetadas: cero SE, extremo a 102\" del contramarco y paso libre de 6\" contra 12\" con volado. El contramarco de ventana no bloquea."
+      "en": "Complete full-L floor/wall staging & labeled verification photos (SE zero corner, 102\"-to-casing endpoint, 6\" vs. 12\" clear passage with overhang); kitchen window casing is set aside as a non-blocker (John's specialized kitchen sill stays separate with no new date)",
+      "es": "Completar trazo en L en piso/muro y fotos etiquetadas (cero en esquina SE, marca 102\" a contramarco, paso libre 6\" vs. 12\" con volado); contramarco de ventana apartado sin ser bloqueo (repisa especial de John sigue aparte sin fecha inventada)",
+      "ru": "Выполнить полную разметку Г-ряда на полу/стенах и фото с подписями (общий ноль в ЮВ углу, отметка 102\" до наличника, чистый проход с добором 6\" или 12\" с учётом свеса столешницы); наличник кухонного окна выведен из блокеров (специальный подоконник Джона идёт отдельно)"
     },
     {
       "done": false,
       "en": "Verify raised hood ceiling-gap photo & subfloor/AFF datums and select 1 of 4 chimney/enclosure options; hold HD-1 hardwire, 6\" duct tie-in & wall close-in",
-      "es": "Verificar foto de brecha actual de campana y alturas subpiso/NPT y elegir 1 de 4 opciones de chimenea; pausar conexión HD-1, ducto 6\" y cierre"
+      "es": "Verificar foto de brecha actual de campana y alturas subpiso/NPT y elegir 1 de 4 opciones de chimenea; pausar conexión HD-1, ducto 6\" y cierre",
+      "ru": "Проверить фото зазора поднятой вытяжки до потолка и высотные отметки от чернового/чистового пола (+t) и выбрать 1 из 4 вариантов короба; держать на паузе подключение HD-1, воздуховод 6\" и зашивку стены"
     },
     {
       "done": false,
-      "en": "Obtain Brett’s factory-finished cabinet quote without dishwasher panel; coordinate counters/tile at Daltile and review finished-front 24\" dishwashers, new or used.",
-      "es": "Solicitar cotización de gabinetes preacabados a Brett sin panel de lavavajillas; coordinar cubierta/azulejo en Daltile y revisar lavavajillas de 24\" con frente terminado, nuevos o usados."
+      "en": "Procurement & finish coordination: Brett factory-finished cabinet quote (exclude DW panel), Daltile counter/tile consult, and finished-front 24\" dishwasher review (new or used)",
+      "es": "Cotización y acabados: cotizar gabinetes preacabados con Brett (sin panel de lavavajillas), coordinar cubierta/azulejo en Daltile y revisar lavavajillas 24\" con frente terminado",
+      "ru": "Закупки и согласование отделки: смета заводских шкафов у Бретта (без фасада ПММ), подбор столешницы/плитки в Daltile и выбор посудомоечной машины 24\" с готовым фасадом (новой или б/у)"
     },
     {
       "done": false,
       "en": "Execute pie-safe interior weather-seal, cavity insulation & flush 1/2\" moisture-resistant drywall cover-over after inspection photo gate, and reconcile D04 / kitchen electrical circuits",
-      "es": "Ejecutar sellado interior de alacena antigua, aislante y cierre al paño con tablaroca 1/2\" resistente a humedad tras foto de cavidad, y conciliar D04 / circuitos de cocina"
+      "es": "Ejecutar sellado interior de alacena antigua, aislante y cierre al paño con tablaroca 1/2\" resistente a humedad tras foto de cavidad, y conciliar D04 / circuitos de cocina",
+      "ru": "Выполнить внутреннюю герметизацию старого шкафа pie-safe, утепление полости и зашивку влагостойким ГКЛ 1/2\" заподлицо после фотоконтроля, а также сверить автоматы щитка D04 и линии кухни"
     },
     {
       "done": false,
       "en": "Reschedule postponed Lowe's 1/2\" drywall delivery (41 regular + 2 Mold Guard) once Ervin AND Joel are available, then install cabinets, templated countertop, zero-metal tile & matte floor",
-      "es": "Reprogramar entrega pospuesta de tablaroca 1/2\" de Lowe's (41 regular + 2 Mold Guard) cuando estén disponibles Ervin Y Joel, e instalar gabinetes, cubierta, azulejo sin metal y piso mate"
+      "es": "Reprogramar entrega pospuesta de tablaroca 1/2\" de Lowe's (41 regular + 2 Mold Guard) cuando estén disponibles Ervin Y Joel, e instalar gabinetes, cubierta, azulejo sin metal y piso mate",
+      "ru": "Переназначить отложенную доставку ГКЛ 1/2\" из Lowe's (41 обычный лист + 2 Mold Guard), когда будут свободны Эрвин И Джоэл, затем смонтировать шкафы, столешницу по шаблону, плитку без металла и матовый пол"
     }
   ]
 }

@@ -8,7 +8,8 @@
     "date": "2026-11-23",
     "lang": "en",
     "pairId": "u4-elec-mod2-r5-pdf",
-    "pin": true
+    "pin": true,
+    "titleRu": "Официальные электросхемы — Модуль 2, лист E-24: Спальня и коридор (#11/#12, Rev R5) · английский"
   },
   {
     "title": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_ES.pdf",
@@ -18,6 +19,19 @@
     "path": "2026-11-23-official-electrical-plans-R5 · Hoja E-24: Recámara y Pasillo (#11/#12) (español)",
     "date": "2026-11-23",
     "lang": "es",
+    "pairId": "u4-elec-mod2-r5-pdf",
+    "pin": true,
+    "titleRu": "Официальные электросхемы — Модуль 2, лист E-24: Спальня и коридор (#11/#12, Rev R5) · испанский"
+  },
+  {
+    "title": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_RU.pdf",
+    "titleEn": "Official Electrical Sheets — Module 2: Sheet E-24: Bedroom & Hall (#11/#12) (Rev R5) · Russian",
+    "titleEs": "Hojas Eléctricas Oficiales — Módulo 2: Hoja E-24: Recámara y Pasillo (#11/#12) (Rev R5) · ruso",
+    "titleRu": "Официальные электросхемы — Модуль 2, лист E-24: Спальня и коридор (#11/#12) (Rev R5) · русский",
+    "id": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_RU",
+    "path": "wiki-pdfs/2026-11-23_U4_Module2_Whole-Unit-Segments_R5_RU.pdf",
+    "date": "2026-11-23",
+    "lang": "ru",
     "pairId": "u4-elec-mod2-r5-pdf",
     "pin": true
   },
@@ -30,7 +44,8 @@
     "date": "2026-11-08",
     "lang": "en",
     "pairId": "bedroom-r2-packet",
-    "review": true
+    "review": true,
+    "titleRu": "Пакет раскладки молдингов спальни (проект, не утверждён) · английский"
   },
   {
     "title": "2026-11-08_U4_bedroom_trim-installation-packet_R2_ES.pdf",
@@ -41,7 +56,8 @@
     "date": "2026-11-08",
     "lang": "es",
     "pairId": "bedroom-r2-packet",
-    "review": true
+    "review": true,
+    "titleRu": "Пакет раскладки молдингов спальни (проект, не утверждён) · испанский"
   },
   {
     "title": "2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_EN.pdf",
@@ -52,7 +68,8 @@
     "date": "2026-11-10",
     "lang": "en",
     "pairId": "bedroom-r2-amend",
-    "review": true
+    "review": true,
+    "titleRu": "Молдинги спальни: метод примерки малярной лентой · английский"
   },
   {
     "title": "2026-11-10_U4_Bedroom_R2_Installation-Method_Amendment_ES.pdf",
@@ -63,7 +80,8 @@
     "date": "2026-11-10",
     "lang": "es",
     "pairId": "bedroom-r2-amend",
-    "review": true
+    "review": true,
+    "titleRu": "Молдинги спальни: метод примерки малярной лентой · испанский"
   },
   {
     "title": "2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_EN.pdf",
@@ -74,7 +92,8 @@
     "date": "2026-11-10",
     "lang": "en",
     "pairId": "molding-opt-a-revb",
-    "review": true
+    "review": true,
+    "titleRu": "Вариант молдингов без среднего горизонтального профиля (на проверку) · английский"
   },
   {
     "title": "2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_ES.pdf",
@@ -85,7 +104,8 @@
     "date": "2026-11-10",
     "lang": "es",
     "pairId": "molding-opt-a-revb",
-    "review": true
+    "review": true,
+    "titleRu": "Вариант молдингов без среднего горизонтального профиля (на проверку) · испанский"
   },
   {
     "title": "2026-11-02_U4_Bedroom_Wall-B_RevB_EN.pdf",
@@ -96,7 +116,8 @@
     "date": "2026-11-02",
     "lang": "en",
     "pairId": "bedroom-wall-b-revb",
-    "history": true
+    "history": true,
+    "titleRu": "Старый чертёж южной стены спальни (не использовать) · английский"
   },
   {
     "title": "2026-11-02_U4_Recamara_Muro-B_RevB_ES.pdf",
@@ -107,6 +128,7 @@
     "date": "2026-11-02",
     "lang": "es",
     "pairId": "bedroom-wall-b-revb",
-    "history": true
+    "history": true,
+    "titleRu": "Старый чертёж южной стены спальни (не использовать) · испанский"
   }
 ]

@@ -3,24 +3,32 @@
     "kEn": "Hood height",
     "kEs": "Altura de la campana",
     "vEn": "Bottom 66\"–72\" from finished floor (bare subfloor now: add ~3/4\"; dry-hang 67\"–68\")",
-    "vEs": "Base a 66\"–72\" del piso terminado (hoy subpiso: sumar ~3/4\"; prueba 67\"–68\")"
+    "vEs": "Base a 66\"–72\" del piso terminado (hoy subpiso: sumar ~3/4\"; prueba 67\"–68\")",
+    "kRu": "Высота вытяжки",
+    "vRu": "Низ 66\"–72\" от чистового пола (сейчас черновой: + ~3/4\"; примерка 67\"–68\")"
   },
   {
     "kEn": "Backing & wall",
     "kEs": "Refuerzos y muro",
     "vEn": "Within 30\" hood width · 68\"–86\" & 104\"–121-1/2\" (+ ~3/4\" subfloor) · 1/2\" drywall + 1/2\" HardieBacker (NO 3/16\" shims)",
-    "vEs": "Dentro de 30\" de campana · 68\"–86\" y 104\"–121-1/2\" (+ ~3/4\" subpiso) · tablaroca 1/2\" + HardieBacker 1/2\" (SIN calzas 3/16\")"
+    "vEs": "Dentro de 30\" de campana · 68\"–86\" y 104\"–121-1/2\" (+ ~3/4\" subpiso) · tablaroca 1/2\" + HardieBacker 1/2\" (SIN calzas 3/16\")",
+    "kRu": "Закладные и стена",
+    "vRu": "В габарите 30\" вытяжки · 68\"–86\" и 104\"–121-1/2\" (+ ~3/4\") · ГКЛ 1/2\" + HardieBacker 1/2\" (БЕЗ реек 3/16\")"
   },
   {
     "kEn": "Power & duct",
     "kEs": "Corriente y ducto",
     "vEn": "HD-1 flush 1-gang ~83\"–86\" AFF · Viking 1\" island trim only · dedicated left chase ≥ 6\" (crew, not NEXT HVAC)",
-    "vEs": "HD-1 caja sencilla al ras ~83\"–86\" del piso terminado · Viking: moldura isla 1\" · ducto izq. ≥ 6\" (cuadrilla)"
+    "vEs": "HD-1 caja sencilla al ras ~83\"–86\" del piso terminado · Viking: moldura isla 1\" · ducto izq. ≥ 6\" (cuadrilla)",
+    "kRu": "Питание и канал",
+    "vRu": "Коробка HD-1 заподлицо ~83\"–86\" · Viking: планка 1\" · левая шахта ≥ 6\" (наша бригада)"
   },
   {
     "kEn": "Tile & edges (TBD, zero metal)",
     "kEs": "Azulejo y orillas (por definir, cero metal)",
     "vEn": "Tile brand TBD · NO metal/Schluter · North: silicone 90° corner · South: bullnose, pencil, painted wood trim, or glazed edge (no 45° miter)",
-    "vEs": "Marca de azulejo por definir · CERO metal/Schluter · Norte: esquina 90° solo silicón · Sur: bullnose, lápiz, madera pintada o canto vidriado (sin 45°)"
+    "vEs": "Marca de azulejo por definir · CERO metal/Schluter · Norte: esquina 90° solo silicón · Sur: bullnose, lápiz, madera pintada o canto vidriado (sin 45°)",
+    "kRu": "Плитка и торцы (без металла)",
+    "vRu": "Бренд уточняется · БЕЗ металла/Schluter · Север: силикон 90° · Юг: булноуз, карандаш, дерево или глазурь (без 45°)"
   }
 ]

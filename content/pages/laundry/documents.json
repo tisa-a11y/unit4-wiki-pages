@@ -8,7 +8,8 @@
     "date": "2026-11-20",
     "lang": "en",
     "pairId": "murphy-door-interactive",
-    "pin": true
+    "pin": true,
+    "titleRu": "Интерактивный план потайной двери-стеллажа Murphy · английский"
   },
   {
     "title": "Murphy-Bookcase-Door-Interactive_ES.html",
@@ -18,6 +19,19 @@
     "path": "Hoja de 9 medidas, giro 90° en pasillo y rejillas de aire (español)",
     "date": "2026-11-20",
     "lang": "es",
+    "pairId": "murphy-door-interactive",
+    "pin": true,
+    "titleRu": "Интерактивный план потайной двери-стеллажа Murphy · испанский"
+  },
+  {
+    "title": "Interactive-Murphy-Door_RU.html",
+    "titleEn": "Murphy bookcase door interactive plan · Russian",
+    "titleEs": "Plano interactivo de puerta librero Murphy · ruso",
+    "titleRu": "Интерактивный план потайной двери-стеллажа Murphy · русский",
+    "id": "2026-11-20_Murphy-Door-Interactive_RU",
+    "path": "Замер проёма B по 9 точкам, поворот и вентиляция (русский)",
+    "date": "2026-11-20",
+    "lang": "ru",
     "pairId": "murphy-door-interactive",
     "pin": true
   },
@@ -30,7 +44,8 @@
     "date": "2026-11-23",
     "lang": "en",
     "pairId": "u4-elec-mod2-r5-pdf",
-    "pin": true
+    "pin": true,
+    "titleRu": "Официальные электросхемы — Модуль 2, лист E-24: Прачечная LG WashTower на 38\" от пола (#14, Rev R5) · английский"
   },
   {
     "title": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_ES.pdf",
@@ -40,6 +55,19 @@
     "path": "2026-11-23-official-electrical-plans-R5 · Hoja E-24: Lavandería a 38\" AFF (#14) (español)",
     "date": "2026-11-23",
     "lang": "es",
+    "pairId": "u4-elec-mod2-r5-pdf",
+    "pin": true,
+    "titleRu": "Официальные электросхемы — Модуль 2, лист E-24: Прачечная LG WashTower на 38\" от пола (#14, Rev R5) · испанский"
+  },
+  {
+    "title": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_RU.pdf",
+    "titleEn": "Official Electrical Sheets — Module 2: Sheet E-24: Laundry WashTower @ 38\" AFF (#14) (Rev R5) · Russian",
+    "titleEs": "Hojas Eléctricas Oficiales — Módulo 2: Hoja E-24: Lavandería WashTower @ 38\" AFF (#14) (Rev R5) · ruso",
+    "titleRu": "Официальные электросхемы — Модуль 2, лист E-24: Прачечная LG WashTower на 38\" от пола (#14) (Rev R5) · русский",
+    "id": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_RU",
+    "path": "wiki-pdfs/2026-11-23_U4_Module2_Whole-Unit-Segments_R5_RU.pdf",
+    "date": "2026-11-23",
+    "lang": "ru",
     "pairId": "u4-elec-mod2-r5-pdf",
     "pin": true
   },
@@ -52,7 +80,8 @@
     "date": "2026-11-20",
     "lang": "en",
     "pairId": "murphy-door-printable",
-    "pin": true
+    "pin": true,
+    "titleRu": "Печатный план двери-стеллажа Murphy R2 · английский · 24 нояб."
   },
   {
     "title": "2026-11-24_U4_laundry_murphy-door-interactive_R2_ES.pdf",
@@ -63,7 +92,8 @@
     "date": "2026-11-20",
     "lang": "es",
     "pairId": "murphy-door-printable",
-    "pin": true
+    "pin": true,
+    "titleRu": "Печатный план двери-стеллажа Murphy R2 · испанский · 24 нояб."
   },
   {
     "title": "2026-11-02_U4_laundry_murphy-door-drawings_EN_RevA.pdf",
@@ -73,7 +103,8 @@
     "path": "laundry/from-remodel-hub/2026-11-02_U4_laundry_murphy-door-drawings_EN_RevA.pdf",
     "date": "2026-11-02",
     "lang": "en",
-    "pairId": "murphy-drawings-reva"
+    "pairId": "murphy-drawings-reva",
+    "titleRu": "Чертежи двери-стеллажа · английский"
   },
   {
     "title": "2026-11-02_U4_laundry_murphy-door-drawings_ES_RevA.pdf",
@@ -83,7 +114,8 @@
     "path": "laundry/from-remodel-hub/2026-11-02_U4_laundry_murphy-door-drawings_ES_RevA.pdf",
     "date": "2026-11-02",
     "lang": "es",
-    "pairId": "murphy-drawings-reva"
+    "pairId": "murphy-drawings-reva",
+    "titleRu": "Чертежи двери-стеллажа · испанский"
   },
   {
     "title": "Murphy Bookshelf Door — English — MD-02 R3",
@@ -93,7 +125,8 @@
     "path": "laundry/from-remodel-hub/ (Google Doc)",
     "date": "2026-11-05",
     "lang": "en",
-    "pairId": "murphy-md02-r3"
+    "pairId": "murphy-md02-r3",
+    "titleRu": "Техническое описание потайной двери-стеллажа · английский"
   },
   {
     "title": "Puerta Librero Murphy — Español — MD-02 R3",
@@ -103,7 +136,8 @@
     "path": "laundry/from-remodel-hub/ (Google Doc)",
     "date": "2026-11-05",
     "lang": "es",
-    "pairId": "murphy-md02-r3"
+    "pairId": "murphy-md02-r3",
+    "titleRu": "Техническое описание потайной двери-стеллажа · испанский"
   },
   {
     "title": "Puerta Murphy — Hoja de trabajo — Ervin — Español — MD-02 R4",
@@ -112,7 +146,8 @@
     "id": "1BZgZgE4HedJKIkOXnxiHmSliGkH_qwegdzQLUYWpWX4",
     "path": "laundry/from-remodel-hub/ (Google Doc)",
     "date": "2026-11-05",
-    "lang": "es"
+    "lang": "es",
+    "titleRu": "Рабочий лист двери-стеллажа для Эрвина · испанский"
   },
   {
     "title": "Murphy Door Measurements — Fill In Here — English and Spanish",
@@ -121,7 +156,8 @@
     "id": "1jLVRxx7XEushojNnyA1GUmHdjmHhVQx-BuqciQtNKug",
     "path": "laundry/from-remodel-hub/ (Google Doc)",
     "date": "2026-11-05",
-    "lang": "both"
+    "lang": "both",
+    "titleRu": "Бланк замеров проёма под дверь-стеллаж (для заполнения)"
   },
   {
     "title": "Murphy Bookshelf Door Build Plan — Oct 10.pdf",
@@ -130,6 +166,7 @@
     "id": "1JucaH0UXB1mko6Qnl4dDa0vzex_WSKh3",
     "path": "laundry/from-remodel-hub/Unit 4 - Murphy Bookshelf Door Build Plan - October 10 2026.pdf",
     "date": "2026-10-10",
-    "lang": "en"
+    "lang": "en",
+    "titleRu": "План сборки двери-стеллажа от 10 окт."
   }
 ]

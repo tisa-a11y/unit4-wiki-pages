@@ -8,7 +8,8 @@
     "date": "2026-11-10",
     "lang": "en",
     "pairId": "molding-opt-a-revb",
-    "review": true
+    "review": true,
+    "titleRu": "Вариант молдингов без среднего горизонтального профиля (на проверку) · английский"
   },
   {
     "title": "2026-11-10_U4_Molding_Option-A_No-rail_Review_RevB_ES.pdf",
@@ -19,7 +20,8 @@
     "date": "2026-11-10",
     "lang": "es",
     "pairId": "molding-opt-a-revb",
-    "review": true
+    "review": true,
+    "titleRu": "Вариант молдингов без среднего горизонтального профиля (на проверку) · испанский"
   },
   {
     "title": "2026-11-02_U4_Whole-Unit_Walls-Trim-Outlets-Plan_R1.pdf",
@@ -29,7 +31,8 @@
     "path": "2026-11-02-walls-trim-outlets-R1/2026-11-02_U4_Whole-Unit_Walls-Trim-Outlets-Plan_R1.pdf",
     "date": "2026-11-02",
     "lang": "en",
-    "pairId": "whole-unit-walls-r1"
+    "pairId": "whole-unit-walls-r1",
+    "titleRu": "Стены, молдинги и розетки (рабочий план) · английский"
   },
   {
     "title": "2026-11-02_U4_Unidad_Muros-Molduras-Contactos_R1_ES.pdf",
@@ -39,6 +42,7 @@
     "path": "2026-11-02-walls-trim-outlets-R1/2026-11-02_U4_Unidad_Muros-Molduras-Contactos_R1_ES.pdf",
     "date": "2026-11-02",
     "lang": "es",
-    "pairId": "whole-unit-walls-r1"
+    "pairId": "whole-unit-walls-r1",
+    "titleRu": "Стены, молдинги и розетки (рабочий план) · испанский"
   }
 ]

@@ -8,8 +8,11 @@
       "img": "./plans/attic-hatch/assets/attic-hatch-candidate.jpg",
       "href": "./plans/attic-hatch/assets/attic-hatch-candidate.jpg",
       "en": "Common stair landing outside Front Door 4. Exact opening still to be marked.",
-      "es": "Descanso común afuera de la puerta 4. Falta trazar la abertura exacta."
+      "es": "Descanso común afuera de la puerta 4. Falta trazar la abertura exacta.",
+      "ru": "Общая лестничная площадка перед входной дверью №4. Точный проём ещё предстоит разметить."
     }
   ],
-  "lead": 8
+  "lead": 8,
+  "ru": "Изображения",
+  "noteRu": "Актуальные указания смотрите в интерактивном плане ниже."
 }

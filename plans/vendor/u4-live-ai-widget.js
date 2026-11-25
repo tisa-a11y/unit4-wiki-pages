@@ -1,12 +1,12 @@
 /* ============================================================================
-   Unit 4 Interactive Plans — Live AI Chat & Voice Guidance Widget (Wave G)
+   Unit 4 Interactive Plans — Live AI Chat & Voice Guidance Widget (Wave G + RU)
    - Embedded in Persistent Shell (iframe / ?embedded=1): ZERO duplicate DOM/WS;
      forwards Ask AI / Field Note triggers via window.parent.postMessage('u4:ai-open')
    - Standalone (?standalone=1 / local): Full R9 msg.toolCall handler
      (show_plan_view, update_plan_state, capture_screen_snapshot, knowledge, intake),
      single shared AudioContext resumed AFTER getUserMedia, box-averaged 16kHz PCM,
-     AudioWorklet (ScriptProcessor 2048 -> GainNode(0) fallback), 5-bar RMS meter,
-     audioStreamEnd on Mute, strict single-language context & Classic 3-State UI
+     AudioWorklet (ScriptProcessor 1024 -> GainNode(0) fallback), 5-bar RMS meter,
+     audioStreamEnd on Mute, first-class EN | ES | RU (ru-RU) & Classic 3-State UI
    ============================================================================ */
 (function () {
   "use strict";
@@ -25,6 +25,7 @@
     room: "kitchen",
     titleEn: "Unit 4 Interactive Plan",
     titleEs: "Plano Interactivo Unidad 4",
+    titleRu: "Интерактивный план Кв. 4",
     getContext: null,
     quickPrompts: null
   };
@@ -53,8 +54,25 @@
     reconnecting: false
   };
 
+  function normLang(raw) {
+    var s = String(raw || "").trim().toLowerCase();
+    if (s === "ru" || s.indexOf("ru-") === 0) return "ru";
+    if (s === "es" || s.indexOf("es-") === 0) return "es";
+    return "en";
+  }
+
   function isEs() {
     return state.lang === "es";
+  }
+
+  function isRu() {
+    return state.lang === "ru";
+  }
+
+  function L(en, es, ru) {
+    if (state.lang === "ru") return ru != null ? ru : en;
+    if (state.lang === "es") return es != null ? es : en;
+    return en;
   }
 
   function escHtml(s) {
@@ -140,7 +158,7 @@
     if (state.audioCtx) state.playCursor = state.audioCtx.currentTime;
   }
 
-  function appendMsg(role, text) {
+  function appendMsg(role, text, extraAttr) {
     var log = document.getElementById("u4LaiLog");
     if (!log) return null;
     if (role === "user") {
@@ -152,6 +170,7 @@
     state.streamRole = "";
     var div = document.createElement("div");
     div.className = "u4-lai-msg is-" + role;
+    if (extraAttr) div.setAttribute("data-u4-msg-kind", extraAttr);
     div.textContent = String(text || "");
     log.appendChild(div);
     log.scrollTop = log.scrollHeight;
@@ -161,11 +180,12 @@
   function appendSnapshotCard(dataUrl, label) {
     var log = document.getElementById("u4LaiLog");
     if (!log || !dataUrl) return;
+    var fallbackLbl = L("Active plan snapshot", "Captura del plano activo", "Снимок активного плана");
     var card = document.createElement("div");
     card.className = "u4-lai-snap-card";
     card.innerHTML =
-      '<img src="' + dataUrl + '" alt="' + escHtml(label || "Plan snapshot") + '">' +
-      '<div class="u4-lai-snap-cap">' + escHtml(label || "Active plan snapshot") + "</div>";
+      '<img src="' + dataUrl + '" alt="' + escHtml(label || fallbackLbl) + '">' +
+      '<div class="u4-lai-snap-cap">' + escHtml(label || fallbackLbl) + "</div>";
     log.appendChild(card);
     log.scrollTop = log.scrollHeight;
   }
@@ -187,6 +207,22 @@
     if (el) el.textContent = text;
   }
 
+  function greetingText() {
+    return L(
+      "Hi! Ask me anything about this plan or tap Voice for hands-free help.",
+      "¡Hola! Pregúntame sobre este plano o toca Voz para hablar manos libres.",
+      "Здравствуйте! Задайте вопрос по этому плану или нажмите «Голос» для громкой связи."
+    );
+  }
+
+  function idleStatusText() {
+    return L(
+      "Ready · Tap Voice to talk live.",
+      "Listo · Toca Voz para hablar en vivo.",
+      "Готов · Нажмите «Голос» для живого общения."
+    );
+  }
+
   function syncUi() {
     if (isEmbedded) return;
     var root = document.getElementById("u4LiveAiRoot");
@@ -198,51 +234,93 @@
     var titleEl = document.getElementById("u4LaiTitle");
     var voiceBtn = document.getElementById("u4LaiVoiceBtn");
     var muteBtn = document.getElementById("u4LaiMuteBtn");
+    var closeBtn = document.getElementById("u4LaiCloseBtn");
     var miniMute = document.getElementById("u4LaiMiniMute");
     var miniOpen = document.getElementById("u4LaiMiniOpen");
     var miniEnd = document.getElementById("u4LaiMiniEnd");
     var inp = document.getElementById("u4LaiInput");
     var noteBtn = document.getElementById("u4LaiNoteBtn");
+    var photoBtn = document.getElementById("u4LaiPhotoBtn");
+    var camBtn = document.getElementById("u4LaiCamBtn");
+    var photoThumb = document.getElementById("u4LaiPhotoThumb");
+    var photoClear = document.getElementById("u4LaiPhotoClear");
+    var sendBtn = root ? root.querySelector(".u4-lai-send") : null;
     var chips = document.getElementById("u4LaiChips");
-    var es = isEs();
 
     if (root) {
       root.setAttribute("data-live", state.liveActive ? "on" : "off");
       root.setAttribute("data-open", state.open ? "true" : "false");
+      root.setAttribute("data-lang", state.lang);
     }
-    if (dlg) dlg.hidden = !state.open;
+    if (dlg) {
+      dlg.hidden = !state.open;
+      dlg.setAttribute("aria-label", L("Unit 4 Live AI Guidance", "Guía de IA en vivo Unidad 4", "Голосовой ИИ Кв. 4"));
+    }
     if (mini) mini.hidden = !state.liveActive || state.open;
     if (pill) pill.setAttribute("aria-expanded", state.open ? "true" : "false");
-    if (pillLbl) pillLbl.textContent = es ? "Ayuda IA / Voz" : "AI Helper / Voice";
-    if (badge) badge.textContent = state.liveConnecting ? "..." : (es ? "CHAT" : "ASK");
-    if (titleEl) titleEl.textContent = es ? "Guía IA · Unidad 4" : "Live AI · Unit 4";
+    if (pillLbl) pillLbl.textContent = L("AI Helper / Voice", "Ayuda IA / Voz", "Голосовой ИИ");
+    if (badge) badge.textContent = state.liveConnecting ? "..." : L("ASK", "CHAT", "ЧАТ");
+    if (titleEl) titleEl.textContent = L("Live AI · Unit 4", "Guía IA · Unidad 4", "Голосовой ИИ · Кв. 4");
+    if (closeBtn) closeBtn.setAttribute("aria-label", L("Close AI Helper", "Cerrar ayuda IA", "Закрыть ИИ-помощник"));
 
     if (voiceBtn) {
       voiceBtn.setAttribute("aria-pressed", state.liveActive ? "true" : "false");
       voiceBtn.textContent = state.liveConnecting
-        ? (es ? "Conectando..." : "Connecting...")
-        : (state.liveActive ? (es ? "Detener" : "End") : (es ? "Voz" : "Voice"));
+        ? L("Connecting...", "Conectando...", "Подключение…")
+        : (state.liveActive ? L("End", "Detener", "Стоп") : L("Voice", "Voz", "Голос"));
     }
     if (muteBtn) {
       muteBtn.hidden = !state.liveActive;
       muteBtn.setAttribute("aria-pressed", state.muted ? "true" : "false");
-      muteBtn.textContent = state.muted ? (es ? "Activar" : "Unmute") : (es ? "Silenciar" : "Mute");
+      muteBtn.textContent = state.muted
+        ? L("Unmute", "Activar", "Вкл. микр.")
+        : L("Mute", "Silenciar", "Микрофон выкл.");
     }
     if (miniMute) {
       miniMute.setAttribute("aria-pressed", state.muted ? "true" : "false");
-      miniMute.textContent = state.muted ? (es ? "🔇 Silenciado" : "🔇 Muted") : (es ? "🎙 Silenciar" : "🎙 Mute");
+      miniMute.textContent = state.muted
+        ? L("🔇 Muted", "🔇 Silenciado", "🔇 Микрофон выкл.")
+        : L("🎙 Mute", "🎙 Silenciar", "🎙 Выкл. микр.");
     }
-    if (miniOpen) miniOpen.textContent = es ? "Abrir" : "Open";
-    if (miniEnd) miniEnd.textContent = es ? "Fin" : "End";
+    if (miniOpen) miniOpen.textContent = L("Open", "Abrir", "Открыть");
+    if (miniEnd) miniEnd.textContent = L("End", "Fin", "Стоп");
     if (noteBtn) {
       noteBtn.classList.toggle("is-active", state.noteMode);
-      noteBtn.title = es ? "Modo nota de obra" : "Field note mode";
+      noteBtn.title = L("Field note mode", "Modo nota de obra", "Заметка с объекта");
+      noteBtn.setAttribute("aria-label", noteBtn.title);
+    }
+    if (photoBtn) {
+      photoBtn.title = L("Photo", "Foto", "Фото");
+      photoBtn.setAttribute("aria-label", photoBtn.title);
+    }
+    if (camBtn) {
+      camBtn.title = L("Camera", "Cámara", "Камера");
+      camBtn.setAttribute("aria-label", camBtn.title);
+    }
+    if (photoThumb) photoThumb.alt = L("Attached site photo", "Foto adjunta de obra", "Прикреплённое фото");
+    if (photoClear) photoClear.setAttribute("aria-label", L("Remove photo", "Quitar foto", "Удалить фото"));
+    if (sendBtn) {
+      var sendLbl = L("Send", "Enviar", "Отправить");
+      sendBtn.setAttribute("aria-label", sendLbl);
+      sendBtn.title = sendLbl;
     }
     if (chips) chips.hidden = state.hasUserMsg;
     if (inp) {
       inp.placeholder = state.noteMode
-        ? (es ? "Escribe nota o medida para PM..." : "Type field measurement or note...")
-        : (es ? "Pregunta sobre este plano..." : "Ask about this plan...");
+        ? L("Type field measurement or note...", "Escribe nota o medida para PM...", "Введите замер или заметку с объекта…")
+        : L("Ask about this plan...", "Pregunta sobre este plano...", "Спросите об этом плане…");
+    }
+
+    var welcomeEl = root ? root.querySelector('[data-u4-msg-kind="welcome"]') : null;
+    if (welcomeEl && !state.hasUserMsg) {
+      welcomeEl.textContent = greetingText();
+    }
+    if (!state.liveActive && !state.liveConnecting && state.open) {
+      setStatus(idleStatusText());
+    } else if (state.liveActive) {
+      setStatus(state.muted
+        ? L("Microphone muted.", "Micrófono silenciado.", "Микрофон выкл.")
+        : L("Listening live...", "Escuchando en vivo...", "Слушаю…"));
     }
 
     renderChips();
@@ -251,13 +329,12 @@
   function renderChips() {
     var box = document.getElementById("u4LaiChips");
     if (!box) return;
-    var es = isEs();
     var prompts = typeof cfg.quickPrompts === "function"
       ? cfg.quickPrompts(state.lang)
       : (Array.isArray(cfg.quickPrompts) ? cfg.quickPrompts : [
-          es ? "¿Qué medir antes de cortar?" : "What must we measure first?",
-          es ? "¿Qué bloqueos hay aquí?" : "What holds apply here?",
-          es ? "¿Qué herramientas ocupo?" : "What tools do I need?"
+          L("What must we measure first?", "¿Qué medir antes de cortar?", "Что нужно замерить до резки?"),
+          L("What holds apply here?", "¿Qué bloqueos hay aquí?", "Какие паузы действуют здесь?"),
+          L("What tools do I need?", "¿Qué herramientas ocupo?", "Какие инструменты нужны?")
         ]);
     box.innerHTML = (prompts || []).slice(0, 3).map(function (p) {
       return '<button type="button" class="u4-lai-chip">' + escHtml(p) + "</button>";
@@ -283,6 +360,9 @@
         if (st && st.summary) ctrlSummary = " " + st.summary;
       } catch (_) {}
     }
+    if (isRu()) {
+      return "Активный интерактивный план: " + (cfg.titleRu || cfg.titleEn) + " (" + cfg.planId + ", помещение=" + cfg.room + "). " + extra + ctrlSummary;
+    }
     if (isEs()) {
       return "Plano interactivo activo: " + cfg.titleEs + " (" + cfg.planId + ", cuarto=" + cfg.room + "). " + extra + ctrlSummary;
     }
@@ -305,7 +385,7 @@
       state.micStream = null;
     }
     if (state.audioCtx) { try { state.audioCtx.close(); } catch (_) {} state.audioCtx = null; }
-    setStatus(isEs() ? "Listo · Toca Voz para hablar en vivo." : "Ready · Tap Voice to talk live.");
+    setStatus(idleStatusText());
     syncUi();
   }
 
@@ -321,8 +401,8 @@
       }
     }
     setStatus(state.muted
-      ? (isEs() ? "Micrófono silenciado." : "Microphone muted.")
-      : (isEs() ? "Escuchando en vivo..." : "Listening live..."));
+      ? L("Microphone muted.", "Micrófono silenciado.", "Микрофон выкл.")
+      : L("Listening live...", "Escuchando en vivo...", "Слушаю…"));
     syncUi();
   }
 
@@ -371,7 +451,7 @@
         zeroGain.connect(ctx.destination);
         return;
       } catch (_) {
-        /* Fallback to ScriptProcessorNode(2048) -> GainNode(0) */
+        /* Fallback to ScriptProcessorNode(1024) -> GainNode(0) */
       }
     }
 
@@ -460,7 +540,7 @@
           ((rm && rm.items) || []).forEach(function (it) {
             if (args.status === "open" && it.done) return;
             if (args.status === "done" && !it.done) return;
-            var txt = isEs() ? (it.es || it.en) : it.en;
+            var txt = isRu() ? (it.ru || it.en) : (isEs() ? (it.es || it.en) : it.en);
             if (kw && String(txt).toLowerCase().indexOf(kw) < 0) return;
             cards.push({ room: rm.key, done: !!it.done, text: txt });
           });
@@ -474,16 +554,21 @@
         var rrRes = await fetch(BACKEND_ORIGIN + "/api/unit4/renders?room=" + encodeURIComponent(args.room || cfg.room || "all"));
         var rr = rrRes.ok ? await rrRes.json() : {};
         var renList = (rr && rr.renders) || [];
-        renList.slice(0, 3).forEach(function (ren) { appendSnapshotCard(ren.thumbUrl || ren.driveUrl, isEs() ? ren.titleEs : ren.titleEn); });
+        renList.slice(0, 3).forEach(function (ren) {
+          appendSnapshotCard(ren.thumbUrl || ren.driveUrl, L(ren.titleEn, ren.titleEs || ren.titleEn, ren.titleRu || ren.titleEn));
+        });
         respObj = { ok: rrRes.ok, count: renList.length };
       } else if (name === "set_language") {
-        var nl = String(args.language || "en").toLowerCase().indexOf("es") === 0 ? "es" : "en";
+        var nl = normLang(args.language || args.lang || "en");
         state.lang = nl;
+        if (window.U4PlanNav && typeof window.U4PlanNav.setLang === "function") {
+          window.U4PlanNav.setLang(nl);
+        }
         syncUi();
         respObj = { ok: true, language: nl };
       } else if (name === "navigate_room") {
         var dr = String(args.room || "home");
-        setTimeout(function () { window.location.href = "../../#" + encodeURIComponent(dr); }, 250);
+        setTimeout(function () { window.location.href = "../../index.html?lang=" + encodeURIComponent(state.lang) + "#" + encodeURIComponent(dr); }, 250);
         respObj = { ok: true, navigatingToRoom: dr };
       } else if (name === "read_active_document" || name === "focus_section" || name === "open_document" || name === "go_to_document_page") {
         var mEl = document.querySelector("main") || document.body;
@@ -510,7 +595,7 @@
             measure_boundary: args.measure_boundary || args.datum || "n_a",
             verbatim_request: args.verbatim_request || args.text || args.summary || "",
             text: args.text || args.verbatim_request || args.summary || "",
-            language: args.language || state.lang,
+            language: normLang(args.language || state.lang),
             spoken_confirmation: true
           };
           if (state.stagedPhoto && state.stagedPhoto.dataUrl) {
@@ -531,16 +616,21 @@
   }
 
   async function startVoiceSession(initialPrompt) {
-    var es = isEs();
     if (typeof WebSocket !== "function" || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-      appendMsg("sys", es ? "Este navegador no soporta audio en vivo. Usa el chat escrito abajo." : "Live audio is not supported in this browser. Use text chat below.");
+      appendMsg("sys", L(
+        "Live audio is not supported in this browser. Use text chat below.",
+        "Este navegador no soporta audio en vivo. Usa el chat escrito abajo.",
+        "Живой звук не поддерживается в этом браузере. Используйте текстовый чат ниже."
+      ));
       return;
     }
     stopVoiceSession();
     var gen = state.generation;
     state.liveConnecting = true;
-    setStatus(es ? "Conectando voz en vivo..." : "Connecting live voice...");
+    setStatus(L("Connecting live voice...", "Conectando voz en vivo...", "Подключение голосового ИИ…"));
     syncUi();
+
+    var speechLocale = isRu() ? "ru-RU" : (isEs() ? "es-MX" : "en-US");
 
     try {
       /* Wave G: Parallel fetch(voice-token) + getUserMedia (zero serial wait!) */
@@ -548,7 +638,7 @@
         fetch(VOICE_TOKEN_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ room: cfg.room, uiLanguage: state.lang })
+          body: JSON.stringify({ room: cfg.room, uiLanguage: state.lang, speechLocale: speechLocale })
         }).then(function (r) {
           return r.json().catch(function () { return null; }).then(function (d) { return { ok: r.ok, status: r.status, data: d }; });
         }),
@@ -588,6 +678,12 @@
 
       ws.onopen = function () {
         var setupPayload = tokData.setup ? Object.assign({}, tokData.setup) : { model: tokData.model || "models/gemini-3.8-live" };
+        setupPayload.generationConfig = Object.assign({}, setupPayload.generationConfig || {});
+        if (!setupPayload.generationConfig.speechConfig) {
+          setupPayload.generationConfig.speechConfig = { languageCode: speechLocale };
+        } else if (!setupPayload.generationConfig.speechConfig.languageCode) {
+          setupPayload.generationConfig.speechConfig.languageCode = speechLocale;
+        }
         setupPayload.inputAudioTranscription = setupPayload.inputAudioTranscription || {};
         setupPayload.outputAudioTranscription = setupPayload.outputAudioTranscription || {};
         setupPayload.contextWindowCompression = setupPayload.contextWindowCompression || { slidingWindow: {} };
@@ -605,17 +701,20 @@
           setupDone = true;
           state.liveConnecting = false;
           state.liveActive = true;
-          setStatus(es ? "Escuchando en vivo..." : "Listening live...");
+          setStatus(L("Listening live...", "Escuchando en vivo...", "Слушаю…"));
           syncUi();
 
           /* Wire mic BEFORE sending initial context so first spoken words are never missed! */
           await wireMicCapture(state.audioCtx, stream, ws, function () { return setupDone; });
 
-          var ctxPrompt = isEs()
-            ? ("Contexto del plano activo (responde en español de México en 1-2 frases concisas, sin precios ni datos privados): " +
-                buildSingleLangContext() + (initialPrompt ? ("\nPregunta: " + initialPrompt) : ""))
-            : ("Active plan context (reply in English only in 1-2 concise sentences; never switch to Spanish unless spoken to in a clear Spanish sentence; never mention prices): " +
-                buildSingleLangContext() + (initialPrompt ? ("\nQuestion: " + initialPrompt) : ""));
+          var ctxPrompt = isRu()
+            ? ("Контекст активного плана (отвечай только на русском языке ru-RU в 1–2 коротких рабочих фразах, без цен и закрытых данных): " +
+                buildSingleLangContext() + (initialPrompt ? ("\nВопрос: " + initialPrompt) : ""))
+            : (isEs()
+              ? ("Contexto del plano activo (responde en español de México en 1-2 frases concisas, sin precios ni datos privados): " +
+                  buildSingleLangContext() + (initialPrompt ? ("\nPregunta: " + initialPrompt) : ""))
+              : ("Active plan context (reply in English only in 1-2 concise sentences; never mention prices): " +
+                  buildSingleLangContext() + (initialPrompt ? ("\nQuestion: " + initialPrompt) : "")));
 
           ws.send(JSON.stringify({
             clientContent: {
@@ -627,7 +726,7 @@
         }
 
         if (msg.sessionResumptionUpdate && msg.sessionResumptionUpdate.resumable && msg.sessionResumptionUpdate.newHandle) state.resumptionHandle = String(msg.sessionResumptionUpdate.newHandle);
-        if (msg.goAway && state.liveActive && !state.reconnecting) { state.reconnecting = true; setTimeout(function () { state.reconnecting = false; startVoiceSession(''); }, 150); return; }
+        if (msg.goAway && state.liveActive && !state.reconnecting) { state.reconnecting = true; setTimeout(function () { state.reconnecting = false; startVoiceSession(""); }, 150); return; }
         /* Full Wave G msg.toolCall handler! */
         if (msg.toolCall && Array.isArray(msg.toolCall.functionCalls)) {
           var responses = [];
@@ -695,15 +794,16 @@
   }
 
   function lnaTipText() {
-    return isEs()
-      ? "Si el navegador bloquea la conexión en vivo, toca Configuración del sitio → Acceso a red local → Permitir. La guía local sigue activa."
-      : "Live helper blocked by browser? Open Site Settings → Local network access → Allow. Built-in plan guidance still works.";
+    return L(
+      "Live helper blocked by browser? Open Site Settings → Local network access → Allow. Built-in plan guidance still works.",
+      "Si el navegador bloquea la conexión en vivo, toca Configuración del sitio → Acceso a red local → Permitir. La guía local sigue activa.",
+      "Браузер заблокировал соединение? Откройте Настройки сайта → Доступ к локальной сети → Разрешить. Встроенный план продолжает работать."
+    );
   }
 
   async function sendFieldNote(text) {
-    var es = isEs();
-    appendMsg("user", (es ? "📝 Nota: " : "📝 Note: ") + text);
-    setStatus(es ? "Enviando nota al proyecto..." : "Sending field note...");
+    appendMsg("user", L("📝 Note: ", "📝 Nota: ", "📝 Заметка: ") + text);
+    setStatus(L("Sending field note...", "Enviando nota al proyecto...", "Отправка заметки на сервер…"));
     try {
       var payload = {
         room: cfg.room,
@@ -727,20 +827,21 @@
       clearStagedPhoto();
       state.noteMode = false;
       syncUi();
-      appendMsg("ai", es
-        ? "✓ Listo — nota guardada en la bandeja del proyecto para Tisa y John."
-        : "✓ Saved — field note logged for Tisa & John to review.");
-      setStatus(es ? "Nota guardada." : "Note saved.");
+      appendMsg("ai", L(
+        "✓ Saved — field note logged for Tisa & John to review.",
+        "✓ Listo — nota guardada en la bandeja del proyecto para Tisa y John.",
+        "✓ Сохранено — заметка отправлена Тисе и Джону на проверку."
+      ));
+      setStatus(L("Note saved.", "Nota guardada.", "Заметка сохранена."));
     } catch (_) {
       appendMsg("sys", lnaTipText());
-      setStatus(es ? "No se pudo conectar ahora." : "Could not reach intake right now.");
+      setStatus(L("Could not reach intake right now.", "No se pudo conectar ahora.", "Нет связи с сервером приёма заметок."));
     }
   }
 
   async function handleUserText(raw) {
     var text = String(raw || "").trim();
     if (!text) return;
-    var es = isEs();
 
     if (state.noteMode) {
       await sendFieldNote(text);
@@ -761,7 +862,7 @@
       return;
     }
 
-    setStatus(es ? "Buscando guía del proyecto..." : "Searching project guidance...");
+    setStatus(L("Searching project guidance...", "Buscando guía del proyecto...", "Поиск по базе знаний объекта…"));
     try {
       var ctl = new AbortController();
       var timer = setTimeout(function () { ctl.abort(); }, 1200);
@@ -781,19 +882,20 @@
       } else {
         appendMsg("ai", localFallbackAnswer());
       }
-      setStatus(es ? "Listo · Toca Voz para conversar." : "Ready · Tap Voice for hands-free help.");
+      setStatus(L("Ready · Tap Voice for hands-free help.", "Listo · Toca Voz para conversar.", "Готов · Нажмите «Голос» для громкой связи."));
     } catch (_) {
       appendMsg("ai", localFallbackAnswer());
-      setStatus(es ? "Mostrando guía local de este plano." : "Showing built-in plan guidance.");
+      setStatus(L("Showing built-in plan guidance.", "Mostrando guía local de este plano.", "Показана встроенная справка плана."));
     }
   }
 
   function localFallbackAnswer() {
-    var es = isEs();
     var ctx = buildSingleLangContext();
-    return es
-      ? (ctx + "\n\nTisa aprueba cualquier cambio abierto de diseño o compra. Toca 📝 para enviar una medida.")
-      : (ctx + "\n\nOpen design or purchase choices always need Tisa's approval. Tap 📝 to log a field measurement.");
+    return L(
+      ctx + "\n\nOpen design or purchase choices always need Tisa's approval. Tap 📝 to log a field measurement.",
+      ctx + "\n\nTisa aprueba cualquier cambio abierto de diseño o compra. Toca 📝 para enviar una medida.",
+      ctx + "\n\nЛюбые открытые решения по дизайну или закупкам требуют подтверждения Тисы. Нажмите 📝, чтобы записать замер с объекта."
+    );
   }
 
   function clearStagedPhoto() {
@@ -825,9 +927,10 @@
     var ctrl = (window.U4PlanControl && typeof window.U4PlanControl.getState === "function")
       ? window.U4PlanControl.getState()
       : {};
+    var aboutPrefix = L("About ", "Sobre ", "По точке ");
     var fullText = (zoneLabel && promptText)
       ? ("[" + zoneLabel + "] " + promptText)
-      : (promptText || (zoneLabel ? ((isEs() ? "Sobre " : "About ") + zoneLabel + ": ") : ""));
+      : (promptText || (zoneLabel ? (aboutPrefix + zoneLabel + ": ") : ""));
     try {
       window.parent.postMessage({
         type: "u4:ai-open",
@@ -837,6 +940,7 @@
         locationTag: String(zoneLabel || ""),
         planId: cfg.planId,
         room: cfg.room,
+        lang: state.lang,
         step: ctrl.step || "",
         wall: ctrl.wall || ""
       }, "*");
@@ -852,6 +956,7 @@
     root.className = "u4-live-ai-root no-print";
     root.setAttribute("data-live", "off");
     root.setAttribute("data-open", "false");
+    root.setAttribute("data-lang", state.lang);
     root.innerHTML =
       '<div id="u4LaiDock" class="u4-lai-dock">' +
         '<button type="button" id="u4LaiPill" class="u4-lai-pill" aria-expanded="false" aria-controls="u4LaiDialog">' +
@@ -911,19 +1016,17 @@
         "</div>" +
       "</aside>";
 
-    document.body.prepend(root);
+    document.body.appendChild(root);
 
     function openDialog() {
       state.open = true;
       syncUi();
       var log = document.getElementById("u4LaiLog");
       if (log && !log.children.length) {
-        appendMsg("ai", isEs()
-          ? "¡Hola! Pregúntame sobre este plano o toca Voz para hablar manos libres."
-          : "Hi! Ask me anything about this plan or tap Voice for hands-free help.");
+        appendMsg("ai", greetingText(), "welcome");
       }
       if (!state.liveActive && !state.liveConnecting) {
-        setStatus(isEs() ? "Listo · Toca Voz para hablar en vivo." : "Ready · Tap Voice to talk live.");
+        setStatus(idleStatusText());
       }
     }
 
@@ -982,20 +1085,22 @@
     });
 
     /* U4_M_KEY_AND_LANG */
-    document.addEventListener('keydown', function (e) {
+    document.addEventListener("keydown", function (e) {
       if (!state.liveActive || e.metaKey || e.ctrlKey || e.altKey) return;
       var tg = e.target;
-      if (tg && (tg.tagName === 'INPUT' || tg.tagName === 'TEXTAREA' || tg.isContentEditable)) return;
-      if (e.key === 'm' || e.key === 'M') { e.preventDefault(); toggleMute(); }
+      if (tg && (tg.tagName === "INPUT" || tg.tagName === "TEXTAREA" || tg.isContentEditable)) return;
+      if (e.key === "m" || e.key === "M") { e.preventDefault(); toggleMute(); }
     });
-    window.addEventListener('u4:lang-change', function () {
-      var dl = String(document.documentElement.lang || '').toLowerCase().indexOf('es') === 0 ? 'es' : 'en';
+    window.addEventListener("u4:lang-change", function (ev) {
+      var nextL = (ev && ev.detail && ev.detail.lang) ? ev.detail.lang : document.documentElement.lang;
+      var dl = normLang(nextL);
       if (dl !== state.lang) { state.lang = dl; syncUi(); }
     });
     syncUi();
   }
 
   window.U4LiveAi = {
+    state: state,
     init: function (options) {
       if (options && typeof options === "object") {
         Object.assign(cfg, options);
@@ -1004,7 +1109,7 @@
       try { storedLang = window.localStorage.getItem("u4_lang") || ""; } catch (_) {}
       var navLang = (window.U4PlanNav && typeof window.U4PlanNav.getLang === "function") ? window.U4PlanNav.getLang() : "";
       var qLang = params.get("lang") || navLang || storedLang || document.documentElement.lang || "en";
-      state.lang = qLang.toLowerCase().indexOf("es") === 0 ? "es" : "en";
+      state.lang = normLang(qLang);
       if (isEmbedded) return;
       if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", mount, { once: true });
@@ -1013,8 +1118,9 @@
       }
     },
     isEmbedded: function () { return isEmbedded; },
+    getLang: function () { return state.lang; },
     setLang: function (lang) {
-      state.lang = String(lang || "en").toLowerCase().indexOf("es") === 0 ? "es" : "en";
+      state.lang = normLang(lang);
       syncUi();
     },
     refreshPrompts: function () {
@@ -1037,7 +1143,7 @@
       } else if (zoneLabel) {
         var inp = document.getElementById("u4LaiInput");
         if (inp) {
-          inp.value = (isEs() ? "Sobre " : "About ") + zoneLabel + ": ";
+          inp.value = L("About ", "Sobre ", "По точке ") + zoneLabel + ": ";
           inp.focus();
         }
       }
