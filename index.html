@@ -4170,17 +4170,29 @@ function formatPinSpotPrompt(m, noteText){
 }
 async function submitPinCorrection(m){
   if (!m || u4PinState.sending) return;
-  const note = String(m.note || "").trim();
+  const inpEl = document.getElementById("u4PinInput");
+  const liveVal = inpEl ? String(inpEl.value || "").trim() : "";
+  const note = liveVal || String(m.note || "").trim();
+  m.note = note;
+  const steerEl = document.getElementById("u4ActivePinSteer");
+  const sendBtn = steerEl ? steerEl.querySelector("[data-u4-ps-send]") : null;
+  const statusEl = steerEl ? steerEl.querySelector("[data-u4-ps-status]") : null;
+  const setStatus = (msg, kind) => {
+    u4PinState.statusMsg = msg || "";
+    u4PinState.statusKind = kind || "";
+    if (statusEl) {
+      statusEl.textContent = msg || "";
+      statusEl.className = "u4-pin-steer-status" + (kind ? (" is-" + kind) : "");
+    }
+  };
   if (!note) {
-    u4PinState.statusMsg = t("pinNeedNote");
-    u4PinState.statusKind = "err";
+    setStatus(t("pinNeedNote"), "err");
     renderActivePinSteer();
     return;
   }
   u4PinState.sending = true;
-  u4PinState.statusMsg = t("pinSending");
-  u4PinState.statusKind = "";
-  renderActivePinSteer();
+  if (sendBtn) { sendBtn.disabled = true; sendBtn.textContent = t("pinSending"); }
+  setStatus(t("pinSending"), "");
   const origin = u4GalOrigin();
   const author = getActiveGalleryAuthor() || "Crew";
   const spotLoc = m.surfaceKind === "pdf"
@@ -4188,15 +4200,17 @@ async function submitPinCorrection(m){
     : (m.contextLabel + " (" + Math.round(m.xPct) + "%, " + Math.round(m.yPct) + "%)");
   const fullText = "[Pinned spot: " + spotLoc + "] " + note;
   const subId = "u4-pin-" + Date.now() + "-" + Math.random().toString(36).slice(2, 6);
+  const roomVal = (m.roomKey && m.roomKey !== "home") ? m.roomKey : "general";
   const payload = {
     schema: "unit4-worker-note-submission-v1",
     submissionId: subId,
     idempotencyKey: subId,
     source: "wiki-pin-dragger",
     commandSource: "wiki_pin_correction",
-    project: m.roomKey || "home",
-    roomKey: m.roomKey || "home",
-    page_id: m.roomKey || "home",
+    room: roomVal,
+    project: roomVal,
+    roomKey: roomVal,
+    page_id: m.roomKey || roomVal,
     document_id: m.documentId || "",
     document_title: m.documentTitle || "",
     pdf_page: m.pageNumber || 0,
@@ -4205,6 +4219,8 @@ async function submitPinCorrection(m){
     kind: "Correction / Spot Pin",
     noteType: "Correction / Spot Pin",
     edit_kind: "spot_correction",
+    summary: ("[Pinned spot: " + spotLoc + "] " + note).slice(0, 200),
+    details: fullText,
     target_item: spotLoc,
     item: spotLoc,
     author: author,
@@ -4213,28 +4229,38 @@ async function submitPinCorrection(m){
     raw: fullText,
     language: LANG
   };
+  const ctl = typeof AbortController === "function" ? new AbortController() : null;
+  const timer = ctl ? setTimeout(() => ctl.abort(), 12000) : null;
   try {
     const resp = await fetch(origin + "/api/unit4/wiki-intake", {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      signal: ctl ? ctl.signal : undefined
     });
     const data = await resp.json().catch(() => ({}));
     if (!resp.ok || data.ok === false) throw new Error(data.error || ("HTTP " + resp.status));
+    m.sent = true;
     u4PinState.sending = false;
-    u4PinState.markers = [];
-    u4PinState.activeId = null;
-    u4PinState.armed = false;
-    window.__u4PinArmed = false;
-    u4PinState.statusMsg = "";
+    if (sendBtn) { sendBtn.disabled = false; sendBtn.textContent = t("pinSendCorrBtn"); }
+    setStatus(t("pinSentOk"), "ok");
     renderPinsOnSurface();
-    if (typeof showToast === "function") showToast(LANG === "es" ? "Corrección enviada — aplicando y publicando..." : "Correction sent — applying & pushing...");
+    setTimeout(() => {
+      const list = u4PinMarksList(m.contextKey);
+      const ix = list.indexOf(m);
+      if (ix >= 0) list.splice(ix, 1);
+      if (u4PinState.selectedId === m.id) u4PinState.selectedId = null;
+      renderPinsOnSurface();
+    }, 1400);
   } catch (err) {
     u4PinState.sending = false;
-    u4PinState.statusMsg = t("pinSentErr") + (err && err.message ? (" (" + err.message + ")") : "");
-    u4PinState.statusKind = "err";
+    if (sendBtn) { sendBtn.disabled = false; sendBtn.textContent = t("pinSendCorrBtn"); }
+    const msg = err && err.name === "AbortError" ? "timeout" : (err && err.message ? err.message : "");
+    setStatus(t("pinSentErr") + (msg ? (" (" + msg + ")") : ""), "err");
     renderActivePinSteer();
+  } finally {
+    if (timer) clearTimeout(timer);
   }
 }
 function mountUniversalPinUi(){
