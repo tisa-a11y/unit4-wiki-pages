@@ -97,6 +97,7 @@
     },
     {
       id: "bathroom-measurements",
+      retired: true,
       rel: "../bathroom-measurements/index.html",
       roomHash: "bathroom",
       roomEn: "Bathroom",
@@ -525,7 +526,7 @@
     if (!host) return;
     var es = state.lang === "es";
     var cur = getPlanMeta(state.planId);
-    var siblings = ALL_PLANS.filter(function (p) { return p.group === cur.group; });
+    var siblings = ALL_PLANS.filter(function (p) { return !p.retired && p.group === cur.group; });
 
     var segHtml = "";
     if (siblings.length > 1) {
@@ -543,7 +544,7 @@
         (es ? "Todos los planos ▾" : "All Plans ▾") +
       "</button>" +
       '<div id="u4hAllPlansPop" class="u4h-plans-pop"' + (state.menuOpen ? "" : " hidden") + ">" +
-        ALL_PLANS.map(function (p) {
+        ALL_PLANS.filter(function (p) { return !p.retired; }).map(function (p) {
           var isCur = p.id === cur.id;
           return '<a href="' + esc(planUrl(p.id)) + '" data-plan-id="' + p.id + '" class="' + (isCur ? "is-current" : "") + '">' +
             '<span>' + (isCur ? "✓ " : "") + esc(es ? p.labelEs : p.labelEn) + "</span>" +

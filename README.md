@@ -39,6 +39,7 @@ Open-access bilingual (**English** / **Español**) site published on GitHub Page
 - **`tools/`** — Build and verification scripts:
   - `python3 tools/build.py` — Compiles `src/template.html` + `content/` into root `index.html` and validates JSON, EN/ES pairs, and JS syntax (`node --check`).
   - `python3 tools/build.py --check` — Exits non-zero if `index.html` is out of date relative to `src/` or `content/`.
+  - `python3 tools/usability_gate.py` — Runs the 13-gate browser suite and writes `tmp/usability-report.html`, including the complete editorial Cut / Rewrite Queue. See [`tests/README.md`](./tests/README.md) for baselines, regression tests, and test boundaries.
   - `python3 tools/smoke_test.py` — Runs headless Chrome over every wiki page in EN and MX ES at mobile (`390x844`) width and requires `0` errors and `0` horizontal overflow.
   - `python3 tools/extract_from_index.py` — Utility to recover edits back into `content/` and `src/` if someone ever touched `index.html`.
 - **Never edit `index.html` by hand.** Always edit `content/` or `src/template.html` and run `python3 tools/build.py` (commit `content/`, `src/`, and regenerated `index.html` together).

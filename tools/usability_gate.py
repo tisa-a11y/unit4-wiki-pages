@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Unit 4 Wiki — 4-Layer, 13-Gate Automated Usability, Editorial & Visual QA Suite.
+"""Unit 4 Wiki — 4-Layer, 13-Gate Automated Usability & Visual QA Suite.
 
 Python 3.9-3.14 compatible (no backslashes inside f-string expressions; raw regex strings).
 Runs headless Chromium via Playwright against a local HTTP server serving the built wiki
@@ -22,6 +22,7 @@ import asyncio
 import base64
 import datetime
 import functools
+import itertools
 import html
 import http.server
 import io
@@ -46,6 +47,8 @@ try:
     HAS_PIL = True
 except ImportError:
     HAS_PIL = False
+
+from usability_editorial import JS_EDITORIAL_BLOCKS, audit_blocks, render_queue
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -77,6 +80,7 @@ ROOM_PAGES_CORE = [
 
 BROKEN_TEXT_PATTERNS = [
     (re.compile(r"\bundefined\b"), "literal 'undefined'"),
+    (re.compile(r"\bnull\b"), "literal 'null'"),
     (re.compile(r"\bNaN\b"), "literal 'NaN'"),
     (re.compile(r"\[object Object\]"), "literal '[object Object]'"),
     (re.compile(r"\ufffd"), "replacement glyph U+FFFD"),
@@ -109,47 +113,6 @@ HTML_COMMENT_RE = re.compile(r"<!--.*?-->", re.S)
 AGENT_BRIEF_RE = re.compile(r'<section\s+id=["\']agent-brief["\'][^>]*>.*?</section>', re.S | re.I)
 FIREWALL_DEF_RE = re.compile(r"FIREWALL_RE\s*=.*?(?:;|\n)")
 INLINE_SCRIPT_RE = re.compile(r"<script(?:\s[^>]*)?>(.*?)</script>", re.S | re.I)
-
-# Gate 13 — Editorial, Anti-Redundancy & Meaningful-Instruction Regexes
-FILLER_PROSE_RE = re.compile(
-    r"\b(?:this section covers|please note that|various updates|see above|hello!?\s+how can i help|hi!?\s+i(?:'m| am) your ai)\b",
-    re.I,
-)
-RAW_COORD_ID_RE = re.compile(
-    r"(?:\bX\s*[:=]\s*\d+(?:\.\d+)?\"?\s*(?:->|–|-)\s*\d+|\b6[a-zA-Z0-9]{15}\b|\brev-0\d{2}\b)"
-)
-ACTION_VERB_RE = re.compile(
-    r"\b(?:confirm|verify|measure|check|hold|keep|install|build|run|select|complete|execute|reschedule|close|patch|wire|review|update|move|set|pass|photograph|cut|seal|align|mount|lock|add|use|pull|plan|coordinate|leave|clear|repair|finish|order|return|paint|grout|tape|drill|hang|test|verificar|confirmar|medir|revisar|mantener|pausar|instalar|armar|construir|tender|elegir|completar|ejecutar|reprogramar|cerrar|resanar|conectar|mover|aprobar|fotografiar|cortar|sellar|alinear|montar|agregar|usar|jalar|planear|coordinar|dejar|despejar|reparar|terminar|pedir|devolver|pintar|colgar|probar)\b",
-    re.I,
-)
-ALL_ROOMS_EDITORIAL = [
-    "kitchen",
-    "kitchen-oven-range",
-    "kitchen-sink-north",
-    "bathroom",
-    "electrical",
-    "hvac",
-    "attic-access",
-    "laundry",
-    "bedroom",
-    "living-dining",
-    "hallway",
-    "paint-floors",
-]
-
-
-def _editorial_tokens(text: str) -> set:
-    return set(re.findall(r"[a-zA-Z0-9\u00c0-\u024f]{3,}", text.lower()))
-
-
-def _jaccard_overlap(a: str, b: str) -> float:
-    ta, tb = _editorial_tokens(a), _editorial_tokens(b)
-    if len(ta) < 4 or len(tb) < 4:
-        return 0.0
-    union = ta | tb
-    if not union:
-        return 0.0
-    return len(ta & tb) / float(len(union))
 SCRIPT_SRC_ATTR_RE = re.compile(r"\bsrc\s*=", re.I)
 
 
@@ -415,7 +378,7 @@ JS_CONTRAST_AND_ARIA = r"""
     const fs = parseFloat(cs.fontSize);
     const fw = parseInt(cs.fontWeight, 10) || 400;
     const isLarge = fs >= 24 || (fs >= 18.66 && fw >= 700);
-    const minReq = isLarge ? 3.0 : 4.2; // 4.5 AA with tiny anti-alias margin
+    const minReq = isLarge ? 3.0 : 4.5; // WCAG AA computed-color threshold
     if (cr < minReq) {
       contrastIssues.push(
         el.tagName.toLowerCase() + (el.id ? '#' + el.id : '') +
@@ -550,21 +513,15 @@ JS_OVERLAP_AND_WRAP = r"""
   }
 
   // 1. Check fixed floating controls against content cards/headings/checklist/buttons
-  const isMobileVp = vw <= 760;
-  const atBottom = (window.scrollY + vh) >= (document.documentElement.scrollHeight - 16);
-  const floaters = Array.from(document.querySelectorAll('.u4-pin-fab, #u4AiFloatingDock')).filter(el => {
+  const floaters = Array.from(document.querySelectorAll('.u4-pin-fab, #u4AiFloatingDock, .u4-lai-dock')).filter(el => {
     const cs = getComputedStyle(el);
     return cs.position === 'fixed' && visibleRect(el);
   });
-  const allTargets = Array.from(document.querySelectorAll('main h1, main h2, .ck li, .u4-plan-launch-card, .u4-gal-btn, .u4-who-chip, #repSend'));
-  const interactiveTargets = Array.from(document.querySelectorAll('.u4-gal-btn, .u4-who-chip, #repSend, .u4-photo-btn, .u4-dictate-btn'));
+  const allTargets = Array.from(document.querySelectorAll('main h1, main h2, .u4h-card h2, .u4h-card h3, .u4h-card p, .u4h-step-body p, .ck li, .u4-plan-launch-card, .u4-gal-btn, .u4-who-chip, #repSend, .u4h-body button, .u4h-body input'));
   for (const fl of floaters) {
     const fr = visibleRect(fl);
     if (!fr) continue;
-    const isAiOrb = fl.id === 'u4AiFloatingDock';
-    // On 390px phone, the compact bottom-right Ask AI orb floats cleanly over scrolling text;
-    // verify it never permanently covers bottom interactive controls when scrolled to bottom.
-    const checkList = (isMobileVp && isAiOrb) ? (atBottom ? interactiveTargets : []) : allTargets;
+    const checkList = allTargets;
     for (const tg of checkList) {
       if (fl.contains(tg) || tg.contains(fl)) continue;
       const txt = (tg.innerText || tg.getAttribute('aria-label') || '').trim();
@@ -593,7 +550,7 @@ JS_OVERLAP_AND_WRAP = r"""
       if (Math.abs(ir.top - firstTop) > 6) {
         issues.push('Segmented switcher wrapped to 2nd row: "' + (it.innerText || '').trim() + '"');
       }
-      if (it.scrollHeight > it.clientHeight + 3) {
+      if (it.scrollHeight > it.clientHeight + 2) {
         issues.push('Segmented pill text overflow/clip: "' + (it.innerText || '').trim() + '" (scrollH=' + it.scrollHeight + ' clientH=' + it.clientHeight + ')');
       }
       if (ir.height > 44) {
@@ -663,13 +620,26 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
         "gate_9_multiscroll_overlap_pill_wrap": {"layer": "Layer 3 — Geometric, SVG, Photo & Content Forensics", "title": "Multi-Scroll Overlap & Top-Bar Pill Wrap", "status": "PASS", "details": []},
         "gate_10_text_es_parity_print": {"layer": "Layer 3 — Geometric, SVG, Photo & Content Forensics", "title": "Zero Broken Text, ES Parity & Print Emulation", "status": "PASS", "details": []},
         "gate_11_privacy_hygiene_syntax": {"layer": "Layer 3 — Geometric, SVG, Photo & Content Forensics", "title": "Privacy Firewall, Spec Hygiene & Script Syntax", "status": "PASS", "details": []},
-        "gate_12_visual_baselines_report": {"layer": "Layer 4 — Visual Baselines, Editorial Audit & HTML QA Report", "title": "Golden Screenshots + Diff Report", "status": "PASS", "details": []},
-        "gate_13_editorial_audit": {"layer": "Layer 4 — Visual Baselines, Editorial Audit & HTML QA Report", "title": "Editorial, Anti-Redundancy & Meaningful-Instruction Audit", "status": "PASS", "details": []},
+        "gate_12_visual_baselines_report": {"layer": "Layer 4 — Visual Baselines & HTML QA Report", "title": "Golden Screenshots + Diff Report", "status": "PASS", "details": []},
+        "gate_13_editorial_audit": {"layer": "Layer 4 — Editorial Review", "title": "Editorial, Anti-Redundancy & Meaningful Instructions", "status": "PASS", "details": []},
     }
 
     screenshots_for_report: List[Dict[str, str]] = []
-    cut_rewrite_queue: List[Dict[str, str]] = []
     runtime_errors: List[str] = []
+    editorial_queue: List[Dict[str, str]] = []
+    editorial_seen = set()
+    coverage: List[str] = []
+
+    async def editorial_audit(page: Any, label: str, lang: str, room: bool = False) -> None:
+        snapshot = await page.evaluate(JS_EDITORIAL_BLOCKS)
+        coverage.append(label + "/" + lang)
+        for finding in audit_blocks(snapshot, label, lang, room=room):
+            key = (finding["page"], lang, finding["selector"], finding["text"], finding["reason"])
+            if key not in editorial_seen:
+                editorial_seen.add(key)
+                editorial_queue.append(finding)
+                fail("gate_13_editorial_audit", label + " [" + lang + "] " + finding["selector"] + ": " + finding["reason"])
+
 
     def fail(gate_key: str, msg: str) -> None:
         gates[gate_key]["status"] = "FAIL"
@@ -700,6 +670,7 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
         if exe:
             launch_kw["executable_path"] = exe
         browser = await pw.chromium.launch(**launch_kw)
+        print("Running 13 usability gates (backend requests intercepted).", file=sys.stderr, flush=True)
 
         def attach_err_listeners(page: Any, label: str) -> None:
             page.on("pageerror", lambda e: runtime_errors.append(f"[{label}] pageerror: {str(e)[:200]}"))
@@ -961,8 +932,8 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
         viewports = [("desktop", 1440, 900), ("mobile", 390, 844)]
         for vp_name, vw, vh in viewports:
             is_mobile = vp_name == "mobile"
-            for lang in ("en", "es"):
-                theme = "light" if lang == "en" else "dark"
+            for lang, theme in itertools.product(("en", "es"), ("light", "dark")):
+                print(f"Matrix {vp_name}/{lang}/{theme}", file=sys.stderr, flush=True)
                 ctx = await browser.new_context(viewport={"width": vw, "height": vh}, reduced_motion="reduce")
                 page = await ctx.new_page()
                 attach_err_listeners(page, f"wiki-{vp_name}-{lang}-{theme}")
@@ -971,27 +942,29 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
                 await page.wait_for_timeout(750)
                 await disable_animations(page)
 
-                check_keys = all_wiki_keys if (vp_name == "desktop") else (["home"] + ROOM_PAGES_CORE)
+                check_keys = all_wiki_keys
                 for key in check_keys:
                     await page.evaluate(f"() => {{ location.hash = '#{key}'; window.scrollTo(0, 0); }}")
                     await page.wait_for_timeout(320)
+
+                    if vp_name == "desktop" and theme == "light":
+                        await editorial_audit(page, "#" + key, lang, room=key in site_json.get("perPage", {}).get("CHECKLISTS", {}).get("order", ROOM_PAGES_CORE))
 
                     # Gate 4: Target size & 390px overflow
                     t_issues = await page.evaluate(JS_TARGET_SIZE, is_mobile)
                     for ti in t_issues:
                         fail("gate_4_target_size_390px_touch", f"[{vp_name}/{lang}/{theme}] #{key}: {ti}")
 
-                    # Gate 8: Image integrity on desktop (every room) and core mobile rooms
-                    if vp_name == "desktop" or key in ("kitchen", "bathroom"):
-                        # Scroll images into view to trigger lazy-loading cleanly
-                        await page.evaluate(r"""async () => {
-                            const imgs = Array.from(document.querySelectorAll('img[loading="lazy"]'));
-                            for (const im of imgs) { im.loading = 'eager'; }
-                            await new Promise(r => setTimeout(r, 120));
-                        }""")
-                        img_issues = await page.evaluate(JS_IMAGE_INTEGRITY)
-                        for ii in img_issues:
-                            fail("gate_8_image_integrity_aspect", f"[{vp_name}/{lang}] #{key}: {ii}")
+                    # Gate 8: Image integrity across every viewport/language/theme state
+                    # Scroll images into view to trigger lazy-loading cleanly
+                    await page.evaluate(r"""async () => {
+                        const imgs = Array.from(document.querySelectorAll('img[loading="lazy"]'));
+                        for (const im of imgs) { im.loading = 'eager'; }
+                        await new Promise(r => setTimeout(r, 120));
+                    }""")
+                    img_issues = await page.evaluate(JS_IMAGE_INTEGRITY)
+                    for ii in img_issues:
+                        fail("gate_8_image_integrity_aspect", f"[{vp_name}/{lang}/{theme}] #{key}: {ii}")
 
                     # Gate 9: Multi-scroll overlap on core room pages
                     if key in ROOM_PAGES_CORE:
@@ -1001,21 +974,21 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
                             await page.wait_for_timeout(80)
                             ov_issues = await page.evaluate(JS_OVERLAP_AND_WRAP)
                             for oi in ov_issues:
-                                fail("gate_9_multiscroll_overlap_pill_wrap", f"[{vp_name}/{lang}] #{key}@{pos_lbl}: {oi}")
+                                fail("gate_9_multiscroll_overlap_pill_wrap", f"[{vp_name}/{lang}/{theme}] #{key}@{pos_lbl}: {oi}")
                         await page.evaluate("() => window.scrollTo(0, 0)")
 
                     # Gate 10: Broken text, HVAC/Attic checklists, Bathroom RETIRED badge, stale dates, ES parity
                     body_txt = await page.evaluate("() => (document.querySelector('main') || document.body).innerText")
                     for rx, desc in BROKEN_TEXT_PATTERNS:
                         if rx.search(body_txt):
-                            fail("gate_10_text_es_parity_print", f"[{vp_name}/{lang}] #{key}: found {desc}")
+                            fail("gate_10_text_es_parity_print", f"[{vp_name}/{lang}/{theme}] #{key}: found {desc}")
                     if key != "decisions":
                         for rx, desc in STALE_COPY_PATTERNS:
                             if rx.search(body_txt):
-                                fail("gate_10_text_es_parity_print", f"[{vp_name}/{lang}] #{key}: found {desc}")
+                                fail("gate_10_text_es_parity_print", f"[{vp_name}/{lang}/{theme}] #{key}: found {desc}")
                     if BACKEND_JARGON_RE.search(body_txt):
                         m_bj = BACKEND_JARGON_RE.search(body_txt)
-                        fail("gate_11_privacy_hygiene_syntax", f"[{vp_name}/{lang}] #{key}: visible backend jargon '{m_bj.group(0)}'")
+                        fail("gate_11_privacy_hygiene_syntax", f"[{vp_name}/{lang}/{theme}] #{key}: visible backend jargon '{m_bj.group(0)}'")
                     if lang == "es":
                         for rx, desc in ES_LEFTOVER_UI_PATTERNS:
                             if rx.search(body_txt):
@@ -1036,7 +1009,7 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
                             fail("gate_10_text_es_parity_print", f"[{lang}] #bathroom render badges expected '{want_tag}', got {tags}")
 
                     # Gate 6: Contrast & ARIA on key pages in Light & Dark
-                    if vp_name == "desktop" and key in ("home", "kitchen", "bathroom", "hvac"):
+                    if vp_name == "desktop":
                         ca = await page.evaluate(JS_CONTRAST_AND_ARIA)
                         for ai in ca.get("ariaIssues", []):
                             fail("gate_6_contrast_aria_light_dark", f"[{lang}/{theme}] #{key}: {ai}")
@@ -1048,8 +1021,8 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
         # ── B. Interactive Plans Matrix (All 7 plans x Desktop/Mobile x EN/ES x Light/Dark) ──
         for vp_name, vw, vh in viewports:
             is_mobile = vp_name == "mobile"
-            for lang in ("en", "es"):
-                theme = "light" if lang == "en" else "dark"
+            for lang, theme in itertools.product(("en", "es"), ("light", "dark")):
+                print(f"Matrix {vp_name}/{lang}/{theme}", file=sys.stderr, flush=True)
                 ctx = await browser.new_context(viewport={"width": vw, "height": vh}, reduced_motion="reduce")
                 page = await ctx.new_page()
                 attach_err_listeners(page, f"plans-{vp_name}-{lang}-{theme}")
@@ -1074,24 +1047,28 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
                     # Gate 8: Image integrity
                     img_issues = await page.evaluate(JS_IMAGE_INTEGRITY)
                     for ii in img_issues:
-                        fail("gate_8_image_integrity_aspect", f"[{vp_name}/{lang}] plans/{pid}: {ii}")
+                        fail("gate_8_image_integrity_aspect", f"[{vp_name}/{lang}/{theme}] plans/{pid}: {ii}")
 
-                    # Gate 9: Pill wrap & multi-scroll overlap (especially Kitchen 3-tab plans)
-                    ov_issues = await page.evaluate(JS_OVERLAP_AND_WRAP)
-                    for oi in ov_issues:
-                        fail("gate_9_multiscroll_overlap_pill_wrap", f"[{vp_name}/{lang}] plans/{pid}: {oi}")
+                    # Gate 9: compare fixed controls at top, middle and bottom on plans too.
+                    max_y = await page.evaluate("() => Math.max(0, document.documentElement.scrollHeight - innerHeight)")
+                    for pos_lbl, sy in (("top", 0), ("mid", int(max_y / 2)), ("bottom", max_y)):
+                        await page.evaluate("y => scrollTo(0, y)", sy)
+                        await page.wait_for_timeout(80)
+                        for oi in await page.evaluate(JS_OVERLAP_AND_WRAP):
+                            fail("gate_9_multiscroll_overlap_pill_wrap", f"[{vp_name}/{lang}/{theme}] plans/{pid}@{pos_lbl}: {oi}")
+                    await page.evaluate("() => scrollTo(0, 0)")
 
                     # Gate 10: Broken text, stale copy, ES parity, print emulation
                     txt = await page.evaluate("() => document.body.innerText")
                     for rx, desc in BROKEN_TEXT_PATTERNS:
                         if rx.search(txt):
-                            fail("gate_10_text_es_parity_print", f"[{vp_name}/{lang}] plans/{pid}: found {desc}")
+                            fail("gate_10_text_es_parity_print", f"[{vp_name}/{lang}/{theme}] plans/{pid}: found {desc}")
                     for rx, desc in STALE_COPY_PATTERNS:
                         if rx.search(txt):
-                            fail("gate_10_text_es_parity_print", f"[{vp_name}/{lang}] plans/{pid}: found {desc}")
+                            fail("gate_10_text_es_parity_print", f"[{vp_name}/{lang}/{theme}] plans/{pid}: found {desc}")
                     if BACKEND_JARGON_RE.search(txt):
                         m_bj = BACKEND_JARGON_RE.search(txt)
-                        fail("gate_11_privacy_hygiene_syntax", f"[{vp_name}/{lang}] plans/{pid}: visible backend jargon '{m_bj.group(0)}'")
+                        fail("gate_11_privacy_hygiene_syntax", f"[{vp_name}/{lang}/{theme}] plans/{pid}: visible backend jargon '{m_bj.group(0)}'")
                     if lang == "es":
                         for rx, desc in ES_LEFTOVER_UI_PATTERNS:
                             if rx.search(txt):
@@ -1106,7 +1083,7 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
                             fail("gate_6_contrast_aria_light_dark", f"[{lang}/{theme}] plans/{pid}: {ci}")
 
                     # Gate 10: Print media emulation check (desktop EN)
-                    if vp_name == "desktop" and lang == "en":
+                    if vp_name == "desktop":
                         await page.emulate_media(media="print")
                         await page.wait_for_timeout(120)
                         print_clip = await page.evaluate("() => document.documentElement.scrollWidth > window.innerWidth + 10")
@@ -1115,6 +1092,59 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
                             fail("gate_10_text_es_parity_print", f"plans/{pid}: horizontal clipping under @media print emulation")
 
                 await ctx.close()
+
+        # Gate 13: inspect every plan step and every local HTML guide, EN + ES.
+        for lang in ("en", "es"):
+            ctx13 = await browser.new_context(viewport={"width": 1440, "height": 900}, reduced_motion="reduce")
+            p13 = await ctx13.new_page()
+            p13.set_default_timeout(5000)
+            attach_err_listeners(p13, "editorial-" + lang)
+            await setup_network_stubs(p13, base_url)
+            for pid in ALL_PLAN_IDS:
+                await p13.goto(f"{base_url}/plans/{pid}/index.html?standalone=1&lang={lang}&theme=light", wait_until="domcontentloaded")
+                await p13.wait_for_timeout(450)
+                await disable_animations(p13)
+                await editorial_audit(p13, "plans/" + pid, lang)
+                # Reset before each top-level step so a manual view cannot
+                # unmount the remaining tabs and silently skip their audit.
+                plan_url = p13.url
+                steps = []
+                for attribute in ("data-step", "data-jump-sheet"):
+                    values = await p13.locator("button[" + attribute + "]:visible").evaluate_all("(els, attr) => [...new Set(els.map(e => e.getAttribute(attr)))]", attribute)
+                    steps.extend((attribute, value) for value in values)
+                for attribute, step in steps:
+                    await p13.goto(plan_url, wait_until="domcontentloaded")
+                    await p13.wait_for_timeout(200)
+                    button = p13.locator("button[" + attribute + "=" + json.dumps(step) + "]:visible").first
+                    if not await button.count():
+                        fail("gate_13_editorial_audit", "plans/" + pid + ": unreachable step " + step)
+                        continue
+                    await button.click()
+                    await p13.wait_for_timeout(150)
+                    label = "plans/" + pid + "#step=" + step
+                    await editorial_audit(p13, label, lang)
+                    for sub_attribute in ("data-wall", "data-wtab"):
+                        values = await p13.locator("button[" + sub_attribute + "]:visible").evaluate_all("(els, attr) => [...new Set(els.map(e => e.getAttribute(attr)))]", sub_attribute)
+                        for value in values:
+                            sub_button = p13.locator("button[" + sub_attribute + "=" + json.dumps(value) + "]:visible").first
+                            if not await sub_button.count():
+                                fail("gate_13_editorial_audit", label + ": unreachable sub-view " + value)
+                                continue
+                            await sub_button.click()
+                            await p13.wait_for_timeout(100)
+                            await editorial_audit(p13, label + "&" + sub_attribute + "=" + value, lang)
+            for guide in sorted(ROOT.glob("wiki-docs/**/*.html")):
+                relative = guide.relative_to(ROOT).as_posix()
+                fixed_lang = re.search(r"_(EN|ES)\.html$", guide.name, re.I)
+                if fixed_lang and fixed_lang.group(1).lower() != lang:
+                    continue
+                await p13.goto(f"{base_url}/{relative}?lang={lang}&theme=light", wait_until="domcontentloaded")
+                await p13.wait_for_timeout(150)
+                actual_lang = (await p13.locator("html").get_attribute("lang") or "unknown").split("-")[0]
+                if actual_lang != lang:
+                    fail("gate_10_text_es_parity_print", relative + ": requested " + lang + " but rendered " + actual_lang)
+                await editorial_audit(p13, relative, actual_lang)
+            await ctx13.close()
 
         # ══════════════════════════════════════════════════════════════════════
         # LAYER 2 — GATE 5: Focus Not Obscured 2.4.11 & Keyboard Walk + 2.5.7
@@ -1173,13 +1203,14 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
         # LAYER 4 — GATE 12: Golden Screenshots + Pixel-Diff & HTML QA Report
         # ══════════════════════════════════════════════════════════════════════
         shots_spec = [
-            ("home-desktop-light", f"{base_url}/index.html?lang=en&theme=light#home", 1440, 900),
-            ("kitchen-desktop-light", f"{base_url}/index.html?lang=en&theme=light#kitchen", 1440, 900),
-            ("bathroom-desktop-dark", f"{base_url}/index.html?lang=es&theme=dark#bathroom", 1440, 900),
-            ("hvac-desktop-light", f"{base_url}/index.html?lang=en&theme=light#hvac", 1440, 900),
-            ("kitchen-3tab-mobile-light", f"{base_url}/plans/kitchen-electrical/index.html?standalone=1&lang=es&theme=light", 390, 844),
-            ("murphy-door-desktop-light", f"{base_url}/plans/murphy-door/index.html?standalone=1&lang=en&theme=light", 1440, 900),
-            ("bathroom-tile-mobile-dark", f"{base_url}/plans/bathroom-tile/index.html?standalone=1&lang=es&theme=dark", 390, 844),
+            (f"{name}-{vp}-{lang}-{theme}", f"{base_url}/{path}?lang={lang}&theme={theme}{fragment}", width, height)
+            for name, path, fragment in (
+                ("kitchen", "index.html", "#kitchen"),
+                ("kitchen-electrical", "plans/kitchen-electrical/index.html", ""),
+                ("bathroom-tile", "plans/bathroom-tile/index.html", ""),
+            )
+            for vp, width, height in viewports
+            for lang, theme in itertools.product(("en", "es"), ("light", "dark"))
         ]
         shots_dir = report_path.parent / "usability-shots"
         shots_dir.mkdir(parents=True, exist_ok=True)
@@ -1200,6 +1231,12 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
             if args.update_baselines:
                 base_file.write_bytes(cur_png)
                 diff_note = "baseline updated"
+            elif not base_file.exists():
+                diff_note = "MISSING BASELINE"
+                fail("gate_12_visual_baselines_report", shot_name + ": missing baseline; inspect captures then run --update-baselines")
+            elif not HAS_PIL:
+                diff_note = "PILLOW REQUIRED"
+                fail("gate_12_visual_baselines_report", shot_name + ": Pillow required for pixel comparisons")
             elif base_file.exists() and HAS_PIL:
                 im_cur = Image.open(io.BytesIO(cur_png)).convert("RGB")
                 im_base = Image.open(base_file).convert("RGB")
@@ -1229,189 +1266,6 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
             })
             await ctx12.close()
 
-        # ══════════════════════════════════════════════════════════════════════
-        # LAYER 4 — GATE 13: Editorial, Anti-Redundancy & Meaningful-Instruction Audit
-        # ══════════════════════════════════════════════════════════════════════
-        ctx13 = await browser.new_context(viewport={"width": 1440, "height": 900}, reduced_motion="reduce")
-        p13 = await ctx13.new_page()
-        await setup_network_stubs(p13, base_url)
-        try:
-            for lang in ("en", "es"):
-                await p13.goto(f"{base_url}/index.html?lang={lang}&theme=light#home", wait_until="domcontentloaded")
-                await p13.wait_for_timeout(450)
-                for room in ALL_ROOMS_EDITORIAL:
-                    await p13.evaluate(f"() => {{ location.hash = '#{room}'; }}")
-                    await p13.wait_for_timeout(240)
-                    blocks = await p13.evaluate(r"""() => {
-                        const out = { title: '', overviewSentences: 0, checklistCount: 0, hasVisual: false, paragraphs: [], bullets: [], cards: [] };
-                        const h1 = document.querySelector('#doc h1');
-                        out.title = h1 ? h1.innerText.trim() : '';
-                        const leadP = document.querySelector('#doc > p, #doc .concept p');
-                        if (leadP) {
-                            const lt = (leadP.innerText || '').trim();
-                            out.overviewSentences = lt ? lt.split(/[.!?]+/).filter(x => x.trim().length > 2).length : 0;
-                        }
-                        out.hasVisual = !!document.querySelector('#doc img, #doc svg, #sec-renders img, #sec-visuals img');
-                        document.querySelectorAll('#doc p').forEach((p, idx) => {
-                            if (p.closest('details:not([open]), [hidden]')) return;
-                            const t = (p.innerText || '').trim();
-                            if (t.length >= 12) out.paragraphs.push({ sel: '#doc p:nth-of-type(' + (idx + 1) + ')', text: t });
-                        });
-                        document.querySelectorAll('#sec-checklist li, section.ck li').forEach((li, idx) => {
-                            const t = (li.innerText || '').trim();
-                            if (t) out.bullets.push({ sel: '#sec-checklist li:nth-child(' + (idx + 1) + ')', text: t });
-                        });
-                        out.checklistCount = out.bullets.length;
-                        document.querySelectorAll('.u4-hm-packet').forEach((a, idx) => {
-                            const titleEl = a.querySelector('.u4-hm-title');
-                            const noteEl = a.querySelector('.u4-hm-note');
-                            if (titleEl && noteEl) {
-                                out.cards.push({ sel: '.u4-hm-packet:nth-of-type(' + (idx + 1) + ')', title: titleEl.innerText.trim(), sub: noteEl.innerText.trim() });
-                            }
-                        });
-                        return out;
-                    }""")
-
-                    # Check Visual-First Room Rhythm (4-7 milestones, <= 2 sentence overview)
-                    if blocks["overviewSentences"] > 3:
-                        cut_rewrite_queue.append({
-                            "page": f"#{room} ({lang})",
-                            "selector": "#doc > p",
-                            "reason": f"Overview has {blocks['overviewSentences']} sentences (> 2-sentence Visual-First target)",
-                            "snippet": blocks["title"][:120],
-                        })
-                    if blocks["checklistCount"] and not (4 <= blocks["checklistCount"] <= 7):
-                        cut_rewrite_queue.append({
-                            "page": f"#{room} ({lang})",
-                            "selector": "#sec-checklist",
-                            "reason": f"Checklist has {blocks['checklistCount']} items (target 4-7 milestones)",
-                            "snippet": f"Checklist items: {blocks['checklistCount']}",
-                        })
-
-                    # Check title/subtitle echo on guide cards
-                    for card in blocks["cards"]:
-                        sim = _jaccard_overlap(card["title"], card["sub"])
-                        if sim >= 0.80:
-                            cut_rewrite_queue.append({
-                                "page": f"#{room} ({lang})",
-                                "selector": card["sel"],
-                                "reason": f"Guide card title/subtitle echo ({int(sim * 100)}% Jaccard overlap)",
-                                "snippet": f"{card['title']} / {card['sub']}"[:140],
-                            })
-
-                    seen_blocks: List[Tuple[str, str]] = []
-                    for blk in blocks["paragraphs"] + blocks["bullets"]:
-                        txt = blk["text"]
-                        sel = blk["sel"]
-                        m_fill = FILLER_PROSE_RE.search(txt)
-                        if m_fill:
-                            msg = f"Empty filler/meta prose: '{m_fill.group(0)}'"
-                            fail("gate_13_editorial_audit", f"[#{room}/{lang}] {sel}: {msg}")
-                            cut_rewrite_queue.append({"page": f"#{room} ({lang})", "selector": sel, "reason": msg, "snippet": txt[:140]})
-                        m_raw = RAW_COORD_ID_RE.search(txt)
-                        if m_raw:
-                            cut_rewrite_queue.append({
-                                "page": f"#{room} ({lang})",
-                                "selector": sel,
-                                "reason": f"Raw coordinate/ID dump in human prose ({m_raw.group(0)})",
-                                "snippet": txt[:140],
-                            })
-                        for prev_sel, prev_txt in seen_blocks:
-                            sim = _jaccard_overlap(txt, prev_txt)
-                            if sim >= 0.80:
-                                cut_rewrite_queue.append({
-                                    "page": f"#{room} ({lang})",
-                                    "selector": f"{sel} vs {prev_sel}",
-                                    "reason": f"Redundant copy ({int(sim * 100)}% Jaccard overlap)",
-                                    "snippet": txt[:140],
-                                })
-                                break
-                        seen_blocks.append((sel, txt))
-
-                    for blk in blocks["paragraphs"]:
-                        wc = len(blk["text"].split())
-                        if wc > 55:
-                            cut_rewrite_queue.append({
-                                "page": f"#{room} ({lang})",
-                                "selector": blk["sel"],
-                                "reason": f"Wall-of-text paragraph ({wc} words > 55)",
-                                "snippet": blk["text"][:140],
-                            })
-                    for blk in blocks["bullets"]:
-                        wc = len(blk["text"].split())
-                        if wc > 35:
-                            cut_rewrite_queue.append({
-                                "page": f"#{room} ({lang})",
-                                "selector": blk["sel"],
-                                "reason": f"Long checklist item ({wc} words > 35)",
-                                "snippet": blk["text"][:140],
-                            })
-                        if not ACTION_VERB_RE.search(blk["text"]):
-                            cut_rewrite_queue.append({
-                                "page": f"#{room} ({lang})",
-                                "selector": blk["sel"],
-                                "reason": "Checklist bullet lacks concrete action verb",
-                                "snippet": blk["text"][:140],
-                            })
-
-            # Audit all 7 interactive plans (EN & ES)
-            for pid in ALL_PLAN_IDS:
-                for lang in ("en", "es"):
-                    await p13.goto(f"{base_url}/plans/{pid}/index.html?standalone=1&lang={lang}&theme=light", wait_until="domcontentloaded")
-                    await p13.wait_for_timeout(300)
-                    pblocks = await p13.evaluate(r"""() => {
-                        const out = { title: '', sub: '', items: [] };
-                        const tEl = document.querySelector('.u4h-title');
-                        const sEl = document.querySelector('.u4h-sub');
-                        out.title = tEl ? tEl.innerText.trim() : '';
-                        out.sub = sEl ? sEl.innerText.trim() : '';
-                        document.querySelectorAll('.u4h-hold-strip, .u4h-info-list li, .u4h-photo-cap').forEach((el, idx) => {
-                            if (el.closest('[hidden], #blueprint-sheet-shell')) return;
-                            const txt = (el.innerText || '').trim();
-                            if (txt.length >= 12) out.items.push({ sel: (el.className || el.tagName) + '#' + idx, text: txt });
-                        });
-                        return out;
-                    }""")
-                    if pblocks["title"] and pblocks["sub"]:
-                        sim_ts = _jaccard_overlap(pblocks["title"], pblocks["sub"])
-                        if sim_ts >= 0.80:
-                            cut_rewrite_queue.append({
-                                "page": f"plans/{pid} ({lang})",
-                                "selector": ".u4h-title / .u4h-sub",
-                                "reason": f"Title/subtitle echo ({int(sim_ts * 100)}% Jaccard overlap)",
-                                "snippet": f"{pblocks['title']} / {pblocks['sub']}"[:140],
-                            })
-                    for blk in pblocks["items"]:
-                        m_fill = FILLER_PROSE_RE.search(blk["text"])
-                        if m_fill:
-                            msg = f"Empty filler/meta prose: '{m_fill.group(0)}'"
-                            fail("gate_13_editorial_audit", f"[plans/{pid}/{lang}] {blk['sel']}: {msg}")
-                            cut_rewrite_queue.append({"page": f"plans/{pid} ({lang})", "selector": blk["sel"], "reason": msg, "snippet": blk["text"][:140]})
-                        m_raw = RAW_COORD_ID_RE.search(blk["text"])
-                        if m_raw:
-                            cut_rewrite_queue.append({
-                                "page": f"plans/{pid} ({lang})",
-                                "selector": blk["sel"],
-                                "reason": f"Raw coordinate/ID dump ({m_raw.group(0)})",
-                                "snippet": blk["text"][:140],
-                            })
-                        wc = len(blk["text"].split())
-                        if wc > 55:
-                            cut_rewrite_queue.append({
-                                "page": f"plans/{pid} ({lang})",
-                                "selector": blk["sel"],
-                                "reason": f"Dense plan text block ({wc} words > 55)",
-                                "snippet": blk["text"][:140],
-                            })
-            if gates["gate_13_editorial_audit"]["status"] == "PASS":
-                note(
-                    "gate_13_editorial_audit",
-                    f"Audited {len(ALL_ROOMS_EDITORIAL)} rooms + {len(ALL_PLAN_IDS)} plans (EN & ES): 0 empty filler/robotic prose violations; {len(cut_rewrite_queue)} items logged in Cut / Rewrite Queue",
-                )
-        except Exception as exc:
-            fail("gate_13_editorial_audit", f"Exception in Gate 13: {exc}")
-        await ctx13.close()
-
         await browser.close()
 
     # Finalize Gate 11 runtime errors
@@ -1426,6 +1280,7 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
             ginfo["details"].append("All assertions passed cleanly.")
 
     srv.shutdown()
+    srv.server_close()
 
     passed_count = sum(1 for g in gates.values() if g["status"] == "PASS")
     failed_count = len(gates) - passed_count
@@ -1436,7 +1291,7 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
     rows_html = []
     for gk, g in gates.items():
         badge_cls = "pass" if g["status"] == "PASS" else "fail"
-        det_items = "".join(f"<li>{html.escape(str(d))}</li>" for d in g["details"][:25])
+        det_items = "".join(f"<li>{html.escape(str(d))}</li>" for d in g["details"])
         rows_html.append(
             f"<tr><td><code>{html.escape(gk)}</code></td>"
             f"<td>{html.escape(g['layer'])}</td>"
@@ -1453,21 +1308,9 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
             f"{html.escape(sh['status'])}<br><code>{html.escape(sh['url'])}</code></figcaption></figure>"
         )
 
-    queue_html = []
-    for q in cut_rewrite_queue[:150]:
-        queue_html.append(
-            f"<tr><td>{html.escape(q['page'])}</td>"
-            f"<td><code>{html.escape(q['selector'])}</code></td>"
-            f"<td>{html.escape(q['reason'])}</td>"
-            f"<td>{html.escape(q['snippet'])}</td></tr>"
-        )
-    if not queue_html:
-        queue_html.append("<tr><td colspan='4'>No editorial blocks flagged for cutting or rewriting.</td></tr>")
-
-    total_gates = len(gates)
     report_html = (
         "<!doctype html><html lang='en'><head><meta charset='utf-8'>"
-        f"<title>Unit 4 Wiki — {total_gates}-Gate Usability QA Report</title>"
+        "<title>Unit 4 Wiki — 13-Gate Usability QA Report</title>"
         "<style>"
         "body{font-family:system-ui,-apple-system,sans-serif;background:#f4f5f3;color:#1d2326;margin:0;padding:24px;line-height:1.45}"
         "h1,h2{margin:0 0 10px} .meta{color:#5d686d;font-size:13px;margin-bottom:18px}"
@@ -1477,24 +1320,20 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
         "th,td{padding:10px 12px;border-bottom:1px solid #d9dedc;vertical-align:top;text-align:left;font-size:13px}"
         "th{background:#ecedea;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#5d686d}"
         "ul{margin:0;padding-left:18px} li{margin:2px 0}"
-        ".shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin-bottom:24px}"
+        ".shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}"
         ".shot{margin:0;background:#fff;border:1px solid #d9dedc;border-radius:8px;overflow:hidden}"
         ".shot img{width:100%;height:auto;display:block;border-bottom:1px solid #d9dedc}"
         ".shot figcaption{padding:8px 10px;font-size:12px;color:#5d686d}"
         "</style></head><body>"
-        f"<h1>Unit 4 Wiki — {total_gates}-Gate Usability QA Report <span class='badge {'pass' if overall == 'PASS' else 'fail'}'>{overall}</span></h1>"
-        f"<div class='meta'>Generated {html.escape(ts_utc)} · Passed {passed_count}/{total_gates} · Failed {failed_count}/{total_gates} · Cut / Rewrite Queue: {len(cut_rewrite_queue)} items</div>"
+        f"<h1>Unit 4 Wiki — 13-Gate Usability QA Report <span class='badge {'pass' if overall == 'PASS' else 'fail'}'>{overall}</span></h1>"
+        f"<div class='meta'>Generated {html.escape(ts_utc)} · Passed {passed_count}/13 · Failed {failed_count}/13</div>"
         "<table><thead><tr><th>Gate ID</th><th>Layer</th><th>Check</th><th>Status</th><th>Details</th></tr></thead><tbody>"
         + "".join(rows_html)
         + "</tbody></table>"
-        "<h2>Layer 4 — Golden Screenshots (Gate 12)</h2><div class='shots'>"
+        + render_queue(editorial_queue)
+        + "<h2>Layer 4 — Golden Screenshots</h2><div class='shots'>"
         + "".join(shots_html)
-        + "</div>"
-        f"<h2>Cut / Rewrite Queue (Gate 13 — {len(cut_rewrite_queue)} flagged blocks)</h2>"
-        "<table><thead><tr><th>Page</th><th>Selector</th><th>Reason</th><th>Snippet</th></tr></thead><tbody>"
-        + "".join(queue_html)
-        + "</tbody></table>"
-        "</body></html>"
+        + "</div></body></html>"
     )
     report_path.write_text(report_html, encoding="utf-8")
     note("gate_12_visual_baselines_report", f"Captured {len(screenshots_for_report)} screenshots and wrote HTML QA report to {report_path}")
@@ -1502,11 +1341,14 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
     return {
         "timestamp": ts_utc,
         "overall": overall,
+        "baseline_update": bool(args.update_baselines),
         "passed": passed_count,
+        "total": len(gates),
+        "cut_rewrite_queue_count": len(editorial_queue),
         "failed": failed_count,
-        "total": total_gates,
         "report": str(report_path),
-        "cut_rewrite_queue_count": len(cut_rewrite_queue),
+        "editorial_queue": editorial_queue,
+        "editorial_coverage": coverage,
         "gates": {k: v["status"] for k, v in gates.items()},
         "details": {k: v["details"] for k, v in gates.items()},
     }
@@ -1515,18 +1357,17 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Unit 4 Wiki 13-Gate Automated Usability Suite")
     parser.add_argument("--update-baselines", action="store_true", help="Save/update golden baseline PNGs for Gate 12")
-    parser.add_argument("--baselines-dir", default=str(ROOT / "tmp/usability-baselines"), help="Directory for golden PNG baselines")
+    parser.add_argument("--baselines-dir", default=str(ROOT / "tests/usability-baselines"), help="Directory for golden PNG baselines")
     parser.add_argument("--report", default=str(ROOT / "tmp/usability-report.html"), help="Path for self-contained HTML QA report")
     parser.add_argument("--json", action="store_true", help="Print full JSON summary to stdout")
     args = parser.parse_args()
 
     result = asyncio.run(run_suite(args))
-    total_gates = result.get("total", len(result["gates"]))
     if args.json:
         print(json.dumps(result, indent=2))
     else:
-        print(f"USABILITY GATE SUITE: {result['overall']} ({result['passed']}/{total_gates} passed, {result['failed']}/{total_gates} failed)")
-        print(f"HTML Report: {result['report']} (Cut / Rewrite Queue: {result.get('cut_rewrite_queue_count', 0)} items)")
+        print(f"USABILITY GATE SUITE: {result['overall']} ({result['passed']}/13 passed, {result['failed']}/13 failed)")
+        print(f"HTML Report: {result['report']}")
         for gk, st in result["gates"].items():
             print(f"  [{st}] {gk}")
             if st == "FAIL":
