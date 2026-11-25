@@ -86,10 +86,10 @@ CIRCUITS = [
      "Open Space", "Espacio Libre", "-", "wsp",
      "Open spare — ready to split Bed/Hall J-Box off #10 later with zero drywall demo",
      "Reserva libre — lista para dividir Caja Recámara/Pasillo desde #10 sin romper tablaroca"),
-    ("#12", "EXIST", "Room Lights (Common Rooms)", "Luces Cuartos Comunes",
-     "15A AFCI (BRN115AF)", "15A AFCI (BRN115AF)", "14/2 + 14/3", "w143",
-     "Living, Dining, Bed, Hall 1-2 (2x 3-Way 14/3) & Laundry Light/Switch via Lights J-Box",
-     "Luces/apagadores Sala, Comedor, Recámara, Pasillo 1-2 (3-Vías 14/3) y Lavandería"),
+    ("#12", "EXIST", "Original Room Lights & Switches", "Luces y Apagadores Originales",
+     "15A AFCI (BRN115AF)", "15A AFCI (BRN115AF)", "Reuse + 14/2", "w14",
+     "Reuse existing switches, 3-way travelers & circuitry in Living, Dining, Bed & Hall intact (+ Laundry light)",
+     "Reusar intactos apagadores, 3-vías y cableado existente en Sala, Comedor, Rec. y Pasillo (+ luz Lavandería)"),
     ("#13", "NEW", "Bathroom (Outlets, Lights & Fan)", "Baño (Tomas, Luces y Extractor)",
      "20A AFCI/GFCI (BRN120DF)", "20A AFCI/GFCI (BRN120DF)", "12/2", "w12",
      "1 circuit via Bath J-Box (100% 12/2): Vanity, Toilet (sep. drop!), Ceiling + Vanity Lights, Fan",
@@ -102,10 +102,10 @@ CIRCUITS = [
      "15A Standard (BR115)", "15A Estándar (BR115)", "14/2", "w14",
      "Dedicated to F1 Furnace + local Disconnect Switch at platform (174\", 258\")",
      "Dedicado a Calefactor F1 + Desconectador local en plataforma (174\", 258\")"),
-    ("#16", "NEW", "Attic Light, Outlet & Smoke/CO", "Luz/Toma Ático y Humo/CO",
-     "15A AFCI-ONLY (BRN115AF — NO GFCI!)", "15A SOLO-AFCI (BRN115AF — ¡SIN GFCI!)", "14/2 + 14/3", "w143",
-     "Unswitched 14/2+14/3 to Smoke/COs; LINE-only GFCI Attic Outlet (<=25 ft F1) + Hatch Switch",
-     "14/2+14/3 directo a Humo/CO; Toma GFCI en Ático SOLO-LINE (<=25 pies F1) + Apagador Escotilla"),
+    ("#16", "NEW", "Attic Service Outlet & Lights", "Toma Servicio y Luces Ático",
+     "15A AFCI/GFCI (BRN115DF)", "15A AFCI/GFCI (BRN115DF)", "14/2", "w14",
+     "Attic GFCI Outlet (<=25 ft F1) + Hatch Switch (outside Door 4) + 2x LEDs on 2x4 blocking (10-yr battery Smoke/CO)",
+     "Toma en Ático (<=25 pies F1) + Apagador Escotilla (Puerta 4) + 2 LEDs en bloqueo 2x4 (Humo/CO batería 10 años)"),
     ("#17", "SPARE", "Spare (Future Living/Dining Split)", "Reserva (División Sala/Comedor)",
      "Open Space", "Espacio Libre", "-", "wsp",
      "Optional future split from Living/Dining J-Box", "División futura opcional desde Caja Sala/Comedor"),
@@ -564,7 +564,7 @@ html.dark .sheet { background: #ecefed; border-color: #39444a; }
 
 RU_MAP = {
     "1231 11th Ave, Unit 4 · San Francisco · INTERNAL CREW WORKING PLAN (NOT A PERMIT SET) · Panel: Eaton BRP20L125G": "1231 11th Ave, Кв. 4 · Сан-Франциско · ВНУТРЕННИЙ РАБОЧИЙ ПЛАН БРИГАДЫ (НЕ ДЛЯ РАЗРЕШЕНИЙ) · Щит: Eaton BRP20L125G",
-    "REV R6 · WHOLE-UNIT LOCKED · 2026-11-25": "РЕД. R5 · СОГЛАСОВАНО ПРОВЕРКОЙ · 2026-11-23",
+    "REV R7 · WHOLE-UNIT LOCKED · 2026-11-25": "РЕД. R5 · СОГЛАСОВАНО ПРОВЕРКОЙ · 2026-11-23",
     "DARK TAG = Physical Box / Switch (Fixed Location)": "ТЁМНАЯ МЕТКА = Физическая коробка / выключатель (фиксированное место)",
     "#N · 12/2 YELLOW = 20A": "#N · 12/2 ЖЁЛТЫЙ = 20А",
     "#N · 14/2 WHITE = 15A": "#N · 14/2 БЕЛЫЙ = 15А",
@@ -902,7 +902,7 @@ def assert_tr_ru_complete():
 
 
 RU_MAP.update({
-    "REV R6 · WHOLE-UNIT LOCKED · 2026-11-25": "REV R6 · ЕДИНЫЙ ПЛАН КВАРТИРЫ · 2026-11-25",
+    "REV R7 · WHOLE-UNIT LOCKED · 2026-11-25": "REV R7 · ЕДИНЫЙ ПЛАН КВАРТИРЫ · 2026-11-25",
     "REUSE+NEW": "РЕУС+НОВ",
     "SPARE": "РЕЗЕРВ",
     "Open Space": "Свободно",
@@ -966,7 +966,30 @@ RU_MAP.update({
     "Ceiling / Rafter Blk": "Потолок / перемычки",
     "#16 · 15A AFCI-ONLY": "#16 · 15A ТОЛЬКО AFCI",
     "BRN115AF (NO GFCI breaker!); LINE-only GFCI outlet; 2x LEDs on 2x4 blocking >=1.5\" below deck; 72\" guards": "BRN115AF (НЕ GFCI-автомат!); розетка GFCI LINE-only; 2 LED на перемычках 2×4 >=1.5\" ниже крыши; планки 72\"",
-    "Site Verification Note (Rev R6 · 2026-11-25): Dining Room stays named Dining Room normally. Living, Dining, Bedroom & Hall outlets share #10 (Reuse + New) so #11 stays free as a 5th open spare alongside #17–#20. Confirm which existing Living/Dining/Bedroom legs are sound and verify wire gauge (12 AWG vs 14 AWG) on site with the C-10 electrician before energizing.": "Проверка на месте (Rev R6 · 2026-11-25): Столовая сохраняет обычное название. Розетки гостиной, столовой, спальни и коридора объединены на #10 (повторное использование + новые), оставляя #11 свободным 5-м резервом вместе с #17–#20. Подтвердить сохраняемые участки и калибр провода (12 AWG или 14 AWG) на объекте с электриком C-10 до подачи напряжения.",
+    "Site Verification Note (Rev R7 · 2026-11-25): Dining Room stays named Dining Room normally. Living, Dining, Bedroom & Hall outlets share #10 (Reuse + New) so #11 stays free as a 5th open spare alongside #17–#20. Confirm which existing Living/Dining/Bedroom legs are sound and verify wire gauge (12 AWG vs 14 AWG) on site with the C-10 electrician before energizing.": "Проверка на месте (Rev R7 · 2026-11-25): Столовая сохраняет обычное название. Розетки гостиной, столовой, спальни и коридора объединены на #10 (повторное использование + новые), оставляя #11 свободным 5-м резервом вместе с #17–#20. Подтвердить сохраняемые участки и калибр провода (12 AWG или 14 AWG) на объекте с электриком C-10 до подачи напряжения.",
+})
+
+
+
+RU_MAP.update({
+    "REV R7 · WHOLE-UNIT LOCKED · 2026-11-25": "REV R7 · ЕДИНЫЙ ПЛАН КВАРТИРЫ · 2026-11-25",
+    "Original Room Lights & Switches": "Оригинальный свет и выключатели",
+    "Reuse + 14/2": "Реус + 14/2",
+    "Reuse existing switches, 3-way travelers & circuitry in Living, Dining, Bed & Hall intact (+ Laundry light)": "Сохранение существующих выключателей, 3-Way и проводки в гостиной, столовой, спальне и коридоре (+ свет прачечной)",
+    "Attic Service Outlet & Lights": "Сервисная розетка и свет чердака",
+    "15A AFCI/GFCI (BRN115DF)": "15A AFCI/GFCI (BRN115DF)",
+    "Attic GFCI Outlet (<=25 ft F1) + Hatch Switch (outside Door 4) + 2x LEDs on 2x4 blocking (10-yr battery Smoke/CO)": "Розетка чердака (<=25 фут. F1) + выкл. у люка + 2 LED на перемычках 2×4 (датчики дыма/CO на 10-летней батарее)",
+    "Original Lights & Sw": "Ориг. свет и выкл.",
+    "Living, Dining, Bed, Hall 3-Way (+ Laun)": "Гостиная, столовая, спальня, 3-Way коридор (+ прач.)",
+    "Existing / 48\" AFF": "Существ. / 48\" от пола",
+    "#12 · Reused Circuitry": "#12 · Сохранённая линия",
+    "Reuse existing switches, 3-way travelers & circuitry intact (C-10 lands feed at Panel + Laundry light)": "Сохранение существующих выключателей, 3-Way и проводки (подключение в щитке C-10 + свет прачечной)",
+    "Attic Outlet & LEDs": "Розетка и LED чердака",
+    "24x36 Hatch (outside Door 4), <=25 ft F1": "Люк 24×36 (у двери 4), <=25 фут. F1",
+    "Platform / Rafter Blk": "Площадка / перемычки",
+    "#16 · Attic Service": "#16 · Чердак (розетка/свет)",
+    "15A BRN115DF; GFCI outlet <=25 ft F1; 2x LEDs on 2x4 blocking >=1.5\" below deck; 10-yr battery Smoke/CO": "15A BRN115DF; розетка <=25 фут. от F1; 2 LED на перемычках 2×4; автономные датчики дыма/CO (10 лет)",
+    "Site Verification Note (Rev R7 · 2026-11-25): Dining Room stays named Dining Room normally. Living, Dining, Bedroom & Hall outlets share #10 (Reuse + New) so #11 stays free as a 5th open spare alongside #17–#20. Confirm which existing Living/Dining/Bedroom legs are sound and verify wire gauge (12 AWG vs 14 AWG) on site with the C-10 electrician before energizing.": "Проверка на месте (Rev R7 · 2026-11-25): Столовая сохраняет название. Розетки гостиной, столовой, спальни и коридора объединены на #10 (Реус + Новые), #11 в резерве вместе с #17–#20; оригинальный свет и выключатели сохраняются на #12; датчики дыма/CO автономные на 10 лет.",
 })
 
 
@@ -995,8 +1018,8 @@ def header_html(lang, mod_title, sheet_code, sheet_title):
     )
     rev = tr(
         lang,
-        "REV R6 · WHOLE-UNIT LOCKED · 2026-11-25",
-        "REV R6 · PLANO COMPLETO VIGENTE · 2026-11-25",
+        "REV R7 · WHOLE-UNIT LOCKED · 2026-11-25",
+        "REV R7 · PLANO COMPLETO VIGENTE · 2026-11-25",
     )
     return (
         '<div class="hdr"><div class="hdr-left"><h1>' + esc(mod_title + " — " + sheet_title) + '</h1>'
@@ -1025,7 +1048,7 @@ def footer_html(lang, mod_short, sheet_code):
         "Bare Subfloor Down: H_subfloor = H_AFF + t (est. t = 3/4\" — verify on site before fastening boxes) · 1:1 True Scale (scaleX = scaleY)",
         "Subpiso Descubierto: H_subpiso = H_AFF + t (est. t = 3/4\" — verificar en obra antes de fijar cajas) · Escala Real 1:1 (scaleX = scaleY)",
     )
-    return '<div class="ftr"><span>' + esc(left) + '</span><span>' + esc(mod_short + " · " + sheet_code + " · Rev R6") + '</span></div>'
+    return '<div class="ftr"><span>' + esc(left) + '</span><span>' + esc(mod_short + " · " + sheet_code + " · Rev R7") + '</span></div>'
 
 
 def svg_compass(cx, cy, lang):
@@ -1896,7 +1919,7 @@ def build_module2(lang):
         + '<rect x="{:.1f}" y="{:.1f}" width="{:.1f}" height="{:.1f}" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3"/>'.format(dx(28), dy(2), 168 * S25, 162 * S25)
         + '<text x="{:.1f}" y="{:.1f}" text-anchor="middle" font-size="8.0" font-weight="800" fill="#991b1b">{}</text>'.format(dx(112), dy(18), esc(tr(lang, "72\" HATCH GUARD ZONE", "ZONA LISTONES 72\"")))
         + '<rect x="{:.1f}" y="{:.1f}" width="{:.1f}" height="{:.1f}" fill="#e0f2fe" stroke="#0369a1" stroke-width="2"/>'.format(dx(100), dy(56), 24 * S25, 36 * S25)
-        + '<text x="{:.1f}" y="{:.1f}" text-anchor="middle" font-size="7.8" font-weight="800" fill="#0c4a6e">24×36</text>'.format(dx(112), dy(77))
+        + '<text x="{:.1f}" y="{:.1f}" text-anchor="middle" font-size="7.8" font-weight="800" fill="#0c4a6e">HATCH</text>'.format(dx(112), dy(77))
 
         # 24" OSB Walkway (15.8 ft <= 20 ft) + 30"x30" Platform + F1 Furnace (174, 258)
         + '<polyline points="{:.1f},{:.1f} {:.1f},{:.1f} {:.1f},{:.1f}" fill="none" stroke="#a855f7" stroke-width="{:.1f}" opacity="0.28"/>'.format(dx(124), dy(74), dx(174), dy(74), dx(174), dy(213.5), 24 * S25)
@@ -1914,13 +1937,8 @@ def build_module2(lang):
         # #15 Furnace (14/2) & #16 Unswitched Smoke/CO (14/2 in -> 14/3 Red loop) + LINE-only GFCI Attic Outlet
         + '<polyline points="{:.1f},{:.1f} {:.1f},{:.1f}" fill="none" stroke="#0f172a" stroke-width="2.4"/>'.format(dx(147), dy(213.75), dx(159), dy(258))
         + '<polyline points="{:.1f},{:.1f} {:.1f},{:.1f} {:.1f},{:.1f}" fill="none" stroke="#334155" stroke-width="2.0"/>'.format(dx(147), dy(213.75), dx(147), dy(92), dx(112), dy(92))
-        + '<polyline points="{:.1f},{:.1f} {:.1f},{:.1f}" fill="none" stroke="#334155" stroke-width="2.0"/>'.format(dx(147), dy(213.75), dx(295), dy(115))  # 14/2 unswitched feed to Hall Smoke/CO
-        + '<polyline points="{:.1f},{:.1f} {:.1f},{:.1f} {:.1f},{:.1f}" fill="none" stroke="#dc2626" stroke-width="2.2" stroke-dasharray="5,2"/>'.format(dx(295), dy(115), dx(395), dy(82), dx(395), dy(215))  # 14/3 Red interconnect!
-        # Smoke/CO Nodes (>=36" from Bath door at X=239..265, Y=88 & >=20 ft from Range at X=31.5, Y=141!)
-        + '<circle cx="{:.1f}" cy="{:.1f}" r="7" fill="#fee2e2" stroke="#dc2626" stroke-width="1.8"/>'.format(dx(295), dy(115))
-        + '<circle cx="{:.1f}" cy="{:.1f}" r="7" fill="#fee2e2" stroke="#dc2626" stroke-width="1.8"/>'.format(dx(395), dy(82))
-        + '<circle cx="{:.1f}" cy="{:.1f}" r="7" fill="#fee2e2" stroke="#dc2626" stroke-width="1.8"/>'.format(dx(395), dy(215))
-
+                        # Smoke/CO Nodes (>=36" from Bath door at X=239..265, Y=88 & >=20 ft from Range at X=31.5, Y=141!)
+                        
         # Non-overlapping Perimeter Callouts
         + svg_callout(8, 86, dx(112), dy(92), tr(lang, "Hatch Sw (Opt A/B)", "Apag. Escotilla"), "#16 · 14/2", "w14", max_x=840)
         + svg_callout(8, 195, dx(147), dy(214), tr(lang, "Panel Top Riser", "Subida Panel"), tr(lang, "Max 2/hole", "Máx 2/hoyo"), "w143", max_x=840)
@@ -1943,7 +1961,7 @@ def build_module2(lang):
                  "1) El interruptor #16 DEBE ser 15A SOLO-AFCI (Eaton BRN115AF — ¡NUNCA interruptor GFCI!, CRC R314.6): derivar 14/2 directo sin apagador hacia Humo/CO Pasillo -> 14/3 Rojo a Recámara y Sala (respaldo 10 años; >=36\" de puerta de Baño y rejillas HVAC, y >=10–20 pies de estufa Viking); conectar Toma GFCI en Ático (<=25 pies de F1) SOLO en LINE (tapar LOAD). 2) Proteger NM-B con listones dentro de 72\" del borde de escotilla Puerta 4; CERO tornillos al techo plano (montar 2 LEDs en bloqueo 2×4 >=1-1/2\" bajo cubierta); máx. 2 cables/hoyo + sellador cortafuego; abanderar las 4 Cajas (#10–#13)."))
         + '</div>' + footer_html(lang, mod_short, "E-25") + '</div>'
     )
-    # --- Sheet E-26: Complete Non-Kitchen Room-by-Room Box, Switch & Light Schedule (Rev R6) ---
+    # --- Sheet E-26: Complete Non-Kitchen Room-by-Room Box, Switch & Light Schedule (Rev R7) ---
     urows = [
         ("Dining 1–4", "Comedor 1–4", "Dining N & S Walls (D01–D03)", "Comedor Muros N y S (D01–D03)", "18\" AFF (in frames)", "18\" AFF (en marcos)",
          "#10 · Shared (Reuse+New)", "#10 · Compartido (Reuso+Nvo)", "12/2*", "12/2*", "w12",
@@ -1961,10 +1979,10 @@ def build_module2(lang):
          "#10 · Shared (#11 Spare)", "#10 · Compartido (#11 Res.)", "12/2*", "12/2*", "w12",
          "Dark horizontal plates @ 11-1/2\" AFF via Bed/Hall J-Box (split-ready to Spare #11)",
          "Placas horizontales oscuras a 11-1/2\" AFF vía Caja Rec/Pas (lista para Reserva #11)"),
-        ("Common Lights & Sw", "Luces y Apag. Comunes", "Living, Dining, Bed, 2x Hall 3-Way, Laun", "Sala, Com., Rec., 2x Pasillo 3-Vías, Lav.", "48\" AFF / Ceiling", "48\" AFF / Techo",
-         "#12 · Room Lights", "#12 · Luces Cuartos", "14/2 + 14/3", "14/2 + 14/3", "w143",
-         "Reuse sound + new via Lights J-Box; 14/3 Red travelers for 2x Hall 3-Way; NEVER put Laun light on #14",
-         "Reuso sano + nuevo vía Caja Luces; 14/3 Rojo viajeras 3-vías; NUNCA Luz Lavandería en #14"),
+        ("Original Lights & Sw", "Luces y Apag. Originales", "Living, Dining, Bed, Hall 3-Way (+ Laun)", "Sala, Com., Rec., Pasillo 3-Vías (+ Lav.)", "Existing / 48\" AFF", "Existente / 48\" AFF",
+         "#12 · Reused Circuitry", "#12 · Circuito Reusado", "Reuse + 14/2", "Reuso + 14/2", "w14",
+         "Reuse existing switches, 3-way travelers & circuitry intact (C-10 lands feed at Panel + Laundry light)",
+         "Reusar intactos apagadores, 3-vías y cableado existente (C-10 conecta en Panel + luz Lavandería)"),
         ("Bath Vanity, WC, Lts/Fan", "Baño Lavabo, WC, Luz/Ext.", "72-1/8\"x82-1/8\" · 28\" Out-Swing Door", "72-1/8\"x82-1/8\" · Puerta 28\" Afuera", "40–44\" / 12\" / 48\"", "40–44\" / 12\" / 48\"",
          "#13 · Bath All-in-One", "#13 · Baño Todo-en-Uno", "100% 12/2", "100% 12/2", "w12",
          "Pocket door RETIRED -> South stud switches OK; SEPARATE 12/2 Toilet drop before tile (split-ready #19)",
@@ -1977,10 +1995,10 @@ def build_module2(lang):
          "#15 · Attic Furnace", "#15 · Calefactor Ático", "14/2", "14/2", "w14",
          "Dedicated 15A standard breaker (BR115) + local disconnect switch at furnace",
          "Interruptor dedicado 15A estándar (BR115) + desconectador local junto al calefactor"),
-        ("Attic Service & Smoke/CO", "Servicio Ático y Humo/CO", "Door 4 Hatch, <=25 ft F1, Hall/Bed/Liv", "Escotilla P4, <=25 ft F1, Pas/Rec/Sala", "Ceiling / Rafter Blk", "Techo / Bloqueo",
-         "#16 · 15A AFCI-ONLY", "#16 · 15A SOLO-AFCI", "14/2 + 14/3", "14/2 + 14/3", "w143",
-         "BRN115AF (NO GFCI breaker!); LINE-only GFCI outlet; 2x LEDs on 2x4 blocking >=1.5\" below deck; 72\" guards",
-         "BRN115AF (¡SIN GFCI!); Toma GFCI solo LINE; 2 LEDs en bloqueo 2x4 >=1.5\" bajo techo; listones 72\""),
+        ("Attic Outlet & LEDs", "Toma y LEDs en Ático", "24x36 Hatch (outside Door 4), <=25 ft F1", "Escotilla 24x36 (Puerta 4), <=25 ft F1", "Platform / Rafter Blk", "Plataforma / Bloqueo",
+         "#16 · Attic Service", "#16 · Servicio Ático", "14/2", "14/2", "w14",
+         "15A BRN115DF; GFCI outlet <=25 ft F1; 2x LEDs on 2x4 blocking >=1.5\" below deck; 10-yr battery Smoke/CO",
+         "15A BRN115DF; Toma <=25 ft F1; 2 LEDs en bloqueo 2x4 >=1.5\" bajo techo; Humo/CO batería 10 años"),
     ]
     ut = (
         "<table class='ptbl-compact'><tr><th>" + esc(tr(lang, "Physical Box / Group (Mapping 1)", "Caja / Grupo Físico (Mapeo 1)")) + "</th>"
@@ -2003,8 +2021,8 @@ def build_module2(lang):
         + header_html(lang, mod_title, "E-26", tr(lang, "Whole-Unit Non-Kitchen Room-by-Room Schedule (#10–#16)", "Tabla Completa Cuarto por Cuarto Fuera de Cocina (#10–#16)"))
         + legend_bar(lang)
         + '<div class="box"><h3>' + esc(tr(lang, "Complete Non-Kitchen Box, Switch & Light Schedule (15 Active Circuits + 5 Open Spares: #11, #17–#20)", "Tabla Completa de Cajas, Apagadores y Luces Fuera de Cocina (15 Activos + 5 Reservas: #11, #17–#20)")) + '</h3>' + ut + '</div>'
-        + '<div class="note-blue">' + esc(tr(lang, "Site Verification Note (Rev R6 · 2026-11-25): Dining Room stays named Dining Room normally. Living, Dining, Bedroom & Hall outlets share #10 (Reuse + New) so #11 stays free as a 5th open spare alongside #17–#20. Confirm which existing Living/Dining/Bedroom legs are sound and verify wire gauge (12 AWG vs 14 AWG) on site with the C-10 electrician before energizing.",
-                                             "Nota de Verificación en Obra (Rev R6 · 2026-11-25): El Comedor conserva su nombre normal. Contactos de Sala, Comedor, Recámara y Pasillo comparten #10 (Reuso + Nuevo) dejando #11 libre como 5ª reserva junto a #17–#20. Confirmar en obra con el electricista C-10 qué tramos existentes se reusan y verificar calibre (12 AWG vs 14 AWG) antes de energizar.")) + '</div>'
+        + '<div class="note-blue">' + esc(tr(lang, "Site Verification Note (Rev R7 · 2026-11-25): Dining Room stays named Dining Room normally. Living, Dining, Bedroom & Hall outlets share #10 (Reuse + New) so #11 stays free as a 5th open spare alongside #17–#20. Confirm which existing Living/Dining/Bedroom legs are sound and verify wire gauge (12 AWG vs 14 AWG) on site with the C-10 electrician before energizing.",
+                                             "Nota de Verificación en Obra (Rev R7 · 2026-11-25): El Comedor conserva su nombre normal. Contactos de Sala, Comedor, Recámara y Pasillo comparten #10 (Reuso + Nuevo) dejando #11 libre como 5ª reserva junto a #17–#20. Confirmar en obra con el electricista C-10 qué tramos existentes se reusan y verificar calibre (12 AWG vs 14 AWG) antes de energizar.")) + '</div>'
         + footer_html(lang, mod_short, "E-26") + '</div>'
     )
     return build_e00(lang, 2) + e21 + e22 + e23 + e24 + e25 + e26
@@ -2240,17 +2258,17 @@ def main():
     ap.add_argument("--out-dir", default=DEFAULT_OUT_DIR)
     ap.add_argument("--html-only", action="store_true")
     args = ap.parse_args()
-    write_and_render(args.out_dir, "2026-11-23_U4_Module1_Kitchen-Electrical_R5_EN", "Unit 4 Electrical R6 — Module 1: Kitchen (EN)", build_module1("EN"), "en", 1, args.html_only)
-    write_and_render(args.out_dir, "2026-11-23_U4_Module1_Kitchen-Electrical_R5_ES", "Unidad 4 Electricidad R6 — Módulo 1: Cocina (ES)", build_module1("ES"), "es", 1, args.html_only)
-    write_and_render(args.out_dir, "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_EN", "Unit 4 Electrical R6 — Module 2: Whole-Unit Segments (EN)", build_module2("EN"), "en", 2, args.html_only)
-    write_and_render(args.out_dir, "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_ES", "Unidad 4 Electricidad R6 — Módulo 2: Segmentos Unidad (ES)", build_module2("ES"), "es", 2, args.html_only)
+    write_and_render(args.out_dir, "2026-11-23_U4_Module1_Kitchen-Electrical_R5_EN", "Unit 4 Electrical R7 — Module 1: Kitchen (EN)", build_module1("EN"), "en", 1, args.html_only)
+    write_and_render(args.out_dir, "2026-11-23_U4_Module1_Kitchen-Electrical_R5_ES", "Unidad 4 Electricidad R7 — Módulo 1: Cocina (ES)", build_module1("ES"), "es", 1, args.html_only)
+    write_and_render(args.out_dir, "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_EN", "Unit 4 Electrical R7 — Module 2: Whole-Unit Segments (EN)", build_module2("EN"), "en", 2, args.html_only)
+    write_and_render(args.out_dir, "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_ES", "Unidad 4 Electricidad R7 — Módulo 2: Segmentos Unidad (ES)", build_module2("ES"), "es", 2, args.html_only)
     reset_tr_ru_stats()
     m1_ru = build_module1("RU")
     m2_ru = build_module2("RU")
     assert_tr_ru_complete()
     print("Verified RU_MAP 100% runtime coverage (" + str(TR_RU_STATS["calls"]) + " tr calls, 0 missing)")
-    write_and_render(args.out_dir, "2026-11-23_U4_Module1_Kitchen-Electrical_R5_RU", "Квартира 4 Электрика R6 — Модуль 1: Кухня (RU)", m1_ru, "ru", 1, args.html_only)
-    write_and_render(args.out_dir, "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_RU", "Квартира 4 Электрика R6 — Модуль 2: Вся квартира (RU)", m2_ru, "ru", 2, args.html_only)
+    write_and_render(args.out_dir, "2026-11-23_U4_Module1_Kitchen-Electrical_R5_RU", "Квартира 4 Электрика R7 — Модуль 1: Кухня (RU)", m1_ru, "ru", 1, args.html_only)
+    write_and_render(args.out_dir, "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_RU", "Квартира 4 Электрика R7 — Модуль 2: Вся квартира (RU)", m2_ru, "ru", 2, args.html_only)
 
 
 if __name__ == "__main__":
