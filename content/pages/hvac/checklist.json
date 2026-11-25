@@ -26,37 +26,5 @@
       "en": "After NEXT installation (VPS): patch, finish & paint ceiling openings and D04 panel wall, closing temporary NW bedroom-closet ceiling only after permanent hatch & thermostat LV cable are ready",
       "es": "Después de la instalación de NEXT (VPS): resanar, detallar y pintar plafones y muro D04, cerrando el techo temporal del clóset NO solo cuando estén listos la escotilla permanente y el cable LV"
     }
-  ],
-  "items": [
-    {
-      "id": "hvac-r7-01",
-      "done": true,
-      "en": "Phase split set: NEXT installs furnace, thermostat, heating ducts, sidewall exhaust & D04 feeder; our crew builds access & repairs finishes",
-      "es": "Fases definidas: NEXT instala calefactor, termostato, ductos, salida lateral y línea D04; nuestra cuadrilla construye el acceso y resana acabados"
-    },
-    {
-      "id": "hvac-r7-02",
-      "done": false,
-      "en": "Before NEXT: Keep bedroom-closet ceiling & D04 wall open, repair flat-roof leak, and keep ozone machine unplugged",
-      "es": "Antes de NEXT: Dejar abiertos el clóset de recámara y el muro D04, reparar la gotera del techo plano y desconectar ozono"
-    },
-    {
-      "id": "hvac-r7-03",
-      "done": false,
-      "en": "Monday, Nov 23 (2:00–4:00 p.m. · Serge & Alex): Resolve Door 4 hatch markout, whether vibration pads are needed, sidewall exhaust route, D04 panel entry/amps & attic light tie-in",
-      "es": "Lunes 23 nov (2:00–4:00 p.m. · Serge y Alex): Resolver trazo en Puerta 4, si requiere bases antivibración, ruta de salida lateral, entrada/amperaje D04 y conexión de luz"
-    },
-    {
-      "id": "hvac-r7-04",
-      "done": false,
-      "en": "Coordinate w/ NEXT: Build 24\"×36\" Door 4 hatch, 15.8 ft walkway, 30\"×30\" platform, GFCI & light; NEXT installs heating system & feeder",
-      "es": "Coordinado con NEXT: Armar escotilla 24\"×36\", pasillo 15.8 pies, plataforma 30\"×30\", GFCI y luz; NEXT instala calefacción y línea"
-    },
-    {
-      "id": "hvac-r7-05",
-      "done": false,
-      "en": "After testing: Pass HERS & City inspections, close bedroom-closet ceiling (after thermostat cable + hatch), and patch/paint finishes",
-      "es": "Después de pruebas: Aprobar HERS e inspecciones, cerrar techo del clóset (tras cable de termostato + escotilla) y resanar/pintar"
-    }
   ]
 }

@@ -69,8 +69,8 @@
       {
         id: 'clash-murphy-pocket-deferred',
         severity: 'MEDIUM',
-        en: 'Wall A–B Framing Check: Nov 19 update deferred the 28" bathroom pocket door for a hinged door. Verify actual inside Wall A–B studs/cavity on site before fastening pivot blocking.',
-        es: 'Revisión muro A–B: la puerta corrediza de baño del 19 nov quedó EN PAUSA por puerta abatible. Verificar bastidor real del muro A–B antes de atornillar pivote.'
+        en: 'Wall A–B Framing Check: Bathroom uses a locked 28" outward-swing hinged hallway door (pocket door retired Nov 24). Verify actual Wall A–B studs on site before anchoring pivot blocking.',
+        es: 'Revisión muro A–B: El baño usa puerta abatible de 28" hacia el pasillo (corrediza retirada 24 nov). Verificar postes reales del muro A–B antes de anclar refuerzo del pivote.'
       },
       {
         id: 'clash-murphy-precut-sequence',
@@ -395,8 +395,8 @@
         fill: '#fef2f2', stroke: '#dc2626', 'stroke-width': 1.8, 'stroke-dasharray': '5,3'
       }, svg);
       svgEl('text', { x: wallABx + wallABw / 2, y: baseFloorY - doorAh / 2 - 4, 'text-anchor': 'middle', 'font-size': 9, 'font-weight': 800, fill: '#b91c1c' }, svg).textContent = 'WALL A–B';
-      svgEl('text', { x: wallABx + wallABw / 2, y: baseFloorY - doorAh / 2 + 10, 'text-anchor': 'middle', 'font-size': 8, 'font-weight': 700, fill: '#991b1b' }, svg).textContent = es ? 'Corrediza PAUSA' : 'Pocket Deferred';
-      svgEl('text', { x: wallABx + wallABw / 2, y: baseFloorY - doorAh / 2 + 22, 'text-anchor': 'middle', 'font-size': 8, 'font-weight': 700, fill: '#991b1b' }, svg).textContent = es ? 'Revisar bastidor' : 'Verify framing';
+      svgEl('text', { x: wallABx + wallABw / 2, y: baseFloorY - doorAh / 2 + 10, 'text-anchor': 'middle', 'font-size': 8, 'font-weight': 700, fill: '#991b1b' }, svg).textContent = es ? 'Puerta abatible' : 'Out-swing Bath';
+      svgEl('text', { x: wallABx + wallABw / 2, y: baseFloorY - doorAh / 2 + 22, 'text-anchor': 'middle', 'font-size': 8, 'font-weight': 700, fill: '#991b1b' }, svg).textContent = es ? 'Verificar postes' : 'Verify studs';
     }
 
     /* Doorway B (Murphy Bookcase — dynamically sized from B7:B12!) */
@@ -522,7 +522,7 @@
     /* Wall A–B hatch */
     svgEl('rect', { x: 245, y: planWallY + 1, width: 70, height: jambPx - 2, fill: '#fecaca', stroke: '#dc2626', 'stroke-width': 1.2, 'stroke-dasharray': '3,2' }, svg);
     svgEl('text', { x: 280, y: planWallY - 5, 'text-anchor': 'middle', 'font-size': 8.5, 'font-weight': 800, fill: '#b91c1c' }, svg).textContent =
-      es ? 'Muro A–B (Corrediza en pausa)' : 'Wall A–B (Pocket Deferred)';
+      es ? 'Muro A–B (Verificar postes)' : 'Wall A–B (Verify Studs)';
 
     /* Bookcase Case Closed (D deep inside jamb J) + True 90° Out-Swing Arc into Hallway */
     const caseDpx = m.caseD * scB;
@@ -993,11 +993,11 @@
       pc.innerHTML = es
         ? '<li class="callout-alert"><strong>Medir Solo Por Dentro del Marco:</strong> Párate en el pasillo viendo a Puerta B. Excluye molduras exteriores y mide dos veces al 1/16".</li>' +
           '<li><strong>Conservar Madera Original:</strong> No tocar la corona original del pasillo, marcos exteriores de puertas A/B/C ni zoclos del pasillo.</li>' +
-          '<li><strong>Revisión Muro A–B:</strong> El 19 nov se pospuso la puerta corrediza del baño por abatible — revisar bastidor real de muro A–B antes de atornillar pivote.</li>' +
+          '<li><strong>Revisión Muro A–B:</strong> El baño usa puerta abatible de 28" hacia el pasillo (corrediza retirada el 24 nov) — revisar postes reales de muro A–B antes de anclar refuerzo del pivote.</li>' +
           '<li><strong>Rejillas WashTower y Seguro:</strong> Superior ≥ 48 sq in libres (≥ 72" arriba) + inferior ≥ 24 sq in libres (≤ 12" arriba), total ≥ 100 sq in + manija interior.</li>'
         : '<li class="callout-alert"><strong>Measure Inside Jambs Only:</strong> Stand in hallway facing Doorway B. Exclude outside casings and measure twice to nearest 1/16&quot;.</li>' +
           '<li><strong>Preserve Existing Woodwork:</strong> Keep original hallway crown molding, door casings around Doors A/B/C, and hallway baseboard untouched.</li>' +
-          '<li><strong>Wall A–B Check:</strong> Nov 19 update deferred the bathroom pocket door for a hinged door — verify actual Wall A–B framing before setting pivot blocking.</li>' +
+          '<li><strong>Wall A–B Check:</strong> Bathroom uses a locked 28&quot; outward-swing hinged hallway door (pocket door retired Nov 24) — verify actual Wall A–B studs before anchoring pivot blocking.</li>' +
           '<li><strong>WashTower Louvers &amp; Release:</strong> Upper vent ≥ 48 sq in net (≥ 72&quot; up) + lower ≥ 24 sq in net (≤ 12&quot; up), total ≥ 100 sq in net + inside release handle.</li>';
     }
     const tb = document.getElementById('tailnet-badge');
@@ -1142,12 +1142,12 @@
           : `Local Spec Answer (Murphy Door B): LG WKG101HVA gas WashTower requires upper louver ≥48 sq in net (≥72" up), lower ≥24 sq in net (≤12" up), total ≥100 sq in net (current: ${m.totalVentNet} sq in), 1" side & 4" rear clearances, and an inside emergency release.`;
       } else if (/bath|doorway a|27-1\/4|79-3\/8|baño|puerta a|wall a/.test(q)) {
         pin.answer = currentLang === 'es'
-          ? 'Respuesta local (Spec Murphy): NUNCA usar las medidas de Puerta A del baño (27-1/4" × 79-3/8") para la Puerta B. Además la puerta corrediza del baño se pospuso el 19 nov; revisar primero el bastidor real del muro A–B antes de fijar refuerzos de pivote.'
-          : 'Local Spec Answer (Murphy Door B): NEVER use Bathroom Doorway A (27-1/4" × 79-3/8") for Doorway B. Bathroom pocket door was deferred on Nov 19 — verify Wall A–B framing before placing pivot blocking.';
+          ? 'Respuesta local (Spec Murphy): NUNCA usar las medidas de Puerta A del baño (27-1/4" × 79-3/8") para la Puerta B. El baño usa puerta abatible de 28" hacia el pasillo (corrediza retirada el 24 nov); revisar los postes reales del muro A–B antes de fijar refuerzos de pivote.'
+          : 'Local Spec Answer (Murphy Door B): NEVER use Bathroom Doorway A (27-1/4" × 79-3/8") for Doorway B. Bathroom uses a locked 28" outward-swing hinged hallway door (pocket door retired Nov 24) — verify Wall A–B studs before placing pivot blocking.';
       } else {
         pin.answer = currentLang === 'es'
-          ? `Respuesta local (Puerta Murphy B): requiere 9 medidas por dentro del marco (${m.measuredCount}/9 capturadas), confirmar muro A–B (baño en pausa) y ≥100 sq in de rejillas (actual: ${m.totalVentNet} sq in). Conecta a Tailscale para respuesta en vivo.`
-          : `Local Spec Answer (Murphy Door B): requires all 9 inside-jamb measurements (${m.measuredCount}/9 entered), Wall A–B framing check (bathroom pocket door deferred), and ≥100 sq in net louver vent area (current: ${m.totalVentNet} sq in). Connect to Tailscale for live Q&A.`;
+          ? `Respuesta local (Puerta Murphy B): requiere 9 medidas por dentro del marco (${m.measuredCount}/9 capturadas), verificar postes en muro A–B (puerta abatible de 28") y ≥100 sq in de rejillas (actual: ${m.totalVentNet} sq in). Conecta a Tailscale para respuesta en vivo.`
+          : `Local Spec Answer (Murphy Door B): requires all 9 inside-jamb measurements (${m.measuredCount}/9 entered), Wall A–B stud check (locked 28" outward-swing bath door), and ≥100 sq in net louver vent area (current: ${m.totalVentNet} sq in). Connect to Tailscale for live Q&A.`;
       }
       pin.status = tailnetState.verified ? 'answered' : 'off_tailnet_local';
       renderPinsAndEod();

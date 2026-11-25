@@ -5,14 +5,14 @@
   "noteEs": "No cortar molduras todavía. Cuando se libere, trazar los marcos con cinta desde el centro de cada muro.",
   "items": [
     {
-      "img": "https://drive.google.com/thumbnail?id=1PhZG1Wkmwd3-WOtiA7fad6touqtj0lkK&sz=w1200",
-      "href": "https://drive.google.com/file/d/1PhZG1Wkmwd3-WOtiA7fad6touqtj0lkK/view",
+      "img": "./wiki-images/bedroom-no-rail-concept-r1.jpg",
+      "href": "./wiki-images/bedroom-no-rail-concept-r1.jpg",
       "en": "Wall panels without chair rail",
       "es": "Paneles de muro sin guardasilla"
     },
     {
-      "img": "https://drive.google.com/thumbnail?id=1H7H2uz34PsgH1uF0km3ozPWihYL54UTq&sz=w1200",
-      "href": "https://drive.google.com/file/d/1H7H2uz34PsgH1uF0km3ozPWihYL54UTq/view",
+      "img": "./wiki-images/bedroom-moulding-furnished-revB.jpg",
+      "href": "./wiki-images/bedroom-moulding-furnished-revB.jpg",
       "en": "Room with furniture",
       "es": "Cuarto con muebles"
     },

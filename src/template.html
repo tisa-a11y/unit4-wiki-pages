@@ -1255,12 +1255,14 @@ a.u4-inline-interactive:hover{text-decoration:underline}
 .u4-gal-card{display:flex;flex-direction:column;border-radius:8px;border:1px solid var(--line);background:var(--panel);overflow:hidden;color:var(--fg);padding:0;text-align:left;font:inherit;cursor:pointer;box-shadow:none}
 .u4-gal-card:hover{border-color:var(--accent);background:var(--accent-soft);box-shadow:none}
 .u4-gal-card.is-deferred{border-color:var(--open);background:var(--open-soft)}
+.u4-gal-card.is-retired{border-color:var(--crimson,#b42318);background:var(--panel);opacity:.88}
 .u4-gal-card img{width:100%;height:146px;object-fit:cover;display:block;background:var(--bg);border-bottom:1px solid var(--line)}
 .u4-gal-meta{padding:8px 10px;display:grid;gap:3px;width:100%}
 .u4-gal-badge-row{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap}
 .u4-gal-tag{display:inline-block;font:600 10px/1.2 var(--mono);text-transform:uppercase;letter-spacing:.06em;padding:1.5px 6px;border-radius:4px;background:var(--accent-soft);color:var(--accent)}
 .u4-gal-tag.is-live{background:var(--lock-soft);color:var(--lock)}
 .u4-gal-tag.is-deferred{background:var(--open-soft);color:var(--open)}
+.u4-gal-tag.is-retired{background:var(--crimson-soft,#fef1f0);color:var(--crimson,#b42318);border:1px solid rgba(180,35,24,.3)}
 .u4-gal-cap{font:600 13px/1.35 var(--body);color:var(--fg);overflow-wrap:anywhere}
 .u4-gal-sub{font:500 11px/1.3 var(--mono);color:var(--muted);overflow-wrap:anywhere}
 .u4-gal-empty{margin:8px 0 2px;font-size:13.5px;color:var(--muted);line-height:1.45}
@@ -1320,7 +1322,7 @@ a.u4-inline-interactive:hover{text-decoration:underline}
 .u4-pin-pill:active{cursor:grabbing}
 .u4-pin-pill.is-armed{border-style:solid;border-color:var(--crimson,#b42318);background:var(--crimson,#b42318);color:#ffffff;cursor:pointer}
 :root[data-theme="dark"] .u4-pin-pill.is-armed{color:#121618;font-weight:700}
-.u4-pin-fab{position:fixed;left:max(12px,env(safe-area-inset-left,0px));bottom:calc(env(safe-area-inset-bottom,0px) + 14px);z-index:91;max-width:calc(100vw - 92px)}
+.u4-pin-fab{position:static;flex:none;min-height:32px;height:32px;padding:4px 11px;font-size:12px}
 body.u4-lb-open .u4-pin-fab{display:none!important}
 .u4-pin-ghost{position:fixed;z-index:350;pointer-events:none;width:32px;height:32px;border-radius:50%;border:2px solid var(--crimson,#b42318);background:rgba(180,35,24,.16);transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center}
 .u4-pin-ghost::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--crimson,#b42318)}
@@ -1573,20 +1575,26 @@ main > .bar #backBtn:hover {
   main > .bar #themeBtn {
     display: none !important;
   }
-  main > .bar:not(:has(#backBtn:not([hidden]))) {
+  body.is-home main > .bar:not(:has(#backBtn:not([hidden]))) {
     border-bottom: 0;
     padding-bottom: 0;
     margin-bottom: 8px;
   }
 }
 
-/* Fix bottom-left Drag/Tap button overlapping left sidebar + hide on Home */
+/* Pin trigger docked cleanly inside main > .bar (never floats over room text/cards) + hidden on Home */
 body.is-home .u4-pin-fab {
   display: none !important;
 }
-@media (min-width: 761px) {
+@media (max-width: 760px) {
   .u4-pin-fab {
-    left: 268px !important;
+    min-height: 36px;
+    height: 36px;
+  }
+  body.is-home main > .bar:not(:has(#backBtn:not([hidden]))) {
+    border-bottom: 0;
+    padding-bottom: 0;
+    margin-bottom: 8px;
   }
 }
 
@@ -2469,6 +2477,7 @@ const UI = {
     galTagUploaded: "Uploaded",
     galTagCurated: "Reference",
     galTagDeferred: "Deferred",
+    galTagRetired: "RETIRED",
     lbOpenDoc: "Open Document / Original ↗",
     lbPrevAria: "Previous photo",
     lbNextAria: "Next photo",
@@ -2538,6 +2547,7 @@ const UI = {
     galTagUploaded: "Subida",
     galTagCurated: "Referencia",
     galTagDeferred: "Pospuesta",
+    galTagRetired: "RETIRADO",
     lbOpenDoc: "Abrir documento / original ↗",
     lbPrevAria: "Foto anterior",
     lbNextAria: "Siguiente foto",
@@ -2729,9 +2739,14 @@ function withPlanParams(href){
   sp.set("theme", currentWikiTheme());
   return path + "?" + sp.toString() + hash;
 }
+function isLocalHtmlDoc(d){
+  var h = d && KITCHEN_HOSTED_LINKS[d.id];
+  return Boolean(h && h.indexOf("./wiki-docs/") === 0 && /\.html(?:[?#]|$)/i.test(h));
+}
 function docHref(d){
   var h = KITCHEN_HOSTED_LINKS[d.id] || (isPdf(d) ? "#doc:"+d.id : docUrl(d));
   if (h && h.indexOf("./plans/") === 0) return planUrlToHash(h) || withPlanParams(h);
+  if (h && h.indexOf("./wiki-docs/") === 0 && /\.html(?:[?#]|$)/i.test(h)) return "#doc:" + d.id;
   return withPlanParams(h);
 }
 
@@ -3075,6 +3090,7 @@ function getStaticRoomGalleryItems(roomKey){
       note: es ? (it.statusEs || it.statusEn || "") : (it.statusEn || it.statusEs || ""),
       href: drv,
       deferred: Boolean(it.deferred),
+      retired: Boolean(it.retired),
       source: "curated"
     };
   });
@@ -3097,6 +3113,7 @@ function getStaticRoomGalleryItems(roomKey){
         note: "",
         href: href,
         deferred: Boolean(it.deferred),
+        retired: Boolean(it.retired),
         source: "curated"
       });
     });
@@ -3172,9 +3189,10 @@ function renderSingleGallerySection(roomKey, kind){
 
   const cardsHtml = items.length
     ? '<div class="u4-gal-grid">' + items.map((it, idx) => {
-        const badgeCls = it.deferred ? "u4-gal-tag is-deferred" : (it.source === "live" ? "u4-gal-tag is-live" : "u4-gal-tag");
-        const badgeLbl = it.deferred ? t("galTagDeferred") : (it.source === "live" ? t("galTagUploaded") : (isRenders ? "Render" : t("galTagCurated")));
-        return '<button type="button" class="u4-gal-card'+(it.deferred?' is-deferred':'')+'" data-u4-gal-idx="'+idx+'">'
+        const badgeCls = it.retired ? "u4-gal-tag is-retired" : (it.deferred ? "u4-gal-tag is-deferred" : (it.source === "live" ? "u4-gal-tag is-live" : "u4-gal-tag"));
+        const badgeLbl = it.retired ? t("galTagRetired") : (it.deferred ? t("galTagDeferred") : (it.source === "live" ? t("galTagUploaded") : (isRenders ? "Render" : t("galTagCurated"))));
+        const cardStateCls = it.retired ? " is-retired" : (it.deferred ? " is-deferred" : "");
+        return '<button type="button" class="u4-gal-card'+cardStateCls+'" data-u4-gal-idx="'+idx+'">'
           + '<img src="'+u4GalEsc(it.thumbUrl)+'" alt="'+u4GalEsc(it.title)+'" loading="lazy">'
           + '<div class="u4-gal-meta">'
           + '<div class="u4-gal-badge-row"><span class="'+badgeCls+'">'+u4GalEsc(badgeLbl)+'</span></div>'
@@ -4153,7 +4171,15 @@ function mountUniversalPinUi(){
     pill.setAttribute("data-u4-pin-trigger", "1");
     pill.setAttribute("aria-pressed", "false");
     pill.textContent = t("pinPillIdle");
-    document.body.appendChild(pill);
+    const topBar = document.querySelector("main > .bar");
+    const langBtn = document.getElementById("langBtn");
+    if (topBar && langBtn && langBtn.parentNode === topBar) {
+      topBar.insertBefore(pill, langBtn);
+    } else if (topBar) {
+      topBar.appendChild(pill);
+    } else {
+      document.body.appendChild(pill);
+    }
   }
   if (!document.getElementById("u4PinArmBanner")) {
     const ban = document.createElement("div");
@@ -5186,9 +5212,12 @@ function show(key){
     renderNav();
     document.getElementById("field").hidden=true;
     const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+    const hostedWithPrefs = (hosted && hosted.indexOf("./wiki-docs/") === 0 && /\.html(?:[?#]|$)/i.test(hosted))
+      ? (hosted + (hosted.indexOf("?") >= 0 ? "&" : "?") + "lang=" + encodeURIComponent(LANG === "es" ? "es" : "en") + "&theme=" + encodeURIComponent(currentWikiTheme()))
+      : hosted;
     const driveBtn=(/^2026-/.test(id)||hosted)?'':'<a class="btn ghost" href="'+docUrl(d)+'" target="_blank" rel="noopener">'+esc(t("openInDrive"))+'</a>';
-    const hostedBtn=hosted?'<a class="btn ghost" href="'+esc(hosted)+'" target="_blank" rel="noopener">'+esc(t("openFullPage"))+'</a>':'';
-    const frameSrc=hosted?hosted:('https://drive.google.com/file/d/'+encodeURIComponent(id)+'/preview');
+    const hostedBtn=hostedWithPrefs?'<a class="btn ghost" href="'+esc(hostedWithPrefs)+'">'+esc(t("openFullPage"))+'</a>':'';
+    const frameSrc=hostedWithPrefs?hostedWithPrefs:('https://drive.google.com/file/d/'+encodeURIComponent(id)+'/preview');
     const hintHtml=hosted?'':'<p class="hint" style="color:var(--muted);font-size:13px;margin-top:8px">'+esc(t("drivePreviewHint"))+'</p>';
     window.__u4ActiveDocContext = {
       id: id,
@@ -6284,7 +6313,7 @@ function renderDecisions(){
   // Next-session view: one heading per group, so each question sits with the meeting or reason it belongs to.
   const DEC_GROUPS = [
     ["blocking", "Blocking work now", "Detiene trabajo ahora"],
-    ["hvac", "Questions for the HVAC walkthrough \u00b7 Mon Nov 23", "Preguntas para la visita de HVAC \u00b7 lun 23 de nov"],
+    ["hvac", "Questions for the NEXT HVAC walkthrough", "Preguntas para la visita de HVAC con NEXT"],
     ["next", "Next up", "Lo que sigue"]
   ];
   const decGroupOf = d => d.group || (d.priority===1 ? "blocking" : "next");
@@ -7284,13 +7313,13 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
     "attic-hatch": {
       id: "attic-hatch",
       room: "attic-access",
-      url: "./plans/hvac-layout/index.html",
-      docIdEn: "2026-11-20_HVAC-Layout-Interactive_EN",
-      docIdEs: "2026-11-20_HVAC-Layout-Interactive_ES",
-      titleEn: "Attic furnace and ducts interactive layout",
-      titleEs: "Plano interactivo de calefacción y ductos en ático",
+      url: "./plans/attic-hatch/index.html",
+      docIdEn: "2026-11-20_Attic-Hatch-Interactive_EN",
+      docIdEs: "2026-11-20_Attic-Hatch-Interactive_ES",
+      titleEn: "Permanent attic hatch interactive plan",
+      titleEs: "Plano interactivo de escotilla permanente del ático",
       status: "live",
-      aliases: ["attic-hatch","interactive hvac","hvac what-if","ductwork layout","attic furnace","plano interactivo clima"]
+      aliases: ["attic-hatch","permanent attic hatch","escotilla interactiva","escotilla del atico"]
     },
     "hvac-layout": {
       id: "hvac-layout",
@@ -7324,6 +7353,17 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       titleEs: "Plano interactivo eléctrico de cocina y subpanel D04",
       status: "live",
       aliases: ["kitchen-electrical","electrical plan","subpanel d04","kitchen circuits","plano electrico cocina","subpanel d04"]
+    },
+    "bathroom-tile": {
+      id: "bathroom-tile",
+      room: "bathroom",
+      url: "./plans/bathroom-tile/index.html",
+      docIdEn: "bathroom-tile",
+      docIdEs: "bathroom-tile",
+      titleEn: "Bathroom Tub & Wall Tile Plan",
+      titleEs: "Baño: Plano de Azulejo y Nichos",
+      status: "live",
+      aliases: ["bathroom-tile","bathroom wall tile","tub tile","azulejo de bano","plano de azulejo"]
     }
   };
 

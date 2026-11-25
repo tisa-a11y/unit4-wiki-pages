@@ -5,17 +5,17 @@
   "noteEs": "Accesorios de bronce, botiquín sobre el muro (devolver el grande), inodoro de 10\" al eje, puerta abatible hacia el pasillo.",
   "items": [
     {
-      "img": "https://drive.google.com/thumbnail?id=13tH-plEJj-eopLt3stePuWSzJQLrJMja&sz=w1200",
-      "href": "https://drive.google.com/file/d/13tH-plEJj-eopLt3stePuWSzJQLrJMja/view",
+      "img": "./wiki-images/bathroom-warm-brass-concept.jpg",
+      "href": "./wiki-images/bathroom-warm-brass-concept.jpg",
       "en": "Bathroom look",
       "es": "Aspecto del baño"
     },
     {
-      "img": "https://drive.google.com/thumbnail?id=1S8GNQgWQXY7wp_TWWBoRVHuLqjd4GukG&sz=w1200",
-      "href": "https://drive.google.com/file/d/1S8GNQgWQXY7wp_TWWBoRVHuLqjd4GukG/view",
+      "img": "./wiki-images/bathroom-pocket-door-mockup-v2-retired.jpg",
+      "href": "./wiki-images/bathroom-pocket-door-mockup-v2-retired.jpg",
       "en": "Pocket door idea (RETIRED Nov 24 — outward-swing hallway door locked)",
       "es": "Idea de puerta corrediza (RETIRADA 24 nov — puerta abatible hacia el pasillo confirmada)",
-      "deferred": true
+      "retired": true
     }
   ]
 }

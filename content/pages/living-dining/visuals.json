@@ -5,10 +5,10 @@
   "noteEs": "El tablero queda en el marco de moldura superior izquierdo del muro del comedor (D04).",
   "items": [
     {
-      "img": "https://drive.google.com/thumbnail?id=14_p0IwMO_fdulKX2_SOUd4zRZ2jcSE61&sz=w1200",
-      "imgEs": "https://drive.google.com/thumbnail?id=1YzpsF3QPmC-RIEwZbNoIq6K4sjB6zRgX&sz=w1200",
-      "href": "https://drive.google.com/file/d/14_p0IwMO_fdulKX2_SOUd4zRZ2jcSE61/view",
-      "hrefEs": "https://drive.google.com/file/d/1YzpsF3QPmC-RIEwZbNoIq6K4sjB6zRgX/view",
+      "img": "./wiki-images/living-dining-d04-concept-en.jpg",
+      "imgEs": "./wiki-images/living-dining-d04-concept-es.jpg",
+      "href": "./wiki-images/living-dining-d04-concept-en.jpg",
+      "hrefEs": "./wiki-images/living-dining-d04-concept-es.jpg",
       "en": "Panel wall with mouldings",
       "es": "Muro del tablero con molduras"
     }

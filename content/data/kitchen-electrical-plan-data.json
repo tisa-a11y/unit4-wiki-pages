@@ -413,7 +413,7 @@
       "height": 78.0
     },
     "planning_gates_project_planning_only": [
-      "Mon Nov 23 HVAC/Electrical Walkthrough (2-4 PM PT): Reconcile signed NEXT #5153-3 80A/#4 Cu feeder vs E20-R1 100A/#3 Cu THWN-2 owner target.",
+      "Rescheduled NEXT HVAC/Electrical Walkthrough: Reconcile signed NEXT #5153-3 80A/#4 Cu feeder vs E20-R1 100A/#3 Cu THWN-2 owner target.",
       "Hold 6hvRcQ4XC9mr56g7: Side-entry notches on D04 on HOLD; route exits vertically through top header to attic or approved in-wall stud bands — NEVER through panel back.",
       "Hold 6hvjQ8qJXqR8Cfj7: Do not pull interior kitchen wire or close drywall until rough-in layout and trade release are confirmed."
     ],
@@ -563,7 +563,7 @@
         "serves_es": "Calefactor en Ático (Carrier/Bryant Legacy 45,000 BTU) con Desconectador",
         "amps": 15,
         "poles": 1,
-        "breaker_type": "Standard (confirm Carrier nameplate MOP Mon Nov 23)",
+        "breaker_type": "Standard (confirm Carrier nameplate MOP at NEXT walkthrough)",
         "eaton_cat": "BR115",
         "cable": "14/2 Cu NM-B",
         "route_mode": "attic",

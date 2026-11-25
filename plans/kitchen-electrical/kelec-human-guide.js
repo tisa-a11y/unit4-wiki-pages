@@ -934,8 +934,8 @@
     if (holdEl) {
       holdEl.className = "u4h-hold-strip is-danger";
       holdEl.innerHTML = es
-        ? "<strong>PAUSA DE INSTALACIÓN ELÉCTRICA:</strong> Confirmar alimentador D04 (80A vs 100A), cortes laterales EN PAUSA y revisión de caja Eaton BRP20L125G el lunes 23 nov antes de jalar cable o cerrar tablaroca. El muro Sur muestra el bastidor existente como referencia. Sellar contra lluvia y tapar el nicho anterior, y volver a revisar las cajas en obra."
-        : "<strong>ROUGH-IN ON HOLD:</strong> Confirm D04 feeder (80A vs 100A), side-entry hold, and onsite Eaton BRP20L125G inspection on Mon Nov 23 before pulling kitchen wire or closing drywall. The South elevation shows existing framing for reference. Weatherproof and cover the former recess and recheck box locations on site.";
+        ? "<strong>PAUSA DE INSTALACIÓN ELÉCTRICA:</strong> Confirmar alimentador D04 (80A vs 100A), cortes laterales EN PAUSA y revisión de caja Eaton BRP20L125G en la visita reprogramada con NEXT antes de jalar cable o cerrar tablaroca. El muro Sur muestra el bastidor existente como referencia. Sellar contra lluvia y tapar el nicho anterior, y volver a revisar las cajas en obra."
+        : "<strong>ROUGH-IN ON HOLD:</strong> Confirm D04 feeder (80A vs 100A), side-entry hold, and onsite Eaton BRP20L125G inspection during the rescheduled NEXT walkthrough before pulling kitchen wire or closing drywall. The South elevation shows existing framing for reference. Weatherproof and cover the former recess and recheck box locations on site.";
     }
 
     var stepPills = '<div class="u4h-steps" role="tablist">' +
@@ -1182,7 +1182,7 @@
 
       var holds = [
         { k: "h1", en: "1. D04 Backside (East 13\"–27-1/2\" from SE, 53\"–77\" H): ZERO screws, ZERO boxes, side-entry ON HOLD", es: "1. Respaldo D04 (Este 13\"–27-1/2\" desde SE, 53\"–77\" alto): CERO tornillos, CERO cajas, cortes laterales EN PAUSA" },
-        { k: "h2", en: "2. Mon Nov 23 walkthrough: confirm 80A/#4 Cu vs 100A/#3 Cu feeder & inspect Eaton BRP20L125G onsite", es: "2. Visita lunes 23 nov: confirmar alimentador 80A/#4 vs 100A/#3 y revisar caja Eaton BRP20L125G en obra" },
+        { k: "h2", en: "2. Rescheduled NEXT walkthrough: confirm 80A/#4 Cu vs 100A/#3 Cu feeder & inspect Eaton BRP20L125G onsite", es: "2. Visita reprogramada con NEXT: confirmar alimentador 80A/#4 vs 100A/#3 y revisar caja Eaton BRP20L125G en obra" },
         { k: "h3", en: "3. DW-GD 2-gang goes INSIDE 30\" sink base (@ 76\", 14\" H) with separate neutrals — NEVER behind dishwasher", es: "3. Caja doble DW-GD va DENTRO del gabinete de tarja (@ 79\", 14\" alto) con neutros separados — NUNCA atrás del lavavajillas" },
         { k: "h4", en: "4. HD-1 hood is flush 1-gang 2\"×3\" (~83\"–86\" AFF, flush) — replaces retired 4×4 @ 100\"/104\"", es: "4. Campana HD-1 usa caja sencilla 2\"×3\" (~83\"–86\" piso, al ras) — reemplaza caja 4×4 a 100\"/104\"" }
       ];

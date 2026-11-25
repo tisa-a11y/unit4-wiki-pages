@@ -267,20 +267,34 @@ body.u4-mode-blueprint #blueprint-sheet-shell {
   background: var(--accent-soft);
 }
 
-/* Seamless Segmented Sibling Switcher */
-.u4h-seg-switch {
+/* Seamless Segmented Sibling Switcher (Single-Line Non-Wrapping + Horizontal Scroll on Narrow Viewports) */
+div.u4h-seg-switch,
+.u4h-seg-switch[role="navigation"] {
   display: inline-flex;
   align-items: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  overflow-x: auto;
+  max-width: 100%;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
   background: var(--bg);
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 2px;
   gap: 2px;
+  box-sizing: border-box;
+}
+
+div.u4h-seg-switch::-webkit-scrollbar,
+.u4h-seg-switch[role="navigation"]::-webkit-scrollbar {
+  display: none;
 }
 
 .u4h-seg-item {
   display: inline-flex;
   align-items: center;
+  flex: 0 0 auto;
   gap: 4px;
   padding: 3px 10px;
   border-radius: 999px;
@@ -1160,23 +1174,28 @@ html[data-theme="dark"] .u4h-svg-wrap {
     min-width: 0;
     box-sizing: border-box;
   }
-  .u4h-seg-switch {
+  div.u4h-seg-switch,
+  .u4h-seg-switch[role="navigation"] {
     display: flex;
     width: 100%;
     max-width: 100%;
-    flex-wrap: wrap;
-    justify-content: center;
-    border-radius: 8px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    border-radius: 999px;
     box-sizing: border-box;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
   }
   .u4h-seg-item {
-    min-height: 36px;
+    min-height: 34px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    flex: 0 0 auto;
     font-size: 11px;
-    padding: 4px 8px;
-    white-space: normal;
+    padding: 4px 10px;
+    white-space: nowrap;
     text-align: center;
     box-sizing: border-box;
   }
@@ -1427,7 +1446,8 @@ html[data-theme="dark"] .u4h-check-row.is-checked {
 }
 
 /* U4_UNIFIED_ES_EN_TOGGLE_PLAN_START */
-.u4h-seg-switch,
+button.u4h-seg-switch,
+.u4h-seg-switch[role="switch"],
 .u4h-lang-btn.u4h-seg-switch,
 .u4h-mini-btn.u4h-seg-switch {
   position: relative;
@@ -1451,17 +1471,20 @@ html[data-theme="dark"] .u4h-check-row.is-checked {
   box-sizing: border-box;
   transition: border-color 160ms ease;
 }
-.u4h-seg-switch:hover,
+button.u4h-seg-switch:hover,
+.u4h-seg-switch[role="switch"]:hover,
 .u4h-lang-btn.u4h-seg-switch:hover,
 .u4h-mini-btn.u4h-seg-switch:hover {
   border-color: var(--accent);
   background: var(--bg);
 }
-.u4h-seg-switch:focus-visible {
+button.u4h-seg-switch:focus-visible,
+.u4h-seg-switch[role="switch"]:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
-.u4h-seg-switch .u4-seg-thumb {
+button.u4h-seg-switch .u4-seg-thumb,
+.u4h-seg-switch[role="switch"] .u4-seg-thumb {
   position: absolute;
   top: 2px;
   left: 2px;
@@ -1473,10 +1496,12 @@ html[data-theme="dark"] .u4h-check-row.is-checked {
   pointer-events: none;
   z-index: 0;
 }
-.u4h-seg-switch[aria-checked="true"] .u4-seg-thumb {
+button.u4h-seg-switch[aria-checked="true"] .u4-seg-thumb,
+.u4h-seg-switch[role="switch"][aria-checked="true"] .u4-seg-thumb {
   transform: translateX(100%);
 }
-.u4h-seg-switch .u4-seg-opt {
+button.u4h-seg-switch .u4-seg-opt,
+.u4h-seg-switch[role="switch"] .u4-seg-opt {
   position: relative;
   z-index: 1;
   display: inline-flex;
@@ -1488,19 +1513,23 @@ html[data-theme="dark"] .u4h-check-row.is-checked {
   transition: color 160ms ease;
   user-select: none;
 }
-.u4h-seg-switch[aria-checked="false"] .u4-seg-opt.is-a,
-.u4h-seg-switch:not([aria-checked="true"]) .u4-seg-opt.is-a,
-.u4h-seg-switch[aria-checked="true"] .u4-seg-opt.is-b {
+button.u4h-seg-switch[aria-checked="false"] .u4-seg-opt.is-a,
+button.u4h-seg-switch:not([aria-checked="true"]) .u4-seg-opt.is-a,
+button.u4h-seg-switch[aria-checked="true"] .u4-seg-opt.is-b,
+.u4h-seg-switch[role="switch"][aria-checked="false"] .u4-seg-opt.is-a,
+.u4h-seg-switch[role="switch"]:not([aria-checked="true"]) .u4-seg-opt.is-a,
+.u4h-seg-switch[role="switch"][aria-checked="true"] .u4-seg-opt.is-b {
   color: var(--panel);
 }
 @media (prefers-reduced-motion: reduce) {
-  .u4h-seg-switch .u4-seg-thumb,
-  .u4h-seg-switch .u4-seg-opt {
+  button.u4h-seg-switch .u4-seg-thumb,
+  button.u4h-seg-switch .u4-seg-opt {
     transition: none;
   }
 }
 @media (max-width: 640px) {
-  .u4h-seg-switch,
+  button.u4h-seg-switch,
+  .u4h-seg-switch[role="switch"],
   .u4h-lang-btn.u4h-seg-switch,
   .u4h-mini-btn.u4h-seg-switch {
     min-height: 36px;

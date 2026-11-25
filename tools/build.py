@@ -67,7 +67,11 @@ def per_page(var):
                 if not (isinstance(s, dict) and s.get("en") and s.get("es") and isinstance(s.get("done"), bool)):
                     errors.append(f"{f}: step {n+1} needs \"done\" (true/false), \"en\" and \"es\"")
             if not 4 <= len(steps) <= 7: warnings.append(f"{f} has {len(steps)} steps (Tisa's rule: 4-7 high-level milestones)")
-            v = {("items" if a == "steps" else a): ([[1 if s.get("done") else 0, s.get("en", ""), s.get("es", "")] for s in b if isinstance(s, dict)] if a == "steps" else b) for a, b in v.items()}
+            if "items" in v and "steps" in v:
+                warnings.append(f"{f} has both \"steps\" and legacy \"items\"; ignoring legacy \"items\"")
+            out_v = {a: b for a, b in v.items() if a not in ("steps", "items")}
+            out_v["items"] = [[1 if s.get("done") else 0, s.get("en", ""), s.get("es", "")] for s in steps if isinstance(s, dict)]
+            v = out_v
         if spec["file"] == "documents.json":
             if not isinstance(v, list): errors.append(f"{f}: must be a list"); continue
             for n, x in enumerate(v):
