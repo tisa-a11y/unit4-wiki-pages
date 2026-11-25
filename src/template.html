@@ -1192,6 +1192,7 @@ html body .u4-subpage-dir,html body article .src{display:none!important}
 html body article h2.dec-group{font-size:19px;margin:26px 0 8px;padding:0 0 0 12px;border:0;border-left:3px solid var(--accent)}
 html body .u4-lead-pic{margin:0 0 14px;max-width:74ch}
 html body .u4-lead-pic img{display:block;width:100%;max-height:340px;object-fit:cover;border-radius:10px}
+html body .u4-lead-pic--uncropped img{max-height:none;height:auto;object-fit:contain}
 html body .u4-lead-pic figcaption{font-size:13.5px;color:var(--muted);margin-top:5px}
 /* 2026-11-20 (Tisa): menu bar stays as built; no page drop-down beside it; Home sections tied by a side line */
 html body .mobile select#jump{display:none!important}
@@ -2351,6 +2352,165 @@ nav.rail a[aria-current="page"]::before {
   background-color: var(--accent) !important;
 }
 /* U4_SIDEBAR_POLISH_V1_CSS_END */
+
+/* U4_PAGEWIDE_WIKI_PIN_CSS_START */
+body.is-home .u4-pin-fab,
+.u4-pin-fab {
+  display: inline-flex !important;
+  left: auto !important;
+  right: 16px !important;
+  bottom: 72px !important;
+  z-index: 95 !important;
+  touch-action: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+}
+@media (max-width: 640px) {
+  body.is-home .u4-pin-fab,
+  .u4-pin-fab {
+    right: 12px !important;
+    bottom: 68px !important;
+  }
+}
+main.u4-page-pin-armed,
+main.u4-page-pin-armed * {
+  cursor: crosshair !important;
+}
+#doc {
+  position: relative;
+}
+.u4-iframe-pin-shield {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: transparent;
+  display: none;
+  cursor: crosshair;
+}
+.u4-iframe-pin-shield.is-active {
+  display: block;
+}
+.u4-wpin-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 38;
+}
+.u4-wpin-highlight {
+  outline: 2px dashed var(--crimson, #a8281c) !important;
+  outline-offset: 3px !important;
+  border-radius: 4px;
+}
+.u4-wpin-dot {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 2px solid var(--crimson, #a8281c);
+  background: rgba(168, 40, 28, 0.18);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  cursor: pointer;
+  z-index: 39;
+}
+.u4-wpin-dot span {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--crimson, #a8281c);
+  color: #ffffff;
+  font-family: var(--mono, monospace);
+  font-size: 10px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.u4-wpin-pop {
+  position: relative;
+  z-index: 42;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 8px 0 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1.5px solid var(--accent, #1f5f7a);
+  background: var(--panel, #ffffff);
+  color: var(--fg, #1d2326);
+  box-shadow: 0 4px 14px rgba(18, 22, 24, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.u4-wpin-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-family: var(--mono, monospace);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent, #1f5f7a);
+}
+.u4-wpin-ctx {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: calc(100% - 70px);
+}
+.u4-wpin-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.u4-wpin-row input {
+  flex: 1 1 180px;
+  min-width: 0;
+  height: 34px;
+  padding: 0 10px;
+  border-radius: 6px;
+  border: 1px solid var(--line, #d9dedc);
+  background: var(--bg, #f4f5f3);
+  color: var(--fg, #1d2326);
+  font-family: inherit;
+  font-size: 13.5px;
+}
+.u4-wpin-btn {
+  min-height: 32px;
+  padding: 4px 11px;
+  border-radius: 6px;
+  border: 1px solid var(--line, #d9dedc);
+  background: var(--bg, #f4f5f3);
+  color: var(--fg, #1d2326);
+  font-family: var(--mono, monospace);
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.u4-wpin-btn.is-primary {
+  background: var(--accent, #1f5f7a);
+  border-color: var(--accent, #1f5f7a);
+  color: var(--panel, #ffffff);
+}
+html[data-theme="dark"] .u4-wpin-btn.is-primary {
+  color: #0d181d;
+}
+.u4-wpin-status {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--lock, #2f6b3f);
+}
+.u4-wpin-status.is-err {
+  color: var(--crimson, #a8281c);
+}
+@media print {
+  .u4-pin-fab, .u4-wpin-layer, .u4-wpin-pop, .u4-iframe-pin-shield { display: none !important; }
+}
+/* U4_PAGEWIDE_WIKI_PIN_CSS_END */
 </style>
 
 <section id="agent-brief" class="sr-only" aria-label="Agent brief"># START HERE — Unit 4 remodel, 1231 11th Ave (San Francisco)<br><br>**This is the only start-here file.** Every person and agent opening this folder reads this first, fully, before acting.<br>Updated 2026-11-05 17:45 PT by Claude (Tisa&#x27;s account, cloud session). The same text is the wiki&#x27;s &quot;For AI agents: read first&quot; section.<br><br>## 0. Where to work — Google Drive is the single source of truth<br>- **Unit 4 folder (work here):** https://drive.google.com/drive/folders/1NnUfcuJfnzcjJz3XRvDQDhfvtMkrlSOr (`1231-11th-avenue/unit-4-renovation`)<br>- **Whole-building parent:** https://drive.google.com/drive/folders/1StmWHtnrDQlpd1CbUUfUEOI1vg-jHn29 (`1231-11th-avenue`)<br>- Everyone — Tisa&#x27;s Claude, John&#x27;s Claude, Dibble, any other agent — reads and writes through this Drive folder. (It is backed by Tisa&#x27;s Mini and syncs automatically; you never need the Mini path.)<br>- Every Unit 4 document now lives here, including copies of everything from the old locations (section 3). If you can&#x27;t find something, look in the room folder&#x27;s `from-remodel-hub/`, `from-unit4-bath-folder/` or `from-my-drive/` subfolder before assuming it&#x27;s missing.<br>- Older start-here, AGENTS and CLAUDE files were retired 2026-11-05 to `continuity/_superseded/start-here-history/` — don&#x27;t follow them.<br><br>---<br><br>## 1. Who and what<br>- **Tisa** owns the project and makes and locks every decision. **John** is lead carpenter on site. **Ervin, Joel, Alex** are crew (Spanish speakers).<br>- **Wiki** — https://tisa-a11y.github.io/unit4-wiki-pages/ — the shared picture: roadmap, one spec per project, open decisions, documents (PDFs preview in the page). It reads the `.md` files in this folder.<br>- **Todoist** board `Full 1231 11th Avenue Remodel` (id ). The wiki is its spine: every card traces to a spec, a locked decision or captured input.<br>- **Magicplan** MASTER plan is the geometry source: https://cloud.magicplan.app/plan/abb2d2c6-aa1c-4a88-a57e-1260847b6410<br>- **Your job:** keep the project moving with as little effort from Tisa and John as possible. Answer from the specs, capture what they tell you, file it, keep wiki and Todoist in step.<br><br>## 2. Read in this order<br>1. `STATUS-NOW.md` — what&#x27;s locked, what&#x27;s blocking, what&#x27;s next on site. Answer &quot;what&#x27;s up?&quot; from here first.<br>2. `continuity/ROADMAP.md` — sequence and phases.<br>3. `&lt;room&gt;/SPEC.md` for the area you&#x27;re working on.<br>4. `continuity/CURRENT-DECISIONS.md` and `continuity/KNOWN-GAPS.md` only if you need the history.<br><br>## 3. Folder map<br>| Folder | Holds |<br>|---|---|<br>| `kitchen/` `bathroom/` `electrical/` `laundry/` `bedroom/` `living-dining/` `hallway/` `paint-floors/` `hvac/` | One per room or trade; each has `SPEC.md` (governs) plus dated drawings and packages. |<br>| `interior-design/` | Wall treatment, trim, outlet and finish plans (dated revision folders). |<br>| `general/` | Whole-unit items; `from-remodel-hub/` = imported old crew-hub files. |<br>| `sprint/` | Current sprint plan and session agendas. |<br>| `continuity/` | Roadmap, decisions log, known gaps, labor ballpark, history and source snapshots. |<br>| `work-control/` | Agent index, Todoist runbook (dated snapshot), `wiki-source/` (wiki build files). |<br>| `to-triage/` | Drop box for any input (notes, photos, voice memos, session minutes). Claude routes it and moves it to `to-triage/_done/`. |<br>| `sessions/` | One folder per working session: minutes (and transcript when available). |<br>| `_to_delete/` | Marked for removal; only Tisa empties it. |<br><br>Outside this folder: `../building/` (common areas, backyard, alley; `building/earlier-renovations-not-unit-4…/` holds older renovation docs that are **not** Unit 4 — don&#x27;t use them for Unit 4), `../GOOGLE-DOCS-INDEX.md`, and the separate private folder `1231-11th-avenue-private` (leases, costs, payroll, bids — **never share with crew**).<br><br>**Old locations — still readable for history, never the place to work:** Drive &quot;1231 11th Ave - Unit 4 Remodel&quot; (old crew hub, folders 01–12), Drive &quot;11th Ave Unit 4 Bath&quot;. Everything in them was copied here on 2026-11-04/05. If an old file and a file here disagree, the room&#x27;s `SPEC.md` governs.<br><br>## 4. Which version is the latest<br>1. Names carry date and revision: `YYYY-MM-DD_U4_&lt;room or trade&gt;_&lt;what&gt;_R#` (issued drawings may use `RevA`, `RevB`), then `_EN` or `_ES`. English and Spanish are always separate files.<br>2. The latest lives in the topic folder. A replaced file moves, name unchanged, to that folder&#x27;s `_superseded/` (or `history/`). Nothing is deleted.<br>3. If a folder still has more than one live iteration, its `CURRENT.md` names the one that governs.<br>4. `from-remodel-hub/`, `from-unit4-bath-folder/`, `from-my-drive/` are copies imported 2026-11-04 so no mockup or image is lost; they&#x27;re being reconciled. Until then the room&#x27;s `SPEC.md` and the dated files outside them govern.<br><br>## 5. Golden rule: John never has to enter anything himself<br>When John or Tisa tells you something — a task, a measurement, a problem, a question, a decision needed — capture it for them in their words and file it (section 7). Don&#x27;t send them to a form. Confirm back in one line what you filed and where.<br><br>## 6. What each kind of agent can do<br>| You are… | You can |<br>|---|---|<br>| **Claude on Tisa&#x27;s claude.ai account** (this Project, Cowork, Claude Code) | Everything: wiki data via the ArtifactData tool (URL above), republish the wiki via the Artifact tool, edit files here, Todoist via the connector (connected 2026-11-03). |<br>| **John&#x27;s Claude** (claude.ai cloud, often voice on John&#x27;s iPhone) | Read the wiki link, this Drive folder and the Todoist board. Its Drive connector can **create** files but can&#x27;t overwrite existing ones, so it writes session minutes and notes to `to-triage/` as `YYYY-MM-DD_HHMM_session_&lt;topic&gt;.md` with an author line (which Claude, which device, cloud or local). Tisa&#x27;s Claude routes them into the wiki, specs, STATUS-NOW and Todoist. |<br>| **Any other agent** (Dibble, Codex, Gemini, Antigravity) | Read and edit the files here (section 8 rules), update `STATUS-NOW.md`, drop input in `to-triage/`. Access comes from this Drive folder being shared with John&#x27;s Google account as Editor. |<br>| **Any agent with a browser** | Open the wiki and help John use it on his phone. |<br><br>**Dropping input (non-Claude agents):** `to-triage/YYYY-MM-DD_HHMM_&lt;who&gt;_&lt;short&gt;.md`<br>```<br>type: task | fact | decision | note<br>project: kitchen | bathroom | electrical | laundry | bedroom | living-dining | hallway | paint-floors | hvac | general<br>from: &lt;agent&gt; on behalf of &lt;John/Tisa&gt;<br>---<br>&lt;their words&gt;<br>```<br>**Claude capture:** write to the wiki&#x27;s `inbox` collection `{type, project, section, title, details, raw, source:&quot;agent&quot;, from, createdAt, status:&quot;queued&quot;}`, then route it in the same turn.<br><br>## 7. Routing — where each thing goes<br>| Came in | Do this |<br>|---|---|<br>| **Task** | Look for an existing card first (comment rather than duplicate). Create it in the project&#x27;s section — Kitchen / Cocina · Bathroom / Baño · Electrical / Electricidad · Laundry / Lavandería · Walls, Molding &amp; Paint · General &amp; HVAC (bedroom, living-dining, hallway, HVAC, building) · New Tasks (need triage) · Backlog · On Hold or Blocked. Re-check section names live before writing. Plain title; description = State / Trade / Next physical action / Governing source (link to SPEC.md). **Unassigned** unless Tisa names someone. |<br>| **Site fact** | Add to the project&#x27;s SPEC.md with date and &quot;(John, field)&quot;. Comment on the card if it changes one. |<br>| **Decision needed** | Add a wiki `decisions` doc (`status: open`, priority 1 blocking / 2 next / 3 later). Only Tisa locks. |<br>| **Locked decision** (`synced: false`) | Update SPEC.md (mark LOCKED), matching cards, the Spanish crew edition, `STATUS-NOW.md`; set `synced: true`. |<br>| **Field report / session notes** | File facts as above; next steps → unassigned cards; open items → decisions; mark `recorded`. |<br><br>Wiki and cards disagree → the wiki wins (never the reverse without Tisa). Any change you make → update `STATUS-NOW.md` in the same pass.<br><br>## 8. Rules that always hold<br>- Tisa&#x27;s direction is locked; anything an AI produces is a suggestion until she locks it.<br>- Nothing is sent, signed, ordered, paid or scheduled without Tisa&#x27;s approval.<br>- Magicplan and existing drawings first. Never ask John to re-measure what&#x27;s recorded; ask only for the specific missing number.<br>- Crew-facing documents: English first, then a **separate** Spanish edition. Never mix languages. Replies to Tisa in English.<br>- Edit an existing spec rather than making a new file beside it (new files break wiki links).<br>- Superseded files go to `_superseded`; never delete. No credentials in any file here.<br>- **Wiki and Drive mirror each other** (Tisa, 2026-11-06): every wiki page and document list matches a folder in `1231 11th Avenue Unit 4`, and each document sits under the same room in both. When you add or move a document or folder in Drive, update the wiki in the same pass, and the reverse. Example: the Laundry Closet is its own project, so its documents live in `laundry/`, not `electrical/`.<br>- **Spanish for the wiki lives only in the wiki's own text** (Tisa, 2026-11-06): the English/Español toggle. Never create Spanish copies of the .md files in Drive. Crew plans keep their existing English and Spanish PDFs.<br>- **Work record (Beads):** canonical ledger `/Users/tisavo/Work/Projects/1231-11th-avenue/unit-4-renovation` on the MacBook Pro (`.beads/embeddeddolt`, main issue `tisa-wi0.6`). Run `bd where` before writing; never initialize a duplicate ledger; keep existing issue IDs. Agents that can&#x27;t reach it (cloud sessions) record state in `STATUS-NOW.md` and say Beads is pending. Last check from a cloud session (2026-11-05): not reachable, status unverified.<br>- Every session&#x27;s minutes say the date, who attended and which Claude wrote them (account, device, cloud or local).<br>- Say plainly what you verified vs. only wrote. Trust the source file over another agent&#x27;s summary.<br><br>## 9. Maintaining the wiki (Claude only)<br>Source: `work-control/wiki-source/` (template updated 2026-11-05 to include the live Home page and collapsible document lists) — `wiki_template.html`, `build_wiki.py` (embeds the specs and document lists), `brief.py` (embeds this file as the agent brief), `drive_docs.json`, `pdf_blobs.json`. Rebuild, then publish to the same artifact URL. Collections: `decisions` (Tisa/admin write), `decisionNotes`, `reports`, `sessionNotes`, `inbox`.<br><br>## 10. More detail, if needed<br>- Routing detail and history: `work-control/2026-11-03_U4_AgentWork_Index_R2.md`<br>- Todoist runbook (11/2 snapshot, has known errors): `work-control/TODOIST-PROJECT-MANAGER-RUNBOOK.md`<br>- Kitchen governing revision: `kitchen/CURRENT.md`<br></section>
@@ -3025,7 +3185,7 @@ function leadPictureBlock(key){
   const es = LANG==="es"; const it = UNIFIED_VISUALS[key].items[i];
   const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const src = (es && it.imgEs) ? it.imgEs : it.img; const cap = es ? it.es : it.en;
-  return '<figure class="u4-lead-pic"><img src="'+esc(src)+'" alt="'+esc(cap)+'"><figcaption>'+esc(cap)+'</figcaption></figure>';
+  return '<figure class="u4-lead-pic'+(it.uncropped ? ' u4-lead-pic--uncropped' : '')+'"><img src="'+esc(src)+'" alt="'+esc(cap)+'"><figcaption>'+esc(cap)+'</figcaption></figure>';
 }
 function u4GalEsc(s){ return String(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 function u4GalOrigin(){
@@ -3105,7 +3265,7 @@ function getStaticRoomGalleryItems(roomKey){
   const references = [];
   if (v0 && Array.isArray(v0.items)) {
     v0.items.forEach((it, idx) => {
-      if (idx === leadI) return;
+      if (idx === leadI && !it.showInReferences) return;
       const src = (es && it.imgEs) ? it.imgEs : (it.img || "");
       const href = (es && it.hrefEs) ? it.hrefEs : (it.href || src);
       const k1 = u4GalExtractKey(src), k2 = u4GalExtractKey(href);
@@ -12288,6 +12448,481 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
 })();
 /* U4-R7-ENHANCER-END */
 
+
+/* U4_PAGEWIDE_WIKI_PIN_JS_START */
+(function () {
+  "use strict";
+  if (window.__u4WikiPageWidePinReady) return;
+  window.__u4WikiPageWidePinReady = true;
+
+  var INTAKE_URL = "https://mac-mini.tailcf4007.ts.net/api/unit4/wiki-intake";
+  var WSTR = {
+    en: {
+      fixTab: "Flag Correction", askTab: "Ask AI",
+      fixPh: "Describe what to change or fix here...", askPh: "Ask a question about this item...",
+      sendFix: "Send Fix", sendAsk: "Ask AI", sending: "Sending...",
+      remove: "Remove", empty: "Type a correction or question first",
+      sentOk: "Correction sent — applying & pushing...",
+      errTimeout: "Timed out after 12s — please retry",
+      errNet: "Could not reach intake server — please retry",
+      armedHint: "Tap anywhere on the page (text, checklist, table, photo, or plan) to drop a pin"
+    },
+    es: {
+      fixTab: "Corregir", askTab: "Preguntar IA",
+      fixPh: "Escribe qué se debe corregir aquí...", askPh: "Escribe tu pregunta sobre este punto...",
+      sendFix: "Enviar ajuste", sendAsk: "Preguntar", sending: "Enviando...",
+      remove: "Quitar", empty: "Escribe primero una corrección o pregunta",
+      sentOk: "Corrección enviada — aplicando y publicando...",
+      errTimeout: "Tiempo agotado (12 s) — intenta de nuevo",
+      errNet: "Sin conexión al servidor — intenta de nuevo",
+      armedHint: "Toca cualquier parte de la página (texto, lista, tabla, foto o plano) para corregir"
+    },
+    ru: {
+      fixTab: "Исправить", askTab: "Спросить ИИ",
+      fixPh: "Опишите, что нужно исправить здесь...", askPh: "Задайте вопрос по этому элементу...",
+      sendFix: "Отправить", sendAsk: "Спросить", sending: "Отправка...",
+      remove: "Удалить", empty: "Сначала введите исправление или вопрос",
+      sentOk: "Правка отправлена — применяем и публикуем...",
+      errTimeout: "Превышено время ожидания (12 с)",
+      errNet: "Сервер недоступен — повторите попытку",
+      armedHint: "Нажмите на любое место страницы (текст, чек-лист, таблицу, фото или план)"
+    }
+  };
+
+  function curLang() {
+    var l = String((typeof LANG !== "undefined" && LANG) || document.documentElement.lang || "en").toLowerCase();
+    if (l.indexOf("ru") === 0) return "ru";
+    if (l.indexOf("es") === 0) return "es";
+    return "en";
+  }
+  function wt(k) { var l = curLang(); return (WSTR[l] && WSTR[l][k]) || WSTR.en[k] || k; }
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  function curRoom() {
+    var h = String(window.location.hash || "").replace(/^#/, "").trim();
+    if (!h || h === "home") return "general";
+    if (h.indexOf("plan:") === 0) {
+      var slug = h.slice(5).split("?")[0];
+      var map = {
+        "bathroom-tile": "bathroom", "bathroom-measurements": "bathroom",
+        "kitchen-west-ks4": "kitchen-oven-range", "kitchen-floor-plan": "kitchen",
+        "kitchen-electrical": "electrical", "attic-hatch": "attic-access",
+        "hvac-layout": "hvac", "attic-hvac": "hvac", "murphy-door": "laundry"
+      };
+      return map[slug] || "general";
+    }
+    return h.split("/")[0].split("?")[0] || "general";
+  }
+
+  var pState = {
+    dragging: false,
+    moved: false,
+    startX: 0,
+    startY: 0,
+    armed: false,
+    marker: null,
+    sending: false,
+    ackMap: {}
+  };
+
+  window.addEventListener("message", function (ev) {
+    var d = ev && ev.data;
+    if (d && d.type === "u4:pin-drop-ack" && d.reqId) {
+      pState.ackMap[d.reqId] = !!d.ok;
+    }
+  });
+
+  function ensureShieldAndGhost() {
+    var sh = document.getElementById("u4IframePinShield");
+    if (!sh) {
+      sh = document.createElement("div");
+      sh.id = "u4IframePinShield";
+      sh.className = "u4-iframe-pin-shield";
+      document.body.appendChild(sh);
+      sh.addEventListener("click", function (ev) {
+        if (!isAnyPinArmed()) return;
+        ev.preventDefault();
+        ev.stopPropagation();
+        setShield(false);
+        disarmAll();
+        handlePageWideDrop(ev.clientX, ev.clientY);
+      }, true);
+    }
+    var gh = document.getElementById("u4WikiPinGhost");
+    if (!gh) {
+      gh = document.createElement("div");
+      gh.id = "u4WikiPinGhost";
+      gh.style.cssText = "position:fixed;pointer-events:none;z-index:99999;width:34px;height:34px;border-radius:50%;border:2px dashed #a8281c;background:rgba(168,40,28,0.2);transform:translate(-50%,-50%);display:none;align-items:center;justify-content:center;font:800 13px monospace;color:#a8281c;";
+      gh.textContent = "⊕";
+      document.body.appendChild(gh);
+    }
+    return { shield: sh, ghost: gh };
+  }
+
+  function isAnyPinArmed() {
+    return !!(pState.armed || window.__u4PinArmed || (typeof u4PinState !== "undefined" && u4PinState && u4PinState.armed));
+  }
+
+  function disarmAll() {
+    pState.armed = false;
+    window.__u4PinArmed = false;
+    if (typeof u4PinState !== "undefined" && u4PinState) u4PinState.armed = false;
+    var mainEl = document.querySelector("main");
+    if (mainEl) mainEl.classList.remove("u4-page-pin-armed");
+    Array.prototype.slice.call(document.querySelectorAll(".u4-pin-fab")).forEach(function (b) {
+      b.classList.remove("is-armed", "armed");
+      b.setAttribute("aria-pressed", "false");
+    });
+  }
+
+  function setShield(active) {
+    var ui = ensureShieldAndGhost();
+    var hasEmbed = !!document.querySelector("#doc iframe, #doc embed, #doc object");
+    ui.shield.classList.toggle("is-active", !!(active && hasEmbed));
+    var mainEl = document.querySelector("main");
+    if (mainEl) mainEl.classList.toggle("u4-page-pin-armed", !!active);
+  }
+
+  function isPinUi(el) {
+    if (!el || !el.closest) return false;
+    return !!(
+      el.closest(".u4-pin-fab") ||
+      el.closest(".u4-wpin-pop") ||
+      el.closest(".u4-wpin-dot") ||
+      el.closest(".u4-pin-popover") ||
+      el.closest(".u4-pin-marker") ||
+      el.closest("#u4AiFloatingDock") ||
+      el.closest(".u4-live-ai-root") ||
+      el.closest("aside") ||
+      el.closest(".mobile") ||
+      el.closest("main > .bar")
+    );
+  }
+
+  function clearPageMarker() {
+    pState.marker = null;
+    pState.sending = false;
+    Array.prototype.slice.call(document.querySelectorAll(".u4-wpin-layer, .u4-wpin-pop")).forEach(function (n) {
+      if (n.parentNode) n.parentNode.removeChild(n);
+    });
+    Array.prototype.slice.call(document.querySelectorAll(".u4-wpin-highlight")).forEach(function (n) {
+      n.classList.remove("u4-wpin-highlight");
+    });
+  }
+
+  function renderPageMarker() {
+    Array.prototype.slice.call(document.querySelectorAll(".u4-wpin-layer, .u4-wpin-pop")).forEach(function (n) {
+      if (n.parentNode) n.parentNode.removeChild(n);
+    });
+    Array.prototype.slice.call(document.querySelectorAll(".u4-wpin-highlight")).forEach(function (n) {
+      n.classList.remove("u4-wpin-highlight");
+    });
+
+    var docEl = document.getElementById("doc") || document.querySelector("main");
+    var m = pState.marker;
+    if (!docEl || !m) return;
+
+    var layer = document.createElement("div");
+    layer.className = "u4-wpin-layer";
+    var dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "u4-wpin-dot";
+    dot.style.left = m.xPct + "%";
+    dot.style.top = m.yPct + "%";
+    dot.innerHTML = "<span>1</span>";
+    layer.appendChild(dot);
+    docEl.appendChild(layer);
+
+    if (m.blockEl && m.blockEl !== docEl && docEl.contains(m.blockEl)) {
+      m.blockEl.classList.add("u4-wpin-highlight");
+    }
+
+    var pop = document.createElement("div");
+    pop.className = "u4-wpin-pop";
+    pop.dataset.lang = curLang();
+    pop.innerHTML =
+      '<div class="u4-wpin-head">' +
+        '<span class="u4-wpin-ctx">#1 · ' + esc(m.snippet) + "</span>" +
+        '<button type="button" class="u4-wpin-btn" data-wp-act="close">' + esc(wt("remove")) + "</button>" +
+      "</div>" +
+      '<div class="u4-wpin-row">' +
+        '<button type="button" class="u4-wpin-btn' + (m.intent === "fix" ? " is-primary" : "") + '" data-wp-intent="fix">' + esc(wt("fixTab")) + "</button>" +
+        '<button type="button" class="u4-wpin-btn' + (m.intent === "ask" ? " is-primary" : "") + '" data-wp-intent="ask">' + esc(wt("askTab")) + "</button>" +
+      "</div>" +
+      '<div class="u4-wpin-row">' +
+        '<input type="text" id="u4WikiPagePinInput" value="' + esc(m.text) + '" placeholder="' + esc(m.intent === "fix" ? wt("fixPh") : wt("askPh")) + '" ' + (pState.sending ? "disabled" : "") + ">" +
+        '<button type="button" class="u4-wpin-btn is-primary" data-wp-act="send" ' + (pState.sending ? "disabled" : "") + ">" +
+          esc(pState.sending ? wt("sending") : (m.intent === "fix" ? wt("sendFix") : wt("sendAsk"))) +
+        "</button>" +
+      "</div>" +
+      (m.status ? '<div class="u4-wpin-status' + (m.err ? " is-err" : "") + '">' + esc(m.status) + "</div>" : "");
+
+    var anchor = m.blockEl && docEl.contains(m.blockEl) ? m.blockEl : docEl.firstElementChild;
+    if (anchor && anchor.closest) {
+      var tbl = anchor.closest("table");
+      if (tbl && docEl.contains(tbl)) anchor = tbl;
+      while (anchor && anchor.parentElement && anchor.parentElement !== docEl) {
+        var dp = "";
+        try { dp = window.getComputedStyle(anchor.parentElement).display || ""; } catch (_) {}
+        if (dp.indexOf("grid") >= 0 || dp.indexOf("flex") >= 0) anchor = anchor.parentElement;
+        else break;
+      }
+    }
+    if (anchor && anchor.parentNode && docEl.contains(anchor)) {
+      anchor.parentNode.insertBefore(pop, anchor.nextSibling);
+    } else {
+      docEl.insertBefore(pop, docEl.firstChild);
+    }
+
+    var inp = document.getElementById("u4WikiPagePinInput");
+    if (inp) {
+      inp.addEventListener("input", function () { m.text = inp.value; });
+      inp.addEventListener("keydown", function (ev) {
+        if (ev.key === "Enter") { ev.preventDefault(); sendPageMarker(); }
+        else if (ev.key === "Escape") { clearPageMarker(); }
+      });
+      if (!pState.sending) {
+        try { inp.focus({ preventScroll: true }); } catch (_) { inp.focus(); }
+      }
+    }
+    pop.querySelector("[data-wp-act='close']").onclick = clearPageMarker;
+    pop.querySelector("[data-wp-act='send']").onclick = sendPageMarker;
+    Array.prototype.slice.call(pop.querySelectorAll("[data-wp-intent]")).forEach(function (b) {
+      b.onclick = function () {
+        if (inp) m.text = inp.value;
+        m.intent = b.getAttribute("data-wp-intent") || "fix";
+        renderPageMarker();
+      };
+    });
+  }
+
+  async function sendPageMarker() {
+    var m = pState.marker;
+    if (!m || pState.sending) return;
+    var inp = document.getElementById("u4WikiPagePinInput");
+    var liveVal = inp ? String(inp.value || "") : String(m.text || "");
+    m.text = liveVal;
+    var note = liveVal.trim();
+    if (!note) {
+      m.err = true;
+      m.status = wt("empty");
+      renderPageMarker();
+      return;
+    }
+
+    var room = curRoom();
+    if (m.intent === "ask") {
+      if (window.U4LiveAi && typeof window.U4LiveAi.open === "function") {
+        window.U4LiveAi.open(note, room + " (" + m.snippet + ")");
+        clearPageMarker();
+        return;
+      }
+      var askBtn = document.querySelector("#u4TopAssistant button, #u4AiFloatingDock button, .u4-ai-fab");
+      if (askBtn && askBtn.click) askBtn.click();
+      clearPageMarker();
+      return;
+    }
+
+    pState.sending = true;
+    m.err = false;
+    m.status = wt("sending");
+    renderPageMarker();
+
+    var ctrl = typeof AbortController === "function" ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 12000) : null;
+    var hashId = String(window.location.hash || "#home").replace(/^#/, "") || "home";
+    var payload = {
+      room: room,
+      roomKey: room,
+      document_id: hashId,
+      edit_kind: "pin_correction",
+      source: "wiki-pin-dragger",
+      commandSource: "wiki_pin_correction",
+      lang: curLang(),
+      summary: "[" + hashId + "] " + note.slice(0, 120),
+      details: "Wiki Page: #" + hashId + "\nPinned Element: " + m.snippet + "\nCoordinates: (" + m.xPct + "%, " + m.yPct + "%)\nCorrection: " + note,
+      text: note,
+      target_text: m.snippet,
+      x_pct: m.xPct,
+      y_pct: m.yPct
+    };
+
+    try {
+      var opts = { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) };
+      if (ctrl) opts.signal = ctrl.signal;
+      var res = await fetch(INTAKE_URL, opts);
+      if (timer) clearTimeout(timer);
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      clearPageMarker();
+      if (typeof showToast === "function") showToast(wt("sentOk"));
+    } catch (err) {
+      if (timer) clearTimeout(timer);
+      pState.sending = false;
+      m.err = true;
+      m.status = (err && err.name === "AbortError") ? wt("errTimeout") : wt("errNet");
+      renderPageMarker();
+    }
+  }
+
+  function handlePageWideDrop(clientX, clientY) {
+    var docEl = document.getElementById("doc") || document.querySelector("main");
+    if (!docEl) return;
+
+    var ui = ensureShieldAndGhost();
+    ui.shield.style.display = "none";
+    ui.ghost.style.display = "none";
+    var hit = document.elementFromPoint ? document.elementFromPoint(clientX, clientY) : docEl;
+    ui.shield.style.display = "";
+
+    if (!hit || isPinUi(hit)) return;
+
+    var ifr = (hit.tagName === "IFRAME") ? hit : (hit.closest ? hit.closest("iframe") : null);
+    if (ifr && docEl.contains(ifr)) {
+      var ir = ifr.getBoundingClientRect();
+      var xr = ir.width ? Math.max(0.02, Math.min(0.98, (clientX - ir.left) / ir.width)) : 0.5;
+      var yr = ir.height ? Math.max(0.02, Math.min(0.98, (clientY - ir.top) / ir.height)) : 0.3;
+      var reqId = "drop-" + Date.now() + "-" + Math.random().toString(36).slice(2, 6);
+      try {
+        if (ifr.contentWindow) {
+          ifr.contentWindow.postMessage({ type: "u4:pin-drop-client", xRatio: xr, yRatio: yr, reqId: reqId }, "*");
+        }
+      } catch (_) {}
+      setTimeout(function () {
+        if (!pState.ackMap[reqId]) {
+          dropDirectOnDoc(docEl, ifr, clientX, clientY);
+        }
+      }, 95);
+      return;
+    }
+
+    var prevCount = (typeof u4PinState !== "undefined" && u4PinState && Array.isArray(u4PinState.markers)) ? u4PinState.markers.length : 0;
+    setTimeout(function () {
+      var nowCount = (typeof u4PinState !== "undefined" && u4PinState && Array.isArray(u4PinState.markers)) ? u4PinState.markers.length : 0;
+      if (nowCount > prevCount) return;
+      dropDirectOnDoc(docEl, hit, clientX, clientY);
+    }, 25);
+  }
+
+  function dropDirectOnDoc(docEl, hit, clientX, clientY) {
+    if (!docEl.contains(hit) && hit !== docEl) {
+      var mainEl = document.querySelector("main");
+      if (!mainEl || !mainEl.contains(hit)) return;
+      hit = docEl;
+    }
+    var dr = docEl.getBoundingClientRect();
+    if (!dr.width || !dr.height) return;
+    var xPct = Math.max(2, Math.min(98, +(((clientX - dr.left) / dr.width) * 100).toFixed(1)));
+    var yPct = Math.max(1, Math.min(99, +(((clientY - dr.top) / dr.height) * 100).toFixed(1)));
+
+    var blk = hit.closest
+      ? (hit.closest("tr, li, label, .check-item, .fact-card, .doc-card, .render-card, figure, details, blockquote, h1, h2, h3, h4, p, section") || hit)
+      : hit;
+    if (!docEl.contains(blk)) blk = docEl;
+
+    var rawTxt = "";
+    if (blk.tagName === "IFRAME") {
+      rawTxt = blk.getAttribute("title") || blk.getAttribute("src") || "Embedded viewer";
+    } else {
+      rawTxt = blk.innerText || blk.textContent || hit.getAttribute("alt") || "Page section";
+    }
+    var snippet = String(rawTxt || "").replace(/\s+/g, " ").trim().slice(0, 110) || "Page item";
+
+    pState.marker = {
+      xPct: xPct,
+      yPct: yPct,
+      blockEl: blk,
+      snippet: snippet,
+      intent: "fix",
+      text: "",
+      status: "",
+      err: false
+    };
+    disarmAll();
+    setShield(false);
+    renderPageMarker();
+  }
+
+  function bindFabButtons() {
+    Array.prototype.slice.call(document.querySelectorAll(".u4-pin-fab")).forEach(function (fab) {
+      if (fab.dataset.u4PageWideBound === "1") return;
+      fab.dataset.u4PageWideBound = "1";
+
+      fab.addEventListener("pointerdown", function (ev) {
+        if (ev.button && ev.button !== 0) return;
+        pState.dragging = true;
+        pState.moved = false;
+        pState.startX = ev.clientX;
+        pState.startY = ev.clientY;
+        ensureShieldAndGhost();
+        try { fab.setPointerCapture(ev.pointerId); } catch (_) {}
+      }, true);
+
+      fab.addEventListener("pointermove", function (ev) {
+        if (!pState.dragging) return;
+        if (!pState.moved && Math.hypot(ev.clientX - pState.startX, ev.clientY - pState.startY) > 6) {
+          pState.moved = true;
+          setShield(true);
+        }
+        if (pState.moved) {
+          var ui = ensureShieldAndGhost();
+          ui.ghost.style.display = "flex";
+          ui.ghost.style.left = ev.clientX + "px";
+          ui.ghost.style.top = ev.clientY + "px";
+        }
+      }, true);
+
+      fab.addEventListener("pointerup", function (ev) {
+        if (!pState.dragging) return;
+        pState.dragging = false;
+        try { fab.releasePointerCapture(ev.pointerId); } catch (_) {}
+        var ui = ensureShieldAndGhost();
+        ui.ghost.style.display = "none";
+        if (pState.moved) {
+          ev.preventDefault();
+          ev.stopPropagation();
+          setShield(false);
+          disarmAll();
+          handlePageWideDrop(ev.clientX, ev.clientY);
+        } else {
+          setTimeout(function () {
+            pState.armed = isAnyPinArmed() || !pState.armed;
+            setShield(pState.armed);
+            if (pState.armed && typeof showToast === "function") showToast(wt("armedHint"));
+          }, 15);
+        }
+      }, true);
+    });
+  }
+
+  document.addEventListener("click", function (ev) {
+    if (!isAnyPinArmed()) return;
+    if (isPinUi(ev.target)) return;
+    setShield(false);
+    disarmAll();
+    handlePageWideDrop(ev.clientX, ev.clientY);
+  }, true);
+
+  window.addEventListener("hashchange", function () {
+    clearPageMarker();
+    disarmAll();
+    setShield(false);
+    setTimeout(bindFabButtons, 60);
+  });
+  if (typeof MutationObserver === "function") {
+    new MutationObserver(function () {
+      if (pState.marker) renderPageMarker();
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ["lang", "data-theme"] });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function () { setTimeout(bindFabButtons, 40); });
+  } else {
+    setTimeout(bindFabButtons, 40);
+  }
+})();
+/* U4_PAGEWIDE_WIKI_PIN_JS_END */
 </script>
 
   

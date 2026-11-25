@@ -1,0 +1,486 @@
+{
+  "version": 1,
+  "generated_at": "2026-11-25T08:44:10.566860+00:00",
+  "generator": "tools/render_tub_surround_reference.py",
+  "canonical_room_json_sha256": "8497a8326182a7aab4f7b47c4a76ecc5caed29e4d6f45a653fc3a5f77562e027",
+  "photo": {
+    "asset": "bathroom-tub-surround-source.jpg",
+    "sha256": "bfa24e5053950821835737fe0e2593523f845ba22721567f2fb5aa76aa7b58d0",
+    "original_source_sha256": "a1cb1885cf7020d9bcf6d83cd41436f73f9017affb4c83db03ac046097b7ec48",
+    "public_metadata_scrubbed_sha256": "bfa24e5053950821835737fe0e2593523f845ba22721567f2fb5aa76aa7b58d0",
+    "width_px": 1350,
+    "height_px": 1800,
+    "embedded_public_jpeg_unchanged": true,
+    "pixels_reencoded": false,
+    "cropped": false,
+    "removed_metadata_segments": [
+      {
+        "marker": "0xFFE1",
+        "bytes": 2920
+      },
+      {
+        "marker": "0xFFE1",
+        "bytes": 2789
+      },
+      {
+        "marker": "0xFFED",
+        "bytes": 116
+      }
+    ],
+    "decoded_pixel_equality_verified": true
+  },
+  "pixel_anchors": {
+    "wall_tl": [
+      310,
+      445
+    ],
+    "wall_tr": [
+      963,
+      469
+    ],
+    "wall_bl": [
+      342,
+      1111
+    ],
+    "wall_br": [
+      929,
+      1105
+    ],
+    "large_tl": [
+      500,
+      797
+    ],
+    "large_tr": [
+      605,
+      797
+    ],
+    "large_bl": [
+      500,
+      968
+    ],
+    "large_br": [
+      604,
+      970
+    ],
+    "small_tl": [
+      675,
+      802
+    ],
+    "small_tr": [
+      742,
+      803
+    ],
+    "small_bl": [
+      675,
+      925
+    ],
+    "small_br": [
+      739,
+      925
+    ]
+  },
+  "tub_pixel_anchors": {
+    "height_start": [
+      218,
+      1310
+    ],
+    "height_end": [
+      232,
+      1590
+    ],
+    "depth_start": [
+      929,
+      1105
+    ],
+    "depth_end": [
+      1115,
+      1278
+    ]
+  },
+  "measurements": {
+    "wall_width": {
+      "value_in": 69.3125,
+      "display_value_in": 69.3125,
+      "label": "69 5/16″",
+      "measure_boundary": "left_backer_corner_to_right_backer_corner",
+      "approximate": false,
+      "calculated": false,
+      "confidence": "owner-reported; not independently field-verified",
+      "sources": [
+        {
+          "kind": "owner-photo-annotation",
+          "photos": [
+            "IMG_5478.heic"
+          ]
+        }
+      ]
+    },
+    "wall_height": {
+      "value_in": 71.25,
+      "display_value_in": 71.25,
+      "label": "71¼″",
+      "measure_boundary": "tub_stone_rim_to_backer_top",
+      "approximate": false,
+      "calculated": false,
+      "confidence": "owner-reported; not independently field-verified",
+      "sources": [
+        {
+          "kind": "owner-typed",
+          "photos": []
+        }
+      ]
+    },
+    "left_gap": {
+      "value_in": 19,
+      "display_value_in": 19,
+      "label": "≈19″",
+      "measure_boundary": "left_backwall_to_large_niche_front_left",
+      "approximate": true,
+      "calculated": false,
+      "confidence": "approximate photo reading or owner report",
+      "sources": [
+        {
+          "kind": "provisional-photo-read",
+          "photos": [
+            "IMG_5480.HEIC",
+            "IMG_5482.HEIC",
+            "IMG_5483.HEIC"
+          ]
+        }
+      ]
+    },
+    "large_width": {
+      "value_in": 11,
+      "display_value_in": 11,
+      "label": "≈11″",
+      "measure_boundary": "large_niche_front_left_to_front_right",
+      "approximate": true,
+      "calculated": true,
+      "confidence": "calculated from approximate observations",
+      "sources": [
+        {
+          "kind": "provisional-photo-read",
+          "photos": [
+            "IMG_5480.HEIC",
+            "IMG_5482.HEIC",
+            "IMG_5483.HEIC"
+          ]
+        }
+      ]
+    },
+    "between_niches": {
+      "value_in": 7.5,
+      "display_value_in": 7.5,
+      "label": "≈7½″",
+      "measure_boundary": "large_niche_front_right_to_small_niche_front_left",
+      "approximate": true,
+      "calculated": true,
+      "confidence": "calculated from approximate observations",
+      "sources": [
+        {
+          "kind": "provisional-photo-read",
+          "photos": [
+            "IMG_5480.HEIC",
+            "IMG_5482.HEIC",
+            "IMG_5483.HEIC"
+          ]
+        },
+        {
+          "kind": "provisional-photo-read",
+          "photos": [
+            "IMG_5484.HEIC",
+            "IMG_5486.HEIC"
+          ]
+        }
+      ]
+    },
+    "small_width": {
+      "value_in": 7.5,
+      "display_value_in": 7.5,
+      "label": "≈7½″",
+      "measure_boundary": "small_niche_front_left_to_front_right",
+      "approximate": true,
+      "calculated": true,
+      "confidence": "calculated from approximate observations",
+      "sources": [
+        {
+          "kind": "provisional-photo-read",
+          "photos": [
+            "IMG_5484.HEIC",
+            "IMG_5486.HEIC"
+          ]
+        }
+      ]
+    },
+    "right_gap": {
+      "value_in": 24.3125,
+      "display_value_in": 24.25,
+      "label": "≈24¼″",
+      "measure_boundary": "small_niche_front_right_to_right_backwall",
+      "approximate": true,
+      "calculated": true,
+      "confidence": "calculated from approximate observations",
+      "sources": [
+        {
+          "kind": "owner-photo-annotation",
+          "photos": [
+            "IMG_5478.heic"
+          ]
+        },
+        {
+          "kind": "provisional-photo-read",
+          "photos": [
+            "IMG_5484.HEIC",
+            "IMG_5486.HEIC"
+          ]
+        }
+      ]
+    },
+    "large_top_gap": {
+      "value_in": 35.25,
+      "display_value_in": 35.25,
+      "label": "≈35¼″",
+      "measure_boundary": "large_niche_front_top_to_backer_top",
+      "approximate": true,
+      "calculated": true,
+      "confidence": "calculated from approximate observations",
+      "sources": [
+        {
+          "kind": "owner-typed",
+          "photos": []
+        },
+        {
+          "kind": "provisional-photo-read",
+          "photos": [
+            "IMG_5479.heic"
+          ]
+        }
+      ]
+    },
+    "large_height": {
+      "value_in": 19,
+      "display_value_in": 19,
+      "label": "≈19″",
+      "measure_boundary": "large_niche_front_bottom_to_front_top",
+      "approximate": true,
+      "calculated": true,
+      "confidence": "calculated from approximate observations",
+      "sources": [
+        {
+          "kind": "provisional-photo-read",
+          "photos": [
+            "IMG_5479.heic"
+          ]
+        }
+      ]
+    },
+    "large_bottom": {
+      "value_in": 17,
+      "display_value_in": 17,
+      "label": "≈17″",
+      "measure_boundary": "tub_stone_rim_to_large_niche_front_bottom",
+      "approximate": true,
+      "calculated": false,
+      "confidence": "approximate photo reading or owner report",
+      "sources": [
+        {
+          "kind": "provisional-photo-read",
+          "photos": [
+            "IMG_5479.heic"
+          ]
+        }
+      ]
+    },
+    "large_top": {
+      "value_in": 36,
+      "display_value_in": 36,
+      "label": "≈36″",
+      "measure_boundary": "tub_stone_rim_to_large_niche_front_top",
+      "approximate": true,
+      "calculated": false,
+      "confidence": "approximate photo reading or owner report",
+      "sources": [
+        {
+          "kind": "provisional-photo-read",
+          "photos": [
+            "IMG_5479.heic"
+          ]
+        }
+      ]
+    },
+    "small_top_gap": {
+      "value_in": [
+        35.25,
+        35.75
+      ],
+      "display_value_in": [
+        35.25,
+        35.75
+      ],
+      "label": "≈35¼–35¾″",
+      "measure_boundary": "small_niche_front_top_to_backer_top",
+      "approximate": true,
+      "calculated": true,
+      "confidence": "calculated from approximate observations",
+      "sources": [
+        {
+          "kind": "owner-typed",
+          "photos": []
+        },
+        {
+          "kind": "provisional-photo-read",
+          "photos": [
+            "IMG_5485.HEIC"
+          ]
+        }
+      ]
+    },
+    "small_height": {
+      "value_in": [
+        13.75,
+        14.25
+      ],
+      "display_value_in": [
+        13.75,
+        14.25
+      ],
+      "label": "≈13¾–14¼″",
+      "measure_boundary": "small_niche_front_bottom_to_front_top",
+      "approximate": true,
+      "calculated": true,
+      "confidence": "calculated from approximate observations",
+      "sources": [
+        {
+          "kind": "provisional-photo-read",
+          "photos": [
+            "IMG_5485.HEIC"
+          ]
+        },
+        {
+          "kind": "owner-typed",
+          "photos": []
+        }
+      ]
+    },
+    "small_bottom": {
+      "value_in": 21.75,
+      "display_value_in": 21.75,
+      "label": "≈21¾″",
+      "measure_boundary": "tub_stone_rim_to_small_niche_front_bottom",
+      "approximate": true,
+      "calculated": false,
+      "confidence": "approximate photo reading or owner report",
+      "sources": [
+        {
+          "kind": "owner-typed",
+          "photos": []
+        }
+      ]
+    },
+    "small_top": {
+      "value_in": [
+        35.5,
+        36
+      ],
+      "display_value_in": [
+        35.5,
+        36
+      ],
+      "label": "≈35½–36″",
+      "measure_boundary": "tub_stone_rim_to_small_niche_front_top",
+      "approximate": true,
+      "calculated": false,
+      "confidence": "approximate photo reading or owner report",
+      "sources": [
+        {
+          "kind": "provisional-photo-read",
+          "photos": [
+            "IMG_5485.HEIC"
+          ]
+        }
+      ]
+    },
+    "tub_height": {
+      "value_in": 22,
+      "display_value_in": 22,
+      "label": "22″",
+      "measure_boundary": "current_photo_floor_to_tub_stone_rim",
+      "approximate": false,
+      "calculated": false,
+      "confidence": "owner-reported; not independently field-verified",
+      "sources": [
+        {
+          "kind": "owner-reported",
+          "photos": [
+            "IMG_5473.HEIC"
+          ]
+        }
+      ]
+    },
+    "tub_depth": {
+      "value_in": 33,
+      "display_value_in": 33,
+      "label": "≈33″",
+      "measure_boundary": "backwall_to_outer_front_tub_stone_edge",
+      "approximate": true,
+      "calculated": false,
+      "confidence": "approximate photo reading or owner report",
+      "sources": [
+        {
+          "kind": "provisional-photo-read",
+          "photos": [
+            "IMG_5488.HEIC"
+          ]
+        }
+      ]
+    }
+  },
+  "outputs": [
+    {
+      "asset": "bathroom-tub-surround-measurements-en.svg",
+      "sha256": "56453964511d7d3508ac4d15fdda4f294418fffcff6d7ec42e38a7d20e6c49c5",
+      "language": "en",
+      "width_px": 1350,
+      "height_px": 2090,
+      "dimension_count": 17
+    },
+    {
+      "asset": "bathroom-tub-surround-measurements-es.svg",
+      "sha256": "6ef1eb6dba9e078045f71eb6401b5ae3ae362c6fdc43497fa8d6b506fd5a3bfe",
+      "language": "es",
+      "width_px": 1350,
+      "height_px": 2090,
+      "dimension_count": 17
+    }
+  ],
+  "coordinate_policy": "Photo anchors identify edges; no pixel-to-inch conversion; no cardinal direction inferred.",
+  "missing_measurements": [
+    "Actual tub outer width across",
+    "Niche depths",
+    "Outer tub edge to selected tile stop"
+  ],
+  "excluded_references": "Unlocated sill/casing and separate west-wall measurements are not placed on this photo.",
+  "review_scope": "Tape-photo evidence checked before authoring; SVG layout requires separate visual review.",
+  "raster_previews": [
+    {
+      "asset": "bathroom-tub-surround-measurements-en.png",
+      "sha256": "81a59827357c06675f2ec1c44805051bf753b451070dfa70e45aa5e46c1ccb5b",
+      "width_px": 1350,
+      "height_px": 2090
+    },
+    {
+      "asset": "bathroom-tub-surround-measurements-es.png",
+      "sha256": "c7b64761200480b3ff47c4b1fc98ea77ab8f8754f361e623002fb656430abecb",
+      "width_px": 1350,
+      "height_px": 2090
+    }
+  ],
+  "checks": {
+    "same_17_arrow_geometries_and_boundaries_en_es": true,
+    "label_rectangles_do_not_overlap": true,
+    "labels_painted_after_all_lines": true,
+    "all_label_rectangles_within_photo": true,
+    "embedded_jpeg_matches_public_source": true,
+    "source_photo_pixels_unchanged": true
+  }
+}

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Unit 4 Wiki — 4-Layer, 12-Gate Automated Usability & Visual QA Suite.
+"""Unit 4 Wiki — 4-Layer, 13-Gate Automated Usability, Editorial & Visual QA Suite.
 
 Python 3.9-3.14 compatible (no backslashes inside f-string expressions; raw regex strings).
 Runs headless Chromium via Playwright against a local HTTP server serving the built wiki
@@ -12,7 +12,7 @@ Usage:
   python3 tools/usability_gate.py --report tmp/usability-report.html
 
 Exit codes:
-  0  All 12 gates PASSED
+  0  All 13 gates PASSED
   1  One or more gates FAILED (details printed + saved to HTML report)
 """
 from __future__ import annotations
@@ -109,6 +109,47 @@ HTML_COMMENT_RE = re.compile(r"<!--.*?-->", re.S)
 AGENT_BRIEF_RE = re.compile(r'<section\s+id=["\']agent-brief["\'][^>]*>.*?</section>', re.S | re.I)
 FIREWALL_DEF_RE = re.compile(r"FIREWALL_RE\s*=.*?(?:;|\n)")
 INLINE_SCRIPT_RE = re.compile(r"<script(?:\s[^>]*)?>(.*?)</script>", re.S | re.I)
+
+# Gate 13 — Editorial, Anti-Redundancy & Meaningful-Instruction Regexes
+FILLER_PROSE_RE = re.compile(
+    r"\b(?:this section covers|please note that|various updates|see above|hello!?\s+how can i help|hi!?\s+i(?:'m| am) your ai)\b",
+    re.I,
+)
+RAW_COORD_ID_RE = re.compile(
+    r"(?:\bX\s*[:=]\s*\d+(?:\.\d+)?\"?\s*(?:->|–|-)\s*\d+|\b6[a-zA-Z0-9]{15}\b|\brev-0\d{2}\b)"
+)
+ACTION_VERB_RE = re.compile(
+    r"\b(?:confirm|verify|measure|check|hold|keep|install|build|run|select|complete|execute|reschedule|close|patch|wire|review|update|move|set|pass|photograph|cut|seal|align|mount|lock|add|use|pull|plan|coordinate|leave|clear|repair|finish|order|return|paint|grout|tape|drill|hang|test|verificar|confirmar|medir|revisar|mantener|pausar|instalar|armar|construir|tender|elegir|completar|ejecutar|reprogramar|cerrar|resanar|conectar|mover|aprobar|fotografiar|cortar|sellar|alinear|montar|agregar|usar|jalar|planear|coordinar|dejar|despejar|reparar|terminar|pedir|devolver|pintar|colgar|probar)\b",
+    re.I,
+)
+ALL_ROOMS_EDITORIAL = [
+    "kitchen",
+    "kitchen-oven-range",
+    "kitchen-sink-north",
+    "bathroom",
+    "electrical",
+    "hvac",
+    "attic-access",
+    "laundry",
+    "bedroom",
+    "living-dining",
+    "hallway",
+    "paint-floors",
+]
+
+
+def _editorial_tokens(text: str) -> set:
+    return set(re.findall(r"[a-zA-Z0-9\u00c0-\u024f]{3,}", text.lower()))
+
+
+def _jaccard_overlap(a: str, b: str) -> float:
+    ta, tb = _editorial_tokens(a), _editorial_tokens(b)
+    if len(ta) < 4 or len(tb) < 4:
+        return 0.0
+    union = ta | tb
+    if not union:
+        return 0.0
+    return len(ta & tb) / float(len(union))
 SCRIPT_SRC_ATTR_RE = re.compile(r"\bsrc\s*=", re.I)
 
 
@@ -622,10 +663,12 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
         "gate_9_multiscroll_overlap_pill_wrap": {"layer": "Layer 3 — Geometric, SVG, Photo & Content Forensics", "title": "Multi-Scroll Overlap & Top-Bar Pill Wrap", "status": "PASS", "details": []},
         "gate_10_text_es_parity_print": {"layer": "Layer 3 — Geometric, SVG, Photo & Content Forensics", "title": "Zero Broken Text, ES Parity & Print Emulation", "status": "PASS", "details": []},
         "gate_11_privacy_hygiene_syntax": {"layer": "Layer 3 — Geometric, SVG, Photo & Content Forensics", "title": "Privacy Firewall, Spec Hygiene & Script Syntax", "status": "PASS", "details": []},
-        "gate_12_visual_baselines_report": {"layer": "Layer 4 — Visual Baselines & HTML QA Report", "title": "Golden Screenshots + Diff Report", "status": "PASS", "details": []},
+        "gate_12_visual_baselines_report": {"layer": "Layer 4 — Visual Baselines, Editorial Audit & HTML QA Report", "title": "Golden Screenshots + Diff Report", "status": "PASS", "details": []},
+        "gate_13_editorial_audit": {"layer": "Layer 4 — Visual Baselines, Editorial Audit & HTML QA Report", "title": "Editorial, Anti-Redundancy & Meaningful-Instruction Audit", "status": "PASS", "details": []},
     }
 
     screenshots_for_report: List[Dict[str, str]] = []
+    cut_rewrite_queue: List[Dict[str, str]] = []
     runtime_errors: List[str] = []
 
     def fail(gate_key: str, msg: str) -> None:
@@ -1186,6 +1229,189 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
             })
             await ctx12.close()
 
+        # ══════════════════════════════════════════════════════════════════════
+        # LAYER 4 — GATE 13: Editorial, Anti-Redundancy & Meaningful-Instruction Audit
+        # ══════════════════════════════════════════════════════════════════════
+        ctx13 = await browser.new_context(viewport={"width": 1440, "height": 900}, reduced_motion="reduce")
+        p13 = await ctx13.new_page()
+        await setup_network_stubs(p13, base_url)
+        try:
+            for lang in ("en", "es"):
+                await p13.goto(f"{base_url}/index.html?lang={lang}&theme=light#home", wait_until="domcontentloaded")
+                await p13.wait_for_timeout(450)
+                for room in ALL_ROOMS_EDITORIAL:
+                    await p13.evaluate(f"() => {{ location.hash = '#{room}'; }}")
+                    await p13.wait_for_timeout(240)
+                    blocks = await p13.evaluate(r"""() => {
+                        const out = { title: '', overviewSentences: 0, checklistCount: 0, hasVisual: false, paragraphs: [], bullets: [], cards: [] };
+                        const h1 = document.querySelector('#doc h1');
+                        out.title = h1 ? h1.innerText.trim() : '';
+                        const leadP = document.querySelector('#doc > p, #doc .concept p');
+                        if (leadP) {
+                            const lt = (leadP.innerText || '').trim();
+                            out.overviewSentences = lt ? lt.split(/[.!?]+/).filter(x => x.trim().length > 2).length : 0;
+                        }
+                        out.hasVisual = !!document.querySelector('#doc img, #doc svg, #sec-renders img, #sec-visuals img');
+                        document.querySelectorAll('#doc p').forEach((p, idx) => {
+                            if (p.closest('details:not([open]), [hidden]')) return;
+                            const t = (p.innerText || '').trim();
+                            if (t.length >= 12) out.paragraphs.push({ sel: '#doc p:nth-of-type(' + (idx + 1) + ')', text: t });
+                        });
+                        document.querySelectorAll('#sec-checklist li, section.ck li').forEach((li, idx) => {
+                            const t = (li.innerText || '').trim();
+                            if (t) out.bullets.push({ sel: '#sec-checklist li:nth-child(' + (idx + 1) + ')', text: t });
+                        });
+                        out.checklistCount = out.bullets.length;
+                        document.querySelectorAll('.u4-hm-packet').forEach((a, idx) => {
+                            const titleEl = a.querySelector('.u4-hm-title');
+                            const noteEl = a.querySelector('.u4-hm-note');
+                            if (titleEl && noteEl) {
+                                out.cards.push({ sel: '.u4-hm-packet:nth-of-type(' + (idx + 1) + ')', title: titleEl.innerText.trim(), sub: noteEl.innerText.trim() });
+                            }
+                        });
+                        return out;
+                    }""")
+
+                    # Check Visual-First Room Rhythm (4-7 milestones, <= 2 sentence overview)
+                    if blocks["overviewSentences"] > 3:
+                        cut_rewrite_queue.append({
+                            "page": f"#{room} ({lang})",
+                            "selector": "#doc > p",
+                            "reason": f"Overview has {blocks['overviewSentences']} sentences (> 2-sentence Visual-First target)",
+                            "snippet": blocks["title"][:120],
+                        })
+                    if blocks["checklistCount"] and not (4 <= blocks["checklistCount"] <= 7):
+                        cut_rewrite_queue.append({
+                            "page": f"#{room} ({lang})",
+                            "selector": "#sec-checklist",
+                            "reason": f"Checklist has {blocks['checklistCount']} items (target 4-7 milestones)",
+                            "snippet": f"Checklist items: {blocks['checklistCount']}",
+                        })
+
+                    # Check title/subtitle echo on guide cards
+                    for card in blocks["cards"]:
+                        sim = _jaccard_overlap(card["title"], card["sub"])
+                        if sim >= 0.80:
+                            cut_rewrite_queue.append({
+                                "page": f"#{room} ({lang})",
+                                "selector": card["sel"],
+                                "reason": f"Guide card title/subtitle echo ({int(sim * 100)}% Jaccard overlap)",
+                                "snippet": f"{card['title']} / {card['sub']}"[:140],
+                            })
+
+                    seen_blocks: List[Tuple[str, str]] = []
+                    for blk in blocks["paragraphs"] + blocks["bullets"]:
+                        txt = blk["text"]
+                        sel = blk["sel"]
+                        m_fill = FILLER_PROSE_RE.search(txt)
+                        if m_fill:
+                            msg = f"Empty filler/meta prose: '{m_fill.group(0)}'"
+                            fail("gate_13_editorial_audit", f"[#{room}/{lang}] {sel}: {msg}")
+                            cut_rewrite_queue.append({"page": f"#{room} ({lang})", "selector": sel, "reason": msg, "snippet": txt[:140]})
+                        m_raw = RAW_COORD_ID_RE.search(txt)
+                        if m_raw:
+                            cut_rewrite_queue.append({
+                                "page": f"#{room} ({lang})",
+                                "selector": sel,
+                                "reason": f"Raw coordinate/ID dump in human prose ({m_raw.group(0)})",
+                                "snippet": txt[:140],
+                            })
+                        for prev_sel, prev_txt in seen_blocks:
+                            sim = _jaccard_overlap(txt, prev_txt)
+                            if sim >= 0.80:
+                                cut_rewrite_queue.append({
+                                    "page": f"#{room} ({lang})",
+                                    "selector": f"{sel} vs {prev_sel}",
+                                    "reason": f"Redundant copy ({int(sim * 100)}% Jaccard overlap)",
+                                    "snippet": txt[:140],
+                                })
+                                break
+                        seen_blocks.append((sel, txt))
+
+                    for blk in blocks["paragraphs"]:
+                        wc = len(blk["text"].split())
+                        if wc > 55:
+                            cut_rewrite_queue.append({
+                                "page": f"#{room} ({lang})",
+                                "selector": blk["sel"],
+                                "reason": f"Wall-of-text paragraph ({wc} words > 55)",
+                                "snippet": blk["text"][:140],
+                            })
+                    for blk in blocks["bullets"]:
+                        wc = len(blk["text"].split())
+                        if wc > 35:
+                            cut_rewrite_queue.append({
+                                "page": f"#{room} ({lang})",
+                                "selector": blk["sel"],
+                                "reason": f"Long checklist item ({wc} words > 35)",
+                                "snippet": blk["text"][:140],
+                            })
+                        if not ACTION_VERB_RE.search(blk["text"]):
+                            cut_rewrite_queue.append({
+                                "page": f"#{room} ({lang})",
+                                "selector": blk["sel"],
+                                "reason": "Checklist bullet lacks concrete action verb",
+                                "snippet": blk["text"][:140],
+                            })
+
+            # Audit all 7 interactive plans (EN & ES)
+            for pid in ALL_PLAN_IDS:
+                for lang in ("en", "es"):
+                    await p13.goto(f"{base_url}/plans/{pid}/index.html?standalone=1&lang={lang}&theme=light", wait_until="domcontentloaded")
+                    await p13.wait_for_timeout(300)
+                    pblocks = await p13.evaluate(r"""() => {
+                        const out = { title: '', sub: '', items: [] };
+                        const tEl = document.querySelector('.u4h-title');
+                        const sEl = document.querySelector('.u4h-sub');
+                        out.title = tEl ? tEl.innerText.trim() : '';
+                        out.sub = sEl ? sEl.innerText.trim() : '';
+                        document.querySelectorAll('.u4h-hold-strip, .u4h-info-list li, .u4h-photo-cap').forEach((el, idx) => {
+                            if (el.closest('[hidden], #blueprint-sheet-shell')) return;
+                            const txt = (el.innerText || '').trim();
+                            if (txt.length >= 12) out.items.push({ sel: (el.className || el.tagName) + '#' + idx, text: txt });
+                        });
+                        return out;
+                    }""")
+                    if pblocks["title"] and pblocks["sub"]:
+                        sim_ts = _jaccard_overlap(pblocks["title"], pblocks["sub"])
+                        if sim_ts >= 0.80:
+                            cut_rewrite_queue.append({
+                                "page": f"plans/{pid} ({lang})",
+                                "selector": ".u4h-title / .u4h-sub",
+                                "reason": f"Title/subtitle echo ({int(sim_ts * 100)}% Jaccard overlap)",
+                                "snippet": f"{pblocks['title']} / {pblocks['sub']}"[:140],
+                            })
+                    for blk in pblocks["items"]:
+                        m_fill = FILLER_PROSE_RE.search(blk["text"])
+                        if m_fill:
+                            msg = f"Empty filler/meta prose: '{m_fill.group(0)}'"
+                            fail("gate_13_editorial_audit", f"[plans/{pid}/{lang}] {blk['sel']}: {msg}")
+                            cut_rewrite_queue.append({"page": f"plans/{pid} ({lang})", "selector": blk["sel"], "reason": msg, "snippet": blk["text"][:140]})
+                        m_raw = RAW_COORD_ID_RE.search(blk["text"])
+                        if m_raw:
+                            cut_rewrite_queue.append({
+                                "page": f"plans/{pid} ({lang})",
+                                "selector": blk["sel"],
+                                "reason": f"Raw coordinate/ID dump ({m_raw.group(0)})",
+                                "snippet": blk["text"][:140],
+                            })
+                        wc = len(blk["text"].split())
+                        if wc > 55:
+                            cut_rewrite_queue.append({
+                                "page": f"plans/{pid} ({lang})",
+                                "selector": blk["sel"],
+                                "reason": f"Dense plan text block ({wc} words > 55)",
+                                "snippet": blk["text"][:140],
+                            })
+            if gates["gate_13_editorial_audit"]["status"] == "PASS":
+                note(
+                    "gate_13_editorial_audit",
+                    f"Audited {len(ALL_ROOMS_EDITORIAL)} rooms + {len(ALL_PLAN_IDS)} plans (EN & ES): 0 empty filler/robotic prose violations; {len(cut_rewrite_queue)} items logged in Cut / Rewrite Queue",
+                )
+        except Exception as exc:
+            fail("gate_13_editorial_audit", f"Exception in Gate 13: {exc}")
+        await ctx13.close()
+
         await browser.close()
 
     # Finalize Gate 11 runtime errors
@@ -1227,9 +1453,21 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
             f"{html.escape(sh['status'])}<br><code>{html.escape(sh['url'])}</code></figcaption></figure>"
         )
 
+    queue_html = []
+    for q in cut_rewrite_queue[:150]:
+        queue_html.append(
+            f"<tr><td>{html.escape(q['page'])}</td>"
+            f"<td><code>{html.escape(q['selector'])}</code></td>"
+            f"<td>{html.escape(q['reason'])}</td>"
+            f"<td>{html.escape(q['snippet'])}</td></tr>"
+        )
+    if not queue_html:
+        queue_html.append("<tr><td colspan='4'>No editorial blocks flagged for cutting or rewriting.</td></tr>")
+
+    total_gates = len(gates)
     report_html = (
         "<!doctype html><html lang='en'><head><meta charset='utf-8'>"
-        "<title>Unit 4 Wiki — 12-Gate Usability QA Report</title>"
+        f"<title>Unit 4 Wiki — {total_gates}-Gate Usability QA Report</title>"
         "<style>"
         "body{font-family:system-ui,-apple-system,sans-serif;background:#f4f5f3;color:#1d2326;margin:0;padding:24px;line-height:1.45}"
         "h1,h2{margin:0 0 10px} .meta{color:#5d686d;font-size:13px;margin-bottom:18px}"
@@ -1239,19 +1477,24 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
         "th,td{padding:10px 12px;border-bottom:1px solid #d9dedc;vertical-align:top;text-align:left;font-size:13px}"
         "th{background:#ecedea;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#5d686d}"
         "ul{margin:0;padding-left:18px} li{margin:2px 0}"
-        ".shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}"
+        ".shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin-bottom:24px}"
         ".shot{margin:0;background:#fff;border:1px solid #d9dedc;border-radius:8px;overflow:hidden}"
         ".shot img{width:100%;height:auto;display:block;border-bottom:1px solid #d9dedc}"
         ".shot figcaption{padding:8px 10px;font-size:12px;color:#5d686d}"
         "</style></head><body>"
-        f"<h1>Unit 4 Wiki — 12-Gate Usability QA Report <span class='badge {'pass' if overall == 'PASS' else 'fail'}'>{overall}</span></h1>"
-        f"<div class='meta'>Generated {html.escape(ts_utc)} · Passed {passed_count}/12 · Failed {failed_count}/12</div>"
+        f"<h1>Unit 4 Wiki — {total_gates}-Gate Usability QA Report <span class='badge {'pass' if overall == 'PASS' else 'fail'}'>{overall}</span></h1>"
+        f"<div class='meta'>Generated {html.escape(ts_utc)} · Passed {passed_count}/{total_gates} · Failed {failed_count}/{total_gates} · Cut / Rewrite Queue: {len(cut_rewrite_queue)} items</div>"
         "<table><thead><tr><th>Gate ID</th><th>Layer</th><th>Check</th><th>Status</th><th>Details</th></tr></thead><tbody>"
         + "".join(rows_html)
         + "</tbody></table>"
-        "<h2>Layer 4 — Golden Screenshots</h2><div class='shots'>"
+        "<h2>Layer 4 — Golden Screenshots (Gate 12)</h2><div class='shots'>"
         + "".join(shots_html)
-        + "</div></body></html>"
+        + "</div>"
+        f"<h2>Cut / Rewrite Queue (Gate 13 — {len(cut_rewrite_queue)} flagged blocks)</h2>"
+        "<table><thead><tr><th>Page</th><th>Selector</th><th>Reason</th><th>Snippet</th></tr></thead><tbody>"
+        + "".join(queue_html)
+        + "</tbody></table>"
+        "</body></html>"
     )
     report_path.write_text(report_html, encoding="utf-8")
     note("gate_12_visual_baselines_report", f"Captured {len(screenshots_for_report)} screenshots and wrote HTML QA report to {report_path}")
@@ -1261,14 +1504,16 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
         "overall": overall,
         "passed": passed_count,
         "failed": failed_count,
+        "total": total_gates,
         "report": str(report_path),
+        "cut_rewrite_queue_count": len(cut_rewrite_queue),
         "gates": {k: v["status"] for k, v in gates.items()},
         "details": {k: v["details"] for k, v in gates.items()},
     }
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Unit 4 Wiki 12-Gate Automated Usability Suite")
+    parser = argparse.ArgumentParser(description="Unit 4 Wiki 13-Gate Automated Usability Suite")
     parser.add_argument("--update-baselines", action="store_true", help="Save/update golden baseline PNGs for Gate 12")
     parser.add_argument("--baselines-dir", default=str(ROOT / "tmp/usability-baselines"), help="Directory for golden PNG baselines")
     parser.add_argument("--report", default=str(ROOT / "tmp/usability-report.html"), help="Path for self-contained HTML QA report")
@@ -1276,11 +1521,12 @@ def main() -> int:
     args = parser.parse_args()
 
     result = asyncio.run(run_suite(args))
+    total_gates = result.get("total", len(result["gates"]))
     if args.json:
         print(json.dumps(result, indent=2))
     else:
-        print(f"USABILITY GATE SUITE: {result['overall']} ({result['passed']}/12 passed, {result['failed']}/12 failed)")
-        print(f"HTML Report: {result['report']}")
+        print(f"USABILITY GATE SUITE: {result['overall']} ({result['passed']}/{total_gates} passed, {result['failed']}/{total_gates} failed)")
+        print(f"HTML Report: {result['report']} (Cut / Rewrite Queue: {result.get('cut_rewrite_queue_count', 0)} items)")
         for gk, st in result["gates"].items():
             print(f"  [{st}] {gk}")
             if st == "FAIL":

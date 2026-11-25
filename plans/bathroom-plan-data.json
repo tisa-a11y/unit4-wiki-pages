@@ -7,8 +7,8 @@
   "governing_spec": "bathroom/SPEC.md",
   "base_rev": "rev-20261124-bath-009",
   "title": {
-    "en": "Bathroom Room Baseline & Field Measurements",
-    "es": "Línea Base y Medidas de Campo del Baño"
+    "en": "Bathroom plan and field measurements",
+    "es": "Plano del baño y medidas de campo"
   },
   "status": "INTAKE_REVIEW_HOLD_TILE_CUTS",
   "registered_live": true,
@@ -607,9 +607,19 @@
       "value_in": 5.25,
       "approximate": true,
       "source": {
-        "source_id": "wiki_intake_1625",
-        "filename": "2026-11-24_1625_field_bathroom_athroom-d27c6945e5268975.md",
-        "note": "Recorded in 2026-11-24 16:25 PT Crew Wiki intake; exact endpoint boundaries to confirm with Tisa before cutting tile."
+        "filename": null,
+        "note": "Previously recorded casing-space reading; exact source/endpoint meaning unconfirmed."
+      },
+      "measure_boundary": null,
+      "placement": null
+    },
+    {
+      "id": "sill_reference",
+      "value_in": 35,
+      "approximate": true,
+      "source": {
+        "filename": null,
+        "note": "Previously recorded sill-reference reading; exact source/endpoint meaning unconfirmed."
       },
       "measure_boundary": null,
       "placement": null
@@ -1119,7 +1129,7 @@
       "entry_door": {
         "action": "retain 28\" x 1-3/8\" slab, hinged outward into hallway; pocket door permanently retired",
         "source_id": "bathroom_spec",
-        "date": "2026-11-24",
+        "date": "2026-11-19",
         "handing": null,
         "hall_clearance_in": null,
         "note": "Magicplan pocket symbol is historical baseline; pocket door permanently retired Nov 24."
@@ -1483,15 +1493,7 @@
     "entry_door": {
       "status": "LOCKED",
       "locked_at": "2026-11-24T22:24:00-08:00",
-      "decision": "Pocket door permanently retired. Reuse 28\" x 1-3/8\" slab as hinged door swinging outward into hallway."
-    }
-  },
-  "flagged_clashes": [
-    {
-      "id": "clash-bath-width-planes",
-      "severity": "HIGH",
-      "en": "Accepted Magicplan room width is 72-1/8 in vs. 69-5/16 in wet-backer span in IMG_5478; keep baseline outline and local backer plane separate.",
-      "es": "El ancho base en Magicplan es 72-1/8 pulg frente a 69-5/16 pulg entre paneles en IMG_5478; mantener separados el contorno base y el plano local."
+      "decision": "Pocket door permanently retired. Reuse 28 x 1-3/8 in slab as hinged door swinging outward into hallway."
     },
     {
       "id": "clash-bath-west-sill-spans",
@@ -1499,13 +1501,19 @@
       "en": "West wall has both 45-1/2 in (estimated doorway-side finished edge to sill stop) and earlier 35 in sill / 5-1/4 in casing readings; confirm exact endpoints before cutting tile.",
       "es": "El muro oeste registra 45-1/2 pulg (borde futuro junto a puerta hasta repisa) y lecturas previas de 35 pulg y 5-1/4 pulg; confirmar extremos antes de cortar azulejo."
     },
-    {
-      "id": "clash-bath-east-tile-stop-open",
-      "severity": "HIGH",
-      "en": "East/shower-control wall tile stop past the ~33 in outer tub front is unselected (null); do not use the retired 3 in suggestion.",
-      "es": "El remate del azulejo en el muro este más allá de las ~33 pulg del frente de tina no está elegido (null); no usar la sugerencia retirada de 3 pulg."
+    "wall_grout_and_silicone": {
+      "status": "LOCKED",
+      "locked_at": "2026-11-25T00:34:00-08:00",
+      "decision": "Mapei Ultracolor Plus FA #77 Frost + Mapesil T Plus #77 Frost on walls (floor grout remains Warm Gray)."
+    },
+    "ceramic_bullnose_trim": {
+      "status": "APPROVED_TO_ORDER",
+      "locked_at": "2026-11-25T00:34:00-08:00",
+      "skus": [
+        "0025S42691P4",
+        "0025SN42691P2"
+      ],
+      "decision": "Approved ordering matching glossy Ice White 2x6 ceramic bullnose and 2x2 corners."
     }
-  ],
-  "field_overrides": [],
-  "pins": []
+  }
 }

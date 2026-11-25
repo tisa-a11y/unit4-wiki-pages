@@ -1,5 +1,7 @@
 # Bathroom
 
+- **Interactive plans:** [Bathroom Tub & Wall Tile Plan](#plan:bathroom-tile) · [Field Measurements & Photos (Room, Tub & Walls)](#plan:bathroom-measurements)
+
 <div class="u4-plan-launch-grid">
   <a class="u4-plan-launch-card is-primary" href="#plan:bathroom-tile">
     <span class="u4-plan-launch-kicker">Interactive Plan &middot; Tub Alcove &amp; Wall Tile</span>

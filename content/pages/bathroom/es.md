@@ -1,5 +1,7 @@
 # Baño
 
+- **Planos interactivos:** [Azulejo y Nichos en Muros](#plan:bathroom-tile) · [Medidas de Campo y Fotos (Planta, Tina y Muros)](#plan:bathroom-measurements)
+
 <div class="u4-plan-launch-grid">
   <a class="u4-plan-launch-card is-primary" href="#plan:bathroom-tile">
     <span class="u4-plan-launch-kicker">Plano Interactivo &middot; Tina y Muros de Azulejo</span>

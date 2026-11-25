@@ -486,7 +486,7 @@
           '<circle cx="468" cy="215" r="8" fill="#FEF3C7" stroke="#B45309" stroke-width="1.8"/>' +
           '<text x="468" y="217.5" text-anchor="middle" font-size="6.5" font-weight="800" fill="#92400E">D3/4</text>' +
           '<text x="46" y="266" font-size="7.5" font-weight="700" fill="#4A5568">' +
-            (es ? "Sp 12 (DIN 20A): D1–D4 a 18\" AFF · Sin D5 detrás de D04 · D6 en pausa por puerta corrediza" : "Sp 12 (DIN 20A): D1–D4 @ 18\" AFF · No D5 on D04 back · D6 on pocket-door hold") +
+            (es ? "Sp 12 (DIN 20A): D1–D4 a 18\" AFF · Sin D5 detrás de D04 · Puerta corrediza baño retirada (puerta abatible 28\")" : "Sp 12 (DIN 20A): D1–D4 @ 18\" AFF · No D5 on D04 back · Bath pocket door retired (28\" outward-swing)") +
           '</text>' +
         '</svg>' +
       '</div>';

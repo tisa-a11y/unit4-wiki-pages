@@ -10,16 +10,16 @@
     tubRimHeightIn: 22.0,
     backerAboveTubIn: 71.25,
     tubOuterDepthIn: 33.0,
-    eastTileStopIn: 35.0,
     eastToiletStubIn: 37.75,
-    westSillStopIn: 35.0,
+    westSillRefIn: 35.0,
+    westDoorwayToSillIn: 45.5,
     westSillFloorIn: 43.0,
     largeNiche: { x0: 19.0, x1: 30.0, z0: 17.0, z1: 36.0, w: 11.0, h: 19.0, depth: null },
     smallNiche: { x0: 37.5, x1: 45.0, z0: 21.75, z1: 35.75, w: 7.5, h: 14.0, depth: null },
     plumbing: [
-      { id: "spout", x: 15.5, z: 5.5, diam: 1.5, en: "Tub Spout", es: "Llave de Tina" },
-      { id: "valve", x: 15.5, z: 27.0, diam: 4.5, en: "Shower Valve", es: "Válvula de Regadera" },
-      { id: "arm", x: 15.5, z: 60.0, diam: 1.5, en: "Shower Head", es: "Salida de Regadera" }
+      { id: "spout", x: 15.5, z: 5.5, diam: 1.5, en: "Tub Spout", es: "Llave de Tina", ru: "Излив ванны" },
+      { id: "valve", x: 15.5, z: 27.0, diam: 4.5, en: "Shower Valve", es: "Válvula de Regadera", ru: "Смеситель душа" },
+      { id: "arm", x: 15.5, z: 60.0, diam: 1.5, en: "Shower Head", es: "Salida de Regadera", ru: "Вывод лейки" }
     ],
     wallTile: {
       sku: "0025 36MOD1P4",
@@ -50,6 +50,7 @@
     groutIn: 0.0625,
     starterRowIn: 2.25,
     horizShiftIn: 0.0,
+    eastStopMode: "35",
     wastePct: 15,
     checks: {
       waterproofPhoto: false,
@@ -81,11 +82,17 @@
     return sign + (whole > 0 ? whole + "-" + (six / g) + "/" + (16 / g) : (six / g) + "/" + (16 / g)) + "″";
   }
 
+  function eastFieldSpanIn() {
+    if (state.eastStopMode === "33") return 31.0;
+    return 33.0;
+  }
+
   function computeLayout() {
     const grout = state.groutIn;
     const pitchW = +(SEED.wallTile.actualW + grout).toFixed(4);
     const pitchH = +(SEED.wallTile.actualH + grout).toFixed(4);
     const topCapBotZ = SEED.backerAboveTubIn - SEED.bullnose.wIn;
+    const eFieldIn = eastFieldSpanIn();
 
     const joints = [0, state.starterRowIn];
     let z = state.starterRowIn;
@@ -118,10 +125,11 @@
     }
 
     const nRows = courses.map((_, i) => rowJoints(SEED.backerWidthIn, 2.65, i));
-    const sRows = courses.map((_, i) => rowJoints(33.0, 0.0, i));
+    const eRows = courses.map((_, i) => rowJoints(eFieldIn, 0.0, i));
+    const wRows = courses.map((_, i) => rowJoints(33.0, 0.0, i));
 
     let minCut = 99;
-    [nRows[0], nRows[1], nRows[2], sRows[0], sRows[1], sRows[2]].forEach((r) => {
+    [nRows[0], nRows[1], nRows[2], eRows[0], eRows[1], wRows[0]].forEach((r) => {
       if (r) minCut = Math.min(minCut, r.firstCut, r.lastCut);
     });
     const topCourseH = courses[courses.length - 1].h;
@@ -135,18 +143,19 @@
     });
 
     const northSqft = (SEED.backerWidthIn * 69.25 - SEED.largeNiche.w * SEED.largeNiche.h - SEED.smallNiche.w * SEED.smallNiche.h) / 144;
-    const eastSqft = (33.0 * 69.25) / 144;
+    const eastSqft = (eFieldIn * 69.25) / 144;
     const westSqft = (33.0 * 21.0) / 144;
     const tileAreaSqft = Math.round(northSqft + eastSqft + westSqft);
     const orderSqft = Math.round((northSqft + eastSqft + westSqft) * (1 + state.wastePct / 100));
     const cartons = Math.ceil(orderSqft / SEED.wallTile.sqftPerBox);
 
-    const perimBullnoseIn = SEED.backerWidthIn + 33.0 + (69.25 + 22.0) + (21.0 + 22.0);
+    const perimBullnoseIn = SEED.backerWidthIn + eFieldIn + (69.25 + 22.0) + (21.0 + 22.0);
     const nicheFrameIn = 2 * (SEED.largeNiche.w + SEED.largeNiche.h) + 2 * (SEED.smallNiche.w + SEED.smallNiche.h);
     const bullnosePcs = Math.ceil(((perimBullnoseIn + nicheFrameIn) / 6.0) * (1 + state.wastePct / 100));
 
     return {
-      pitchW, pitchH, courses, nRows, sRows, minCut: +minCut.toFixed(2), topCourseH, hasSliver, plumbingHits,
+      pitchW, pitchH, eFieldIn, totalEastIn: eFieldIn + 2.0, courses, nRows, eRows, wRows,
+      minCut: +minCut.toFixed(2), topCourseH, hasSliver, plumbingHits,
       takeoff: { tileAreaSqft, orderSqft, cartons, bullnosePcs, cornerPcs: 10 }
     };
   }
@@ -160,13 +169,40 @@
     return out;
   }
 
-  function buildStep1Svg(es, lay, forPrint) {
+  function buildHoldAndRefStrip() {
+    const qLang = state.lang !== "en" ? `&lang=${state.lang}` : "";
+    const qTheme = state.theme === "dark" ? `&theme=dark` : "";
+    const baseHref = `../bathroom-measurements/index.html?v=rev010${qLang}${qTheme}`;
+    return `
+      <div class="u4b-hold-banner no-print">
+        <strong>${pick("ACTIVE PRE-TILE HOLD (NOV 24):", "PAUSA PREVIA AL AZULEJO (24 NOV):", "ПАУЗА ПЕРЕД УКЛАДКОЙ ПЛИТКИ (24 НОЯБ.):")}</strong>
+        ${pick(
+          "Alex is out this week — wall tile stays on hold until: (1) bathroom window & casing are replaced (no tile above 43″ sill), (2) oversized 20″×32″ medicine cabinet is kept off the wall for return, (3) tub faucet trim is fixed, and (4) waterproofed niche dimensions are measured on site. (35″ shower stop, #77 Frost wall grout & ceramic bullnose locked Nov 25.)",
+          "Alex no está disponible esta semana — el azulejo en muros queda en pausa hasta: (1) reemplazar ventana y marco (sin azulejo arriba de 43″), (2) retirar el botiquín grande de 20″×32″ para devolución, (3) corregir la llave de la tina y (4) medir los nichos impermeabilizados en obra. (Tope de 35″, boquilla #77 Frost y bullnose aprobados 25 nov.)",
+          "Алекс отсутствует на этой неделе — укладка настенной плитки на паузе до: (1) замены окна и наличников (без плитки выше подоконника 43″), (2) возврата шкафчика 20″×32″, (3) исправления излива ванны и (4) замера ниш после гидроизоляции. (Край 35″, затирка #77 Frost и бордюр утверждены 25 нояб.)"
+        )}
+      </div>
+      <div class="u4b-ref-strip no-print">
+        <span><strong>${pick("Field Measurements & Photos:", "Medidas de campo y fotos:", "Полевые замеры и фото:")}</strong> ${pick("Open interactive wall & tub drawings:", "Abrir planos y fotos de referencia:", "Открыть чертежи и фото:")}</span>
+        <div class="u4b-ref-links">
+          <a class="u4b-ref-link" href="${baseHref}&wall=room&view=flat">${pick("Whole Room", "Todo el baño", "Вся ванная")}</a>
+          <a class="u4b-ref-link" href="${baseHref}&wall=tub&view=photo">${pick("Tub Wall", "Muro tina", "Стена ванны")}</a>
+          <a class="u4b-ref-link" href="${baseHref}&wall=tub-profile&view=photo">${pick("Tub Side", "Perfil tina", "Профиль ванны")}</a>
+          <a class="u4b-ref-link" href="${baseHref}&wall=west&view=photo">${pick("West Wall (45-1/2″)", "Muro oeste (45-1/2″)", "Западная стена")}</a>
+        </div>
+      </div>
+    `;
+  }
+
+  function buildStep1Svg(lay, forPrint) {
     const S = 2.95;
     if (!forPrint) state.lastScaleInfo = { view: "field-layout", scaleX: S, scaleY: S, uniform: true };
     const xWest0 = 32;
     const xNW = +(xWest0 + 36.0 * S).toFixed(1);
     const xNE = +(xNW + SEED.backerWidthIn * S).toFixed(1);
     const xEastEnd = +(xNE + 38.0 * S).toFixed(1);
+    const eField = lay.eFieldIn;
+    const isEastOpen = state.eastStopMode === "open";
 
     const yZ = (z) => +(38 + (78.0 - z) * S).toFixed(1);
     const yTopCap = yZ(71.25);
@@ -181,12 +217,12 @@
       const yT = yZ(c.z1);
       const yB = yZ(c.z0);
       if (i > 0) {
-        grid += `<line x1="${xNW}" y1="${yB}" x2="${(xNE + 33 * S).toFixed(1)}" y2="${yB}" stroke="#C8D1D6" stroke-width="0.7"/>`;
+        grid += `<line x1="${xNW}" y1="${yB}" x2="${(xNE + eField * S).toFixed(1)}" y2="${yB}" stroke="#C8D1D6" stroke-width="0.7"/>`;
         if (c.z0 <= 21.0) grid += `<line x1="${(xNW - 33 * S).toFixed(1)}" y1="${yB}" x2="${xNW}" y2="${yB}" stroke="#C8D1D6" stroke-width="0.7"/>`;
       }
       grid += renderVertJoints(lay.nRows[i].joints, xNW, yT, yB, S, false);
-      grid += renderVertJoints(lay.sRows[i].joints, xNE, yT, yB, S, false);
-      if (c.z0 < 21.0) grid += renderVertJoints(lay.sRows[i].joints, xNW, c.z1 <= 21.0 ? yT : ySill, yB, S, true);
+      grid += renderVertJoints(lay.eRows[i].joints, xNE, yT, yB, S, false);
+      if (c.z0 < 21.0) grid += renderVertJoints(lay.wRows[i].joints, xNW, c.z1 <= 21.0 ? yT : ySill, yB, S, true);
     });
 
     const lgX = +(xNW + SEED.largeNiche.x0 * S).toFixed(1);
@@ -202,6 +238,8 @@
     const kpD = +(SEED.roomDepthIn * Sk).toFixed(1);
     const doorX = +(kpX + 26).toFixed(1);
     const doorW = +(SEED.doorSlabIn * Sk).toFixed(1);
+
+    const eastLabel = lay.totalEastIn + "″ " + pick("SHOWER", "REGADERA", "ДУШ");
 
     return `
       <svg viewBox="0 0 680 392" xmlns="http://www.w3.org/2000/svg" role="img"
@@ -224,27 +262,27 @@
         <text x="${(xNW - 17.5 * S).toFixed(1)}" y="${((yTopCap + ySill) / 2 - 3).toFixed(1)}" text-anchor="middle" font-size="7.2" font-weight="700" fill="#8F5305">${es ? "ARRIBA DE REPISA 43″" : "ABOVE 43″ SILL"}</text>
         <text x="${(xNW - 17.5 * S).toFixed(1)}" y="${((yTopCap + ySill) / 2 + 10).toFixed(1)}" text-anchor="middle" font-size="6.8" fill="#8F5305">${es ? "(SIN AZULEJO)" : "(NO WALL TILE)"}</text>
 
-        <rect x="${xNW}" y="${yCapBot}" width="${(SEED.backerWidthIn * S).toFixed(1)}" height="${(yTub - yCapBot).toFixed(1)}" fill="#FFFFFF" stroke="#8C99A0"/>
-        <rect x="${xNE}" y="${yCapBot}" width="${(33 * S).toFixed(1)}" height="${(yTub - yCapBot).toFixed(1)}" fill="#FFFFFF" stroke="#8C99A0"/>
-        <rect x="${(xNW - 33 * S).toFixed(1)}" y="${ySill}" width="${(33 * S).toFixed(1)}" height="${(yTub - ySill).toFixed(1)}" fill="#FFFFFF" stroke="#8C99A0"/>
-        ${grid}
+      <rect x="${xNW}" y="${yCapBot}" width="${(SEED.backerWidthIn * S).toFixed(1)}" height="${(yTub - yCapBot).toFixed(1)}" fill="#FFFFFF" stroke="#8C99A0"/>
+      <rect x="${xNE}" y="${yCapBot}" width="${(eField * S).toFixed(1)}" height="${(yTub - yCapBot).toFixed(1)}" fill="#FFFFFF" stroke="#8C99A0"/>
+      <rect x="${(xNW - 33 * S).toFixed(1)}" y="${ySill}" width="${(33 * S).toFixed(1)}" height="${(yTub - ySill).toFixed(1)}" fill="#FFFFFF" stroke="#8C99A0"/>
+      ${grid}
 
-        <rect x="${xNW}" y="${yTopCap}" width="${((SEED.backerWidthIn + 33) * S).toFixed(1)}" height="${(2 * S).toFixed(1)}" fill="#D6ECF8" stroke="#1F5F7A"/>
-        <rect x="${(xNE + 33 * S).toFixed(1)}" y="${yTopCap}" width="${(2 * S).toFixed(1)}" height="${(2 * S).toFixed(1)}" fill="#8EC6E2" stroke="#1F5F7A"/>
-        <rect x="${(xNE + 33 * S).toFixed(1)}" y="${yCapBot}" width="${(2 * S).toFixed(1)}" height="${(yFloor - yCapBot).toFixed(1)}" fill="#D6ECF8" stroke="#1F5F7A"/>
-        <rect x="${(xNW - 35 * S).toFixed(1)}" y="${ySill}" width="${(2 * S).toFixed(1)}" height="${(yFloor - ySill).toFixed(1)}" fill="#D6ECF8" stroke="#1F5F7A"/>
-        <rect x="${(xNW - 35 * S - 2).toFixed(1)}" y="${(ySill - 4).toFixed(1)}" width="${(35 * S + 2).toFixed(1)}" height="4.2" fill="#C99E67" stroke="#6E471B"/>
+      <rect x="${xNW}" y="${yTopCap}" width="${((SEED.backerWidthIn + eField) * S).toFixed(1)}" height="${(2 * S).toFixed(1)}" fill="#D6ECF8" stroke="#1F5F7A"/>
+      <rect x="${(xNE + eField * S).toFixed(1)}" y="${yTopCap}" width="${(2 * S).toFixed(1)}" height="${(2 * S).toFixed(1)}" fill="#8EC6E2" stroke="#1F5F7A"/>
+      <rect x="${(xNE + eField * S).toFixed(1)}" y="${yCapBot}" width="${(2 * S).toFixed(1)}" height="${(yFloor - yCapBot).toFixed(1)}" fill="#D6ECF8" stroke="#1F5F7A"/>
+      <rect x="${(xNW - 35 * S).toFixed(1)}" y="${ySill}" width="${(2 * S).toFixed(1)}" height="${(yFloor - ySill).toFixed(1)}" fill="#D6ECF8" stroke="#1F5F7A"/>
+      <rect x="${(xNW - 35 * S - 2).toFixed(1)}" y="${(ySill - 4).toFixed(1)}" width="${(35 * S + 2).toFixed(1)}" height="4.2" fill="#C99E67" stroke="#6E471B"/>
 
-        <rect x="${lgX}" y="${lgY}" width="${(SEED.largeNiche.w * S).toFixed(1)}" height="${(SEED.largeNiche.h * S).toFixed(1)}" fill="#FFFDF7" stroke="#9A5B06" stroke-width="1.5" stroke-dasharray="4 2"/>
-        <text x="${(lgX + SEED.largeNiche.w * S / 2).toFixed(1)}" y="${(lgY + 28).toFixed(1)}" text-anchor="middle" font-size="6.4" font-weight="700" fill="#9A5B06">${es ? "NICHO" : "NICHE"}</text>
-        <rect x="${smX}" y="${smY}" width="${(SEED.smallNiche.w * S).toFixed(1)}" height="${(SEED.smallNiche.h * S).toFixed(1)}" fill="#FFFDF7" stroke="#9A5B06" stroke-width="1.5" stroke-dasharray="4 2"/>
+      <rect x="${lgX}" y="${lgY}" width="${(SEED.largeNiche.w * S).toFixed(1)}" height="${(SEED.largeNiche.h * S).toFixed(1)}" fill="#FFFDF7" stroke="#9A5B06" stroke-width="1.5" stroke-dasharray="4 2"/>
+      <text x="${(lgX + SEED.largeNiche.w * S / 2).toFixed(1)}" y="${(lgY + 28).toFixed(1)}" text-anchor="middle" font-size="6.4" font-weight="700" fill="#9A5B06">${pick("NICHE", "NICHO", "НИША")}</text>
+      <rect x="${smX}" y="${smY}" width="${(SEED.smallNiche.w * S).toFixed(1)}" height="${(SEED.smallNiche.h * S).toFixed(1)}" fill="#FFFDF7" stroke="#9A5B06" stroke-width="1.5" stroke-dasharray="4 2"/>
 
-        <rect x="${(xNW - 33 * S).toFixed(1)}" y="${yTub}" width="${((33 + SEED.backerWidthIn + 33) * S).toFixed(1)}" height="${(22 * S).toFixed(1)}" fill="#E7ECEF" stroke="#5D686D" stroke-width="1.2"/>
-        <text x="${xCenter}" y="${(yTub + 34).toFixed(1)}" text-anchor="middle" font-size="7.8" font-weight="700" fill="#1D2326">${es ? "TINA + CUBIERTA DE PIEDRA (22″ DEL PISO)" : "TUB + STONE DECK (22″ ABOVE FLOOR)"}</text>
+      <rect x="${(xNW - 33 * S).toFixed(1)}" y="${yTub}" width="${((33 + SEED.backerWidthIn + 33) * S).toFixed(1)}" height="${(22 * S).toFixed(1)}" fill="#E7ECEF" stroke="#5D686D" stroke-width="1.2"/>
+      <text x="${xCenter}" y="${(yTub + 34).toFixed(1)}" text-anchor="middle" font-size="7.8" font-weight="700" fill="#1D2326">${pick("TUB + ~33″ STONE DECK (22″ ABOVE FLOOR)", "TINA + PIEDRA ~33″ (22″ DEL PISO)", "ВАННА + КАМЕНЬ ~33″ (22″ ОТ ПОЛА)")}</text>
 
-        <line x1="${xNW}" y1="${yTopCap - 5}" x2="${xNW}" y2="${yFloor + 5}" stroke="#1D2326" stroke-width="1.4" stroke-dasharray="5 3"/>
-        <line x1="${xNE}" y1="${yTopCap - 5}" x2="${xNE}" y2="${yFloor + 5}" stroke="#1D2326" stroke-width="1.4" stroke-dasharray="5 3"/>
-        <line x1="${(xNW - 35 * S).toFixed(1)}" y1="${yLaser}" x2="${(xNE + 35 * S).toFixed(1)}" y2="${yLaser}" stroke="#C92A2A" stroke-width="1.4" stroke-dasharray="6 3"/>
+      <line x1="${xNW}" y1="${yTopCap - 5}" x2="${xNW}" y2="${yFloor + 5}" stroke="#1D2326" stroke-width="1.4" stroke-dasharray="5 3"/>
+      <line x1="${xNE}" y1="${yTopCap - 5}" x2="${xNE}" y2="${yFloor + 5}" stroke="#1D2326" stroke-width="1.4" stroke-dasharray="5 3"/>
+      <line x1="${(xNW - 35 * S).toFixed(1)}" y1="${yLaser}" x2="${(xNE + (eField + 2) * S).toFixed(1)}" y2="${yLaser}" stroke="#C92A2A" stroke-width="1.4" stroke-dasharray="6 3"/>
 
         <line x1="20" y1="${yFloor}" x2="${(xEastEnd + 10).toFixed(1)}" y2="${yFloor}" stroke="#1D2326" stroke-width="1.6"/>
         <text x="${(xNW - 17.5 * S).toFixed(1)}" y="${(yFloor + 14).toFixed(1)}" text-anchor="middle" font-size="7.4" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#2F6B3F">${es ? "35″ OESTE" : "35″ WEST"}</text>
@@ -266,13 +304,13 @@
           <text x="19" y="2.5" text-anchor="middle" font-size="6.5" fill="#5D686D">E</text>
         </g>
 
-        <rect x="${kpX}" y="${kpY}" width="${kpW}" height="${kpD}" fill="#FFFFFF" stroke="#1D2326" stroke-width="1.6"/>
-        <rect x="${kpX}" y="${kpY}" width="${kpW}" height="${(33 * Sk).toFixed(1)}" fill="#E3EEF2" stroke="#1F5F7A" stroke-width="1.2"/>
-        <text x="${(kpX + kpW / 2).toFixed(1)}" y="${(kpY + 34).toFixed(1)}" text-anchor="middle" font-size="7.4" font-weight="700" fill="#1F5F7A">${es ? "TINA" : "TUB"}</text>
-        <rect x="${kpX + 2}" y="${(kpY + 86).toFixed(1)}" width="28" height="32" rx="4" fill="#F4F5F3" stroke="#5D686D"/>
-        <text x="${kpX + 16}" y="${(kpY + 105).toFixed(1)}" text-anchor="middle" font-size="6.2" fill="#1D2326">${es ? "Lavabo" : "Sink"}</text>
-        <rect x="${(kpX + kpW - 30).toFixed(1)}" y="${(kpY + 88).toFixed(1)}" width="28" height="30" rx="4" fill="#F4F5F3" stroke="#5D686D"/>
-        <text x="${(kpX + kpW - 16).toFixed(1)}" y="${(kpY + 106).toFixed(1)}" text-anchor="middle" font-size="6.2" fill="#1D2326">${es ? "Inodoro" : "Toilet"}</text>
+      <rect x="${kpX}" y="${kpY}" width="${kpW}" height="${kpD}" fill="#FFFFFF" stroke="#1D2326" stroke-width="1.6"/>
+      <rect x="${kpX}" y="${kpY}" width="${kpW}" height="${(33 * Sk).toFixed(1)}" fill="#E3EEF2" stroke="#1F5F7A" stroke-width="1.2"/>
+      <text x="${(kpX + kpW / 2).toFixed(1)}" y="${(kpY + 34).toFixed(1)}" text-anchor="middle" font-size="7.4" font-weight="700" fill="#1F5F7A">${pick("TUB", "TINA", "ВАННА")}</text>
+      <rect x="${kpX + 2}" y="${(kpY + 86).toFixed(1)}" width="28" height="32" rx="4" fill="#F4F5F3" stroke="#5D686D"/>
+      <text x="${kpX + 16}" y="${(kpY + 105).toFixed(1)}" text-anchor="middle" font-size="6.2" fill="#1D2326">${pick("Sink", "Lavabo", "Раковина")}</text>
+      <rect x="${(kpX + kpW - 30).toFixed(1)}" y="${(kpY + 88).toFixed(1)}" width="28" height="30" rx="4" fill="#F4F5F3" stroke="#5D686D"/>
+      <text x="${(kpX + kpW - 16).toFixed(1)}" y="${(kpY + 106).toFixed(1)}" text-anchor="middle" font-size="6.2" fill="#1D2326">${pick("Toilet", "Inodoro", "Унитаз")}</text>
 
         <line x1="${doorX}" y1="${(kpY + kpD).toFixed(1)}" x2="${(+doorX + doorW).toFixed(1)}" y2="${(kpY + kpD).toFixed(1)}" stroke="#FFFFFF" stroke-width="3"/>
         <line x1="${doorX}" y1="${(kpY + kpD).toFixed(1)}" x2="${doorX}" y2="${(kpY + kpD + doorW * 0.72).toFixed(1)}" stroke="#2F6B3F" stroke-width="2"/>
@@ -283,7 +321,7 @@
     `;
   }
 
-  function buildStep2PlumbingSvg(es, lay, forPrint) {
+  function buildStep2PlumbingSvg(lay, forPrint) {
     const S = 3.1;
     if (!forPrint) state.lastScaleInfo = { view: "plumbing-stops", scaleX: S, scaleY: S, uniform: true };
     const yZ = (z) => +(40 + (76.0 - z) * S).toFixed(1);
@@ -294,6 +332,7 @@
     const ySill = yZ(21.0);
 
     const ex0 = 28;
+    const eField = lay.eFieldIn;
     const wxCorner = 618;
     const wxStop = +(wxCorner - 35 * S).toFixed(1);
     const wxApron = +(wxCorner - 33 * S).toFixed(1);
@@ -304,17 +343,18 @@
       const yT = yZ(c.z1);
       const yB = yZ(c.z0);
       if (i > 0) {
-        eGrid += `<line x1="${ex0}" y1="${yB}" x2="${(ex0 + 33 * S).toFixed(1)}" y2="${yB}" stroke="#C8D1D6" stroke-width="0.7"/>`;
+        eGrid += `<line x1="${ex0}" y1="${yB}" x2="${(ex0 + eField * S).toFixed(1)}" y2="${yB}" stroke="#C8D1D6" stroke-width="0.7"/>`;
         if (c.z0 <= 21.0) wGrid += `<line x1="${wxApron}" y1="${yB}" x2="${wxCorner}" y2="${yB}" stroke="#C8D1D6" stroke-width="0.7"/>`;
       }
-      eGrid += renderVertJoints(lay.sRows[i].joints, ex0, yT, yB, S, false);
-      if (c.z0 < 21.0) wGrid += renderVertJoints(lay.sRows[i].joints, wxCorner, c.z1 <= 21.0 ? yT : ySill, yB, S, true);
+      eGrid += renderVertJoints(lay.eRows[i].joints, ex0, yT, yB, S, false);
+      if (c.z0 < 21.0) wGrid += renderVertJoints(lay.wRows[i].joints, wxCorner, c.z1 <= 21.0 ? yT : ySill, yB, S, true);
     });
 
     const pMarks = lay.plumbingHits.map((p) => {
       const cx = +(ex0 + p.x * S).toFixed(1);
       const cy = yZ(p.z);
       const r = p.id === "valve" ? 7 : 3.4;
+      const pName = pick(p.en, p.es, p.ru);
       return `
         <line x1="${ex0}" y1="${cy}" x2="${cx}" y2="${cy}" stroke="#C92A2A" stroke-width="0.9" stroke-dasharray="3 2"/>
         <circle cx="${cx}" cy="${cy}" r="${r}" fill="#F2D492" stroke="#9A5B06" stroke-width="1.4"/>
@@ -326,13 +366,13 @@
     }).join("");
 
     return `
-      <svg viewBox="0 0 660 384" xmlns="http://www.w3.org/2000/svg" role="img"
-           aria-label="${es ? "Muro de regadera y muro de ventana" : "Shower wall plumbing and window wall stop"}">
-        <defs>
-          <pattern id="noTileH2" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-            <line x1="0" y1="0" x2="0" y2="8" stroke="#9A5B06" stroke-width="1.1" opacity="0.32"/>
-          </pattern>
-        </defs>
+    <svg viewBox="0 0 660 384" xmlns="http://www.w3.org/2000/svg" role="img"
+         aria-label="${pick("Shower wall plumbing and window wall stop", "Muro de regadera y muro de ventana", "Стена душа и стена окна")}">
+      <defs>
+        <pattern id="noTileH2" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <line x1="0" y1="0" x2="0" y2="8" stroke="#9A5B06" stroke-width="1.1" opacity="0.32"/>
+        </pattern>
+      </defs>
 
         <text x="${ex0}" y="18" font-size="9.2" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#1F5F7A">
           ${es ? "MURO ESTE (REGADERA) · TOPE 35″" : "EAST SHOWER WALL · 35″ EDGE"}
@@ -341,18 +381,18 @@
           ${es ? "Salidas a 15-1/2″ del rincón · Libra agua del inodoro (~38″)" : "Pipes 15-1/2″ from North corner · Clears toilet water line (~38″)"}
         </text>
 
-        <rect x="${ex0}" y="${yTopCap}" width="${(40 * S).toFixed(1)}" height="${(yFloor - yTopCap).toFixed(1)}" fill="#F4F5F3" stroke="#C5CCC9"/>
-        <rect x="${ex0}" y="${yCapBot}" width="${(33 * S).toFixed(1)}" height="${(yTub - yCapBot).toFixed(1)}" fill="#FFFFFF" stroke="#8C99A0"/>
-        ${eGrid}
-        <rect x="${ex0}" y="${yTopCap}" width="${(33 * S).toFixed(1)}" height="${(2 * S).toFixed(1)}" fill="#D6ECF8" stroke="#1F5F7A"/>
-        <rect x="${(ex0 + 33 * S).toFixed(1)}" y="${yTopCap}" width="${(2 * S).toFixed(1)}" height="${(2 * S).toFixed(1)}" fill="#8EC6E2" stroke="#1F5F7A"/>
-        <rect x="${(ex0 + 33 * S).toFixed(1)}" y="${yCapBot}" width="${(2 * S).toFixed(1)}" height="${(yFloor - yCapBot).toFixed(1)}" fill="#D6ECF8" stroke="#1F5F7A"/>
-        <rect x="${ex0}" y="${yTub}" width="${(33 * S).toFixed(1)}" height="${(22 * S).toFixed(1)}" fill="#E7ECEF" stroke="#5D686D" stroke-width="1.2"/>
-        <text x="${(ex0 + 16.5 * S).toFixed(1)}" y="${(yTub + 34).toFixed(1)}" text-anchor="middle" font-size="7.4" font-weight="700" fill="#1D2326">${es ? "PIEDRA ~33″" : "~33″ STONE APRON"}</text>
-        ${pMarks}
-        <circle cx="${(ex0 + 37.75 * S).toFixed(1)}" cy="${yZ(-14)}" r="3.2" fill="#C86D3B" stroke="#1D2326"/>
-        <line x1="${ex0 - 6}" y1="${yFloor}" x2="${(ex0 + 41 * S).toFixed(1)}" y2="${yFloor}" stroke="#1D2326" stroke-width="1.6"/>
-        <text x="${(ex0 + 17.5 * S).toFixed(1)}" y="${(yFloor + 14).toFixed(1)}" text-anchor="middle" font-size="7.8" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#2F6B3F">${es ? "35″ DE AZULEJO" : "35″ TILE EDGE"}</text>
+      <rect x="${ex0}" y="${yTopCap}" width="${(40 * S).toFixed(1)}" height="${(yFloor - yTopCap).toFixed(1)}" fill="#F4F5F3" stroke="#C5CCC9"/>
+      <rect x="${ex0}" y="${yCapBot}" width="${(eField * S).toFixed(1)}" height="${(yTub - yCapBot).toFixed(1)}" fill="#FFFFFF" stroke="#8C99A0"/>
+      ${eGrid}
+      <rect x="${ex0}" y="${yTopCap}" width="${(eField * S).toFixed(1)}" height="${(2 * S).toFixed(1)}" fill="#D6ECF8" stroke="#1F5F7A"/>
+      <rect x="${(ex0 + eField * S).toFixed(1)}" y="${yTopCap}" width="${(2 * S).toFixed(1)}" height="${(2 * S).toFixed(1)}" fill="#8EC6E2" stroke="#1F5F7A"/>
+      <rect x="${(ex0 + eField * S).toFixed(1)}" y="${yCapBot}" width="${(2 * S).toFixed(1)}" height="${(yFloor - yCapBot).toFixed(1)}" fill="#D6ECF8" stroke="#1F5F7A"/>
+      <rect x="${ex0}" y="${yTub}" width="${(33 * S).toFixed(1)}" height="${(22 * S).toFixed(1)}" fill="#E7ECEF" stroke="#5D686D" stroke-width="1.2"/>
+      <text x="${(ex0 + 16.5 * S).toFixed(1)}" y="${(yTub + 34).toFixed(1)}" text-anchor="middle" font-size="7.4" font-weight="700" fill="#1D2326">${pick("~33″ TUB FRONT", "FRENTE TINA ~33″", "КРАЙ ВАННЫ ~33″")}</text>
+      ${pMarks}
+      <circle cx="${(ex0 + 37.75 * S).toFixed(1)}" cy="${yZ(-14)}" r="3.2" fill="#C86D3B" stroke="#1D2326"/>
+      <line x1="${ex0 - 6}" y1="${yFloor}" x2="${(ex0 + 41 * S).toFixed(1)}" y2="${yFloor}" stroke="#1D2326" stroke-width="1.6"/>
+      <text x="${(ex0 + 17.5 * S).toFixed(1)}" y="${(yFloor + 14).toFixed(1)}" text-anchor="middle" font-size="7.4" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#2F6B3F">${lay.totalEastIn}″</text>
 
         <text x="${wxStop}" y="18" font-size="9.2" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#1F5F7A">
           ${es ? "MURO OESTE (VENTANA) · REPISA 43″" : "WEST WINDOW WALL · 43″ SILL"}
@@ -375,7 +415,7 @@
     `;
   }
 
-  function buildStep3NichesSvg(es, lay, forPrint) {
+  function buildStep3NichesSvg(lay, forPrint) {
     const S = 3.8;
     if (!forPrint) state.lastScaleInfo = { view: "niches-trim", scaleX: S, scaleY: S, uniform: true };
     const ox = 24;
@@ -423,23 +463,23 @@
           ${es ? "Esquema de armado (medir profundidad en obra)" : "Side cutaway (measure niche depth on site)"}
         </text>
 
-        <rect x="326" y="54" width="18" height="194" fill="#EFE6D8" stroke="#A6947D"/>
-        <rect x="344" y="54" width="58" height="32" fill="#EFE6D8" stroke="#A6947D"/>
-        <rect x="344" y="210" width="58" height="38" fill="#EFE6D8" stroke="#A6947D"/>
-        <rect x="402" y="54" width="10" height="32" fill="#CFD8DC" stroke="#5D686D"/>
-        <rect x="402" y="210" width="10" height="38" fill="#CFD8DC" stroke="#5D686D"/>
-        <polyline points="413,54 413,86 346,86 346,210 413,210 413,248" fill="none" stroke="#C92A2A" stroke-width="2.4"/>
+      <rect x="326" y="54" width="18" height="194" fill="#EFE6D8" stroke="#A6947D"/>
+      <rect x="344" y="54" width="58" height="32" fill="#EFE6D8" stroke="#A6947D"/>
+      <rect x="344" y="210" width="58" height="38" fill="#EFE6D8" stroke="#A6947D"/>
+      <rect x="402" y="54" width="10" height="32" fill="#CFD8DC" stroke="#5D686D"/>
+      <rect x="402" y="210" width="10" height="38" fill="#CFD8DC" stroke="#5D686D"/>
+      <polyline points="413,54 413,86 346,86 346,210 413,210 413,248" fill="none" stroke="#C92A2A" stroke-width="2.4"/>
 
-        <rect x="415" y="54" width="12" height="20" fill="#FFFFFF" stroke="#1D2326"/>
-        <rect x="415" y="222" width="12" height="26" fill="#FFFFFF" stroke="#1D2326"/>
-        <path d="M415,74 L427,74 L427,82 Q427,86 422,86 L415,86 Z" fill="#8EC6E2" stroke="#1F5F7A" stroke-width="1.3"/>
-        <path d="M415,210 L422,210 Q427,210 427,214 L427,222 L415,222 Z" fill="#8EC6E2" stroke="#1F5F7A" stroke-width="1.3"/>
+      <rect x="415" y="54" width="12" height="20" fill="#FFFFFF" stroke="#1D2326"/>
+      <rect x="415" y="222" width="12" height="26" fill="#FFFFFF" stroke="#1D2326"/>
+      <path d="M415,74 L427,74 L427,82 Q427,86 422,86 L415,86 Z" fill="#8EC6E2" stroke="#1F5F7A" stroke-width="1.3"/>
+      <path d="M415,210 L422,210 Q427,210 427,214 L427,222 L415,222 Z" fill="#8EC6E2" stroke="#1F5F7A" stroke-width="1.3"/>
 
-        <rect x="349" y="88" width="10" height="120" fill="#FFFFFF" stroke="#1F5F7A" stroke-width="1.6"/>
-        <rect x="359" y="88" width="56" height="9" fill="#D6ECF8" stroke="#1F5F7A" stroke-width="1.2"/>
-        <polygon points="359,198 424,203 424,210 359,208" fill="#E4F0E6" stroke="#2F6B3F" stroke-width="1.4"/>
-        <circle cx="359" cy="97" r="3" fill="#2F6B3F"/>
-        <circle cx="359" cy="198" r="3" fill="#2F6B3F"/>
+      <rect x="349" y="88" width="10" height="120" fill="#FFFFFF" stroke="#1F5F7A" stroke-width="1.6"/>
+      <rect x="359" y="88" width="56" height="9" fill="#D6ECF8" stroke="#1F5F7A" stroke-width="1.2"/>
+      <polygon points="359,198 424,203 424,210 359,208" fill="#E4F0E6" stroke="#2F6B3F" stroke-width="1.4"/>
+      <circle cx="359" cy="97" r="3" fill="#2F6B3F"/>
+      <circle cx="359" cy="198" r="3" fill="#2F6B3F"/>
 
         <text x="442" y="68" font-size="7.4" font-weight="700" fill="#1D2326">${es ? "Azulejo 3″×6″ en muro" : "3″×6″ wall tile"}</text>
         <text x="442" y="86" font-size="7.4" font-weight="700" fill="#1F5F7A">${es ? "Bullnose cerámico 2″×6″" : "2″×6″ ceramic bullnose"}</text>
@@ -455,8 +495,7 @@
   }
 
   function renderAll() {
-    const es = state.lang === "es";
-    document.documentElement.lang = es ? "es" : "en";
+    document.documentElement.lang = state.lang;
     document.documentElement.setAttribute("data-theme", state.theme);
     const lay = computeLayout();
     const stepIdx = STEPS.findIndex((s) => s.id === state.step);
@@ -469,7 +508,7 @@
       stepBar.innerHTML = STEPS.map((s) => `
         <button type="button" class="u4b-step-btn ${s.id === state.step ? "active" : ""}" data-step="${s.id}">
           <span class="u4b-step-num">${s.num}</span>
-          <span>${es ? s.es : s.en}</span>
+          <span>${pick(s.en, s.es, s.ru)}</span>
         </button>
       `).join("");
     }
@@ -486,7 +525,7 @@
               <h1 class="u4b-title">${es ? "Paso 1 — Trazo de Azulejo en los 3 Muros" : "Step 1 — 3-Wall Tile Layout & Pattern"}</h1>
               <p class="u4b-sub">${es ? "American Olean 0025 Ice White 3″×6″ con bullnose cerámico del mismo color · Topes a 35″ en ambos costados" : "American Olean 0025 Ice White 3″×6″ with matching ceramic bullnose trim · 35″ symmetrical edges"}</p>
             </div>
-            <span class="u4b-badge">${es ? "DIBUJO A ESCALA" : "SCALE DRAWING"}</span>
+            <span class="u4b-badge">${pick("SCALE DRAWING", "DIBUJO A ESCALA", "В МАСШТАБЕ")}</span>
           </div>
 
           <div class="u4h-svg-wrap" data-u4-zoom-label="${es ? "Trazo de 3 muros" : "3-Wall Tile Layout"}">
@@ -495,32 +534,39 @@
 
           <div class="u4b-ctrl-panel">
             <div class="u4b-ctrl-row">
-              <strong>${es ? "Patrón:" : "Tile pattern:"}</strong>
+              <strong>${pick("Shower-wall tile stop (LOCKED 35″):", "Tope en muro de regadera (FIJADO 35″):", "Край плитки на стене душа (35″ УТВЕРЖДЁН):")}</strong>
               <div class="u4b-pills">
-                <button type="button" class="u4b-pill ${state.pattern === "half" ? "active" : ""}" data-pat="half">${es ? "Mitad 50% (Rec.)" : "Half-Offset 50% (Rec.)"}</button>
-                <button type="button" class="u4b-pill ${state.pattern === "third" ? "active" : ""}" data-pat="third">${es ? "Un tercio 33%" : "Third-Offset 33%"}</button>
-                <button type="button" class="u4b-pill ${state.pattern === "stacked" ? "active" : ""}" data-pat="stacked">${es ? "Recto" : "Stacked Grid"}</button>
+                <button type="button" class="u4b-pill ${state.eastStopMode === "35" ? "active" : ""}" data-east="35">${pick("35″ Locked (match sill ref)", "35″ Fijado (igual a repisa)", "35″ Утверждён")}</button>
+                <button type="button" class="u4b-pill ${state.eastStopMode === "33" ? "active" : ""}" data-east="33">${pick("Compare 33″ (tub front)", "Comparar 33″ (frente tina)", "Сравнить 33″")}</button>
               </div>
             </div>
             <div class="u4b-ctrl-row">
-              <strong>${es ? "Junta de boquilla:" : "Grout line width:"}</strong>
+              <strong>${pick("Tile pattern:", "Patrón:", "Схема укладки:")}</strong>
               <div class="u4b-pills">
-                <button type="button" class="u4b-pill ${state.groutIn === 0.0625 ? "active" : ""}" data-grout="0.0625">1/16″ (${es ? "Recomendado" : "Recommended"})</button>
+                <button type="button" class="u4b-pill ${state.pattern === "half" ? "active" : ""}" data-pat="half">${pick("Half-Offset 50% (Rec.)", "Mitad 50% (Rec.)", "Вразбежку 50% (рек.)")}</button>
+                <button type="button" class="u4b-pill ${state.pattern === "third" ? "active" : ""}" data-pat="third">${pick("Third-Offset 33%", "Un tercio 33%", "Смещение 33%")}</button>
+                <button type="button" class="u4b-pill ${state.pattern === "stacked" ? "active" : ""}" data-pat="stacked">${pick("Stacked Grid", "Recto", "Шов в шов")}</button>
+              </div>
+            </div>
+            <div class="u4b-ctrl-row">
+              <strong>${pick("Grout line width:", "Junta de boquilla:", "Ширина шва:")}</strong>
+              <div class="u4b-pills">
+                <button type="button" class="u4b-pill ${state.groutIn === 0.0625 ? "active" : ""}" data-grout="0.0625">1/16″ (${pick("Recommended", "Recomendado", "Рек.")})</button>
                 <button type="button" class="u4b-pill ${state.groutIn === 0.125 ? "active" : ""}" data-grout="0.125">1/8″</button>
               </div>
             </div>
             <div class="u4b-ctrl-row">
-              <label for="u4Starter"><strong>${es ? "Altura 1.ª fila sobre tina:" : "Bottom row height:"}</strong> ${fmtFrac(state.starterRowIn)}</label>
+              <label for="u4Starter"><strong>${pick("Bottom row height:", "Altura 1.ª fila sobre tina:", "Высота 1-го ряда:")}</strong> ${fmtFrac(state.starterRowIn)}</label>
               <input type="range" id="u4Starter" min="1.5" max="3.0" step="0.125" value="${state.starterRowIn}">
             </div>
             <div class="u4b-ctrl-row">
-              <label for="u4HShift"><strong>${es ? "Mover azulejo izq./der.:" : "Slide tile left or right:"}</strong> ${fmtFrac(state.horizShiftIn)}</label>
+              <label for="u4HShift"><strong>${pick("Slide tile left or right:", "Mover azulejo izq./der.:", "Сдвиг влево/вправо:")}</strong> ${fmtFrac(state.horizShiftIn)}</label>
               <input type="range" id="u4HShift" min="-2.0" max="2.0" step="0.25" value="${state.horizShiftIn}">
             </div>
             <div class="u4b-status ${lay.hasSliver ? "warn" : ""}">
               ${lay.hasSliver
-                ? (es ? `Corte angosto detectado (${fmtFrac(Math.min(state.starterRowIn, lay.topCourseH, lay.minCut))}). Mueve la 1.ª fila o el trazo horizontal.` : `Narrow cut warning (${fmtFrac(Math.min(state.starterRowIn, lay.topCourseH, lay.minCut))}). Adjust bottom row height or slide tiles left/right.`)
-                : (es ? `Sin cortes angostos: 1.ª fila ${fmtFrac(state.starterRowIn)}, fila superior ${fmtFrac(lay.topCourseH)}, menor corte en esquinas ${fmtFrac(lay.minCut)}.` : `No narrow cuts: bottom row ${fmtFrac(state.starterRowIn)}, top row ${fmtFrac(lay.topCourseH)}, smallest corner piece ${fmtFrac(lay.minCut)}.`)}
+                ? pick(`Narrow cut warning (${fmtFrac(Math.min(state.starterRowIn, lay.topCourseH, lay.minCut))}). Adjust bottom row height or slide tiles left/right.`, `Corte angosto detectado (${fmtFrac(Math.min(state.starterRowIn, lay.topCourseH, lay.minCut))}). Ajusta la 1.ª fila o el trazo horizontal.`, `Узкая подрезка (${fmtFrac(Math.min(state.starterRowIn, lay.topCourseH, lay.minCut))}). Скорректируйте 1-й ряд или горизонтальный сдвиг.`)
+                : pick(`No narrow cuts: bottom row ${fmtFrac(state.starterRowIn)}, top row ${fmtFrac(lay.topCourseH)}, smallest corner piece ${fmtFrac(lay.minCut)}.`, `Sin cortes angostos: 1.ª fila ${fmtFrac(state.starterRowIn)}, fila superior ${fmtFrac(lay.topCourseH)}, menor corte en esquinas ${fmtFrac(lay.minCut)}.`, `Без узких подрезок: 1-й ряд ${fmtFrac(state.starterRowIn)}, верхний ряд ${fmtFrac(lay.topCourseH)}, мин. угловой рез ${fmtFrac(lay.minCut)}.`)}
             </div>
           </div>
 
@@ -548,7 +594,7 @@
               <h1 class="u4b-title">${es ? "Paso 2 — Muro de Regadera y Muro de Ventana" : "Step 2 — Shower Wall & Window Wall"}</h1>
               <p class="u4b-sub">${es ? "Perforaciones de plomería a 15-1/2″ del rincón · En ventana, azulejo solo debajo de la repisa de 43″" : "Shower pipes sit 15-1/2″ from the North corner · Window wall is tiled below the 43″ sill only"}</p>
             </div>
-            <span class="u4b-badge">${es ? "TOPES A 35″" : "35″ TILE EDGES"}</span>
+            <span class="u4b-badge">${pick("35″ STOP LOCKED", "TOPE 35″ FIJADO", "КРАЙ 35″ УТВЕРЖДЁН")}</span>
           </div>
 
           <div class="u4h-svg-wrap" data-u4-zoom-label="${es ? "Regadera y ventana" : "Shower & Window Walls"}">
@@ -585,10 +631,10 @@
         <section class="u4b-card">
           <div class="u4b-head">
             <div>
-              <h1 class="u4b-title">${es ? "Paso 3 — Nichos y Orillas con Bullnose Cerámico" : "Step 3 — Niches & Ceramic Bullnose Trim"}</h1>
-              <p class="u4b-sub">${es ? "Medir ambos nichos (ancho, alto y profundidad) después de impermeabilizar antes de cortar los fondos" : "Measure both niches (width, height, and depth) after waterproofing before cutting back panels"}</p>
+              <h1 class="u4b-title">${pick("Step 3 — Niches & Ceramic Bullnose Trim", "Paso 3 — Nichos y Orillas con Bullnose Cerámico", "Шаг 3 — Ниши и керамический бордюр")}</h1>
+              <p class="u4b-sub">${pick("Measure both niches (width, height, and depth) after waterproofing before cutting solid white back panels", "Medir ambos nichos (ancho, alto y profundidad) después de impermeabilizar antes de cortar los fondos", "Замерьте обе ниши (ширину, высоту и глубину) после гидроизоляции перед резкой задних панелей")}</p>
             </div>
-            <span class="u4b-badge open">${es ? "MEDIR EN OBRA" : "MEASURE ON SITE"}</span>
+            <span class="u4b-badge open">${pick("MEASURE ON SITE", "MEDIR EN OBRA", "ЗАМЕР НА МЕСТЕ")}</span>
           </div>
 
           <div class="u4h-svg-wrap" data-u4-zoom-label="${es ? "Nichos y bullnose" : "Niches & Ceramic Trim"}">
@@ -601,8 +647,8 @@
               <p>${es ? "Aprox. 11″ ancho × 19″ alto. Medir profundidad real en obra." : "Approx. 11″ wide × 19″ tall. Measure actual depth on site."}</p>
             </div>
             <div class="u4b-box">
-              <h4>${es ? "NICHO DERECHO" : "RIGHT NICHE"}</h4>
-              <p>${es ? "Aprox. 7-1/2″ ancho × 14″ alto. Comparte la misma altura superior (~36″)." : "Approx. 7-1/2″ wide × 14″ tall. Shares the same ~36″ top height."}</p>
+              <h4>${pick("RIGHT NICHE", "NICHO DERECHO", "ПРАВАЯ НИША")}</h4>
+              <p>${pick("Approx. 7-1/2″ wide × 14″ tall (X: ~37-1/2″→45″, bottom ~21-3/4″, top ~35-1/2″–36″). Measure depth on site.", "Aprox. 7-1/2″ ancho × 14″ alto (X: ~37-1/2″→45″, base ~21-3/4″, tope ~35-1/2″–36″). Medir profundidad en obra.", "Около 7-1/2″ × 14″ (X: ~37-1/2″→45″, низ ~21-3/4″, верх ~35-1/2″–36″). Глубину замерить на месте.")}</p>
             </div>
             <div class="u4b-box">
               <h4>${es ? "ORILLAS DE CERÁMICA" : "CERAMIC BULLNOSE TRIM"}</h4>
@@ -721,7 +767,7 @@
           </div>
 
           <details class="u4b-details">
-            <summary>${es ? "Herramientas y suministros" : "Tools & Supplies"}</summary>
+            <summary>${pick("Tools & Supplies", "Herramientas y suministros", "Инструменты и расходники")}</summary>
             <div class="u4b-details-body">
               <ul class="u4b-supply-list">
                 <li>${es ? "Cortadora húmeda con disco continuo de diamante y almohadilla manual de pulido" : "Wet tile saw with continuous-rim diamond blade and diamond hand polishing pad"}</li>
@@ -750,8 +796,8 @@
       </div>
     `;
 
-    body.innerHTML = cardHtml + pager;
-    renderPrintSheets(es, lay);
+    body.innerHTML = buildHoldAndRefStrip() + cardHtml + pager;
+    renderPrintSheets(lay);
     wireEvents(prevS, nextS);
 
     if (window.U4ZoomPan && typeof window.U4ZoomPan.attach === "function") {
@@ -765,7 +811,7 @@
     }
   }
 
-  function renderPrintSheets(es, lay) {
+  function renderPrintSheets(lay) {
     const pr = document.getElementById("u4PrintRoot");
     if (!pr) return;
     pr.innerHTML = `
@@ -774,8 +820,8 @@
           <h2>${es ? "UNIT 4 BAÑO — TRAZO DE AZULEJO 3 MUROS (PÁG. 1/2)" : "UNIT 4 BATHROOM — 3-WALL TILE LAYOUT (PAGE 1/2)"}</h2>
           <span>${es ? "Topes 35″ · Alto 71-1/4″ · Repisa 43″" : "35″ Side Edges · 71-1/4″ Top · 43″ Sill Stop"}</span>
         </div>
-        ${buildStep1Svg(es, lay, true)}
-        <div style="margin-top:8px">${buildStep2PlumbingSvg(es, lay, true)}</div>
+        ${buildStep1Svg(lay, true)}
+        <div style="margin-top:8px">${buildStep2PlumbingSvg(lay, true)}</div>
         <div class="u4-print-foot">
           <span>American Olean 0025 Ice White 3″×6″ · Matching 2″×6″ Ceramic Bullnose · Mapei #77 Frost</span>
           <span>1231 11th Ave Unit 4 · ${es ? "Pág. 1 de 2" : "Page 1 of 2"}</span>
@@ -786,7 +832,7 @@
           <h2>${es ? "UNIT 4 BAÑO — NICHOS Y MATERIALES (PÁG. 2/2)" : "UNIT 4 BATHROOM — NICHES & MATERIALS (PAGE 2/2)"}</h2>
           <span>${es ? "Medir Nichos Impermeabilizados Antes de Cortar" : "Measure Waterproofed Niches Before Cutting"}</span>
         </div>
-        ${buildStep3NichesSvg(es, lay, true)}
+        ${buildStep3NichesSvg(lay, true)}
         <div class="u4-print-foot">
           <span>${es ? `Estimado (+${state.wastePct}%): ${lay.takeoff.cartons} cajas 3″×6″ · ${lay.takeoff.bullnosePcs} bullnose 2″×6″ · 10 esq. 2″×2″ · Mapei #77 Frost` : `Est. (+${state.wastePct}%): ${lay.takeoff.cartons} boxes 3″×6″ · ${lay.takeoff.bullnosePcs} bullnose 2″×6″ · 10 corners 2″×2″ · Mapei #77 Frost`}</span>
           <span>1231 11th Ave Unit 4 · ${es ? "Pág. 2 de 2" : "Page 2 of 2"}</span>
@@ -798,6 +844,9 @@
   function wireEvents(prevS, nextS) {
     document.querySelectorAll("[data-step]").forEach((btn) => {
       btn.onclick = () => { state.step = btn.getAttribute("data-step"); renderAll(); window.scrollTo(0, 0); };
+    });
+    document.querySelectorAll("[data-east]").forEach((btn) => {
+      btn.onclick = () => { state.eastStopMode = btn.getAttribute("data-east") || "35"; renderAll(); };
     });
     document.querySelectorAll("[data-pat]").forEach((btn) => {
       btn.onclick = () => { state.pattern = btn.getAttribute("data-pat"); renderAll(); };
@@ -821,6 +870,13 @@
     if (prevBtn && prevS) prevBtn.onclick = () => { state.step = prevS.id; renderAll(); window.scrollTo(0, 0); };
     const nextBtn = document.getElementById("u4Next");
     if (nextBtn && nextS) nextBtn.onclick = () => { state.step = nextS.id; renderAll(); window.scrollTo(0, 0); };
+  }
+
+  function normLang(raw) {
+    const s = String(raw || "").toLowerCase();
+    if (s.indexOf("ru") === 0) return "ru";
+    if (s.indexOf("es") === 0) return "es";
+    return "en";
   }
 
   function boot() {
@@ -859,7 +915,7 @@
         planId: "bathroom-tile",
         headerEl: document.getElementById("u4hTopbar"),
         onLangChange: (l) => {
-          state.lang = l === "es" ? "es" : "en";
+          state.lang = normLang(l);
           renderAll();
           if (window.U4LiveAi && typeof window.U4LiveAi.refreshPrompts === "function") window.U4LiveAi.refreshPrompts();
         },
@@ -868,7 +924,7 @@
           document.documentElement.setAttribute("data-theme", state.theme);
         }
       });
-      state.lang = window.U4PlanNav.getLang() === "es" ? "es" : "en";
+      state.lang = normLang(window.U4PlanNav.getLang());
       state.theme = window.U4PlanNav.getTheme() === "dark" ? "dark" : "light";
     } else {
       state.lang = p.get("lang") === "es" ? "es" : "en";
