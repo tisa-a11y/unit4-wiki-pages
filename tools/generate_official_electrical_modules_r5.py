@@ -618,7 +618,7 @@ RU_MAP = {
     "Physical Boxes Currently Fed (Mapping 1)": "Подключённые физические коробки (Привязка 1)",
     "NEW": "НОВАЯ",
     "REUSE": "СУЩЕСТВ.",
-    "4 SPARES": "4 РЕЗЕРВА",
+    "4 MORE SPARES": "4 РЕЗЕРВА",
     "Open Panel Spaces (#17, #18, #19, #20)": "Резервные места щита (#17, #18, #19, #20)",
     "4 Open Full-Size Spaces": "4 полноразмерных резервных модуля",
     "#17 Living/Dining split · #18 Bedroom split · #19 Toilet bidet split · #20 Open": "#17 Разделение гостиной/столовой · #18 Разделение спальни · #19 Биде унитаза · #20 Свободно",
@@ -1215,7 +1215,7 @@ def build_e00(lang, mod_num):
         )
     ptbl += (
         "<tr><td><strong>#17–#20</strong></td>"
-        "<td><span class='b-sp'>" + esc(tr(lang, "4 SPARES", "4 RESERVAS")) + "</span></td>"
+        "<td><span class='b-sp'>" + esc(tr(lang, "4 MORE SPARES", "4 RESERVAS MÁS")) + "</span></td>"
         "<td><strong>" + esc(tr(lang, "Open Panel Spaces (#17, #18, #19, #20)", "Espacios Libres (#17, #18, #19, #20)")) + "</strong></td>"
         "<td>" + esc(tr(lang, "4 Open Full-Size Spaces", "4 Espacios Completos")) + "</td>"
         "<td><span class='wsp'>—</span></td>"

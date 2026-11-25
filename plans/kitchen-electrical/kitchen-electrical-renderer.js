@@ -1446,7 +1446,7 @@
       txt(px(74), py(46), 'HAIER FRIDGE', { 'text-anchor': 'middle', 'font-size': 9.8, 'font-weight': 800, fill: '#1e293b' }, svg);
       txt(px(74), py(43.2), 'QJS15HYRFS (60"–88")', { 'text-anchor': 'middle', 'font-size': 8.1, fill: '#475569' }, svg);
 
-      /* East Wall Devices: E1 @ 10", E2 @ 48", REF-1 @ 74" */
+      /* East Wall Devices: E1 @ 10", E2 @ 48", REF-1 @ 68" */
       devs.filter((d) => d.wall === 'east').forEach((d) => {
         drawDeviceBox(svg, px(d.station), py(d.z), d, 38, 17, 'bottom');
       });

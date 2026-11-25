@@ -3,9 +3,9 @@
   "steps": [
     {
       "done": true,
-      "en": "Eaton 20-space Panel on site; Rev R5 Module 1 (Kitchen) & Module 2 (Whole-Unit) working blueprints published",
-      "es": "Panel Eaton de 20 espacios en obra; planos oficiales Rev R5 Módulo 1 (Cocina) y Módulo 2 (Unidad) publicados",
-      "ru": "20-модульный щиток Eaton на объекте; опубликованы официальные рабочие чертежи Rev R5: Модуль 1 (Кухня) и Модуль 2 (Вся квартира)"
+      "en": "Eaton 20-space Panel on site; Rev R6 Module 1 (Kitchen) & Module 2 (Whole-Unit) working blueprints published",
+      "es": "Panel Eaton de 20 espacios en obra; planos oficiales Rev R6 Módulo 1 (Cocina) y Módulo 2 (Unidad) publicados",
+      "ru": "20-модульный щиток Eaton на объекте; опубликованы официальные рабочие чертежи Rev R6: Модуль 1 (Кухня) и Модуль 2 (Вся квартира)"
     },
     {
       "done": false,
@@ -27,9 +27,9 @@
     },
     {
       "done": false,
-      "en": "Common rooms (#10–#12, Sheets E-22 & E-24): keep non-kitchen wire pulling on hold (bathroom pocket door retired Nov 24 — standard 28\" hinged outward-swing hallway door locked, south stud wall allows switches); verify every reused wire gauge (14 AWG requires 15A AFCI)",
-      "es": "Cuartos comunes (#10–#12, Hojas E-22 y E-24): mantener pausa sin jalar cable fuera de cocina (puerta corrediza del baño retirada el 24 nov — puerta abatible estándar de 28\" hacia el pasillo confirmada, muro sur de postes permite apagadores); verificar calibre de cables reusados (14 AWG requiere 15A AFCI)",
-      "ru": "Жилые комнаты (#10–#12, листы E-22 и E-24): держать протяжку кабеля вне кухни на паузе (кассетная дверь ванной отменена 24 нояб. — утверждена стандартная распашная дверь 28\" наружу в коридор, южная каркасная стена допускает выключатели); проверить калибр каждого сохраняемого провода (при 14 AWG обязателен автомат 15A AFCI)"
+      "en": "Common rooms (#10, #12; #11 Spare, Sheets E-22 & E-24): keep non-kitchen wire pulling on hold (bathroom pocket door retired Nov 24 — standard 28\" hinged outward-swing hallway door locked, south stud wall allows switches); verify every reused wire gauge (14 AWG requires 15A AFCI)",
+      "es": "Cuartos comunes (#10, #12; #11 Spare, Hojas E-22 y E-24): mantener pausa sin jalar cable fuera de cocina (puerta corrediza del baño retirada el 24 nov — puerta abatible estándar de 28\" hacia el pasillo confirmada, muro sur de postes permite apagadores); verificar calibre de cables reusados (14 AWG requiere 15A AFCI)",
+      "ru": "Жилые комнаты (#10, #12; #11 Spare, листы E-22 и E-24): держать протяжку кабеля вне кухни на паузе (кассетная дверь ванной отменена 24 нояб. — утверждена стандартная распашная дверь 28\" наружу в коридор, южная каркасная стена допускает выключатели); проверить калибр каждого сохраняемого провода (при 14 AWG обязателен автомат 15A AFCI)"
     },
     {
       "done": false,
