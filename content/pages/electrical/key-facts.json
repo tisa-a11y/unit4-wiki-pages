@@ -10,25 +10,25 @@
   {
     "kEn": "Active circuits",
     "kEs": "Circuitos activos",
-    "vEn": "16 active (#1–#16) + 4 open spares (#17–#20)",
-    "vEs": "16 activos (#1–#16) + 4 reservas (#17–#20)",
+    "vEn": "15 active (#1–#10, #12–#16) + 5 open spares (#11, #17–#20)",
+    "vEs": "15 activos (#1–#10, #12–#16) + 5 reservas (#11, #17–#20)",
     "kRu": "Рабочие линии",
-    "vRu": "16 активных (#1–#16) + 4 резервных (#17–#20)"
+    "vRu": "15 активных (#1–#10, #12–#16) + 5 резервных (#11, #17–#20)"
   },
   {
     "kEn": "Working sheets",
     "kEs": "Planos vigentes",
-    "vEn": "Rev R5 · Module 1 (Kitchen) & Module 2 (Unit)",
-    "vEs": "Rev R5 · Módulo 1 (Cocina) y Módulo 2 (Unidad)",
+    "vEn": "Rev R6 · Module 1 (Kitchen) & Module 2 (Whole Unit)",
+    "vEs": "Rev R6 · Módulo 1 (Cocina) y Módulo 2 (Toda la Unidad)",
     "kRu": "Чертежи",
-    "vRu": "Rev R5 · Модуль 1 (Кухня) и Модуль 2 (Квартира)"
+    "vRu": "Rev R6 · Модуль 1 (Кухня) и Модуль 2 (Квартира)"
   },
   {
     "kEn": "Active holds",
     "kEs": "Pausas activas",
-    "vEn": "Panel feeder/notch · South CL · #10/#11 gauge",
-    "vEs": "Alimentador Panel · Eje Sur · Calibre #10/#11",
+    "vEn": "Panel feeder/notch · South CL · #10 reused wire gauge",
+    "vEs": "Alimentador Panel · Eje Sur · Calibre cable reusado #10",
     "kRu": "Активные паузы",
-    "vRu": "Ввод щитка · Ось южного окна · Калибр #10/#11"
+    "vRu": "Ввод щитка · Ось южного окна · Калибр кабеля #10"
   }
 ]

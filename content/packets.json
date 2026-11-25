@@ -127,10 +127,10 @@
   {
     "key": "interactive-kitchen-electrical",
     "room": "electrical",
-    "titleEn": "Interactive kitchen electrical and panel D04 plan",
-    "titleEs": "Plano interactivo eléctrico de cocina y tablero D04",
-    "noteEn": "6 coupled views, D04 breaker map, hood 1-gang box & wire lengths.",
-    "noteEs": "6 vistas acopladas, tablero D04, caja de campana y largos de cable.",
+    "titleEn": "Interactive Whole-Unit Electrical Plan (All Rooms & Panel)",
+    "titleEs": "Plano Interactivo Eléctrico de Toda la Unidad (Cuartos y Panel)",
+    "noteEn": "All rooms (15 active #1–#10, #12–#16 + 5 spares), Dining+Living+Bed+Hall shared #10 (reused + new), elevations & holds.",
+    "noteEs": "Todos los cuartos (15 activos + 5 reservas), #10 compartido Sala/Comedor/Recámara/Pasillo (reusado + nuevo) y elevaciones.",
     "docEn": "2026-11-20_Kitchen-Electrical-Interactive_EN",
     "docEs": "2026-11-20_Kitchen-Electrical-Interactive_ES",
     "aliases": [
@@ -141,8 +141,8 @@
       "электрика кухни",
       "щиток d04"
     ],
-    "titleRu": "Интерактивный план электрики кухни и щитка D04",
-    "noteRu": "6 связанных видов, автоматы D04, коробка вытяжки и длины кабелей.",
+    "titleRu": "Интерактивный план электрики всей квартиры (все комнаты и щиток)",
+    "noteRu": "Все комнаты (15 активных + 5 резервов), общая линия #10 гостиная/столовая/спальня/коридор (повторное использование + новое).",
     "docRu": "2026-11-20_Kitchen-Electrical-Interactive_RU"
   },
   {
@@ -396,8 +396,8 @@
     "room": "bathroom",
     "titleEn": "Bathroom Tub & Wall Tile Plan",
     "titleEs": "Plano de Azulejo y Nichos en Baño",
-    "noteEn": "35\" symmetrical stops, 71-1/4\" HardieBacker top, 2\"×6\" bullnose (zero metal), 1-piece 24\"×48\" White niche backs, Mapei #77 Frost grout.",
-    "noteEs": "Topes simétricos 35\", altura 71-1/4\", bullnose 2\"×6\" (cero metal), fondos nicho 1 pieza 24\"×48\" Blanco y boquilla Mapei #77 Frost.",
+    "noteEn": "35\" side stops, 71-1/4\" top, matching 2\"×6\" ceramic bullnose, total sq ft & pieces, niche back TBD.",
+    "noteEs": "Topes a 35\", alto 71-1/4\", bullnose cerámico 2\"×6\", área y piezas totales, fondo de nichos por elegir.",
     "docEn": "./plans/bathroom-tile/index.html?v=rev008",
     "docEs": "./plans/bathroom-tile/index.html?lang=es&v=rev008",
     "aliases": [
@@ -411,7 +411,7 @@
       "плитка ванной и ниши"
     ],
     "titleRu": "Плитка ванной и ниши",
-    "noteRu": "Симметричные границы 35\", верх HardieBacker 71-1/4\", керамический булноуз 2\"×6\" (без металла), цельные задние стенки ниш 24\"×48\" белые, затирка Mapei #77 Frost.",
+    "noteRu": "Границы 35\", верх 71-1/4\", керамический булноз 2\"×6\", итоговая площадь и штуки, задняя стенка ниш на согласовании.",
     "docRu": "./plans/bathroom-tile/index.html?lang=ru&v=rev008"
   },
   {

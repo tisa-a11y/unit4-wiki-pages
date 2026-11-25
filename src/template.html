@@ -4910,7 +4910,21 @@ function packetHref(pk){
   var hosted = packetHostedPlanUrl(pk);
   return hosted ? (planUrlToHash(hosted) || hosted) : ("#" + pk.key);
 }
-function packetsFor(roomKey){ return PACKETS.filter(x=>x.room===roomKey && x.inMenu!==false); }
+function packetSortRank(pk){
+  const isInt = Boolean(packetHostedPlanUrl(pk));
+  const id = String(pk.key || "").toLowerCase();
+  const ttl = String(pk.titleEn || "").toLowerCase();
+  const isHist = /historic|earlier|given to john|old |archive|supers/.test(id + " " + ttl);
+  if (isInt) return 0;
+  if (isHist) return 2;
+  return 1;
+}
+function packetsFor(roomKey){
+  return PACKETS.filter(x=>x.room===roomKey && x.inMenu!==false)
+    .map((x,i)=>({x,i,r:packetSortRank(x)}))
+    .sort((a,b)=>(a.r-b.r)||(a.i-b.i))
+    .map(o=>o.x);
+}
 function packetCardsBlock(list, showRoom){
   if (!list.length) return "";
   const es = LANG==="es", ru = LANG==="ru";
@@ -7797,7 +7811,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       docIdEn: "2026-11-20_Kitchen-Electrical-Interactive_EN",
       docIdEs: "2026-11-20_Kitchen-Electrical-Interactive_ES",
       docIdRu: "2026-11-20_Kitchen-Electrical-Interactive_RU",
-      titleEn: "Kitchen electrical and subpanel D04 interactive plan",
+      titleEn: "Whole-unit electrical and subpanel D04 interactive plan",
       titleEs: "Plano interactivo eléctrico de cocina y subpanel D04",
       titleRu: "Интерактивный план электрики кухни и щитка D04",
       status: "live",
@@ -12367,7 +12381,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
   var SIDEBAR_PLANS = [
     { id: "kitchen-floor-plan", en: "Kitchen Floor Plan", es: "Cocina: Planta", ru: "Кухня: План этажа", tagEn: "→", tagEs: "→", tagRu: "→" },
     { id: "kitchen-west-ks4", en: "Range & Hood Wall", es: "Estufa y Campana", ru: "Плита и вытяжка", tagEn: "→", tagEs: "→", tagRu: "→" },
-    { id: "kitchen-electrical", en: "Kitchen Electrical", es: "Cocina: Eléctrico", ru: "Кухня: Электрика", tagEn: "→", tagEs: "→", tagRu: "→" },
+    { id: "kitchen-electrical", en: "Whole-Unit Electrical", es: "Eléctrico: Unidad 4", ru: "Электрика: Квартира 4", tagEn: "→", tagEs: "→", tagRu: "→" },
     { id: "attic-hatch", en: "Attic Hatch & Walkway", es: "Escotilla y Pasillo", ru: "Люк и мостки", tagEn: "1", tagEs: "1", tagRu: "1" },
     { id: "hvac-layout", en: "Heating & Ducts", es: "Calefactor y Ductos", ru: "Печь и воздуховоды", tagEn: "2", tagEs: "2", tagRu: "2" },
     { id: "murphy-door", en: "Murphy Bookcase Door", es: "Puerta Murphy", ru: "Шкаф-дверь Murphy", tagEn: "→", tagEs: "→", tagRu: "→" },

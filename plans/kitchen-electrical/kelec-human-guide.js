@@ -18,65 +18,71 @@
 
   var CIRCUITS = [
     { sp: 1, id: "SA-A", grp: "kitchen", amp: "20A", cat: "BRN120DF", wire: "12/2 Cu", ft: 10.5,
-      en: "East Counter Outlets (E1, E2)", es: "Contactos Cubierta Este (E1, E2)", ru: "Розетки восточной столешницы (E1, E2)",
-      routeEn: "In-wall East 50\" band", routeEs: "En muro Este franja 50\"", routeRu: "В восточной стене, пояс сверления 50\"" },
+      en: "East Counter Outlets (East 1 @ 10\", East 2 @ 45\")", es: "Contactos Cubierta Este (Este 1 @ 10\", Este 2 @ 45\")", ru: "Розетки восточной столешницы (East 1 @ 10\", East 2 @ 45\")",
+      routeEn: "In-wall East 50\" band", routeEs: "En muro Este franja 50\"", routeRu: "В восточной стене, зона 50\"" },
     { sp: 2, id: "SA-B", grp: "kitchen", amp: "20A", cat: "BRN120DF", wire: "12/2 Cu", ft: 16.0,
-      en: "South Counter Outlets (S1, S2)", es: "Contactos Cubierta Sur (S1, S2)", ru: "Розетки южной столешницы (S1, S2)",
-      routeEn: "In-wall South 30\" band", routeEs: "En muro Sur franja 30\"", routeRu: "В южной стене, пояс сверления 30\"" },
+      en: "South Counter Outlets (South 1 @ 24\", South 2 @ 62\"*)", es: "Contactos Cubierta Sur (Sur 1 @ 24\", Sur 2 @ 62\"*)", ru: "Розетки южной столешницы (South 1 @ 24\", South 2 @ 62\"*)",
+      routeEn: "In-wall South 30\" band", routeEs: "En muro Sur franja 30\"", routeRu: "В южной стене, зона 30\"" },
     { sp: 3, id: "SA-C", grp: "kitchen", amp: "20A", cat: "BRN120DF", wire: "12/2 Cu", ft: 39.0,
-      en: "West Range Counter Outlets (W1, W2 · 1\" tile rings)", es: "Contactos Estufa Oeste (W1, W2 · aros 1\" azulejo)", ru: "Розетки западной стены у плиты (W1, W2 · рамки 1\" под плитку)",
-      routeEn: "Attic to West 50\" band", routeEs: "Ático a muro Oeste 50\"", routeRu: "Через чердак → западная стена, пояс 50\"" },
+      en: "West Range Counter Outlets (West 1 @ 9\", West 2 @ 57\" · ~1\" tile rings)", es: "Contactos Estufa Oeste (Oeste 1 @ 9\", Oeste 2 @ 57\" · aros ~1\")", ru: "Розетки западной стены плиты (West 1 @ 9\", West 2 @ 57\" · рамки ~1\")",
+      routeEn: "Attic to West 50\" band", routeEs: "Ático a muro Oeste 50\"", routeRu: "Через чердак в западную стену, зона 50\"" },
     { sp: 4, id: "REF", grp: "kitchen", amp: "20A", cat: "BRN120DF", wire: "12/2 Cu", ft: 10.1,
-      en: "Haier Fridge Single Outlet (REF-1 @ 74\", 15\" H)", es: "Refrigerador Haier Sencillo (REF-1 @ 74\", 15\" alto)", ru: "Одиночная розетка холодильника Haier (REF-1 @ 74\", выс. 15\")",
-      routeEn: "In-wall East 52-1/2\" band", routeEs: "En muro Este franja 52-1/2\"", routeRu: "В восточной стене, пояс 52-1/2\"" },
-    { sp: 5, id: "DW", grp: "kitchen", amp: "15A", cat: "BRN115DF", wire: "14/2 Cu", ft: 13.6,
-      en: "24\" Dishwasher (Sink-Base 2-Gang Left · Separate Neutral)", es: "Lavavajillas 24\" (Caja Doble Tarja Izq. · Neutro Separado)", ru: "Посудомойка 24\" (двойная под мойкой слева · отдельный ноль)",
-      routeEn: "In-wall South 24\" band", routeEs: "En muro Sur franja 24\"", routeRu: "В южной стене, пояс 24\"" },
+      en: "Haier 28\" Fridge Single Outlet (REF-1 @ 68\" N, 15\" AFF)", es: "Refrigerador Haier 28\" Sencillo (REF-1 @ 68\" N, 15\" AFF)", ru: "Холодильник Haier 28\" (REF-1 @ 68\" С, 15\" от пола)",
+      routeEn: "In-wall East 52-1/2\" band", routeEs: "En muro Este franja 52-1/2\"", routeRu: "В восточной стене, зона 52-1/2\"" },
+    { sp: 5, id: "DW", grp: "kitchen", amp: "20A", cat: "BRN120DF", wire: "12/2 Cu", ft: 13.6,
+      en: "24\" Finished-Front Dishwasher (Under-Sink 2-Gang Left · 14\" AFF)", es: "Lavavajillas 24\" Frente Terminado (Caja Doble Izq. · 14\" AFF)", ru: "ПММ 24\" (левая сторона коробки под мойкой · 14\" от пола)",
+      routeEn: "In-wall South 24\" band (separate 20A yoke/neutral)", routeEs: "En muro Sur franja 24\" (yugo y neutro 20A separados)", routeRu: "В южной стене, зона 24\" (отдельный механизм и нейтраль)" },
     { sp: 6, id: "GD", grp: "kitchen", amp: "15A", cat: "BRN115DF", wire: "14/2 Cu", ft: 17.5,
-      en: "Garbage Disposal (Sink-Base 2-Gang Right · Separate Neutral)", es: "Triturador Basura (Caja Doble Tarja Der. · Neutro Separado)", ru: "Измельчитель отходов (двойная под мойкой справа · отдельный ноль)",
-      routeEn: "In-wall South 26\" / 20\" band", routeEs: "En muro Sur franja 26\" / 20\"", routeRu: "В южной стене, пояс 26\" / 20\"" },
+      en: "Garbage Disposal (Under-Sink 2-Gang Right + Air Button @ 90\"*)", es: "Triturador Basura (Caja Doble Der. + Botón Aire @ 90\"*)", ru: "Измельчитель (правая сторона коробки под мойкой + пневмокнопка @ 90\"*)",
+      routeEn: "In-wall South 26\" / 20\" band (separate 15A yoke/neutral)", routeEs: "En muro Sur franja 26\" / 20\" (yugo y neutro 15A separados)", routeRu: "В южной стене, зона 26\"/20\" (отдельный механизм и нейтраль)" },
     { sp: 7, id: "RG", grp: "kitchen", amp: "15A", cat: "BRN115DF", wire: "14/2 Cu", ft: 34.8,
-      en: "Viking 30\" Gas Range Low Pocket (RG-1 @ 33\", 3\" H)", es: "Estufa Gas Viking 30\" Franja Baja (RG-1 @ 33\", 3\" alto)", ru: "Газовая плита Viking 30\", нижняя ниша (RG-1 @ 33\", выс. 3\")",
-      routeEn: "Attic drop to West 3\" high", routeEs: "Ático a muro Oeste 3\" alto", routeRu: "Опуск с чердака по западной стене до выс. 3\"" },
+      en: "Viking 30\" Gas Range Low Pocket (RG-1 @ 33\" N, 3\" AFF)", es: "Estufa Gas Viking 30\" Franja Baja (RG-1 @ 33\" N, 3\" AFF)", ru: "Газовая плита Viking 30\" (RG-1 @ 33\" С, 3\" от пола)",
+      routeEn: "Attic drop to West 3\" AFF", routeEs: "Ático a muro Oeste 3\" AFF", routeRu: "Спуск с чердака к западной стене на 3\"" },
     { sp: 8, id: "HD", grp: "kitchen", amp: "15A", cat: "BRN115AF + BRLW1", wire: "14/2 Cu", ft: 24.6,
-      en: "Zephyr Hood Direct Hardwire 1-Gang 2\"×3\" (HD-1 @ 83\"–86\")", es: "Campana Zephyr Directa 2\"×3\" (HD-1 @ 83\"–86\")", ru: "Вытяжка Zephyr, прямое подключение 1-пост 2\"×3\" (HD-1 @ 83\"–86\")",
-      routeEn: "Attic drop to West 84-1/2\"", routeEs: "Ático a muro Oeste 84-1/2\"", routeRu: "Опуск с чердака по западной стене до 84-1/2\"" },
+      en: "Zephyr Hood Flush 1-Gang 2\"×3\" (HD-1 @ 33\"±2.25\" N, 83\"–86\" AFF)", es: "Campana Zephyr 1-Gang 2\"×3\" (HD-1 @ 33\"±2.25\" N, 83\"–86\" AFF)", ru: "Вытяжка Zephyr 1-Gang 2\"×3\" (HD-1 @ 33\"±2.25\" С, 83\"–86\" от пола)",
+      routeEn: "Attic drop to West 84-1/2\" (~1\" proud; NO 4×4 @ 100\")", routeEs: "Ático a muro Oeste 84-1/2\" (~1\" salida; NO 4×4 a 100\")", routeRu: "Спуск с чердака на 84-1/2\" (выступ ~1\"; без 4×4 на 100\")" },
     { sp: 9, id: "LT", grp: "kitchen", amp: "15A", cat: "BRN115AF", wire: "14/2 Cu", ft: 69.3,
-      en: "Kitchen Main Light + Sink Task Lights + SW-ENTRY 3-Gang", es: "Luz Principal + Luces Tarja + Apagador Entrada 3-Gang", ru: "Основной свет кухни + свет мойки + 3-клавишный выключатель у входа",
+      en: "Kitchen Lights (Entry 3-Switch @ 35.5\" W of NE -> Ceiling, Pendants, Under-Cab)", es: "Luces Cocina (3-Apagadores @ 35.5\" O de NE -> Techo, Colgantes, Bajo Gab.)", ru: "Свет кухни (тройной выключатель @ 35.5\" З от СВ)",
       routeEn: "Attic to North entry & ceiling", routeEs: "Ático a entrada Norte y techo", routeRu: "Через чердак к северному входу и потолку" },
-    { sp: 10, id: "HVAC", grp: "unit", amp: "15A", cat: "BR115", wire: "14/2 Cu", ft: 31.2,
-      en: "Attic Furnace w/ Disconnect (Heating Only)", es: "Calefactor Ático con Desconectador (Solo Calefacción)", ru: "Чердачная печь с сервисным выключателем (только отопление)",
-      routeEn: "Attic overhead", routeEs: "Ático aéreo", routeRu: "По чердаку поверху" },
-    { sp: 11, id: "LIV", grp: "unit", amp: "20A", cat: "BRN120AF", wire: "12/2 Cu", ft: 196.5,
-      en: "Living Outlets L1–L6 + Hall H1 (ENT Hold)", es: "Contactos Sala L1–L6 + Pasillo H1 (Tubo Vacío)", ru: "Розетки гостиной L1–L6 + коридор H1 (гофра ENT на паузе)",
-      routeEn: "Attic junction", routeEs: "Caja de paso ático", routeRu: "Через распаечную коробку на чердаке" },
-    { sp: 12, id: "DIN", grp: "unit", amp: "20A", cat: "BRN120AF", wire: "12/2 Cu", ft: 147.0,
-      en: "Dining Outlets D1–D4 (No Outlet on D04 Wall)", es: "Contactos Comedor D1–D4 (Sin Contacto en Muro D04)", ru: "Розетки столовой D1–D4 (без розеток на стене щита D04)",
-      routeEn: "Attic junction", routeEs: "Caja de paso ático", routeRu: "Через распаечную коробку на чердаке" },
-    { sp: 13, id: "BED", grp: "unit", amp: "20A", cat: "BRN120AF", wire: "12/2 Cu", ft: 149.9,
-      en: "Bedroom Outlets B1–B5 + Closet Light", es: "Contactos Recámara B1–B5 + Luz Clóset", ru: "Розетки спальни B1–B5 + свет гардеробной",
-      routeEn: "Attic junction", routeEs: "Caja de paso ático", routeRu: "Через распаечную коробку на чердаке" },
-    { sp: 14, id: "BATH-R", grp: "unit", amp: "20A", cat: "BRN120GF", wire: "12/2 Cu", ft: 64.4,
-      en: "Bathroom Vanity + Toilet Outlets", es: "Contactos Lavabo + Inodoro Baño", ru: "Розетки раковины и унитаза/биде в ванной",
-      routeEn: "Attic junction", routeEs: "Caja de paso ático", routeRu: "Через распаечную коробку на чердаке" },
-    { sp: 15, id: "BATH-L", grp: "unit", amp: "15A", cat: "BRN115AF", wire: "14/2 Cu", ft: 91.0,
-      en: "Bathroom Ceiling Light, Vanity & Fan", es: "Luz Techo, Lavabo y Extractor Baño", ru: "Потолочный свет, бра раковины и вытяжной вентилятор ванной",
-      routeEn: "Attic junction", routeEs: "Caja de paso ático", routeRu: "Через распаечную коробку на чердаке" },
-    { sp: 16, id: "LAUN-W", grp: "unit", amp: "20A", cat: "BRN120DF", wire: "12/2 Cu", ft: 45.5,
-      en: "Laundry Washer Outlet (2-Gang Left)", es: "Lavadora Lavandería (Caja Doble Izq.)", ru: "Стиральная машина в прачечной (двойная коробка слева)",
-      routeEn: "Attic direct", routeEs: "Ático directo", routeRu: "Прямая линия по чердаку" },
-    { sp: 17, id: "LTG", grp: "unit", amp: "15A", cat: "BRN115AF", wire: "14/2 + 14/3", ft: 179.9,
-      en: "Whole-Unit Lights + Smoke/CO Alarms", es: "Luces Generales + Detectores Humo/CO", ru: "Общий свет квартиры + датчики дыма и угарного газа CO",
-      routeEn: "Attic junction", routeEs: "Caja de paso ático", routeRu: "Через распаечную коробку на чердаке" },
-    { sp: 18, id: "LAUN-D", grp: "unit", amp: "15A", cat: "BRN115DF", wire: "14/2 Cu", ft: 45.5,
-      en: "Laundry Gas Dryer 120V (2-Gang Right)", es: "Secadora Gas 120V (Caja Doble Der.)", ru: "Газовая сушилка 120В в прачечной (двойная коробка справа)",
-      routeEn: "Attic direct", routeEs: "Ático directo", routeRu: "Прямая линия по чердаку" },
-    { sp: 19, id: "SPARE", grp: "spare", amp: "—", cat: "Filler", wire: "—", ft: 0,
-      en: "Open Spare Space (Reserved)", es: "Espacio Libre de Reserva", ru: "Свободное резервное место в щите",
-      routeEn: "None", routeEs: "Ninguna", routeRu: "Резерв" },
-    { sp: 20, id: "ATTIC", grp: "unit", amp: "15A", cat: "BRN115DF", wire: "14/2 Cu", ft: 39.2,
-      en: "Attic Service GFCI (<=25 ft) + Hatch Light", es: "Contacto Servicio Ático (<=25 pies) + Luz", ru: "Сервисная розетка чердака GFCI (<=25 фут.) + свет у люка",
-      routeEn: "Attic direct", routeEs: "Ático directo", routeRu: "Прямая линия по чердаку" }
+    { sp: 10, id: "COMMON-R", grp: "unit", amp: "20A*", cat: "BRN120AF (15A if 14 AWG)", wire: "12/2* Reuse+New", ft: 180.0,
+      en: "Living, Dining, Bedroom & Hall Outlets (Reuse + New · Verify w/ C-10)", es: "Contactos Sala, Comedor, Recámara y Pasillo (Reuso + Nuevo · C-10)", ru: "Розетки гостиной, столовой, спальни и коридора (повторное использование + новые · C-10)",
+      routeEn: "Dining 1–4, Living 1–5 (18\" AFF), Hall 1 (18\"), Bed 1–5 (11.5\" dark horiz.) via J-Boxes; NO D5 on Panel wall; D6/L6 pocket hold",
+      routeEs: "Comedor 1–4, Sala 1–5 (18\" AFF), Pasillo 1 (18\"), Rec. 1–5 (11.5\" horiz. oscuro) vía Cajas; SIN D5 en Panel; pausa D6/L6",
+      routeRu: "Dining 1–4, Living 1–5 (18\"), Hall 1 (18\"), Bed 1–5 (11.5\" гориз. тёмные); без D5 на стене щитка; пауза D6/L6" },
+    { sp: 11, id: "SPARE-11", grp: "spare", amp: "—", cat: "Open Spare", wire: "None", ft: 0,
+      en: "Open Spare — Future Bedroom / Room Split", es: "Reserva Libre — División Futura Recámara / Cuartos", ru: "Свободный резерв — будущее выделение спальни / комнат",
+      routeEn: "Split-ready from Bed/Hall Attic J-Box (zero drywall demo)", routeEs: "Lista para separar Caja Recámara/Pasillo sin romper tablaroca", routeRu: "Готово к разделению из чердачной коробки Bed/Hall без вскрытия ГКЛ" },
+    { sp: 12, id: "COMMON-L", grp: "unit", amp: "15A", cat: "BRN115AF", wire: "14/2 + 14/3", ft: 145.0,
+      en: "Common-Room Lights (Living, Dining, Bed, 2× Hall 3-Way, Laundry)", es: "Luces Cuartos Comunes (Sala, Comedor, Rec., 2× Pasillo 3-Vías, Lav.)", ru: "Освещение комнат (гостиная, столовая, спальня, 2× 3-Way коридор, прачечная)",
+      routeEn: "Reuse sound + new via Lights J-Box (14/3 Red travelers for Hall 3-Way)", routeEs: "Reuso sano + nuevo vía Caja Luces (14/3 Rojo viajeras 3-vías)", routeRu: "Сохранение исправной + новые линии через Lights J-Box (14/3 3-Way)" },
+    { sp: 13, id: "BATH", grp: "unit", amp: "20A", cat: "BRN120DF", wire: "100% 12/2 Cu", ft: 88.0,
+      en: "Bathroom All-in-One (Vanity, Sep. Toilet Drop, Lights, Humidity Fan)", es: "Baño Todo-en-Uno (Lavabo, Bajada Sep. Inodoro, Luces, Extractor)", ru: "Ванная (всё на одной линии 100% 12/2: раковина, отд. спуск WC, свет, вытяжка)",
+      routeEn: "Via Bath J-Box (100% 12/2 Yellow; pocket door RETIRED -> 28\" outward hall door; South stud switches OK)",
+      routeEs: "Vía Caja Baño (100% 12/2 Amarillo; corrediza RETIRADA -> puerta 28\" afuera; apagadores muro Sur OK)",
+      routeRu: "Через Bath J-Box (100% 12/2; кассетная дверь отменена -> распашная 28\" наружу)" },
+    { sp: 14, id: "LAUN", grp: "unit", amp: "20A", cat: "BRN120DF at Panel", wire: "12/2 Cu", ft: 45.5,
+      en: "Laundry WashTower (1× 20A Duplex East Wall @ 38\" AFF)", es: "Lavandería WashTower (1 Toma Doble 20A Muro Este @ 38\" AFF)", ru: "Прачечная WashTower (1× двойная 20A на восточной стене @ 38\")",
+      routeEn: "Both 120V LG WKG101HVA plugs; clears 8-1/4\" Murphy door; Panel GFCI reset", routeEs: "Ambos enchufes 120V LG WKG101HVA; libra Murphy 8-1/4\"; reset en Panel", routeRu: "Обе вилки 120V LG WKG101HVA; вне двери-стеллажа 8-1/4\"; сброс GFCI в щитке" },
+    { sp: 15, id: "HVAC", grp: "unit", amp: "15A", cat: "BR115", wire: "14/2 Cu", ft: 31.2,
+      en: "Attic Furnace F1 + Local Disconnect (174\", 258\")", es: "Calefactor Ático F1 + Desconectador Local (174\", 258\")", ru: "Чердачная печь F1 + сервисный выключатель (174\", 258\")",
+      routeEn: "Attic overhead dedicated circuit", routeEs: "Circuito dedicado aéreo en ático", routeRu: "Выделенная линия на чердаке" },
+    { sp: 16, id: "ATTIC-SMK", grp: "unit", amp: "15A", cat: "BRN115AF (AFCI-ONLY!)", wire: "14/2 + 14/3", ft: 96.0,
+      en: "Attic Light/GFCI (LINE-Only) + Unswitched Smoke/CO Interconnect", es: "Luz/GFCI Ático (Solo LINE) + Humo/CO Directo 14/3 Rojo", ru: "Свет/GFCI чердака (LINE-only) + неотключаемые датчики дыма/CO (14/3)",
+      routeEn: "NEVER GFCI breaker! Unswitched 14/2->14/3 to Hall/Bed/Liv Smoke/CO; 2× LEDs on 2×4 blocking >=1.5\" below deck",
+      routeEs: "¡NUNCA breaker GFCI! 14/2->14/3 directo a Humo/CO Pasillo/Rec/Sala; 2 LEDs en bloqueo 2×4 >=1.5\" bajo techo",
+      routeRu: "Никогда не GFCI-автомат! Прямой 14/2->14/3 к датчикам дыма/CO; 2 LED на перемычках 2×4" },
+    { sp: 17, id: "SPARE-17", grp: "spare", amp: "—", cat: "Open Spare", wire: "None", ft: 0,
+      en: "Open Spare — Future Living / Dining Split", es: "Reserva Libre — División Futura Sala / Comedor", ru: "Свободный резерв — будущее разделение гостиной / столовой",
+      routeEn: "Split-ready from Living/Dining J-Box", routeEs: "Lista desde Caja Sala/Comedor", routeRu: "Готово из коробки Living/Dining" },
+    { sp: 18, id: "SPARE-18", grp: "spare", amp: "—", cat: "Open Spare", wire: "None", ft: 0,
+      en: "Open Spare — Future Room Split", es: "Reserva Libre — División Futura", ru: "Свободный резерв — будущее разделение",
+      routeEn: "Open panel space", routeEs: "Espacio libre en panel", routeRu: "Свободное место в щитке" },
+    { sp: 19, id: "SPARE-19", grp: "spare", amp: "—", cat: "Open Spare", wire: "None", ft: 0,
+      en: "Open Spare — Future Toilet Bidet Split", es: "Reserva Libre — División Futura Bidet Inodoro", ru: "Свободный резерв — будущее выделение биде унитаза",
+      routeEn: "Zero-tile-demo split using separate Toilet 12/2 drop in Bath J-Box", routeEs: "División sin romper azulejo usando bajada 12/2 separada en Caja Baño", routeRu: "Разделение без демонтажа плитки через отдельный спуск 12/2 в Bath J-Box" },
+    { sp: 20, id: "SPARE-20", grp: "spare", amp: "—", cat: "Open Spare", wire: "None", ft: 0,
+      en: "Open Spare — Open Panel Space", es: "Reserva Libre — Espacio Libre", ru: "Свободный резерв — свободное место",
+      routeEn: "Open panel space", routeEs: "Espacio libre en panel", routeRu: "Свободное место в щитке" }
   ];
 
   var state = {
@@ -89,7 +95,7 @@
     pieStart: 26.0,
     sinkStart: 72.0,
     selectedCircuit: "SA-A",
-    showUnitSlots: false,
+    showUnitSlots: true,
     equipOpen: false,
     holds: { h1: false, h2: false, h3: false, h4: false }
   };
@@ -241,19 +247,19 @@
       '<g data-cir="SA-A" style="cursor:pointer">' +
         '<circle cx="' + (xEast - 10).toFixed(1) + '" cy="' + (ySouth - 10 * S).toFixed(1) + '" r="8" fill="#E5F4EC" stroke="#1B6B46" stroke-width="1.6"/>' +
         '<text x="' + (xEast - 10).toFixed(1) + '" y="' + (ySouth - 10 * S + 2.5).toFixed(1) + '" text-anchor="middle" font-size="6.4" font-weight="800" fill="#1B6B46">E1</text>' +
-        '<circle cx="' + (xEast - 10).toFixed(1) + '" cy="' + (ySouth - 48 * S).toFixed(1) + '" r="8" fill="#E5F4EC" stroke="#1B6B46" stroke-width="1.6"/>' +
-        '<text x="' + (xEast - 10).toFixed(1) + '" y="' + (ySouth - 48 * S + 2.5).toFixed(1) + '" text-anchor="middle" font-size="6.4" font-weight="800" fill="#1B6B46">E2</text>' +
+        '<circle cx="' + (xEast - 10).toFixed(1) + '" cy="' + (ySouth - 45 * S).toFixed(1) + '" r="8" fill="#E5F4EC" stroke="#1B6B46" stroke-width="1.6"/>' +
+        '<text x="' + (xEast - 10).toFixed(1) + '" y="' + (ySouth - 45 * S + 2.5).toFixed(1) + '" text-anchor="middle" font-size="6.4" font-weight="800" fill="#1B6B46">E2</text>' +
       "</g>" +
       '<g data-cir="REF" style="cursor:pointer">' +
-        '<rect x="' + (xEast - 54).toFixed(1) + '" y="' + (ySouth - 80 * S).toFixed(1) + '" width="44" height="18" rx="4" fill="#E6F0F8" stroke="#184E77" stroke-width="1.5"/>' +
-        '<text x="' + (xEast - 32).toFixed(1) + '" y="' + (ySouth - 80 * S + 11.5).toFixed(1) + '" text-anchor="middle" font-size="7" font-weight="800" fill="#184E77">REF-1</text>' +
+        '<rect x="' + (xEast - 54).toFixed(1) + '" y="' + (ySouth - 74 * S).toFixed(1) + '" width="44" height="18" rx="4" fill="#E6F0F8" stroke="#184E77" stroke-width="1.5"/>' +
+        '<text x="' + (xEast - 32).toFixed(1) + '" y="' + (ySouth - 74 * S + 11.5).toFixed(1) + '" text-anchor="middle" font-size="7" font-weight="800" fill="#184E77">REF-1</text>' +
       "</g>" +
 
       '<g data-cir="SA-B" style="cursor:pointer">' +
         '<circle cx="' + (xEast - 24 * S).toFixed(1) + '" cy="' + (ySouth - 10).toFixed(1) + '" r="8" fill="#E6F0F8" stroke="#184E77" stroke-width="1.6"/>' +
         '<text x="' + (xEast - 24 * S).toFixed(1) + '" y="' + (ySouth - 7.5).toFixed(1) + '" text-anchor="middle" font-size="6.4" font-weight="800" fill="#184E77">S1</text>' +
-        '<circle cx="' + (xEast - 65 * S).toFixed(1) + '" cy="' + (ySouth - 10).toFixed(1) + '" r="8" fill="#E6F0F8" stroke="#184E77" stroke-width="1.6"/>' +
-        '<text x="' + (xEast - 65 * S).toFixed(1) + '" y="' + (ySouth - 7.5).toFixed(1) + '" text-anchor="middle" font-size="6.4" font-weight="800" fill="#184E77">S2</text>' +
+        '<circle cx="' + (xEast - 62 * S).toFixed(1) + '" cy="' + (ySouth - 10).toFixed(1) + '" r="8" fill="#E6F0F8" stroke="#184E77" stroke-width="1.6"/>' +
+        '<text x="' + (xEast - 62 * S).toFixed(1) + '" y="' + (ySouth - 7.5).toFixed(1) + '" text-anchor="middle" font-size="6.4" font-weight="800" fill="#184E77">S2</text>' +
       "</g>" +
       '<g data-cir="DW" style="cursor:pointer">' +
         '<rect x="' + (xEast - (state.sinkStart + 23) * S).toFixed(1) + '" y="' + (ySouth - 40).toFixed(1) + '" width="56" height="20" rx="4" fill="#FDF2E4" stroke="#A15206" stroke-width="1.6"/>' +
@@ -297,7 +303,7 @@
               "Стальной корпус подщита D04 в столовой находится всего в 1/8\"–5/8\" за гипсокартоном кухни на высоте " + fmtIn(d04Low) + "–" + fmtIn(d04High) + ". НИКАКОГО ввода сзади, НИКАКИХ саморезов, боковые прорези НА ПАУЗЕ!"
             ) + "</li>" +
           "<li><strong>E1 @ 10\" &amp; E2 @ 45\" (" + L("Circuit SA-A 20A", "Circuito SA-A 20A", "Линия SA-A 20А") + "):</strong> " + L("Height ", "Altura ", "Высота ") + fmtIn(cH) + " · " + L("50\" in-wall bore band", "Franja perforación 50\"", "пояс сверления в стене 50\"") + ".</li>" +
-          "<li><strong>REF-1 @ 74\" (" + L("Circuit REF 20A", "Circuito REF 20A", "Линия REF 20А") + "):</strong> " + L("Single outlet at ", "Contacto sencillo a ", "Одиночная розетка на ") + fmtIn(15 + d) + " · " + L("52-1/2\" band", "Franja 52-1/2\"", "пояс 52-1/2\"") + ".</li>" +
+          "<li><strong>REF-1 @ 68\" (" + L("Circuit REF 20A", "Circuito REF 20A", "Линия REF 20А") + "):</strong> " + L("Single outlet at ", "Contacto sencillo a ", "Одиночная розетка на ") + fmtIn(15 + d) + " · " + L("52-1/2\" band", "Franja 52-1/2\"", "пояс 52-1/2\"") + ".</li>" +
         "</ul>" +
       "</div>";
     }
@@ -373,9 +379,9 @@
           '<img src="./assets/south-sink-wall.jpg" alt="' + esc(L("Real open-stud photo of South sink wall", "Foto real del muro Sur abierto", "Реальное фото открытого каркаса южной стены мойки")) + '">' +
           '<div class="u4h-photo-cap"><strong>' + L("Real photo — South Sink Wall:", "Foto real — Muro Sur:", "Реальное фото — Южная стена мойки:") + "</strong> " +
             L(
-              "S1 @ 24\" & S2 @ 65\" at " + fmtIn(cH) + ". DW-GD 2-gang box goes INSIDE sink base (provisional) (" + fmtIn(14 + d) + " high) with separate neutrals — NEVER behind 48\"–72\" dishwasher.",
-              "S1 @ 24\" y S2 @ 65\" a " + fmtIn(cH) + ". Caja doble DW-GD DENTRO del gabinete de tarja (provisional) (" + fmtIn(14 + d) + " alto) con neutros separados — NUNCA detrás del lavavajillas (48\"–72\").",
-              "S1 @ 24\" и S2 @ 65\" на высоте " + fmtIn(cH) + ". Двойная коробка DW-GD ставится ВНУТРИ тумбы мойки (предварительно на выс. " + fmtIn(14 + d) + ") с раздельными механизмами и нулями — НИКОГДА позади посудомойки (48\"–72\")."
+              "S1 @ 24\" & S2 @ 62\"* at " + fmtIn(cH) + ". DW-GD 2-gang box goes INSIDE sink base (provisional) (" + fmtIn(14 + d) + " high) with separate neutrals — NEVER behind 48\"–72\" dishwasher.",
+              "S1 @ 24\" y S2 @ 62\"* a " + fmtIn(cH) + ". Caja doble DW-GD DENTRO del gabinete de tarja (provisional) (" + fmtIn(14 + d) + " alto) con neutros separados — NUNCA detrás del lavavajillas (48\"–72\").",
+              "S1 @ 24\" и S2 @ 62\"* на высоте " + fmtIn(cH) + ". Двойная коробка DW-GD ставится ВНУТРИ тумбы мойки (предварительно на выс. " + fmtIn(14 + d) + ") с раздельными механизмами и нулями — НИКОГДА позади посудомойки (48\"–72\")."
             ) +
           "</div>" +
         "</div>" +
@@ -789,17 +795,17 @@
       '</text>' +
       '<rect x="' + px(0) + '" y="' + py(0) + '" width="' + sw(508) + '" height="' + sw(298) + '" fill="#FFFFFF" stroke="#131A22" stroke-width="2"/>' +
       '<rect x="' + px(0) + '" y="' + py(0) + '" width="' + sw(180) + '" height="' + sw(160) + '" fill="#F0FDF4" fill-opacity="0.45" stroke="#94A3B8" stroke-width="1" stroke-dasharray="4,3"/>' +
-      '<text x="' + px(90) + '" y="' + py(142) + '" text-anchor="middle" font-size="7.6" font-weight="700" fill="#475569">' + L("BEDROOM (Sp 13)", "RECÁMARA (Esp 13)", "СПАЛЬНЯ (Авт. 13)") + '</text>' +
+      '<text x="' + px(90) + '" y="' + py(142) + '" text-anchor="middle" font-size="7.6" font-weight="700" fill="#475569">' + L("BEDROOM (#10/#12)", "RECÁMARA (Esp 13)", "СПАЛЬНЯ (Авт. 13)") + '</text>' +
       '<rect x="' + px(180) + '" y="' + py(0) + '" width="' + sw(108) + '" height="' + sw(124) + '" fill="#FAF5FF" fill-opacity="0.5" stroke="#94A3B8" stroke-width="1" stroke-dasharray="4,3"/>' +
-      '<text x="' + px(234) + '" y="' + py(22) + '" text-anchor="middle" font-size="7.2" font-weight="700" fill="#6B21A8">' + L("BATH (Sp 14/15)", "BAÑO (Esp 14/15)", "ВАННАЯ (14/15)") + '</text>' +
+      '<text x="' + px(234) + '" y="' + py(22) + '" text-anchor="middle" font-size="7.2" font-weight="700" fill="#6B21A8">' + L("BATH (#13 12/2)", "BAÑO (Esp 14/15)", "ВАННАЯ (14/15)") + '</text>' +
       '<rect x="' + px(288) + '" y="' + py(0) + '" width="' + sw(68) + '" height="' + sw(80) + '" fill="#FFF7ED" fill-opacity="0.55" stroke="#94A3B8" stroke-width="1" stroke-dasharray="4,3"/>' +
-      '<text x="' + px(322) + '" y="' + py(22) + '" text-anchor="middle" font-size="7.0" font-weight="700" fill="#9A3412">' + L("LAUN (16/18)", "LAV. (16/18)", "ПРАЧ. (16/18)") + '</text>' +
+      '<text x="' + px(322) + '" y="' + py(22) + '" text-anchor="middle" font-size="7.0" font-weight="700" fill="#9A3412">' + L("LAUN (#14)", "LAV. (#14)", "ПРАЧ. (16/18)") + '</text>' +
       '<rect x="' + px(0) + '" y="' + py(160) + '" width="' + sw(210) + '" height="' + sw(138) + '" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1" stroke-dasharray="4,3"/>' +
-      '<text x="' + px(72) + '" y="' + py(282) + '" text-anchor="middle" font-size="7.6" font-weight="700" fill="#475569">' + L("LIVING (Sp 11)", "SALA (Esp 11)", "ГОСТИНАЯ (Авт. 11)") + '</text>' +
+      '<text x="' + px(72) + '" y="' + py(282) + '" text-anchor="middle" font-size="7.6" font-weight="700" fill="#475569">' + L("LIVING (#10)", "SALA (Esp 11)", "ГОСТИНАЯ (Авт. 11)") + '</text>' +
       '<rect x="' + px(210) + '" y="' + py(160) + '" width="' + sw(146) + '" height="' + sw(126) + '" fill="#FEFCE8" fill-opacity="0.6" stroke="#B45309" stroke-width="1.2" stroke-dasharray="4,3"/>' +
       '<text x="' + px(283) + '" y="' + py(280) + '" text-anchor="middle" font-size="7.6" font-weight="800" fill="#92400E">' + L("KITCHEN (Sp 1–9)", "COCINA (Esp 1–9)", "КУХНЯ (Авт. 1–9)") + '</text>' +
       '<rect x="' + px(356) + '" y="' + py(160) + '" width="' + sw(152) + '" height="' + sw(138) + '" fill="#F0F9FF" fill-opacity="0.5" stroke="#94A3B8" stroke-width="1" stroke-dasharray="4,3"/>' +
-      '<text x="' + px(432) + '" y="' + py(282) + '" text-anchor="middle" font-size="7.6" font-weight="700" fill="#0369A1">' + L("DINING (Sp 12)", "COMEDOR (Esp 12)", "СТОЛОВАЯ (Авт. 12)") + '</text>' +
+      '<text x="' + px(432) + '" y="' + py(282) + '" text-anchor="middle" font-size="7.6" font-weight="700" fill="#0369A1">' + L("DINING (#10)", "COMEDOR (Esp 12)", "СТОЛОВАЯ (Авт. 12)") + '</text>' +
       '<circle cx="' + px(112) + '" cy="' + py(74) + '" r="' + sw(72) + '" fill="#FEF3C7" fill-opacity="0.32" stroke="#D97706" stroke-width="1.2" stroke-dasharray="5,3"/>' +
       '<text x="' + px(112) + '" y="' + py(14) + '" text-anchor="middle" font-size="6.8" font-weight="700" fill="#B45309">' + L("NEC 320.23(A): 6 ft Guard-Strip Zone", "NEC 320.23(A): Zona listones 6 pies", "NEC 320.23(A): Зона защитных брусков 6 фут.") + '</text>' +
       '<rect x="' + px(124) + '" y="' + py(62) + '" width="' + sw(62) + '" height="' + sw(24) + '" fill="#E5E7EB" stroke="#6B7280" stroke-width="1"/>' +
@@ -918,8 +924,8 @@
           "</div>" +
           '<div class="u4h-kpi">' +
             '<div class="u4h-kpi-lbl">' + L("Kitchen circuits", "Circuitos cocina", "Линии кухни в щите") + "</div>" +
-            '<div class="u4h-kpi-val is-info">9 / 20</div>' +
-            '<div class="u4h-kpi-sub">Eaton BRP20L125G (D04)</div>' +
+            '<div class="u4h-kpi-val is-info">15 / 20</div>' +
+            '<div class="u4h-kpi-sub">Eaton BRP20L125G (5 Spares)</div>' +
           "</div>" +
         "</div>" +
         '<div class="u4h-svg-wrap">' + renderFloorElectricalSvg() + "</div>" +
@@ -1202,7 +1208,7 @@
             '<div class="u4h-title">' + esc(titleTxt) + "</div>" +
             '<div class="u4h-sub">' + esc(subTxt) + "</div>" +
           "</div>" +
-          '<span class="u4h-compass">' + L("D04 · 9 Ckt", "D04 · 9 Cto", "Щит D04 · 9 лин.") + '</span>' +
+          '<span class="u4h-compass">' + L("Rev R6 · 15+5", "D04 · 9 Cto", "Щит D04 · 9 лин.") + '</span>' +
         "</div>" +
         stepPills +
         inner +

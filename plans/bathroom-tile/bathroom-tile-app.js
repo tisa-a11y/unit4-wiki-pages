@@ -153,21 +153,33 @@
       return Object.assign({}, p, { courses: hitNums });
     });
 
-    const northSqft = (SEED.backerWidthIn * 69.25 - SEED.largeNiche.w * SEED.largeNiche.h - SEED.smallNiche.w * SEED.smallNiche.h) / 144;
-    const eastSqft = (eFieldIn * 69.25) / 144;
-    const westSqft = (33.0 * 21.0) / 144;
-    const tileAreaSqft = Math.round(northSqft + eastSqft + westSqft);
-    const orderSqft = Math.round((northSqft + eastSqft + westSqft) * (1 + state.wastePct / 100));
+    const northSqft = +((SEED.backerWidthIn * 69.25 - SEED.largeNiche.w * SEED.largeNiche.h - SEED.smallNiche.w * SEED.smallNiche.h) / 144).toFixed(1);
+    const eastSqft = +((eFieldIn * 69.25) / 144).toFixed(1);
+    const westSqft = +((33.0 * 21.0) / 144).toFixed(1);
+    const nicheFrameIn = 2 * (SEED.largeNiche.w + SEED.largeNiche.h) + 2 * (SEED.smallNiche.w + SEED.smallNiche.h);
+    const nicheReturnSqft = +((nicheFrameIn * 3.5) / 144).toFixed(1);
+    const netExactSqft = +(northSqft + eastSqft + westSqft + nicheReturnSqft).toFixed(1);
+    const tileAreaSqft = netExactSqft;
+    const orderSqft = +(netExactSqft * (1 + state.wastePct / 100)).toFixed(1);
+    const netTilePcs = Math.ceil(netExactSqft * 8);
+    const orderTilePcs = Math.ceil(orderSqft * 8);
     const cartons = Math.ceil(orderSqft / SEED.wallTile.sqftPerBox);
+    const boxedPcs = cartons * 100;
+    const nicheBackSqft = +(((SEED.largeNiche.w * SEED.largeNiche.h) + (SEED.smallNiche.w * SEED.smallNiche.h)) / 144).toFixed(1);
 
     const perimBullnoseIn = SEED.backerWidthIn + eFieldIn + (69.25 + 22.0) + (21.0 + 22.0);
-    const nicheFrameIn = 2 * (SEED.largeNiche.w + SEED.largeNiche.h) + 2 * (SEED.smallNiche.w + SEED.smallNiche.h);
-    const bullnosePcs = Math.ceil(((perimBullnoseIn + nicheFrameIn) / 6.0) * (1 + state.wastePct / 100));
+    const bullnoseLinFt = +((perimBullnoseIn + nicheFrameIn) / 12.0).toFixed(1);
+    const bullnoseNetPcs = Math.ceil((perimBullnoseIn + nicheFrameIn) / 6.0);
+    const bullnosePcs = Math.ceil(bullnoseNetPcs * (1 + state.wastePct / 100));
 
     return {
       pitchW, pitchH, eFieldIn, totalEastIn: eFieldIn + 2.0, courses, nRows, eRows, wRows,
       minCut: +minCut.toFixed(2), topCourseH, hasSliver, plumbingHits,
-      takeoff: { tileAreaSqft, orderSqft, cartons, bullnosePcs, cornerPcs: 10 }
+      takeoff: {
+        northSqft, eastSqft, westSqft, nicheReturnSqft,
+        tileAreaSqft, orderSqft, netTilePcs, orderTilePcs, cartons, boxedPcs,
+        bullnoseLinFt, bullnoseNetPcs, bullnosePcs, cornerPcs: 10, nicheBackSqft
+      }
     };
   }
 
