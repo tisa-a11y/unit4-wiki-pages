@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Unit 4 — Attic Opening Plan &amp; Checklists (R10)</title>
+<title>Unit 4 — Attic Opening Plan &amp; Checklists</title>
 <style>
-  :root { --bg: #f4f5f3; --card: #ffffff; --ink: #10202b; --muted: #475569; --line: #cbd5e1; --accent: #1f5f4a; --accent-soft: #e6f2ed; }
+  :root { --bg: #f4f5f3; --card: #ffffff; --panel:var(--card); --fg:var(--ink); --ink: #10202b; --muted: #475569; --line: #cbd5e1; --accent: #1f5f4a; --accent-soft: #e6f2ed; }
   * { box-sizing: border-box; }
   body { margin: 0; font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.55; padding: 24px 16px 48px; }
   main { max-width: 880px; margin: 0 auto; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 24px 28px; }
@@ -20,41 +20,74 @@
   tr:nth-child(even) td { background: #f8fafc; }
   ol li { margin-bottom: 8px; font-size: 14px; }
   code { background: #f1f5f9; padding: 1px 5px; border-radius: 4px; font-size: 12.5px; }
+
+  :root[data-theme="dark"] { --bg:#121618; --card:#1b2124; --ink:#e8eeec; --muted:#b2bdb8; --line:#48534e; --accent:#9bdbbe; --accent-soft:#203b30; }
+  :root[data-theme="dark"] .banner { background:#392d18; border-color:#c18d36; }
+  :root[data-theme="dark"] tr:nth-child(even) td, :root[data-theme="dark"] code { background:#252e29; }
+  a { color:var(--accent); } p { margin:0 0 10px; } p:last-child { margin-bottom:0; }
+  .controls { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+  button,.top-links a { min-height:44px; display:inline-flex; align-items:center; }
+  button { color:var(--ink); background:var(--card); border:1px solid var(--line); border-radius:6px; padding:8px 12px; font:inherit; cursor:pointer; }
+  details { margin-top:18px; } summary { cursor:pointer; min-height:44px; padding:8px 0; }
+  @media(max-width:500px) { body { padding:12px 8px 30px; } main { padding:18px 12px; } th,td { padding:8px 6px; overflow-wrap:anywhere; } h1 { font-size:23px; } table,tbody,tr,td,th[scope="row"] { display:block; width:100%; } thead { display:none; } tr { margin-bottom:14px; } th[scope="row"] { border-bottom:0; } td { padding:12px; } }
+  @media print { .controls,.top-links { display:none; } body,main { padding:0; } }
 </style>
-  <link rel="stylesheet" href="../plans/vendor/u4-pin-dragger.css?v=rev010">
+<link rel="stylesheet" href="../plans/vendor/u4-pin-dragger.css?v=rev010">
 </head>
 <body>
 <main>
-  <div class="top-links">
-    <a href="../#attic-access">&larr; Attic Access Wiki Page</a>
-    <a href="../#hvac">HVAC &amp; Subpanel Page</a>
-    <a href="../plans/attic-hatch/">Interactive Plan 1: Attic Hatch</a>
-    <a href="../plans/hvac-layout/">Interactive Plan 2: Heating &amp; Ducts</a>
-    <a href="./attic-hatch-r6/Attic-hatch-practical-guide_R6_EN.pdf">Practical Guide R6 (EN PDF)</a>
-    <a href="./attic-hatch-r6/Attic-hatch-practical-guide_R6_ES.pdf">Guía Práctica R6 (ES PDF)</a>
-  </div>
-  <h1>Unit 4 — Attic Opening Plan &amp; Checklists</h1>
-  <div class="banner">
-    <strong>Planning visit: reschedule requested (hold all ceiling cuts).</strong> The original NEXT walkthrough slot was Monday, Nov. 23, 2026; NEXT has not confirmed cancellation or a replacement time. The upcoming visit with Serge and Alex is planning only (confirming attic access and how heating and <code>D04</code> electrical work fit — not an inspection or installation).
-  </div>
-  <h2>1. Settled Equipment, Hatch &amp; Walkway Rules</h2>
-  <table>
-    <thead><tr><th>Element</th><th>Current Governing Requirement (Nov 24, 2026 · R10)</th></tr></thead>
-    <tbody>
-      <tr><td><strong>Permanent Hatch Spot</strong></td><td><code>24&quot; &times; 36&quot;</code> finished clear outside Front Door 4 on the unconditioned common stair landing. Photograph markout first — do not cut ceiling until fire-rating and joist bay <code>B</code> are verified.</td></tr>
-      <tr><td><strong>Uninsulated Lid &amp; Gasket</strong></td><td>Unconditioned Door 4 landing (<a href="https://codes.iccsafe.org/content/CAEC2025P1/subchapter-10-multifamily-buildings-mandatory-requirements" target="_blank" rel="noopener">2025 CA Energy Code &sect;160.1(a)</a>): snug <code>3/4&quot;</code> plywood lid + <code>3/8&quot;</code> backer rod &amp; caulk on fixed frame + continuous <code>1/2&quot; &times; 1/8&quot;</code> closed-cell foam gasket on <code>1&times;2</code> ledges + <code>4</code> latches outside clear opening. Zero fiberglass lid insulation, wire loops, eye-bolts, or perimeter barrier.</td></tr>
-      <tr><td><strong>Furnace Pass &amp; Walkway</strong></td><td>Carrier/Bryant Legacy 45k BTU bare cabinet (<code>33.25&quot; H &times; 14.19&quot; W &times; 29&quot; D</code>) passes end-first (<code>14.19&quot; &times; 29&quot;</code>). At <code>66&quot;</code> attic height, continuous <code>24&quot;</code> OSB/ply walkway is <code>15.8 ft &le; 20 ft</code> (<code>3</code> walkway sheets + <code>1</code> platform/lid sheet = <code>4</code> net <code>4&times;8</code> sheets; never <code>3/8&quot;</code> plywood).</td></tr>
-      <tr><td><strong>Service Platform &amp; Venting</strong></td><td>Level <code>30&quot; &times; 30&quot;</code> North service platform (<code>X=174&quot;, Y=228.5&quot;</code>); have NEXT confirm any equipment-specific mounting hardware before buying pads. Horizontal sidewall exhaust only (<code>&ge; 4 ft</code> lot line per <a href="https://www.sf.gov/documents/49620/2025-08-05_SFMC_amendments.pdf" target="_blank" rel="noopener">2025 SFMC &sect;802.8</a>; zero flat-roof penetrations).</td></tr>
-      <tr><td><strong>Service Electrical &amp; Closet Hold</strong></td><td><code>1</code> switched enclosed LED attic light (agree with NEXT&apos;s electrician on wiring connection) + <code>1</code> line-side <code>120V</code> GFCI receptacle within <code>25 ft</code>. Keep NW bedroom-closet ceiling opening (<code>X=315.4&quot;&ndash;352.0&quot;, Y=5.4&quot;&ndash;88.0&quot;</code>) open until LV thermostat cable and permanent hatch are finished.</td></tr>
-    </tbody>
-  </table>
-  <h2>2. Current Official Printable PDFs (EN &amp; ES)</h2>
-  <ol>
-    <li><strong>Attic Hatch &amp; Wood Walkway (2-Page Scale Plan R4):</strong> <a href="../wiki-pdfs/2026-11-24_U4_attic_hatch_R4_EN.pdf">English R4 PDF</a> · <a href="../wiki-pdfs/2026-11-24_U4_attic_hatch_R4_ES.pdf">Español R4 PDF</a></li>
-    <li><strong>Heating System, Ducts &amp; Sidewall Exhaust (2-Page Scale Plan R4):</strong> <a href="../wiki-pdfs/2026-11-24_U4_hvac_layout_R4_EN.pdf">English R4 PDF</a> · <a href="../wiki-pdfs/2026-11-24_U4_hvac_layout_R4_ES.pdf">Español R4 PDF</a></li>
-    <li><strong>Attic Hatch Visual Practical Guide (8-Page Crew Guide R6):</strong> <a href="./attic-hatch-r6/Attic-hatch-practical-guide_R6_EN.pdf">English R6 PDF</a> · <a href="./attic-hatch-r6/Attic-hatch-practical-guide_R6_ES.pdf">Español R6 PDF</a></li>
-  </ol>
+<div class="controls"><button type="button" id="language">Español (MX)</button><button type="button" id="theme">Dark</button><button type="button" id="print">Print / PDF</button></div>
+<div class="top-links">
+<a data-copy="nav0" href="../#attic-access">← Attic Access Wiki Page</a>
+<a data-copy="nav1" href="../#hvac">HVAC &amp; Subpanel Page</a>
+<a data-copy="nav2" href="../plans/attic-hatch/">Interactive Plan 1: Attic Hatch</a>
+<a data-copy="nav3" href="../plans/hvac-layout/">Interactive Plan 2: Heating &amp; Ducts</a>
+<a data-copy="nav4" href="./attic-hatch-r6/Attic-hatch-practical-guide_R6_EN.pdf">Practical Guide R6 (EN PDF)</a>
+<a data-copy="nav5" href="./attic-hatch-r6/Attic-hatch-practical-guide_R6_ES.pdf">Practical Guide R6 (ES PDF)</a>
+</div>
+<h1 data-copy="title" >Unit 4 — Attic Opening Plan &amp; Checklists</h1>
+<div data-copy="hold" class="banner"><p><strong>Planning visit: reschedule requested. HOLD all ceiling cuts.</strong></p><p>The original NEXT visit was Monday, Nov. 23, 2026. NEXT has not confirmed cancellation or a replacement time.</p><p>The upcoming visit with Serge and Alex is for planning attic access and coordinating heating with Door 4 electrical work. It is not an inspection or installation.</p></div>
+<h2 data-copy="requirements" >1. Settled Equipment, Hatch &amp; Walkway Rules</h2>
+<table><thead><tr><th data-copy="element" >Element</th><th data-copy="current" >Current requirement · Nov. 24, 2026</th></tr></thead><tbody>
+<tr><th data-copy="rowlabel0" scope="row">Permanent hatch location</th><td data-copy="row0" ><p><code>24" × 36"</code> finished clear outside Front Door 4 on the unconditioned common stair landing.</p><p><strong>Photograph the markout before cutting. HOLD ceiling cuts until the fire rating and joist bay B are verified.</strong></p></td></tr>
+<tr><th data-copy="rowlabel1" scope="row">Uninsulated lid &amp; gasket</th><td data-copy="row1" ><p>Unconditioned Door 4 landing: <a href="https://codes.iccsafe.org/content/CAEC2025P1/subchapter-10-multifamily-buildings-mandatory-requirements" target="_blank" rel="noopener">2025 CA Energy Code §160.1(a)</a>.</p><p>Use a snug <code>3/4"</code> plywood lid; <code>3/8"</code> backer rod and caulk at the fixed frame; continuous <code>1/2" × 1/8"</code> closed-cell foam gasket on <code>1×2</code> ledges; and <code>4</code> latches outside the clear opening.</p><p>No fiberglass lid insulation, wire loops, eye-bolts, or perimeter barrier.</p></td></tr>
+<tr><th data-copy="rowlabel2" scope="row">Furnace passage &amp; walkway</th><td data-copy="row2" ><p>Carrier/Bryant Legacy 45k BTU bare cabinet: <code>33.25" H × 14.19" W × 29" D</code>. Pass it end-first through its <code>14.19" × 29"</code> end.</p><p>Attic height: <code>66"</code>. Continuous OSB/plywood walkway: <code>24"</code> wide and <code>15.8 ft</code> long, within the <code>20 ft</code> limit.</p><p>Use <code>3</code> walkway sheets + <code>1</code> platform/lid sheet = <code>4</code> net <code>4×8</code> sheets. Never use <code>3/8"</code> plywood.</p></td></tr>
+<tr><th data-copy="rowlabel3" scope="row">Service platform &amp; exhaust</th><td data-copy="row3" ><p>Level North service platform: <code>30" × 30"</code>. Have NEXT confirm equipment-specific mounting hardware before buying pads.</p><p>Horizontal sidewall exhaust only: <code>≥ 4 ft</code> from the lot line under <a href="https://www.sf.gov/documents/49620/2025-08-05_SFMC_amendments.pdf" target="_blank" rel="noopener">2025 SFMC §802.8</a>. No flat-roof penetrations.</p></td></tr>
+<tr><th data-copy="rowlabel4" scope="row">Service electrical &amp; closet hold</th><td data-copy="row4" ><p><code>1</code> enclosed LED attic light with a switch; agree on the wiring connection with NEXT’s electrician. Add <code>1</code> line-side <code>120V</code> GFCI receptacle within <code>25 ft</code>.</p><p><strong>Keep the northwest bedroom-closet ceiling opening OPEN until the low-voltage thermostat cable and permanent hatch are finished.</strong></p></td></tr>
+</tbody></table>
+<h2 data-copy="pdfs" >2. Current Official Printable PDFs</h2><ol>
+<li><span data-copy="pdf0" >Attic hatch &amp; wood walkway · 2-page scale plan R4</span> <a href="../wiki-pdfs/2026-11-24_U4_attic_hatch_R4_EN.pdf">English PDF</a> · <a href="../wiki-pdfs/2026-11-24_U4_attic_hatch_R4_ES.pdf">Español PDF</a></li>
+<li><span data-copy="pdf1" >Heating, ducts &amp; sidewall exhaust · 2-page scale plan R4</span> <a href="../wiki-pdfs/2026-11-24_U4_hvac_layout_R4_EN.pdf">English PDF</a> · <a href="../wiki-pdfs/2026-11-24_U4_hvac_layout_R4_ES.pdf">Español PDF</a></li>
+<li><span data-copy="pdf2" >Attic hatch practical guide · 8-page crew guide R6</span> <a href="./attic-hatch-r6/Attic-hatch-practical-guide_R6_EN.pdf">English PDF</a> · <a href="./attic-hatch-r6/Attic-hatch-practical-guide_R6_ES.pdf">Español PDF</a></li>
+</ol><details><summary data-copy="refs" >Drawing coordinates</summary><div data-copy="coords" ><p>North service platform: <code>X=174", Y=228.5"</code>.</p><p>Northwest bedroom closet opening: <code>X=315.4"–352.0", Y=5.4"–88.0"</code>.</p></div></details>
 </main>
-  <script defer src="../plans/vendor/u4-pin-dragger.js?v=rev010"></script>
-</body>
-</html>
+<script>
+(function(){
+"use strict";
+const copy={"nav0": {"en": "← Attic Access Wiki Page", "es": "← Acceso al ático"}, "nav1": {"en": "HVAC &amp; Subpanel Page", "es": "Calefacción y subpanel"}, "nav2": {"en": "Interactive Plan 1: Attic Hatch", "es": "Plano interactivo 1: Escotilla"}, "nav3": {"en": "Interactive Plan 2: Heating &amp; Ducts", "es": "Plano interactivo 2: Calefacción y ductos"}, "nav4": {"en": "Practical Guide R6 (EN PDF)", "es": "Guía práctica R6 (PDF en inglés)"}, "nav5": {"en": "Practical Guide R6 (ES PDF)", "es": "Guía práctica R6 (PDF en español)"}, "title": {"en": "Unit 4 — Attic Opening Plan &amp; Checklists", "es": "Unidad 4 — Abertura del ático y verificaciones"}, "hold": {"en": "<p><strong>Planning visit: reschedule requested. HOLD all ceiling cuts.</strong></p><p>The original NEXT visit was Monday, Nov. 23, 2026. NEXT has not confirmed cancellation or a replacement time.</p><p>The upcoming visit with Serge and Alex is for planning attic access and coordinating heating with Door 4 electrical work. It is not an inspection or installation.</p>", "es": "<p><strong>Visita de planeación: se solicitó reprogramarla. NO CORTAR ningún plafón.</strong></p><p>La visita original de NEXT era el lunes 23 de noviembre de 2026. NEXT no ha confirmado la cancelación ni una nueva fecha.</p><p>La próxima visita con Serge y Alex es para planear el acceso al ático y coordinar la calefacción con el trabajo eléctrico de Puerta 4. No es inspección ni instalación.</p>"}, "requirements": {"en": "1. Settled Equipment, Hatch &amp; Walkway Rules", "es": "1. Requisitos definidos: equipo, escotilla y pasarela"}, "element": {"en": "Element", "es": "Elemento"}, "current": {"en": "Current requirement · Nov. 24, 2026", "es": "Requisito vigente · 24 de noviembre de 2026"}, "rowlabel0": {"en": "Permanent hatch location", "es": "Ubicación de la escotilla permanente"}, "row0": {"en": "<p><code>24\" × 36\"</code> finished clear outside Front Door 4 on the unconditioned common stair landing.</p><p><strong>Photograph the markout before cutting. HOLD ceiling cuts until the fire rating and joist bay B are verified.</strong></p>", "es": "<p>Claro terminado de <code>24\" × 36\"</code> afuera de Puerta Principal 4, en el descanso común de la escalera, sin acondicionamiento térmico.</p><p><strong>Fotografiar el trazo antes de cortar. NO CORTAR el plafón hasta verificar la clasificación cortafuego y el claro B entre vigas.</strong></p>"}, "rowlabel1": {"en": "Uninsulated lid &amp; gasket", "es": "Tapa sin aislamiento y empaque"}, "row1": {"en": "<p>Unconditioned Door 4 landing: <a href=\"https://codes.iccsafe.org/content/CAEC2025P1/subchapter-10-multifamily-buildings-mandatory-requirements\" target=\"_blank\" rel=\"noopener\">2025 CA Energy Code §160.1(a)</a>.</p><p>Use a snug <code>3/4\"</code> plywood lid; <code>3/8\"</code> backer rod and caulk at the fixed frame; continuous <code>1/2\" × 1/8\"</code> closed-cell foam gasket on <code>1×2</code> ledges; and <code>4</code> latches outside the clear opening.</p><p>No fiberglass lid insulation, wire loops, eye-bolts, or perimeter barrier.</p>", "es": "<p>Descanso de Puerta 4 sin acondicionamiento térmico: <a href=\"https://codes.iccsafe.org/content/CAEC2025P1/subchapter-10-multifamily-buildings-mandatory-requirements\" target=\"_blank\" rel=\"noopener\">Código de Energía de California 2025, §160.1(a)</a>.</p><p>Usar tapa ajustada de triplay de <code>3/4\"</code>; cordón de respaldo de <code>3/8\"</code> y sellador en el marco fijo; empaque continuo de espuma de celda cerrada de <code>1/2\" × 1/8\"</code> sobre apoyos de <code>1×2</code>; y <code>4</code> cierres fuera del claro.</p><p>No instalar fibra aislante en la tapa, lazos de alambre, armellas ni barrera perimetral.</p>"}, "rowlabel2": {"en": "Furnace passage &amp; walkway", "es": "Paso del calefactor y pasarela"}, "row2": {"en": "<p>Carrier/Bryant Legacy 45k BTU bare cabinet: <code>33.25\" H × 14.19\" W × 29\" D</code>. Pass it end-first through its <code>14.19\" × 29\"</code> end.</p><p>Attic height: <code>66\"</code>. Continuous OSB/plywood walkway: <code>24\"</code> wide and <code>15.8 ft</code> long, within the <code>20 ft</code> limit.</p><p>Use <code>3</code> walkway sheets + <code>1</code> platform/lid sheet = <code>4</code> net <code>4×8</code> sheets. Never use <code>3/8\"</code> plywood.</p>", "es": "<p>Gabinete sin accesorios Carrier/Bryant Legacy de 45 mil BTU: <code>33.25\" alto × 14.19\" ancho × 29\" fondo</code>. Pasarlo de punta, por la cara de <code>14.19\" × 29\"</code>.</p><p>Altura del ático: <code>66\"</code>. Pasarela continua de OSB/triplay: <code>24\"</code> de ancho y <code>15.8 pies</code> de largo, dentro del límite de <code>20 pies</code>.</p><p>Usar <code>3</code> hojas para la pasarela + <code>1</code> para plataforma/tapa = <code>4</code> hojas netas de <code>4×8</code>. Nunca usar triplay de <code>3/8\"</code>.</p>"}, "rowlabel3": {"en": "Service platform &amp; exhaust", "es": "Plataforma de servicio y salida de gases"}, "row3": {"en": "<p>Level North service platform: <code>30\" × 30\"</code>. Have NEXT confirm equipment-specific mounting hardware before buying pads.</p><p>Horizontal sidewall exhaust only: <code>≥ 4 ft</code> from the lot line under <a href=\"https://www.sf.gov/documents/49620/2025-08-05_SFMC_amendments.pdf\" target=\"_blank\" rel=\"noopener\">2025 SFMC §802.8</a>. No flat-roof penetrations.</p>", "es": "<p>Plataforma norte de servicio, nivelada: <code>30\" × 30\"</code>. Pedir a NEXT que confirme los herrajes específicos del equipo antes de comprar bases.</p><p>Salida horizontal de gases solo por muro lateral: <code>≥ 4 pies</code> a la colindancia según <a href=\"https://www.sf.gov/documents/49620/2025-08-05_SFMC_amendments.pdf\" target=\"_blank\" rel=\"noopener\">SFMC 2025, §802.8</a>. No perforar el techo plano.</p>"}, "rowlabel4": {"en": "Service electrical &amp; closet hold", "es": "Electricidad de servicio y pausa del clóset"}, "row4": {"en": "<p><code>1</code> enclosed LED attic light with a switch; agree on the wiring connection with NEXT’s electrician. Add <code>1</code> line-side <code>120V</code> GFCI receptacle within <code>25 ft</code>.</p><p><strong>Keep the northwest bedroom-closet ceiling opening OPEN until the low-voltage thermostat cable and permanent hatch are finished.</strong></p>", "es": "<p><code>1</code> luminaria LED cerrada en el ático con apagador; acordar la conexión con el electricista de NEXT. Agregar <code>1</code> contacto GFCI de <code>120V</code> alimentado antes del apagador, a no más de <code>25 pies</code>.</p><p><strong>Mantener ABIERTA la abertura del plafón del clóset noroeste de la recámara hasta terminar el cable de baja tensión del termostato y la escotilla permanente.</strong></p>"}, "pdfs": {"en": "2. Current Official Printable PDFs", "es": "2. Planos oficiales vigentes para imprimir"}, "pdf0": {"en": "Attic hatch &amp; wood walkway · 2-page scale plan R4", "es": "Escotilla y pasarela de madera · Plano a escala de 2 páginas R4"}, "pdf1": {"en": "Heating, ducts &amp; sidewall exhaust · 2-page scale plan R4", "es": "Calefacción, ductos y salida lateral · Plano a escala de 2 páginas R4"}, "pdf2": {"en": "Attic hatch practical guide · 8-page crew guide R6", "es": "Guía práctica de la escotilla · 8 páginas para la cuadrilla R6"}, "refs": {"en": "Drawing coordinates", "es": "Coordenadas de referencia del plano"}, "coords": {"en": "<p>North service platform: <code>X=174\", Y=228.5\"</code>.</p><p>Northwest bedroom closet opening: <code>X=315.4\"–352.0\", Y=5.4\"–88.0\"</code>.</p>", "es": "<p>Plataforma norte de servicio: <code>X=174\", Y=228.5\"</code>.</p><p>Abertura del clóset noroeste de la recámara: <code>X=315.4\"–352.0\", Y=5.4\"–88.0\"</code>.</p>"}};
+
+const params=new URLSearchParams(location.search);
+function saved(key){try{return localStorage.getItem(key);}catch(_){return null;}}
+let lang=(params.get('lang')||saved('u4_lang'))==='es'?'es':'en';
+let theme=(params.get('theme')||saved('u4_theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))==='dark'?'dark':'light';
+function render(){
+ document.documentElement.lang=lang==='es'?'es-MX':'en';
+ document.documentElement.dataset.theme=theme;
+ document.querySelectorAll('[data-copy]').forEach(el=>{el.innerHTML=copy[el.dataset.copy][lang];});
+ document.title=lang==='es'?'Unidad 4 — Abertura del ático y verificaciones':'Unit 4 — Attic Opening Plan & Checklists';
+ document.getElementById('language').textContent=lang==='es'?'English (EN)':'Español (MX)';
+ document.getElementById('language').setAttribute('aria-label',lang==='es'?'Cambiar a inglés':'Switch to Spanish');
+ document.getElementById('theme').textContent=lang==='es'?(theme==='dark'?'Modo claro':'Modo oscuro'):(theme==='dark'?'Light mode':'Dark mode');
+ document.getElementById('print').textContent=lang==='es'?'Imprimir / PDF':'Print / PDF';
+ try{localStorage.setItem('u4_lang',lang);localStorage.setItem('u4_theme',theme);}catch(_){}
+ const own=new URL(location.href);own.searchParams.set('lang',lang);own.searchParams.set('theme',theme);history.replaceState(null,'',own);
+ document.querySelectorAll('a[href]').forEach(a=>{const url=new URL(a.getAttribute('href'),location.href);if(url.origin===location.origin&&!url.pathname.endsWith('.pdf')){url.searchParams.set('lang',lang);url.searchParams.set('theme',theme);a.href=url.href;}});
+}
+document.getElementById('language').addEventListener('click',()=>{lang=lang==='es'?'en':'es';render();});
+document.getElementById('theme').addEventListener('click',()=>{theme=theme==='dark'?'light':'dark';render();});
+document.getElementById('print').addEventListener('click',()=>window.print());
+render();
+})();
+</script>
+<script defer src="../plans/vendor/u4-pin-dragger.js?v=rev010"></script>
+</body></html>

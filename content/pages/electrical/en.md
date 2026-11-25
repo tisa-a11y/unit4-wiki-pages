@@ -26,5 +26,9 @@ New 20-space Eaton **Panel** (`BRP20L125G`) in the shared Kitchen / Dining wall,
 
 ## Active Holds Before Fastening or Pulling Wire
 - **Panel & Feeder Hold:** Confirm NEXT `80A/#4` vs. `100A/#3` feeder and hold side-entry notches on the `Panel` wall before closing framing.
-- **Non-Kitchen Conduit / Wire Hold:** `SFEC 362.10` restricts `ENT` in wood walls while `SFEC 334.10(2)` permits concealed `NM-B`; keep non-kitchen wire pulling on hold until owner/inspector release (bathroom pocket door retired Nov 24 in favor of a 28" hinged outward-swing hallway door; framed south stud wall allows switches), and keep the NW Bedroom Temp Closet ceiling open until the switch cable and hatch finish.
+- **Non-kitchen wire hold:** Keep wire pulling on hold until owner/inspector release. `SFEC 362.10` restricts `ENT` in wood walls; `SFEC 334.10(2)` permits concealed `NM-B`.
+- **Bathroom and closet:** The pocket door was retired Nov 24 for a 28" outward-swing hallway door; the framed South wall allows switches. Keep the NW bedroom-closet ceiling open until the switch cable and hatch finish.
 - **Kitchen South Window & Bare Subfloor Datum:** Verify South window centerline (`87"` vs. `90"` W of SE) and finished-floor thickness `+t` (`H_subfloor = H_AFF + t`, est. `3/4"`) on site before fastening boxes.
+
+## Bathroom wall work
+Keep bathroom wall tile on hold until Alex returns; the separate toilet drop must precede tile. The retired pocket door is replaced by the locked 28" outward-swing hallway door; the South stud wall allows switches.

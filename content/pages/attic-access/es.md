@@ -1,6 +1,11 @@
 # Acceso al Ático, Pasillo y Plataforma
 
-> **Visita de planeación: reprogramación solicitada — no cortar plafón todavía:** El horario original con NEXT era el lunes 23 de noviembre, de 2:00 a 4:00 p.m. PT (NEXT aún no confirma cancelación ni nuevo horario). La ubicación permanente elegida es el **descanso común no acondicionado afuera de la Puerta Principal 4** (`24" × 36"` libres terminadas — no lleva fibra ni dique de aislante). Fotografiar primero el trazo con Serge y Alex — **no cortar el plafón todavía**.
+## Concepto
+La escotilla permanente va afuera de Puerta 4, en el descanso no acondicionado, con claro terminado de 24"×36". No cortar el plafón hasta verificar cortafuego, vigas y ruta del equipo.
+
+> **Visita de planeación: reprogramación solicitada — no cortar plafón todavía:** El horario original con NEXT era el lunes 23 de noviembre, de 2:00 a 4:00 p.m. PT (NEXT aún no confirma cancelación ni nuevo horario).
+>
+> La ubicación permanente elegida es el **descanso común no acondicionado afuera de la Puerta Principal 4** (`24" × 36"` libres terminadas — no lleva fibra ni dique de aislante). Fotografiar primero el trazo con Serge y Alex — **no cortar el plafón todavía**.
 
 <div class="u4-plan-launch-grid">
   <a class="u4-plan-launch-card is-primary" href="#plan:attic-hatch">
@@ -19,12 +24,12 @@
 
 <section id="sec-attic-notes" class="u4-sec-block">
   <h2>Cuatro Reglas de Carpintería y Tapa (Descanso No Acondicionado)</h2>
-  <ol>
-    <li><strong>Cortafuego y vigas antes de cortar:</strong> La ubicación es afuera de Puerta Principal 4 en el descanso común no acondicionado (<code>24&quot; &times; 36&quot;</code> libres terminadas). No cortar ni aprobar medida rústica de madera hasta verificar clasificación cortafuego y separación de vigas con Serge y Alex en la visita reprogramada; si es cortafuego, pedir puerta listada con <strong><code>24&quot; &times; 36&quot;</code> libres reales</strong>.</li>
-    <li><strong>Marco sellado y tapa de <code>3/4&quot;</code> sin aislante (cero fibra ni dique):</strong> Como el descanso afuera de Puerta 4 no es área acondicionada (<a href="https://codes.iccsafe.org/content/CAEC2025P1/subchapter-10-multifamily-buildings-mandatory-requirements" target="_blank" rel="noopener">Código de Energía CA 2025 &sect;160.1(a)</a>), no se colocan aislante en la tapa, alambres, armellas ni dique perimetral. Sellar el marco fijo exterior con cordón de <code>3/8&quot;</code>, pegar empaque continuo de espuma de <code>1/2&quot; &times; 1/8&quot;</code> sobre tiras <code>1&times;2</code> limpias, dejar la junta de la tapa <strong>sin sellador</strong> (probar abrir dos veces) y montar los broches <strong>fuera</strong> del claro de <code>24&quot; &times; 36&quot;</code>.</li>
-    <li><strong>Pasillo continuo de <code>24&quot;</code> y plataforma de <code>30&quot; &times; 30&quot;</code>:</strong> Atornillar un pasillo continuo de madera de <code>24&quot;</code> (<code>15.8 pies</code>, <code>3</code> hojas de OSB <code>23/32&quot;</code> o triplay estructural <code>3/4&quot;</code> &mdash; nunca <code>3/8&quot;</code>) hasta la plataforma nivelada de madera de <code>30&quot; &times; 30&quot;</code> (<code>1</code> hoja) en el lado Norte de servicio del calefactor. NEXT confirmará si el equipo requiere herraje específico antes de comprar o instalar soportes.</li>
-    <li><strong>Mantener separado el clóset NO y acordar conexión de luz:</strong> Dejar abierta la abertura temporal del clóset NO (<code>X=315.4&quot;&ndash;352.0&quot;, Y=5.4&quot;&ndash;88.0&quot;</code>) hasta terminar tanto el cable de bajo voltaje como la escotilla permanente de <code>24&quot; &times; 36&quot;</code> (<a href="https://app.todoist.com/app/task/6j3Rf89g8M6hPPx7" target="_blank" rel="noopener">tarea</a>), acordar con el electricista de NEXT quién conecta la lámpara LED con apagador y verificar seca la gotera del techo plano antes de cerrar plafones.</li>
-  </ol>
+  <div class="u4-field-rules">
+    <section class="u4-field-rule"><p><strong>Cortafuego y vigas antes de cortar:</strong> La ubicación es afuera de Puerta Principal 4 en el descanso común no acondicionado (<code>24&quot; &times; 36&quot;</code> libres terminadas). </p><p>No cortar ni aprobar medida rústica de madera hasta verificar clasificación cortafuego y separación de vigas con Serge y Alex en la visita reprogramada; si es cortafuego, pedir puerta listada con <strong><code>24&quot; &times; 36&quot;</code> libres reales</strong>.</p></section>
+    <section class="u4-field-rule"><p><strong>Marco sellado y tapa de <code>3/4&quot;</code> sin aislante (cero fibra ni dique):</strong> Como el descanso afuera de Puerta 4 no es área acondicionada (<a href="https://codes.iccsafe.org/content/CAEC2025P1/subchapter-10-multifamily-buildings-mandatory-requirements" target="_blank" rel="noopener">Código de Energía CA 2025 &sect;160.1(a)</a>), no se colocan aislante en la tapa, alambres, armellas ni dique perimetral. </p><p>Sellar el marco fijo exterior con cordón de <code>3/8&quot;</code>, pegar empaque continuo de espuma de <code>1/2&quot; &times; 1/8&quot;</code> sobre tiras <code>1&times;2</code> limpias. </p><p>Dejar la junta de la tapa <strong>sin sellador</strong> (probar abrir dos veces) y montar los broches <strong>fuera</strong> del claro de <code>24&quot; &times; 36&quot;</code>.</p></section>
+    <section class="u4-field-rule"><p><strong>Pasillo continuo de <code>24&quot;</code> y plataforma de <code>30&quot; &times; 30&quot;</code>:</strong> Atornillar un pasillo continuo de madera de <code>24&quot;</code> (<code>15.8 pies</code>, <code>3</code> hojas de OSB <code>23/32&quot;</code> o triplay estructural <code>3/4&quot;</code> &mdash; nunca <code>3/8&quot;</code>) hasta la plataforma nivelada de madera de <code>30&quot; &times; 30&quot;</code> (<code>1</code> hoja) en el lado Norte de servicio del calefactor. </p><p>NEXT confirmará si el equipo requiere herraje específico antes de comprar o instalar soportes.</p></section>
+    <section class="u4-field-rule"><p><strong>Mantener separado el clóset NO y acordar conexión de luz:</strong> Dejar abierta la abertura temporal del clóset NO hasta terminar tanto el cable de bajo voltaje como la escotilla permanente de <code>24&quot; &times; 36&quot;</code> (<a href="https://app.todoist.com/app/task/6j3Rf89g8M6hPPx7" target="_blank" rel="noopener">tarea</a>). </p><p>Acordar con el electricista de NEXT quién conecta la lámpara LED con apagador y verificar seca la gotera del techo plano antes de cerrar plafones.</p></section>
+  </div>
 </section>
 
 <section id="sec-attic-specs" class="u4-sec-block">
@@ -45,6 +50,7 @@
 <details id="sec-details" class="u4-sec-block">
   <summary>Protección de molduras originales eduardianas</summary>
   <ul>
+    <li><strong>Referencia del acceso temporal del clóset NO:</strong> (<code>X=315.4&quot;&ndash;352.0&quot;, Y=5.4&quot;&ndash;88.0&quot;</code>).</li>
     <li>Conservar intactos el riel superior de cuadros a <code>103&quot;</code>, el zoclo de <code>9-1/2&quot;</code>, la lámpara del descanso y los contramarcos de Puerta 4 y ventana &mdash; mantener el marco de la escotilla separado de las molduras originales.</li>
     <li>Ver <a href="#hvac/sec-hvac-summary">Resumen NEXT vs. Cuadrilla</a> para la coordinación completa de calefacción y subpanel.</li>
     <li><strong>PDFs para imprimir (R4 y R6):</strong> <a href="./wiki-pdfs/2026-11-24_U4_attic_hatch_R4_ES.pdf" target="_blank" rel="noopener">Plano 2 Págs. Escotilla y Pasillo R4 (ES PDF)</a> &middot; <a href="./wiki-pdfs/2026-11-24_U4_attic_hatch_R4_EN.pdf" target="_blank" rel="noopener">English R4 PDF</a> &middot; <a href="./wiki-docs/attic-hatch-r6/Attic-hatch-practical-guide_R6_ES.pdf" target="_blank" rel="noopener">Guía Práctica 8 Págs. R6 (ES PDF)</a> &middot; <a href="./wiki-docs/attic-hatch-r6/Attic-hatch-practical-guide_R6_EN.pdf" target="_blank" rel="noopener">Guide R6 (EN PDF)</a>.</li>

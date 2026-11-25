@@ -1,7 +1,7 @@
 # Tarja Sur y muro Norte
 
 ## Concepto
-Muro Sur con la tarja y el nicho de la antigua alacena por sellar y tapar. Muro Este con el refrigerador. Muro Norte con el paso al pasillo y el muro del tablero.
+El muro Sur lleva la tarja y el nicho de la antigua alacena, pendiente de sellar y tapar. El refrigerador queda al Este; el paso al pasillo y el tablero, al Norte.
 
 ## Muros y medidas
 - **Muro Sur, desde la esquina sureste:** esquinero de 36", extraíble de basura de 12", lavavajillas de 24" y gabinete de tarja de 30". Con el mismo cero sureste, el cálculo ubica el lavavajillas entre 48" y 72" y la tarja entre 72" y 102", centro a 87". Las posiciones anteriores de 51"–75" para lavavajillas y 75"–105" / centro 90" para tarja quedan retiradas; no son instrucciones de instalación. Verificar en obra el mismo punto cero, el centro de la ventana y el borde exterior de la moldura de la puerta trasera.

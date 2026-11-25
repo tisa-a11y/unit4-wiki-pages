@@ -3,7 +3,7 @@
 **Open decision — November 23:** Tisa and John will review the original Savona extension, custom stainless cover, small cream ceiling box, or cream arch with exposed stainless hood and optional shelves. Exact gap remains unmeasured; no option is approved. [Decision and John’s review](https://app.todoist.com/app/task/6hvjQGhG62xHf437). The arch and tutorial are proposals only.
 
 ## Concept
-L-shaped kitchen. Dark green lower cabinets, brass hardware, light counters. Tile to the ceiling behind the range. No upper cabinets beside the hood.
+L-shaped kitchen with dark green lower cabinets, brass hardware and light counters. Tile runs to the ceiling behind the range, with no upper cabinets beside the hood.
 
 ## Interactive Plans &amp; Wall Runs
 - **Whole-kitchen floor plan &amp; electrical:** Open the [Interactive Full Kitchen Floor Plan &amp; Cabinet Schedule](./plans/kitchen-floor-plan/index.html) or the [Interactive Kitchen Electrical &amp; Panel D04 Plan](./plans/kitchen-electrical/index.html) to verify L-shape stations, 6" vs. 12" passage checks, Panel D04 circuits, and all four walls together.
@@ -20,3 +20,6 @@ L-shaped kitchen. Dark green lower cabinets, brass hardware, light counters. Til
 - Do not set the sink cabinet.
 - Do not close the panel wall.
 - Do not order cabinets or countertops.
+
+## Window work
+Kitchen window casing is set aside as a non-blocker; John’s specialized kitchen sill remains separate, with no new date.

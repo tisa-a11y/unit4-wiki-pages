@@ -1,6 +1,11 @@
 # Calefacción, Acceso al Ático y Subpanel
 
-> **Visita de planeación: reprogramación solicitada.** El horario original era el lunes 23 de noviembre, de 2:00 a 4:00 p.m. PT. NEXT aún no ha confirmado la cancelación ni el nuevo horario. La próxima visita con Serge y Alex es para planear el acceso al ático y revisar cómo cabrán la calefacción y el trabajo eléctrico; no es inspección ni instalación — no cortar plafones, no cortar el techo plano ni meter cable al subpanel todavía.
+## Concepto
+El calefactor del ático necesita acceso permanente en Puerta 4, pasillo de servicio y salida lateral. NEXT realiza calefacción y alimentador exterior; nuestra cuadrilla prepara carpintería, eléctrico de servicio y resanes.
+
+> **Visita de planeación: reprogramación solicitada.** El horario original era el lunes 23 de noviembre, de 2:00 a 4:00 p.m. PT. NEXT aún no ha confirmado la cancelación ni el nuevo horario.
+>
+> La próxima visita con Serge y Alex es para planear el acceso al ático y revisar cómo cabrán la calefacción y el trabajo eléctrico; no es inspección ni instalación — no cortar plafones, no cortar el techo plano ni meter cable al subpanel todavía.
 
 <div class="u4-plan-launch-grid">
   <a class="u4-plan-launch-card is-primary" href="#plan:hvac-layout">
@@ -35,9 +40,12 @@
       <div class="u4-phase-badge is-crew">Alcance de Nuestra Cuadrilla (VPS) — En 3 Fases</div>
       <h3>Qué Hace Nuestra Cuadrilla Antes, Con y Después de NEXT</h3>
       <ol>
-        <li><strong>Antes de que inicie NEXT:</strong> Mantener abierto el acceso temporal en el clóset NO de recámara (<code>X=315.4&quot;&ndash;352.0&quot;, Y=5.4&quot;&ndash;88.0&quot;</code>, <a href="https://app.todoist.com/app/task/6j3j3pXFrFWhH2w7" target="_blank" rel="noopener">tarea</a>); preparar y mantener abierto el muro <code>D04</code> del subpanel (<a href="https://app.todoist.com/app/task/6hvRcQ4XC9mr56g7" target="_blank" rel="noopener">tarea</a>); despejar estorbos; reparar y verificar seca la gotera del techo plano; dejar apagado y desconectado el generador de ozono (<a href="https://app.todoist.com/app/task/6j4MQwqCqp24hX57" target="_blank" rel="noopener">tarea</a>).</li>
-        <li><strong>Coordinado con NEXT (tras visto bueno de la visita):</strong> Construir la escotilla permanente de <code>24&quot; &times; 36&quot;</code> libres afuera de Puerta Principal 4 en el descanso no acondicionado (tapa de triplay <code>3/4&quot;</code> + empaque de espuma, sin fibra ni dique; <a href="https://app.todoist.com/app/task/6j3Rf8FVhMVQ7vQf" target="_blank" rel="noopener">tarea</a>), el pasillo continuo de madera de <code>24&quot;</code> de <code>15.8 pies</code> (<a href="https://app.todoist.com/app/task/6j3RvWq3q6RRFXf7" target="_blank" rel="noopener">tarea</a>), la plataforma nivelada de madera de <code>30&quot; &times; 30&quot;</code> (<a href="https://app.todoist.com/app/task/6j3j3pqfM4GC53Qf" target="_blank" rel="noopener">tarea</a>; NEXT debe confirmar si el equipo requiere algún soporte específico antes de comprar o instalar bases), el contacto GFCI <code>120V</code> a <code>&le; 25 pies</code> (<a href="https://app.todoist.com/app/task/6j3RvWhHcpMmCjP7" target="_blank" rel="noopener">tarea</a>) y la lámpara LED permanente con apagador en el ático (<a href="https://app.todoist.com/app/task/6hvjQJgpw2W5VcQf" target="_blank" rel="noopener">tarea</a> &mdash; acordar con el electricista de NEXT quién realiza la conexión eléctrica).</li>
-        <li><strong>Después de la instalación:</strong> Resanar, detallar y pintar las aberturas en plafón y el muro <code>D04</code> (<a href="https://app.todoist.com/app/task/6hvj3CgXpVqrJgvf" target="_blank" rel="noopener">tarea</a>), cerrando el techo temporal del clóset NO solo cuando estén listos el cable de bajo voltaje y la escotilla permanente (<a href="https://app.todoist.com/app/task/6j3Rf89g8M6hPPx7" target="_blank" rel="noopener">tarea</a>).</li>
+        <li><strong>Antes de NEXT:</strong> Mantener abiertos el acceso temporal del clóset NO de recámara y el muro D04 del subpanel; despejar cuartos y pasillo. <a href="https://app.todoist.com/app/task/6j3j3pXFrFWhH2w7" target="_blank" rel="noopener">Tarea de acceso</a> · <a href="https://app.todoist.com/app/task/6hvRcQ4XC9mr56g7" target="_blank" rel="noopener">Preparación del tablero</a>.</li>
+        <li><strong>Antes de trabajar en ático:</strong> Reparar la gotera del techo plano y verificar que esté seca. Dejar apagado y desconectado el generador de ozono. <a href="https://app.todoist.com/app/task/6j4MQwqCqp24hX57" target="_blank" rel="noopener">Preparación de obra</a>.</li>
+        <li><strong>Tras visto bueno de NEXT:</strong> Construir escotilla de <code>24&quot; × 36&quot;</code> libres afuera de Puerta 4, en descanso no acondicionado: tapa ajustada de triplay <code>3/4&quot;</code> y empaque de espuma, sin fibra ni dique. <a href="https://app.todoist.com/app/task/6j3Rf8FVhMVQ7vQf" target="_blank" rel="noopener">Tarea de escotilla</a>.</li>
+        <li><strong>Pasillo y plataforma:</strong> Tras aprobar el recorrido, construir pasillo continuo de madera de <code>24&quot;</code> por <code>15.8 pies</code> y plataforma nivelada de <code>30&quot; × 30&quot;</code>. NEXT confirmará herrajes específicos de montaje/vibración antes de comprar o instalar bases. <a href="https://app.todoist.com/app/task/6j3RvWq3q6RRFXf7" target="_blank" rel="noopener">Pasillo</a> · <a href="https://app.todoist.com/app/task/6j3j3pqfM4GC53Qf" target="_blank" rel="noopener">Plataforma</a>.</li>
+        <li><strong>Eléctrico de servicio:</strong> Tras aprobar el recorrido, instalar contacto GFCI <code>120V</code> a <code>≤25 pies</code> y lámpara LED permanente con apagador; acordar con electricista NEXT quién conecta la lámpara. <a href="https://app.todoist.com/app/task/6j3RvWhHcpMmCjP7" target="_blank" rel="noopener">Contacto</a> · <a href="https://app.todoist.com/app/task/6hvjQJgpw2W5VcQf" target="_blank" rel="noopener">Lámpara</a>.</li>
+        <li><strong>Después de instalar:</strong> Resanar, detallar y pintar aberturas de plafón y muro D04. Cerrar el techo temporal del clóset NO solo cuando estén listos tanto el cable de termostato de bajo voltaje como la escotilla permanente. <a href="https://app.todoist.com/app/task/6hvj3CgXpVqrJgvf" target="_blank" rel="noopener">Acabados</a> · <a href="https://app.todoist.com/app/task/6j3Rf89g8M6hPPx7" target="_blank" rel="noopener">Cierre del clóset</a>.</li>
       </ol>
     </div>
   </div>
@@ -47,13 +55,12 @@
   </div>
 </section>
 
-## Salir de la Visita de Planeación Con Estas 3 Respuestas
+## Preguntas para Serge y Alex en la Visita
 
-| Punto del Recorrido | Confirmar Con Serge y Alex en la Visita Reprogramada |
-| :--- | :--- |
-| **1. Acceso al ático** | Confirmar ubicación exacta y medidas del trazo de `24" × 36"` libres afuera de Puerta 4, vigas, clasificación/protección cortafuego del plafón y ruta de subida del calefactor (`14.19" × 29"` de punta) y ductos. **Fotografiar el trazo — no cortar todavía** ([tarea](https://app.todoist.com/app/task/6j3RvWmJ329qPCc7)). |
-| **2. Subpanel (`D04`)** | Confirmar si NEXT puede usar el gabinete Eaton `125A` montado por John en `D04`, por dónde entra la acometida y obtener visto bueno del electricista sobre la **línea de 80A + principal condicional de 100A** antes de cablear o cerrar el muro ([tarea](https://app.todoist.com/app/task/6hvRcQ4XC9mr56g7)). |
-| **3. Luz en ático, escape y secuencia** | Acordar quién cablea y conecta la lámpara LED con apagador y cuándo, confirmar claro de salida lateral (`>= 4 pies` a colindancia en muro Sur vs. muro Oeste trasero, cero cortes en techo plano), confirmar si el calefactor requiere herraje/base específica antes de comprar soportes, y definir qué preparaciones deben quedar listas antes de que inicie NEXT. |
+- **Escotilla:** Confirmar trazo libre de 24"×36" afuera de Puerta 4, vigas y protección cortafuego. Fotografiar sin cortar. Revisar ruta del calefactor de punta (14.19"×29") y acceso de ductos ([tarea de acceso](https://app.todoist.com/app/task/6j3RvWmJ329qPCc7)).
+- **Subpanel:** Confirmar que NEXT pueda usar el gabinete Eaton 125A montado por John en D04 y ubicar entrada del alimentador. Obtener visto bueno del electricista para línea 80A y principal condicional 100A antes de cablear o cerrar ([tarea del tablero](https://app.todoist.com/app/task/6hvRcQ4XC9mr56g7)).
+- **Escape:** Confirmar claro de salida lateral horizontal: ≥4 pies a colindancia, comparando muro Sur con muro Oeste al patio trasero. Cero cortes en techo plano.
+- **Luz y montaje:** Acordar quién conecta la lámpara LED permanente con apagador y cuándo. Confirmar herrajes específicos de montaje/vibración antes de comprar bases y listar preparaciones de ático/muros necesarias antes de NEXT.
 
 <section id="sec-subpages" class="u4-sec-block">
   <h2>Acceso al Ático y Planos Interactivos</h2>
@@ -73,9 +80,10 @@
   </div>
 </section>
 
-<details id="sec-details" class="u4-sec-block" open>
+<details id="sec-details" class="u4-sec-block">
   <summary>Medidas de campo y notas de madera</summary>
   <ul>
+    <li><strong>Referencia del acceso temporal del clóset NO:</strong> <code>X=315.4&quot;&ndash;352.0&quot;, Y=5.4&quot;&ndash;88.0&quot;</code>.</li>
     <li><strong>Paso del equipo (<code>33.25&quot; &times; 14.19&quot; &times; 29&quot;</code>):</strong> Sube de punta (<code>14.19&quot; &times; 29&quot;</code>) por el claro libre completo de <code>24&quot; &times; 36&quot;</code>. Evitar puertas metálicas nominales de <code>24&quot;&times;36&quot;</code> cuyo marco reduzca el paso libre.</li>
     <li><strong>Madera de pasillo y plataforma:</strong> Con <code>66&quot;</code> de altura bajo techo plano, el pasillo continuo de <code>24&quot;</code> mide <code>20 pies</code> o menos (<code>15.8 pies</code> a Comedor Suroeste). Usar <code>3</code> hojas de OSB <code>23/32&quot;</code> o triplay estructural <code>3/4&quot;</code> para el pasillo (<code>1</code> tira por hoja; nunca triplay <code>3/8&quot;</code>) más <code>1</code> hoja para la plataforma de <code>30&quot; &times; 30&quot;</code> y la tapa (sin fibra ni dique sobre el descanso común no acondicionado).</li>
     <li><strong>Planos interactivos:</strong> Abrir <a href="#plan:attic-hatch">Plano 1: Escotilla del Ático, Pasillo y Plataforma</a> para marco y tapa, o <a href="#plan:hvac-layout">Plano 2: Sistema de Calefacción &mdash; Calefactor, Ductos y Salida Lateral</a> para ductos y salida lateral.</li>

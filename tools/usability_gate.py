@@ -60,7 +60,6 @@ ALL_PLAN_IDS = [
     "hvac-layout",
     "murphy-door",
     "bathroom-tile",
-    "bathroom-measurements",
 ]
 
 KITCHEN_3TAB_PLANS = [
@@ -462,11 +461,21 @@ JS_SVG_FORENSICS = r"""
 """
 
 JS_IMAGE_INTEGRITY = r"""
-() => {
+async () => {
   const issues = [];
   const imgs = Array.from(document.querySelectorAll('img'));
   for (const img of imgs) {
     if (img.closest('[hidden], #u4PrintRoot, #blueprint-sheet-shell, .u4-lb-backdrop[hidden]')) continue;
+    let hidden = false;
+    for (let node = img; node; node = node.parentElement) {
+      const style = getComputedStyle(node);
+      if (style.display === 'none' || style.visibility === 'hidden' ||
+          (node.tagName === 'DETAILS' && !node.open && !img.closest('summary'))) hidden = true;
+    }
+    if (hidden || !img.getClientRects().length) continue;
+    // Visible lazy images must finish loading before checking their dimensions.
+    img.loading = 'eager';
+    try { await img.decode(); } catch (_) { /* broken images are reported below */ }
     const cs = getComputedStyle(img);
     if (cs.display === 'none' || cs.visibility === 'hidden') continue;
     const r = img.getBoundingClientRect();
@@ -513,7 +522,7 @@ JS_OVERLAP_AND_WRAP = r"""
   }
 
   // 1. Check fixed floating controls against content cards/headings/checklist/buttons
-  const floaters = Array.from(document.querySelectorAll('.u4-pin-fab, #u4AiFloatingDock, .u4-lai-dock')).filter(el => {
+  const floaters = Array.from(document.querySelectorAll('.u4-pin-fab, .u4-pin-float-pill, #u4AiFloatingDock, .u4-lai-dock')).filter(el => {
     const cs = getComputedStyle(el);
     return cs.position === 'fixed' && visibleRect(el);
   });
@@ -828,7 +837,7 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
         attach_err_listeners(p3, "gate3-controls")
         await setup_network_stubs(p3, base_url)
         try:
-            # 3a. Verify All Plans dropdown parity across ALL 8 interactive plans
+            # 3a. Verify All Plans dropdown parity across all active interactive plans
             expected_set = set(ALL_PLAN_IDS)
             for pid in ALL_PLAN_IDS:
                 await p3.goto(f"{base_url}/plans/{pid}/index.html?standalone=1&lang=en&theme=light", wait_until="domcontentloaded")
@@ -917,7 +926,7 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
                     if box_muted and abs(box_muted["height"] - h_before) > 6:
                         fail("gate_3_plan_controls_ai_ergonomics", f"Mute state caused Ask AI resize jump: {h_before:.1f}px -> {box_muted['height']:.1f}px")
             if gates["gate_3_plan_controls_ai_ergonomics"]["status"] == "PASS":
-                note("gate_3_plan_controls_ai_ergonomics", "All 8 plans share identical 8-item All Plans dropdown (Esc returns focus), pagers reset scroll, zoom works, Ask AI empty height <220px & 32x32 icon buttons verified")
+                note("gate_3_plan_controls_ai_ergonomics", "All 7 active plans share identical 7-item All Plans dropdown (Esc returns focus), pagers reset scroll, zoom works, Ask AI empty height <220px & 32x32 icon buttons verified")
         except Exception as exc:
             fail("gate_3_plan_controls_ai_ergonomics", f"Exception in Gate 3: {exc}")
         await ctx3.close()
@@ -1108,20 +1117,22 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
                 # Reset before each top-level step so a manual view cannot
                 # unmount the remaining tabs and silently skip their audit.
                 plan_url = p13.url
-                steps = []
+                steps = [(None, None)]
                 for attribute in ("data-step", "data-jump-sheet"):
                     values = await p13.locator("button[" + attribute + "]:visible").evaluate_all("(els, attr) => [...new Set(els.map(e => e.getAttribute(attr)))]", attribute)
                     steps.extend((attribute, value) for value in values)
                 for attribute, step in steps:
                     await p13.goto(plan_url, wait_until="domcontentloaded")
                     await p13.wait_for_timeout(200)
-                    button = p13.locator("button[" + attribute + "=" + json.dumps(step) + "]:visible").first
-                    if not await button.count():
-                        fail("gate_13_editorial_audit", "plans/" + pid + ": unreachable step " + step)
-                        continue
-                    await button.click()
-                    await p13.wait_for_timeout(150)
-                    label = "plans/" + pid + "#step=" + step
+                    label = "plans/" + pid
+                    if attribute is not None:
+                        button = p13.locator("button[" + attribute + "=" + json.dumps(step) + "]:visible").first
+                        if not await button.count():
+                            fail("gate_13_editorial_audit", "plans/" + pid + ": unreachable step " + step)
+                            continue
+                        await button.click()
+                        await p13.wait_for_timeout(150)
+                        label += "#step=" + step
                     await editorial_audit(p13, label, lang)
                     for sub_attribute in ("data-wall", "data-wtab"):
                         values = await p13.locator("button[" + sub_attribute + "]:visible").evaluate_all("(els, attr) => [...new Set(els.map(e => e.getAttribute(attr)))]", sub_attribute)
@@ -1203,7 +1214,7 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
         # LAYER 4 — GATE 12: Golden Screenshots + Pixel-Diff & HTML QA Report
         # ══════════════════════════════════════════════════════════════════════
         shots_spec = [
-            (f"{name}-{vp}-{lang}-{theme}", f"{base_url}/{path}?lang={lang}&theme={theme}{fragment}", width, height)
+            (f"{name}-{vp}-{lang}-{theme}", f"{base_url}/{path}?standalone=1&lang={lang}&theme={theme}{fragment}", width, height)
             for name, path, fragment in (
                 ("kitchen", "index.html", "#kitchen"),
                 ("kitchen-electrical", "plans/kitchen-electrical/index.html", ""),
@@ -1221,6 +1232,11 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
             await p12.goto(shot_url, wait_until="domcontentloaded")
             await p12.wait_for_timeout(650)
             await disable_animations(p12)
+            title_selector = "#doc h1" if "/index.html?" in shot_url and "/plans/" not in shot_url else "#u4hBody h1, #u4hBody .u4h-title"
+            if not await p12.locator(title_selector).first.is_visible():
+                fail("gate_12_visual_baselines_report", shot_name + ": target content did not render; refusing empty baseline")
+                await ctx12.close()
+                continue
             cur_png = await p12.screenshot(full_page=False)
             cur_file = shots_dir / f"{shot_name}.png"
             cur_file.write_bytes(cur_png)

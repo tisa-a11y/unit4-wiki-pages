@@ -1,7 +1,7 @@
 # South Sink & North Wall Runs
 
 ## Concept
-South wall with the sink and a former pie-safe recess to weatherproof and cover. East wall with the refrigerator. North wall with the hall opening and the panel wall.
+The South wall holds the sink and former pie-safe recess, which needs weatherproofing and a cover. The refrigerator sits on the East wall; the hall opening and panel wall are North.
 
 ## Walls and measurements
 - **South wall, from the southeast corner:** 36" corner, 12" trash pull-out, 24" dishwasher, then 30" sink base. Using the same southeast zero, the plan-derived dishwasher station is 48"–72" and the sink is 72"–102", center 87". The former 51"–75" dishwasher and 75"–105" / center 90" sink coordinates are retired, not installation directions. Confirm the common zero, window center and outside edge of rear-door casing on site.

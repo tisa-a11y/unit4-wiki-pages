@@ -389,3 +389,6 @@ html[data-theme="dark"] .u4-pin-act.is-primary {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
+
+/* The pin bar and desktop toolbar provide triggers without covering instructions. */
+body:has(.u4-pin-bar) .u4-pin-float-pill{display:none}

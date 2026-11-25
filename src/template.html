@@ -308,6 +308,11 @@ html[data-theme="dark"] .u4-home-plan-chip {
   border-color: rgba(124, 192, 220, 0.28);
 }
 </style>
+<style>
+@media(max-width:760px){
+  main > .bar #u4AiFloatingDock.u4-ai-dock{position:static!important;inset:auto!important;margin-left:auto!important;box-shadow:none}
+}
+</style>
 </head><body>
 <meta name="description" content="Agent brief: shared home of the 1231 11th Ave Unit 4 remodel so Tisa (owner, locks decisions) and John (lead carpenter) work from one current picture; the spine of the Todoist board — every card traces to a wiki spec or decision; agents file every note into specs, Todoist and decisions. Read #agent-brief (= unit-4-renovation/START-HERE.md).">
 <!--
@@ -1329,7 +1334,7 @@ body.u4-lb-open .u4-pin-fab{display:none!important}
 .u4-pin-ghost::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--crimson,#b42318)}
 .u4-pin-arm-banner{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 60px);transform:translateX(-50%);z-index:265;padding:6px 12px;border-radius:8px;border:1px solid var(--crimson,#b42318);background:var(--panel);color:var(--fg);font:600 12px/1.3 var(--mono);white-space:nowrap;max-width:calc(100vw - 24px);overflow:hidden;text-overflow:ellipsis}
 .u4-pin-arm-banner[hidden]{display:none!important}
-body.u4-pin-armed #doc,body.u4-pin-armed .u4-lb-stage,body.u4-pin-armed .u4-pdf-page-box{cursor:crosshair}
+body.u4-pin-armed #doc,body.u4-pin-armed #roomTechnical,body.u4-pin-armed .u4-lb-stage,body.u4-pin-armed .u4-pdf-page-box{cursor:crosshair}
 
 .u4-pin-marker{position:absolute;transform:translate(-50%,-50%);pointer-events:auto;cursor:grab;width:28px;height:28px;border-radius:50%;border:2px dashed var(--crimson,#b42318);background:rgba(180,35,24,.14);display:inline-flex;align-items:center;justify-content:center;padding:0;touch-action:none;z-index:18}
 .u4-pin-marker.is-selected{border-style:solid;border-color:var(--accent);background:rgba(31,95,122,.16)}
@@ -2376,7 +2381,7 @@ main.u4-page-pin-armed,
 main.u4-page-pin-armed * {
   cursor: crosshair !important;
 }
-#doc {
+#doc, #roomTechnical {
   position: relative;
 }
 .u4-iframe-pin-shield {
@@ -3242,7 +3247,7 @@ function getStaticRoomGalleryItems(roomKey){
   const crMap = (typeof U4_CONCEPT_RENDERS === "object" && U4_CONCEPT_RENDERS) ? U4_CONCEPT_RENDERS : {};
   const rawRenders = Array.isArray(crMap[roomKey]) ? crMap[roomKey] : [];
   const seenKeys = new Set();
-  const renders = rawRenders.map((it, idx) => {
+  const renders = rawRenders.filter(it => !it.lang || it.lang === LANG).map((it, idx) => {
     const thumb = (es && it.thumbUrlEs) ? it.thumbUrlEs : (it.thumbUrl || "");
     const drv = it.driveUrl || "";
     if (it.id) seenKeys.add(String(it.id).toLowerCase());
@@ -3974,18 +3979,19 @@ function u4Snippet(txt, maxLen){
   return clean.length > (maxLen || 46) ? clean.slice(0, (maxLen || 46) - 1) + "…" : clean;
 }
 function stampDocPinAnchors(){
-  const docEl = document.getElementById("doc");
-  if (!docEl) return;
+  const roots = [document.getElementById("doc"), document.getElementById("roomTechnical")].filter(Boolean);
   const sel = "figure.u4-lead-pic, section.u4-gal-sec, section.ck li, section.ck, section.docs li, section.docs, .u4-hvac-col, .u4-hvac-facts, .u4-qa-card, .u4-fact-card, details.fulldet, .u4-home-sec, .goals, .tbl";
   let idx = 0;
+  roots.forEach(docEl => {
   docEl.querySelectorAll(sel).forEach(el => {
     if (el.closest(".u4-zoom-inline, .viewer")) return;
     idx++;
     el.setAttribute("data-u4-pin-anchor", "anchor-" + idx);
     el.classList.add("u4-pin-host");
   });
-  docEl.setAttribute("data-u4-pin-anchor", "doc-root");
+  docEl.setAttribute("data-u4-pin-anchor", docEl.id === "doc" ? "doc-root" : "technical-root");
   docEl.classList.add("u4-pin-host");
+  });
 }
 function resolvePinDropTarget(clientX, clientY){
   const el = document.elementFromPoint(clientX, clientY);
@@ -4064,7 +4070,7 @@ function resolvePinDropTarget(clientX, clientY){
     };
   }
 
-  const docEl = el.closest("#doc");
+  const docEl = el.closest("#doc, #roomTechnical");
   if (docEl) {
     stampDocPinAnchors();
     const anchor = el.closest("[data-u4-pin-anchor]") || docEl;
@@ -4569,7 +4575,7 @@ function ensureGalleryDelegation(){
       openGalleryLightbox([{ fullUrl: leadImg.currentSrc || leadImg.src, thumbUrl: leadImg.src, title: cap, note: "" }], 0, current ? pageLabel(current) : "");
       return;
     }
-    const mdImg = ev.target && ev.target.closest ? ev.target.closest("#doc .mdbody img") : null;
+    const mdImg = ev.target && ev.target.closest ? ev.target.closest("#doc .mdbody img, #roomTechnical .mdbody img") : null;
     if (mdImg && !mdImg.closest("a")) {
       const fig = mdImg.closest("figure");
       const cap = mdImg.alt || (fig && fig.querySelector("figcaption") && fig.querySelector("figcaption").textContent) || (current ? pageLabel(current) : "");
@@ -4777,24 +4783,30 @@ function crewRoom(p, srcMd){
       + '<span class="u4-crumb-sep" aria-hidden="true">›</span>'
       + '<span class="u4-crumb-cur">'+label+'</span>'
       + '</nav>'
-      + leadPictureBlock(p.key)
       + '<h1>'+label+'</h1>';
   } else {
-    h += leadPictureBlock(p.key) + '<h1>'+label+'</h1>';
+    h += '<h1>'+label+'</h1>';
   }
   h += roomSubnavBar(p);
 
-  if (p.key==="hvac") {
-    h += U4_HTML[es ? "pages/hvac/block-1.es.html" : "pages/hvac/block-1.en.html"];
-  } else {
-    if (concept) {
-      h += '<p class="u4-room-summary" id="sec-concept">'+render(concept.body.join("\n").trim()).replace(/^<p>|<\/p>\s*$/g, "")+'</p>';
+  // Keep the overview short while retaining the source's visible field holds.
+  let supporting = "";
+  if (concept) {
+    const conceptDom = document.createElement("div");
+    conceptDom.innerHTML = render(concept.body.join("\n").trim());
+    const overview = conceptDom.querySelector(":scope > p");
+    if (overview) {
+      h += '<p class="u4-room-summary" id="sec-concept">'+overview.innerHTML+'</p>';
+      overview.remove();
     }
-    h += keyFactsBlock(p.key);
+    supporting = conceptDom.innerHTML;
   }
+  h += leadPictureBlock(p.key);
+  h += keyFactsBlock(p.key);
 
   h += roomAreasBlock(p);
   h += ckBlock(p.key);
+  h += supporting;
 
   if (p.key==="kitchen") {
     h += '<div class="u4-subpage-dir" id="sec-subpages">'
@@ -4811,7 +4823,9 @@ function crewRoom(p, srcMd){
   h += visualsBlock(p.key);
   h += docsBlock(p.key);
 
-  const detail = rest.map(s=>"## "+s.h+"\n"+s.body.join("\n")).join("\n\n");
+  const active = rest.filter(s=>/^(Active Holds|Restricciones activas|Pausas activas)/i.test(s.h));
+  h += active.map(s=>render("## "+s.h+"\n"+s.body.join("\n"))).join("");
+  const detail = rest.filter(s=>!active.includes(s)).map(s=>"## "+s.h+"\n"+s.body.join("\n")).join("\n\n");
   if (detail.trim()) {
     h += '<details class="fulldet" id="sec-details"><summary>'+(p.key==="hvac"?t("techSpecsDetails"):t("fullPlanDetails"))+'</summary><div class="mdbody">'+render(detail)+'</div></details>';
   }
@@ -5287,6 +5301,7 @@ function closePlanShell(){
 }
 
 function openPlanShell(planSpec){
+  document.getElementById("roomTechnical")?.replaceChildren();
   if (!planSpec || !planSpec.planId) return false;
   var sh = document.getElementById("u4PlanShell");
   var fr = document.getElementById("u4PlanFrame");
@@ -5329,6 +5344,7 @@ function openPlanShell(planSpec){
 }
 
 function show(key){
+  document.getElementById("roomTechnical")?.replaceChildren();
   const __planRoute = parsePlanHash(key);
   if (__planRoute){
     pdfTok++;
@@ -5474,9 +5490,31 @@ function show(key){
   if (p.key!=="home" && !isCrew) body += `<div class="src">${LANG==="es"?"Archivo fuente:":"Source file:"} ${p.path}</div>`;
   document.body.classList.toggle("is-home", p.key==="home");
   document.body.classList.toggle("is-crew", isCrew);
+  let technical = document.getElementById("roomTechnical");
+  if (!technical) {
+    technical = document.createElement("div");
+    technical.id = "roomTechnical";
+    document.getElementById("field").after(technical);
+  }
+  technical.replaceChildren();
   document.getElementById("doc").innerHTML = body;
-  enhanceInteractiveLinks(document.getElementById("doc"));
-  enhanceZoomableInlineContent(document.getElementById("doc"));
+  if (isCrew) {
+    const sections = [...document.querySelectorAll("#doc #sec-details")];
+    if (sections.length) {
+      const combined = document.createElement("details");
+      combined.id = "sec-details";
+      combined.className = "fulldet";
+      combined.innerHTML = '<summary>'+t("techSpecsDetails")+'</summary>';
+      sections.forEach(section=>{
+        const title = section.querySelector(":scope > summary");
+        if (title) { const heading=document.createElement("h3"); heading.textContent=title.textContent; combined.append(heading); title.remove(); }
+        combined.append(...section.childNodes); section.remove();
+      });
+      technical.append(combined);
+    }
+  }
+  enhanceInteractiveLinks(document.querySelector("main"));
+  enhanceZoomableInlineContent(document.querySelector("main"));
   stampDocPinAnchors();
   mountUniversalPinUi();
   renderPinsOnSurface();
@@ -11536,7 +11574,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
           '<span id="u4AiStateBadge" class="u4-ai-orb-pill">OFF</span>' +
         '</button>';
 
-      document.body.appendChild(dock);
+      (document.querySelector("main > .bar") || document.body).appendChild(dock);
 
       var minBar = document.createElement("div");
       minBar.id = "u4VoiceMinBar";
