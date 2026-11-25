@@ -1192,6 +1192,7 @@ html body .u4-subpage-dir,html body article .src{display:none!important}
 html body article h2.dec-group{font-size:19px;margin:26px 0 8px;padding:0 0 0 12px;border:0;border-left:3px solid var(--accent)}
 html body .u4-lead-pic{margin:0 0 14px;max-width:74ch}
 html body .u4-lead-pic img{display:block;width:100%;max-height:340px;object-fit:cover;border-radius:10px}
+html body .u4-lead-pic--uncropped img{max-height:none;height:auto;object-fit:contain}
 html body .u4-lead-pic figcaption{font-size:13.5px;color:var(--muted);margin-top:5px}
 /* 2026-11-20 (Tisa): menu bar stays as built; no page drop-down beside it; Home sections tied by a side line */
 html body .mobile select#jump{display:none!important}
@@ -3020,7 +3021,7 @@ function leadPictureBlock(key){
   const es = LANG==="es"; const it = UNIFIED_VISUALS[key].items[i];
   const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const src = (es && it.imgEs) ? it.imgEs : it.img; const cap = es ? it.es : it.en;
-  return '<figure class="u4-lead-pic"><img src="'+esc(src)+'" alt="'+esc(cap)+'"><figcaption>'+esc(cap)+'</figcaption></figure>';
+  return '<figure class="u4-lead-pic'+(it.uncropped ? ' u4-lead-pic--uncropped' : '')+'"><img src="'+esc(src)+'" alt="'+esc(cap)+'"><figcaption>'+esc(cap)+'</figcaption></figure>';
 }
 function u4GalEsc(s){ return String(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 function u4GalOrigin(){
@@ -3100,7 +3101,7 @@ function getStaticRoomGalleryItems(roomKey){
   const references = [];
   if (v0 && Array.isArray(v0.items)) {
     v0.items.forEach((it, idx) => {
-      if (idx === leadI) return;
+      if (idx === leadI && !it.showInReferences) return;
       const src = (es && it.imgEs) ? it.imgEs : (it.img || "");
       const href = (es && it.hrefEs) ? it.hrefEs : (it.href || src);
       const k1 = u4GalExtractKey(src), k2 = u4GalExtractKey(href);

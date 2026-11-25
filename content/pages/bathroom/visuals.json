@@ -1,9 +1,19 @@
 {
   "en": "Pictures",
   "es": "Imágenes",
-  "noteEn": "Bronze fixtures, surface-mounted medicine cabinet (oversized unit to return), 10\" rough-in toilet, outward-swing hallway door.",
-  "noteEs": "Accesorios de bronce, botiquín sobre el muro (devolver el grande), inodoro de 10\" al eje, puerta abatible hacia el pasillo.",
+  "noteEn": "Tub Surround measurements: full photo with wall, niche and tub dimensions. Approximate readings are marked ≈; open the photo to enlarge.",
+  "noteEs": "Medidas del contorno de la tina: foto completa con medidas del muro, los nichos y la tina. Las aproximaciones llevan ≈; abre la foto para ampliarla.",
   "items": [
+    {
+      "img": "./wiki-images/bathroom-tub-surround-measurements-en.svg",
+      "imgEs": "./wiki-images/bathroom-tub-surround-measurements-es.svg",
+      "href": "./wiki-images/bathroom-tub-surround-measurements-en.svg",
+      "hrefEs": "./wiki-images/bathroom-tub-surround-measurements-es.svg",
+      "en": "Tub Surround measurements",
+      "es": "Medidas del contorno de la tina",
+      "showInReferences": true,
+      "uncropped": true
+    },
     {
       "img": "./wiki-images/bathroom-warm-brass-concept.jpg",
       "href": "./wiki-images/bathroom-warm-brass-concept.jpg",
@@ -16,6 +26,13 @@
       "en": "Pocket door idea (RETIRED Nov 24 — outward-swing hallway door locked)",
       "es": "Idea de puerta corrediza (RETIRADA 24 nov — puerta abatible hacia el pasillo confirmada)",
       "retired": true
+    },
+    {
+      "img": "./wiki-images/bathroom-tub-surround-source.jpg",
+      "href": "./wiki-images/bathroom-tub-surround-source.jpg",
+      "en": "Original tub surround photo — without arrows",
+      "es": "Foto original del contorno de la tina — sin flechas"
     }
-  ]
+  ],
+  "lead": 0
 }
