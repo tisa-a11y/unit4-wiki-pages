@@ -1,5 +1,25 @@
 [
   {
+    "key": "interactive-bathroom-tile",
+    "room": "bathroom",
+    "titleEn": "Bathroom Tub & Wall Tile Interactive Plan",
+    "titleEs": "Plano Interactivo de Azulejo y Nichos en Baño",
+    "titleRu": "Интерактивный план плитки и ниш ванной",
+    "docEn": "./plans/bathroom-tile/index.html?v=rev010",
+    "docEs": "./plans/bathroom-tile/index.html?lang=es&v=rev010",
+    "docRu": "./plans/bathroom-tile/index.html?lang=ru&v=rev010"
+  },
+  {
+    "key": "interactive-bathroom-measurements",
+    "room": "bathroom",
+    "titleEn": "Bathroom Field Measurements & Photos (Room, Tub & Walls)",
+    "titleEs": "Medidas de Campo y Fotos del Baño (Planta, Tina y Muros)",
+    "titleRu": "Полевые замеры и фото ванной (план, ванна и стены)",
+    "docEn": "./plans/bathroom-measurements/index.html?v=rev010",
+    "docEs": "./plans/bathroom-measurements/index.html?lang=es&v=rev010",
+    "docRu": "./plans/bathroom-measurements/index.html?lang=ru&v=rev010"
+  },
+  {
     "key": "interactive-hood-wall-plan",
     "room": "kitchen-oven-range",
     "titleEn": "Interactive range and hood wall plan",
@@ -300,22 +320,6 @@
     "aliases": [
       "bath plan",
       "plan del bano"
-    ]
-  },
-  {
-    "key": "bathroom-tile",
-    "room": "bathroom",
-    "titleEn": "Bathroom Tub & Wall Tile Plan",
-    "titleEs": "Plano de Azulejo y Nichos en Baño",
-    "noteEn": "35\" symmetrical stops, 71-1/4\" HardieBacker top, 2\"×6\" bullnose (zero metal), 1-piece 24\"×48\" White niche backs, Mapei #77 Frost grout.",
-    "noteEs": "Topes simétricos 35\", altura 71-1/4\", bullnose 2\"×6\" (cero metal), fondos nicho 1 pieza 24\"×48\" Blanco y boquilla Mapei #77 Frost.",
-    "docEn": "./plans/bathroom-tile/index.html?v=rev008",
-    "docEs": "./plans/bathroom-tile/index.html?lang=es&v=rev008",
-    "aliases": [
-      "bathroom tile",
-      "bathroom tile plan",
-      "tub wall tile",
-      "plano azulejo bano"
     ]
   },
   {

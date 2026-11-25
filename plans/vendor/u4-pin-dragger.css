@@ -1,24 +1,31 @@
 /* ============================================================================
-   Unit 4 Interactive Plans — Universal Pin/Circle Dragger (Ask AI / Correct)
-   Classic Old Wiki Flat Chrome · Drag OR 1-Tap Arm · Mobile 390px Clamped
+   Unit 4 Interactive Plans — Universal Page-Wide Pin/Circle Dragger (Ask AI / Correct)
+   Works on ANY element on the page (text, tables, checklists, steps, SVGs, photos)
+   Classic Old Wiki Flat Chrome · Drag OR 1-Tap Arm · EN | ES | RU · Mobile 390px Safe
    Zero External CDNs · Zero Prices · Hidden on Print
    ============================================================================ */
 
 @media print {
   .u4-pin-bar,
   .u4-pin-layer,
+  .u4-pin-page-layer,
   .u4-pin-pop,
   .u4-pin-ghost,
-  .u4-pin-toast {
+  .u4-pin-toast,
+  .u4-pin-float-pill,
+  .u4-pin-topbar-btn {
     display: none !important;
   }
 }
 
 body.u4-mode-blueprint .u4-pin-bar,
 body.u4-mode-blueprint .u4-pin-layer,
+body.u4-mode-blueprint .u4-pin-page-layer,
 body.u4-mode-blueprint .u4-pin-pop,
 body.u4-mode-blueprint .u4-pin-ghost,
-body.u4-mode-blueprint .u4-pin-toast {
+body.u4-mode-blueprint .u4-pin-toast,
+body.u4-mode-blueprint .u4-pin-float-pill,
+body.u4-mode-blueprint .u4-pin-topbar-btn {
   display: none !important;
 }
 
@@ -32,18 +39,22 @@ body.u4-mode-blueprint .u4-pin-toast {
   gap: 8px;
   flex-wrap: wrap;
   padding: 6px 10px;
-  margin-bottom: 9px;
-  border-radius: 6px;
-  background: var(--bg, #f4f5f3);
+  margin-bottom: 10px;
+  border-radius: 8px;
+  background: var(--panel, #ffffff);
   border: 1px solid var(--line, #d9dedc);
   font-size: 12px;
   color: var(--muted, #5d686d);
 }
 
-.u4-pin-arm-btn {
+.u4-pin-arm-btn,
+.u4-pin-topbar-btn,
+.u4-pin-float-pill {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
+  min-height: 32px;
   padding: 4px 11px;
   border-radius: 999px;
   border: 1.5px dashed var(--crimson, #a8281c);
@@ -52,26 +63,60 @@ body.u4-mode-blueprint .u4-pin-toast {
   font-family: var(--mono, "IBM Plex Mono", ui-monospace, monospace);
   font-size: 11.5px;
   font-weight: 700;
+  line-height: 1;
   cursor: grab;
   user-select: none;
+  -webkit-user-select: none;
   touch-action: none;
+  white-space: nowrap;
+  box-sizing: border-box;
 }
 
-.u4-pin-arm-btn:active {
+.u4-pin-arm-btn:active,
+.u4-pin-topbar-btn:active,
+.u4-pin-float-pill:active {
   cursor: grabbing;
 }
 
-.u4-pin-arm-btn.is-armed {
+.u4-pin-arm-btn.is-armed,
+.u4-pin-topbar-btn.is-armed,
+.u4-pin-float-pill.is-armed {
   background: var(--crimson, #a8281c);
   color: #ffffff;
   border-style: solid;
 }
 
-html[data-theme="dark"] .u4-pin-arm-btn.is-armed {
-  color: #0D1116;
+html[data-theme="dark"] .u4-pin-arm-btn.is-armed,
+html[data-theme="dark"] .u4-pin-topbar-btn.is-armed,
+html[data-theme="dark"] .u4-pin-float-pill.is-armed {
+  color: #0d1116;
+}
+
+/* Always-reachable floating trigger in bottom-right gutter (never overlaps left room text) */
+.u4-pin-float-pill {
+  position: fixed;
+  right: 16px;
+  bottom: 72px;
+  z-index: 94;
+  min-height: 36px;
+  padding: 6px 13px;
+  box-shadow: 0 3px 12px rgba(18, 22, 24, 0.18);
+}
+
+@media (max-width: 560px) {
+  .u4-pin-float-pill {
+    right: 12px;
+    bottom: 68px;
+    padding: 6px 11px;
+    font-size: 11px;
+  }
+  .u4-pin-topbar-btn {
+    display: none !important;
+  }
 }
 
 .u4-pin-clear-btn {
+  min-height: 28px;
   padding: 3px 9px;
   border-radius: 999px;
   border: 1px solid var(--line, #d9dedc);
@@ -88,43 +133,53 @@ html[data-theme="dark"] .u4-pin-arm-btn.is-armed {
   color: var(--crimson, #a8281c);
 }
 
+.u4-pin-host-surface,
 .u4-pin-target {
   position: relative;
+}
+.u4-pin-host-surface {
+  padding-bottom: 96px;
+}
+
+.u4-pin-host-surface.is-pin-armed,
+.u4-pin-host-surface.is-pin-armed * {
+  cursor: crosshair !important;
 }
 
 .u4-pin-target.is-pin-armed {
   outline: 2px dashed var(--accent, #1f5f7a);
   outline-offset: 2px;
-  cursor: crosshair !important;
 }
 
-.u4-pin-layer {
+.u4-pin-highlighted-el {
+  outline: 2px dashed var(--crimson, #a8281c) !important;
+  outline-offset: 3px !important;
+  border-radius: 4px;
+}
+
+.u4-pin-layer,
+.u4-pin-page-layer {
   position: absolute;
   inset: 0;
-  z-index: 15;
+  z-index: 22;
   pointer-events: none;
-}
-
-.u4-pin-target.is-pin-armed .u4-pin-layer {
-  pointer-events: auto;
-  cursor: crosshair;
 }
 
 .u4-pin-dot {
   position: absolute;
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   transform: translate(-50%, -50%) scale(var(--u4-inv-scale, 1));
   border-radius: 50%;
   border: 2px dashed var(--crimson, #a8281c);
-  background: rgba(168, 40, 28, 0.14);
+  background: rgba(168, 40, 28, 0.16);
   display: flex;
   align-items: center;
   justify-content: center;
   pointer-events: auto;
   cursor: grab;
   touch-action: none;
-  z-index: 16;
+  z-index: 24;
 }
 
 .u4-pin-dot.is-selected {
@@ -150,7 +205,7 @@ html[data-theme="dark"] .u4-pin-arm-btn.is-armed {
 .u4-pin-pop {
   grid-column: 1 / -1;
   position: relative;
-  z-index: 30;
+  z-index: 35;
   width: 100%;
   max-width: 100%;
   margin: 8px 0 10px;
@@ -160,7 +215,7 @@ html[data-theme="dark"] .u4-pin-arm-btn.is-armed {
   border: 1.5px solid var(--accent, #1f5f7a);
   border-radius: 8px;
   padding: 10px 12px;
-  box-shadow: 0 3px 12px rgba(18, 22, 24, 0.10);
+  box-shadow: 0 4px 14px rgba(18, 22, 24, 0.12);
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -177,21 +232,29 @@ html[data-theme="dark"] .u4-pin-arm-btn.is-armed {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 6px;
+  gap: 8px;
   font-family: var(--mono, "IBM Plex Mono", ui-monospace, monospace);
   font-size: 11px;
   font-weight: 700;
   color: var(--accent, #1f5f7a);
 }
 
+.u4-pin-pop-ctx {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: calc(100% - 64px);
+}
+
 .u4-pin-intents {
   display: flex;
-  gap: 5px;
+  gap: 6px;
   flex-wrap: wrap;
 }
 
 .u4-pin-int-btn {
-  padding: 3px 9px;
+  min-height: 28px;
+  padding: 3px 10px;
   border-radius: 999px;
   border: 1px solid var(--line, #d9dedc);
   background: var(--bg, #f4f5f3);
@@ -208,34 +271,39 @@ html[data-theme="dark"] .u4-pin-arm-btn.is-armed {
   color: var(--panel, #ffffff);
 }
 
+html[data-theme="dark"] .u4-pin-int-btn.is-active {
+  color: #0d181d;
+}
+
 .u4-pin-row {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
+  flex-wrap: wrap;
 }
 
 .u4-pin-row input {
-  flex: 1;
+  flex: 1 1 180px;
   min-width: 0;
-  height: 32px;
-  padding: 0 8px;
+  height: 34px;
+  padding: 0 10px;
   border-radius: 6px;
   border: 1px solid var(--line, #d9dedc);
   background: var(--bg, #f4f5f3);
   color: var(--fg, #1d2326);
-  font-family: inherit;
-  font-size: 13px;
+  font-family: var(--body, system-ui, sans-serif);
+  font-size: 13.5px;
 }
 
 .u4-pin-act {
-  height: 30px;
-  padding: 0 9px;
+  min-height: 34px;
+  padding: 0 11px;
   border-radius: 6px;
   border: 1px solid var(--line, #d9dedc);
   background: var(--bg, #f4f5f3);
   color: var(--fg, #1d2326);
   font-family: var(--mono, "IBM Plex Mono", ui-monospace, monospace);
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
@@ -245,6 +313,10 @@ html[data-theme="dark"] .u4-pin-arm-btn.is-armed {
   background: var(--accent, #1f5f7a);
   border-color: var(--accent, #1f5f7a);
   color: var(--panel, #ffffff);
+}
+
+html[data-theme="dark"] .u4-pin-act.is-primary {
+  color: #0d181d;
 }
 
 .u4-pin-act.is-listening {
@@ -262,26 +334,30 @@ html[data-theme="dark"] .u4-pin-arm-btn.is-armed {
 }
 
 .u4-pin-status {
-  font-size: 11px;
+  font-size: 11.5px;
   color: var(--lock, #2f6b3f);
   font-weight: 600;
+}
+
+.u4-pin-status.is-err {
+  color: var(--crimson, #a8281c);
 }
 
 .u4-pin-ghost {
   position: fixed;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 99999;
   width: 34px;
   height: 34px;
   border-radius: 50%;
   border: 2px dashed var(--crimson, #a8281c);
-  background: rgba(168, 40, 28, 0.16);
+  background: rgba(168, 40, 28, 0.20);
   transform: translate(-50%, -50%);
   display: none;
   align-items: center;
   justify-content: center;
   font-family: var(--mono, "IBM Plex Mono", ui-monospace, monospace);
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 800;
   color: var(--crimson, #a8281c);
 }
@@ -293,7 +369,7 @@ html[data-theme="dark"] .u4-pin-arm-btn.is-armed {
 .u4-pin-toast {
   position: fixed;
   left: 50%;
-  bottom: 76px;
+  bottom: 74px;
   transform: translateX(-50%) translateY(14px);
   max-width: calc(100vw - 24px);
   text-align: center;
@@ -306,7 +382,7 @@ html[data-theme="dark"] .u4-pin-arm-btn.is-armed {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.16s, transform 0.16s;
-  z-index: 96;
+  z-index: 99998;
 }
 
 .u4-pin-toast.is-show {

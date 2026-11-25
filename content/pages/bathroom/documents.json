@@ -1,5 +1,27 @@
 [
   {
+    "id": "interactive-bathroom-tile",
+    "title": "bathroom-tile.html",
+    "titleEn": "Interactive Plan — Bathroom Tub & Wall Tile (rev-010)",
+    "titleEs": "Plano Interactivo — Azulejo de Tina y Muros (rev-010)",
+    "titleRu": "Интерактивный план — Плитка ванны и стен (rev-010)",
+    "path": "./plans/bathroom-tile/index.html?v=rev010",
+    "pathEs": "./plans/bathroom-tile/index.html?lang=es&v=rev010",
+    "pathRu": "./plans/bathroom-tile/index.html?lang=ru&v=rev010",
+    "pin": true
+  },
+  {
+    "id": "interactive-bathroom-measurements",
+    "title": "bathroom-measurements.html",
+    "titleEn": "Interactive Reference — Bathroom Field Measurements & Photos",
+    "titleEs": "Referencia Interactiva — Medidas de Campo y Fotos del Baño",
+    "titleRu": "Интерактивный справочник — Полевые замеры и фото ванной",
+    "path": "./plans/bathroom-measurements/index.html?v=rev010",
+    "pathEs": "./plans/bathroom-measurements/index.html?lang=es&v=rev010",
+    "pathRu": "./plans/bathroom-measurements/index.html?lang=ru&v=rev010",
+    "pin": true
+  },
+  {
     "title": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_EN.pdf",
     "titleEn": "Official Electrical Sheets — Module 2: Sheet E-23: Bathroom All-in-One (#13 · 12/2) (Rev R5) · English",
     "titleEs": "Hojas Eléctricas Oficiales — Módulo 2: Hoja E-23: Baño Todo-en-Uno (#13 · 12/2) (Rev R5) · inglés",

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Bathroom Field Measurements &amp; Photos · Unit 4</title>
+  <link rel="stylesheet" href="../vendor/u4-human-guide-shell.css?v=rev010">
+  <link rel="stylesheet" href="../vendor/u4-pin-dragger.css?v=rev010">
+  <link rel="stylesheet" href="../vendor/u4-live-ai-widget.css?v=rev010">
+  <link rel="stylesheet" href="wiki-style-reference.css?v=rev010">
+  <link rel="stylesheet" href="preview.css?v=rev010">
+  <link rel="icon" href="data:,">
+  <script defer src="../vendor/u4-plan-nav.js?v=rev010"></script>
+  <script defer src="../vendor/u4-live-ai-widget.js?v=rev010"></script>
+  <script defer src="../vendor/u4-pin-dragger.js?v=rev010"></script>
+  <script defer src="model.js?v=rev010"></script>
+  <script defer src="room-model.js?v=rev010"></script>
+  <script defer src="room-view.js?v=rev010"></script>
+  <script defer src="preview.js?v=rev010"></script>
+  <script defer src="u4-measurements-bridge.js?v=rev010"></script>
+</head>
+<body class="u4-mode-human">
+<header id="u4hTopbar" class="u4h-topbar no-print"></header>
+<main id="u4-human-app">
+  <header><div><p class="eyebrow" data-i18n="eyebrow">UNIT 4 · FIELD REFERENCE</p><h1 data-i18n="title">Bathroom measurements</h1></div>
+  <div class="preferences" hidden><button id="language">Español (MX)</button><button id="theme" data-i18n="dark">Dark</button></div></header>
+  <p class="hold" data-i18n="hold">Check these measurements on site before cutting or installing.</p>
+  <div class="segmented wall-switch" role="group" id="walls" aria-label="Wall"><button data-wall="room" aria-pressed="false">Whole room</button><button data-wall="tub" aria-pressed="true">Tub wall</button><button data-wall="tub-profile" aria-pressed="false">Tub</button><button data-wall="west" aria-pressed="false">West wall</button></div>
+  <p class="orientation" id="orientation">Tub wall · orientation to confirm</p>
+  <section class="plan-card" aria-labelledby="figure-title">
+    <h2 id="figure-title" class="sr-only" data-i18n="title">Bathroom measurements</h2>
+    <div class="toolbar"><div class="segmented" role="group" aria-label="View" id="views">
+      <button data-view="photo" aria-pressed="true" data-i18n="photo">Photo</button><button data-view="flat" aria-pressed="false" data-i18n="flat">Flat drawing</button>
+    </div><div class="segmented" role="group" aria-label="Measurements" id="layers">
+      <button data-layer="widths" aria-pressed="true" data-i18n="widths">Widths</button><button data-layer="heights" aria-pressed="false" data-i18n="heights">Heights</button><button data-layer="all" aria-pressed="false" data-i18n="all">All</button>
+    </div></div>
+    <div class="zoom-control"><label for="zoom" data-i18n="zoom">Zoom</label><input id="zoom" type="range" min="100" max="300" value="100" step="25"><output for="zoom" id="zoom-value">100%</output><button id="reset-zoom" data-i18n="reset">Reset</button></div>
+    <div class="viewport" id="viewport" tabindex="0"><div id="drawing"></div></div>
+    <p class="caption" id="caption"></p>
+  </section>
+  <div id="tile-gap" class="unknown-gap" hidden><span id="tile-gap-label"></span><strong>?</strong><small id="tile-gap-note"></small></div>
+  <p class="note" data-i18n="approximate">≈ marks provisional readings, rounded to the nearest ¼ inch.</p>
+  <p class="note" id="datum-note" data-i18n="datum">Heights start at the tub/stone rim. The reported 22″ floor-to-tub height has an unconfirmed floor datum.</p>
+  <section class="measurements"><h2 data-i18n="readings">Measurements</h2><div id="measurements"></div></section>
+  <p class="hold subtle" data-i18n="unknown">Still to measure: both niche depths after waterproofing. (Shower-wall tile stop locked at 35″ on Nov 25.)</p>
+  <details><summary data-i18n="sources">Sources and notes</summary><div id="sources"></div></details>
+  <details><summary data-i18n="technical">Technical details</summary><p id="chain-note"></p><p data-i18n="draft">Field reference preview. Entry door locked Nov 24: 28″ hinged door swinging outward into hallway (pocket door retired).</p><a href="../../content/data/bathroom-plan-data.json" download data-i18n="download">Download source measurements</a><pre id="json"></pre></details>
+  <p id="error" role="alert" hidden></p>
+</main>
+</body></html>

@@ -88,10 +88,28 @@
       roomHash: "bathroom",
       roomEn: "Bathroom",
       roomEs: "Baño",
-      shortEn: "Bathroom Wall Tile",
-      shortEs: "Baño: Azulejo",
+      roomRu: "Ванная",
+      shortEn: "Wall Tile Plan",
+      shortEs: "Plan de Azulejo",
+      shortRu: "План плитки",
       labelEn: "Bathroom Tub & Wall Tile Plan",
       labelEs: "Baño: Plano de Azulejo y Nichos",
+      labelRu: "Ванная: раскладка плитки и ниши",
+      group: "bathroom"
+    },
+    {
+      id: "bathroom-measurements",
+      rel: "../bathroom-measurements/index.html",
+      roomHash: "bathroom",
+      roomEn: "Bathroom",
+      roomEs: "Baño",
+      roomRu: "Ванная",
+      shortEn: "Field Measurements",
+      shortEs: "Medidas y Fotos",
+      shortRu: "Замеры и фото",
+      labelEn: "Bathroom Field Measurements & Photos",
+      labelEs: "Baño: Medidas de Campo y Fotos",
+      labelRu: "Ванная: полевые замеры и фото",
       group: "bathroom"
     }
   ];
