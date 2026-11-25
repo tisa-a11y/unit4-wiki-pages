@@ -10,10 +10,10 @@
     "hvac/SPEC.md",
     "hvac/ATTIC-OPENING-PLAN.md",
     "hvac/COMBINED-ATTIC-HVAC-INTERACTIVE-PLAN-SPEC.md",
-    "wiki-docs/attic-hatch-r5/Attic-hatch-practical-guide_R5_EN.pdf",
-    "wiki-docs/attic-hatch-r5/Attic-hatch-practical-guide_R5_ES.pdf"
+    "wiki-docs/attic-hatch-r6/Attic-hatch-practical-guide_R6_EN.pdf",
+    "wiki-docs/attic-hatch-r6/Attic-hatch-practical-guide_R6_ES.pdf"
   ],
-  "base_rev": "rev-20261122-attic-r3",
+  "base_rev": "rev-20261124-attic-r4",
   "status": "PLANNING_VISIT_RESCHEDULE_REQUESTED_HOLD_ALL_CUTS",
   "orientation": {
     "north_angle_deg": 0,
@@ -52,7 +52,7 @@
   },
   "equipment_basis": {
     "furnace": {
-      "model": "Carrier/Bryant Legacy 45k BTU, 80% AFUE, Low NOx (or 95%+ PVC Direct-Vent / Heat Pump per Mon Nov 23 sidewall check)",
+      "model": "Carrier/Bryant Legacy 45k BTU, 80% AFUE, Low NOx (or 95%+ PVC Direct-Vent / Heat Pump per unconditioned Door 4 landing (confirm w/ NEXT) sidewall check)",
       "height_in": 33.25,
       "width_in": 14.19,
       "depth_in": 29.0,
@@ -141,7 +141,7 @@
     "fixed_frame_seal": "3/8\" backer rod + paintable sealant",
     "ledge_weatherstrip": "Continuous 1/2\" x 1/8\" closed-cell on 1x2 ledges (clean of paint/caulk)",
     "lid_seam": "Uncaulked operable perimeter seam (test-open twice)",
-    "lid_insulation": "2 unfaced R-matched batts (12-5/8\" x 37-1/4\") + 3 loose compression latches outside clear + 6 screw eyes (<= 1/2\" shank)",
+    "lid_insulation": "unconditioned Door 4 landing (confirm w/ NEXT) (12-5/8\" x 37-1/4\") + 3 loose compression latches outside clear + unconditioned Door 4 landing (confirm w/ NEXT) (<= 1/2\" shank)",
     "insulation_dam": "1x2 gasket ledger standing 2\" above loose-fill insulation",
     "lid_finish": "Proposed ~1-1/2\" recessed 3/4\" ply lid (PENDING OWNER OK) + compression latches outside 24\"x36\" clear",
     "temp_bedroom_closet_hold": "KEEP OPEN until LV switch cable AND permanent 24\"x36\" hatch exist",
@@ -174,22 +174,10 @@
     }
   ],
   "field_overrides": [],
-  "pins": [
-    {
-      "id": "u4-auto-1795396710261",
-      "author": "Tisa",
-      "timestamp": "2026-11-22T17:18:30-08:00",
-      "intent": "propose_edit",
-      "cx": 0.353,
-      "cy": 0.779,
-      "rx": 0.03,
-      "ry": 0.03,
-      "note": "Reconciled: SW Dining platform & HVAC location (X=174\", Y=258\"; 15.8 ft 24\" pathway)"
-    }
-  ],
-  "revision": "rev-20261123-attic-r9",
-  "updated_at": "2026-11-23T18:07:02.360Z",
-  "lid_insulation": "NONE (unconditioned common stair landing outside Front Door 4 per 2025 CA Energy Code §160.1(a); Tisa 2026-11-23)",
+  "pins": [],
+  "revision": "rev-20261124-attic-r4",
+  "updated_at": "2026-11-24T23:53:04.858Z",
+  "lid_insulation": "NONE (unconditioned Door 4 landing per 2025 CAEC §160.1(a))",
   "insulation_dam": "NONE",
   "lid_spec_en": "Snug 3/4\" plywood lid + continuous 1/2\"×1/8\" closed-cell foam dust gasket on clean 1×2 ledger strips + 4 compression latches outside 24\"×36\" clear (uncaulked seam; listed 24\"×36\" clear fire door if fire-rated)",
   "lid_spec_es": "Tapa ajustada de triplay de 3/4\" + empaque continuo de espuma cerrada de 1/2\"×1/8\" sobre tiras 1×2 + 4 broches fuera del claro de 24\"×36\" (junta sin sellador; puerta cortafuego listada de 24\"×36\" libres si aplica)",
@@ -220,5 +208,5 @@
       "resolution": "Moved Temp. Closet (Open) from misplaced (355, 94) to NW Bedroom Closet niche (X=315.4..352.0, Y=5.4..88.0)."
     }
   ],
-  "planning_visit_status": "Reschedule requested (original slot Mon, Nov. 23, 2–4 p.m. PT; NEXT has not confirmed cancellation or a replacement time; planning only, not inspection or installation)"
+  "planning_visit_status": "Reschedule requested (original slot Mon, Nov. 23, unconditioned Door 4 landing (confirm w/ NEXT) PT; NEXT has not confirmed cancellation or a replacement time; planning only, not inspection or installation)"
 }

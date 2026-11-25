@@ -779,15 +779,15 @@
     } else if (state.step === "vents") {
       titleEn = "LG Gas WashTower Vents & Safety Release";
       titleEs = "Ventilación LG WashTower (Gas) y Apertura Interior";
-      subEn = "HOLD back & grille cuts until rated free-area review passes (LG WKG101HVA delivery Tue Dec 1 — delivery only, verify rating plate)";
-      subEs = "PAUSAR cortes de respaldo y rejillas hasta validar área libre real (entrega LG mar 1 dic — solo entrega, revisar placa)";
+      subEn = "HOLD back & grille cuts until rated free-area review passes (LG WKG101HVA delivery Mon, Dec 14 (10 a.m.–2 p.m. PT) — delivery only, verify rating plate)";
+      subEs = "PAUSAR cortes de respaldo y rejillas hasta validar área libre real (entrega LG lun 14 dic (10 a.m.–2 p.m. PT) — solo entrega, revisar placa)";
 
       inner =
         '<div class="u4h-svg-wrap">' + renderVentsSvg(es) + "</div>" +
         '<div class="u4h-info-box">' +
           '<div class="u4h-info-title">' + (es ? "Requisitos de seguridad y equipo" : "Appliance & Code Requirements") + "</div>" +
           '<ul class="u4h-info-list">' +
-            "<li><strong>LG WKG101HVA:</strong> 27\" W × 30-3/8\" D × 74-3/8\" H (" + (es ? '55" fondo con puerta abierta, mín. 1" lados, 4" atrás; referencia Samsung retirada; revisar placa el mar 1 dic' : '55" depth w/ door open, min 1" sides, 4" rear; legacy Samsung retired; verify rating plate on Tue Dec 1 delivery') + ").</li>" +
+            "<li><strong>LG WKG101HVA:</strong> 27\" W × 30-3/8\" D × 74-3/8\" H (" + (es ? '55" fondo con puerta abierta, mín. 1" lados, 4" atrás; referencia Samsung retirada; revisar placa el lun 14 dic (10 a.m.–2 p.m. PT)' : '55" depth w/ door open, min 1" sides, 4" rear; legacy Samsung retired; verify rating plate on Mon, Dec 14 (10 a.m.–2 p.m. PT) delivery') + ").</li>" +
             "<li><strong>" + (es ? "Ventilación obligatoria:" : "Mandatory combustion/dryer airflow:") + "</strong> " + (es ? 'PAUSAR corte de respaldo/rejillas hasta confirmar con librero cerrado y cargado usando ÁREA LIBRE EFECTIVA de rejilla (no marco exterior): LG ≥ 48 sq in arriba (≥ 6 pies / 72" NPT) + ≥ 24 sq in abajo (≤ 1 pie / 12" NPT); CMC 2025 §504.4.1 exige 100 sq in netos (independiente del ducto exterior de secadora).' : 'HOLD bookcase back & grille cuts until reviewer confirms unobstructed openings with bookcase closed & loaded using RATED FREE/OPEN GRILLE AREA (not outside frame size): LG ≥ 48 sq in upper (≥ 6 ft / 72" AFF) + ≥ 24 sq in lower (≤ 1 ft / 12" AFF); 2025 CMC §504.4.1 requires 100 sq in net makeup air (separate from exterior dryer exhaust).') + "</li>" +
             "<li><strong>" + (es ? "Manija interior:" : "Inside release:") + "</strong> " + (es ? "Obligatoria para poder abrir desde adentro del clóset en cualquier momento." : "Required so nobody can ever get trapped inside the laundry closet.") + "</li>" +
           "</ul>" +

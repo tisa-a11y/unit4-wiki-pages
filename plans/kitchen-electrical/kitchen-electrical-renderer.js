@@ -90,10 +90,10 @@
       {
         id: 'hold-d04-feeder',
         severity: 'HIGH',
-        title_en: 'Mon Nov 23 Walkthrough: D04 Feeder & Side-Entry Hold',
-        title_es: 'Recorrido Lunes 23 Nov: Alimentador D04 y Cortes Laterales',
-        en: 'Confirm 80A/#4 Cu vs 100A/#3 Cu feeder and inspect onsite Eaton BRP20L125G box + BRPX2A20L1F flush cover during Mon Nov 23 walkthrough. Do NOT pull kitchen wire or close drywall until rough-in release.',
-        es: 'Confirmar alimentador 80A/#4 Cu vs 100A/#3 Cu y revisar caja Eaton BRP20L125G + tapa BRPX2A20L1F en obra el lunes 23 nov. NO jalar cable de cocina ni cerrar tablaroca hasta liberar instalación.'
+        title_en: 'NEXT Planning Visit (Reschedule Req.): D04 Feeder & Side-Entry Hold',
+        title_es: 'Recorrido visita NEXT reprogramada: Alimentador D04 y Cortes Laterales',
+        en: 'Confirm 80A/#4 Cu vs 100A/#3 Cu feeder and inspect onsite Eaton BRP20L125G box + BRPX2A20L1F flush cover at rescheduled NEXT planning visit. Do NOT pull kitchen wire or close drywall until rough-in release.',
+        es: 'Confirmar alimentador 80A/#4 Cu vs 100A/#3 Cu y revisar caja Eaton BRP20L125G + tapa BRPX2A20L1F en obra el visita NEXT reprogramada. NO jalar cable de cocina ni cerrar tablaroca hasta liberar instalación.'
       },
       {
         id: 'hold-hd1-box',
@@ -130,7 +130,7 @@
       btn_circle_off: 'Drawing Active…',
       btn_export_svg: 'Export SVG',
       btn_download_pdf: 'Download / Print PDF',
-      hold_html: '<strong>PLANNING &amp; MOCKUP ONLY — ROUGH-IN ON HOLD:</strong> Do NOT pull interior kitchen wire, cut subpanel <strong>D04</strong> side-entry notches, or close drywall until Friday layout photos and the Mon Nov 23 electrical walkthrough confirm exact stations, <strong>D04</strong> feeder size, and box clearances.',
+      hold_html: '<strong>PLANNING &amp; MOCKUP ONLY — ROUGH-IN ON HOLD:</strong> Do NOT pull interior kitchen wire, cut subpanel <strong>D04</strong> side-entry notches, or close drywall until Friday layout photos and the NEXT Planning Visit electrical walkthrough confirm exact stations, <strong>D04</strong> feeder size, and box clearances.',
       conflict_text: 'A newer revision was saved on Tailnet by another editor (HTTP 409). Reload the latest plan before saving again.',
       btn_reload: 'Reload Latest Plan',
       tabs: {
@@ -262,7 +262,7 @@
       tailnet_off: 'Off-Tailnet · Read-Only / Local Export',
       baseline_loaded: 'Baseline Loaded',
       pending_eod_stamp: 'Field Update · Pending EOD Review',
-      not_synced: 'Not Yet Synced (Local Preview)',
+      not_synced: 'Official Seed R3 (2026-11-24)',
       showing_all_ckts: 'Showing: All 9 Kitchen Circuits',
       d04_zone_pill: 'D04 Backside: NO SCREWS 53"–77"',
       scale_pill: 'True Scale 1:1 (X = Y)',
@@ -287,7 +287,7 @@
       btn_circle_off: 'Dibujo Activo…',
       btn_export_svg: 'Exportar SVG',
       btn_download_pdf: 'Descargar / Imprimir PDF',
-      hold_html: '<strong>SOLO PLANEACIÓN Y MAQUETA — INSTALACIÓN EN ESPERA:</strong> NO jalar cable interior de cocina, NO cortar entradas laterales en tablero <strong>D04</strong> ni cerrar tablaroca hasta confirmar fotos del trazo del viernes y el recorrido eléctrico del lunes 23 nov.',
+      hold_html: '<strong>SOLO PLANEACIÓN Y MAQUETA — INSTALACIÓN EN ESPERA:</strong> NO jalar cable interior de cocina, NO cortar entradas laterales en tablero <strong>D04</strong> ni cerrar tablaroca hasta confirmar fotos del trazo del viernes y el recorrido eléctrico del visita NEXT reprogramada.',
       conflict_text: 'Otro editor guardó una revisión más reciente en Tailnet (HTTP 409). Recarga el plano más reciente antes de volver a guardar.',
       btn_reload: 'Recargar Plano Actual',
       tabs: {
@@ -419,7 +419,7 @@
       tailnet_off: 'Fuera de Tailnet · Solo Lectura / Exportar',
       baseline_loaded: 'Base Cargada',
       pending_eod_stamp: 'Actualización Obra · Revisión EOD Pendiente',
-      not_synced: 'Sin Sincronizar (Vista Local)',
+      not_synced: 'Semilla Oficial R3 (24 Nov 2026)',
       showing_all_ckts: 'Mostrando: Los 9 Circuitos de Cocina',
       d04_zone_pill: 'Respaldo D04: SIN TORNILLOS 53"–77"',
       scale_pill: 'Escala Real 1:1 (X = Y)',
@@ -1810,13 +1810,13 @@
     el('rect', { x: 48, y: 745, width: 840, height: 215, rx: 6, fill: '#fef2f2', stroke: '#fca5a5', 'stroke-width': 1.4 }, svg);
     txt(64, 768, lang === 'es' ? 'ESPERAS ACTIVAS EN TABLERO D04 (NO LIBERAR SIN CONFIRMAR):' : 'ACTIVE SUBPANEL D04 HOLDS (DO NOT RELEASE WITHOUT SIGN-OFF):', { 'font-size': 10.5, 'font-weight': 800, fill: '#b91c1c' }, svg);
     const holdLines = lang === 'es' ? [
-      '• Recorrido Lunes 23 Nov: Confirmar alimentador 80A/#4 Cu vs 100A/#3 Cu y revisar caja física Eaton BRP20L125G + tapa.',
+      '• Recorrido visita NEXT reprogramada: Confirmar alimentador 80A/#4 Cu vs 100A/#3 Cu y revisar caja física Eaton BRP20L125G + tapa.',
       '• Cortes laterales D04 EN ESPERA: Salir solo hacia arriba al ático o debajo de la zona prohibida de 53"–77" (NUNCA por atrás).',
       '• Circuitos no-cocina (Espacios 11–13): Cajas + tubo vacío ENT solamente — NO jalar cable antes de liberación.',
       '• Circuito HD (Espacio 8): Bloqueo BRLW1 obligatorio + caja sencilla 2"×3" (~83"–86" piso, al ras del acabado).',
       '• Espacios 5 y 6 (DW + GD): Neutros estrictamente separados y etiquetados dentro del gabinete del fregadero (72"–102").'
     ] : [
-      '• Mon Nov 23 Walkthrough: Reconcile 80A/#4 Cu vs 100A/#3 Cu feeder & inspect onsite Eaton BRP20L125G box + flush cover.',
+      '• NEXT Planning Visit (Reschedule Req.): Reconcile 80A/#4 Cu vs 100A/#3 Cu feeder & inspect onsite Eaton BRP20L125G box + flush cover.',
       '• D04 Side-Entry Notches ON HOLD: Route exits vertically through top header to attic or approved bands — NEVER through back.',
       '• Non-Kitchen Circuits (Spaces 11–13): Approved boxes + empty ENT tubing only — NO wire pull before release.',
       '• Circuit HD (Space 8): BRLW1 handle lock-off required + flush 1-gang 2"×3" box (~83"–86" above floor, flush to finished surface).',

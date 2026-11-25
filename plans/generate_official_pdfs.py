@@ -34,23 +34,23 @@ PLAN_REGISTRY = {
     },
     "kitchen-electrical": {
         "html": "plans/kitchen-electrical/index.html",
-        "en_name": "2026-11-22_U4_kitchen_electrical_R2_EN.pdf",
-        "es_name": "2026-11-22_U4_kitchen_electrical_R2_ES.pdf",
+        "en_name": "2026-11-24_U4_kitchen_electrical_R3_EN.pdf",
+        "es_name": "2026-11-24_U4_kitchen_electrical_R3_ES.pdf",
     },
     "attic-hatch": {
         "html": "plans/attic-hatch/index.html",
-        "en_name": "2026-11-22_U4_attic_hatch_R3_EN.pdf",
-        "es_name": "2026-11-22_U4_attic_hatch_R3_ES.pdf",
+        "en_name": "2026-11-24_U4_attic_hatch_R4_EN.pdf",
+        "es_name": "2026-11-24_U4_attic_hatch_R4_ES.pdf",
     },
     "hvac-layout": {
         "html": "plans/hvac-layout/index.html",
-        "en_name": "2026-11-22_U4_hvac_layout_R3_EN.pdf",
-        "es_name": "2026-11-22_U4_hvac_layout_R3_ES.pdf",
+        "en_name": "2026-11-24_U4_hvac_layout_R4_EN.pdf",
+        "es_name": "2026-11-24_U4_hvac_layout_R4_ES.pdf",
     },
     "murphy-door": {
         "html": "plans/murphy-door/index.html",
-        "en_name": "2026-11-20_U4_laundry_murphy-door-interactive_R1_EN.pdf",
-        "es_name": "2026-11-20_U4_laundry_murphy-door-interactive_R1_ES.pdf",
+        "en_name": "2026-11-24_U4_laundry_murphy-door-interactive_R2_EN.pdf",
+        "es_name": "2026-11-24_U4_laundry_murphy-door-interactive_R2_ES.pdf",
     },
 }
 DEFAULT_HTML = PLAN_REGISTRY["kitchen-west-ks4"]["html"]

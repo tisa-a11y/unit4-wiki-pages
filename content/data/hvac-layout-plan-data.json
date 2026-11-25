@@ -12,7 +12,7 @@
     "hvac/COMBINED-ATTIC-HVAC-INTERACTIVE-PLAN-SPEC.md",
     "attic/attic-hatch-plan-data.json"
   ],
-  "base_rev": "rev-20261122-hvac-r3",
+  "base_rev": "rev-20261124-hvac-r4",
   "status": "PLANNING_VISIT_RESCHEDULE_REQUESTED",
   "orientation": {
     "north_angle_deg": 0,
@@ -255,55 +255,32 @@
     {
       "id": "clash-hvac-sidewall-vent-code",
       "severity": "HIGH",
-      "en": "Flat Roof + Sidewall Exit Gate (Pin u4-auto-1795396857428): 80% AFUE Category I furnace CANNOT gravity-vent horizontally out a sidewall (Carrier II810SA-05 p. 22). Serge must include a listed Sidewall Power Venter (2025 SFMC 802.8: >= 4 ft from interior lot line, >= 1/4\"/ft pitch) OR switch to 95%+ PVC direct-vent / heat pump; use West rear-yard wall if South setback < 4 ft.",
-      "es": "Techo Plano + Salida Lateral (Pin u4-auto-1795396857428): Un equipo 80% AFUE Categoría I NO puede salir horizontal sin tiro mecánico listado (Carrier II810SA-05 p. 22) o cambio a 95%+ PVC directo / bomba de calor; respetar >= 4 ft a colindancia (SFMC 802.8) o salir por muro Oeste al patio trasero."
+      "en": "Flat Roof + Sidewall Exit Gate: 80% AFUE Category I furnace CANNOT gravity-vent horizontally out a sidewall (Carrier II810SA-05 p. 22). Require listed Sidewall Power Venter (2025 SFMC §802.8 >= 4 ft from interior lot line, >= 1/4\"/ft pitch) OR 95%+ PVC direct-vent / heat pump; use West rear-yard wall if South setback < 4 ft.",
+      "es": "Techo Plano + Salida Lateral: Equipo 80% AFUE Cat I NO puede salir horizontal sin extractor listado (Carrier II810SA-05 p. 22) o cambio a 95%+ PVC directo / bomba de calor; cumplir >= 4 ft a colindancia (SFMC 2025 §802.8) o salir por muro Oeste."
     },
     {
       "id": "clash-hvac-hatch-fire-offsets",
       "severity": "HIGH",
-      "en": "Door 4 landing hatch offsets and ceiling fire-rating check remain MEASURE ON SITE before any ceiling cut or wood purchase (15.8 ft <= 20.0 ft 24\" OSB pathway to SW Dining F1).",
-      "es": "Las medidas exactas de la escotilla en Puerta 4 y la revisión contra fuego del techo siguen pendientes de MEDIR EN OBRA antes de cortar (pasillo 24\" de 15.8 ft <= 20.0 ft hacia F1 en Comedor SO)."
+      "en": "Door 4 landing 24\"×36\" clear hatch markout, ceiling fire-rating, and joist bay width B remain MEASURE ON SITE before any ceiling cut (15.8 ft <= 20.0 ft 24\" OSB walkway to SW Dining F1). Photograph markout first.",
+      "es": "El trazo de 24\"×36\" libres en Puerta 4, la revisión cortafuego y el claro B entre vigas siguen en MEDIR EN OBRA antes de cortar (pasillo OSB 24\" de 15.8 ft <= 20.0 ft a Comedor SO). Fotografiar primero."
     },
     {
       "id": "clash-hvac-feeder-80v100",
       "severity": "HIGH",
-      "en": "Electrical reconciliation required Mon Nov 23: NEXT scope includes 80A (#4 copper) feeder + 125A 20-space panel vs. earlier 100A / onsite panel box note; keep Kitchen West 6\" Savona separate exhaust separate.",
-      "es": "Confirmar el lunes 23 nov con Serge y Alex: propuesta NEXT trae alimentador 80A (#4 cobre) y tablero 125A frente a nota previa de 100A; ducto de separate exhaust\" de cocina va separado."
+      "en": "Subpanel D04 & attic light check (rescheduled NEXT planning visit): confirm mounted Eaton BRP20L125G (125A, 20-space) box, exterior feeder entry, 80A feed + conditional 100A main breaker, and switched LED attic light wiring.",
+      "es": "Subpanel D04 y luz de ático (visita NEXT reprogramada): confirmar gabinete Eaton BRP20L125G (125A, 20 espacios) montado, entrada exterior, línea 80A + principal condicional 100A y conexión de luz LED."
     },
     {
       "id": "clash-hvac-roof-leaks",
       "severity": "MEDIUM",
-      "en": "Active flat-roof/attic leak repair must be confirmed dry before sealing or insulating around attic hatch and ductwork.",
-      "es": "Confirmar reparación completa de goteras en techo plano y ático antes de sellar o aislar alrededor de ductos y escotilla."
+      "en": "Confirm flat-roof/attic leak repair is dry before closing ceilings, and have NEXT confirm whether the horizontal furnace needs any equipment-specific mounting hardware on the 30\"×30\" platform before buying pads.",
+      "es": "Confirmar seca la reparación de gotera en techo plano antes de cerrar plafones, y validar con NEXT si el calefactor horizontal requiere herraje específico sobre la plataforma 30\"×30\" antes de comprar bases."
     }
   ],
   "field_overrides": [],
-  "pins": [
-    {
-      "id": "u4-auto-1795396710261",
-      "author": "Tisa",
-      "timestamp": "2026-11-22T17:18:30-08:00",
-      "intent": "propose_edit",
-      "cx": 0.353,
-      "cy": 0.779,
-      "rx": 0.03,
-      "ry": 0.03,
-      "note": "Reconciled SW Dining platform & furnace location (X=174\", Y=258\"; 15.8 ft <= 20 ft 24\" pathway)"
-    },
-    {
-      "id": "u4-auto-1795396857428",
-      "author": "Tisa",
-      "timestamp": "2026-11-22T17:20:57-08:00",
-      "intent": "flag_problem",
-      "cx": 0.208,
-      "cy": 0.241,
-      "rx": 0.03,
-      "ry": 0.03,
-      "note": "Flat roof (66\" cavity, zero roof penetrations) — exhaust exits horizontally out sidewall per 2025 SFMC 802.8"
-    }
-  ],
-  "revision": "rev-20261123-hvac-r9",
-  "updated_at": "2026-11-23T18:07:02.360Z",
+  "pins": [],
+  "revision": "rev-20261124-hvac-r4",
+  "updated_at": "2026-11-24T23:53:04.858Z",
   "vibration_pads_tbd_with_next": true,
   "temp_bedroom_closet_niche_in": {
     "x_min": 315.4,
@@ -337,5 +314,5 @@
       "y": 112
     }
   },
-  "planning_visit_status": "Reschedule requested (original slot Mon, Nov. 23, 2–4 p.m. PT; NEXT has not confirmed cancellation or a replacement time; planning attic access & heating/electrical fit with Serge & Alex, not inspection or installation)"
+  "planning_visit_status": "Reschedule requested (original slot Mon, Nov. 23, rescheduled NEXT planning visit PT; NEXT has not confirmed cancellation or a replacement time; planning attic access & heating/electrical fit with Serge & Alex, not inspection or installation)"
 }

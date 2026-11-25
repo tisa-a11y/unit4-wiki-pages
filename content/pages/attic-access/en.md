@@ -47,5 +47,6 @@
   <ul>
     <li>Preserve the original <code>103&quot;</code> high picture rail, <code>9-1/2&quot;</code> baseboard, ceiling light fixture, and Door 4 / stairwell window casings on the landing &mdash; keep hatch trim completely separate from original mouldings.</li>
     <li>See <a href="#hvac/sec-hvac-summary">NEXT vs. Our Crew Summary</a> for full heating and subpanel coordination.</li>
+    <li><strong>Printable PDFs (R4 &amp; R6):</strong> <a href="./wiki-pdfs/2026-11-24_U4_attic_hatch_R4_EN.pdf" target="_blank" rel="noopener">2-Page Attic Hatch &amp; Walkway Plan R4 (EN PDF)</a> &middot; <a href="./wiki-pdfs/2026-11-24_U4_attic_hatch_R4_ES.pdf" target="_blank" rel="noopener">Español R4 PDF</a> &middot; <a href="./wiki-docs/attic-hatch-r6/Attic-hatch-practical-guide_R6_EN.pdf" target="_blank" rel="noopener">8-Page Practical Guide R6 (EN PDF)</a> &middot; <a href="./wiki-docs/attic-hatch-r6/Attic-hatch-practical-guide_R6_ES.pdf" target="_blank" rel="noopener">Guía R6 (ES PDF)</a>.</li>
   </ul>
 </details>

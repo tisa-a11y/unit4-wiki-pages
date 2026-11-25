@@ -1056,5 +1056,7 @@
     "basis": "Plan-derived from approved 36+12+24; common SE zero, window/casing and passage require field verification. Electrical placement HELD; old 51–75 / 75–105 / CL90 are historical only.",
     "pie_safe": "Weather-seal and cover; no preserved niche or shelves.",
     "hood": "Viking 1-inch island trim only; HD-1 flush 1-gang approximately83–86in AFF; follow OEM and field constraints."
-  }
+  },
+  "pins": [],
+  "updated_at": "2026-11-24T23:53:04.858Z"
 }

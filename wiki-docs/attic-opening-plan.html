@@ -1,406 +1,58 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Unit 4 HVAC — Attic Opening Plan &amp; Checklists / Plan de Apertura al Ático</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unit 4 — Attic Opening Plan &amp; Checklists (R10)</title>
 <style>
-  :root{
-    --bg:#faf9f6; --paper:#ffffff; --fg:#111827; --muted:#4b5563;
-    --accent:#0f5b4f; --accent-soft:#ecfdf5; --accent-line:#a7f3d0;
-    --warn-bg:#fffbeb; --warn-line:#f59e0b; --warn-fg:#78350f;
-    --line:#d8d2c7; --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;padding:18px 16px 48px;font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--fg)}
-  .wrap{max-width:960px;margin:0 auto}
-  .topbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding-bottom:14px;border-bottom:2px solid var(--accent);margin-bottom:18px}
-  .brand{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
-  h1{margin:4px 0 6px;font-size:24px;line-height:1.2}
-  .sub{margin:0;color:var(--muted);font-size:14px}
-  .actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-  .btn{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;border:1.5px solid var(--accent);background:var(--paper);color:var(--accent);font:600 13px/1.2 inherit;text-decoration:none;cursor:pointer}
-  .btn.primary{background:var(--accent);color:#fff}
-  .btn:hover{opacity:.92}
-  .banner{background:var(--accent);color:#fff;padding:12px 16px;border-radius:10px;font-weight:700;font-size:15px;margin:14px 0}
-  .warn{background:var(--warn-bg);border:1px solid var(--warn-line);color:var(--warn-fg);padding:12px 15px;border-radius:10px;margin:14px 0;font-size:14px}
-  .enclosure{background:#eef5f9;border:2px solid #2b6cb0;color:#143656;padding:14px 16px;border-radius:12px;margin:14px 0;font-size:14px}
-  .enclosure h2{color:#143656;border-bottom-color:#b7d4ea;margin:0 0 8px;font-size:18px}
-  .enclosure ul{margin:6px 0 0;padding-left:20px}
-  .enclosure li{margin:4px 0}
-  .tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-  .card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0}
-  .card h2{margin:0 0 10px;font-size:18px;color:var(--accent)}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:12px 0}
-  .stat{border:1px solid var(--line);border-radius:10px;padding:11px 13px;background:#fcfcfa}
-  .stat .k{font-size:12px;font-weight:700;text-transform:uppercase;color:var(--muted)}
-  .stat .v{font:700 16px/1.3 var(--mono);color:var(--accent);margin:4px 0}
-  .stat p{margin:4px 0 0;font-size:13px;color:var(--muted)}
-  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:14px}
-  th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
-  th{background:var(--accent);color:#fff;font-weight:600}
-  tr:nth-child(even) td{background:#f8fbfa}
-  .step{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #ece8df}
-  .step:last-child{border-bottom:none}
-  .num{flex:0 0 28px;height:28px;border-radius:6px;background:var(--accent);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px;margin-top:2px}
-  .step h3{margin:0 0 4px;font-size:15.5px}
-  .step p{margin:0 0 6px;font-size:14px;color:var(--fg)}
-  .meta{font-size:12.5px;color:var(--muted)}
-  .meta a,.chk a{color:var(--accent);font-weight:600;text-decoration:underline}
-  .chk-list{list-style:none;padding:0;margin:8px 0}
-  .chk{display:flex;gap:10px;align-items:flex-start;padding:9px 10px;border:1px solid #e5e1d8;border-radius:8px;margin-bottom:8px;background:#fff}
-  .chk input[type=checkbox]{margin-top:4px;width:17px;height:17px;accent-color:var(--accent);cursor:pointer}
-  .chk.done{background:#f4fbf8;border-color:var(--accent-line)}
-  .chk.done .chk-title{text-decoration:line-through;color:var(--muted)}
-  .chk-title{font-weight:600;font-size:14px}
-  .chk-sub{font-size:12.5px;color:var(--muted);margin-top:2px}
-  .tag{display:inline-block;padding:2px 7px;border-radius:999px;font-size:11.5px;font-weight:700;background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent-line);margin-right:4px}
-  [data-lang="es"]{display:none}
-  body.es [data-lang="en"]{display:none}
-  body.es [data-lang="es"]{display:block}
-  body.es table[data-lang="es"]{display:table}
-  body.es span[data-lang="es"],body.es a[data-lang="es"]{display:inline}
-  body:not(.es) span[data-lang="en"],body:not(.es) a[data-lang="en"]{display:inline}
-
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --bg:#12171D; --paper:#1A2129; --fg:#ECF1F6; --muted:#A7B4C2;
-      --accent:#6FB3E6; --accent-soft:#1B2E3E; --accent-line:#2B4C66;
-      --warn-bg:#352715; --warn-line:#D97706; --warn-fg:#F5B461;
-      --line:#28323D;
-    }
-    .btn.primary,th,.num,.banner{color:#0D1116}
-    .enclosure{background:#1B2E3E;border-color:#6FB3E6;color:#ECF1F6}
-    .enclosure h2{color:#6FB3E6}
-    .stat,.chk,tr:nth-child(even) td{background:#161C23}
-    .chk.done{background:#173025}
-  }
-
-/* U4_UNIFIED_ES_EN_TOGGLE_DOC_START */
-.u4-doc-langbar{display:flex;justify-content:flex-end;align-items:center;margin:10px 0 6px}
-.u4-seg-switch,.u4-lang-pill,#langBtn.u4-lang-pill{
-  position:relative !important;
-  display:inline-grid !important;
-  grid-template-columns:1fr 1fr !important;
-  align-items:center !important;
-  padding:2px !important;
-  min-height:32px !important;
-  height:32px !important;
-  min-width:68px !important;
-  border-radius:999px !important;
-  border:1px solid var(--u4-line,#d9dedc) !important;
-  background:var(--u4-bg,#f4f5f3) !important;
-  color:var(--u4-muted,#5d686d) !important;
-  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace !important;
-  font-size:11.5px !important;
-  font-weight:700 !important;
-  letter-spacing:0.04em !important;
-  line-height:1 !important;
-  cursor:pointer !important;
-  text-decoration:none !important;
-  box-sizing:border-box !important;
-}
-.u4-seg-switch .u4-seg-thumb{
-  position:absolute;top:2px;left:2px;width:calc(50% - 2px);height:calc(100% - 4px);
-  border-radius:999px;background:var(--u4-accent,#1f5f7a);
-  transition:transform 180ms cubic-bezier(0.22,0.9,0.32,1);pointer-events:none;z-index:0;
-}
-.u4-seg-switch[aria-checked="true"] .u4-seg-thumb{transform:translateX(100%)}
-.u4-seg-switch .u4-seg-opt{
-  position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;
-  height:100%;padding:0 7px;color:var(--u4-muted,#5d686d);
-}
-.u4-seg-switch[aria-checked="false"] .u4-seg-opt.is-a,
-.u4-seg-switch:not([aria-checked="true"]) .u4-seg-opt.is-a,
-.u4-seg-switch[aria-checked="true"] .u4-seg-opt.is-b{color:var(--u4-panel,#ffffff)}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){--u4-accent:#7cc0dc;--u4-panel:#1b2124;--u4-bg:#121618;--u4-line:#2b3438;--u4-muted:#9aa7ad}
-}
-:root[data-theme="dark"]{--u4-accent:#7cc0dc;--u4-panel:#1b2124;--u4-bg:#121618;--u4-line:#2b3438;--u4-muted:#9aa7ad}
-@media print{.u4-doc-langbar,.u4-seg-switch{display:none !important}}
-/* U4_UNIFIED_ES_EN_TOGGLE_DOC_END */
+  :root { --bg: #f4f5f3; --card: #ffffff; --ink: #10202b; --muted: #475569; --line: #cbd5e1; --accent: #1f5f4a; --accent-soft: #e6f2ed; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.55; padding: 24px 16px 48px; }
+  main { max-width: 880px; margin: 0 auto; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 24px 28px; }
+  .top-links { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; font-size: 13px; }
+  .top-links a { color: var(--accent); font-weight: 700; text-decoration: none; background: var(--accent-soft); padding: 5px 10px; border-radius: 6px; border: 1px solid #b7d8cb; }
+  h1 { margin: 0 0 8px; font-size: 26px; line-height: 1.2; }
+  h2 { margin: 24px 0 10px; font-size: 18px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+  .banner { background: #fffbeb; border: 1px solid #d97706; border-left: 4px solid #b45309; padding: 10px 14px; border-radius: 6px; font-size: 14px; margin: 12px 0 18px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 12px 0; }
+  th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: #1e293b; color: #fff; }
+  tr:nth-child(even) td { background: #f8fafc; }
+  ol li { margin-bottom: 8px; font-size: 14px; }
+  code { background: #f1f5f9; padding: 1px 5px; border-radius: 4px; font-size: 12.5px; }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="topbar">
-    <div>
-      <div class="brand">Unit 4 · HVAC / Attic Access &amp; Prep</div>
-      <h1 data-lang="en">Attic Opening Plan, Requirements &amp; Step-by-Step Checklist</h1>
-      <h1 data-lang="es">Plan de Apertura al Ático, Requisitos y Lista Paso a Paso</h1>
-      <p class="sub" data-lang="en">Owner-verified Nov 19, 2026 · Mirrors John Speer's Todoist cards · Do NOT cut or buy wood before Step 1–2 gates pass</p>
-      <p class="sub" data-lang="es">Verificado el 19 nov 2026 · Espejo exacto de tarjetas en Todoist (John Speer) · NO cortar ni comprar madera antes de aprobar Pasos 1–2</p>
-    </div>
-    <div class="actions">
-      <button class="u4-seg-switch u4-lang-pill" id="langBtn" type="button" role="switch" aria-checked="false" aria-label="Switch language"><span class="u4-seg-thumb" aria-hidden="true"></span><span class="u4-seg-opt is-a">EN</span><span class="u4-seg-opt is-b">ES</span></button>
-      <a class="btn" href="../#attic-access"><span data-lang="en">← Back to Attic Access</span><span data-lang="es">← Volver a Acceso al ático</span></a>
-      <a class="btn" href="./attic-hatch-r5/Attic-hatch-practical-guide_R5_EN.pdf" target="_blank" rel="noopener">R5 PDF (EN)</a>
-      <a class="btn" href="./attic-hatch-r5/Attic-hatch-practical-guide_R5_ES.pdf" target="_blank" rel="noopener">Guía R5 PDF (ES)</a>
-    </div>
+<main>
+  <div class="top-links">
+    <a href="../#attic-access">&larr; Attic Access Wiki Page</a>
+    <a href="../#hvac">HVAC &amp; Subpanel Page</a>
+    <a href="../plans/attic-hatch/">Interactive Plan 1: Attic Hatch</a>
+    <a href="../plans/hvac-layout/">Interactive Plan 2: Heating &amp; Ducts</a>
+    <a href="./attic-hatch-r6/Attic-hatch-practical-guide_R6_EN.pdf">Practical Guide R6 (EN PDF)</a>
+    <a href="./attic-hatch-r6/Attic-hatch-practical-guide_R6_ES.pdf">Guía Práctica R6 (ES PDF)</a>
   </div>
-
-  <div class="banner" data-lang="en">
-    SETTLED BASES: Permanent Hatch = 24 × 36 in. FINISHED CLEAR · Furnace = 33.25" H × 14.19" W × 29" D (14.19" × 29" end-first) · Max Walkway Run = ≤ 20 ft (at 66" attic height)
+  <h1>Unit 4 — Attic Opening Plan &amp; Checklists</h1>
+  <div class="banner">
+    <strong>Planning visit: reschedule requested (hold all ceiling cuts).</strong> The original NEXT walkthrough slot was Monday, Nov. 23, 2026; NEXT has not confirmed cancellation or a replacement time. The upcoming visit with Serge and Alex is planning only (confirming attic access and how heating and <code>D04</code> electrical work fit — not an inspection or installation).
   </div>
-  <div class="banner" data-lang="es">
-    BASES FIJAS: Registro Permanente = 24 × 36 pulg. LIBRES · Calefactor = 33.25" Al × 14.19" An × 29" F (pasa 14.19" × 29") · Pasarela Máx = ≤ 20 pies (altura ático 66")
-  </div>
-
-  <div class="warn" data-lang="en">
-    <strong>Planning &amp; Prep Gate — Mon Nov 23 (2–4 p.m. PT) NEXT Visit (Serge &amp; Alex):</strong> Planning walkthrough only — zero cuts or furnace install released until (1) John verifies the <strong>existing temporary bedroom closet opening</strong> (Step 1), (2) ceiling fire-rating requirement is checked (custom wood hatch vs fire-rated assembly), and (3) joist bay width <code>B</code> + framing plan are confirmed from inside the attic (Step 2). Keep the bedroom closet opening open until low-voltage switch cable <strong>AND</strong> the permanent hatch exist. Fix any active roof/attic leaks before enclosing work.
-  </div>
-  <div class="warn" data-lang="es">
-    <strong>Compuerta de Planeación — Visita de NEXT Lunes 23 nov (2–4 p.m. PT, Serge y Alex):</strong> Visita solo de planeación — sin cortes ni instalación hasta confirmar: (1) medidas y viguetas de la <strong>abertura temporal actual del clóset de recámara</strong> (Paso 1), (2) si el techo requiere conjunto resistente al fuego vs registro de madera, y (3) claro de viguetas <code>B</code> y apoyos desde arriba (Paso 2). No cerrar el techo del clóset hasta instalar cable de bajo voltaje <strong>Y</strong> tener el registro permanente. Reparar filtraciones antes de tapar.
-  </div>
-
-  <section class="enclosure" data-lang="en">
-    <h2>Special Notes: Attic Enclosure</h2>
-    <ul>
-      <li><strong>Fire-Rating Check First:</strong> Confirm ceiling fire-rating requirement before buying wood or cutting (custom shop-built wood hatch vs fire-rated ceiling access assembly).</li>
-      <li><strong>Continuous Air-Seal (Fixed vs Removable Seam):</strong> Seal the fixed perimeter frame to ceiling/framing with <code>3/8"</code> backer rod + sealant, install <code>1/2" × 1/8"</code> closed-cell foam weatherstrip on the inner lid ledges, and keep the removable lid-to-frame seam <strong>uncaulked</strong> so the panel opens cleanly without tearing.</li>
-      <li><strong>Lid Insulation &amp; Retention:</strong> Strap two foam dust gasket (no lid batts on unconditioned landing) (matching attic R-value) to the back of the lid using <strong>3 loose compression latches outside clear</strong> anchored with <code>≤ 1/2"</code> screw eyes so batts are not compressed.</li>
-      <li><strong>4-Sided Loose-Fill Insulation Dam:</strong> Build a 4-sided plywood collar dam around the rough opening rising at least <code>2"</code> above surrounding attic loose-fill insulation.</li>
-      <li><strong>Proposed Recessed Lid (Pending Owner OK):</strong> Proposed <code>~1-1/2"</code> recessed panel is pending owner finish approval; place draw/turn latches outside the <code>24" × 36"</code> clear chute so hardware never steals clearance.</li>
-      <li><strong>Temporary Bedroom Closet Sequencing:</strong> Keep the existing bedroom closet ceiling opening uncovered until the low-voltage hatch light switch cable is pulled <strong>AND</strong> the permanent hatch is built/installed (confirm Step 1 dimensions first).</li>
-      <li><strong>Leak Pre-Gate:</strong> Fix any active roof or attic leaks before enclosing ceiling framing or insulation.</li>
-    </ul>
-  </section>
-  <section class="enclosure" data-lang="es">
-    <h2>Notas especiales: envolvente del ático</h2>
-    <ul>
-      <li><strong>Revisar clasificación contra fuego primero:</strong> Confirmar si el cielo raso exige tapa certificada contra fuego antes de comprar madera o cortar.</li>
-      <li><strong>Sellado continuo de aire (fijo vs tapa removible):</strong> Sellar el marco fijo al cielo raso con cordón de respaldo (backer rod) de <code>3/8"</code> + sellador, colocar burlete de celda cerrada de <code>1/2" × 1/8"</code> en las pestañas interiores y dejar la junta de la tapa removible <strong>sin sellador (sin caulk)</strong> para poder abrirla sin dañar el sello.</li>
-      <li><strong>Aislamiento de la tapa:</strong> Sujetar dos colchonetas (batts) de fibra de vidrio sin cara de papel al reverso de la tapa (igualando el valor R del ático) con <strong>3 lazos flojos de alambre cal. 16</strong> y armellas de <code>≤ 1/2"</code> para no aplastar el aislamiento.</li>
-      <li><strong>Retén perimetral de 4 lados:</strong> Armar un collarín de triplay de 4 lados alrededor de la abertura que suba al menos <code>2"</code> por encima del aislamiento suelto del ático.</li>
-      <li><strong>Tapa remetida propuesta (pendiente aprobación de Tisa):</strong> El diseño con panel remetido de <code>~1-1/2"</code> queda sujeto a aprobación de acabado; ubicar pasadores fuera del paso libre de <code>24" × 36"</code>.</li>
-      <li><strong>Secuencia de abertura temporal en clóset de recámara:</strong> Mantener abierta la abertura actual del clóset hasta tender el cable de bajo voltaje del apagador <strong>Y</strong> contar con el registro permanente (verificar primero Paso 1).</li>
-      <li><strong>Cero filtraciones antes de cerrar:</strong> Reparar cualquier gotera o filtración activa en techo o ático antes de tapar o aislar.</li>
-    </ul>
-  </section>
-
-  <div class="card">
-    <h2 data-lang="en">1. Locked Description &amp; Code/Site Requirements</h2>
-    <h2 data-lang="es">1. Descripción y Requisitos Técnicos / Código</h2>
-    <div class="grid">
-      <div class="stat">
-        <div class="k" data-lang="en">Furnace Envelope (NEXT HVAC)</div>
-        <div class="k" data-lang="es">Medidas Calefactor (NEXT HVAC)</div>
-        <div class="v">33.25" H × 14.19" W × 29" D</div>
-        <p data-lang="en">Carrier/Bryant Legacy 45k BTU, 80% AFUE, Low NOx. Pass end-first <strong>14.19" × 29"</strong> (9.81" across &amp; 7" along total margin inside 24"×36" clear — check lift &amp; turn headroom).</p>
-        <p data-lang="es">Carrier/Bryant Legacy 45k BTU, 80% AFUE, Low NOx. Pasa primero cara <strong>14.19" × 29"</strong> (margen total 9.81" y 7" en paso libre 24"×36" — comprobar elevación y giro).</p>
-      </div>
-      <div class="stat">
-        <div class="k" data-lang="en">Attic Height &amp; Max Run (CMC 304.4)</div>
-        <div class="k" data-lang="es">Altura del Ático y Recorrido Máx</div>
-        <div class="v">66" High → ≤ 20 ft Run</div>
-        <p data-lang="en">Unit 4 attic height is confirmed <strong>66 in. (&lt; 6 ft)</strong>, capping hatch-to-furnace walkway run at <strong>20 ft max</strong> with <strong>30" unobstructed passage clearance</strong>.</p>
-        <p data-lang="es">Altura confirmada de <strong>66 pulg. (&lt; 6 pies)</strong>: recorrido máximo <strong>≤ 20 pies</strong> del registro al calefactor con <strong>30" de paso libre sin obstrucciones</strong>.</p>
-      </div>
-      <div class="stat">
-        <div class="k" data-lang="en">Cheapest Compliant Walkway Wood</div>
-        <div class="k" data-lang="es">Madera Más Económica Permitida</div>
-        <div class="v">23/32" OSB / 3/4" Ply / 2× Lumber</div>
-        <p data-lang="en">Cheapest compliant = <strong>23/32" (3/4" nom.) rated OSB</strong>, <strong>3/4" structural ply</strong>, or <strong>2× lumber</strong>. <strong>NEVER 3/8" ply.</strong> Count <strong>1 strip (24") per 4×8 sheet</strong> (saw kerf eats ~1/8"). Fasten with <strong>#9 × 2-1/2" or 3" wood screws</strong> (no nails/drywall screws).</p>
-        <p data-lang="es">Más económica = <strong>OSB clasificado de 23/32"</strong>, <strong>triplay estructural 3/4"</strong>, o <strong>madera 2×</strong>. <strong>NUNCA 3/8".</strong> Contar <strong>1 tira de 24" por hoja 4×8</strong> (desperdicio por corte). Tornillos <strong>#9 × 2-1/2" o 3"</strong> para madera (nunca clavos ni de tablaroca).</p>
-      </div>
-      <div class="stat">
-        <div class="k" data-lang="en">Service Platform &amp; NEXT Scope Split</div>
-        <div class="k" data-lang="es">Plataforma 30×30 y Alcance con NEXT</div>
-        <div class="v">30" × 30" Platform · NO Pads</div>
-        <p data-lang="en">Level <strong>30" × 30" solid wood platform</strong> at furnace service side. <strong>John does NOT buy or install vibration pads</strong> (NEXT installs furnace). Keep <strong>Type B double-wall vent ≥ 1"</strong> from combustibles.</p>
-        <p data-lang="es">Plataforma nivelada sólida de <strong>30" × 30"</strong> al lado de servicio. <strong>John NO compra ni instala almohadillas antivibración</strong> (NEXT instala equipo). Respetar <strong>≥ 1" libre en tiro Tipo B</strong>.</p>
-      </div>
-    </div>
-
-    <div class="tbl-wrap">
-    <table data-lang="en">
-      <thead><tr><th>Requirement Area</th><th>Locked / Code Standard</th><th>Notes &amp; Hold Points</th></tr></thead>
-      <tbody>
-        <tr><td><strong>1. Temp Closet Opening</strong></td><td>Verify existing open ceiling framing, clear dimensions &amp; headroom</td><td>John checks &amp; photos whether furnace passes closet or must wait for permanent 24"×36" hatch. Keep open until LV cable AND permanent hatch exist.</td></tr>
-        <tr><td><strong>2. Permanent Hatch Size &amp; Framing Gate</strong></td><td><strong>24" × 36" FINISHED CLEAR</strong> (R5 wood proposal cut: 27-1/2" × 39-1/2")</td><td>Confirm landing fire-rating requirement FIRST. From attic side check bay width <code>B</code>: <code>B = 27-1/2"</code> fits; <code>B &gt; 27-1/2"</code> uses designed solid side backing; <code>B &lt; 27-1/2"</code> needs structural plan or alternate spot — never narrow 24×36 clear.</td></tr>
-        <tr><td><strong>3. Continuous Walkway</strong></td><td><strong>24" wide</strong> solid wood floor · <strong>30"</strong> unobstructed passage · <strong>≤ 20 ft</strong> max run</td><td>Cheapest: <strong>23/32" rated OSB</strong> (or 3/4" ply / 2× lumber). 1 strip/sheet saw-kerf rule: ≤7 ft = 1 sheet; 7–14 ft = 2; 14–20 ft = 3. Support every joint/edge on joists/blocking; keep wires/pipes/insulation uncrushed.</td></tr>
-        <tr><td><strong>4. Working Platform</strong></td><td><strong>30" × 30" min</strong> level solid platform at furnace service side</td><td>23/32" OSB or 3/4" ply screwed into verified framing (never ceiling drywall). <strong>confirm vibration mounts with NEXT from John</strong> (NEXT installs furnace).</td></tr>
-        <tr><td><strong>5. Attic Electrical</strong></td><td><strong>LED light + entry switch + 120V GFCI ≤ 25 ft + dedicated circuit/disconnect</strong></td><td>Enclosed LED utility light controlled by single-pole switch at hatch entry (keep landing light). <strong>120V GFCI outlet within 25 ft</strong> (ideally at 30"×30" platform), <strong>wired live on line side independent of furnace disconnect</strong>. Dedicated circuit + disconnect in sight.</td></tr>
-        <tr><td><strong>6. Vent Clearance</strong></td><td><strong>Type B double-wall flue ≥ 1"</strong> from combustibles</td><td>Verify clearance path along furnace/flue route; furnace flue stays independent of kitchen hood &amp; bath fan ducts.</td></tr>
-      </tbody>
-    </table>
-
-    <table data-lang="es">
-      <thead><tr><th>Área</th><th>Estándar / Código Fijo</th><th>Notas y Puntos de Control</th></tr></thead>
-      <tbody>
-        <tr><td><strong>1. Abertura Temporal Clóset</strong></td><td>Medir y fotografiar abertura abierta actual del clóset</td><td>Confirmar medidas libres, viguetas y altura para ver si cabe el equipo. Conservar abierto hasta cable de bajo voltaje Y registro permanente.</td></tr>
-        <tr><td><strong>2. Registro Permanente</strong></td><td><strong>24" × 36" LIBRES TERMINADOS</strong> (corte R5 propuesto: 27-1/2" × 39-1/2")</td><td>Confirmar primero si el techo exige registro resistente al fuego. Revisar claro <code>B</code> arriba: <code>B = 27-1/2"</code> cabe; <code>B &gt; 27-1/2"</code> usa apoyo lateral sólido diseñado; <code>B &lt; 27-1/2"</code> requiere solución estructural u otro sitio.</td></tr>
-        <tr><td><strong>3. Pasarela Continua</strong></td><td>Piso sólido <strong>24" ancho mín.</strong> · paso libre <strong>30"</strong> · máx <strong>≤ 20 pies</strong></td><td>Más barato: <strong>OSB 23/32"</strong> (o triplay 3/4" / 2×). 1 tira por hoja 4×8 (≤7 ft = 1; 7–14 ft = 2; 14–20 ft = 3). Tornillos #9×2-1/2" o 3" a viguetas verificadas (nunca sobre tablaroca/cables/aislante).</td></tr>
-        <tr><td><strong>4. Plataforma de Servicio</strong></td><td><strong>30" × 30" mín.</strong> nivelada en lado de servicio del calefactor</td><td>OSB 23/32" o triplay 3/4" atornillado a estructura. <strong>John NO compra ni pone almohadillas antivibración</strong> (NEXT instala calefactor).</td></tr>
-        <tr><td><strong>5. Electricidad Ático</strong></td><td><strong>Luz LED + apagador entrada + GFCI 120V ≤ 25 pies + desconectador</strong></td><td>Lámpara LED cerrada con apagador al entrar (conservar luz descanso). <strong>Contacto GFCI 120V dentro de 25 pies</strong> (ideal en plataforma) conectado <strong>vivo independiente del desconectador del calefactor</strong>. Circuito dedicado + desconectador a la vista.</td></tr>
-        <tr><td><strong>6. Tiro Tipo B</strong></td><td>Separación <strong>≥ 1"</strong> a materiales combustibles</td><td>Ducto de gases independiente de campana de cocina y extractor de baño.</td></tr>
-      </tbody>
-    </table>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2 data-lang="en">2. Full Step-by-Step Plan (Steps 1–7)</h2>
-    <h2 data-lang="es">2. Plan Paso a Paso (Pasos 1–7)</h2>
-
-    <div class="step">
-      <div class="num">1</div>
-      <div>
-        <h3 data-lang="en">Verify existing temporary bedroom closet opening <span class="tag">John · Blocker Check</span></h3>
-        <h3 data-lang="es">Verificar abertura temporal existente del clóset de recámara <span class="tag">John · Revisión Inicial</span></h3>
-        <p data-lang="en">Measure exact clear width × length, framing/joists above, local headroom, and obstructions at the open closet ceiling to verify whether the 33.25" × 14.19" × 29" furnace can pass temporarily or must wait for the permanent 24"×36" hatch. Upload tape-measured photos.</p>
-        <p data-lang="es">Medir ancho y largo libres, viguetas arriba, altura y obstáculos en el techo abierto del clóset para ver si cabe el calefactor (33.25" × 14.19" × 29") o debe pasar por el registro permanente. Subir fotos con cinta métrica.</p>
-        <div class="meta">Todoist (John Speer): <a href="https://app.todoist.com/app/task/6j3j3pXFrFWhH2w7" target="_blank" rel="noopener">6j3j3pXFrFWhH2w7</a> · Photo: <a href="https://app.todoist.com/app/task/6j3j3pX6fmWf4cmf" target="_blank" rel="noopener">6j3j3pX6fmWf4cmf</a></div>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="num">2</div>
-      <div>
-        <h3 data-lang="en">Confirm permanent hatch spot, fire-rating gate, bay width B &amp; ≤ 20 ft route</h3>
-        <h3 data-lang="es">Confirmar punto de registro, tipo de techo, claro B y ruta ≤ 20 pies</h3>
-        <p data-lang="en">Deliver the 4 labeled photos from John's "Here" blue-ceiling photo (confirmed common landing outside Front Door 4; taped 24"×36" finished-clear rectangle + wall offsets; attic joists/wires/pipes above; furnace lift/turn + walkway route ≤ 20 ft). Resolve fire-rated ceiling gate and bay width cases (<code>B =, &gt;, &lt; 27-1/2"</code>) BEFORE buying wood or cutting ceiling.</p>
-        <p data-lang="es">Entregar 4 fotos rotuladas (descanso común confirmado afuera de la puerta 4; cinta de 24"×36" libre + distancias a muros; viguetas/cables/tubos arriba; maniobra y ruta ≤ 20 pies). Confirmar si requiere registro resistente al fuego y casos <code>B</code> antes de comprar o cortar.</p>
-        <div class="meta">Todoist (John Speer): <a href="https://app.todoist.com/app/task/6j3RvWmJ329qPCc7" target="_blank" rel="noopener">6j3RvWmJ329qPCc7</a> · <span data-lang="en">Guide: <a href="./attic-hatch-r5/Attic-hatch-practical-guide_R5_EN.pdf#page=5" target="_blank" rel="noopener">R5 p. 5 (EN)</a> · <a href="../#doc:2026-11-19_Attic-hatch-practical-guide_R5_EN:p5">Wiki Viewer</a></span><span data-lang="es">Guía: <a href="./attic-hatch-r5/Attic-hatch-practical-guide_R5_ES.pdf#page=5" target="_blank" rel="noopener">R5 pág. 5 (ES)</a> · <a href="../#doc:2026-11-19_Attic-hatch-practical-guide_R5_ES:p5">Visor Wiki</a></span></div>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="num">3</div>
-      <div>
-        <h3 data-lang="en">Frame, install &amp; prove permanent 24" × 36" FINISHED CLEAR hatch</h3>
-        <h3 data-lang="es">Enmarcar, instalar y comprobar el registro permanente de 24" × 36" LIBRES</h3>
-        <p data-lang="en">Only after Step 2 approval &amp; owner OK on proposed <code>~1-1/2"</code> recessed lid: install end blocks + connectors, set square frame (27"×39" OD wood kit if non-rated ceiling fits), seal fixed frame to ceiling with <code>3/8"</code> backer rod + sealant, set 1×2 ledges preserving 24"×36" clear with <code>1/2"×1/8"</code> closed-cell weatherstrip, keep removable lid seam uncaulked, strap 2 foam dust gasket with 3 loose compression latches outside clear + <code>≤ 1/2"</code> screw eyes, add 4-sided plywood insulation dam <code>2"</code> above loose-fill, and place latches outside 24"×36". Test-open twice, verify 14.19"×29" / 33.25" furnace pass, and upload tape-measured photos.</p>
-        <p data-lang="es">Solo tras aprobar Paso 2 y visto bueno de la tapa remetida <code>~1-1/2"</code>: instalar travesaños y conectores, marco a escuadra, sellar marco fijo con cordón <code>3/8"</code> + sellador, repisas 1×2 con burlete de celda cerrada <code>1/2"×1/8"</code> manteniendo 24"×36" libres, dejar junta de tapa removible sin caulk, sujetar 2 batts con 3 lazos flojos de alambre cal. 16 + armellas <code>≤ 1/2"</code>, retén de triplay de 4 lados <code>2"</code> arriba del aislamiento y pasadores fuera de 24"×36". Probar dos veces y subir foto con cinta métrica.</p>
-        <div class="meta">Todoist Parent (John Speer): <a href="https://app.todoist.com/app/task/6j3Rf8FVhMVQ7vQf" target="_blank" rel="noopener">6j3Rf8FVhMVQ7vQf</a> · Photo: <a href="https://app.todoist.com/app/task/6j3RvWrhQMw5F5Wf" target="_blank" rel="noopener">6j3RvWrhQMw5F5Wf</a></div>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="num">4</div>
-      <div>
-        <h3 data-lang="en">Build continuous 24" solid wood walkway (≤ 20 ft max, 30" passage clearance)</h3>
-        <h3 data-lang="es">Construir pasarela sólida continua de 24" (máx ≤ 20 pies, paso libre 30")</h3>
-        <p data-lang="en">Check existing lumber/OSB stock first. Use cheapest compliant wood: <strong>23/32" rated OSB</strong> (or 3/4" ply / 2× lumber; never 3/8"). Count <strong>1 true 24" strip per 4×8 sheet</strong> (saw kerf). Support every joint/edge on verified joists/blocking with <strong>#9 × 2-1/2" or 3" wood screws</strong> (no nails/drywall screws, never crush insulation/wires/pipes).</p>
-        <p data-lang="es">Revisar existencias primero. Usar madera permitida más económica: <strong>OSB 23/32"</strong> (o triplay 3/4" / 2×; nunca 3/8"). Contar <strong>1 tira de 24" por hoja 4×8</strong>. Apoyar uniones en estructura con <strong>tornillos #9×2-1/2" o 3"</strong> sin aplastar aislante/cables/tubos.</p>
-        <div class="meta">Todoist (John Speer): <a href="https://app.todoist.com/app/task/6j3RvWq3q6RRFXf7" target="_blank" rel="noopener">6j3RvWq3q6RRFXf7</a> · Photo: <a href="https://app.todoist.com/app/task/6j3Rvf89Mx9gmgWf" target="_blank" rel="noopener">6j3Rvf89Mx9gmgWf</a></div>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="num">5</div>
-      <div>
-        <h3 data-lang="en">Build level 30" × 30" service platform (confirm vibration mounts with NEXT)</h3>
-        <h3 data-lang="es">Construir plataforma nivelada de servicio de 30" × 30" (sin almohadillas antivibración)</h3>
-        <p data-lang="en">Screw level <strong>30" × 30" min</strong> solid wood platform (23/32" OSB or 3/4" structural ply) on furnace service side into verified joists/blocking. <strong>John does NOT buy/install vibration pads</strong> (NEXT installs furnace). Keep Type B vent ≥ 1" from combustibles.</p>
-        <p data-lang="es">Atornillar plataforma sólida nivelada mínima de <strong>30" × 30"</strong> (OSB 23/32" o triplay 3/4") frente al lado de servicio sobre estructura verificada. <strong>John NO compra ni coloca almohadillas antivibración</strong>. Respetar ≥ 1" en tiro Tipo B.</p>
-        <div class="meta">Todoist (John Speer): <a href="https://app.todoist.com/app/task/6j3j3pqfM4GC53Qf" target="_blank" rel="noopener">6j3j3pqfM4GC53Qf</a> · Photo: <a href="https://app.todoist.com/app/task/6j3j3ppwWXxjMX57" target="_blank" rel="noopener">6j3j3ppwWXxjMX57</a></div>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="num">6</div>
-      <div>
-        <h3 data-lang="en">Install enclosed LED light, hatch entry switch, 120V GFCI ≤ 25 ft &amp; furnace circuits</h3>
-        <h3 data-lang="es">Instalar luz LED cerrada, apagador de entrada, GFCI 120V ≤ 25 pies y circuitos</h3>
-        <p data-lang="en">Install enclosed LED utility light lighting walkway &amp; service platform, single-pole switch at hatch entry (retain landing light), and <strong>120V GFCI receptacle within 25 ft</strong> (ideally at platform) <strong>wired live independent of furnace disconnect</strong>. Coordinate dedicated furnace circuit, disconnect in sight, and nameplate photo.</p>
-        <p data-lang="es">Instalar lámpara LED cerrada iluminando pasarela y plataforma, apagador al entrar (conservar luz descanso), y <strong>contacto GFCI 120V dentro de 25 pies</strong> (ideal en plataforma) conectado <strong>vivo independiente del desconectador</strong>. Coordinar circuito dedicado, desconectador y foto de placa.</p>
-        <div class="meta">Todoist (John Speer): <a href="https://app.todoist.com/app/task/6hvjQJgpw2W5VcQf" target="_blank" rel="noopener">6hvjQJgpw2W5VcQf</a> · Photo: <a href="https://app.todoist.com/app/task/6j3RvWhHcpMmCjP7" target="_blank" rel="noopener">6j3RvWhHcpMmCjP7</a></div>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="num">7</div>
-      <div>
-        <h3 data-lang="en">Frame &amp; close temporary bedroom closet ONLY after LV cable &amp; permanent hatch</h3>
-        <h3 data-lang="es">Enmarcar y cerrar clóset de recámara SOLO tras cable de bajo voltaje Y registro permanente</h3>
-        <p data-lang="en">Install cross-framing per bedroom closet packet timing, run low-voltage wall-switch cable to attic, confirm furnace passage, verify permanent 24"×36" hatch exists, fix any roof leak first, then close drywall and upload photo.</p>
-        <p data-lang="es">Colocar bastidor según paquete de recámara, subir cable de bajo voltaje al ático, confirmar paso del equipo y existencia del registro permanente, reparar filtraciones primero, luego cerrar y subir foto.</p>
-        <div class="meta">Todoist (John Speer): <a href="https://app.todoist.com/app/task/6j3Rf89g8M6hPPx7" target="_blank" rel="noopener">6j3Rf89g8M6hPPx7</a> · Photo: <a href="https://app.todoist.com/app/task/6j3RvWjQ5pGMWQR7" target="_blank" rel="noopener">6j3RvWjQ5pGMWQR7</a></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2 data-lang="en">3. Task Checklists (1:1 Mirrored to John Speer's Todoist Cards)</h2>
-    <h2 data-lang="es">3. Listas de Verificación (Espejo 1:1 en Todoist — John Speer)</h2>
-    <ul class="chk-list" id="chkList">
-      <li class="chk" data-id="c1">
-        <input type="checkbox" aria-label="Step 1">
-        <div>
-          <div class="chk-title"><span data-lang="en">Step 1: Verify temporary bedroom closet opening (dimensions, framing &amp; furnace pass check)</span><span data-lang="es">Paso 1: Verificar abertura temporal del clóset (medidas, estructura y paso del equipo)</span></div>
-          <div class="chk-sub">Todoist: <a href="https://app.todoist.com/app/task/6j3j3pXFrFWhH2w7" target="_blank" rel="noopener">6j3j3pXFrFWhH2w7</a> · Photo: <a href="https://app.todoist.com/app/task/6j3j3pX6fmWf4cmf" target="_blank" rel="noopener">6j3j3pX6fmWf4cmf</a></div>
-        </div>
-      </li>
-      <li class="chk" data-id="c2">
-        <input type="checkbox" aria-label="Step 2">
-        <div>
-          <div class="chk-title"><span data-lang="en">Step 2: Send 4 labeled hatch photos + check ceiling fire-rating, B bay width &amp; L ≤ 20 ft route</span><span data-lang="es">Paso 2: Enviar 4 fotos rotuladas + confirmar tipo de techo, claro B y ruta ≤ 20 pies</span></div>
-          <div class="chk-sub">Todoist: <a href="https://app.todoist.com/app/task/6j3RvWmJ329qPCc7" target="_blank" rel="noopener">6j3RvWmJ329qPCc7</a></div>
-        </div>
-      </li>
-      <li class="chk" data-id="c3">
-        <input type="checkbox" aria-label="Step 3">
-        <div>
-          <div class="chk-title"><span data-lang="en">Step 3: After cut approval, build permanent 24 × 36 in FINISHED CLEAR hatch &amp; upload clear-tape photo</span><span data-lang="es">Paso 3: Tras aprobar corte, construir registro 24 × 36 pulg. LIBRES y subir foto con cinta</span></div>
-          <div class="chk-sub">Todoist: <a href="https://app.todoist.com/app/task/6j3Rf8FVhMVQ7vQf" target="_blank" rel="noopener">6j3Rf8FVhMVQ7vQf</a> · Photo: <a href="https://app.todoist.com/app/task/6j3RvWrhQMw5F5Wf" target="_blank" rel="noopener">6j3RvWrhQMw5F5Wf</a></div>
-        </div>
-      </li>
-      <li class="chk" data-id="c4">
-        <input type="checkbox" aria-label="Step 4">
-        <div>
-          <div class="chk-title"><span data-lang="en">Step 4: Build continuous 24" wood walkway (≤ 20 ft, 23/32" OSB / 3/4" ply / 2× lumber, #9 screws, 1 strip/sheet)</span><span data-lang="es">Paso 4: Instalar pasarela continua de 24" (≤ 20 pies, OSB 23/32" / triplay 3/4" / 2×, tornillos #9)</span></div>
-          <div class="chk-sub">Todoist: <a href="https://app.todoist.com/app/task/6j3RvWq3q6RRFXf7" target="_blank" rel="noopener">6j3RvWq3q6RRFXf7</a> · Photo: <a href="https://app.todoist.com/app/task/6j3Rvf89Mx9gmgWf" target="_blank" rel="noopener">6j3Rvf89Mx9gmgWf</a></div>
-        </div>
-      </li>
-      <li class="chk" data-id="c5">
-        <input type="checkbox" aria-label="Step 5">
-        <div>
-          <div class="chk-title"><span data-lang="en">Step 5: Build level 30 × 30 in furnace service platform (confirm vibration mounts with NEXT; B-vent ≥ 1")</span><span data-lang="es">Paso 5: Construir plataforma nivelada de 30 × 30 pulg. (sin almohadillas antivibración; tiro ≥ 1")</span></div>
-          <div class="chk-sub">Todoist: <a href="https://app.todoist.com/app/task/6j3j3pqfM4GC53Qf" target="_blank" rel="noopener">6j3j3pqfM4GC53Qf</a> · Photo: <a href="https://app.todoist.com/app/task/6j3j3ppwWXxjMX57" target="_blank" rel="noopener">6j3j3ppwWXxjMX57</a></div>
-        </div>
-      </li>
-      <li class="chk" data-id="c6">
-        <input type="checkbox" aria-label="Step 6">
-        <div>
-          <div class="chk-title"><span data-lang="en">Step 6: Install enclosed LED light, hatch switch, 120V GFCI ≤ 25 ft (live independent of disconnect) &amp; furnace circuit</span><span data-lang="es">Paso 6: Instalar luz LED cerrada, apagador entrada, GFCI ≤ 25 pies independiente y circuito</span></div>
-          <div class="chk-sub">Todoist: <a href="https://app.todoist.com/app/task/6hvjQJgpw2W5VcQf" target="_blank" rel="noopener">6hvjQJgpw2W5VcQf</a> · Photo: <a href="https://app.todoist.com/app/task/6j3RvWhHcpMmCjP7" target="_blank" rel="noopener">6j3RvWhHcpMmCjP7</a></div>
-        </div>
-      </li>
-      <li class="chk" data-id="c7">
-        <input type="checkbox" aria-label="Step 7">
-        <div>
-          <div class="chk-title"><span data-lang="en">Step 7: Keep closet open until LV cable &amp; permanent hatch exist + furnace pass coordinated, then close</span><span data-lang="es">Paso 7: Conservar clóset abierto hasta cable LV + registro permanente + paso de equipo, luego cerrar</span></div>
-          <div class="chk-sub">Todoist: <a href="https://app.todoist.com/app/task/6j3Rf89g8M6hPPx7" target="_blank" rel="noopener">6j3Rf89g8M6hPPx7</a> · Photo: <a href="https://app.todoist.com/app/task/6j3RvWjQ5pGMWQR7" target="_blank" rel="noopener">6j3RvWjQ5pGMWQR7</a></div>
-        </div>
-      </li>
-    </ul>
-  </div>
-</div>
-<script>
-(function(){
-  var btn=document.getElementById("langBtn");
-  function setLang(es){
-    document.body.classList.toggle("es", es);
-    btn.setAttribute("aria-checked", es ? "true" : "false");
-    try{ localStorage.setItem("u4_attic_lang", es ? "es" : "en"); }catch(e){}
-  }
-  btn.addEventListener("click", function(){ setLang(!document.body.classList.contains("es")); });
-  try{ if(localStorage.getItem("u4_attic_lang")==="es") setLang(true); }catch(e){}
-
-  var KEY="u4_attic_opening_checks_v1";
-  var saved={};
-  try{ saved=JSON.parse(localStorage.getItem(KEY)||"{}"); }catch(e){}
-  document.querySelectorAll("#chkList .chk").forEach(function(li){
-    var id=li.getAttribute("data-id"), cb=li.querySelector("input[type=checkbox]");
-    if(saved[id]){ cb.checked=true; li.classList.add("done"); }
-    cb.addEventListener("change", function(){
-      li.classList.toggle("done", cb.checked);
-      saved[id]=cb.checked;
-      try{ localStorage.setItem(KEY, JSON.stringify(saved)); }catch(e){}
-    });
-  });
-})();
-</script>
+  <h2>1. Settled Equipment, Hatch &amp; Walkway Rules</h2>
+  <table>
+    <thead><tr><th>Element</th><th>Current Governing Requirement (Nov 24, 2026 · R10)</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Permanent Hatch Spot</strong></td><td><code>24&quot; &times; 36&quot;</code> finished clear outside Front Door 4 on the unconditioned common stair landing. Photograph markout first — do not cut ceiling until fire-rating and joist bay <code>B</code> are verified.</td></tr>
+      <tr><td><strong>Uninsulated Lid &amp; Gasket</strong></td><td>Unconditioned Door 4 landing (<a href="https://codes.iccsafe.org/content/CAEC2025P1/subchapter-10-multifamily-buildings-mandatory-requirements" target="_blank" rel="noopener">2025 CA Energy Code &sect;160.1(a)</a>): snug <code>3/4&quot;</code> plywood lid + <code>3/8&quot;</code> backer rod &amp; caulk on fixed frame + continuous <code>1/2&quot; &times; 1/8&quot;</code> closed-cell foam gasket on <code>1&times;2</code> ledges + <code>4</code> latches outside clear opening. Zero fiberglass lid insulation, wire loops, eye-bolts, or perimeter barrier.</td></tr>
+      <tr><td><strong>Furnace Pass &amp; Walkway</strong></td><td>Carrier/Bryant Legacy 45k BTU bare cabinet (<code>33.25&quot; H &times; 14.19&quot; W &times; 29&quot; D</code>) passes end-first (<code>14.19&quot; &times; 29&quot;</code>). At <code>66&quot;</code> attic height, continuous <code>24&quot;</code> OSB/ply walkway is <code>15.8 ft &le; 20 ft</code> (<code>3</code> walkway sheets + <code>1</code> platform/lid sheet = <code>4</code> net <code>4&times;8</code> sheets; never <code>3/8&quot;</code> plywood).</td></tr>
+      <tr><td><strong>Service Platform &amp; Venting</strong></td><td>Level <code>30&quot; &times; 30&quot;</code> North service platform (<code>X=174&quot;, Y=228.5&quot;</code>); have NEXT confirm any equipment-specific mounting hardware before buying pads. Horizontal sidewall exhaust only (<code>&ge; 4 ft</code> lot line per <a href="https://www.sf.gov/documents/49620/2025-08-05_SFMC_amendments.pdf" target="_blank" rel="noopener">2025 SFMC &sect;802.8</a>; zero flat-roof penetrations).</td></tr>
+      <tr><td><strong>Service Electrical &amp; Closet Hold</strong></td><td><code>1</code> switched enclosed LED attic light (agree with NEXT&apos;s electrician on wiring connection) + <code>1</code> line-side <code>120V</code> GFCI receptacle within <code>25 ft</code>. Keep NW bedroom-closet ceiling opening (<code>X=315.4&quot;&ndash;352.0&quot;, Y=5.4&quot;&ndash;88.0&quot;</code>) open until LV thermostat cable and permanent hatch are finished.</td></tr>
+    </tbody>
+  </table>
+  <h2>2. Current Official Printable PDFs (EN &amp; ES)</h2>
+  <ol>
+    <li><strong>Attic Hatch &amp; Wood Walkway (2-Page Scale Plan R4):</strong> <a href="../wiki-pdfs/2026-11-24_U4_attic_hatch_R4_EN.pdf">English R4 PDF</a> · <a href="../wiki-pdfs/2026-11-24_U4_attic_hatch_R4_ES.pdf">Español R4 PDF</a></li>
+    <li><strong>Heating System, Ducts &amp; Sidewall Exhaust (2-Page Scale Plan R4):</strong> <a href="../wiki-pdfs/2026-11-24_U4_hvac_layout_R4_EN.pdf">English R4 PDF</a> · <a href="../wiki-pdfs/2026-11-24_U4_hvac_layout_R4_ES.pdf">Español R4 PDF</a></li>
+    <li><strong>Attic Hatch Visual Practical Guide (8-Page Crew Guide R6):</strong> <a href="./attic-hatch-r6/Attic-hatch-practical-guide_R6_EN.pdf">English R6 PDF</a> · <a href="./attic-hatch-r6/Attic-hatch-practical-guide_R6_ES.pdf">Español R6 PDF</a></li>
+  </ol>
+</main>
 </body>
 </html>

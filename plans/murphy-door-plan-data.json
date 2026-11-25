@@ -130,7 +130,7 @@
     "total_net_vent_min_sq_in": 100,
     "inside_release_required": true,
     "open_door_depth_in": 55.0,
-    "delivery_note": "Tuesday, Dec 1, 2026 delivery only (not a gas hookup appointment) — verify appliance rating plate upon arrival",
+    "delivery_note": "Monday, Dec 14 (10 a.m.–2 p.m. PT) delivery only (not a gas hookup appointment) — verify appliance rating plate upon arrival",
     "move_in_sequence_gate": "MANDATORY: Move LG WKG101HVA WashTower into laundry closet BEFORE installing/hanging Murphy bookcase door (6hvj3CJrHRWm9CM7)",
     "electrical_circuit": "Rev R4/R5 Circuit #14: 1x 20A · 12/2 duplex receptacle on East/Right laundry wall @ 38\" AFF for both 120V plugs (GFCI reset at Panel)",
     "code_makeup_air_basis": "2025 California Mechanical Code §504.4.1 (100 sq in dryer-closet makeup air or approved alternative, separate from exterior dryer exhaust; confirm permit code edition & rated grille free area before cutting back/grilles)"
@@ -157,5 +157,5 @@
   ],
   "field_overrides": [],
   "pins": [],
-  "updated_at": "2026-11-23T18:07:02.360Z"
+  "updated_at": "2026-11-24T23:53:04.858Z"
 }

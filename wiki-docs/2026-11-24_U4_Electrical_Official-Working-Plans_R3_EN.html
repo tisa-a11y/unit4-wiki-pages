@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>1231 11th Ave Unit 4 — Official Electrical Working Plans (Rev R3 — 2026-11-24)</title>
+<style>
+  @page { size: 17in 11in; margin: 0.35in; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "IBM Plex Sans", "Segoe UI", sans-serif; background: #E2E8F0; color: #0F172A; }
+  .sheet { width: 16.3in; min-height: 10.3in; margin: 18px auto; background: #FFFFFF; border: 1.5px solid #0F172A; padding: 14px 16px; display: flex; flex-direction: column; justify-content: space-between; page-break-after: always; }
+  .sheet:last-child { page-break-after: auto; }
+  .tb { display: flex; justify-content: space-between; align-items: stretch; border: 1.5px solid #0F172A; margin-top: 10px; background: #F8FAFC; }
+  .tb-main { padding: 6px 10px; flex: 1; }
+  .tb-proj { font-size: 9px; font-weight: 800; letter-spacing: 0.04em; color: #475569; }
+  .tb-title { font-size: 14px; font-weight: 900; color: #0F172A; margin-top: 2px; }
+  .tb-meta { display: grid; grid-template-columns: repeat(4, auto); gap: 12px; align-items: center; padding: 6px 12px; border-left: 1.5px solid #0F172A; font-size: 10px; }
+  .tb-status { background: #FEF3C7; border: 1px solid #B45309; color: #92400E; font-weight: 800; padding: 2px 6px; border-radius: 3px; }
+  .plan-svg { display: block; width: 100%; height: auto; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; flex: 1; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; flex: 1; }
+  .card { border: 1.2px solid #94A3B8; border-radius: 6px; padding: 10px 12px; background: #FCFDFC; }
+  .card h3 { margin: 0 0 6px; font-size: 12.5px; color: #0F172A; border-bottom: 1px solid #CBD5E1; padding-bottom: 4px; }
+  .meta-bar { font-size: 9.5px; font-weight: 700; color: #1E40AF; background: #EFF6FF; padding: 3px 6px; border-radius: 3px; margin-bottom: 6px; }
+  .badge-hold { display: inline-block; font-size: 9px; font-weight: 800; color: #991B1B; background: #FEE2E2; border: 1px solid #DC2626; padding: 2px 6px; border-radius: 3px; margin-bottom: 6px; }
+  .badge-warn { display: inline-block; font-size: 9px; font-weight: 800; color: #92400E; background: #FEF3C7; border: 1px solid #D97706; padding: 2px 6px; border-radius: 3px; margin-bottom: 6px; }
+  .badge-ok { display: inline-block; font-size: 9px; font-weight: 800; color: #166534; background: #DCFCE7; border: 1px solid #16A34A; padding: 2px 6px; border-radius: 3px; margin-bottom: 6px; }
+  .spec-list { margin: 0; padding-left: 16px; font-size: 10.5px; line-height: 1.45; }
+  .spec-list li { margin-bottom: 5px; }
+  .sched { width: 100%; border-collapse: collapse; font-size: 9.6px; }
+  .sched th, .sched td { border: 1px solid #94A3B8; padding: 4px 6px; text-align: left; }
+  .sched th { background: #1E293B; color: #FFFFFF; font-weight: 800; }
+  .sched tr:nth-child(even) { background: #F8FAFC; }
+  .tag { font-weight: 700; font-size: 8.8px; color: #0F172A; }
+  .summary-bar { margin-top: 8px; padding: 8px 10px; background: #F1F5F9; border: 1px solid #64748B; border-radius: 4px; font-size: 10px; line-height: 1.45; }
+  @media print { body { background: #FFFFFF; } .sheet { margin: 0; border: 1.5px solid #0F172A; width: 100%; min-height: 10.1in; } }
+</style>
+</head>
+<body>
+<section class="sheet"><svg viewBox="0 0 960 560" width="100%" class="plan-svg">
+<rect x="0" y="0" width="960" height="560" fill="#FCFDFC" stroke="#CBD5E1" stroke-width="1"/>
+<g transform="translate(920,40)">
+<circle r="22" fill="#FFFFFF" stroke="#475569" stroke-width="1.2"/>
+<polygon points="0,-16 -5,-4 5,-4" fill="#B91C1C"/>
+<text x="0" y="-17" text-anchor="middle" font-size="8.5" font-weight="900" fill="#B91C1C">N</text>
+<text x="0" y="18" text-anchor="middle" font-size="7" font-weight="700" fill="#475569">S</text>
+<text x="15" y="2.5" text-anchor="middle" font-size="7" font-weight="700" fill="#475569">E</text>
+<text x="-15" y="2.5" text-anchor="middle" font-size="7" font-weight="700" fill="#475569">W</text>
+</g>
+<g transform="translate(46,536)">
+<rect x="0" y="0" width="99.0" height="6" fill="#0F172A"/>
+<rect x="99.0" y="0" width="99.0" height="6" fill="#FFFFFF" stroke="#0F172A" stroke-width="1"/>
+<text x="0" y="16" font-size="8" font-weight="700" fill="#0F172A">0</text>
+<text x="99.0" y="16" text-anchor="middle" font-size="8" font-weight="700" fill="#0F172A">5 ft (60&quot;)</text>
+<text x="198.0" y="16" text-anchor="middle" font-size="8" font-weight="700" fill="#0F172A">10 ft (120&quot;)</text>
+</g>
+<rect x="154.9" y="88.1" width="133.7" height="122.1" rx="3" fill="#FDF6E7" stroke="#9A5B06" stroke-width="1.5" stroke-dasharray="6,3"/>
+<text x="221.7" y="106.2" text-anchor="middle" font-size="8" font-weight="800" fill="#9A5B06">DOOR 4 LANDING</text>
+<path d="M 98.0 210.2 L 288.5 210.2 L 288.5 418.1 L 46.0 418.1 L 46.0 319.1 L 98.0 319.1 Z" fill="#FEFCE8" stroke="#1E293B" stroke-width="2.2"/>
+<text x="178.0" y="322.4" text-anchor="middle" font-size="11" font-weight="900" fill="#92400E">KITCHEN</text>
+<text x="178.0" y="343.8" text-anchor="middle" font-size="7.5" font-weight="700" fill="#92400E">Sp 1–9 (NM-B · Sheet E-03)</text>
+<path d="M 288.5 127.7 L 387.5 127.7 L 387.5 177.2 L 626.8 177.2 L 626.8 266.3 L 288.5 266.3 Z" fill="#F8FAFC" stroke="#1E293B" stroke-width="2"/>
+<text x="491.5" y="253.1" text-anchor="middle" font-size="8.5" font-weight="700" fill="#64748B">CENTRAL HALLWAY</text>
+<rect x="387.5" y="32.0" width="119.0" height="145.2" fill="#FAF5FF" stroke="#1E293B" stroke-width="2.2"/>
+<text x="446.9" y="81.5" text-anchor="middle" font-size="9.5" font-weight="800" fill="#6B21A8">BATHROOM</text>
+<rect x="506.5" y="40.9" width="59.9" height="136.3" fill="#FFF7ED" stroke="#1E293B" stroke-width="2.2"/>
+<text x="536.4" y="74.9" text-anchor="middle" font-size="7.8" font-weight="800" fill="#9A3412">LAUNDRY</text>
+<text x="536.4" y="93.0" text-anchor="middle" font-size="6.4" font-weight="700" fill="#9A3412">LG Gas</text>
+<path d="M 566.4 32.0 L 767.9 32.0 L 828.1 88.1 L 828.1 190.4 L 767.9 256.4 L 626.8 256.4 L 626.8 177.2 L 566.4 177.2 Z" fill="#F0FDF4" stroke="#1E293B" stroke-width="2.2"/>
+<text x="699.4" y="88.1" text-anchor="middle" font-size="10.5" font-weight="800" fill="#047857">BEDROOM (NE)</text>
+<rect x="631.8" y="190.4" width="95.7" height="36.3" rx="3" fill="#FDF6E7" stroke="#9A5B06" stroke-width="1.2" stroke-dasharray="3,2"/>
+<text x="679.6" y="211.8" text-anchor="middle" font-size="6.8" font-weight="800" fill="#9A5B06">Temp Closet (LV)</text>
+<rect x="288.5" y="266.3" width="242.1" height="257.0" fill="#F0F9FF" stroke="#1E293B" stroke-width="2.2"/>
+<text x="448.6" y="497.3" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0369A1">DINING ROOM</text>
+<path d="M 530.6 266.3 L 827.3 266.3 L 884.2 325.7 L 884.2 457.7 L 827.3 523.3 L 530.6 523.3 Z" fill="#FFFFFF" stroke="#1E293B" stroke-width="2.2"/>
+<text x="714.2" y="487.4" text-anchor="middle" font-size="11" font-weight="800" fill="#334155">LIVING ROOM (SE)</text>
+<circle cx="230.8" cy="154.1" r="118.8" fill="#FEF3C7" fill-opacity="0.22" stroke="#D97706" stroke-width="1.3" stroke-dasharray="6,3"/>
+<text x="230.8" y="48.5" text-anchor="middle" font-size="7.5" font-weight="800" fill="#B45309">NEC 320.23(A): 6 ft Guard-Strip Zone</text>
+<rect x="250.6" y="134.3" width="102.3" height="39.6" fill="#D9A86C" fill-opacity="0.38" stroke="#9A5B06" stroke-width="1"/>
+<rect x="313.3" y="173.9" width="39.6" height="210.4" fill="#D9A86C" fill-opacity="0.38" stroke="#9A5B06" stroke-width="1"/>
+<rect x="308.3" y="384.3" width="49.5" height="49.5" fill="#E4F0E6" stroke="#2F6B3F" stroke-width="1.8"/>
+<text x="333.1" y="413.1" text-anchor="middle" font-size="6.8" font-weight="800" fill="#166534">30&quot;×30&quot;</text>
+<rect x="305.9" y="433.8" width="54.9" height="47.8" rx="3" fill="#1D2326"/>
+<text x="333.1" y="461.0" text-anchor="middle" font-size="8" font-weight="900" fill="#FFFFFF">F1 HVAC</text>
+<rect x="211.0" y="124.4" width="39.6" height="59.4" fill="#E3EEF2" stroke="#1F5F7A" stroke-width="2.2"/>
+<text x="230.8" y="157.4" text-anchor="middle" font-size="7.5" font-weight="900" fill="#1F5F7A">24×36</text>
+<rect x="281.9" y="366.9" width="14.8" height="34.6" fill="#0F172A"/>
+<rect x="291.9" y="362.0" width="36.3" height="46.2" fill="none" stroke="#B91C1C" stroke-width="1.2" stroke-dasharray="3,2"/>
+<text x="275.4" y="388.4" text-anchor="end" font-size="9" font-weight="900" fill="#0F172A">D04</text>
+<polyline points="288.5,384.7 98.0,384.7 98.0,264.6" fill="none" stroke="#D97706" stroke-width="2.6"/>
+<polyline points="288.5,384.7 191.2,309.2 229.1,210.2" fill="none" stroke="#2563EB" stroke-width="2.2"/>
+<polyline points="288.5,384.7 288.5,457.7 305.9,457.7" fill="none" stroke="#15803D" stroke-width="2.8"/>
+<polyline points="288.5,384.7 288.5,190.4 230.8,190.4 230.8,183.8" fill="none" stroke="#16A34A" stroke-width="2.2" stroke-dasharray="5,3"/>
+<polyline points="288.5,384.7 369.4,384.7 369.4,144.2 442.0,144.2" fill="none" stroke="#9333EA" stroke-width="2.6"/>
+<polyline points="369.4,144.2 536.0,144.2 536.0,124.4" fill="none" stroke="#D97706" stroke-width="2.6"/>
+<polyline points="288.5,384.7 417.2,371.9" fill="none" stroke="#0D9488" stroke-width="2.4" stroke-dasharray="6,3"/>
+<polyline points="288.5,384.7 417.2,309.2 676.3,309.2 676.3,381.8" fill="none" stroke="#0D9488" stroke-width="2.4" stroke-dasharray="6,3"/>
+<polyline points="288.5,384.7 369.4,221.8 697.8,221.8 697.8,137.6" fill="none" stroke="#0D9488" stroke-width="2.4" stroke-dasharray="6,3"/>
+<polyline points="288.5,384.7 461.8,221.8 697.8,160.7" fill="none" stroke="#DC2626" stroke-width="2.2" stroke-dasharray="7,3"/>
+<polyline points="461.8,221.8 676.3,404.9" fill="none" stroke="#DC2626" stroke-width="1.8" stroke-dasharray="4,3"/>
+<polyline points="461.8,221.8 417.2,395.0" fill="none" stroke="#DC2626" stroke-width="1.8" stroke-dasharray="4,3"/>
+<g><rect x="408.2" y="362.9" width="18" height="18" rx="3" fill="#FFFFFF" stroke="#0D9488" stroke-width="2.2"/><text x="417.2" y="374.4" text-anchor="middle" font-size="6.8" font-weight="900" fill="#0D9488">JB</text><rect x="389.2" y="345.9" width="56" height="14" rx="2.5" fill="#FFFFFF" stroke="#0D9488" stroke-width="1"/><text x="417.2" y="355.4" text-anchor="middle" font-size="7.4" font-weight="900" fill="#0D9488">JB-DIN</text><text x="417.2" y="390.9" text-anchor="middle" font-size="6.4" font-weight="700" fill="#334155">Sp 12 (ENT)</text></g>
+<g><rect x="667.3" y="372.8" width="18" height="18" rx="3" fill="#FFFFFF" stroke="#0D9488" stroke-width="2.2"/><text x="676.3" y="384.3" text-anchor="middle" font-size="6.8" font-weight="900" fill="#0D9488">JB</text><rect x="648.3" y="355.8" width="56" height="14" rx="2.5" fill="#FFFFFF" stroke="#0D9488" stroke-width="1"/><text x="676.3" y="365.3" text-anchor="middle" font-size="7.4" font-weight="900" fill="#0D9488">JB-LIV*</text><text x="676.3" y="400.8" text-anchor="middle" font-size="6.4" font-weight="700" fill="#334155">Sp 11 (+1.5&quot; ext)</text></g>
+<g><rect x="688.8" y="128.6" width="18" height="18" rx="3" fill="#FFFFFF" stroke="#0D9488" stroke-width="2.2"/><text x="697.8" y="140.1" text-anchor="middle" font-size="6.8" font-weight="900" fill="#0D9488">JB</text><rect x="669.8" y="111.6" width="56" height="14" rx="2.5" fill="#FFFFFF" stroke="#0D9488" stroke-width="1"/><text x="697.8" y="121.1" text-anchor="middle" font-size="7.4" font-weight="900" fill="#0D9488">JB-BED</text><text x="697.8" y="156.6" text-anchor="middle" font-size="6.4" font-weight="700" fill="#334155">Sp 13 (ENT)</text></g>
+<g><rect x="433.0" y="135.2" width="18" height="18" rx="3" fill="#FFFFFF" stroke="#9333EA" stroke-width="2.2"/><text x="442.0" y="146.7" text-anchor="middle" font-size="6.8" font-weight="900" fill="#9333EA">JB</text><rect x="414.0" y="118.2" width="56" height="14" rx="2.5" fill="#FFFFFF" stroke="#9333EA" stroke-width="1"/><text x="442.0" y="127.7" text-anchor="middle" font-size="7.4" font-weight="900" fill="#9333EA">JB-BR/BL</text><text x="442.0" y="163.2" text-anchor="middle" font-size="6.4" font-weight="700" fill="#334155">Sp 14 &amp; 15</text></g>
+<g><rect x="452.8" y="212.8" width="18" height="18" rx="3" fill="#FFFFFF" stroke="#DC2626" stroke-width="2.2"/><text x="461.8" y="224.2" text-anchor="middle" font-size="6.8" font-weight="900" fill="#DC2626">JB</text><rect x="433.8" y="195.8" width="56" height="14" rx="2.5" fill="#FFFFFF" stroke="#DC2626" stroke-width="1"/><text x="461.8" y="205.2" text-anchor="middle" font-size="7.4" font-weight="900" fill="#DC2626">JB-LT</text><text x="461.8" y="240.8" text-anchor="middle" font-size="6.4" font-weight="700" fill="#334155">Sp 17 + 14/3</text></g>
+<circle cx="422.2" cy="41.9" r="7.5" fill="#F3E8FF" stroke="#6B21A8" stroke-width="1.6"/><text x="422.2" y="44.4" text-anchor="middle" font-size="6.5" font-weight="800" fill="#6B21A8">V1</text>
+<circle cx="478.3" cy="41.9" r="7.5" fill="#F3E8FF" stroke="#6B21A8" stroke-width="1.6"/><text x="478.3" y="44.4" text-anchor="middle" font-size="6.5" font-weight="800" fill="#6B21A8">T1</text>
+<circle cx="536.0" cy="124.4" r="7.5" fill="#FFEDD5" stroke="#9A3412" stroke-width="1.6"/><text x="536.0" y="126.9" text-anchor="middle" font-size="6.5" font-weight="800" fill="#9A3412">W/D</text>
+<circle cx="603.7" cy="41.9" r="7.5" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.6"/><text x="603.7" y="44.4" text-anchor="middle" font-size="6.5" font-weight="800" fill="#0F766E">B1</text>
+<circle cx="722.5" cy="41.9" r="7.5" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.6"/><text x="722.5" y="44.4" text-anchor="middle" font-size="6.5" font-weight="800" fill="#0F766E">B2</text>
+<circle cx="818.2" cy="137.6" r="7.5" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.6"/><text x="818.2" y="140.1" text-anchor="middle" font-size="6.5" font-weight="800" fill="#0F766E">B5</text>
+<circle cx="730.8" cy="246.5" r="7.5" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.6"/><text x="730.8" y="249.0" text-anchor="middle" font-size="6.5" font-weight="800" fill="#0F766E">B3</text>
+<circle cx="577.3" cy="137.6" r="7.5" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.6"/><text x="577.3" y="140.1" text-anchor="middle" font-size="6.5" font-weight="800" fill="#0F766E">B4</text>
+<circle cx="359.5" cy="276.2" r="7.5" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.6"/><text x="359.5" y="278.7" text-anchor="middle" font-size="6.5" font-weight="800" fill="#0F766E">D1</text>
+<circle cx="488.2" cy="276.2" r="7.5" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.6"/><text x="488.2" y="278.7" text-anchor="middle" font-size="6.5" font-weight="800" fill="#0F766E">D2</text>
+<circle cx="521.2" cy="401.6" r="7.5" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.6"/><text x="521.2" y="404.1" text-anchor="middle" font-size="6.5" font-weight="800" fill="#0F766E">D3</text>
+<circle cx="415.6" cy="513.8" r="7.5" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.6"/><text x="415.6" y="516.3" text-anchor="middle" font-size="6.5" font-weight="800" fill="#0F766E">D4</text>
+<circle cx="607.0" cy="276.2" r="7.5" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.6"/><text x="607.0" y="278.7" text-anchor="middle" font-size="6.5" font-weight="800" fill="#0F766E">L1</text>
+<circle cx="758.8" cy="276.2" r="7.5" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.6"/><text x="758.8" y="278.7" text-anchor="middle" font-size="6.5" font-weight="800" fill="#0F766E">L2</text>
+<circle cx="872.6" cy="391.7" r="7.5" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.6"/><text x="872.6" y="394.2" text-anchor="middle" font-size="6.5" font-weight="800" fill="#0F766E">L5</text>
+<circle cx="758.8" cy="513.8" r="7.5" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.6"/><text x="758.8" y="516.3" text-anchor="middle" font-size="6.5" font-weight="800" fill="#0F766E">L4</text>
+<circle cx="607.0" cy="513.8" r="7.5" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.6"/><text x="607.0" y="516.3" text-anchor="middle" font-size="6.5" font-weight="800" fill="#0F766E">L3</text>
+<circle cx="541.0" cy="395.0" r="7.5" fill="#FEE2E2" stroke="#B91C1C" stroke-width="1.6"/><text x="541.0" y="397.5" text-anchor="middle" font-size="6.5" font-weight="800" fill="#B91C1C">L6*</text>
+<circle cx="346.3" cy="210.2" r="7.5" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.6"/><text x="346.3" y="212.7" text-anchor="middle" font-size="6.5" font-weight="800" fill="#0F766E">H1</text>
+<rect x="290" y="528" width="654" height="26" rx="4" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1"/>
+<text x="302" y="544" font-size="7.8" font-weight="800" fill="#0F172A">LEGEND:  Amber = 12/2 20A NM-B  |  Blue = 14/2 15A NM-B  |  Green = HVAC/Attic  |  Purple = Bath  |  Teal Dashed = EMPTY ENT HOLD (NO WIRE PULL)  |  Red = Sp 17 + 14/3 Smoke/CO</text>
+</svg><div class="tb"><div class="tb-main"><div class="tb-proj">1231 11th AVENUE, UNIT 4 · SAN FRANCISCO, CA &nbsp;|&nbsp; OFFICIAL ELECTRICAL WORKING DRAWINGS (NOT A PERMIT SET)</div><div class="tb-title">WHOLE-UNIT FLOOR PLAN &amp; ATTIC JUNCTION BOX ROUTING (ALL 20 CIRCUITS)</div></div><div class="tb-meta"><div><strong>SHEET:</strong> E-01</div><div><strong>REV:</strong> R3 (2026-11-24)</div><div><strong>SCALE:</strong> 1:1 TRUE SCALE (508&quot; × 298&quot;)</div><div class="tb-status">DRAFT / WORKING PLAN</div></div></div></section>
+<section class="sheet"><svg viewBox="0 0 960 560" width="100%" class="plan-svg">
+<rect x="0" y="0" width="960" height="560" fill="#F8FAF9" stroke="#CBD5E1" stroke-width="1"/>
+<text x="18" y="88" font-size="8.8" font-weight="800" fill="#64748B">FLAT-ROOF DECK (+66&quot; CAVITY · NO SCREWS)</text>
+<text x="18" y="148" font-size="8.8" font-weight="800" fill="#0369A1">ATTIC JOIST PLANE (EXPLODED +54&quot; FOR CLARITY)</text>
+<text x="18" y="340" font-size="8.8" font-weight="800" fill="#334155">LIVING LEVEL WALLS (Z = 0&quot; TO 121-1/2&quot;)</text>
+<polygon points="423.2,279.1 480.7,303.4 428.1,325.6 370.6,301.3" fill="#FDF6E7" fill-opacity="0.55" stroke="#9A5B06" stroke-width="1.2" stroke-dasharray="5,3"/>
+<polygon points="346.1,290.9 428.1,325.6 338.7,363.4 234.3,319.3 276.9,301.3 299.2,310.8" fill="#FEF9C3" fill-opacity="0.45" stroke="#B45309" stroke-width="1.2"/>
+<polygon points="463.6,310.6 506.2,328.6 484.9,337.6 587.9,381.1 549.6,397.3 404.0,335.8" fill="#F1F5F9" fill-opacity="0.55" stroke="#64748B" stroke-width="1.2"/>
+<polygon points="547.4,311.2 598.6,332.8 536.1,359.2 484.9,337.6" fill="#F3E8FF" fill-opacity="0.40" stroke="#7C3AED" stroke-width="1.2"/>
+<polygon points="594.8,334.4 620.6,345.3 561.9,370.1 536.1,359.2" fill="#FFEDD5" fill-opacity="0.45" stroke="#C2410C" stroke-width="1.2"/>
+<polygon points="624.4,343.7 711.1,380.4 712.9,401.5 668.9,420.1 614.5,421.1 553.8,395.5 587.9,381.1 561.9,370.1" fill="#ECFDF5" fill-opacity="0.38" stroke="#047857" stroke-width="1.2"/>
+<polygon points="404.0,335.8 508.2,379.8 397.6,426.5 293.4,382.5" fill="#E0F2FE" fill-opacity="0.38" stroke="#0369A1" stroke-width="1.2"/>
+<polygon points="508.2,379.8 635.8,433.8 634.8,454.9 578.0,478.9 525.2,480.5 397.6,426.5" fill="#FFFFFF" fill-opacity="0.70" stroke="#475569" stroke-width="1.2"/>
+<polygon points="346.1,290.9 428.1,325.6 428.1,223.5 346.1,188.9" fill="#FEF3C7" fill-opacity="0.22" stroke="#B45309" stroke-width="1"/>
+<polygon points="428.1,325.6 338.7,363.4 338.7,261.3 428.1,223.5" fill="#FDE68A" fill-opacity="0.32" stroke="#B45309" stroke-width="1"/>
+<polygon points="234.3,319.3 338.7,363.4 338.7,261.3 234.3,217.2" fill="#FEF3C7" fill-opacity="0.16" stroke="#B45309" stroke-width="1"/>
+<polygon points="346.1,290.9 299.2,310.8 299.2,208.7 346.1,188.9" fill="#FEF3C7" fill-opacity="0.22" stroke="#B45309" stroke-width="1"/>
+<polygon points="547.4,311.2 484.9,337.6 484.9,235.5 547.4,209.1" fill="#E9D5FF" fill-opacity="0.20" stroke="#7C3AED" stroke-width="1"/>
+<polygon points="598.6,332.8 536.1,359.2 536.1,257.2 598.6,230.8" fill="#E9D5FF" fill-opacity="0.20" stroke="#7C3AED" stroke-width="1"/>
+<polygon points="624.4,343.7 561.9,370.1 561.9,268.1 624.4,241.7" fill="#FED7AA" fill-opacity="0.20" stroke="#C2410C" stroke-width="1"/>
+<polygon points="404.0,335.8 635.8,433.8 635.8,331.7 404.0,233.7" fill="#E2E8F0" fill-opacity="0.14" stroke="#64748B" stroke-width="1"/>
+<polygon points="508.2,379.8 397.6,426.5 397.6,324.5 508.2,277.8" fill="#E2E8F0" fill-opacity="0.12" stroke="#64748B" stroke-width="1"/>
+<polygon points="359.3,310.2 347.2,315.3 347.2,295.1 359.3,290.0" fill="#1E293B" fill-opacity="0.95" stroke="#0F172A" stroke-width="1"/>
+<polyline points="353.0,357.3 353.0,312.8" fill="none" stroke="#0F172A" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="353.0,292.6 353.0,209.9" fill="none" stroke="#1E293B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4,3"/>
+<text x="353.0" y="283.4" text-anchor="middle" font-size="9.5" font-weight="900" fill="#0F172A">SUBPANEL D04</text>
+<polygon points="400.4,101.7 737.0,243.9 634.8,307.5 578.0,331.5 525.2,333.1 293.4,235.1 338.7,216.0 234.3,171.9" fill="#E0F2FE" fill-opacity="0.18" stroke="#64748B" stroke-width="1.2" stroke-dasharray="6,3"/>
+<polygon points="400.4,46.2 737.0,188.4 634.8,252.0 578.0,276.0 525.2,277.6 293.4,179.7 338.7,160.5 234.3,116.4" fill="none" fill-opacity="0" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="3,5"/>
+<polygon points="431.7,148.5 448.7,155.7 423.2,166.5 406.1,159.3" fill="#E3EEF2" fill-opacity="0.85" stroke="#1F5F7A" stroke-width="1.2"/>
+<polygon points="444.5,157.5 488.5,176.1 471.4,183.3 427.4,164.7" fill="#D9A86C" fill-opacity="0.50" stroke="#9A5B06" stroke-width="1.2"/>
+<polygon points="454.4,176.1 471.4,183.3 380.9,221.5 363.9,214.3" fill="#D9A86C" fill-opacity="0.50" stroke="#9A5B06" stroke-width="1.2"/>
+<polygon points="361.7,213.4 383.0,222.4 361.7,231.4 340.4,222.4" fill="#E4F0E6" fill-opacity="0.78" stroke="#2F6B3F" stroke-width="1.2"/>
+<polygon points="339.0,222.1 362.4,232.0 362.4,210.2 339.0,200.3" fill="#1D2326" fill-opacity="0.90" stroke="#FFFFFF" stroke-width="1"/>
+<text x="340.8" y="201.0" text-anchor="middle" font-size="8.8" font-weight="900" fill="#166534">F1 FURNACE</text>
+<polyline points="353.0,292.6 353.0,315.3 370.6,307.9" fill="none" stroke="#D97706" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="353.0,292.6 338.7,338.2 294.6,319.6" fill="none" stroke="#D97706" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="353.0,292.6 338.7,343.2 284.7,320.4" fill="none" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="353.0,209.9 271.0,175.3 322.7,153.4 322.7,230.3 322.7,295.8" fill="none" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="353.0,209.9 305.6,160.6 305.6,271.1 339.7,256.7" fill="none" stroke="#D97706" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="353.0,209.9 340.8,179.7 402.6,167.4 402.6,274.5" fill="none" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="353.0,209.9 321.6,223.2 340.8,219.5" fill="none" stroke="#15803D" stroke-width="3.0" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="353.0,209.9 436.7,174.6 411.8,164.1 414.6,159.5 444.5,112.6 382.0,161.8" fill="none" stroke="#16A34A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5,3"/>
+<polyline points="353.0,209.9 387.8,224.6 491.3,180.9 522.6,194.1 563.8,174.3 563.8,286.4" fill="none" stroke="#9333EA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="491.3,180.9 563.1,211.2 602.8,194.4 602.8,306.5" fill="none" stroke="#D97706" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="515.6" y="187.1" width="14" height="14" rx="2.5" fill="#FFFFFF" stroke="#9333EA" stroke-width="2"/><text x="522.6" y="184.1" text-anchor="middle" font-size="8.2" font-weight="900" fill="#9333EA">JB-BR/BL</text>
+<polyline points="353.0,209.9 413.9,231.0 352.9,256.8 352.9,389.1" fill="none" stroke="#0D9488" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6,3"/>
+<polyline points="353.0,209.9 440.9,219.6 552.4,266.7 521.2,279.9 603.5,314.7 603.5,447.0" fill="none" stroke="#0D9488" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6,3"/>
+<polyline points="353.0,209.9 458.0,195.0 599.3,254.7 635.5,239.4 687.3,261.3 687.3,393.6" fill="none" stroke="#0D9488" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6,3"/>
+<rect x="406.9" y="224.0" width="14" height="14" rx="2.5" fill="#FFFFFF" stroke="#0D9488" stroke-width="2"/><text x="413.9" y="221.0" text-anchor="middle" font-size="8.2" font-weight="900" fill="#0D9488">JB-DIN</text>
+<rect x="514.2" y="272.9" width="14" height="14" rx="2.5" fill="#FFFFFF" stroke="#0D9488" stroke-width="2"/><text x="521.2" y="269.9" text-anchor="middle" font-size="8.2" font-weight="900" fill="#0D9488">JB-LIV*</text>
+<rect x="628.5" y="232.4" width="14" height="14" rx="2.5" fill="#FFFFFF" stroke="#0D9488" stroke-width="2"/><text x="635.5" y="229.4" text-anchor="middle" font-size="8.2" font-weight="900" fill="#0D9488">JB-BED</text>
+<polyline points="353.0,209.9 497.7,211.8 625.5,243.6" fill="none" stroke="#DC2626" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7,3"/>
+<polyline points="497.7,211.8 511.2,284.1" fill="none" stroke="#DC2626" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4,3"/>
+<rect x="490.7" y="204.8" width="14" height="14" rx="2.5" fill="#FFFFFF" stroke="#DC2626" stroke-width="2"/><text x="497.7" y="201.8" text-anchor="middle" font-size="8.2" font-weight="900" fill="#DC2626">JB-LT</text>
+<text x="327.3" y="326.7" text-anchor="middle" font-size="9.2" font-weight="900" fill="#92400E">KITCHEN</text>
+<text x="376.3" y="390.0" text-anchor="middle" font-size="9.2" font-weight="900" fill="#0369A1">DINING</text>
+<text x="521.2" y="438.6" text-anchor="middle" font-size="9.5" font-weight="900" fill="#334155">LIVING (SE)</text>
+<text x="646.1" y="381.6" text-anchor="middle" font-size="9.2" font-weight="900" fill="#047857">BEDROOM (NE)</text>
+<text x="543.2" y="332.1" text-anchor="middle" font-size="8.5" font-weight="900" fill="#6B21A8">BATH</text>
+<text x="580.1" y="348.9" text-anchor="middle" font-size="8.0" font-weight="900" fill="#9A3412">LAUN</text>
+</svg><div class="tb"><div class="tb-main"><div class="tb-proj">1231 11th AVENUE, UNIT 4 · SAN FRANCISCO, CA &nbsp;|&nbsp; OFFICIAL ELECTRICAL WORKING DRAWINGS (NOT A PERMIT SET)</div><div class="tb-title">3D ISOMETRIC WHOLE-UNIT WIRE ROUTING PLAN (EXPLODED ATTIC + WALL DROPS)</div></div><div class="tb-meta"><div><strong>SHEET:</strong> E-02</div><div><strong>REV:</strong> R3 (2026-11-24)</div><div><strong>SCALE:</strong> ISOMETRIC 1:1 GEOMETRY</div><div class="tb-status">DRAFT / WORKING PLAN</div></div></div></section>
+<section class="sheet"><div class="grid-2">
+<div class="card"><h3>1. Kitchen East Wall (126-1/4&quot; · SE = 0&quot; → North)</h3><div class="meta-bar">Nov 22 Reconciled · Subfloor = AFF + t (verify finish build-up t on site)</div><ul class="spec-list"><li><strong>D04 NO-SCREW ZONE (13&quot;–27-1/2&quot; from SE · 53&quot;–77&quot; AFF):</strong> Steel panel can sits 1/8&quot;–5/8&quot; behind kitchen drywall. NEVER back-enter or screw into studs S1/S2; side-entry notches ON HOLD.</li><li><strong>E1 @ 10&quot; &amp; E2 @ 45&quot; (Sp 1 SA-A, 20A DF, 12/2):</strong> 50&quot; in-wall bore band · Reconciled to 18&quot; drawer base (36&quot;–54&quot;).</li><li><strong>REF-1 @ 68&quot; (Sp 4 REF, 20A DF, 12/2):</strong> Single receptacle @ 15&quot; AFF · 52-1/2&quot; bore band · Reconciled to 28&quot; Haier fridge bay (54&quot;–82&quot;).</li></ul></div>
+<div class="card"><h3>2. Kitchen South Wall (147&quot; · SE = 0&quot; → West)</h3><div class="meta-bar">Former pie-safe (26&quot;–59&quot;) SEALED &amp; COVERED · 24&quot; finished-front DW</div><ul class="spec-list"><li><strong>S1 @ 24&quot; &amp; S2 @ 62&quot; (Sp 2 SA-B, 20A DF, 12/2):</strong> 30&quot; in-wall bore band · S2 shifted -3&quot; for 12&quot; trash (36&quot;–48&quot;) &amp; 24&quot; DW (48&quot;–72&quot;).</li><li><strong>DW-GD @ 76&quot; (Sp 5 DW 15A DF + Sp 6 GD 15A DF, 14/2 each):</strong> 2-gang inside 30&quot; sink base (72&quot;–102&quot;, CL 87&quot;). Separate labeled neutrals for dual-function breakers.</li><li><strong>GD-AIR @ 90&quot; &amp; T3 @ 87&quot; (Sp 9 LT):</strong> Sink-deck air switch (or wired alt @ 67&quot;) · 2 task pendants @ 75&quot; and 99&quot;.</li></ul></div>
+<div class="card"><h3>3. Kitchen West Range Wall (66-1/4&quot; Run + 59-3/4&quot; Recess)</h3><div class="meta-bar">Attic Drops (Sp 3, 7, 8) · 1/2&quot; Drywall + 1/2&quot; HardieBacker (NO 3/16&quot; shims)</div><ul class="spec-list"><li><strong>W1 @ 9&quot; &amp; W2 @ 57&quot; (Sp 3 SA-C, 20A DF, 12/2):</strong> 1&quot; tile mud rings · Attic homerun dropping into 50&quot; bore band.</li><li><strong>RG-1 @ 33&quot; (Sp 7 RG, 15A DF, 14/2):</strong> 3&quot; AFF low pocket behind 30&quot; Viking gas range VGCC5304BSS.</li><li><strong>HD-1 @ 33&quot; ± 2-1/4&quot; (Sp 8 HD, 15A AFCI + BRLW1, 14/2):</strong> Flush 1-gang 2&quot;×3&quot; (~1&quot; proud) at ~83&quot;–86&quot; AFF inside Zephyr chimney (replaces retired 4×4 @ 100&quot;).</li></ul></div>
+<div class="card"><h3>4. Kitchen North Entry Wall (115-1/2&quot; · West → East)</h3><div class="meta-bar">Attic Drop (Sp 9 LT) · 29-1/2&quot; × 79&quot; Hall Opening on East End</div><ul class="spec-list"><li><strong>SW-ENTRY (3-Gang, Sp 9 LT, 14/2):</strong> 6&quot; West of hall opening, 48&quot; AFF (+t from subfloor). Controls Kitchen Main, South Task Pendants T3, and Opt. Under-Cab.</li><li><strong>Historic Trim — DO NOT CUT:</strong> Keep original 9-1/2&quot; Edwardian baseboard and 103&quot; AFF picture rail completely untouched.</li></ul></div>
+</div><div class="tb"><div class="tb-main"><div class="tb-proj">1231 11th AVENUE, UNIT 4 · SAN FRANCISCO, CA &nbsp;|&nbsp; OFFICIAL ELECTRICAL WORKING DRAWINGS (NOT A PERMIT SET)</div><div class="tb-title">KITCHEN ELECTRICAL PLAN &amp; ALL 4 WALL ELEVATIONS (RECONCILED NOV 22)</div></div><div class="tb-meta"><div><strong>SHEET:</strong> E-03</div><div><strong>REV:</strong> R3 (2026-11-24)</div><div><strong>SCALE:</strong> NTS SPEC SHEET</div><div class="tb-status">HOLD: FULL-L &amp; D04</div></div></div></section>
+<section class="sheet"><div class="grid-3">
+<div class="card"><h3>1. Dining West Wall — Subpanel D04 Face</h3><div class="badge-hold">HOLD: 80A vs 100A Feeder &amp; Side-Entry</div><ul class="spec-list"><li><strong>Eaton BRP20L125G (20 Sp, MLO):</strong> Faces East into Dining · Proposed 65&quot; AFF CL (verify vs 70&quot; note) · Cover BRPX2A20L1F.</li><li><strong>SFEC 110.26(A)(3):</strong> Mandatory 30&quot; W × 36&quot; D × 78&quot; H clear working space (SF deletes NEC existing-dwelling height exception).</li><li><strong>Sp 12 DIN (D1–D4):</strong> EMPTY ENT from JB-DIN · NO D5 outlet on D04 wall · D6 on pocket-door hold.</li></ul></div>
+<div class="card"><h3>2. Bathroom (72-1/8&quot; × 88&quot; · North-Center)</h3><div class="badge-warn">COORDINATE BEFORE TUESDAY TILE</div><ul class="spec-list"><li><strong>Sp 14 BATH-R (JB-BR, 20A GFCI, 12/2):</strong> V1 vanity GFCI (42&quot; AFF) + T1 toilet/bidet GFCI (12&quot; AFF).</li><li><strong>Pro Option Sp 19:</strong> Assign open Spare Sp 19 to heated bidet T1 (10–12A) so hair dryers on V1 never trip the breaker.</li><li><strong>Sp 15 BATH-L (JB-BL, 15A, 14/2):</strong> Wire directly NOW on open ceiling: ceiling light, vanity sconce, humidity fan &amp; 2-gang switch.</li></ul></div>
+<div class="card"><h3>3. Laundry Closet (36-1/4&quot; × 82-5/8&quot;)</h3><div class="badge-ok">LG Gas WashTower WKG101HVA</div><ul class="spec-list"><li><strong>Sp 16 LAUN-W (20A DF, 12/2):</strong> Straight from D04 via attic (no JB) → 2-gang box Left (42&quot; AFF, verify LG manual).</li><li><strong>Sp 18 LAUN-D (15A DF, 14/2):</strong> Straight from D04 via attic → 2-gang box Right · Separate labeled neutrals.</li><li><strong>R5/R9 Update &amp; Sequence:</strong> Rev R5 Circuit #14 uses 1× 20A · 12/2 duplex @ 38&quot; AFF on East/Right wall (GFCI at D04); move LG WashTower in BEFORE hanging Murphy door (verify plate Mon Dec 14, 10 a.m.–2 p.m. PT).</li></ul></div>
+<div class="card"><h3>4. Bedroom (Northeast · East Bay Window)</h3><div class="badge-hold">EMPTY ENT HOLD — NO WIRE PULL</div><ul class="spec-list"><li><strong>Sp 13 BED (JB-BED, 20A AFCI):</strong> B1–B5 (B4 desk, B5 bay) · Approved boxes + EMPTY ENT from attic · Confirm 18&quot; vs 11-1/2&quot; height.</li><li><strong>Temp Closet Niche:</strong> Keep ceiling open until closet LV switch cable reaches attic JB and permanent Door 4 hatch completes.</li><li><strong>Sp 17 LTG:</strong> Ceiling light + interconnected smoke alarm via 14/3 red conductor from hall.</li></ul></div>
+<div class="card"><h3>5. Living Room (Southeast) &amp; Central Hall</h3><div class="badge-hold">EMPTY ENT HOLD · L6 POCKET-DOOR HOLD</div><ul class="spec-list"><li><strong>Sp 11 LIV (JB-LIV + 1-1/2&quot; ext, 20A AFCI):</strong> L1–L6 + Hall H1 in EMPTY ENT · Keep L6 clear of pocket-door cavity.</li><li><strong>Sp 17 LTG (JB-LT, 15A AFCI, 14/2 + 14/3):</strong> 2 hall lights with 3-way switches (14/3 entry &amp; bedroom ends), living light + Hall Smoke/CO.</li><li><strong>Sp 20 ATTIC (Door 4):</strong> See Sheet E-05 for Switch Option A (landing wall ~48&quot;) vs Option B (inside 2× hatch rim).</li></ul></div>
+<div class="card"><h3>6. Datum &amp; Photo Gate Rules</h3><div class="badge-ok">2025 CEC / NEC / SFEC</div><ul class="spec-list"><li><strong>Dual Datums:</strong> H_subfloor = H_AFF + t (tag VERIFY ON SITE until finished floor build-up t is measured).</li><li><strong>Photo Gate:</strong> Tape-in-frame photo of every open box, nail plate, and bored hole before drywall/tile close-in.</li></ul></div>
+</div><div class="tb"><div class="tb-main"><div class="tb-proj">1231 11th AVENUE, UNIT 4 · SAN FRANCISCO, CA &nbsp;|&nbsp; OFFICIAL ELECTRICAL WORKING DRAWINGS (NOT A PERMIT SET)</div><div class="tb-title">WHOLE-UNIT WALL ELEVATIONS — DINING/D04, BATH, LAUNDRY, BEDROOM (NE), LIVING (SE)</div></div><div class="tb-meta"><div><strong>SHEET:</strong> E-04</div><div><strong>REV:</strong> R3 (2026-11-24)</div><div><strong>SCALE:</strong> PROVISIONAL — VERIFY ON SITE</div><div class="tb-status">HOLD: EMPTY ENT (Sp 11–13)</div></div></div></section>
+<section class="sheet"><svg viewBox="0 0 960 340" width="100%" class="plan-svg">
+<rect x="0" y="0" width="960" height="340" fill="#FCFDFC" stroke="#CBD5E1" stroke-width="1"/>
+<rect x="16" y="16" width="224" height="308" rx="6" fill="#FFFFFF" stroke="#15803D" stroke-width="2"/>
+<text x="128" y="38" text-anchor="middle" font-size="10.5" font-weight="900" fill="#166534">DETAIL A: SIDE OF JOIST (BEST)</text>
+<rect x="86" y="64" width="32" height="148" fill="#E6CCB2" stroke="#7F5539" stroke-width="1.8"/>
+<circle cx="124" cy="138" r="7" fill="#D97706" stroke="#92400E" stroke-width="1.8"/>
+<text x="138" y="135" font-size="9" font-weight="800" fill="#92400E">NM-B</text>
+<text x="138" y="148" font-size="8" fill="#475569">&gt;= 1-1/4&quot; edges</text>
+<text x="128" y="240" text-anchor="middle" font-size="8.8" font-weight="800" fill="#166534">NEC 320.23(B): No Guard Strip</text>
+<text x="128" y="258" text-anchor="middle" font-size="8" fill="#334155">Staple &lt;=12&quot; box (8&quot; plastic)</text>
+<text x="128" y="274" text-anchor="middle" font-size="8" fill="#334155">Staple every &lt;= 4.5 ft (NEC 334.30)</text>
+<text x="128" y="290" text-anchor="middle" font-size="8" fill="#334155">Bend radius &gt;= 5× cable dia.</text>
+<rect x="252" y="16" width="224" height="308" rx="6" fill="#FFFFFF" stroke="#D97706" stroke-width="2"/>
+<text x="364" y="38" text-anchor="middle" font-size="10.5" font-weight="900" fill="#92400E">DETAIL B: GUARD STRIPS &lt;= 6 FT</text>
+<rect x="284" y="156" width="160" height="54" fill="#E6CCB2" stroke="#7F5539" stroke-width="1.8"/>
+<rect x="322" y="130" width="20" height="26" fill="#DDB892" stroke="#7F5539" stroke-width="1.6"/>
+<rect x="386" y="130" width="20" height="26" fill="#DDB892" stroke="#7F5539" stroke-width="1.6"/>
+<circle cx="364" cy="146" r="7.5" fill="#D97706" stroke="#92400E" stroke-width="1.8"/>
+<text x="364" y="240" text-anchor="middle" font-size="8.8" font-weight="800" fill="#92400E">NEC 320.23(A): 1×2 / 2×2 Rails</text>
+<text x="364" y="258" text-anchor="middle" font-size="8" fill="#334155">Required crossing joists &lt;=6 ft Door 4</text>
+<text x="364" y="274" text-anchor="middle" font-size="8" fill="#B91C1C" font-weight="800">NEVER trap NM-B under OSB walkway</text>
+<text x="364" y="290" text-anchor="middle" font-size="8" fill="#334155">Keep clear of flat-roof leak zone</text>
+<rect x="488" y="16" width="224" height="308" rx="6" fill="#FFFFFF" stroke="#184E77" stroke-width="2"/>
+<text x="600" y="38" text-anchor="middle" font-size="10.5" font-weight="900" fill="#184E77">DETAIL C: FLAT-ROOF LED MOUNT</text>
+<rect x="510" y="64" width="180" height="18" fill="#64748B" stroke="#0F172A" stroke-width="1.5"/>
+<text x="600" y="76" text-anchor="middle" font-size="8" font-weight="900" fill="#FFFFFF">ROOF DECK — NO SCREWS</text>
+<line x1="600" y1="82" x2="600" y2="112" stroke="#DC2626" stroke-width="1.8" stroke-dasharray="3,2"/>
+<text x="646" y="100" font-size="8.8" font-weight="900" fill="#DC2626">&gt;= 1-1/2&quot;</text>
+<rect x="526" y="112" width="148" height="28" fill="#E6CCB2" stroke="#7F5539" stroke-width="1.6"/>
+<text x="600" y="129" text-anchor="middle" font-size="8.2" font-weight="800" fill="#5C3D2E">2×4 / 2×6 Rafter Blocking</text>
+<rect x="580" y="140" width="40" height="20" rx="2" fill="#E2E8F0" stroke="#334155" stroke-width="1.6"/>
+<ellipse cx="600" cy="170" rx="34" ry="9" fill="#FEF08A" stroke="#CA8A04" stroke-width="1.8"/>
+<text x="600" y="240" text-anchor="middle" font-size="8.8" font-weight="800" fill="#184E77">NEC 314.23 / 300.4(E)</text>
+<text x="600" y="258" text-anchor="middle" font-size="8" fill="#334155">2 enclosed LEDs &lt;=3&quot; on 4O boxes</text>
+<text x="600" y="274" text-anchor="middle" font-size="8" fill="#334155">1 over walkway, 1 over F1 platform</text>
+<text x="600" y="290" text-anchor="middle" font-size="8" fill="#334155">Always-live 120V GFCI at platform</text>
+<rect x="724" y="16" width="220" height="308" rx="6" fill="#FFFFFF" stroke="#6B21A8" stroke-width="2"/>
+<text x="834" y="38" text-anchor="middle" font-size="10.2" font-weight="900" fill="#6B21A8">DETAIL D: ATTIC JBs &amp; SWITCH</text>
+<rect x="784" y="68" width="100" height="62" rx="4" fill="#F8FAFC" stroke="#0F172A" stroke-width="2"/>
+<text x="834" y="96" text-anchor="middle" font-size="9" font-weight="900" fill="#0F172A">4-11/16&quot; × 2-1/8&quot;</text>
+<text x="834" y="112" text-anchor="middle" font-size="7.6" font-weight="700" fill="#475569">42 cu in (+1.5&quot; JB-LIV)</text>
+<line x1="834" y1="68" x2="834" y2="46" stroke="#DC2626" stroke-width="2"/>
+<polygon points="834,46 858,52 834,58" fill="#DC2626"/>
+<text x="834" y="156" text-anchor="middle" font-size="8.2" font-weight="800" fill="#6B21A8">NEC 314.29: Flagged Above Insul.</text>
+<text x="834" y="176" text-anchor="middle" font-size="7.8" fill="#334155">1 circuit per JB · Blank cover on</text>
+<text x="834" y="192" text-anchor="middle" font-size="7.8" fill="#334155">Max 2 cables/top-plate hole + fire caulk</text>
+<line x1="740" y1="212" x2="928" y2="212" stroke="#CBD5E1" stroke-width="1"/>
+<text x="834" y="232" text-anchor="middle" font-size="8.6" font-weight="900" fill="#166534">ATTIC SWITCH (NEC 210.70(C))</text>
+<text x="834" y="250" text-anchor="middle" font-size="7.8" fill="#1E293B">Opt A: Landing wall ~48&quot; (MC/EMT</text>
+<text x="834" y="264" text-anchor="middle" font-size="7.8" fill="#1E293B">if R-2 common area, SFEC 334.12)</text>
+<text x="834" y="284" text-anchor="middle" font-size="7.8" fill="#1E293B">Opt B: Metal handy box inside 2×</text>
+<text x="834" y="298" text-anchor="middle" font-size="7.8" fill="#1E293B">hatch rim (zero landing wall cut)</text>
+</svg><div class="summary-bar"><strong>Mandatory Field Rules (2025 CEC / NEC / SFEC):</strong> 1) Max 2 cables per bored hole in double top plate above D04, fire-caulked. 2) 1 circuit per 4-11/16&quot; × 2-1/8&quot; attic JB (add 1-1/2&quot; extension ring on JB-LIV for 8 cables), blank cover on, flagged above insulation (NEC 314.29). 3) Never trap NM-B under OSB walkway; install guard strips within 6 ft of Door 4 hatch (NEC 320.23(A)). 4) If landing wall outside Door 4 is an R-2 common area, run MC cable or EMT for Switch Option A (SFEC 334.12(A)(12)).</div><div class="tb"><div class="tb-main"><div class="tb-proj">1231 11th AVENUE, UNIT 4 · SAN FRANCISCO, CA &nbsp;|&nbsp; OFFICIAL ELECTRICAL WORKING DRAWINGS (NOT A PERMIT SET)</div><div class="tb-title">ATTIC ROMEX CROSS-SECTIONS, JUNCTION BOX RULES &amp; FLAT-ROOF LED BLOCKING</div></div><div class="tb-meta"><div><strong>SHEET:</strong> E-05</div><div><strong>REV:</strong> R3 (2026-11-24)</div><div><strong>SCALE:</strong> DETAILS — NOT TO SCALE</div><div class="tb-status">DRAFT / WORKING PLAN</div></div></div></section>
+<section class="sheet"><table class="sched"><thead><tr><th>Sp</th><th>ID</th><th>Breaker</th><th>Cable</th><th>Load / Serves</th><th>Route</th><th>Status / Gate</th></tr></thead><tbody><tr><td><strong>1</strong></td><td><strong>SA-A</strong></td><td>20A DF</td><td>12/2 NM-B</td><td>East Counter E1 (10&quot;), E2 (45&quot;)</td><td>In-wall East 50&quot; band</td><td><span class='tag'>Hold: full-L</span></td></tr>
+<tr><td><strong>2</strong></td><td><strong>SA-B</strong></td><td>20A DF</td><td>12/2 NM-B</td><td>South Counter S1 (24&quot;), S2 (62&quot;)</td><td>In-wall South 30&quot; band</td><td><span class='tag'>Hold: full-L</span></td></tr>
+<tr><td><strong>3</strong></td><td><strong>SA-C</strong></td><td>20A DF</td><td>12/2 NM-B</td><td>West Range Counter W1 (9&quot;), W2 (57&quot;)</td><td>Attic -&gt; West 50&quot; band</td><td><span class='tag'>Hold: full-L</span></td></tr>
+<tr><td><strong>4</strong></td><td><strong>REF</strong></td><td>20A DF</td><td>12/2 NM-B</td><td>Haier Fridge Single Outlet (68&quot;, 15&quot; H)</td><td>In-wall East 52-1/2&quot; band</td><td><span class='tag'>Hold: full-L</span></td></tr>
+<tr><td><strong>5</strong></td><td><strong>DW</strong></td><td>15A DF</td><td>14/2 NM-B</td><td>24&quot; Dishwasher (DW-GD Left @ 76&quot;)</td><td>In-wall South 24&quot; band (sep. N)</td><td><span class='tag'>Hold: full-L</span></td></tr>
+<tr><td><strong>6</strong></td><td><strong>GD</strong></td><td>15A DF</td><td>14/2 NM-B</td><td>Garbage Disposal (DW-GD Right @ 76&quot;)</td><td>In-wall South 26&quot;/20&quot; (sep. N)</td><td><span class='tag'>Hold: full-L</span></td></tr>
+<tr><td><strong>7</strong></td><td><strong>RG</strong></td><td>15A DF</td><td>14/2 NM-B</td><td>Viking 30&quot; Gas Range (RG-1 @ 33&quot;, 3&quot; H)</td><td>Attic -&gt; West low drop</td><td><span class='tag'>Hold: full-L</span></td></tr>
+<tr><td><strong>8</strong></td><td><strong>HD</strong></td><td>15A AF+BRLW1</td><td>14/2 NM-B</td><td>Zephyr Hood Direct (HD-1 1-gang 83&quot;–86&quot;)</td><td>Attic -&gt; West hood chase</td><td><span class='tag'>Locked R2</span></td></tr>
+<tr><td><strong>9</strong></td><td><strong>LT</strong></td><td>15A AF</td><td>14/2 (+14/3)</td><td>Kitchen Main + South T3 (87&quot;) + SW-ENTRY</td><td>Attic -&gt; Ceiling &amp; North Wall</td><td><span class='tag'>Hold: full-L</span></td></tr>
+<tr><td><strong>10</strong></td><td><strong>HVAC</strong></td><td>15A Std</td><td>14/2 NM-B</td><td>Carrier/Bryant 45k BTU Furnace Disconnect</td><td>Attic straight -&gt; F1 (174,258)</td><td><span class='tag'>NEXT Visit (Resched.)</span></td></tr>
+<tr><td><strong>11</strong></td><td><strong>LIV</strong></td><td>20A AF</td><td>12/2 (ENT)</td><td>Living L1–L6 + Hall H1 (L6 pocket hold)</td><td>Attic -&gt; JB-LIV (+1.5&quot; ext)</td><td><span class='tag'>EMPTY ENT HOLD</span></td></tr>
+<tr><td><strong>12</strong></td><td><strong>DIN</strong></td><td>20A AF</td><td>12/2 (ENT)</td><td>Dining D1–D4 (No D5 on D04; D6 pocket hold)</td><td>Attic -&gt; JB-DIN</td><td><span class='tag'>EMPTY ENT HOLD</span></td></tr>
+<tr><td><strong>13</strong></td><td><strong>BED</strong></td><td>20A AF</td><td>12/2 (ENT)</td><td>Bedroom B1–B5 + Closet LV Switch</td><td>Attic -&gt; JB-BED</td><td><span class='tag'>EMPTY ENT HOLD</span></td></tr>
+<tr><td><strong>14</strong></td><td><strong>BATH-R</strong></td><td>20A GF</td><td>12/2 NM-B</td><td>Bath Vanity V1 + Toilet Bidet T1</td><td>Attic -&gt; JB-BR</td><td><span class='tag'>Pre-Tue Tile</span></td></tr>
+<tr><td><strong>15</strong></td><td><strong>BATH-L</strong></td><td>15A AF/Std</td><td>14/2 NM-B</td><td>Bath Ceiling Light, Vanity &amp; Humidity Fan</td><td>Attic -&gt; JB-BL (open ceiling)</td><td><span class='tag'>Pre-Tue Tile</span></td></tr>
+<tr><td><strong>16</strong></td><td><strong>LAUN-W</strong></td><td>20A DF</td><td>12/2 NM-B</td><td>LG WashTower Washer (2-Gang Left)</td><td>Attic straight (no JB)</td><td><span class='tag'>Verify LG manual</span></td></tr>
+<tr><td><strong>17</strong></td><td><strong>LTG</strong></td><td>15A AF</td><td>14/2 + 14/3</td><td>Hall 3-Way, Liv/Din/Bed/Laun Lights + Smoke/CO</td><td>Attic -&gt; JB-LT + 14/3 loop</td><td><span class='tag'>Verify routes</span></td></tr>
+<tr><td><strong>18</strong></td><td><strong>LAUN-D</strong></td><td>15A DF</td><td>14/2 NM-B</td><td>LG WashTower Gas Dryer (2-Gang Right)</td><td>Attic straight (no JB)</td><td><span class='tag'>Verify LG manual</span></td></tr>
+<tr><td><strong>19</strong></td><td><strong>SPARE</strong></td><td>Open</td><td>—</td><td>Optional Dedicated T1 Heated Bidet (10–12A)</td><td>Reserve / Future</td><td><span class='tag'>Owner Option</span></td></tr>
+<tr><td><strong>20</strong></td><td><strong>ATTIC</strong></td><td>15A DF/GF</td><td>14/2 NM-B</td><td>Always-Live GFCI (Platform) + 2 Enclosed LEDs</td><td>Attic straight + Opt A/B Sw</td><td><span class='tag'>Choose Opt A/B</span></td></tr></tbody></table><div class="summary-bar"><div><strong>NEC 220.82 Demand Audit:</strong> 13,975 VA connected → 11,590 VA demand = <strong>48.3A</strong> vs. NEXT 80A/#4 Cu feeder (&gt;31A headroom). Confirm mounted Eaton BRP20L125G box, exterior entry &amp; 80A feed + conditional 100A main breaker with NEXT (rescheduled planning visit).</div><div><strong>Takeoff Ref (Do Not Pull Held Non-Kitchen ENT):</strong> Active NM-B = Kitchen + Bath + Laundry + HVAC + Attic + Lighting · Non-kitchen outlets (Sp 11–13) = Approved Boxes + EMPTY ENT only until inspection &amp; release.</div></div><div class="tb"><div class="tb-main"><div class="tb-proj">1231 11th AVENUE, UNIT 4 · SAN FRANCISCO, CA &nbsp;|&nbsp; OFFICIAL ELECTRICAL WORKING DRAWINGS (NOT A PERMIT SET)</div><div class="tb-title">RECONCILED 20-SPACE SUBPANEL D04 SCHEDULE, NEC 220.82 AUDIT &amp; ACTIVE HOLDS</div></div><div class="tb-meta"><div><strong>SHEET:</strong> E-06</div><div><strong>REV:</strong> R3 (2026-11-24)</div><div><strong>SCALE:</strong> SCHEDULE</div><div class="tb-status">HOLD: NEXT PLANNING VISIT</div></div></div></section>
+</body>
+</html>

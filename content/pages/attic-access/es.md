@@ -47,5 +47,6 @@
   <ul>
     <li>Conservar intactos el riel superior de cuadros a <code>103&quot;</code>, el zoclo de <code>9-1/2&quot;</code>, la lámpara del descanso y los contramarcos de Puerta 4 y ventana &mdash; mantener el marco de la escotilla separado de las molduras originales.</li>
     <li>Ver <a href="#hvac/sec-hvac-summary">Resumen NEXT vs. Cuadrilla</a> para la coordinación completa de calefacción y subpanel.</li>
+    <li><strong>PDFs para imprimir (R4 y R6):</strong> <a href="./wiki-pdfs/2026-11-24_U4_attic_hatch_R4_ES.pdf" target="_blank" rel="noopener">Plano 2 Págs. Escotilla y Pasillo R4 (ES PDF)</a> &middot; <a href="./wiki-pdfs/2026-11-24_U4_attic_hatch_R4_EN.pdf" target="_blank" rel="noopener">English R4 PDF</a> &middot; <a href="./wiki-docs/attic-hatch-r6/Attic-hatch-practical-guide_R6_ES.pdf" target="_blank" rel="noopener">Guía Práctica 8 Págs. R6 (ES PDF)</a> &middot; <a href="./wiki-docs/attic-hatch-r6/Attic-hatch-practical-guide_R6_EN.pdf" target="_blank" rel="noopener">Guide R6 (EN PDF)</a>.</li>
   </ul>
 </details>

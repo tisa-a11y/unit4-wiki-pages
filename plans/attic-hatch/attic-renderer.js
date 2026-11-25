@@ -42,7 +42,7 @@
     title_en: 'Permanent Attic Access Hatch, Walkway & Enclosure (24" × 36" Finished Clear)',
     title_es: 'Escotilla Permanente de Ático, Pasillo y Sellado (24" × 36" Libre Terminado)',
     governing_spec: 'attic/SPEC.md',
-    base_rev: 'rev-20261122-attic-r3',
+    base_rev: 'rev-20261124-attic-r4',
     status: 'PLANNING_HOLD_ZERO_CUTS_UNTIL_GATES_PASS',
     orientation: {
       north_angle_deg: 0,
@@ -53,7 +53,7 @@
     },
     equipment_basis: {
       furnace: {
-        model: 'Carrier/Bryant Legacy 45k BTU, 80% AFUE, Low NOx (confirm exact SKU Mon Nov 23)',
+        model: 'Carrier/Bryant Legacy 45k BTU, 80% AFUE, Low NOx (confirm exact SKU at NEXT planning visit)',
         height_in: 33.25,
         width_in: 14.19,
         depth_in: 29.0,
@@ -134,7 +134,7 @@
       fixed_frame_seal: '3/8" backer rod + paintable sealant',
       ledge_weatherstrip: 'Continuous 1/2" × 1/8" closed-cell on 1×2 ledges (clean of paint/caulk)',
       lid_seam: 'Uncaulked operable perimeter seam (test-open twice)',
-      lid_insulation: '2 unfaced R-matched batts (12-5/8" × 37-1/4") + 3 loose 1x2 gasket ledger + 6 screw eyes (<= 1/2" shank)',
+      lid_insulation: 'Uninsulated 3/4" ply lid + 2 ring pulls + 4 latches outside 24"×36" clear (unconditioned Door 4 landing)" × 37-1/4") + 3 loose 1x2 gasket ledger + confirm w/ NEXT (<= 1/2" shank)',
       insulation_dam: '1x2 gasket ledger standing 2" above loose-fill insulation',
       lid_finish: 'Proposed ~1-1/2" recessed 3/4" ply lid (PENDING OWNER OK) + compression latches outside 24"×36" clear',
       temp_bedroom_closet_hold: 'KEEP OPEN until LV switch cable AND permanent 24"×36" hatch exist',
@@ -221,7 +221,7 @@
       drag_hint: 'Drag walkway handle on drawing or edit ft below',
       lyr_framing: 'Joists & Cut',
       lyr_furnace: 'Furnace Pass & Platform',
-      lyr_enclosure: 'Dam, Seals & Power',
+      lyr_enclosure: 'Gasket, Frame & Power',
       circle_bar_hint: 'Draw a circle around any spot on the plan (touch or mouse) to attach a callout note.',
       btn_clear_sketch: 'Clear Sketch',
       btn_circle_done: 'Exit Circle Mode',
@@ -241,10 +241,10 @@
       rules_pill: '24" × 36" Clear Locked',
       rules_cards: [
         { hold: true, title: '1. Fire Rating + Joist Bay B First', body: 'Verify ceiling fire-rating status AND joist bay B before cutting or buying wood kit. Listed fire-rated ceiling disables the wood kit.' },
-        { hold: false, title: '2. Air-Seal & Thermal Barrier', body: '3/8" backer rod + sealant on fixed frame; continuous 1/2"×1/8" closed-cell weatherstrip on 1×2 ledges; uncaulked operable lid seam (test-open twice); 2 unfaced batts (12-5/8"×37-1/4") + 3 wire loops + 6 screw eyes (<=1/2"); 1x2 gasket ledger 2" above loose fill.' },
+        { hold: false, title: '2. Air-Seal & Dust Gasket (No Lid Batts)', body: '3/8" backer rod + sealant on fixed frame; continuous 1/2"×1/8" closed-cell weatherstrip on 1×2 ledges; uncaulked operable lid seam (test-open twice); Uninsulated 3/4" ply lid + 2 ring pulls + 4 latches outside 24"×36" clear (unconditioned Door 4 landing)"×37-1/4") + 3 wire loops + confirm w/ NEXT (<=1/2"); 1x2 gasket ledger 2" above loose fill.' },
         { hold: false, title: '3. Lid Finish & Latches', body: 'Proposed ~1-1/2" recessed 3/4" ply lid (pending owner OK) with compression latches mounted outside the locked 24"×36" clear opening.' },
         { hold: true, title: '4. Keep Bedroom Closet Open', body: 'KEEP temporary bedroom closet ceiling opening OPEN until BOTH the low-voltage switch cable AND the permanent 24"×36" hatch are installed.' },
-        { hold: true, title: '5. Active Roof Leak Gate', body: 'Repair the active roof/attic water leak before enclosing framing, setting insulation batts, or finishing ceiling work.' }
+        { hold: true, title: '5. Active Roof Leak Gate', body: 'Repair the active roof/attic water leak before enclosing framing, or finishing ceiling work.' }
       ],
       clashes_title: 'Flagged Clashes & Field Checks (Never Auto-Resolved)',
       clashes_lock_pill: 'Immutable · Verify in Field',
@@ -354,7 +354,7 @@
       drag_hint: 'Arrastra la manija del pasillo en el plano o captura pies abajo',
       lyr_framing: 'Vigas y Corte',
       lyr_furnace: 'Calefactor y Plataforma',
-      lyr_enclosure: 'Presa, Sellos y Energía',
+      lyr_enclosure: 'Empaque, Marco y Energía',
       circle_bar_hint: 'Dibuja un círculo sobre cualquier punto del plano (dedo o ratón) para adjuntar un comentario.',
       btn_clear_sketch: 'Borrar Trazo',
       btn_circle_done: 'Salir de Círculo',
@@ -374,7 +374,7 @@
       rules_pill: '24" × 36" Libre Fijo',
       rules_cards: [
         { hold: true, title: '1. Cortafuego + Claro Vigas B Primero', body: 'Confirmar si el plafón es cortafuego Y medir claro B antes de cortar o comprar madera. Si es cortafuego, el kit de madera queda deshabilitado.' },
-        { hold: false, title: '2. Sello de Aire y Barrera Térmica', body: 'Cordón respaldo 3/8" + sellador en marco fijo; burlete continuo 1/2"×1/8" en apoyos 1×2; junta operable sin sellador (abrir 2 veces); 2 1x2 gasket ledger (12-5/8"×37-1/4") + 3 alambres cal.16 + 6 armellas (<=1/2"); presa triplay 2" sobre aislante.' },
+        { hold: false, title: '2. Sello Fijo y Empaque (Sin Fibra)', body: 'Cordón respaldo 3/8" + sellador en marco fijo; burlete continuo 1/2"×1/8" en apoyos 1×2; junta operable sin sellador (abrir 2 veces); 2 1x2 gasket ledger (12-5/8"×37-1/4") + 3 alambres cal.16 + confirm w/ NEXT (<=1/2"); marco con empaque guardapolvo (sin dique)" sobre aislante.' },
         { hold: false, title: '3. Tapa y Broches', body: 'Tapa propuesta de triplay 3/4" remetida ~1-1/2" (pendiente aprobación dueña) con broches de compresión fuera del claro 24"×36".' },
         { hold: true, title: '4. Mantener Clóset Abierto', body: 'MANTENER ABIERTA la abertura temporal del clóset de recámara hasta tener TANTO el cable de bajo voltaje COMO la escotilla permanente 24"×36".' },
         { hold: true, title: '5. Reparar Gotera del Techo', body: 'Reparar la filtración activa de agua en techo/ático antes de encerrar bastidor, colocar aislante o cerrar plafón.' }
@@ -700,16 +700,19 @@
       wood_screws_9_pcs: m.woodKitDisabled ? 30 : 60,
       backer_rod_3_8_lf: backerRodLF,
       weatherstrip_closed_cell_lf: weatherstripLF,
-      unfaced_batts_count: 2,
+      unfaced_batts_count: 0,
       wire_loops_16ga_count: 3,
-      screw_eyes_half_in_count: 6,
+      screw_eyes_half_in_count: 0,
       compression_latches_count: 4
     };
   }
 
   function computeRevisionStamp() {
     const tr = I18N[currentLang];
-    const rev = lastSavedRevId || state.base_rev || 'rev-20261120-attic-001';
+    const rev = 'rev-20261124-attic-r4';
+    if (params.get('snapshot') === '1' || params.get('print') === '1') {
+      return currentLang === 'es' ? `${rev} · Edición Oficial R4 (24 Nov 2026)` : `${rev} · Official Print Edition R4 (2026-11-24)`;
+    }
     if (hasUnsyncedLocalEdits) return `${rev} · ${tr.not_yet_synced}`;
     if ((tailnetState.pendingEod && tailnetState.pendingEod.length > 0) || (state.field_overrides && state.field_overrides.length > 0)) {
       return `${rev} · ${tr.pending_eod_stamp}`;
@@ -836,22 +839,20 @@
       <rect x="${sx(4).toFixed(1)}" y="${(yAtticFloor - 11 * pxPerIn).toFixed(1)}" width="${((cutStartIn - 4) * pxPerIn).toFixed(1)}" height="${(11 * pxPerIn).toFixed(1)}" fill="url(#insulHatch)" stroke="#d97706" stroke-width="0.9"/>
       <rect x="${sx(cutStartIn + woodCutW).toFixed(1)}" y="${(yAtticFloor - 11 * pxPerIn).toFixed(1)}" width="${((platXIn - (cutStartIn + woodCutW)) * pxPerIn).toFixed(1)}" height="${(11 * pxPerIn).toFixed(1)}" fill="url(#insulHatch)" stroke="#d97706" stroke-width="0.9"/>
 
-      <!-- 4-Sided Plywood Insulation Dam standing 2" above loose fill (13" high) -->
-      <rect data-elem="insulation-dam" x="${sx(cutStartIn - 1).toFixed(1)}" y="${(yAtticFloor - 13 * pxPerIn).toFixed(1)}" width="${(1.5 * pxPerIn).toFixed(1)}" height="${(13 * pxPerIn).toFixed(1)}" fill="#8f4a16"/>
-      <rect x="${sx(cutStartIn + woodCutW - 0.5).toFixed(1)}" y="${(yAtticFloor - 13 * pxPerIn).toFixed(1)}" width="${(1.5 * pxPerIn).toFixed(1)}" height="${(13 * pxPerIn).toFixed(1)}" fill="#8f4a16"/>
+      <!-- uninsulated gasketed frame (unconditioned landing)" above loose fill (13" high) -->
+      
 
       <!-- Ceiling Joist Layer (split by hatch opening) -->
       <rect x="${sx(0).toFixed(1)}" y="${yAtticFloor.toFixed(1)}" width="${(cutStartIn * pxPerIn).toFixed(1)}" height="${(joistDepth * pxPerIn).toFixed(1)}" fill="url(#woodHatch)" stroke="#10202b" stroke-width="1.5"/>
       <rect x="${sx(cutStartIn + woodCutW).toFixed(1)}" y="${yAtticFloor.toFixed(1)}" width="${((wallSpan - (cutStartIn + woodCutW)) * pxPerIn).toFixed(1)}" height="${(joistDepth * pxPerIn).toFixed(1)}" fill="url(#woodHatch)" stroke="#10202b" stroke-width="1.5"/>
 
-      <!-- Locked 24" x 36" Hatch Opening + Lid + 2 Unfaced Batts + Weatherstrip -->
+      <!-- Locked 24" x 36" Hatch Opening + Lid + Uninsulated 3/4" ply lid + 2 ring pulls + 4 latches outside 24"×36" clear (unconditioned Door 4 landing)
       <rect data-elem="hatch-clear" x="${sx(hatchStartIn).toFixed(1)}" y="${yAtticFloor.toFixed(1)}" width="${(hatchClearW * pxPerIn).toFixed(1)}" height="${(joistDepth * pxPerIn).toFixed(1)}"
             fill="#e8f1fb" stroke="#15539e" stroke-width="1.8"/>
-      <!-- Recessed 3/4" ply lid (~1-1/2" recess) + 2 unfaced batts above -->
+      <!-- Recessed 3/4" ply lid (~1-1/2" recess) + Uninsulated 3/4" ply lid + 2 ring pulls + 4 latches outside 24"×36" clear (unconditioned Door 4 landing)
       <rect x="${sx(hatchStartIn).toFixed(1)}" y="${(yHallCeil - 2.25 * pxPerIn).toFixed(1)}" width="${(hatchClearW * pxPerIn).toFixed(1)}" height="${(1.5 * pxPerIn).toFixed(1)}"
             fill="${m.woodKitDisabled ? '#fecaca' : '#cbd5e1'}" stroke="${m.woodKitDisabled ? '#b91c1c' : '#10202b'}" stroke-width="1.3"/>
-      <rect x="${sx(hatchStartIn + 1).toFixed(1)}" y="${(yHallCeil - 10 * pxPerIn).toFixed(1)}" width="${((hatchClearW - 2) * pxPerIn).toFixed(1)}" height="${(7.5 * pxPerIn).toFixed(1)}"
-            fill="url(#insulHatch)" stroke="#b45309" stroke-width="1.1"/>
+      
       <text x="${sx(hatchStartIn + hatchClearW / 2).toFixed(1)}" y="${(yHallCeil + 14).toFixed(1)}" font-size="8.0" text-anchor="middle" font-weight="700" fill="#15539e">${isEs ? '36" LIBRE TERMINADO (FIJO)' : '36" FINISHED CLEAR (LOCKED)'}</text>
 
       <!-- 30" x 30" Service Platform + 33.25" Tall Carrier/Bryant Furnace + Type B Vent >= 1" -->
@@ -892,9 +893,9 @@
       <text x="526" y="152" font-size="8.0" font-weight="700" fill="#10202b">2. ${isEs ? 'Burlete y Junta Operable:' : 'Ledge Weatherstrip & Operable Seam:'}</text>
       <text x="536" y="166" font-size="7.5" fill="#334155">${isEs ? '1/2"×1/8" celda cerrada en apoyos 1×2 (sin pintura/sellador).' : 'Continuous 1/2"×1/8" closed-cell on 1×2 ledges (clean of paint).'}</text>
       <text x="536" y="179" font-size="7.5" fill="#334155">${isEs ? 'Junta de tapa SIN sellador — probar apertura 2 veces.' : 'Uncaulked operable lid seam — test-open twice.'}</text>
-      <text x="526" y="199" font-size="8.0" font-weight="700" fill="#10202b">3. ${isEs ? 'Aislamiento Tapa + Presa 4 Lados:' : 'Lid Batts + 1x2 gasket ledger:'}</text>
-      <text x="536" y="213" font-size="7.5" fill="#334155">${isEs ? '2 1x2 gasket ledger (12-5/8"×37-1/4") + 3 alambres cal.16 + 6 armellas <=1/2".' : '2 unfaced batts (12-5/8"×37-1/4") + 3 1x2 gasket ledger + 6 screw eyes <=1/2".'}</text>
-      <text x="536" y="226" font-size="7.5" fill="#334155">${isEs ? 'Presa de triplay 4 lados 2" arriba del aislante suelto.' : '1x2 gasket ledger standing 2" above loose-fill insulation.'}</text>
+      <text x="526" y="199" font-size="8.0" font-weight="700" fill="#10202b">3. ${isEs ? 'Tapa 3/4" Sin Fibra + Empaque:' : 'Lid Batts + 1x2 gasket ledger:'}</text>
+      <text x="536" y="213" font-size="7.5" fill="#334155">${isEs ? '2 1x2 gasket ledger (12-5/8"×37-1/4") + 3 alambres cal.16 + confirm w/ NEXT <=1/2".' : 'Uninsulated 3/4" ply lid + 2 ring pulls + 4 latches outside 24"×36" clear (unconditioned Door 4 landing)"×37-1/4") + 3 1x2 gasket ledger + confirm w/ NEXT <=1/2".'}</text>
+      <text x="536" y="226" font-size="7.5" fill="#334155">${isEs ? 'Descanso no acondicionado (CAEC §160.1(a)): cero fibra ni dique.' : '1x2 gasket ledger standing 2" above loose-fill insulation.'}</text>
       <text x="526" y="246" font-size="8.0" font-weight="700" fill="#10202b">4. ${isEs ? 'Tapa Remetida y Broches:' : 'Recessed Lid & Latches:'}</text>
       <text x="536" y="260" font-size="7.5" fill="#334155">${isEs ? 'Tapa triplay 3/4" remetida ~1-1/2" (pend. dueña) · broches fuera de 24"×36".' : 'Proposed ~1-1/2" recessed 3/4" ply lid (pending OK) · latches outside 24"×36".'}</text>
       <text x="526" y="282" font-size="8.0" font-weight="700" fill="#b91c1c">5. ${isEs ? 'Bloqueos Clóset y Gotera Techo:' : 'Closet Hold & Active Roof Leak:'}</text>
@@ -905,7 +906,7 @@
       <text x="536" y="362" font-size="7.5" fill="#334155">• ${isEs ? 'Lámpara LED cerrada con apagador en entrada (conservar luz descanso).' : 'Entrance-switched enclosed LED light (retain landing light).'}</text>
       <text x="536" y="376" font-size="7.5" fill="#334155">• ${isEs ? 'Contacto 120V GFCI <= 25 pies en lado línea (independiente).' : '120V GFCI <= 25 ft wired live on line side (independent of disconnect).'}</text>
       <text x="536" y="390" font-size="7.5" fill="#334155">• ${isEs ? 'Circuito dedicado calefactor + desconectador a la vista.' : 'Dedicated furnace circuit + disconnect switch in sight.'}</text>
-      <text x="536" y="410" font-size="7.5" font-weight="700" fill="#b91c1c">• ${isEs ? 'Plataforma 30"×30": SIN almohadillas antivibración de John.' : '30"×30" Platform: confirm vibration mount requirements w/ NEXT (HVAC handles install).'}</text>
+      <text x="536" y="410" font-size="7.5" font-weight="700" fill="#b91c1c">• ${isEs ? 'Plataforma 30"×30": confirmar herraje de montaje con NEXT.' : '30"×30" Platform: confirm vibration mount requirements w/ NEXT (HVAC handles install).'}</text>
 
       <!-- Bar Scale -->
       <text x="${barX}" y="${barY - 14}" font-size="8.2" font-weight="700" fill="#10202b">${isEs ? 'ESCALA GRÁFICA CORTE (Escala Real X = Y)' : 'SECTION BAR SCALE (Uniform True Scale X = Y)'}</text>
@@ -1145,9 +1146,7 @@
 
       <!-- 1x2 gasket ledger outside rough opening -->
       ${layers.enclosure ? `
-        <rect data-elem="insulation-dam" x="${(cx - cutWpx / 2 - 10).toFixed(1)}" y="${(cy - cutHpx / 2 - 10).toFixed(1)}" width="${(cutWpx + 20).toFixed(1)}" height="${(cutHpx + 20).toFixed(1)}"
-              fill="none" stroke="#8f4a16" stroke-width="2.0" stroke-dasharray="3,2"/>
-      ` : ''}
+        ` : ''}
 
       <!-- Proposed Wood-Kit Rough Cut (27.5" x 39.5" — DISABLED when FIRE_RATED_REQUIRED) -->
       ${woodCutSvg}
@@ -1179,7 +1178,7 @@
       <line x1="${(cx + clearWpx / 2 + 18).toFixed(1)}" y1="${(cy - clearHpx / 2).toFixed(1)}" x2="${(cx + clearWpx / 2 + 18).toFixed(1)}" y2="${(cy + clearHpx / 2).toFixed(1)}" stroke="#15539e" stroke-width="1.3"/>
       <text x="${(cx + clearWpx / 2 + 25).toFixed(1)}" y="${(cy + 3).toFixed(1)}" font-size="8.4" font-weight="700" fill="#15539e">24"</text>
       <text x="36" y="492" font-size="7.8" font-weight="700" fill="${joistStroke}">${isEs ? 'Resultado Vigas B:' : 'Joist Bay B Check:'} ${esc(joistResultTxt)}</text>
-      <text x="36" y="508" font-size="7.1" fill="#4b5c69">${isEs ? 'Presa 4 lados 2" arriba del aislante · Broches fuera del claro 24"×36"' : '1x2 gasket ledger 2" above loose fill · Latches outside 24"×36" clear'}</text>
+      <text x="36" y="508" font-size="7.1" fill="#4b5c69">${isEs ? 'Descanso no acondicionado (sin fibra/dique) · Broches fuera de 24"×36"' : '1x2 gasket ledger 2" above loose fill · Latches outside 24"×36" clear'}</text>
 
       <!-- VIEW 2 (BOTTOM-LEFT): DRAGGABLE WALKWAY L (<= 20 ft) + 30"x30" SERVICE PLATFORM (scaleX === scaleY = 1.28 px/in) -->
       <rect x="24" y="534" width="478" height="392" rx="4" fill="#fbfdfb" stroke="#94a3b8" stroke-width="1.1"/>
@@ -1234,7 +1233,7 @@
         ${isEs ? 'Pasillo L:' : 'Walkway L:'} ${walkProv ? tr.provisional_outline : `${m.walkFt} ft · ${tk.walkway_sheets_4x8} ${isEs ? 'hojas 4×8 (1 tira 24"/hoja por sierra)' : 'sheets 4×8 (1 true 24" strip/sheet)'}`}
       </text>
       <text x="36" y="812" font-size="7.4" fill="#334155">• ${isEs ? 'Material obligatorio: OSB 23/32" o triplay estructural 3/4" (NUNCA 3/8").' : 'Required decking: 23/32" OSB or 3/4" structural ply (NEVER 3/8" ply).'}</text>
-      <text x="36" y="828" font-size="7.4" fill="#334155">• ${isEs ? 'Plataforma 30"×30" nivelada · SIN almohadillas antivibración de John.' : 'Level 30"×30" service platform · confirm vibration mount requirements w/ NEXT.'}</text>
+      <text x="36" y="828" font-size="7.4" fill="#334155">• ${isEs ? 'Plataforma 30"×30" nivelada · confirmar herraje de montaje con NEXT.' : 'Level 30"×30" service platform · confirm vibration mount requirements w/ NEXT.'}</text>
       <text x="36" y="844" font-size="7.4" fill="#334155">• ${isEs ? 'Paso libre mínimo 30" · Lámpara LED cerrada + GFCI 120V en lado línea <= 25 pies.' : '30" clear passage · Enclosed LED utility light + line-side 120V GFCI <= 25 ft.'}</text>
       <text x="36" y="864" font-size="7.4" font-weight="700" fill="#15539e">${isEs ? 'Arrastra el círculo azul ↔ para probar largo L (0–25 pies) y ver hojas 4×8 en vivo.' : 'Drag blue ↔ handle to test walkway L (0–25 ft) and recalculate 4×8 sheets live.'}</text>
 
@@ -1274,7 +1273,7 @@
       <text x="526" y="402" font-size="8.0" font-weight="700" fill="#10202b">${isEs ? 'Hojas 4×8 (OSB 23/32" o Triplay 3/4"):' : '4×8 Sheets (23/32" OSB / 3/4" Ply):'} ${tk.total_osb_ply_sheets_gross !== null ? `${tk.total_osb_ply_sheets_gross} (+${tk.waste_pct}%)` : tr.measure_on_site}</text>
       <text x="526" y="418" font-size="7.6" fill="${m.woodKitDisabled ? '#b91c1c' : '#334155'}">${isEs ? 'Kit Madera (1×2 / 1×3):' : 'Wood Kit (1×2 / 1×3):'} ${m.woodKitDisabled ? (isEs ? 'DESHABILITADO (Exige Cortafuego)' : 'DISABLED (Fire-Rated Required)') : `${tk.ledge_1x2_lf} LF 1×2 · ${tk.trim_1x3_lf} LF 1×3`}</text>
       <text x="526" y="434" font-size="7.6" fill="#334155">${isEs ? 'Sellos:' : 'Seals:'} ${tk.backer_rod_3_8_lf} LF 3/8" rod · ${tk.weatherstrip_closed_cell_lf} LF 1/2"×1/8" strip</text>
-      <text x="526" y="450" font-size="7.6" fill="#334155">${isEs ? 'Tapa:' : 'Lid:'} 2 unfaced batts · 3 × 16-ga loops · 6 screw eyes (&le;1/2")</text>
+      <text x="526" y="450" font-size="7.6" fill="#334155">${isEs ? 'Tapa:' : 'Lid:'} uninsulated 3/4" ply · 2 ring pulls · 4 latches (outside 24"×36")</text>
       <text x="526" y="472" font-size="7.3" font-weight="700" fill="#92400e">${isEs ? 'Cantidades brutas propuestas (0 precios) — verificar stock.' : 'Gross proposed qty only (zero prices) — verify stock first.'}</text>
 
       <!-- Holds & Attached Comments Panel -->
@@ -1284,7 +1283,7 @@
       <text x="526" y="590" font-size="7.6" fill="#7f1d1d">• ${isEs ? 'NUNCA reducir el claro libre terminado de 24" × 36".' : 'NEVER shrink the locked 24" × 36" finished clear opening.'}</text>
       <text x="526" y="607" font-size="7.6" fill="#7f1d1d">• ${isEs ? 'Mantener abierto clóset temporal hasta cable LV + escotilla.' : 'Keep temp bedroom closet OPEN until LV cable + permanent hatch.'}</text>
       <text x="526" y="624" font-size="7.6" fill="#7f1d1d">• ${isEs ? 'Reparar gotera activa del techo antes de aislar o cerrar.' : 'Resolve active roof/attic leak before insulating or enclosing.'}</text>
-      <text x="526" y="641" font-size="7.6" fill="#7f1d1d">• ${isEs ? 'NUNCA usar triplay 3/8" ni almohadillas antivibración de John.' : 'NEVER use 3/8" plywood for walkway or vibration pads from John.'}</text>
+      <text x="526" y="641" font-size="7.6" fill="#7f1d1d">• ${isEs ? 'NUNCA usar triplay 3/8" ; confirmar herrajes de montaje con NEXT.' : 'NEVER use 3/8" plywood for walkway ; confirm any furnace mounts w/ NEXT.'}</text>
       <line x1="526" y1="658" x2="884" y2="658" stroke="#fca5a5" stroke-width="0.9"/>
       <text x="526" y="676" font-size="7.8" font-weight="700" fill="#10202b">${isEs ? 'Comentarios Adjuntos' : 'Attached Callouts'}: ${(state.pins || []).length} · ${isEs ? 'Pendientes EOD' : 'Pending EOD'}: ${(tailnetState.pendingEod || []).length}</text>
 
@@ -1388,7 +1387,7 @@
     }
 
     const revBadge = document.getElementById('rev-badge');
-    if (revBadge) revBadge.textContent = state.base_rev || 'rev-20261120-attic-001';
+    if (revBadge) revBadge.textContent = state.base_rev || 'rev-20261124-attic-r4';
 
     const syncPill = document.getElementById('sync-stamp-pill');
     if (syncPill) {
@@ -1459,8 +1458,8 @@
 
     const sheetSub = tk.walkway_sheets_4x8 !== null
       ? (es
-        ? `Pasillo (${m.walkFt} pies): ${tk.walkway_sheets_4x8} hoja(s) + Plataforma/Presa: 1 hoja · Neto ${tk.total_osb_ply_sheets_net}`
-        : `Walkway (${m.walkFt} ft): ${tk.walkway_sheets_4x8} sheet(s) + Platform/Dam: 1 sheet · Net ${tk.total_osb_ply_sheets_net}`)
+        ? `Pasillo (${m.walkFt} pies): ${tk.walkway_sheets_4x8} hoja(s) + Plataforma + Tapa: 1 hoja · Neto ${tk.total_osb_ply_sheets_net}`
+        : `Walkway (${m.walkFt} ft): ${tk.walkway_sheets_4x8} sheet(s) + Platform + Lid: 1 sheet · Net ${tk.total_osb_ply_sheets_net}`)
       : (es
         ? 'Regla sierra: <=7 pies = 1, 7–14 pies = 2, 14–20 pies = 3 hojas (OSB 23/32" o triplay 3/4", NUNCA 3/8")'
         : 'Saw-kerf: <=7 ft = 1, 7–14 ft = 2, 14–20 ft = 3 sheets (23/32" OSB / 3/4" ply, NEVER 3/8")');
@@ -1497,9 +1496,9 @@
       </article>
 
       <article class="takeoff-card">
-        <div class="takeoff-card-title">${es ? 'Aislamiento Tapa y Herrajes' : 'Lid Insulation & Hardware'}</div>
-        <div class="takeoff-card-big">2 ${es ? 'colchonetas' : 'batts'} · 6 ${es ? 'armellas' : 'eyes'}</div>
-        <div class="takeoff-card-sub">${es ? '2 1x2 gasket ledger (12-5/8"×37-1/4") + 3 alambres cal.16 + 6 armellas <=1/2" + 4 broches' : '2 unfaced R-matched batts (12-5/8"×37-1/4") + 3 1x2 gasket ledger + 6 screw eyes <=1/2" + 4 latches'}</div>
+        <div class="takeoff-card-title">${es ? 'Aislamiento Tapa y Herrajes' : 'Lid Hardware (Uninsulated)'}</div>
+        <div class="takeoff-card-big">2 ${es ? 'jaladeras' : 'pulls'} · 4 ${es ? 'cierres' : 'latches'}</div>
+        <div class="takeoff-card-sub">${es ? '2 1x2 gasket ledger (12-5/8"×37-1/4") + 3 alambres cal.16 + confirm w/ NEXT <=1/2" + 4 broches' : 'Uninsulated 3/4" ply lid + 2 ring pulls + 4 latches outside 24"×36" clear (unconditioned Door 4 landing)"×37-1/4") + 3 1x2 gasket ledger + confirm w/ NEXT <=1/2" + 4 latches'}</div>
       </article>
     `;
   }
@@ -2526,6 +2525,7 @@
     initCircleCanvas();
     wireControls();
     await hydrateFromLocalJson();
+    if (params.get('snapshot') === '1' || params.get('print') === '1') { state.pins = []; state.field_overrides = []; hasUnsyncedLocalEdits = false; }
     syncFormFromState();
     renderAll();
     if (params.get('snapshot') !== '1') await checkTailnetAndLoad();

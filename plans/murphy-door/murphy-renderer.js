@@ -29,7 +29,7 @@
     title_en: 'Unit 4 Murphy Bookcase Door — Hallway Doorway B',
     title_es: 'Puerta Librero Murphy — Puerta Central B del Pasillo',
     governing_spec: 'laundry/SPEC.md',
-    base_rev: 'rev-20261123-murphy-r9',
+    base_rev: 'rev-20261124-murphy-r2',
     status: 'HOLD_UNTIL_9_POINT_FIELD_MEASUREMENTS',
     orientation: {
       north_angle_deg: 0,
@@ -125,7 +125,7 @@
       dictate_stop: 'Listening… Tap to Stop',
       firewall_err: 'Blocked by privacy guard: keep prices, bids, lender terms, and order numbers in Private records only.',
       synced_label: 'Synced to Murphy Baseline',
-      local_preview: 'Not Yet Synced (Local Preview)',
+      local_preview: 'Official Seed R2 (2026-11-24)',
       pending_eod: 'Field Update · Pending EOD Review',
       off_tailnet: 'Read-Only / Local Export (Off Tailnet)',
       on_tailnet: 'Tailnet Connected',
@@ -166,7 +166,7 @@
       dictate_stop: 'Escuchando… Tocar para Parar',
       firewall_err: 'Bloqueado por privacidad: nunca incluir precios, presupuestos ni números de orden.',
       synced_label: 'Sincronizado con Base Murphy',
-      local_preview: 'Sin Sincronizar (Vista Local)',
+      local_preview: 'Semilla Oficial R2 (24 Nov 2026)',
       pending_eod: 'Actualización en Sitio · Pendiente EOD',
       off_tailnet: 'Solo Lectura / Exportar Local (Fuera de Tailnet)',
       on_tailnet: 'Conectado a Tailnet',
@@ -1015,7 +1015,7 @@
   }
 
   function computeRevisionStamp() {
-    const rev = state.base_rev || 'rev-20261123-murphy-r9';
+    const rev = state.base_rev || 'rev-20261124-murphy-r2';
     if (hasUnsyncedLocalEdits) return `${rev} · ${I18N[currentLang].local_preview}`;
     if (lastSavedRevId) return `${rev} · ${I18N[currentLang].pending_eod} (${lastSavedRevId})`;
     return `${rev} · ${I18N[currentLang].synced_label}`;

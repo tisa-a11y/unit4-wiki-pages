@@ -1,4 +1,4 @@
-/* Unit 4 HVAC & Ductwork (Mon Nov 23 Walkthrough) Interactive What-If Renderer & Tailnet Client
+/* Unit 4 HVAC & Ductwork (rescheduled NEXT planning visit Walkthrough) Interactive What-If Renderer & Tailnet Client
  * Module 3 — hvac/interactive-pilot/hvac-renderer.js
  *
  * Integration contract on window.U4PLAN:
@@ -28,7 +28,7 @@
     title_en: 'Unit 4 HVAC & Ductwork — Attic What-If Layout',
     title_es: 'Calefacción y Ductos Unidad 4 — Plano Interactivo en Ático',
     governing_spec: 'hvac/SPEC.md',
-    base_rev: 'rev-20261122-hvac-r3',
+    base_rev: 'rev-20261124-hvac-r4',
     status: 'PLANNING_SANDBOX_MON_NOV23_WALKTHROUGH',
     orientation: {
       north_angle_deg: 0,
@@ -85,8 +85,8 @@
       {
         id: 'clash-hvac-feeder-80v100',
         severity: 'HIGH',
-        en: 'Electrical reconciliation required Mon Nov 23: NEXT scope includes 80A (#4 copper) feeder + 125A 20-space panel vs. earlier 100A / onsite panel box note.',
-        es: 'Confirmar el lunes 23 nov con Serge y Alex: propuesta NEXT trae alimentador 80A (#4 cobre) y tablero 125A frente a nota previa de 100A / caja en sitio.'
+        en: 'Subpanel D04 & attic light check (rescheduled NEXT visit): confirm mounted Eaton BRP20L125G (125A, 20-space) box, exterior feeder entry, 80A feed + conditional 100A main breaker, and switched LED attic light connection.',
+        es: 'Subpanel D04 y luz de ático (visita NEXT reprogramada): confirmar uso de gabinete Eaton BRP20L125G montado, entrada exterior, línea 80A + principal condicional 100A y conexión de lámpara LED.'
       },
       {
         id: 'clash-hvac-roof-leaks',
@@ -105,13 +105,13 @@
   const I18N = {
     en: {
       hdr_title: 'Attic Furnace & Ducts — Interactive Layout',
-      hdr_sub: 'Mon Nov 23 Walkthrough (Serge + Alex) · Carrier/Bryant Legacy 45k BTU · Zero Prices',
+      hdr_sub: 'NEXT Planning Walkthrough (Reschedule Requested · Serge + Alex) · Carrier/Bryant Legacy 45k BTU · Zero Prices',
       btn_lang: 'Español (MX)',
       btn_circle_on: 'Exit Circle Mode',
       btn_circle_off: 'Circle-to-Correct',
       btn_svg: 'Export SVG',
       btn_pdf: 'Download / Print PDF',
-      hold_banner: '<strong>PLANNING SANDBOX — MON NOV 23 WALKTHROUGH (2–4 P.M. WITH SERGE &amp; ALEX):</strong> Zero ceiling cuts, zero roof penetrations, and zero equipment installation are released today. Confirm furnace spot, vent route, fire-rating, and feeder reconciliation first.',
+      hold_banner: '<strong>PLANNING WALKTHROUGH (RESCHEDULE REQUESTED — WITH SERGE &amp; ALEX):</strong> Planning visit only (not an inspection or installation). Zero ceiling cuts, zero flat-roof penetrations, and zero equipment installation released yet.',
       svg_title: 'True-to-Scale Attic Floor Plan & Section (Uniform Scale)',
       lyr_furnace: 'Furnace & Platform',
       lyr_walkway: 'Walkway & Hatch',
@@ -122,8 +122,8 @@
       tab_plan: 'Attic Floor Plan',
       tab_section: 'Flat-Roof Section (66" Cavity + Sidewall Exit)',
       photo_title: 'Candidate Access & Floor Plan Reference',
-      photo_badge: 'VERIFY MON NOV 23',
-      clashes_title: 'Clashes, Clearance Flags & Mon Nov 23 Checks',
+      photo_badge: 'VERIFY AT WALKTHROUGH',
+      clashes_title: 'Clashes, Clearance Flags & Walkthrough Checks',
       clashes_lock: 'Live + Immutable Flags',
       takeoff_title: 'Live Proposed Materials Takeoff & Existing Original Trim',
       takeoff_notice: 'PLANNING QUANTITIES ONLY — ZERO PRICES. Verify on-site lumber & electrical stock before buying.',
@@ -145,13 +145,13 @@
     },
     es: {
       hdr_title: 'Calefacción y Ductos en Ático — Plano Interactivo',
-      hdr_sub: 'Recorrido Lunes 23 Nov (Serge + Alex) · Calefactor Legacy 45k BTU · Sin Precios',
+      hdr_sub: 'Visita Planeación NEXT (Reprogramación Solicitada · Serge + Alex) · Calefactor Legacy 45k BTU · Sin Precios',
       btn_lang: 'English (US)',
       btn_circle_on: 'Salir de Círculo',
       btn_circle_off: 'Encerrar / Corregir',
       btn_svg: 'Exportar SVG',
       btn_pdf: 'Descargar / Imprimir PDF',
-      hold_banner: '<strong>PLANO DE TRABAJO — RECORRIDO LUNES 23 NOV (2–4 P.M. SERGE Y ALEX):</strong> Cero cortes en techo ni instalación todavía. Confirmar primero ubicación del equipo, ruta del ducto de escape, resistencia al fuego y capacidad eléctrica.',
+      hold_banner: '<strong>VISITA DE PLANEACIÓN (REPROGRAMACIÓN SOLICITADA — CON SERGE Y ALEX):</strong> Solo visita de planeación (no inspección ni instalación). Cero cortes en plafón, cero cortes en techo plano y cero instalación liberada todavía.',
       svg_title: 'Planta y Corte en Ático a Escala Real Uniforme',
       lyr_furnace: 'Equipo y Plataforma',
       lyr_walkway: 'Pasillo y Escotilla',
@@ -162,8 +162,8 @@
       tab_plan: 'Planta del Ático',
       tab_section: 'Corte Techo Plano (66" + Salida Lateral)',
       photo_title: 'Foto de Puerta 4 y Planta de Referencia',
-      photo_badge: 'VERIFICAR LUNES 23 NOV',
-      clashes_title: 'Choques, Claros y Puntos del Lunes 23 Nov',
+      photo_badge: 'VERIFICAR EN VISITA',
+      clashes_title: 'Choques, Claros y Puntos de la Visita',
       clashes_lock: 'Alertas Activas + Fijas',
       takeoff_title: 'Cálculo Vivo de Materiales Propuestos y Molduras Originales',
       takeoff_notice: 'SOLO CANTIDADES DE OBRA — CERO PRECIOS. Revisar existencia en bodega antes de comprar material.',
@@ -759,7 +759,7 @@
     /* Ceiling Joists & Insulation zone */
     svgEl('rect', { x: 80, y: joistY, width: 760, height: 18, fill: '#fde68a', stroke: '#92400e', 'stroke-width': 1.5 }, svg);
     svgEl('text', { x: 750, y: joistY + 13, 'text-anchor': 'end', 'font-size': 9.5, 'font-weight': 700, fill: '#78350f' }, svg).textContent =
-      es ? 'Vigas de techo y aislamiento (respetar claro libre)' : 'Ceiling Joists & Insulation (Maintain Air Seal + Dam)';
+      es ? 'Vigas de techo y aislamiento (respetar claro libre)' : 'Ceiling Joists & Insulation (Maintain Air Seal)';
 
     /* 66" Height vertical dimension */
     svgEl('line', { x1: 460, y1: ridgeY, x2: 460, y2: joistY, stroke: '#15539e', 'stroke-width': 1.5, 'stroke-dasharray': '4,3' }, svg);
@@ -1108,8 +1108,8 @@
           title: es ? 'Plataforma 30"×30" y Tornillos' : '30"×30" Platform & Screws',
           big: `1 ${es ? 'hoja' : 'sheet'} + ${screwCount} #9`,
           sub: es
-            ? `${platSqFt} sq ft netos · Tornillos #9 × 2-1/2" o 3" · CERO soportes antivibración (los incluye NEXT)`
-            : `${platSqFt} sq ft net · #9 × 2-1/2" or 3" wood screws · ZERO vibration pads for John (NEXT supplies)`
+            ? `${platSqFt} sq ft netos · Tornillos #9 × 2-1/2" o 3" · Confirmar con NEXT si requiere herraje/base de montaje`
+            : `${platSqFt} sq ft net · #9 × 2-1/2" or 3" wood screws · Confirm any furnace mounting pads w/ NEXT first`
         },
         {
           primary: false,
@@ -1124,8 +1124,8 @@
           title: es ? 'Ductos NEXT (Solo Recorrido)' : 'NEXT Ductwork (Walkthrough Ref)',
           big: `${ductGrossFt} ft ${es ? 'brutos' : 'gross'}`,
           sub: es
-            ? `3 inyecciones (${m.totalSupplyFt} ft) + 1 retorno (${m.r1Ft} ft) + 1 paso (${m.jdFt} ft) + escape Tipo B · +${waste}% tolerancia`
-            : `3 supplies (${m.totalSupplyFt} ft) + 1 return (${m.r1Ft} ft) + 1 jump (${m.jdFt} ft) + Type B flue · incl. +${waste}% allowance`
+            ? `3 inyecciones (${m.totalSupplyFt} ft) + 1 retorno (${m.r1Ft} ft) + 1 paso (${m.jdFt} ft) + salida lateral en muro · +${waste}% tolerancia`
+            : `3 supplies (${m.totalSupplyFt} ft) + 1 return (${m.r1Ft} ft) + 1 jump (${m.jdFt} ft) + horizontal sidewall vent · incl. +${waste}% allowance`
         }
       ];
 
@@ -1154,7 +1154,7 @@
           es ? 'Calefactor Ático (33.25×14.19×29")' : 'Attic Furnace (33.25"×14.19"×29")',
           `X=${fmtIn(m.fx)}, Y=${fmtIn(m.fy)}`,
           `30"×30" (${m.side})`,
-          es ? 'Revisar Lunes 23 Nov' : 'Verify Mon Nov 23',
+          es ? 'Confirmar en visita NEXT' : 'Confirm at NEXT visit',
           'wall_to_wall · PROPOSED'
         ],
         [
@@ -1181,7 +1181,7 @@
           !m.gfciPass ? 'row-fail' : ''
         ],
         [
-          es ? 'Escape Doble Pared Tipo B' : 'Type B Double-Wall Exhaust Flue',
+          es ? 'Salida Horizontal en Muro Exterior' : 'Horizontal Sidewall Exhaust Vent',
           `X=${fmtIn(m.flueX)}, Y=${fmtIn(m.flueY)}`,
           `${fmtIn(m.flueClear)} ${es ? 'claro' : 'clearance'}`,
           m.flueClearPass ? (es ? 'CUMPLE (≥ 1")' : 'PASS (≥ 1")') : (es ? 'FALLA (< 1"!)' : 'FAIL (< 1"!)'),
@@ -1317,12 +1317,12 @@
       pc.innerHTML = es
         ? '<li class="callout-alert"><strong>Arrastrar en Planta:</strong> Arrastra Equipo, Inyecciones (S1–S3), Retorno (RET), Paso, GFCI o Escape Tipo B en el SVG para probar largo del pasillo y cruces.</li>' +
           '<li><strong>Tope por Altura 66":</strong> El pasillo continuo de 24" máximo mide <strong>20 ft</strong> con 30" de paso libre y <strong>1 tira real de 24" por hoja 4×8</strong> (corte de sierra).</li>' +
-          '<li><strong>Aislamiento Incluido por NEXT:</strong> John arma solo la plataforma nivelada de 30" × 30" — <strong>confirmar bases antivibración con NEXT</strong>.</li>' +
-          '<li><strong>Alimentador por Confirmar:</strong> Confirmar el lunes 23 nov propuesta NEXT 80A/#4 vs. nota previa de 100A / tablero Eaton en sitio.</li>'
+          '<li><strong>rescheduled NEXT planning visit:</strong> John arma solo la plataforma nivelada de 30" × 30" — <strong>confirmar bases antivibración con NEXT</strong>.</li>' +
+          '<li><strong>Subpanel (D04) y Luz Ático:</strong> Confirmar gabinete Eaton BRP20L125G (125A, 20 espacios) montado, entrada exterior, línea 80A + principal condicional 100A y luz LED.</li>'
         : '<li class="callout-alert"><strong>Drag on Plan:</strong> Drag Furnace, Supply Boots (S1–S3), Return (RET), Jump Duct, GFCI, or Type B Flue directly on the SVG to test walkway length and clashes.</li>' +
           '<li><strong>66&quot; Attic Height Cap:</strong> Continuous 24&quot; wood walkway is capped at <strong>20 ft max</strong> with a 30&quot; clear passage and <strong>1 true 24&quot; strip per 4×8 sheet</strong> (saw kerf).</li>' +
-          '<li><strong>Isolation Included by NEXT:</strong> John builds the level 30&quot; × 30&quot; solid platform only — <strong>confirm vibration mounts w/ NEXT</strong>.</li>' +
-          '<li><strong>Feeder Reconciliation Open:</strong> Reconcile NEXT 80A/#4 feeder proposal vs. 100A/onsite Eaton panel box on Mon Nov 23.</li>';
+          '<li><strong>rescheduled NEXT planning visit:</strong> John builds the level 30&quot; × 30&quot; solid platform only — <strong>confirm vibration mounts w/ NEXT</strong>.</li>' +
+          '<li><strong>Subpanel (D04) &amp; Attic Light:</strong> Confirm mounted Eaton BRP20L125G (125A, 20-space) box, exterior feeder entry, 80A feed + conditional 100A main breaker, and switched LED attic light connection.</li>';
     }
     const tb = document.getElementById('tailnet-badge');
     if (tb && tailnetState.checked) {
@@ -1339,7 +1339,10 @@
   }
 
   function computeRevisionStamp() {
-    const rev = state.base_rev || 'rev-20261120-hvac-001';
+    const rev = 'rev-20261124-hvac-r4';
+    if (params.get('snapshot') === '1' || params.get('print') === '1') {
+      return currentLang === 'es' ? `${rev} · Edición Oficial R4 (24 Nov 2026)` : `${rev} · Official Print Edition R4 (2026-11-24)`;
+    }
     if (hasUnsyncedLocalEdits) return `${rev} · ${I18N[currentLang].local_preview}`;
     if (lastSavedRevId) return `${rev} · ${I18N[currentLang].pending_eod} (${lastSavedRevId})`;
     return `${rev} · ${I18N[currentLang].synced_label}`;
@@ -1624,11 +1627,11 @@
       if (/pad|vibrat|isolat|platform|aislam|plataform/.test(q)) {
         pin.answer = currentLang === 'es'
           ? 'Respuesta local (Spec HVAC): Sí — NEXT confirmar bases antivibración de aislamiento contra vibración en su alcance. John y equipo solo arman la plataforma sólida nivelada de 30" × 30"; confirmar bases antivibración con NEXT aparte.'
-          : 'Local Spec Answer (Attic HVAC): Yes — NEXT includes vibration isolation pads in their furnace install scope. Crew builds only a solid, level 30" × 30" service platform; confirm vibration mounts w/ NEXT separately.';
+          : 'Local Spec Answer (Attic HVAC): Our crew builds the level 30" × 30" platform; confirm with NEXT at the planning visit whether the horizontal furnace needs any equipment-specific mounting hardware before buying pads.';
       } else if (/feeder|80a|100a|panel|electr|gfci|tablero|aliment/.test(q)) {
         pin.answer = currentLang === 'es'
-          ? `Respuesta local (Spec HVAC): Revisar el lunes 23 nov con Serge y Alex el alimentador (NEXT marca 80A #4 cobre + tablero 125A frente a nota previa de 100A). Contacto GFCI 120V actual = ${m.gfciFt} ft (máx 25 ft).`
-          : `Local Spec Answer (Attic HVAC): Confirm Mon Nov 23 with Serge & Alex whether NEXT 80A (#4 Cu) feeder + 125A panel governs over the earlier 100A/onsite panel note. Live 120V GFCI distance = ${m.gfciFt} ft (max 25 ft).`;
+          ? `Respuesta local (Spec HVAC): Revisar el rescheduled NEXT planning visit con Serge y Alex el alimentador (NEXT marca 80A #4 cobre + tablero 125A frente a nota previa de 100A). Contacto GFCI 120V actual = ${m.gfciFt} ft (máx 25 ft).`
+          : `Local Spec Answer (Attic HVAC): Confirm rescheduled NEXT planning visit with Serge & Alex whether NEXT 80A (#4 Cu) feeder + 125A panel governs over the earlier 100A/onsite panel note. Live 120V GFCI distance = ${m.gfciFt} ft (max 25 ft).`;
       } else if (/walk|sheet|ply|osb|kerf|pasillo|hoja|corte/.test(q)) {
         pin.answer = currentLang === 'es'
           ? `Respuesta local (Spec HVAC): Con 66" de altura (<6 ft), el pasillo continuo de 24" máximo mide 20 ft (actual ${m.walkFt} ft) con 30" libres y 1 tira real de 24" por hoja 4×8 (corte de sierra) = ${m.sawKerfSheets} hojas.`
@@ -2048,6 +2051,7 @@
     initCircleCanvas();
     wireControls();
     await hydrateFromLocalJson();
+    if (params.get('snapshot') === '1' || params.get('print') === '1') { state.pins = []; state.field_overrides = []; hasUnsyncedLocalEdits = false; }
     syncFormFromState();
     renderAll();
     if (params.get('snapshot') !== '1') await checkTailnetAndLoad();
