@@ -1,0 +1,172 @@
+/* Scoped Bathroom Reference Renderings Styles (extends canonical u4-human-guide-shell.css) */
+#u4hBody.u4m-main {
+  max-width: 920px;
+  margin: 12px auto 64px;
+  padding: 0 14px 48px;
+}
+.u4m-head { margin-bottom: 10px; }
+.u4m-head .eyebrow {
+  font-family: var(--mono, monospace);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--accent, #1f5f7a);
+  margin: 0;
+}
+.u4m-head h1 {
+  font: 700 23px/1.2 var(--display, "Archivo Narrow", sans-serif);
+  margin: 3px 0 6px;
+  color: var(--fg, #1d2326);
+}
+#u4hBody .hold {
+  padding: 10px 13px;
+  border: 1px solid var(--open, #9a5b06);
+  border-left: 4px solid var(--open, #9a5b06);
+  border-radius: 8px;
+  background: var(--open-soft, #f7ecd9);
+  color: var(--fg, #1d2326);
+  font-weight: 600;
+  font-size: 13.5px;
+  margin: 8px 0 12px;
+}
+#u4hBody .hold.subtle { font-weight: 500; }
+#u4hBody .wall-switch,
+#u4hBody .segmented {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-width: 100%;
+}
+#u4hBody .wall-switch { margin: 10px 0; }
+#u4hBody .segmented button {
+  font: 600 13px/1.2 var(--body, sans-serif);
+  min-height: 38px;
+  padding: 7px 13px;
+  border: 1px solid var(--line, #d9dedc);
+  border-radius: 8px;
+  color: var(--fg, #1d2326);
+  background: var(--panel, #ffffff);
+  cursor: pointer;
+}
+#u4hBody .segmented button[aria-pressed="true"] {
+  background: var(--accent, #1f5f7a);
+  border-color: var(--accent, #1f5f7a);
+  color: var(--panel, #ffffff);
+}
+html[data-theme="dark"] #u4hBody .segmented button[aria-pressed="true"] {
+  background: #7cc0dc;
+  border-color: #7cc0dc;
+  color: #0d181d;
+  font-weight: 800;
+}
+#u4hBody .orientation { margin: 8px 0 10px; color: var(--muted, #5d686d); font-size: 13.5px; }
+#u4hBody .plan-card {
+  border: 1px solid var(--line, #d9dedc);
+  border-radius: 8px;
+  background: var(--panel, #ffffff);
+  overflow: hidden;
+  padding: 10px;
+}
+#u4hBody .toolbar {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 0 10px;
+}
+#u4hBody .viewport {
+  width: 100%;
+  max-height: 700px;
+  overflow: auto;
+  background: #ecefed;
+  position: relative;
+  border-radius: 6px;
+}
+#u4hBody .viewport.tub-focus,
+#u4hBody .viewport.room-focus { max-height: none; }
+#u4hBody #drawing { width: 100%; line-height: 0; }
+#u4hBody #drawing svg { display: block; width: 100%; height: auto; max-width: 100%; }
+#u4hBody .caption { font-size: 13px; color: var(--muted, #5d686d); padding: 8px 4px 2px; margin: 0; }
+#u4hBody .note { font-size: 13px; color: var(--muted, #5d686d); margin: 10px 0; }
+#u4hBody .measurements h2 {
+  font: 700 18px/1.2 var(--display, "Archivo Narrow", sans-serif);
+  margin: 18px 0 8px;
+  color: var(--fg, #1d2326);
+}
+#u4hBody .measurement-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 13.5px;
+}
+#u4hBody .measurement-table th,
+#u4hBody .measurement-table td {
+  border-bottom: 1px solid var(--line, #d9dedc);
+  padding: 9px 6px;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+#u4hBody .measurement-table td:last-child {
+  width: 112px;
+  text-align: right;
+  font-family: var(--mono, monospace);
+  font-weight: 600;
+}
+#u4hBody .measurement-table th {
+  color: var(--muted, #5d686d);
+  font-family: var(--mono, monospace);
+  font-size: 11.5px;
+  text-transform: uppercase;
+}
+#u4hBody .measurement-table caption {
+  text-align: left;
+  font-weight: 700;
+  margin: 12px 0 4px;
+  color: var(--fg, #1d2326);
+}
+#u4hBody .measurement-table tbody tr[data-dim] { cursor: pointer; }
+#u4hBody .measurement-table tbody tr:hover { background: var(--accent-soft, #e3eef2); }
+#u4hBody details {
+  border: 1px solid var(--line, #d9dedc);
+  border-radius: 8px;
+  background: var(--panel, #ffffff);
+  margin-top: 14px;
+  padding: 0 14px;
+}
+#u4hBody summary {
+  cursor: pointer;
+  min-height: 44px;
+  padding: 11px 0;
+  font-weight: 600;
+  color: var(--accent, #1f5f7a);
+}
+#u4hBody details p,
+#u4hBody details li { font-size: 13px; overflow-wrap: anywhere; }
+#u4hBody details ul { padding-left: 20px; list-style: disc; }
+#u4hBody details figure { margin: 10px 0; }
+#u4hBody details figcaption { font-size: 12px; color: var(--muted, #5d686d); margin-bottom: 4px; }
+#u4hBody details img { border-radius: 6px; border: 1px solid var(--line, #d9dedc); }
+#u4hBody .west-photos { display: grid; gap: 10px; padding: 8px; }
+#u4hBody .west-photos img { display: block; width: 100%; height: auto; border-radius: 6px; }
+.dim-line { stroke: #17495e; stroke-width: 2.5; fill: none; }
+.dim-text { font-family: Arial, sans-serif; font-size: 23px; font-weight: 700; fill: #123c50; paint-order: stroke; stroke: #ffffff; stroke-width: 7; stroke-linejoin: round; }
+.height-dim .dim-line { stroke: #7e4200; }
+.height-dim .dim-text { fill: #713b00; }
+.edge-dot { fill: #ffffff; stroke: #17495e; stroke-width: 2; }
+.height-dim .edge-dot { stroke: #7e4200; }
+.photo-outline { fill: none; stroke: #ffffff; stroke-width: 2; stroke-dasharray: 8 6; opacity: 0.85; }
+.niche-outline { fill: #dce5e6; stroke: #17495e; stroke-width: 2; stroke-dasharray: 7 5; }
+.highlight .dim-line { stroke: #b83c20; stroke-width: 5; }
+.highlight .dim-text { fill: #b83c20; }
+svg[data-view="west-photo"] .dim-text,
+svg[data-view="tub-photo"] .dim-text { font-size: 38px; stroke-width: 9px; }
+@media (max-width: 480px) {
+  #u4hBody.u4m-main { padding: 0 10px 48px; }
+  #u4hBody .segmented button { flex: 1 1 auto; padding: 7px 10px; font-size: 12.5px; }
+}
+@media print {
+  .no-print, #u4hBody .toolbar, #u4hBody details { display: none !important; }
+  #u4hBody .viewport { max-height: none !important; overflow: visible !important; }
+  #u4hBody.u4m-main { max-width: 100%; margin: 0; padding: 0; }
+  body { background: #ffffff !important; color: #111111 !important; }
+}

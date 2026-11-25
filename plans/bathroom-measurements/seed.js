@@ -1,0 +1,1505 @@
+window.U4_BATHROOM_SEED = {
+  "schema_version": "1.0-room-draft",
+  "plan_id": "bathroom",
+  "project": "1231 11th Avenue Unit 4, San Francisco, CA",
+  "room_id": "bathroom",
+  "element_id": "BATHROOM-ROOM-01",
+  "governing_spec": "bathroom/SPEC.md",
+  "base_rev": "rev-20261124-bath-009",
+  "title": {
+    "en": "Bathroom Room Baseline & Field Measurements",
+    "es": "Línea Base y Medidas de Campo del Baño"
+  },
+  "status": "WALL_TILE_ON_HOLD_ALEX_OUT_THIS_WEEK",
+  "registered_live": true,
+  "units": "in",
+  "coordinate_system": {
+    "type": "flat wall elevation",
+    "origin": "left back-wall corner at tub/stone rim",
+    "x_positive": "toward shower wall / viewer right",
+    "z_positive": "up",
+    "cardinal_orientation": null,
+    "left_context": "window",
+    "right_context": "shower",
+    "floor_finish_datum": null,
+    "finished_floor_buildup_in": null
+  },
+  "sources": {
+    "photo": {
+      "filename": "IMG_5471 3.heic",
+      "display_asset": "plans/bathroom-measurements/assets/bathroom-source.jpg",
+      "duplicate_filename": "IMG_5471 2.heic",
+      "note": "Display copy of IMG_5471 3.heic. Annotation renderer leaves the source photo unchanged."
+    },
+    "wall_width": {
+      "filename": "IMG_5478.heic",
+      "kind": "owner-photo-annotation",
+      "note": "69 5/16 inches wall width; retain annotation precision, not independently tape-verified here."
+    },
+    "wall_height": {
+      "filename": null,
+      "kind": "owner-typed",
+      "quote": "71.25 inches from tub/stone top"
+    },
+    "large_vertical": {
+      "filename": "IMG_5479.heic",
+      "kind": "provisional-photo-read",
+      "note": "About 17 bottom and 36 top above tub/stone."
+    },
+    "large_horizontal": {
+      "filenames": [
+        "IMG_5480.HEIC",
+        "IMG_5482.HEIC",
+        "IMG_5483.HEIC"
+      ],
+      "kind": "provisional-photo-read",
+      "note": "About 19 and 30 from left back-wall corner."
+    },
+    "small_horizontal": {
+      "filename": "IMG_5484.HEIC",
+      "supporting_filename": "IMG_5486.HEIC",
+      "kind": "provisional-photo-read",
+      "note": "About 37.5 and 45 from left back-wall corner."
+    },
+    "small_vertical": {
+      "filename": "IMG_5485.HEIC",
+      "kind": "provisional-photo-read",
+      "note": "Top front edge in 35.5–36 inch interval; use approximate midpoint 35.75 for this draft.",
+      "interval_in": [
+        35.5,
+        36
+      ]
+    },
+    "small_bottom": {
+      "filename": null,
+      "kind": "owner-typed",
+      "quote": "about21 3/4",
+      "note": "Latest owner-reported small niche bottom above tub; overrides older photo interpretation."
+    },
+    "tub_height": {
+      "filename": "IMG_5473.HEIC",
+      "kind": "owner-reported",
+      "note": "Owner-reported 22-inch current-photo-floor to tub/stone top. Current floor finish datum remains unknown; height can still be drawn from this named current floor."
+    },
+    "shower_depth": {
+      "filename": "IMG_5488.HEIC",
+      "kind": "provisional-photo-read",
+      "note": "About 33 inches to OUTER tub front; not final tile stop."
+    },
+    "west_span": {
+      "filenames": [
+        "IMG_5489.HEIC",
+        "IMG_5490.HEIC",
+        "IMG_5491.HEIC"
+      ],
+      "kind": "owner-reported 2026-11-24",
+      "quote": "WEST WALL: distance from estimated finished edge to window sill / intended tile stop = 45.5 inches",
+      "note": "Owner confirmed doorway-side future finished edge at left of IMG_5491 as start; starting plane remains estimated. Separate from tub wall and 35-inch sill reference.",
+      "original_urls": [
+        "https://drive.google.com/file/d/1In3QEnhvY_KcwnvB76UPfOOqzwWzCn-N/view",
+        "https://drive.google.com/file/d/1j6xIFxKgs9vtQjlN5KrMZzLbIPpgUlK5/view",
+        "https://drive.google.com/file/d/1JuFeeLweixydAbnq6IY-dIx4HmE2QSe4/view"
+      ]
+    },
+    "magicplan_live": {
+      "kind": "magicplan_live",
+      "project_id": "44f4fc6f-8e5f-49f6-bae6-2c3557fb3444",
+      "plan_id": "abb2d2c6-aa1c-4a88-a57e-1260847b6410",
+      "project_modified_at": "2026-11-23T00:02:02Z",
+      "read_at": "2026-11-25T02:25:22Z",
+      "room_uid": "6ac582a0.dea16fff",
+      "tool": "magicplan.get_project_plan; magicplan.get_plan_statistics",
+      "note": "Live metadata and metre-valued symbol fields; connector omits placements and complete wall IDs."
+    },
+    "magicplan_svg": {
+      "kind": "preserved_vector_export",
+      "asset": "assets/magicplan-baseline.svg",
+      "sha256": "0ff23f07702577b85b095d79f2ce314982a2b47dfc9938119d67b711dc7e700f",
+      "source_path": "wiki-assets/unit4-magicplan-master-floorplan.svg",
+      "source_date": "2026-10-29",
+      "note": "Original source preserved byte-for-byte. Placements are model baseline, not as-built offsets."
+    },
+    "accepted_room": {
+      "kind": "owner_accepted_baseline",
+      "date": "2026-10-14",
+      "record": "bathroom/2026-10-29-surfaces-R1/sources/dimension-schedule-for-john.json#D01",
+      "note": "Owner accepted 72 1/8 x 82 1/8 inch room and 28 inch entry. Later local backer measurements do not resize room."
+    },
+    "bathroom_spec": {
+      "kind": "governing_record",
+      "drive_id": "1zPqajGZuBoYZ-zR9VFzC_So3dF78KHD7",
+      "path": "bathroom/SPEC.md",
+      "read_date": "2026-11-24"
+    },
+    "plumbing_photo": {
+      "kind": "owner_photo",
+      "filename": "IMG_5490.HEIC",
+      "duplicate_filename": "IMG_5490 2.HEIC",
+      "original_url": "https://drive.google.com/file/d/1j6xIFxKgs9vtQjlN5KrMZzLbIPpgUlK5/view",
+      "note": "Byte-identical alias per owner intake; angled image is context, not a dimension scale."
+    },
+    "wiki_intake_1625": {
+      "kind": "owner-typed",
+      "recorded_at": "2026-11-24T16:25:45-08:00",
+      "filename": "2026-11-24_1625_field_bathroom_athroom-d27c6945e5268975.md",
+      "supporting_filename": "2026-11-24_1625_field_bathroom_athroom-d27c6945e5268975_photo.jpg",
+      "drive_id": "1FHYcCDTag00tDZswJoB5a7d1F4qq4dxN",
+      "original_url": "https://drive.google.com/file/d/1q9WgxeZ003SBRGv9KeUFGcbja9S4DwHk/view",
+      "quote": "Current medicine cabinet too big and needs return; replace bathroom window; floor to tub top is 22 inches; tub to top of tile backer is 71 and a quarter inches; right side of window casing is 5 and a quarter inches; wall to end of window sill is 35 inches; bathtub trim needs to be fixed.",
+      "confidence": "owner-submitted via Unit 4 Crew Wiki intake"
+    },
+    "wiki_intake_1627": {
+      "kind": "owner-typed",
+      "recorded_at": "2026-11-24T16:27:54-08:00",
+      "filename": "2026-11-24_1627_field_bathroom_athroom-c0f86d5cc2e80f83.md",
+      "supporting_filename": "2026-11-24_1627_field_bathroom_athroom-c0f86d5cc2e80f83_photo.jpg",
+      "drive_id": "1d-oYtHkE4G5iDMFG8tIrYHxrzsT_WrOF",
+      "original_url": "https://drive.google.com/file/d/1SinvDDkATIQ9BZGYalJ5SkA98tTvIUa9/view",
+      "quote": "Edge of tile for bathtub surround bottom. 43\" down to the floor\"",
+      "note": "Photo shows vertical tape from laid marble-look floor tile (0 in) up the left/West window wall to the horizontal pencil line immediately under the wood window sill at 43 in.",
+      "confidence": "owner-submitted with vertical tape photo"
+    }
+  },
+  "points": {
+    "wall_bl": {
+      "x": 0,
+      "z": 0,
+      "unit": "in",
+      "source": {
+        "x": "wall_width",
+        "z": "wall_height"
+      },
+      "measure_boundary": "wall_to_wall",
+      "confidence": "owner-reported; not independently field-verified"
+    },
+    "wall_br": {
+      "x": 69.3125,
+      "z": 0,
+      "unit": "in",
+      "source": {
+        "x": "wall_width",
+        "z": "wall_height"
+      },
+      "measure_boundary": "wall_to_wall",
+      "confidence": "owner-reported; not independently field-verified"
+    },
+    "wall_tl": {
+      "x": 0,
+      "z": 71.25,
+      "unit": "in",
+      "source": {
+        "x": "wall_width",
+        "z": "wall_height"
+      },
+      "measure_boundary": "wall_to_wall",
+      "confidence": "owner-reported; not independently field-verified"
+    },
+    "wall_tr": {
+      "x": 69.3125,
+      "z": 71.25,
+      "unit": "in",
+      "source": {
+        "x": "wall_width",
+        "z": "wall_height"
+      },
+      "measure_boundary": "wall_to_wall",
+      "confidence": "owner-reported; not independently field-verified"
+    },
+    "large_bl": {
+      "x": 19,
+      "z": 17,
+      "unit": "in",
+      "source": {
+        "x": "large_horizontal",
+        "z": "large_vertical"
+      },
+      "measure_boundary": "visible_niche_front_edge_provisional",
+      "confidence": "approximate; provisional"
+    },
+    "large_br": {
+      "x": 30,
+      "z": 17,
+      "unit": "in",
+      "source": {
+        "x": "large_horizontal",
+        "z": "large_vertical"
+      },
+      "measure_boundary": "visible_niche_front_edge_provisional",
+      "confidence": "approximate; provisional"
+    },
+    "large_tl": {
+      "x": 19,
+      "z": 36,
+      "unit": "in",
+      "source": {
+        "x": "large_horizontal",
+        "z": "large_vertical"
+      },
+      "measure_boundary": "visible_niche_front_edge_provisional",
+      "confidence": "approximate; provisional"
+    },
+    "large_tr": {
+      "x": 30,
+      "z": 36,
+      "unit": "in",
+      "source": {
+        "x": "large_horizontal",
+        "z": "large_vertical"
+      },
+      "measure_boundary": "visible_niche_front_edge_provisional",
+      "confidence": "approximate; provisional"
+    },
+    "small_bl": {
+      "x": 37.5,
+      "z": 21.75,
+      "unit": "in",
+      "source": {
+        "x": "small_horizontal",
+        "z": "small_bottom"
+      },
+      "measure_boundary": "visible_niche_front_edge_provisional",
+      "confidence": "approximate; provisional"
+    },
+    "small_br": {
+      "x": 45,
+      "z": 21.75,
+      "unit": "in",
+      "source": {
+        "x": "small_horizontal",
+        "z": "small_bottom"
+      },
+      "measure_boundary": "visible_niche_front_edge_provisional",
+      "confidence": "approximate; provisional"
+    },
+    "small_tl": {
+      "x": 37.5,
+      "z": 35.75,
+      "unit": "in",
+      "source": {
+        "x": "small_horizontal",
+        "z": "small_vertical"
+      },
+      "measure_boundary": "visible_niche_front_edge_provisional",
+      "confidence": "approximate; provisional",
+      "z_interval_in": [
+        35.5,
+        36
+      ]
+    },
+    "small_tr": {
+      "x": 45,
+      "z": 35.75,
+      "unit": "in",
+      "source": {
+        "x": "small_horizontal",
+        "z": "small_vertical"
+      },
+      "measure_boundary": "visible_niche_front_edge_provisional",
+      "confidence": "approximate; provisional",
+      "z_interval_in": [
+        35.5,
+        36
+      ]
+    },
+    "west_estimated_finished_edge": {
+      "x": 0,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "west_wall_local",
+      "source": "west_span",
+      "measure_boundary": "estimated_future_finished_edge_to_window_sill_intended_tile_stop",
+      "confidence": "owner-reported; doorway-side starting finished plane estimated; photo placement approximate"
+    },
+    "west_window_sill_tile_stop": {
+      "x": 45.5,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "west_wall_local",
+      "source": "west_span",
+      "measure_boundary": "estimated_future_finished_edge_to_window_sill_intended_tile_stop",
+      "confidence": "owner-reported; doorway-side starting finished plane estimated; photo placement approximate"
+    },
+    "tub_side_bl": {
+      "x": 0,
+      "z": -22,
+      "unit": "in",
+      "coordinate_system": "tub_side_local",
+      "source": {
+        "x": "shower_depth",
+        "z": "tub_height"
+      },
+      "measure_boundary": "backwall_to_outer_front_tub_edge; current_photo_floor_to_tub_stone_top",
+      "confidence": "depth approximate photo read; height owner-reported; floor finish unknown"
+    },
+    "tub_side_br": {
+      "x": 33,
+      "z": -22,
+      "unit": "in",
+      "coordinate_system": "tub_side_local",
+      "source": {
+        "x": "shower_depth",
+        "z": "tub_height"
+      },
+      "measure_boundary": "backwall_to_outer_front_tub_edge; current_photo_floor_to_tub_stone_top",
+      "confidence": "depth approximate photo read; height owner-reported; floor finish unknown"
+    },
+    "tub_side_tr": {
+      "x": 33,
+      "z": 0,
+      "unit": "in",
+      "coordinate_system": "tub_side_local",
+      "source": {
+        "x": "shower_depth",
+        "z": "tub_height"
+      },
+      "measure_boundary": "backwall_to_outer_front_tub_edge; current_photo_floor_to_tub_stone_top",
+      "confidence": "depth approximate photo read; height owner-reported; floor finish unknown"
+    },
+    "tub_side_tl": {
+      "x": 0,
+      "z": 0,
+      "unit": "in",
+      "coordinate_system": "tub_side_local",
+      "source": {
+        "x": "shower_depth",
+        "z": "tub_height"
+      },
+      "measure_boundary": "backwall_to_outer_front_tub_edge; current_photo_floor_to_tub_stone_top",
+      "confidence": "depth approximate photo read; height owner-reported; floor finish unknown"
+    },
+    "shower_tile_stop": {
+      "x": 35,
+      "z": 0,
+      "unit": "in",
+      "coordinate_system": "tub_side_local",
+      "source": null,
+      "measure_boundary": "outer_front_tub_edge_to_proposed_tile_stop",
+      "confidence": "locked by owner 2026-11-24 at 35 in from North back wall (~2 in past ~33 in stone apron)"
+    },
+    "tub_across_left": {
+      "x": null,
+      "z": 0,
+      "unit": "in",
+      "coordinate_system": "tub_across_local",
+      "source": null,
+      "measure_boundary": "actual_tub_left_edge_to_right_edge",
+      "confidence": "to measure; wall width is not tub width"
+    },
+    "tub_across_right": {
+      "x": null,
+      "z": 0,
+      "unit": "in",
+      "coordinate_system": "tub_across_local",
+      "source": null,
+      "measure_boundary": "actual_tub_left_edge_to_right_edge",
+      "confidence": "to measure; wall width is not tub width"
+    },
+    "room_back_left": {
+      "x": 0,
+      "y": 0,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "accepted_room",
+      "measure_boundary": "owner_accepted_room_interior_envelope",
+      "confidence": "owner-accepted baseline; not a new field measurement",
+      "precedence": "accepted_baseline"
+    },
+    "room_back_right": {
+      "x": 72.125,
+      "y": 0,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "accepted_room",
+      "measure_boundary": "owner_accepted_room_interior_envelope",
+      "confidence": "owner-accepted baseline; not a new field measurement",
+      "precedence": "accepted_baseline"
+    },
+    "room_entry_right": {
+      "x": 72.125,
+      "y": 82.125,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "accepted_room",
+      "measure_boundary": "owner_accepted_room_interior_envelope",
+      "confidence": "owner-accepted baseline; not a new field measurement",
+      "precedence": "accepted_baseline"
+    },
+    "room_entry_left": {
+      "x": 0,
+      "y": 82.125,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "accepted_room",
+      "measure_boundary": "owner_accepted_room_interior_envelope",
+      "confidence": "owner-accepted baseline; not a new field measurement",
+      "precedence": "accepted_baseline"
+    },
+    "window_replacement_origin": {
+      "x": null,
+      "y": null,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "bathroom_spec",
+      "measure_boundary": "replacement_window_rough_opening_origin",
+      "confidence": "replacement selected by owner; product and opening coordinates unresolved",
+      "precedence": "owner"
+    },
+    "hot_supply": {
+      "x": null,
+      "y": null,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "plumbing_photo",
+      "measure_boundary": "plumbing_connection_center_from_named_room_origin_and_floor_datum",
+      "confidence": "visible plumbing context only; coordinates unmeasured",
+      "precedence": "field_photo"
+    },
+    "cold_supply": {
+      "x": null,
+      "y": null,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "plumbing_photo",
+      "measure_boundary": "plumbing_connection_center_from_named_room_origin_and_floor_datum",
+      "confidence": "visible plumbing context only; coordinates unmeasured",
+      "precedence": "field_photo"
+    },
+    "waste_outlet": {
+      "x": null,
+      "y": null,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "plumbing_photo",
+      "measure_boundary": "plumbing_connection_center_from_named_room_origin_and_floor_datum",
+      "confidence": "visible plumbing context only; coordinates unmeasured",
+      "precedence": "field_photo"
+    },
+    "west_sill_bottom_tile_edge": {
+      "x": null,
+      "y": null,
+      "z": 43,
+      "unit": "in",
+      "coordinate_system": "west_window_floor_local",
+      "source": "wiki_intake_1627",
+      "measure_boundary": "current_tiled_floor_to_window_sill_bottom_tile_line",
+      "confidence": "owner-reported with vertical tape photo; confirm interaction with replacement window/casing",
+      "precedence": "owner"
+    }
+  },
+  "rectangles": {
+    "wall": {
+      "point_ids": [
+        "wall_bl",
+        "wall_br",
+        "wall_tr",
+        "wall_tl"
+      ],
+      "approximate": false
+    },
+    "large": {
+      "point_ids": [
+        "large_bl",
+        "large_br",
+        "large_tr",
+        "large_tl"
+      ],
+      "approximate": true,
+      "depth_in": null
+    },
+    "small": {
+      "point_ids": [
+        "small_bl",
+        "small_br",
+        "small_tr",
+        "small_tl"
+      ],
+      "approximate": true,
+      "depth_in": null
+    },
+    "tub_side": {
+      "point_ids": [
+        "tub_side_bl",
+        "tub_side_br",
+        "tub_side_tr",
+        "tub_side_tl"
+      ],
+      "approximate": true,
+      "coordinate_system": "tub_side_local",
+      "note": "Simple side-profile measurement envelope, not a manufacturer tub section."
+    }
+  },
+  "photo": {
+    "source": "photo",
+    "asset": "assets/bathroom-source.jpg",
+    "width_px": 1350,
+    "height_px": 1800,
+    "sha256": "a1cb1885cf7020d9bcf6d83cd41436f73f9017affb4c83db03ac046097b7ec48",
+    "view_box": [
+      220,
+      350,
+      860,
+      880
+    ],
+    "not_to_scale": true,
+    "anchors_px": {
+      "wall_tl": [
+        310,
+        445
+      ],
+      "wall_tr": [
+        963,
+        469
+      ],
+      "wall_bl": [
+        342,
+        1111
+      ],
+      "wall_br": [
+        929,
+        1105
+      ],
+      "large_tl": [
+        500,
+        797
+      ],
+      "large_tr": [
+        605,
+        797
+      ],
+      "large_bl": [
+        500,
+        968
+      ],
+      "large_br": [
+        604,
+        970
+      ],
+      "small_tl": [
+        675,
+        802
+      ],
+      "small_tr": [
+        742,
+        803
+      ],
+      "small_bl": [
+        675,
+        925
+      ],
+      "small_br": [
+        739,
+        925
+      ]
+    },
+    "anchor_note": "Pixel anchors identify visible edges only. Never use pixel separation to infer inches."
+  },
+  "unplaced_references": [
+    {
+      "id": "casing_space",
+      "value_in": 5.25,
+      "approximate": true,
+      "source": {
+        "source_id": "wiki_intake_1625",
+        "filename": "2026-11-24_1625_field_bathroom_athroom-d27c6945e5268975.md",
+        "note": "Recorded in 2026-11-24 16:25 PT Crew Wiki intake; exact endpoint boundaries to confirm with Tisa before cutting tile."
+      },
+      "measure_boundary": null,
+      "placement": null
+    },
+    {
+      "id": "sill_reference",
+      "value_in": 35,
+      "approximate": true,
+      "source": {
+        "source_id": "wiki_intake_1625",
+        "filename": "2026-11-24_1625_field_bathroom_athroom-d27c6945e5268975.md",
+        "note": "Recorded in 2026-11-24 16:25 PT Crew Wiki intake; exact endpoint boundaries to confirm with Tisa before cutting tile."
+      },
+      "measure_boundary": null,
+      "placement": null
+    }
+  ],
+  "unknowns": {
+    "large_niche_depth_in": null,
+    "small_niche_depth_in": null,
+    "final_shower_wall_tile_stop_in": 35,
+    "casing_space_endpoints": null,
+    "sill_reference_endpoints": null,
+    "actual_across_tub_length_in": null,
+    "outer_front_tub_edge_to_tile_stop_gap_in": 2
+  },
+  "history": [
+    {
+      "item": "3-inch tile extension",
+      "status": "assistant suggestion; not selected",
+      "active": false,
+      "note": "Excluded from all active coordinates and rendered geometry."
+    }
+  ],
+  "display_policy": {
+    "approximate_rounding_in": 0.25,
+    "approximate_prefix": "≈",
+    "no_cut_or_install_release": true
+  },
+  "wall_segments": {
+    "west": {
+      "point_ids": [
+        "west_estimated_finished_edge",
+        "west_window_sill_tile_stop"
+      ],
+      "cardinal_orientation": "west",
+      "source": "west_span",
+      "height_in": null,
+      "photo_anchors_px": {
+        "filename": "IMG_5491.HEIC",
+        "width_px": 1350,
+        "height_px": 1800,
+        "start": [
+          232,
+          930
+        ],
+        "end": [
+          1207,
+          908
+        ],
+        "confidence": "approximate image placement; owner confirmed doorway-side future finished edge; plane remains estimated",
+        "start_is_estimated": true
+      },
+      "approximate": false,
+      "photos": [
+        {
+          "filename": "IMG_5489.HEIC",
+          "asset": "assets/IMG_5489.jpg",
+          "original_url": "https://drive.google.com/file/d/1In3QEnhvY_KcwnvB76UPfOOqzwWzCn-N/view"
+        },
+        {
+          "filename": "IMG_5490.HEIC",
+          "asset": "assets/IMG_5490.jpg",
+          "original_url": "https://drive.google.com/file/d/1j6xIFxKgs9vtQjlN5KrMZzLbIPpgUlK5/view"
+        },
+        {
+          "filename": "IMG_5491.HEIC",
+          "asset": "assets/IMG_5491.jpg",
+          "original_url": "https://drive.google.com/file/d/1JuFeeLweixydAbnq6IY-dIx4HmE2QSe4/view"
+        }
+      ],
+      "note": "One-dimensional span only; no inferred wall height or tub-wall replacement."
+    }
+  },
+  "tub": {
+    "side_rectangle": "tub_side",
+    "across_point_ids": [
+      "tub_across_left",
+      "tub_across_right"
+    ],
+    "tile_gap_point_ids": [
+      "tub_side_tr",
+      "shower_tile_stop"
+    ],
+    "floor_datum": "current photo floor, finish status unknown",
+    "top_datum": "tub/stone rim",
+    "photo_anchors_px": {
+      "source": "photo",
+      "height_start": [
+        218,
+        1310
+      ],
+      "height_end": [
+        232,
+        1590
+      ],
+      "depth_start": [
+        929,
+        1105
+      ],
+      "depth_end": [
+        1115,
+        1278
+      ],
+      "confidence": "approximate visible edge anchors; not a pixel-to-inch conversion"
+    },
+    "evidence_photos": [
+      {
+        "filename": "IMG_5473.HEIC",
+        "asset": "assets/IMG_5473.jpg",
+        "shows": "current floor-to-tub height tape"
+      },
+      {
+        "filename": "IMG_5488.HEIC",
+        "asset": "assets/IMG_5488.jpg",
+        "shows": "backwall to OUTER front tub/stone edge tape"
+      },
+      {
+        "filename": "IMG_5474.HEIC",
+        "asset": "assets/IMG_5474.jpg",
+        "shows": "shower wall and tub outer edge context"
+      }
+    ]
+  },
+  "room_model": {
+    "version": 1,
+    "identity": {
+      "project_id": "44f4fc6f-8e5f-49f6-bae6-2c3557fb3444",
+      "plan_id": "abb2d2c6-aa1c-4a88-a57e-1260847b6410",
+      "floor_uid": "6ac57060.ac3137ff",
+      "room_uid": "6ac582a0.dea16fff",
+      "room_name": "Bathroom"
+    },
+    "frame": {
+      "id": "room_plan",
+      "unit": "in",
+      "origin": "back-left interior corner of accepted room envelope",
+      "x_positive": "right toward control/toilet side in source plan",
+      "y_positive": "toward entry",
+      "z_positive": "up",
+      "z_datum": null,
+      "cardinal_rotation_degrees": null,
+      "source_svg_root_matrix": [
+        68.0915,
+        0,
+        0,
+        68.0915,
+        440.42,
+        415.957
+      ],
+      "source_native_origin": [
+        -0.269,
+        -2.251
+      ],
+      "source_native_unit": "m",
+      "note": "Translation and unit conversion only; no axis stretching or photo-derived scale."
+    },
+    "baseline": {
+      "immutable": true,
+      "provenance_source_ids": [
+        "magicplan_live",
+        "magicplan_svg",
+        "accepted_room"
+      ],
+      "source_room": {
+        "uid": "6ac582a0.dea16fff",
+        "name": "Bathroom",
+        "dimensions": "72 1/8\" x 82 1/8\"",
+        "fields": {
+          "ceilingHeight": "3.086857",
+          "roomType": "Bathroom",
+          "ground.color": "FFFFFF00"
+        },
+        "objects": [
+          {
+            "uid": "6ad04169.02366fff",
+            "name": "Bathtub",
+            "symbol_id": "plumbing-92a68219-7c7c-47ba-a67b-22425a2e37e0",
+            "fields": {
+              "width": "1.6764",
+              "depth": "0.8128",
+              "height": "0.537"
+            }
+          },
+          {
+            "uid": "6ad0419d.82eb0bff",
+            "name": "Sink with pedestal",
+            "symbol_id": "plumbing-56720de7-856c-46bd-94f2-33c85e8a0c9b",
+            "fields": {
+              "width": "0.61",
+              "depth": "0.41",
+              "height": "1.028"
+            }
+          },
+          {
+            "uid": "6ad041a8.34b21fff",
+            "name": "Toilet",
+            "symbol_id": "plumbing-8b48ccf6-dd2b-43d4-8aa3-29de1c85f8a7",
+            "fields": {
+              "width": "0.494",
+              "depth": "0.71",
+              "height": "0.724"
+            }
+          },
+          {
+            "uid": "6ac582a0.dfa313ff",
+            "name": "Pocket Door",
+            "symbol_id": "doorpocket",
+            "wall_uid": "6ac582a0.dea337ff",
+            "fields": {
+              "width": "0.7112",
+              "height": "2.014538"
+            }
+          },
+          {
+            "uid": "6ac582a0.e04c03ff",
+            "name": "French Window",
+            "symbol_id": "windowfrench",
+            "wall_uid": "6ac582a0.dea183ff",
+            "fields": {
+              "width": "0.57269",
+              "height": "1.535334"
+            }
+          }
+        ]
+      },
+      "source_statistics": {
+        "name": "Bathroom",
+        "uid": "6ac582a0.dea16fff",
+        "area": 41.138,
+        "perimeter": 25.71,
+        "ground_perimeter": 23.376,
+        "area_without_walls": 41.138,
+        "area_with_interior_walls_only": 41.138,
+        "area_with_walls": 41.138,
+        "wall_count": 4,
+        "door_count": 1,
+        "window_count": 1,
+        "doors_surface": 15.422,
+        "furniture_count": 5,
+        "height": 10.127,
+        "volume": 416.626,
+        "dimensions": "72 1/8\" x 82 1/8\"",
+        "walls_surface": 260.374,
+        "walls_surface_without_openings": 235.488,
+        "windows_surface": 9.464
+      },
+      "svg_object_transforms": {
+        "6ad04169.02366fff": {
+          "svg_child_index": 226,
+          "matrix": [
+            68.0915,
+            0,
+            0,
+            68.0915,
+            432.664,
+            262.653
+          ]
+        },
+        "6ad0419d.82eb0bff": {
+          "svg_child_index": 246,
+          "matrix": [
+            0,
+            -68.0915,
+            68.0915,
+            0,
+            422.062,
+            375.598
+          ]
+        },
+        "6ad041a8.34b21fff": {
+          "svg_child_index": 232,
+          "matrix": [
+            0,
+            68.0915,
+            -68.0915,
+            0,
+            546.815,
+            334.883
+          ]
+        },
+        "6ac582a0.e04c03ff": {
+          "svg_child_index": 268,
+          "matrix": [
+            0,
+            -68.0915,
+            -68.0915,
+            0,
+            422.065,
+            318.219
+          ]
+        }
+      },
+      "svg_door_jambs_native": [
+        [
+          -0.117,
+          -0.165
+        ],
+        [
+          0.594,
+          -0.165
+        ]
+      ],
+      "captured_at": "2026-11-25T02:25:22Z",
+      "source_geometry_sha256": "0ff23f07702577b85b095d79f2ce314982a2b47dfc9938119d67b711dc7e700f",
+      "limitations": [
+        "SVG wall coordinates rounded to .001 native unit; small edge residuals preserved.",
+        "Live connector does not expose positional geometry; preserved SVG supplies baseline placement.",
+        "Native IDs are absent from SVG; objects paired to live records by unique type and matching dimensions."
+      ],
+      "payload_hash_encoding": "UTF-8 sorted object keys, JSON values, comma-space and colon-space separators",
+      "payload_sha256": "04a069aa2c01983588e0f5b9226702f72338f199549a66b70db566ef603433d6"
+    },
+    "outline": {
+      "point_ids": [
+        "room_back_left",
+        "room_back_right",
+        "room_entry_right",
+        "room_entry_left"
+      ],
+      "status": "owner_accepted_baseline",
+      "source_id": "accepted_room"
+    },
+    "walls": [
+      {
+        "id": "bath_back",
+        "magicplan_uid": null,
+        "from": "room_back_left",
+        "to": "room_back_right",
+        "role": "tub back / niches",
+        "source_id": "magicplan_svg"
+      },
+      {
+        "id": "bath_control",
+        "magicplan_uid": null,
+        "from": "room_back_right",
+        "to": "room_entry_right",
+        "role": "control / toilet side",
+        "source_id": "magicplan_svg"
+      },
+      {
+        "id": "bath_entry",
+        "magicplan_uid": "6ac582a0.dea337ff",
+        "from": "room_entry_right",
+        "to": "room_entry_left",
+        "role": "entry",
+        "source_id": "magicplan_live"
+      },
+      {
+        "id": "bath_window",
+        "magicplan_uid": "6ac582a0.dea183ff",
+        "from": "room_entry_left",
+        "to": "room_back_left",
+        "role": "window / sink side",
+        "source_id": "magicplan_live"
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "6ad04169.02366fff",
+        "magicplan_uid": "6ad04169.02366fff",
+        "baseline_object_uid": "6ad04169.02366fff",
+        "label": "Bathtub",
+        "status": "preserved model symbol; field placement not verified",
+        "source_id": "magicplan_svg"
+      },
+      {
+        "id": "6ad0419d.82eb0bff",
+        "magicplan_uid": "6ad0419d.82eb0bff",
+        "baseline_object_uid": "6ad0419d.82eb0bff",
+        "label": "Sink with pedestal",
+        "status": "preserved model symbol; field placement not verified",
+        "source_id": "magicplan_svg"
+      },
+      {
+        "id": "6ad041a8.34b21fff",
+        "magicplan_uid": "6ad041a8.34b21fff",
+        "baseline_object_uid": "6ad041a8.34b21fff",
+        "label": "Toilet",
+        "status": "preserved model symbol; field placement not verified",
+        "source_id": "magicplan_svg"
+      }
+    ],
+    "openings": [
+      {
+        "id": "6ac582a0.dfa313ff",
+        "magicplan_uid": "6ac582a0.dfa313ff",
+        "baseline_object_uid": "6ac582a0.dfa313ff",
+        "label": "Pocket Door",
+        "status": "preserved model symbol; field placement not verified",
+        "source_id": "magicplan_svg",
+        "wall_id": "bath_entry",
+        "kind": "door",
+        "current_action_ref": "entry_door"
+      },
+      {
+        "id": "6ac582a0.e04c03ff",
+        "magicplan_uid": "6ac582a0.e04c03ff",
+        "baseline_object_uid": "6ac582a0.e04c03ff",
+        "label": "French Window",
+        "status": "preserved model symbol; field placement not verified",
+        "source_id": "magicplan_svg",
+        "wall_id": "bath_window",
+        "kind": "window",
+        "current_action_ref": "window"
+      }
+    ],
+    "point_groups": {
+      "backer": {
+        "point_ids": [
+          "wall_bl",
+          "wall_br",
+          "wall_tr",
+          "wall_tl"
+        ],
+        "frame": "back_wall_elevation",
+        "role": "measured backer clear span; does not alter room envelope",
+        "room_registration": null
+      },
+      "large_niche": {
+        "point_ids": [
+          "large_bl",
+          "large_br",
+          "large_tr",
+          "large_tl"
+        ],
+        "frame": "back_wall_elevation",
+        "room_registration": null
+      },
+      "small_niche": {
+        "point_ids": [
+          "small_bl",
+          "small_br",
+          "small_tr",
+          "small_tl"
+        ],
+        "frame": "back_wall_elevation",
+        "room_registration": null
+      },
+      "tub_outer_envelope": {
+        "point_ids": [
+          "tub_side_bl",
+          "tub_side_br",
+          "tub_side_tr",
+          "tub_side_tl"
+        ],
+        "frame": "tub_side_local",
+        "room_registration": null
+      },
+      "west_span": {
+        "point_ids": [
+          "west_estimated_finished_edge",
+          "west_window_sill_tile_stop"
+        ],
+        "frame": "west_wall_local",
+        "room_registration": null
+      },
+      "sink_plumbing": {
+        "point_ids": [
+          "hot_supply",
+          "cold_supply",
+          "waste_outlet"
+        ],
+        "frame": "room_plan",
+        "room_registration": null,
+        "note": "Coordinates remain null; do not infer from photo angle."
+      },
+      "west_sill_elevation": {
+        "point_ids": [
+          "west_sill_bottom_tile_edge"
+        ],
+        "frame": "west_window_floor_local",
+        "room_registration": null,
+        "note": "43 in vertical tape reading from laid floor tile to pencil line under window sill on West wall ahead of tub surround."
+      }
+    },
+    "decisions": {
+      "window": {
+        "action": "replace window and casing",
+        "status": "owner_directed",
+        "source_id": "bathroom_spec",
+        "date": "2026-11-24",
+        "replacement_product": null,
+        "replacement_dimensions": null,
+        "installed": null
+      },
+      "medicine_cabinet": {
+        "action": "return oversized cabinet",
+        "status": "owner_directed",
+        "source_id": "bathroom_spec",
+        "date": "2026-11-24",
+        "return_confirmed": null,
+        "replacement_product": null,
+        "replacement_dimensions": null,
+        "mounting": "surface mounted only"
+      },
+      "entry_door": {
+        "action": "retain 28\" x 1-3/8\" slab, hinged outward into hallway; pocket door permanently retired",
+        "source_id": "bathroom_spec",
+        "date": "2026-11-24",
+        "handing": null,
+        "hall_clearance_in": null,
+        "note": "Magicplan pocket symbol is historical baseline; pocket door permanently retired Nov 24."
+      },
+      "tile_extension": {
+        "selected": false,
+        "gap_in": null,
+        "note": "No 3 inch extension selected."
+      },
+      "sink_selection": {
+        "status": "reevaluate_requested",
+        "selected": null,
+        "baseline_fixture_id": "6ad0419d.82eb0bff",
+        "source": "ownerNov24",
+        "source_id": "plumbing_photo",
+        "date": "2026-11-24",
+        "note": "Reevaluate sink using plumbing, room clearance and interior design; no replacement selected."
+      },
+      "tub_trim": {
+        "action": "fix bathtub trim",
+        "status": "owner_directed",
+        "source_id": "wiki_intake_1625",
+        "date": "2026-11-24",
+        "note": "Flagged in 16:25 PT intake; inspect apron/rim interface before tiling."
+      }
+    },
+    "materials": {
+      "wall_tile": {
+        "manufacturer": "American Olean",
+        "collection": "Color Story",
+        "color": "Ice White 0025",
+        "model": "36MOD1P4",
+        "nominal_inches": [
+          3,
+          6
+        ],
+        "source_id": "bathroom_spec",
+        "status": "on hand per owner box photo Nov24"
+      },
+      "floor_tile": {
+        "manufacturer": "STAINMASTER",
+        "collection": "Calacatta Gem",
+        "model": "SM421224XTMTLW",
+        "nominal_inches": [
+          12,
+          24
+        ],
+        "source_id": "bathroom_spec",
+        "status": "reported laid; not independently verified"
+      },
+      "grout": {
+        "color": "Warm Gray",
+        "source_id": "bathroom_spec",
+        "status": "owner selected; stock and installation not verified"
+      },
+      "edge_trim_policy": {
+        "metal_or_schluter_allowed": false,
+        "approved_zero_metal_finishes": [
+          "ceramic_bullnose",
+          "ceramic_pencil_or_quarter_round",
+          "painted_edwardian_wood_trim",
+          "factory_glazed_edge_tile"
+        ],
+        "selected_finish": "American Olean 0025S42691P4 2x6 Glossy Bullnose + 0025SN42691P2 2x2 Corner",
+        "source_id": "bathroom_spec",
+        "status": "locked by owner 2026-11-24"
+      }
+    },
+    "corrections": [
+      {
+        "id": "field-20261124-backer",
+        "recorded_at": "2026-11-24",
+        "kind": "add_measurement_group",
+        "precedence": "owner",
+        "source_ids": [
+          "wall_width",
+          "wall_height"
+        ],
+        "point_ids": [
+          "wall_bl",
+          "wall_br",
+          "wall_tr",
+          "wall_tl"
+        ],
+        "before": null,
+        "after_point_refs": [
+          "wall_bl",
+          "wall_br",
+          "wall_tr",
+          "wall_tl"
+        ],
+        "measure_boundary": "wall_to_wall",
+        "confidence": "owner-reported; not independently field-verified",
+        "note": "New field domain absent from Magicplan baseline; current values live only in points."
+      },
+      {
+        "id": "field-20261124-large_niche",
+        "recorded_at": "2026-11-24",
+        "kind": "add_measurement_group",
+        "precedence": "field_photo",
+        "source_ids": [
+          "large_horizontal",
+          "large_vertical"
+        ],
+        "point_ids": [
+          "large_bl",
+          "large_br",
+          "large_tr",
+          "large_tl"
+        ],
+        "before": null,
+        "after_point_refs": [
+          "large_bl",
+          "large_br",
+          "large_tr",
+          "large_tl"
+        ],
+        "measure_boundary": "visible_niche_front_edge_provisional",
+        "confidence": "approximate; provisional",
+        "note": "New field domain absent from Magicplan baseline; current values live only in points."
+      },
+      {
+        "id": "field-20261124-small_niche",
+        "recorded_at": "2026-11-24",
+        "kind": "add_measurement_group",
+        "precedence": "field_photo",
+        "source_ids": [
+          "small_horizontal",
+          "small_bottom",
+          "small_vertical"
+        ],
+        "point_ids": [
+          "small_bl",
+          "small_br",
+          "small_tr",
+          "small_tl"
+        ],
+        "before": null,
+        "after_point_refs": [
+          "small_bl",
+          "small_br",
+          "small_tr",
+          "small_tl"
+        ],
+        "measure_boundary": "visible_niche_front_edge_provisional",
+        "confidence": "approximate; provisional",
+        "note": "New field domain absent from Magicplan baseline; current values live only in points."
+      },
+      {
+        "id": "field-20261124-tub_outer_envelope",
+        "recorded_at": "2026-11-24",
+        "kind": "add_measurement_group",
+        "precedence": "field_photo",
+        "source_ids": [
+          "shower_depth",
+          "tub_height"
+        ],
+        "point_ids": [
+          "tub_side_bl",
+          "tub_side_br",
+          "tub_side_tr",
+          "tub_side_tl"
+        ],
+        "before": null,
+        "after_point_refs": [
+          "tub_side_bl",
+          "tub_side_br",
+          "tub_side_tr",
+          "tub_side_tl"
+        ],
+        "measure_boundary": "backwall_to_outer_front_tub_edge; current_photo_floor_to_tub_stone_top",
+        "confidence": "depth approximate photo read; height owner-reported; floor finish unknown",
+        "note": "New field domain absent from Magicplan baseline; current values live only in points."
+      },
+      {
+        "id": "field-20261124-west_span",
+        "recorded_at": "2026-11-24",
+        "kind": "add_measurement_group",
+        "precedence": "owner",
+        "source_ids": [
+          "west_span"
+        ],
+        "point_ids": [
+          "west_estimated_finished_edge",
+          "west_window_sill_tile_stop"
+        ],
+        "before": null,
+        "after_point_refs": [
+          "west_estimated_finished_edge",
+          "west_window_sill_tile_stop"
+        ],
+        "measure_boundary": "estimated_future_finished_edge_to_window_sill_intended_tile_stop",
+        "confidence": "owner-reported; doorway-side starting finished plane estimated; photo placement approximate",
+        "note": "New field domain absent from Magicplan baseline; current values live only in points."
+      },
+      {
+        "id": "owner-20261124-small-bottom",
+        "recorded_at": "2026-11-24",
+        "kind": "supersede_interpretation",
+        "precedence": "owner",
+        "source_ids": [
+          "small_bottom"
+        ],
+        "point_ids": [
+          "small_bl",
+          "small_br"
+        ],
+        "before": {
+          "value": null,
+          "status": "earlier photo interpretation not retained as a reliable numeric reading"
+        },
+        "after_point_refs": [
+          "small_bl",
+          "small_br"
+        ],
+        "measure_boundary": "tub_stone_rim_to_small_niche_bottom",
+        "confidence": "owner said about 21 3/4 inches",
+        "note": "Owner report outranks earlier photo interpretation; no fabricated before value."
+      },
+      {
+        "id": "owner-20261124-sink-reevaluation",
+        "recorded_at": "2026-11-24",
+        "kind": "add_measurement_group",
+        "precedence": "owner",
+        "source_ids": [
+          "plumbing_photo"
+        ],
+        "point_ids": [
+          "hot_supply",
+          "cold_supply",
+          "waste_outlet"
+        ],
+        "before": null,
+        "after_point_refs": [
+          "hot_supply",
+          "cold_supply",
+          "waste_outlet"
+        ],
+        "measure_boundary": "unmeasured plumbing connection centers",
+        "confidence": "owner requested reevaluation; no dimensional reading",
+        "note": "Adds explicit unknowns; preserves baseline sink symbol."
+      },
+      {
+        "id": "owner-20261124-1627-west-sill-43in",
+        "recorded_at": "2026-11-24T16:27:54-08:00",
+        "kind": "add_measurement_group",
+        "precedence": "owner",
+        "source_ids": [
+          "wiki_intake_1627"
+        ],
+        "point_ids": [
+          "west_sill_bottom_tile_edge"
+        ],
+        "before": null,
+        "after_point_refs": [
+          "west_sill_bottom_tile_edge"
+        ],
+        "measure_boundary": "current_tiled_floor_to_window_sill_bottom_tile_line",
+        "confidence": "owner-reported with vertical tape photo",
+        "note": "Captures 16:27 PT Crew Wiki intake (43 in down to laid floor tile under West window sill)."
+      }
+    ],
+    "extensions": {
+      "new_point_groups_allowed": true,
+      "unknown_coordinates_are_null": true
+    }
+  },
+  "dimensions": {
+    "magicplan_room_width_in": {
+      "value": 72.125,
+      "measure_boundary": "wall_to_wall",
+      "verified": "LOCKED",
+      "source": "Magicplan MASTER 6ac582a0.dea16fff (accepted Oct 14 baseline)",
+      "date": "2026-10-14"
+    },
+    "magicplan_room_depth_in": {
+      "value": 82.125,
+      "measure_boundary": "wall_to_wall",
+      "verified": "LOCKED",
+      "source": "Magicplan MASTER 6ac582a0.dea16fff (accepted Oct 14 baseline)",
+      "date": "2026-10-14"
+    },
+    "tub_back_wall_backer_width_in": {
+      "value": 69.3125,
+      "measure_boundary": "wall_to_wall",
+      "verified": "VERIFY_ON_SITE",
+      "source": "IMG_5478.heic owner annotation (wet-backer corner to corner)",
+      "date": "2026-11-24"
+    },
+    "current_floor_to_tub_rim_in": {
+      "value": 22.0,
+      "measure_boundary": "aff",
+      "verified": "VERIFY_ON_SITE",
+      "source": "2026-11-24 16:25 PT intake + IMG_5473.HEIC",
+      "date": "2026-11-24"
+    },
+    "tub_rim_to_backer_top_in": {
+      "value": 71.25,
+      "measure_boundary": "wall_to_wall",
+      "verified": "VERIFY_ON_SITE",
+      "source": "2026-11-24 16:25 PT intake (71-1/4 in)",
+      "date": "2026-11-24"
+    },
+    "west_sill_tile_edge_to_floor_in": {
+      "value": 43.0,
+      "measure_boundary": "aff",
+      "verified": "VERIFY_ON_SITE",
+      "source": "2026-11-24 16:27 PT intake + vertical tape photo",
+      "date": "2026-11-24"
+    },
+    "tub_outer_depth_backwall_to_front_in": {
+      "value": 33.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "MEASURE_ON_SITE",
+      "source": "IMG_5488.HEIC provisional tape read (~33 in)",
+      "date": "2026-11-24"
+    },
+    "west_door_edge_to_sill_tile_stop_in": {
+      "value": 45.5,
+      "measure_boundary": "to_casing_edge",
+      "verified": "VERIFY_ON_SITE",
+      "source": "IMG_5491.HEIC owner-reported future finished edge to sill stop",
+      "date": "2026-11-24"
+    },
+    "east_tub_front_to_tile_stop_in": {
+      "value": 2.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "LOCKED",
+      "source": "Owner lock 2026-11-24 20:05 PT: 35 in East stop from North wall (~2 in past ~33 in stone apron)",
+      "date": "2026-11-24"
+    }
+  },
+  "options": {
+    "wall_tile_pattern": {
+      "status": "LOCKED",
+      "selected": "half_offset_50pct",
+      "sku": "0025 36MOD1P4",
+      "shade": "55501",
+      "grout_joint_in": 0.0625
+    },
+    "zero_metal_edge_finish": "LOCKED_0025S42691P4_BULLNOSE",
+    "ceramic_edge_trim": {
+      "status": "LOCKED",
+      "locked_at": "2026-11-24T20:05:00-08:00",
+      "bullnose_2x6_sku": "0025S42691P4",
+      "corner_2x2_sku": "0025SN42691P2",
+      "east_shower_stop_in": 35.0,
+      "west_window_stop_in": 35.0,
+      "west_sill_height_aff_in": 43.0,
+      "top_backer_above_tub_in": 71.25
+    },
+    "niche_back_selection": {
+      "status": "LOCKED",
+      "panel": "Solid 1-piece smooth white porcelain/ceramic panel per niche (measure waterproofed openings & depth on site before cutting)"
+    },
+    "wall_grout_selection": {
+      "status": "LOCKED",
+      "grout": "Mapei Ultracolor Plus FA #77 Frost",
+      "silicone": "Mapei Mapesil T Plus #77 Frost"
+    },
+    "entry_door": {
+      "status": "LOCKED",
+      "locked_at": "2026-11-24T22:24:00-08:00",
+      "decision": "Pocket door permanently retired. Reuse 28\" x 1-3/8\" slab as hinged door swinging outward into hallway."
+    }
+  },
+  "flagged_clashes": [
+    {
+      "id": "clash-bath-width-planes",
+      "severity": "HIGH",
+      "en": "Accepted Magicplan room width is 72-1/8 in vs. 69-5/16 in wet-backer span in IMG_5478; keep baseline outline and local backer plane separate.",
+      "es": "El ancho base en Magicplan es 72-1/8 pulg frente a 69-5/16 pulg entre paneles en IMG_5478; mantener separados el contorno base y el plano local."
+    },
+    {
+      "id": "clash-bath-west-sill-spans",
+      "severity": "MEDIUM",
+      "en": "West wall has both 45-1/2 in (estimated doorway-side finished edge to sill stop) and earlier 35 in sill / 5-1/4 in casing readings; confirm exact endpoints before cutting tile.",
+      "es": "El muro oeste registra 45-1/2 pulg (borde futuro junto a puerta hasta repisa) y lecturas previas de 35 pulg y 5-1/4 pulg; confirmar extremos antes de cortar azulejo."
+    }
+  ],
+  "field_overrides": [],
+  "pins": []
+};

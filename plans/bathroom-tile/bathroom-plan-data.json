@@ -5,13 +5,13 @@
   "room_id": "bathroom",
   "element_id": "BATHROOM-ROOM-01",
   "governing_spec": "bathroom/SPEC.md",
-  "base_rev": "rev-20261124-bath-006",
+  "base_rev": "rev-20261124-bath-009",
   "title": {
     "en": "Bathroom Room Baseline & Field Measurements",
     "es": "Línea Base y Medidas de Campo del Baño"
   },
-  "status": "locked_for_crew_review",
-  "registered_live": false,
+  "status": "WALL_TILE_ON_HOLD_ALEX_OUT_THIS_WEEK",
+  "registered_live": true,
   "units": "in",
   "coordinate_system": {
     "type": "flat wall elevation",
@@ -158,33 +158,6 @@
       "quote": "Edge of tile for bathtub surround bottom. 43\" down to the floor\"",
       "note": "Photo shows vertical tape from laid marble-look floor tile (0 in) up the left/West window wall to the horizontal pencil line immediately under the wood window sill at 43 in.",
       "confidence": "owner-submitted with vertical tape photo"
-    },
-    "owner_confirm_20261124_q1": {
-      "kind": "owner-typed",
-      "recorded_at": "2026-11-24T19:11:10-08:00",
-      "quote": "1. Yes. 2. i need you to research and use the tiler skill to recommend where it should end. don't worry about niche depths for now",
-      "note": "Owner confirmed West wall 35 in measures from tub back-wall corner (0 in) to front tip of wood window sill / tile stop, and 43 in measures vertically from laid floor tile up to bottom edge of sill/tile wrap. Niche depths explicitly deferred (null).",
-      "confidence": "owner-confirmed in PM session"
-    },
-    "tile_specialist_ao_0025": {
-      "kind": "manufacturer_and_code_research",
-      "recorded_at": "2026-11-24T19:18:00-08:00",
-      "note": "American Olean Color Story 0025 Ice White 3x6 glossy wall tile (002536MOD1P4, 1/16 in grout joint) stocked zero-metal ceramic trims: 2x6 surface bullnose 0025S42691P4 + 2x2 corner SN4269, 3x6 surface bullnose 0025S4369MOD1P4, 1/2x12 ceramic jolly 0025S1/212J1P2, 1x6 quarter round 0025A106SP. CBC 1209.2.3 / CRC R307.2 require >=72 in height above drain.",
-      "confidence": "verified manufacturer spec sheet + CA code"
-    },
-    "owner_tisa_2026_11_24_q1_q3_lock": {
-      "id": "owner_tisa_2026_11_24_q1_q3_lock",
-      "kind": "owner_decision",
-      "precedence_rank": 1,
-      "date": "2026-11-24",
-      "summary": "Tisa locked East wall tile stop at 35 in from back wall (~2 in past ~33 in stone apron), zero-metal 2x6 Surface Bullnose 0025S42691P4 + 2x2 Corner 0025SN42691P2, and top horizontal tile termination at the current HardieBacker top edge (71-1/4 in above tub rim / ~93-1/4 in AFF)."
-    },
-    "owner_tisa_2026_11_24_niche_back": {
-      "id": "owner_tisa_2026_11_24_niche_back",
-      "kind": "owner_decision",
-      "precedence_rank": 1,
-      "date": "2026-11-24",
-      "summary": "Tisa directed using a large-format tile cut to size so each niche back is a single seamless piece (not necessarily the installed floor tile; tile product/finish open)."
     }
   },
   "points": {
@@ -395,14 +368,13 @@
       "confidence": "depth approximate photo read; height owner-reported; floor finish unknown"
     },
     "shower_tile_stop": {
-      "x": 35.0,
+      "x": 35,
       "z": 0,
       "unit": "in",
       "coordinate_system": "tub_side_local",
-      "source": "owner_tisa_2026_11_24_q1_q3_lock",
+      "source": null,
       "measure_boundary": "outer_front_tub_edge_to_proposed_tile_stop",
-      "confidence": "owner_locked_2026-11-24",
-      "note": "Locked 2026-11-24: 35 in from tub back wall (~2 in past ~33 in stone waterfall apron), carried down beside apron to floor/baseboard, matching 35 in West window-sill stop."
+      "confidence": "locked by owner 2026-11-24 at 35 in from North back wall (~2 in past ~33 in stone apron)"
     },
     "tub_across_left": {
       "x": null,
@@ -516,19 +488,9 @@
       "z": 43,
       "unit": "in",
       "coordinate_system": "west_window_floor_local",
-      "source": "owner_confirm_20261124_q1",
+      "source": "wiki_intake_1627",
       "measure_boundary": "current_tiled_floor_to_window_sill_bottom_tile_line",
-      "confidence": "owner-confirmed vertical height (43 in) from laid floor tile to bottom edge of sill/tile wrap beneath tub window",
-      "precedence": "owner"
-    },
-    "west_backwall_to_sill_tile_stop": {
-      "x": 35,
-      "z": 43,
-      "unit": "in",
-      "coordinate_system": "west_wall_local",
-      "source": "owner_confirm_20261124_q1",
-      "measure_boundary": "tub_backwall_corner_to_window_sill_front_tile_stop",
-      "confidence": "owner-confirmed endpoint (35 in from tub back-wall corner; 43 in above laid floor tile)",
+      "confidence": "owner-reported with vertical tape photo; confirm interaction with replacement window/casing",
       "precedence": "owner"
     }
   },
@@ -651,16 +613,28 @@
       },
       "measure_boundary": null,
       "placement": null
+    },
+    {
+      "id": "sill_reference",
+      "value_in": 35,
+      "approximate": true,
+      "source": {
+        "source_id": "wiki_intake_1625",
+        "filename": "2026-11-24_1625_field_bathroom_athroom-d27c6945e5268975.md",
+        "note": "Recorded in 2026-11-24 16:25 PT Crew Wiki intake; exact endpoint boundaries to confirm with Tisa before cutting tile."
+      },
+      "measure_boundary": null,
+      "placement": null
     }
   ],
   "unknowns": {
     "large_niche_depth_in": null,
     "small_niche_depth_in": null,
-    "final_shower_wall_tile_stop_in": 35.0,
+    "final_shower_wall_tile_stop_in": 35,
     "casing_space_endpoints": null,
-    "sill_reference_endpoints": "confirmed_2026-11-24: tub_backwall_corner_0in_to_window_sill_front_tip_35in",
+    "sill_reference_endpoints": null,
     "actual_across_tub_length_in": null,
-    "outer_front_tub_edge_to_tile_stop_gap_in": 2.0
+    "outer_front_tub_edge_to_tile_stop_gap_in": 2
   },
   "history": [
     {
@@ -668,24 +642,6 @@
       "status": "assistant suggestion; not selected",
       "active": false,
       "note": "Excluded from all active coordinates and rendered geometry."
-    },
-    {
-      "rev": "rev-20261124-bath-003",
-      "date": "2026-11-24",
-      "actor": "tisa_owner",
-      "summary": "Locked East wall tile stop at 35 in (~2 in past ~33 in stone apron), zero-metal 2x6 Surface Bullnose 0025S42691P4 + SN4269 corner, and top horizontal tile termination at current HardieBacker height (71-1/4 in above tub rim / ~93-1/4 in AFF)."
-    },
-    {
-      "rev": "rev-20261124-bath-004",
-      "date": "2026-11-24",
-      "actor": "tisa_owner",
-      "summary": "Recorded owner direction to use a large-format tile cut to size so each niche back is a single seamless piece (product/finish open; 24x48 1-tile vs 12x24 2-tile sizing check)."
-    },
-    {
-      "rev": "rev-20261124-bath-005",
-      "timestamp": "2026-11-24T21:10:05-08:00",
-      "author": "Tisa Vo",
-      "summary": "Locked Option 1.A (24x48 Glossy/Satin White porcelain single-piece niche backs + sills) and Option 2.A (Mapei Ultracolor Plus FA #77 Frost grout + Mapesil T Plus #77 Frost silicone at 1/16\" joint)."
     }
   ],
   "display_policy": {
@@ -1133,8 +1089,7 @@
       },
       "west_sill_elevation": {
         "point_ids": [
-          "west_sill_bottom_tile_edge",
-          "west_backwall_to_sill_tile_stop"
+          "west_sill_bottom_tile_edge"
         ],
         "frame": "west_window_floor_local",
         "room_registration": null,
@@ -1162,29 +1117,17 @@
         "mounting": "surface mounted only"
       },
       "entry_door": {
-        "action": "retain 28x1-3/8 in slab, standard hinged outward-swing hallway door; pocket door permanently retired Nov 24 (standard framed stud south wall, switches permitted)",
+        "action": "retain 28\" x 1-3/8\" slab, hinged outward into hallway; pocket door permanently retired",
         "source_id": "bathroom_spec",
         "date": "2026-11-24",
         "handing": null,
         "hall_clearance_in": null,
-        "note": "Magicplan pocket symbol is historical baseline, not current installation instruction."
+        "note": "Magicplan pocket symbol is historical baseline; pocket door permanently retired Nov 24."
       },
       "tile_extension": {
-        "selected": true,
-        "gap_in": 2.0,
-        "recommended_east_stop_from_backwall_in": 35,
-        "recommended_extension_past_outer_apron_in": 2,
-        "recommended_zero_metal_trim_sku": "0025S42691P4 (2x6 Surface Bullnose + SN4269 2x2 Corner)",
-        "alternate_zero_metal_trim_sku": "0025S1/212J1P2 (1/2x12 Ceramic Jolly Liner)",
-        "note": "Owner-locked 2026-11-24: East shower-control wall stops at 35 in from back wall (~2 in past ~33 in stone waterfall apron) for West/East symmetry, stone-apron corner splash protection, zero sliver cuts, and toilet supply clearance; trimmed with zero-metal 2x6 Surface Bullnose 0025S42691P4 + 2x2 Corner 0025SN42691P2; top horizontal tile ends at current HardieBacker top edge (71-1/4 in above tub rim / ~93-1/4 in AFF).",
-        "status": "owner_locked",
-        "date": "2026-11-24",
-        "source_id": "owner_tisa_2026_11_24_q1_q3_lock",
-        "east_stop_from_backwall_in": 35.0,
-        "top_termination_above_tub_rim_in": 71.25,
-        "top_termination_aff_in": 93.25,
-        "top_termination_rule": "end_at_current_hardiebacker_top_edge_capped_with_bullnose",
-        "selected_zero_metal_trim_sku": "0025S42691P4 (2x6 Glossy Surface Bullnose) + 0025SN42691P2 (2x2 Bullnose Corner)"
+        "selected": false,
+        "gap_in": null,
+        "note": "No 3 inch extension selected."
       },
       "sink_selection": {
         "status": "reevaluate_requested",
@@ -1201,24 +1144,6 @@
         "source_id": "wiki_intake_1625",
         "date": "2026-11-24",
         "note": "Flagged in 16:25 PT intake; inspect apron/rim interface before tiling."
-      },
-      "niche_backs": {
-        "status": "owner_directed_single_piece_large_tile_product_tbd",
-        "source_id": "owner_tisa_2026_11_24_niche_back",
-        "date": "2026-11-24",
-        "concept": "Single cut piece of large-format tile per niche back (zero grout joints on back wall)",
-        "product_selected": null,
-        "candidate_formats": [
-          "24x48 large-format porcelain/ceramic (~23.6 x 47.2 in actual): 1 single tile cuts BOTH ~11x19 Left and ~7.5x14 Right niche backs + sills with generous margin even if Left Niche > 11-7/8 in",
-          "12x24 large-format porcelain/ceramic (~11.8 x 23.6 in actual): 2 tiles (1 per niche), valid ONLY if waterproofed Left Niche width measures <= 11-3/4 in",
-          "Thin stone/quartz slab remnant (note: 5/16-3/8 in porcelain preserves full shampoo shelf depth better than 3/4 in stone)"
-        ],
-        "candidate_finishes": [
-          "Glossy solid white large-format tile (matches 0025 Ice White 3x6 field, quietest seamless look)",
-          "Soft white/gray veined marble-look porcelain (echoes stone tub surround & floor)",
-          "Matching white quartz/stone remnant"
-        ],
-        "install_sequence": "Set single-piece back tile FIRST against waterproofed back wall; set bottom sill sloped 1/4 in per ft toward tub; lap side/top/sill returns IN FRONT of back piece so all 4 cut edges are hidden; seal inside 90-deg corners with 100% silicone."
       }
     },
     "materials": {
@@ -1258,10 +1183,9 @@
           "painted_edwardian_wood_trim",
           "factory_glazed_edge_tile"
         ],
-        "selected_finish": "ceramic_bullnose",
-        "source_id": "owner_tisa_2026_11_24_q1_q3_lock",
-        "status": "owner_locked_2026-11-24",
-        "selected_sku": "0025S42691P4 (2x6 Glossy Surface Bullnose) + 0025SN42691P2 (2x2 Bullnose Corner)"
+        "selected_finish": "American Olean 0025S42691P4 2x6 Glossy Bullnose + 0025SN42691P2 2x2 Corner",
+        "source_id": "bathroom_spec",
+        "status": "locked by owner 2026-11-24"
       }
     },
     "corrections": [
@@ -1456,84 +1380,6 @@
         "measure_boundary": "current_tiled_floor_to_window_sill_bottom_tile_line",
         "confidence": "owner-reported with vertical tape photo",
         "note": "Captures 16:27 PT Crew Wiki intake (43 in down to laid floor tile under West window sill)."
-      },
-      {
-        "id": "owner-20261124-1911-west-35-43-confirmed",
-        "recorded_at": "2026-11-24T19:11:10-08:00",
-        "kind": "point_update",
-        "precedence": "owner",
-        "source_ids": [
-          "owner_confirm_20261124_q1"
-        ],
-        "point_ids": [
-          "west_backwall_to_sill_tile_stop",
-          "west_sill_bottom_tile_edge"
-        ],
-        "before": {
-          "west_backwall_to_sill_tile_stop": null
-        },
-        "added_point_ids": [
-          "west_backwall_to_sill_tile_stop"
-        ],
-        "after_point_refs": [
-          "west_backwall_to_sill_tile_stop",
-          "west_sill_bottom_tile_edge"
-        ],
-        "measure_boundary": "tub_backwall_corner_to_window_sill_front_tile_stop; current_tiled_floor_to_window_sill_bottom_tile_line",
-        "confidence": "owner-confirmed in PM session (niche depths deferred null)",
-        "note": "Promotes 35 in West sill stop from unplaced_references to placed owner-confirmed point and locks 43 in floor-to-sill vertical datum."
-      },
-      {
-        "id": "owner-20261124-1911-west-35-43-confirmed",
-        "recorded_at": "2026-11-24T19:11:10-08:00",
-        "kind": "point_update",
-        "precedence": "owner",
-        "source_ids": [
-          "owner_confirm_20261124_q1"
-        ],
-        "point_ids": [
-          "west_backwall_to_sill_tile_stop",
-          "west_sill_bottom_tile_edge"
-        ],
-        "before": {
-          "west_backwall_to_sill_tile_stop": null
-        },
-        "added_point_ids": [
-          "west_backwall_to_sill_tile_stop"
-        ],
-        "after_point_refs": [
-          "west_backwall_to_sill_tile_stop",
-          "west_sill_bottom_tile_edge"
-        ],
-        "measure_boundary": "tub_backwall_corner_to_window_sill_front_tile_stop; current_tiled_floor_to_window_sill_bottom_tile_line",
-        "confidence": "owner-confirmed in PM session (niche depths deferred null)",
-        "note": "Promotes 35 in West sill stop from unplaced_references to placed owner-confirmed point and locks 43 in floor-to-sill vertical datum."
-      },
-      {
-        "id": "owner-20261124-1911-west-35-43-confirmed",
-        "recorded_at": "2026-11-24T19:11:10-08:00",
-        "kind": "point_update",
-        "precedence": "owner",
-        "source_ids": [
-          "owner_confirm_20261124_q1"
-        ],
-        "point_ids": [
-          "west_backwall_to_sill_tile_stop",
-          "west_sill_bottom_tile_edge"
-        ],
-        "before": {
-          "west_backwall_to_sill_tile_stop": null
-        },
-        "added_point_ids": [
-          "west_backwall_to_sill_tile_stop"
-        ],
-        "after_point_refs": [
-          "west_backwall_to_sill_tile_stop",
-          "west_sill_bottom_tile_edge"
-        ],
-        "measure_boundary": "tub_backwall_corner_to_window_sill_front_tile_stop; current_tiled_floor_to_window_sill_bottom_tile_line",
-        "confidence": "owner-confirmed in PM session (niche depths deferred null)",
-        "note": "Promotes 35 in West sill stop from unplaced_references to placed owner-confirmed point and locks 43 in floor-to-sill vertical datum."
       }
     ],
     "extensions": {
@@ -1580,7 +1426,7 @@
     "west_sill_tile_edge_to_floor_in": {
       "value": 43.0,
       "measure_boundary": "aff",
-      "verified": "CONFIRMED",
+      "verified": "VERIFY_ON_SITE",
       "source": "2026-11-24 16:27 PT intake + vertical tape photo",
       "date": "2026-11-24"
     },
@@ -1599,39 +1445,45 @@
       "date": "2026-11-24"
     },
     "east_tub_front_to_tile_stop_in": {
-      "value": null,
+      "value": 2.0,
       "measure_boundary": "wall_to_wall",
-      "verified": "MEASURE_ON_SITE",
-      "source": "Open owner decision (assistant 3-in suggestion retired)",
-      "date": "2026-11-24"
-    },
-    "west_backwall_to_sill_tile_stop_in": {
-      "value": 35.0,
-      "measure_boundary": "wall_to_wall",
-      "verified": "CONFIRMED",
-      "source": "Owner-confirmed Q1 (2026-11-24 19:11 PT) + 16:25 PT intake",
+      "verified": "LOCKED",
+      "source": "Owner lock 2026-11-24 20:05 PT: 35 in East stop from North wall (~2 in past ~33 in stone apron)",
       "date": "2026-11-24"
     }
   },
   "options": {
-    "wall_tile_pattern": "running_bond_50pct_proposed",
-    "zero_metal_edge_finish": "open_tbd",
-    "niche_back_selection": {
-      "choice": "A",
+    "wall_tile_pattern": {
       "status": "LOCKED",
-      "locked_at": "2026-11-24T21:10:05-08:00",
-      "material": "Single-piece cut from 1 x 24\" x 48\" Glossy/Satin White porcelain/ceramic tile (~5/16\"-3/8\" thick)",
-      "coverage": "Cuts both ~11\" x 19\" Left Niche back and ~7-1/2\" x 14\" Right Niche back + both 1-piece sloped bottom sills",
-      "install_order": "Waterproof -> set 1-piece back panel FIRST -> set 1-piece sill sloped 1/4\"/ft -> lap side/top returns in front of back panel (all 4 cut edges hidden); 100% silicone at inside 90° corners"
+      "selected": "half_offset_50pct",
+      "sku": "0025 36MOD1P4",
+      "shade": "55501",
+      "grout_joint_in": 0.0625
+    },
+    "zero_metal_edge_finish": "LOCKED_0025S42691P4_BULLNOSE",
+    "ceramic_edge_trim": {
+      "status": "LOCKED",
+      "locked_at": "2026-11-24T20:05:00-08:00",
+      "bullnose_2x6_sku": "0025S42691P4",
+      "corner_2x2_sku": "0025SN42691P2",
+      "east_shower_stop_in": 35.0,
+      "west_window_stop_in": 35.0,
+      "west_sill_height_aff_in": 43.0,
+      "top_backer_above_tub_in": 71.25
+    },
+    "niche_back_selection": {
+      "status": "LOCKED",
+      "panel": "Solid 1-piece smooth white porcelain/ceramic panel per niche (measure waterproofed openings & depth on site before cutting)"
     },
     "wall_grout_selection": {
-      "choice": "A",
       "status": "LOCKED",
-      "locked_at": "2026-11-24T21:10:05-08:00",
-      "grout": "Mapei Ultracolor Plus FA #77 Frost (5077)",
-      "silicone": "Mapei Mapesil T Plus 100% Silicone #77 Frost",
-      "joint_width": "1/16\"",
-      "notes": "Fine-aggregate (FA) safe for glossy 0025 Ice White glaze; whisper-pale silver-mist near-white bridges cool wall tile to Calacatta Gem floor + #93 Warm Gray floor grout"
+      "grout": "Mapei Ultracolor Plus FA #77 Frost",
+      "silicone": "Mapei Mapesil T Plus #77 Frost"
+    },
+    "entry_door": {
+      "status": "LOCKED",
+      "locked_at": "2026-11-24T22:24:00-08:00",
+      "decision": "Pocket door permanently retired. Reuse 28\" x 1-3/8\" slab as hinged door swinging outward into hallway."
     }
   },
   "flagged_clashes": [
@@ -1643,15 +1495,9 @@
     },
     {
       "id": "clash-bath-west-sill-spans",
-      "severity": "LOW",
-      "en": "West wall endpoints confirmed Nov 24: 35 in from tub back-wall corner to sill front tip and 45-1/2 in from estimated doorway-side finished edge to sill stop (43 in floor-to-sill bottom); verify 5-1/4 in right window casing space when replacement window is selected.",
-      "es": "Extremos del muro oeste confirmados 24 nov: 35 pulg desde esquina trasera de tina hasta punta de repisa y 45-1/2 pulg desde borde futuro junto a puerta hasta repisa (43 pulg del piso a base de repisa); verificar 5-1/4 pulg de contramarco al elegir ventana nueva."
-    },
-    {
-      "id": "clash-bath-east-tile-stop-open",
-      "severity": "HIGH",
-      "en": "East/shower-control wall tile stop past the ~33 in outer tub front is unselected (null); do not use the retired 3 in suggestion.",
-      "es": "El remate del azulejo en el muro este más allá de las ~33 pulg del frente de tina no está elegido (null); no usar la sugerencia retirada de 3 pulg."
+      "severity": "MEDIUM",
+      "en": "West wall has both 45-1/2 in (estimated doorway-side finished edge to sill stop) and earlier 35 in sill / 5-1/4 in casing readings; confirm exact endpoints before cutting tile.",
+      "es": "El muro oeste registra 45-1/2 pulg (borde futuro junto a puerta hasta repisa) y lecturas previas de 35 pulg y 5-1/4 pulg; confirmar extremos antes de cortar azulejo."
     }
   ],
   "field_overrides": [],

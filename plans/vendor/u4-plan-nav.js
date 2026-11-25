@@ -88,10 +88,22 @@
       roomHash: "bathroom",
       roomEn: "Bathroom",
       roomEs: "Baño",
-      shortEn: "Bathroom Wall Tile",
-      shortEs: "Baño: Azulejo",
+      shortEn: "Wall Tile",
+      shortEs: "Azulejo",
       labelEn: "Bathroom Tub & Wall Tile Plan",
       labelEs: "Baño: Plano de Azulejo y Nichos",
+      group: "bathroom"
+    },
+    {
+      id: "bathroom-measurements",
+      rel: "../bathroom-measurements/index.html",
+      roomHash: "bathroom",
+      roomEn: "Bathroom",
+      roomEs: "Baño",
+      shortEn: "Wall & Tub Plans",
+      shortEs: "Muros y Tina",
+      labelEn: "Bathroom Wall, Tub & Room Renderings",
+      labelEs: "Baño: Planos de Muros, Tina y Cuarto",
       group: "bathroom"
     }
   ];
@@ -166,6 +178,7 @@
     var hashParts = [];
     if (params.get("step")) hashParts.push("step=" + encodeURIComponent(params.get("step")));
     if (params.get("wall")) hashParts.push("wall=" + encodeURIComponent(params.get("wall")));
+    if (params.get("view")) hashParts.push("view=" + encodeURIComponent(params.get("view")));
     if (params.get("zoom")) hashParts.push("zoom=" + encodeURIComponent(params.get("zoom")));
     var wrapTarget =
       "../../index.html?lang=" + encodeURIComponent(initialLang) +
@@ -624,7 +637,7 @@
     var targetPlan = matchPlanIdFromHref(href);
     if (targetPlan) {
       ev.preventDefault();
-      postToParent({ type: "u4:nav-plan", planId: targetPlan });
+      var qIdx = href.indexOf("?"); var hSp = new URLSearchParams(qIdx >= 0 ? href.slice(qIdx + 1).split("#")[0] : ""); postToParent({ type: "u4:nav-plan", planId: targetPlan, wall: hSp.get("wall") || "", view: hSp.get("view") || "", step: hSp.get("step") || "", zoom: hSp.get("zoom") || "" });
       return;
     }
     if (href.indexOf("../../index.html") === 0) {

@@ -2621,6 +2621,10 @@ const KITCHEN_HOSTED_LINKS = {
   "2026-11-20_Murphy-Door-Interactive_ES": "./plans/murphy-door/index.html?lang=es",
   "2026-11-20_Kitchen-Electrical-Interactive_EN": "./plans/kitchen-electrical/index.html?lang=en",
   "2026-11-20_Kitchen-Electrical-Interactive_ES": "./plans/kitchen-electrical/index.html?lang=es",
+  "2026-11-24_Bathroom-Tile-Interactive_EN": "./plans/bathroom-tile/index.html?lang=en",
+  "2026-11-24_Bathroom-Tile-Interactive_ES": "./plans/bathroom-tile/index.html?lang=es",
+  "2026-11-24_Bathroom-Measurements-Interactive_EN": "./plans/bathroom-measurements/index.html?wall=room&view=flat&lang=en",
+  "2026-11-24_Bathroom-Measurements-Interactive_ES": "./plans/bathroom-measurements/index.html?wall=room&view=flat&lang=es",
   "2026-11-23_U4_Module1_Kitchen-Electrical_R5_HTML_EN": "./wiki-docs/2026-11-23_U4_Module1_Kitchen-Electrical_R5_EN.html",
   "2026-11-23_U4_Module1_Kitchen-Electrical_R5_HTML_ES": "./wiki-docs/2026-11-23_U4_Module1_Kitchen-Electrical_R5_ES.html",
   "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_HTML_EN": "./wiki-docs/2026-11-23_U4_Module2_Whole-Unit-Segments_R5_EN.html",
@@ -2702,11 +2706,11 @@ function planUrlToHash(href, opts){
   var qIdx = String(href || "").indexOf("?");
   if (qIdx >= 0) {
     var baseSp = new URLSearchParams(String(href).slice(qIdx + 1).split("#")[0]);
-    ["step", "wall", "zoom"].forEach(function(k){
+    ["step", "wall", "view", "zoom"].forEach(function(k){
       if (baseSp.get(k)) out.set(k, baseSp.get(k));
     });
   }
-  ["step", "wall", "zoom"].forEach(function(k){
+  ["step", "wall", "view", "zoom"].forEach(function(k){
     if (o[k] !== undefined && o[k] !== null && String(o[k]).trim() !== "") out.set(k, String(o[k]).trim());
   });
   var qs = out.toString();
@@ -2724,6 +2728,7 @@ function parsePlanHash(rawKey){
     planId: pid,
     step: sp.get("step") || "",
     wall: sp.get("wall") || "",
+    view: sp.get("view") || "",
     zoom: sp.get("zoom") || ""
   };
 }
@@ -4531,7 +4536,7 @@ function packetDocId(pk){ return LANG==="es" ? (pk.docEs||pk.docEn) : (pk.docEn|
 function packetHostedPlanUrl(pk){
   if (!pk) return null;
   const id = packetDocId(pk);
-  const hosted = id ? KITCHEN_HOSTED_LINKS[id] : null;
+  const hosted = id ? (KITCHEN_HOSTED_LINKS[id] || (id.indexOf("./plans/") === 0 ? id : null)) : null;
   return (hosted && hosted.indexOf("./plans/") === 0) ? withPlanParams(hosted) : null;
 }
 function packetHref(pk){
@@ -5133,6 +5138,7 @@ function openPlanShell(planSpec){
   sp.set("embedded", "1");
   if (planSpec.step) sp.set("step", String(planSpec.step));
   if (planSpec.wall) sp.set("wall", String(planSpec.wall));
+  if (planSpec.view) sp.set("view", String(planSpec.view));
   if (planSpec.zoom) sp.set("zoom", String(planSpec.zoom));
   var targetSrc = "./plans/" + encodeURIComponent(pid) + "/index.html?" + sp.toString();
   var samePlanLoaded = (!sh.hidden && fr.dataset.planId === pid && fr.getAttribute("src") && fr.getAttribute("src") !== "about:blank");
@@ -7357,7 +7363,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       status: "live",
       aliases: ["murphy-door","interactive murphy","interactive bookcase door","puerta librero interactiva"]
     },
-    "kitchen-electrical": {
+        "kitchen-electrical": {
       id: "kitchen-electrical",
       room: "electrical",
       url: "./plans/kitchen-electrical/index.html",
@@ -7367,6 +7373,28 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
       titleEs: "Plano interactivo eléctrico de cocina y subpanel D04",
       status: "live",
       aliases: ["kitchen-electrical","electrical plan","subpanel d04","kitchen circuits","plano electrico cocina","subpanel d04"]
+    },
+    "bathroom-tile": {
+      id: "bathroom-tile",
+      room: "bathroom",
+      url: "./plans/bathroom-tile/index.html",
+      docIdEn: "2026-11-24_Bathroom-Tile-Interactive_EN",
+      docIdEs: "2026-11-24_Bathroom-Tile-Interactive_ES",
+      titleEn: "Bathroom Tub & Wall Tile Plan",
+      titleEs: "Baño: Plano de Azulejo y Nichos",
+      status: "live",
+      aliases: ["bathroom-tile","bathroom tile","bathroom wall tile","tub tile","azulejo bano","nichos bano"]
+    },
+    "bathroom-measurements": {
+      id: "bathroom-measurements",
+      room: "bathroom",
+      url: "./plans/bathroom-measurements/index.html",
+      docIdEn: "2026-11-24_Bathroom-Measurements-Interactive_EN",
+      docIdEs: "2026-11-24_Bathroom-Measurements-Interactive_ES",
+      titleEn: "Bathroom Wall, Tub & Room Renderings",
+      titleEs: "Baño: Planos de Muros, Tina y Cuarto",
+      status: "live",
+      aliases: ["bathroom-measurements","bathroom renderings","tub wall measurements","bathroom floor plan","medidas del bano","planos de muros bano"]
     },
     "bathroom-tile": {
       id: "bathroom-tile",
@@ -10157,7 +10185,7 @@ if (window.claude && claude.use) claude.use("mcp").then(m=>{ if (m){ mcp=m; unwa
         if (typeof show === "function") show(rKey);
         pushLiveContextIfChanged();
       } else if (typ === "u4:nav-plan") {
-        var ph = planUrlToHash(d.planId || d.href, { step: d.step, wall: d.wall, zoom: d.zoom });
+        var ph = planUrlToHash(d.planId || d.href, { step: d.step, wall: d.wall, view: d.view, zoom: d.zoom });
         if (ph) {
           location.hash = ph;
           if (typeof show === "function") show(ph.slice(1));
