@@ -5,7 +5,7 @@
   "room_id": "bathroom",
   "element_id": "BATHROOM-ROOM-01",
   "governing_spec": "bathroom/SPEC.md",
-  "base_rev": "rev-20261124-bath-005",
+  "base_rev": "rev-20261124-bath-006",
   "title": {
     "en": "Bathroom Room Baseline & Field Measurements",
     "es": "Línea Base y Medidas de Campo del Baño"
