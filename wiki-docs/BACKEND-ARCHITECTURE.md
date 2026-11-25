@@ -102,3 +102,9 @@ See companion architecture brief [`docs/PILOT-TO-PRODUCT-ARCHITECTURE.md`](./PIL
 | **Public / Private Split** | Separate unshared Drive `Private` folder + regex firewall blocking currency/private tokens | **Hardware-Isolated Tenant Vaults & Row-Level Security (`RLS`)**: Owner budget/procurement ledger stays cryptographically isolated from no-login Crew Room Views, with automated egress DLP |
 | **Task & Photo Gates** | Todoist project `6hcMQpGhXWprg6m7` + `@verification-photo` subtasks + `todoist-mirror.json` | **Native Last-Planner & Pre-Close-In Gate Engine** (`Should -> Can -> Will -> Did -> Learn`, 7 Make-Ready constraints, `Order-By` lead-time calculator, hard photo-proof gates before drywall/tile) + 2-way Todoist/Procore/Buildertrend sync |
 | **Specialist Intelligence** | Unit 4 `SKILL.md` modules (`sf-code-check`, `unit4-tile-and-waterproofing`, `appliance-install-crosscheck`) | **Versioned Jurisdiction & OEM Rule Packs** (CA Title 24 / SF / NYC / Seattle municipal codes, utility rebate guards, and verified OEM cutout/venting libraries) |
+
+### 3.3 Interactive Plan Publishing & Room-Page Wiring Contract
+
+Every interactive plan module under `plans/<module>/` (including `plans/bathroom-tile/`, `plans/kitchen-west-ks4/`, `plans/kitchen-electrical/`, `plans/attic-hatch/`, `plans/hvac-layout/`, and `plans/murphy-door/`) requires **both**:
+1. Static module assets (`index.html`, styles, JS renderer, `assets/`, and `<room>-plan-data.json` synced to `plans/` and `content/data/`).
+2. Explicit links inside the room's bilingual wiki pages (`content/pages/<room>/en.md` and `content/pages/<room>/es.md`) pointing to `./plans/<module>/` before running `tools/build.py` — otherwise `index.html` will not surface the module on the room page.
