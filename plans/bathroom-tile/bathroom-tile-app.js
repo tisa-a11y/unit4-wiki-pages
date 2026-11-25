@@ -254,7 +254,7 @@
     const xPlumb = +(xNW + (SEED.backerWidthIn / 2) * S).toFixed(1);
 
     return `
-      <svg viewBox="0 0 564 405" xmlns="http://www.w3.org/2000/svg" role="img"
+      <svg viewBox="0 0 584 418" xmlns="http://www.w3.org/2000/svg" role="img"
            aria-label="${es ? "Alzado desplegado 1:1 de los 3 muros de tina con cortes y líneas láser" : "True 1:1 unfolded 3-wall tub alcove cut map with laser lines"}">
         <defs>
           <pattern id="noTileHatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
@@ -266,7 +266,7 @@
         <text x="16" y="18" font-size="10" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#1F5F7A">
           ${es ? "ALZADO DESPLEGADO 1:1 · MAPA DE CORTES Y LÁSER" : "UNFOLDED 3-WALL CUT MAP & LASER LINES (TRUE 1:1)"}
         </text>
-        <text x="548" y="18" text-anchor="end" font-size="8.5" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#5D686D">
+        <text x="568" y="18" text-anchor="end" font-size="8.5" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#5D686D">
           ${es ? "OESTE | NORTE (FONDO) | ESTE" : "WEST | NORTH (BACK) | EAST"}
         </text>
 
@@ -328,9 +328,12 @@
 
         <!-- Floor Datum & Running Dimension Callouts -->
         <line x1="22" y1="${yFloor}" x2="552" y2="${yFloor}" stroke="#1D2326" stroke-width="1.8"/>
-        <text x="${(xNW - 17.5 * S).toFixed(1)}" y="${(yFloor + 14).toFixed(1)}" text-anchor="middle" font-size="8" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#2F6B3F">← 35″ (33″+2″) — 0″</text>
-        <text x="${xPlumb}" y="${(yFloor + 14).toFixed(1)}" text-anchor="middle" font-size="8" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#1F5F7A">0″ — 69-5/16″ NORTH — 0″</text>
-        <text x="${(xNE + 17.5 * S).toFixed(1)}" y="${(yFloor + 14).toFixed(1)}" text-anchor="middle" font-size="8" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#2F6B3F">0″ — 35″ (33″+2″) →</text>
+        <text x="${(xNW - 17.5 * S).toFixed(1)}" y="${(yFloor + 14).toFixed(1)}" text-anchor="middle" font-size="8.2" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#2F6B3F">← 35″ WEST</text>
+        <text x="${(xNW - 17.5 * S).toFixed(1)}" y="${(yFloor + 25).toFixed(1)}" text-anchor="middle" font-size="6.8" font-family="IBM Plex Mono, monospace" fill="#5D686D">(33″ + 2″ trim)</text>
+        <text x="${xPlumb}" y="${(yFloor + 14).toFixed(1)}" text-anchor="middle" font-size="8.2" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#1F5F7A">69-5/16″ NORTH</text>
+        <text x="${xPlumb}" y="${(yFloor + 25).toFixed(1)}" text-anchor="middle" font-size="6.8" font-family="IBM Plex Mono, monospace" fill="#5D686D">(50% running bond)</text>
+        <text x="${(xNE + 17.5 * S).toFixed(1)}" y="${(yFloor + 14).toFixed(1)}" text-anchor="middle" font-size="8.2" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#2F6B3F">35″ EAST →</text>
+        <text x="${(xNE + 17.5 * S).toFixed(1)}" y="${(yFloor + 25).toFixed(1)}" text-anchor="middle" font-size="6.8" font-family="IBM Plex Mono, monospace" fill="#5D686D">(33″ + 2″ trim)</text>
         <text x="${(xNW - 35 * S - 5).toFixed(1)}" y="${((ySill + yFloor) / 2).toFixed(1)}" text-anchor="end" font-size="8" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#2F6B3F">43″</text>
         <text x="${(xNE + 36 * S + 4).toFixed(1)}" y="${((yTopCap + yTub) / 2).toFixed(1)}" font-size="8" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#1F5F7A">71-1/4″</text>
       </svg>
@@ -1050,6 +1053,12 @@
       setLang: (l) => { state.lang = l === "es" ? "es" : "en"; renderAll(); },
       setTheme: (t) => { state.theme = t === "dark" ? "dark" : "light"; renderAll(); }
     };
+    window.addEventListener("message", (ev) => {
+      const d = ev && ev.data;
+      if (!d || typeof d !== "object") return;
+      if (d.theme === "dark" || d.theme === "light") { state.theme = d.theme; renderAll(); }
+      if (d.lang === "en" || d.lang === "es") { state.lang = d.lang; renderAll(); }
+    });
     renderAll();
   }
 

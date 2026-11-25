@@ -547,3 +547,21 @@ html[data-theme="dark"] .u4-svg-viewport {
   .u4-card { padding: 10px; }
   .u4-card-title { font-size: 18px; }
 }
+
+/* Explicit Dark-Mode High Contrast Guard (WCAG AA) */
+html[data-theme="dark"] .u4-calc-box,
+html[data-theme="dark"] .u4-step-card,
+html[data-theme="dark"] .u4-check-item,
+html[data-theme="dark"] .u4-details {
+  background: #141a1d;
+  color: #e4e9ea;
+  border-color: #2c3539;
+}
+html[data-theme="dark"] .u4-calc-box p,
+html[data-theme="dark"] .u4-step-card p {
+  color: #d4dcdf;
+}
+html[data-theme="dark"] .u4-calc-box strong,
+html[data-theme="dark"] .u4-step-card-title {
+  color: #ffffff;
+}
