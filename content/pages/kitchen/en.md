@@ -10,13 +10,11 @@ L-shaped kitchen. Dark green lower cabinets, brass hardware, light counters. Til
 - **Room:** 147" × 126" (East 126-1/4"). Ceiling 121-1/2".
 - **West wall:** range and hood. See [Oven / Range Run](#kitchen-oven-range) or open the [Interactive Range &amp; Hood Wall Plan](./plans/kitchen-west-ks4/index.html).
 - **Dishwasher (Nov 22 update):** Changed from panel-ready to **finished-front** (new or used; model unselected, no purchase yet). Keep 24" bay planning and exclude dishwasher door panel from cabinet quotes.
-- **Drywall delivery postponed:** Held until Ervin and Joel can carry it; no close-in release.
-- **South wall:** 12" trash pull-out base; sink under the window. Seal and weatherproof the old pie-safe openings, then cover the recess. See [South Sink &amp; North Wall Runs](#kitchen-sink-north).
-- **East wall:** 18" drawer base and 30" upper beside the refrigerator. Confirm the setout on site.
-- **North wall:** hall opening, three light switches, electrical panel wall.
-- **Floor (bare subfloor now):** Unit 4 is currently on **bare subfloor (finished floor not installed yet)** — add the finished-floor thickness allowance (about 3/4", to confirm) to every floor-referenced height when measuring from bare subfloor.
-- **Range wall tile edges (TBD brand, ZERO metal / Schluter):** Kitchen tile brand/selection is TBD (no hardcoded default). Never use metal edge trim or Schluter anywhere on Unit 4 tile. Right (North) edge dies into the North wall (inside 90° corner — silicone only, zero trim); Left (South) edge ends on a painted flat return wall with no tiled return — **4 zero-metal options only**: Ceramic Bullnose, Ceramic Pencil / Quarter-Round, Painted Edwardian Wood Trim, or Factory Glazed-Edge Tile (no 45° miter).
-- **Drywall &amp; backer (1/2" drywall ONLY — NO 3/16" shims):** Unit 4 ONLY purchased **1/2" drywall** (NOT 5/8"); 1/2" HardieBacker 500 (0.42") meets 1/2" drywall (0.50") with **NO 3/16" stud shims** (only ~1/16" feather/skim at transition).
+- **Today — Tuesday, Nov 24 (3:00–5:00 p.m.):** NEXT HVAC planning walkthrough rescheduled to today with Serge, John, and Tisa (confirm outside-Door-4 hatch location, route, and D04 panel feed before any cutting).
+- **Crew availability this week:** Alex is unavailable this week, so bathroom wall tile is on hold until he returns. Ervin and Joel are resting and recovering this week.
+- **Drywall delivery rescheduled to Monday, Nov 30:** Held until Ervin and Joel are back to carry it. No receiving commitment this week; close no walls.
+- **John's carry-over & Wednesday, Nov 25:** John finishes remaining bathroom window casing and tile-planning prep (carried over from Monday), then starts eligible electrical work; kitchen full-L/D04 reconciliation and non-kitchen no-wire-before-inspection holds remain active.
+- **Kitchen procurement & hood review:** Tisa and John review the 4 hood cover options; John gets Brett’s cabinet quote and coordinates finishes at Daltile; dishwasher is now finished-front (new or used, 24" bay, no door panel).
 
 ## Do not do yet
 - Do not set the sink cabinet.

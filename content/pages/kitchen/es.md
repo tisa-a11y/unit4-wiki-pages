@@ -10,13 +10,11 @@ Cocina en L. Gabinetes bajos verde oscuro, herrajes de latón, cubiertas claras.
 - **Cuarto:** 147" × 126" (Este 126-1/4"). Techo a 121-1/2".
 - **Muro Oeste:** estufa y campana. Ver [Tramo de estufa y campana](#kitchen-oven-range) o abrir el [Plano Interactivo de Estufa y Campana](./plans/kitchen-west-ks4/index.html?lang=es).
 - **Lavavajillas (actualización 22 nov):** Cambia de panelable a **frente terminado** (nuevo o usado; modelo pendiente, sin compra aún). Mantener espacio de 24" y excluir panel de puerta en cotizaciones de gabinetes.
-- **Entrega de tablaroca pospuesta:** En espera hasta que Ervin y Joel puedan cargarla; no cerrar muros.
-- **Muro Sur:** gabinete extraíble de basura de 12"; tarja bajo la ventana. Sellar y proteger de la lluvia las aberturas de la antigua alacena y luego tapar el nicho. Ver [Tarja Sur y muro Norte](#kitchen-sink-north).
-- **Muro Este:** gabinete bajo de cajones de 18" y gabinete alto de 30" junto al refrigerador. Verificar el trazo en obra.
-- **Muro Norte:** paso al pasillo, tres apagadores, muro del tablero eléctrico.
-- **Piso (subpiso al descubierto hoy):** La Unidad 4 está actualmente en **subpiso sin piso terminado** — sumar el espesor estimado del piso terminado (unos 3/4", por confirmar) a cada altura referida al piso al medir desde el subpiso.
-- **Azulejo y orillas en muro de estufa (marca por definir, CERO metal / Schluter):** La marca y selección de azulejo de cocina está **por definir (TBD)** (sin marca predeterminada). Nunca usar moldura metálica ni Schluter en el azulejo de la Unidad 4. El borde derecho (Norte) llega al muro Norte (esquina interior a 90° — solo silicón, cero moldura); el borde izquierdo (Sur) termina contra muro pintado liso sin retorno de azulejo — **solo 4 opciones sin metal**: Bullnose cerámico, Lápiz / Cuarto de caña cerámico, Moldura de madera pintada estilo Edwardian o Azulejo con canto vidriado de fábrica (sin corte inglete a 45°).
-- **Tablaroca y respaldo (SOLO tablaroca de 1/2" — SIN calzas de 3/16"):** La Unidad 4 SOLO compró **tablaroca de 1/2"** (NO de 5/8"); el HardieBacker 500 de 1/2" (0.42") se une a la tablaroca de 1/2" (0.50") **SIN calzas de 3/16"** (solo ~1/16" de pasta/desvanecido en la junta).
+- **Hoy — Martes 24 de nov (3:00–5:00 p.m.):** Recorrido de planeación de NEXT HVAC reprogramado para hoy con Serge, John y Tisa (confirmar ubicación y ruta del acceso al ático fuera de la Puerta 4 y el alimentador del panel D04 antes de cortar).
+- **Disponibilidad del equipo esta semana:** Alex no está disponible esta semana, así que el azulejo de muro del baño queda en pausa hasta su regreso. Ervin y Joel están descansando y recuperándose esta semana.
+- **Entrega de tablaroca reprogramada al lunes 30 de nov:** En espera hasta que Ervin y Joel regresen para cargarla. Sin entrega esta semana; no cerrar muros.
+- **Pendientes de John y miércoles 25 de nov:** John termina el marco de ventana del baño y la preparación de azulejo pendientes del lunes, y luego inicia trabajo eléctrico elegible; siguen vigentes las pausas de reconciliación de cocina/D04 y de no jalar cable antes de inspección fuera de cocina.
+- **Compras de cocina y campana:** Tisa y John revisan las 4 opciones de cubierta de campana; John solicita cotización de gabinetes a Brett y coordina acabados en Daltile; el lavavajillas ahora es con frente terminado (nuevo o usado, espacio de 24", sin panel de puerta).
 
 ## Todavía no hacer
 - No fijar el gabinete de la tarja.
