@@ -1,0 +1,692 @@
+{
+  "schema_version": "1.0-room-canonical",
+  "plan_id": "living-dining",
+  "project": "1231 11th Avenue Unit 4, San Francisco, CA",
+  "room_id": "living-dining",
+  "element_id": "LIVING-DINING-ROOM-01",
+  "governing_spec": "living-dining/SPEC.md",
+  "companion_interactive_plans": [
+    "kitchen-electrical",
+    "hvac-layout"
+  ],
+  "base_rev": "rev-20261124-livingdining-001",
+  "title": {
+    "en": "Living & Dining Rooms Baseline & Field Measurements",
+    "es": "Línea Base y Medidas de Campo de Sala y Comedor"
+  },
+  "status": "BASELINE_ACTIVE_HOLD_D04_AND_POCKET_WALLS",
+  "registered_live": true,
+  "units": "in",
+  "sources": {
+    "magicplan_live": {
+      "kind": "magicplan_live",
+      "project_id": "44f4fc6f-8e5f-49f6-bae6-2c3557fb3444",
+      "plan_id": "abb2d2c6-aa1c-4a88-a57e-1260847b6410",
+      "project_modified_at": "2026-11-23T00:02:02Z",
+      "read_at": "2026-11-25T02:25:22Z",
+      "room_uid": "6ac582a0.defaf7ff",
+      "tool": "magicplan.get_project_plan; magicplan.get_plan_statistics",
+      "note": "Live Magicplan MASTER metadata and metre-valued symbol fields; connector omits placements and complete wall IDs."
+    },
+    "magicplan_svg": {
+      "kind": "preserved_vector_export",
+      "asset": "wiki-assets/unit4-magicplan-master-floorplan.svg",
+      "sha256": "0ff23f07702577b85b095d79f2ce314982a2b47dfc9938119d67b711dc7e700f",
+      "source_path": "wiki-assets/unit4-magicplan-master-floorplan.svg",
+      "source_date": "2026-10-29",
+      "note": "Original Magicplan MASTER vector export preserved byte-for-byte; supplies model symbol transforms without resizing room envelope."
+    },
+    "accepted_room": {
+      "kind": "owner_accepted_baseline",
+      "date": "2026-11-22",
+      "record": "living-dining/SPEC.md#magicplan-master-6ac582a0.defaf7ff",
+      "note": "Magicplan MASTER (abb2d2c6-aa1c-4a88-a57e-1260847b6410) room envelope (209\" x 142 9/16\") preserved as immutable baseline; local field tape readings attach in named coordinate frames without stretching room outline."
+    },
+    "governing_spec": {
+      "kind": "governing_record",
+      "drive_id": "1AZfSQLnFnGGCNUKDIFuUB9OUBeDL1e0f",
+      "path": "living-dining/SPEC.md",
+      "original_url": "https://drive.google.com/file/d/1AZfSQLnFnGGCNUKDIFuUB9OUBeDL1e0f/view",
+      "read_date": "2026-11-24"
+    },
+    "d04_subpanel_spec": {
+      "kind": "governing_record",
+      "path": "electrical/SPEC.md",
+      "drive_id": "1BBfkV0Pu0qd1J_aGVJaHW8WsMwb3ptGn",
+      "note": "Subpanel D04 (Eaton BRP20L125G, 125A 20-space) mounts on Dining-side NW partition wall backing Kitchen East wall; back is mudded over with kitchen cabinet behind — side-entry feeder & closure held pending NEXT planning visit."
+    }
+  },
+  "points": {
+    "room_back_left": {
+      "x": 0,
+      "y": 0,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "accepted_room",
+      "measure_boundary": "owner_accepted_room_interior_envelope",
+      "confidence": "Magicplan MASTER baseline envelope; verify casing/trim offsets on site",
+      "precedence": "accepted_baseline"
+    },
+    "room_back_right": {
+      "x": 209.0,
+      "y": 0,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "accepted_room",
+      "measure_boundary": "owner_accepted_room_interior_envelope",
+      "confidence": "Magicplan MASTER baseline envelope; verify casing/trim offsets on site",
+      "precedence": "accepted_baseline"
+    },
+    "room_entry_right": {
+      "x": 209.0,
+      "y": 142.5625,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "accepted_room",
+      "measure_boundary": "owner_accepted_room_interior_envelope",
+      "confidence": "Magicplan MASTER baseline envelope; verify casing/trim offsets on site",
+      "precedence": "accepted_baseline"
+    },
+    "room_entry_left": {
+      "x": 0,
+      "y": 142.5625,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "accepted_room",
+      "measure_boundary": "owner_accepted_room_interior_envelope",
+      "confidence": "Magicplan MASTER baseline envelope; verify casing/trim offsets on site",
+      "precedence": "accepted_baseline"
+    },
+    "dining_nw_corner": {
+      "x": 0,
+      "y": 0,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "dining_room_local",
+      "source": "accepted_room",
+      "measure_boundary": "wall_to_wall",
+      "confidence": "Magicplan Dining Room 6ac582a0.dee273ff native [-1.913, 1.143] (146-11/16 x 155-3/4 in)",
+      "precedence": "accepted_baseline"
+    },
+    "dining_se_corner": {
+      "x": 146.6875,
+      "y": 155.75,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "dining_room_local",
+      "source": "accepted_room",
+      "measure_boundary": "wall_to_wall",
+      "confidence": "Magicplan Dining Room 6ac582a0.dee273ff SE corner",
+      "precedence": "accepted_baseline"
+    },
+    "d04_subpanel_center_provisional": {
+      "x": null,
+      "y": null,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "dining_west_d04_local",
+      "source": "d04_subpanel_spec",
+      "measure_boundary": "wall_to_wall",
+      "confidence": "Eaton BRP20L125G mounted in Dining D04 bay; exact station & side-entry conduit to confirm at NEXT visit",
+      "precedence": "owner"
+    }
+  },
+  "room_model": {
+    "version": 1,
+    "allowed_frames": [
+      "room_plan",
+      "north_wall_elevation",
+      "south_wall_elevation",
+      "east_wall_elevation",
+      "west_wall_elevation",
+      "ceiling_plan",
+      "dining_room_local",
+      "dining_west_d04_local"
+    ],
+    "identity": {
+      "project_id": "44f4fc6f-8e5f-49f6-bae6-2c3557fb3444",
+      "plan_id": "abb2d2c6-aa1c-4a88-a57e-1260847b6410",
+      "floor_uid": "6ac57060.ac3137ff",
+      "room_uid": "6ac582a0.defaf7ff",
+      "room_name": "Living Room"
+    },
+    "frame": {
+      "id": "room_plan",
+      "unit": "in",
+      "origin": "top-left (NW) corner of Magicplan MASTER room bounding envelope",
+      "x_positive": "east / viewer right in preserved Magicplan SVG",
+      "y_positive": "south / viewer down in preserved Magicplan SVG",
+      "z_positive": "up",
+      "z_datum": null,
+      "cardinal_rotation_degrees": null,
+      "source_svg_root_matrix": [
+        68.0915,
+        0,
+        0,
+        68.0915,
+        440.42,
+        415.957
+      ],
+      "source_native_origin": [
+        1.928,
+        1.483
+      ],
+      "source_native_unit": "m",
+      "note": "Pure translation and metre-to-inch unit conversion (1 m = 39.37007874 in); zero axis stretching."
+    },
+    "baseline": {
+      "immutable": true,
+      "provenance_source_ids": [
+        "magicplan_live",
+        "magicplan_svg",
+        "accepted_room"
+      ],
+      "source_room": {
+        "uid": "6ac582a0.defaf7ff",
+        "name": "Living Room",
+        "dimensions": "209\" x 142 9/16\"",
+        "fields": {
+          "ceilingHeight": "3.086857",
+          "roomType": "Living Room",
+          "ground.color": "FFFFFF00"
+        },
+        "objects": [
+          {
+            "uid": "6ac582a0.e08cc3ff",
+            "name": "Fireplace",
+            "symbol_id": "hvac-1489fe06-b5c5-40ce-b7fa-c0555750d8c9",
+            "fields": {
+              "width": "0.8",
+              "height": "2.04"
+            }
+          },
+          {
+            "uid": "6ac582a0.e02e63ff",
+            "name": "Sliding Window",
+            "symbol_id": "windowsliding",
+            "wall_uid": "6ac582a0.df0f7bff",
+            "fields": {
+              "width": "1.00239",
+              "height": "1.922391"
+            }
+          },
+          {
+            "uid": "6ac582a0.e036fbff",
+            "name": "Hung Window",
+            "symbol_id": "windowhung",
+            "wall_uid": "6ac582a0.df1453ff",
+            "fields": {
+              "width": "0.72166",
+              "height": "1.826272"
+            }
+          },
+          {
+            "uid": "6ac582a0.e03e0fff",
+            "name": "Hung Window",
+            "symbol_id": "windowhung",
+            "wall_uid": "6ac582a0.df0ae3ff",
+            "fields": {
+              "width": "0.82689",
+              "height": "1.888063"
+            }
+          },
+          {
+            "uid": "6ac582a0.df7e8fff.auto",
+            "name": "Opening",
+            "symbol_id": "dooropening",
+            "wall_uid": "6ac582a0.defb2bff",
+            "fields": {
+              "width": "0.94471",
+              "height": "2.750286"
+            }
+          },
+          {
+            "uid": "6ac582a0.df8323ff.auto",
+            "name": "Double Pocket Door",
+            "symbol_id": "doordoublesliding",
+            "wall_uid": "6ac582a0.deff8fff",
+            "fields": {
+              "width": "1.69167",
+              "height": "2.034036"
+            }
+          }
+        ]
+      },
+      "source_statistics": {
+        "name": "Living Room",
+        "uid": "6ac582a0.defaf7ff",
+        "area": 194.853,
+        "perimeter": 55.662,
+        "ground_perimeter": 47.013,
+        "area_without_walls": 194.853,
+        "area_with_interior_walls_only": 194.853,
+        "area_with_walls": 194.853,
+        "wall_count": 8,
+        "door_count": 2,
+        "window_count": 3,
+        "doors_surface": 65.005,
+        "furniture_count": 6,
+        "height": 10.127,
+        "volume": 1973.375,
+        "dimensions": "209\" x 142 9/16\"",
+        "walls_surface": 563.717,
+        "walls_surface_without_openings": 446.979,
+        "windows_surface": 51.733
+      },
+      "svg_object_transforms": {
+        "6ac582a0.e08cc3ff": {
+          "svg_child_index": 341,
+          "matrix": [
+            -68.0915,
+            0.0,
+            0.0,
+            -68.0915,
+            786.963,
+            777.662
+          ]
+        },
+        "6ac582a0.e02e63ff": {
+          "svg_child_index": 370,
+          "matrix": [
+            0.0,
+            68.0915,
+            68.0915,
+            0.0,
+            933.181,
+            606.466
+          ]
+        },
+        "6ac582a0.e036fbff": {
+          "svg_child_index": 383,
+          "matrix": [
+            48.095,
+            48.2009,
+            48.2009,
+            -48.095,
+            888.226,
+            547.687
+          ]
+        },
+        "6ac582a0.e03e0fff": {
+          "svg_child_index": 398,
+          "matrix": [
+            -47.0402,
+            49.2308,
+            49.2308,
+            47.0402,
+            926.034,
+            693.122
+          ]
+        },
+        "6ac582a0.df8323ff.auto": {
+          "svg_child_index": 337,
+          "matrix": [
+            0.0,
+            68.0915,
+            68.0915,
+            0.0,
+            563.833,
+            583.249
+          ]
+        }
+      },
+      "svg_door_jambs_native": [
+        [
+          1.928,
+          2.456
+        ],
+        [
+          1.928,
+          4.148
+        ]
+      ],
+      "captured_at": "2026-11-25T03:20:00Z",
+      "source_geometry_sha256": "0ff23f07702577b85b095d79f2ce314982a2b47dfc9938119d67b711dc7e700f",
+      "limitations": [
+        "SVG wall coordinates rounded to .001 native unit; small edge residuals preserved.",
+        "Live Magicplan connector omits object station coordinates and door/window casings; preserved SVG supplies baseline placement.",
+        "Floor finish buildup thickness t remains TO VERIFY IN FIELD unless measured on site."
+      ],
+      "companion_subrooms": {
+        "dining_room": {
+          "source_room": {
+            "uid": "6ac582a0.dee273ff",
+            "name": "Dining Room",
+            "dimensions": "146 11/16\" x 155 3/4\"",
+            "fields": {
+              "ceilingHeight": "3.086857",
+              "roomType": "Dining Room",
+              "ground.color": "FFFFFF00"
+            },
+            "objects": [
+              {
+                "uid": "6ac582a0.e074dbff",
+                "name": "2 Door wardrobe",
+                "symbol_id": "furniture-8285a785-4b2a-4a2a-904b-5fd5d91551d4",
+                "fields": {
+                  "width": "1.87765",
+                  "depth": "0.50327",
+                  "height": "1.32662"
+                }
+              },
+              {
+                "uid": "6ac582a0.df8323ff",
+                "name": "Double Pocket Door",
+                "symbol_id": "doordoublesliding",
+                "wall_uid": "6ac582a0.deeedbff",
+                "fields": {
+                  "width": "1.69167",
+                  "height": "2.034036"
+                }
+              },
+              {
+                "uid": "6ac582a0.e04503ff",
+                "name": "French Window",
+                "symbol_id": "windowfrench",
+                "wall_uid": "6ac582a0.dee2a7ff",
+                "fields": {
+                  "width": "1.12555",
+                  "height": "1.918238"
+                }
+              },
+              {
+                "uid": "6ac582a0.dfb743ff.auto",
+                "name": "Hinged Door",
+                "symbol_id": "doorhinged",
+                "wall_uid": "6ac582a0.deea3fff",
+                "fields": {
+                  "width": "0.85559",
+                  "height": "2.028206"
+                }
+              }
+            ]
+          },
+          "source_statistics": {
+            "name": "Dining Room",
+            "uid": "6ac582a0.dee273ff",
+            "area": 158.651,
+            "perimeter": 50.405,
+            "ground_perimeter": 42.048,
+            "area_without_walls": 158.651,
+            "area_with_interior_walls_only": 158.651,
+            "area_with_walls": 158.651,
+            "wall_count": 4,
+            "door_count": 2,
+            "window_count": 1,
+            "doors_surface": 55.716,
+            "furniture_count": 4,
+            "height": 10.127,
+            "volume": 1606.742,
+            "dimensions": "146 11/16\" x 155 3/4\"",
+            "walls_surface": 510.479,
+            "walls_surface_without_openings": 431.522,
+            "windows_surface": 23.24
+          },
+          "svg_object_transforms": {
+            "6ac582a0.e074dbff": {
+              "svg_child_index": 313,
+              "matrix": [
+                -68.0915,
+                0.0,
+                0.0,
+                -68.0915,
+                517.477,
+                763.156
+              ]
+            },
+            "6ac582a0.e04503ff": {
+              "svg_child_index": 326,
+              "matrix": [
+                0.0,
+                -68.0915,
+                -68.0915,
+                -0.0,
+                310.128,
+                736.457
+              ]
+            },
+            "6ac582a0.df8323ff": {
+              "svg_child_index": 337,
+              "matrix": [
+                0.0,
+                68.0915,
+                68.0915,
+                0.0,
+                563.833,
+                583.249
+              ]
+            },
+            "6ac582a0.dfb743ff.auto": {
+              "svg_child_index": 296,
+              "matrix": [
+                -68.0915,
+                0.0,
+                0.0,
+                68.0915,
+                388.12,
+                431.452
+              ]
+            }
+          }
+        }
+      },
+      "payload_hash_encoding": "UTF-8 sorted object keys, JSON values, comma-space and colon-space separators",
+      "payload_sha256": "e83f5604eba50e17e6f00e438d283bb5a70751590b4b4263fb27aa6b55cea03b"
+    },
+    "outline": {
+      "point_ids": [
+        "room_back_left",
+        "room_back_right",
+        "room_entry_right",
+        "room_entry_left"
+      ],
+      "status": "owner_accepted_baseline",
+      "source_id": "accepted_room"
+    },
+    "walls": [
+      {
+        "id": "liv_north",
+        "magicplan_uid": "6ac582a0.defb2bff",
+        "from": "room_back_left",
+        "to": "room_back_right",
+        "role": "north partition to hallway & bedroom (cased opening)",
+        "source_id": "magicplan_live"
+      },
+      {
+        "id": "liv_east_bay",
+        "magicplan_uid": "6ac582a0.df0f7bff",
+        "from": "room_back_right",
+        "to": "room_entry_right",
+        "role": "east street-facing bay window wall (3 windows)",
+        "source_id": "magicplan_live"
+      },
+      {
+        "id": "liv_south_fireplace",
+        "magicplan_uid": null,
+        "from": "room_entry_right",
+        "to": "room_entry_left",
+        "role": "south fireplace wall",
+        "source_id": "magicplan_svg"
+      },
+      {
+        "id": "liv_west_pocket",
+        "magicplan_uid": "6ac582a0.deff8fff",
+        "from": "room_entry_left",
+        "to": "room_back_left",
+        "role": "west double pocket door wall to dining room (NO-SCREW / NO-BORE ZONE)",
+        "source_id": "magicplan_live"
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "6ac582a0.e08cc3ff",
+        "magicplan_uid": "6ac582a0.e08cc3ff",
+        "baseline_object_uid": "6ac582a0.e08cc3ff",
+        "label": "Fireplace",
+        "status": "preserved original architectural feature",
+        "source_id": "magicplan_svg"
+      }
+    ],
+    "openings": [
+      {
+        "id": "6ac582a0.df8323ff.auto",
+        "magicplan_uid": "6ac582a0.df8323ff.auto",
+        "baseline_object_uid": "6ac582a0.df8323ff.auto",
+        "label": "Double Pocket Door (Living <-> Dining)",
+        "status": "preserved existing pocket doors; protect pocket cavities from fasteners/boxes",
+        "source_id": "magicplan_svg",
+        "wall_id": "liv_west_pocket",
+        "kind": "door",
+        "current_action_ref": "double_pocket_door"
+      },
+      {
+        "id": "6ac582a0.e02e63ff",
+        "magicplan_uid": "6ac582a0.e02e63ff",
+        "baseline_object_uid": "6ac582a0.e02e63ff",
+        "label": "Center Bay Sliding Window",
+        "status": "preserved model symbol",
+        "source_id": "magicplan_svg",
+        "wall_id": "liv_east_bay",
+        "kind": "window",
+        "current_action_ref": "window"
+      },
+      {
+        "id": "6ac582a0.e036fbff",
+        "magicplan_uid": "6ac582a0.e036fbff",
+        "baseline_object_uid": "6ac582a0.e036fbff",
+        "label": "North Angled Bay Hung Window",
+        "status": "preserved model symbol",
+        "source_id": "magicplan_svg",
+        "wall_id": "liv_east_bay",
+        "kind": "window",
+        "current_action_ref": "window"
+      },
+      {
+        "id": "6ac582a0.e03e0fff",
+        "magicplan_uid": "6ac582a0.e03e0fff",
+        "baseline_object_uid": "6ac582a0.e03e0fff",
+        "label": "South Angled Bay Hung Window",
+        "status": "preserved model symbol",
+        "source_id": "magicplan_svg",
+        "wall_id": "liv_east_bay",
+        "kind": "window",
+        "current_action_ref": "window"
+      }
+    ],
+    "point_groups": {
+      "dining_envelope": {
+        "point_ids": [
+          "dining_nw_corner",
+          "dining_se_corner"
+        ],
+        "frame": "dining_room_local",
+        "room_registration": null,
+        "role": "Companion Dining Room (6ac582a0.dee273ff) envelope"
+      },
+      "d04_subpanel_bay": {
+        "point_ids": [
+          "d04_subpanel_center_provisional"
+        ],
+        "frame": "dining_west_d04_local",
+        "room_registration": null,
+        "role": "Subpanel D04 bay on Dining West wall (hold closure until NEXT walkthrough)"
+      }
+    },
+    "decisions": {
+      "window": {
+        "action": "preserve or verify per governing spec",
+        "status": "see_governing_spec",
+        "source_id": "governing_spec",
+        "replacement_product": null,
+        "replacement_dimensions": null
+      },
+      "medicine_cabinet": {
+        "action": "not_applicable_non_bath_room",
+        "status": "n/a",
+        "source_id": "governing_spec",
+        "replacement_product": null,
+        "replacement_dimensions": null
+      },
+      "double_pocket_door": {
+        "action": "preserve existing L02/D03 double pocket doors and protect pocket wall cavities from any electrical boxes or long fasteners",
+        "status": "LOCKED",
+        "source_id": "governing_spec",
+        "date": "2026-11-19"
+      },
+      "stored_hutch": {
+        "action": "Dining hutch (6hhCMFfPxFqRqQh7) ON HOLD",
+        "status": "ON_HOLD",
+        "source_id": "governing_spec"
+      },
+      "d04_subpanel_hold": {
+        "action": "Hold D04 subpanel wall closure (6hvRcQ4XC9mr56g7) until exterior feeder side-entry and 80A feed + conditional 100A main breaker are confirmed with NEXT",
+        "status": "LOCKED_HOLD",
+        "source_id": "d04_subpanel_spec"
+      }
+    },
+    "materials": {
+      "original_millwork": {
+        "preserve_edwardian_wainscot_crown_and_casings": true
+      }
+    },
+    "corrections": [],
+    "extensions": {
+      "new_point_groups_allowed": true,
+      "unknown_coordinates_are_null": true
+    }
+  },
+  "dimensions": {
+    "living_room_width_in": {
+      "value": 209.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "LOCKED",
+      "source": "Magicplan MASTER 6ac582a0.defaf7ff",
+      "date": "2026-11-22"
+    },
+    "living_room_depth_in": {
+      "value": 142.5625,
+      "measure_boundary": "wall_to_wall",
+      "verified": "LOCKED",
+      "source": "Magicplan MASTER 6ac582a0.defaf7ff",
+      "date": "2026-11-22"
+    },
+    "dining_room_width_in": {
+      "value": 146.6875,
+      "measure_boundary": "wall_to_wall",
+      "verified": "LOCKED",
+      "source": "Magicplan MASTER 6ac582a0.dee273ff",
+      "date": "2026-11-22"
+    },
+    "dining_room_depth_in": {
+      "value": 155.75,
+      "measure_boundary": "wall_to_wall",
+      "verified": "LOCKED",
+      "source": "Magicplan MASTER 6ac582a0.dee273ff",
+      "date": "2026-11-22"
+    }
+  },
+  "options": {
+    "protect_pocket_door_cavities": true,
+    "d04_closure_hold": true
+  },
+  "flagged_clashes": [
+    {
+      "id": "clash-livdin-pocket-door-wall",
+      "severity": "HIGH",
+      "en": "Living/Dining L02/D03 double pocket door wall cavities are active NO-SCREW / NO-BOX zones; verify pocket depth before any nearby electrical rough-in.",
+      "es": "Los muros de las puertas corredizas ocultas dobles L02/D03 entre Sala y Comedor son zona PROHIBIDA para cajas o tornillos largos."
+    },
+    {
+      "id": "clash-dining-d04-subpanel-hold",
+      "severity": "HIGH",
+      "en": "Hold Dining D04 subpanel wall closure (6hvRcQ4XC9mr56g7) until NEXT confirms side-entry feeder route (never route through mudded rear wall behind kitchen cabinets).",
+      "es": "Mantener abierto el muro del subpanel D04 en Comedor (6hvRcQ4XC9mr56g7) hasta confirmar entrada lateral con NEXT (jamás entrar por detrás hacia gabinetes de cocina)."
+    }
+  ],
+  "field_overrides": [],
+  "pins": []
+}

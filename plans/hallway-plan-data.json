@@ -1,0 +1,598 @@
+{
+  "schema_version": "1.0-room-canonical",
+  "plan_id": "hallway",
+  "project": "1231 11th Avenue Unit 4, San Francisco, CA",
+  "room_id": "hallway",
+  "element_id": "HALLWAY-ROOM-01",
+  "governing_spec": "hallway/SPEC.md",
+  "companion_interactive_plans": [
+    "attic-hatch",
+    "murphy-door"
+  ],
+  "base_rev": "rev-20261124-hallway-001",
+  "title": {
+    "en": "Hallway & Front Door 4 Landing Baseline & Field Measurements",
+    "es": "Línea Base y Medidas de Campo del Pasillo y Descanso Puerta 4"
+  },
+  "status": "BASELINE_ACTIVE_HOLD_DOOR4_CEILING_CUT",
+  "registered_live": true,
+  "units": "in",
+  "sources": {
+    "magicplan_live": {
+      "kind": "magicplan_live",
+      "project_id": "44f4fc6f-8e5f-49f6-bae6-2c3557fb3444",
+      "plan_id": "abb2d2c6-aa1c-4a88-a57e-1260847b6410",
+      "project_modified_at": "2026-11-23T00:02:02Z",
+      "read_at": "2026-11-25T02:25:22Z",
+      "room_uid": "6ac582a0.deaa9fff",
+      "tool": "magicplan.get_project_plan; magicplan.get_plan_statistics",
+      "note": "Live Magicplan MASTER metadata and metre-valued symbol fields; connector omits placements and complete wall IDs."
+    },
+    "magicplan_svg": {
+      "kind": "preserved_vector_export",
+      "asset": "wiki-assets/unit4-magicplan-master-floorplan.svg",
+      "sha256": "0ff23f07702577b85b095d79f2ce314982a2b47dfc9938119d67b711dc7e700f",
+      "source_path": "wiki-assets/unit4-magicplan-master-floorplan.svg",
+      "source_date": "2026-10-29",
+      "note": "Original Magicplan MASTER vector export preserved byte-for-byte; supplies model symbol transforms without resizing room envelope."
+    },
+    "accepted_room": {
+      "kind": "owner_accepted_baseline",
+      "date": "2026-11-22",
+      "record": "hallway/SPEC.md#magicplan-master-6ac582a0.deaa9fff",
+      "note": "Magicplan MASTER (abb2d2c6-aa1c-4a88-a57e-1260847b6410) room envelope (205 7/16\" x 95 15/16\") preserved as immutable baseline; local field tape readings attach in named coordinate frames without stretching room outline."
+    },
+    "governing_spec": {
+      "kind": "governing_record",
+      "drive_id": "1Iv-p2qom5G0tSqPo2GVefLf6f9HtTzpo",
+      "path": "hallway/SPEC.md",
+      "original_url": "https://drive.google.com/file/d/1Iv-p2qom5G0tSqPo2GVefLf6f9HtTzpo/view",
+      "read_date": "2026-11-24"
+    },
+    "door4_landing_ruling": {
+      "kind": "owner-locked-decision",
+      "recorded_at": "2026-11-23T00:00:00-08:00",
+      "path": "attic/SPEC.md",
+      "drive_id": "1p5x_lCtrZrv3cDa7uTtLF8ULvTpPmpOL",
+      "note": "Permanent 24x36 in finished-clear attic hatch locked outside Front Door 4 on unconditioned common stair landing (zero lid batts or dam per 2025 CAEC 160.1(a)); hold ceiling cut until fire-rating and joist bay B check with NEXT."
+    }
+  },
+  "points": {
+    "room_back_left": {
+      "x": 0,
+      "y": 0,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "accepted_room",
+      "measure_boundary": "owner_accepted_room_interior_envelope",
+      "confidence": "Magicplan MASTER baseline envelope; verify casing/trim offsets on site",
+      "precedence": "accepted_baseline"
+    },
+    "room_back_right": {
+      "x": 205.4375,
+      "y": 0,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "accepted_room",
+      "measure_boundary": "owner_accepted_room_interior_envelope",
+      "confidence": "Magicplan MASTER baseline envelope; verify casing/trim offsets on site",
+      "precedence": "accepted_baseline"
+    },
+    "room_entry_right": {
+      "x": 205.4375,
+      "y": 95.9375,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "accepted_room",
+      "measure_boundary": "owner_accepted_room_interior_envelope",
+      "confidence": "Magicplan MASTER baseline envelope; verify casing/trim offsets on site",
+      "precedence": "accepted_baseline"
+    },
+    "room_entry_left": {
+      "x": 0,
+      "y": 95.9375,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "accepted_room",
+      "measure_boundary": "owner_accepted_room_interior_envelope",
+      "confidence": "Magicplan MASTER baseline envelope; verify casing/trim offsets on site",
+      "precedence": "accepted_baseline"
+    },
+    "door4_landing_hatch_markout_origin": {
+      "x": null,
+      "y": null,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "door4_stair_landing_local",
+      "source": "door4_landing_ruling",
+      "measure_boundary": "rough_opening",
+      "confidence": "24x36 in finished clear (27-1/2 x 39-1/2 in proposed wood cut); exact landing ceiling offsets & joist bay B to photograph at NEXT visit before cutting",
+      "precedence": "owner"
+    }
+  },
+  "room_model": {
+    "version": 1,
+    "allowed_frames": [
+      "room_plan",
+      "north_wall_elevation",
+      "south_wall_elevation",
+      "east_wall_elevation",
+      "west_wall_elevation",
+      "ceiling_plan",
+      "door4_stair_landing_local",
+      "hall_north_wall_local"
+    ],
+    "identity": {
+      "project_id": "44f4fc6f-8e5f-49f6-bae6-2c3557fb3444",
+      "plan_id": "abb2d2c6-aa1c-4a88-a57e-1260847b6410",
+      "floor_uid": "6ac57060.ac3137ff",
+      "room_uid": "6ac582a0.deaa9fff",
+      "room_name": "Hall"
+    },
+    "frame": {
+      "id": "room_plan",
+      "unit": "in",
+      "origin": "top-left (NW) corner of Magicplan MASTER room bounding envelope",
+      "x_positive": "east / viewer right in preserved Magicplan SVG",
+      "y_positive": "south / viewer down in preserved Magicplan SVG",
+      "z_positive": "up",
+      "z_datum": null,
+      "cardinal_rotation_degrees": null,
+      "source_svg_root_matrix": [
+        68.0915,
+        0,
+        0,
+        68.0915,
+        440.42,
+        415.957
+      ],
+      "source_native_origin": [
+        -1.918,
+        -1.073
+      ],
+      "source_native_unit": "m",
+      "note": "Pure translation and metre-to-inch unit conversion (1 m = 39.37007874 in); zero axis stretching."
+    },
+    "baseline": {
+      "immutable": true,
+      "provenance_source_ids": [
+        "magicplan_live",
+        "magicplan_svg",
+        "accepted_room"
+      ],
+      "source_room": {
+        "uid": "6ac582a0.deaa9fff",
+        "name": "Hall",
+        "dimensions": "205 7/16\" x 95 15/16\"",
+        "fields": {
+          "ceilingHeight": "3.086857",
+          "roomType": "Hall",
+          "ground.color": "FFFFFF00"
+        },
+        "objects": [
+          {
+            "uid": "6ac582a0.df7e8fff",
+            "name": "Opening",
+            "symbol_id": "dooropening",
+            "wall_uid": "6ac582a0.deb15bff",
+            "fields": {
+              "width": "0.94471",
+              "height": "2.750286"
+            }
+          },
+          {
+            "uid": "6ac582a0.df8ed3ff",
+            "name": "Hinged Door",
+            "symbol_id": "doorhinged",
+            "wall_uid": "6ac582a0.deb67bff",
+            "fields": {
+              "width": "0.85324",
+              "height": "2.189565"
+            }
+          },
+          {
+            "uid": "6ac582a0.df9703ff",
+            "name": "Hinged Door",
+            "symbol_id": "doorhinged",
+            "wall_uid": "6ac582a0.deaaafff",
+            "fields": {
+              "width": "0.72231",
+              "height": "2.042331"
+            }
+          },
+          {
+            "uid": "6ac582a0.dfb743ff",
+            "name": "Hinged Door",
+            "symbol_id": "doorhinged",
+            "wall_uid": "6ac582a0.deb4d7ff",
+            "fields": {
+              "width": "0.85559",
+              "height": "2.028206"
+            }
+          },
+          {
+            "uid": "6ac582a0.dffdc3ff",
+            "name": "French Window",
+            "symbol_id": "windowfrench",
+            "wall_uid": "6ac582a0.deba03ff",
+            "fields": {
+              "width": "0.81083",
+              "height": "1.906468"
+            }
+          },
+          {
+            "uid": "6ac582a0.dfa313ff.auto",
+            "name": "Pocket Door",
+            "symbol_id": "doorpocket",
+            "wall_uid": "6ac582a0.deaaafff",
+            "fields": {
+              "width": "0.7112",
+              "height": "2.014538"
+            }
+          },
+          {
+            "uid": "6ac582a0.df92e3ff.auto",
+            "name": "Opening",
+            "symbol_id": "dooropening",
+            "wall_uid": "6ac582a0.deb67bff",
+            "fields": {
+              "width": "0.74798",
+              "height": "2.007589"
+            }
+          },
+          {
+            "uid": "6ac582a0.dfad5bff.auto",
+            "name": "Hinged Door",
+            "symbol_id": "doorhinged",
+            "wall_uid": "6ac582a0.deafbbff",
+            "fields": {
+              "width": "0.84436",
+              "height": "2.192755"
+            }
+          }
+        ]
+      },
+      "source_statistics": {
+        "name": "Hall",
+        "uid": "6ac582a0.deaa9fff",
+        "area": 81.792,
+        "perimeter": 50.236,
+        "ground_perimeter": 31.602,
+        "area_without_walls": 81.792,
+        "area_with_interior_walls_only": 81.792,
+        "area_with_walls": 81.792,
+        "wall_count": 8,
+        "door_count": 7,
+        "window_count": 1,
+        "doors_surface": 134.148,
+        "furniture_count": 8,
+        "height": 10.127,
+        "volume": 828.345,
+        "dimensions": "205 7/16\" x 95 15/16\"",
+        "walls_surface": 508.759,
+        "walls_surface_without_openings": 357.971,
+        "windows_surface": 16.639
+      },
+      "svg_object_transforms": {
+        "6ac582a0.dffdc3ff": {
+          "svg_child_index": 281,
+          "matrix": [
+            68.0915,
+            0.0,
+            -0.0,
+            -68.0915,
+            326.252,
+            342.877
+          ]
+        },
+        "6ac582a0.df8ed3ff": {
+          "svg_child_index": 292,
+          "matrix": [
+            0.0,
+            -68.0915,
+            -68.0915,
+            -0.0,
+            363.798,
+            410.07
+          ]
+        },
+        "6ac582a0.df9703ff": {
+          "svg_child_index": 293,
+          "matrix": [
+            68.0915,
+            0.0,
+            -0.0,
+            -68.0915,
+            566.465,
+            458.156
+          ]
+        },
+        "6ac582a0.dfb743ff": {
+          "svg_child_index": 296,
+          "matrix": [
+            -68.0915,
+            0.0,
+            0.0,
+            68.0915,
+            388.12,
+            431.452
+          ]
+        },
+        "6ac582a0.dfa313ff.auto": {
+          "svg_child_index": 267,
+          "matrix": [
+            -68.0915,
+            0.0,
+            0.0,
+            68.0915,
+            480.878,
+            404.699
+          ]
+        },
+        "6ac582a0.dfad5bff.auto": {
+          "svg_child_index": 454,
+          "matrix": [
+            0.0,
+            68.0915,
+            -68.0915,
+            -0.0,
+            726.71,
+            424.372
+          ]
+        }
+      },
+      "svg_door_jambs_native": [
+        [
+          -1.918,
+          -0.086
+        ],
+        [
+          -1.918,
+          -0.939
+        ]
+      ],
+      "captured_at": "2026-11-25T03:20:00Z",
+      "source_geometry_sha256": "0ff23f07702577b85b095d79f2ce314982a2b47dfc9938119d67b711dc7e700f",
+      "limitations": [
+        "SVG wall coordinates rounded to .001 native unit; small edge residuals preserved.",
+        "Live Magicplan connector omits object station coordinates and door/window casings; preserved SVG supplies baseline placement.",
+        "Floor finish buildup thickness t remains TO VERIFY IN FIELD unless measured on site."
+      ],
+      "payload_hash_encoding": "UTF-8 sorted object keys, JSON values, comma-space and colon-space separators",
+      "payload_sha256": "10a32b3c955072460c4c727b3cc97698d150dae11caead45677333cdff4f2cdd"
+    },
+    "outline": {
+      "point_ids": [
+        "room_back_left",
+        "room_back_right",
+        "room_entry_right",
+        "room_entry_left"
+      ],
+      "status": "owner_accepted_baseline",
+      "source_id": "accepted_room"
+    },
+    "walls": [
+      {
+        "id": "hall_north",
+        "magicplan_uid": "6ac582a0.deaaafff",
+        "from": "room_back_left",
+        "to": "room_back_right",
+        "role": "north wall (lightwell window, Bathroom Door A, Laundry Murphy Door B, NW closet)",
+        "source_id": "magicplan_live"
+      },
+      {
+        "id": "hall_east",
+        "magicplan_uid": "6ac582a0.deafbbff",
+        "from": "room_back_right",
+        "to": "room_entry_right",
+        "role": "east Bedroom Door C wall",
+        "source_id": "magicplan_live"
+      },
+      {
+        "id": "hall_south",
+        "magicplan_uid": "6ac582a0.deb4d7ff",
+        "from": "room_entry_right",
+        "to": "room_entry_left",
+        "role": "south wall (Living Room cased opening, Dining Room door, Front Entry Door 4)",
+        "source_id": "magicplan_live"
+      },
+      {
+        "id": "hall_west",
+        "magicplan_uid": "6ac582a0.deb67bff",
+        "from": "room_entry_left",
+        "to": "room_back_left",
+        "role": "west Kitchen cased opening & stair-landing partition",
+        "source_id": "magicplan_live"
+      }
+    ],
+    "fixtures": [],
+    "openings": [
+      {
+        "id": "6ac582a0.df8ed3ff",
+        "magicplan_uid": "6ac582a0.df8ed3ff",
+        "baseline_object_uid": "6ac582a0.df8ed3ff",
+        "label": "Unit 4 Front Entry Hinged Door (Door 4)",
+        "status": "preserved entry door; permanent 24x36 clear attic hatch selected on unconditioned landing outside Door 4",
+        "source_id": "magicplan_svg",
+        "wall_id": "hall_west",
+        "kind": "door",
+        "current_action_ref": "front_door_4_landing_hatch"
+      },
+      {
+        "id": "6ac582a0.dfa313ff.auto",
+        "magicplan_uid": "6ac582a0.dfa313ff.auto",
+        "baseline_object_uid": "6ac582a0.dfa313ff.auto",
+        "label": "Bathroom Doorway A (Retained Outward-Swing Slab)",
+        "status": "pocket door deferred Nov 19; outward-swing hinged slab retained",
+        "source_id": "magicplan_svg",
+        "wall_id": "hall_north",
+        "kind": "door",
+        "current_action_ref": "bathroom_door_a"
+      },
+      {
+        "id": "6ac582a0.df9703ff",
+        "magicplan_uid": "6ac582a0.df9703ff",
+        "baseline_object_uid": "6ac582a0.df9703ff",
+        "label": "Middle Doorway B (Laundry Closet / Murphy Bookcase Door MD-02)",
+        "status": "preserve original hallway casings, crown, and 9-1/2 in baseboard; 9-point B7-B15 inside-jamb measurement active",
+        "source_id": "magicplan_svg",
+        "wall_id": "hall_north",
+        "kind": "door",
+        "current_action_ref": "laundry_door_b_interface"
+      },
+      {
+        "id": "6ac582a0.dfb743ff",
+        "magicplan_uid": "6ac582a0.dfb743ff",
+        "baseline_object_uid": "6ac582a0.dfb743ff",
+        "label": "Dining Room Hinged Door",
+        "status": "preserved model symbol",
+        "source_id": "magicplan_svg",
+        "wall_id": "hall_south",
+        "kind": "door",
+        "current_action_ref": "window"
+      },
+      {
+        "id": "6ac582a0.dfad5bff.auto",
+        "magicplan_uid": "6ac582a0.dfad5bff.auto",
+        "baseline_object_uid": "6ac582a0.dfad5bff.auto",
+        "label": "Bedroom Hinged Door (Door C)",
+        "status": "preserved model symbol",
+        "source_id": "magicplan_svg",
+        "wall_id": "hall_east",
+        "kind": "door",
+        "current_action_ref": "window"
+      },
+      {
+        "id": "6ac582a0.dffdc3ff",
+        "magicplan_uid": "6ac582a0.dffdc3ff",
+        "baseline_object_uid": "6ac582a0.dffdc3ff",
+        "label": "Hallway Lightwell French Window",
+        "status": "preserved model symbol",
+        "source_id": "magicplan_svg",
+        "wall_id": "hall_north",
+        "kind": "window",
+        "current_action_ref": "window"
+      }
+    ],
+    "point_groups": {
+      "door4_landing_hatch": {
+        "point_ids": [
+          "door4_landing_hatch_markout_origin"
+        ],
+        "frame": "door4_stair_landing_local",
+        "room_registration": null,
+        "role": "Outside Front Door 4 unconditioned landing 24x36 clear attic hatch markout"
+      }
+    },
+    "decisions": {
+      "window": {
+        "action": "preserve or verify per governing spec",
+        "status": "see_governing_spec",
+        "source_id": "governing_spec",
+        "replacement_product": null,
+        "replacement_dimensions": null
+      },
+      "medicine_cabinet": {
+        "action": "not_applicable_non_bath_room",
+        "status": "n/a",
+        "source_id": "governing_spec",
+        "replacement_product": null,
+        "replacement_dimensions": null
+      },
+      "front_door_4_landing_hatch": {
+        "action": "24x36 in finished-clear uninsulated gasketed hatch outside Front Door 4; photograph markout at rescheduled NEXT visit before cutting",
+        "status": "LOCKED_LOCATION_HOLD_CUT",
+        "source_id": "door4_landing_ruling"
+      },
+      "bathroom_door_a": {
+        "action": "retain existing hinged door slab swinging outward; pocket door deferred Nov 19; verify hallway swing clearance against Murphy Door B",
+        "status": "LOCKED",
+        "source_id": "governing_spec"
+      },
+      "laundry_door_b_interface": {
+        "action": "preserve original hallway crown, Door A/B/C casings, 103 in picture rail, and 9-1/2 in baseboard untouched; Murphy door owned under laundry/SPEC.md",
+        "status": "LOCKED",
+        "source_id": "governing_spec"
+      }
+    },
+    "materials": {
+      "original_edwardian_trim": {
+        "baseboard_height_in": 9.5,
+        "picture_rail_aff_in": 103.0,
+        "preserve_all_casings": true
+      }
+    },
+    "corrections": [],
+    "extensions": {
+      "new_point_groups_allowed": true,
+      "unknown_coordinates_are_null": true
+    }
+  },
+  "dimensions": {
+    "magicplan_hall_length_in": {
+      "value": 205.4375,
+      "measure_boundary": "wall_to_wall",
+      "verified": "LOCKED",
+      "source": "Magicplan MASTER 6ac582a0.deaa9fff",
+      "date": "2026-11-22"
+    },
+    "magicplan_hall_width_in": {
+      "value": 95.9375,
+      "measure_boundary": "wall_to_wall",
+      "verified": "LOCKED",
+      "source": "Magicplan MASTER 6ac582a0.deaa9fff",
+      "date": "2026-11-22"
+    },
+    "original_baseboard_height_in": {
+      "value": 9.5,
+      "measure_boundary": "aff",
+      "verified": "FIELD_VERIFIED",
+      "source": "hallway/SPEC.md",
+      "date": "2026-11-19"
+    },
+    "original_picture_rail_aff_in": {
+      "value": 103.0,
+      "measure_boundary": "aff",
+      "verified": "FIELD_VERIFIED",
+      "source": "hallway/SPEC.md",
+      "date": "2026-11-19"
+    },
+    "door4_hatch_clear_width_in": {
+      "value": 24.0,
+      "measure_boundary": "clear_between_casings",
+      "verified": "LOCKED_NEVER_SHRINK",
+      "source": "attic/SPEC.md",
+      "date": "2026-11-23"
+    },
+    "door4_hatch_clear_length_in": {
+      "value": 36.0,
+      "measure_boundary": "clear_between_casings",
+      "verified": "LOCKED_NEVER_SHRINK",
+      "source": "attic/SPEC.md",
+      "date": "2026-11-23"
+    }
+  },
+  "options": {
+    "preserve_edwardian_trim": true
+  },
+  "flagged_clashes": [
+    {
+      "id": "clash-hall-door4-hatch-hold",
+      "severity": "HIGH",
+      "en": "Hold ceiling cut outside Front Door 4 (6j3RvWmJ329qPCc7) until ceiling fire-rating, joist bay B, and markout photo are confirmed with Serge & Alex.",
+      "es": "Pausar corte en plafón afuera de Puerta 4 (6j3RvWmJ329qPCc7) hasta confirmar clasificación cortafuego, claro B y foto de trazo con Serge y Alex."
+    },
+    {
+      "id": "clash-hall-door-a-vs-b-swing",
+      "severity": "MEDIUM",
+      "en": "Verify outward-swing Bathroom Door A clearance relative to out-swinging Middle Door B Murphy bookcase door during B7-B15 cardboard mockup.",
+      "es": "Verificar giro exterior de Puerta A del baño frente a la puerta librero Murphy en Puerta B durante la plantilla de cartón B7-B15."
+    }
+  ],
+  "field_overrides": [],
+  "pins": []
+}

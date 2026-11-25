@@ -1,0 +1,879 @@
+{
+  "schema_version": "1.0-room-canonical",
+  "plan_id": "kitchen",
+  "project": "1231 11th Avenue Unit 4, San Francisco, CA",
+  "room_id": "kitchen",
+  "element_id": "KITCHEN-ROOM-01",
+  "governing_spec": "kitchen/SPEC.md",
+  "companion_interactive_plans": [
+    "kitchen-floor-plan",
+    "kitchen-west-ks4",
+    "kitchen-electrical"
+  ],
+  "base_rev": "rev-20261124-kitchen-001",
+  "title": {
+    "en": "Kitchen Whole-Room Baseline & Field Measurements",
+    "es": "Línea Base y Medidas de Campo de toda la Cocina"
+  },
+  "status": "STAGING_HOLD_L_MARKOUT_AND_D04",
+  "registered_live": true,
+  "units": "in",
+  "sources": {
+    "magicplan_live": {
+      "kind": "magicplan_live",
+      "project_id": "44f4fc6f-8e5f-49f6-bae6-2c3557fb3444",
+      "plan_id": "abb2d2c6-aa1c-4a88-a57e-1260847b6410",
+      "project_modified_at": "2026-11-23T00:02:02Z",
+      "read_at": "2026-11-25T02:25:22Z",
+      "room_uid": "6ac582a0.de82fbff",
+      "tool": "magicplan.get_project_plan; magicplan.get_plan_statistics",
+      "note": "Live Magicplan MASTER metadata and metre-valued symbol fields; connector omits placements and complete wall IDs."
+    },
+    "magicplan_svg": {
+      "kind": "preserved_vector_export",
+      "asset": "wiki-assets/unit4-magicplan-master-floorplan.svg",
+      "sha256": "0ff23f07702577b85b095d79f2ce314982a2b47dfc9938119d67b711dc7e700f",
+      "source_path": "wiki-assets/unit4-magicplan-master-floorplan.svg",
+      "source_date": "2026-10-29",
+      "note": "Original Magicplan MASTER vector export preserved byte-for-byte; supplies model symbol transforms without resizing room envelope."
+    },
+    "accepted_room": {
+      "kind": "owner_accepted_baseline",
+      "date": "2026-11-22",
+      "record": "kitchen/SPEC.md#magicplan-master-6ac582a0.de82fbff",
+      "note": "Magicplan MASTER (abb2d2c6-aa1c-4a88-a57e-1260847b6410) room envelope (147\" x 126 1/4\") preserved as immutable baseline; local field tape readings attach in named coordinate frames without stretching room outline."
+    },
+    "governing_spec": {
+      "kind": "governing_record",
+      "drive_id": "1iXinIsipgqR6ak5jdWSTmbbL5netZUhS",
+      "path": "kitchen/SPEC.md",
+      "original_url": "https://drive.google.com/file/d/1iXinIsipgqR6ak5jdWSTmbbL5netZUhS/view",
+      "read_date": "2026-11-24"
+    },
+    "owner_locks_20261122": {
+      "kind": "owner-locked-decision",
+      "recorded_at": "2026-11-22T19:53:00-08:00",
+      "drive_id": "1mEZ73JuoGPbLOzFLBt3BIgQdPql6fXwU",
+      "note": "Locked S-B2=12 in, E-B2=18 in, E-U2=30 in in Magicplan MASTER; weather-seal & cover Pie-Safe; switch DW to finished-front (exclude DW panel); 9 in hood gap retired as historical (measure current assembled-cover gap & floor buildup t)."
+    }
+  },
+  "points": {
+    "room_back_left": {
+      "x": 0,
+      "y": 0,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "accepted_room",
+      "measure_boundary": "owner_accepted_room_interior_envelope",
+      "confidence": "Magicplan MASTER baseline envelope; verify casing/trim offsets on site",
+      "precedence": "accepted_baseline"
+    },
+    "room_back_right": {
+      "x": 147.0,
+      "y": 0,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "accepted_room",
+      "measure_boundary": "owner_accepted_room_interior_envelope",
+      "confidence": "Magicplan MASTER baseline envelope; verify casing/trim offsets on site",
+      "precedence": "accepted_baseline"
+    },
+    "room_entry_right": {
+      "x": 147.0,
+      "y": 126.25,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "accepted_room",
+      "measure_boundary": "owner_accepted_room_interior_envelope",
+      "confidence": "Magicplan MASTER baseline envelope; verify casing/trim offsets on site",
+      "precedence": "accepted_baseline"
+    },
+    "room_entry_left": {
+      "x": 0,
+      "y": 126.25,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "accepted_room",
+      "measure_boundary": "owner_accepted_room_interior_envelope",
+      "confidence": "Magicplan MASTER baseline envelope; verify casing/trim offsets on site",
+      "precedence": "accepted_baseline"
+    },
+    "south_sink_center_setout": {
+      "x": 87.0,
+      "z": 36.0,
+      "unit": "in",
+      "coordinate_system": "south_sink_run_from_se",
+      "source": "owner_locks_20261122",
+      "measure_boundary": "wall_to_wall",
+      "confidence": "setout arithmetic 36+12+24 -> 72-102 in (CL 87 in) from SE corner; verify common zero & window casing before moving plumbing",
+      "precedence": "owner"
+    },
+    "hood_ceiling_gap_current": {
+      "x": 33.0,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "west_wall_elevation",
+      "source": "owner_locks_20261122",
+      "measure_boundary": "aff",
+      "confidence": "to measure on site after John raised whole hood (historical 9 in gap retired)",
+      "precedence": "owner"
+    }
+  },
+  "room_model": {
+    "version": 1,
+    "allowed_frames": [
+      "room_plan",
+      "north_wall_elevation",
+      "south_wall_elevation",
+      "east_wall_elevation",
+      "west_wall_elevation",
+      "ceiling_plan",
+      "south_sink_run_from_se",
+      "east_fridge_run_from_se"
+    ],
+    "identity": {
+      "project_id": "44f4fc6f-8e5f-49f6-bae6-2c3557fb3444",
+      "plan_id": "abb2d2c6-aa1c-4a88-a57e-1260847b6410",
+      "floor_uid": "6ac57060.ac3137ff",
+      "room_uid": "6ac582a0.de82fbff",
+      "room_name": "Kitchen"
+    },
+    "frame": {
+      "id": "room_plan",
+      "unit": "in",
+      "origin": "top-left (NW) corner of Magicplan MASTER room bounding envelope",
+      "x_positive": "east / viewer right in preserved Magicplan SVG",
+      "y_positive": "south / viewer down in preserved Magicplan SVG",
+      "z_positive": "up",
+      "z_datum": null,
+      "cardinal_rotation_degrees": null,
+      "source_svg_root_matrix": [
+        68.0915,
+        0,
+        0,
+        68.0915,
+        440.42,
+        415.957
+      ],
+      "source_native_origin": [
+        -5.763,
+        0.259
+      ],
+      "source_native_unit": "m",
+      "note": "Pure translation and metre-to-inch unit conversion (1 m = 39.37007874 in); zero axis stretching."
+    },
+    "baseline": {
+      "immutable": true,
+      "provenance_source_ids": [
+        "magicplan_live",
+        "magicplan_svg",
+        "accepted_room"
+      ],
+      "source_room": {
+        "uid": "6ac582a0.de82fbff",
+        "name": "Kitchen",
+        "dimensions": "147\" x 126 1/4\"",
+        "fields": {
+          "ceilingHeight": "3.086857",
+          "roomType": "Kitchen",
+          "ground.color": "FFFFFF00",
+          "notes": "Sink span: 115 inches to casing. John and Ervin confirmed Oct 14. 102 in cabinets; 13 in unallocated. Return about 89 in Is an estimate. Room outline remains provisional."
+        },
+        "objects": [
+          {
+            "uid": "6ac60290.d580f7ff",
+            "name": "Gas stove",
+            "symbol_id": "appliances-d4661afb-7014-4992-bc57-e9082cd22b62",
+            "fields": {
+              "width": "0.762",
+              "depth": "0.6096",
+              "height": "0.9144"
+            }
+          },
+          {
+            "uid": "6ac605c4.543943ff",
+            "name": "Dishwasher",
+            "symbol_id": "appliances-73d6f02d-0ca6-47e2-948c-5c37692247a7",
+            "fields": {
+              "width": "0.60329",
+              "depth": "0.635",
+              "height": "0.9"
+            }
+          },
+          {
+            "uid": "6ac60639.35c27fff",
+            "name": "Base Cabinet 18\"",
+            "symbol_id": "basecabinet18.us",
+            "fields": {
+              "width": "0.4572",
+              "depth": "0.6096",
+              "height": "0.9"
+            }
+          },
+          {
+            "uid": "6ac60899.542107ff",
+            "name": "Base Cabinet 18\"",
+            "symbol_id": "basecabinet18.us",
+            "fields": {
+              "width": "0.4572",
+              "depth": "0.6096",
+              "height": "0.9"
+            }
+          },
+          {
+            "uid": "6ac6098e.070b8bff",
+            "name": "Base Cabinet 30\"",
+            "symbol_id": "basecabinet30.us",
+            "fields": {
+              "width": "0.762",
+              "depth": "0.6096",
+              "height": "0.9"
+            }
+          },
+          {
+            "uid": "6ac60a08.50bd43ff",
+            "name": "Single Sink",
+            "symbol_id": "sinksingle",
+            "fields": {
+              "width": "0.68",
+              "depth": "0.51",
+              "height": "0.275"
+            }
+          },
+          {
+            "uid": "6ac60cae.1f1fabff",
+            "name": "2 Door refrigerator",
+            "symbol_id": "appliances-c2a1d666-f465-40d5-af58-7c4c406980d4",
+            "fields": {
+              "width": "0.7112",
+              "depth": "0.6096",
+              "height": "1.72"
+            }
+          },
+          {
+            "uid": "6ae94e3b.3f88fbff",
+            "name": "Base Filler",
+            "symbol_id": "basecabinetfiller.us",
+            "fields": {
+              "width": "0.17621",
+              "depth": "0.6096",
+              "height": "0.9"
+            }
+          },
+          {
+            "uid": "6ae97221.68dad3ff",
+            "name": "Carousel Base Cabinet 36\"",
+            "symbol_id": "basecabinetcarousel.us",
+            "fields": {
+              "width": "0.9144",
+              "depth": "0.9144",
+              "height": "0.9"
+            }
+          },
+          {
+            "uid": "6afe1af7.06a6f3ff",
+            "name": "Base Cabinet 12\"",
+            "symbol_id": "basecabinet12.us",
+            "fields": {
+              "width": "0.3048",
+              "depth": "0.6096",
+              "height": "0.9"
+            }
+          },
+          {
+            "uid": "6b03825c.98944fff",
+            "name": "Base Drawers (Resizable)",
+            "symbol_id": "basecabinetdrawersadjustable.us",
+            "fields": {
+              "width": "0.4572",
+              "depth": "0.6096",
+              "height": "0.9"
+            }
+          },
+          {
+            "uid": "6ac582a0.df8a0bff",
+            "name": "Hinged Door",
+            "symbol_id": "doorhinged",
+            "wall_uid": "6ac582a0.de99e7ff",
+            "fields": {
+              "width": "0.65734",
+              "height": "1.997265"
+            }
+          },
+          {
+            "uid": "6ac582a0.df92e3ff",
+            "name": "Opening",
+            "symbol_id": "dooropening",
+            "wall_uid": "6ac582a0.de9593ff",
+            "fields": {
+              "width": "0.74798",
+              "height": "2.007589"
+            }
+          },
+          {
+            "uid": "6ac582a0.dfc0e3ff",
+            "name": "Hopper Window",
+            "symbol_id": "windowhopper",
+            "wall_uid": "6ac582a0.de99e7ff",
+            "fields": {
+              "width": "0.8596",
+              "height": "1.475811"
+            }
+          },
+          {
+            "uid": "6ac6110c.88b43bff",
+            "name": "Wall shelf",
+            "symbol_id": "furniture-5bbc6918-1cd7-43b3-9bce-7023fa57b60d",
+            "wall_uid": "6ac582a0.de99e7ff",
+            "fields": {
+              "width": "0.8128",
+              "depth": "0.127",
+              "height": "1.3716"
+            }
+          },
+          {
+            "uid": "6acff59a.50bac7ff",
+            "name": "Wall-mounted hood",
+            "symbol_id": "appliances-1ec95a29-b957-4652-9152-fe713561ea8d",
+            "wall_uid": "6ac582a0.de9f47ff",
+            "fields": {
+              "width": "0.7588",
+              "depth": "0.4985",
+              "height": "0.7112"
+            }
+          },
+          {
+            "uid": "6adfe635.a120bfff",
+            "name": "Right Corner Wall Cab. 24\"",
+            "symbol_id": "wallcabinetrightcorner.us",
+            "wall_uid": "6ac582a0.de9593ff",
+            "fields": {
+              "width": "0.6096",
+              "depth": "0.6096",
+              "height": "1.027113"
+            }
+          },
+          {
+            "uid": "6b0381e0.03fe07ff",
+            "name": "Double Wall Cabinet 30\"",
+            "symbol_id": "wallcabinetdouble30.us",
+            "wall_uid": "6ac582a0.de9593ff",
+            "fields": {
+              "width": "0.762",
+              "depth": "0.3048",
+              "height": "0.9"
+            }
+          }
+        ]
+      },
+      "source_statistics": {
+        "name": "Kitchen",
+        "uid": "6ac582a0.de82fbff",
+        "area": 114.085,
+        "perimeter": 45.498,
+        "ground_perimeter": 40.888,
+        "area_without_walls": 114.085,
+        "area_with_interior_walls_only": 114.085,
+        "area_with_walls": 114.085,
+        "wall_count": 6,
+        "door_count": 2,
+        "window_count": 1,
+        "doors_surface": 30.295,
+        "furniture_count": 18,
+        "height": 10.127,
+        "volume": 1155.392,
+        "dimensions": "147\" x 126 1/4\"",
+        "walls_surface": 460.781,
+        "walls_surface_without_openings": 416.831,
+        "windows_surface": 13.655
+      },
+      "svg_object_transforms": {
+        "6ac605c4.543943ff": {
+          "svg_child_index": 2,
+          "matrix": [
+            -68.0915,
+            0.0,
+            0.0,
+            -68.0915,
+            162.069,
+            651.857
+          ]
+        },
+        "6ac60639.35c27fff": {
+          "svg_child_index": 10,
+          "matrix": [
+            0.0,
+            68.0915,
+            -68.0915,
+            0.0,
+            143.488,
+            433.649
+          ]
+        },
+        "6ac60899.542107ff": {
+          "svg_child_index": 15,
+          "matrix": [
+            0.0,
+            68.0915,
+            -68.0915,
+            0.0,
+            144.003,
+            516.666
+          ]
+        },
+        "6ac6098e.070b8bff": {
+          "svg_child_index": 20,
+          "matrix": [
+            68.0915,
+            0.0,
+            0.0,
+            68.0915,
+            162.069,
+            610.276
+          ]
+        },
+        "6ae97221.68dad3ff": {
+          "svg_child_index": 28,
+          "matrix": [
+            68.0915,
+            0.0,
+            0.0,
+            68.0915,
+            239.9,
+            589.31
+          ]
+        },
+        "6b03825c.98944fff": {
+          "svg_child_index": 38,
+          "matrix": [
+            0.0,
+            -68.0915,
+            68.0915,
+            0.0,
+            260.406,
+            589.309
+          ]
+        },
+        "6afe1af7.06a6f3ff": {
+          "svg_child_index": 46,
+          "matrix": [
+            68.0915,
+            0.0,
+            0.0,
+            68.0915,
+            213.956,
+            610.183
+          ]
+        },
+        "6ac60a08.50bd43ff": {
+          "svg_child_index": 51,
+          "matrix": [
+            68.0915,
+            0.0,
+            0.0,
+            68.0915,
+            164.704,
+            617.02
+          ]
+        },
+        "6ac60290.d580f7ff": {
+          "svg_child_index": 63,
+          "matrix": [
+            0.0,
+            -68.0915,
+            68.0915,
+            0.0,
+            102.345,
+            516.666
+          ]
+        },
+        "6ac6110c.88b43bff": {
+          "svg_child_index": 100,
+          "matrix": [
+            68.0914,
+            -0.114543,
+            0.114543,
+            68.0914,
+            196.683,
+            643.083
+          ]
+        },
+        "6ac582a0.dfc0e3ff": {
+          "svg_child_index": 104,
+          "matrix": [
+            -68.0914,
+            0.114543,
+            0.114543,
+            68.0914,
+            176.192,
+            651.765
+          ]
+        },
+        "6ac60cae.1f1fabff": {
+          "svg_child_index": 116,
+          "matrix": [
+            0.0,
+            68.0915,
+            -68.0915,
+            0.0,
+            301.867,
+            499.374
+          ]
+        },
+        "6ac582a0.df8a0bff": {
+          "svg_child_index": 154,
+          "matrix": [
+            68.0914,
+            -0.114543,
+            0.114543,
+            68.0914,
+            56.0712,
+            611.294
+          ]
+        },
+        "6adfe635.a120bfff": {
+          "svg_child_index": 155,
+          "matrix": [
+            -0.207211,
+            -68.0912,
+            68.0912,
+            -0.207211,
+            260.688,
+            651.135
+          ]
+        },
+        "6b0381e0.03fe07ff": {
+          "svg_child_index": 169,
+          "matrix": [
+            -0.207211,
+            -68.0912,
+            68.0912,
+            -0.207211,
+            281.317,
+            610.108
+          ]
+        },
+        "6acff59a.50bac7ff": {
+          "svg_child_index": 180,
+          "matrix": [
+            0.535834,
+            68.0894,
+            -68.0894,
+            0.535834,
+            135.967,
+            464.495
+          ]
+        }
+      },
+      "svg_door_jambs_native": [
+        [
+          -2.039,
+          0.259
+        ],
+        [
+          -2.037,
+          1.009
+        ]
+      ],
+      "captured_at": "2026-11-25T03:20:00Z",
+      "source_geometry_sha256": "0ff23f07702577b85b095d79f2ce314982a2b47dfc9938119d67b711dc7e700f",
+      "limitations": [
+        "SVG wall coordinates rounded to .001 native unit; small edge residuals preserved.",
+        "Live Magicplan connector omits object station coordinates and door/window casings; preserved SVG supplies baseline placement.",
+        "Floor finish buildup thickness t remains TO VERIFY IN FIELD unless measured on site."
+      ],
+      "payload_hash_encoding": "UTF-8 sorted object keys, JSON values, comma-space and colon-space separators",
+      "payload_sha256": "81f0e4eb5dac3cd7377bda694092dbbadc53f6b4da3c7fb0ee8da835021306d6"
+    },
+    "outline": {
+      "point_ids": [
+        "room_back_left",
+        "room_back_right",
+        "room_entry_right",
+        "room_entry_left"
+      ],
+      "status": "owner_accepted_baseline",
+      "source_id": "accepted_room"
+    },
+    "walls": [
+      {
+        "id": "kit_north_hall",
+        "magicplan_uid": "6ac582a0.de9593ff",
+        "from": "room_back_left",
+        "to": "room_back_right",
+        "role": "north wall (cased opening to hallway)",
+        "source_id": "magicplan_live"
+      },
+      {
+        "id": "kit_east_fridge",
+        "magicplan_uid": "6ac582a0.de9593ff",
+        "from": "room_back_right",
+        "to": "room_entry_right",
+        "role": "east refrigerator & drawer-base wall (backs Dining D04 subpanel)",
+        "source_id": "magicplan_live"
+      },
+      {
+        "id": "kit_south_sink",
+        "magicplan_uid": "6ac582a0.de99e7ff",
+        "from": "room_entry_right",
+        "to": "room_entry_left",
+        "role": "south sink, dishwasher, hopper window, covered pie-safe & rear door wall",
+        "source_id": "magicplan_live"
+      },
+      {
+        "id": "kit_west_range",
+        "magicplan_uid": "6ac582a0.de9f47ff",
+        "from": "room_entry_left",
+        "to": "room_back_left",
+        "role": "west Viking range & Zephyr Savona hood wall (K-S4, 66-1/4 in bay)",
+        "source_id": "magicplan_live"
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "6ac60290.d580f7ff",
+        "magicplan_uid": "6ac60290.d580f7ff",
+        "baseline_object_uid": "6ac60290.d580f7ff",
+        "label": "Viking VGCC5304BSS 30 in Gas Range",
+        "status": "owned on site; low 1 in island trim confirmed",
+        "source_id": "magicplan_svg"
+      },
+      {
+        "id": "6acff59a.50bac7ff",
+        "magicplan_uid": "6acff59a.50bac7ff",
+        "baseline_object_uid": "6acff59a.50bac7ff",
+        "label": "Zephyr Savona ZSA-E30AS 30 in Hood",
+        "status": "owned on site; mock-hung by John; verify current ceiling gap & floor buildup t",
+        "source_id": "magicplan_svg"
+      },
+      {
+        "id": "6ac605c4.543943ff",
+        "magicplan_uid": "6ac605c4.543943ff",
+        "baseline_object_uid": "6ac605c4.543943ff",
+        "label": "24 in Dishwasher Bay (Finished-Front Basis)",
+        "status": "switched Nov 22 from panel-ready to finished-front (exclude DW door panel)",
+        "source_id": "magicplan_svg"
+      },
+      {
+        "id": "6ac60a08.50bd43ff",
+        "magicplan_uid": "6ac60a08.50bd43ff",
+        "baseline_object_uid": "6ac60a08.50bd43ff",
+        "label": "Single Sink (30 in Sink Base)",
+        "status": "setout arithmetic 72-102 in (CL 87 in) from SE corner; verify window CL & casing before moving plumbing",
+        "source_id": "magicplan_svg"
+      },
+      {
+        "id": "6ac60cae.1f1fabff",
+        "magicplan_uid": "6ac60cae.1f1fabff",
+        "baseline_object_uid": "6ac60cae.1f1fabff",
+        "label": "Haier QJS15HYRFS Counter-Depth Refrigerator",
+        "status": "owned; scheduled Mon Dec 14, 10am-2pm PT delivery window",
+        "source_id": "magicplan_svg"
+      },
+      {
+        "id": "6ae97221.68dad3ff",
+        "magicplan_uid": "6ae97221.68dad3ff",
+        "baseline_object_uid": "6ae97221.68dad3ff",
+        "label": "SE Corner Base Cabinet 36 in",
+        "status": "locked 36 in corner base",
+        "source_id": "magicplan_svg"
+      },
+      {
+        "id": "6afe1af7.06a6f3ff",
+        "magicplan_uid": "6afe1af7.06a6f3ff",
+        "baseline_object_uid": "6afe1af7.06a6f3ff",
+        "label": "South Trash Base S-B2 (12 in Locked Nov 22)",
+        "status": "locked 12 in width (updated from 15 in in Magicplan MASTER Nov 22)",
+        "source_id": "magicplan_svg"
+      },
+      {
+        "id": "6b03825c.98944fff",
+        "magicplan_uid": "6b03825c.98944fff",
+        "baseline_object_uid": "6b03825c.98944fff",
+        "label": "East Drawer Base E-B2 (18 in Locked Nov 22)",
+        "status": "locked 18 in width (updated from 24 in in Magicplan MASTER Nov 22)",
+        "source_id": "magicplan_svg"
+      },
+      {
+        "id": "6b0381e0.03fe07ff",
+        "magicplan_uid": "6b0381e0.03fe07ff",
+        "baseline_object_uid": "6b0381e0.03fe07ff",
+        "label": "East Upper Cabinet E-U2 (30 in Locked Nov 22)",
+        "status": "locked 30 in width (updated from 36 in in Magicplan MASTER Nov 22)",
+        "source_id": "magicplan_svg"
+      },
+      {
+        "id": "6ac6110c.88b43bff",
+        "magicplan_uid": "6ac6110c.88b43bff",
+        "baseline_object_uid": "6ac6110c.88b43bff",
+        "label": "Former Pie-Safe Recess (Weather-Seal & Cover Over)",
+        "status": "locked Nov 22: seal/weatherproof exterior openings and cover over",
+        "source_id": "magicplan_svg"
+      }
+    ],
+    "openings": [
+      {
+        "id": "6ac582a0.df8a0bff",
+        "magicplan_uid": "6ac582a0.df8a0bff",
+        "baseline_object_uid": "6ac582a0.df8a0bff",
+        "label": "Rear/Exterior Hinged Door",
+        "status": "preserved model symbol",
+        "source_id": "magicplan_svg",
+        "wall_id": "kit_south_sink",
+        "kind": "door",
+        "current_action_ref": "window"
+      },
+      {
+        "id": "6ac582a0.dfc0e3ff",
+        "magicplan_uid": "6ac582a0.dfc0e3ff",
+        "baseline_object_uid": "6ac582a0.dfc0e3ff",
+        "label": "South Sink Hopper Window",
+        "status": "verify centerline against 72-102 in (CL 87 in) sink base before plumbing move",
+        "source_id": "magicplan_svg",
+        "wall_id": "kit_south_sink",
+        "kind": "window",
+        "current_action_ref": "window"
+      }
+    ],
+    "point_groups": {
+      "south_l_run_setout": {
+        "point_ids": [
+          "south_sink_center_setout"
+        ],
+        "frame": "south_sink_run_from_se",
+        "room_registration": null,
+        "role": "South sink run station from SE corner (verify full-L labeled photos 6j3hQfxHXHJhWgG7)"
+      },
+      "west_hood_check": {
+        "point_ids": [
+          "hood_ceiling_gap_current"
+        ],
+        "frame": "west_wall_elevation",
+        "room_registration": null,
+        "role": "Current assembled hood-cover to ceiling gap (6j4P6HFr2rfpmpj7)"
+      }
+    },
+    "decisions": {
+      "window": {
+        "action": "preserve or verify per governing spec",
+        "status": "see_governing_spec",
+        "source_id": "governing_spec",
+        "replacement_product": null,
+        "replacement_dimensions": null
+      },
+      "medicine_cabinet": {
+        "action": "not_applicable_non_bath_room",
+        "status": "n/a",
+        "source_id": "governing_spec",
+        "replacement_product": null,
+        "replacement_dimensions": null
+      },
+      "cabinet_widths_nov22": {
+        "s_b2_in": 12,
+        "e_b2_in": 18,
+        "e_u2_in": 30,
+        "status": "LOCKED",
+        "source_id": "owner_locks_20261122"
+      },
+      "pie_safe": {
+        "action": "weather-seal exterior openings and cover over recess; inspect before covering",
+        "status": "LOCKED",
+        "source_id": "owner_locks_20261122"
+      },
+      "dishwasher_basis": {
+        "action": "finished-front 24 in dishwasher (new or used); exclude cabinet DW door panel from quote",
+        "status": "LOCKED",
+        "source_id": "owner_locks_20261122"
+      }
+    },
+    "materials": {
+      "cabinet_color_direction": "Benjamin Moore Essex Green",
+      "range_wall_tile": {
+        "selection": null,
+        "zero_metal_trim_locked": true,
+        "substrate": "1/2 in HardieBacker 500 meeting 1/2 in drywall with NO 3/16 in stud shims"
+      },
+      "floor_datum": "bare subfloor currently down; buildup t TO VERIFY IN FIELD"
+    },
+    "corrections": [],
+    "extensions": {
+      "new_point_groups_allowed": true,
+      "unknown_coordinates_are_null": true
+    }
+  },
+  "dimensions": {
+    "magicplan_kitchen_width_in": {
+      "value": 147.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "LOCKED",
+      "source": "Magicplan MASTER 6ac582a0.de82fbff",
+      "date": "2026-11-22"
+    },
+    "magicplan_kitchen_depth_in": {
+      "value": 126.25,
+      "measure_boundary": "wall_to_wall",
+      "verified": "LOCKED",
+      "source": "Magicplan MASTER 6ac582a0.de82fbff",
+      "date": "2026-11-22"
+    },
+    "west_range_bay_width_in": {
+      "value": 66.25,
+      "measure_boundary": "wall_to_wall",
+      "verified": "VERIFY_ON_SITE",
+      "source": "kitchen-west-ks4-plan-data.json",
+      "date": "2026-11-20"
+    },
+    "south_trash_base_sb2_in": {
+      "value": 12.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "LOCKED",
+      "source": "Owner lock Nov 22",
+      "date": "2026-11-22"
+    },
+    "east_drawer_base_eb2_in": {
+      "value": 18.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "LOCKED",
+      "source": "Owner lock Nov 22",
+      "date": "2026-11-22"
+    },
+    "east_upper_eu2_in": {
+      "value": 30.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "LOCKED",
+      "source": "Owner lock Nov 22",
+      "date": "2026-11-22"
+    },
+    "floor_buildup_t_in": {
+      "value": null,
+      "measure_boundary": "subfloor",
+      "verified": "MEASURE_ON_SITE",
+      "source": "Bare subfloor currently down",
+      "date": "2026-11-22"
+    }
+  },
+  "options": {
+    "zero_metal_edge_trim_locked": true,
+    "no_stud_shims_locked": true
+  },
+  "flagged_clashes": [
+    {
+      "id": "clash-kitchen-full-l-markout-hold",
+      "severity": "HIGH",
+      "en": "Hold sink plumbing relocation (CL 87 vs 90 in), remaining kitchen circuit pulls, and cabinet/counter orders until John's labeled full-L tape markout photos (6j3hQfxHXHJhWgG7) confirm SE zero and narrowest passage.",
+      "es": "Pausar cambio de plomería de tarja (CL 87 vs 90 pulg), circuitos restantes y pedido de gabinetes/cubierta hasta confirmar fotos etiquetadas del trazo en L (6j3hQfxHXHJhWgG7)."
+    },
+    {
+      "id": "clash-kitchen-hood-gap-unmeasured",
+      "severity": "MEDIUM",
+      "en": "9 in hood-to-ceiling gap is retired as historical after John raised whole hood; measure current assembled-cover ceiling gap and floor buildup t (6j4P6HFr2rfpmpj7) before fabricating any enclosure.",
+      "es": "El claro histórico de 9 pulg sobre la campana quedó retirado tras subir la campana; medir el claro real actual y el espesor de piso t (6j4P6HFr2rfpmpj7) antes de fabricar cierre."
+    }
+  ],
+  "field_overrides": [],
+  "pins": []
+}

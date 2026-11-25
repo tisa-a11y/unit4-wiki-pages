@@ -1,0 +1,495 @@
+{
+  "schema_version": "1.0-room-canonical",
+  "plan_id": "laundry",
+  "project": "1231 11th Avenue Unit 4, San Francisco, CA",
+  "room_id": "laundry",
+  "element_id": "LAUNDRY-ROOM-01",
+  "governing_spec": "laundry/SPEC.md",
+  "companion_interactive_plans": [
+    "murphy-door"
+  ],
+  "base_rev": "rev-20261124-laundry-001",
+  "title": {
+    "en": "Laundry Closet & LG WashTower Baseline & Field Measurements",
+    "es": "Línea Base y Medidas de Campo del Clóset de Lavado y Torre LG"
+  },
+  "status": "PRE_CUT_MOCKUP_AND_GRILLE_HOLD",
+  "registered_live": true,
+  "units": "in",
+  "sources": {
+    "magicplan_live": {
+      "kind": "magicplan_live",
+      "project_id": "44f4fc6f-8e5f-49f6-bae6-2c3557fb3444",
+      "plan_id": "abb2d2c6-aa1c-4a88-a57e-1260847b6410",
+      "project_modified_at": "2026-11-23T00:02:02Z",
+      "read_at": "2026-11-25T02:25:22Z",
+      "room_uid": "6ac582a0.debe03ff",
+      "tool": "magicplan.get_project_plan; magicplan.get_plan_statistics",
+      "note": "Live Magicplan MASTER metadata and metre-valued symbol fields; connector omits placements and complete wall IDs."
+    },
+    "magicplan_svg": {
+      "kind": "preserved_vector_export",
+      "asset": "wiki-assets/unit4-magicplan-master-floorplan.svg",
+      "sha256": "0ff23f07702577b85b095d79f2ce314982a2b47dfc9938119d67b711dc7e700f",
+      "source_path": "wiki-assets/unit4-magicplan-master-floorplan.svg",
+      "source_date": "2026-10-29",
+      "note": "Original Magicplan MASTER vector export preserved byte-for-byte; supplies model symbol transforms without resizing room envelope."
+    },
+    "accepted_room": {
+      "kind": "owner_accepted_baseline",
+      "date": "2026-11-22",
+      "record": "laundry/SPEC.md#magicplan-master-6ac582a0.debe03ff",
+      "note": "Magicplan MASTER (abb2d2c6-aa1c-4a88-a57e-1260847b6410) room envelope (36 5/16\" x 82 5/8\") preserved as immutable baseline; local field tape readings attach in named coordinate frames without stretching room outline."
+    },
+    "governing_spec": {
+      "kind": "governing_record",
+      "drive_id": "17s8c5HVIC6tI_Xv30SJh3ZYl34h9nBhg",
+      "path": "laundry/SPEC.md",
+      "original_url": "https://drive.google.com/file/d/17s8c5HVIC6tI_Xv30SJh3ZYl34h9nBhg/view",
+      "read_date": "2026-11-24"
+    },
+    "laundry_precut_review_20261123": {
+      "kind": "governing_record",
+      "drive_id": "1CxpRbz33-z15eZmsZReocIsZ9jPoOg9N",
+      "original_url": "https://drive.google.com/file/d/1CxpRbz33-z15eZmsZReocIsZ9jPoOg9N/view",
+      "recorded_at": "2026-11-23T10:05:00-08:00",
+      "note": "Locks LG WKG101HVA gas WashTower (retiring Samsung), Circuit #14 1x 20A 12/2 duplex @ 38 in AFF on East wall, move WashTower in BEFORE hanging Murphy door, and rated free-area grille check (100 sq in CMC 504.4.1 vs LG 48+24 sq in)."
+    },
+    "lowes_reschedule_20261124": {
+      "kind": "owner-typed",
+      "drive_id": "14mDQ8cQpT-s5yQcHuKlla8m2OItDYSdM",
+      "recorded_at": "2026-11-24T13:44:00-08:00",
+      "note": "LG WKG101HVA delivery rescheduled from Tue Dec 1 to Monday, Dec 14, 2026, 10:00 a.m.-2:00 p.m. PT (shared window with Haier QJS15HYRFS fridge as separate orders; delivery only)."
+    }
+  },
+  "points": {
+    "room_back_left": {
+      "x": 0,
+      "y": 0,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "accepted_room",
+      "measure_boundary": "owner_accepted_room_interior_envelope",
+      "confidence": "Magicplan MASTER baseline envelope; verify casing/trim offsets on site",
+      "precedence": "accepted_baseline"
+    },
+    "room_back_right": {
+      "x": 36.3125,
+      "y": 0,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "accepted_room",
+      "measure_boundary": "owner_accepted_room_interior_envelope",
+      "confidence": "Magicplan MASTER baseline envelope; verify casing/trim offsets on site",
+      "precedence": "accepted_baseline"
+    },
+    "room_entry_right": {
+      "x": 36.3125,
+      "y": 82.625,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "accepted_room",
+      "measure_boundary": "owner_accepted_room_interior_envelope",
+      "confidence": "Magicplan MASTER baseline envelope; verify casing/trim offsets on site",
+      "precedence": "accepted_baseline"
+    },
+    "room_entry_left": {
+      "x": 0,
+      "y": 82.625,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "accepted_room",
+      "measure_boundary": "owner_accepted_room_interior_envelope",
+      "confidence": "Magicplan MASTER baseline envelope; verify casing/trim offsets on site",
+      "precedence": "accepted_baseline"
+    },
+    "circuit_14_duplex_east": {
+      "x": null,
+      "z": 38.0,
+      "unit": "in",
+      "coordinate_system": "east_wall_elevation",
+      "source": "laundry_precut_review_20261123",
+      "measure_boundary": "aff",
+      "confidence": "Rev R4/R5 Circuit #14 target 38 in AFF on East/Right wall; verify horizontal station & open-wall photo before drywall close-in",
+      "precedence": "owner"
+    },
+    "door_b_jamb_top_width_b7": {
+      "x": null,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "door_b_jamb_local",
+      "source": "laundry_precut_review_20261123",
+      "measure_boundary": "clear_between_casings",
+      "confidence": "to measure on site (9-point B7-B15 worksheet)",
+      "precedence": "owner"
+    }
+  },
+  "room_model": {
+    "version": 1,
+    "allowed_frames": [
+      "room_plan",
+      "north_wall_elevation",
+      "south_wall_elevation",
+      "east_wall_elevation",
+      "west_wall_elevation",
+      "ceiling_plan",
+      "door_b_jamb_local"
+    ],
+    "identity": {
+      "project_id": "44f4fc6f-8e5f-49f6-bae6-2c3557fb3444",
+      "plan_id": "abb2d2c6-aa1c-4a88-a57e-1260847b6410",
+      "floor_uid": "6ac57060.ac3137ff",
+      "room_uid": "6ac582a0.debe03ff",
+      "room_name": "Closet"
+    },
+    "frame": {
+      "id": "room_plan",
+      "unit": "in",
+      "origin": "top-left (NW) corner of Magicplan MASTER room bounding envelope",
+      "x_positive": "east / viewer right in preserved Magicplan SVG",
+      "y_positive": "south / viewer down in preserved Magicplan SVG",
+      "z_positive": "up",
+      "z_datum": null,
+      "cardinal_rotation_degrees": null,
+      "source_svg_root_matrix": [
+        68.0915,
+        0,
+        0,
+        68.0915,
+        440.42,
+        415.957
+      ],
+      "source_native_origin": [
+        1.685,
+        -2.26
+      ],
+      "source_native_unit": "m",
+      "note": "Pure translation and metre-to-inch unit conversion (1 m = 39.37007874 in); zero axis stretching."
+    },
+    "baseline": {
+      "immutable": true,
+      "provenance_source_ids": [
+        "magicplan_live",
+        "magicplan_svg",
+        "accepted_room"
+      ],
+      "source_room": {
+        "uid": "6ac582a0.debe03ff",
+        "name": "Closet",
+        "dimensions": "36 5/16\" x 82 5/8\"",
+        "fields": {
+          "ceilingHeight": "3.086857",
+          "roomType": "Closet",
+          "ground.color": "FFFFFF00"
+        },
+        "objects": [
+          {
+            "uid": "6ac5e24c.ef750fff",
+            "name": "Stacked washer & dryer",
+            "symbol_id": "appliances-b8a23c17-6093-445d-8ab1-3197f9ea5302",
+            "fields": {
+              "width": "0.6",
+              "depth": "0.625",
+              "height": "1.7"
+            }
+          },
+          {
+            "uid": "6ac61293.726e97ff",
+            "name": "Bookcase (large)",
+            "symbol_id": "furniture-847b90b3-d923-43c4-b25e-bcb4ca730f8a",
+            "fields": {
+              "width": "0.918385",
+              "depth": "0.2032",
+              "height": "2.032"
+            }
+          },
+          {
+            "uid": "6ac582a0.df9703ff.auto",
+            "name": "Hinged Door",
+            "symbol_id": "doorhinged",
+            "wall_uid": "6ac582a0.debfbbff",
+            "fields": {
+              "width": "0.72231",
+              "height": "2.042331"
+            }
+          }
+        ]
+      },
+      "source_statistics": {
+        "name": "Closet",
+        "uid": "6ac582a0.debe03ff",
+        "area": 20.743,
+        "perimeter": 19.797,
+        "ground_perimeter": 17.428,
+        "area_without_walls": 20.743,
+        "area_with_interior_walls_only": 20.743,
+        "area_with_walls": 20.743,
+        "wall_count": 4,
+        "door_count": 1,
+        "window_count": 0,
+        "doors_surface": 15.879,
+        "furniture_count": 3,
+        "height": 10.127,
+        "volume": 210.075,
+        "dimensions": "36 5/16\" x 82 5/8\"",
+        "walls_surface": 200.497,
+        "walls_surface_without_openings": 184.618,
+        "windows_surface": 0
+      },
+      "svg_object_transforms": {
+        "6ac5e24c.ef750fff": {
+          "svg_child_index": 299,
+          "matrix": [
+            68.0915,
+            0.0,
+            0.0,
+            68.0915,
+            565.964,
+            264.323
+          ]
+        },
+        "6ac61293.726e97ff": {
+          "svg_child_index": 310,
+          "matrix": [
+            68.0915,
+            0.0,
+            0.0,
+            68.0915,
+            555.266,
+            391.122
+          ]
+        },
+        "6ac582a0.df9703ff.auto": {
+          "svg_child_index": 293,
+          "matrix": [
+            68.0915,
+            0.0,
+            -0.0,
+            -68.0915,
+            566.465,
+            458.156
+          ]
+        }
+      },
+      "svg_door_jambs_native": [
+        [
+          1.851,
+          -0.161
+        ],
+        [
+          2.573,
+          -0.16
+        ]
+      ],
+      "captured_at": "2026-11-25T03:20:00Z",
+      "source_geometry_sha256": "0ff23f07702577b85b095d79f2ce314982a2b47dfc9938119d67b711dc7e700f",
+      "limitations": [
+        "SVG wall coordinates rounded to .001 native unit; small edge residuals preserved.",
+        "Live Magicplan connector omits object station coordinates and door/window casings; preserved SVG supplies baseline placement.",
+        "Floor finish buildup thickness t remains TO VERIFY IN FIELD unless measured on site."
+      ],
+      "payload_hash_encoding": "UTF-8 sorted object keys, JSON values, comma-space and colon-space separators",
+      "payload_sha256": "5c9419c69dd2028005d35499a2272f8f0753a00b71839c7dc5964fb910d0b87a"
+    },
+    "outline": {
+      "point_ids": [
+        "room_back_left",
+        "room_back_right",
+        "room_entry_right",
+        "room_entry_left"
+      ],
+      "status": "owner_accepted_baseline",
+      "source_id": "accepted_room"
+    },
+    "walls": [
+      {
+        "id": "laun_north_back",
+        "magicplan_uid": null,
+        "from": "room_back_left",
+        "to": "room_back_right",
+        "role": "north rear wall (gas shutoff, drain box, 4 in rigid dryer exhaust)",
+        "source_id": "magicplan_svg"
+      },
+      {
+        "id": "laun_east_right",
+        "magicplan_uid": null,
+        "from": "room_back_right",
+        "to": "room_entry_right",
+        "role": "east/right wall (Circuit #14 20A 12/2 duplex @ 38 in AFF)",
+        "source_id": "magicplan_svg"
+      },
+      {
+        "id": "laun_south_door_b",
+        "magicplan_uid": "6ac582a0.debfbbff",
+        "from": "room_entry_right",
+        "to": "room_entry_left",
+        "role": "south Middle Doorway B (Murphy Bookcase Door MD-02)",
+        "source_id": "magicplan_live"
+      },
+      {
+        "id": "laun_west_bath",
+        "magicplan_uid": null,
+        "from": "room_entry_left",
+        "to": "room_back_left",
+        "role": "west partition shared with Bathroom East control/toilet wall",
+        "source_id": "magicplan_svg"
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "6ac5e24c.ef750fff",
+        "magicplan_uid": "6ac5e24c.ef750fff",
+        "baseline_object_uid": "6ac5e24c.ef750fff",
+        "label": "Stacked Washer & Dryer (Ordered LG WKG101HVA Gas WashTower)",
+        "status": "ordered LG WKG101HVA (27 W x 74-3/8 H x 30-3/8 D in; 55 in open-door depth); delivery rescheduled Mon Dec 14 10am-2pm PT",
+        "source_id": "magicplan_svg"
+      },
+      {
+        "id": "6ac61293.726e97ff",
+        "magicplan_uid": "6ac61293.726e97ff",
+        "baseline_object_uid": "6ac61293.726e97ff",
+        "label": "Murphy Bookcase Door (MD-02)",
+        "status": "hold back-panel/grille cuts until rated free-area makeup air confirmed; hang ONLY AFTER WashTower moves in",
+        "source_id": "magicplan_svg"
+      }
+    ],
+    "openings": [
+      {
+        "id": "6ac582a0.df9703ff.auto",
+        "magicplan_uid": "6ac582a0.df9703ff.auto",
+        "baseline_object_uid": "6ac582a0.df9703ff.auto",
+        "label": "Middle Hallway Doorway B",
+        "status": "9-point inside-jamb B7-B15 measurement & cardboard dual-door swing mockup required before fabrication",
+        "source_id": "magicplan_svg",
+        "wall_id": "laun_south_door_b",
+        "kind": "door",
+        "current_action_ref": "murphy_door_b"
+      }
+    ],
+    "point_groups": {
+      "east_wall_electrical": {
+        "point_ids": [
+          "circuit_14_duplex_east"
+        ],
+        "frame": "east_wall_elevation",
+        "room_registration": null,
+        "role": "Circuit #14 20A 12/2 duplex receptacle @ 38 in AFF"
+      },
+      "doorway_b_jambs": {
+        "point_ids": [
+          "door_b_jamb_top_width_b7"
+        ],
+        "frame": "door_b_jamb_local",
+        "room_registration": null,
+        "role": "Middle Doorway B 9-point inside-jamb measurement anchor (see companion murphy-door plan)"
+      }
+    },
+    "decisions": {
+      "window": {
+        "action": "preserve or verify per governing spec",
+        "status": "see_governing_spec",
+        "source_id": "governing_spec",
+        "replacement_product": null,
+        "replacement_dimensions": null
+      },
+      "medicine_cabinet": {
+        "action": "not_applicable_non_bath_room",
+        "status": "n/a",
+        "source_id": "governing_spec",
+        "replacement_product": null,
+        "replacement_dimensions": null
+      },
+      "murphy_door_b": {
+        "action": "Move LG WKG101HVA WashTower into closet (Mon Dec 14 window) BEFORE hanging Murphy bookcase door; hold grille cuts until rated free-area makeup air is confirmed",
+        "status": "LOCKED_SEQUENCE_AND_HOLD",
+        "source_id": "laundry_precut_review_20261123"
+      },
+      "electrical_circuit_14": {
+        "action": "Single 20A 12/2 duplex on East/Right wall @ 38 in AFF with GFCI at D04 panel (supersedes two-circuit LAUN-W/LAUN-D)",
+        "status": "LOCKED",
+        "source_id": "laundry_precut_review_20261123"
+      }
+    },
+    "materials": {
+      "appliance": {
+        "manufacturer": "LG",
+        "model": "WKG101HVA",
+        "type": "Stacked Gas WashTower",
+        "nominal_w_h_d_in": [
+          27.0,
+          74.375,
+          30.375
+        ],
+        "door_open_depth_in": 55.0,
+        "rear_clearance_in": 4.0,
+        "delivery_window": "Monday, Dec 14, 2026, 10:00 a.m.-2:00 p.m. PT (delivery only)"
+      }
+    },
+    "corrections": [],
+    "extensions": {
+      "new_point_groups_allowed": true,
+      "unknown_coordinates_are_null": true
+    }
+  },
+  "dimensions": {
+    "magicplan_closet_width_in": {
+      "value": 36.3125,
+      "measure_boundary": "wall_to_wall",
+      "verified": "LOCKED",
+      "source": "Magicplan MASTER 6ac582a0.debe03ff",
+      "date": "2026-11-22"
+    },
+    "magicplan_closet_depth_in": {
+      "value": 82.625,
+      "measure_boundary": "wall_to_wall",
+      "verified": "LOCKED",
+      "source": "Magicplan MASTER 6ac582a0.debe03ff",
+      "date": "2026-11-22"
+    },
+    "lg_washtower_width_in": {
+      "value": 27.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "LOCKED",
+      "source": "LG WKG101HVA Builder Spec Sheet p. 3",
+      "date": "2026-11-23"
+    },
+    "lg_washtower_open_door_depth_in": {
+      "value": 55.0,
+      "measure_boundary": "wall_to_wall",
+      "verified": "LOCKED",
+      "source": "LG WKG101HVA Builder Spec Sheet p. 3",
+      "date": "2026-11-23"
+    },
+    "circuit_14_duplex_aff_in": {
+      "value": 38.0,
+      "measure_boundary": "aff",
+      "verified": "CONFIRMED",
+      "source": "Electrical Rev R4/R5 Circuit #14",
+      "date": "2026-11-23"
+    }
+  },
+  "options": {
+    "legacy_samsung_retired": true,
+    "hang_murphy_after_washtower_move_in": true
+  },
+  "flagged_clashes": [
+    {
+      "id": "clash-laundry-grille-free-area-hold",
+      "severity": "HIGH",
+      "en": "Hold bookcase back/grille cuts (6hvj3CJrHRWm9CM7) until qualified reviewer confirms rated free-area makeup air: 2025 CMC 504.4.1 (100 sq in) vs. LG manual (>=48 sq in >=72 in AFF + >=24 sq in <=12 in AFF).",
+      "es": "Pausar cortes de rejillas en librero (6hvj3CJrHRWm9CM7) hasta confirmar área libre neta de aire de combustión: CMC 2025 504.4.1 (100 pulg2) vs. manual LG (>=48 pulg2 arriba + >=24 pulg2 abajo)."
+    },
+    {
+      "id": "clash-laundry-movein-sequence",
+      "severity": "HIGH",
+      "en": "Mandatory sequence: receive LG WKG101HVA (Mon Dec 14, 10am-2pm PT), verify rating plate, and MOVE WashTower into closet BEFORE hanging Murphy bookcase door.",
+      "es": "Secuencia obligatoria: recibir torre LG WKG101HVA (lun 14 dic, 10am-2pm PT), verificar placa y METER la torre al clóset ANTES de colgar la puerta librero Murphy."
+    }
+  ],
+  "field_overrides": [],
+  "pins": []
+}

@@ -1,0 +1,584 @@
+{
+  "schema_version": "1.0-room-canonical",
+  "plan_id": "bedroom",
+  "project": "1231 11th Avenue Unit 4, San Francisco, CA",
+  "room_id": "bedroom",
+  "element_id": "BEDROOM-ROOM-01",
+  "governing_spec": "bedroom/SPEC.md",
+  "companion_interactive_plans": [
+    "attic-hatch",
+    "hvac-layout"
+  ],
+  "base_rev": "rev-20261124-bedroom-001",
+  "title": {
+    "en": "Bedroom & NW Closet Room Baseline & Field Measurements",
+    "es": "Línea Base y Medidas de Campo de la Recámara y Clóset NO"
+  },
+  "status": "BASELINE_ACTIVE_HOLD_TEMP_CLOSET_CEILING",
+  "registered_live": true,
+  "units": "in",
+  "sources": {
+    "magicplan_live": {
+      "kind": "magicplan_live",
+      "project_id": "44f4fc6f-8e5f-49f6-bae6-2c3557fb3444",
+      "plan_id": "abb2d2c6-aa1c-4a88-a57e-1260847b6410",
+      "project_modified_at": "2026-11-23T00:02:02Z",
+      "read_at": "2026-11-25T02:25:22Z",
+      "room_uid": "6ac582a0.df23abff",
+      "tool": "magicplan.get_project_plan; magicplan.get_plan_statistics",
+      "note": "Live Magicplan MASTER metadata and metre-valued symbol fields; connector omits placements and complete wall IDs."
+    },
+    "magicplan_svg": {
+      "kind": "preserved_vector_export",
+      "asset": "wiki-assets/unit4-magicplan-master-floorplan.svg",
+      "sha256": "0ff23f07702577b85b095d79f2ce314982a2b47dfc9938119d67b711dc7e700f",
+      "source_path": "wiki-assets/unit4-magicplan-master-floorplan.svg",
+      "source_date": "2026-10-29",
+      "note": "Original Magicplan MASTER vector export preserved byte-for-byte; supplies model symbol transforms without resizing room envelope."
+    },
+    "accepted_room": {
+      "kind": "owner_accepted_baseline",
+      "date": "2026-11-22",
+      "record": "bedroom/SPEC.md#magicplan-master-6ac582a0.df23abff",
+      "note": "Magicplan MASTER (abb2d2c6-aa1c-4a88-a57e-1260847b6410) room envelope (155 3/4\" x 142 3/16\") preserved as immutable baseline; local field tape readings attach in named coordinate frames without stretching room outline."
+    },
+    "governing_spec": {
+      "kind": "governing_record",
+      "drive_id": "1VtNR5w_Ty-ri869rMmCd_YToOnQ_1Owz",
+      "path": "bedroom/SPEC.md",
+      "original_url": "https://drive.google.com/file/d/1VtNR5w_Ty-ri869rMmCd_YToOnQ_1Owz/view",
+      "read_date": "2026-11-24"
+    },
+    "nw_closet_temp_hatch_pin": {
+      "kind": "owner-pinned-field-fact",
+      "recorded_at": "2026-11-23T06:49:43Z",
+      "drive_id": "13cPvrNE811ANI2YgMKWAmli2yhwq8-_K",
+      "note": "Temporary attic inspection opening located in NW Bedroom Closet niche (Magicplan Other 6ac582a0.ded15bff, 22-5/8 x 82-5/16 in); hold ceiling open until LV thermostat cable and permanent Door 4 landing hatch are complete."
+    }
+  },
+  "points": {
+    "room_back_left": {
+      "x": 0,
+      "y": 0,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "accepted_room",
+      "measure_boundary": "owner_accepted_room_interior_envelope",
+      "confidence": "Magicplan MASTER baseline envelope; verify casing/trim offsets on site",
+      "precedence": "accepted_baseline"
+    },
+    "room_back_right": {
+      "x": 155.75,
+      "y": 0,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "accepted_room",
+      "measure_boundary": "owner_accepted_room_interior_envelope",
+      "confidence": "Magicplan MASTER baseline envelope; verify casing/trim offsets on site",
+      "precedence": "accepted_baseline"
+    },
+    "room_entry_right": {
+      "x": 155.75,
+      "y": 142.1875,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "accepted_room",
+      "measure_boundary": "owner_accepted_room_interior_envelope",
+      "confidence": "Magicplan MASTER baseline envelope; verify casing/trim offsets on site",
+      "precedence": "accepted_baseline"
+    },
+    "room_entry_left": {
+      "x": 0,
+      "y": 142.1875,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "room_plan",
+      "source": "accepted_room",
+      "measure_boundary": "owner_accepted_room_interior_envelope",
+      "confidence": "Magicplan MASTER baseline envelope; verify casing/trim offsets on site",
+      "precedence": "accepted_baseline"
+    },
+    "nw_closet_niche_nw": {
+      "x": -27.28,
+      "y": -0.2,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "bedroom_closet_local",
+      "source": "nw_closet_temp_hatch_pin",
+      "measure_boundary": "wall_to_wall",
+      "confidence": "Magicplan Other 6ac582a0.ded15bff native [2.727, -2.252] relative to Bedroom origin",
+      "precedence": "owner"
+    },
+    "nw_closet_niche_se": {
+      "x": -4.69,
+      "y": 82.09,
+      "z": null,
+      "unit": "in",
+      "coordinate_system": "bedroom_closet_local",
+      "source": "nw_closet_temp_hatch_pin",
+      "measure_boundary": "wall_to_wall",
+      "confidence": "Magicplan Other 6ac582a0.ded15bff native [3.301, -0.162] (22-5/8 x 82-5/16 in)",
+      "precedence": "owner"
+    }
+  },
+  "room_model": {
+    "version": 1,
+    "allowed_frames": [
+      "room_plan",
+      "north_wall_elevation",
+      "south_wall_elevation",
+      "east_wall_elevation",
+      "west_wall_elevation",
+      "ceiling_plan",
+      "bedroom_closet_local",
+      "east_bay_local"
+    ],
+    "identity": {
+      "project_id": "44f4fc6f-8e5f-49f6-bae6-2c3557fb3444",
+      "plan_id": "abb2d2c6-aa1c-4a88-a57e-1260847b6410",
+      "floor_uid": "6ac57060.ac3137ff",
+      "room_uid": "6ac582a0.df23abff",
+      "room_name": "Bedroom"
+    },
+    "frame": {
+      "id": "room_plan",
+      "unit": "in",
+      "origin": "top-left (NW) corner of Magicplan MASTER room bounding envelope",
+      "x_positive": "east / viewer right in preserved Magicplan SVG",
+      "y_positive": "south / viewer down in preserved Magicplan SVG",
+      "z_positive": "up",
+      "z_datum": null,
+      "cardinal_rotation_degrees": null,
+      "source_svg_root_matrix": [
+        68.0915,
+        0,
+        0,
+        68.0915,
+        440.42,
+        415.957
+      ],
+      "source_native_origin": [
+        3.42,
+        -2.247
+      ],
+      "source_native_unit": "m",
+      "note": "Pure translation and metre-to-inch unit conversion (1 m = 39.37007874 in); zero axis stretching."
+    },
+    "baseline": {
+      "immutable": true,
+      "provenance_source_ids": [
+        "magicplan_live",
+        "magicplan_svg",
+        "accepted_room"
+      ],
+      "source_room": {
+        "uid": "6ac582a0.df23abff",
+        "name": "Bedroom",
+        "dimensions": "155 3/4\" x 142 3/16\"",
+        "fields": {
+          "ceilingHeight": "3.086857",
+          "roomType": "Bedroom",
+          "ground.color": "FFFFFF00"
+        },
+        "objects": [
+          {
+            "uid": "6ac582a0.dfad5bff",
+            "name": "Hinged Door",
+            "symbol_id": "doorhinged",
+            "wall_uid": "6ac582a0.df23dfff",
+            "fields": {
+              "width": "0.84436",
+              "height": "2.192755"
+            }
+          },
+          {
+            "uid": "6ac582a0.e052e7ff",
+            "name": "Sliding Window",
+            "symbol_id": "windowsliding",
+            "wall_uid": "6ac582a0.df382fff",
+            "fields": {
+              "width": "1.2185",
+              "height": "1.961707"
+            }
+          },
+          {
+            "uid": "6ac582a0.e05943ff",
+            "name": "French Window",
+            "symbol_id": "windowfrench",
+            "wall_uid": "6ac582a0.df3c2fff",
+            "fields": {
+              "width": "0.90183",
+              "height": "1.909855"
+            }
+          },
+          {
+            "uid": "6ac582a0.e05fafff",
+            "name": "French Window",
+            "symbol_id": "windowfrench",
+            "wall_uid": "6ac582a0.df33ebff",
+            "fields": {
+              "width": "0.87299",
+              "height": "1.832078"
+            }
+          },
+          {
+            "uid": "6ac582a0.df868bff.auto",
+            "name": "Opening",
+            "symbol_id": "dooropening",
+            "wall_uid": "6ac582a0.df23dfff",
+            "fields": {
+              "width": "2.08566",
+              "height": "3.067697"
+            }
+          }
+        ]
+      },
+      "source_statistics": {
+        "name": "Bedroom",
+        "uid": "6ac582a0.df23abff",
+        "area": 140.151,
+        "perimeter": 46.586,
+        "ground_perimeter": 36.974,
+        "area_without_walls": 140.151,
+        "area_with_interior_walls_only": 140.151,
+        "area_with_walls": 140.151,
+        "wall_count": 8,
+        "door_count": 2,
+        "window_count": 3,
+        "doors_surface": 88.798,
+        "furniture_count": 5,
+        "height": 10.127,
+        "volume": 1419.378,
+        "dimensions": "155 3/4\" x 142 3/16\"",
+        "walls_surface": 471.803,
+        "walls_surface_without_openings": 321.521,
+        "windows_surface": 61.484
+      },
+      "svg_object_transforms": {
+        "6ac582a0.e052e7ff": {
+          "svg_child_index": 415,
+          "matrix": [
+            0.0,
+            68.0915,
+            68.0915,
+            0.0,
+            942.651,
+            344.187
+          ]
+        },
+        "6ac582a0.e05943ff": {
+          "svg_child_index": 428,
+          "matrix": [
+            -53.6227,
+            41.965,
+            41.965,
+            53.6227,
+            937.696,
+            440.644
+          ]
+        },
+        "6ac582a0.e05fafff": {
+          "svg_child_index": 441,
+          "matrix": [
+            50.2659,
+            45.9324,
+            45.9324,
+            -50.2659,
+            892.577,
+            294.183
+          ]
+        },
+        "6ac582a0.dfad5bff": {
+          "svg_child_index": 454,
+          "matrix": [
+            0.0,
+            68.0915,
+            -68.0915,
+            -0.0,
+            726.71,
+            424.372
+          ]
+        }
+      },
+      "svg_door_jambs_native": [
+        [
+          3.42,
+          0.123
+        ],
+        [
+          3.42,
+          0.967
+        ]
+      ],
+      "captured_at": "2026-11-25T03:20:00Z",
+      "source_geometry_sha256": "0ff23f07702577b85b095d79f2ce314982a2b47dfc9938119d67b711dc7e700f",
+      "limitations": [
+        "SVG wall coordinates rounded to .001 native unit; small edge residuals preserved.",
+        "Live Magicplan connector omits object station coordinates and door/window casings; preserved SVG supplies baseline placement.",
+        "Floor finish buildup thickness t remains TO VERIFY IN FIELD unless measured on site."
+      ],
+      "companion_subrooms": {
+        "bedroom_closet_niche": {
+          "source_room": {
+            "uid": "6ac582a0.ded15bff",
+            "name": "Other",
+            "dimensions": "22 5/8\" x 82 5/16\"",
+            "fields": {
+              "ceilingHeight": "3.086857",
+              "roomType": "Other",
+              "ground.color": "FFFFFF00"
+            },
+            "objects": [
+              {
+                "uid": "6ac582a0.df868bff",
+                "name": "Opening",
+                "symbol_id": "dooropening",
+                "wall_uid": "6ac582a0.deda43ff",
+                "fields": {
+                  "width": "2.08566",
+                  "height": "3.067697"
+                }
+              }
+            ]
+          },
+          "source_statistics": {
+            "name": "Other",
+            "uid": "6ac582a0.ded15bff",
+            "area": 12.888,
+            "perimeter": 17.473,
+            "ground_perimeter": 10.63,
+            "area_without_walls": 12.888,
+            "area_with_interior_walls_only": 12.888,
+            "area_with_walls": 12.888,
+            "wall_count": 4,
+            "door_count": 1,
+            "window_count": 0,
+            "doors_surface": 68.869,
+            "furniture_count": 1,
+            "height": 10.127,
+            "volume": 130.528,
+            "dimensions": "22 5/8\" x 82 5/16\"",
+            "walls_surface": 176.953,
+            "walls_surface_without_openings": 108.084,
+            "windows_surface": 0
+          },
+          "svg_opening_transform": {
+            "svg_child_index": 294,
+            "matrix": [
+              68.0915,
+              0.0,
+              0.0,
+              68.0915,
+              591.056,
+              433.565
+            ]
+          }
+        }
+      },
+      "payload_hash_encoding": "UTF-8 sorted object keys, JSON values, comma-space and colon-space separators",
+      "payload_sha256": "c47e793b49969c7217b9c490dfc1f042ea281dafc229acdefac79084870db621"
+    },
+    "outline": {
+      "point_ids": [
+        "room_back_left",
+        "room_back_right",
+        "room_entry_right",
+        "room_entry_left"
+      ],
+      "status": "owner_accepted_baseline",
+      "source_id": "accepted_room"
+    },
+    "walls": [
+      {
+        "id": "bed_north",
+        "magicplan_uid": null,
+        "from": "room_back_left",
+        "to": "room_back_right",
+        "role": "north party/exterior wall",
+        "source_id": "magicplan_svg"
+      },
+      {
+        "id": "bed_east_bay",
+        "magicplan_uid": "6ac582a0.df382fff",
+        "from": "room_back_right",
+        "to": "room_entry_right",
+        "role": "east bay window wall (3 windows)",
+        "source_id": "magicplan_live"
+      },
+      {
+        "id": "bed_south",
+        "magicplan_uid": null,
+        "from": "room_entry_right",
+        "to": "room_entry_left",
+        "role": "south partition to living room",
+        "source_id": "magicplan_svg"
+      },
+      {
+        "id": "bed_west_entry_closet",
+        "magicplan_uid": "6ac582a0.df23dfff",
+        "from": "room_entry_left",
+        "to": "room_back_left",
+        "role": "west hallway door + NW closet opening wall",
+        "source_id": "magicplan_live"
+      }
+    ],
+    "fixtures": [],
+    "openings": [
+      {
+        "id": "6ac582a0.dfad5bff",
+        "magicplan_uid": "6ac582a0.dfad5bff",
+        "baseline_object_uid": "6ac582a0.dfad5bff",
+        "label": "Bedroom Entry Hinged Door (Door C)",
+        "status": "preserved model symbol; field casing offsets to verify",
+        "source_id": "magicplan_svg",
+        "wall_id": "bed_west_entry_closet",
+        "kind": "door",
+        "current_action_ref": "entry_door"
+      },
+      {
+        "id": "6ac582a0.e052e7ff",
+        "magicplan_uid": "6ac582a0.e052e7ff",
+        "baseline_object_uid": "6ac582a0.e052e7ff",
+        "label": "Center Bay Sliding Window",
+        "status": "preserved model symbol",
+        "source_id": "magicplan_svg",
+        "wall_id": "bed_east_bay",
+        "kind": "window",
+        "current_action_ref": "window"
+      },
+      {
+        "id": "6ac582a0.e05943ff",
+        "magicplan_uid": "6ac582a0.e05943ff",
+        "baseline_object_uid": "6ac582a0.e05943ff",
+        "label": "South Angled Bay French Window",
+        "status": "preserved model symbol",
+        "source_id": "magicplan_svg",
+        "wall_id": "bed_east_bay",
+        "kind": "window",
+        "current_action_ref": "window"
+      },
+      {
+        "id": "6ac582a0.e05fafff",
+        "magicplan_uid": "6ac582a0.e05fafff",
+        "baseline_object_uid": "6ac582a0.e05fafff",
+        "label": "North Angled Bay French Window",
+        "status": "preserved model symbol",
+        "source_id": "magicplan_svg",
+        "wall_id": "bed_east_bay",
+        "kind": "window",
+        "current_action_ref": "window"
+      }
+    ],
+    "point_groups": {
+      "nw_closet_temp_access": {
+        "point_ids": [
+          "nw_closet_niche_nw",
+          "nw_closet_niche_se"
+        ],
+        "frame": "bedroom_closet_local",
+        "room_registration": null,
+        "role": "Adjoining NW Bedroom Closet niche holding temporary attic ceiling access"
+      }
+    },
+    "decisions": {
+      "window": {
+        "action": "preserve or verify per governing spec",
+        "status": "see_governing_spec",
+        "source_id": "governing_spec",
+        "replacement_product": null,
+        "replacement_dimensions": null
+      },
+      "medicine_cabinet": {
+        "action": "not_applicable_non_bath_room",
+        "status": "n/a",
+        "source_id": "governing_spec",
+        "replacement_product": null,
+        "replacement_dimensions": null
+      },
+      "entry_door": {
+        "action": "retain existing Edwardian door & casings",
+        "source_id": "governing_spec",
+        "date": "2026-11-22"
+      },
+      "temp_closet_ceiling_hold": {
+        "action": "keep NW bedroom-closet ceiling opening open until LV thermostat cable and permanent Door 4 hatch are complete, and roof leak repair is verified dry",
+        "todoist_card": "https://app.todoist.com/app/task/6j3Rf89g8M6hPPx7",
+        "status": "LOCKED_HOLD",
+        "source_id": "nw_closet_temp_hatch_pin"
+      }
+    },
+    "materials": {
+      "drywall_patch_stock": {
+        "thickness_in": 0.5,
+        "note": "Unit 4 purchased 1/2 in drywall only; hold non-kitchen ENT wire pulls until inspection"
+      },
+      "original_trim": {
+        "preserve_edwardian_casings_and_baseboards": true
+      }
+    },
+    "corrections": [],
+    "extensions": {
+      "new_point_groups_allowed": true,
+      "unknown_coordinates_are_null": true
+    }
+  },
+  "dimensions": {
+    "magicplan_room_width_in": {
+      "value": 155.75,
+      "measure_boundary": "wall_to_wall",
+      "verified": "LOCKED",
+      "source": "Magicplan MASTER 6ac582a0.df23abff",
+      "date": "2026-11-22"
+    },
+    "magicplan_room_depth_in": {
+      "value": 142.1875,
+      "measure_boundary": "wall_to_wall",
+      "verified": "LOCKED",
+      "source": "Magicplan MASTER 6ac582a0.df23abff",
+      "date": "2026-11-22"
+    },
+    "nw_closet_width_in": {
+      "value": 22.625,
+      "measure_boundary": "wall_to_wall",
+      "verified": "LOCKED",
+      "source": "Magicplan MASTER Other 6ac582a0.ded15bff",
+      "date": "2026-11-22"
+    },
+    "nw_closet_depth_in": {
+      "value": 82.3125,
+      "measure_boundary": "wall_to_wall",
+      "verified": "LOCKED",
+      "source": "Magicplan MASTER Other 6ac582a0.ded15bff",
+      "date": "2026-11-22"
+    },
+    "ceiling_height_in": {
+      "value": 121.5,
+      "measure_boundary": "aff",
+      "verified": "VERIFY_ON_SITE",
+      "source": "Magicplan MASTER 3.086857 m",
+      "date": "2026-11-22"
+    }
+  },
+  "options": {
+    "non_kitchen_ent_wire_pull_hold": true
+  },
+  "flagged_clashes": [
+    {
+      "id": "clash-bedroom-closet-ceiling-hold",
+      "severity": "HIGH",
+      "en": "Do NOT close temporary NW bedroom-closet ceiling opening (6j3Rf89g8M6hPPx7) until LV thermostat cable, permanent Door 4 hatch, and dry flat-roof check are all complete.",
+      "es": "NO cerrar la abertura temporal del techo en el clóset NO de recámara (6j3Rf89g8M6hPPx7) hasta completar cable de termostato, escotilla permanente en Puerta 4 y revisión seca del techo."
+    },
+    {
+      "id": "clash-bedroom-ent-no-wire-pull",
+      "severity": "HIGH",
+      "en": "Non-kitchen electrical hold (6hvRcQ7Gmh3fG5m7): boxes and empty ENT conduit only; zero conductors pulled before rough electrical inspection.",
+      "es": "Pausa eléctrica fuera de cocina (6hvRcQ7Gmh3fG5m7): solo cajas y tubo ENT vacío; cero cables jalados antes de inspección."
+    }
+  ],
+  "field_overrides": [],
+  "pins": []
+}
