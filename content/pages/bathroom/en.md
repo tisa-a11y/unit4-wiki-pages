@@ -2,9 +2,9 @@
 
 <div class="u4-plan-launch-grid">
   <a class="u4-plan-launch-card is-primary" href="#plan:bathroom-tile">
-    <span class="u4-plan-launch-kicker">Interactive Plan &middot; Tub Alcove &amp; Wall Tile (rev-005)</span>
+    <span class="u4-plan-launch-kicker">Interactive Plan &middot; Tub Alcove &amp; Wall Tile (rev-008)</span>
     <strong class="u4-plan-launch-title">Bathroom Tub &amp; Wall Tiling Plan (1:1 Scale &middot; Calculated Cuts &amp; Steps)</strong>
-    <span class="u4-plan-launch-desc">35&quot; East/West stops, 71-1/4&quot; HardieBacker top, 2&quot;&times;6&quot; zero-metal bullnose, 1-piece 24&quot;&times;48&quot; Glossy White niche backs &amp; Mapei #77 Frost grout.</span>
+    <span class="u4-plan-launch-desc">35&quot; East/West stops, 71-1/4&quot; HardieBacker top, 2&quot;&times;6&quot; matching ceramic bullnose, 1-piece 24&quot;&times;48&quot; Glossy White niche backs &amp; Mapei #77 Frost grout.</span>
     <span class="u4-plan-launch-cta">Open Bathroom Tiling Plan &rarr;</span>
   </a>
 </div>

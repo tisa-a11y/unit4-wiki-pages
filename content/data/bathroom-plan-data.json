@@ -5,7 +5,7 @@
   "room_id": "bathroom",
   "element_id": "BATHROOM-ROOM-01",
   "governing_spec": "bathroom/SPEC.md",
-  "base_rev": "rev-20261124-bath-006",
+  "base_rev": "rev-20261124-bath-008",
   "title": {
     "en": "Bathroom Room Baseline & Field Measurements",
     "es": "Línea Base y Medidas de Campo del Baño"
@@ -1632,6 +1632,11 @@
       "silicone": "Mapei Mapesil T Plus 100% Silicone #77 Frost",
       "joint_width": "1/16\"",
       "notes": "Fine-aggregate (FA) safe for glossy 0025 Ice White glaze; whisper-pale silver-mist near-white bridges cool wall tile to Calacatta Gem floor + #93 Warm Gray floor grout"
+    },
+    "entry_door": {
+      "status": "LOCKED",
+      "locked_at": "2026-11-24T22:24:00-08:00",
+      "decision": "Pocket door permanently retired. Reuse 28\" x 1-3/8\" slab as hinged door swinging outward into hallway."
     }
   },
   "flagged_clashes": [

@@ -81,6 +81,18 @@
       labelEn: "Murphy Bookcase Door (Hallway B)",
       labelEs: "Puerta Librero Murphy (Pasillo B)",
       group: "laundry"
+    },
+    {
+      id: "bathroom-tile",
+      rel: "../bathroom-tile/index.html",
+      roomHash: "bathroom",
+      roomEn: "Bathroom",
+      roomEs: "Baño",
+      shortEn: "Bathroom Wall Tile",
+      shortEs: "Baño: Azulejo",
+      labelEn: "Bathroom Tub & Wall Tile Plan",
+      labelEs: "Baño: Plano de Azulejo y Nichos",
+      group: "bathroom"
     }
   ];
 
