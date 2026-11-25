@@ -24,7 +24,10 @@ are excluded. The job-site layout requirement is checked on room pages only.
 Editorial findings are review candidates and fail Gate 13; a heuristic cannot
 approve construction instructions. Preserve dimensions, active holds, and
 separate fixture requirements when rewriting. Similar sentences describing
-different fixture heights may be intentional and still need editorial review.
+different fixture heights are compared with their named fixture context. Repeated
+table values use row and column context; repeated prose and same-value
+instructions still fail. Nested paragraphs are checked separately, while a
+checklist milestone retains its aggregate 35-word limit.
 Static language-specific guide exports are scanned as rendered; supplying a
 language query does not prove that a static document was translated.
 
@@ -44,7 +47,14 @@ An update run records `baseline_update: true` and labels each screenshot
 again without that flag to compare pixels. Baselines are browser/OS/font
 sensitive: investigate differences before accepting an update. Screenshot
 coverage spans both viewports, both languages, and both themes for the kitchen
-room, kitchen electrical plan, and bathroom tile plan.
+room, kitchen electrical plan, and bathroom tile plan. Plan captures use the
+standalone view and refuse an empty target before writing a baseline.
+
+The active plan menu contains seven plans. The retired bathroom measurement
+viewer remains in document history and is not an active navigation entry.
+Browser regressions also cover all bathroom steps and print sheets, visible
+versus collapsed lazy images, mobile launcher placement, and room navigation
+without stale technical drawers.
 
 ## Test boundaries
 

@@ -99,6 +99,28 @@ class WikiRepairDOMTests(unittest.IsolatedAsyncioTestCase):
                         self.assertGreater(bounds['height'], 0)
                     self.assertEqual([], errors, 'Print rendering raised a runtime error')
 
+    async def test_room_navigation_keeps_holds_and_clears_previous_details(self):
+        await self.page.goto(self.base_url + '/?lang=en#hvac')
+        await self.page.wait_for_function("document.querySelector('#sec-concept')")
+        room_text = await self.page.locator('#doc').inner_text()
+        self.assertIn('do not cut ceilings', room_text)
+        self.assertIn('temporary NW bedroom-closet ceiling', room_text)
+        self.assertEqual(1, await self.page.locator('#sec-details').count())
+        self.assertEqual(1, await self.page.locator('nav#rail').count())
+        await self.page.wait_for_function("document.querySelector('#u4AiFloatingDock')")
+        self.assertEqual('static', await self.page.locator('#u4AiFloatingDock').evaluate(
+            '(el) => getComputedStyle(el).position'))
+        self.assertEqual(1, await self.page.locator('#u4AiFloatingDock').count())
+        await self.page.evaluate("location.hash = 'decisions'")
+        await self.page.wait_for_function("document.querySelector('#doc h1')?.textContent === 'Project Planning'")
+        self.assertEqual(0, await self.page.locator('#roomTechnical > *').count(),
+                         'Previous room details must not remain on the decisions page')
+        await self.page.evaluate("location.hash = 'electrical'")
+        await self.page.wait_for_function("document.querySelector('#sec-checklist')")
+        self.assertEqual(1, await self.page.locator('#sec-details').count())
+        self.assertEqual(1, await self.page.locator('nav#rail').count())
+        self.assertEqual(1, await self.page.locator('#u4AiFloatingDock').count())
+
     async def test_image_audit_skips_hidden_lazy_but_reports_visible_broken(self):
         valid = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30'%3E%3Crect width='30' height='30' fill='green'/%3E%3C/svg%3E"
         await self.page.set_content('''

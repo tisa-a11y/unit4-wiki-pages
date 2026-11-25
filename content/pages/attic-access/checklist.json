@@ -23,13 +23,8 @@
     },
     {
       "done": false,
-      "en": "Build the level 30\"×30\" North service platform from one sheet; confirm equipment mounting hardware with NEXT before buying pads.",
-      "es": "Construir plataforma Norte nivelada de 30\"×30\" con una hoja; confirmar herrajes de montaje con NEXT antes de comprar bases."
-    },
-    {
-      "done": false,
-      "en": "Agree with NEXT’s electrician who wires the permanent switched enclosed LED light; install that light and a 120V GFCI outlet within 25 ft of the furnace.",
-      "es": "Instalar lámpara LED cerrada permanente con apagador y contacto GFCI 120V a ≤25 pies del calefactor; acordar previamente con electricista NEXT quién conecta la lámpara."
+      "en": "Confirm mounting hardware with NEXT before buying pads; build the 30\"×30\" North platform and install enclosed switched LED and 120V GFCI within 25 ft. Agree with NEXT’s electrician who wires them.",
+      "es": "Confirmar herrajes con NEXT antes de comprar bases; construir plataforma Norte 30\"×30\" e instalar lámpara LED cerrada con apagador y GFCI 120V a ≤25 pies. Acordar con electricista NEXT quién conecta."
     },
     {
       "done": false,

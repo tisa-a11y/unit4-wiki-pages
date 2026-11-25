@@ -60,7 +60,6 @@ ALL_PLAN_IDS = [
     "hvac-layout",
     "murphy-door",
     "bathroom-tile",
-    "bathroom-measurements",
 ]
 
 KITCHEN_3TAB_PLANS = [
@@ -838,7 +837,7 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
         attach_err_listeners(p3, "gate3-controls")
         await setup_network_stubs(p3, base_url)
         try:
-            # 3a. Verify All Plans dropdown parity across ALL 8 interactive plans
+            # 3a. Verify All Plans dropdown parity across all active interactive plans
             expected_set = set(ALL_PLAN_IDS)
             for pid in ALL_PLAN_IDS:
                 await p3.goto(f"{base_url}/plans/{pid}/index.html?standalone=1&lang=en&theme=light", wait_until="domcontentloaded")
@@ -927,7 +926,7 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
                     if box_muted and abs(box_muted["height"] - h_before) > 6:
                         fail("gate_3_plan_controls_ai_ergonomics", f"Mute state caused Ask AI resize jump: {h_before:.1f}px -> {box_muted['height']:.1f}px")
             if gates["gate_3_plan_controls_ai_ergonomics"]["status"] == "PASS":
-                note("gate_3_plan_controls_ai_ergonomics", "All 8 plans share identical 8-item All Plans dropdown (Esc returns focus), pagers reset scroll, zoom works, Ask AI empty height <220px & 32x32 icon buttons verified")
+                note("gate_3_plan_controls_ai_ergonomics", "All 7 active plans share identical 7-item All Plans dropdown (Esc returns focus), pagers reset scroll, zoom works, Ask AI empty height <220px & 32x32 icon buttons verified")
         except Exception as exc:
             fail("gate_3_plan_controls_ai_ergonomics", f"Exception in Gate 3: {exc}")
         await ctx3.close()
@@ -1215,7 +1214,7 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
         # LAYER 4 — GATE 12: Golden Screenshots + Pixel-Diff & HTML QA Report
         # ══════════════════════════════════════════════════════════════════════
         shots_spec = [
-            (f"{name}-{vp}-{lang}-{theme}", f"{base_url}/{path}?lang={lang}&theme={theme}{fragment}", width, height)
+            (f"{name}-{vp}-{lang}-{theme}", f"{base_url}/{path}?standalone=1&lang={lang}&theme={theme}{fragment}", width, height)
             for name, path, fragment in (
                 ("kitchen", "index.html", "#kitchen"),
                 ("kitchen-electrical", "plans/kitchen-electrical/index.html", ""),
@@ -1233,6 +1232,11 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
             await p12.goto(shot_url, wait_until="domcontentloaded")
             await p12.wait_for_timeout(650)
             await disable_animations(p12)
+            title_selector = "#doc h1" if shot_name.startswith("kitchen-") and not shot_name.startswith("kitchen-electrical-") else "#u4hBody h1, #u4hBody .u4h-title"
+            if not await p12.locator(title_selector).first.is_visible():
+                fail("gate_12_visual_baselines_report", shot_name + ": target content did not render; refusing empty baseline")
+                await ctx12.close()
+                continue
             cur_png = await p12.screenshot(full_page=False)
             cur_file = shots_dir / f"{shot_name}.png"
             cur_file.write_bytes(cur_png)
