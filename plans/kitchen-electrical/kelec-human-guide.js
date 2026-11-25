@@ -1,10 +1,10 @@
 /* ============================================================================
-   Unit 4 Whole-Unit Electrical (Rev R7) — True 1:1 Human-First Interactive Guide
-   15 Active Circuits (#1–#10, #12–#16) + 5 Open Spares (#11, #17–#20)
-   - Reuses sound existing Living/Dining/Bedroom outlet wiring on shared #10 (#11 Spare)
-   - Reuses all original common-room lights, switches & circuitry intact on #12
-   - 10-year sealed-battery Smoke/CO alarms (zero hardwired 14/3 ceiling pulls; #16 = Attic Light & GFCI only)
-   - Matches Plan 1 Attic Hatch & Walkway 1:1 geometry (24"x36" Hatch outside Door 4, zero "D4/D04" ambiguity)
+   Unit 4 Whole-Unit Electrical (Rev R8) — True 1:1 Human-First Interactive Guide
+   14 New Subpanel Circuits (#1–#10, #13–#16) + 6 Open Spares (#11, #12, #17–#20)
+   - Reused circuits (original room lights/switches + reused room outlets) stay on the Existing Panel (0 new subpanel spaces!)
+   - #12 is now an Open Spare on the 20-space Eaton subpanel; #10 feeds only newly added common-room outlet runs
+   - Clean room names ONLY inside floor-plan rooms (zero cryptic sublabels; visual markers show new vs. reused devices)
+   - 10-year sealed-battery Smoke/CO alarms (zero hardwired 14/3 ceiling pulls; #16 = Attic Service Outlet & Utility Lights)
    ============================================================================ */
 (function () {
   "use strict";
@@ -12,7 +12,7 @@
   var STEPS = [
     { id: "outlets",     en: "1. Unit & Kitchen Map",  es: "1. Mapa Unidad y Cocina", ru: "1. План квартиры и кухни" },
     { id: "walls",       en: "2. Room Details",        es: "2. Detalles por Cuarto",  ru: "2. По комнатам" },
-    { id: "panel",       en: "3. Panel (15 + 5)",      es: "3. Panel (15 + 5)",       ru: "3. Щиток (15 + 5)" },
+    { id: "panel",       en: "3. Subpanel (14 + 6)",   es: "3. Subpanel (14 + 6)",    ru: "3. Субщиток (14 + 6)" },
     { id: "attic-runs",  en: "4. Attic 1:1 Map",       es: "4. Mapa 1:1 Ático",       ru: "4. План чердака 1:1" },
     { id: "attic-guide", en: "5. Attic Rules",         es: "5. Reglas Ático",         ru: "5. Правила чердака" },
     { id: "holds",       en: "6. Holds & Breakers",    es: "6. Pausas y Kit",         ru: "6. Паузы и автоматы" }
@@ -76,33 +76,33 @@
       routeEs: "Bajada de ático ~1\" salida en chimenea 8-5/8\" (NO 4×4 a 100\")",
       routeRu: "Спуск с чердака, выступ ~1\" в коробе 8-5/8\" (без 4×4 на 100\")" },
     { sp: 9, id: "LT", grp: "kitchen", st: "NEW", amp: "15A", cat: "BRN115AF", wire: "14/2 Cu",
-      en: "Kitchen Lights (Entry 3-Switch @ 35.5\" W of NE -> Ceiling, Pendants 75/99\", Under-Cab)",
-      es: "Luces Cocina (3-Apagadores @ 35.5\" O de NE -> Techo, Colgantes 75/99\", Bajo Gab.)",
-      ru: "Свет кухни (тройной выкл. @ 35.5\" З от СВ -> потолок, подвесы 75/99\", подсветка)",
+      en: "Kitchen Lights (Entry 3-Switch @ 6\" W of NE -> Ceiling, Pendants 75/99\", Under-Cab)",
+      es: "Luces Cocina (3-Apagadores @ 6\" O de NE -> Techo, Colgantes 75/99\", Bajo Gab.)",
+      ru: "Свет кухни (тройной выкл. @ 6\" З от СВ -> потолок, подвесы 75/99\", подсветка)",
       routeEn: "Attic to North Entry 3-Switch (48\" AFF) & ceiling fixtures",
       routeEs: "Por ático a 3-Apagadores Entrada Norte (48\" AFF) y techo",
       routeRu: "Через чердак к северному входу (48\" от пола) и потолку" },
-    { sp: 10, id: "COMMON-R", grp: "unit", st: "REUSE+NEW", amp: "20A*", cat: "BRN120AF (15A if 14 AWG)", wire: "12/2* Reuse+New",
-      en: "Living, Dining, Bedroom & Hall Outlets (Reuse Existing + New · Verify w/ C-10)",
-      es: "Contactos Sala, Comedor, Recámara y Pasillo (Reuso + Nuevo · C-10)",
-      ru: "Розетки гостиной, столовой, спальни и коридора (сохранение + новые · C-10)",
-      routeEn: "Reuses existing Living/Dining/Bed wiring + new legs (Bed @ 11.5\" dark horiz., Hall H1 @ 18\"); NO outlet on Panel wall; D6/L6 pocket hold",
-      routeEs: "Reusa cableado existente Sala/Comedor/Rec. + tramos nuevos (Rec. @ 11.5\" horiz. oscuro, H1 @ 18\"); SIN contacto en Panel; pausa D6/L6",
-      routeRu: "Сохраняет существующую проводку + новые точки (спальня @ 11.5\" гориз. тёмные, H1 @ 18\"); без розетки на стене щитка" },
+    { sp: 10, id: "COMMON-R", grp: "unit", st: "NEW ONLY", amp: "20A", cat: "BRN120AF", wire: "12/2 Cu (New Legs)",
+      en: "New Common-Room Outlets Only (Living, Dining, Bedroom & Hall New Drops)",
+      es: "Solo Contactos Nuevos en Cuartos (Bajadas Nuevas Sala, Comedor, Recámara y Pasillo)",
+      ru: "Только новые розетки жилых комнат (гостиная, столовая, спальня и коридор)",
+      routeEn: "Feeds ONLY newly added 12/2 receptacle drops (Bed @ 11.5\" dark horiz., Hall H1 @ 18\"). Reused outlets stay on Existing Panel (0 subpanel spaces)! Zero Panel-wall outlet; D6/L6 pocket hold.",
+      routeEs: "Alimenta SOLO contactos nuevos 12/2 (Rec. @ 11.5\" horiz. oscuro, H1 @ 18\"). ¡Los contactos reusados quedan en el Panel Existente (0 espacios aquí)! Sin toma en muro Panel; pausa D6/L6.",
+      routeRu: "Питает ТОЛЬКО новые линии 12/2 (спальня @ 11.5\" тёмные гориз., H1 @ 18\"). Сохраняемые розетки остаются на существующем щите (0 мест в субщитке)!" },
     { sp: 11, id: "SPARE-11", grp: "spare", st: "SPARE", amp: "—", cat: "Open Spare", wire: "—",
-      en: "Open Spare — Future Bedroom / Room Split",
-      es: "Reserva Libre — División Futura Recámara / Cuartos",
+      en: "Open Spare — Future Bedroom / Room Outlet Split",
+      es: "Reserva Libre — División Futura Contactos Recámara / Cuartos",
       ru: "Свободный резерв — будущее выделение спальни / комнат",
       routeEn: "Split-ready from accessible Attic J-Box with zero drywall demo",
       routeEs: "Lista para dividir desde Caja en Ático sin romper tablaroca",
       routeRu: "Готово к отделению из чердачной коробки без вскрытия ГКЛ" },
-    { sp: 12, id: "COMMON-L", grp: "unit", st: "REUSE", amp: "15A", cat: "BRN115AF", wire: "Reuse Existing",
-      en: "Original Room Lights & Switches (Reuse Existing Circuitry + Laundry Light)",
-      es: "Luces y Apagadores Originales (Reusar Circuito Existente + Luz Lavandería)",
-      ru: "Оригинальный свет и выключатели комнат (сохранение существующей проводки + прачечная)",
-      routeEn: "Reuses existing switches, 3-way travelers & ceiling wiring in Living, Dining, Bedroom & Hall intact (C-10 lands existing feed at Panel + Laundry light)",
-      routeEs: "Reusa intactos los apagadores, 3-vías y cableado existente en Sala, Comedor, Recámara y Pasillo (C-10 conecta en Panel + luz Lavandería)",
-      routeRu: "Полностью сохраняет существующие выключатели, 3-Way и проводку света в гостиной, столовой, спальне и коридоре (+ свет прачечной)" },
+    { sp: 12, id: "SPARE-12", grp: "spare", st: "SPARE", amp: "—", cat: "Open Spare (Lights on Existing Panel)", wire: "—",
+      en: "Open Spare — Original Room Lights & Switches Stay on Existing Panel (0 Spaces Used)",
+      es: "Reserva Libre — Luces y Apagadores Originales Quedan en Panel Existente (0 Espacios)",
+      ru: "Свободный резерв — родной свет и выключатели остаются на существующем щите (0 мест)",
+      routeEn: "Living, Dining, Bedroom & Hallway original switches, 3-way travelers & ceiling lights stay on Existing Panel (takes 0 spaces on this subpanel!)",
+      routeEs: "Los apagadores, 3-vías y luces originales de Sala, Comedor, Recámara y Pasillo permanecen en su Panel Existente (¡0 espacios en este subpanel!)",
+      routeRu: "Родные выключатели, проходные схемы и потолочный свет жилых комнат остаются на старом щите (0 мест в субщитке)" },
     { sp: 13, id: "BATH", grp: "unit", st: "NEW", amp: "20A", cat: "BRN120DF", wire: "100% 12/2 Cu",
       en: "Bathroom All-in-One (Vanity, Sep. Pre-Tile Toilet Drop, Lights, Humidity Fan)",
       es: "Baño Todo-en-Uno (Lavabo, Bajada Sep. Inodoro Pre-Azulejo, Luces, Extractor)",
@@ -110,79 +110,85 @@
       routeEn: "Via Bath J-Box · 100% 12/2 Yellow · pocket door RETIRED -> 28\" outward hall door; South stud switches OK",
       routeEs: "Vía Caja Baño · 100% 12/2 Amarillo · corrediza RETIRADA -> puerta 28\" afuera; apagadores muro Sur OK",
       routeRu: "Через Bath J-Box · 100% 12/2 · кассетная дверь отменена -> распашная 28\" наружу" },
-    { sp: 14, id: "LAUN", grp: "unit", st: "NEW", amp: "20A", cat: "BRN120DF (Panel)", wire: "12/2 Cu",
+    { sp: 14, id: "LAUN", grp: "unit", st: "NEW", amp: "20A", cat: "BRN120DF (Subpanel)", wire: "12/2 Cu",
       en: "Laundry WashTower (1× 20A Duplex East Wall @ 38\" AFF)",
       es: "Lavandería WashTower (1 Toma Doble 20A Muro Este @ 38\" AFF)",
       ru: "Прачечная LG WashTower (1× двойная 20A на восточной стене @ 38\")",
-      routeEn: "Both 120V LG WKG101HVA plugs · clears 8-1/4\" Murphy bookcase door · Panel GFCI reset",
-      routeEs: "Ambos enchufes 120V LG WKG101HVA · libra puerta Murphy 8-1/4\" · reset GFCI en Panel",
-      routeRu: "Обе вилки 120V LG WKG101HVA · вне двери-стеллажа 8-1/4\" · сброс GFCI в щитке" },
+      routeEn: "Both 120V LG WKG101HVA plugs · clears 8-1/4\" Murphy bookcase door · Subpanel GFCI reset",
+      routeEs: "Ambos enchufes 120V del LG WKG101HVA · libra puerta librero Murphy 8-1/4\" · reset GFCI en Subpanel",
+      routeRu: "Обе вилки 120V LG WKG101HVA · зазор двери-шкафа Murphy 8-1/4\" · сброс GFCI в субщитке" },
     { sp: 15, id: "HVAC", grp: "unit", st: "NEW", amp: "15A", cat: "BR115", wire: "14/2 Cu",
       en: "Attic Furnace F1 + Local Disconnect Switch (174\", 258\")",
       es: "Calefactor Ático F1 + Desconectador Local (174\", 258\")",
-      ru: "Чердачная печь F1 + сервисный выключатель (174\", 258\")",
-      routeEn: "Dedicated 14/2 run from Panel riser directly to F1 service platform",
-      routeEs: "Línea 14/2 dedicada desde subida del Panel hasta plataforma F1",
-      routeRu: "Выделенная линия 14/2 от щитка напрямую к площадке F1" },
+      ru: "Печь на чердаке F1 + местный выключатель (174\", 258\")",
+      routeEn: "Dedicated circuit to SW Dining attic service platform (30\"×30\")",
+      routeEs: "Circuito dedicado a plataforma de servicio en ático (30\"×30\")",
+      routeRu: "Выделенная линия к сервисной площадке чердака (30\"×30\")" },
     { sp: 16, id: "ATTIC-SVC", grp: "unit", st: "NEW", amp: "15A", cat: "BRN115DF", wire: "14/2 Cu",
-      en: "Attic Service Outlet (<=25 ft F1) & Hatch LEDs (Zero Wired Smoke Alarms)",
-      es: "Toma Servicio Ático (<=25 pies F1) y Luces LED (Cero Detectores Cableados)",
-      ru: "Сервисная розетка чердака (<=25 фут. F1) и свет LED (без проводных датчиков дыма)",
-      routeEn: "Always-live GFCI outlet at 30\"×30\" platform + Hatch Switch (outside Door 4) -> 2× enclosed LEDs on 2×4 rafter blocking; Smoke/CO use 10-yr sealed-battery units",
-      routeEs: "Toma en plataforma 30\"×30\" + Apagador Escotilla (afuera Puerta 4) -> 2 LEDs en bloqueo 2×4; Humo/CO usan unidades de batería sellada 10 años",
-      routeRu: "Розетка у площадки 30\"×30\" + выключатель у люка -> 2 LED на перемычках 2×4; датчики дыма/CO автономные на 10-летней батарее" },
+      en: "Attic Service GFCI Outlet & Utility Lights (Hatch Switch + 2× Attic LEDs)",
+      es: "Toma GFCI de Servicio y Luces de Utilidad en Ático (Apagador Escotilla + 2 LEDs)",
+      ru: "Сервисная розетка GFCI и свет чердака (выкл. у люка + 2 LED)",
+      routeEn: "GFCI outlet <=25 ft from F1 + Hatch Switch outside Door 4 + 2× enclosed LEDs (+ Laundry closet light if newly added). Smoke/CO = 10-yr sealed battery!",
+      routeEs: "Toma GFCI <=25 pies de F1 + Apagador afuera Puerta 4 + 2 LEDs cerrados (+ luz clóset Lavandería si es nueva). ¡Humo/CO de batería sellada 10 años!",
+      routeRu: "Розетка GFCI <=25 фут. от F1 + выкл. у двери 4 + 2 LED (+ свет прачечной при новом выводе). Датчики дыма/CO автономные на 10 лет!" },
     { sp: 17, id: "SPARE-17", grp: "spare", st: "SPARE", amp: "—", cat: "Open Spare", wire: "—",
       en: "Open Spare — Future Living / Dining Split",
       es: "Reserva Libre — División Futura Sala / Comedor",
       ru: "Свободный резерв — будущее разделение гостиной / столовой",
-      routeEn: "Split-ready from Living/Dining Attic J-Box",
-      routeEs: "Lista desde Caja Ático Sala/Comedor",
-      routeRu: "Готово из чердачной коробки Living/Dining" },
+      routeEn: "Reserved full-size subpanel space",
+      routeEs: "Espacio libre tamaño completo",
+      routeRu: "Полноразмерное резервное место" },
     { sp: 18, id: "SPARE-18", grp: "spare", st: "SPARE", amp: "—", cat: "Open Spare", wire: "—",
-      en: "Open Spare — Future Room Split",
+      en: "Open Spare — Future Split",
       es: "Reserva Libre — División Futura",
-      ru: "Свободный резерв — будущее разделение",
-      routeEn: "Open full-size panel space",
-      routeEs: "Espacio libre completo en panel",
-      routeRu: "Свободное место в щитке" },
+      ru: "Свободный резерв — будущее расширение",
+      routeEn: "Reserved full-size subpanel space",
+      routeEs: "Espacio libre tamaño completo",
+      routeRu: "Полноразмерное резервное место" },
     { sp: 19, id: "SPARE-19", grp: "spare", st: "SPARE", amp: "—", cat: "Open Spare", wire: "—",
-      en: "Open Spare — Future Toilet Bidet Split",
-      es: "Reserva Libre — División Futura Bidet Inodoro",
-      ru: "Свободный резерв — будущее выделение биде унитаза",
-      routeEn: "Zero-tile-demo split using separate Toilet 12/2 drop in Bath J-Box",
-      routeEs: "División sin romper azulejo usando bajada 12/2 separada en Caja Baño",
-      routeRu: "Разделение без демонтажа плитки через отдельный спуск 12/2 в Bath J-Box" },
+      en: "Open Spare — Future Toilet Bidet Split (from Bath J-Box)",
+      es: "Reserva Libre — División Futura Bidet Inodoro (desde Caja Baño)",
+      ru: "Свободный резерв — линия крышки-биде (от коробки ванной)",
+      routeEn: "Pre-tile Toilet 12/2 drop ready in Bath J-Box",
+      routeEs: "Bajada 12/2 pre-azulejo ya separada en Caja Baño",
+      routeRu: "Отдельный спуск 12/2 к унитазу уже заложен в коробке ванной" },
     { sp: 20, id: "SPARE-20", grp: "spare", st: "SPARE", amp: "—", cat: "Open Spare", wire: "—",
-      en: "Open Spare — Open Panel Space",
-      es: "Reserva Libre — Espacio Libre",
-      ru: "Свободный резерв — свободное место",
-      routeEn: "Open full-size panel space",
-      routeEs: "Espacio libre completo en panel",
-      routeRu: "Свободное место в щитке" }
+      en: "Open Spare — Future Expansion (Pairs w/ #18 for 2-Pole if Needed)",
+      es: "Reserva Libre — Expansión Futura (Par 2-Polos con #18 si se Requiere)",
+      ru: "Свободный резерв — запасное место (пара с #18 под 2-полюсный автомат)",
+      routeEn: "Reserved full-size subpanel space",
+      routeEs: "Espacio libre tamaño completo",
+      routeRu: "Полноразмерное резервное место" }
   ];
 
   var state = {
+    lang: "en",
     step: "outlets",
-    mapMode: "unit",        // "unit" | "kitchen"
-    counterH: 44,           // 44 or 41
-    floorDown: false,       // false = bare subfloor (+3/4"), true = finished floor
-    wallTab: "south",       // east | south | west | north | dining | bathroom | laundry | bedroom | living
-    selectedCircuit: "COMMON-R",
-    panelFilter: "all",     // all | kitchen | unit | spare
-    atticFilter: "all",     // all | kitchen | attic | bath | common
-    atticSwitchOpt: "optA", // optA | optB
-    equipOpen: true,
-    holds: { h1: false, h2: false, h3: false, h4: false, h5: false }
+    mapMode: "unit",
+    floorDown: false,
+    counterH: 44,
+    wallTab: "east",
+    panelFilter: "all",
+    atticFilter: "all",
+    atticSwitchOpt: "optA",
+    selectedCircuit: "SA-A"
   };
 
   function getLang() {
-    return window.U4PlanNav && typeof window.U4PlanNav.getLang === "function" ? window.U4PlanNav.getLang() : "en";
+    var attr = (document.documentElement.getAttribute("data-u4-lang") || document.documentElement.lang || "").toLowerCase();
+    if (attr.indexOf("ru") === 0) return "ru";
+    if (attr.indexOf("es") === 0) return "es";
+    try {
+      var q = new URLSearchParams(window.location.search).get("lang");
+      if (q === "ru" || q === "es" || q === "en") return q;
+    } catch (e) {}
+    return state.lang || "en";
   }
 
   function t(en, es, ru) {
     var l = getLang();
-    if (l === "es") return es;
-    if (l === "ru") return ru || en;
+    if (l === "ru") return ru !== undefined ? ru : en;
+    if (l === "es") return es !== undefined ? es : en;
     return en;
   }
 
@@ -194,30 +200,17 @@
       .replace(/"/g, "&quot;");
   }
 
-  function fmtIn(n) {
-    var r = Math.round(n * 8) / 8;
-    var w = Math.floor(r);
-    var f = Math.round((r - w) * 8);
-    var m = { 1: "1/8", 2: "1/4", 3: "3/8", 4: "1/2", 5: "5/8", 6: "3/4", 7: "7/8" };
-    return f === 0 ? w + '"' : (w ? w + "-" : "") + m[f] + '"';
+  function off() { return state.floorDown ? 0 : 0.75; }
+
+  function fmtIn(v) {
+    var whole = Math.floor(v + 1e-6);
+    var rem = Math.round((v - whole) * 8);
+    if (rem === 8) { whole += 1; rem = 0; }
+    var map = { 0: "", 1: "-1/8", 2: "-1/4", 3: "-3/8", 4: "-1/2", 5: "-5/8", 6: "-3/4", 7: "-7/8" };
+    return whole + (map[rem] || "") + '"';
   }
 
-  function off() {
-    return state.floorDown ? 0 : 0.75;
-  }
-
-  function syncUnderlyingPrint() {
-    try {
-      if (window.U4PLAN && typeof window.U4PLAN.setFloorCondition === "function") {
-        window.U4PLAN.setFloorCondition(state.floorDown ? "finished_installed" : "bare_subfloor", 0.75);
-      }
-      if (window.U4PLAN && typeof window.U4PLAN.selectCircuit === "function") {
-        window.U4PLAN.selectCircuit(state.selectedCircuit);
-      }
-    } catch (_) {}
-  }
-
-  // Exact same 1:1 room polygons as Plan 1 (attic-human-guide.js): X = 0..508" W->E, Y = 0..298" N->S, North UP
+  // Exact 1:1 room polygons matching Plan 1 (attic-human-guide.js): X = 0..508" W->E, Y = 0..298" N->S, North UP
   var U4_ROOMS = {
     landing:    [[66,34],[147,34],[147,108],[66,108]],
     kitchen:    [[31.5,108],[147,108],[147,234.25],[0,234.25],[0,174.25],[31.5,174.25]],
@@ -248,95 +241,126 @@
 
   function renderWholeUnitMapSvg() {
     var S = 1.12;
-    var ox = 56, oy = 42;
+    var ox = 56, oy = 40;
     function ux(x) { return ox + x * S; }
     function uy(y) { return oy + y * S; }
 
-    return '<svg viewBox="0 0 680 412" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' +
+    function newDot(x, y, cir, fill, stroke) {
+      var isSel = state.selectedCircuit === cir;
+      return '<circle cx="' + ux(x).toFixed(1) + '" cy="' + uy(y).toFixed(1) + '" r="' + (isSel ? "5.2" : "4.0") + '" fill="' + (isSel ? "#F59E0B" : fill) + '" stroke="' + stroke + '" stroke-width="1.5" data-cir="' + cir + '" style="cursor:pointer"/>';
+    }
+    function reusedDot(x, y, cir) {
+      return '<circle cx="' + ux(x).toFixed(1) + '" cy="' + uy(y).toFixed(1) + '" r="4.2" fill="#FFFFFF" stroke="#475569" stroke-width="1.4" stroke-dasharray="2,1.5" data-cir="' + cir + '" style="cursor:pointer"/>';
+    }
+
+    return '<svg viewBox="0 0 680 416" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' +
       esc(t("True 1:1 Unit 4 Whole-Unit Electrical Map", "Mapa Eléctrico 1:1 de Toda la Unidad 4", "План электрики всей квартиры 1:1")) + '">' +
-      '<rect x="0" y="0" width="680" height="412" fill="#F8FAFC" rx="8"/>' +
-      '<text x="340" y="22" text-anchor="middle" font-size="11.2" font-weight="800" fill="#0F2537">' +
-        esc(t("TRUE 1:1 UNIT 4 ELECTRICAL MAP (508\" × 298\" · NORTH UP · 15 ACTIVE + 5 SPARES)",
-              "MAPA ELÉCTRICO 1:1 UNIDAD 4 (508\" × 298\" · NORTE ARRIBA · 15 ACTIVOS + 5 RESERVAS)",
-              "ПЛАН ЭЛЕКТРИКИ 1:1 КВАРТИРА 4 (508\" × 298\" · СЕВЕР ВВЕРХ · 15 АКТИВНЫХ + 5 РЕЗЕРВОВ)")) +
+      '<rect x="0" y="0" width="680" height="416" fill="#F8FAFC" rx="8"/>' +
+      '<text x="340" y="22" text-anchor="middle" font-size="11.0" font-weight="800" fill="#0F2537">' +
+        esc(t("UNIT 4 ELECTRICAL MAP (1:1 SCALE · 14 NEW SUBPANEL CIRCUITS + 6 OPEN SPARES)",
+              "MAPA ELÉCTRICO UNIDAD 4 (ESCALA 1:1 · 14 CIRCUITOS NUEVOS + 6 RESERVAS)",
+              "ПЛАН ЭЛЕКТРИКИ КВАРТИРЫ 4 (МАСШТАБ 1:1 · 14 НОВЫХ ЛИНИЙ + 6 РЕЗЕРВОВ)")) +
       '</text>' +
       svgCompass(646, 46) +
 
+      // Clean Room Polygons (1:1 true scale)
       '<polygon points="' + polyStr(U4_ROOMS.landing, ux, uy) + '" fill="#FDF6E7" stroke="#9A5B06" stroke-width="1.4" stroke-dasharray="5,3"/>' +
-      '<polygon points="' + polyStr(U4_ROOMS.kitchen, ux, uy) + '" fill="#FEF9C3" stroke="#B45309" stroke-width="2.2" data-cir="SA-A" style="cursor:pointer"/>' +
-      '<polygon points="' + polyStr(U4_ROOMS.dining, ux, uy) + '" fill="#E0F2FE" stroke="#0369A1" stroke-width="2" data-cir="COMMON-R" style="cursor:pointer"/>' +
-      '<polygon points="' + polyStr(U4_ROOMS.living, ux, uy) + '" fill="#E0F2FE" stroke="#0369A1" stroke-width="2" data-cir="COMMON-R" style="cursor:pointer"/>' +
-      '<polygon points="' + polyStr(U4_ROOMS.hall, ux, uy) + '" fill="#F8FAFC" stroke="#475569" stroke-width="1.6" data-cir="COMMON-L" style="cursor:pointer"/>' +
-      '<polygon points="' + polyStr(U4_ROOMS.bath, ux, uy) + '" fill="#DCFCE7" stroke="#15803D" stroke-width="2" data-cir="BATH" style="cursor:pointer"/>' +
-      '<polygon points="' + polyStr(U4_ROOMS.laundry, ux, uy) + '" fill="#FFEDD5" stroke="#C2410C" stroke-width="2" data-cir="LAUN" style="cursor:pointer"/>' +
-      '<polygon points="' + polyStr(U4_ROOMS.tempCloset, ux, uy) + '" fill="#FDF6E7" stroke="#9A5B06" stroke-width="1.5" stroke-dasharray="4,2"/>' +
-      '<polygon points="' + polyStr(U4_ROOMS.bedroom, ux, uy) + '" fill="#EEF2FF" stroke="#4338CA" stroke-width="2" data-cir="COMMON-R" style="cursor:pointer"/>' +
+      '<polygon points="' + polyStr(U4_ROOMS.kitchen, ux, uy) + '" fill="#FEFCE8" stroke="#B45309" stroke-width="2.0" data-cir="SA-A" style="cursor:pointer"/>' +
+      '<polygon points="' + polyStr(U4_ROOMS.dining, ux, uy) + '" fill="#F0F9FF" stroke="#0369A1" stroke-width="1.8" data-cir="COMMON-R" style="cursor:pointer"/>' +
+      '<polygon points="' + polyStr(U4_ROOMS.living, ux, uy) + '" fill="#F0F9FF" stroke="#0369A1" stroke-width="1.8" data-cir="COMMON-R" style="cursor:pointer"/>' +
+      '<polygon points="' + polyStr(U4_ROOMS.hall, ux, uy) + '" fill="#FFFFFF" stroke="#475569" stroke-width="1.6" data-cir="COMMON-R" style="cursor:pointer"/>' +
+      '<polygon points="' + polyStr(U4_ROOMS.bath, ux, uy) + '" fill="#F0FDF4" stroke="#15803D" stroke-width="1.9" data-cir="BATH" style="cursor:pointer"/>' +
+      '<polygon points="' + polyStr(U4_ROOMS.laundry, ux, uy) + '" fill="#FFF7ED" stroke="#C2410C" stroke-width="1.9" data-cir="LAUN" style="cursor:pointer"/>' +
+      '<polygon points="' + polyStr(U4_ROOMS.tempCloset, ux, uy) + '" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.3" stroke-dasharray="4,2"/>' +
+      '<polygon points="' + polyStr(U4_ROOMS.bedroom, ux, uy) + '" fill="#EEF2FF" stroke="#4338CA" stroke-width="1.8" data-cir="COMMON-R" style="cursor:pointer"/>' +
 
-      // 24"x36" Attic Hatch on Common Stair Landing (NEVER labeled D4/D04!)
-      '<rect x="' + ux(100).toFixed(1) + '" y="' + uy(56).toFixed(1) + '" width="' + (24 * S).toFixed(1) + '" height="' + (36 * S).toFixed(1) + '" rx="2" fill="#E3EEF2" stroke="#1F5F7A" stroke-width="2" data-cir="ATTIC-SVC" style="cursor:pointer"/>' +
-      '<text x="' + ux(112).toFixed(1) + '" y="' + uy(73).toFixed(1) + '" text-anchor="middle" font-size="6.4" font-weight="800" fill="#1F5F7A">HATCH</text>' +
-      '<text x="' + ux(112).toFixed(1) + '" y="' + uy(81).toFixed(1) + '" text-anchor="middle" font-size="5.8" font-weight="700" fill="#1F5F7A">24×36</text>' +
-      '<text x="' + ux(106.5).toFixed(1) + '" y="' + uy(46).toFixed(1) + '" text-anchor="middle" font-size="6.8" font-weight="800" fill="#9A5B06">' + esc(t("STAIR LANDING", "DESCANSO ESCALERA", "ЛЕСТН. ПЛОЩАДКА")) + '</text>' +
-
-      '<text x="' + ux(333.7).toFixed(1) + '" y="' + uy(44).toFixed(1) + '" text-anchor="middle" font-size="6.2" font-weight="800" fill="#9A5B06">' + esc(t("Temp", "Clóset", "Шкаф")) + '</text>' +
-      '<text x="' + ux(333.7).toFixed(1) + '" y="' + uy(53).toFixed(1) + '" text-anchor="middle" font-size="6.0" font-weight="700" fill="#9A5B06">' + esc(t("Closet", "Temp", "(откр.)")) + '</text>' +
-
-      // Panel Eaton BRP20L125G @ X=147, Y=213.75 (faces East into Dining) + 30x36 clear zone
-      '<rect x="' + ux(147).toFixed(1) + '" y="' + uy(198.75).toFixed(1) + '" width="' + (36 * S).toFixed(1) + '" height="' + (30 * S).toFixed(1) + '" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.4" stroke-dasharray="3,2"/>' +
-      '<rect x="' + (ux(147) - 4).toFixed(1) + '" y="' + uy(203).toFixed(1) + '" width="8" height="' + (22 * S).toFixed(1) + '" fill="#DC2626"/>' +
-      '<text x="' + ux(166).toFixed(1) + '" y="' + uy(217).toFixed(1) + '" text-anchor="middle" font-size="7.2" font-weight="800" fill="#991B1B">PANEL</text>' +
-
-      // Double pocket-door hold between Dining & Living (X=293.7)
+      // Cased openings: Kitchen-to-Hallway (East wall X=147, Y=108..137.5) & Dining-to-Living
+      '<line x1="' + ux(147).toFixed(1) + '" y1="' + uy(108.5).toFixed(1) + '" x2="' + ux(147).toFixed(1) + '" y2="' + uy(137.5).toFixed(1) + '" stroke="#FFFFFF" stroke-width="4.5"/>' +
+      '<line x1="' + ux(147).toFixed(1) + '" y1="' + uy(108.5).toFixed(1) + '" x2="' + ux(147).toFixed(1) + '" y2="' + uy(137.5).toFixed(1) + '" stroke="#475569" stroke-width="1.2" stroke-dasharray="3,2"/>' +
       '<line x1="' + ux(293.7).toFixed(1) + '" y1="' + uy(186).toFixed(1) + '" x2="' + ux(293.7).toFixed(1) + '" y2="' + uy(252.5).toFixed(1) + '" stroke="#FFFFFF" stroke-width="4.5"/>' +
-      '<text x="' + ux(293.7).toFixed(1) + '" y="' + uy(176).toFixed(1) + '" text-anchor="middle" font-size="6.8" font-weight="800" fill="#DC2626">D6/L6 HOLD</text>' +
 
-      // Room Labels + Rev R7 Circuit Badges
-      '<text x="' + ux(84).toFixed(1) + '" y="' + uy(162).toFixed(1) + '" text-anchor="middle" font-size="9.5" font-weight="800" fill="#92400E">' + esc(t("KITCHEN", "COCINA", "КУХНЯ")) + '</text>' +
-      '<text x="' + ux(84).toFixed(1) + '" y="' + uy(176).toFixed(1) + '" text-anchor="middle" font-size="8" font-weight="700" fill="#B45309">#1–#9 (New)</text>' +
+      // 24"x36" Attic Hatch on Common Stair Landing
+      '<rect x="' + ux(100).toFixed(1) + '" y="' + uy(56).toFixed(1) + '" width="' + (24 * S).toFixed(1) + '" height="' + (36 * S).toFixed(1) + '" rx="2" fill="#E3EEF2" stroke="#1F5F7A" stroke-width="1.8" data-cir="ATTIC-SVC" style="cursor:pointer"/>' +
+      '<text x="' + ux(112).toFixed(1) + '" y="' + uy(76).toFixed(1) + '" text-anchor="middle" font-size="6.4" font-weight="800" fill="#1F5F7A">HATCH</text>' +
 
-      '<text x="' + ux(225).toFixed(1) + '" y="' + uy(212).toFixed(1) + '" text-anchor="middle" font-size="9.5" font-weight="800" fill="#075985">' + esc(t("DINING ROOM", "COMEDOR", "СТОЛОВАЯ")) + '</text>' +
-      '<text x="' + ux(225).toFixed(1) + '" y="' + uy(226).toFixed(1) + '" text-anchor="middle" font-size="7.6" font-weight="700" fill="#0369A1">#10* Plugs · #12 Reused Lts/Sw</text>' +
-      '<text x="' + ux(225).toFixed(1) + '" y="' + uy(238).toFixed(1) + '" text-anchor="middle" font-size="7" font-weight="700" fill="#64748B">F1 Attic above (#15/#16)</text>' +
+      // New 20-Space Eaton Subpanel @ X=147, Y=213.75 (faces East into Dining) + 30x36 clear zone
+      '<rect x="' + ux(147).toFixed(1) + '" y="' + uy(198.75).toFixed(1) + '" width="' + (36 * S).toFixed(1) + '" height="' + (30 * S).toFixed(1) + '" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.3" stroke-dasharray="3,2"/>' +
+      '<rect x="' + (ux(147) - 3.5).toFixed(1) + '" y="' + uy(203).toFixed(1) + '" width="7" height="' + (22 * S).toFixed(1) + '" fill="#DC2626"/>' +
+      '<text x="' + ux(165.5).toFixed(1) + '" y="' + uy(216.5).toFixed(1) + '" text-anchor="middle" font-size="6.8" font-weight="800" fill="#991B1B">PANEL</text>' +
 
-      '<text x="' + ux(398).toFixed(1) + '" y="' + uy(212).toFixed(1) + '" text-anchor="middle" font-size="9.5" font-weight="800" fill="#075985">' + esc(t("LIVING ROOM", "SALA", "ГОСТИНАЯ")) + '</text>' +
-      '<text x="' + ux(398).toFixed(1) + '" y="' + uy(226).toFixed(1) + '" text-anchor="middle" font-size="7.6" font-weight="700" fill="#0369A1">#10* Plugs · #12 Reused Lts/Sw</text>' +
+      // Clean Room Names ONLY (zero cryptic sublabels!)
+      '<text x="' + ux(106.5).toFixed(1) + '" y="' + uy(46).toFixed(1) + '" text-anchor="middle" font-size="6.6" font-weight="800" fill="#9A5B06">' + esc(t("STAIR LANDING", "DESCANSO", "ПЛОЩАДКА")) + '</text>' +
+      '<text x="' + ux(88).toFixed(1) + '" y="' + uy(172).toFixed(1) + '" text-anchor="middle" font-size="9.5" font-weight="800" fill="#92400E">' + esc(t("KITCHEN", "COCINA", "КУХНЯ")) + '</text>' +
+      '<text x="' + ux(232).toFixed(1) + '" y="' + uy(216).toFixed(1) + '" text-anchor="middle" font-size="9.5" font-weight="800" fill="#075985">' + esc(t("DINING ROOM", "COMEDOR", "СТОЛОВАЯ")) + '</text>' +
+      '<text x="' + ux(402).toFixed(1) + '" y="' + uy(216).toFixed(1) + '" text-anchor="middle" font-size="9.5" font-weight="800" fill="#075985">' + esc(t("LIVING ROOM", "SALA", "ГОСТИНАЯ")) + '</text>' +
+      '<text x="' + ux(250).toFixed(1) + '" y="' + uy(118).toFixed(1) + '" text-anchor="middle" font-size="8.4" font-weight="800" fill="#334155">' + esc(t("HALLWAY", "PASILLO", "КОРИДОР")) + '</text>' +
+      '<text x="' + ux(243).toFixed(1) + '" y="' + uy(46).toFixed(1) + '" text-anchor="middle" font-size="8.2" font-weight="800" fill="#166534">' + esc(t("BATHROOM", "BAÑO", "ВАННАЯ")) + '</text>' +
+      '<text x="' + ux(297.2).toFixed(1) + '" y="' + uy(46).toFixed(1) + '" text-anchor="middle" font-size="6.8" font-weight="800" fill="#9A3412">' + esc(t("LAUNDRY", "LAV.", "ПРАЧ.")) + '</text>' +
+      '<text x="' + ux(414).toFixed(1) + '" y="' + uy(68).toFixed(1) + '" text-anchor="middle" font-size="9.5" font-weight="800" fill="#3730A3">' + esc(t("BEDROOM", "RECÁMARA", "СПАЛЬНЯ")) + '</text>' +
 
-      '<text x="' + ux(243).toFixed(1) + '" y="' + uy(38).toFixed(1) + '" text-anchor="middle" font-size="8.5" font-weight="800" fill="#166534">' + esc(t("BATH", "BAÑO", "ВАННАЯ")) + '</text>' +
-      '<text x="' + ux(243).toFixed(1) + '" y="' + uy(51).toFixed(1) + '" text-anchor="middle" font-size="7.5" font-weight="700" fill="#15803D">#13 (100% 12/2)</text>' +
-      '<text x="' + ux(243).toFixed(1) + '" y="' + uy(63).toFixed(1) + '" text-anchor="middle" font-size="6.8" font-weight="700" fill="#166534">28\" out-swing</text>' +
+      // Visual 1:1 Device Markers — Solid = New Subpanel Circuits
+      // Kitchen (#1–#9)
+      newDot(31.5, 165.25, "SA-C", "#FEF08A", "#92400E") +
+      newDot(31.5, 117.25, "SA-C", "#FEF08A", "#92400E") +
+      newDot(31.5, 141.0,  "HD",   "#FEE2E2", "#DC2626") +
+      newDot(147,  224.25, "SA-A", "#FEF08A", "#92400E") +
+      newDot(147,  189.25, "SA-A", "#FEF08A", "#92400E") +
+      newDot(147,  166.25, "REF",  "#FEF08A", "#92400E") +
+      newDot(123,  234.25, "SA-B", "#FEF08A", "#92400E") +
+      newDot(85,   234.25, "SA-B", "#FEF08A", "#92400E") +
+      newDot(71,   234.25, "DW",   "#DBEAFE", "#1D4ED8") +
+      newDot(141.0,108.0,  "LT",   "#FEF3C7", "#A15206") +
+      // Bathroom (#13) & Laundry (#14)
+      newDot(207,  58,     "BATH", "#DCFCE7", "#15803D") +
+      newDot(279,  60,     "BATH", "#DCFCE7", "#15803D") +
+      newDot(243,  22,     "BATH", "#DCFCE7", "#15803D") +
+      newDot(315.4,52,     "LAUN", "#FFEDD5", "#C2410C") +
+      // Common-Room Outlets (New #10 drops vs. Reused Existing Panel outlets)
+      newDot(265,  88,     "COMMON-R", "#DBEAFE", "#0284C7") +
+      newDot(370,  0,      "COMMON-R", "#DBEAFE", "#0284C7") +
+      newDot(426,  0,      "COMMON-R", "#DBEAFE", "#0284C7") +
+      newDot(415,  136,    "COMMON-R", "#DBEAFE", "#0284C7") +
+      reusedDot(190, 142,  "COMMON-R") +
+      reusedDot(268, 142,  "COMMON-R") +
+      reusedDot(190, 297.75, "COMMON-R") +
+      reusedDot(258, 297.75, "COMMON-R") +
+      reusedDot(340, 142,  "COMMON-R") +
+      reusedDot(432, 142,  "COMMON-R") +
+      reusedDot(345, 297.75, "COMMON-R") +
+      reusedDot(430, 297.75, "COMMON-R") +
+      reusedDot(508, 218,  "COMMON-R") +
+      reusedDot(474, 65,   "COMMON-R") +
+      // Reused Original Ceiling Lights (Stay on Existing Panel — 0 Subpanel Spaces!)
+      reusedDot(228, 190,  "SPARE-12") +
+      reusedDot(402, 190,  "SPARE-12") +
+      reusedDot(414, 42,   "SPARE-12") +
+      reusedDot(185, 102,  "SPARE-12") +
+      reusedDot(315, 102,  "SPARE-12") +
 
-      '<text x="' + ux(297).toFixed(1) + '" y="' + uy(38).toFixed(1) + '" text-anchor="middle" font-size="7.4" font-weight="800" fill="#9A3412">' + esc(t("LAUN", "LAV.", "ПРАЧ.")) + '</text>' +
-      '<text x="' + ux(297).toFixed(1) + '" y="' + uy(51).toFixed(1) + '" text-anchor="middle" font-size="7.2" font-weight="700" fill="#C2410C">#14</text>' +
-      '<text x="' + ux(297).toFixed(1) + '" y="' + uy(63).toFixed(1) + '" text-anchor="middle" font-size="6.5" font-weight="700" fill="#9A3412">38\" E</text>' +
-
-      '<text x="' + ux(412).toFixed(1) + '" y="' + uy(58).toFixed(1) + '" text-anchor="middle" font-size="9.5" font-weight="800" fill="#3730A3">' + esc(t("BEDROOM", "RECÁMARA", "СПАЛЬНЯ")) + '</text>' +
-      '<text x="' + ux(412).toFixed(1) + '" y="' + uy(72).toFixed(1) + '" text-anchor="middle" font-size="7.6" font-weight="700" fill="#4338CA">#10* Plugs (11.5\" horiz.)</text>' +
-      '<text x="' + ux(412).toFixed(1) + '" y="' + uy(84).toFixed(1) + '" text-anchor="middle" font-size="7" font-weight="700" fill="#4338CA">#11 Spare · #12 Reused Lts/Sw</text>' +
-
-      '<text x="' + ux(250).toFixed(1) + '" y="' + uy(118).toFixed(1) + '" text-anchor="middle" font-size="8.0" font-weight="800" fill="#334155">' + esc(t("HALLWAY", "PASILLO", "КОРИДОР")) + ' · #10* H1 · #12 Reused 3-Way Lts/Sw</text>' +
-
-      '<text x="340" y="396" text-anchor="middle" font-size="8.0" font-weight="700" fill="#1E293B">' +
-        esc(t("*#10 Shared Outlets (Reuse + New) · #12 Reuses Original Lights & Switches · 10-Yr Sealed-Battery Smoke/CO (Zero Wired Alarm Pulls)",
-              "*#10 Contactos Compartidos (Reuso+Nuevo) · #12 Reusa Luces y Apagadores Originales · Humo/CO Batería 10 Años (Sin Cablear)",
-              "*#10 Общие розетки (Реус+Нов) · #12 Сохранение света и выключателей · Автономные датчики дыма/CO на 10 лет")) +
+      // Clean Visual Legend Bar at Bottom
+      '<circle cx="96" cy="396" r="4.5" fill="#FEF08A" stroke="#92400E" stroke-width="1.5"/>' +
+      '<text x="106" y="399" font-size="7.8" font-weight="700" fill="#0F2537">' +
+        esc(t("New Subpanel Circuit (#1–#10, #13–#16)", "Circuito Nuevo en Subpanel (#1–#10, #13–#16)", "Новая линия субщитка (#1–#10, #13–#16)")) +
+      '</text>' +
+      '<circle cx="338" cy="396" r="4.5" fill="#FFFFFF" stroke="#475569" stroke-width="1.5" stroke-dasharray="2,1.5"/>' +
+      '<text x="348" y="399" font-size="7.8" font-weight="700" fill="#334155">' +
+        esc(t("Reused on Existing Panel (0 Subpanel Spaces)", "Reusado en Panel Existente (0 Espacios en Subpanel)", "Сохранено на старом щите (0 мест в субщитке)")) +
       '</text>' +
     '</svg>';
   }
 
   function renderKitchenPlanSvg() {
     var S = 2.45;
-    var ox = 110, oy = 46;
+    var ox = 72, oy = 48 - 108 * S;
     function kx(x) { return ox + x * S; }
-    function ky(y) { return oy + (y - 108) * S; }
-    var pts = polyStr(U4_ROOMS.kitchen, kx, ky);
-    var d = off();
-    var cH = fmtIn(state.counterH + d);
+    function ky(y) { return oy + y * S; }
+    var cH = fmtIn(state.counterH + off());
 
-    function isSel(cid) { return state.selectedCircuit === cid; }
-    function bFill(cid, def) { return isSel(cid) ? "#DC2626" : def; }
+    var pts = U4_ROOMS.kitchen.map(function (p) { return kx(p[0]).toFixed(1) + "," + ky(p[1]).toFixed(1); }).join(" ");
+    function bFill(id, def) { return state.selectedCircuit === id ? "#F59E0B" : def; }
 
     return '<svg viewBox="0 0 640 412" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' +
-      esc(t("Kitchen 1:1 Electrical Floor Plan (#1–#9)", "Plano Eléctrico 1:1 de Cocina (#1–#9)", "План электрики кухни 1:1 (#1–#9)")) + '">' +
+      esc(t("True 1:1 Unit 4 Kitchen Electrical Floor Plan", "Plano 1:1 Eléctrico de Cocina", "План электрики кухни 1:1")) + '">' +
       '<rect x="0" y="0" width="640" height="412" fill="#F8FAFC" rx="8"/>' +
       '<text x="320" y="22" text-anchor="middle" font-size="11.2" font-weight="800" fill="#0F2537">' +
         esc(t("KITCHEN 1:1 FLOOR PLAN (#1–#9) · COUNTER OUTLETS @ " + cH + " · TAP ANY BOX",
@@ -347,9 +371,9 @@
 
       '<polygon points="' + pts + '" fill="#FFFFFF" stroke="#0F2537" stroke-width="2.4"/>' +
 
-      '<line x1="' + kx(117.5).toFixed(1) + '" y1="' + ky(108).toFixed(1) + '" x2="' + kx(147).toFixed(1) + '" y2="' + ky(108).toFixed(1) + '" stroke="#FFFFFF" stroke-width="5"/>' +
-      '<line x1="' + kx(117.5).toFixed(1) + '" y1="' + ky(108).toFixed(1) + '" x2="' + kx(147).toFixed(1) + '" y2="' + ky(108).toFixed(1) + '" stroke="#0F2537" stroke-width="1.4" stroke-dasharray="4,3"/>' +
-      '<text x="' + kx(132).toFixed(1) + '" y="' + (ky(108) - 6).toFixed(1) + '" text-anchor="middle" font-size="7.5" font-weight="700" fill="#475569">' + esc(t("HALL 29.5\"", "PASO 29.5\"", "ПРОЁМ 29.5\"")) + '</text>' +
+      '<line x1="' + kx(147).toFixed(1) + '" y1="' + ky(108).toFixed(1) + '" x2="' + kx(147).toFixed(1) + '" y2="' + ky(137.5).toFixed(1) + '" stroke="#FFFFFF" stroke-width="5.5"/>' +
+      '<line x1="' + kx(147).toFixed(1) + '" y1="' + ky(108).toFixed(1) + '" x2="' + kx(147).toFixed(1) + '" y2="' + ky(137.5).toFixed(1) + '" stroke="#15539E" stroke-width="1.5" stroke-dasharray="4,3"/>' +
+      '<text x="' + (kx(147) + 10).toFixed(1) + '" y="' + ky(123.5).toFixed(1) + '" font-size="7.6" font-weight="800" fill="#15539E">' + esc(t("HALL 29-1/2\"", "PASILLO 29-1/2\"", "ПРОЁМ 29-1/2\"")) + '</text>' +
       '<line x1="' + kx(4.75).toFixed(1) + '" y1="' + ky(234.25).toFixed(1) + '" x2="' + kx(30.625).toFixed(1) + '" y2="' + ky(234.25).toFixed(1) + '" stroke="#B45309" stroke-width="3.2" stroke-dasharray="4,2"/>' +
       '<text x="' + kx(17.5).toFixed(1) + '" y="' + (ky(234.25) + 13).toFixed(1) + '" text-anchor="middle" font-size="7.2" font-weight="700" fill="#92400E">' + esc(t("REAR DOOR", "PTA TRAS.", "ЗАДН. ДВ.")) + '</text>' +
       '<line x1="' + kx(88).toFixed(1) + '" y1="' + ky(234.25).toFixed(1) + '" x2="' + kx(121).toFixed(1) + '" y2="' + ky(234.25).toFixed(1) + '" stroke="#D97706" stroke-width="4" stroke-dasharray="5,2"/>' +
@@ -407,31 +431,31 @@
         '<text x="' + kx(62).toFixed(1) + '" y="' + (ky(234.25) + 17).toFixed(1) + '" text-anchor="middle" font-size="7.6" font-weight="800" fill="#1D4ED8">DW+GD 76\" (#5/#6)</text>' +
       '</g>' +
       '<g data-cir="LT" style="cursor:pointer">' +
-        '<rect x="' + (kx(111.5) - 8).toFixed(1) + '" y="' + (ky(108) - 4).toFixed(1) + '" width="16" height="8" rx="2" fill="' + bFill("LT", "#FEE2E2") + '" stroke="#DC2626" stroke-width="1.5"/>' +
-        '<text x="' + kx(92).toFixed(1) + '" y="' + (ky(108) - 8).toFixed(1) + '" text-anchor="middle" font-size="7.6" font-weight="800" fill="#991B1B">3-SW 35.5\" (#9)</text>' +
+        '<rect x="' + (kx(141) - 8).toFixed(1) + '" y="' + (ky(108) - 4).toFixed(1) + '" width="16" height="8" rx="2" fill="' + bFill("LT", "#FEE2E2") + '" stroke="#DC2626" stroke-width="1.5"/>' +
+        '<text x="' + kx(136).toFixed(1) + '" y="' + (ky(108) - 8).toFixed(1) + '" text-anchor="end" font-size="7.6" font-weight="800" fill="#991B1B">3-SW 6\" W (#9)</text>' +
         '<circle cx="' + kx(89).toFixed(1) + '" cy="' + ky(159).toFixed(1) + '" r="8" fill="#FEF3C7" stroke="#A15206" stroke-width="1.6"/>' +
         '<text x="' + kx(89).toFixed(1) + '" y="' + (ky(159) + 3).toFixed(1) + '" text-anchor="middle" font-size="7" font-weight="800" fill="#92400E">L1</text>' +
         '<circle cx="' + kx(72).toFixed(1) + '" cy="' + ky(201).toFixed(1) + '" r="5.5" fill="#FEF3C7" stroke="#A15206" stroke-width="1.4"/>' +
         '<circle cx="' + kx(48).toFixed(1) + '" cy="' + ky(201).toFixed(1) + '" r="5.5" fill="#FEF3C7" stroke="#A15206" stroke-width="1.4"/>' +
       '</g>' +
 
-      '<text x="320" y="396" text-anchor="middle" font-size="8" font-weight="700" fill="#1E293B">' +
-        esc(t("SE = 0\" · Sealed Pie-Safe (26\"–59\" W, dashed amber) · Under-Sink 2-Gang @ 14\" AFF (2 separate yokes) · ZERO back-entries in Panel zone (53\"–77\" AFF)",
-              "SE = 0\" · Pie-Safe sellado (26\"–59\" O) · Caja Doble Fregadero @ 14\" AFF (2 yugos separados) · CERO tornillos tras Panel (53\"–77\" AFF)",
-              "ЮВ = 0\" · Зашитая ниша (26\"–59\" З) · Коробка под мойкой @ 14\" (2 суппорта) · Ноль саморезов за щитком (53\"–77\")")) +
+      '<text x="320" y="396" text-anchor="middle" font-size="8.0" font-weight="700" fill="#475569">' +
+        esc(t("*Verify South window CL (87\" vs 90\" W) before fastening S2 & DW/GD · Zero screws 53\"–77\" AFF behind Panel",
+              "*Verificar eje ventana Sur (87\" vs 90\" O) antes de fijar S2 y DW/GD · Cero tornillos 53\"–77\" AFF tras Panel",
+              "*Сверить ось южного окна (87\" и 90\" З) до крепежа S2 и DW/GD · Без саморезов 53\"–77\" за щитком")) +
       '</text>' +
     '</svg>';
   }
 
-  function renderAtticCeilingMapSvg() {
+  function renderAtticMapSvg() {
     var S = 1.12;
-    var ox = 56, oy = 42;
+    var ox = 56, oy = 40;
     function ax(x) { return ox + x * S; }
     function ay(y) { return oy + y * S; }
-
-    var flt = state.atticFilter || "all";
-    var swOpt = state.atticSwitchOpt || "optA";
+    var flt = state.atticFilter;
+    var swOpt = state.atticSwitchOpt;
     var all = flt === "all";
+
     var opKit = (all || flt === "kitchen") ? "1" : "0.16";
     var opAtt = (all || flt === "attic") ? "1" : "0.16";
     var opBth = (all || flt === "bath") ? "1" : "0.16";
@@ -447,9 +471,9 @@
       esc(t("True 1:1 Unit 4 Attic & Ceiling Romex Map", "Mapa 1:1 de Ático y Techo Unidad 4", "План чердака и потолочных трасс 1:1")) + '">' +
       '<rect x="0" y="0" width="680" height="416" fill="#F8FAFC" rx="8"/>' +
       '<text x="340" y="22" text-anchor="middle" font-size="11.0" font-weight="800" fill="#0F2537">' +
-        esc(t("TRUE 1:1 ATTIC & CEILING MAP (508\" × 298\" · NORTH UP · MATCHES PLAN 1 ATTIC HATCH)",
-              "MAPA 1:1 ÁTICO Y TECHO (508\" × 298\" · NORTE ARRIBA · IGUAL A PLANO 1 ESCOTILLA)",
-              "ПЛАН ЧЕРДАКА 1:1 (508\" × 298\" · СЕВЕР ВВЕРХ · СОВПАДАЕТ С ПЛАНОМ 1 ЛЮКА)")) +
+        esc(t("ATTIC & CEILING HOMERUNS (1:1 SCALE · NEW SUBPANEL RUNS ONLY)",
+              "RUTAS EN ÁTICO Y TECHO (ESCALA 1:1 · SOLO CIRCUITOS NUEVOS DEL SUBPANEL)",
+              "ЧЕРДАЧНЫЕ ТРАССЫ (МАСШТАБ 1:1 · ТОЛЬКО НОВЫЕ ЛИНИИ СУБЩИТКА)")) +
       '</text>' +
       svgCompass(646, 46) +
 
@@ -460,40 +484,40 @@
       '<polygon points="' + polyStr(U4_ROOMS.hall, ax, ay) + '" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.3"/>' +
       '<polygon points="' + polyStr(U4_ROOMS.bath, ax, ay) + '" fill="#F0FDF4" stroke="#94A3B8" stroke-width="1.3"/>' +
       '<polygon points="' + polyStr(U4_ROOMS.laundry, ax, ay) + '" fill="#FFF7ED" stroke="#94A3B8" stroke-width="1.3"/>' +
-      '<polygon points="' + polyStr(U4_ROOMS.tempCloset, ax, ay) + '" fill="#FDF6E7" stroke="#9A5B06" stroke-width="1.5" stroke-dasharray="4,2"/>' +
+      '<polygon points="' + polyStr(U4_ROOMS.tempCloset, ax, ay) + '" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.3" stroke-dasharray="4,2"/>' +
       '<polygon points="' + polyStr(U4_ROOMS.bedroom, ax, ay) + '" fill="#EEF2FF" stroke="#94A3B8" stroke-width="1.3"/>' +
+      '<line x1="' + ax(147).toFixed(1) + '" y1="' + ay(108.5).toFixed(1) + '" x2="' + ax(147).toFixed(1) + '" y2="' + ay(137.5).toFixed(1) + '" stroke="#F8FAFC" stroke-width="3.6"/>' +
 
-      '<text x="' + ax(84).toFixed(1) + '" y="' + ay(222).toFixed(1) + '" text-anchor="middle" font-size="7.6" font-weight="700" fill="#92400E">' + esc(t("KITCHEN (#1–#9)", "COCINA (#1–#9)", "КУХНЯ (#1–#9)")) + '</text>' +
-      '<text x="' + ax(242).toFixed(1) + '" y="' + ay(286).toFixed(1) + '" text-anchor="middle" font-size="7.6" font-weight="700" fill="#475569">' + esc(t("DINING (#10 Plugs · #12 Reused Lts)", "COMEDOR (#10 · #12 Reusado)", "СТОЛОВАЯ (#10 · #12 реус.)")) + '</text>' +
-      '<text x="' + ax(400).toFixed(1) + '" y="' + ay(286).toFixed(1) + '" text-anchor="middle" font-size="7.6" font-weight="700" fill="#475569">' + esc(t("LIVING (#10 Plugs · #12 Reused Lts)", "SALA (#10 · #12 Reusado)", "ГОСТИНАЯ (#10 · #12 реус.)")) + '</text>' +
-      '<text x="' + ax(243).toFixed(1) + '" y="' + ay(20).toFixed(1) + '" text-anchor="middle" font-size="7.2" font-weight="700" fill="#166534">' + esc(t("BATH (#13)", "BAÑO (#13)", "ВАННАЯ (#13)")) + '</text>' +
-      '<text x="' + ax(297).toFixed(1) + '" y="' + ay(20).toFixed(1) + '" text-anchor="middle" font-size="6.8" font-weight="700" fill="#9A3412">' + esc(t("LAUN (#14)", "LAV (#14)", "ПРАЧ (#14)")) + '</text>' +
-      '<text x="' + ax(333.7).toFixed(1) + '" y="' + ay(46).toFixed(1) + '" text-anchor="middle" font-size="6.2" font-weight="800" fill="#9A5B06">' + esc(t("Temp Closet", "Clóset Temp", "Шкаф (откр.)")) + '</text>' +
-      '<text x="' + ax(412).toFixed(1) + '" y="' + ay(20).toFixed(1) + '" text-anchor="middle" font-size="7.6" font-weight="700" fill="#3730A3">' + esc(t("BEDROOM (#10 · #12 Reused Lts)", "RECÁMARA (#10 · #12 Reusado)", "СПАЛЬНЯ (#10 · #12 реус.)")) + '</text>' +
+      // Clean Room Names ONLY (zero sublabel soup!)
+      '<text x="' + ax(84).toFixed(1) + '" y="' + ay(222).toFixed(1) + '" text-anchor="middle" font-size="7.8" font-weight="800" fill="#92400E">' + esc(t("KITCHEN", "COCINA", "КУХНЯ")) + '</text>' +
+      '<text x="' + ax(242).toFixed(1) + '" y="' + ay(286).toFixed(1) + '" text-anchor="middle" font-size="7.8" font-weight="800" fill="#475569">' + esc(t("DINING ROOM", "COMEDOR", "СТОЛОВАЯ")) + '</text>' +
+      '<text x="' + ax(402).toFixed(1) + '" y="' + ay(286).toFixed(1) + '" text-anchor="middle" font-size="7.8" font-weight="800" fill="#475569">' + esc(t("LIVING ROOM", "SALA", "ГОСТИНАЯ")) + '</text>' +
+      '<text x="' + ax(243).toFixed(1) + '" y="' + ay(20).toFixed(1) + '" text-anchor="middle" font-size="7.4" font-weight="800" fill="#166534">' + esc(t("BATHROOM", "BAÑO", "ВАННАЯ")) + '</text>' +
+      '<text x="' + ax(297.2).toFixed(1) + '" y="' + ay(20).toFixed(1) + '" text-anchor="middle" font-size="6.8" font-weight="800" fill="#9A3412">' + esc(t("LAUNDRY", "LAV.", "ПРАЧ.")) + '</text>' +
+      '<text x="' + ax(414).toFixed(1) + '" y="' + ay(20).toFixed(1) + '" text-anchor="middle" font-size="7.8" font-weight="800" fill="#3730A3">' + esc(t("BEDROOM", "RECÁMARA", "СПАЛЬНЯ")) + '</text>' +
 
       // 72" Hatch Guard-Strip Zone around 24"x36" Attic Hatch
       '<rect x="' + ax(28).toFixed(1) + '" y="' + ay(2).toFixed(1) + '" width="' + (168 * S).toFixed(1) + '" height="' + (162 * S).toFixed(1) + '" fill="none" stroke="#DC2626" stroke-width="1.2" stroke-dasharray="5,3"/>' +
       '<text x="' + ax(112).toFixed(1) + '" y="' + ay(15).toFixed(1) + '" text-anchor="middle" font-size="7.2" font-weight="800" fill="#991B1B">NEC 320.23(A): 72" HATCH GUARD ZONE</text>' +
 
-      // 24" OSB Walkway + 30"x30" Platform + F1 Furnace (exact match to Plan 1!)
+      // 24" OSB Walkway + 30"x30" Platform + F1 Furnace (exact match to Plan 1)
       '<polyline points="' + ax(124).toFixed(1) + ',' + ay(74).toFixed(1) + ' ' + ax(174).toFixed(1) + ',' + ay(74).toFixed(1) + ' ' + ax(174).toFixed(1) + ',' + ay(213.5).toFixed(1) + '" fill="none" stroke="#D9A86C" stroke-width="' + (24 * S).toFixed(1) + '" opacity="0.55"/>' +
       '<rect x="' + ax(159).toFixed(1) + '" y="' + ay(213.5).toFixed(1) + '" width="' + (30 * S).toFixed(1) + '" height="' + (30 * S).toFixed(1) + '" fill="#E4F0E6" stroke="#2F6B3F" stroke-width="1.6"/>' +
       '<rect x="' + ax(157.4).toFixed(1) + '" y="' + ay(243.5).toFixed(1) + '" width="' + (33.25 * S).toFixed(1) + '" height="' + (29 * S).toFixed(1) + '" rx="3" fill="#1E293B" stroke="#0F172A"/>' +
-      '<text x="' + ax(174).toFixed(1) + '" y="' + ay(261).toFixed(1) + '" text-anchor="middle" font-size="7.6" font-weight="800" fill="#FFFFFF">FURNACE #15</text>' +
+      '<text x="' + ax(174).toFixed(1) + '" y="' + ay(261).toFixed(1) + '" text-anchor="middle" font-size="7.4" font-weight="800" fill="#FFFFFF">FURNACE #15</text>' +
 
-      // 24"x36" Attic Hatch outside Door 4 (clearly labeled "HATCH 24x36", NEVER "D4/D04"!)
-      '<rect x="' + ax(100).toFixed(1) + '" y="' + ay(56).toFixed(1) + '" width="' + (24 * S).toFixed(1) + '" height="' + (36 * S).toFixed(1) + '" rx="2.5" fill="#E3EEF2" stroke="#1F5F7A" stroke-width="2.2"/>' +
-      '<text x="' + ax(112).toFixed(1) + '" y="' + ay(72).toFixed(1) + '" text-anchor="middle" font-size="6.4" font-weight="800" fill="#1F5F7A">HATCH</text>' +
-      '<text x="' + ax(112).toFixed(1) + '" y="' + ay(81).toFixed(1) + '" text-anchor="middle" font-size="5.8" font-weight="700" fill="#1F5F7A">24"×36"</text>' +
+      // 24"x36" Attic Hatch outside Door 4
+      '<rect x="' + ax(100).toFixed(1) + '" y="' + ay(56).toFixed(1) + '" width="' + (24 * S).toFixed(1) + '" height="' + (36 * S).toFixed(1) + '" rx="2.5" fill="#E3EEF2" stroke="#1F5F7A" stroke-width="2.0"/>' +
+      '<text x="' + ax(112).toFixed(1) + '" y="' + ay(76).toFixed(1) + '" text-anchor="middle" font-size="6.4" font-weight="800" fill="#1F5F7A">HATCH</text>' +
 
-      // Panel Top Riser @ X=147, Y=213.75
+      // Subpanel Top Riser @ X=147, Y=213.75
       '<rect x="' + (ax(147) - 5).toFixed(1) + '" y="' + (ay(213.75) - 7).toFixed(1) + '" width="10" height="14" fill="#DC2626"/>' +
       '<text x="' + (ax(147) - 9).toFixed(1) + '" y="' + (ay(213.75) + 3).toFixed(1) + '" text-anchor="end" font-size="7.4" font-weight="800" fill="#991B1B">PANEL</text>' +
 
       // 1. Kitchen Attic Homeruns (#3, #7, #8, #9)
       '<g opacity="' + opKit + '">' +
         '<polyline points="' + ax(147).toFixed(1) + ',' + ay(213.75).toFixed(1) + ' ' + ax(65).toFixed(1) + ',' + ay(141).toFixed(1) + ' ' + ax(31.5).toFixed(1) + ',' + ay(141).toFixed(1) + '" fill="none" stroke="#D97706" stroke-width="2.4"/>' +
-        '<polyline points="' + ax(147).toFixed(1) + ',' + ay(213.75).toFixed(1) + ' ' + ax(111.5).toFixed(1) + ',' + ay(108).toFixed(1) + '" fill="none" stroke="#2563EB" stroke-width="2"/>' +
+        '<polyline points="' + ax(147).toFixed(1) + ',' + ay(213.75).toFixed(1) + ' ' + ax(141).toFixed(1) + ',' + ay(108).toFixed(1) + '" fill="none" stroke="#2563EB" stroke-width="2"/>' +
       '</g>' +
 
       // 2. Attic Furnace (#15) & Attic Service GFCI + Hatch LEDs (#16 — ZERO wired smoke alarms!)
@@ -516,188 +540,118 @@
         '<text x="' + ax(243).toFixed(1) + '" y="' + (ay(68) - 10).toFixed(1) + '" text-anchor="middle" font-size="6.8" font-weight="800" fill="#166534">Bath JB #13</text>' +
       '</g>' +
 
-      // 4. Shared #10 Outlets (Reuse Existing + New Bedroom/Hall Tie-In; #12 Original Lights/Switches Reused in Place!)
+      // 4. New Common-Room Outlet Drops (#10 — Reused Outlets & Lights Stay on Existing Panel!)
       '<g opacity="' + opCom + '">' +
-        '<polyline points="' + ax(147).toFixed(1) + ',' + ay(213.75).toFixed(1) + ' ' + ax(255).toFixed(1) + ',' + ay(202).toFixed(1) + ' ' + ax(395).toFixed(1) + ',' + ay(68).toFixed(1) + '" fill="none" stroke="#CA8A04" stroke-width="2.2" stroke-dasharray="6,3"/>' +
-        '<rect x="' + (ax(255) - 6).toFixed(1) + '" y="' + (ay(202) - 6).toFixed(1) + '" width="12" height="12" fill="#FEF08A" stroke="#713F12" stroke-width="1.8"/>' +
-        '<text x="' + ax(255).toFixed(1) + '" y="' + (ay(202) + 16).toFixed(1) + '" text-anchor="middle" font-size="6.8" font-weight="800" fill="#713F12">#10 Tie-In (Split #17)</text>' +
-        '<rect x="' + (ax(395) - 6).toFixed(1) + '" y="' + (ay(68) - 6).toFixed(1) + '" width="12" height="12" fill="#FEF08A" stroke="#713F12" stroke-width="1.8"/>' +
-        '<text x="' + ax(395).toFixed(1) + '" y="' + (ay(68) + 16).toFixed(1) + '" text-anchor="middle" font-size="6.8" font-weight="800" fill="#713F12">#10 Bed/Hall JB (Split #11)</text>' +
+        '<polyline points="' + ax(147).toFixed(1) + ',' + ay(213.75).toFixed(1) + ' ' + ax(265).toFixed(1) + ',' + ay(108).toFixed(1) + ' ' + ax(395).toFixed(1) + ',' + ay(68).toFixed(1) + '" fill="none" stroke="#0284C7" stroke-width="2.2" stroke-dasharray="6,3"/>' +
+        '<rect x="' + (ax(395) - 6).toFixed(1) + '" y="' + (ay(68) - 6).toFixed(1) + '" width="12" height="12" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.8"/>' +
+        '<text x="' + ax(395).toFixed(1) + '" y="' + (ay(68) - 10).toFixed(1) + '" text-anchor="middle" font-size="6.8" font-weight="800" fill="#075985">New Outlets JB #10</text>' +
       '</g>' +
 
-      '<text x="340" y="399" text-anchor="middle" font-size="7.6" font-weight="700" fill="#1E293B">' +
-        esc(t("#12 Original Lights/Switches Reused in Place · Zero Wired Smoke Alarm Runs (10-Yr Sealed Battery) · 72\" Hatch Guard Strips",
-              "#12 Luces y Apagadores Originales Reusados en Sitio · Cero Detectores Cableados (Batería 10 Años) · Listones 72\" en Escotilla",
-              "#12 Оригинальный свет и выключатели сохраняются · Без проводных датчиков дыма (батарея 10 лет) · Планки 72\" у люка")) +
+      '<text x="340" y="398" text-anchor="middle" font-size="7.8" font-weight="700" fill="#334155">' +
+        esc(t("Reused room lights/switches & reused outlets stay on Existing Panel (0 attic runs to this subpanel) · 72\" hatch guard strips",
+              "Luces/apagadores y contactos reusados quedan en su Panel Existente (0 rutas nuevas aquí) · Listones de guardia a 72\" en escotilla",
+              "Сохраняемый свет/выключатели и розетки остаются на старом щите (0 новых трасс к субщитку) · Защитные планки 72\" у люка")) +
       '</text>' +
     '</svg>';
   }
 
   function renderWallDetail() {
-    var d = off();
-    var cH = fmtIn(state.counterH + d);
-    var hdLow = fmtIn(83 + d);
-    var hdHigh = fmtIn(86 + d);
-    var panLow = fmtIn(53 + d);
-    var panHigh = fmtIn(77 + d);
+    var cH = fmtIn(state.counterH + off());
+    var w = state.wallTab;
+    var cards = {
+      east: {
+        title: t("Kitchen East Wall (126-1/4\") — Counter #1, Fridge #4 & Panel Back Zone", "Muro Este Cocina (126-1/4\") — Cubierta #1, Refri #4 y Reverso Panel", "Восточная стена кухни (126-1/4\") — фартук #1, холодильник #4 и тыл щитка"),
+        photo: "../../wiki-images/2026-11-19_U4_kitchen_east-wall-fridge-bay.jpg",
+        bullets: [
+          t("East 1 @ 10\" N & East 2 @ 45\" N of SE at " + cH + " (#1 · 20A BRN120DF · 12/2 in 50\" bore band); 29-1/2\" × 79\" Hallway cased opening sits at 96-1/2\"–126\" N (NE corner).", "Este 1 @ 10\" N y Este 2 @ 45\" N de SE a " + cH + " (#1 · 20A BRN120DF · 12/2); vano al Pasillo de 29-1/2\" × 79\" en 96-1/2\"–126\" N (esquina NE).", "East 1 @ 10\" С и East 2 @ 45\" С на " + cH + " (#1 · 20A BRN120DF · 12/2); проём в коридор 29-1/2\" × 79\" на 96-1/2\"–126\" С (угол СВ)."),
+          t("Haier 28\" Fridge single 20A TR @ 68\" N of SE, " + fmtIn(15 + off()) + " (#4 · 12/2 in 52-1/2\" bore band).", "Refrigerador Haier 28\" toma sencilla 20A TR @ 68\" N, " + fmtIn(15 + off()) + " (#4 · 12/2).", "Холодильник Haier 28\" одиночная 20A TR @ 68\" С, " + fmtIn(15 + off()) + " (#4 · 12/2)."),
+          t("RED ZONE (13\"–27-1/2\" N, 53\"–77\" AFF): ZERO screws, boxes, or back-entries behind the Dining Subpanel.", "ZONA ROJA (13\"–27-1/2\" N, 53\"–77\" AFF): CERO tornillos, cajas ni entradas traseras detrás del Subpanel.", "КРАСНАЯ ЗОНА (13\"–27-1/2\" С, 53\"–77\"): БЕЗ саморезов, коробок и ввода сзади за субщитком.")
+        ]
+      },
+      south: {
+        title: t("Kitchen South Sink Wall (147\") — Counter #2 & Under-Sink 2-Gang (#5/#6)", "Muro Sur Tarja (147\") — Cubierta #2 y Caja Doble Bajo Tarja (#5/#6)", "Южная стена мойки (147\") — фартук #2 и двойная коробка (#5/#6)"),
+        photo: "../../wiki-images/2026-11-21_U4_kitchen_sink-wall-wide.jpg",
+        bullets: [
+          t("South 1 @ 24\" W & South 2 @ 62\" W* of SE at " + cH + " (#2 · 20A BRN120DF · 12/2; Pie-Safe sealed & flush).", "Sur 1 @ 24\" O y Sur 2 @ 62\" O* de SE a " + cH + " (#2 · 20A BRN120DF · 12/2; Pie-Safe sellado al paño).", "South 1 @ 24\" З и South 2 @ 62\" З* на " + cH + " (#2 · 20A BRN120DF · 12/2)."),
+          t("Under-Sink 2-Gang @ 76\" W*, " + fmtIn(14 + off()) + ": TWO separate TR receptacles on separate yokes — LEFT = #5 24\" Finished-Front DW (20A · 12/2), RIGHT = #6 Disposal (15A · 14/2 + Air Button @ 90\"*).", "Caja Doble Bajo Tarja @ 76\" O*, " + fmtIn(14 + off()) + ": DOS receptáculos TR separados — IZQ. = #5 Lavavajillas 24\" frente terminado (20A · 12/2), DER. = #6 Triturador (15A · 14/2 + Botón Aire @ 90\"*).", "Двойная коробка @ 76\" З*, " + fmtIn(14 + off()) + ": ЛЕВЫЙ = #5 посудомойка 24\" (20A · 12/2), ПРАВЫЙ = #6 измельчитель (15A · 14/2)."),
+          t("*HOLD: Verify South window CL (87\" vs. 90\" W of SE) before fastening South 2 & Under-Sink 2-Gang.", "*PAUSA: Verificar eje de ventana Sur (87\" vs. 90\" O de SE) antes de fijar Sur 2 y Caja Doble.", "*ПАУЗА: Сверить ось южного окна (87\" или 90\" З от ЮВ) до крепежа коробок.")
+        ]
+      },
+      west: {
+        title: t("Kitchen West Range Wall (66-1/4\" @ X = 31.5\") — #3, Range #7 & Hood #8", "Muro Oeste Estufa (66-1/4\" @ X = 31.5\") — #3, Estufa #7 y Campana #8", "Западная стена плиты (66-1/4\" @ X = 31.5\") — #3, плита #7 и вытяжка #8"),
+        photo: "../../wiki-images/2026-11-19_U4_kitchen_west-wall-hood-duct.jpg",
+        bullets: [
+          t("West 1 @ 9\" N & West 2 @ 57\" N of Step at " + cH + " (#3 · 20A 12/2 · ~1\" tile mud rings; 1/2\" drywall + 1/2\" HardieBacker, zero shims).", "Oeste 1 @ 9\" N y Oeste 2 @ 57\" N a " + cH + " (#3 · 20A 12/2 · aros ~1\"; tablaroca 1/2\" + HardieBacker 1/2\", sin calzas).", "West 1 @ 9\" С и West 2 @ 57\" С на " + cH + " (#3 · 20A 12/2 · выступ ~1\" под плитку)."),
+          t("Viking 30\" Gas Range (#7 · 15A 14/2) @ 33\" N, " + fmtIn(3 + off()) + " low rear pocket beside <=2\" gas shutoff.", "Estufa Viking 30\" (#7 · 15A 14/2) @ 33\" N, " + fmtIn(3 + off()) + " junto a llave de gas <=2\".", "Плита Viking 30\" (#7 · 15A 14/2) @ 33\" С, " + fmtIn(3 + off()) + " рядом с газовым краном <=2\"."),
+          t("Zephyr Hood (#8 · 15A AFCI + BRLW1 · 14/2): Flush 1-gang 2\"×3\" set ~1\" proud @ 33\"±2.25\" N, " + fmtIn(83 + off()) + "–" + fmtIn(86 + off()) + " inside 8-5/8\" shroud (replaces retired 4×4 @ 100\").", "Campana Zephyr (#8 · 15A AFCI + BRLW1 · 14/2): Caja 1-gang 2\"×3\" ~1\" salida @ 33\"±2.25\" N, " + fmtIn(83 + off()) + "–" + fmtIn(86 + off()) + " dentro de chimenea 8-5/8\".", "Вытяжка Zephyr (#8 · 15A AFCI + BRLW1 · 14/2): коробка 2\"×3\" @ 33\"±2.25\" С, " + fmtIn(83 + off()) + "–" + fmtIn(86 + off()) + ".")
+        ]
+      },
+      north: {
+        title: t("Kitchen North Entry Wall (115-1/2\") — 3-Switch #9 & Trim Protection", "Muro Norte Entrada (115-1/2\") — 3-Apagadores #9 y Molduras", "Северная стена входа (115-1/2\") — выключатели #9 и молдинги"),
+        photo: "",
+        bullets: [
+          t("Entry 3-Switch @ 6\" W of NE corner at " + fmtIn(48 + off()) + " (#9 · 15A BRN115AF · 14/2 — immediately on your right entering from the 29-1/2\" East-wall Hallway opening) controlling Ceiling Light, Sink Pendants (75\"/99\" W), and Under-Cabinet LEDs.", "3-Apagadores @ 6\" O de la esquina NE a " + fmtIn(48 + off()) + " (#9 · 15A BRN115AF · 14/2 — justo a la derecha al entrar por el vano Este de 29-1/2\" desde el Pasillo) para Luz Central, Colgantes (75\"/99\" O) y LEDs Bajo Gabinete.", "Тройной выключатель @ 6\" З от угла СВ на " + fmtIn(48 + off()) + " (#9 · 15A BRN115AF · 14/2 — сразу справа при входе из коридора через восточный проём 29-1/2\")."),
+          t("Protect intact 9-1/2\" baseboard and 103\" high picture rail.", "Proteger zoclo original de 9-1/2\" y riel superior de 103\".", "Сохранить оригинальный плинтус 9-1/2\" и верхний карниз 103\".")
+        ]
+      },
+      dining: {
+        title: t("Dining Room — 20-Space Subpanel, Reused Lights & Outlets (#10 New Only)", "Comedor — Subpanel de 20 Espacios, Luces Reusadas y Contactos", "Столовая — 20-местный субщиток, родной свет и розетки"),
+        photo: "",
+        bullets: [
+          t("Subpanel Eaton BRP20L125G (125A main-lug, 20 spaces) @ X=147\", Y=213.75\" opens East into Dining: keep 30\"W × 36\"D × 78\"H clear (SFEC 110.26(A)(3)) and put ZERO outlets on the Panel wall.", "Subpanel Eaton BRP20L125G (20 espacios) @ X=147\", Y=213.75\" abre al Este al Comedor: mantener 30\"×36\"×78\" libres y CERO contactos en el muro del Panel.", "Субщиток Eaton BRP20L125G (20 мест) открывается в столовую: свободная зона 30\"×36\"×78\", БЕЗ розеток на стене щитка."),
+          t("Reused existing Dining outlets & original Dining ceiling light/switch stay on the Existing Panel (taking 0 spaces on this subpanel). Only newly added 12/2 outlet drops land on #10; zero boxes inside ~33\" D03 pocket-door cavities.", "Los contactos existentes reusados y la luz/apagador originales del Comedor quedan en el Panel Existente (0 espacios en este subpanel). Solo contactos nuevos 12/2 van a #10; cero cajas en cavidades ~33\" de puertas corredizas.", "Сохраняемые розетки и родной свет/выключатель столовой остаются на существующем щите (0 мест в субщитке). Только новые линии 12/2 идут на #10.")
+        ]
+      },
+      bathroom: {
+        title: t("Bathroom (72-1/8\" × 82-1/8\") — All-in-One #13 (100% 12/2) & Outward Door", "Baño (72-1/8\" × 82-1/8\") — Todo-en-Uno #13 (100% 12/2) y Puerta Abatible", "Ванная (72-1/8\" × 82-1/8\") — линия #13 (100% 12/2) и распашная дверь"),
+        photo: "",
+        bullets: [
+          t("Pocket door permanently RETIRED (Nov 24): standard hinged 28\" × 1-3/8\" door swings outward into hallway; South stud wall permits active Bath Switches.", "Puerta corrediza RETIRADA definitivamente (24 nov): puerta abatible 28\" × 1-3/8\" abre hacia el pasillo; muro Sur de postes permite apagadores.", "Кассетная дверь отменена (24 нояб.): распашная дверь 28\" наружу в коридор; выключатели на южной каркасной стене."),
+          t("ALL branches from Bath J-Box (#13 · 20A BRN120DF) MUST be 12/2 Yellow (Vanity GFCI 40\"–44\", Vanity Light, Damp/Wet Bath Light, Humidity Fan, plus a SEPARATE pre-tile 12/2 Toilet drop @ 12\" AFF for future #19 bidet split).", "TODOS los ramales desde Caja Baño (#13 · 20A BRN120DF) DEBEN ser 12/2 Amarillo (incluyendo bajada 12/2 SEPARADA pre-azulejo al Inodoro a 12\" AFF para futuro bidet en #19).", "ВСЕ ответвления от Bath J-Box (#13 · 20A BRN120DF) — строго 12/2 (включая отдельный спуск 12/2 к унитазу 12\" до укладки плитки под резерв #19).")
+        ]
+      },
+      laundry: {
+        title: t("Laundry Closet — East Wall Duplex #14 @ 38\" AFF (LG WashTower)", "Clóset Lavandería — Toma Doble #14 Muro Este @ 38\" AFF (LG WashTower)", "Прачечная — двойная розетка #14 на восточной стене @ 38\""),
+        photo: "",
+        bullets: [
+          t("Single 20A TR duplex (#14 · 12/2 · BRN120DF reset at Subpanel) on East/Right wall at " + fmtIn(38 + off()) + " feeds both 120V plugs of LG WKG101HVA gas WashTower, clearing the 8-1/4\" Murphy bookcase door.", "1 toma doble 20A TR (#14 · 12/2 · reset GFCI en Subpanel) en muro Este a " + fmtIn(38 + off()) + " recibe ambos cables 120V del LG WKG101HVA, librando las 8-1/4\" de la puerta Murphy.", "Одна двойная розетка 20A TR (#14 · 12/2 · сброс GFCI в субщитке) на восточной стене @ " + fmtIn(38 + off()) + " для обеих вилок 120V LG WKG101HVA."),
+          t("Closet light stays off #14 (reuses existing light if present, or taps #16 15A utility lighting right above — 0 extra subpanel spaces).", "La luz del clóset nunca va en #14 (reusa luz existente o toma #16 15A de utilidad arriba — 0 espacios extra en subpanel).", "Свет прачечной не подключается к #14 (сохраняется существующий или запитывается от сервисной линии #16 сверху — 0 лишних мест в субщитке).")
+        ]
+      },
+      bedroom: {
+        title: t("Bedroom — Dark Horizontal Outlets, Reused Light & Open Temp Closet", "Recámara — Placas Horizontales Oscuras, Luz Reusada y Clóset Temporal", "Спальня — тёмные гориз. розетки, родной свет и временный люк шкафа"),
+        photo: "",
+        bullets: [
+          t("Bed 1–5 outlets at " + fmtIn(11.5 + off()) + " (dark horizontal plates clearing 9-1/2\" baseboard & 13-1/2\" lower trim frames): reused outlets stay on Existing Panel (0 subpanel spaces); newly added 12/2 drops land on #10 (split-ready to Spare #11).", "Contactos Rec 1–5 a " + fmtIn(11.5 + off()) + " (placas horizontales oscuras): los reusados quedan en el Panel Existente (0 espacios en subpanel); bajadas nuevas 12/2 van a #10 (divisible a Reserva #11).", "Розетки спальни 1–5 на " + fmtIn(11.5 + off()) + " (тёмные горизонтальные рамки): сохраняемые остаются на старом щите, новые линии 12/2 — на #10."),
+          t("Original Bedroom ceiling light & entry switch stay on Existing Panel (0 subpanel spaces). Keep NW Temp Closet ceiling OPEN until LV switch wire reaches attic, Door 4 hatch is framed, and furnace passage clears.", "La luz y apagador originales quedan en su Panel Existente (0 espacios). Mantener ABIERTO el techo del Clóset Temporal hasta pasar cable BV, enmarcar escotilla Puerta 4 y librar paso del calefactor.", "Родной свет и выключатель остаются на существующем щите. Потолок временного шкафа не зашивать до вывода слаботочки и монтажа люка у двери 4.")
+        ]
+      },
+      living: {
+        title: t("Living Room & Hallway — Reused Switches/Lights & Pocket-Door Hold", "Sala y Pasillo — Apagadores/Luces Reusados y Pausa Puertas Corredizas", "Гостиная и коридор — сохранение родного света/выключателей"),
+        photo: "",
+        bullets: [
+          t("Original switches, 3-way hallway travelers, and ceiling lights stay intact on Existing Panel (0 subpanel spaces). Smoke & CO alarms use listed 10-year sealed-battery units (zero ceiling 14/3 pulls).", "Los apagadores originales, 3-vías del pasillo y luces de techo permanecen intactos en el Panel Existente (0 espacios en subpanel). Detectores Humo/CO de batería sellada 10 años (cero cableado 14/3).", "Родные выключатели, проходные переключатели коридора и люстры остаются на существующем щите (0 мест в субщитке). Датчики дыма/CO автономные на 10 лет."),
+          t("Reused Living receptacles stay on Existing Panel; newly added 12/2 outlets (such as Hall H1 @ " + fmtIn(18 + off()) + " between Bath & Murphy doors) land on #10. ZERO boxes inside ~33\" L02 pocket-door cavities.", "Contactos reusados de Sala quedan en el Panel Existente; tomas nuevas 12/2 (como Pasillo H1 @ " + fmtIn(18 + off()) + ") van a #10. CERO cajas en cavidades ~33\" de puertas corredizas L02.", "Сохраняемые розетки гостиной остаются на старом щите; новые точки 12/2 (включая H1 в коридоре) — на #10. Без коробок в кассетах дверей ~33\".")
+        ]
+      }
+    };
 
-    if (state.wallTab === "east") {
-      return '<div class="u4h-info-box" style="border-left-color:var(--crimson)">' +
-        '<div class="u4h-info-title" style="color:var(--crimson)">' + esc(t("Kitchen East Wall (126-1/4\") — Fridge & Panel Back No-Screw Zone", "Muro Este Cocina (126-1/4\") — Refri y Respaldo Panel", "Восточная стена кухни (126-1/4\") — Холодильник и тыл щитка")) + '</div>' +
-        '<ul class="u4h-info-list">' +
-          '<li><strong>' + esc(t("PANEL NO-SCREW / NO-BOX ZONE (13\"–27-1/2\" N of SE):", "ZONA PROHIBIDA PANEL (13\"–27-1/2\" N de SE):", "ЗАПРЕТНАЯ ЗОНА ЩИТКА (13\"–27-1/2\" С от ЮВ):")) + '</strong> ' +
-            esc(t("Eaton BRP20L125G sits behind Kitchen drywall from " + panLow + " to " + panHigh + ". ZERO back-entries, ZERO screws, side-entry notches ON HOLD.",
-                  "El gabinete Eaton BRP20L125G está detrás de la tablaroca de " + panLow + " a " + panHigh + ". CERO entradas traseras, CERO tornillos, muescas laterales EN PAUSA.",
-                  "Корпус Eaton BRP20L125G за ГКЛ от " + panLow + " до " + panHigh + ". Ноль саморезов и задних вводов; боковые вырезы на паузе.")) + '</li>' +
-          '<li><strong>East 1 @ 10\" N &amp; East 2 @ 45\" N (#1 · 20A 12/2):</strong> ' + cH + ' · ' + esc(t("50\" in-wall bore band · East 2 centered over 18\" drawer base (36\"–54\" N).", "Franja 50\" · Este 2 centrado sobre cajonera 18\" (36\"–54\" N).", "Зона 50\" · East 2 по центру тумбы 18\" (36\"–54\" С).")) + '</li>' +
-          '<li><strong>REF-1 @ 68\" N (#4 · 20A 12/2):</strong> ' + fmtIn(15 + d) + ' · ' + esc(t("Single 20A TR behind 28\" Haier fridge (54\"–82\" N) · 52-1/2\" bore band.", "Sencillo 20A TR tras Haier 28\" (54\"–82\" N) · franja 52-1/2\".", "Одинарная 20A TR за Haier 28\" (54\"–82\" С) · зона 52-1/2\".")) + '</li>' +
-        '</ul></div>';
-    }
-    if (state.wallTab === "south") {
-      return '<div class="u4h-photo-grid"><div class="u4h-photo-card">' +
-        '<img src="./assets/south-sink-wall.jpg" alt="' + esc(t("Open-stud photo of South sink wall", "Foto real muro Sur", "Фото южной стены")) + '">' +
-        '<div class="u4h-photo-cap"><strong>' + esc(t("South Wall (147\" · SE = 0\"):", "Muro Sur (147\" · SE = 0\"):", "Южная стена (147\" · ЮВ = 0\"):")) + '</strong> ' +
-        esc(t("South 1 @ 24\" W & South 2 @ 62\" W* (verify window CL 87\" vs 90\") at " + cH + " (#2). Under-Sink 2-Gang INSIDE 30\" sink base @ 76\" W*, " + fmtIn(14 + d) + " with 2 SEPARATE TR receptacles & neutrals (#5 20A DW left + #6 15A Disposal right) — NEVER behind 24\" finished-front DW (48\"–72\" W). Pie-Safe (26\"–59\" W) sealed flush.",
-              "Sur 1 @ 24\" O y Sur 2 @ 62\" O* (verificar eje ventana 87\" vs 90\") a " + cH + " (#2). Caja Doble Fregadero DENTRO de tarja 30\" a 76\" O*, " + fmtIn(14 + d) + " con 2 receptáculos y neutros SEPARADOS (#5 20A izq. + #6 15A der.) — NUNCA tras lavavajillas 24\" (48\"–72\" O). Pie-Safe (26\"–59\" O) sellado al ras.",
-              "South 1 @ 24\" З и South 2 @ 62\" З* (сверить ось окна 87\"/90\") на " + cH + " (#2). Двойная коробка внутри тумбы мойки @ 76\" З*, " + fmtIn(14 + d) + " на 2 раздельных суппорта (#5 20A ПММ + #6 15A диспоузер). Ниша 26\"–59\" З зашита заподлицо.")) +
-        '</div></div></div>';
-    }
-    if (state.wallTab === "west") {
-      return '<div class="u4h-photo-grid"><div class="u4h-photo-card">' +
-        '<img src="./assets/west-range-wall.jpeg" alt="' + esc(t("Open-stud photo of West range wall", "Foto real muro Oeste", "Фото западной стены")) + '">' +
-        '<div class="u4h-photo-cap"><strong>' + esc(t("West Range Wall (66-1/4\" at X = 31.5\" Step · ZERO Uppers):", "Muro Oeste Estufa (66-1/4\" en escalón X = 31.5\" · SIN altos):", "Западная стена плиты (66-1/4\" уступ X = 31.5\" · без верхних шкафов):")) + '</strong> ' +
-        esc(t("West 1 @ 9\" N & West 2 @ 57\" N at " + cH + " (#3, ~1\" tile mud rings; 1/2\" drywall + 1/2\" HardieBacker, zero shims). RG-1 @ 33\" N, " + fmtIn(3 + d) + " (#7). HD-1 flush 1-gang 2\"×3\" set ~1\" proud at 33\"±2-1/4\" N, " + hdLow + "–" + hdHigh + " (#8 + BRLW1 lock — replaces retired 4×4 @ 100\").",
-              "Oeste 1 @ 9\" N y Oeste 2 @ 57\" N a " + cH + " (#3, aros ~1\" azulejo; 1/2\" tablaroca + 1/2\" HardieBacker, sin calzas). RG-1 @ 33\" N, " + fmtIn(3 + d) + " (#7). HD-1 caja sencilla 2\"×3\" ~1\" salida a 33\"±2-1/4\" N, " + hdLow + "–" + hdHigh + " (#8 + bloqueo BRLW1).",
-              "West 1 @ 9\" С и West 2 @ 57\" С на " + cH + " (#3, рамки ~1\" под плитку). RG-1 @ 33\" С, " + fmtIn(3 + d) + " (#7). HD-1 одинарная 2\"×3\" выступ ~1\" в 33\"±2-1/4\" С, " + hdLow + "–" + hdHigh + " (#8 + BRLW1).")) +
-        '</div></div></div>';
-    }
-    if (state.wallTab === "north") {
-      return '<div class="u4h-info-box"><div class="u4h-info-title">' + esc(t("Kitchen North Entry Wall (115-1/2\" × 121-1/2\")", "Muro Norte Entrada Cocina (115-1/2\" × 121-1/2\")", "Северная стена кухни (115-1/2\" × 121-1/2\")")) + '</div>' +
-        '<ul class="u4h-info-list">' +
-          '<li><strong>Entry 3-Switch (#9 · 15A 14/2):</strong> 35.5\" W of NE (6\" W of 29.5\" hall opening) @ ' + fmtIn(48 + d) + ' -> Main Ceiling Light, Sink Pendants (75\"/99\" W), Under-Cab Lights.</li>' +
-          '<li><strong>' + esc(t("Keep Original Trim Intact:", "Conservar Molduras Originales:", "Сохранить оригинальную отделку:")) + '</strong> 103\" Picture Rail &amp; 9-1/2\" Edwardian Baseboard.</li>' +
-        '</ul></div>';
-    }
-    if (state.wallTab === "dining") {
-      return '<div class="u4h-info-box"><div class="u4h-info-title">' + esc(t("Dining Room & Panel Face (Eaton BRP20L125G)", "Comedor y Cara del Panel (Eaton BRP20L125G)", "Столовая и щиток (Eaton BRP20L125G)")) + '</div>' +
-        '<ul class="u4h-info-list">' +
-          '<li><strong>Panel (West Wall, X = 147\", Y = 213.75\"):</strong> 53\"–77\" AFF · SFEC 110.26(A)(3) 30\"W × 36\"D × 78\"H clear space · <strong>ZERO outlet on Panel wall</strong>.</li>' +
-          '<li><strong>Dining 1–4 (#10 Shared · Reuse + New):</strong> 18\" AFF in lower trim frames. Pre-existing sound outlets/wiring reused in part — verify reused vs. new legs &amp; wire gauge with C-10 electrician (15A AFCI if any reused leg is 14 AWG).</li>' +
-          '<li><strong>Original Dining Light &amp; Switch (#12):</strong> Reuse existing switch &amp; circuitry intact. Keep ~33\" double pocket-door cavities clear (D6 hold).</li>' +
-        '</ul></div>';
-    }
-    if (state.wallTab === "bathroom") {
-      return '<div class="u4h-info-box"><div class="u4h-info-title">' + esc(t("Bathroom All-in-One (#13 · 20A DF · 100% 12/2 Yellow)", "Baño Todo-en-Uno (#13 · 20A DF · 100% 12/2 Amarillo)", "Ванная (#13 · 20A DF · 100% 12/2)")) + '</div>' +
-        '<ul class="u4h-info-list">' +
-          '<li><strong>Room &amp; Door (Locked Nov 24):</strong> 72-1/8\" × 82-1/8\" · Pocket door <strong>RETIRED</strong> -> 28\" outward-swing hallway door; South framed stud wall allows switches @ ' + fmtIn(48 + d) + '.</li>' +
-          '<li><strong>100% 12/2 Yellow via Bath J-Box:</strong> Vanity GFCI (40\"–44\" AFF), Vanity Light, Damp/Wet Bath Light, Humidity Fan, and <strong>SEPARATE pre-tile 12/2 Toilet drop @ 12\" AFF</strong> (split-ready to Spare #19 with zero tile demo).</li>' +
-        '</ul></div>';
-    }
-    if (state.wallTab === "laundry") {
-      return '<div class="u4h-info-box"><div class="u4h-info-title">' + esc(t("Laundry Closet (#14 · 20A DF at Panel · 12/2)", "Clóset Lavandería (#14 · 20A DF en Panel · 12/2)", "Прачечная (#14 · 20A DF в щитке · 12/2)")) + '</div>' +
-        '<ul class="u4h-info-list">' +
-          '<li><strong>1× Standard 20A TR Duplex on East/Right Wall @ ' + fmtIn(38 + d) + ':</strong> Serves both 120V plugs of stacked <strong>LG WKG101HVA</strong> gas WashTower, clearing the 8-1/4\" Murphy bookcase door projection.</li>' +
-          '<li><strong>GFCI Reset &amp; Light Rule:</strong> Keep BRN120DF reset accessible at Panel; put Laundry ceiling light/switch on <strong>#12</strong> (NEVER on #14).</li>' +
-        '</ul></div>';
-    }
-    if (state.wallTab === "bedroom") {
-      return '<div class="u4h-info-box"><div class="u4h-info-title">' + esc(t("Bedroom — Shared #10 Outlets (#11 Spare) + #12 Reused Original Light/Switch", "Recámara — #10 Compartido (#11 Reserva) + #12 Luz/Apagador Original Reusado", "Спальня — #10 общая (#11 резерв) + #12 сохранение света/выкл.")) + '</div>' +
-        '<ul class="u4h-info-list">' +
-          '<li><strong>Bed 1–5 (#10 Shared · Reuse + New):</strong> Wall A (17\"/107\"), Wall C (60-1/2\"), Desk (B4), East Bay (B5) at <strong>11-1/2\" AFF with dark horizontal plates</strong> (split-ready via Attic J-Box to Open Spare #11).</li>' +
-          '<li><strong>Original Light &amp; Switch (#12) + 10-Yr Battery Smoke Alarm:</strong> Reuse existing Bedroom switch &amp; ceiling light circuitry intact; install 10-year sealed-battery smoke alarm (zero wired ceiling pull). Keep NW Temp. Closet ceiling open until thermostat cable &amp; permanent hatch finish.</li>' +
-        '</ul></div>';
-    }
-    return '<div class="u4h-info-box"><div class="u4h-info-title">' + esc(t("Living Room & Hallway — #10 Shared Outlets + #12 Reused Original Lights & Switches", "Sala y Pasillo — #10 Contactos + #12 Luces y Apagadores Originales Reusados", "Гостиная и коридор — #10 розетки + #12 сохранение света и выключателей")) + '</div>' +
-      '<ul class="u4h-info-list">' +
-        '<li><strong>Living 1–5 &amp; Hall 1 (#10 Shared · Reuse + New):</strong> L01 (17-1/2\"/106-1/2\"), Fireplace side frames, East Bay &amp; Hall 1 (solid pier between Bath &amp; Murphy) @ 18\" AFF. Pre-existing sound wiring reused in part (verify gauge w/ C-10; 15A AFCI if 14 AWG). <strong>NO L6</strong> in ~33\" pocket cavity.</li>' +
-        '<li><strong>Original Switches &amp; Lights (#12) + 10-Yr Battery Smoke/CO:</strong> Reuse existing Living Room &amp; Hallway switches (including existing 3-way travelers) and ceiling light circuitry intact. Use 10-year sealed-battery Smoke/CO alarms (zero new 14/3 ceiling pulls).</li>' +
-      '</ul></div>';
-  }
-
-  function renderAtticWiringGuideSvg() {
-    return '<svg viewBox="0 0 600 240" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + esc(t("Attic wiring rules cross-section", "Reglas de cableado en ático", "Правила прокладки на чердаке")) + '">' +
-      '<rect x="0" y="0" width="600" height="240" fill="#F8FAFC" rx="8"/>' +
-      '<text x="300" y="20" text-anchor="middle" font-size="11" font-weight="800" fill="#0F2537">ATTIC ROUTING &amp; FLAT-ROOF LED BLOCKING (NEC 314.23 / 320.23 / 300.4(E))</text>' +
-      '<rect x="16" y="34" width="180" height="190" rx="6" fill="#FFFFFF" stroke="#15803D" stroke-width="1.8"/>' +
-      '<text x="106" y="52" text-anchor="middle" font-size="8.6" font-weight="800" fill="#166534">1. SIDE OF JOIST (BEST)</text>' +
-      '<rect x="76" y="72" width="24" height="90" fill="#E6CCB2" stroke="#7F5539" stroke-width="1.5"/>' +
-      '<circle cx="104" cy="116" r="5.5" fill="#D97706" stroke="#92400E" stroke-width="1.5"/>' +
-      '<text x="116" y="114" font-size="7.2" font-weight="800" fill="#92400E">NM-B</text>' +
-      '<text x="116" y="125" font-size="6.8" fill="#475569">&gt;= 1-1/4\" edges</text>' +
-      '<text x="106" y="186" text-anchor="middle" font-size="7.2" font-weight="700" fill="#166534">NEC 320.23(B): No guard strip</text>' +
-      '<text x="106" y="200" text-anchor="middle" font-size="6.8" fill="#475569">Staple &lt;=12\" box, every &lt;=4.5 ft</text>' +
-
-      '<rect x="210" y="34" width="180" height="190" rx="6" fill="#FFFFFF" stroke="#D97706" stroke-width="1.8"/>' +
-      '<text x="300" y="52" text-anchor="middle" font-size="8.6" font-weight="800" fill="#92400E">2. GUARD STRIPS (&lt;=72\" HATCH)</text>' +
-      '<rect x="234" y="120" width="132" height="40" fill="#E6CCB2" stroke="#7F5539" stroke-width="1.5"/>' +
-      '<rect x="266" y="100" width="16" height="20" fill="#DDB892" stroke="#7F5539" stroke-width="1.3"/>' +
-      '<rect x="318" y="100" width="16" height="20" fill="#DDB892" stroke="#7F5539" stroke-width="1.3"/>' +
-      '<circle cx="300" cy="112" r="5.5" fill="#D97706" stroke="#92400E" stroke-width="1.5"/>' +
-      '<text x="300" y="186" text-anchor="middle" font-size="7.2" font-weight="700" fill="#92400E">NEC 320.23(A): 1×2 / 2×2 rails</text>' +
-      '<text x="300" y="200" text-anchor="middle" font-size="6.8" fill="#475569">Never trap under OSB walkway</text>' +
-
-      '<rect x="404" y="34" width="180" height="190" rx="6" fill="#FFFFFF" stroke="#184E77" stroke-width="1.8"/>' +
-      '<text x="494" y="52" text-anchor="middle" font-size="8.6" font-weight="800" fill="#184E77">3. FLAT-ROOF LED BLOCKING</text>' +
-      '<rect x="420" y="66" width="148" height="14" fill="#94A3B8" stroke="#334155" stroke-width="1.3"/>' +
-      '<text x="494" y="76" text-anchor="middle" font-size="6.8" font-weight="800" fill="#FFFFFF">ROOF DECK — NO SCREWS</text>' +
-      '<line x1="494" y1="80" x2="494" y2="100" stroke="#DC2626" stroke-width="1.4" stroke-dasharray="2,2"/>' +
-      '<text x="530" y="94" font-size="6.8" font-weight="800" fill="#DC2626">&gt;= 1-1/2\"</text>' +
-      '<rect x="434" y="100" width="120" height="20" fill="#E6CCB2" stroke="#7F5539" stroke-width="1.4"/>' +
-      '<text x="494" y="113" text-anchor="middle" font-size="6.8" font-weight="700" fill="#5C3D2E">2×4 Rafter Blocking</text>' +
-      '<ellipse cx="494" cy="140" rx="24" ry="7" fill="#FEF08A" stroke="#CA8A04" stroke-width="1.5"/>' +
-      '<text x="494" y="186" text-anchor="middle" font-size="7.2" font-weight="700" fill="#184E77">NEC 314.23 / 300.4(E)</text>' +
-      '<text x="494" y="200" text-anchor="middle" font-size="6.8" fill="#475569">2 enclosed LEDs on 4O boxes</text>' +
-    '</svg>';
-  }
-
-  function renderEquip() {
-    return '<div class="u4h-equip-wrap">' +
-      '<button type="button" id="kelecEquipBtn" class="u4h-equip-toggle" aria-expanded="' + (state.equipOpen ? "true" : "false") + '">' +
-        esc(t("🔧 Complete Rev R7 Eaton BR Breaker Kit (15 Active + 5 Spares) ",
-              "🔧 Kit Completo de Pastillas Eaton BR Rev R7 (15 Activos + 5 Reservas) ",
-              "🔧 Комплект автоматов Eaton BR Rev R7 (15 активных + 5 резервов) ")) + (state.equipOpen ? "▴" : "▾") +
-      '</button>' +
-      '<div id="kelecEquipBody" class="u4h-equip-body"' + (state.equipOpen ? "" : " hidden") + '>' +
-        '<div class="u4h-equip-grid">' +
-          '<div class="u4h-equip-col">' +
-            '<h4>' + esc(t("Kitchen (#1–#9)", "Cocina (#1–#9)", "Кухня (#1–#9)")) + '</h4>' +
-            '<ul>' +
-              '<li><strong>5× BRN120DF</strong> (20A DF: #1 East, #2 South, #3 West, #4 Fridge, #5 DW)</li>' +
-              '<li><strong>2× BRN115DF</strong> (15A DF: #6 Disposal, #7 Gas Range)</li>' +
-              '<li><strong>1× BRN115AF + BRLW1</strong> (15A AFCI + Lock-Off: #8 Hood)</li>' +
-              '<li><strong>1× BRN115AF</strong> (15A AFCI: #9 Kitchen Lights)</li>' +
-            '</ul>' +
-          '</div>' +
-          '<div class="u4h-equip-col">' +
-            '<h4>' + esc(t("Rest of Unit (#10, #12–#16) + 5 Spares", "Resto de la Unidad (#10, #12–#16) + 5 Reservas", "Остальная квартира (#10, #12–#16) + 5 резервов")) + '</h4>' +
-            '<ul>' +
-              '<li><strong>1× BRN120AF*</strong> (#10 Shared Outlets — step down to <strong>BRN115AF</strong> if any reused leg is 14 AWG!)</li>' +
-              '<li><strong>1× BRN115AF</strong> (#12 Reused Original Room Lights &amp; Switches)</li>' +
-              '<li><strong>2× BRN120DF</strong> (#13 Bathroom All-in-One · #14 Laundry WashTower)</li>' +
-              '<li><strong>1× BR115</strong> (#15 Attic Furnace F1) · <strong>1× BRN115DF</strong> (#16 Attic Service Outlet &amp; LEDs)</li>' +
-              '<li><strong>5 Open Spares (#11, #17–#20)</strong> · <strong>10-Yr Sealed-Battery Smoke/CO Alarms</strong></li>' +
-            '</ul>' +
-          '</div>' +
-        '</div>' +
-      '</div>' +
+    var cur = cards[w] || cards.east;
+    return '<div class="u4h-card">' +
+      '<h3 style="margin:0 0 8px;font-size:15px;">' + esc(cur.title) + '</h3>' +
+      (cur.photo ? '<img src="' + cur.photo + '" alt="' + esc(cur.title) + '" style="width:100%;max-height:240px;object-fit:cover;border-radius:8px;margin-bottom:10px;border:1px solid var(--rule);"/>' : '') +
+      '<ul class="u4h-StatusList">' +
+        cur.bullets.map(function (b) { return '<li>' + esc(b) + '</li>'; }).join("") +
+      '</ul>' +
     '</div>';
   }
 
   function render() {
-    var host = document.getElementById("u4hBody");
-    var holdEl = document.getElementById("u4hHoldStrip");
+    var host = document.getElementById("u4HumanGuide");
     if (!host) return;
-    var idx = STEPS.findIndex(function (s) { return s.id === state.step; });
-    if (idx < 0) idx = 0;
 
-    if (holdEl) {
-      holdEl.className = "u4h-hold-strip is-danger";
-      holdEl.innerHTML = t(
-        "<strong>REV R7 FIELD RULES &amp; HOLDS:</strong> Reusing sound existing outlets (#10) and all original common-room switches/lighting circuitry (#12) · 10-yr sealed-battery Smoke/CO alarms (no wired alarm pulls) · Confirm NEXT feeder (80A vs 100A) &amp; verify #10 wire gauge w/ C-10.",
-        "<strong>REGLAS Y PAUSAS REV R7:</strong> Se reusan contactos sanos (#10) y todos los apagadores/circuitos originales de luces (#12) · Humo/CO de batería 10 años (sin cablear) · Confirmar alimentador NEXT y calibre #10 con C-10.",
-        "<strong>ПРАВИЛА И ПАУЗЫ REV R7:</strong> Сохранение существующих розеток (#10) и всех оригинальных выключателей/линий света (#12) · Автономные датчики дыма/CO на 10 лет · Сверить ввод NEXT и калибр #10 с C-10."
-      );
-    }
+    var stepIdx = STEPS.findIndex(function (s) { return s.id === state.step; });
+    if (stepIdx < 0) { stepIdx = 0; state.step = STEPS[0].id; }
 
     var stepPills = '<div class="u4h-steps" role="tablist">' +
       STEPS.map(function (s) {
@@ -706,23 +660,23 @@
       }).join("") +
     '</div>';
 
-    var title = t("Whole-Unit Electrical Map (Rev R7 · 15 Active + 5 Spares)", "Mapa Eléctrico Completo Unidad 4 (Rev R7 · 15 + 5)", "План электрики всей квартиры (Rev R7 · 15 + 5)");
-    var sub = t("True 1:1 Unit 4 layout (North UP) — reuses original lights/switches (#12) & sound outlets (#10), zero wired smoke alarm pulls", "Plano real 1:1 Unidad 4 (Norte ARRIBA) — reusa luces/apagadores originales (#12) y contactos sanos (#10), sin detectores cableados", "Точный план 1:1 (север вверх) — сохранение оригинального света/выключателей (#12) и розеток (#10), без проводных датчиков дыма");
+    var title = t("Whole-Unit Electrical Map (Rev R8 · 14 New + 6 Open Spares)", "Mapa Eléctrico Unidad 4 (Rev R8 · 14 Nuevos + 6 Reservas)", "План электрики квартиры 4 (Rev R8 · 14 новых + 6 резервов)");
+    var sub = t("Reused room lights, switches & outlets stay on Existing Panel (0 subpanel spaces) · 10-yr sealed-battery Smoke/CO", "Luces, apagadores y contactos reusados quedan en Panel Existente (0 espacios en subpanel) · Humo/CO batería 10 años", "Сохраняемый свет, выключатели и розетки остаются на старом щите (0 мест в субщитке) · Автономные датчики 10 лет");
     var inner = "";
 
     if (state.step === "outlets") {
       var sel = CIRCUITS.find(function (c) { return c.id === state.selectedCircuit; }) || CIRCUITS[0];
       inner =
         '<div class="u4h-kpi-grid">' +
-          '<div class="u4h-kpi"><div class="u4h-kpi-lbl">' + esc(t("Active Circuits", "Circuitos Activos", "Активные линии")) + '</div><div class="u4h-kpi-val is-ok">15 / 20</div><div class="u4h-kpi-sub">#1–#10, #12–#16</div></div>' +
-          '<div class="u4h-kpi"><div class="u4h-kpi-lbl">' + esc(t("Open Spares", "Reservas Libres", "Свободный резерв")) + '</div><div class="u4h-kpi-val is-info">5 Spares</div><div class="u4h-kpi-sub">#11, #17–#20</div></div>' +
+          '<div class="u4h-kpi"><div class="u4h-kpi-lbl">' + esc(t("Subpanel Used", "Subpanel Usado", "Занято в субщитке")) + '</div><div class="u4h-kpi-val is-ok">14 / 20</div><div class="u4h-kpi-sub">#1–#10, #13–#16</div></div>' +
+          '<div class="u4h-kpi"><div class="u4h-kpi-lbl">' + esc(t("Open Spares", "Reservas Libres", "Свободный резерв")) + '</div><div class="u4h-kpi-val is-info">6 Spares</div><div class="u4h-kpi-sub">#11, #12, #17–#20</div></div>' +
           '<div class="u4h-kpi"><div class="u4h-kpi-lbl">' + esc(t("Counter Outlets", "Altura Cubierta", "Высота фартука")) + '</div><div class="u4h-kpi-val is-info">' + fmtIn(state.counterH + off()) + '</div><div class="u4h-kpi-sub">' + esc(state.floorDown ? t("Finished floor", "Piso terminado", "Чистовой пол") : t("Bare subfloor (+3/4\")", "Subpiso (+3/4\")", "Черновой пол (+3/4\")")) + '</div></div>' +
         '</div>' +
         '<div class="u4h-controls">' +
           '<div class="u4h-ctrl-row">' +
             '<span class="u4h-ctrl-lbl">' + esc(t("Map View:", "Vista del Mapa:", "Вид плана:")) + '</span>' +
             '<div class="u4h-pill-group">' +
-              '<button type="button" class="u4h-pill' + (state.mapMode === "unit" ? " is-active" : "") + '" data-mmode="unit">' + esc(t("Whole-Unit 1:1 (#1–#20)", "Toda la Unidad 1:1 (#1–#20)", "Вся квартира 1:1 (#1–#20)")) + '</button>' +
+              '<button type="button" class="u4h-pill' + (state.mapMode === "unit" ? " is-active" : "") + '" data-mmode="unit">' + esc(t("Whole-Unit 1:1 Map", "Toda la Unidad 1:1", "Вся квартира 1:1")) + '</button>' +
               '<button type="button" class="u4h-pill' + (state.mapMode === "kitchen" ? " is-active" : "") + '" data-mmode="kitchen">' + esc(t("Kitchen 1:1 Zoom (#1–#9)", "Zoom Cocina 1:1 (#1–#9)", "Кухня крупно 1:1 (#1–#9)")) + '</button>' +
             '</div>' +
           '</div>' +
@@ -745,7 +699,7 @@
 
     } else if (state.step === "walls") {
       title = t("Room-by-Room Details & Real Site Photos", "Detalles por Cuarto y Fotos Reales", "Детали по комнатам и фото объекта");
-      sub = t("Pick any room or kitchen wall to verify box stations, heights, and Rev R7 reuse rules", "Elige cualquier cuarto o muro de cocina para ver alturas y reglas de reuso Rev R7", "Выберите комнату или стену кухни для проверки высот и правил Rev R7");
+      sub = t("Pick any room or kitchen wall to verify box stations, heights, and Existing Panel vs. New Subpanel rules", "Elige cualquier cuarto o muro de cocina para ver alturas y qué queda en el Panel Existente vs. Subpanel Nuevo", "Выберите комнату или стену кухни для проверки высот и разделения старого и нового щитков");
       inner =
         '<div class="u4h-controls"><div class="u4h-ctrl-row">' +
           '<span class="u4h-ctrl-lbl">' + esc(t("Room / Wall:", "Cuarto / Muro:", "Комната / стена:")) + '</span>' +
@@ -755,11 +709,11 @@
               ["south",    t("Kitchen South", "Cocina Sur", "Кухня Ю")],
               ["west",     t("Kitchen West", "Cocina Oeste", "Кухня З")],
               ["north",    t("Kitchen North", "Cocina Norte", "Кухня С")],
-              ["dining",   t("Dining & Panel", "Comedor y Panel", "Столовая и щиток")],
+              ["dining",   t("Dining & Subpanel", "Comedor y Subpanel", "Столовая и щиток")],
               ["bathroom", t("Bathroom #13", "Baño #13", "Ванная #13")],
               ["laundry",  t("Laundry #14", "Lavandería #14", "Прачечная #14")],
-              ["bedroom",  t("Bedroom #10/#12", "Recámara #10/#12", "Спальня #10/#12")],
-              ["living",   t("Living & Hall #10/#12", "Sala y Pasillo #10/#12", "Гостиная/Кор. #10/#12")]
+              ["bedroom",  t("Bedroom", "Recámara", "Спальня")],
+              ["living",   t("Living & Hall", "Sala y Pasillo", "Гостиная и кор.")]
             ].map(function (w) {
               return '<button type="button" class="u4h-pill' + (state.wallTab === w[0] ? " is-active" : "") + '" data-wtab="' + w[0] + '">' + esc(w[1]) + '</button>';
             }).join("") +
@@ -768,8 +722,8 @@
         renderWallDetail();
 
     } else if (state.step === "panel") {
-      title = t("Eaton BRP20L125G Panel Directory — 15 Active + 5 Spares", "Directorio Panel Eaton BRP20L125G — 15 Activos + 5 Reservas", "Таблица щитка Eaton BRP20L125G — 15 активных + 5 резервов");
-      sub = t("#10 shares Living/Dining/Bed/Hall outlets (Reuse+New) · #12 reuses original lights & switches · #16 = Attic GFCI & LEDs only · #11 & #17–#20 Spares", "#10 comparte contactos (Reuso+Nuevo) · #12 reusa luces y apagadores originales · #16 = Toma y LEDs Ático · #11 y #17–#20 Reservas", "#10 общие розетки · #12 сохранение оригинального света/выключателей · #16 розетка и LED чердака · #11 и #17–#20 резерв");
+      title = t("Eaton BRP20L125G Subpanel — 14 New Circuits + 6 Open Spares", "Subpanel Eaton BRP20L125G — 14 Circuitos Nuevos + 6 Reservas", "Субщиток Eaton BRP20L125G — 14 новых линий + 6 резервов");
+      sub = t("Reused circuits stay on Existing Panel (0 spaces used here) · #11, #12 & #17–#20 are Open Spares · #10 feeds newly pulled common-room outlets only", "Circuitos reusados quedan en su Panel Existente (0 espacios aquí) · #11, #12 y #17–#20 Libres · #10 solo contactos nuevos", "Сохраняемые линии остаются на существующем щите (0 мест здесь) · #11, #12 и #17–#20 свободны · #10 только новые розетки");
       var list = CIRCUITS.filter(function (c) {
         if (state.panelFilter === "all") return true;
         return c.grp === state.panelFilter;
@@ -781,8 +735,8 @@
             [
               ["all",     t("All 20 Spaces", "Todos (20)", "Все 20 мест")],
               ["kitchen", t("Kitchen (#1–#9)", "Cocina (#1–#9)", "Кухня (#1–#9)")],
-              ["unit",    t("Rest of Unit (#10, #12–#16)", "Resto Unidad (#10, #12–#16)", "Остальные (#10, #12–#16)")],
-              ["spare",   t("5 Open Spares (#11, #17–#20)", "5 Reservas (#11, #17–#20)", "5 резервов (#11, #17–#20)")]
+              ["unit",    t("New Unit Circuits (#10, #13–#16)", "Nuevos Unidad (#10, #13–#16)", "Новые по квартире (#10, #13–#16)")],
+              ["spare",   t("6 Open Spares (#11, #12, #17–#20)", "6 Reservas (#11, #12, #17–#20)", "6 резервов (#11, #12, #17–#20)")]
             ].map(function (f) {
               return '<button type="button" class="u4h-pill' + (state.panelFilter === f[0] ? " is-active" : "") + '" data-pfilt="' + f[0] + '">' + esc(f[1]) + '</button>';
             }).join("") +
@@ -802,8 +756,8 @@
         '</div>';
 
     } else if (state.step === "attic-runs") {
-      title = t("Attic & Ceiling Runs — True 1:1 Unit 4 Overlay", "Rutas en Ático y Techo — Superposición Real 1:1", "Чердачные трассы — точный план 1:1");
-      sub = t("24\"×36\" Hatch outside Door 4 · 24\" walkway to Furnace #15 & GFCI #16 · Zero wired smoke alarm runs · #12 original lights/switches reused in place", "Escotilla 24\"×36\" afuera de Puerta 4 · Pasillo 24\" a Calefactor #15 y Toma #16 · Sin detectores cableados · #12 luces originales reusadas", "Люк 24\"×36\" у двери 4 · Мостки 24\" к печи #15 и розетке #16 · Без проводных датчиков дыма · #12 оригинальный свет сохраняется");
+      title = t("Attic & Ceiling Homeruns — New Subpanel Circuits Only", "Rutas en Ático y Techo — Solo Circuitos Nuevos del Subpanel", "Чердачные трассы — только новые линии субщитка");
+      sub = t("24\"×36\" Hatch outside Door 4 · 24\" walkway to Furnace #15 & GFCI #16 · Reused lights/outlets stay on Existing Panel (0 attic pulls here)", "Escotilla 24\"×36\" afuera Puerta 4 · Pasillo 24\" a Calefactor #15 y Toma #16 · Luces/contactos reusados quedan en Panel Existente", "Люк 24\"×36\" у двери 4 · Мостки 24\" к печи #15 и розетке #16 · Сохраняемые линии остаются на старом щите");
       inner =
         '<div class="u4h-controls">' +
           '<div class="u4h-ctrl-row">' +
@@ -814,193 +768,187 @@
                 ["kitchen", t("Kitchen (#3, #7–#9)", "Cocina (#3, #7–#9)", "Кухня (#3, #7–#9)")],
                 ["attic",   t("Attic / Furnace (#15, #16)", "Ático / Calefactor (#15, #16)", "Чердак / Печь (#15, #16)")],
                 ["bath",    t("Bath / Laundry (#13, #14)", "Baño / Lav. (#13, #14)", "Ванная / Прач. (#13, #14)")],
-                ["common",  t("Shared #10 Outlet Tie-Ins", "Empalmes Contactos #10", "Коробки розеток #10")]
+                ["common",  t("New #10 Outlet Drops", "Bajadas Nuevas #10", "Новые розетки #10")]
               ].map(function (f) {
-                return '<button type="button" class="u4h-pill' + (state.atticFilter === f[0] ? " is-active" : "") + '" data-attic-flt="' + f[0] + '">' + esc(f[1]) + '</button>';
+                return '<button type="button" class="u4h-pill' + (state.atticFilter === f[0] ? " is-active" : "") + '" data-afilt="' + f[0] + '">' + esc(f[1]) + '</button>';
               }).join("") +
             '</div>' +
           '</div>' +
           '<div class="u4h-ctrl-row">' +
-            '<span class="u4h-ctrl-lbl">' + esc(t("Hatch Switch (#16):", "Apagador Escotilla (#16):", "Выключатель люка (#16):")) + '</span>' +
+            '<span class="u4h-ctrl-lbl">' + esc(t("Hatch Switch:", "Apagador Escotilla:", "Выключатель люка:")) + '</span>' +
             '<div class="u4h-pill-group">' +
-              '<button type="button" class="u4h-pill' + (state.atticSwitchOpt === "optA" ? " is-active" : "") + '" data-attic-sw="optA">' + esc(t("Option A: Landing Wall", "Opción A: Muro Descanso", "Вариант A: стена площадки")) + '</button>' +
-              '<button type="button" class="u4h-pill' + (state.atticSwitchOpt === "optB" ? " is-active" : "") + '" data-attic-sw="optB">' + esc(t("Option B: Inside 2× Curb", "Opción B: Marco 2×", "Вариант B: внутри короба 2×")) + '</button>' +
+              '<button type="button" class="u4h-pill' + (state.atticSwitchOpt === "optA" ? " is-active" : "") + '" data-asw="optA">' + esc(t("Option A: Landing Wall", "Opción A: Muro Descanso", "Вариант A: стена площадки")) + '</button>' +
+              '<button type="button" class="u4h-pill' + (state.atticSwitchOpt === "optB" ? " is-active" : "") + '" data-asw="optB">' + esc(t("Option B: Inside 2× Curb", "Opción B: Marco 2×", "Вариант B: внутри короба 2×")) + '</button>' +
             '</div>' +
           '</div>' +
         '</div>' +
-        '<div class="u4h-svg-wrap">' + renderAtticCeilingMapSvg() + '</div>';
+        '<div class="u4h-svg-wrap">' + renderAtticMapSvg() + '</div>';
 
     } else if (state.step === "attic-guide") {
-      title = t("Attic Wiring & Flat-Roof Mounting Rules", "Reglas de Cableado en Ático y Techo Plano", "Правила прокладки на чердаке и плоской крыше");
-      sub = t("NEC 320.23, 334.30, 314.23 & 2025 SFEC field rules", "Reglas NEC 320.23, 334.30, 314.23 y SFEC 2025", "Нормы NEC 320.23, 334.30, 314.23 и SFEC 2025");
+      title = t("Attic J-Box, Flat-Roof & Protection Rules", "Reglas de Cajas en Ático, Techo Plano y Protección", "Правила коробок чердака и плоской крыши");
+      sub = t("Keep all J-Boxes accessible above insulation · Zero screws into flat roof deck · 72\" guard strips at Door 4 Hatch", "Cajas accesibles sobre aislamiento · Cero tornillos al techo plano · Listones a 72\" de Escotilla Puerta 4", "Коробки выше утеплителя · Без саморезов в настил крыши · Планки 72\" у люка двери 4");
       inner =
-        '<div class="u4h-svg-wrap">' + renderAtticWiringGuideSvg() + '</div>' +
-        '<div class="u4h-info-box"><div class="u4h-info-title">' + esc(t("Attic Service (#15 & #16) & Smoke/CO Summary", "Servicio en Ático (#15 y #16) y Detectores Humo/CO", "Чердак (#15 и #16) и датчики дыма/CO")) + '</div>' +
-          '<ul class="u4h-info-list">' +
-            '<li><strong>#16 Attic Service Outlet &amp; LEDs (15A · 14/2):</strong> Always-live GFCI outlet at the 30\"×30\" service platform (&lt;=25 ft from F1) + Hatch Switch outside Door 4 controlling 2 enclosed LEDs on 2×4 rafter blocking (&gt;=1-1/2\" below flat roof deck — zero screws into deck).</li>' +
-            '<li><strong>Smoke &amp; CO Alarms:</strong> Listed 10-year sealed-battery alarms (zero hardwired 14/3 ceiling pulls required under existing-dwelling alteration exceptions CRC R314.2.2 / R315.2.2).</li>' +
-            '<li><strong>R-2 Common-Area Check (SFEC 334.12(A)(12)):</strong> If landing wall outside Door 4 is R-2 common area, use MC/EMT for Switch Option A (or mount Switch Option B inside the 2× hatch curb).</li>' +
-          '</ul></div>';
+        '<div class="u4h-card"><ul class="u4h-StatusList">' +
+          '<li><strong>' + esc(t("NEC 320.23(A) — 72\" Hatch Guard Zone:", "NEC 320.23(A) — Zona 72\" Escotilla:", "NEC 320.23(A) — Зона 72\" у люка:")) + '</strong> ' + esc(t("Protect any NM-B cable within 6 ft (72\") of the outside-Door-4 24\"×36\" hatch edge with wood guard strips along joists, and never trap cable under the 24\" OSB walkway.", "Proteger cualquier cable NM-B dentro de 72\" de la escotilla 24\"×36\" con listones de madera y nunca atrapar cable bajo el pasillo OSB de 24\".", "Защитить кабели NM-B в радиусе 72\" от люка 24\"×36\" деревянными планками; не зажимать под настилом 24\".")) + '</li>' +
+          '<li><strong>' + esc(t("Flat Roof Deck Protection (#16):", "Protección Techo Plano (#16):", "Плоская крыша (#16):")) + '</strong> ' + esc(t("Mount both enclosed attic LEDs on horizontal 2×4 rafter blocking >=1-1/2\" below the flat roof deck — ZERO screws upward into roofing membrane.", "Montar los 2 LEDs cerrados sobre bloqueo 2×4 >=1-1/2\" bajo la cubierta — CERO tornillos hacia la membrana del techo plano.", "Крепить оба закрытых LED на перемычках 2×4 >=1-1/2\" ниже настила — БЕЗ саморезов в кровлю.")) + '</li>' +
+          '<li><strong>' + esc(t("Flagged Accessible Attic J-Boxes:", "Cajas Abanderadas en Ático:", "Флажки над коробками чердака:")) + '</strong> ' + esc(t("Mount 4-11/16\" × 2-1/8\" metal J-Boxes (Bath #13, plus New Outlets #10 if split) above insulation with blank covers and visible flags; max 2 cables per top-plate hole sealed with fire caulk.", "Montar cajas metálicas 4-11/16\" × 2-1/8\" sobre el aislamiento con tapa ciega y bandera visible; máx. 2 cables por perforación con sellador cortafuego.", "Металлические коробки 4-11/16\" × 2-1/8\" выше утеплителя с глухими крышками и флажками; макс. 2 кабеля в отверстие + огнезащитный герметик.")) + '</li>' +
+        '</ul></div>';
 
     } else {
-      title = t("Pre-Rough-In Holds & Complete Breaker Kit (Rev R7)", "Pausas Previas y Kit Completo de Pastillas (Rev R7)", "Проверки до монтажа и комплект автоматов (Rev R7)");
-      sub = t("Confirm every hold before pulling wire or closing walls", "Confirma cada candado antes de jalar cable o cerrar muros", "Проверьте все паузы до протяжки кабеля и зашивки стен");
-      var holds = [
-        { k: "h1", en: "1. Panel Feeder (80A/#4 vs 100A/#3) confirmed with NEXT & side-entry notches ON HOLD; ZERO screws in Kitchen back zone (13\"–27.5\" N, 53\"–77\" AFF)",
-                   es: "1. Alimentador Panel (80A/#4 vs 100A/#3) confirmado con NEXT y muescas laterales EN PAUSA; CERO tornillos tras Panel (53\"–77\" AFF)",
-                   ru: "1. Ввод щитка (80A/#4 или 100A/#3) подтверждён с NEXT, боковые вырезы на паузе; ноль саморезов за щитком (53\"–77\")" },
-        { k: "h2", en: "2. #10 & #12 Existing Circuitry Check w/ C-10: reuse original lights/switches (#12) & sound outlets (#10) — use 15A AFCI (BRN115AF) on #10 if ANY reused wire leg is 14 AWG",
-                   es: "2. Revisión #10 y #12 con C-10: reusar luces/apagadores originales (#12) y contactos sanos (#10) — usar 15A AFCI en #10 si ALGÚN tramo reusado es 14 AWG",
-                   ru: "2. Проверка #10 и #12 с C-10: сохранение света/выключателей (#12) и розеток (#10) — ставить 15A AFCI на #10 при 14 AWG" },
-        { k: "h3", en: "3. Kitchen South Window CL (87\" vs 90\") verified; Under-Sink 2-Gang @ 14\" AFF uses 2 SEPARATE TR receptacles/yokes (#5 20A + #6 15A) & neutrals",
-                   es: "3. Eje ventana Sur (87\" vs 90\") verificado; Caja Doble Fregadero @ 14\" AFF usa 2 receptáculos/yugos SEPARADOS (#5 20A + #6 15A) y neutros",
-                   ru: "3. Ось южного окна (87\"/90\") проверена; коробка под мойкой @ 14\" на 2 раздельных суппорта (#5 20A + #6 15A)" },
-        { k: "h4", en: "4. Hood HD-1 flush 1-gang 2\"×3\" (~1\" proud @ 33\"±2-1/4\" N, 83\"–86\" AFF + BRLW1) — replaces retired 4×4 @ 100\"",
-                   es: "4. Campana HD-1 caja sencilla 2\"×3\" (~1\" salida @ 33\"±2-1/4\" N, 83\"–86\" AFF + BRLW1) — reemplaza caja 4×4 @ 100\"",
-                   ru: "4. Вытяжка HD-1 одинарная 2\"×3\" (выступ ~1\" @ 33\"±2-1/4\" С, 83\"–86\" + BRLW1) — вместо старой 4×4 @ 100\"" },
-        { k: "h5", en: "5. Bathroom (#13 · 100% 12/2): pull SEPARATE 12/2 Toilet drop before wall tile (split-ready to Spare #19); pocket door RETIRED -> 28\" out-swing door",
-                   es: "5. Baño (#13 · 100% 12/2): bajar 12/2 SEPARADO al Inodoro antes de azulejo (lista para Reserva #19); corrediza RETIRADA -> puerta 28\" afuera",
-                   ru: "5. Ванная (#13 · 100% 12/2): отдельный спуск 12/2 к унитазу до плитки (под резерв #19); распашная дверь 28\" наружу" }
-      ];
+      title = t("Active Holds & 14-Breaker Subpanel Kit (Rev R8)", "Pausas Activas y Kit de 14 Interruptores (Rev R8)", "Активные паузы и комплект 14 автоматов (Rev R8)");
+      sub = t("Confirm active holds before pulling interior wire · Reused circuits stay on Existing Panel (0 breakers needed here)", "Confirmar pausas antes de jalar cable · Los circuitos reusados quedan en su Panel Existente (0 interruptores aquí)", "Проверить паузы до протяжки · Сохраняемые линии остаются на существующем щите (0 автоматов здесь)");
       inner =
-        '<div class="u4h-item-list">' +
-          holds.map(function (h) {
-            var done = !!state.holds[h.k];
-            return '<div class="u4h-item-card' + (done ? " is-selected" : "") + '"><label style="display:flex;gap:10px;align-items:center;flex:1;cursor:pointer">' +
-              '<input type="checkbox" data-h="' + h.k + '"' + (done ? " checked" : "") + ' style="width:17px;height:17px;accent-color:var(--cobalt)">' +
-              '<span class="u4h-item-name" style="font-size:13px">' + esc(t(h.en, h.es, h.ru)) + '</span></label></div>';
-          }).join("") +
+        '<div class="u4h-banner is-warn">' +
+          '<strong>' + esc(t("Active Rough-In & Panel Holds:", "Pausas Activas de Obra y Subpanel:", "Активные паузы чернового монтажа:")) + '</strong>' +
+          '<ul class="u4h-StatusList" style="margin-top:6px;">' +
+            '<li>' + esc(t("Subpanel & Feeder Hold: Reconcile NEXT 80A/#4 vs. 100A/#3 feeder & side-entry notches before closing framing; zero screws 53\"–77\" AFF on Kitchen back.", "Pausa Subpanel y Alimentador: Conciliar NEXT 80A/#4 vs. 100A/#3 y muescas laterales antes de cerrar; cero tornillos 53\"–77\" AFF detrás en Cocina.", "Пауза щитка и ввода: согласовать ввод NEXT 80A/#4 или 100A/#3 и боковые вводы; без саморезов 53\"–77\" со стороны кухни.")) + '</li>' +
+            '<li>' + esc(t("Non-Kitchen Wire-Pull Hold (6hvRcQ7Gmh3fG5m7): Do not pull wire through held ENT runs until owner/C-10 release (SFEC 334.10(2) permits concealed NM-B).", "Pausa Fuera de Cocina (6hvRcQ7Gmh3fG5m7): No jalar cable por tramos ENT en pausa hasta liberación con C-10.", "Пауза вне кухни (6hvRcQ7Gmh3fG5m7): не протягивать провод в гофре ENT до согласования с электриком C-10.")) + '</li>' +
+            '<li>' + esc(t("Kitchen South Window CL (87\" vs. 90\" W) & Pre-Tile Toilet 12/2 Drop: Verify window CL before fastening S2 / DW-GD; pull separate 12/2 Toilet drop before bathroom wall tile.", "Eje Ventana Sur Cocina (87\" vs. 90\" O) y Bajada 12/2 Inodoro Pre-Azulejo: Verificar antes de fijar cajas o azulejar baño.", "Ось южного окна кухни (87\" и 90\") и отдельный спуск 12/2 к унитазу до плитки.")) + '</li>' +
+            '<li>' + esc(t("Smoke & CO Alarms: Listed 10-year sealed-battery units (CRC R314.2.2 / R315.2.2 existing-dwelling exceptions — zero hardwired 14/3 ceiling pulls).", "Detectores Humo y CO: Unidades selladas de batería 10 años (cero cableado 14/3 en techo).", "Датчики дыма и CO: сертифицированные автономные с 10-летней батареей (без потолочной проводки 14/3).")) + '</li>' +
+          '</ul>' +
         '</div>' +
-        renderEquip();
+        '<div class="u4h-card"><h3 style="margin:0 0 8px;font-size:15px;">' + esc(t("Eaton BR 14-Breaker Kit (6 Open Spares #11, #12, #17–#20)", "Kit de 14 Interruptores Eaton BR (6 Reservas #11, #12, #17–#20)", "Комплект 14 автоматов Eaton BR (6 резервов #11, #12, #17–#20)")) + '</h3>' +
+          '<ul class="u4h-StatusList">' +
+            '<li><strong>7× Eaton BRN120DF</strong> — 20A Dual-Function AFCI/GFCI (#1, #2, #3, #4, #5, #13, #14)</li>' +
+            '<li><strong>3× Eaton BRN115DF</strong> — 15A Dual-Function AFCI/GFCI (#6 Disposal, #7 Range, #16 Attic Service GFCI & LEDs)</li>' +
+            '<li><strong>1× Eaton BRN120AF</strong> — 20A AFCI (#10 Newly Added Common-Room Outlets Only)</li>' +
+            '<li><strong>2× Eaton BRN115AF + 1× BRLW1</strong> — 15A AFCI (#8 Hood w/ lock-off, #9 Kitchen Lights)</li>' +
+            '<li><strong>1× Eaton BR115</strong> — 15A Standard Thermal-Magnetic (#15 Attic Furnace F1)</li>' +
+          '</ul>' +
+        '</div>';
     }
 
-    var pager = '<div class="u4h-pager">' +
-      '<button type="button" id="kelecPrevBtn" class="u4h-pager-btn"' + (idx <= 0 ? " disabled" : "") + '>&larr; ' + esc(t("Prev", "Anterior", "Назад")) + '</button>' +
-      '<span class="u4h-pager-count">' + esc(t("Step ", "Paso ", "Шаг ")) + (idx + 1) + esc(t(" of ", " de ", " из ")) + STEPS.length + '</span>' +
-      '<button type="button" id="kelecNextBtn" class="u4h-pager-btn is-next"' + (idx >= STEPS.length - 1 ? " disabled" : "") + '>' + esc(t("Next", "Siguiente", "Далее")) + ' &rarr;</button>' +
-    '</div>';
+    var prevDisabled = stepIdx <= 0 ? " disabled" : "";
+    var nextHidden = stepIdx >= STEPS.length - 1 ? ' style="visibility:hidden"' : "";
 
     host.innerHTML =
-      '<div class="u4h-card u4h-animate-in">' +
-        '<div class="u4h-card-head"><div>' +
-          '<div class="u4h-title">' + esc(title) + '</div>' +
-          '<div class="u4h-sub">' + esc(sub) + '</div>' +
-        '</div><span class="u4h-compass">Rev R7 · 15+5</span></div>' +
-        stepPills + inner + pager +
+      stepPills +
+      '<div class="u4h-head"><h2 class="u4h-title">' + esc(title) + '</h2><p class="u4h-sub">' + esc(sub) + '</p></div>' +
+      inner +
+      '<div class="u4h-pager">' +
+        '<button type="button" class="u4h-btn" data-nav="-1"' + prevDisabled + '>' + esc(t("← Prev", "← Ant.", "← Назад")) + '</button>' +
+        '<span class="u4h-step-count">' + esc(t("Step " + (stepIdx + 1) + " of " + STEPS.length, "Paso " + (stepIdx + 1) + " de " + STEPS.length, "Шаг " + (stepIdx + 1) + " из " + STEPS.length)) + '</span>' +
+        '<button type="button" class="u4h-btn is-primary" data-nav="1"' + nextHidden + '>' + esc(t("Next →", "Sig. →", "Далее →")) + '</button>' +
       '</div>';
-
-    host.querySelectorAll("[data-step]").forEach(function (b) {
-      b.addEventListener("click", function () { state.step = b.getAttribute("data-step"); render(); window.scrollTo(0, 0); });
-    });
-    host.querySelectorAll("[data-mmode]").forEach(function (b) {
-      b.addEventListener("click", function () { state.mapMode = b.getAttribute("data-mmode"); render(); });
-    });
-    host.querySelectorAll("[data-fl]").forEach(function (b) {
-      b.addEventListener("click", function () { state.floorDown = b.getAttribute("data-fl") === "done"; syncUnderlyingPrint(); render(); });
-    });
-    host.querySelectorAll("[data-wtab]").forEach(function (b) {
-      b.addEventListener("click", function () { state.wallTab = b.getAttribute("data-wtab"); render(); });
-    });
-    host.querySelectorAll("[data-cir]").forEach(function (el) {
-      el.addEventListener("click", function () { state.selectedCircuit = el.getAttribute("data-cir"); syncUnderlyingPrint(); render(); });
-    });
-    host.querySelectorAll("[data-pfilt]").forEach(function (b) {
-      b.addEventListener("click", function () { state.panelFilter = b.getAttribute("data-pfilt"); render(); });
-    });
-    host.querySelectorAll("[data-attic-flt]").forEach(function (b) {
-      b.addEventListener("click", function () { state.atticFilter = b.getAttribute("data-attic-flt"); render(); });
-    });
-    host.querySelectorAll("[data-attic-sw]").forEach(function (b) {
-      b.addEventListener("click", function () { state.atticSwitchOpt = b.getAttribute("data-attic-sw"); render(); });
-    });
-    host.querySelectorAll("[data-h]").forEach(function (cb) {
-      cb.addEventListener("change", function () { state.holds[cb.getAttribute("data-h")] = cb.checked; render(); });
-    });
-    var eqBtn = document.getElementById("kelecEquipBtn");
-    if (eqBtn) eqBtn.addEventListener("click", function () { state.equipOpen = !state.equipOpen; render(); });
-    var pBtn = document.getElementById("kelecPrevBtn");
-    var nBtn = document.getElementById("kelecNextBtn");
-    if (pBtn) pBtn.addEventListener("click", function () { if (idx > 0) { state.step = STEPS[idx - 1].id; render(); window.scrollTo(0, 0); } });
-    if (nBtn) nBtn.addEventListener("click", function () { if (idx < STEPS.length - 1) { state.step = STEPS[idx + 1].id; render(); window.scrollTo(0, 0); } });
-
-    if (window.U4PlanNav && typeof window.U4PlanNav.reportPlanContext === "function") {
-      window.U4PlanNav.reportPlanContext();
-    }
   }
 
-  function applyKelecView(args) {
-    args = args || {};
-    var changed = false;
-    var wallRaw = String(args.wall || "").toLowerCase().trim();
-    if (["south", "east", "west", "north", "dining", "bathroom", "laundry", "bedroom", "living"].indexOf(wallRaw) >= 0) {
-      state.step = "walls";
-      state.wallTab = wallRaw;
-      changed = true;
-    } else if (wallRaw === "plan" || wallRaw === "all") {
-      state.step = "outlets";
-      changed = true;
-    }
-    var stepRaw = args.step;
-    if (stepRaw != null && stepRaw !== "") {
-      var n = Number(stepRaw);
-      if (isFinite(n) && n >= 1 && n <= STEPS.length) {
-        state.step = STEPS[n - 1].id;
-        changed = true;
-      } else {
-        var s = String(stepRaw).toLowerCase().trim();
-        var map = { overview: "outlets", all: "outlets", panel: "panel", subpanel: "panel", checklist: "holds", attic: "attic-runs" };
-        var id = map[s] || s;
-        if (STEPS.some(function (x) { return x.id === id; })) { state.step = id; changed = true; }
+  function wireEvents() {
+    var host = document.getElementById("u4HumanGuide");
+    if (!host) return;
+    host.addEventListener("click", function (ev) {
+      var btn = ev.target.closest("[data-step],[data-nav],[data-mmode],[data-fl],[data-wtab],[data-pfilt],[data-afilt],[data-asw],[data-cir]");
+      if (!btn) return;
+      if (btn.hasAttribute("data-step")) {
+        state.step = btn.getAttribute("data-step");
+        window.scrollTo(0, 0);
+      } else if (btn.hasAttribute("data-nav")) {
+        var idx = STEPS.findIndex(function (s) { return s.id === state.step; });
+        var nxt = idx + parseInt(btn.getAttribute("data-nav"), 10);
+        if (nxt >= 0 && nxt < STEPS.length) {
+          state.step = STEPS[nxt].id;
+          window.scrollTo(0, 0);
+        }
+      } else if (btn.hasAttribute("data-mmode")) {
+        state.mapMode = btn.getAttribute("data-mmode");
+      } else if (btn.hasAttribute("data-fl")) {
+        state.floorDown = btn.getAttribute("data-fl") === "done";
+      } else if (btn.hasAttribute("data-wtab")) {
+        state.wallTab = btn.getAttribute("data-wtab");
+      } else if (btn.hasAttribute("data-pfilt")) {
+        state.panelFilter = btn.getAttribute("data-pfilt");
+      } else if (btn.hasAttribute("data-afilt")) {
+        state.atticFilter = btn.getAttribute("data-afilt");
+      } else if (btn.hasAttribute("data-asw")) {
+        state.atticSwitchOpt = btn.getAttribute("data-asw");
+      } else if (btn.hasAttribute("data-cir")) {
+        state.selectedCircuit = btn.getAttribute("data-cir");
       }
-    }
-    if (changed) render();
-    return changed;
+      render();
+    });
   }
-
-  window.U4PlanControl = {
-    showView: function (args) { return applyKelecView(args); },
-    getState: function () {
-      return {
-        planId: "kitchen-electrical",
-        step: state.step,
-        mapMode: state.mapMode,
-        wall: state.step === "walls" ? state.wallTab : "all",
-        selectedCircuit: state.selectedCircuit,
-        summary: "Whole-Unit Electrical Rev R7 (15 Active + 5 Spares): step=" + state.step + ", mapMode=" + state.mapMode + ", circuit=" + state.selectedCircuit
-      };
-    }
-  };
 
   function boot() {
-    if (window.U4PlanNav) {
-      window.U4PlanNav.init({
-        planId: "kitchen-electrical",
-        headerEl: document.getElementById("u4hTopbar"),
-        onLangChange: function () { render(); if (window.U4LiveAi) window.U4LiveAi.refreshPrompts(); }
-      });
-      var bp = window.U4PlanNav.getBootParams ? window.U4PlanNav.getBootParams() : {};
-      if (bp.wall || bp.step) applyKelecView(bp);
-    }
-    if (window.U4LiveAi) {
-      window.U4LiveAi.init({
-        planId: "kitchen-electrical",
-        room: "electrical",
-        titleEn: "Whole-Unit Electrical (Rev R7)",
-        titleEs: "Eléctrico Completo Unidad 4 (Rev R7)",
-        titleRu: "Электрика всей квартиры (Rev R7)",
-        getContext: function () {
-          return "Rev R7 (15 Active #1-#10, #12-#16 + 5 Open Spares #11, #17-#20). #10 shares Living/Dining/Bedroom/Hall outlets (Reuse+New); #11 Spare; #12 reuses original lights, switches & circuitry intact; #16 = Attic Service GFCI & LEDs only (10-yr sealed-battery Smoke/CO alarms, zero wired alarm pulls). Step=" + state.step + ", ActiveCircuit=" + state.selectedCircuit;
-        },
-        quickPrompts: function (lang) {
-          if (lang === "es") return ["¿Qué reusa #12?", "¿Qué comparte el circuito #10?", "¿Cómo van los detectores de humo/CO?"];
-          if (lang === "ru") return ["Что сохраняется на линии #12?", "Что подключено к линии #10?", "Как устроены датчики дыма/CO?"];
-          return ["What does #12 reuse?", "What shares Circuit #10?", "How are Smoke/CO alarms handled?"];
+    var shell = document.querySelector("main.page-shell");
+    var header = document.querySelector("header.page-header");
+    if (header) header.style.display = "none";
+    if (shell) shell.style.display = "none";
+
+    var wrap = document.getElementById("u4HumanShell");
+    if (!wrap) {
+      wrap = document.createElement("div");
+      wrap.id = "u4HumanShell";
+      wrap.className = "u4h-wrap";
+      wrap.innerHTML =
+        '<header class="u4h-topbar">' +
+          '<div class="u4h-top-left">' +
+            '<a class="u4h-back" href="../../index.html#electrical" id="u4hBackLink">← Electrical</a>' +
+          '</div>' +
+          '<div class="u4h-top-right">' +
+            '<div class="u4-lang-seg" role="radiogroup" aria-label="Language">' +
+              '<button type="button" class="u4-lang-btn" data-lang-pick="en" role="radio" aria-checked="true">EN</button>' +
+              '<button type="button" class="u4-lang-btn" data-lang-pick="es" role="radio" aria-checked="false">ES</button>' +
+              '<button type="button" class="u4-lang-btn" data-lang-pick="ru" role="radio" aria-checked="false">RU</button>' +
+            '</div>' +
+            '<button type="button" class="u4h-btn" id="u4hPrintBtn">Print / PDF</button>' +
+          '</div>' +
+        '</header>' +
+        '<main id="u4HumanGuide" class="u4h-stage"></main>';
+      document.body.insertBefore(wrap, document.body.firstChild);
+
+      wrap.addEventListener("click", function (ev) {
+        var lbtn = ev.target.closest("[data-lang-pick]");
+        if (lbtn) {
+          var l = lbtn.getAttribute("data-lang-pick");
+          state.lang = l;
+          document.documentElement.setAttribute("data-u4-lang", l);
+          document.documentElement.lang = l;
+          syncTopChrome();
+          render();
+          return;
+        }
+        if (ev.target.closest("#u4hPrintBtn")) {
+          window.print();
         }
       });
     }
+
+    state.lang = getLang();
+    document.documentElement.setAttribute("data-u4-lang", state.lang);
+    syncTopChrome();
+    wireEvents();
     render();
+
+    var obs = new MutationObserver(function () {
+      var cur = getLang();
+      if (cur !== state.lang) {
+        state.lang = cur;
+        syncTopChrome();
+        render();
+      }
+    });
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ["data-u4-lang", "lang"] });
   }
 
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot, { once: true });
-  else boot();
+  function syncTopChrome() {
+    var l = getLang();
+    var back = document.getElementById("u4hBackLink");
+    if (back) {
+      back.textContent = t("← Electrical", "← Electricidad", "← Электрика");
+      back.href = "../../index.html?lang=" + encodeURIComponent(l) + "#electrical";
+    }
+    var pr = document.getElementById("u4hPrintBtn");
+    if (pr) pr.textContent = t("Print / PDF", "Imprimir / PDF", "Печать / PDF");
+    var btns = document.querySelectorAll("[data-lang-pick]");
+    for (var i = 0; i < btns.length; i++) {
+      var on = btns[i].getAttribute("data-lang-pick") === l;
+      btns[i].classList.toggle("is-active", on);
+      btns[i].setAttribute("aria-checked", on ? "true" : "false");
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
+  }
 })();

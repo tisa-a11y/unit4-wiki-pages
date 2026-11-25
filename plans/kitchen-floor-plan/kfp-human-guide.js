@@ -266,17 +266,17 @@
           " L " + xRange.toFixed(1) + " " + yStep.toFixed(1) + ' Z" fill="#FCFDFE" stroke="#131A22" stroke-width="2.4"/>' +
 
         '<text x="' + ((xRange + xEast) / 2).toFixed(1) + '" y="22" text-anchor="middle" font-size="9.5" font-weight="800" fill="#131A22">' +
-          L('NORTH WALL (OPEN) · 115-1/2"', 'MURO NORTE ABIERTO · 115-1/2"', 'СЕВЕРНАЯ СТЕНА (ОТКРЫТА) · 115-1/2"') + "</text>" +
+          L('NORTH WALL · 115-1/2"', 'MURO NORTE · 115-1/2"', 'СЕВЕРНАЯ СТЕНА · 115-1/2"') + "</text>" +
         '<text x="' + (xRange - 8).toFixed(1) + '" y="' + ((yNorth + yStep) / 2).toFixed(1) + '" text-anchor="middle" font-size="8.5" font-weight="800" fill="#184E77" transform="rotate(-90 ' + (xRange - 12).toFixed(1) + " " + ((yNorth + yStep) / 2).toFixed(1) + ')">' +
           L('WEST RANGE 66-1/4"', 'OESTE ESTUFA 66-1/4"', 'ЗАПАД ПЛИТА 66-1/4"') + "</text>" +
         '<text x="' + ((xLeft + xEast) / 2).toFixed(1) + '" y="' + (ySouth + 36).toFixed(1) + '" text-anchor="middle" font-size="9.5" font-weight="800" fill="#131A22">' +
           L('SOUTH WALL 147" · Usable to door casing: 114" (tape) / 115" (scan)', 'MURO SUR 147" · Útil hasta chambrana: 114" (cinta) / 115" (escaneo)', 'ЮЖНАЯ СТЕНА 147" · До наличника двери: 114" (рулетка) / 115" (скан)') + "</text>" +
-        '<text x="' + (xEast + 22).toFixed(1) + '" y="' + ((yNorth + ySouth) / 2).toFixed(1) + '" text-anchor="middle" font-size="8.5" font-weight="800" fill="#131A22" transform="rotate(90 ' + (xEast + 22).toFixed(1) + " " + ((yNorth + ySouth) / 2).toFixed(1) + ')">' +
-          L('EAST WALL 126-1/4" (88" usable)', 'MURO ESTE 126-1/4" (88" útiles)', 'ВОСТОЧНАЯ СТЕНА 126-1/4" (88" полезн.)') + "</text>" +
+        '<text x="' + (xEast + 22).toFixed(1) + '" y="' + ((yNorth + ySouth) / 2 + 24).toFixed(1) + '" text-anchor="middle" font-size="8.5" font-weight="800" fill="#131A22" transform="rotate(90 ' + (xEast + 22).toFixed(1) + " " + ((yNorth + ySouth) / 2 + 24).toFixed(1) + ')">' +
+          L('EAST WALL 126-1/4" (82" cab/ref)', 'MURO ESTE 126-1/4" (82" gab/ref)', 'ВОСТОЧНАЯ СТЕНА 126-1/4" (82" меб.)') + "</text>" +
 
-        '<line x1="' + (xEast - 29.375 * S).toFixed(1) + '" y1="' + yNorth.toFixed(1) + '" x2="' + xEast.toFixed(1) + '" y2="' + yNorth.toFixed(1) + '" stroke="#FFFFFF" stroke-width="4"/>' +
-        '<line x1="' + (xEast - 29.375 * S).toFixed(1) + '" y1="' + yNorth.toFixed(1) + '" x2="' + xEast.toFixed(1) + '" y2="' + yNorth.toFixed(1) + '" stroke="#184E77" stroke-width="1.4" stroke-dasharray="4 3"/>' +
-        '<text x="' + (xEast - 14.7 * S).toFixed(1) + '" y="' + (yNorth + 12).toFixed(1) + '" text-anchor="middle" font-size="7.5" font-weight="700" fill="#184E77">' + L('Hall 29-3/8"', 'Pasillo 29-3/8"', 'Коридор 29-3/8"') + "</text>" +
+        '<line x1="' + xEast.toFixed(1) + '" y1="' + yNorth.toFixed(1) + '" x2="' + xEast.toFixed(1) + '" y2="' + (yNorth + 29.5 * S).toFixed(1) + '" stroke="#FFFFFF" stroke-width="4.5"/>' +
+        '<line x1="' + xEast.toFixed(1) + '" y1="' + yNorth.toFixed(1) + '" x2="' + xEast.toFixed(1) + '" y2="' + (yNorth + 29.5 * S).toFixed(1) + '" stroke="#184E77" stroke-width="1.5" stroke-dasharray="4 3"/>' +
+        '<text x="' + (xEast + 6).toFixed(1) + '" y="' + (yNorth + 15 * S).toFixed(1) + '" font-size="7.5" font-weight="800" fill="#184E77">' + L('Hall 29-1/2"', 'Pasillo 29-1/2"', 'Коридор 29-1/2"') + "</text>" +
 
         '<g class="kfp-hit" data-cab="W-B2" style="cursor:pointer">' +
           '<rect x="' + xRange.toFixed(1) + '" y="' + (yNorth + 0.25 * S).toFixed(1) + '" width="' + (24 * S).toFixed(1) + '" height="' + (18 * S).toFixed(1) + '" fill="' + cabColor + '" stroke="' + selStroke("W-B2", "#2D4A3E") + '" stroke-width="' + selWidth("W-B2") + '"/>' +

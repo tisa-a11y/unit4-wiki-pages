@@ -4,7 +4,7 @@
   "project": "1231 11th Avenue Unit 4, San Francisco, CA",
   "room": "kitchen",
   "target_delivery_date": "2026-11-21",
-  "revision": "2026-11-22-r2",
+  "revision": "R8",
   "status": "PLANNING_AND_MOCKUP_ONLY_ROUGH_IN_ON_HOLD",
   "governing_sources": {
     "kitchen_spec": "https://drive.google.com/file/d/1iXinIsipgqR6ak5jdWSTmbbL5netZUhS/view",
@@ -34,8 +34,8 @@
       "t_provenance": "to_measure",
       "formula_subfloor_from_aff": "H_subfloor = H_AFF + t",
       "formula_aff_from_subfloor": "H_AFF = H_subfloor - t",
-      "crew_banner_en": "Bare subfloor is currently down. Add finished floor thickness (+t, est. 3/4 in — confirm before final box fastening) when measuring up from bare wood.",
-      "crew_banner_es": "Actualmente está descubierto el subpiso de madera. Sume el espesor del piso terminado (+t, est. 3/4 pulg. — confirmar antes de fijar cajas) al medir desde el subpiso."
+      "crew_banner_en": "Bare subfloor is currently down. Add finished floor thickness (+t, est. 3/4 in \u2014 confirm before final box fastening) when measuring up from bare wood.",
+      "crew_banner_es": "Actualmente est\u00e1 descubierto el subpiso de madera. Sume el espesor del piso terminado (+t, est. 3/4 pulg. \u2014 confirmar antes de fijar cajas) al medir desde el subpiso."
     },
     "wall_substrate_locks_2026_11_20": {
       "kitchen_drywall_in": 0.5,
@@ -54,18 +54,8 @@
         "length_in": 115.5,
         "measure_boundary": "wall_to_wall",
         "provenance": "plan-derived (field cross-check 115.5625)",
-        "openings": [
-          {
-            "id": "hall-opening",
-            "label_en": "Hallway Opening (no door)",
-            "label_es": "Vano al Pasillo (sin puerta)",
-            "from_ne_corner_in": 0.0,
-            "width_in": 29.5,
-            "height_aff_in": 79.0,
-            "measure_boundary": "clear_between_casings",
-            "note": "East-wall face places hall opening 96.5 to 126.0 in north of SE corner"
-          }
-        ]
+        "openings": [],
+        "note": "Solid 115-1/2 in partition separating Kitchen from exterior Common Stair Landing; 29-1/2 x 79 in Hallway cased opening sits at NE corner on East wall (96-1/2 to 126 in N of SE corner)."
       },
       "east": {
         "length_in": 126.25,
@@ -85,8 +75,8 @@
             "type": "base_cabinet",
             "start_in": 36.0,
             "end_in": 54,
-            "label_en": "18 in Drawers — Plan-Derived",
-            "label_es": "Cajones18pulg. — Derivado del plano"
+            "label_en": "18 in Drawers \u2014 Plan-Derived",
+            "label_es": "Cajones18pulg. \u2014 Derivado del plano"
           },
           {
             "id": "app-fridge",
@@ -118,8 +108,8 @@
         "exclusion_zones": [
           {
             "id": "d04-panel-back-no-screw",
-            "label_en": "NO SCREWS / NO BOXES / NO BACK ENTRY — Dining Subpanel D04 Can Behind",
-            "label_es": "PROHIBIDO TORNILLOS / CAJAS / PASAR CABLES — Respaldo Tablero D04 (Comedor)",
+            "label_en": "NO SCREWS / NO BOXES / NO BACK ENTRY \u2014 Dining Subpanel D04 Can Behind",
+            "label_es": "PROHIBIDO TORNILLOS / CAJAS / PASAR CABLES \u2014 Respaldo Tablero D04 (Comedor)",
             "s_from_se_start_in": 13.0,
             "s_from_se_end_in": 27.5,
             "panel_cl_from_se_model_in": 20.25,
@@ -141,7 +131,7 @@
             "end_in": 60.0,
             "aff_bottom_in": 55.125,
             "aff_top_in": 95.5625,
-            "note": "Approved30in East upper; placement plan-derived. Never anchor in53–77in D04 no-screw zone."
+            "note": "Approved30in East upper; placement plan-derived. Never anchor in53\u201377in D04 no-screw zone."
           }
         ]
       },
@@ -163,8 +153,8 @@
             "type": "base_cabinet",
             "start_in": 36.0,
             "end_in": 48,
-            "label_en": "12 in Base — Plan-Derived",
-            "label_es": "Base 12 pulg. — Derivada del plano"
+            "label_en": "12 in Base \u2014 Plan-Derived",
+            "label_es": "Base 12 pulg. \u2014 Derivada del plano"
           },
           {
             "id": "cab-s-dw",
@@ -181,16 +171,16 @@
             "end_in": 102,
             "center_in": 87,
             "status": "hold_field_verify_6hvjQGR85r5gFjg7",
-            "label_en": "30 in Sink Base — CL87 Plan-Derived / HOLD",
-            "label_es": "Gabinete 30 pulg. — Eje87 derivado / EN ESPERA"
+            "label_en": "30 in Sink Base \u2014 CL87 Plan-Derived / HOLD",
+            "label_es": "Gabinete 30 pulg. \u2014 Eje87 derivado / EN ESPERA"
           },
           {
             "id": "cab-s-filler",
             "type": "base_cabinet",
             "start_in": 102,
             "end_in": 108,
-            "label_en": "6 in End Option — Passage HOLD",
-            "label_es": "Opción extremo 6 pulg. — Paso EN ESPERA"
+            "label_en": "6 in End Option \u2014 Passage HOLD",
+            "label_es": "Opci\u00f3n extremo 6 pulg. \u2014 Paso EN ESPERA"
           },
           {
             "id": "south-door-walk",
@@ -309,13 +299,13 @@
         "44_aff_ke_revi": {
           "aff_in": 44.0,
           "above_counter_in": 8.0,
-          "label_en": "44 in above floor (8 in above counter — KE Rev I)",
+          "label_en": "44 in above floor (8 in above counter \u2014 KE Rev I)",
           "label_es": "44 pulg. sobre piso (8 pulg. sobre cubierta)"
         },
         "41_aff_ks7_r8": {
           "aff_in": 41.0,
           "above_counter_in": 5.0,
-          "label_en": "41 in above floor (5 in above counter — K-S7 proposal)",
+          "label_en": "41 in above floor (5 in above counter \u2014 K-S7 proposal)",
           "label_es": "41 pulg. sobre piso (5 pulg. sobre cubierta)"
         }
       }
@@ -325,13 +315,13 @@
       "options": {
         "air_switch_and_wireless_remote": {
           "label_en": "Counter Air Button (Disposal) + Wireless Remote at S2 (Zero Sink Switch Box)",
-          "label_es": "Botón de Aire en Cubierta (Triturador) + Control Inalámbrico en S2 (Sin Caja de Interruptor)",
+          "label_es": "Bot\u00f3n de Aire en Cubierta (Triturador) + Control Inal\u00e1mbrico en S2 (Sin Caja de Interruptor)",
           "requires_14_3_traveler": false,
           "saves_14_3_ft": 30.3
         },
         "wired_2gang_sink_switch": {
           "label_en": "Wired 2-Gang Switch Box East of Sink @ 70 in (Disposal + 3-Way Task Lights)",
-          "label_es": "Caja Doble Cableada al Este del Fregadero a 70 pulg. (Triturador + Luces 3 Vías)",
+          "label_es": "Caja Doble Cableada al Este del Fregadero a 70 pulg. (Triturador + Luces 3 V\u00edas)",
           "requires_14_3_traveler": true,
           "adds_14_3_ft": 30.3
         }
@@ -348,8 +338,8 @@
             89.75
           ],
           "offset_from_south_wall_in": 14.5,
-          "label_en": "3 Task Lights @ 17-3/4, 53-3/4, 89-3/4 in (positions provisional — sink CL87 / window alignment HOLD)",
-          "label_es": "3 Luces de Tarea a 17-3/4, 53-3/4, 89-3/4 pulg. (posiciones provisionales — eje87/ventana EN ESPERA)"
+          "label_en": "3 Task Lights @ 17-3/4, 53-3/4, 89-3/4 in (positions provisional \u2014 sink CL87 / window alignment HOLD)",
+          "label_es": "3 Luces de Tarea a 17-3/4, 53-3/4, 89-3/4 pulg. (posiciones provisionales \u2014 eje87/ventana EN ESPERA)"
         },
         "two_pendants_sink": {
           "count": 2,
@@ -358,8 +348,8 @@
             102.0
           ],
           "offset_from_south_wall_in": 15.0,
-          "label_en": "2 Pendants @ 78 and 102 in (historical spacing — revised sink CL87 / alignment HOLD)",
-          "label_es": "2 Colgantes a 78 y 102 pulg. (separación anterior — eje87/alineación EN ESPERA)"
+          "label_en": "2 Pendants @ 78 and 102 in (historical spacing \u2014 revised sink CL87 / alignment HOLD)",
+          "label_es": "2 Colgantes a 78 y 102 pulg. (separaci\u00f3n anterior \u2014 eje87/alineaci\u00f3n EN ESPERA)"
         }
       }
     },
@@ -368,7 +358,7 @@
       "options": {
         "df_breaker_at_d04": {
           "label_en": "Dual-Function 15A Breaker at D04 (Code-clean; check Viking igniter note)",
-          "label_es": "Interruptor Doble Función 15A en D04"
+          "label_es": "Interruptor Doble Funci\u00f3n 15A en D04"
         },
         "afci_breaker_plus_accessible_deadfront_gfci": {
           "label_en": "15A AFCI Breaker at D04 + Accessible Dead-Front GFCI (Electrician option)",
@@ -380,12 +370,12 @@
       "default": "in_wall_bored_bands_ke_revi",
       "options": {
         "in_wall_bored_bands_ke_revi": {
-          "label_en": "In-Wall Horizontal Bored Bands Around SE Corner (30/26/24/20 in — saves ~115 ft Romex)",
+          "label_en": "In-Wall Horizontal Bored Bands Around SE Corner (30/26/24/20 in \u2014 saves ~115 ft Romex)",
           "label_es": "En Muro por Franjas Perforadas en Esquina SE (30/26/24/20 pulg.)"
         },
         "via_attic_overhead_e20": {
           "label_en": "Up to Attic & Drop Down South Wall (Use if corner framing blocks boring)",
-          "label_es": "Subir al Ático y Bajar por Muro Sur"
+          "label_es": "Subir al \u00c1tico y Bajar por Muro Sur"
         }
       }
     }
@@ -414,7 +404,7 @@
     },
     "planning_gates_project_planning_only": [
       "Rescheduled NEXT HVAC/Electrical Walkthrough: Reconcile signed NEXT #5153-3 80A/#4 Cu feeder vs E20-R1 100A/#3 Cu THWN-2 owner target.",
-      "Hold 6hvRcQ4XC9mr56g7: Side-entry notches on D04 on HOLD; route exits vertically through top header to attic or approved in-wall stud bands — NEVER through panel back.",
+      "Hold 6hvRcQ4XC9mr56g7: Side-entry notches on D04 on HOLD; route exits vertically through top header to attic or approved in-wall stud bands \u2014 NEVER through panel back.",
       "Hold 6hvjQ8qJXqR8Cfj7: Do not pull interior kitchen wire or close drywall until rough-in layout and trade release are confirmed."
     ],
     "slots_1_to_20": [
@@ -528,7 +518,7 @@
         "id": "HD",
         "group": "kitchen",
         "serves_en": "Zephyr Savona Hood (Direct Hardwire @ 83-86 in + Lock-Off)",
-        "serves_es": "Campana Zephyr (Conexión Directa a 83-86 pulg. + Bloqueo)",
+        "serves_es": "Campana Zephyr (Conexi\u00f3n Directa a 83-86 pulg. + Bloqueo)",
         "amps": 15,
         "poles": 1,
         "breaker_type": "AFCI + Breaker Handle Lock-Off",
@@ -560,7 +550,7 @@
         "id": "HVAC",
         "group": "unit_other",
         "serves_en": "Attic Furnace (Trane S8X1A040M3PTCC) via Disconnect",
-        "serves_es": "Calefactor en Ático con Desconectador",
+        "serves_es": "Calefactor en \u00c1tico con Desconectador",
         "amps": 15,
         "poles": 1,
         "breaker_type": "Standard (confirm Trane label)",
@@ -602,7 +592,7 @@
         "id": "BED",
         "group": "unit_other",
         "serves_en": "Bedroom Outlets B1-B5 + Closet LV Switch",
-        "serves_es": "Contactos Recámara B1-B5 + Luz Clóset",
+        "serves_es": "Contactos Rec\u00e1mara B1-B5 + Luz Cl\u00f3set",
         "amps": 20,
         "poles": 1,
         "breaker_type": "AFCI",
@@ -616,7 +606,7 @@
         "id": "BATH-R",
         "group": "unit_other",
         "serves_en": "Bathroom Outlets V1 (Vanity) + T1 (Toilet Bidet)",
-        "serves_es": "Contactos Baño V1 (Lavabo) + T1 (Inodoro)",
+        "serves_es": "Contactos Ba\u00f1o V1 (Lavabo) + T1 (Inodoro)",
         "amps": 20,
         "poles": 1,
         "breaker_type": "GFCI / Dual-Function",
@@ -630,7 +620,7 @@
         "id": "BATH-L",
         "group": "unit_other",
         "serves_en": "Bathroom Ceiling Light, Vanity Light & Humidity Fan",
-        "serves_es": "Luces y Extractor de Humedad de Baño",
+        "serves_es": "Luces y Extractor de Humedad de Ba\u00f1o",
         "amps": 15,
         "poles": 1,
         "breaker_type": "AFCI / Standard",
@@ -700,7 +690,7 @@
         "id": "ATTIC",
         "group": "unit_other",
         "serves_en": "Attic Service Outlet (<=25 ft of Furnace) + Hatch Switched Light",
-        "serves_es": "Contacto de Servicio en Ático + Luz con Interruptor en Escotilla",
+        "serves_es": "Contacto de Servicio en \u00c1tico + Luz con Interruptor en Escotilla",
         "amps": 15,
         "poles": 1,
         "breaker_type": "GFCI / Dual-Function",
@@ -709,7 +699,18 @@
         "route_mode": "attic_direct",
         "net_ft_ew2": 39.2
       }
-    ]
+    ],
+    "active_new_subpanel_circuits": 14,
+    "open_spares": 6,
+    "open_spare_spaces": [
+      11,
+      12,
+      17,
+      18,
+      19,
+      20
+    ],
+    "reused_existing_panel_rule": "Reused original room lights/switches and reused common-room outlets stay on Unit 4 Existing Panel (0 spaces used on new 20-space Eaton BRP20L125G subpanel); Space #10 feeds newly pulled 12/2 common-room outlet drops only."
   },
   "kitchen_devices": [
     {
@@ -743,8 +744,8 @@
       "box_type": "1-gang new-work deep box (20A TR duplex)",
       "measure_boundary": "aff",
       "provenance": "owner-locked",
-      "crew_note_en": "Placement HELD pending revised18in East drawers, South12in base, sink72–102in /CL87 and closed former pie-safe reconciliation. Field verify.",
-      "crew_note_es": "Ubicación EN ESPERA hasta conciliar cajones Este18pulg., base Sur12pulg., fregadero72–102/eje87 y cierre de alacena anterior. Verificar en obra."
+      "crew_note_en": "Placement HELD pending revised18in East drawers, South12in base, sink72\u2013102in /CL87 and closed former pie-safe reconciliation. Field verify.",
+      "crew_note_es": "Ubicaci\u00f3n EN ESPERA hasta conciliar cajones Este18pulg., base Sur12pulg., fregadero72\u2013102/eje87 y cierre de alacena anterior. Verificar en obra."
     },
     {
       "id": "REF-1",
@@ -776,8 +777,8 @@
       "box_type": "1-gang box (20A TR duplex)",
       "measure_boundary": "aff",
       "provenance": "plan-derived",
-      "crew_note_en": "Placement HELD pending revised18in East drawers, South12in base, sink72–102in /CL87 and closed former pie-safe reconciliation. Field verify.",
-      "crew_note_es": "Ubicación EN ESPERA hasta conciliar cajones Este18pulg., base Sur12pulg., fregadero72–102/eje87 y cierre de alacena anterior. Verificar en obra."
+      "crew_note_en": "Placement HELD pending revised18in East drawers, South12in base, sink72\u2013102in /CL87 and closed former pie-safe reconciliation. Field verify.",
+      "crew_note_es": "Ubicaci\u00f3n EN ESPERA hasta conciliar cajones Este18pulg., base Sur12pulg., fregadero72\u2013102/eje87 y cierre de alacena anterior. Verificar en obra."
     },
     {
       "id": "S2",
@@ -796,8 +797,8 @@
       "box_type": "1-gang (or 2-gang low-voltage divider plate w/ wireless pendant remote)",
       "measure_boundary": "aff",
       "provenance": "plan-derived",
-      "crew_note_en": "Placement HELD pending revised18in East drawers, South12in base, sink72–102in /CL87 and closed former pie-safe reconciliation. Field verify.",
-      "crew_note_es": "Ubicación EN ESPERA hasta conciliar cajones Este18pulg., base Sur12pulg., fregadero72–102/eje87 y cierre de alacena anterior. Verificar en obra."
+      "crew_note_en": "Placement HELD pending revised18in East drawers, South12in base, sink72\u2013102in /CL87 and closed former pie-safe reconciliation. Field verify.",
+      "crew_note_es": "Ubicaci\u00f3n EN ESPERA hasta conciliar cajones Este18pulg., base Sur12pulg., fregadero72\u2013102/eje87 y cierre de alacena anterior. Verificar en obra."
     },
     {
       "id": "DW-GD",
@@ -813,8 +814,8 @@
       "box_type": "2-gang flush box inside C3 sink base (2 separate TR receptacles, separate neutrals)",
       "measure_boundary": "aff",
       "provenance": "plan-derived placement HOLD",
-      "crew_note_en": "Provisional inside72–102in sink base, CL87 derived; NEVER behind48–72in dishwasher. Separate neutrals. Field verify before fastening.",
-      "crew_note_es": "Provisional dentro de gabinete72–102pulg., eje87 derivado; NUNCA detrás de lavavajillas48–72pulg. Neutros separados. Verificar antes de fijar."
+      "crew_note_en": "Provisional inside72\u2013102in sink base, CL87 derived; NEVER behind48\u201372in dishwasher. Separate neutrals. Field verify before fastening.",
+      "crew_note_es": "Provisional dentro de gabinete72\u2013102pulg., eje87 derivado; NUNCA detr\u00e1s de lavavajillas48\u201372pulg. Neutros separados. Verificar antes de fijar."
     },
     {
       "id": "GD-AIR-OR-SW",
@@ -834,7 +835,7 @@
       "measure_boundary": "aff",
       "provenance": "to_confirm_option",
       "crew_note_en": "Default: sink-deck air push button (no wall switch box at sink). Toggleable to wired wall switch @ 70 in.",
-      "crew_note_es": "Por defecto: botón de aire en la cubierta junto a la llave (sin caja en pared)."
+      "crew_note_es": "Por defecto: bot\u00f3n de aire en la cubierta junto a la llave (sin caja en pared)."
     },
     {
       "id": "W1",
@@ -902,8 +903,8 @@
       "measure_boundary": "aff",
       "provenance": "owner-locked (kitchen/SPEC.md 2026-11-20 02:48 PT)",
       "supersedes": "Supersedes K-S7 100 in box, KE-04 104 in box, and Nov 19 4x4 offset box at 100 in",
-      "crew_note_en": "HD-1 flush one-gang ~83–86in AFF; Viking1-inch island trim only. Match actual OEM knockout/mounting constraints; old4x4/mud-ring104in instructions retired.",
-      "crew_note_es": "HD-1 caja sencilla al ras ~83–86pulg. sobre piso terminado; solo remate Viking de1pulg. Seguir orificio y montaje reales del fabricante; caja4x4/aro a104pulg. retirados."
+      "crew_note_en": "HD-1 flush one-gang ~83\u201386in AFF; Viking1-inch island trim only. Match actual OEM knockout/mounting constraints; old4x4/mud-ring104in instructions retired.",
+      "crew_note_es": "HD-1 caja sencilla al ras ~83\u201386pulg. sobre piso terminado; solo remate Viking de1pulg. Seguir orificio y montaje reales del fabricante; caja4x4/aro a104pulg. retirados."
     },
     {
       "id": "SW-ENTRY",
@@ -931,7 +932,7 @@
       "measure_boundary": "wall_to_wall",
       "provenance": "plan-derived",
       "crew_note_en": "Centered in open kitchen work floor between counter fronts.",
-      "crew_note_es": "Centrada en el área libre de trabajo de la cocina."
+      "crew_note_es": "Centrada en el \u00e1rea libre de trabajo de la cocina."
     },
     {
       "id": "T1-T2-T3",
@@ -953,7 +954,7 @@
       "measure_boundary": "wall_to_wall",
       "provenance": "to_confirm_option",
       "crew_note_en": "Lighting setout HELD until sink CL87 plan-derived and actual window center are reconciled; 3 lights vs2 pendants remains an option.",
-      "crew_note_es": "Replanteo de luces EN ESPERA hasta conciliar eje87 derivado y ventana real;3 luces o2 colgantes sigue como opción."
+      "crew_note_es": "Replanteo de luces EN ESPERA hasta conciliar eje87 derivado y ventana real;3 luces o2 colgantes sigue como opci\u00f3n."
     }
   ],
   "horizontal_bore_bands_aff_in": {
@@ -975,7 +976,7 @@
     }
   },
   "material_takeoff_baseline_zero_prices": {
-    "policy_banner": "Gross Proposed Qty — Verify On-Hand Stock Before Ordering (Zero Prices / Crew Safe)",
+    "policy_banner": "Gross Proposed Qty \u2014 Verify On-Hand Stock Before Ordering (Zero Prices / Crew Safe)",
     "default_waste_pct": 15,
     "alt_waste_pct": 20,
     "tail_allowance_per_box_end_in": 18,
@@ -1053,10 +1054,10 @@
       ],
       "sink_center": 87
     },
-    "basis": "Plan-derived from approved 36+12+24; common SE zero, window/casing and passage require field verification. Electrical placement HELD; old 51–75 / 75–105 / CL90 are historical only.",
+    "basis": "Plan-derived from approved 36+12+24; common SE zero, window/casing and passage require field verification. Electrical placement HELD; old 51\u201375 / 75\u2013105 / CL90 are historical only.",
     "pie_safe": "Weather-seal and cover; no preserved niche or shelves.",
-    "hood": "Viking 1-inch island trim only; HD-1 flush 1-gang approximately83–86in AFF; follow OEM and field constraints."
+    "hood": "Viking 1-inch island trim only; HD-1 flush 1-gang approximately83\u201386in AFF; follow OEM and field constraints."
   },
   "pins": [],
-  "updated_at": "2026-11-24T23:53:04.858Z"
+  "updated_at": "2026-11-25T04:50:00-08:00"
 }

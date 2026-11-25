@@ -549,11 +549,11 @@
 
     const list = [
       { id: 'E1', ckt: 'SA-A', space: 1, wall: 'east', x: 0, y: 10, z: hCounter, station: 10, gauge: '12/2', boundary: 'above_finished_floor', box_en: '1-gang deep box (20A duplex)', box_es: 'Caja sencilla profunda (contacto 20A)', note_en: 'Below 53" D04 no-screw zone; never attach to D04 steel can.', note_es: 'Debajo de la zona prohibida D04 (53"–77"); nunca fijar al gabinete D04.' },
-      { id: 'E2', ckt: 'SA-A', space: 1, wall: 'east', x: 0, y: 48, z: hCounter, station: 48, gauge: '12/2', boundary: 'above_finished_floor', box_en: '1-gang deep box (20A duplex)', box_es: 'Caja sencilla profunda (contacto 20A)', note_en: 'Centered over 24" East drawer base, 12" from Haier fridge bay.', note_es: 'Sobre base cajonera de 24", a 12" del claro del refrigerador Haier.' },
-      { id: 'REF-1', ckt: 'REF', space: 4, wall: 'east', x: 0, y: 74, z: 15, station: 74, gauge: '12/2', boundary: 'above_finished_floor', box_en: '1-gang flush box (20A single outlet)', box_es: 'Caja sencilla empotrada (contacto sencillo 20A)', note_en: 'Centered in 60"–88" Haier fridge bay; verify rear cord pocket.', note_es: 'Centrado en claro 60"–88" del refrigerador Haier; verificar hueco trasero.' },
+      { id: 'E2', ckt: 'SA-A', space: 1, wall: 'east', x: 0, y: 45, z: hCounter, station: 45, gauge: '12/2', boundary: 'above_finished_floor', box_en: '1-gang deep box (20A duplex)', box_es: 'Caja sencilla profunda (contacto 20A)', note_en: 'Centered over locked 18" East drawer base (36"–54" N), 9" clear of Haier fridge bay.', note_es: 'Centrado sobre cajonera de 18" (36"–54" N), a 9" del refrigerador Haier.' },
+      { id: 'REF-1', ckt: 'REF', space: 4, wall: 'east', x: 0, y: 68, z: 15, station: 68, gauge: '12/2', boundary: 'above_finished_floor', box_en: '1-gang flush box (20A single outlet)', box_es: 'Caja sencilla empotrada (contacto sencillo 20A)', note_en: 'Centered in locked 54"–82" Haier 28" fridge bay; verify rear cord pocket.', note_es: 'Centrado en claro 54"–82" del refrigerador Haier 28"; verificar hueco trasero.' },
       { id: 'S1', ckt: 'SA-B', space: 2, wall: 'south', x: 24, y: 0, z: hCounter, station: 24, gauge: '12/2', boundary: 'above_finished_floor', box_en: '1-gang box (20A duplex)', box_es: 'Caja sencilla (contacto 20A)', note_en: 'Provisional station; weather-seal and cover former pie-safe, then verify box backing and counter clearance on site.', note_es: 'Posición provisional; sellar contra intemperie y cubrir la alacena anterior; verificar respaldo y claro sobre cubierta en obra.' },
       { id: 'S2', ckt: 'SA-B', space: 2, wall: 'south', x: 65, y: 0, z: hCounter, station: 65, gauge: '12/2', boundary: 'above_finished_floor', box_en: isOptB ? '1-gang box (20A duplex)' : '1-gang (or 2-gang w/ wireless light remote)', box_es: isOptB ? 'Caja sencilla (contacto 20A)' : 'Caja sencilla (o doble con control inalámbrico)', note_en: 'Provisional station near former opening and South window casing (72-7/8"); verify after weather-sealing and covering.', note_es: 'Posición provisional junto al hueco anterior y chambrana Sur (72-7/8"); verificar después de sellar y cubrir.' },
-      { id: 'DW-GD', ckt: 'DW + GD', space: 5, spaces: [5, 6], wall: 'south', x: dwGdX, y: 0, z: 14, station: dwGdX, gauge: '14/2', boundary: 'above_finished_floor', box_en: '2-gang box inside sink base (2 separate circuits · separate neutrals)', box_es: 'Caja doble dentro del fregadero (2 circuitos · neutros separados)', note_en: 'Inside 30" sink base, NEVER behind 24" dishwasher (48"–72"). Keep Space 5 & Space 6 neutrals separate and clearly labeled.', note_es: 'Dentro del gabinete de fregadero 30", NUNCA detrás del lavavajillas (48"–72"). Mantener neutros de Espacios 5 y 6 separados y etiquetados.' },
+      { id: 'DW-GD', ckt: 'DW + GD', space: 5, spaces: [5, 6], wall: 'south', x: dwGdX, y: 0, z: 14, station: dwGdX, gauge: '12/2 + 14/2', boundary: 'above_finished_floor', box_en: '2-gang box inside sink base (2 separate circuits · separate neutrals)', box_es: 'Caja doble dentro del fregadero (2 circuitos · neutros separados)', note_en: 'Inside 30" sink base, NEVER behind 24" dishwasher (48"–72"). Keep Space 5 & Space 6 neutrals separate and clearly labeled.', note_es: 'Dentro del gabinete de fregadero 30", NUNCA detrás del lavavajillas (48"–72"). Mantener neutros de Espacios 5 y 6 separados y etiquetados.' },
       { id: 'GD-AIR-OR-SW', ckt: isOptB ? 'GD + LT' : 'GD', space: 6, spaces: isOptB ? [6, 9] : [6], wall: 'south', x: isOptB ? swSinkX : (sinkStart + 18), y: 0, z: isOptB ? 39.5 : 36, station: isOptB ? swSinkX : (sinkStart + 18), gauge: isOptB ? '14/3' : '14/2', boundary: 'above_finished_floor', box_en: isOptB ? 'Wired 2-gang wall switch box @ 70" (Disposal + 3-Way Task Lights)' : 'Countertop sink-deck air button beside faucet (zero wall switch box)', box_es: isOptB ? 'Caja doble cableada en muro a 70" (Triturador + Luces 3 vías)' : 'Botón de aire en cubierta junto a la llave (sin caja en pared)', note_en: isOptB ? 'Option B active: adds wired 2-gang box at 70" and 14/3 3-way traveler to entry switch.' : 'Option A active: clean splash wall using sink-deck air button + wireless light remote at S2.', note_es: isOptB ? 'Opción B activa: agrega caja doble a 70" y cable 14/3 de 3 vías a la entrada.' : 'Opción A activa: muro limpio usando botón de aire en cubierta + control inalámbrico en S2.' },
       { id: 'W1', ckt: 'SA-C', space: 3, wall: 'west', x: 115.5, y: 69, z: hCounter, station: 9, gauge: '12/2', boundary: 'above_finished_floor', box_en: '1-gang box + ~1" tile mud ring (20A duplex)', box_es: 'Caja sencilla + aro ~1" azulejo (contacto 20A)', note_en: 'Centered over left 18" base cabinet; ~1" proud for 1/2" HardieBacker + tile (no stud shims).', note_es: 'Centrado sobre gabinete izquierdo 18"; ~1" salida para HardieBacker 1/2" + azulejo (sin calzas).' },
       { id: 'W2', ckt: 'SA-C', space: 3, wall: 'west', x: 115.5, y: 117, z: hCounter, station: 57, gauge: '12/2', boundary: 'above_finished_floor', box_en: '1-gang box + ~1" tile mud ring (20A duplex)', box_es: 'Caja sencilla + aro ~1" azulejo (contacto 20A)', note_en: 'Centered over right 18" base cabinet; ~1" proud for 1/2" HardieBacker + tile (no stud shims).', note_es: 'Centrado sobre gabinete derecho 18"; ~1" salida para HardieBacker 1/2" + azulejo (sin calzas).' },
@@ -656,8 +656,8 @@
       'DW': dwFt, 'GD': gdFt, 'RG': rgFt, 'HD': hdFt, 'LT': ltFt
     };
 
-    const net12_2 = Number((saAFt + saBFt + saCFt + refFt).toFixed(1));
-    const net14_2 = Number((dwFt + gdFt + rgFt + hdFt + ltFt).toFixed(1));
+    const net12_2 = Number((saAFt + saBFt + saCFt + refFt + dwFt).toFixed(1));
+    const net14_2 = Number((gdFt + rgFt + hdFt + ltFt).toFixed(1));
     const net14_3 = Number(traveler143Net.toFixed(1));
     const gross12_2 = Math.ceil(net12_2 * mult);
     const gross14_2 = Math.ceil(net14_2 * mult);
@@ -665,8 +665,8 @@
 
     const useDeadfrontRg = state.range_gfci_method === 'afci_breaker_plus_accessible_deadfront_gfci';
     const breakers = {
-      BRN120DF: 4,
-      BRN115DF: useDeadfrontRg ? 2 : 3,
+      BRN120DF: 5,
+      BRN115DF: useDeadfrontRg ? 1 : 2,
       BRN115AF: useDeadfrontRg ? 3 : 2,
       BRLW1_lockoff: 1,
       deadfront_gfci_15a: useDeadfrontRg ? 1 : 0
@@ -962,9 +962,9 @@
     /* Base Cabinets & Appliances (24" counter depth true to scale) */
     const sinkS = state.sink_base_start_in;
     const sinkE = sinkS + state.sink_base_width_in;
-    /* East Wall: Corner 0-36, Drawer 36-60, Haier Fridge 60-88 (28" deep w/ 2" gap) */
-    el('rect', { x: px(24), y: py(60), width: 24 * S, height: 60 * S, fill: '#e6efe9', stroke: '#2f4f42', 'stroke-width': 1.3 }, svg);
-    el('rect', { x: px(29.5), y: py(88), width: 29.5 * S, height: 28 * S, fill: '#e2e8f0', stroke: '#475569', 'stroke-width': 1.4 }, svg);
+    /* East Wall: Corner 0-36, Drawer 36-54 (18"), Haier Fridge 54-82 (28" deep w/ 2" gap), Hall Opening 96.5-126 */
+    el('rect', { x: px(24), y: py(54), width: 24 * S, height: 54 * S, fill: '#e6efe9', stroke: '#2f4f42', 'stroke-width': 1.3 }, svg);
+    el('rect', { x: px(29.5), y: py(82), width: 29.5 * S, height: 28 * S, fill: '#e2e8f0', stroke: '#475569', 'stroke-width': 1.4 }, svg);
 
     /* South Wall: 0-112 base cabinets (depth 24") */
     el('rect', { x: px(112), y: py(24), width: 112 * S, height: 24 * S, fill: '#e6efe9', stroke: '#2f4f42', 'stroke-width': 1.3 }, svg);
