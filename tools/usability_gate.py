@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Unit 4 Wiki — 4-Layer, 12-Gate Automated Usability & Visual QA Suite.
+"""Unit 4 Wiki — 4-Layer, 13-Gate Automated Usability & Visual QA Suite.
 
 Python 3.9-3.14 compatible (no backslashes inside f-string expressions; raw regex strings).
 Runs headless Chromium via Playwright against a local HTTP server serving the built wiki
@@ -12,7 +12,7 @@ Usage:
   python3 tools/usability_gate.py --report tmp/usability-report.html
 
 Exit codes:
-  0  All 12 gates PASSED
+  0  All 13 gates PASSED
   1  One or more gates FAILED (details printed + saved to HTML report)
 """
 from __future__ import annotations
@@ -22,6 +22,7 @@ import asyncio
 import base64
 import datetime
 import functools
+import itertools
 import html
 import http.server
 import io
@@ -46,6 +47,8 @@ try:
     HAS_PIL = True
 except ImportError:
     HAS_PIL = False
+
+from usability_editorial import JS_EDITORIAL_BLOCKS, audit_blocks, render_queue
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -76,6 +79,7 @@ ROOM_PAGES_CORE = [
 
 BROKEN_TEXT_PATTERNS = [
     (re.compile(r"\bundefined\b"), "literal 'undefined'"),
+    (re.compile(r"\bnull\b"), "literal 'null'"),
     (re.compile(r"\bNaN\b"), "literal 'NaN'"),
     (re.compile(r"\[object Object\]"), "literal '[object Object]'"),
     (re.compile(r"\ufffd"), "replacement glyph U+FFFD"),
@@ -372,7 +376,7 @@ JS_CONTRAST_AND_ARIA = r"""
     const fs = parseFloat(cs.fontSize);
     const fw = parseInt(cs.fontWeight, 10) || 400;
     const isLarge = fs >= 24 || (fs >= 18.66 && fw >= 700);
-    const minReq = isLarge ? 3.0 : 4.2; // 4.5 AA with tiny anti-alias margin
+    const minReq = isLarge ? 3.0 : 4.5; // WCAG AA computed-color threshold
     if (cr < minReq) {
       contrastIssues.push(
         el.tagName.toLowerCase() + (el.id ? '#' + el.id : '') +
@@ -507,21 +511,15 @@ JS_OVERLAP_AND_WRAP = r"""
   }
 
   // 1. Check fixed floating controls against content cards/headings/checklist/buttons
-  const isMobileVp = vw <= 760;
-  const atBottom = (window.scrollY + vh) >= (document.documentElement.scrollHeight - 16);
-  const floaters = Array.from(document.querySelectorAll('.u4-pin-fab, #u4AiFloatingDock')).filter(el => {
+  const floaters = Array.from(document.querySelectorAll('.u4-pin-fab, #u4AiFloatingDock, .u4-lai-dock')).filter(el => {
     const cs = getComputedStyle(el);
     return cs.position === 'fixed' && visibleRect(el);
   });
-  const allTargets = Array.from(document.querySelectorAll('main h1, main h2, .ck li, .u4-plan-launch-card, .u4-gal-btn, .u4-who-chip, #repSend'));
-  const interactiveTargets = Array.from(document.querySelectorAll('.u4-gal-btn, .u4-who-chip, #repSend, .u4-photo-btn, .u4-dictate-btn'));
+  const allTargets = Array.from(document.querySelectorAll('main h1, main h2, .u4h-card h2, .u4h-card h3, .u4h-card p, .u4h-step-body p, .ck li, .u4-plan-launch-card, .u4-gal-btn, .u4-who-chip, #repSend, .u4h-body button, .u4h-body input'));
   for (const fl of floaters) {
     const fr = visibleRect(fl);
     if (!fr) continue;
-    const isAiOrb = fl.id === 'u4AiFloatingDock';
-    // On 390px phone, the compact bottom-right Ask AI orb floats cleanly over scrolling text;
-    // verify it never permanently covers bottom interactive controls when scrolled to bottom.
-    const checkList = (isMobileVp && isAiOrb) ? (atBottom ? interactiveTargets : []) : allTargets;
+    const checkList = allTargets;
     for (const tg of checkList) {
       if (fl.contains(tg) || tg.contains(fl)) continue;
       const txt = (tg.innerText || tg.getAttribute('aria-label') || '').trim();
@@ -550,7 +548,7 @@ JS_OVERLAP_AND_WRAP = r"""
       if (Math.abs(ir.top - firstTop) > 6) {
         issues.push('Segmented switcher wrapped to 2nd row: "' + (it.innerText || '').trim() + '"');
       }
-      if (it.scrollHeight > it.clientHeight + 3) {
+      if (it.scrollHeight > it.clientHeight + 2) {
         issues.push('Segmented pill text overflow/clip: "' + (it.innerText || '').trim() + '" (scrollH=' + it.scrollHeight + ' clientH=' + it.clientHeight + ')');
       }
       if (ir.height > 44) {
@@ -621,10 +619,27 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
         "gate_10_text_es_parity_print": {"layer": "Layer 3 — Geometric, SVG, Photo & Content Forensics", "title": "Zero Broken Text, ES Parity & Print Emulation", "status": "PASS", "details": []},
         "gate_11_privacy_hygiene_syntax": {"layer": "Layer 3 — Geometric, SVG, Photo & Content Forensics", "title": "Privacy Firewall, Spec Hygiene & Script Syntax", "status": "PASS", "details": []},
         "gate_12_visual_baselines_report": {"layer": "Layer 4 — Visual Baselines & HTML QA Report", "title": "Golden Screenshots + Diff Report", "status": "PASS", "details": []},
+        "gate_13_editorial_instructions": {"layer": "Layer 4 — Editorial Review", "title": "Editorial, Anti-Redundancy & Meaningful Instructions", "status": "PASS", "details": []},
     }
 
     screenshots_for_report: List[Dict[str, str]] = []
     runtime_errors: List[str] = []
+    editorial_queue: List[Dict[str, str]] = []
+    editorial_seen = set()
+    coverage: List[str] = []
+
+    async def editorial_audit(page: Any, label: str, lang: str, room: bool = False) -> None:
+        snapshot = await page.evaluate(JS_EDITORIAL_BLOCKS)
+        if not snapshot.get("blocks"):
+            fail("gate_13_editorial_instructions", label + ": no rendered prose inspected")
+        coverage.append(label + "/" + lang)
+        for finding in audit_blocks(snapshot, label, lang, room=room):
+            key = (finding["page"], lang, finding["selector"], finding["text"], finding["reason"])
+            if key not in editorial_seen:
+                editorial_seen.add(key)
+                editorial_queue.append(finding)
+                fail("gate_13_editorial_instructions", label + " [" + lang + "] " + finding["selector"] + ": " + finding["reason"])
+
 
     def fail(gate_key: str, msg: str) -> None:
         gates[gate_key]["status"] = "FAIL"
@@ -655,6 +670,7 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
         if exe:
             launch_kw["executable_path"] = exe
         browser = await pw.chromium.launch(**launch_kw)
+        print("Running 13 usability gates (backend requests intercepted).", file=sys.stderr, flush=True)
 
         def attach_err_listeners(page: Any, label: str) -> None:
             page.on("pageerror", lambda e: runtime_errors.append(f"[{label}] pageerror: {str(e)[:200]}"))
@@ -916,8 +932,8 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
         viewports = [("desktop", 1440, 900), ("mobile", 390, 844)]
         for vp_name, vw, vh in viewports:
             is_mobile = vp_name == "mobile"
-            for lang in ("en", "es"):
-                theme = "light" if lang == "en" else "dark"
+            for lang, theme in itertools.product(("en", "es"), ("light", "dark")):
+                print(f"Matrix {vp_name}/{lang}/{theme}", file=sys.stderr, flush=True)
                 ctx = await browser.new_context(viewport={"width": vw, "height": vh}, reduced_motion="reduce")
                 page = await ctx.new_page()
                 attach_err_listeners(page, f"wiki-{vp_name}-{lang}-{theme}")
@@ -926,27 +942,29 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
                 await page.wait_for_timeout(750)
                 await disable_animations(page)
 
-                check_keys = all_wiki_keys if (vp_name == "desktop") else (["home"] + ROOM_PAGES_CORE)
+                check_keys = all_wiki_keys
                 for key in check_keys:
                     await page.evaluate(f"() => {{ location.hash = '#{key}'; window.scrollTo(0, 0); }}")
                     await page.wait_for_timeout(320)
+
+                    if vp_name == "desktop" and theme == "light":
+                        await editorial_audit(page, "#" + key, lang, room=key in site_json.get("perPage", {}).get("CHECKLISTS", {}).get("order", ROOM_PAGES_CORE))
 
                     # Gate 4: Target size & 390px overflow
                     t_issues = await page.evaluate(JS_TARGET_SIZE, is_mobile)
                     for ti in t_issues:
                         fail("gate_4_target_size_390px_touch", f"[{vp_name}/{lang}/{theme}] #{key}: {ti}")
 
-                    # Gate 8: Image integrity on desktop (every room) and core mobile rooms
-                    if vp_name == "desktop" or key in ("kitchen", "bathroom"):
-                        # Scroll images into view to trigger lazy-loading cleanly
-                        await page.evaluate(r"""async () => {
-                            const imgs = Array.from(document.querySelectorAll('img[loading="lazy"]'));
-                            for (const im of imgs) { im.loading = 'eager'; }
-                            await new Promise(r => setTimeout(r, 120));
-                        }""")
-                        img_issues = await page.evaluate(JS_IMAGE_INTEGRITY)
-                        for ii in img_issues:
-                            fail("gate_8_image_integrity_aspect", f"[{vp_name}/{lang}] #{key}: {ii}")
+                    # Gate 8: Image integrity across every viewport/language/theme state
+                    # Scroll images into view to trigger lazy-loading cleanly
+                    await page.evaluate(r"""async () => {
+                        const imgs = Array.from(document.querySelectorAll('img[loading="lazy"]'));
+                        for (const im of imgs) { im.loading = 'eager'; }
+                        await new Promise(r => setTimeout(r, 120));
+                    }""")
+                    img_issues = await page.evaluate(JS_IMAGE_INTEGRITY)
+                    for ii in img_issues:
+                        fail("gate_8_image_integrity_aspect", f"[{vp_name}/{lang}] #{key}: {ii}")
 
                     # Gate 9: Multi-scroll overlap on core room pages
                     if key in ROOM_PAGES_CORE:
@@ -991,7 +1009,7 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
                             fail("gate_10_text_es_parity_print", f"[{lang}] #bathroom render badges expected '{want_tag}', got {tags}")
 
                     # Gate 6: Contrast & ARIA on key pages in Light & Dark
-                    if vp_name == "desktop" and key in ("home", "kitchen", "bathroom", "hvac"):
+                    if vp_name == "desktop":
                         ca = await page.evaluate(JS_CONTRAST_AND_ARIA)
                         for ai in ca.get("ariaIssues", []):
                             fail("gate_6_contrast_aria_light_dark", f"[{lang}/{theme}] #{key}: {ai}")
@@ -1003,8 +1021,8 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
         # ── B. Interactive Plans Matrix (All 7 plans x Desktop/Mobile x EN/ES x Light/Dark) ──
         for vp_name, vw, vh in viewports:
             is_mobile = vp_name == "mobile"
-            for lang in ("en", "es"):
-                theme = "light" if lang == "en" else "dark"
+            for lang, theme in itertools.product(("en", "es"), ("light", "dark")):
+                print(f"Matrix {vp_name}/{lang}/{theme}", file=sys.stderr, flush=True)
                 ctx = await browser.new_context(viewport={"width": vw, "height": vh}, reduced_motion="reduce")
                 page = await ctx.new_page()
                 attach_err_listeners(page, f"plans-{vp_name}-{lang}-{theme}")
@@ -1031,10 +1049,14 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
                     for ii in img_issues:
                         fail("gate_8_image_integrity_aspect", f"[{vp_name}/{lang}] plans/{pid}: {ii}")
 
-                    # Gate 9: Pill wrap & multi-scroll overlap (especially Kitchen 3-tab plans)
-                    ov_issues = await page.evaluate(JS_OVERLAP_AND_WRAP)
-                    for oi in ov_issues:
-                        fail("gate_9_multiscroll_overlap_pill_wrap", f"[{vp_name}/{lang}] plans/{pid}: {oi}")
+                    # Gate 9: compare fixed controls at top, middle and bottom on plans too.
+                    max_y = await page.evaluate("() => Math.max(0, document.documentElement.scrollHeight - innerHeight)")
+                    for pos_lbl, sy in (("top", 0), ("mid", int(max_y / 2)), ("bottom", max_y)):
+                        await page.evaluate("y => scrollTo(0, y)", sy)
+                        await page.wait_for_timeout(80)
+                        for oi in await page.evaluate(JS_OVERLAP_AND_WRAP):
+                            fail("gate_9_multiscroll_overlap_pill_wrap", f"[{vp_name}/{lang}/{theme}] plans/{pid}@{pos_lbl}: {oi}")
+                    await page.evaluate("() => scrollTo(0, 0)")
 
                     # Gate 10: Broken text, stale copy, ES parity, print emulation
                     txt = await page.evaluate("() => document.body.innerText")
@@ -1061,7 +1083,7 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
                             fail("gate_6_contrast_aria_light_dark", f"[{lang}/{theme}] plans/{pid}: {ci}")
 
                     # Gate 10: Print media emulation check (desktop EN)
-                    if vp_name == "desktop" and lang == "en":
+                    if vp_name == "desktop":
                         await page.emulate_media(media="print")
                         await page.wait_for_timeout(120)
                         print_clip = await page.evaluate("() => document.documentElement.scrollWidth > window.innerWidth + 10")
@@ -1070,6 +1092,42 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
                             fail("gate_10_text_es_parity_print", f"plans/{pid}: horizontal clipping under @media print emulation")
 
                 await ctx.close()
+
+        # Gate 13: inspect every plan step and every local HTML guide, EN + ES.
+        for lang in ("en", "es"):
+            ctx13 = await browser.new_context(viewport={"width": 1440, "height": 900}, reduced_motion="reduce")
+            p13 = await ctx13.new_page()
+            p13.set_default_timeout(5000)
+            attach_err_listeners(p13, "editorial-" + lang)
+            await setup_network_stubs(p13, base_url)
+            for pid in ALL_PLAN_IDS:
+                await p13.goto(f"{base_url}/plans/{pid}/index.html?standalone=1&lang={lang}&theme=light", wait_until="domcontentloaded")
+                await p13.wait_for_timeout(450)
+                await disable_animations(p13)
+                await editorial_audit(p13, "plans/" + pid, lang)
+                for attribute in ("data-step", "data-jump-sheet"):
+                    step_selector = "button[" + attribute + "]:visible"
+                    steps = await p13.locator(step_selector).evaluate_all("(els, attr) => [...new Set(els.map(e => e.getAttribute(attr)))]", attribute)
+                    for step in steps:
+                        button = p13.locator(step_selector)
+                        for n in range(await button.count()):
+                            if await button.nth(n).get_attribute(attribute) == step:
+                                await button.nth(n).click()
+                                await p13.wait_for_timeout(150)
+                                await editorial_audit(p13, "plans/" + pid + "#step=" + step, lang)
+                                break
+            for guide in sorted(ROOT.glob("wiki-docs/*.html")):
+                relative = guide.relative_to(ROOT).as_posix()
+                fixed_lang = re.search(r"_(EN|ES)\.html$", guide.name, re.I)
+                if fixed_lang and fixed_lang.group(1).lower() != lang:
+                    continue
+                await p13.goto(f"{base_url}/{relative}?lang={lang}&theme=light", wait_until="domcontentloaded")
+                await p13.wait_for_timeout(150)
+                actual_lang = (await p13.locator("html").get_attribute("lang") or "unknown").split("-")[0]
+                if actual_lang != lang:
+                    fail("gate_10_text_es_parity_print", relative + ": requested " + lang + " but rendered " + actual_lang)
+                await editorial_audit(p13, relative, actual_lang)
+            await ctx13.close()
 
         # ══════════════════════════════════════════════════════════════════════
         # LAYER 2 — GATE 5: Focus Not Obscured 2.4.11 & Keyboard Walk + 2.5.7
@@ -1128,13 +1186,14 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
         # LAYER 4 — GATE 12: Golden Screenshots + Pixel-Diff & HTML QA Report
         # ══════════════════════════════════════════════════════════════════════
         shots_spec = [
-            ("home-desktop-light", f"{base_url}/index.html?lang=en&theme=light#home", 1440, 900),
-            ("kitchen-desktop-light", f"{base_url}/index.html?lang=en&theme=light#kitchen", 1440, 900),
-            ("bathroom-desktop-dark", f"{base_url}/index.html?lang=es&theme=dark#bathroom", 1440, 900),
-            ("hvac-desktop-light", f"{base_url}/index.html?lang=en&theme=light#hvac", 1440, 900),
-            ("kitchen-3tab-mobile-light", f"{base_url}/plans/kitchen-electrical/index.html?standalone=1&lang=es&theme=light", 390, 844),
-            ("murphy-door-desktop-light", f"{base_url}/plans/murphy-door/index.html?standalone=1&lang=en&theme=light", 1440, 900),
-            ("bathroom-tile-mobile-dark", f"{base_url}/plans/bathroom-tile/index.html?standalone=1&lang=es&theme=dark", 390, 844),
+            (f"{name}-{vp}-{lang}-{theme}", f"{base_url}/{path}?lang={lang}&theme={theme}{fragment}", width, height)
+            for name, path, fragment in (
+                ("kitchen", "index.html", "#kitchen"),
+                ("kitchen-electrical", "plans/kitchen-electrical/index.html", ""),
+                ("bathroom-tile", "plans/bathroom-tile/index.html", ""),
+            )
+            for vp, width, height in viewports
+            for lang, theme in itertools.product(("en", "es"), ("light", "dark"))
         ]
         shots_dir = report_path.parent / "usability-shots"
         shots_dir.mkdir(parents=True, exist_ok=True)
@@ -1155,6 +1214,12 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
             if args.update_baselines:
                 base_file.write_bytes(cur_png)
                 diff_note = "baseline updated"
+            elif not base_file.exists():
+                diff_note = "MISSING BASELINE"
+                fail("gate_12_visual_baselines_report", shot_name + ": missing baseline; inspect captures then run --update-baselines")
+            elif not HAS_PIL:
+                diff_note = "PILLOW REQUIRED"
+                fail("gate_12_visual_baselines_report", shot_name + ": Pillow required for pixel comparisons")
             elif base_file.exists() and HAS_PIL:
                 im_cur = Image.open(io.BytesIO(cur_png)).convert("RGB")
                 im_base = Image.open(base_file).convert("RGB")
@@ -1198,6 +1263,7 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
             ginfo["details"].append("All assertions passed cleanly.")
 
     srv.shutdown()
+    srv.server_close()
 
     passed_count = sum(1 for g in gates.values() if g["status"] == "PASS")
     failed_count = len(gates) - passed_count
@@ -1208,7 +1274,7 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
     rows_html = []
     for gk, g in gates.items():
         badge_cls = "pass" if g["status"] == "PASS" else "fail"
-        det_items = "".join(f"<li>{html.escape(str(d))}</li>" for d in g["details"][:25])
+        det_items = "".join(f"<li>{html.escape(str(d))}</li>" for d in g["details"])
         rows_html.append(
             f"<tr><td><code>{html.escape(gk)}</code></td>"
             f"<td>{html.escape(g['layer'])}</td>"
@@ -1227,7 +1293,7 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
 
     report_html = (
         "<!doctype html><html lang='en'><head><meta charset='utf-8'>"
-        "<title>Unit 4 Wiki — 12-Gate Usability QA Report</title>"
+        "<title>Unit 4 Wiki — 13-Gate Usability QA Report</title>"
         "<style>"
         "body{font-family:system-ui,-apple-system,sans-serif;background:#f4f5f3;color:#1d2326;margin:0;padding:24px;line-height:1.45}"
         "h1,h2{margin:0 0 10px} .meta{color:#5d686d;font-size:13px;margin-bottom:18px}"
@@ -1242,12 +1308,13 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
         ".shot img{width:100%;height:auto;display:block;border-bottom:1px solid #d9dedc}"
         ".shot figcaption{padding:8px 10px;font-size:12px;color:#5d686d}"
         "</style></head><body>"
-        f"<h1>Unit 4 Wiki — 12-Gate Usability QA Report <span class='badge {'pass' if overall == 'PASS' else 'fail'}'>{overall}</span></h1>"
-        f"<div class='meta'>Generated {html.escape(ts_utc)} · Passed {passed_count}/12 · Failed {failed_count}/12</div>"
+        f"<h1>Unit 4 Wiki — 13-Gate Usability QA Report <span class='badge {'pass' if overall == 'PASS' else 'fail'}'>{overall}</span></h1>"
+        f"<div class='meta'>Generated {html.escape(ts_utc)} · Passed {passed_count}/13 · Failed {failed_count}/13</div>"
         "<table><thead><tr><th>Gate ID</th><th>Layer</th><th>Check</th><th>Status</th><th>Details</th></tr></thead><tbody>"
         + "".join(rows_html)
         + "</tbody></table>"
-        "<h2>Layer 4 — Golden Screenshots</h2><div class='shots'>"
+        + render_queue(editorial_queue)
+        + "<h2>Layer 4 — Golden Screenshots</h2><div class='shots'>"
         + "".join(shots_html)
         + "</div></body></html>"
     )
@@ -1257,18 +1324,21 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
     return {
         "timestamp": ts_utc,
         "overall": overall,
+        "baseline_update": bool(args.update_baselines),
         "passed": passed_count,
         "failed": failed_count,
         "report": str(report_path),
+        "editorial_queue": editorial_queue,
+        "editorial_coverage": coverage,
         "gates": {k: v["status"] for k, v in gates.items()},
         "details": {k: v["details"] for k, v in gates.items()},
     }
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Unit 4 Wiki 12-Gate Automated Usability Suite")
+    parser = argparse.ArgumentParser(description="Unit 4 Wiki 13-Gate Automated Usability Suite")
     parser.add_argument("--update-baselines", action="store_true", help="Save/update golden baseline PNGs for Gate 12")
-    parser.add_argument("--baselines-dir", default=str(ROOT / "tmp/usability-baselines"), help="Directory for golden PNG baselines")
+    parser.add_argument("--baselines-dir", default=str(ROOT / "tests/usability-baselines"), help="Directory for golden PNG baselines")
     parser.add_argument("--report", default=str(ROOT / "tmp/usability-report.html"), help="Path for self-contained HTML QA report")
     parser.add_argument("--json", action="store_true", help="Print full JSON summary to stdout")
     args = parser.parse_args()
@@ -1277,7 +1347,7 @@ def main() -> int:
     if args.json:
         print(json.dumps(result, indent=2))
     else:
-        print(f"USABILITY GATE SUITE: {result['overall']} ({result['passed']}/12 passed, {result['failed']}/12 failed)")
+        print(f"USABILITY GATE SUITE: {result['overall']} ({result['passed']}/13 passed, {result['failed']}/13 failed)")
         print(f"HTML Report: {result['report']}")
         for gk, st in result["gates"].items():
             print(f"  [{st}] {gk}")
