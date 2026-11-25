@@ -16,13 +16,14 @@ FILLER_RE = re.compile(
     r"esta sección (?:cubre|abarca)|tenga en cuenta que|diversas actualizaciones|"
     r"ver arriba|véase arriba|cómo puedo ayudarte)\b", re.I)
 RAW_RE = re.compile(
-    r"\b(?:rev[-_]\d{3,}|todoist(?:\s+(?:task|tarea|id))?\s*[:#=]?\s*[A-Za-z0-9]{8,})\b|"
+    r"\bmagicplan(?:\s+plan)?\s+[a-f0-9]{7,}\b|\b[a-z]{2,}_[a-z0-9_]{3,}\b|\b6[A-Za-z0-9]{15}\b|\b(?:rev[-_]\d{3,}|todoist(?:\s+(?:task|tarea|id))?\s*[:#=]?\s*[A-Za-z0-9]{8,})\b|"
+    r'\b[XYZ]\s*[:=]\s*-?\d+(?:[./-]\d+)?\s*[″"]?\s*,\s*[XYZ]\s*[:=]\s*-?\d+|'
     r'\b[XYZ]\s*[:=]\s*\d+(?:[./-]\d+)?\s*[″"]?\s*(?:->|→|–|—)\s*\d+', re.I)
 # A bounded bilingual vocabulary, deliberately including completion verbs. A
 # completed milestone is valid copy; an open item still needs an action.
 VERB_RE = re.compile(
     r"\b(?:verify|check|measure|hold|keep|install|build|hang|confirm|mark|test|inspect|"
-    r"frame|weatherproof|lay out|wire|add|flag|place|receive|fabricate|published|chosen|laid|set|drafted|run|connect|route|select|choose|leave|clear|patch|paint|prime|seal|finish|close|"
+    r"replace|waterproof|tile|grout|caulk|shim|level|plumb|drill|fasten|pull|insulate|firestop|deliver|order|move|frame|weatherproof|lay out|wire|add|flag|place|receive|fabricate|published|chosen|laid|set|drafted|run|connect|route|select|choose|leave|clear|patch|paint|prime|seal|finish|close|"
     r"coordinate|reschedule|complete|execute|reconcile|review|record|photograph|"
     r"take|protect|remove|retain|use|avoid|do not|stop|cut|anchor|secure|prepare|"
     r"approved|locked|installed|settled|completed|updated|raised|mounted|"
@@ -37,19 +38,19 @@ CONTEXT_RE = re.compile(
     r'\d|[″"′]|\b(?:wall|door|floor|ceiling|cabinet|hood|range|hatch|duct|panel|'
     r'wire|cable|outlet|switch|room|kitchen|bathroom|attic|hall|closet|stud|'
     r'blocking|tile|sink|toilet|washer|dryer|window|counter|subfloor|chimney|'
-    r'moulding|molding|trim|hutch|fireplace|frame|drywall|roof|photo|clearance|inspection|approval|sign-off|release|before|until|'
+    r'moulding|molding|trim|hutch|fireplace|frame|drywall|roof|photo|clearance|inspection|approval|sign-off|release|'
     r'muro|pared|puerta|piso|plafón|techo|gabinete|campana|estufa|escotilla|ducto|'
     r'contacto|apagador|cocina|baño|ático|pasillo|clóset|poste|refuerzo|azulejo|'
     r'tarja|lavavajillas|refrigerador|moldura|marco|trinchador|boquilla|comedor|fregadero|inodoro|ventana|cubierta|subpiso|chimenea|tablaroca|foto|'
-    r'inspección|aprobación|antes|hasta)(?:s|es)?\b', re.I)
+    r'inspección|aprobación)(?:s|es)?\b', re.I)
 
 # Exclude hidden technical/print layers and UI chrome before extracting prose.
 # A stable CSS path is retained; generated report content is always HTML escaped.
 JS_EDITORIAL_BLOCKS = r"""
 () => {
-  const root = document.querySelector('#doc') || document.body;
+  const root = (document.querySelector('#doc') && document.querySelector('#doc').closest('main')) || document.querySelector('#doc') || document.body;
   function visible(el) {
-    if (el.closest('#agent-brief, #blueprint-sheet-shell, #u4PrintRoot, nav, header, .u4h-topbar, .u4h-pager, .u4h-steps, [hidden]')) return false;
+    if (el.closest('#agent-brief, #blueprint-sheet-shell, #u4PrintRoot, nav, header, aside, .u4h-topbar, .u4h-pager, .u4h-steps, [hidden]')) return false;
     for (let n = el; n && n.nodeType === 1; n = n.parentElement) {
       const s = getComputedStyle(n);
       if (s.display === 'none' || s.visibility === 'hidden' || Number(s.opacity) === 0) return false;
@@ -67,9 +68,9 @@ JS_EDITORIAL_BLOCKS = r"""
     }
     return parts.join(' > ');
   }
-  const elements = [...root.querySelectorAll('h1, h2, h3, p, li, .u4-room-summary, .u4h-subtitle, .u4h-card-sub, .u4-guide-card-desc, .u4-subpage-row-desc, .u4-gal-caption, figcaption, .u4h-card-desc, .u4h-card-subtitle, .u4-doc-preview-desc, .u4h-title, .u4h-sub, .u4h-note, .u4h-callout, .u4h-hold-strip, .u4h-kpi-sub, .u4h-section-title, .u4h-status, label.u4b-check')];
+  const elements = [...root.querySelectorAll('h1, h2, h3, h4, p, li, td, .u4h-check-row, .u4h-item-name, .u4h-item-note, .u4h-item-meta, .u4h-svg-hint, .u4h-info-title, #murGuidanceBox > div, .u4g-hold-strip, .sheet-title, .sheet-sub, .status-strip, .floor-note, .key-facts-title, .equip-name, .equip-sub, .u4b-status, .u4b-step-item-title, .u4-gal-cap, .u4-gal-sub, .banner, .callout, .lead, .photo-cap, .summary-bar, .u4-room-summary, .u4h-subtitle, .u4h-card-sub, .u4-guide-card-desc, .u4-subpage-row-desc, .u4-gal-caption, figcaption, .u4h-card-desc, .u4h-card-subtitle, .u4-doc-preview-desc, .u4h-title, .u4h-sub, .u4h-note, .u4h-callout, .u4h-hold-strip, .u4h-kpi-sub, .u4h-section-title, .u4h-status, .u4-hm-title, .u4-hm-note, .u4h-photo-cap, label.u4b-check')];
   function blockText(el) {
-    if (['P', 'LI'].includes(el.tagName)) return el.innerText.trim();
+    if (el.matches('p, li, td, .u4h-check-row, .u4b-check')) return el.innerText.trim();
     const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
     const words = [];
     while (walker.nextNode()) {
@@ -84,9 +85,10 @@ JS_EDITORIAL_BLOCKS = r"""
     }
     return words.join(' ').replace(/\s+/g, ' ').trim();
   }
-  const blocks = elements.filter(visible).filter(el => !elements.some(other => other !== el && other.contains(el) && visible(other) && ['LI','P'].includes(other.tagName))).map(el => ({
-    selector: selector(el), text: blockText(el), kind: el.matches('.u4h-title, .u4h-section-title') ? 'h2' : (el.tagName === 'DIV' || el.tagName === 'SPAN' ? 'p' : el.tagName.toLowerCase()),
-    checklist: (el.tagName === 'LI' && !!el.closest('#sec-checklist')) || el.matches('label.u4b-check'),
+  const blocks = elements.filter(visible).filter(el => !elements.some(other => other !== el && other.contains(el) && visible(other) && other.matches('li, p, td, .u4h-check-row, .u4b-check'))).map(el => ({
+    selector: selector(el), text: blockText(el), kind: el.matches('.u4h-title, .u4h-section-title, .sheet-title, .key-facts-title, .u4h-info-title') ? 'h2' : (el.tagName === 'DIV' || el.tagName === 'SPAN' ? 'p' : el.tagName.toLowerCase()),
+    checklist: el.matches('#sec-checklist li, .u4h-check-row, label.u4b-check'),
+    subtitle: el.matches('.u4h-sub, .u4h-subtitle, .sheet-sub, .equip-sub, .u4-hm-note'),
     overview: el.matches('#sec-concept, .u4-room-summary'),
     y: el.getBoundingClientRect().top + scrollY
   })).filter(b => b.text);
@@ -111,6 +113,8 @@ def tokens(text: str) -> set:
 def audit_blocks(snapshot: Dict[str, Any], page: str, lang: str,
                  room: bool = False) -> List[Dict[str, str]]:
     findings: List[Dict[str, str]] = []
+    if not snapshot.get('blocks'):
+        findings.append(dict(page=page, lang=lang, selector='#doc', text='(no visible prose blocks extracted)', reason='No rendered prose inspected on view.'))
 
     def flag(block: Dict[str, Any], reason: str) -> None:
         findings.append(dict(page=page, lang=lang, selector=block['selector'],
@@ -120,18 +124,23 @@ def audit_blocks(snapshot: Dict[str, Any], page: str, lang: str,
     for i, block in enumerate(blocks):
         text = block['text']
         words = WORD_RE.findall(text)
+        if block.get('subtitle') and i:
+            prior = tokens(blocks[i - 1]['text'])
+            current = tokens(text)
+            if len(prior) >= 2 and prior <= current and len(prior) / max(1, len(current)) >= .6:
+                flag(block, 'Subtitle echoes preceding title.')
         if FILLER_RE.search(text):
             flag(block, 'Cut filler or meta prose; state the action directly.')
         if RAW_RE.search(text):
             flag(block, 'Move raw coordinates or internal IDs to technical details.')
         limit = 35 if block.get('checklist') else 55
-        if (block.get('checklist') or block['kind'] == 'p') and len(words) > limit:
+        if not block['kind'].startswith('h') and len(words) > limit:
             flag(block, 'Split or shorten block: {} words (limit {}).'.format(len(words), limit))
         if block.get('overview'):
             sentences = [s for s in re.split(r'(?<=[.!?])\s+(?=[A-ZÁÉÍÓÚÑ])', text) if s.strip()]
             if len(sentences) > 2:
                 flag(block, 'Overview exceeds two sentences.')
-        if block.get('checklist') and (not VERB_RE.search(text) or not CONTEXT_RE.search(text)):
+        if block.get('checklist') and (not VERB_RE.search(re.sub(r'\([^)]*\)', '', text)) or not CONTEXT_RE.search(text)):
             flag(block, 'Checklist needs a concrete verb plus a fixture/location or measurable check/hold.')
     # Compare sentences as well as whole bullets: a repeated sentence inside
     # an otherwise different paragraph must not escape the 80% overlap rule.

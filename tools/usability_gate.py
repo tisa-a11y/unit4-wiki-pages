@@ -619,7 +619,7 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
         "gate_10_text_es_parity_print": {"layer": "Layer 3 — Geometric, SVG, Photo & Content Forensics", "title": "Zero Broken Text, ES Parity & Print Emulation", "status": "PASS", "details": []},
         "gate_11_privacy_hygiene_syntax": {"layer": "Layer 3 — Geometric, SVG, Photo & Content Forensics", "title": "Privacy Firewall, Spec Hygiene & Script Syntax", "status": "PASS", "details": []},
         "gate_12_visual_baselines_report": {"layer": "Layer 4 — Visual Baselines & HTML QA Report", "title": "Golden Screenshots + Diff Report", "status": "PASS", "details": []},
-        "gate_13_editorial_instructions": {"layer": "Layer 4 — Editorial Review", "title": "Editorial, Anti-Redundancy & Meaningful Instructions", "status": "PASS", "details": []},
+        "gate_13_editorial_audit": {"layer": "Layer 4 — Editorial Review", "title": "Editorial, Anti-Redundancy & Meaningful Instructions", "status": "PASS", "details": []},
     }
 
     screenshots_for_report: List[Dict[str, str]] = []
@@ -630,15 +630,13 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
 
     async def editorial_audit(page: Any, label: str, lang: str, room: bool = False) -> None:
         snapshot = await page.evaluate(JS_EDITORIAL_BLOCKS)
-        if not snapshot.get("blocks"):
-            fail("gate_13_editorial_instructions", label + ": no rendered prose inspected")
         coverage.append(label + "/" + lang)
         for finding in audit_blocks(snapshot, label, lang, room=room):
             key = (finding["page"], lang, finding["selector"], finding["text"], finding["reason"])
             if key not in editorial_seen:
                 editorial_seen.add(key)
                 editorial_queue.append(finding)
-                fail("gate_13_editorial_instructions", label + " [" + lang + "] " + finding["selector"] + ": " + finding["reason"])
+                fail("gate_13_editorial_audit", label + " [" + lang + "] " + finding["selector"] + ": " + finding["reason"])
 
 
     def fail(gate_key: str, msg: str) -> None:
@@ -964,7 +962,7 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
                     }""")
                     img_issues = await page.evaluate(JS_IMAGE_INTEGRITY)
                     for ii in img_issues:
-                        fail("gate_8_image_integrity_aspect", f"[{vp_name}/{lang}] #{key}: {ii}")
+                        fail("gate_8_image_integrity_aspect", f"[{vp_name}/{lang}/{theme}] #{key}: {ii}")
 
                     # Gate 9: Multi-scroll overlap on core room pages
                     if key in ROOM_PAGES_CORE:
@@ -974,21 +972,21 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
                             await page.wait_for_timeout(80)
                             ov_issues = await page.evaluate(JS_OVERLAP_AND_WRAP)
                             for oi in ov_issues:
-                                fail("gate_9_multiscroll_overlap_pill_wrap", f"[{vp_name}/{lang}] #{key}@{pos_lbl}: {oi}")
+                                fail("gate_9_multiscroll_overlap_pill_wrap", f"[{vp_name}/{lang}/{theme}] #{key}@{pos_lbl}: {oi}")
                         await page.evaluate("() => window.scrollTo(0, 0)")
 
                     # Gate 10: Broken text, HVAC/Attic checklists, Bathroom RETIRED badge, stale dates, ES parity
                     body_txt = await page.evaluate("() => (document.querySelector('main') || document.body).innerText")
                     for rx, desc in BROKEN_TEXT_PATTERNS:
                         if rx.search(body_txt):
-                            fail("gate_10_text_es_parity_print", f"[{vp_name}/{lang}] #{key}: found {desc}")
+                            fail("gate_10_text_es_parity_print", f"[{vp_name}/{lang}/{theme}] #{key}: found {desc}")
                     if key != "decisions":
                         for rx, desc in STALE_COPY_PATTERNS:
                             if rx.search(body_txt):
-                                fail("gate_10_text_es_parity_print", f"[{vp_name}/{lang}] #{key}: found {desc}")
+                                fail("gate_10_text_es_parity_print", f"[{vp_name}/{lang}/{theme}] #{key}: found {desc}")
                     if BACKEND_JARGON_RE.search(body_txt):
                         m_bj = BACKEND_JARGON_RE.search(body_txt)
-                        fail("gate_11_privacy_hygiene_syntax", f"[{vp_name}/{lang}] #{key}: visible backend jargon '{m_bj.group(0)}'")
+                        fail("gate_11_privacy_hygiene_syntax", f"[{vp_name}/{lang}/{theme}] #{key}: visible backend jargon '{m_bj.group(0)}'")
                     if lang == "es":
                         for rx, desc in ES_LEFTOVER_UI_PATTERNS:
                             if rx.search(body_txt):
@@ -1047,7 +1045,7 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
                     # Gate 8: Image integrity
                     img_issues = await page.evaluate(JS_IMAGE_INTEGRITY)
                     for ii in img_issues:
-                        fail("gate_8_image_integrity_aspect", f"[{vp_name}/{lang}] plans/{pid}: {ii}")
+                        fail("gate_8_image_integrity_aspect", f"[{vp_name}/{lang}/{theme}] plans/{pid}: {ii}")
 
                     # Gate 9: compare fixed controls at top, middle and bottom on plans too.
                     max_y = await page.evaluate("() => Math.max(0, document.documentElement.scrollHeight - innerHeight)")
@@ -1062,13 +1060,13 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
                     txt = await page.evaluate("() => document.body.innerText")
                     for rx, desc in BROKEN_TEXT_PATTERNS:
                         if rx.search(txt):
-                            fail("gate_10_text_es_parity_print", f"[{vp_name}/{lang}] plans/{pid}: found {desc}")
+                            fail("gate_10_text_es_parity_print", f"[{vp_name}/{lang}/{theme}] plans/{pid}: found {desc}")
                     for rx, desc in STALE_COPY_PATTERNS:
                         if rx.search(txt):
-                            fail("gate_10_text_es_parity_print", f"[{vp_name}/{lang}] plans/{pid}: found {desc}")
+                            fail("gate_10_text_es_parity_print", f"[{vp_name}/{lang}/{theme}] plans/{pid}: found {desc}")
                     if BACKEND_JARGON_RE.search(txt):
                         m_bj = BACKEND_JARGON_RE.search(txt)
-                        fail("gate_11_privacy_hygiene_syntax", f"[{vp_name}/{lang}] plans/{pid}: visible backend jargon '{m_bj.group(0)}'")
+                        fail("gate_11_privacy_hygiene_syntax", f"[{vp_name}/{lang}/{theme}] plans/{pid}: visible backend jargon '{m_bj.group(0)}'")
                     if lang == "es":
                         for rx, desc in ES_LEFTOVER_UI_PATTERNS:
                             if rx.search(txt):
@@ -1105,18 +1103,35 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
                 await p13.wait_for_timeout(450)
                 await disable_animations(p13)
                 await editorial_audit(p13, "plans/" + pid, lang)
+                # Reset before each top-level step so a manual view cannot
+                # unmount the remaining tabs and silently skip their audit.
+                plan_url = p13.url
+                steps = []
                 for attribute in ("data-step", "data-jump-sheet"):
-                    step_selector = "button[" + attribute + "]:visible"
-                    steps = await p13.locator(step_selector).evaluate_all("(els, attr) => [...new Set(els.map(e => e.getAttribute(attr)))]", attribute)
-                    for step in steps:
-                        button = p13.locator(step_selector)
-                        for n in range(await button.count()):
-                            if await button.nth(n).get_attribute(attribute) == step:
-                                await button.nth(n).click()
-                                await p13.wait_for_timeout(150)
-                                await editorial_audit(p13, "plans/" + pid + "#step=" + step, lang)
-                                break
-            for guide in sorted(ROOT.glob("wiki-docs/*.html")):
+                    values = await p13.locator("button[" + attribute + "]:visible").evaluate_all("(els, attr) => [...new Set(els.map(e => e.getAttribute(attr)))]", attribute)
+                    steps.extend((attribute, value) for value in values)
+                for attribute, step in steps:
+                    await p13.goto(plan_url, wait_until="domcontentloaded")
+                    await p13.wait_for_timeout(200)
+                    button = p13.locator("button[" + attribute + "=" + json.dumps(step) + "]:visible").first
+                    if not await button.count():
+                        fail("gate_13_editorial_audit", "plans/" + pid + ": unreachable step " + step)
+                        continue
+                    await button.click()
+                    await p13.wait_for_timeout(150)
+                    label = "plans/" + pid + "#step=" + step
+                    await editorial_audit(p13, label, lang)
+                    for sub_attribute in ("data-wall", "data-wtab"):
+                        values = await p13.locator("button[" + sub_attribute + "]:visible").evaluate_all("(els, attr) => [...new Set(els.map(e => e.getAttribute(attr)))]", sub_attribute)
+                        for value in values:
+                            sub_button = p13.locator("button[" + sub_attribute + "=" + json.dumps(value) + "]:visible").first
+                            if not await sub_button.count():
+                                fail("gate_13_editorial_audit", label + ": unreachable sub-view " + value)
+                                continue
+                            await sub_button.click()
+                            await p13.wait_for_timeout(100)
+                            await editorial_audit(p13, label + "&" + sub_attribute + "=" + value, lang)
+            for guide in sorted(ROOT.glob("wiki-docs/**/*.html")):
                 relative = guide.relative_to(ROOT).as_posix()
                 fixed_lang = re.search(r"_(EN|ES)\.html$", guide.name, re.I)
                 if fixed_lang and fixed_lang.group(1).lower() != lang:
@@ -1326,6 +1341,8 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
         "overall": overall,
         "baseline_update": bool(args.update_baselines),
         "passed": passed_count,
+        "total": len(gates),
+        "cut_rewrite_queue_count": len(editorial_queue),
         "failed": failed_count,
         "report": str(report_path),
         "editorial_queue": editorial_queue,

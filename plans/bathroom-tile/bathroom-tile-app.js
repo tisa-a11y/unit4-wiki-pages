@@ -607,8 +607,8 @@
 
           <div class="u4b-photos">
             <figure class="u4h-photo-card">
-              <img src="./assets/IMG_5478.jpg" alt="Back tub wall with both framed niches">
-              <figcaption><strong>${es ? "Muro de fondo:" : "Back tub wall:"}</strong> ${es ? "Foto completa con ambos nichos — confirmar medidas netas tras impermeabilizar." : "Full view of both framed niches — measure inside openings after waterproofing."}</figcaption>
+              <a href="../../wiki-images/bathroom-tub-surround-measurements-${es ? "es" : "en"}.svg" target="_blank" rel="noopener"><img src="../../wiki-images/bathroom-tub-surround-measurements-${es ? "es" : "en"}.svg" alt="${es ? "Medidas del contorno de la tina" : "Tub Surround measurements"}" style="max-height:none;height:auto;object-fit:contain"></a>
+              <figcaption><strong>${es ? "Medidas del contorno de la tina" : "Tub Surround measurements"}</strong> — ${es ? "Foto completa con medidas del muro, los nichos y la tina. ≈ indica aproximaciones. Toca para ver la imagen completa." : "Full photo with wall, niche and tub measurements. ≈ marks approximate readings. Tap to open full size."}</figcaption>
             </figure>
             <figure class="u4h-photo-card">
               <img src="./assets/IMG_5493.jpg" alt="American Olean Ice White 3x6 tile box label">

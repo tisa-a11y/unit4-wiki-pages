@@ -62,6 +62,23 @@ class EditorialDOMTests(unittest.TestCase):
         self.assertEqual(1, len(snapshot['blocks']))
         self.assertEqual([], audit_blocks(snapshot, '/plan', 'en'))
 
+    def test_guide_card_title_subtitle_echo_is_inspected(self):
+        page = self.browser.new_page()
+        self.addCleanup(page.close)
+        page.set_content('<article id="doc"><a class="u4-hm-packet"><span class="u4-hm-title">Kitchen layout</span><span class="u4-hm-note">Kitchen layout</span></a></article>')
+        snapshot = page.evaluate(JS_EDITORIAL_BLOCKS)
+        self.assertEqual(2, len(snapshot['blocks']))
+        self.assertTrue(any('Duplicate' in x['reason'] for x in audit_blocks(snapshot, '#kitchen', 'en')))
+
+    def test_plan_checklist_and_guide_table_are_inspected(self):
+        page = self.browser.new_page()
+        self.addCleanup(page.close)
+        page.set_content('<label class="u4h-check-row"><input type="checkbox"><span class="u4h-check-body"><strong>Verify platform </strong><span>X=174, Y=228.5</span></span></label><table><tr><td>See above</td></tr></table><div class="banner">Please note that the wall is open.</div>')
+        snapshot = page.evaluate(JS_EDITORIAL_BLOCKS)
+        self.assertEqual(3, len(snapshot['blocks']))
+        self.assertTrue(snapshot['blocks'][0]['checklist'])
+        self.assertEqual(3, len(audit_blocks(snapshot, '/plan', 'en')))
+
     def test_label_checklist_is_inspected(self):
         page = self.browser.new_page()
         self.addCleanup(page.close)
