@@ -427,7 +427,7 @@
         "magicplan_uid": "6ac582a0.dfa313ff.auto",
         "baseline_object_uid": "6ac582a0.dfa313ff.auto",
         "label": "Bathroom Doorway A (Retained Outward-Swing Slab)",
-        "status": "pocket door deferred Nov 19; outward-swing hinged slab retained",
+        "status": "pocket door permanently retired Nov 24; standard hinged 28 in outward-swing hallway door locked",
         "source_id": "magicplan_svg",
         "wall_id": "hall_north",
         "kind": "door",
@@ -509,7 +509,7 @@
         "source_id": "door4_landing_ruling"
       },
       "bathroom_door_a": {
-        "action": "retain existing hinged door slab swinging outward; pocket door deferred Nov 19; verify hallway swing clearance against Murphy Door B",
+        "action": "retain 28x1-3/8 in hinged door slab swinging outward into hallway; pocket door permanently retired Nov 24; field-verify hinge swing direction and hallway clearance against Murphy Door B",
         "status": "LOCKED",
         "source_id": "governing_spec"
       },

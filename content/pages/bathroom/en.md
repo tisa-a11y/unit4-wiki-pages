@@ -12,17 +12,17 @@
 
 
 ## Concept
-Marble-look floor tile, white subway wall tile, bronze fixtures, drop-in tub.
+Marble-look floor tile, American Olean Ice White 0025 3" × 6" subway wall tile, bronze fixtures, drop-in tub, and an outward-swing hallway door.
 
 ## Room and fixtures
-- **Room:** 72-1/8" × 82-1/8".
-- **Tub:** installed and leak-tested Nov 9.
+- **Room:** 72-1/8" × 82-1/8" (Nov 24 back-wall field note: 69-5/16").
+- **Door (locked Nov 24):** Pocket door is permanently **retired**. Use a standard hinged door swinging **outward into the hallway** (keep the 28" × 1-3/8" slab; field-verify hinge swing direction and hallway clearance before framing lock). The south entry wall is a standard framed stud wall — switches are permitted.
+- **Tub:** installed and leak-tested Nov 9 (floor to tub top: 22").
 - **Toilet:** 10" rough-in.
-- **Medicine cabinet:** on the wall surface, not recessed.
-- **Door:** do not frame a pocket door or buy the track.
+- **Medicine cabinet:** surface-mounted only (not recessed). Return the oversized medicine cabinet on hand; replacement model TBD.
 
-## Tile and order of work
-- **Window trim first.** Original trim goes on before any wall tile.
+## Tile, window and schedule (updated Nov 24)
+- **Window and casing replacement first:** Replace the bathroom window and casing before wall tile — zero wall tile in the window-casing area. Coordinate casing and sill with waterproofing and adjacent tile.
+- **Wall tile (on hold until Alex returns):** **American Olean Color Story Ice White 0025** 3" × 6" (`36MOD1P4`, replacing Daltile). Board and both niches are up; Alex is unavailable this week, so wall tile stays on hold until he returns.
 - **Floor:** tile is laid, not grouted. Check the toilet flange, then grout Warm Gray.
-- **Walls:** board and both niches are up. Wall tile is white 3" × 6" subway.
-- **Electrical:** two GFCI outlet boxes. Ceiling wire goes to a junction box in the attic.
+- **Electrical:** John's remaining bathroom prep continues before eligible Wednesday electrical work. Run 12/2 from the attic junction box, including a separate toilet drop before wall tile.

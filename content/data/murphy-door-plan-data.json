@@ -145,8 +145,8 @@
     {
       "id": "clash-murphy-pocket-deferred",
       "severity": "MEDIUM",
-      "en": "Older Nov 2 drawings assume a 28\" bathroom pocket door sliding into wall A-B ('no fasteners in pocket cavity'). Per Nov 19 bathroom/SPEC.md, the pocket door is DEFERRED in favor of an outward-swing hinged door — verify actual wall A-B framing on site before placing pivot blocking.",
-      "es": "Los planos del 2 nov suponen una puerta corrediza de baño de 28\" dentro del muro A-B. Según bathroom/SPEC.md (19 nov), la corrediza está EN PAUSA — verificar el bastidor real del muro A-B en obra antes de colocar refuerzos de pivote."
+      "en": "Older Nov 2 drawings assume a 28\" bathroom pocket door sliding into wall A-B ('no fasteners in pocket cavity'). Per Nov 24 bathroom/SPEC.md, the bathroom pocket door is permanently RETIRED in favor of a standard hinged 28\" outward-swing hallway door (standard framed stud wall) — verify actual wall A-B framing on site before placing pivot blocking.",
+      "es": "Los planos del 2 nov suponen una puerta corrediza de baño de 28\" dentro del muro A-B. Según bathroom/SPEC.md (24 nov), la puerta corrediza del baño está RETIRADA definitivamente en favor de puerta abatible de 28\" hacia el pasillo (muro estándar de postes) — verificar el bastidor real del muro A-B en obra antes de colocar refuerzos de pivote."
     },
     {
       "id": "clash-murphy-unmeasured",

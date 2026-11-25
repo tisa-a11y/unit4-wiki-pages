@@ -66,14 +66,14 @@ var DEFAULT_OPEN_DECISIONS = [
     priority: 2,
     order: 5,
     status: "open",
-    question: "Bathroom: confirm the toilet, the sink faucet and drain, the glass screen and the door",
-    questionEs: "Baño: confirmar inodoro, llave y desagüe del lavabo, cancel de vidrio y puerta",
-    why: "These are the last fixture choices. The pocket door was put on hold Nov 13, so the clearance for a hinged door that swings out also needs checking.",
-    whyEs: "Son las últimas elecciones de muebles. La puerta corrediza empotrada quedó en espera el 13 de noviembre, así que también hay que revisar el espacio para una puerta abatible hacia afuera.",
-    options: "Confirm the toilet with a 10-in. rough-in, the Champagne Bronze sink faucet and tub drain, and the partial fixed glass screen.",
-    optionsEs: "Confirmar el inodoro de 10 pulg. al eje, la llave del lavabo y el desagüe de la tina en Champagne Bronze, y el cancel fijo parcial de vidrio.",
-    johnInput: "Install the original window trim before wall tile. Check the toilet flange before grouting the floor.",
-    johnInputEs: "Colocar la moldura original de la ventana antes del azulejo de muro. Revisar la brida del inodoro antes de emboquillar el piso."
+    question: "Bathroom: confirm the toilet, the sink faucet and drain, the glass screen, replacement medicine cabinet and outward-swing door clearance",
+    questionEs: "Baño: confirmar inodoro, llave y desagüe del lavabo, cancel de vidrio, botiquín de reemplazo y espacio libre de la puerta abatible",
+    why: "These are the last fixture choices. The bathroom pocket door is permanently retired (Nov 24) in favor of a standard hinged 28-in. door swinging outward into the hallway; field-verify hinge swing direction and hallway clearance prior to framing lock.",
+    whyEs: "Son las últimas elecciones de muebles. La puerta corrediza del baño quedó retirada definitivamente (24 nov) en favor de una puerta abatible estándar de 28 pulg. hacia el pasillo; verificar en obra el sentido de giro y el espacio libre del pasillo antes de cerrar el marco.",
+    options: "Confirm the toilet with a 10-in. rough-in, Champagne Bronze sink faucet and tub drain, partial fixed glass screen, and replacement surface-mounted medicine cabinet (return oversized unit on hand).",
+    optionsEs: "Confirmar el inodoro de 10 pulg. al eje, la llave del lavabo y el desagüe de la tina en Champagne Bronze, el cancel fijo parcial de vidrio y el botiquín de sobreponer de reemplazo (devolver el botiquín grande en obra).",
+    johnInput: "Replace the bathroom window and casing (zero tile in casing area) before wall tile (American Olean Ice White 0025 — on hold until Alex returns). Check the toilet flange before grouting the floor.",
+    johnInputEs: "Reemplazar la ventana y el marco del baño (cero azulejo en el área del marco) antes del azulejo de muro (American Olean Ice White 0025 — en pausa hasta regreso de Alex). Revisar la brida del inodoro antes de emboquillar el piso."
   },
   {
     id: "d06",
@@ -101,8 +101,8 @@ var DEFAULT_OPEN_DECISIONS = [
     questionEs: "¿El alimentador del tablero nuevo es de 80 o de 100 amperes?",
     why: "The earlier plan said 100 amps. The current plan is an 80-amp copper feeder. The Eaton panel on site is rated 125 amps.",
     whyEs: "El plan anterior decía 100 amperes. El plan actual es un alimentador de cobre de 80 amperes. El tablero Eaton en obra es de 125 amperes.",
-    options: "Serge and Alex confirm it at the walkthrough on Monday, Nov 23.",
-    optionsEs: "Serge y Alex lo confirman en la visita del lunes 23 de nov.",
+    options: "Serge, John, and Tisa confirm it at the rescheduled walkthrough on Tuesday, Nov 24 (3:00–5:00 p.m. PT).",
+    optionsEs: "Serge, John y Tisa lo confirman en la visita reprogramada del martes 24 de nov (3:00–5:00 p.m. PT).",
     johnInput: "Keep the panel wall open until this is confirmed.",
     johnInputEs: "Dejar abierto el muro del tablero hasta que se confirme."
   },

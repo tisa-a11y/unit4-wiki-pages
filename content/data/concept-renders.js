@@ -109,10 +109,10 @@
       {
         id: "1S8GNQgWQXY7wp_TWWBoRVHuLqjd4GukG",
         room: "bathroom",
-        titleEn: "Bathroom Pocket Door Mockup v2 (DEFERRED Nov 13)",
-        titleEs: "Maqueta de puerta corrediza oculta v2 (POSPUESTA 13 nov)",
-        statusEn: "DEFERRED (2026-11-13): Pocket door deferred for now \u2014 keep hinged-door swing/clearances & note EC10 switch relocation",
-        statusEs: "POSPUESTA (2026-11-13): Puerta corrediza pospuesta \u2014 mantener puerta abatible y reubicaci\u00f3n de interruptor EC10",
+        titleEn: "Bathroom Pocket Door Mockup v2 (RETIRED Nov 24)",
+        titleEs: "Maqueta de puerta corrediza oculta v2 (RETIRADA 24 nov)",
+        statusEn: "RETIRED (2026-11-24): Bathroom pocket door permanently retired \u2014 standard hinged 28\" outward-swing hallway door locked (framed stud south wall; switches permitted)",
+        statusEs: "RETIRADA (2026-11-24): Puerta corrediza del ba\u00f1o retirada definitivamente \u2014 puerta abatible est\u00e1ndar de 28\" hacia el pasillo confirmada (muro sur de postes; apagadores permitidos)",
         driveUrl: "https://drive.google.com/file/d/1S8GNQgWQXY7wp_TWWBoRVHuLqjd4GukG/view",
         thumbUrl: "https://drive.google.com/thumbnail?id=1S8GNQgWQXY7wp_TWWBoRVHuLqjd4GukG&sz=w1200",
         deferred: true

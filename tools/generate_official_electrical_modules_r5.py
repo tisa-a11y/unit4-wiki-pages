@@ -892,7 +892,10 @@ def build_module2(lang):
         + '</div>' + footer_html(lang, mod_short, "E-22") + '</div>'
     )
 
-    # --- Sheet E-23: Segment B — Bathroom 1:1 Plan (72.125" x 88", S23 = 2.65 px/in) ---
+    # --- Sheet E-23: Segment B — Bathroom 1:1 Plan (72.125" x 82.125", S23 = 2.65 px/in) ---
+    # Nov 24 Owner Lock: Pocket door permanently RETIRED -> standard hinged 28" outward-swing hallway door;
+    # South wall is standard framed stud assembly (active switch installation permitted).
+    # Governing room dimensions: 72-1/8" x 82-1/8" per bathroom/SPEC.md (Nov 24 back-wall field note: 69-5/16").
     S23 = 2.65
     def bx_b(x): return 235.0 + x * S23
     def by_b(y): return 48.0 + y * S23
@@ -901,20 +904,23 @@ def build_module2(lang):
         '<svg viewBox="0 0 840 340" width="100%" data-equal-scale="2.65">'
         + svg_compass(798, 36, lang)
         + svg_scale_bar(24, 312, S23, 24, lang)
-        # Bathroom 72.125" x 88"
-        + '<rect x="235.0" y="48.0" width="{:.1f}" height="{:.1f}" fill="#f0fdf4" stroke="#0f2537" stroke-width="2.5"/>'.format(72.125 * S23, 88.0 * S23)
+        # Bathroom 72.125" x 82.125" (governing bathroom/SPEC.md)
+        + '<rect x="235.0" y="48.0" width="{:.1f}" height="{:.1f}" fill="#f0fdf4" stroke="#0f2537" stroke-width="2.5"/>'.format(72.125 * S23, 82.125 * S23)
         # Tub/Shower along North end (0..30" Y) — Damp/Wet zone CEC 410.10(D)
         + '<rect x="235.0" y="48.0" width="{:.1f}" height="{:.1f}" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.5"/>'.format(72.125 * S23, 30.0 * S23)
-        + '<text x="{:.1f}" y="{:.1f}" text-anchor="middle" font-size="9.2" font-weight="800" fill="#1e40af">{}</text>'.format(bx_b(36), by_b(16), esc(tr(lang, "TUB / SHOWER (WET/DAMP ZONE)", "TINA / REGADERA (ZONA HÚMEDA)")))
-        # Pedestal Vanity on West wall (Y=42..66") + Vanity Sconce
-        + '<rect x="235.0" y="{:.1f}" width="{:.1f}" height="{:.1f}" fill="#e2e8f0" stroke="#475569"/>'.format(by_b(42), 20 * S23, 24 * S23)
-        + '<text x="{:.1f}" y="{:.1f}" text-anchor="middle" font-size="8.2" font-weight="700" fill="#1e293b">{}</text>'.format(bx_b(10), by_b(55), esc(tr(lang, "VANITY", "LAVABO")))
-        # Toilet on East side (X=54", Y=54")
-        + '<ellipse cx="{:.1f}" cy="{:.1f}" rx="20" ry="14" fill="#ffffff" stroke="#475569" stroke-width="1.5"/>'.format(bx_b(54), by_b(54))
-        + '<text x="{:.1f}" y="{:.1f}" text-anchor="middle" font-size="8.0" font-weight="700" fill="#334155">WC</text>'.format(bx_b(54), by_b(57))
-        # Pocket door cavity warning on South-West jamb vs Solid South-East jamb!
-        + '<rect x="235.0" y="{:.1f}" width="{:.1f}" height="8" fill="#fee2e2" stroke="#dc2626" stroke-dasharray="3,2"/>'.format(by_b(85), 32 * S23)
-        + '<line x1="{:.1f}" y1="{:.1f}" x2="{:.1f}" y2="{:.1f}" stroke="#ffffff" stroke-width="5"/>'.format(bx_b(32), by_b(88), bx_b(58), by_b(88))
+        + '<text x="{:.1f}" y="{:.1f}" text-anchor="middle" font-size="9.0" font-weight="800" fill="#1e40af">{}</text>'.format(bx_b(36), by_b(14), esc(tr(lang, "TUB / SHOWER (WET/DAMP ZONE)", "TINA / REGADERA (ZONA HÚMEDA)")))
+        + '<text x="{:.1f}" y="{:.1f}" text-anchor="middle" font-size="7.6" font-weight="700" fill="#1e3a8a">{}</text>'.format(bx_b(36), by_b(25), esc(tr(lang, "Back wall: 69-5/16\" field note", "Muro fondo: nota 69-5/16\"")))
+        # Pedestal Vanity on West wall (Y=40..64") + Vanity Sconce
+        + '<rect x="235.0" y="{:.1f}" width="{:.1f}" height="{:.1f}" fill="#e2e8f0" stroke="#475569"/>'.format(by_b(40), 20 * S23, 24 * S23)
+        + '<text x="{:.1f}" y="{:.1f}" text-anchor="middle" font-size="8.2" font-weight="700" fill="#1e293b">{}</text>'.format(bx_b(10), by_b(53), esc(tr(lang, "VANITY", "LAVABO")))
+        # Toilet on East side (X=54", Y=52")
+        + '<ellipse cx="{:.1f}" cy="{:.1f}" rx="20" ry="14" fill="#ffffff" stroke="#475569" stroke-width="1.5"/>'.format(bx_b(54), by_b(52))
+        + '<text x="{:.1f}" y="{:.1f}" text-anchor="middle" font-size="8.0" font-weight="700" fill="#334155">WC</text>'.format(bx_b(54), by_b(55))
+        # Standard framed stud South wall (Pocket Door RETIRED Nov 24) + 28" Outward-Swing Hallway Door (X=30..58")
+        + '<line x1="{:.1f}" y1="{:.1f}" x2="{:.1f}" y2="{:.1f}" stroke="#ffffff" stroke-width="5"/>'.format(bx_b(30), by_b(82.125), bx_b(58), by_b(82.125))
+        + '<line x1="{:.1f}" y1="{:.1f}" x2="{:.1f}" y2="{:.1f}" stroke="#0f2537" stroke-width="2.0"/>'.format(bx_b(30), by_b(82.125), bx_b(30), by_b(82.125 + 24.0))
+        + '<path d="M {:.1f},{:.1f} A {:.1f},{:.1f} 0 0,0 {:.1f},{:.1f}" fill="none" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="4,2"/>'.format(bx_b(30), by_b(82.125 + 24.0), 24.0 * S23, 24.0 * S23, bx_b(54), by_b(82.125))
+        + '<text x="{:.1f}" y="{:.1f}" text-anchor="middle" font-size="7.4" font-weight="800" fill="#14532d">{}</text>'.format(bx_b(41), by_b(76), esc(tr(lang, "28\" OUT-SWING DOOR (FIELD VERIFY)", "PUERTA 28\" ABATIBLE AFUERA")))
 
         # Attic Bath J-Box (#13) drawn to the East with 5 explicit 12/2 Yellow home-drops!
         + '<rect x="520" y="128" width="96" height="40" rx="4" fill="#fef08a" stroke="#713f12" stroke-width="2.2"/>'
@@ -924,26 +930,26 @@ def build_module2(lang):
         + '<text x="700" y="140" text-anchor="middle" font-size="8.8" font-weight="800" fill="#713f12">{}</text>'.format(esc(tr(lang, "FROM PANEL #13 (12/2)", "DESDE PANEL #13 (12/2)")))
 
         # 5 Separate 12/2 Yellow Branches from Bath J-Box
-        + '<polyline points="520,134 460,134 {:.1f},{:.1f}" fill="none" stroke="#ca8a04" stroke-width="2.2"/>'.format(bx_b(36), by_b(44))
-        + '<polyline points="520,142 465,142 {:.1f},{:.1f}" fill="none" stroke="#ca8a04" stroke-width="2.2"/>'.format(bx_b(72.125), by_b(62))
-        + '<polyline points="520,150 470,150 {:.1f},{:.1f}" fill="none" stroke="#ca8a04" stroke-width="2.0"/>'.format(bx_b(0), by_b(54))
-        + '<polyline points="520,158 475,158 {:.1f},{:.1f}" fill="none" stroke="#ca8a04" stroke-width="2.0"/>'.format(bx_b(0), by_b(40))
-        + '<polyline points="520,164 480,164 {:.1f},{:.1f}" fill="none" stroke="#ca8a04" stroke-width="2.0"/>'.format(bx_b(64), by_b(88))
+        + '<polyline points="520,134 460,134 {:.1f},{:.1f}" fill="none" stroke="#ca8a04" stroke-width="2.2"/>'.format(bx_b(36), by_b(42))
+        + '<polyline points="520,142 465,142 {:.1f},{:.1f}" fill="none" stroke="#ca8a04" stroke-width="2.2"/>'.format(bx_b(72.125), by_b(60))
+        + '<polyline points="520,150 470,150 {:.1f},{:.1f}" fill="none" stroke="#ca8a04" stroke-width="2.0"/>'.format(bx_b(0), by_b(58))
+        + '<polyline points="520,158 475,158 {:.1f},{:.1f}" fill="none" stroke="#ca8a04" stroke-width="2.0"/>'.format(bx_b(0), by_b(38))
+        + '<polyline points="520,164 480,164 {:.1f},{:.1f}" fill="none" stroke="#ca8a04" stroke-width="2.0"/>'.format(bx_b(65), by_b(82.125))
 
         # Physical Device Markers
-        + '<circle cx="{:.1f}" cy="{:.1f}" r="4.8" fill="#fef08a" stroke="#713f12" stroke-width="1.6"/>'.format(bx_b(0), by_b(40))    # Vanity Light
-        + '<circle cx="{:.1f}" cy="{:.1f}" r="4.8" fill="#fef08a" stroke="#713f12" stroke-width="1.6"/>'.format(bx_b(0), by_b(62))    # Vanity GFCI
-        + '<circle cx="{:.1f}" cy="{:.1f}" r="6.5" fill="#ffffff" stroke="#16a34a" stroke-width="1.8"/>'.format(bx_b(36), by_b(44))   # Bath Light + Fan
-        + '<circle cx="{:.1f}" cy="{:.1f}" r="4.8" fill="#fef08a" stroke="#713f12" stroke-width="1.6"/>'.format(bx_b(72.125), by_b(62)) # Toilet GFCI (12" AFF)
-        + '<rect x="{:.1f}" y="{:.1f}" width="12" height="7" fill="#fee2e2" stroke="#dc2626" stroke-width="1.6"/>'.format(bx_b(64) - 6, by_b(88) - 7) # Solid-jamb switches
+        + '<circle cx="{:.1f}" cy="{:.1f}" r="4.8" fill="#fef08a" stroke="#713f12" stroke-width="1.6"/>'.format(bx_b(0), by_b(38))      # Vanity Light
+        + '<circle cx="{:.1f}" cy="{:.1f}" r="4.8" fill="#fef08a" stroke="#713f12" stroke-width="1.6"/>'.format(bx_b(0), by_b(58))      # Vanity GFCI
+        + '<circle cx="{:.1f}" cy="{:.1f}" r="6.5" fill="#ffffff" stroke="#16a34a" stroke-width="1.8"/>'.format(bx_b(36), by_b(42))     # Bath Light + Fan
+        + '<circle cx="{:.1f}" cy="{:.1f}" r="4.8" fill="#fef08a" stroke="#713f12" stroke-width="1.6"/>'.format(bx_b(72.125), by_b(60)) # Toilet GFCI (12" AFF)
+        + '<rect x="{:.1f}" y="{:.1f}" width="12" height="7" fill="#fee2e2" stroke="#dc2626" stroke-width="1.6"/>'.format(bx_b(65) - 6, by_b(82.125) - 7) # Framed stud wall switches
 
         # Non-overlapping Callouts
-        + svg_callout(14, 118, bx_b(0), by_b(40), tr(lang, "Vanity Light", "Luz Espejo"), "#13 · 12/2", "w12")
-        + svg_callout(14, 186, bx_b(0), by_b(62), tr(lang, "Vanity (40–44\" AFF)", "Lavabo (40–44\" AFF)"), "#13 · 12/2", "w12")
-        + svg_callout(14, 255, bx_b(16), by_b(86), tr(lang, "Pocket Wall HOLD", "Pausa Corrediza"), tr(lang, "NO SWITCHES", "SIN APAG."), "w143")
-        + svg_callout(260, 14, bx_b(36), by_b(44), tr(lang, "Bath Light + Humidity Fan", "Luz Techo + Extractor"), "#13 · 12/2", "w12")
-        + svg_callout(520, 210, bx_b(72.125), by_b(62), tr(lang, "Toilet (12\" AFF · Sep. Drop!)", "Inodoro (12\" AFF · Bajada Sep.)"), "#13 · 12/2", "w12")
-        + svg_callout(465, 295, bx_b(64), by_b(88), tr(lang, "Bath Switches (Solid Jamb)", "Apagadores (Jamba Sólida)"), "#13 · 12/2", "w12")
+        + svg_callout(14, 118, bx_b(0), by_b(38), tr(lang, "Vanity Light", "Luz Espejo"), "#13 · 12/2", "w12")
+        + svg_callout(14, 186, bx_b(0), by_b(58), tr(lang, "Vanity (40–44\" AFF)", "Lavabo (40–44\" AFF)"), "#13 · 12/2", "w12")
+        + svg_callout(14, 250, bx_b(15), by_b(82.125), tr(lang, "Framed Stud Wall", "Muro de Postes"), tr(lang, "Switches OK", "Apagadores OK"), "w12")
+        + svg_callout(260, 14, bx_b(36), by_b(42), tr(lang, "Bath Light + Humidity Fan", "Luz Techo + Extractor"), "#13 · 12/2", "w12")
+        + svg_callout(520, 210, bx_b(72.125), by_b(60), tr(lang, "Toilet (12\" AFF · Sep. Drop!)", "Inodoro (12\" AFF · Bajada Sep.)"), "#13 · 12/2", "w12")
+        + svg_callout(465, 290, bx_b(65), by_b(82.125), tr(lang, "Bath Switches (Stud Wall)", "Apagadores (Muro Postes)"), "#13 · 12/2", "w12")
         + '</svg>'
     )
 
@@ -951,10 +957,10 @@ def build_module2(lang):
         '<div class="sheet slide">'
         + header_html(lang, mod_title, "E-23", tr(lang, "Segment B: Bathroom All-in-One (#13 · 12/2 via Bath J-Box)", "Segmento B: Baño Todo-en-Uno (#13 · 12/2 vía Caja Baño)"))
         + legend_bar(lang)
-        + '<div class="svg-wrap"><div class="svg-cap">' + esc(tr(lang, "1:1 Bathroom Plan (72-1/8\" × 88\") — Coordinate Toilet Box & Separate 12/2 Drop BEFORE Tuesday Wall Tile!", "Plano 1:1 de Baño (72-1/8\" × 88\") — ¡Coordinar Caja Inodoro y Bajada 12/2 Separada ANTES del Azulejo del Martes!")) + '</div>' + s23 + '</div>'
+        + '<div class="svg-wrap"><div class="svg-cap">' + esc(tr(lang, "1:1 Bathroom Plan (72-1/8\" × 82-1/8\" per SPEC; Nov 24 back-wall note: 69-5/16\") — Outward-Swing Hallway Door (Pocket Door RETIRED) · Separate 12/2 Toilet Drop Before Tile!", "Plano 1:1 de Baño (72-1/8\" × 82-1/8\" según SPEC; nota 24 nov muro fondo: 69-5/16\") — Puerta Abatible Hacia Pasillo (Corrediza RETIRADA) · ¡Bajada 12/2 Separada al Inodoro Antes del Azulejo!")) + '</div>' + s23 + '</div>'
         + '<div class="note-red"><strong>' + esc(tr(lang, "CRITICAL 20A BATHROOM & PRE-TILE RULES (#13):", "REGLAS CRÍTICAS 20A Y PRE-AZULEJO EN BAÑO (#13):")) + '</strong> '
-        + esc(tr(lang, "1) ALL 5 branches from Bath J-Box (Vanity, Toilet, Ceiling Light, Vanity Light, Humidity Fan & Solid-Jamb Switches) MUST use 12/2 Yellow (NEVER 14/2 on a 20A breaker, NEC 240.4(D)(5); use deep switch box for 12 AWG fill + Title 24 vacancy sensor). 2) ZERO loads outside Bathroom (CEC 210.11(C)(3) Ex.; fastened fan+lights <=10A per 210.23(A)(2)). 3) Pull a SEPARATE home-drop from Bath J-Box to Toilet BEFORE Tuesday wall tile so splitting a heated bidet to Spare #19 later requires zero tile demolition. 4) Damp/wet-rated fixture over tub (CEC 410.10(D)).",
-                 "1) TODOS los 5 ramales desde Caja Baño (Lavabo, Inodoro, Luz Techo, Luz Espejo, Extractor y Apagadores en jamba sólida) DEBEN ser 12/2 Amarillo (PROHIBIDO 14/2 en interruptor 20A; usar caja profunda + sensor Title 24). 2) CERO cargas fuera del Baño (CEC 210.11(C)(3) Ex.). 3) Tirar bajada 12/2 SEPARADA desde Caja Baño al Inodoro ANTES del azulejo del martes para poder dividir luego a Reserva #19 sin romper azulejo. 4) Luminaria apta zona húmeda sobre tina (CEC 410.10(D))."))
+        + esc(tr(lang, "1) ALL 5 branches from Bath J-Box (Vanity, Toilet, Ceiling Light, Vanity Light, Humidity Fan & Switches) MUST use 12/2 Yellow (NEVER 14/2 on a 20A breaker, NEC 240.4(D)(5); use deep switch box for 12 AWG fill + Title 24 vacancy sensor). 2) ZERO loads outside Bathroom (CEC 210.11(C)(3) Ex.; fastened fan+lights <=10A per 210.23(A)(2)). 3) Pocket door permanently RETIRED (Nov 24): South wall is a standard framed stud assembly (active switch installation permitted); 28\"×1-3/8\" slab swings outward into hallway (field-verify hinge swing & clearance). 4) Pull a SEPARATE 12/2 home-drop from Bath J-Box to Toilet BEFORE wall tile (tile on hold until Alex returns) so splitting a heated bidet to Spare #19 later requires zero tile demolition; damp/wet-rated fixture over tub (CEC 410.10(D)).",
+                 "1) TODOS los 5 ramales desde Caja Baño (Lavabo, Inodoro, Luz Techo, Luz Espejo, Extractor y Apagadores) DEBEN ser 12/2 Amarillo (PROHIBIDO 14/2 en interruptor 20A; usar caja profunda + sensor Title 24). 2) CERO cargas fuera del Baño (CEC 210.11(C)(3) Ex.). 3) Puerta corrediza RETIRADA definitivamente (24 nov): el muro Sur es bastidor estándar de postes (se permite instalar apagadores); hoja 28\"×1-3/8\" abate hacia afuera al pasillo (verificar sentido y claro en obra). 4) Tirar bajada 12/2 SEPARADA desde Caja Baño al Inodoro ANTES del azulejo de muro (en pausa hasta regreso de Alex) para poder dividir luego a Reserva #19 sin romper azulejo; luminaria apta zona húmeda sobre tina (CEC 410.10(D))."))
         + '</div>' + footer_html(lang, mod_short, "E-23") + '</div>'
     )
 

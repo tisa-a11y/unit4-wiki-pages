@@ -12,17 +12,17 @@
 
 
 ## Concepto
-Piso de azulejo tipo mármol, azulejo blanco tipo metro en muros, accesorios color bronce, tina de empotrar.
+Piso de azulejo tipo mármol, azulejo blanco tipo metro American Olean Ice White 0025 de 3" × 6" en muros, accesorios color bronce, tina de empotrar y puerta abatible hacia el pasillo.
 
 ## Cuarto y muebles
-- **Cuarto:** 72-1/8" × 82-1/8".
-- **Tina:** instalada y probada sin fugas el 9 de nov.
+- **Cuarto:** 72-1/8" × 82-1/8" (nota de campo 24 nov en muro de fondo: 69-5/16").
+- **Puerta (confirmada 24 nov):** La puerta corrediza queda **retirada definitivamente**. Usar una puerta abatible estándar que abra **hacia afuera al pasillo** (conservar la hoja de 28" × 1-3/8"; verificar en obra el sentido de giro y el espacio libre en el pasillo antes de cerrar el marco). El muro sur de entrada es un muro estándar de postes — se permite instalar apagadores.
+- **Tina:** instalada y probada sin fugas el 9 de nov (piso a borde de tina: 22").
 - **Inodoro:** descarga a 10".
-- **Botiquín:** sobre el muro, no empotrado.
-- **Puerta:** no enmarcar puerta corrediza ni comprar el riel.
+- **Botiquín:** sobre el muro únicamente (no empotrado). Devolver el botiquín sobredimensionado en obra; reemplazo por elegir.
 
-## Azulejo y orden del trabajo
-- **Primero la moldura de la ventana.** La moldura original va antes de cualquier azulejo de muro.
+## Azulejo, ventana y programa (actualizado 24 nov)
+- **Primero reemplazo de ventana y marco:** Reemplazar la ventana y el marco del baño antes del azulejo de muro — cero azulejo en el área del marco de ventana. Coordinar el marco y el alféizar con la impermeabilización y el azulejo vecino.
+- **Azulejo de muro (en pausa hasta que regrese Alex):** **American Olean Color Story Ice White 0025** de 3" × 6" (`36MOD1P4`, reemplaza a Daltile). El tablero y los dos nichos ya están puestos; Alex no está disponible esta semana, así que el azulejo queda en pausa hasta su regreso.
 - **Piso:** azulejo colocado, sin boquilla. Revisar la brida del inodoro y luego emboquillar con Warm Gray.
-- **Muros:** tablero y los dos nichos puestos. Azulejo de muro blanco de 3" × 6".
-- **Electricidad:** dos cajas GFCI. El cable del techo va a una caja de conexiones en el ático.
+- **Electricidad:** La preparación restante del baño a cargo de John continúa antes del trabajo eléctrico elegible del miércoles. Tender cable 12/2 desde la caja de conexiones del ático, incluyendo bajada separada al inodoro antes del azulejo de muro.

@@ -1162,9 +1162,9 @@
         "mounting": "surface mounted only"
       },
       "entry_door": {
-        "action": "retain slab, hinged outward; pocket door deferred",
+        "action": "retain 28x1-3/8 in slab, standard hinged outward-swing hallway door; pocket door permanently retired Nov 24 (standard framed stud south wall, switches permitted)",
         "source_id": "bathroom_spec",
-        "date": "2026-11-19",
+        "date": "2026-11-24",
         "handing": null,
         "hall_clearance_in": null,
         "note": "Magicplan pocket symbol is historical baseline, not current installation instruction."
