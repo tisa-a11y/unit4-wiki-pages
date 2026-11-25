@@ -60,6 +60,10 @@
     lastScaleInfo: { view: "field-layout", scaleX: 2.95, scaleY: 2.95, uniform: true }
   };
 
+  function pick(en, es, ru) {
+    return state.lang === "es" ? (es || en) : state.lang === "ru" ? (ru || en) : en;
+  }
+
   function resolveStepId(raw) {
     const val = String(raw || "").trim().toLowerCase();
     if (!val) return null;
@@ -170,9 +174,6 @@
   }
 
   function buildHoldAndRefStrip() {
-    const qLang = state.lang !== "en" ? `&lang=${state.lang}` : "";
-    const qTheme = state.theme === "dark" ? `&theme=dark` : "";
-    const baseHref = `../bathroom-measurements/index.html?v=rev010${qLang}${qTheme}`;
     return `
       <div class="u4b-hold-banner no-print">
         <strong>${pick("ACTIVE PRE-TILE HOLD (NOV 24):", "PAUSA PREVIA AL AZULEJO (24 NOV):", "ПАУЗА ПЕРЕД УКЛАДКОЙ ПЛИТКИ (24 НОЯБ.):")}</strong>
@@ -183,18 +184,13 @@
         )}
       </div>
       <div class="u4b-ref-strip no-print">
-        <span><strong>${pick("Field Measurements & Photos:", "Medidas de campo y fotos:", "Полевые замеры и фото:")}</strong> ${pick("Open interactive wall & tub drawings:", "Abrir planos y fotos de referencia:", "Открыть чертежи и фото:")}</span>
-        <div class="u4b-ref-links">
-          <a class="u4b-ref-link" href="${baseHref}&wall=room&view=flat">${pick("Whole Room", "Todo el baño", "Вся ванная")}</a>
-          <a class="u4b-ref-link" href="${baseHref}&wall=tub&view=photo">${pick("Tub Wall", "Muro tina", "Стена ванны")}</a>
-          <a class="u4b-ref-link" href="${baseHref}&wall=tub-profile&view=photo">${pick("Tub Side", "Perfil tina", "Профиль ванны")}</a>
-          <a class="u4b-ref-link" href="${baseHref}&wall=west&view=photo">${pick("West Wall (45-1/2″)", "Muro oeste (45-1/2″)", "Западная стена")}</a>
-        </div>
+        <a class="u4b-ref-link" href="../../wiki-images/bathroom-tub-surround-measurements-${state.lang === 'es' ? 'es' : 'en'}.svg">${pick("Tub Surround measurements — open reference photo", "Medidas del contorno de la tina — abrir foto de referencia", "Замеры зоны ванны — открыть фото")}</a>
       </div>
     `;
   }
 
   function buildStep1Svg(lay, forPrint) {
+    const es = state.lang === "es";
     const S = 2.95;
     if (!forPrint) state.lastScaleInfo = { view: "field-layout", scaleX: S, scaleY: S, uniform: true };
     const xWest0 = 32;
@@ -322,6 +318,7 @@
   }
 
   function buildStep2PlumbingSvg(lay, forPrint) {
+    const es = state.lang === "es";
     const S = 3.1;
     if (!forPrint) state.lastScaleInfo = { view: "plumbing-stops", scaleX: S, scaleY: S, uniform: true };
     const yZ = (z) => +(40 + (76.0 - z) * S).toFixed(1);
@@ -416,6 +413,7 @@
   }
 
   function buildStep3NichesSvg(lay, forPrint) {
+    const es = state.lang === "es";
     const S = 3.8;
     if (!forPrint) state.lastScaleInfo = { view: "niches-trim", scaleX: S, scaleY: S, uniform: true };
     const ox = 24;
@@ -495,6 +493,7 @@
   }
 
   function renderAll() {
+    const es = state.lang === "es";
     document.documentElement.lang = state.lang;
     document.documentElement.setAttribute("data-theme", state.theme);
     const lay = computeLayout();
@@ -529,7 +528,7 @@
           </div>
 
           <div class="u4h-svg-wrap" data-u4-zoom-label="${es ? "Trazo de 3 muros" : "3-Wall Tile Layout"}">
-            ${buildStep1Svg(es, lay, false)}
+            ${buildStep1Svg(lay, false)}
           </div>
 
           <div class="u4b-ctrl-panel">
@@ -598,7 +597,7 @@
           </div>
 
           <div class="u4h-svg-wrap" data-u4-zoom-label="${es ? "Regadera y ventana" : "Shower & Window Walls"}">
-            ${buildStep2PlumbingSvg(es, lay, false)}
+            ${buildStep2PlumbingSvg(lay, false)}
           </div>
 
           <div class="u4b-grid">
@@ -638,7 +637,7 @@
           </div>
 
           <div class="u4h-svg-wrap" data-u4-zoom-label="${es ? "Nichos y bullnose" : "Niches & Ceramic Trim"}">
-            ${buildStep3NichesSvg(es, lay, false)}
+            ${buildStep3NichesSvg(lay, false)}
           </div>
 
           <div class="u4b-grid">
@@ -812,6 +811,7 @@
   }
 
   function renderPrintSheets(lay) {
+    const es = state.lang === "es";
     const pr = document.getElementById("u4PrintRoot");
     if (!pr) return;
     pr.innerHTML = `

@@ -1,22 +1,5 @@
 # Bathroom
 
-- **Interactive plans:** [Bathroom Tub & Wall Tile Plan](#plan:bathroom-tile) · [Field Measurements & Photos (Room, Tub & Walls)](#plan:bathroom-measurements)
-
-<div class="u4-plan-launch-grid">
-  <a class="u4-plan-launch-card is-primary" href="#plan:bathroom-tile">
-    <span class="u4-plan-launch-kicker">Interactive Plan &middot; Tub Alcove &amp; Wall Tile</span>
-    <strong class="u4-plan-launch-title">Bathroom Tub &amp; Wall Tile Plan</strong>
-    <span class="u4-plan-launch-desc">35&quot; symmetrical East/West stops, 71-1/4&quot; top height, matching 2&quot;&times;6&quot; ceramic bullnose, 1-piece white niche backs &amp; Mapei #77 Frost grout.</span>
-    <span class="u4-plan-launch-cta">Open Wall Tile Plan &rarr;</span>
-  </a>
-  <a class="u4-plan-launch-card" href="#plan:bathroom-measurements">
-    <span class="u4-plan-launch-kicker">Reference Renderings &middot; Photo &amp; 1:1 Drawings</span>
-    <strong class="u4-plan-launch-title">Wall, Tub &amp; Room Reference Renderings</strong>
-    <span class="u4-plan-launch-desc">Whole-room floor plan (72-1/8&quot;&times;82-1/8&quot;), tub back wall (69-5/16&quot;), tub height/depth profile, and West window wall photos.</span>
-    <span class="u4-plan-launch-cta">Open Wall &amp; Tub Renderings &rarr;</span>
-  </a>
-</div>
-
 ## Concept
 Marble-look floor tile, American Olean Ice White 0025 3" × 6" subway wall tile with matching ceramic bullnose trim, bronze fixtures, drop-in tub, and an outward-swing hallway door.
 

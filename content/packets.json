@@ -7,7 +7,8 @@
     "titleRu": "Интерактивный план плитки и ниш ванной",
     "docEn": "./plans/bathroom-tile/index.html?v=rev010",
     "docEs": "./plans/bathroom-tile/index.html?lang=es&v=rev010",
-    "docRu": "./plans/bathroom-tile/index.html?lang=ru&v=rev010"
+    "docRu": "./plans/bathroom-tile/index.html?lang=ru&v=rev010",
+    "inMenu": false
   },
   {
     "key": "interactive-bathroom-measurements",
@@ -17,7 +18,8 @@
     "titleRu": "Полевые замеры и фото ванной (план, ванна и стены)",
     "docEn": "./plans/bathroom-measurements/index.html?v=rev010",
     "docEs": "./plans/bathroom-measurements/index.html?lang=es&v=rev010",
-    "docRu": "./plans/bathroom-measurements/index.html?lang=ru&v=rev010"
+    "docRu": "./plans/bathroom-measurements/index.html?lang=ru&v=rev010",
+    "inMenu": false
   },
   {
     "key": "interactive-hood-wall-plan",
@@ -311,16 +313,17 @@
   {
     "key": "bathroom-plan",
     "room": "bathroom",
-    "titleEn": "Bathroom plan",
-    "titleEs": "Plan del baño",
-    "noteEn": "The plan given to John.",
-    "noteEs": "El plan entregado a John.",
+    "titleEn": "Historical bathroom plan for John",
+    "titleEs": "Plan anterior del baño para John",
+    "noteEn": "October 14 edition — history only.",
+    "noteEs": "Edición del 14 de octubre — solo historial.",
     "docEn": "1taIg19r1lPEztEDybHcrDh_H702WusVy",
     "docEs": "1NY9eaXvYK_oICJBK8FrMnkw5iCx5lVuQ",
     "aliases": [
       "bath plan",
       "plan del bano"
-    ]
+    ],
+    "inMenu": false
   },
   {
     "key": "bathroom-tile",
@@ -352,7 +355,8 @@
       "bathroom renderings",
       "tub wall renderings",
       "medidas del bano"
-    ]
+    ],
+    "inMenu": false
   },
   {
     "key": "bathroom-surfaces-r1",
