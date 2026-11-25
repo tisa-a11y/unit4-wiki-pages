@@ -1334,7 +1334,7 @@ body.u4-lb-open .u4-pin-fab{display:none!important}
 .u4-pin-ghost::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--crimson,#b42318)}
 .u4-pin-arm-banner{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 60px);transform:translateX(-50%);z-index:265;padding:6px 12px;border-radius:8px;border:1px solid var(--crimson,#b42318);background:var(--panel);color:var(--fg);font:600 12px/1.3 var(--mono);white-space:nowrap;max-width:calc(100vw - 24px);overflow:hidden;text-overflow:ellipsis}
 .u4-pin-arm-banner[hidden]{display:none!important}
-body.u4-pin-armed #doc,body.u4-pin-armed .u4-lb-stage,body.u4-pin-armed .u4-pdf-page-box{cursor:crosshair}
+body.u4-pin-armed #doc,body.u4-pin-armed #roomTechnical,body.u4-pin-armed .u4-lb-stage,body.u4-pin-armed .u4-pdf-page-box{cursor:crosshair}
 
 .u4-pin-marker{position:absolute;transform:translate(-50%,-50%);pointer-events:auto;cursor:grab;width:28px;height:28px;border-radius:50%;border:2px dashed var(--crimson,#b42318);background:rgba(180,35,24,.14);display:inline-flex;align-items:center;justify-content:center;padding:0;touch-action:none;z-index:18}
 .u4-pin-marker.is-selected{border-style:solid;border-color:var(--accent);background:rgba(31,95,122,.16)}
@@ -2381,7 +2381,7 @@ main.u4-page-pin-armed,
 main.u4-page-pin-armed * {
   cursor: crosshair !important;
 }
-#doc {
+#doc, #roomTechnical {
   position: relative;
 }
 .u4-iframe-pin-shield {
@@ -4102,18 +4102,19 @@ function u4Snippet(txt, maxLen){
   return clean.length > (maxLen || 46) ? clean.slice(0, (maxLen || 46) - 1) + "…" : clean;
 }
 function stampDocPinAnchors(){
-  const docEl = document.getElementById("doc");
-  if (!docEl) return;
+  const roots = [document.getElementById("doc"), document.getElementById("roomTechnical")].filter(Boolean);
   const sel = "figure.u4-lead-pic, section.u4-gal-sec, section.ck li, section.ck, section.docs li, section.docs, .u4-hvac-col, .u4-hvac-facts, .u4-qa-card, .u4-fact-card, details.fulldet, .u4-home-sec, .goals, .tbl";
   let idx = 0;
+  roots.forEach(docEl => {
   docEl.querySelectorAll(sel).forEach(el => {
     if (el.closest(".u4-zoom-inline, .viewer")) return;
     idx++;
     el.setAttribute("data-u4-pin-anchor", "anchor-" + idx);
     el.classList.add("u4-pin-host");
   });
-  docEl.setAttribute("data-u4-pin-anchor", "doc-root");
+  docEl.setAttribute("data-u4-pin-anchor", docEl.id === "doc" ? "doc-root" : "technical-root");
   docEl.classList.add("u4-pin-host");
+  });
 }
 function resolvePinDropTarget(clientX, clientY){
   const el = document.elementFromPoint(clientX, clientY);
@@ -4192,7 +4193,7 @@ function resolvePinDropTarget(clientX, clientY){
     };
   }
 
-  const docEl = el.closest("#doc");
+  const docEl = el.closest("#doc, #roomTechnical");
   if (docEl) {
     stampDocPinAnchors();
     const anchor = el.closest("[data-u4-pin-anchor]") || docEl;
@@ -4697,7 +4698,7 @@ function ensureGalleryDelegation(){
       openGalleryLightbox([{ fullUrl: leadImg.currentSrc || leadImg.src, thumbUrl: leadImg.src, title: cap, note: "" }], 0, current ? pageLabel(current) : "");
       return;
     }
-    const mdImg = ev.target && ev.target.closest ? ev.target.closest("#doc .mdbody img") : null;
+    const mdImg = ev.target && ev.target.closest ? ev.target.closest("#doc .mdbody img, #roomTechnical .mdbody img") : null;
     if (mdImg && !mdImg.closest("a")) {
       const fig = mdImg.closest("figure");
       const cap = mdImg.alt || (fig && fig.querySelector("figcaption") && fig.querySelector("figcaption").textContent) || (current ? pageLabel(current) : "");
@@ -4916,7 +4917,7 @@ function crewRoom(p, srcMd){
   if (concept) {
     const conceptDom = document.createElement("div");
     conceptDom.innerHTML = render(concept.body.join("\n").trim());
-    const overview = conceptDom.querySelector("p");
+    const overview = conceptDom.querySelector(":scope > p");
     if (overview) {
       h += '<p class="u4-room-summary" id="sec-concept">'+overview.innerHTML+'</p>';
       overview.remove();
@@ -5423,6 +5424,7 @@ function closePlanShell(){
 }
 
 function openPlanShell(planSpec){
+  document.getElementById("roomTechnical")?.replaceChildren();
   if (!planSpec || !planSpec.planId) return false;
   var sh = document.getElementById("u4PlanShell");
   var fr = document.getElementById("u4PlanFrame");
@@ -5634,8 +5636,8 @@ function show(key){
       technical.append(combined);
     }
   }
-  enhanceInteractiveLinks(document.getElementById("doc"));
-  enhanceZoomableInlineContent(document.getElementById("doc"));
+  enhanceInteractiveLinks(document.querySelector("main"));
+  enhanceZoomableInlineContent(document.querySelector("main"));
   stampDocPinAnchors();
   mountUniversalPinUi();
   renderPinsOnSurface();

@@ -1232,7 +1232,7 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
             await p12.goto(shot_url, wait_until="domcontentloaded")
             await p12.wait_for_timeout(650)
             await disable_animations(p12)
-            title_selector = "#doc h1" if shot_name.startswith("kitchen-") and not shot_name.startswith("kitchen-electrical-") else "#u4hBody h1, #u4hBody .u4h-title"
+            title_selector = "#doc h1" if "/index.html?" in shot_url and "/plans/" not in shot_url else "#u4hBody h1, #u4hBody .u4h-title"
             if not await p12.locator(title_selector).first.is_visible():
                 fail("gate_12_visual_baselines_report", shot_name + ": target content did not render; refusing empty baseline")
                 await ctx12.close()

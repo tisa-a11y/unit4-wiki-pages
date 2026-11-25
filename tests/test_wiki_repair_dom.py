@@ -121,6 +121,44 @@ class WikiRepairDOMTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(1, await self.page.locator('nav#rail').count())
         self.assertEqual(1, await self.page.locator('#u4AiFloatingDock').count())
 
+    async def test_relocated_details_keep_links_zoom_images_and_pin_targets(self):
+        await self.page.goto(self.base_url + '/?lang=en#electrical')
+        await self.page.wait_for_function("document.querySelector('#sec-concept')")
+        # Supply deterministic room content through the real show()/crewRoom() path.
+        # This edits only in-memory test state, never source files or connected data.
+        fixture = '# Electrical\n\n## Concept\nCheck the electrical wall before closing it.\n\n## Fixture technical reference\n\n[Fixture attic plan](./plans/attic-hatch/)\n\n<p id="fixture-pin-text">Verify the service platform reference before cutting.</p>\n\n<img id="fixture-detail-image" src="./wiki-images/favicon-32.png" alt="Fixture detail photograph" width="64" height="64">\n\n<svg id="fixture-detail-svg" width="160" height="100" viewBox="0 0 160 100"><rect x="10" y="10" width="140" height="80" fill="green" /></svg>'
+        await self.page.evaluate("md => { live.electrical = {md, at: Date.now()}; show('electrical'); }", fixture)
+        details = self.page.locator('#roomTechnical #sec-details')
+        self.assertEqual(1, await details.count())
+        await details.locator(':scope > summary').click()
+        link = details.get_by_role('link', name='Fixture attic plan')
+        self.assertTrue((await link.get_attribute('href')).startswith('#plan:attic-hatch'))
+        self.assertEqual('./plans/attic-hatch/', await link.get_attribute('data-u4-plan-base'))
+        self.assertEqual(1, await details.locator('.u4-zoom-inline #fixture-detail-svg').count())
+        zoom = details.locator('.u4-zoom-inline').filter(has=self.page.locator('#fixture-detail-svg'))
+        scale_before = await zoom.locator('.u4-zoom-inline-view').evaluate('(el) => el.__u4ZoomCtrl.getScale()')
+        await zoom.locator('[data-u4-zoom-in]').click()
+        self.assertGreater(await zoom.locator('.u4-zoom-inline-view').evaluate('(el) => el.__u4ZoomCtrl.getScale()'), scale_before)
+        self.assertTrue(await details.get_attribute('data-u4-pin-anchor'))
+        anchors = await self.page.locator('[data-u4-pin-anchor]').evaluate_all(
+            '(elements) => elements.map(el => el.dataset.u4PinAnchor)')
+        self.assertEqual(len(anchors), len(set(anchors)), 'Pin anchors must be unique across both surfaces')
+        text = details.locator('#fixture-pin-text')
+        await text.scroll_into_view_if_needed()
+        target = await text.evaluate("""el => {
+            const r=el.getBoundingClientRect();
+            const result=resolvePinDropTarget(r.left+r.width/2, r.top+r.height/2);
+            return result && {kind:result.surfaceKind, room:result.roomKey, anchor:result.anchorId};
+        }""")
+        self.assertIsNotNone(target, 'A detail paragraph must remain a pin drop target')
+        self.assertEqual('room', target['kind'])
+        self.assertEqual('electrical', target['room'])
+        self.assertEqual(await details.get_attribute('data-u4-pin-anchor'), target['anchor'])
+        image = details.locator('#fixture-detail-image')
+        await image.click()
+        self.assertTrue(await self.page.locator('#u4GalLightbox').is_visible())
+        self.assertEqual('Fixture detail photograph', await self.page.locator('#u4LbTitle').inner_text())
+
     async def test_image_audit_skips_hidden_lazy_but_reports_visible_broken(self):
         valid = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30'%3E%3Crect width='30' height='30' fill='green'/%3E%3C/svg%3E"
         await self.page.set_content('''
