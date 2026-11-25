@@ -2,7 +2,7 @@
   "use strict";
 
   const SEED = {
-    rev: "bath-tile-v9",
+    rev: "bath-tile-v10",
     roomWidthIn: 72.125,
     roomDepthIn: 82.125,
     doorSlabIn: 28.0,
@@ -54,7 +54,7 @@
     wastePct: 15,
     checks: {
       waterproofPhoto: false,
-      nicheMeasure: false,
+      nicheBackTile: false,
       valveDepth: false
     },
     lastScaleInfo: { view: "field-layout", scaleX: 2.95, scaleY: 2.95, uniform: true }
@@ -178,9 +178,9 @@
       <div class="u4b-hold-banner no-print">
         <strong>${pick("ACTIVE PRE-TILE HOLD (NOV 24):", "PAUSA PREVIA AL AZULEJO (24 NOV):", "ПАУЗА ПЕРЕД УКЛАДКОЙ ПЛИТКИ (24 НОЯБ.):")}</strong>
         ${pick(
-          "Alex is out this week — wall tile stays on hold until: (1) bathroom window & casing are replaced (no tile above 43″ sill), (2) oversized 20″×32″ medicine cabinet is kept off the wall for return, (3) tub faucet trim is fixed, and (4) waterproofed niche dimensions are measured on site. (35″ shower stop, #77 Frost wall grout & ceramic bullnose locked Nov 25.)",
-          "Alex no está disponible esta semana — el azulejo en muros queda en pausa hasta: (1) reemplazar ventana y marco (sin azulejo arriba de 43″), (2) retirar el botiquín grande de 20″×32″ para devolución, (3) corregir la llave de la tina y (4) medir los nichos impermeabilizados en obra. (Tope de 35″, boquilla #77 Frost y bullnose aprobados 25 nov.)",
-          "Алекс отсутствует на этой неделе — укладка настенной плитки на паузе до: (1) замены окна и наличников (без плитки выше подоконника 43″), (2) возврата шкафчика 20″×32″, (3) исправления излива ванны и (4) замера ниш после гидроизоляции. (Край 35″, затирка #77 Frost и бордюр утверждены 25 нояб.)"
+          "Alex is out this week — wall tile stays on hold until: (1) bathroom window & casing are replaced (no tile above 43″ sill), (2) oversized 20″×32″ medicine cabinet is kept off the wall for return, (3) tub faucet trim is fixed, and (4) niche back tile is chosen before tiling the niches. (35″ shower stop, #77 Frost wall grout & ceramic bullnose locked Nov 25.)",
+          "Alex no está disponible esta semana — el azulejo en muros queda en pausa hasta: (1) reemplazar ventana y marco (sin azulejo arriba de 43″), (2) retirar el botiquín grande de 20″×32″ para devolución, (3) corregir la llave de la tina y (4) elegir el azulejo de fondo de los nichos. (Tope de 35″, boquilla #77 Frost y bullnose aprobados 25 nov.)",
+          "Алекс отсутствует на этой неделе — укладка настенной плитки на паузе до: (1) замены окна и наличников (без плитки выше подоконника 43″), (2) возврата шкафчика 20″×32″, (3) исправления излива ванны и (4) выбора плитки для задней стенки ниш. (Край 35″, затирка #77 Frost и бордюр утверждены 25 нояб.)"
         )}
       </div>
       <div class="u4b-ref-strip no-print">
@@ -450,15 +450,15 @@
 
         <text x="${ox}" y="${(oy + wallH + 15).toFixed(1)}" font-size="7.4" fill="#5D686D">${es ? "← Oeste (Ventana)" : "← West (Window)"}</text>
         <text x="${(ox + wallW).toFixed(1)}" y="${(oy + wallH + 15).toFixed(1)}" text-anchor="end" font-size="7.4" fill="#5D686D">${es ? "Este (Regadera) →" : "East (Shower) →"}</text>
-        <text x="${ox}" y="${(oy + wallH + 31).toFixed(1)}" font-size="7.4" fill="#1D2326">${es ? "Fondo liso de 1 sola pieza en cada nicho (sin juntas)." : "Solid 1-piece white back panel per niche (no grout lines)."}</text>
-        <text x="${ox}" y="${(oy + wallH + 45).toFixed(1)}" font-size="7.2" fill="#9A5B06">${es ? "Profundidad pendiente de medir en obra." : "Niche depth: measure on site."}</text>
+        <text x="${ox}" y="${(oy + wallH + 31).toFixed(1)}" font-size="7.4" fill="#1D2326">${es ? "Elegir primero el azulejo/placa del fondo; pegarlo antes de cortar los costados." : "Choose niche back tile first; set back panel before cutting side returns."}</text>
+        <text x="${ox}" y="${(oy + wallH + 45).toFixed(1)}" font-size="7.2" fill="#9A5B06">${es ? "Vanos ya medidos (~11″×19″ y ~7-1/2″×14″); costados se ajustan al fondo elegido." : "Openings recorded (~11″×19″ & ~7-1/2″×14″); side strips fit after setting back."}</text>
 
         <rect x="312" y="10" width="326" height="264" rx="6" fill="#F8FAF9" stroke="#C5CCC9"/>
         <text x="324" y="27" font-size="9" font-weight="700" font-family="IBM Plex Mono, monospace" fill="#1F5F7A">
           ${es ? "2. CORTE LATERAL DEL NICHO" : "2. HOW TILE MEETS THE NICHE"}
         </text>
         <text x="324" y="40" font-size="7.2" fill="#5D686D">
-          ${es ? "Esquema de armado (medir profundidad en obra)" : "Side cutaway (measure niche depth on site)"}
+          ${es ? "Esquema de armado (pegar fondo elegido y luego ajustar costados)" : "Side cutaway (set chosen back first, then fit side strips)"}
         </text>
 
       <rect x="326" y="54" width="18" height="194" fill="#EFE6D8" stroke="#A6947D"/>
@@ -482,12 +482,12 @@
         <text x="442" y="68" font-size="7.4" font-weight="700" fill="#1D2326">${es ? "Azulejo 3″×6″ en muro" : "3″×6″ wall tile"}</text>
         <text x="442" y="86" font-size="7.4" font-weight="700" fill="#1F5F7A">${es ? "Bullnose cerámico 2″×6″" : "2″×6″ ceramic bullnose"}</text>
         <text x="442" y="114" font-size="7.4" font-weight="700" fill="#C92A2A">① ${es ? "Impermeabilizar todo" : "Waterproof entire niche"}</text>
-        <text x="442" y="138" font-size="7.4" font-weight="700" fill="#1F5F7A">② ${es ? "Pegar fondo liso primero" : "Set solid back panel first"}</text>
+        <text x="442" y="138" font-size="7.4" font-weight="700" fill="#1F5F7A">② ${es ? "Pegar fondo elegido primero" : "Set chosen back tile first"}</text>
         <text x="442" y="152" font-size="6.8" fill="#5D686D">${es ? "Los cantos quedan ocultos" : "Cut edges stay hidden"}</text>
         <text x="442" y="176" font-size="7.4" font-weight="700" fill="#2F6B3F">③ ${es ? "Repisa con caída hacia tina" : "Slope bottom sill to tub"}</text>
         <text x="442" y="200" font-size="7.4" font-weight="700" fill="#1F5F7A">④ ${es ? "Colocar retornos al frente" : "Set side/top pieces in front"}</text>
         <text x="442" y="214" font-size="6.8" fill="#2F6B3F">${es ? "Sellar esquinas con silicón" : "Seal corners with silicone"}</text>
-        <text x="442" y="242" font-size="7" font-weight="700" fill="#9A5B06">${es ? "Profundidad: medir en obra" : "Depth: measure on site"}</text>
+        <text x="442" y="242" font-size="7" font-weight="700" fill="#9A5B06">${es ? "Costados se cortan tras pegar fondo" : "Cut side strips after setting back"}</text>
       </svg>
     `;
   }
@@ -631,9 +631,9 @@
           <div class="u4b-head">
             <div>
               <h1 class="u4b-title">${pick("Step 3 — Niches & Ceramic Bullnose Trim", "Paso 3 — Nichos y Orillas con Bullnose Cerámico", "Шаг 3 — Ниши и керамический бордюр")}</h1>
-              <p class="u4b-sub">${pick("Measure both niches (width, height, and depth) after waterproofing before cutting solid white back panels", "Medir ambos nichos (ancho, alto y profundidad) después de impermeabilizar antes de cortar los fondos", "Замерьте обе ниши (ширину, высоту и глубину) после гидроизоляции перед резкой задних панелей")}</p>
+              <p class="u4b-sub">${pick("Openings recorded (~11″ × 19″ left, ~7-1/2″ × 14″ right) · Choose niche back tile first, then fit side returns after setting backs", "Vanos registrados (~11″ × 19″ izq., ~7-1/2″ × 14″ der.) · Elegir fondo primero y ajustar costados tras pegarlo", "Проёмы записаны (~11″ × 19″ и ~7-1/2″ × 14″) · Сначала выберите плитку задней стенки, затем подгоните боковины")}</p>
             </div>
-            <span class="u4b-badge open">${pick("MEASURE ON SITE", "MEDIR EN OBRA", "ЗАМЕР НА МЕСТЕ")}</span>
+            <span class="u4b-badge open">${pick("BACK TILE TBD", "FONDO POR ELEGIR", "ВЫБОР ФОНА НИШИ")}</span>
           </div>
 
           <div class="u4h-svg-wrap" data-u4-zoom-label="${es ? "Nichos y bullnose" : "Niches & Ceramic Trim"}">
@@ -643,11 +643,11 @@
           <div class="u4b-grid">
             <div class="u4b-box">
               <h4>${es ? "NICHO IZQUIERDO" : "LEFT NICHE"}</h4>
-              <p>${es ? "Aprox. 11″ ancho × 19″ alto. Medir profundidad real en obra." : "Approx. 11″ wide × 19″ tall. Measure actual depth on site."}</p>
+              <p>${es ? "Aprox. 11″ ancho × 19″ alto (19″–30″ desde esquina izq.; 17″–36″ sobre tina). Pegar fondo elegido primero y luego cortar laterales." : "Approx. 11″ wide × 19″ tall (19″–30″ from left corner; 17″–36″ above tub rim). Set chosen back first, then cut side strips."}</p>
             </div>
             <div class="u4b-box">
               <h4>${pick("RIGHT NICHE", "NICHO DERECHO", "ПРАВАЯ НИША")}</h4>
-              <p>${pick("Approx. 7-1/2″ wide × 14″ tall (X: ~37-1/2″→45″, bottom ~21-3/4″, top ~35-1/2″–36″). Measure depth on site.", "Aprox. 7-1/2″ ancho × 14″ alto (X: ~37-1/2″→45″, base ~21-3/4″, tope ~35-1/2″–36″). Medir profundidad en obra.", "Около 7-1/2″ × 14″ (X: ~37-1/2″→45″, низ ~21-3/4″, верх ~35-1/2″–36″). Глубину замерить на месте.")}</p>
+              <p>${pick("Approx. 7-1/2″ wide × 14″ tall (X: ~37-1/2″→45″, bottom ~21-3/4″, top ~35-1/2″–36″). Set chosen back first, then cut side strips.", "Aprox. 7-1/2″ ancho × 14″ alto (X: ~37-1/2″→45″, base ~21-3/4″, tope ~35-1/2″–36″). Pegar fondo elegido primero y luego cortar laterales.", "Около 7-1/2″ × 14″ (X: ~37-1/2″→45″, низ ~21-3/4″, верх ~35-1/2″–36″). Сначала уложите заднюю плитку, затем подрежьте боковины.")}</p>
             </div>
             <div class="u4b-box">
               <h4>${es ? "ORILLAS DE CERÁMICA" : "CERAMIC BULLNOSE TRIM"}</h4>
@@ -657,8 +657,8 @@
 
           <div class="u4b-photos">
             <figure class="u4h-photo-card">
-              <img src="./assets/IMG_5478.jpg" alt="${es ? "Muro de fondo con ambos nichos" : "Back tub wall with both framed niches"}">
-              <figcaption><strong>${es ? "Muro de fondo:" : "Back tub wall:"}</strong> ${es ? "Vista completa con ambos nichos — medir vanos interiores tras impermeabilizar." : "Full view of both framed niches — measure inside openings after waterproofing."}</figcaption>
+              <a href="../../wiki-images/bathroom-tub-surround-measurements-${es ? "es" : "en"}.svg"><img src="../../wiki-images/bathroom-tub-surround-measurements-${es ? "es" : "en"}.svg" alt="${es ? "Foto de referencia con medidas del contorno de tina y nichos" : "Tub surround reference photo with recorded niche measurements"}"></a>
+              <figcaption><strong>${es ? "Medidas registradas:" : "Recorded measurements:"}</strong> ${es ? " Muro de 69-5/16″ y ambos nichos (~11″×19″ y ~7-1/2″×14″) — toca para ampliar." : " 69-5/16″ wall and both niches (~11″×19″ & ~7-1/2″×14″) — click to enlarge."}</figcaption>
             </figure>
             <figure class="u4h-photo-card">
               <img src="./assets/IMG_5493.jpg" alt="${es ? "Etiqueta de caja American Olean Ice White" : "American Olean Ice White 3x6 tile box label"}">
@@ -671,7 +671,7 @@
       const refHref = (wall, view) => `../bathroom-measurements/index.html?wall=${wall}&view=${view}&lang=${es ? "es" : "en"}&theme=${state.theme}`;
       const preTileChecks = [
         ["waterproofPhoto", "Take photos of finished waterproofing before setting tile.", "Tomar fotos de la impermeabilización terminada antes de pegar azulejo."],
-        ["nicheMeasure", "Measure waterproofed width, height, and depth of both niches.", "Medir ancho, alto y profundidad interior de ambos nichos ya impermeabilizados."],
+        ["nicheBackTile", "Confirm niche back tile selection before tiling niches (set backs first, then cut side returns).", "Confirmar el azulejo de fondo de ambos nichos antes de forrarlos (pegar fondo primero y cortar laterales después)."],
         ["valveDepth", "Check Delta shower valve depth against finished tile plane.", "Revisar la profundidad de la válvula Delta respecto al paño final del azulejo."]
       ];
       cardHtml = `
@@ -752,9 +752,9 @@
                   <td class="u4b-mono"><strong>${lay.takeoff.cornerPcs} ${es ? "piezas" : "pieces"}</strong></td>
                 </tr>
                 <tr>
-                  <td><strong>${es ? "Fondos Lisos de Nicho (1 pieza)" : "Solid 1-Piece White Niche Backs"}</strong></td>
-                  <td class="u4b-mono">${es ? "Porcelánico/cerámico blanco liso · Medir en obra" : "Smooth white porcelain/ceramic · Measure on site"}</td>
-                  <td class="u4b-mono"><strong>${es ? "Cortar tras medir nichos" : "Cut after measuring niches"}</strong></td>
+                  <td><strong>${es ? "Azulejo / Placa de Fondo de Nichos" : "Niche Back Tile / Slab"}</strong></td>
+                  <td class="u4b-mono">${es ? "Por elegir — definir material de fondo primero" : "TBD — choose niche back tile/slab first"}</td>
+                  <td class="u4b-mono"><strong>${es ? "Pegar fondo primero; cortar costados después" : "Set backs first, then cut side returns"}</strong></td>
                 </tr>
                 <tr>
                   <td><strong>${es ? "Boquilla y Silicón 100%" : "Wall Grout & Matching Silicone"}</strong></td>
@@ -830,7 +830,7 @@
       <section class="u4-print-page">
         <div class="u4-print-head">
           <h2>${es ? "UNIT 4 BAÑO — NICHOS Y MATERIALES (PÁG. 2/2)" : "UNIT 4 BATHROOM — NICHES & MATERIALS (PAGE 2/2)"}</h2>
-          <span>${es ? "Medir Nichos Impermeabilizados Antes de Cortar" : "Measure Waterproofed Niches Before Cutting"}</span>
+          <span>${es ? "Elegir Fondo de Nicho Primero · Cortar Costados Después" : "Choose Niche Back Tile First · Cut Side Strips After"}</span>
         </div>
         ${buildStep3NichesSvg(lay, true)}
         <div class="u4-print-foot">
