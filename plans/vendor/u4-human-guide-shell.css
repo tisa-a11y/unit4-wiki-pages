@@ -1569,3 +1569,14 @@ button.u4h-seg-switch[aria-checked="true"] .u4-seg-opt.is-b,
   }
 }
 /* U4_DEEP_UX_POLISH_PLAN_END */
+
+/* U4_SIBLING_NOWRAP_FIX */
+.u4h-siblings, .u4h-sib-strip {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  max-width: 100%;
+}
+.u4h-siblings a, .u4h-sib-btn {
+  white-space: nowrap;
+}

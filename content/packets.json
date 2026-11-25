@@ -1,5 +1,25 @@
 [
   {
+    "key": "interactive-bathroom-tile",
+    "room": "bathroom",
+    "titleEn": "Bathroom Tub & Wall Tile Interactive Plan",
+    "titleEs": "Plano Interactivo de Azulejo y Nichos en Baño",
+    "titleRu": "Интерактивный план плитки и ниш ванной",
+    "docEn": "./plans/bathroom-tile/index.html?v=rev010",
+    "docEs": "./plans/bathroom-tile/index.html?lang=es&v=rev010",
+    "docRu": "./plans/bathroom-tile/index.html?lang=ru&v=rev010"
+  },
+  {
+    "key": "interactive-bathroom-measurements",
+    "room": "bathroom",
+    "titleEn": "Bathroom Field Measurements & Photos (Room, Tub & Walls)",
+    "titleEs": "Medidas de Campo y Fotos del Baño (Planta, Tina y Muros)",
+    "titleRu": "Полевые замеры и фото ванной (план, ванна и стены)",
+    "docEn": "./plans/bathroom-measurements/index.html?v=rev010",
+    "docEs": "./plans/bathroom-measurements/index.html?lang=es&v=rev010",
+    "docRu": "./plans/bathroom-measurements/index.html?lang=ru&v=rev010"
+  },
+  {
     "key": "interactive-hood-wall-plan",
     "room": "kitchen-oven-range",
     "titleEn": "Interactive range and hood wall plan",
@@ -306,17 +326,47 @@
     "key": "bathroom-tile",
     "room": "bathroom",
     "titleEn": "Bathroom Tub & Wall Tile Plan",
-    "titleEs": "Plano de Azulejo y Nichos en Baño",
-    "noteEn": "35\" symmetrical stops, 71-1/4\" HardieBacker top, 2\"×6\" bullnose (zero metal), 1-piece 24\"×48\" White niche backs, Mapei #77 Frost grout.",
-    "noteEs": "Topes simétricos 35\", altura 71-1/4\", bullnose 2\"×6\" (cero metal), fondos nicho 1 pieza 24\"×48\" Blanco y boquilla Mapei #77 Frost.",
-    "docEn": "./plans/bathroom-tile/index.html?v=rev008",
-    "docEs": "./plans/bathroom-tile/index.html?lang=es&v=rev008",
+    "titleEs": "Plano Interactivo de Azulejo y Nichos en Baño",
+    "noteEn": "35\" symmetrical stops, 71-1/4\" top height, matching 2\"×6\" ceramic bullnose, 1-piece white niche backs & Mapei #77 Frost.",
+    "noteEs": "Topes simétricos a 35\", altura 71-1/4\", bullnose cerámico 2\"×6\", fondos blancos de 1 pieza en nichos y boquilla Mapei #77 Frost.",
+    "docEn": "2026-11-24_Bathroom-Tile-Interactive_EN",
+    "docEs": "2026-11-24_Bathroom-Tile-Interactive_ES",
     "aliases": [
-      "bathroom tile",
       "bathroom tile plan",
-      "tub wall tile",
-      "plano azulejo bano"
+      "bathroom wall tile",
+      "tub tile",
+      "azulejo del bano"
     ]
+  },
+  {
+    "key": "bathroom-measurements",
+    "room": "bathroom",
+    "titleEn": "Bathroom Wall, Tub & Room Reference Renderings",
+    "titleEs": "Planos de Referencia: Muros, Tina y Cuarto",
+    "noteEn": "Whole-room floor plan (72-1/8\"×82-1/8\"), tub back wall, tub profile, and West window wall in Photo & Flat Drawing views.",
+    "noteEs": "Planta completa (72-1/8\"×82-1/8\"), muro de tina, perfil de tina y muro oeste en vistas de Foto y Dibujo a escala.",
+    "docEn": "2026-11-24_Bathroom-Measurements-Interactive_EN",
+    "docEs": "2026-11-24_Bathroom-Measurements-Interactive_ES",
+    "aliases": [
+      "bathroom measurements",
+      "bathroom renderings",
+      "tub wall renderings",
+      "medidas del bano"
+    ]
+  },
+  {
+    "key": "bathroom-surfaces-r1",
+    "room": "bathroom",
+    "titleEn": "Earlier bathroom surfaces sheet (PDF)",
+    "titleEs": "Hoja anterior de superficies del baño (PDF)",
+    "noteEn": "Oct 29 reference PDF.",
+    "noteEs": "PDF de referencia del 29 oct.",
+    "docEn": "1aYu9yWuRRFk8T5E3nQ6NDTHWpeRcrXgW",
+    "docEs": "19BYgPOC5-RoRmaj-qidSJBTcEZoXR6tR",
+    "aliases": [
+      "bathroom surfaces pdf"
+    ],
+    "inMenu": false
   },
   {
     "key": "bathroom-blocking",

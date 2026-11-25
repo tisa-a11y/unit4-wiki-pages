@@ -60,6 +60,7 @@ ALL_PLAN_IDS = [
     "hvac-layout",
     "murphy-door",
     "bathroom-tile",
+    "bathroom-measurements",
 ]
 
 KITCHEN_3TAB_PLANS = [
@@ -168,7 +169,8 @@ def run_node_syntax_checks(root: Path) -> List[str]:
         text = hf.read_text(encoding="utf-8", errors="replace")
         for idx, m in enumerate(INLINE_SCRIPT_RE.finditer(text), start=1):
             open_tag = text[m.start():m.start() + 120]
-            if SCRIPT_SRC_ATTR_RE.search(open_tag.split(">", 1)[0]):
+            tag_head = open_tag.split(">", 1)[0]
+            if SCRIPT_SRC_ATTR_RE.search(tag_head) or "application/json" in tag_head.lower():
                 continue
             code = m.group(1).strip()
             if not code:
@@ -826,7 +828,7 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
         attach_err_listeners(p3, "gate3-controls")
         await setup_network_stubs(p3, base_url)
         try:
-            # 3a. Verify All Plans dropdown parity across ALL 7 interactive plans
+            # 3a. Verify All Plans dropdown parity across ALL 8 interactive plans
             expected_set = set(ALL_PLAN_IDS)
             for pid in ALL_PLAN_IDS:
                 await p3.goto(f"{base_url}/plans/{pid}/index.html?standalone=1&lang=en&theme=light", wait_until="domcontentloaded")
@@ -915,7 +917,7 @@ async def run_suite(args: argparse.Namespace) -> Dict[str, Any]:
                     if box_muted and abs(box_muted["height"] - h_before) > 6:
                         fail("gate_3_plan_controls_ai_ergonomics", f"Mute state caused Ask AI resize jump: {h_before:.1f}px -> {box_muted['height']:.1f}px")
             if gates["gate_3_plan_controls_ai_ergonomics"]["status"] == "PASS":
-                note("gate_3_plan_controls_ai_ergonomics", "All 7 plans share identical 7-item All Plans dropdown (Esc returns focus), pagers reset scroll, zoom works, Ask AI empty height <220px & 32x32 icon buttons verified")
+                note("gate_3_plan_controls_ai_ergonomics", "All 8 plans share identical 8-item All Plans dropdown (Esc returns focus), pagers reset scroll, zoom works, Ask AI empty height <220px & 32x32 icon buttons verified")
         except Exception as exc:
             fail("gate_3_plan_controls_ai_ergonomics", f"Exception in Gate 3: {exc}")
         await ctx3.close()
