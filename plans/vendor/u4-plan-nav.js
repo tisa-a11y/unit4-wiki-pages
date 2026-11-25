@@ -103,12 +103,12 @@
       roomEn: "Bathroom",
       roomEs: "Baño",
       roomRu: "Ванная",
-      shortEn: "Field Measurements",
-      shortEs: "Medidas y Fotos",
-      shortRu: "Замеры и фото",
-      labelEn: "Bathroom Field Measurements & Photos",
-      labelEs: "Baño: Medidas de Campo y Fotos",
-      labelRu: "Ванная: полевые замеры и фото",
+      shortEn: "Wall & Tub Plans",
+      shortEs: "Muros y Tina",
+      shortRu: "Стены и ванна",
+      labelEn: "Bathroom Wall, Tub & Room Renderings",
+      labelEs: "Baño: Planos de Muros, Tina y Cuarto",
+      labelRu: "Ванная: схемы стен, ванны и комнаты",
       group: "bathroom"
     }
   ];

@@ -1,5 +1,20 @@
 # Baño
 
+<div class="u4-plan-launch-grid">
+  <a class="u4-plan-launch-card is-primary" href="#plan:bathroom-tile">
+    <span class="u4-plan-launch-kicker">Plano Interactivo &middot; Tina y Muros de Azulejo</span>
+    <strong class="u4-plan-launch-title">Plano de Azulejo y Nichos en Ba&ntilde;o</strong>
+    <span class="u4-plan-launch-desc">Topes sim&eacute;tricos a 35&quot;, altura 71-1/4&quot;, bullnose cer&aacute;mico 2&quot;&times;6&quot; del mismo color, fondos blancos de 1 pieza en nichos y boquilla Mapei #77 Frost.</span>
+    <span class="u4-plan-launch-cta">Abrir Plano de Azulejo &rarr;</span>
+  </a>
+  <a class="u4-plan-launch-card" href="#plan:bathroom-measurements">
+    <span class="u4-plan-launch-kicker">Planos de Referencia &middot; Fotos y Dibujos 1:1</span>
+    <strong class="u4-plan-launch-title">Planos de Referencia: Muros, Tina y Cuarto</strong>
+    <span class="u4-plan-launch-desc">Planta completa del ba&ntilde;o (72-1/8&quot;&times;82-1/8&quot;), muro norte de tina (69-5/16&quot;), perfil de tina y fotos del muro oeste.</span>
+    <span class="u4-plan-launch-cta">Abrir Planos de Muros y Tina &rarr;</span>
+  </a>
+</div>
+
 ## Concepto
 Piso de azulejo tipo mármol, azulejo blanco tipo metro American Olean Ice White 0025 de 3" × 6" con bullnose cerámico del mismo color, accesorios color bronce, tina de empotrar y puerta abatible hacia el pasillo.
 
