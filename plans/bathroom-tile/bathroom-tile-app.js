@@ -61,7 +61,7 @@
   };
 
   function pick(en, es, ru) {
-    return state.lang === "es" ? es : (state.lang === "ru" ? (ru || en) : en);
+    return state.lang === "es" ? (es || en) : state.lang === "ru" ? (ru || en) : en;
   }
 
   function resolveStepId(raw) {
@@ -174,9 +174,6 @@
   }
 
   function buildHoldAndRefStrip() {
-    const qLang = state.lang !== "en" ? `&lang=${state.lang}` : "";
-    const qTheme = state.theme === "dark" ? `&theme=dark` : "";
-    const baseHref = `../bathroom-measurements/index.html?v=rev010${qLang}${qTheme}`;
     return `
       <div class="u4b-hold-banner no-print">
         <strong>${pick("ACTIVE PRE-TILE HOLD (NOV 24):", "PAUSA PREVIA AL AZULEJO (24 NOV):", "ПАУЗА ПЕРЕД УКЛАДКОЙ ПЛИТКИ (24 НОЯБ.):")}</strong>
@@ -197,13 +194,7 @@
         )}</p>
       </div>
       <div class="u4b-ref-strip no-print">
-        <span><strong>${pick("Field Measurements & Photos:", "Medidas de campo y fotos:", "Полевые замеры и фото:")}</strong> ${pick("Open interactive wall & tub drawings:", "Abrir planos y fotos de referencia:", "Открыть чертежи и фото:")}</span>
-        <div class="u4b-ref-links">
-          <a class="u4b-ref-link" href="${baseHref}&wall=room&view=flat">${pick("Whole Room", "Todo el baño", "Вся ванная")}</a>
-          <a class="u4b-ref-link" href="${baseHref}&wall=tub&view=photo">${pick("Tub Wall", "Muro tina", "Стена ванны")}</a>
-          <a class="u4b-ref-link" href="${baseHref}&wall=tub-profile&view=photo">${pick("Tub Side", "Perfil tina", "Профиль ванны")}</a>
-          <a class="u4b-ref-link" href="${baseHref}&wall=west&view=photo">${pick("West Wall (45-1/2″)", "Muro oeste (45-1/2″)", "Западная стена")}</a>
-        </div>
+        <a class="u4b-ref-link" href="../../wiki-images/bathroom-tub-surround-measurements-${state.lang === 'es' ? 'es' : 'en'}.svg">${pick("Tub Surround measurements — open reference photo", "Medidas del contorno de la tina — abrir foto de referencia", "Замеры зоны ванны — открыть фото")}</a>
       </div>
     `;
   }

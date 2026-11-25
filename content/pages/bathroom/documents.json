@@ -13,13 +13,14 @@
   {
     "id": "interactive-bathroom-measurements",
     "title": "bathroom-measurements.html",
-    "titleEn": "Interactive Reference — Bathroom Field Measurements & Photos",
-    "titleEs": "Referencia Interactiva — Medidas de Campo y Fotos del Baño",
-    "titleRu": "Интерактивный справочник — Полевые замеры и фото ванной",
+    "titleEn": "Historical bathroom measurement viewer",
+    "titleEs": "Visor anterior de medidas del baño",
+    "titleRu": "Архивный просмотр замеров ванной",
     "path": "./plans/bathroom-measurements/index.html?v=rev010",
     "pathEs": "./plans/bathroom-measurements/index.html?lang=es&v=rev010",
     "pathRu": "./plans/bathroom-measurements/index.html?lang=ru&v=rev010",
-    "pin": true
+    "pin": false,
+    "history": true
   },
   {
     "title": "2026-11-23_U4_Module2_Whole-Unit-Segments_R5_EN.pdf",
@@ -45,25 +46,27 @@
   },
   {
     "title": "Unit 4 Bathroom - Plan for John - English.pdf",
-    "titleEn": "Bathroom plan for John · English",
-    "titleEs": "Plan del baño para John · inglés",
+    "titleEn": "Historical — Bathroom plan for John · English",
+    "titleEs": "Histórico — Plan del baño para John · inglés",
     "id": "1taIg19r1lPEztEDybHcrDh_H702WusVy",
     "path": "Plan for John (shared with John) · English",
     "date": "2026-10-14",
     "lang": "en",
     "pairId": "bathroom-plan-for-john",
-    "pin": true
+    "pin": false,
+    "history": true
   },
   {
     "title": "Bano Unidad 4 - Plan para John - Espanol.pdf",
-    "titleEn": "Bathroom plan for John · Spanish",
-    "titleEs": "Plan del baño para John · español",
+    "titleEn": "Historical — Bathroom plan for John · Spanish",
+    "titleEs": "Histórico — Plan del baño para John · español",
     "id": "1NY9eaXvYK_oICJBK8FrMnkw5iCx5lVuQ",
     "path": "Plan para John (compartido con John) · Español",
     "date": "2026-10-14",
     "lang": "es",
     "pairId": "bathroom-plan-for-john",
-    "pin": true
+    "pin": false,
+    "history": true
   },
   {
     "title": "Unit4-Bathroom-Surfaces-R1-EN.pdf",
